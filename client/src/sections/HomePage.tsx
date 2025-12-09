@@ -1950,6 +1950,118 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-32 px-4 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Edition</h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Community Edition */}
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col">
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Community Edition</h3>
+                <div className="text-4xl font-bold text-emerald-400 mb-2">FREE</div>
+                <p className="text-gray-400 mb-8">Open Source Forever</p>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
+                    <span>Full AI capabilities</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
+                    <span>All core features</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
+                    <span>Open source (Apache 2.0)</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
+                    <span>Community support</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
+                    <span>Unlimited personal use</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-auto">
+                <a
+                  href="https://github.com/cortexlinux/cortex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                  data-testid="button-download-free"
+                >
+                  Download Free
+                </a>
+              </div>
+            </div>
+
+            {/* Enterprise Edition */}
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col relative">
+              <div className="absolute -top-3 right-8">
+                <span className="px-4 py-1.5 bg-blue-500 text-white text-sm font-semibold rounded-full">
+                  FOR TEAMS
+                </span>
+              </div>
+              
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Enterprise Edition</h3>
+                <div className="text-4xl font-bold text-blue-400 mb-2">Custom</div>
+                <p className="text-gray-400 mb-8">Contact for Pricing</p>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>Everything in Community</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>Priority support (24/7)</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>Compliance reporting</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>Role-based access control</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>Custom integrations</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300">
+                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <span>SLA guarantees</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-auto">
+                <a
+                  href="mailto:sales@cortexlinux.com"
+                  className="block w-full py-4 text-center rounded-xl font-semibold bg-blue-500 hover:bg-blue-600 transition-colors"
+                  data-testid="button-contact-sales"
+                >
+                  Contact Sales
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section id="join" className="py-32 px-4 relative overflow-hidden">
         <div className="gradient-glow left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" />
@@ -2027,7 +2139,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <h4 className="font-semibold mb-4 text-white">Product</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
               </ul>
