@@ -473,9 +473,152 @@ section h2 + p {
   filter: blur(80px);
 }
 
-/* Alternating section backgrounds */
-section:nth-of-type(even) {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.005) 0%, transparent 100%);
+/* Unique section backgrounds for variety */
+
+/* Hero - dramatic gradient */
+#home {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+}
+
+/* Preview section - subtle side glow */
+#preview {
+  background: 
+    radial-gradient(ellipse 40% 60% at 0% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+}
+
+/* Features section - right side accent */
+#about {
+  background: 
+    radial-gradient(ellipse 50% 80% at 100% 30%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+}
+
+/* Security section - centered subtle glow */
+#security {
+  background: 
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(34, 197, 94, 0.05) 0%, transparent 60%);
+}
+
+/* Join/CTA section - dramatic centered */
+#join {
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+}
+
+/* Diagonal section dividers */
+.section-divider-diagonal {
+  position: relative;
+}
+
+.section-divider-diagonal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(175deg, #000 49.5%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Curved section divider */
+.section-divider-curve::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: radial-gradient(ellipse 100% 100% at 50% 0%, transparent 70%, #0a0a0a 70.5%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Staggered card layout */
+.staggered-grid > *:nth-child(odd) {
+  transform: translateY(20px);
+}
+
+.staggered-grid > *:nth-child(even) {
+  transform: translateY(-20px);
+}
+
+@media (max-width: 768px) {
+  .staggered-grid > * {
+    transform: none !important;
+  }
+}
+
+/* Horizontal card style */
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .card-horizontal {
+    flex-direction: column;
+  }
+}
+
+/* Large feature card */
+.card-featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+}
+
+@media (max-width: 768px) {
+  .card-featured {
+    grid-column: span 1;
+  }
+}
+
+/* Section with left-aligned header */
+.section-left-aligned {
+  text-align: left;
+}
+
+.section-left-aligned h2,
+.section-left-aligned p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Floating accent shapes */
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, -15px) rotate(2deg); }
+  50% { transform: translate(-5px, 10px) rotate(-1deg); }
+  75% { transform: translate(-10px, -5px) rotate(1deg); }
+}
+
+.floating-shape-1 {
+  width: 400px;
+  height: 400px;
+  top: 20%;
+  right: -10%;
+  animation-delay: 0s;
+}
+
+.floating-shape-2 {
+  width: 300px;
+  height: 300px;
+  bottom: 30%;
+  left: -5%;
+  animation-delay: -7s;
 }
 
 /* Navigation link hover effects */
