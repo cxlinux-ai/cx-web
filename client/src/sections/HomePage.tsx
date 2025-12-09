@@ -297,10 +297,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const features = [
-    { icon: Zap, title: "Instant Setup", description: "One command to scaffold. Zero config required. Start building in seconds.", code: "cortex init my-app && cd my-app && cortex dev" },
-    { icon: Shield, title: "Secure by Default", description: "Built-in auth, rate limiting, and secrets management out of the box.", code: "cortex add auth --provider oauth2\ncortex add ratelimit --max 100/min" },
-    { icon: Globe, title: "Edge-Ready", description: "Deploy globally in seconds. Auto-scaling included. 50ms latency worldwide.", code: "cortex deploy --edge --regions all" },
-    { icon: Puzzle, title: "Plugin Ecosystem", description: "Extend with community modules or build your own. 200+ plugins available.", code: "cortex plugin install @cortex/analytics\ncortex plugin install @cortex/payments" },
+    { icon: Zap, title: "Get Started in Minutes, Not Hours", description: "Skip the setup headaches. One command creates your entire ML environment, pre-configured and production-ready.", code: "cortex init my-app && cd my-app && cortex dev" },
+    { icon: Shield, title: "Sleep Better with Built-in Security", description: "Enterprise-grade auth, rate limiting, and secrets vault included. Dramatically reduce your attack surface from day one.", code: "cortex add auth --provider oauth2\ncortex add ratelimit --max 100/min" },
+    { icon: Globe, title: "Deploy Anywhere, Scale Automatically", description: "Go global in seconds with edge deployment across multiple regions. Achieve low latency worldwide with zero DevOps.", code: "cortex deploy --edge --regions all" },
+    { icon: Puzzle, title: "Extend Without Limits", description: "Access a growing library of community plugins for payments, analytics, ML frameworks, and more. Or build your own in minutes.", code: "cortex plugin install @cortex/analytics\ncortex plugin install @cortex/payments" },
   ];
 
   const comparisonData = [
@@ -369,9 +369,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6"
           >
-            <span className="gradient-text">The AI-Native</span>
+            <span className="gradient-text">Accelerate Your ML Workflow</span>
             <br />
-            <span className="text-white">Operating System</span>
+            <span className="text-white">with AI-Native Linux</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -381,8 +381,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
           >
-            Linux that understands natural language. No documentation required.
-            Just ask, and Cortex executes.
+            Stop wrestling with configs and drivers. Describe what you need in plain English,
+            and Cortex handles the rest — from GPU optimization to deployment.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -396,7 +396,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               onClick={() => onNavigate("join")}
               className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Get Started Free
+              Start Building Now — Free Forever
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
@@ -442,7 +442,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       {/* Social Proof - Logo Wall */}
       <section className="py-16 border-t border-white/5 overflow-hidden">
         <div className="text-center mb-8">
-          <p className="text-sm text-gray-500 uppercase tracking-widest">Trusted by teams at</p>
+          <p className="text-sm text-gray-500 uppercase tracking-widest">Powering ML infrastructure at leading teams</p>
         </div>
         <div className="relative">
           <div className="logo-scroll flex gap-16 items-center">
@@ -468,8 +468,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See It In Action</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Try these commands and see real responses. No signup required.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Cortex in Action</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Real commands, real results. See what takes others hours happen in seconds — no signup required.</p>
           </motion.div>
 
           <motion.div
@@ -562,8 +562,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Everything You Need</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Built for developers who want to ship fast without sacrificing quality.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Complete ML Toolkit</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Everything data scientists and DevOps teams need to go from prototype to production — without the infrastructure headaches.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1059,7 +1059,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 onClick={() => onNavigate("join")}
                 className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
               >
-                Get Started with Cortex
+                Start Building with Cortex — Free
                 <ArrowRight size={16} />
               </button>
             </motion.div>
@@ -1076,8 +1076,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Open Source Momentum</h2>
-            <p className="text-gray-400">Built by the community, for the community.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Join a Growing Community of Engineers</h2>
+            <p className="text-gray-400">100% open source. Backed by a thriving community of ML engineers, data scientists, and DevOps pros.</p>
           </motion.div>
 
           {/* Stats Grid */}
@@ -1164,8 +1164,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Quick Start</h2>
-            <p className="text-gray-400">Get up and running in 30 seconds.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Be Up and Running in 30 Seconds</h2>
+            <p className="text-gray-400">Three commands. That's all it takes to transform how you work with ML infrastructure.</p>
           </motion.div>
 
           <motion.div
@@ -1272,9 +1272,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <Cpu size={14} />
               <span>How It Works</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">AI That Understands You</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stop Reading Docs. Start Shipping.</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Watch how Cortex transforms your natural language into system actions through intelligent processing.
+              Describe what you need in plain English. Cortex translates your intent into perfectly optimized system commands — instantly.
             </p>
           </motion.div>
 
