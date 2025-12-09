@@ -1093,17 +1093,160 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Sponsorship Section */}
+      <section id="sponsor" className="py-32 px-4 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Fund Open Source Innovation</h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {/* Bronze Tier */}
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col">
+              <div>
+                <h3 className="text-xl font-bold mb-2">Bronze</h3>
+                <div className="text-4xl font-bold text-blue-400 mb-1">$1,000</div>
+                <p className="text-gray-500 mb-6">/month</p>
+                
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Logo on README</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Discord sponsor channel access</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Monthly progress reports</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-auto">
+                <a
+                  href="mailto:sponsors@cortexlinux.com?subject=Bronze%20Sponsorship"
+                  className="block w-full py-3 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                  data-testid="button-sponsor-bronze"
+                >
+                  Become Bronze Sponsor
+                </a>
+              </div>
+            </div>
+
+            {/* Silver Tier */}
+            <div className="glass-card rounded-2xl p-8 border border-blue-500/30 flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="px-4 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full uppercase tracking-wider">
+                  Most Popular
+                </span>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-bold mb-2">Silver</h3>
+                <div className="text-4xl font-bold text-blue-400 mb-1">$5,000</div>
+                <p className="text-gray-500 mb-6">/month</p>
+                
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Everything in Bronze</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Priority feature requests</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Quarterly strategy calls</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Co-marketing opportunities</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-auto">
+                <a
+                  href="mailto:sponsors@cortexlinux.com?subject=Silver%20Sponsorship"
+                  className="block w-full py-3 text-center rounded-xl font-semibold bg-blue-500 hover:bg-blue-600 transition-colors"
+                  data-testid="button-sponsor-silver"
+                >
+                  Become Silver Sponsor
+                </a>
+              </div>
+            </div>
+
+            {/* Gold Tier */}
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col">
+              <div>
+                <h3 className="text-xl font-bold mb-2">Gold</h3>
+                <div className="text-4xl font-bold text-blue-400 mb-1">$10,000+</div>
+                <p className="text-gray-500 mb-6">/month</p>
+                
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Everything in Silver</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Dedicated support channel</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Early access to enterprise features</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Joint case studies</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-300 text-sm">
+                    <Check size={16} className="text-blue-400 flex-shrink-0" />
+                    <span>Advisory board seat</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-auto">
+                <a
+                  href="mailto:sponsors@cortexlinux.com?subject=Gold%20Sponsorship"
+                  className="block w-full py-3 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                  data-testid="button-sponsor-gold"
+                >
+                  Become Gold Sponsor
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Enterprise Partnership */}
+          <div className="glass-card rounded-2xl p-10 border border-white/10 text-center max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4">Enterprise Partnership</h3>
+            <p className="text-gray-400 mb-8">
+              Building on Cortex Linux? Let's discuss custom partnership opportunities including: 
+              white-label licensing, dedicated development resources, SLA guarantees, and equity participation.
+            </p>
+            <a
+              href="mailto:enterprise@cortexlinux.com?subject=Enterprise%20Partnership"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl font-semibold transition-colors"
+              data-testid="button-enterprise-contact"
+            >
+              Contact for Enterprise
+              <ArrowRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-32 px-4 relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Edition</h2>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Community Edition */}
