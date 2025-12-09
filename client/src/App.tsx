@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Switch, Route, Link, useLocation } from "wouter";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, Github, Star } from "lucide-react";
 import FAQ from "./pages/faq";
 import BetaPage from "./pages/beta";
 import HomePage from "./sections/HomePage";
@@ -76,10 +76,10 @@ export default function App() {
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
                 {[
-                  { name: "Home", id: "home" },
                   { name: "Features", id: "about" },
+                  { name: "Docs", id: "preview" },
                   { name: "Security", id: "security" },
-                  { name: "Pricing", id: "pricing" },
+                  { name: "Community", id: "join" },
                 ].map((link) => (
                   <button
                     key={link.id}
@@ -105,15 +105,26 @@ export default function App() {
                 </Link>
               </div>
 
-              {/* Try Beta Button (Desktop) */}
-              <Link
-                href="/beta"
-                className="hidden md:flex items-center gap-2 px-6 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
-                data-testid="button-try-beta"
-              >
-                <Sparkles size={16} />
-                Try Beta
-              </Link>
+              {/* GitHub Stars & Get Started Button (Desktop) */}
+              <div className="hidden md:flex items-center gap-3">
+                <a
+                  href="https://github.com/cortexlinux/cortex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-400/50 hover:text-white transition-all"
+                >
+                  <Github size={16} />
+                  <Star size={14} className="text-yellow-400" />
+                  <span>1.2k</span>
+                </a>
+                <Link
+                  href="/beta"
+                  className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
+                  data-testid="button-try-beta"
+                >
+                  Get Started
+                </Link>
+              </div>
 
               {/* Mobile Menu Button */}
               <button
@@ -130,10 +141,10 @@ export default function App() {
               <div className="md:hidden backdrop-blur-xl bg-black/95 border-b border-white/10">
                 <div className="px-4 py-6 space-y-4">
                   {[
-                    { name: "Home", id: "home" },
                     { name: "Features", id: "about" },
+                    { name: "Docs", id: "preview" },
                     { name: "Security", id: "security" },
-                    { name: "Pricing", id: "pricing" },
+                    { name: "Community", id: "join" },
                   ].map((link) => (
                     <button
                       key={link.id}
@@ -158,8 +169,7 @@ export default function App() {
                     className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
                     data-testid="mobile-button-try-beta"
                   >
-                    <Sparkles size={16} />
-                    Try Beta
+                    Get Started
                   </Link>
                 </div>
               </div>
