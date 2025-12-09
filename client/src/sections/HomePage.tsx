@@ -595,10 +595,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 onClick={() => setExpandedFeature(expandedFeature === i ? null : i)}
-                className="glass-card glass-card-hover rounded-2xl p-8 cursor-pointer transition-colors duration-300"
+                className="glass-card glass-card-hover rounded-2xl p-8 cursor-pointer transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center flex-shrink-0">
@@ -630,13 +634,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       </div>
                     </motion.div>
                     
-                    <button className="text-blue-400 text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-colors">
+                    <button className="text-blue-400 text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-all">
                       {expandedFeature === i ? "Hide code" : "View code"}
                       <ChevronRight size={14} className={`transition-transform duration-200 ${expandedFeature === i ? "rotate-90" : ""}`} />
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -727,21 +731,39 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {/* Horizontal Flow - Desktop */}
             <div className="hidden md:flex items-center justify-center gap-4 lg:gap-8">
               {/* Step 1: Input */}
-              <div className="flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col items-center"
+              >
                 <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/30 flex flex-col items-center justify-center p-4">
                   <Terminal size={28} className="text-blue-400 mb-2" />
                   <span className="text-xs text-blue-400 font-medium">INPUT</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Natural Language</span>
-              </div>
+              </motion.div>
 
               {/* Arrow 1 */}
-              <div className="flex-shrink-0">
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                className="flex-shrink-0"
+              >
                 <ArrowRight size={24} className="text-gray-600" />
-              </div>
+              </motion.div>
 
               {/* Step 2: AI Processing */}
-              <div className="flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="flex flex-col items-center"
+              >
                 <div className="w-44 lg:w-52 h-28 rounded-xl bg-gradient-to-br from-purple-500/15 to-purple-600/5 border border-purple-500/40 flex flex-col items-center justify-center p-4 relative">
                   <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-purple-500/50 animate-pulse" />
                   <Brain size={32} className="text-purple-400 mb-2" />
@@ -749,35 +771,59 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <span className="text-xs text-gray-400">Parse + Analyze</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Context-Aware Processing</span>
-              </div>
+              </motion.div>
 
               {/* Arrow 2 */}
-              <div className="flex-shrink-0">
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.35 }}
+                className="flex-shrink-0"
+              >
                 <ArrowRight size={24} className="text-gray-600" />
-              </div>
+              </motion.div>
 
               {/* Step 3: Command Generation */}
-              <div className="flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex flex-col items-center"
+              >
                 <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 border border-cyan-500/30 flex flex-col items-center justify-center p-4">
                   <Code2 size={28} className="text-cyan-400 mb-2" />
                   <span className="text-xs text-cyan-400 font-medium">GENERATE</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Safe Commands</span>
-              </div>
+              </motion.div>
 
               {/* Arrow 3 */}
-              <div className="flex-shrink-0">
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+                className="flex-shrink-0"
+              >
                 <ArrowRight size={24} className="text-gray-600" />
-              </div>
+              </motion.div>
 
               {/* Step 4: Execution */}
-              <div className="flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.45 }}
+                className="flex flex-col items-center"
+              >
                 <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 border border-green-500/30 flex flex-col items-center justify-center p-4">
                   <CheckCircle2 size={28} className="text-green-400 mb-2" />
                   <span className="text-xs text-green-400 font-medium">EXECUTE</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Sandboxed Runtime</span>
-              </div>
+              </motion.div>
             </div>
 
             {/* Vertical Flow - Mobile */}
@@ -795,8 +841,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   green: "from-green-500/10 to-green-600/5 border-green-500/30 text-green-400",
                 };
                 return (
-                  <div
+                  <motion.div
                     key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
                     className="flex flex-col items-center"
                   >
                     {i > 0 && <ArrowRight size={20} className="text-gray-600 rotate-90 mb-3" />}
@@ -807,7 +857,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         <p className="text-xs text-gray-400">{step.sublabel}</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -836,8 +886,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               { icon: RotateCcw, title: "Instant Rollback", description: "Undo any change in seconds. Full system snapshots before major operations." },
               { icon: FileText, title: "Complete Audit Logging", description: "Track every command, every change. Full transparency for compliance." },
             ].map((feature, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 className="flex gap-4 p-6 glass-card rounded-xl"
               >
                 <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
@@ -847,7 +901,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-gray-400 text-sm">{feature.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -1114,15 +1168,19 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               { icon: Users, value: contributorCount, label: "Contributors", suffix: "" },
               { icon: Globe, value: 12, label: "Edge Regions", suffix: "" },
             ].map((stat, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 className="glass-card rounded-xl p-6 text-center"
                 data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 <stat.icon size={24} className="text-blue-400 mx-auto mb-3" />
                 <div className="text-3xl font-bold mb-1">{stat.value.toLocaleString()}{stat.suffix}</div>
                 <div className="text-sm text-gray-400">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -1669,11 +1727,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           {/* Enhanced Interactive Pipeline Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Stage 1: Natural Input */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
               className="group"
               data-testid="card-stage-input"
             >
-              <div className="glass-card rounded-xl p-6 h-full border border-blue-500/20 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-colors duration-300">
+              <div className="glass-card rounded-xl p-6 h-full border border-blue-500/20 hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
                     <MessageCircle size={22} className="text-blue-400" />
@@ -1692,14 +1754,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <span>Voice and text input supported</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stage 2: AI Processing */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
               className="group"
               data-testid="card-stage-ai"
             >
-              <div className="glass-card rounded-xl p-6 h-full border border-indigo-500/20 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-colors duration-300">
+              <div className="glass-card rounded-xl p-6 h-full border border-indigo-500/20 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
                     <Brain size={22} className="text-indigo-400" />
@@ -1727,14 +1793,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stage 3: Command Generation */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
               className="group"
               data-testid="card-stage-generate"
             >
-              <div className="glass-card rounded-xl p-6 h-full border border-purple-500/20 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-colors duration-300">
+              <div className="glass-card rounded-xl p-6 h-full border border-purple-500/20 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center border border-purple-500/30">
                     <Code2 size={22} className="text-purple-400" />
@@ -1757,14 +1827,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 
                 <div className="mt-3 text-xs text-purple-400/70">Auto-optimized for CUDA 12.3</div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stage 4: Safe Execution */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
               className="group"
               data-testid="card-stage-execute"
             >
-              <div className="glass-card rounded-xl p-6 h-full border border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.15)] transition-colors duration-300">
+              <div className="glass-card rounded-xl p-6 h-full border border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(34,197,94,0.15)] transition-all duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
                     <CheckCircle2 size={22} className="text-emerald-400" />
@@ -1793,11 +1867,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Feature Highlights - Enhanced */}
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
             className="mt-16 flex flex-wrap justify-center gap-4"
           >
             {[
@@ -1817,7 +1895,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               return (
                 <div
                   key={i}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full border ${colorMap[item.color]} transition-transform duration-200 hover:scale-105`}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full border ${colorMap[item.color]} transition-all duration-200 hover:scale-105`}
                   data-testid={`badge-feature-${item.label.toLowerCase().replace(' ', '-')}`}
                 >
                   <item.icon size={16} />
@@ -1825,7 +1903,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 </div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -1848,12 +1926,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               { icon: FaTwitter, name: "Twitter", count: "12.4k followers", color: "hover:border-sky-500", link: "#" },
               { icon: Github, name: "GitHub", count: "Discussions", color: "hover:border-gray-500", link: "https://github.com/cortexlinux/cortex/discussions" },
             ].map((platform, i) => (
-              <a
+              <motion.a
                 key={i}
                 href={platform.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`glass-card rounded-xl p-6 text-center transition-colors ${platform.color}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`glass-card rounded-xl p-6 text-center transition-all ${platform.color}`}
               >
                 <platform.icon size={32} className="mx-auto mb-4 text-gray-400" />
                 <h3 className="font-semibold mb-1">{platform.name}</h3>
@@ -1862,7 +1944,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   Join
                   <ChevronRight size={14} className="inline ml-1" />
                 </button>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -1907,32 +1989,40 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {/* Content below timeline */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {roadmapItems.map((item, i) => (
-                <div key={i} className="text-center">
-                  <div className={`text-sm font-semibold mb-2 ${
-                    item.status === "completed" || item.status === "current"
-                      ? "text-blue-400"
-                      : "text-gray-500"
-                  }`}>
-                    {item.quarter}
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <div className="text-center">
+                    <div className={`text-sm font-semibold mb-2 ${
+                      item.status === "completed" || item.status === "current"
+                        ? "text-blue-400"
+                        : "text-gray-500"
+                    }`}>
+                      {item.quarter}
+                    </div>
+                    <div className="space-y-1">
+                      {item.items.map((task, j) => (
+                        <div
+                          key={j}
+                          className={`text-sm ${
+                            item.status === "completed"
+                              ? "text-white"
+                              : item.status === "current"
+                              ? "text-gray-300"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {item.status === "completed" && <Check size={12} className="inline mr-1 text-green-400" />}
+                          {task}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-1">
-                    {item.items.map((task, j) => (
-                      <div
-                        key={j}
-                        className={`text-sm ${
-                          item.status === "completed"
-                            ? "text-white"
-                            : item.status === "current"
-                            ? "text-gray-300"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {item.status === "completed" && <Check size={12} className="inline mr-1 text-green-400" />}
-                        {task}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
