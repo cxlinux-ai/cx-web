@@ -2008,10 +2008,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
             {/* Logo & Description */}
             <div className="col-span-2">
-              <div className="text-2xl font-bold mb-4">
+              <button 
+                onClick={() => onNavigate("home")}
+                className="text-2xl font-bold mb-4 text-left"
+                data-testid="footer-logo"
+              >
                 <span className="text-white">CORTEX</span>{" "}
                 <span className="text-blue-400">LINUX</span>
-              </div>
+              </button>
               <p className="text-gray-400 text-sm max-w-xs">
                 Open-source AI infrastructure for the modern developer.
               </p>
@@ -2021,10 +2025,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div>
               <h4 className="font-semibold mb-4 text-white">Product</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+                <li><button onClick={() => onNavigate("about")} className="hover:text-white transition-colors" data-testid="footer-link-features">Features</button></li>
+                <li><button onClick={() => onNavigate("pricing")} className="hover:text-white transition-colors" data-testid="footer-link-pricing">Pricing</button></li>
+                <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-docs">Documentation</button></li>
+                <li><a href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">FAQ</a></li>
               </ul>
             </div>
 
@@ -2032,10 +2036,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div>
               <h4 className="font-semibold mb-4 text-white">Resources</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API Reference</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Tutorials</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Examples</a></li>
+                <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</button></li>
+                <li><a href="/beta" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
+                <li><button onClick={() => onNavigate("security")} className="hover:text-white transition-colors" data-testid="footer-link-security">Security</button></li>
+                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-examples">Examples</a></li>
               </ul>
             </div>
 
@@ -2043,10 +2047,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div>
               <h4 className="font-semibold mb-4 text-white">Community</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Discord</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
-                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">YouTube</a></li>
+                <li><a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">Discord</a></li>
+                <li><a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
+                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
+                <li><button onClick={() => onNavigate("join")} className="hover:text-white transition-colors" data-testid="footer-link-community">Join Community</button></li>
               </ul>
             </div>
           </div>
@@ -2055,18 +2059,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-500">© 2024 Cortex. All rights reserved.</p>
             <div className="flex gap-6 text-sm text-gray-500">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-white transition-colors">Security</a>
+              <a href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-privacy">Privacy</a>
+              <a href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms</a>
+              <button onClick={() => onNavigate("security")} className="hover:text-white transition-colors" data-testid="footer-link-security-bottom">Security</button>
             </div>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-500 hover:text-white transition-colors">
+              <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
                 <FaTwitter size={20} />
               </a>
-              <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+              <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
                 <Github size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-white transition-colors">
+              <a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
                 <FaDiscord size={20} />
               </a>
             </div>
