@@ -375,6 +375,109 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Premium Section Spacing */
+section {
+  position: relative;
+}
+
+/* Section separators - subtle gradient transitions */
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  pointer-events: none;
+}
+
+section:last-of-type::after {
+  display: none;
+}
+
+/* Hero spacing enhancement */
+#home {
+  padding-top: 160px !important;
+  padding-bottom: 160px !important;
+}
+
+/* Features spacing */
+#about {
+  padding-top: 140px !important;
+  padding-bottom: 140px !important;
+}
+
+/* Security section */
+#security {
+  padding-top: 140px !important;
+  padding-bottom: 140px !important;
+}
+
+/* Card grid spacing */
+.grid {
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: 32px;
+  }
+}
+
+/* Glass card enhanced padding */
+.glass-card.p-6 {
+  padding: 28px;
+}
+
+.glass-card.p-8 {
+  padding: 36px;
+}
+
+@media (min-width: 768px) {
+  .glass-card.p-6 {
+    padding: 32px;
+  }
+  
+  .glass-card.p-8 {
+    padding: 44px;
+  }
+}
+
+/* Section header spacing */
+section h2 {
+  margin-bottom: 20px;
+}
+
+section h2 + p {
+  margin-bottom: 56px;
+}
+
+/* Subtle background shapes for visual interest */
+.section-bg-accent {
+  position: relative;
+}
+
+.section-bg-accent::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* Alternating section backgrounds */
+section:nth-of-type(even) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.005) 0%, transparent 100%);
+}
+
 /* Navigation link hover effects */
 nav button, nav a {
   position: relative;
