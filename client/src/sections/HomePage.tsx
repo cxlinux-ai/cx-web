@@ -25,6 +25,13 @@ import {
   Eye,
   RotateCcw,
   FileText,
+  X,
+  Sparkles,
+  Server,
+  Infinity,
+  HardDrive,
+  Undo2,
+  CircleDot,
 } from "lucide-react";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import type { Contributor } from "@shared/schema";
@@ -297,13 +304,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const comparisonData = [
-    { feature: "Open Source", cortex: true, toolA: false, toolB: false },
-    { feature: "Self-Hostable", cortex: true, toolA: false, toolB: true },
-    { feature: "AI-Native", cortex: true, toolA: "partial", toolB: false },
-    { feature: "Edge Runtime", cortex: true, toolA: true, toolB: false },
-    { feature: "Free Tier", cortex: "Unlimited", toolA: "Limited", toolB: "None" },
-    { feature: "Hardware Detection", cortex: true, toolA: false, toolB: false },
-    { feature: "Auto Rollback", cortex: true, toolA: false, toolB: false },
+    { feature: "Open Source", icon: Github, cortex: true, toolA: false, toolB: false },
+    { feature: "Self-Hostable", icon: Server, cortex: true, toolA: false, toolB: true },
+    { feature: "AI-Native", icon: Sparkles, cortex: true, toolA: "partial", toolB: false },
+    { feature: "Edge Runtime", icon: Globe, cortex: true, toolA: true, toolB: false },
+    { feature: "Free Tier", icon: Infinity, cortex: "Unlimited", toolA: "Limited", toolB: "None" },
+    { feature: "Hardware Detection", icon: HardDrive, cortex: true, toolA: false, toolB: false },
+    { feature: "Auto Rollback", icon: Undo2, cortex: true, toolA: false, toolB: false },
   ];
 
   const roadmapItems = [
@@ -801,70 +808,262 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section className="py-24 px-4 border-t border-white/5">
-        <div className="max-w-4xl mx-auto">
+      {/* Comparison Table - Enhanced Design */}
+      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
+        {/* Background gradient accents */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How Is Cortex Different?</h2>
-            <p className="text-gray-400">See how we compare to alternatives.</p>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-blue-400 text-sm mb-6">
+              <CircleDot size={14} />
+              <span>Feature Comparison</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
+              How Is Cortex Different?
+            </h2>
+            <p className="text-gray-400 text-lg max-w-xl mx-auto">
+              See why developers choose Cortex over traditional alternatives.
+            </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="glass-card rounded-2xl overflow-hidden"
-          >
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left p-4 text-gray-400 font-medium">Feature</th>
-                  <th className="p-4 text-center bg-blue-500/10 text-blue-400 font-semibold">Cortex</th>
-                  <th className="p-4 text-center text-gray-400 font-medium">Tool A</th>
-                  <th className="p-4 text-center text-gray-400 font-medium">Tool B</th>
-                </tr>
-              </thead>
-              <tbody>
+          {/* Desktop Table View */}
+          <div className="hidden md:block">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-sm overflow-hidden"
+            >
+              {/* Table Header */}
+              <div className="grid grid-cols-4 border-b border-white/10">
+                <div className="p-6 text-gray-400 font-semibold uppercase text-xs tracking-wider">
+                  Feature
+                </div>
+                <div className="p-6 text-center relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-blue-500/5" />
+                  <div className="relative">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                      <span className="text-blue-400 font-bold text-sm">CORTEX</span>
+                    </div>
+                    <p className="text-xs text-blue-300/60">Recommended</p>
+                  </div>
+                </div>
+                <div className="p-6 text-center text-gray-500 font-medium">
+                  Tool A
+                </div>
+                <div className="p-6 text-center text-gray-500 font-medium">
+                  Tool B
+                </div>
+              </div>
+
+              {/* Table Body */}
+              <div className="divide-y divide-white/5">
                 {comparisonData.map((row, i) => (
-                  <tr key={i} className="border-b border-white/5 last:border-0">
-                    <td className="p-4 text-gray-300">{row.feature}</td>
-                    <td className="p-4 text-center bg-blue-500/5">
-                      {row.cortex === true ? (
-                        <Check size={20} className="text-green-400 mx-auto" />
-                      ) : typeof row.cortex === "string" ? (
-                        <span className="text-green-400">{row.cortex}</span>
-                      ) : null}
-                    </td>
-                    <td className="p-4 text-center">
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.4 }}
+                    className="grid grid-cols-4 group transition-all duration-300 hover:bg-white/[0.02]"
+                  >
+                    {/* Feature Name with Icon */}
+                    <div className="p-5 flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 group-hover:from-blue-900/30 group-hover:to-gray-900 transition-all duration-300">
+                        <row.icon size={16} className="text-gray-400 group-hover:text-blue-400 transition-colors" />
+                      </div>
+                      <span className="text-gray-200 font-medium group-hover:text-white transition-colors">
+                        {row.feature}
+                      </span>
+                    </div>
+
+                    {/* Cortex Column - Highlighted */}
+                    <div className="p-5 flex items-center justify-center relative">
+                      <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent" />
+                      <div className="relative">
+                        {row.cortex === true ? (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.08 + 0.2, type: "spring", stiffness: 300 }}
+                            className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/25"
+                          >
+                            <Check size={16} className="text-white" strokeWidth={3} />
+                          </motion.div>
+                        ) : typeof row.cortex === "string" ? (
+                          <span className="px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 text-green-400 font-semibold text-sm">
+                            {row.cortex}
+                          </span>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    {/* Tool A Column */}
+                    <div className="p-5 flex items-center justify-center">
                       {row.toolA === true ? (
-                        <Check size={20} className="text-gray-500 mx-auto" />
+                        <div className="w-7 h-7 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
+                          <Check size={14} className="text-gray-500" />
+                        </div>
                       ) : row.toolA === "partial" ? (
-                        <span className="text-yellow-500">Partial</span>
+                        <span className="px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-sm font-medium">
+                          Partial
+                        </span>
                       ) : row.toolA === false ? (
-                        <span className="text-gray-600">—</span>
+                        <div className="w-7 h-7 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center">
+                          <X size={14} className="text-gray-600" />
+                        </div>
                       ) : (
-                        <span className="text-gray-500">{row.toolA}</span>
+                        <span className="text-gray-500 text-sm">{row.toolA}</span>
                       )}
-                    </td>
-                    <td className="p-4 text-center">
+                    </div>
+
+                    {/* Tool B Column */}
+                    <div className="p-5 flex items-center justify-center">
                       {row.toolB === true ? (
-                        <Check size={20} className="text-gray-500 mx-auto" />
+                        <div className="w-7 h-7 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
+                          <Check size={14} className="text-gray-500" />
+                        </div>
                       ) : row.toolB === false ? (
-                        <span className="text-gray-600">—</span>
+                        <div className="w-7 h-7 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center">
+                          <X size={14} className="text-gray-600" />
+                        </div>
                       ) : (
-                        <span className="text-gray-500">{row.toolB}</span>
+                        <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium">
+                          {row.toolB}
+                        </span>
                       )}
-                    </td>
-                  </tr>
+                    </div>
+                  </motion.div>
                 ))}
-              </tbody>
-            </table>
-          </motion.div>
+              </div>
+
+              {/* Table Footer */}
+              <div className="p-6 border-t border-white/10 bg-gradient-to-r from-blue-500/5 via-transparent to-transparent">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-3 text-sm text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <Check size={10} className="text-white" strokeWidth={3} />
+                      </div>
+                      <span>Full Support</span>
+                    </div>
+                    <span className="text-gray-700">|</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
+                        <X size={8} className="text-gray-600" />
+                      </div>
+                      <span>Not Supported</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => onNavigate("join")}
+                    className="group flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                  >
+                    Try Cortex Free
+                    <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {comparisonData.map((row, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-sm p-5"
+              >
+                {/* Feature Header */}
+                <div className="flex items-center gap-3 mb-4 pb-4 border-b border-white/5">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/20 flex items-center justify-center">
+                    <row.icon size={18} className="text-blue-400" />
+                  </div>
+                  <span className="text-white font-semibold text-lg">{row.feature}</span>
+                </div>
+
+                {/* Comparison Grid */}
+                <div className="grid grid-cols-3 gap-3">
+                  {/* Cortex */}
+                  <div className="text-center p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                    <div className="text-xs text-blue-400 font-semibold mb-2">Cortex</div>
+                    {row.cortex === true ? (
+                      <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <Check size={14} className="text-white" strokeWidth={3} />
+                      </div>
+                    ) : typeof row.cortex === "string" ? (
+                      <span className="text-green-400 font-semibold text-sm">{row.cortex}</span>
+                    ) : null}
+                  </div>
+
+                  {/* Tool A */}
+                  <div className="text-center p-3 rounded-lg bg-white/[0.02]">
+                    <div className="text-xs text-gray-500 font-medium mb-2">Tool A</div>
+                    {row.toolA === true ? (
+                      <div className="w-6 h-6 mx-auto rounded-full bg-gray-800 flex items-center justify-center">
+                        <Check size={12} className="text-gray-500" />
+                      </div>
+                    ) : row.toolA === "partial" ? (
+                      <span className="text-yellow-500 text-xs font-medium">Partial</span>
+                    ) : row.toolA === false ? (
+                      <div className="w-6 h-6 mx-auto rounded-full bg-gray-900 flex items-center justify-center">
+                        <X size={12} className="text-gray-600" />
+                      </div>
+                    ) : (
+                      <span className="text-gray-500 text-xs">{row.toolA}</span>
+                    )}
+                  </div>
+
+                  {/* Tool B */}
+                  <div className="text-center p-3 rounded-lg bg-white/[0.02]">
+                    <div className="text-xs text-gray-500 font-medium mb-2">Tool B</div>
+                    {row.toolB === true ? (
+                      <div className="w-6 h-6 mx-auto rounded-full bg-gray-800 flex items-center justify-center">
+                        <Check size={12} className="text-gray-500" />
+                      </div>
+                    ) : row.toolB === false ? (
+                      <div className="w-6 h-6 mx-auto rounded-full bg-gray-900 flex items-center justify-center">
+                        <X size={12} className="text-gray-600" />
+                      </div>
+                    ) : (
+                      <span className="text-red-400 text-xs font-medium">{row.toolB}</span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Mobile CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="pt-4"
+            >
+              <button
+                onClick={() => onNavigate("join")}
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+              >
+                Get Started with Cortex
+                <ArrowRight size={16} />
+              </button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
