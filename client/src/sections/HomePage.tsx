@@ -129,9 +129,43 @@ function CodeEditor({
   showLineNumbers?: boolean;
   actions?: React.ReactNode;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !glowRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * 2;
+    const rotateY = ((x - centerX) / centerX) * -2;
+    
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    glowRef.current.style.left = `${x}px`;
+    glowRef.current.style.top = `${y}px`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    setIsHovered(false);
+  };
+
   return (
-    <div className="code-editor">
-      <div className="code-editor-header">
+    <div 
+      ref={cardRef}
+      className="code-editor"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div ref={glowRef} className="code-editor-glow" />
+      <div className="code-editor-header relative z-10">
         <div className="flex items-center gap-4">
           <div className="code-editor-dots">
             <div className="code-editor-dot code-editor-dot-red" />
@@ -142,7 +176,7 @@ function CodeEditor({
         </div>
         {actions && <div className="code-editor-actions">{actions}</div>}
       </div>
-      <div className="code-editor-body">
+      <div className="code-editor-body relative z-10">
         {children}
       </div>
     </div>
@@ -173,6 +207,56 @@ function OutputLine({ children }: { children: React.ReactNode }) {
         <Check size={10} />
       </span>
       <span className="syntax-muted">{children}</span>
+    </div>
+  );
+}
+
+function InteractiveCodeEditor({ 
+  title, 
+  children, 
+  actions 
+}: { 
+  title: string; 
+  children: React.ReactNode; 
+  actions?: React.ReactNode;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !glowRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * 2;
+    const rotateY = ((x - centerX) / centerX) * -2;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    glowRef.current.style.left = `${x}px`;
+    glowRef.current.style.top = `${y}px`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  };
+
+  return (
+    <div ref={cardRef} className="code-editor" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+      <div ref={glowRef} className="code-editor-glow" />
+      <div className="code-editor-header relative z-10">
+        <div className="flex items-center gap-4">
+          <div className="code-editor-dots">
+            <div className="code-editor-dot code-editor-dot-red" />
+            <div className="code-editor-dot code-editor-dot-yellow" />
+            <div className="code-editor-dot code-editor-dot-green" />
+          </div>
+          <span className="code-editor-title">{title}</span>
+        </div>
+        {actions && <div className="code-editor-actions">{actions}</div>}
+      </div>
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }
@@ -387,19 +471,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="code-editor">
-              <div className="code-editor-header">
-                <div className="flex items-center gap-4">
-                  <div className="code-editor-dots">
-                    <div className="code-editor-dot code-editor-dot-red" />
-                    <div className="code-editor-dot code-editor-dot-yellow" />
-                    <div className="code-editor-dot code-editor-dot-green" />
-                  </div>
-                  <span className="code-editor-title">interactive demo</span>
-                </div>
-                <CopyButton text={demoCommands[activeDemo].command} size="sm" />
-              </div>
-              
+            <InteractiveCodeEditor title="interactive demo" actions={<CopyButton text={demoCommands[activeDemo].command} size="sm" />}>
               {/* Demo Tabs */}
               <div className="code-tabs">
                 {demoCommands.map((demo, i) => (
@@ -469,7 +541,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   )}
                 </div>
               </div>
-            </div>
+            </InteractiveCodeEditor>
           </motion.div>
         </div>
       </section>

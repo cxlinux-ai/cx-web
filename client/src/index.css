@@ -341,6 +341,7 @@
 
 /* Professional Code Block System */
 .code-editor {
+  position: relative;
   background: linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 100%);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
@@ -349,6 +350,69 @@
     0 0 0 1px rgba(255, 255, 255, 0.03),
     0 20px 40px -10px rgba(0, 0, 0, 0.5),
     0 0 80px -20px rgba(59, 130, 246, 0.15);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.2s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.code-editor:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 100px -20px rgba(59, 130, 246, 0.25);
+}
+
+/* Glass border glow effect */
+.code-editor::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.code-editor:hover::before {
+  opacity: 1;
+}
+
+/* Dynamic glow that follows cursor */
+.code-editor-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  filter: blur(40px);
+}
+
+.code-editor:hover .code-editor-glow {
+  opacity: 1;
+}
+
+/* 3D tilt container */
+.code-editor-3d {
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .code-editor-header {
