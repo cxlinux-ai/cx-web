@@ -1536,9 +1536,29 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute top-[15px] left-0 right-0 h-0.5 bg-gray-800" />
+            {/* Timeline with dots and line together */}
+            <div className="flex items-center justify-between mb-8">
+              {roadmapItems.map((item, i) => (
+                <div key={i} className="flex items-center flex-1">
+                  {/* Timeline Dot */}
+                  <div
+                    className={`w-4 h-4 rounded-full flex-shrink-0 z-10 ${
+                      item.status === "completed"
+                        ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                        : item.status === "current"
+                        ? "bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                        : "bg-gray-600"
+                    }`}
+                  />
+                  {/* Connector line (except for last item) */}
+                  {i < roadmapItems.length - 1 && (
+                    <div className="flex-1 h-0.5 bg-gray-700" />
+                  )}
+                </div>
+              ))}
+            </div>
             
+            {/* Content below timeline */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {roadmapItems.map((item, i) => (
                 <motion.div
@@ -1547,19 +1567,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="relative pt-10"
                 >
-                  {/* Timeline Dot */}
-                  <div
-                    className={`absolute top-[7px] left-1/2 -translate-x-1/2 w-4 h-4 rounded-full ${
-                      item.status === "completed"
-                        ? "timeline-dot-completed"
-                        : item.status === "current"
-                        ? "timeline-dot-current"
-                        : "timeline-dot-planned"
-                    }`}
-                  />
-                  
                   <div className="text-center">
                     <div className={`text-sm font-semibold mb-2 ${
                       item.status === "completed" || item.status === "current"
