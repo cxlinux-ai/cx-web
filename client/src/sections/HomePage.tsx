@@ -760,328 +760,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* AI Processing Visualization */}
-      <section className="py-24 px-4 border-t border-white/5 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">AI That Understands You</h2>
-            <p className="text-gray-400">Watch how Cortex processes your commands in real-time.</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="relative h-[400px] flex items-center justify-center"
-          >
-            {/* Animated Neural Network */}
-            <svg viewBox="0 0 800 350" className="w-full max-w-4xl">
-              {/* Background glow */}
-              <defs>
-                <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-                </radialGradient>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.1" />
-                  <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.1" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* Input Layer - Natural Language */}
-              <motion.g
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <text x="60" y="30" fill="#9ca3af" fontSize="11" textAnchor="middle">INPUT</text>
-                {[80, 140, 200, 260].map((y, i) => (
-                  <motion.g key={`input-${i}`}>
-                    <motion.circle
-                      cx="60"
-                      cy={y}
-                      r="18"
-                      fill="#1a1a1a"
-                      stroke="#3b82f6"
-                      strokeWidth="2"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * i, duration: 0.3 }}
-                    />
-                    <motion.circle
-                      cx="60"
-                      cy={y}
-                      r="6"
-                      fill="#3b82f6"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: [0, 1, 0.5] }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + 0.1 * i, duration: 1, repeat: Infinity, repeatDelay: 2 }}
-                    />
-                  </motion.g>
-                ))}
-              </motion.g>
-
-              {/* Hidden Layer 1 */}
-              <motion.g
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              >
-                <text x="220" y="30" fill="#9ca3af" fontSize="11" textAnchor="middle">PROCESS</text>
-                {[60, 120, 180, 240, 300].map((y, i) => (
-                  <motion.circle
-                    key={`h1-${i}`}
-                    cx="220"
-                    cy={y}
-                    r="14"
-                    fill="#1a1a1a"
-                    stroke="#6366f1"
-                    strokeWidth="1.5"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + 0.05 * i }}
-                  />
-                ))}
-              </motion.g>
-
-              {/* Core Processing - Central */}
-              <motion.g
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-              >
-                <text x="400" y="30" fill="#9ca3af" fontSize="11" textAnchor="middle">CORTEX AI</text>
-                <motion.circle
-                  cx="400"
-                  cy="175"
-                  r="60"
-                  fill="url(#nodeGlow)"
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: [0.8, 1.1, 0.8] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
-                <circle cx="400" cy="175" r="45" fill="#1a1a1a" stroke="url(#lineGradient)" strokeWidth="3" filter="url(#glow)" />
-                <motion.circle
-                  cx="400"
-                  cy="175"
-                  r="25"
-                  fill="#3b82f6"
-                  initial={{ opacity: 0.5 }}
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <text x="400" y="180" fill="white" fontSize="12" fontWeight="600" textAnchor="middle">AI</text>
-              </motion.g>
-
-              {/* Hidden Layer 2 */}
-              <motion.g
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              >
-                <text x="580" y="30" fill="#9ca3af" fontSize="11" textAnchor="middle">EXECUTE</text>
-                {[60, 120, 180, 240, 300].map((y, i) => (
-                  <motion.circle
-                    key={`h2-${i}`}
-                    cx="580"
-                    cy={y}
-                    r="14"
-                    fill="#1a1a1a"
-                    stroke="#8b5cf6"
-                    strokeWidth="1.5"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.9 + 0.05 * i }}
-                  />
-                ))}
-              </motion.g>
-
-              {/* Output Layer */}
-              <motion.g
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1, duration: 0.6 }}
-              >
-                <text x="740" y="30" fill="#9ca3af" fontSize="11" textAnchor="middle">OUTPUT</text>
-                {[100, 175, 250].map((y, i) => (
-                  <motion.g key={`output-${i}`}>
-                    <motion.circle
-                      cx="740"
-                      cy={y}
-                      r="20"
-                      fill="#1a1a1a"
-                      stroke="#22c55e"
-                      strokeWidth="2"
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 1.1 + 0.1 * i }}
-                    />
-                    <motion.circle
-                      cx="740"
-                      cy={y}
-                      r="8"
-                      fill="#22c55e"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: [0, 1, 0.6] }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 1.5 + 0.2 * i, duration: 0.8, repeat: Infinity, repeatDelay: 2.5 }}
-                    />
-                  </motion.g>
-                ))}
-              </motion.g>
-
-              {/* Connection Lines with animated data flow */}
-              {/* Input to Hidden 1 */}
-              {[80, 140, 200, 260].map((y1, i) =>
-                [60, 120, 180, 240, 300].map((y2, j) => (
-                  <motion.line
-                    key={`l1-${i}-${j}`}
-                    x1="78"
-                    y1={y1}
-                    x2="206"
-                    y2={y2}
-                    stroke="#3b82f6"
-                    strokeWidth="1"
-                    strokeOpacity="0.15"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + 0.02 * (i + j), duration: 0.5 }}
-                  />
-                ))
-              )}
-
-              {/* Hidden 1 to Core */}
-              {[60, 120, 180, 240, 300].map((y, i) => (
-                <motion.line
-                  key={`l2-${i}`}
-                  x1="234"
-                  y1={y}
-                  x2="355"
-                  y2="175"
-                  stroke="#6366f1"
-                  strokeWidth="1.5"
-                  strokeOpacity="0.25"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 + 0.05 * i, duration: 0.4 }}
-                />
-              ))}
-
-              {/* Core to Hidden 2 */}
-              {[60, 120, 180, 240, 300].map((y, i) => (
-                <motion.line
-                  key={`l3-${i}`}
-                  x1="445"
-                  y1="175"
-                  x2="566"
-                  y2={y}
-                  stroke="#8b5cf6"
-                  strokeWidth="1.5"
-                  strokeOpacity="0.25"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8 + 0.05 * i, duration: 0.4 }}
-                />
-              ))}
-
-              {/* Hidden 2 to Output */}
-              {[60, 120, 180, 240, 300].map((y1, i) =>
-                [100, 175, 250].map((y2, j) => (
-                  <motion.line
-                    key={`l4-${i}-${j}`}
-                    x1="594"
-                    y1={y1}
-                    x2="720"
-                    y2={y2}
-                    stroke="#22c55e"
-                    strokeWidth="1"
-                    strokeOpacity="0.15"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1 + 0.02 * (i + j), duration: 0.5 }}
-                  />
-                ))
-              )}
-
-              {/* Animated data pulses flowing through */}
-              <motion.circle
-                r="4"
-                fill="#3b82f6"
-                filter="url(#glow)"
-                initial={{ opacity: 0 }}
-                animate={{
-                  cx: [60, 220, 400, 580, 740],
-                  cy: [140, 120, 175, 180, 175],
-                  opacity: [0, 1, 1, 1, 0]
-                }}
-                transition={{ duration: 3, repeat: Infinity, repeatDelay: 1, ease: "easeInOut" }}
-              />
-              <motion.circle
-                r="4"
-                fill="#8b5cf6"
-                filter="url(#glow)"
-                initial={{ opacity: 0 }}
-                animate={{
-                  cx: [60, 220, 400, 580, 740],
-                  cy: [200, 240, 175, 120, 100],
-                  opacity: [0, 1, 1, 1, 0]
-                }}
-                transition={{ duration: 3, delay: 1.5, repeat: Infinity, repeatDelay: 1, ease: "easeInOut" }}
-              />
-            </svg>
-          </motion.div>
-
-          {/* Labels */}
-          <div className="flex justify-center gap-8 mt-8 flex-wrap">
-            {[
-              { color: "#3b82f6", label: "Natural Language Input" },
-              { color: "#6366f1", label: "Context Processing" },
-              { color: "#8b5cf6", label: "Command Generation" },
-              { color: "#22c55e", label: "System Execution" },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 1.2 + i * 0.1 }}
-                className="flex items-center gap-2"
-              >
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-sm text-gray-400">{item.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Security Section */}
       <section id="security" className="py-24 px-4 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
@@ -1376,6 +1054,225 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
               </div>
             </InteractiveCodeEditor>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* AI Processing Visualization - Enhanced */}
+      <section id="ai-processing" className="py-24 px-4 border-t border-white/5 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm mb-4">
+              <Cpu size={14} />
+              <span>How It Works</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">AI That Understands You</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Watch how Cortex transforms your natural language into system actions through intelligent processing.
+            </p>
+          </motion.div>
+
+          {/* Interactive Pipeline */}
+          <div className="relative">
+            {/* Main Pipeline Container */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+              {/* Stage 1: Input */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0 }}
+                className="group relative"
+              >
+                <div className="glass-card rounded-xl p-6 h-full border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                      <MessageCircle size={20} className="text-blue-400" />
+                    </div>
+                    <span className="text-xs text-gray-500 font-mono">01</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-white">Natural Input</h3>
+                  <p className="text-sm text-gray-400 mb-4">Speak or type in plain language</p>
+                  
+                  {/* Example command */}
+                  <div className="bg-black/40 rounded-lg p-3 border border-white/5">
+                    <p className="text-sm font-mono text-blue-300">"Update all packages and clean cache"</p>
+                  </div>
+                  
+                  {/* Animated pulse */}
+                  <motion.div
+                    className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-500 hidden md:block"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </div>
+              </motion.div>
+
+              {/* Stage 2: Parse */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+                className="group relative"
+              >
+                <div className="glass-card rounded-xl p-6 h-full border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                      <Cpu size={20} className="text-indigo-400" />
+                    </div>
+                    <span className="text-xs text-gray-500 font-mono">02</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-white">AI Processing</h3>
+                  <p className="text-sm text-gray-400 mb-4">Context-aware understanding</p>
+                  
+                  {/* Processing visualization */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-indigo-400"
+                        animate={{ opacity: [0.3, 1, 0.3] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+                      />
+                      <span className="text-xs text-gray-500">Intent Analysis</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-indigo-400"
+                        animate={{ opacity: [0.3, 1, 0.3] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+                      />
+                      <span className="text-xs text-gray-500">Context Mapping</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-indigo-400"
+                        animate={{ opacity: [0.3, 1, 0.3] }}
+                        transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
+                      />
+                      <span className="text-xs text-gray-500">Safety Check</span>
+                    </div>
+                  </div>
+                  
+                  <motion.div
+                    className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-indigo-500 hidden md:block"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                  />
+                </div>
+              </motion.div>
+
+              {/* Stage 3: Generate */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="group relative"
+              >
+                <div className="glass-card rounded-xl p-6 h-full border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                      <Terminal size={20} className="text-purple-400" />
+                    </div>
+                    <span className="text-xs text-gray-500 font-mono">03</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-white">Command Gen</h3>
+                  <p className="text-sm text-gray-400 mb-4">Precise system commands</p>
+                  
+                  {/* Generated commands */}
+                  <div className="bg-black/40 rounded-lg p-3 border border-white/5 font-mono text-xs space-y-1">
+                    <div className="text-purple-300">$ sudo pacman -Syu</div>
+                    <div className="text-purple-300">$ sudo paccache -r</div>
+                  </div>
+                  
+                  <motion.div
+                    className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-purple-500 hidden md:block"
+                    animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  />
+                </div>
+              </motion.div>
+
+              {/* Stage 4: Execute */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.45 }}
+                className="group"
+              >
+                <div className="glass-card rounded-xl p-6 h-full border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                      <Check size={20} className="text-emerald-400" />
+                    </div>
+                    <span className="text-xs text-gray-500 font-mono">04</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-white">Safe Execute</h3>
+                  <p className="text-sm text-gray-400 mb-4">Sandboxed & reversible</p>
+                  
+                  {/* Success indicators */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <Check size={14} />
+                      <span className="text-xs">Packages updated</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <Check size={14} />
+                      <span className="text-xs">Cache cleaned</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <Check size={14} />
+                      <span className="text-xs">Rollback ready</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Connection arrows for desktop */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none">
+              <svg className="w-full h-8" viewBox="0 0 1000 30" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3b82f6" />
+                    <stop offset="33%" stopColor="#6366f1" />
+                    <stop offset="66%" stopColor="#8b5cf6" />
+                    <stop offset="100%" stopColor="#22c55e" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
+          {/* Feature highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-12 flex flex-wrap justify-center gap-6"
+          >
+            {[
+              { label: "Natural Language", icon: MessageCircle },
+              { label: "Context Aware", icon: Cpu },
+              { label: "Sandboxed", icon: Shield },
+              { label: "Reversible", icon: RotateCcw },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10"
+              >
+                <item.icon size={16} className="text-gray-400" />
+                <span className="text-sm text-gray-300">{item.label}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
