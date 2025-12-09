@@ -631,22 +631,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="code-editor">
-              <div className="code-editor-header">
-                <div className="flex items-center gap-4">
-                  <div className="code-editor-dots">
-                    <div className="code-editor-dot code-editor-dot-red" />
-                    <div className="code-editor-dot code-editor-dot-yellow" />
-                    <div className="code-editor-dot code-editor-dot-green" />
-                  </div>
-                  <span className="code-editor-title flex items-center gap-2">
-                    <Terminal size={14} className="opacity-50" />
-                    cortex-playground
-                  </span>
-                </div>
-                <CopyButton text="cortex generate api --name products" size="sm" />
-              </div>
-              
+            <InteractiveCodeEditor title="cortex-playground" actions={<CopyButton text="cortex generate api --name products" size="sm" />}>
               <div className="code-editor-body">
                 <CodeLine lineNumber={1}>
                   <span className="syntax-prompt">$</span>{" "}
@@ -675,7 +660,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </button>
                 ))}
               </div>
-            </div>
+            </InteractiveCodeEditor>
           </motion.div>
         </div>
       </section>
@@ -987,19 +972,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="code-editor">
-              <div className="code-editor-header">
-                <div className="flex items-center gap-4">
-                  <div className="code-editor-dots">
-                    <div className="code-editor-dot code-editor-dot-red" />
-                    <div className="code-editor-dot code-editor-dot-yellow" />
-                    <div className="code-editor-dot code-editor-dot-green" />
-                  </div>
-                  <span className="code-editor-title">quickstart.sh</span>
-                </div>
-                <CopyButton text={`${installCommands[activeTab]}\ncortex init my-app\ncortex dev`} size="sm" />
-              </div>
-              
+            <InteractiveCodeEditor title="quickstart.sh" actions={<CopyButton text={`${installCommands[activeTab]}\ncortex init my-app\ncortex dev`} size="sm" />}>
               {/* Package Manager Tabs */}
               <div className="code-tabs">
                 {(["npm", "yarn", "pnpm", "bun"] as const).map((pm) => (
@@ -1080,7 +1053,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
                 <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
               </div>
-            </div>
+            </InteractiveCodeEditor>
           </motion.div>
         </div>
       </section>
