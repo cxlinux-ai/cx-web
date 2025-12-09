@@ -495,7 +495,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See Cortex in Action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See <span className="gradient-text">Cortex</span> in Action</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Real commands, real results. See what takes others hours happen in seconds — no signup required.</p>
           </motion.div>
 
