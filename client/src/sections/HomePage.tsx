@@ -85,7 +85,7 @@ function TypewriterText({ text, speed = 40 }: { text: string; speed?: number }) 
   );
 }
 
-function CopyButton({ text, variant = "default" }: { text: string; variant?: "default" | "3d" }) {
+function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   
   const handleCopy = async () => {
@@ -93,18 +93,6 @@ function CopyButton({ text, variant = "default" }: { text: string; variant?: "de
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  
-  if (variant === "3d") {
-    return (
-      <button
-        onClick={handleCopy}
-        className={`copy-button-3d ${copied ? "copied" : ""}`}
-        aria-label="Copy to clipboard"
-      >
-        {copied ? <Check size={16} /> : <Copy size={16} />}
-      </button>
-    );
-  }
   
   return (
     <button
@@ -114,50 +102,6 @@ function CopyButton({ text, variant = "default" }: { text: string; variant?: "de
     >
       {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} className="text-gray-400" />}
     </button>
-  );
-}
-
-function SyntaxLine({ children, lineNumber }: { children: React.ReactNode; lineNumber?: number }) {
-  return (
-    <div className="code-line">
-      {lineNumber && <span className="line-number">{lineNumber}</span>}
-      <span className="flex-1">{children}</span>
-    </div>
-  );
-}
-
-function TerminalCommand({ command, showPrompt = true }: { command: string; showPrompt?: boolean }) {
-  const parts = command.split(" ");
-  const cmd = parts[0];
-  const args = parts.slice(1);
-  
-  return (
-    <div className="terminal-input-line">
-      {showPrompt && (
-        <>
-          <span className="terminal-prompt">~</span>
-          <span className="terminal-arrow">❯</span>
-        </>
-      )}
-      <span className="syntax-command">{cmd}</span>
-      {args.map((arg, i) => (
-        <span key={i} className={arg.startsWith("--") || arg.startsWith("-") ? "syntax-flag" : "syntax-value"}>
-          {arg}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function TerminalOutput({ lines, success = true }: { lines: string[]; success?: boolean }) {
-  return (
-    <div className="mt-3 space-y-1">
-      {lines.map((line, i) => (
-        <div key={i} className={success ? "syntax-success" : "syntax-error"}>
-          {line}
-        </div>
-      ))}
-    </div>
   );
 }
 
@@ -303,55 +247,23 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </a>
           </motion.div>
 
-          {/* Premium 3D Terminal Preview */}
+          {/* Animated Terminal Preview */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="terminal-3d terminal-glow max-w-3xl mx-auto"
+            className="macos-window max-w-3xl mx-auto border border-white/10"
           >
-            <div className="terminal-3d-titlebar">
-              <div className="terminal-3d-button terminal-3d-close" />
-              <div className="terminal-3d-button terminal-3d-minimize" />
-              <div className="terminal-3d-button terminal-3d-maximize" />
-              <div className="flex-1 flex items-center justify-center gap-2">
-                <Terminal size={14} className="text-gray-500" />
-                <span className="text-sm text-gray-400 font-medium">cortex — zsh</span>
-              </div>
-              <div className="w-16" />
+            <div className="macos-titlebar">
+              <div className="macos-button macos-close" />
+              <div className="macos-button macos-minimize" />
+              <div className="macos-button macos-maximize" />
+              <span className="ml-4 text-sm text-gray-400">Terminal — cortex</span>
             </div>
-            <div className="terminal-3d-content text-left relative">
-              <CopyButton text="cortex install tensorflow --optimize-gpu" variant="3d" />
-              <SyntaxLine lineNumber={1}>
-                <span className="terminal-prompt">~</span>
-                <span className="terminal-arrow mx-2">❯</span>
-                <span className="syntax-command">cortex</span>
-                <span className="syntax-value ml-2">install</span>
-                <span className="syntax-value ml-2">tensorflow</span>
-                <span className="syntax-flag ml-2">--optimize-gpu</span>
-              </SyntaxLine>
-              <div className="mt-4 space-y-1">
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Detected</span>
-                  <span className="syntax-string">NVIDIA RTX 4090</span>
-                </div>
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Installing</span>
-                  <span className="syntax-path">CUDA 12.3</span>
-                  <span>drivers</span>
-                </div>
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Configuring TensorFlow for GPU</span>
-                </div>
-                <div className="syntax-success flex items-center gap-2 mt-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Optimized for your hardware —</span>
-                  <span className="syntax-number">Ready in 8s</span>
-                  <span className="typing-cursor" />
-                </div>
+            <div className="bg-[#1a1a1a] p-6 font-mono text-sm text-left">
+              <div className="text-gray-400 mb-2">$ cortex install tensorflow --optimize-gpu</div>
+              <div className="text-green-400">
+                <TypewriterText text="✓ Detected NVIDIA RTX 4090&#10;✓ Installing CUDA 12.3 drivers&#10;✓ Configuring TensorFlow for GPU&#10;✓ Optimized for your hardware — Ready in 8s" speed={30} />
               </div>
             </div>
           </motion.div>
@@ -395,78 +307,54 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="terminal-3d terminal-glow max-w-4xl mx-auto"
+            className="macos-window max-w-4xl mx-auto border border-white/10"
           >
-            <div className="terminal-3d-titlebar">
-              <div className="terminal-3d-button terminal-3d-close" />
-              <div className="terminal-3d-button terminal-3d-minimize" />
-              <div className="terminal-3d-button terminal-3d-maximize" />
-              <div className="flex-1 flex items-center justify-center gap-2">
-                <Command size={14} className="text-gray-500" />
-                <span className="text-sm text-gray-400 font-medium">Interactive Playground</span>
-              </div>
-              <div className="w-16" />
+            <div className="macos-titlebar">
+              <div className="macos-button macos-close" />
+              <div className="macos-button macos-minimize" />
+              <div className="macos-button macos-maximize" />
+              <span className="ml-4 text-sm text-gray-400">Interactive Demo</span>
             </div>
             
-            {/* Premium Demo Tabs */}
-            <div className="pm-tabs-3d">
+            {/* Demo Tabs */}
+            <div className="bg-[#252525] border-b border-white/10 flex gap-2 px-4 py-2">
               {demoCommands.map((demo, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveDemo(i)}
-                  className={`pm-tab ${activeDemo === i ? "active" : ""}`}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    activeDemo === i
+                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
                 >
                   {demo.label}
                 </button>
               ))}
             </div>
 
-            {/* Terminal Content with Syntax Highlighting */}
-            <div className="terminal-3d-content min-h-[220px] relative">
-              <CopyButton text={demoCommands[activeDemo].command} variant="3d" />
-              <SyntaxLine lineNumber={1}>
-                <span className="terminal-prompt">~</span>
-                <span className="terminal-arrow mx-2">❯</span>
-                {demoCommands[activeDemo].command.split(" ").map((part, i) => (
-                  <span 
-                    key={i} 
-                    className={`ml-1 ${
-                      i === 0 ? "syntax-command" : 
-                      part.startsWith("--") ? "syntax-flag" : 
-                      "syntax-value"
-                    }`}
-                  >
-                    {part}
-                  </span>
-                ))}
-              </SyntaxLine>
-              <div className="mt-4 space-y-1">
-                {demoCommands[activeDemo].output.split("\n").map((line, i) => (
-                  <div key={i} className="syntax-success flex items-center gap-2">
-                    <span className="text-emerald-400">{line.startsWith("✓") ? "✓" : ""}</span>
-                    <span>{line.replace("✓ ", "")}</span>
-                  </div>
-                ))}
+            {/* Terminal Content */}
+            <div className="bg-[#1a1a1a] p-6 font-mono text-sm min-h-[200px]">
+              <div className="text-gray-400 mb-4">$ {demoCommands[activeDemo].command}</div>
+              <div className="text-green-400 whitespace-pre-line">
+                {demoCommands[activeDemo].output}
               </div>
             </div>
 
-            {/* Premium Footer Actions */}
-            <div className="terminal-3d-footer">
-              <div className="flex gap-3">
-                <button className="terminal-action-btn primary">
+            {/* Actions */}
+            <div className="bg-[#252525] border-t border-white/10 px-4 py-3 flex justify-between items-center">
+              <div className="flex gap-2">
+                <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors">
                   <Play size={14} />
                   Run Example
                 </button>
-                <button className="terminal-action-btn secondary">
-                  <Copy size={14} />
-                  Copy
-                </button>
+                <CopyButton text={demoCommands[activeDemo].command} />
               </div>
               <a
                 href="https://github.com/cortexlinux/cortex"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-blue-400 flex items-center gap-1 transition-colors"
+                className="text-sm text-gray-400 hover:text-blue-400 flex items-center gap-1"
               >
                 Fork this example
                 <ExternalLink size={12} />
@@ -508,32 +396,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                     <p className="text-gray-400 mb-4">{feature.description}</p>
                     
-                    {/* Expandable 3D Code Block */}
+                    {/* Expandable Code */}
                     <motion.div
                       initial={false}
                       animate={{ height: expandedFeature === i ? "auto" : 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="code-block-3d mt-4 relative">
-                        <CopyButton text={feature.code} variant="3d" />
-                        {feature.code.split("\n").map((line, lineIdx) => (
-                          <SyntaxLine key={lineIdx} lineNumber={lineIdx + 1}>
-                            {line.split(" ").map((word, wordIdx) => (
-                              <span 
-                                key={wordIdx}
-                                className={`${wordIdx > 0 ? "ml-1" : ""} ${
-                                  word === "cortex" ? "syntax-command" :
-                                  word.startsWith("--") ? "syntax-flag" :
-                                  word.startsWith("@") ? "syntax-path" :
-                                  word.match(/^[0-9]+/) ? "syntax-number" :
-                                  "syntax-value"
-                                }`}
-                              >
-                                {word}
-                              </span>
-                            ))}
-                          </SyntaxLine>
-                        ))}
+                      <div className="bg-black/50 rounded-lg p-4 font-mono text-sm text-green-400 mt-4">
+                        <pre>{feature.code}</pre>
                       </div>
                     </motion.div>
                     
@@ -567,54 +437,30 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="terminal-3d terminal-glow"
+            className="glass-card rounded-2xl overflow-hidden"
           >
-            <div className="terminal-3d-titlebar">
-              <div className="terminal-3d-button terminal-3d-close" />
-              <div className="terminal-3d-button terminal-3d-minimize" />
-              <div className="terminal-3d-button terminal-3d-maximize" />
-              <div className="flex-1 flex items-center justify-center gap-2">
-                <Cpu size={14} className="text-gray-500" />
-                <span className="text-sm text-gray-400 font-medium">cortex-playground</span>
+            <div className="bg-[#1a1a1a] p-6 font-mono text-sm border-b border-white/10">
+              <div className="flex items-center gap-2 text-gray-500 mb-4">
+                <Terminal size={16} />
+                <span>cortex-playground</span>
               </div>
-              <div className="w-16" />
-            </div>
-            
-            <div className="terminal-3d-content relative">
-              <CopyButton text="cortex generate api --name products" variant="3d" />
-              <SyntaxLine lineNumber={1}>
-                <span className="terminal-prompt">~</span>
-                <span className="terminal-arrow mx-2">❯</span>
-                <span className="syntax-command">cortex</span>
-                <span className="syntax-value ml-2">generate</span>
-                <span className="syntax-value ml-2">api</span>
-                <span className="syntax-flag ml-2">--name</span>
-                <span className="syntax-string ml-2">products</span>
-              </SyntaxLine>
-              <div className="mt-4 space-y-1">
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Created</span>
-                  <span className="syntax-path">/api/products/route.ts</span>
-                </div>
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Generated CRUD operations</span>
-                </div>
-                <div className="syntax-success flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span>
-                  <span>Added TypeScript types</span>
+              <div className="space-y-2">
+                <div className="text-gray-400">$ cortex generate api --name products</div>
+                <div className="text-green-400">
+                  ✓ Created /api/products/route.ts<br />
+                  ✓ Generated CRUD operations<br />
+                  ✓ Added TypeScript types<br />
                 </div>
               </div>
             </div>
             
-            {/* Prompt Pills with Premium Style */}
-            <div className="terminal-3d-footer flex-wrap gap-2">
-              <span className="text-sm text-gray-400">Try:</span>
+            {/* Prompt Pills */}
+            <div className="bg-[#252525] px-6 py-4 flex flex-wrap gap-2">
+              <span className="text-sm text-gray-400 mr-2">Try:</span>
               {["Generate REST API", "Add Authentication", "Deploy to Edge", "Install Plugin"].map((prompt, i) => (
                 <button
                   key={i}
-                  className="px-4 py-2 rounded-full text-sm bg-white/5 text-gray-300 hover:bg-blue-500/20 hover:text-blue-400 border border-white/10 hover:border-blue-500/30 transition-all duration-200 hover:scale-105"
+                  className="px-4 py-2 rounded-full text-sm bg-white/5 text-gray-300 hover:bg-blue-500/20 hover:text-blue-400 border border-white/10 hover:border-blue-500/30 transition-all"
                 >
                   {prompt}
                 </button>
@@ -930,81 +776,45 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="terminal-3d terminal-glow"
+            className="glass-card rounded-2xl overflow-hidden"
           >
-            <div className="terminal-3d-titlebar">
-              <div className="terminal-3d-button terminal-3d-close" />
-              <div className="terminal-3d-button terminal-3d-minimize" />
-              <div className="terminal-3d-button terminal-3d-maximize" />
-              <div className="flex-1 flex items-center justify-center gap-2">
-                <FileText size={14} className="text-gray-500" />
-                <span className="text-sm text-gray-400 font-medium">Quick Start Guide</span>
-              </div>
-              <div className="w-16" />
-            </div>
-
-            {/* Premium Package Manager Tabs */}
-            <div className="pm-tabs-3d">
+            {/* Package Manager Tabs */}
+            <div className="border-b border-white/10 flex">
               {(["npm", "yarn", "pnpm", "bun"] as const).map((pm) => (
                 <button
                   key={pm}
                   onClick={() => setActiveTab(pm)}
-                  className={`pm-tab ${activeTab === pm ? "active" : ""}`}
+                  className={`px-6 py-3 text-sm font-medium transition-all ${
+                    activeTab === pm
+                      ? "text-blue-400 border-b-2 border-blue-400"
+                      : "text-gray-400 hover:text-white"
+                  }`}
                 >
                   {pm}
                 </button>
               ))}
             </div>
 
-            {/* Premium Code Blocks with Syntax Highlighting */}
-            <div className="terminal-3d-content relative">
-              <CopyButton text={`${installCommands[activeTab]}\ncortex init my-app\ncortex dev`} variant="3d" />
-              
-              <div className="mb-6">
-                <div className="syntax-comment mb-2"># Install Cortex CLI</div>
-                <SyntaxLine lineNumber={1}>
-                  <span className="syntax-command">{activeTab}</span>
-                  <span className="syntax-value ml-2">{activeTab === "npm" ? "install" : activeTab === "yarn" ? "global" : "add"}</span>
-                  <span className="syntax-flag ml-2">{activeTab === "npm" ? "-g" : activeTab === "yarn" ? "add" : "-g"}</span>
-                  <span className="syntax-path ml-2">cortex-cli</span>
-                </SyntaxLine>
+            {/* Code Blocks */}
+            <div className="p-6 font-mono text-sm bg-[#1a1a1a]">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-gray-500"># Install</span>
+                <CopyButton text={installCommands[activeTab]} />
               </div>
+              <div className="text-green-400 mb-6">{installCommands[activeTab]}</div>
               
-              <div className="mb-6">
-                <div className="syntax-comment mb-2"># Initialize your project</div>
-                <SyntaxLine lineNumber={2}>
-                  <span className="syntax-command">cortex</span>
-                  <span className="syntax-value ml-2">init</span>
-                  <span className="syntax-string ml-2">my-app</span>
-                </SyntaxLine>
-              </div>
+              <div className="text-gray-500 mb-2"># Initialize</div>
+              <div className="text-green-400 mb-6">cortex init my-app</div>
               
-              <div>
-                <div className="syntax-comment mb-2"># Start developing</div>
-                <SyntaxLine lineNumber={3}>
-                  <span className="syntax-command">cortex</span>
-                  <span className="syntax-value ml-2">dev</span>
-                  <span className="typing-cursor" />
-                </SyntaxLine>
-              </div>
+              <div className="text-gray-500 mb-2"># Start developing</div>
+              <div className="text-green-400">cortex dev</div>
             </div>
 
-            {/* Premium Doc Links */}
-            <div className="terminal-3d-footer">
-              <div className="flex gap-4 flex-wrap">
-                <a href="#" className="flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors">
-                  <FileText size={14} />
-                  Full Documentation
-                </a>
-                <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-                  <Command size={14} />
-                  API Reference
-                </a>
-                <a href="#" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-                  <Play size={14} />
-                  Examples
-                </a>
-              </div>
+            {/* Doc Links */}
+            <div className="border-t border-white/10 p-4 flex gap-4 flex-wrap">
+              <a href="#" className="text-sm text-blue-400 hover:underline">Full Documentation</a>
+              <a href="#" className="text-sm text-gray-400 hover:text-white">API Reference</a>
+              <a href="#" className="text-sm text-gray-400 hover:text-white">Examples</a>
             </div>
           </motion.div>
         </div>
