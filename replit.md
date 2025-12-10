@@ -9,8 +9,11 @@ Professional marketing landing page and FAQ for Cortex Linux - an AI-native oper
 - Target audience: Data scientists, ML engineers, DevOps teams, students
 - Tone: Professional, trustworthy, cutting-edge but addresses security concerns directly
 
-**Current Status (November 2025):**
-- Complete landing page with 15 sections including hero, problem/solution, security, comparison, use cases, pricing, testimonials, contributors
+**Current Status (December 2025):**
+- Complete landing page with 15+ sections including hero, problem/solution, security, comparison, use cases, pricing, testimonials, contributors, blog preview
+- Blog Preview Section on homepage showing 3 latest posts with hover effects and blue glow accents
+- Full Blog system at /blog with 10 technical articles, search functionality, and category filters
+- Individual blog post pages at /blog/:slug with full content, related posts, and tag display
 - Contributors section with GitHub avatar grid collage showing all developers (8 fallback contributors displayed)
 - Comprehensive FAQ page with 30 questions across 7 categories with real-time search
 - Live GitHub API integration for project statistics and contributors (currently showing 401 auth errors, non-blocking)
@@ -36,7 +39,13 @@ Preferred communication style: Simple, everyday language.
 
 **Design System**: Updated brand colors in index.css (Tech blue #0066FF primary, Terminal green #00FF00 success). Glass-morphism effects throughout with backdrop-blur-xl, bg-white/5, and subtle borders. Consistent rounded corners, low-opacity borders, and glow shadow effects.
 
-**Routing Strategy**: Multi-page application using wouter for client-side routing. Two main routes: / (landing page) and /faq (FAQ page). Landing page uses smooth scrolling to section anchors (home, about, security, pricing, join, sponsor). Navigation tracks active sections via scroll position.
+**Routing Strategy**: Multi-page application using wouter for client-side routing. Routes include:
+- `/` - Landing page with smooth scrolling to section anchors (home, about, security, pricing, join)
+- `/faq` - Comprehensive FAQ page with search
+- `/beta` - Interactive beta preview/demo page
+- `/blog` - Blog index with all posts, search, and category filtering
+- `/blog/:slug` - Individual blog post pages with full content and related posts
+Navigation tracks active sections via scroll position on the homepage.
 
 **State Management**: React hooks (useState, useEffect) for local component state. No global state management needed for this marketing site. Active section tracking handled via scroll event listeners.
 
