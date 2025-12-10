@@ -19,10 +19,10 @@ const ISSUES_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 // Fallback data for when GitHub is unavailable
 const FALLBACK_STATS = {
   openIssues: 12,
-  contributors: 24,
-  mergedPRs: 87,
-  stars: 156,
-  forks: 32
+  contributors: 89,
+  mergedPRs: 156,
+  stars: 1250,
+  forks: 340
 };
 
 const FALLBACK_ISSUES = [

@@ -350,7 +350,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
+      <section id="home" className="min-h-screen flex flex-col justify-start pt-24 sm:pt-28 px-4 relative overflow-hidden">
         <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" />
         <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50" />
         
@@ -359,7 +359,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap justify-center gap-3 mb-8"
+            className="flex flex-wrap justify-center gap-3 mb-6"
           >
             <a
               href="https://github.com/cortexlinux/cortex"
@@ -369,7 +369,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               data-testid="link-github-stars"
             >
               <Star size={14} className="text-yellow-400" />
-              <span className="text-gray-300">{githubStats?.stars?.toLocaleString() || "1.2k"} stars</span>
+              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1.2k"} stars</span>
             </a>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm" data-testid="badge-open-source">
               <Github size={14} className="text-gray-400" />

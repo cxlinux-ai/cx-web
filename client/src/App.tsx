@@ -5,6 +5,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Menu, X, Sparkles, Github, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import FAQ from "./pages/faq";
 import BetaPage from "./pages/beta";
 import Blog from "./pages/blog";
@@ -12,23 +13,52 @@ import BlogPostPage from "./pages/blog-post";
 import HomePage from "./sections/HomePage";
 
 export default function App() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+
+  // Handle pending scroll after navigation
+  useEffect(() => {
+    if (location === "/" && pendingScroll) {
+      // Small delay to ensure page is rendered
+      setTimeout(() => {
+        const element = document.getElementById(pendingScroll);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          setActiveSection(pendingScroll);
+        }
+        setPendingScroll(null);
+      }, 100);
+    }
+  }, [location, pendingScroll]);
 
   // Smooth scroll handler
   const scrollToSection = (sectionId: string) => {
+    setMobileMenuOpen(false);
+    
     if (location !== "/") {
-      // Navigate to home first, then scroll
-      window.location.href = "/#" + sectionId;
+      // Navigate to home first, then scroll after render
+      setPendingScroll(sectionId);
+      navigate("/");
       return;
     }
     
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
       setActiveSection(sectionId);
+    }
+  };
+
+  // Scroll to top smoothly when navigating home
+  const handleHomeClick = () => {
+    setMobileMenuOpen(false);
+    if (location === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      setPendingScroll("home");
+      navigate("/");
     }
   };
 
@@ -66,14 +96,14 @@ export default function App() {
           <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/50 border-b border-white/10 h-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
               {/* Logo */}
-              <Link
-                href="/"
+              <button
+                onClick={handleHomeClick}
                 className="text-2xl font-bold cursor-pointer hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300"
                 data-testid="logo-cortex"
               >
                 <span className="text-white">CORTEX</span>{" "}
                 <span className="text-blue-400">LINUX</span>
-              </Link>
+              </button>
 
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
@@ -139,9 +169,22 @@ export default function App() {
             </div>
 
             {/* Mobile Menu Dropdown */}
-            {mobileMenuOpen && (
-              <div className="md:hidden backdrop-blur-xl bg-black/95 border-b border-white/10">
-                <div className="px-4 py-6 space-y-4">
+            <AnimatePresence>
+              {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="md:hidden backdrop-blur-xl bg-black/95 border-b border-white/10 overflow-hidden"
+              >
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2, delay: 0.1 }}
+                  className="px-4 py-6 space-y-4"
+                >
                   {[
                     { name: "Features", id: "about" },
                     { name: "Docs", id: "preview" },
@@ -173,9 +216,10 @@ export default function App() {
                   >
                     Get Started
                   </Link>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             )}
+            </AnimatePresence>
           </nav>
 
           {/* Routes */}
