@@ -72,21 +72,18 @@ function formatContent(content: string): string {
   return html;
 }
 
-// Extract TOC from content
+// Extract TOC from content - captures both h2 and h3
 function extractTOC(content: string): { id: string; text: string; level: number }[] {
   const toc: { id: string; text: string; level: number }[] = [];
-  const h2Regex = /^## (.+)$/gm;
-  const h3Regex = /^### (.+)$/gm;
+  const headingRegex = /^(#{2,3}) (.+)$/gm;
   
   let match;
-  while ((match = h2Regex.exec(content)) !== null) {
-    const text = match[1];
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const text = match[2];
     const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    toc.push({ id, text, level: 2 });
+    toc.push({ id, text, level });
   }
-  
-  // Reset regex
-  h3Regex.lastIndex = 0;
   
   return toc;
 }
@@ -109,19 +106,26 @@ export default function BlogPostPage() {
 
   // Update document title and meta tags
   useEffect(() => {
+    const originalTitle = document.title;
+    const createdElements: Element[] = [];
+    const originalValues: Map<Element, string> = new Map();
+
     if (post) {
       document.title = post.seoTitle || post.title;
       
-      // Update meta description
+      // Update meta description - cache original value
       let metaDesc = document.querySelector('meta[name="description"]');
       if (!metaDesc) {
         metaDesc = document.createElement('meta');
         metaDesc.setAttribute('name', 'description');
         document.head.appendChild(metaDesc);
+        createdElements.push(metaDesc);
+      } else {
+        originalValues.set(metaDesc, metaDesc.getAttribute('content') || '');
       }
       metaDesc.setAttribute('content', post.seoDescription || post.excerpt);
 
-      // Update OG tags
+      // Update OG tags - cache original values
       const ogTags = [
         { property: 'og:title', content: post.seoTitle || post.title },
         { property: 'og:description', content: post.seoDescription || post.excerpt },
@@ -135,11 +139,24 @@ export default function BlogPostPage() {
           tag = document.createElement('meta');
           tag.setAttribute('property', property);
           document.head.appendChild(tag);
+          createdElements.push(tag);
+        } else {
+          originalValues.set(tag, tag.getAttribute('content') || '');
         }
         tag.setAttribute('content', content);
       });
 
-      // Add JSON-LD structured data
+      // Add JSON-LD structured data with unique ID for this component
+      const jsonLdId = 'blog-post-jsonld';
+      let scriptTag = document.getElementById(jsonLdId);
+      if (!scriptTag) {
+        scriptTag = document.createElement('script');
+        scriptTag.id = jsonLdId;
+        scriptTag.setAttribute('type', 'application/ld+json');
+        document.head.appendChild(scriptTag);
+        createdElements.push(scriptTag);
+      }
+      
       const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -153,18 +170,24 @@ export default function BlogPostPage() {
         image: post.image,
         wordCount: post.wordCount,
       };
-
-      let scriptTag = document.querySelector('script[type="application/ld+json"]');
-      if (!scriptTag) {
-        scriptTag = document.createElement('script');
-        scriptTag.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(scriptTag);
-      }
       scriptTag.textContent = JSON.stringify(jsonLd);
     }
 
+    // Cleanup on unmount
     return () => {
-      document.title = 'Cortex Linux';
+      document.title = originalTitle;
+      
+      // Restore original values for existing elements
+      originalValues.forEach((value, element) => {
+        element.setAttribute('content', value);
+      });
+      
+      // Remove created elements
+      createdElements.forEach(el => {
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
+      });
     };
   }, [post]);
 
