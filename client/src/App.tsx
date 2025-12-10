@@ -37,7 +37,7 @@ export default function App() {
     }
 
     const handleScroll = () => {
-      const sections = ["home", "about", "security", "pricing", "join", "sponsor"];
+      const sections = ["home", "about", "security", "pricing", "join"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {

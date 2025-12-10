@@ -1390,9 +1390,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
               {/* Doc Links */}
               <div className="border-t border-white/5 px-6 py-4 flex gap-6 flex-wrap bg-black/20">
-                <a href="#" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Full Documentation</a>
-                <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
-                <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
+                <a href="https://github.com/cortexlinux/cortex#readme" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Full Documentation</a>
+                <a href="https://github.com/cortexlinux/cortex/wiki" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
+                <a href="https://github.com/cortexlinux/cortex/tree/main/examples" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
               </div>
             </InteractiveCodeEditor>
           </motion.div>
@@ -1835,8 +1835,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: FaDiscord, name: "Discord", count: "5.2k members", color: "hover:border-indigo-500", link: "#" },
-              { icon: FaTwitter, name: "Twitter", count: "12.4k followers", color: "hover:border-sky-500", link: "#" },
+              { icon: FaDiscord, name: "Discord", count: "5.2k members", color: "hover:border-indigo-500", link: "https://discord.gg/cortexlinux" },
+              { icon: FaTwitter, name: "Twitter", count: "12.4k followers", color: "hover:border-sky-500", link: "https://twitter.com/cortexlinux" },
               { icon: Github, name: "GitHub", count: "Discussions", color: "hover:border-gray-500", link: "https://github.com/cortexlinux/cortex/discussions" },
             ].map((platform, i) => (
               <a
