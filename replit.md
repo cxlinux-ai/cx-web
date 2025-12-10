@@ -12,8 +12,14 @@ Professional marketing landing page and FAQ for Cortex Linux - an AI-native oper
 **Current Status (December 2025):**
 - Complete landing page with 15+ sections including hero, problem/solution, security, comparison, use cases, pricing, testimonials, contributors, blog preview
 - Blog Preview Section on homepage showing 3 latest posts with hover effects and blue glow accents
-- Full Blog system at /blog with 10 technical articles, search functionality, and category filters
-- Individual blog post pages at /blog/:slug with full content, related posts, and tag display
+- Full Blog system at /blog with 10 deep technical articles (2000-2500 words each), search functionality, and category filters across 8 categories
+- Individual blog post pages at /blog/:slug with:
+  - Sticky Table of Contents sidebar on desktop
+  - SEO meta tags (Open Graph) with proper cleanup on navigation
+  - JSON-LD structured data for BlogPosting schema
+  - Word count display and reading time
+  - Related articles section
+- Blog categories: Fundamentals, Tutorials, Performance, Best Practices, Infrastructure, Troubleshooting, Security, Industry Trends
 - Contributors section with GitHub avatar grid collage showing all developers (8 fallback contributors displayed)
 - Comprehensive FAQ page with 30 questions across 7 categories with real-time search
 - Live GitHub API integration for project statistics and contributors (currently showing 401 auth errors, non-blocking)
