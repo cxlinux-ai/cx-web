@@ -1978,7 +1978,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   {/* Timeline Dot */}
                   <div className="absolute top-5 left-1/2 -translate-x-1/2">
                     <div
-                      className={`w-6 h-6 rounded-full border-4 border-black transition-all duration-500 ${
+                      className={`w-6 h-6 rounded-full border-4 border-black transition-all duration-2000 ${
                         item.status === "completed"
                           ? "bg-green-500 shadow-[0_0_20px_rgba(34,197,94,0.6)]"
                           : item.status === "current"

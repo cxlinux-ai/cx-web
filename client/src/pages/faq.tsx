@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Shield, Settings, DollarSign, Cpu, Target, Rocket, Wrench, Search } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface Question {
   q: string;
@@ -314,6 +315,8 @@ export default function FAQ() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

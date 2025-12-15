@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, Shield, Database, Cookie, Users, FileText, Bell, Mail } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function Privacy() {
   const sections = [
@@ -142,6 +143,8 @@ Data Protection Officer: Available for enterprise customers with specific compli
           ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

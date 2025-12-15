@@ -16,6 +16,7 @@ import {
   AlertCircle,
   Zap,
 } from "lucide-react";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -647,6 +648,8 @@ export default function BetaPage() {
           </div>
         </SheetContent>
       </Sheet>
+
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Scale, Github, ExternalLink } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function License() {
   const currentYear = new Date().getFullYear();
@@ -136,6 +137,8 @@ SOFTWARE.`}
           </a>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

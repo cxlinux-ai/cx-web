@@ -4,6 +4,7 @@ import { ChevronLeft, Calendar, Clock, User, Tag, ArrowRight } from "lucide-reac
 import { getPostBySlug, getRelatedPosts, BlogPost } from "@/data/blogPosts";
 import { useEffect, useState } from "react";
 import BlogCard from "@/components/BlogCard";
+import Footer from "@/components/Footer";
 
 // Simple markdown to HTML converter
 function formatContent(content: string): string {
@@ -359,6 +360,8 @@ export default function BlogPostPage() {
           </aside>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 }

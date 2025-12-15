@@ -5,6 +5,7 @@ import { useState, useMemo } from "react";
 import { blogPosts, getAllCategories } from "@/data/blogPosts";
 import { Input } from "@/components/ui/input";
 import BlogCard from "@/components/BlogCard";
+import Footer from "@/components/Footer";
 
 export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -115,6 +116,8 @@ export default function Blog() {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 }

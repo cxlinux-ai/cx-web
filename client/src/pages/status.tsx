@@ -1,4 +1,5 @@
 import { CheckCircle2, Activity, Globe, Terminal, Github, Clock } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface StatusItem {
   name: string;
@@ -195,6 +196,8 @@ export default function Status() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

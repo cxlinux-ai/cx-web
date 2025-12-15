@@ -15,6 +15,7 @@ import {
   Server,
   Eye
 } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function SecurityPage() {
   const coreDesignSections = [
@@ -294,6 +295,8 @@ Enterprise customers with specific security requirements can contact us for cust
           </p>
         </motion.div>
       </div>
+
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, FileCheck, Scale, UserCheck, AlertTriangle, ShieldOff, Gavel } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function Terms() {
   const sections = [
@@ -136,6 +137,8 @@ For users outside the United States, you agree to comply with all local laws reg
           ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
