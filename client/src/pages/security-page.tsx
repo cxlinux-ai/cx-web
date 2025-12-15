@@ -1,36 +1,81 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ChevronLeft, Shield, Bug, Award, CheckCircle, AlertCircle, Mail } from "lucide-react";
+import { 
+  ChevronLeft, 
+  Shield, 
+  Bug, 
+  Award, 
+  CheckCircle, 
+  AlertCircle, 
+  Mail,
+  Lock,
+  Package,
+  RotateCcw,
+  FileCheck,
+  Server,
+  Eye
+} from "lucide-react";
 
 export default function SecurityPage() {
-  const sections = [
+  const coreDesignSections = [
+    {
+      icon: Lock,
+      title: "Principle of Least Privilege",
+      content: `Cortex operates with the minimum permissions necessary for each task. By default, operations run in user space without elevated privileges. When administrative access is required, users are prompted explicitly and shown exactly what will be executed before confirmation.`
+    },
     {
       icon: Shield,
-      title: "Security Practices",
-      content: `Cortex Linux is built with security as a core principle:
-
-Infrastructure Security:
-• All data encrypted at rest (AES-256) and in transit (TLS 1.3)
-• Regular security audits and penetration testing
-• Automated vulnerability scanning in CI/CD pipeline
-• Principle of least privilege for all system components
-
-Application Security:
-• Sandboxed command execution using Firejail containers
-• Input validation and sanitization for all user inputs
-• Secure secret management with encrypted storage
-• Regular dependency updates and security patches
-
-Code Security:
-• Mandatory code review for all changes
-• Static analysis and security linting
-• Signed commits and releases
-• Reproducible builds for verification`
+      title: "No Root by Default",
+      content: `The system does not run with root permissions under normal operation. Elevated privileges are requested only when strictly necessary, and users maintain full visibility into what actions require administrative access and why.`
     },
+    {
+      icon: FileCheck,
+      title: "Reproducible Builds",
+      content: `All official releases are built deterministically. Given the same source code and build environment, the resulting binaries are identical. This allows independent verification that distributed binaries match the published source code.`
+    }
+  ];
+
+  const supplyChainSections = [
+    {
+      icon: Package,
+      title: "Verified Sources",
+      content: `Dependencies are fetched only from known, authenticated sources. Package integrity is verified against published checksums before installation. The dependency tree is locked to specific versions to prevent unexpected changes.`
+    },
+    {
+      icon: Eye,
+      title: "Checksums and Integrity Validation",
+      content: `Every downloaded component is validated against cryptographic checksums. Signature verification is performed where available. Failed integrity checks halt installation and alert the user rather than proceeding silently.`
+    },
+    {
+      icon: Server,
+      title: "Sandboxed Execution",
+      content: `Commands execute within isolated environments with restricted filesystem and network access. This containment limits the potential impact of compromised or misbehaving software. Users can inspect and adjust sandbox policies as needed.`
+    }
+  ];
+
+  const operationalSections = [
+    {
+      icon: CheckCircle,
+      title: "Deterministic Installs",
+      content: `Installation outcomes are predictable and repeatable. The same configuration produces the same result across different machines and time periods. This consistency simplifies debugging and reduces environment-specific issues.`
+    },
+    {
+      icon: FileCheck,
+      title: "Version Pinning",
+      content: `All dependencies are pinned to specific versions by default. Updates occur only when explicitly requested, allowing users to control when changes are introduced. Lock files ensure consistent environments across team members and deployments.`
+    },
+    {
+      icon: RotateCcw,
+      title: "Safe Rollbacks",
+      content: `System state is captured before significant changes. If an update causes issues, users can revert to the previous working state. Rollback operations are tested as part of the release process to ensure reliability when needed.`
+    }
+  ];
+
+  const additionalSections = [
     {
       icon: Bug,
       title: "Vulnerability Disclosure",
-      content: `We appreciate responsible disclosure of security vulnerabilities.
+      content: `We accept responsible disclosure of security vulnerabilities.
 
 How to Report:
 1. Email security@cortexlinux.com with details of the vulnerability
@@ -38,16 +83,10 @@ How to Report:
 3. Allow up to 90 days for us to address the issue before public disclosure
 
 What to Expect:
-• Acknowledgment within 48 hours of your report
-• Regular updates on our progress
-• Credit in our security advisories (if desired)
-• No legal action for good-faith security research
-
-What Not to Do:
-• Access, modify, or delete data belonging to others
-• Disrupt service availability
-• Social engineering of employees or users
-• Physical security testing`
+- Acknowledgment within 48 hours of your report
+- Regular updates on our progress
+- Credit in our security advisories (if desired)
+- No legal action for good-faith security research`
     },
     {
       icon: Award,
@@ -55,46 +94,17 @@ What Not to Do:
       content: `We reward security researchers who help keep Cortex Linux secure.
 
 Scope:
-• Cortex Linux core software and CLI
-• Official web properties (cortexlinux.com)
-• API endpoints and authentication systems
+- Cortex Linux core software and CLI
+- Official web properties (cortexlinux.com)
+- API endpoints and authentication systems
 
 Rewards:
-• Critical vulnerabilities: Up to $5,000
-• High severity: Up to $2,500
-• Medium severity: Up to $1,000
-• Low severity: Up to $250
-
-Eligibility:
-• First reporter of a previously unknown vulnerability
-• Vulnerability must be in-scope and valid
-• Must follow responsible disclosure guidelines
-• Must not be a current or recent employee
+- Critical vulnerabilities: Up to $5,000
+- High severity: Up to $2,500
+- Medium severity: Up to $1,000
+- Low severity: Up to $250
 
 Submit reports to: security@cortexlinux.com`
-    },
-    {
-      icon: CheckCircle,
-      title: "Compliance",
-      content: `Cortex Linux maintains compliance with industry standards:
-
-SOC 2 Type II:
-• Annual audits by independent third parties
-• Controls for security, availability, and confidentiality
-• Continuous monitoring and reporting
-
-GDPR Compliance:
-• Data processing agreements with all vendors
-• Privacy by design principles
-• User rights management (access, deletion, portability)
-• Data Protection Impact Assessments
-
-Additional Standards:
-• ISO 27001 aligned security controls
-• OWASP secure development practices
-• CIS benchmark hardening guidelines
-
-Enterprise customers can request compliance documentation and audit reports.`
     },
     {
       icon: AlertCircle,
@@ -102,27 +112,21 @@ Enterprise customers can request compliance documentation and audit reports.`
       content: `Our incident response process ensures rapid and effective handling of security events:
 
 Detection:
-• 24/7 automated monitoring and alerting
-• Anomaly detection for unusual activity
-• Regular log analysis and threat hunting
+- 24/7 automated monitoring and alerting
+- Anomaly detection for unusual activity
+- Regular log analysis and threat hunting
 
 Response:
-• Immediate containment of identified threats
-• Root cause analysis and remediation
-• Communication to affected users within 72 hours
-• Post-incident review and improvements
+- Immediate containment of identified threats
+- Root cause analysis and remediation
+- Communication to affected users within 72 hours
+- Post-incident review and improvements
 
-Communication:
-• Security advisories published on our website
-• Email notifications for affected users
-• Transparent incident reports
-• GitHub security advisories for code vulnerabilities
-
-Our target response times:
-• Critical: 4 hours
-• High: 24 hours
-• Medium: 72 hours
-• Low: 7 days`
+Target response times:
+- Critical: 4 hours
+- High: 24 hours
+- Medium: 72 hours
+- Low: 7 days`
     },
     {
       icon: Mail,
@@ -132,21 +136,16 @@ Our target response times:
 Email: security@cortexlinux.com
 PGP Key: Available at cortexlinux.com/security.asc
 
-For general inquiries, please use:
-• GitHub Issues: github.com/cortexlinux/cortex/issues
-• Discord: discord.gg/cortexlinux
+For general inquiries:
+- GitHub Issues: github.com/cortexlinux/cortex/issues
+- Discord: discord.gg/cortexlinux
 
-Enterprise Security:
-Enterprise customers with specific security requirements can contact us for:
-• Custom security assessments
-• Dedicated security contacts
-• Enhanced SLA for security issues
-• Compliance documentation and attestations`
+Enterprise customers with specific security requirements can contact us for custom assessments and dedicated support.`
     }
   ];
 
   return (
-    <div className="min-h-screen pt-20 pb-16">
+    <div className="min-h-screen pt-20 pb-16 bg-black text-white">
       <div className="max-w-4xl mx-auto px-4">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
@@ -163,17 +162,111 @@ Enterprise customers with specific security requirements can contact us for:
             <span className="text-gray-400">Policy</span>
           </h1>
           <p className="text-gray-400 text-lg">
-            How we protect Cortex Linux and your systems
+            How we design, build, and operate Cortex Linux with security in mind
           </p>
         </motion.div>
 
-        <div className="space-y-8">
-          {sections.map((section, index) => (
+        {/* Security-First Design */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-12"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
+            <div className="p-2 bg-blue-500/10 rounded-lg">
+              <Shield size={24} className="text-blue-400" />
+            </div>
+            Security-First Design
+          </h2>
+          <div className="space-y-4">
+            {coreDesignSections.map((section, index) => (
+              <div
+                key={section.title}
+                className="bg-white/5 border border-white/10 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <section.icon size={18} className="text-blue-400" />
+                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
+                </div>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {section.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Supply Chain Protection */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-12"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
+            <div className="p-2 bg-blue-500/10 rounded-lg">
+              <Package size={24} className="text-blue-400" />
+            </div>
+            Supply Chain Protection
+          </h2>
+          <div className="space-y-4">
+            {supplyChainSections.map((section, index) => (
+              <div
+                key={section.title}
+                className="bg-white/5 border border-white/10 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <section.icon size={18} className="text-blue-400" />
+                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
+                </div>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {section.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Operational Reliability */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
+            <div className="p-2 bg-blue-500/10 rounded-lg">
+              <Server size={24} className="text-blue-400" />
+            </div>
+            Operational Reliability
+          </h2>
+          <div className="space-y-4">
+            {operationalSections.map((section, index) => (
+              <div
+                key={section.title}
+                className="bg-white/5 border border-white/10 rounded-xl p-6"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <section.icon size={18} className="text-blue-400" />
+                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
+                </div>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {section.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Additional Sections */}
+        <div className="space-y-6">
+          {additionalSections.map((section, index) => (
             <motion.div
               key={section.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: 0.4 + index * 0.1 }}
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
@@ -188,6 +281,18 @@ Enterprise customers with specific security requirements can contact us for:
             </motion.div>
           ))}
         </div>
+
+        {/* Transparency Note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="mt-12 p-6 border border-white/10 rounded-xl bg-white/5"
+        >
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Security is an ongoing process, not a destination. We continuously review and improve our practices as threats evolve and new techniques emerge. This document reflects our current approach and will be updated as our security posture develops. Questions or concerns about our security practices can be directed to security@cortexlinux.com.
+          </p>
+        </motion.div>
       </div>
     </div>
   );

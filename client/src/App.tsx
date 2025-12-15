@@ -11,6 +11,11 @@ import BetaPage from "./pages/beta";
 import Blog from "./pages/blog";
 import BlogPostPage from "./pages/blog-post";
 import HomePage from "./sections/HomePage";
+import Privacy from "./pages/privacy";
+import Terms from "./pages/terms";
+import SecurityPage from "./pages/security-page";
+import Status from "./pages/status";
+import License from "./pages/license";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -246,6 +251,11 @@ export default function App() {
             <Route path="/beta" component={BetaPage} />
             <Route path="/blog" component={Blog} />
             <Route path="/blog/:slug" component={BlogPostPage} />
+            <Route path="/privacy" component={Privacy} />
+            <Route path="/terms" component={Terms} />
+            <Route path="/security-policy" component={SecurityPage} />
+            <Route path="/status" component={Status} />
+            <Route path="/license" component={License} />
           </Switch>
 
           <Toaster />
