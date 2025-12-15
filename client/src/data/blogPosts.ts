@@ -32,21 +32,7 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "AI-Native Linux Explained: Architecture, Benefits & Implementation Guide | Cortex",
     seoDescription: "Deep dive into AI-native Linux architecture. Learn how intent-based computing, GPU optimization, and declarative configs transform ML workflows.",
     excerpt: "Beyond buzzwords: understand how AI-native operating systems fundamentally change developer workflows with intent-based computing and automatic optimization.",
-    content: `## Table of Contents
-
-- [Defining AI-Native: Beyond Marketing Speak](#defining-ai-native-beyond-marketing-speak)
-- [The Intent-Resolution Architecture](#the-intent-resolution-architecture)
-- [How Natural Language Becomes System Calls](#how-natural-language-becomes-system-calls)
-- [Traditional Linux vs AI-Native Linux: A Technical Comparison](#traditional-linux-vs-ai-native-linux-a-technical-comparison)
-- [CLI Deep Dive: Cortex Commands vs Traditional Equivalents](#cli-deep-dive-cortex-commands-vs-traditional-equivalents)
-- [Why Traditional Package Managers Break for ML Workflows](#why-traditional-package-managers-break-for-ml-workflows)
-- [Benchmarks: Setup Time Comparison](#benchmarks-setup-time-comparison)
-- [Troubleshooting Intent Mismatches](#troubleshooting-intent-mismatches)
-- [Checklist: Is Your System AI-Native Ready?](#checklist-is-your-system-ai-native-ready)
-
----
-
-## Defining AI-Native: Beyond Marketing Speak
+    content: `## Defining AI-Native: Beyond Marketing Speak
 
 The term "AI-native" has become a buzzword, but when applied to operating systems, it carries precise technical meaning. An AI-native Linux distribution is not simply a traditional distro with machine learning libraries pre-installed. It represents a fundamental architectural shift in how the operating system interprets, validates, and executes user commands.
 
@@ -534,20 +520,7 @@ Ready to eliminate config hell entirely? Check out our guide on [How to Run ML W
     seoTitle: "Eliminate ML Config Hell: Declarative Environments & Reproducible Workflows | Cortex",
     seoDescription: "Step-by-step guide to eliminating hours of ML environment setup. Master declarative configs, snapshot management, and dependency resolution.",
     excerpt: "A step-by-step guide to eliminating the hours spent on environment setup. From CUDA drivers to Python dependencies, master the modern approach.",
-    content: `## Table of Contents
-
-- [Understanding Config Hell](#understanding-config-hell)
-- [The Dependency Resolution Architecture](#the-dependency-resolution-architecture)
-- [Step-by-Step: Setting Up PyTorch with CUDA](#step-by-step-setting-up-pytorch-with-cuda)
-- [Configuration Files Deep Dive](#configuration-files-deep-dive)
-- [Common Error Messages and Their Fixes](#common-error-messages-and-their-fixes)
-- [Debugging Workflow](#debugging-workflow)
-- [Manual Setup vs Cortex: Time Comparison](#manual-setup-vs-cortex-time-comparison)
-- [Pre-flight Checks Before Training](#pre-flight-checks-before-training)
-
----
-
-## Understanding Config Hell
+    content: `## Understanding Config Hell
 
 Config hell isn't just inconvenience—it's a systematic failure mode that affects ML engineering productivity at scale. Our analysis of 15,000 support tickets and internal incident reports reveals that **ML engineers spend an average of 23% of their working hours on environment configuration and debugging**, not on actual model development.
 
@@ -1173,22 +1146,7 @@ Ready to optimize your actual training performance? Continue to [GPU Optimizatio
     seoTitle: "GPU Optimization for ML Training: Practical Techniques & Benchmarks | Cortex",
     seoDescription: "Cut through GPU optimization noise. Learn memory management, mixed precision, and kernel optimization with real benchmarks and actionable code.",
     excerpt: "Cut through the noise. These are the GPU optimization techniques that deliver measurable performance gains, backed by benchmarks and production experience.",
-    content: `## Table of Contents
-
-- [The Reality of GPU Optimization](#the-reality-of-gpu-optimization)
-- [Understanding GPU Memory Hierarchy](#understanding-gpu-memory-hierarchy)
-- [Reading nvidia-smi Like a Pro](#reading-nvidia-smi-like-a-pro)
-- [CUDA Profiling: Finding Real Bottlenecks](#cuda-profiling-finding-real-bottlenecks)
-- [Memory Optimization Techniques](#memory-optimization-techniques)
-- [Batch Size vs Memory Trade-offs](#batch-size-vs-memory-trade-offs)
-- [Multi-GPU Topology and Scaling](#multi-gpu-topology-and-scaling)
-- [Precision Benchmarks: FP32 vs FP16 vs BF16 vs INT8](#precision-benchmarks-fp32-vs-fp16-vs-bf16-vs-int8)
-- [Troubleshooting GPU Memory Errors](#troubleshooting-gpu-memory-errors)
-- [Optimization Checklist](#optimization-checklist)
-
----
-
-## The Reality of GPU Optimization
+    content: `## The Reality of GPU Optimization
 
 **Opinionated take:** 80% of GPU optimization advice you'll read online is either outdated, hardware-specific, or solves the wrong problem. Before implementing any optimization, you need to understand what's actually limiting your performance.
 
@@ -1817,22 +1775,7 @@ For environment setup that doesn't fight you, see [How to Run ML Workloads Witho
     seoTitle: "Building Reproducible ML Pipelines: DVC, MLflow, CI/CD & Version Control | Cortex",
     seoDescription: "Master ML pipeline reproducibility with DVC integration, artifact tracking, CI/CD examples, and debugging strategies. Complete guide with code examples.",
     excerpt: "Stop debugging 'why did my model change?' forever. Learn the complete system for reproducible ML pipelines from data versioning to deployment.",
-    content: `## Table of Contents
-
-- [The Reproducibility Crisis in ML](#the-reproducibility-crisis-in-ml)
-- [Pipeline Architecture Overview](#pipeline-architecture-overview)
-- [Version Control Strategies for ML](#version-control-strategies-for-ml)
-- [DVC Integration Deep Dive](#dvc-integration-deep-dive)
-- [Container Manifests and Environment Lock Files](#container-manifests-and-environment-lock-files)
-- [Artifact Tracking and Experiment Logging](#artifact-tracking-and-experiment-logging)
-- [CI/CD Pipeline Examples for ML](#cicd-pipeline-examples-for-ml)
-- [Debugging: Why Did My Model Change?](#debugging-why-did-my-model-change)
-- [MLflow vs Weights & Biases vs Custom Solutions](#mlflow-vs-weights--biases-vs-custom-solutions)
-- [Reproducibility Verification Checklist](#reproducibility-verification-checklist)
-
----
-
-## The Reproducibility Crisis in ML
+    content: `## The Reproducibility Crisis in ML
 
 A 2022 study found that only 15% of ML papers could be fully reproduced by independent researchers. In production environments, the situation is often worse: teams struggle to reproduce their own results from three months ago.
 
@@ -2657,22 +2600,7 @@ For more on environment management, see [How to Run ML Workloads Without Config 
     seoTitle: "Container vs Bare Metal for ML Training: Performance, Cost & GPU Benchmarks | Cortex",
     seoDescription: "Comprehensive comparison of containerized vs bare-metal ML infrastructure. Performance benchmarks, GPU passthrough, Kubernetes analysis, and cost breakdown.",
     excerpt: "Cut through the container hype. When does Docker make sense for ML, and when is bare metal the right choice? Data-driven analysis inside.",
-    content: `## Table of Contents
-
-- [The Container Debate in ML](#the-container-debate-in-ml)
-- [Architecture Comparison](#architecture-comparison)
-- [Performance Benchmarks](#performance-benchmarks)
-- [GPU Passthrough Configuration](#gpu-passthrough-configuration)
-- [Decision Framework: When to Use Each](#decision-framework-when-to-use-each)
-- [Kubernetes vs Bare Metal for ML Clusters](#kubernetes-vs-bare-metal-for-ml-clusters)
-- [Storage Considerations](#storage-considerations)
-- [Security Isolation Comparison](#security-isolation-comparison)
-- [Cost Analysis: Real Numbers](#cost-analysis-real-numbers)
-- [Troubleshooting Container GPU Issues](#troubleshooting-container-gpu-issues)
-
----
-
-## The Container Debate in ML
+    content: `## The Container Debate in ML
 
 Containers revolutionized software deployment, but ML workloads have unique characteristics that complicate the picture:
 
@@ -3215,22 +3143,7 @@ For guidance on GPU optimization within either environment, see [GPU Optimizatio
     seoTitle: "Multi-GPU Training Guide: DDP, FSDP, DeepSpeed & NCCL Tuning | Cortex",
     seoDescription: "Complete guide to multi-GPU training with PyTorch DDP, FSDP, and DeepSpeed. Includes NVLink topology, NCCL tuning, scaling benchmarks, and troubleshooting.",
     excerpt: "Scale from 1 GPU to 8 without wasting compute. Complete setup guide with code examples, topology visualization, and performance benchmarks.",
-    content: `## Table of Contents
-
-- [Why Multi-GPU Training Matters](#why-multi-gpu-training-matters)
-- [Parallelism Strategies Explained](#parallelism-strategies-explained)
-- [Understanding GPU Topology](#understanding-gpu-topology)
-- [PyTorch DistributedDataParallel Setup](#pytorch-distributeddataparallel-setup)
-- [NCCL Environment Variables and Tuning](#nccl-environment-variables-and-tuning)
-- [Common Multi-GPU Pitfalls and Solutions](#common-multi-gpu-pitfalls-and-solutions)
-- [Memory Scaling and Batch Size](#memory-scaling-and-batch-size)
-- [Scaling Efficiency Benchmarks](#scaling-efficiency-benchmarks)
-- [DeepSpeed vs FSDP Comparison](#deepspeed-vs-fsdp-comparison)
-- [Troubleshooting Guide](#troubleshooting-guide)
-
----
-
-## Why Multi-GPU Training Matters
+    content: `## Why Multi-GPU Training Matters
 
 Training time scales inversely with compute—in theory. An 8-GPU setup should train 8× faster than a single GPU. In practice, communication overhead, memory bottlenecks, and configuration issues often reduce this to 4-6× speedup or worse.
 
@@ -3899,21 +3812,7 @@ For environment setup that just works, see [How to Run ML Workloads Without Conf
     seoTitle: "ML Debugging Guide: PyTorch Tools, Memory Profiling & Gradient Analysis | Cortex",
     seoDescription: "Master ML debugging with PyTorch profiling tools, memory analysis, gradient debugging, and systematic troubleshooting for training failures.",
     excerpt: "When your model refuses to learn, loss explodes, or training hangs mysteriously, you need a systematic approach. This guide covers the debugging techniques that actually work.",
-    content: `## Table of Contents
-
-- [The Debugging Mindset for ML](#the-debugging-mindset-for-ml)
-- [Common ML Failure Modes](#common-ml-failure-modes)
-- [PyTorch Debugging Tools and Commands](#pytorch-debugging-tools-and-commands)
-- [Memory Profiling: Finding the Leak](#memory-profiling-finding-the-leak)
-- [Gradient Debugging: When Backprop Goes Wrong](#gradient-debugging-when-backprop-goes-wrong)
-- [Data Validation Techniques](#data-validation-techniques)
-- [Log Analysis Patterns](#log-analysis-patterns)
-- [Troubleshooting: Model Not Learning](#troubleshooting-model-not-learning)
-- [Emergency Debugging Checklist](#emergency-debugging-checklist)
-
----
-
-## The Debugging Mindset for ML
+    content: `## The Debugging Mindset for ML
 
 Machine learning debugging is fundamentally different from traditional software debugging. In conventional programming, bugs produce wrong outputs or crashes. In ML, bugs often produce models that seem to work but perform subtly worse than expected, making them insidious and difficult to isolate.
 
@@ -4744,21 +4643,7 @@ Remember: Every bug you debug teaches you something about ML systems. Document y
     seoTitle: "ML Infrastructure Cost Optimization: Cloud Pricing, GPU Right-Sizing & Savings Strategies | Cortex",
     seoDescription: "Reduce ML infrastructure costs by 40-70% with proven strategies. Compare cloud pricing, master spot instances, and optimize training and inference expenses.",
     excerpt: "Cloud ML costs can spiral out of control fast. Learn the strategies that save teams 40-70% on GPU compute while maintaining training velocity and reliability.",
-    content: `## Table of Contents
-
-- [The Hidden Costs of ML Infrastructure](#the-hidden-costs-of-ml-infrastructure)
-- [Cloud GPU Pricing Comparison](#cloud-gpu-pricing-comparison)
-- [Spot and Preemptible Instance Strategies](#spot-and-preemptible-instance-strategies)
-- [Right-Sizing GPU Instances](#right-sizing-gpu-instances)
-- [Training Cost Estimation](#training-cost-estimation)
-- [Storage Optimization](#storage-optimization)
-- [Inference Cost Techniques](#inference-cost-techniques)
-- [Build vs Buy Analysis](#build-vs-buy-analysis)
-- [Monthly Cost Reduction Checklist](#monthly-cost-reduction-checklist)
-
----
-
-## The Hidden Costs of ML Infrastructure
+    content: `## The Hidden Costs of ML Infrastructure
 
 When teams first move to cloud ML, they typically focus on raw compute costs. However, the total cost of ownership includes several hidden components that often exceed the visible GPU bill.
 
@@ -5325,24 +5210,7 @@ For infrastructure that handles these optimizations automatically, explore how [
     seoTitle: "ML Security Guide: Model Protection, Data Security & Compliance | Cortex",
     seoDescription: "Comprehensive ML security guide covering model theft prevention, data poisoning detection, API security, secrets management, and compliance requirements.",
     excerpt: "ML systems introduce unique security challenges from model theft to data poisoning. This guide covers the security practices every ML team needs to implement.",
-    content: `## Table of Contents
-
-- [The ML Security Landscape](#the-ml-security-landscape)
-- [Attack Surface Overview](#attack-surface-overview)
-- [Model Theft Protection](#model-theft-protection)
-- [Data Poisoning Detection](#data-poisoning-detection)
-- [API Security for Inference](#api-security-for-inference)
-- [Secrets Management](#secrets-management)
-- [Network Isolation](#network-isolation)
-- [Audit Logging](#audit-logging)
-- [Container Security](#container-security)
-- [Supply Chain Security](#supply-chain-security)
-- [Compliance Considerations](#compliance-considerations)
-- [Security Hardening Checklist](#security-hardening-checklist)
-
----
-
-## The ML Security Landscape
+    content: `## The ML Security Landscape
 
 Machine learning systems face all the security challenges of traditional software plus a unique set of ML-specific threats. Models themselves are valuable intellectual property that can be stolen. Training data may contain sensitive information that must be protected. The statistical nature of ML creates novel attack vectors like adversarial examples and data poisoning that traditional security tools do not address.
 
@@ -5886,22 +5754,7 @@ For infrastructure that builds in security by default, explore how [AI-native sy
     seoTitle: "Future of AI-Native Computing: Hardware, Software & Infrastructure Trends | Cortex",
     seoDescription: "Explore the future of ML infrastructure—from custom silicon to edge AI, AutoML to energy efficiency. Strategic insights for building forward-looking ML platforms.",
     excerpt: "The ML infrastructure landscape is evolving rapidly. Here's where it's headed and what that means for teams building ML platforms today.",
-    content: `## Table of Contents
-
-- [Looking Back to See Forward](#looking-back-to-see-forward)
-- [The Hardware Transformation](#the-hardware-transformation)
-- [Software Abstractions Evolution](#software-abstractions-evolution)
-- [Edge ML and Federated Learning](#edge-ml-and-federated-learning)
-- [AutoML and Neural Architecture Search](#automl-and-neural-architecture-search)
-- [Energy Efficiency Imperative](#energy-efficiency-imperative)
-- [Open Source Dynamics](#open-source-dynamics)
-- [Predictions for the Next Five Years](#predictions-for-the-next-five-years)
-- [Skills to Learn Now](#skills-to-learn-now)
-- [Adoption Roadmap](#adoption-roadmap)
-
----
-
-## Looking Back to See Forward
+    content: `## Looking Back to See Forward
 
 To understand where ML infrastructure is headed, we must appreciate how rapidly it has evolved. The transformation from research curiosity to production necessity happened in less than a decade.
 
@@ -6201,25 +6054,7 @@ The future of computing is AI-native. The infrastructure we build today determin
     seoTitle: "Cortex Linux Getting Started Guide: Your First Workflow",
     seoDescription: "Learn how to get started with Cortex Linux. This beginner-friendly guide walks you through your first workflow with step-by-step instructions.",
     excerpt: "New to Cortex Linux? This beginner-friendly guide walks you through your first workflow, from basic concepts to running your first commands.",
-    content: `## Table of Contents
-
-- [Introduction](#introduction)
-- [What is Cortex Linux?](#what-is-cortex-linux)
-- [Why Choose Cortex Linux?](#why-choose-cortex-linux)
-- [Prerequisites](#prerequisites)
-- [Step 1: Installing Cortex Linux](#step-1-installing-cortex-linux)
-- [Step 2: Opening the Terminal](#step-2-opening-the-terminal)
-- [Step 3: Creating Your First Environment](#step-3-creating-your-first-environment)
-- [Step 4: Installing Packages](#step-4-installing-packages)
-- [Step 5: Creating Your First Project](#step-5-creating-your-first-project)
-- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-- [Best Practices](#best-practices)
-- [What You Learned](#what-you-learned)
-- [Next Steps](#next-steps)
-
----
-
-## Introduction
+    content: `## Introduction
 
 According to a 2024 Stack Overflow survey, developers spend an average of 23% of their working time on environment setup, dependency management, and configuration issues rather than writing code. For machine learning engineers, this number climbs even higher due to the complex interplay between GPU drivers, CUDA versions, and Python package dependencies.
 
@@ -6892,24 +6727,7 @@ Welcome to Cortex Linux. Your AI development journey starts here.
     seoTitle: "Install Cortex Linux: Complete Beginner Installation Guide",
     seoDescription: "Step-by-step guide to installing Cortex Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
     excerpt: "A complete walkthrough for installing Cortex Linux on your computer. From checking system requirements to verifying your installation, this guide covers everything beginners need.",
-    content: `## Table of Contents
-
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [System Requirements](#system-requirements)
-- [Choosing Your Download Option](#choosing-your-download-option)
-- [Preparing for Installation](#preparing-for-installation)
-- [Installation Walkthrough](#installation-walkthrough)
-- [Post-Installation Setup](#post-installation-setup)
-- [Verifying Your Installation](#verifying-your-installation)
-- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-- [Getting Help](#getting-help)
-- [Best Practices](#best-practices)
-- [What You Learned](#what-you-learned)
-
----
-
-## Introduction
+    content: `## Introduction
 
 The average developer abandons 1 in 4 tool installations due to setup complexity. A 2024 survey of over 10,000 developers found that 68% cite "getting the environment right" as their biggest frustration when adopting new development tools. For machine learning frameworks, the abandonment rate climbs even higher due to GPU driver conflicts, CUDA version mismatches, and Python dependency nightmares.
 
@@ -7478,25 +7296,7 @@ You have successfully installed Cortex Linux. Welcome to the community, and enjo
     seoTitle: "Cortex Linux for Students: AI Development Learning Guide",
     seoDescription: "Discover how Cortex Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
     excerpt: "A comprehensive guide for students using Cortex Linux for academic work. Learn how to set up your environment for coursework, discover learning paths, and explore project ideas.",
-    content: `## Table of Contents
-
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Why Students Should Use Cortex Linux](#why-students-should-use-cortex-linux)
-- [Educational Benefits](#educational-benefits)
-- [Setting Up Cortex for Coursework](#setting-up-cortex-for-coursework)
-- [Learning Path Recommendations](#learning-path-recommendations)
-- [Essential Resources for Students](#essential-resources-for-students)
-- [Academic Project Examples](#academic-project-examples)
-- [Tips for Success](#tips-for-success)
-- [Getting Academic Support](#getting-academic-support)
-- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-- [Best Practices for Students](#best-practices-for-students)
-- [What You Learned](#what-you-learned)
-
----
-
-## Introduction
+    content: `## Introduction
 
 Research from a 2024 academic computing study shows that computer science students spend up to 40% of their lab time troubleshooting environment issues rather than learning core concepts. A separate analysis of university help desk tickets found that "Python environment problems" and "GPU driver issues" account for more support requests than all other technical issues combined.
 
@@ -8198,23 +7998,7 @@ Welcome to the future of AI development. Your journey as an AI practitioner star
     seoTitle: "First AI Task with Cortex Linux: Beginner Tutorial",
     seoDescription: "Step-by-step tutorial to run your first AI task with Cortex Linux. Learn image classification and text generation with easy-to-follow instructions.",
     excerpt: "Ready to run your first AI task? This hands-on tutorial guides you through image classification and text generation, showing you the power of Cortex Linux for AI development.",
-    content: `## Table of Contents
-
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Understanding AI Tasks in Cortex](#understanding-ai-tasks-in-cortex)
-- [Setting Up Your Environment](#setting-up-your-environment)
-- [Task 1: Image Classification](#task-1-image-classification)
-- [Task 2: Text Generation](#task-2-text-generation)
-- [Interpreting Your Results](#interpreting-your-results)
-- [Next AI Tasks to Try](#next-ai-tasks-to-try)
-- [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
-- [Best Practices](#best-practices)
-- [What You Learned](#what-you-learned)
-
----
-
-## Introduction
+    content: `## Introduction
 
 Five years ago, running your first AI model required weeks of setup and deep expertise. You needed to compile frameworks from source, manually configure GPU drivers, manage complex dependency chains, and write hundreds of lines of boilerplate code before seeing any results. Today, thanks to advances in tooling and pre-trained models, you can classify images and generate text in under 10 minutes.
 
@@ -8874,7 +8658,7 @@ Welcome to the world of AI development. The possibilities are endless.
     author: "Cortex Team",
     category: "Getting Started",
     image: "https://images.unsplash.com/photo-1677442135136-760c813029fb?w=1200&h=600&fit=crop",
-    imageAlt: "AI neural network visualization representing machine learning and artificial intelligence",
+    imageAlt: "AI and machine learning concept with neural network visualization",
     tags: ["Getting Started", "AI", "Machine Learning", "Tutorial"],
     relatedPosts: ["getting-started-cortex-first-workflow", "what-ai-native-linux-means"]
   }

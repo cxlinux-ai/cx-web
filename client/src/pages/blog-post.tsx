@@ -73,17 +73,16 @@ function formatContent(content: string): string {
   return html;
 }
 
-// Extract TOC from content - captures both h2 and h3
-function extractTOC(content: string): { id: string; text: string; level: number }[] {
-  const toc: { id: string; text: string; level: number }[] = [];
-  const headingRegex = /^(#{2,3}) (.+)$/gm;
+// Extract TOC from content - only h2 headings for cleaner navigation
+function extractTOC(content: string): { id: string; text: string }[] {
+  const toc: { id: string; text: string }[] = [];
+  const headingRegex = /^## (.+)$/gm;
   
   let match;
   while ((match = headingRegex.exec(content)) !== null) {
-    const level = match[1].length;
-    const text = match[2];
+    const text = match[1];
     const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    toc.push({ id, text, level });
+    toc.push({ id, text });
   }
   
   return toc;
@@ -336,25 +335,28 @@ export default function BlogPostPage() {
           )}
         </article>
 
-        {/* TOC Sidebar - Desktop Only */}
-        {toc.length > 0 && (
-          <aside className="hidden xl:block w-64 flex-shrink-0">
+        {/* Quick Navigation Sidebar - Large screens only */}
+        {toc.length > 3 && (
+          <aside className="hidden xl:block w-56 flex-shrink-0">
             <div className="sticky top-24">
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
-                On this page
-              </h3>
-              <nav className="space-y-2">
-                {toc.map((item) => (
+              <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3">
+                In this article
+              </h4>
+              <nav className="space-y-1.5 border-l border-white/5 pl-3">
+                {toc.slice(0, 8).map((item, index) => (
                   <a
-                    key={item.id}
+                    key={`${item.id}-${index}`}
                     href={`#${item.id}`}
-                    className={`block text-sm text-gray-500 hover:text-blue-400 transition-colors ${
-                      item.level === 3 ? 'pl-4' : ''
-                    }`}
+                    className="block text-xs text-gray-500 hover:text-gray-300 transition-colors leading-relaxed"
                   >
                     {item.text}
                   </a>
                 ))}
+                {toc.length > 8 && (
+                  <span className="block text-xs text-gray-600">
+                    +{toc.length - 8} more sections
+                  </span>
+                )}
               </nav>
             </div>
           </aside>
