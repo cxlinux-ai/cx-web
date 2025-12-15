@@ -14,8 +14,9 @@ export default function License() {
               Open Source
             </span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
-            MIT License
+          <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
+            <span className="text-white">MIT</span>{" "}
+            <span className="gradient-text">License</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Cortex Linux is free and open source software

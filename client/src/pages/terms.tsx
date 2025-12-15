@@ -107,7 +107,7 @@ For users outside the United States, you agree to comply with all local laws reg
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Terms of</span>{" "}
-            <span className="text-gray-400">Service</span>
+            <span className="gradient-text">Service</span>
           </h1>
           <p className="text-gray-400 text-lg">
             Legal terms governing your use of Cortex Linux

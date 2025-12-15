@@ -160,7 +160,7 @@ Enterprise customers with specific security requirements can contact us for cust
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Security</span>{" "}
-            <span className="text-gray-400">Policy</span>
+            <span className="gradient-text">Policy</span>
           </h1>
           <p className="text-gray-400 text-lg">
             How we design, build, and operate Cortex Linux with security in mind
