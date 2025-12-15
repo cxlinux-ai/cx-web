@@ -42,7 +42,7 @@ export default function Blog() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Cortex</span>{" "}
-            <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">Blog</span>
+            <span className="gradient-text">Blog</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Technical insights, tutorials, and best practices for ML engineers and developers
