@@ -411,6 +411,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <span className="text-white">with AI-Native Linux</span>
           </motion.h1>
 
+          {/* Why Cortex - Core Mission Statement */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+            className="text-xl sm:text-2xl font-medium text-white/90 max-w-3xl mx-auto mb-6 border-l-2 border-blue-500 pl-4"
+            data-testid="text-mission-statement"
+          >
+            Cortex turns natural language into deterministic Linux systems — without sacrificing control.
+          </motion.p>
+
           {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
