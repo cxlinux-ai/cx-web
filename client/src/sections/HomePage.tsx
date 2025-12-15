@@ -1848,88 +1848,203 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Roadmap Timeline */}
-      <section className="py-24 px-4 border-t border-white/5 relative">
+      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
         {/* Subtle background blobs */}
-        <div className="bg-blob bg-blob-blue w-[400px] h-[400px] top-20 left-1/3" style={{ animationDelay: '2s' }} />
-        <div className="bg-blob bg-blob-blue w-[300px] h-[300px] bottom-10 right-1/4" style={{ animationDelay: '8s' }} />
+        <div className="bg-blob bg-blob-blue w-[500px] h-[500px] top-0 left-1/4 opacity-40" style={{ animationDelay: '2s' }} />
+        <div className="bg-blob bg-blob-blue w-[400px] h-[400px] bottom-0 right-1/3 opacity-30" style={{ animationDelay: '8s' }} />
         
-        <div className="max-w-4xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4"><span className="gradient-text">Roadmap</span></h2>
-            <p className="text-gray-400">Where we're headed.</p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">Roadmap</span>
+            </h2>
+            <p className="text-gray-400 text-lg">Building the future of AI-native development</p>
           </motion.div>
 
-          <div className="relative">
-            {/* Timeline with dots and line together */}
-            <div className="flex items-center justify-between mb-8">
-              {roadmapItems.map((item, i) => (
-                <div key={i} className="flex items-center flex-1">
-                  {/* Timeline Dot */}
-                  <div
-                    className={`w-4 h-4 rounded-full flex-shrink-0 z-10 ${
-                      item.status === "completed"
-                        ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"
-                        : item.status === "current"
-                        ? "bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"
-                        : "bg-gray-600"
-                    }`}
-                  />
-                  {/* Connector line (except for last item) */}
-                  {i < roadmapItems.length - 1 && (
-                    <div className="flex-1 h-0.5 bg-gray-700" />
-                  )}
-                </div>
-              ))}
+          {/* Desktop Timeline */}
+          <div className="hidden md:block relative">
+            {/* Timeline Track */}
+            <div className="absolute top-8 left-0 right-0 h-1 bg-gray-800 rounded-full overflow-hidden">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: "37.5%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                className="h-full bg-gradient-to-r from-green-500 via-green-400 to-blue-500 rounded-full"
+              />
             </div>
             
-            {/* Content below timeline */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Timeline Items */}
+            <div className="grid grid-cols-4 gap-6">
               {roadmapItems.map((item, i) => (
-                <div key={i} className="text-center">
-                  <div className={`text-sm font-semibold mb-2 ${
-                    item.status === "completed" || item.status === "current"
-                      ? "text-blue-400"
-                      : "text-gray-500"
-                  }`}>
-                    {item.quarter}
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  className="relative pt-16"
+                >
+                  {/* Timeline Dot */}
+                  <div className="absolute top-5 left-1/2 -translate-x-1/2">
+                    <div
+                      className={`w-6 h-6 rounded-full border-4 border-black transition-all duration-500 ${
+                        item.status === "completed"
+                          ? "bg-green-500 shadow-[0_0_20px_rgba(34,197,94,0.6)]"
+                          : item.status === "current"
+                          ? "bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.6)] animate-pulse"
+                          : "bg-gray-700"
+                      }`}
+                    />
                   </div>
-                  <div className="space-y-1">
-                    {item.items.map((task, j) => (
-                      <div
-                        key={j}
-                        className={`text-sm ${
-                          item.status === "completed"
-                            ? "text-white"
-                            : item.status === "current"
-                            ? "text-gray-300"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {item.status === "completed" && <Check size={12} className="inline mr-1 text-green-400" />}
-                        {task}
-                      </div>
-                    ))}
+                  
+                  {/* Card */}
+                  <div
+                    className={`p-5 rounded-xl backdrop-blur-xl transition-all duration-300 ${
+                      item.status === "completed"
+                        ? "bg-green-500/10 border border-green-500/30 hover:border-green-400/50"
+                        : item.status === "current"
+                        ? "bg-blue-500/10 border border-blue-500/30 hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
+                        : "bg-white/5 border border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    <div className={`text-xs font-bold uppercase tracking-wider mb-3 ${
+                      item.status === "completed"
+                        ? "text-green-400"
+                        : item.status === "current"
+                        ? "text-blue-400"
+                        : "text-gray-500"
+                    }`}>
+                      {item.quarter}
+                    </div>
+                    <div className="space-y-2">
+                      {item.items.map((task, j) => (
+                        <div
+                          key={j}
+                          className={`flex items-center gap-2 text-sm ${
+                            item.status === "completed"
+                              ? "text-white"
+                              : item.status === "current"
+                              ? "text-gray-200"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {item.status === "completed" ? (
+                            <Check size={14} className="text-green-400 flex-shrink-0" />
+                          ) : item.status === "current" ? (
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                          ) : (
+                            <div className="w-1.5 h-1.5 rounded-full bg-gray-600 flex-shrink-0" />
+                          )}
+                          {task}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          {/* Mobile Timeline (Vertical) */}
+          <div className="md:hidden relative">
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-800">
+              <motion.div 
+                initial={{ height: 0 }}
+                whileInView={{ height: "37.5%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                className="w-full bg-gradient-to-b from-green-500 to-blue-500"
+              />
+            </div>
+            
+            <div className="space-y-6">
+              {roadmapItems.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative pl-12"
+                >
+                  {/* Dot */}
+                  <div className="absolute left-2 top-5 -translate-x-1/2">
+                    <div
+                      className={`w-5 h-5 rounded-full border-4 border-black ${
+                        item.status === "completed"
+                          ? "bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                          : item.status === "current"
+                          ? "bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] animate-pulse"
+                          : "bg-gray-700"
+                      }`}
+                    />
+                  </div>
+                  
+                  {/* Card */}
+                  <div
+                    className={`p-4 rounded-xl backdrop-blur-xl ${
+                      item.status === "completed"
+                        ? "bg-green-500/10 border border-green-500/30"
+                        : item.status === "current"
+                        ? "bg-blue-500/10 border border-blue-500/30"
+                        : "bg-white/5 border border-white/10"
+                    }`}
+                  >
+                    <div className={`text-xs font-bold uppercase tracking-wider mb-2 ${
+                      item.status === "completed"
+                        ? "text-green-400"
+                        : item.status === "current"
+                        ? "text-blue-400"
+                        : "text-gray-500"
+                    }`}>
+                      {item.quarter}
+                    </div>
+                    <div className="space-y-1.5">
+                      {item.items.map((task, j) => (
+                        <div
+                          key={j}
+                          className={`flex items-center gap-2 text-sm ${
+                            item.status === "completed"
+                              ? "text-white"
+                              : item.status === "current"
+                              ? "text-gray-200"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {item.status === "completed" && <Check size={14} className="text-green-400 flex-shrink-0" />}
+                          {task}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="text-center mt-14"
+          >
             <a
               href="https://github.com/cortexlinux/cortex/discussions"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-gray-400 hover:text-blue-400"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/10 text-gray-400 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/10 transition-all duration-300"
             >
-              Suggest a feature →
+              Suggest a feature
+              <ArrowRight size={16} />
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
       {/* Blog Preview Section */}
