@@ -465,11 +465,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* Social Proof - Logo Wall */}
       <section className="py-16 border-t border-white/5 overflow-hidden">
         <div className="text-center mb-8">
-          <p className="text-sm text-gray-500 uppercase tracking-widest">Trusted by teams at industry-leading companies</p>
+          <p className="text-sm text-gray-500 uppercase tracking-widest">Optimized for today’s developer ecosystem</p>
           <p className="text-xs text-gray-600 mt-2">Over 50,000+ developers use Cortex daily</p>
         </div>
         <div className="relative">
@@ -485,7 +484,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Interactive Product Preview */}
       <section id="preview" className="py-24 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -579,7 +577,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* Features Grid - Bento Style */}
       <section id="about" className="py-24 px-4 border-t border-white/5 relative">
         {/* Subtle background blobs */}
@@ -645,7 +642,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Live Demo Playground */}
       <section className="py-24 px-4 border-t border-white/5 relative">
         {/* Subtle background blobs */}
@@ -701,7 +697,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* Architecture Diagram - Enhanced 3D Layered Visualization */}
       <section id="architecture" className="py-32 px-4 border-t border-white/5 relative overflow-hidden">
         {/* Background Effects */}
@@ -822,7 +817,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           </div>
       </section>
-
       {/* Security Section */}
       <section id="security" className="py-24 px-4 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
@@ -859,7 +853,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Comparison Table - Enhanced Design */}
       <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
         {/* Background gradient accents */}
@@ -1099,7 +1092,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Pricing Section */}
       <section id="pricing" className="py-32 px-4 relative">
         {/* Subtle background blobs */}
@@ -1210,7 +1202,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Open Source Dashboard */}
       <section ref={statsRef} className="py-24 px-4 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
@@ -1295,7 +1286,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Documentation Preview */}
       <section className="py-24 px-4 border-t border-white/5">
         <div className="max-w-3xl mx-auto">
@@ -1399,7 +1389,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* AI Processing Visualization - Premium Enhanced Version */}
       <section id="ai-processing" className="py-32 px-4 border-t border-white/5 overflow-hidden relative">
         {/* Background Effects */}
@@ -1816,7 +1805,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Community Section */}
       <section className="py-24 px-4 border-t border-white/5 relative">
         {/* Subtle background blobs */}
@@ -1859,7 +1847,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Roadmap Timeline */}
       <section className="py-24 px-4 border-t border-white/5 relative">
         {/* Subtle background blobs */}
@@ -1945,10 +1932,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* Blog Preview Section */}
       <BlogPreview />
-
       {/* Final CTA */}
       <section id="join" className="py-32 px-4 relative overflow-hidden">
         <div className="gradient-glow left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" />
@@ -2005,7 +1990,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="border-t border-white/10 py-16 px-4">
         <div className="max-w-6xl mx-auto">
