@@ -67,6 +67,16 @@ export default function App() {
     }
   };
 
+  // Scroll to top when navigating to a new page (not homepage sections)
+  useEffect(() => {
+    // Don't scroll to top if we have a pending section scroll or if on homepage
+    if (pendingScroll || location === "/") {
+      return;
+    }
+    // Smooth scroll to top for all other pages
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location, pendingScroll]);
+
   // Track active section on scroll (only on homepage)
   useEffect(() => {
     if (location !== "/") {
