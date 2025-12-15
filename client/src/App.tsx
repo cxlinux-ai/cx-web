@@ -16,6 +16,7 @@ import Terms from "./pages/terms";
 import SecurityPage from "./pages/security-page";
 import Status from "./pages/status";
 import License from "./pages/license";
+import GettingStarted from "./pages/getting-started";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -142,6 +143,15 @@ export default function App() {
                   </button>
                 ))}
                 <Link
+                  href="/getting-started"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/getting-started" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                  }`}
+                  data-testid="link-getting-started"
+                >
+                  Get Started
+                </Link>
+                <Link
                   href="/faq"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/faq" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
@@ -225,6 +235,14 @@ export default function App() {
                     </button>
                   ))}
                   <Link
+                    href="/getting-started"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    data-testid="mobile-link-getting-started"
+                  >
+                    Get Started
+                  </Link>
+                  <Link
                     href="/faq"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
@@ -266,6 +284,7 @@ export default function App() {
             <Route path="/security-policy" component={SecurityPage} />
             <Route path="/status" component={Status} />
             <Route path="/license" component={License} />
+            <Route path="/getting-started" component={GettingStarted} />
           </Switch>
 
           <Toaster />
