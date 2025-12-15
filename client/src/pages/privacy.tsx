@@ -112,7 +112,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Privacy</span>{" "}
-            <span className="text-gray-400">Policy</span>
+            <span className="gradient-text">Policy</span>
           </h1>
           <p className="text-gray-400 text-lg">
             How Cortex Linux collects, uses, and protects your data
