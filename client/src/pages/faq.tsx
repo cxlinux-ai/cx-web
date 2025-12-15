@@ -62,7 +62,7 @@ export default function FAQ() {
         },
         {
           q: "Do I need to know Linux to use Cortex?",
-          a: "No, that's the point! Cortex is designed for:\n\n• Data scientists who need tools but don't want to become Linux experts\n• Developers who want to focus on code, not configuration\n• Students learning programming without fighting the OS\n• Anyone frustrated by \"dependency hell\"\n\nYou can learn Linux through Cortex. It explains what it's doing and why."
+          a: "No, that's the point! Cortex is designed for:\n\n• Data scientists who need tools but don't want to become Linux experts\n• Developers who want to focus on code, not configuration\n• Students learning programming without OS configuration barriers\n• Anyone frustrated by \"dependency hell\"\n\nYou can learn Linux through Cortex. It explains what it's doing and why."
         },
         {
           q: "Does it work offline or require internet?",
@@ -84,7 +84,7 @@ export default function FAQ() {
         },
         {
           q: "Who is Cortex for?",
-          a: "Primary users:\n\n• Data Scientists: Tired of CUDA installation hell\n• ML Engineers: Want tools working, not dependency debugging\n• DevOps Teams: Need reproducible environments\n• Students: Learning to code, not fight Linux\n• Enterprises: Need compliance + easy Linux deployment\n\nIf you've ever spent hours on Stack Overflow trying to install something, Cortex is for you."
+          a: "Primary users:\n\n• Data Scientists: Tired of CUDA installation hell\n• ML Engineers: Want tools working, not dependency debugging\n• DevOps Teams: Need reproducible environments\n• Students: Learning to code, not managing system configuration\n• Enterprises: Need compliance + easy Linux deployment\n\nIf you've ever spent hours on Stack Overflow trying to install something, Cortex is for you."
         },
         {
           q: "Can I use it for commercial projects?",

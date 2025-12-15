@@ -316,7 +316,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const features = [
-    { icon: Zap, title: "Get Started in Minutes, Not Hours", description: "Skip the setup headaches. One command creates your entire ML environment, pre-configured and production-ready.", code: "cortex init my-app && cd my-app && cortex dev" },
+    { icon: Zap, title: "Get Started in Minutes, Not Hours", description: "Eliminate setup complexity. One command creates your entire ML environment, pre-configured and production-ready.", code: "cortex init my-app && cd my-app && cortex dev" },
     { icon: Shield, title: "Sleep Better with Built-in Security", description: "Enterprise-grade auth, rate limiting, and secrets vault included. Dramatically reduce your attack surface from day one.", code: "cortex add auth --provider oauth2\ncortex add ratelimit --max 100/min" },
     { icon: Globe, title: "Deploy Anywhere, Scale Automatically", description: "Go global in seconds with edge deployment across multiple regions. Achieve low latency worldwide with zero DevOps.", code: "cortex deploy --edge --regions all" },
     { icon: Puzzle, title: "Extend Without Limits", description: "Access a growing library of community plugins for payments, analytics, ML frameworks, and more. Or build your own in minutes.", code: "cortex plugin install @cortex/analytics\ncortex plugin install @cortex/payments" },
@@ -418,7 +418,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
           >
-            Stop wrestling with configs and drivers. Describe what you need in plain English,
+            Eliminate configuration overhead and driver complexity. Describe what you need in plain English,
             and Cortex handles the rest — from GPU optimization to deployment.
           </motion.p>
 
@@ -518,7 +518,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 icon: Brain,
                 title: "ML Engineers",
                 description: "GPU drivers, CUDA, PyTorch",
-                detail: "Stop fighting drivers. Start training models."
+                detail: "Driver configuration handled. Focus on training models."
               },
               {
                 icon: Workflow,
@@ -666,7 +666,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Complete <span className="gradient-text">ML Toolkit</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Everything data scientists and DevOps teams need to go from prototype to production — without the infrastructure headaches.</p>
+            <p className="text-gray-400 max-w-2xl mx-auto">Everything data scientists and DevOps teams need to go from prototype to production — without infrastructure complexity.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

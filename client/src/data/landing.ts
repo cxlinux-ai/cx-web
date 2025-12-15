@@ -126,7 +126,7 @@ export const testimonials = [
     testid: "testimonial-1"
   },
   {
-    quote: "Finally, Linux that doesn't fight back.",
+    quote: "Finally, Linux that works with you.",
     author: "Beta Tester",
     testid: "testimonial-2"
   },
