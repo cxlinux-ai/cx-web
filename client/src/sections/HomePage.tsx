@@ -56,6 +56,7 @@ import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
 import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
+import InteractiveDemoHero from "@/components/InteractiveDemoHero";
 
 interface GitHubStats {
   openIssues: number;
@@ -424,57 +425,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             and Cortex handles the rest — from GPU optimization to deployment.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* Demo */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <button
-              onClick={() => onNavigate("join")}
-              className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              Start Building Now — Free Forever
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <a
-              href="https://github.com/cortexlinux/cortex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 glass-card rounded-xl text-lg font-semibold hover:border-blue-400/50 hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <Github size={20} />
-              View on GitHub
-            </a>
+            <InteractiveDemoHero />
           </motion.div>
 
-          {/* Professional Terminal Preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="max-w-3xl mx-auto"
-          >
-            <CodeEditor 
-              title="terminal — cortex" 
-              actions={<CopyButton text="cortex install tensorflow --optimize-gpu" size="sm" />}
-            >
-              <CodeLine lineNumber={1}>
-                <span className="syntax-prompt">$</span>{" "}
-                <span className="syntax-command">cortex</span>{" "}
-                <span className="syntax-keyword">install</span>{" "}
-                <span className="syntax-string">tensorflow</span>{" "}
-                <span className="syntax-flag">--optimize-gpu</span>
-              </CodeLine>
-              <div className="code-output">
-                <OutputLine>Detected <span className="syntax-accent">NVIDIA RTX 4090</span></OutputLine>
-                <OutputLine>Installing <span className="syntax-info">CUDA 12.3</span> drivers</OutputLine>
-                <OutputLine>Configuring TensorFlow for <span className="syntax-accent">GPU</span></OutputLine>
-                <OutputLine>Optimized for your hardware — <span className="syntax-success">Ready in 8s</span></OutputLine>
-              </div>
-            </CodeEditor>
-          </motion.div>
         </div>
       </section>
       {/* Social Proof - Logo Wall */}
