@@ -425,13 +425,37 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             and Cortex handles the rest — from GPU optimization to deployment.
           </motion.p>
 
-          {/* Demo */}
+          {/* Demo - Hidden on small screens, show simple CTA instead */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
+            className="hidden sm:block"
           >
             <InteractiveDemoHero />
+          </motion.div>
+
+          {/* Mobile CTA - Shown only on small screens */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="sm:hidden space-y-4"
+          >
+            <a 
+              href="https://github.com/cortexlinux/cortex" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-blue-500/30 transition-all">
+                <Terminal size={20} />
+                Try Cortex CLI
+              </button>
+            </a>
+            <p className="text-xs text-gray-500 text-center">
+              Free forever · Open source · No credit card
+            </p>
           </motion.div>
 
         </div>
