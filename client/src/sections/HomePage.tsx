@@ -336,10 +336,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const roadmapItems = [
-    { quarter: "Q1 2024", items: ["Core Release", "AI Streaming"], status: "completed" },
-    { quarter: "Q2 2024", items: ["Plugin System", "Edge Functions"], status: "current" },
-    { quarter: "Q3 2024", items: ["Enterprise SSO", "Team Workspaces"], status: "planned" },
-    { quarter: "Q4 2024", items: ["Mobile SDK", "v3.0 Launch"], status: "planned" },
+    { quarter: "Q1 2026", items: ["Core Release", "AI Streaming"], status: "completed" },
+    { quarter: "Q2 2026", items: ["Plugin System", "Edge Functions"], status: "current" },
+    { quarter: "Q3 2026", items: ["Enterprise SSO", "Team Workspaces"], status: "planned" },
+    { quarter: "Q4 2026", items: ["Mobile SDK", "v3.0 Launch"], status: "planned" },
   ];
 
   const logos = [
