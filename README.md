@@ -1,6 +1,6 @@
 # Cortex Linux Website
 
-The official website for [Cortex Linux](https://github.com/cortexlinux/cortex) - the AI-native operating system that simplifies software installation using natural language.
+The official website [Cortex Linux](https://cortexlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
 
 ## Tech Stack
 
