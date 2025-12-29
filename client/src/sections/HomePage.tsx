@@ -372,32 +372,32 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap justify-center gap-3 mb-6"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
           >
             <a
               href="https://github.com/cortexlinux/cortex"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm hover:border-blue-400/50 transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-blue-400/50 transition-all"
               data-testid="link-github-stars"
             >
-              <Star size={14} className="text-yellow-400" />
-              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1.2k"} stars</span>
+              <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
+              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1,250"} stars</span>
             </a>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm" data-testid="badge-open-source">
-              <Github size={14} className="text-gray-400" />
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-open-source">
+              <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">Open Source</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm" data-testid="badge-mit-licensed">
-              <Scale size={14} className="text-emerald-400" />
+            <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-mit-licensed">
+              <Scale size={12} className="text-emerald-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">MIT Licensed</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm">
-              <Tag size={14} className="text-blue-400" />
+            <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
+              <Tag size={12} className="text-blue-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">v2.4.0</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-sm">
-              <div className="w-2 h-2 rounded-full bg-green-400" />
+            <div className="hidden md:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400" />
               <span className="text-gray-300">All systems operational</span>
             </div>
           </motion.div>
@@ -407,7 +407,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
             <span className="gradient-text">Accelerate Your ML Workflow</span>
             <br />
@@ -419,7 +419,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10"
+            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-10 px-2"
           >
             Eliminate configuration overhead and driver complexity. Describe what you need in plain English,
             and Cortex handles the rest — from GPU optimization to deployment.

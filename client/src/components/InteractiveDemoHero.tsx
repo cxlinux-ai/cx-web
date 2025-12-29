@@ -136,8 +136,8 @@ export default function InteractiveDemoHero() {
                 </div>
                 <div className="ml-2 sm:ml-3 flex items-center gap-1.5 sm:gap-2">
                   <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500" />
-                  <span className="text-xs sm:text-sm text-gray-400 font-medium truncate max-w-[120px] sm:max-w-none">
-                    <span className="hidden xs:inline">cortex — </span>interactive demo
+                  <span className="text-xs sm:text-sm text-gray-400 font-medium truncate">
+                    <span className="hidden sm:inline">cortex — </span>demo
                   </span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function InteractiveDemoHero() {
                   ) : (
                     <Copy className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   )}
-                  <span className="ml-1 sm:ml-1.5 text-[10px] sm:text-xs hidden xs:inline">{copied ? "Copied!" : "Copy"}</span>
+                  <span className="ml-1 sm:ml-1.5 text-[10px] sm:text-xs hidden sm:inline">{copied ? "Copied!" : "Copy"}</span>
                 </Button>
               )}
             </div>
@@ -272,12 +272,12 @@ export default function InteractiveDemoHero() {
                   <div className="flex items-center gap-2 sm:gap-3">
                     <span className="flex items-center gap-1 sm:gap-1.5">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500/80 animate-pulse" />
-                      <span className="hidden xs:inline">Connected</span>
+                      <span className="hidden sm:inline">Connected</span>
                     </span>
                     {remaining !== null && (
                       <>
-                        <span className="text-gray-600 hidden xs:inline">|</span>
-                        <span>{remaining} <span className="hidden xs:inline">requests</span> left</span>
+                        <span className="text-gray-600 hidden sm:inline">|</span>
+                        <span>{remaining} left</span>
                       </>
                     )}
                   </div>
