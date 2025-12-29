@@ -101,8 +101,8 @@ export default function InteractiveDemoHero() {
         transition={{ duration: 0.6 }}
         className="space-y-6"
       >
-        {/* Header */}
-        <div className="text-center space-y-2 sm:space-y-3">
+        {/* Header - Hidden on very small screens to prevent layout issues */}
+        <div className="hidden sm:block text-center space-y-2 sm:space-y-3">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
             <span className="text-xs sm:text-sm font-medium text-purple-300">Try Before Install — No Signup Required</span>
