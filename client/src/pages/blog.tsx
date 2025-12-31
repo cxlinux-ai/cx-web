@@ -1,11 +1,36 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Search, ChevronLeft } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Clock, Calendar } from "lucide-react";
 import { useState, useMemo } from "react";
 import { blogPosts, getAllCategories } from "@/data/blogPosts";
 import { Input } from "@/components/ui/input";
 import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
+import { Badge } from "@/components/ui/badge";
+
+const FEATURED_POSTS = [
+  {
+    slug: "getting-started-cortex-first-workflow",
+    level: "Beginner",
+    step: 1,
+    badge: "Start Here",
+    badgeColor: "bg-green-500/20 text-green-300 border-green-500/30"
+  },
+  {
+    slug: "ml-debugging-finding-real-problem",
+    level: "Intermediate",
+    step: 2,
+    badge: "Most Popular",
+    badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30"
+  },
+  {
+    slug: "gpu-optimization-real-techniques",
+    level: "Advanced",
+    step: 3,
+    badge: "Deep Dive",
+    badgeColor: "bg-orange-500/20 text-orange-300 border-orange-500/30"
+  }
+];
 
 export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +50,13 @@ export default function Blog() {
       })
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [searchTerm, selectedCategory]);
+
+  const featuredPostsData = useMemo(() => {
+    return FEATURED_POSTS.map(featured => {
+      const post = blogPosts.find(p => p.slug === featured.slug);
+      return post ? { ...post, ...featured } : null;
+    }).filter(Boolean);
+  }, []);
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -49,6 +81,122 @@ export default function Blog() {
           </p>
         </motion.div>
       </div>
+
+      {/* Start Here Section - only shows when no search/filter active */}
+      {!searchTerm && !selectedCategory && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="max-w-6xl mx-auto px-4 mb-12"
+        >
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-white mb-2">New to ML Infrastructure?</h2>
+            <p className="text-gray-400">Follow this reading path from beginner to advanced.</p>
+          </div>
+          
+          <div className="relative">
+            {/* Connecting line for desktop */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500/30 via-purple-500/30 to-orange-500/30 -translate-y-1/2 z-0" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+              {featuredPostsData.map((post, index) => {
+                if (!post) return null;
+                const featured = FEATURED_POSTS[index];
+                
+                return (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1 }}
+                  >
+                    <Link href={`/blog/${post.slug}`}>
+                      <article
+                        className="group relative rounded-2xl border-2 border-transparent bg-gradient-to-b from-white/[0.08] to-white/[0.02] overflow-hidden transition-all duration-300 hover:-translate-y-2 cursor-pointer h-full"
+                        style={{
+                          backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.02)), linear-gradient(to right, ${
+                            index === 0 ? 'rgba(34,197,94,0.3), rgba(34,197,94,0.1)' :
+                            index === 1 ? 'rgba(168,85,247,0.3), rgba(168,85,247,0.1)' :
+                            'rgba(249,115,22,0.3), rgba(249,115,22,0.1)'
+                          })`,
+                          backgroundOrigin: 'border-box',
+                          backgroundClip: 'padding-box, border-box'
+                        }}
+                        data-testid={`featured-card-${post.slug}`}
+                      >
+                        {/* Glow effect on hover */}
+                        <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl ${
+                          index === 0 ? 'shadow-[0_0_40px_rgba(34,197,94,0.3)]' :
+                          index === 1 ? 'shadow-[0_0_40px_rgba(168,85,247,0.3)]' :
+                          'shadow-[0_0_40px_rgba(249,115,22,0.3)]'
+                        }`} />
+                        
+                        {/* Step Number Circle */}
+                        <div className={`absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
+                          index === 0 ? 'bg-green-500/20 text-green-300 border border-green-500/50' :
+                          index === 1 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/50' :
+                          'bg-orange-500/20 text-orange-300 border border-orange-500/50'
+                        }`}>
+                          {featured.step}
+                        </div>
+                        
+                        {/* Arrow connector (shows on right side except last card) */}
+                        {index < 2 && (
+                          <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20">
+                            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                              index === 0 ? 'bg-green-500/30 text-green-300' :
+                              'bg-purple-500/30 text-purple-300'
+                            }`}>
+                              <ChevronRight size={14} />
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div className="p-6 pt-16 relative z-10">
+                          {/* Badges Row */}
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            <span className={`px-2 py-0.5 text-xs font-medium rounded-full border ${featured.badgeColor}`}>
+                              {featured.badge}
+                            </span>
+                            <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
+                              index === 0 ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                              index === 1 ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' :
+                              'bg-orange-500/10 text-orange-400 border border-orange-500/20'
+                            }`}>
+                              {featured.level}
+                            </span>
+                          </div>
+                          
+                          <h3 className="text-lg font-semibold mb-2 text-white group-hover:text-blue-300 transition-colors line-clamp-2">
+                            {post.title}
+                          </h3>
+                          
+                          <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                            {post.excerpt}
+                          </p>
+                          
+                          {/* Meta */}
+                          <div className="flex items-center gap-3 text-xs text-gray-500">
+                            <span className="flex items-center gap-1">
+                              <Calendar size={12} />
+                              {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock size={12} />
+                              {post.readingTime}
+                            </span>
+                          </div>
+                        </div>
+                      </article>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* Search and Filters */}
       <div className="max-w-6xl mx-auto px-4 mb-8">

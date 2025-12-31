@@ -28,8 +28,8 @@ export const blogPosts: BlogPost[] = [
   {
     id: "1",
     slug: "what-ai-native-linux-means",
-    title: "How to Understand AI-Native Linux: Architecture, Benefits & Practical Guide",
-    seoTitle: "How to Understand AI-Native Linux: Architecture, Benefits & Practical Guide | Cortex Linux",
+    title: "What is AI-Native Linux? A Practical Guide",
+    seoTitle: "What is AI-Native Linux? A Practical Guide | Cortex Linux",
     seoDescription: "Deep dive into AI-native Linux architecture. Learn how intent-based computing, GPU optimization, and declarative configs transform ML workflows.",
     excerpt: "Beyond buzzwords: understand how AI-native operating systems fundamentally change developer workflows with intent-based computing and automatic optimization.",
     content: `**The 3 AM wake-up call nobody wants:** A senior ML engineer at a Fortune 500 company spent 14 hours debugging why their PyTorch installation suddenly broke after a routine system update. The culprit? A kernel upgrade silently broke the NVIDIA driver, which broke CUDA, which broke everything. Three sprints of work—gone. Their model training pipeline sat idle for a week while they manually rebuilt their environment from scratch.
@@ -1173,8 +1173,8 @@ Config hell is not an inevitable part of ML engineering—it's a symptom of usin
   {
     id: "3",
     slug: "gpu-optimization-real-techniques",
-    title: "How to Optimize GPU Performance: Real Techniques That Actually Work",
-    seoTitle: "How to Optimize GPU Performance: Real Techniques That Actually Work | Cortex Linux",
+    title: "GPU Optimization: Techniques That Actually Work",
+    seoTitle: "GPU Optimization: Techniques That Actually Work | Cortex Linux",
     seoDescription: "Cut through GPU optimization noise. Learn memory management, mixed precision, and kernel optimization with real benchmarks and actionable code.",
     excerpt: "Cut through the noise. These are the GPU optimization techniques that deliver measurable performance gains, backed by benchmarks and production experience.",
     content: `**A team at a well-funded AI startup watched $180,000 evaporate in 6 weeks.** Their training runs took 3x longer than expected because nobody noticed their A100s were running at 30% utilization. The GPUs were starving—waiting on data that was bottlenecked at the CPU. By the time they diagnosed the issue, they'd burned through their entire quarterly compute budget on what should have been a 2-week training run.
@@ -1822,8 +1822,8 @@ The key insight: profile before optimizing. A 10-minute profiling session can sa
   {
     id: "4",
     slug: "building-reproducible-ml-pipelines",
-    title: "How to Build Reproducible ML Pipelines: From Chaos to Production",
-    seoTitle: "How to Build Reproducible ML Pipelines: From Chaos to Production | Cortex Linux",
+    title: "Reproducible ML Pipelines: From Chaos to Production",
+    seoTitle: "Reproducible ML Pipelines: From Chaos to Production | Cortex Linux",
     seoDescription: "Master ML pipeline reproducibility with DVC integration, artifact tracking, CI/CD examples, and debugging strategies. Complete guide with code examples.",
     excerpt: "Stop debugging 'why did my model change?' forever. Learn the complete system for reproducible ML pipelines from data versioning to deployment.",
     content: `**"We can't reproduce last quarter's results."** Those six words cost a biotech company their Series B. They'd shown promising drug discovery results to investors, but when due diligence came, their ML team couldn't recreate the model performance. The training data had silently changed. The random seeds weren't logged. The exact package versions were lost in a Jupyter notebook that someone had since overwritten.
@@ -2667,8 +2667,8 @@ For more on environment management, see [How to Run ML Workloads Without Config 
   {
     id: "5",
     slug: "container-vs-bare-metal-ml",
-    title: "Container vs Bare Metal for ML: How to Choose the Right Approach",
-    seoTitle: "Container vs Bare Metal for ML: How to Choose the Right Approach | Cortex Linux",
+    title: "Container vs Bare Metal for ML: How to Choose",
+    seoTitle: "Container vs Bare Metal for ML: How to Choose | Cortex Linux",
     seoDescription: "Comprehensive comparison of containerized vs bare-metal ML infrastructure. Performance benchmarks, GPU passthrough, Kubernetes analysis, and cost breakdown.",
     excerpt: "Cut through the container hype. When does Docker make sense for ML, and when is bare metal the right choice? Data-driven analysis inside.",
     content: `**The CTO called it "the most expensive Docker run command in company history."** A fintech team containerized their fraud detection model without understanding GPU passthrough overhead. In production, their P99 latency jumped from 8ms to 47ms—well outside SLA. They lost three enterprise contracts worth $2.3M ARR before diagnosing the issue.
@@ -3917,8 +3917,8 @@ For environment setup that just works, see [How to Run ML Workloads Without Conf
   {
     id: "7",
     slug: "ml-debugging-finding-real-problem",
-    title: "How to Debug ML Models: Finding and Fixing Real Problems",
-    seoTitle: "How to Debug ML Models: Finding and Fixing Real Problems | Cortex Linux",
+    title: "ML Debugging: Finding and Fixing Real Problems",
+    seoTitle: "ML Debugging: Finding and Fixing Real Problems | Cortex Linux",
     seoDescription: "Master ML debugging with PyTorch profiling tools, memory analysis, gradient debugging, and systematic troubleshooting for training failures.",
     excerpt: "When your model refuses to learn, loss explodes, or training hangs mysteriously, you need a systematic approach. This guide covers the debugging techniques that actually work.",
     content: `**72 hours of training. Zero learning.** An ML engineer at a healthcare AI company ran a week-long training job on a cluster of A100s. The loss curve looked perfect—steadily decreasing, smooth convergence. When they evaluated the model, it performed at random chance. The bug? A single line: they'd accidentally frozen all layers except the final classifier head.
@@ -4772,8 +4772,8 @@ Remember: Every bug you debug teaches you something about ML systems. Document y
   {
     id: "8",
     slug: "cost-optimization-ml-infrastructure",
-    title: "How to Optimize ML Infrastructure Costs: Practical Strategies",
-    seoTitle: "How to Optimize ML Infrastructure Costs: Practical Strategies | Cortex Linux",
+    title: "ML Infrastructure Costs: Practical Strategies",
+    seoTitle: "ML Infrastructure Costs: Practical Strategies | Cortex Linux",
     seoDescription: "Reduce ML infrastructure costs by 40-70% with proven strategies. Compare cloud pricing, master spot instances, and optimize training and inference expenses.",
     excerpt: "Cloud ML costs can spiral out of control fast. Learn the strategies that save teams 40-70% on GPU compute while maintaining training velocity and reliability.",
     content: `**$340,000 cloud bill. For a model that never shipped.** A Series A startup scaled their training infrastructure "just in case" before actually needing it. They spun up reserved instances for GPUs they used 4 hours a week. They stored every checkpoint "for reproducibility" without ever deleting old experiments. They ran inference endpoints 24/7 for an internal demo that got used twice.
@@ -5361,8 +5361,8 @@ The key is treating cost optimization as an ongoing practice, not a one-time pro
   {
     id: "9",
     slug: "security-best-practices-ml-systems",
-    title: "How to Secure ML Systems: Security Best Practices Guide",
-    seoTitle: "How to Secure ML Systems: Security Best Practices Guide | Cortex Linux",
+    title: "ML Security: Best Practices That Actually Work",
+    seoTitle: "ML Security: Best Practices That Actually Work | Cortex Linux",
     seoDescription: "Comprehensive ML security guide covering model theft prevention, data poisoning detection, API security, secrets management, and compliance requirements.",
     excerpt: "ML systems introduce unique security challenges from model theft to data poisoning. This guide covers the security practices every ML team needs to implement.",
     content: `**Model stolen. Competitor ships identical product 6 weeks later.** An AI startup discovered their proprietary computer vision model—representing 18 months of R&D and $2.4M in training compute—was being sold on a Chinese marketplace for $500. The theft vector? A former contractor who'd had access to the model weights and no audit trail showing they'd downloaded them.
@@ -5927,8 +5927,8 @@ Start with the fundamentals: strong access control, encryption, and logging. The
   {
     id: "10",
     slug: "future-ai-native-computing",
-    title: "The Future of AI-Native Computing: What to Expect in 2025-2030",
-    seoTitle: "The Future of AI-Native Computing: What to Expect in 2025-2030 | Cortex Linux",
+    title: "Future of AI-Native Computing: 2025-2030",
+    seoTitle: "Future of AI-Native Computing: 2025-2030 | Cortex Linux",
     seoDescription: "Explore the future of ML infrastructure—from custom silicon to edge AI, AutoML to energy efficiency. Strategic insights for building forward-looking ML platforms.",
     excerpt: "The ML infrastructure landscape is evolving rapidly. Here's where it's headed and what that means for teams building ML platforms today.",
     content: `**"We bet on the wrong framework. Twice."** A autonomous vehicle company rewrote their entire perception stack from TensorFlow to PyTorch in 2019, then spent 2022 partially migrating to JAX for TPU support, then pivoted again when PyTorch 2.0 closed the compiler gap. Each migration cost 6-9 months of engineering time and tens of millions in delayed products.
@@ -6936,8 +6936,8 @@ Welcome to Cortex Linux. Your AI development journey starts here.
   {
     id: "12",
     slug: "install-cortex-linux-beginner-guide",
-    title: "How to Install Cortex Linux: Complete Beginner Guide",
-    seoTitle: "Install Cortex Linux: Complete Beginner Installation Guide",
+    title: "Install Cortex Linux: Complete Beginner Guide",
+    seoTitle: "Install Cortex Linux: Complete Beginner Guide | Cortex Linux",
     seoDescription: "Step-by-step guide to installing Cortex Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
     excerpt: "A complete walkthrough for installing Cortex Linux on your computer. From checking system requirements to verifying your installation, this guide covers everything beginners need.",
     content: `**"Installation failed. Again."** A computer science student spent her entire weekend trying to set up a deep learning environment for her thesis project. She followed three different tutorials, each promising to be "the complete guide." None of them worked. By Sunday night, she had a corrupted Python installation, conflicting CUDA versions, and no working ML environment.
@@ -7517,8 +7517,8 @@ You have successfully installed Cortex Linux. Welcome to the community, and enjo
   {
     id: "13",
     slug: "cortex-linux-for-students",
-    title: "How to Learn AI Development with Cortex Linux: Student Guide",
-    seoTitle: "How to Learn AI Development with Cortex Linux: Student Guide | Cortex Linux",
+    title: "Cortex Linux for Students: AI Development Guide",
+    seoTitle: "Cortex Linux for Students: AI Development Guide | Cortex Linux",
     seoDescription: "Discover how Cortex Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
     excerpt: "A comprehensive guide for students using Cortex Linux for academic work. Learn how to set up your environment for coursework, discover learning paths, and explore project ideas.",
     content: `**"I failed the assignment because I couldn't get TensorFlow installed."** A sophomore's words to their professor after spending 8 hours on a lab that should have taken 2. The GPU drivers wouldn't load. The CUDA version didn't match. The Python virtual environment got corrupted halfway through.
@@ -8229,8 +8229,8 @@ Welcome to the future of AI development. Your journey as an AI practitioner star
   {
     id: "14",
     slug: "first-ai-task-cortex-linux",
-    title: "How to Run Your First AI Task with Cortex Linux",
-    seoTitle: "How to Run Your First AI Task with Cortex Linux | Cortex Linux",
+    title: "Run Your First AI Task with Cortex Linux",
+    seoTitle: "Run Your First AI Task with Cortex Linux | Cortex Linux",
     seoDescription: "Step-by-step tutorial to run your first AI task with Cortex Linux. Learn image classification and text generation with easy-to-follow instructions.",
     excerpt: "Ready to run your first AI task? This hands-on tutorial guides you through image classification and text generation, showing you the power of Cortex Linux for AI development.",
     content: `**"I just wanted to see if I could make an image classifier."** A hobbyist developer's first attempt at AI turned into a 12-hour debugging marathon. They installed PyTorch (wrong version). Fixed that, hit a CUDA error. Fixed that, got a memory error. By the time they gave up, they'd learned nothing about AI—only that AI development was apparently only for experts with computer science degrees.
