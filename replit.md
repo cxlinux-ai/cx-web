@@ -29,10 +29,18 @@ Professional marketing landing page and FAQ for Cortex Linux - an AI-native oper
   - All posts now include: compelling hooks with real-world statistics, prerequisites tables, numbered step-by-step walkthroughs, code blocks with expected outputs, troubleshooting sections (5 issues each), best practices sections, "What You Learned" summaries, and clear CTAs
 - Individual blog post pages at /blog/:slug with:
   - Sticky Table of Contents sidebar on desktop
-  - SEO meta tags (Open Graph) with proper cleanup on navigation
+  - Full SEO meta tags: Open Graph, Twitter Cards, canonical URLs
   - JSON-LD structured data for BlogPosting schema
   - Word count display and reading time
   - Related articles section
+  - Key Takeaways sections for featured snippets
+- **SEO & Analytics (December 2025):**
+  - Google Analytics 4 (GA4) integrated with anonymized IP (GDPR-friendly)
+  - Canonical URLs for all blog posts (prevents duplicate content)
+  - Twitter/X Cards for better social sharing
+  - SEO-optimized titles with "How to" patterns
+  - Key Takeaways sections added to all blog posts (improves featured snippet chances)
+  - Contact information in footer (address + phone)
 - Blog categories: Fundamentals, Tutorials, Performance, Best Practices, Infrastructure, Troubleshooting, Security, Industry Trends, Getting Started
 - Contributors section with GitHub avatar grid collage showing all developers (8 fallback contributors displayed)
 - Comprehensive FAQ page with 30 questions across 7 categories with real-time search
