@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Search, ChevronLeft, ChevronRight, Clock, Calendar } from "lucide-react";
+import { Search, ChevronLeft, Clock, Calendar } from "lucide-react";
 import { useState, useMemo } from "react";
 import { blogPosts, getAllCategories } from "@/data/blogPosts";
 import { Input } from "@/components/ui/input";
@@ -96,14 +96,8 @@ export default function Blog() {
           </div>
           
           <div className="relative">
-            {/* Connecting line for desktop (lg+) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500/30 via-purple-500/30 to-orange-500/30 -translate-y-1/2 z-0" />
-            
-            {/* Vertical connecting line for mobile/tablet */}
-            <div className="lg:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500/30 via-purple-500/30 to-orange-500/30 z-0" />
-            
             {/* Grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
               {featuredPostsData.map((post, index) => {
                 if (!post) return null;
                 const featured = FEATURED_POSTS[index];
@@ -145,18 +139,6 @@ export default function Blog() {
                         }`}>
                           {featured.step}
                         </div>
-                        
-                        {/* Arrow connector - desktop only (shows on right side except last card) */}
-                        {index < 2 && (
-                          <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20">
-                            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                              index === 0 ? 'bg-green-500/30 text-green-300' :
-                              'bg-purple-500/30 text-purple-300'
-                            }`}>
-                              <ChevronRight size={14} />
-                            </div>
-                          </div>
-                        )}
                         
                         <div className="p-4 pt-14 sm:p-6 sm:pt-16 relative z-10">
                           {/* Badges Row */}
