@@ -90,16 +90,20 @@ export default function Blog() {
           transition={{ delay: 0.1 }}
           className="max-w-6xl mx-auto px-4 mb-12"
         >
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-white mb-2">New to ML Infrastructure?</h2>
-            <p className="text-gray-400">Follow this reading path from beginner to advanced.</p>
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">New to ML Infrastructure?</h2>
+            <p className="text-sm sm:text-base text-gray-400">Follow this reading path from beginner to advanced.</p>
           </div>
           
           <div className="relative">
-            {/* Connecting line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500/30 via-purple-500/30 to-orange-500/30 -translate-y-1/2 z-0" />
+            {/* Connecting line for desktop (lg+) */}
+            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500/30 via-purple-500/30 to-orange-500/30 -translate-y-1/2 z-0" />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+            {/* Vertical connecting line for mobile/tablet */}
+            <div className="lg:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500/30 via-purple-500/30 to-orange-500/30 z-0" />
+            
+            {/* Grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 relative z-10">
               {featuredPostsData.map((post, index) => {
                 if (!post) return null;
                 const featured = FEATURED_POSTS[index];
@@ -110,10 +114,11 @@ export default function Blog() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
+                    className={index === 2 ? "sm:col-span-2 lg:col-span-1" : ""}
                   >
                     <Link href={`/blog/${post.slug}`}>
                       <article
-                        className="group relative rounded-2xl border-2 border-transparent bg-gradient-to-b from-white/[0.08] to-white/[0.02] overflow-hidden transition-all duration-300 hover:-translate-y-2 cursor-pointer h-full"
+                        className="group relative rounded-xl sm:rounded-2xl border-2 border-transparent bg-gradient-to-b from-white/[0.08] to-white/[0.02] overflow-hidden transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 cursor-pointer h-full"
                         style={{
                           backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.02)), linear-gradient(to right, ${
                             index === 0 ? 'rgba(34,197,94,0.3), rgba(34,197,94,0.1)' :
@@ -132,8 +137,8 @@ export default function Blog() {
                           'shadow-[0_0_40px_rgba(249,115,22,0.3)]'
                         }`} />
                         
-                        {/* Step Number Circle */}
-                        <div className={`absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${
+                        {/* Step Number Circle - responsive sizing */}
+                        <div className={`absolute top-3 left-3 sm:top-4 sm:left-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-lg font-bold ${
                           index === 0 ? 'bg-green-500/20 text-green-300 border border-green-500/50' :
                           index === 1 ? 'bg-purple-500/20 text-purple-300 border border-purple-500/50' :
                           'bg-orange-500/20 text-orange-300 border border-orange-500/50'
@@ -141,9 +146,9 @@ export default function Blog() {
                           {featured.step}
                         </div>
                         
-                        {/* Arrow connector (shows on right side except last card) */}
+                        {/* Arrow connector - desktop only (shows on right side except last card) */}
                         {index < 2 && (
-                          <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20">
+                          <div className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20">
                             <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                               index === 0 ? 'bg-green-500/30 text-green-300' :
                               'bg-purple-500/30 text-purple-300'
@@ -153,7 +158,7 @@ export default function Blog() {
                           </div>
                         )}
                         
-                        <div className="p-6 pt-16 relative z-10">
+                        <div className="p-4 pt-14 sm:p-6 sm:pt-16 relative z-10">
                           {/* Badges Row */}
                           <div className="flex flex-wrap gap-2 mb-3">
                             <span className={`px-2 py-0.5 text-xs font-medium rounded-full border ${featured.badgeColor}`}>
@@ -168,22 +173,22 @@ export default function Blog() {
                             </span>
                           </div>
                           
-                          <h3 className="text-lg font-semibold mb-2 text-white group-hover:text-blue-300 transition-colors line-clamp-2">
+                          <h3 className="text-base sm:text-lg font-semibold mb-2 text-white group-hover:text-blue-300 transition-colors line-clamp-2">
                             {post.title}
                           </h3>
                           
-                          <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                          <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4 line-clamp-2">
                             {post.excerpt}
                           </p>
                           
-                          {/* Meta */}
-                          <div className="flex items-center gap-3 text-xs text-gray-500">
+                          {/* Meta - responsive sizing */}
+                          <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-gray-500">
                             <span className="flex items-center gap-1">
-                              <Calendar size={12} />
+                              <Calendar size={10} className="sm:w-3 sm:h-3" />
                               {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                             </span>
                             <span className="flex items-center gap-1">
-                              <Clock size={12} />
+                              <Clock size={10} className="sm:w-3 sm:h-3" />
                               {post.readingTime}
                             </span>
                           </div>
@@ -243,14 +248,14 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* Blog Posts Grid */}
+      {/* Blog Posts Grid - responsive for all devices */}
       <div className="max-w-6xl mx-auto px-4">
         {filteredPosts.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-12 sm:py-16">
             <p className="text-gray-400">No posts found matching your search.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             {filteredPosts.map((post, index) => (
               <motion.div
                 key={post.id}
