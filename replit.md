@@ -38,8 +38,10 @@ Professional marketing landing page and FAQ for Cortex Linux - an AI-native oper
   - Google Analytics 4 (GA4) integrated with anonymized IP (GDPR-friendly)
   - Canonical URLs for all blog posts (prevents duplicate content)
   - Twitter/X Cards for better social sharing
-  - SEO-optimized titles with "How to" patterns
-  - Key Takeaways sections added to all blog posts (improves featured snippet chances)
+  - SEO-optimized titles with "How to" and pain-based patterns
+  - Key Takeaways sections added to ALL 14 blog posts (improves featured snippet chances)
+  - Emotional hooks in all post intros (failure scenarios, costs, pain points)
+  - Internal linking between related posts (Related Reading callouts)
   - Contact information in footer (address + phone)
 - Blog categories: Fundamentals, Tutorials, Performance, Best Practices, Infrastructure, Troubleshooting, Security, Industry Trends, Getting Started
 - Contributors section with GitHub avatar grid collage showing all developers (8 fallback contributors displayed)
