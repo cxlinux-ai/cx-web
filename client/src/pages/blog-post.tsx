@@ -125,12 +125,26 @@ export default function BlogPostPage() {
       }
       metaDesc.setAttribute('content', post.seoDescription || post.excerpt);
 
+      // Add canonical URL
+      const canonicalUrl = `https://cortexlinux.com/blog/${post.slug}`;
+      let canonicalTag = document.querySelector('link[rel="canonical"]');
+      if (!canonicalTag) {
+        canonicalTag = document.createElement('link');
+        canonicalTag.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalTag);
+        createdElements.push(canonicalTag);
+      } else {
+        originalValues.set(canonicalTag, canonicalTag.getAttribute('href') || '');
+      }
+      canonicalTag.setAttribute('href', canonicalUrl);
+
       // Update OG tags - cache original values
       const ogTags = [
         { property: 'og:title', content: post.seoTitle || post.title },
         { property: 'og:description', content: post.seoDescription || post.excerpt },
         { property: 'og:type', content: 'article' },
         { property: 'og:image', content: post.image || '' },
+        { property: 'og:url', content: canonicalUrl },
       ];
 
       ogTags.forEach(({ property, content }) => {
@@ -138,6 +152,26 @@ export default function BlogPostPage() {
         if (!tag) {
           tag = document.createElement('meta');
           tag.setAttribute('property', property);
+          document.head.appendChild(tag);
+          createdElements.push(tag);
+        } else {
+          originalValues.set(tag, tag.getAttribute('content') || '');
+        }
+        tag.setAttribute('content', content);
+      });
+
+      // Update Twitter Card tags
+      const twitterTags = [
+        { name: 'twitter:title', content: post.seoTitle || post.title },
+        { name: 'twitter:description', content: post.seoDescription || post.excerpt },
+        { name: 'twitter:image', content: post.image || '' },
+      ];
+
+      twitterTags.forEach(({ name, content }) => {
+        let tag = document.querySelector(`meta[name="${name}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute('name', name);
           document.head.appendChild(tag);
           createdElements.push(tag);
         } else {
