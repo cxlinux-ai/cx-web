@@ -2231,9 +2231,25 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <p className="text-gray-400 text-sm max-w-xs mb-4">
                 Open-source AI infrastructure for the modern developer.
               </p>
-              <p className="text-gray-500 text-xs">
-                Built in public. Open source on GitHub.
-              </p>
+              <div className="space-y-2 text-sm text-gray-400">
+                <a 
+                  href="https://maps.app.goo.gl/J3LDbMyKgzwZUJ1y8" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block hover:text-white transition-colors"
+                  data-testid="footer-address"
+                >
+                  A75 Towne Ridge Parkway, Suite 125<br />
+                  Sandy UT, 84070
+                </a>
+                <a 
+                  href="tel:385-608-4343" 
+                  className="block hover:text-white transition-colors"
+                  data-testid="footer-phone"
+                >
+                  (385) 608-4343
+                </a>
+              </div>
             </div>
 
             {/* Product */}
