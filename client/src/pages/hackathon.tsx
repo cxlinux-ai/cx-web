@@ -246,10 +246,17 @@ export default function Hackathon() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-6"
           >
             <div className="flex -space-x-2">
-              {[...Array(4)].map((_, i) => (
-                <div
+              {[
+                "https://avatars.githubusercontent.com/u/1?v=4",
+                "https://avatars.githubusercontent.com/u/2?v=4",
+                "https://avatars.githubusercontent.com/u/3?v=4",
+                "https://avatars.githubusercontent.com/u/4?v=4",
+              ].map((avatar, i) => (
+                <img
                   key={i}
-                  className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 border-2 border-black"
+                  src={avatar}
+                  alt={`Contributor ${i + 1}`}
+                  className="w-6 h-6 rounded-full border-2 border-black object-cover"
                 />
               ))}
             </div>
