@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="text-blue-400">LINUX</span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
-              Open-source AI infrastructure for the modern developer.
+              The AI Layer for Linux. Execute any task with natural language.
             </p>
             <p className="text-gray-500 text-xs">
               Built in public. Open source on GitHub.

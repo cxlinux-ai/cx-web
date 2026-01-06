@@ -313,26 +313,26 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
 
   const demoCommands = [
-    { label: "Generate API", command: "cortex generate api --name users", output: "✓ Created /api/users/route.ts\n✓ Generated CRUD operations\n✓ Added TypeScript types\n✓ API ready at localhost:3000/api/users" },
-    { label: "Add Auth", command: "cortex add auth --provider oauth", output: "✓ Installed authentication dependencies\n✓ Created auth middleware\n✓ Generated login/signup routes\n✓ Added session management" },
-    { label: "Deploy", command: "cortex deploy --edge", output: "✓ Building production bundle...\n✓ Optimizing for edge runtime\n✓ Deploying to 12 regions\n✓ Live at https://app.cortex.dev" },
+    { label: "Automate Backups", command: "cortex \"set up automated daily backups for /var/www\"", output: "✓ Created backup script at /usr/local/bin/backup-www.sh\n✓ Configured cron job for 2:00 AM daily\n✓ Added rotation to keep last 7 backups\n✓ Backups will be stored at /var/backups/www/" },
+    { label: "Configure Nginx", command: "cortex \"configure nginx as reverse proxy for my Node app on port 3000\"", output: "✓ Created nginx config at /etc/nginx/sites-available/nodeapp\n✓ Enabled site with symlink to sites-enabled\n✓ Added SSL with Let's Encrypt\n✓ Reloaded nginx - proxy active at port 443" },
+    { label: "Setup Monitoring", command: "cortex \"set up system monitoring with alerts for high CPU\"", output: "✓ Installed monitoring stack (Prometheus + Grafana)\n✓ Configured CPU/memory/disk collectors\n✓ Created alert rules for >80% CPU usage\n✓ Dashboard available at localhost:3000" },
   ];
 
   const features = [
-    { icon: Zap, title: "Get Started in Minutes, Not Hours", description: "Eliminate setup complexity. One command creates your entire ML environment, pre-configured and production-ready.", code: "cortex init my-app && cd my-app && cortex dev" },
-    { icon: Shield, title: "Sleep Better with Built-in Security", description: "Enterprise-grade auth, rate limiting, and secrets vault included. Dramatically reduce your attack surface from day one.", code: "cortex add auth --provider oauth2\ncortex add ratelimit --max 100/min" },
-    { icon: Globe, title: "Deploy Anywhere, Scale Automatically", description: "Go global in seconds with edge deployment across multiple regions. Achieve low latency worldwide with zero DevOps.", code: "cortex deploy --edge --regions all" },
-    { icon: Puzzle, title: "Extend Without Limits", description: "Access a growing library of community plugins for payments, analytics, ML frameworks, and more. Or build your own in minutes.", code: "cortex plugin install @cortex/analytics\ncortex plugin install @cortex/payments" },
+    { icon: Zap, title: "Execute Any Task", description: "From shell scripts to system configuration to data analysis — describe what you need and Cortex translates it into precise Linux commands.", code: "cortex \"find all files larger than 100MB modified in the last week\"\ncortex \"analyze nginx logs for top 10 error sources\"" },
+    { icon: Wand2, title: "Intelligent Automation", description: "Transform complex multi-step workflows into simple natural language descriptions. Cortex chains commands intelligently with error handling.", code: "cortex \"deploy my app: build, run tests, backup db, then restart services\"\ncortex \"set up a Python dev environment with virtualenv and requirements\"" },
+    { icon: Server, title: "Full System Control", description: "Configure, optimize, and monitor your Linux system naturally. From package management to service orchestration — all through conversation.", code: "cortex \"optimize my system for running Docker containers\"\ncortex \"configure firewall to only allow SSH and HTTPS\"" },
+    { icon: Puzzle, title: "Endless Extensibility", description: "Access the full Linux ecosystem — every tool, library, and package available through natural language. The only limit is what Linux can do.", code: "cortex \"install TensorFlow with GPU support\"\ncortex \"set up a complete LAMP stack with security hardening\"" },
   ];
 
   const comparisonData = [
     { feature: "Open Source", icon: Github, cortex: true, toolA: false, toolB: false },
     { feature: "Self-Hostable", icon: Server, cortex: true, toolA: false, toolB: true },
-    { feature: "AI-Native", icon: Sparkles, cortex: true, toolA: "partial", toolB: false },
-    { feature: "Edge Runtime", icon: Globe, cortex: true, toolA: true, toolB: false },
-    { feature: "Free Tier", icon: Infinity, cortex: "Unlimited", toolA: "Limited", toolB: "None" },
-    { feature: "Hardware Detection", icon: HardDrive, cortex: true, toolA: false, toolB: false },
-    { feature: "Auto Rollback", icon: Undo2, cortex: true, toolA: false, toolB: false },
+    { feature: "Natural Language Interface", icon: MessageCircle, cortex: true, toolA: "partial", toolB: false },
+    { feature: "Unlimited Task Scope", icon: Infinity, cortex: true, toolA: false, toolB: false },
+    { feature: "Context-Aware Execution", icon: Brain, cortex: true, toolA: false, toolB: false },
+    { feature: "System-Level Access", icon: Terminal, cortex: true, toolA: false, toolB: "partial" },
+    { feature: "Safety & Rollback", icon: Shield, cortex: true, toolA: false, toolB: false },
   ];
 
   const roadmapItems = [
@@ -409,9 +409,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="gradient-text">Accelerate Your ML Workflow</span>
+            <span className="gradient-text">The AI Layer for Linux</span>
             <br />
-            <span className="text-white">with AI-Native Linux</span>
+            <span className="text-white">Execute Your Intent</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -421,8 +421,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-10 px-2"
           >
-            Eliminate configuration overhead and driver complexity. Describe what you need in plain English,
-            and Cortex handles the rest — from GPU optimization to deployment.
+            Describe what you want. Cortex handles the rest. From automation scripts to system configuration,
+            data analysis to coding workflows — unlimited possibilities with natural language.
           </motion.p>
 
           {/* Demo - Hidden on small screens, show simple CTA instead */}
@@ -490,38 +490,38 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Built for <span className="gradient-text">You</span>
+              Built for <span className="gradient-text">Everyone</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
-              Whether you're training models, shipping code, or scaling infrastructure
+              From automation to analysis, configuration to deployment — Cortex adapts to your workflow
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: Brain,
-                title: "ML Engineers",
-                description: "GPU drivers, CUDA, PyTorch",
-                detail: "Driver configuration handled. Focus on training models."
+                icon: Terminal,
+                title: "Developers",
+                description: "Automation, scripts, workflows",
+                detail: "Automate repetitive tasks with natural language commands."
               },
               {
                 icon: Workflow,
-                title: "DevOps Teams",
-                description: "Reproducible infra, CI-friendly",
-                detail: "Deterministic builds. Every time."
+                title: "System Admins",
+                description: "Config, monitoring, security",
+                detail: "Manage infrastructure without memorizing commands."
+              },
+              {
+                icon: Brain,
+                title: "Data Scientists",
+                description: "Analysis, ML, pipelines",
+                detail: "Focus on insights, not environment setup."
               },
               {
                 icon: Zap,
-                title: "Startups",
-                description: "Faster iteration, less infra debt",
-                detail: "Move fast without breaking things."
-              },
-              {
-                icon: ShieldCheck,
-                title: "Enterprises",
-                description: "Control, auditability, SLA",
-                detail: "Compliance-ready from day one."
+                title: "Power Users",
+                description: "Unlimited possibilities",
+                detail: "If Linux can do it, Cortex can execute it."
               }
             ].map((item, index) => (
               <motion.div
@@ -633,52 +633,39 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <span className="syntax-prompt">$</span>{" "}
                   <span className="syntax-command">cortex</span>{" "}
                   {activeDemo === 0 && (
-                    <>
-                      <span className="syntax-keyword">generate</span>{" "}
-                      <span className="syntax-string">api</span>{" "}
-                      <span className="syntax-flag">--name</span>{" "}
-                      <span className="syntax-variable">users</span>
-                    </>
+                    <span className="syntax-string">"set up automated daily backups for /var/www"</span>
                   )}
                   {activeDemo === 1 && (
-                    <>
-                      <span className="syntax-keyword">add</span>{" "}
-                      <span className="syntax-string">auth</span>{" "}
-                      <span className="syntax-flag">--provider</span>{" "}
-                      <span className="syntax-variable">oauth</span>
-                    </>
+                    <span className="syntax-string">"configure nginx as reverse proxy for my Node app on port 3000"</span>
                   )}
                   {activeDemo === 2 && (
-                    <>
-                      <span className="syntax-keyword">deploy</span>{" "}
-                      <span className="syntax-flag">--edge</span>
-                    </>
+                    <span className="syntax-string">"set up system monitoring with alerts for high CPU"</span>
                   )}
                 </CodeLine>
                 
                 <div className="code-output" key={activeDemo}>
                   {activeDemo === 0 && (
                     <>
-                      <OutputLine>Created <span className="syntax-path">/api/users/route.ts</span></OutputLine>
-                      <OutputLine>Generated <span className="syntax-info">CRUD operations</span></OutputLine>
-                      <OutputLine>Added <span className="syntax-accent">TypeScript</span> types</OutputLine>
-                      <OutputLine>API ready at <span className="syntax-string">localhost:3000/api/users</span></OutputLine>
+                      <OutputLine>Created backup script at <span className="syntax-path">/usr/local/bin/backup-www.sh</span></OutputLine>
+                      <OutputLine>Configured <span className="syntax-info">cron job</span> for 2:00 AM daily</OutputLine>
+                      <OutputLine>Added rotation to keep <span className="syntax-accent">last 7 backups</span></OutputLine>
+                      <OutputLine>Backups stored at <span className="syntax-string">/var/backups/www/</span></OutputLine>
                     </>
                   )}
                   {activeDemo === 1 && (
                     <>
-                      <OutputLine>Installed <span className="syntax-info">authentication</span> dependencies</OutputLine>
-                      <OutputLine>Created <span className="syntax-path">auth middleware</span></OutputLine>
-                      <OutputLine>Generated <span className="syntax-accent">login/signup</span> routes</OutputLine>
-                      <OutputLine>Added <span className="syntax-success">session management</span></OutputLine>
+                      <OutputLine>Created nginx config at <span className="syntax-path">/etc/nginx/sites-available/nodeapp</span></OutputLine>
+                      <OutputLine>Enabled site with <span className="syntax-info">symlink</span> to sites-enabled</OutputLine>
+                      <OutputLine>Added SSL with <span className="syntax-accent">Let's Encrypt</span></OutputLine>
+                      <OutputLine>Nginx reloaded — proxy active at <span className="syntax-success">port 443</span></OutputLine>
                     </>
                   )}
                   {activeDemo === 2 && (
                     <>
-                      <OutputLine>Building <span className="syntax-info">production bundle</span>...</OutputLine>
-                      <OutputLine>Optimizing for <span className="syntax-accent">edge runtime</span></OutputLine>
-                      <OutputLine>Deploying to <span className="syntax-variable">12 regions</span></OutputLine>
-                      <OutputLine>Live at <span className="syntax-string">https://app.cortex.dev</span></OutputLine>
+                      <OutputLine>Installed <span className="syntax-info">Prometheus + Grafana</span> stack</OutputLine>
+                      <OutputLine>Configured <span className="syntax-accent">CPU/memory/disk</span> collectors</OutputLine>
+                      <OutputLine>Created alert rules for <span className="syntax-variable">&gt;80% CPU</span> usage</OutputLine>
+                      <OutputLine>Dashboard available at <span className="syntax-string">localhost:3000</span></OutputLine>
                     </>
                   )}
                 </div>
@@ -700,8 +687,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Complete <span className="gradient-text">ML Toolkit</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Everything data scientists and DevOps teams need to go from prototype to production — without infrastructure complexity.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Complete <span className="gradient-text">AI Layer</span></h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">Everything you need to control your Linux system through natural language — from system administration to development workflows.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -774,27 +761,24 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <InteractiveCodeEditor title="cortex-playground" actions={<CopyButton text="cortex generate api --name products" size="sm" />}>
+            <InteractiveCodeEditor title="cortex-playground" actions={<CopyButton text='cortex "show disk usage and find large files"' size="sm" />}>
               <div className="code-editor-body">
                 <CodeLine lineNumber={1}>
                   <span className="syntax-prompt">$</span>{" "}
                   <span className="syntax-command">cortex</span>{" "}
-                  <span className="syntax-keyword">generate</span>{" "}
-                  <span className="syntax-string">api</span>{" "}
-                  <span className="syntax-flag">--name</span>{" "}
-                  <span className="syntax-variable">products</span>
+                  <span className="syntax-string">"show disk usage and find large files"</span>
                 </CodeLine>
                 <div className="code-output">
-                  <OutputLine>Created <span className="syntax-path">/api/products/route.ts</span></OutputLine>
-                  <OutputLine>Generated <span className="syntax-info">CRUD operations</span></OutputLine>
-                  <OutputLine>Added <span className="syntax-accent">TypeScript</span> types</OutputLine>
+                  <OutputLine>Analyzing disk usage on <span className="syntax-path">/</span>...</OutputLine>
+                  <OutputLine>Found <span className="syntax-info">3 files</span> over 1GB in /var/log</OutputLine>
+                  <OutputLine>Suggested cleanup: <span className="syntax-accent">rotate old logs</span></OutputLine>
                 </div>
               </div>
               
               {/* Prompt Pills */}
               <div className="border-t border-white/5 px-6 py-4 flex flex-wrap items-center gap-3 bg-black/20">
                 <span className="text-xs text-gray-500 uppercase tracking-wider">Try:</span>
-                {["Generate REST API", "Add Authentication", "Deploy to Edge", "Install Plugin"].map((prompt, i) => (
+                {["Analyze system logs", "Configure SSH keys", "Set up Docker", "Create backup script"].map((prompt, i) => (
                   <button
                     key={i}
                     className="px-4 py-2 rounded-lg text-sm bg-white/[0.03] text-gray-400 hover:text-white hover:bg-white/[0.06] border border-white/[0.06] hover:border-white/10 transition-all duration-200"

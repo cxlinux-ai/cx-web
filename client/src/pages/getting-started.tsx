@@ -43,21 +43,21 @@ export default function GettingStarted() {
   const quickNavCards = [
     {
       title: "Installation Guide",
-      description: "Step-by-step instructions to install Cortex Linux on your system",
+      description: "Get Cortex running on your system in minutes with our guided setup",
       icon: Download,
       link: "/blog/install-cortex-linux-beginner-guide",
       color: "from-blue-500 to-cyan-500"
     },
     {
-      title: "First Workflow",
-      description: "Learn how to create and run your first Cortex workflow",
+      title: "Your First Task",
+      description: "Tell Cortex what you need—from server config to automation to anything in between",
       icon: Terminal,
       link: "/blog/getting-started-cortex-first-workflow",
       color: "from-purple-500 to-pink-500"
     },
     {
-      title: "Run Your First AI Task",
-      description: "Execute your first AI-powered command and see Cortex in action",
+      title: "Unlimited Possibilities",
+      description: "See how Cortex handles any Linux operation through natural language",
       icon: Sparkles,
       link: "/blog/first-ai-task-cortex-linux",
       color: "from-orange-500 to-red-500"
@@ -66,7 +66,7 @@ export default function GettingStarted() {
 
   const prerequisites = [
     { text: "64-bit x86 processor (AMD64/Intel)", icon: Cpu },
-    { text: "8GB RAM minimum (16GB recommended for ML workloads)", icon: Database },
+    { text: "8GB RAM minimum (16GB recommended for demanding workloads)", icon: Database },
     { text: "50GB free disk space", icon: Monitor },
     { text: "NVIDIA GPU with CUDA support (optional, for GPU acceleration)", icon: Zap },
     { text: "Internet connection for AI features", icon: Rocket }
@@ -109,23 +109,25 @@ export default function GettingStarted() {
     {
       number: 4,
       title: "Run Your First Command",
-      description: "Experience the power of intent-based computing. Simply describe what you want to accomplish in natural language.",
+      description: "Experience the power of intent-based computing. Simply describe what you want to accomplish—Cortex handles the rest.",
       details: [
-        "Try: 'cortex setup python for machine learning'",
-        "Or: 'cortex install docker with compose'",
-        "Preview commands before execution",
-        "Watch as dependencies are resolved automatically"
+        "Try: 'cortex configure my nginx web server with SSL'",
+        "Or: 'cortex set up automated daily backups to S3'",
+        "Or: 'cortex install monitoring with Prometheus and Grafana'",
+        "Or: 'cortex set up a Python dev environment with Django'",
+        "Preview commands before execution and watch dependencies resolve automatically"
       ]
     },
     {
       number: 5,
-      title: "Explore AI Features",
-      description: "Unlock the full potential of AI-native Linux with advanced features designed for modern development.",
+      title: "Do Anything on Linux",
+      description: "Cortex is your intelligent Linux assistant. Whatever you need to accomplish, just ask.",
       details: [
-        "Use 'cortex env create' for isolated environments",
-        "Try 'cortex explain' for detailed command breakdowns",
-        "Explore 'cortex snapshot' for system state management",
-        "Run 'cortex optimize' for performance tuning"
+        "System administration: users, permissions, services, networking",
+        "DevOps: containers, CI/CD, infrastructure automation",
+        "Development: environments, dependencies, build systems",
+        "Security: firewall rules, audits, hardening, compliance",
+        "And literally anything else you can do on Linux"
       ]
     }
   ];
@@ -134,42 +136,53 @@ export default function GettingStarted() {
     {
       title: "Beginner Path",
       icon: GraduationCap,
-      description: "New to Linux or AI development? Start here.",
+      description: "New to Linux? Let Cortex be your guide.",
       color: "from-green-500 to-emerald-500",
       resources: [
         { title: "Getting Started with Cortex", link: "/blog/getting-started-cortex-first-workflow" },
         { title: "How to Install Cortex Linux", link: "/blog/install-cortex-linux-beginner-guide" },
-        { title: "Run Your First AI Task", link: "/blog/first-ai-task-cortex-linux" },
+        { title: "Your First Linux Tasks", link: "/blog/first-ai-task-cortex-linux" },
         { title: "Cortex for Students", link: "/blog/cortex-linux-for-students" },
         { title: "FAQ for New Users", link: "/faq" }
       ]
     },
     {
-      title: "Developer Path",
-      icon: Code,
-      description: "Experienced developers looking to supercharge their workflow.",
-      color: "from-blue-500 to-indigo-500",
+      title: "Sysadmin Path",
+      icon: Shield,
+      description: "System administrators managing servers and infrastructure.",
+      color: "from-orange-500 to-red-500",
       resources: [
-        { title: "Advanced CLI Commands", link: "/blog" },
-        { title: "Docker and Container Integration", link: "/blog" },
-        { title: "Multi-Environment Management", link: "/blog/ml-workloads-without-config-hell" },
-        { title: "CI/CD Pipeline Setup", link: "/blog" },
-        { title: "Custom Workflow Automation", link: "/blog" },
-        { title: "API Reference", link: "/blog" }
+        { title: "Server Configuration Automation", link: "/blog" },
+        { title: "User and Permission Management", link: "/blog" },
+        { title: "Backup and Disaster Recovery", link: "/blog" },
+        { title: "Security Hardening with Cortex", link: "/blog" },
+        { title: "Monitoring and Alerting Setup", link: "/blog" }
       ]
     },
     {
-      title: "Data Scientist Path",
-      icon: FlaskConical,
-      description: "ML engineers and researchers optimizing for AI workloads.",
+      title: "Developer Path",
+      icon: Code,
+      description: "Developers building applications and managing environments.",
+      color: "from-blue-500 to-indigo-500",
+      resources: [
+        { title: "Development Environment Setup", link: "/blog" },
+        { title: "Docker and Container Integration", link: "/blog" },
+        { title: "Multi-Environment Management", link: "/blog/ml-workloads-without-config-hell" },
+        { title: "Database Setup and Management", link: "/blog" },
+        { title: "Custom Workflow Automation", link: "/blog" }
+      ]
+    },
+    {
+      title: "DevOps Path",
+      icon: Rocket,
+      description: "DevOps engineers automating pipelines and infrastructure.",
       color: "from-purple-500 to-violet-500",
       resources: [
-        { title: "GPU Optimization Techniques", link: "/blog/gpu-optimization-real-techniques" },
-        { title: "PyTorch and TensorFlow Setup", link: "/blog/ml-workloads-without-config-hell" },
-        { title: "Multi-GPU Training Configuration", link: "/blog" },
-        { title: "CUDA and cuDNN Management", link: "/blog" },
-        { title: "Reproducible ML Environments", link: "/blog/ml-workloads-without-config-hell" },
-        { title: "LLM Inference Optimization", link: "/blog" }
+        { title: "CI/CD Pipeline Setup", link: "/blog" },
+        { title: "Infrastructure as Code", link: "/blog" },
+        { title: "Kubernetes Cluster Management", link: "/blog" },
+        { title: "Log Aggregation and Analysis", link: "/blog" },
+        { title: "Performance Optimization", link: "/blog/gpu-optimization-real-techniques" }
       ]
     }
   ];
@@ -189,18 +202,18 @@ export default function GettingStarted() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Getting Started with{" "}
+            The{" "}
             <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
-              Cortex Linux
+              AI Layer for Linux
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Your journey to AI-powered development starts here
+            Your intelligent Linux assistant that can do anything
           </p>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Cortex Linux transforms how you interact with your operating system. 
-            Instead of memorizing commands, simply describe what you want to accomplish. 
-            This guide will help you get up and running in minutes.
+            Stop memorizing commands. Just describe what you need—configure servers, 
+            automate tasks, manage infrastructure, set up development environments, 
+            or anything else. Cortex understands your intent and makes it happen.
           </p>
         </motion.div>
       </section>
@@ -405,7 +418,7 @@ export default function GettingStarted() {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {learningPaths.map((path, index) => (
               <motion.div
                 key={index}

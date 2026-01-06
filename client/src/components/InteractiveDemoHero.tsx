@@ -7,11 +7,11 @@ import { useCortexDemo } from "@/hooks/useCortexDemo";
 import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight } from "lucide-react";
 
 const EXAMPLE_PROMPTS = [
-  "Set up Python for machine learning",
+  "Automate my backup script",
+  "Set up system monitoring",
+  "Configure firewall rules",
+  "Create cron job for reports",
   "Install Docker on Ubuntu",
-  "Configure nginx web server",
-  "Install PostgreSQL database",
-  "Set up Node.js development environment",
 ];
 
 export default function InteractiveDemoHero() {
@@ -111,7 +111,7 @@ export default function InteractiveDemoHero() {
             Experience Cortex in <span className="gradient-text">10 Seconds</span>
           </h2>
           <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
-            Type what you need in plain English. Watch Cortex generate the exact commands.
+            Describe any task in plain English. Cortex handles automation, configuration, scripts, and more.
           </p>
           {remaining !== null && (
             <p className="text-xs sm:text-sm text-gray-500">
@@ -171,7 +171,7 @@ export default function InteractiveDemoHero() {
                       <Input
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        placeholder="Describe what you want to install..."
+                        placeholder="Describe any task you want to accomplish..."
                         className="pl-7 sm:pl-9 bg-gray-950/60 border-gray-700/50 text-white placeholder:text-gray-500 focus:border-purple-500/70 focus:ring-2 focus:ring-purple-500/20 h-10 sm:h-11 md:h-12 text-sm sm:text-base rounded-lg transition-all"
                         disabled={isLoading}
                         data-testid="input-demo-command"
@@ -226,8 +226,8 @@ export default function InteractiveDemoHero() {
                         <Terminal className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-gray-600" />
                       </div>
                       <div className="text-center space-y-0.5 sm:space-y-1 px-4">
-                        <p className="text-sm sm:text-base text-gray-400">Ready to help you install anything</p>
-                        <p className="text-xs sm:text-sm text-gray-600">Click an example above or type your own request</p>
+                        <p className="text-sm sm:text-base text-gray-400">Ready to accomplish any task on Linux</p>
+                        <p className="text-xs sm:text-sm text-gray-600">Click an example above or describe what you need</p>
                       </div>
                     </div>
                   ) : (

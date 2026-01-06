@@ -2,24 +2,34 @@
 
 ## Overview
 
-Professional marketing landing page and FAQ for Cortex Linux - an AI-native operating system that makes Linux easy through natural language commands. Tagline: "Linux that understands you. No documentation required."
+Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer for Linux**. Cortex is a dynamic, intelligent assistant that can perform unlimited tasks on Linux through natural language commands. From automation scripts to system configuration, data analysis to coding workflows - Cortex handles anything you can do on Linux.
+
+**Tagline:** "The AI Layer for Linux - Execute Your Intent"
+
+**Core Value Proposition:**
+- Cortex can do ANYTHING on Linux (automation, configuration, scripts, analysis, workflows)
+- Package management is just one small feature among unlimited capabilities
+- Translates natural language intent into multi-step Linux execution
+- Safety-first: sandboxed execution, preview before execute, instant rollback
 
 **Brand Identity:**
 - Colors: Tech blue (#0066FF primary), Terminal green (#00FF00 success), Dark theme (#0A0A0A background)
-- Target audience: Data scientists, ML engineers, DevOps teams, students
+- Target audience: Developers, system admins, data scientists, DevOps teams, power users, students
 - Tone: Professional, trustworthy, cutting-edge but addresses security concerns directly
+- Psychological marketing: Clarity, Authority, Aspiration, Curiosity
 
-**Current Status (December 2025):**
+**Current Status (January 2026):**
+- **MAJOR CONTENT REFRAME (January 2026):** Complete website repositioning from "AI package manager" to "AI Layer for Linux" with unlimited capabilities across all pages
 - Complete landing page with 15+ sections including hero, problem/solution, security, comparison, use cases, pricing, testimonials, contributors, blog preview
 - "New to Cortex?" preview card on homepage after Built For section linking to Getting Started guide
 - Blog Preview Section on homepage showing 3 latest posts with hover effects and blue glow accents
 - Full Blog system at /blog with 14 deep technical articles (1500-2500 words each), search functionality, and category filters across 9 categories
-- **NEW: Getting Started page at /getting-started** with:
-  - Hero section with gradient styling
+- **ENHANCED: Getting Started page at /getting-started** with:
+  - Hero section with "AI Layer for Linux" messaging
   - Quick navigation cards linking to beginner blog posts
   - Prerequisites and system requirements
-  - 5-step getting started guide
-  - Learning paths (Beginner, Developer, Data Scientist)
+  - 5-step getting started guide (expanded with diverse examples)
+  - Learning paths (Beginner, Sysadmin, Developer, DevOps) - 4 paths for all users
   - Community & Support section
 - **ENHANCED: 4 Beginner Blog Posts** in "Getting Started" category (improved based on competitor analysis from KodeKloud, Dev.to, DevOps industry standards):
   - "Getting Started with Cortex Linux: Your First Workflow" (2800 words, 14 min read)

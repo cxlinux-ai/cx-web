@@ -77,7 +77,7 @@ export default function Blog() {
             <span className="gradient-text">Blog</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Technical insights, tutorials, and best practices for ML engineers and developers
+            Technical insights, tutorials, and best practices for Linux automation and AI-powered workflows
           </p>
         </motion.div>
       </div>
@@ -91,8 +91,8 @@ export default function Blog() {
           className="max-w-6xl mx-auto px-4 mb-12"
         >
           <div className="mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">New to ML Infrastructure?</h2>
-            <p className="text-sm sm:text-base text-gray-400">Follow this reading path from beginner to advanced.</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">New to Cortex?</h2>
+            <p className="text-sm sm:text-base text-gray-400">Start your journey with this curated reading path.</p>
           </div>
           
           <div className="relative">
