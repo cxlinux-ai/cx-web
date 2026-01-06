@@ -142,7 +142,7 @@ export default function HackathonPreview() {
                 className="text-white font-bold text-center mb-3 leading-tight"
                 style={{ fontSize: '46px' }}
               >
-                <span className="gradient-text text-[50px]">Shape the Future of AI Linux</span>
+                <span className="gradient-text text-[50px]">Shape the Future of Cortex Linux</span>
               </h3>
               <p className="text-center text-xl md:text-2xl font-semibold text-gray-300 mb-6">
                 $5,350 in Prizes · First AI Linux Hackathon
