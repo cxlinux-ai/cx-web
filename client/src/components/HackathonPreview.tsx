@@ -139,14 +139,11 @@ export default function HackathonPreview() {
 
               {/* Headline - Bold, 50px */}
               <h3 
-                className="text-white font-bold text-center mb-4 leading-tight"
-                style={{ fontSize: '44px' }}
+                className="text-white font-bold text-center mb-6 leading-tight"
+                style={{ fontSize: '50px' }}
               >
-                1st AI Linux Hackathon
+                First <span className="gradient-text">$5000+ AI Linux Hackathon</span> in the World
               </h3>
-              <p className="text-center text-2xl md:text-3xl font-bold mb-6">
-                <span className="text-emerald-400">$5,350</span> <span className="text-gray-300">Cash Prize</span>
-              </p>
               
               {/* Value proposition */}
               <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
