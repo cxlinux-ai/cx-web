@@ -366,18 +366,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2 text-gray-500">
-            <span className="text-xs">Scroll to learn more</span>
-            <ChevronDown size={20} className="animate-bounce" />
-          </div>
-        </motion.div>
       </section>
 
       {/* Two-Phase Overview Section */}
