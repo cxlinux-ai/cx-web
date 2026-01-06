@@ -1484,3 +1484,37 @@ body:not(.page-transition-blur) {
   background-size: 200% 200%;
   animation: gradient-shift 4s ease-in-out infinite;
 }
+
+/* Slow-moving gradient shift for premium tech feel */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Slow pulse animation for ambient effects */
+@keyframes pulse-slow-anim {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow-anim 4s ease-in-out infinite;
+}
+
+/* Radial gradient for ambient glow */
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-from), var(--tw-gradient-to));
+}
