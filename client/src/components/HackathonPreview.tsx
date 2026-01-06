@@ -54,7 +54,7 @@ export default function HackathonPreview() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="group relative"
         >
-          {/* Animated gradient border - attention grabbing */}
+          {/* Animated gradient border */}
           <div className="absolute -inset-[1px] rounded-[28px] bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-blue-500/40 opacity-60 group-hover:opacity-100 blur-[1px] transition-opacity duration-500 animate-gradient-shift" />
           
           {/* Secondary glow layer */}
@@ -69,7 +69,7 @@ export default function HackathonPreview() {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-gradient-to-b from-blue-500/[0.06] to-transparent" />
             
             <div className="relative px-6 py-8 md:px-10 md:py-12">
-              {/* Hackathon badge - eye-catching */}
+              {/* Hackathon badge */}
               <div className="flex justify-center mb-6">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20">
                   <span className="relative flex h-2 w-2">
@@ -92,23 +92,23 @@ export default function HackathonPreview() {
                 Ship real AI tools for Linux. Two-part hackathon with $3,000+ in prizes.
               </p>
               
-              {/* Countdown timer */}
-              <div className="flex items-center justify-center gap-2 mb-8">
-                <Clock size={14} className="text-gray-500" />
-                <span className="text-[13px] text-gray-500">Starts in</span>
-                <div className="flex items-center gap-1">
-                  <span className="inline-flex items-center justify-center min-w-[32px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-sm font-mono font-medium text-white">
-                    {countdown.days}d
-                  </span>
-                  <span className="inline-flex items-center justify-center min-w-[32px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-sm font-mono font-medium text-white">
-                    {countdown.hours}h
-                  </span>
-                  <span className="inline-flex items-center justify-center min-w-[32px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-sm font-mono font-medium text-white">
-                    {countdown.minutes}m
-                  </span>
-                  <span className="inline-flex items-center justify-center min-w-[32px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-sm font-mono font-medium text-gray-400">
-                    {countdown.seconds}s
-                  </span>
+              {/* Countdown timer - matching hackathon page style */}
+              <div className="mb-8">
+                <p className="text-sm text-gray-400 mb-4 flex items-center justify-center gap-2">
+                  <Clock size={16} className="text-blue-400" />
+                  Hackathon starts in:
+                </p>
+                <div className="flex gap-2 sm:gap-3 justify-center">
+                  {Object.entries(countdown).map(([unit, value]) => (
+                    <div key={unit} className="text-center">
+                      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg p-2 sm:p-3 min-w-[50px] sm:min-w-[65px]">
+                        <span className="text-xl sm:text-2xl font-bold text-blue-400 font-mono">
+                          {String(value).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <span className="text-[10px] sm:text-xs text-gray-500 mt-1.5 block capitalize">{unit}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
               
