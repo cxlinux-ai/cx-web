@@ -83,7 +83,7 @@ export default function HackathonPreview() {
               </div>
 
               {/* Headline */}
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-3 tracking-tight">
+               <h3 className="gradient-text text-center font-extrabold text-[45px]">
                 Build with Cortex
               </h3>
               
