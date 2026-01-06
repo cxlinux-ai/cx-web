@@ -140,14 +140,17 @@ export default function HackathonPreview() {
               {/* Headline - Bold, 50px */}
               <h3 
                 className="text-white font-bold text-center mb-4 leading-tight"
-                style={{ fontSize: '50px' }}
+                style={{ fontSize: '44px' }}
               >
-                Build with <span className="gradient-text">Cortex</span>
+                1st AI Linux Hackathon
               </h3>
+              <p className="text-center text-2xl md:text-3xl font-bold mb-6">
+                <span className="text-emerald-400">$5,350</span> <span className="text-gray-300">Cash Prize</span>
+              </p>
               
               {/* Value proposition */}
               <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
-                Crowdsource monetization strategies for Cortex Linux. Two-phase hackathon with <span className="text-white font-medium">$5,350</span> in prizes.
+                Help shape the future of <span className="gradient-text">Cortex Linux</span> — crowdsource monetization strategies and build production-ready features.
               </p>
               
               {/* Countdown timer */}
