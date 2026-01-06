@@ -115,7 +115,7 @@ export default function Hackathon() {
   const phase1Details = {
     title: "Phase 1: Ideation",
     weeks: "Weeks 1-4",
-    description: "Submit ideas via GitHub Issues. Low barrier to entry, maximum idea capture.",
+    description: "Submit monetization strategies and feature ideas via GitHub Issues. Monetization weighted at 40% — our top priority.",
     prizes: [
       { place: "1st Place", amount: "$200" },
       { place: "2nd Place", amount: "$150" },
@@ -297,7 +297,8 @@ export default function Hackathon() {
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
-            A two-phase program designed to crowdsource ideas and convert them into production code.
+            A two-phase program designed to <span className="text-emerald-400 font-medium">crowdsource monetization strategies</span> and 
+            convert the best ideas into production code with measurable ROI.
             <span className="text-blue-400 font-medium"> Contribute to Cortex Linux</span> — the open-source AI layer for Linux.
           </motion.p>
 
@@ -388,11 +389,15 @@ export default function Hackathon() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
+              <Target size={16} />
+              Main Goal: Crowdsource Monetization Strategies
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               Two Phases, <span className="text-blue-400">One Goal</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Phase 1 captures ideas. Phase 2 turns the best ones into production code.
+              Generate features that enable sustainable revenue. Phase 1 captures monetization ideas. Phase 2 turns them into production code.
             </p>
           </motion.div>
 

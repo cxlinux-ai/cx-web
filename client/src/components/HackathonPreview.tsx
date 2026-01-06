@@ -89,7 +89,7 @@ export default function HackathonPreview() {
               
               {/* Value proposition */}
               <p className="text-gray-400 text-center text-base md:text-lg max-w-md mx-auto mb-8 leading-relaxed">
-                Ship real AI tools for Linux. Two-part hackathon with $3,000+ in prizes.
+                Crowdsource monetization strategies for Cortex Linux. Two-phase hackathon with $5,350 in prizes.
               </p>
               
               {/* Countdown timer - matching hackathon page style */}
