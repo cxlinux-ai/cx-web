@@ -137,17 +137,20 @@ export default function HackathonPreview() {
                 </motion.div>
               </div>
 
-              {/* Headline - Bold, 50px */}
+              {/* Headline - Bold */}
               <h3 
-                className="text-white font-bold text-center mb-6 leading-tight"
-                style={{ fontSize: '50px' }}
+                className="text-white font-bold text-center mb-3 leading-tight"
+                style={{ fontSize: '46px' }}
               >
-                First <span className="gradient-text">AI Linux Hackathon</span> in the World
+                <span className="gradient-text">Shape the Future of AI Linux</span>
               </h3>
+              <p className="text-center text-xl md:text-2xl font-semibold text-gray-300 mb-6">
+                $5,350 in Prizes · First AI Linux Hackathon
+              </p>
               
               {/* Value proposition */}
               <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
-                Help shape the future of <span className="gradient-text">Cortex Linux</span> — crowdsource monetization strategies and build production-ready features.
+                Build monetization strategies & production features for Cortex. Two phases. Real impact. Real rewards.
               </p>
               
               {/* Countdown timer */}
