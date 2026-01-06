@@ -185,10 +185,11 @@ export default function HackathonPreview() {
                   href={GITHUB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px] transition-all duration-200"
+                  className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px]"
                   data-testid="link-hackathon-github"
                   whileHover={{ y: -2, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   style={{ 
                     boxShadow: "0 4px 14px rgba(255,255,255,0.15), 0 2px 6px rgba(0,0,0,0.1)",
                   }}
