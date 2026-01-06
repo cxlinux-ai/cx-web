@@ -50,43 +50,20 @@ export default function HackathonPreview() {
     >
       <div className="max-w-3xl mx-auto">
         <motion.div
-          whileHover={{ y: -6, scale: 1.008 }}
+          whileHover={{ y: -4 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="group relative"
         >
-          {/* Animated pulse behind card - catches peripheral vision */}
-          <div className="absolute -inset-8 rounded-[40px] bg-gradient-to-r from-blue-500/5 via-purple-500/8 to-blue-500/5 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-1000 animate-pulse-slow" />
-          
-          {/* Animated gradient border with slow shift */}
-          <div 
-            className="absolute -inset-[1px] rounded-[28px] opacity-60 group-hover:opacity-100 blur-[1px] transition-opacity duration-500"
-            style={{
-              background: 'linear-gradient(90deg, #6b5bff, #00cfff, #6b5bff)',
-              backgroundSize: '200% 100%',
-              animation: 'gradientShift 10s ease infinite',
-            }}
-          />
-          
-          {/* Secondary glow layer */}
-          <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700" />
+          {/* Subtle glow on hover */}
+          <div className="absolute -inset-4 rounded-[32px] bg-blue-500/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500" />
           
           {/* Main card */}
-          <div className="relative rounded-[26px] bg-[#08080c] border border-white/[0.08] overflow-hidden">
-            {/* Animated top accent line with gradient shift */}
-            <div 
-              className="absolute top-0 left-0 right-0 h-[2px] opacity-90"
-              style={{
-                background: 'linear-gradient(90deg, transparent, #6b5bff, #00cfff, #6b5bff, transparent)',
-                backgroundSize: '200% 100%',
-                animation: 'gradientShift 10s ease infinite',
-              }}
-            />
+          <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/10 group-hover:border-white/15 transition-colors duration-300 overflow-hidden">
+            {/* Subtle top accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             
-            {/* Inner ambient glow - soft vertical glow from top */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-48 bg-gradient-to-b from-blue-500/[0.08] via-purple-500/[0.04] to-transparent blur-xl" />
-            
-            {/* Ambient blur / soft gradient behind content */}
-            <div className="absolute inset-0 bg-gradient-radial from-blue-500/[0.03] via-transparent to-transparent" />
+            {/* Inner ambient glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-32 bg-gradient-to-b from-blue-500/[0.05] to-transparent blur-xl" />
             
             <div className="relative px-8 py-10 md:px-12 md:py-14">
               {/* Hackathon badge with pulse glow */}
@@ -109,14 +86,12 @@ export default function HackathonPreview() {
               </div>
 
               {/* Headline - Bold, 50px */}
-              <motion.h3 
+              <h3 
                 className="text-white font-bold text-center mb-4 leading-tight"
                 style={{ fontSize: '50px' }}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
               >
                 Build with <span className="gradient-text">Cortex</span>
-              </motion.h3>
+              </h3>
               
               {/* Value proposition - Light gray, increased line-height */}
               <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
