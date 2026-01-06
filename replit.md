@@ -61,6 +61,16 @@ Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer fo
 - Full responsive design with mobile navigation
 - Smooth scroll navigation between sections
 - Framer Motion animations throughout including stagger animations in contributors grid
+- **NEW: Hackathon Page at /hackathon** with psychology-driven marketing:
+  - Hero section with "Build AI Tools That Ship" headline and countdown timer
+  - Social proof: "500+ builders already participating"
+  - 3-step process (Star & Fork → View Issues → Start Building)
+  - Statistics section with GitHub stars, contributors, and bounty info
+  - FAQ section for hackathon-specific questions
+  - All CTAs redirect to GitHub repository
+  - HackathonPreview component on homepage with animated gradient border
+  - FOMO elements: countdown timer, participant count, urgency messaging
+  - Smooth transition utility with safety timeout
 
 ## User Preferences
 
