@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowRight, Github, Clock } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 
@@ -42,115 +42,141 @@ export default function HackathonPreview() {
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="py-16 px-4"
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="py-12 px-4"
     >
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <motion.div
-          whileHover={{ y: -8 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          whileHover={{ y: -6, scale: 1.008 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="group relative"
         >
-          {/* Outer ambient pulse - subtle depth */}
+          {/* Animated pulse behind card - catches peripheral vision */}
+          <div className="absolute -inset-8 rounded-[40px] bg-gradient-to-r from-blue-500/5 via-purple-500/8 to-blue-500/5 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-1000 animate-pulse-slow" />
+          
+          {/* Animated gradient border with slow shift */}
           <div 
-            className="absolute -inset-12 rounded-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
+            className="absolute -inset-[1px] rounded-[28px] opacity-60 group-hover:opacity-100 blur-[1px] transition-opacity duration-500"
             style={{
-              background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.08), transparent 70%)',
+              background: 'linear-gradient(90deg, #6b5bff, #00cfff, #6b5bff)',
+              backgroundSize: '200% 100%',
+              animation: 'gradientShift 10s ease infinite',
             }}
           />
           
-          {/* Animated gradient border - slow shifting */}
-          <div 
-            className="absolute -inset-[2px] rounded-[32px] opacity-70 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4, #6366f1)',
-              backgroundSize: '300% 300%',
-              animation: 'gradientShift 8s ease infinite',
-            }}
-          />
-          
-          {/* Inner glow layer */}
-          <div className="absolute -inset-[1px] rounded-[31px] bg-[#0a0a0f] opacity-95" />
+          {/* Secondary glow layer */}
+          <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-700" />
           
           {/* Main card */}
-          <div className="relative rounded-[30px] bg-gradient-to-b from-[#0f0f18] to-[#08080c] border border-white/[0.06] overflow-hidden">
-            
-            {/* Top accent glow */}
+          <div className="relative rounded-[26px] bg-[#08080c] border border-white/[0.08] overflow-hidden">
+            {/* Animated top accent line with gradient shift */}
             <div 
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-32 opacity-60"
+              className="absolute top-0 left-0 right-0 h-[2px] opacity-90"
               style={{
-                background: 'radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), transparent 70%)',
+                background: 'linear-gradient(90deg, transparent, #6b5bff, #00cfff, #6b5bff, transparent)',
+                backgroundSize: '200% 100%',
+                animation: 'gradientShift 10s ease infinite',
               }}
             />
             
-            {/* Content with generous whitespace */}
-            <div className="relative px-10 py-14 md:px-16 md:py-20 text-center">
-              
-              {/* Small badge - secondary */}
-              <div className="mb-10">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium tracking-wide uppercase">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-500" />
+            {/* Inner ambient glow - soft vertical glow from top */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-48 bg-gradient-to-b from-blue-500/[0.08] via-purple-500/[0.04] to-transparent blur-xl" />
+            
+            {/* Ambient blur / soft gradient behind content */}
+            <div className="absolute inset-0 bg-gradient-radial from-blue-500/[0.03] via-transparent to-transparent" />
+            
+            <div className="relative px-8 py-10 md:px-12 md:py-14">
+              {/* Hackathon badge with pulse glow */}
+              <div className="flex justify-center mb-8">
+                <motion.div 
+                  className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/25"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {/* Badge glow effect */}
+                  <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-md animate-pulse-slow" />
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
                   </span>
-                  Feb 11, 2026
-                </span>
+                  <span className="relative text-[13px] font-semibold text-blue-400 tracking-wide uppercase">
+                    Hackathon · Feb 11, 2026
+                  </span>
+                </motion.div>
               </div>
 
-              {/* Headline - DOMINANT */}
-              <h3 
-                className="text-white font-bold tracking-tight mb-4"
-                style={{ fontSize: '52px', lineHeight: '1.1' }}
+              {/* Headline - Bold, 50px */}
+              <motion.h3 
+                className="text-white font-bold text-center mb-4 leading-tight"
+                style={{ fontSize: '50px' }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
               >
                 Build with <span className="gradient-text">Cortex</span>
-              </h3>
+              </motion.h3>
               
-              {/* Subheadline - secondary, muted */}
-              <p className="text-gray-500 text-lg max-w-md mx-auto mb-12 leading-relaxed">
-                Crowdsource monetization strategies. Win <span className="text-gray-300">$5,350</span> in prizes.
+              {/* Value proposition - Light gray, increased line-height */}
+              <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
+                Crowdsource monetization strategies for Cortex Linux. Two-phase hackathon with <span className="text-white font-medium">$5,350</span> in prizes.
               </p>
               
-              {/* Countdown - minimal, secondary */}
-              <div className="flex justify-center gap-6 mb-14">
-                {Object.entries(countdown).map(([unit, value]) => (
-                  <div key={unit} className="text-center">
-                    <div className="text-2xl font-mono font-bold text-white/80">
-                      {String(value).padStart(2, "0")}
-                    </div>
-                    <div className="text-[10px] text-gray-600 uppercase tracking-wider mt-1">{unit}</div>
-                  </div>
-                ))}
+              {/* Countdown timer with hover effects */}
+              <div className="mb-10">
+                <p className="text-sm text-gray-500 mb-5 flex items-center justify-center gap-2">
+                  <Clock size={16} className="text-blue-400" />
+                  Hackathon starts in:
+                </p>
+                <div className="flex gap-3 sm:gap-4 justify-center">
+                  {Object.entries(countdown).map(([unit, value]) => (
+                    <motion.div 
+                      key={unit} 
+                      className="text-center group/timer"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="relative">
+                        {/* Glow behind numbers on hover */}
+                        <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-lg opacity-0 group-hover/timer:opacity-100 transition-opacity duration-300" />
+                        <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-3 sm:p-4 min-w-[55px] sm:min-w-[70px] group-hover/timer:border-blue-500/30 transition-colors duration-300">
+                          <span className="text-xl sm:text-2xl font-bold text-blue-400 font-mono">
+                            {String(value).padStart(2, "0")}
+                          </span>
+                        </div>
+                      </div>
+                      <span className="text-[10px] sm:text-xs text-gray-500 mt-2 block capitalize">{unit}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
               
-              {/* CTA - DOMINANT */}
+              {/* CTA area with enhanced hover effects */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                {/* Primary CTA with hover shadow pop */}
                 <motion.a
                   href={GITHUB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-white text-black font-semibold text-base transition-all duration-300"
+                  className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px] transition-all duration-300 hover:bg-gray-50"
                   data-testid="link-hackathon-github"
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.03, boxShadow: "0 20px 40px -10px rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.98 }}
-                  style={{
-                    boxShadow: '0 0 40px rgba(255,255,255,0.1)',
-                  }}
                 >
-                  <Github size={20} strokeWidth={2} />
+                  <Github size={18} strokeWidth={2.5} />
                   <span>Start Building</span>
-                  <ArrowRight size={18} className="opacity-50 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all duration-300" />
+                  <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
                 </motion.a>
                 
+                {/* Secondary CTA */}
                 <Link
                   href="/hackathon"
-                  className="inline-flex items-center gap-2 px-6 py-4 text-gray-500 hover:text-white text-sm transition-colors duration-300"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-[15px] text-gray-400 hover:text-white transition-colors duration-300 group/link"
                   data-testid="link-hackathon-details"
                 >
-                  Learn more
-                  <ArrowRight size={14} />
+                  <span>Learn more</span>
+                  <ArrowRight size={14} strokeWidth={2} className="group-hover/link:translate-x-1 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
