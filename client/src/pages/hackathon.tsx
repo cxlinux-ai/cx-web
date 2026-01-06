@@ -283,7 +283,7 @@ export default function Hackathon() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
-              Build AI Tools That Ship
+              Cortex Hackathon 2026
             </span>
           </motion.h1>
 
