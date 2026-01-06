@@ -1411,3 +1411,61 @@ table tbody tr:hover {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+
+/* Page transition blur effect */
+.page-transition-blur {
+  transition: filter 0.4s ease, opacity 0.4s ease;
+  filter: blur(4px);
+  opacity: 0.9;
+}
+
+body:not(.page-transition-blur) {
+  transition: filter 0.2s ease, opacity 0.2s ease;
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* Hackathon Preview Card Styles */
+.hackathon-card {
+  position: relative;
+}
+
+.hackathon-gradient-border {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  animation: hackathon-gradient-pulse 3s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.hackathon-card:hover .hackathon-gradient-border {
+  opacity: 1;
+  animation-duration: 2s;
+}
+
+@keyframes hackathon-gradient-pulse {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Hackathon glow effect */
+.hackathon-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
+  background-size: 200% 200%;
+  animation: hackathon-gradient-pulse 3s ease-in-out infinite;
+  border-radius: inherit;
+  filter: blur(12px);
+  opacity: 0.5;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.hackathon-card:hover::before {
+  opacity: 0.8;
+}

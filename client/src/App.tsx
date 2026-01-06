@@ -17,6 +17,7 @@ import SecurityPage from "./pages/security-page";
 import Status from "./pages/status";
 import License from "./pages/license";
 import GettingStarted from "./pages/getting-started";
+import Hackathon from "./pages/hackathon";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -298,6 +299,7 @@ export default function App() {
             <Route path="/status" component={Status} />
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
+            <Route path="/hackathon" component={Hackathon} />
           </Switch>
 
           <Toaster />

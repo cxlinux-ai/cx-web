@@ -57,6 +57,7 @@ import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiC
 import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
+import HackathonPreview from "@/components/HackathonPreview";
 
 interface GitHubStats {
   openIssues: number;
@@ -480,6 +481,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
+      
+      {/* Hackathon Preview Section */}
+      <HackathonPreview />
+      
       {/* Built For Section - Who This Is For */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
