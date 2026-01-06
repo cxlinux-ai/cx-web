@@ -8,11 +8,9 @@ import {
   Trophy,
   Code2,
   GitPullRequest,
-  Rocket,
   Brain,
   Terminal,
   Clock,
-  CheckCircle2,
   ArrowRight,
   ChevronDown,
   ChevronUp,
@@ -21,37 +19,43 @@ import {
   Lightbulb,
   Shield,
   Gift,
-  MessageCircle,
   BookOpen,
-  Award,
+  FileText,
+  Layers,
+  Calendar,
+  CheckCircle2,
 } from "lucide-react";
 import Footer from "@/components/Footer";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
+const HACKATHON_DATE = new Date("2026-02-11T00:00:00");
 
 function CountdownTimer() {
-  const getTimeLeft = () => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 14);
-    const now = new Date().getTime();
-    const distance = targetDate.getTime() - now;
-
-    return {
-      days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((distance % (1000 * 60)) / 1000),
-    };
-  };
-
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
-    }, 1000);
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = HACKATHON_DATE.getTime() - now.getTime();
 
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -108,6 +112,44 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function Hackathon() {
+  const phase1Details = {
+    title: "Phase 1: Ideation",
+    weeks: "Weeks 1-4",
+    description: "Submit ideas via GitHub Issues. Low barrier to entry, maximum idea capture.",
+    prizes: [
+      { place: "1st Place", amount: "$200" },
+      { place: "2nd Place", amount: "$150" },
+      { place: "3rd Place", amount: "$100" },
+      { place: "4th-10th", amount: "$50 each" },
+    ],
+    total: "$850",
+    categories: [
+      { name: "Monetization", weight: "40%", description: "Revenue models, pricing strategies" },
+      { name: "Features", weight: "30%", description: "New capabilities, integrations" },
+      { name: "Marketing", weight: "20%", description: "Growth tactics, community building" },
+      { name: "Other", weight: "10%", description: "Operations, partnerships, docs" },
+    ],
+  };
+
+  const phase2Details = {
+    title: "Phase 2: Execution",
+    weeks: "Weeks 6-13",
+    description: "Build real features via GitHub PRs. Teams of 2-5 convert ideas into production code.",
+    prizes: [
+      { place: "1st Place", amount: "$2,000" },
+      { place: "2nd Place", amount: "$1,500" },
+      { place: "3rd Place", amount: "$1,000" },
+    ],
+    total: "$4,500",
+    criteria: [
+      { name: "Code Quality", weight: "25%", description: "Readability, structure, best practices" },
+      { name: "Completeness", weight: "25%", description: "Full functionality, edge cases" },
+      { name: "Documentation", weight: "20%", description: "README, comments, API docs" },
+      { name: "Test Coverage", weight: "15%", description: "Unit & integration tests" },
+      { name: "Architecture", weight: "15%", description: "Style guide, patterns" },
+    ],
+  };
+
   const benefits = [
     {
       icon: Brain,
@@ -121,40 +163,13 @@ export default function Hackathon() {
     },
     {
       icon: Users,
-      title: "Join Elite Builders",
-      description: "Connect with 500+ developers who ship real products, not just tutorials.",
+      title: "Join 1,000+ Builders",
+      description: "Connect with developers globally who ship real products, not just tutorials.",
     },
     {
       icon: Trophy,
-      title: "Get Recognized",
-      description: "Top contributors get featured, bounties, and direct access to the core team.",
-    },
-  ];
-
-  const steps = [
-    {
-      number: "01",
-      icon: Star,
-      title: "Star & Fork",
-      description: "Star the repo and fork it to your GitHub account. Takes 30 seconds.",
-      cta: "Star on GitHub",
-      url: GITHUB_URL,
-    },
-    {
-      number: "02",
-      icon: Target,
-      title: "Pick an Issue",
-      description: "Browse open issues labeled 'good first issue' or 'hackathon'. Choose your challenge.",
-      cta: "View Issues",
-      url: GITHUB_ISSUES_URL,
-    },
-    {
-      number: "03",
-      icon: GitPullRequest,
-      title: "Ship Your PR",
-      description: "Submit your pull request. Get reviews from maintainers and iterate until merged.",
-      cta: "Start Building",
-      url: GITHUB_URL,
+      title: "Win $5,350 in Prizes",
+      description: "Compete for prizes across two phases, plus mentorship and recognition.",
     },
   ];
 
@@ -191,20 +206,24 @@ export default function Hackathon() {
 
   const faqs = [
     {
+      question: "What is the two-phase structure?",
+      answer: "Phase 1 (Weeks 1-4) focuses on ideation—submit ideas via GitHub Issues. Phase 2 (Weeks 6-13) is execution—teams build and submit code via Pull Requests. This design maximizes idea capture while ensuring quality code delivery.",
+    },
+    {
       question: "Do I need to be an expert developer?",
-      answer: "Not at all! We have issues for all skill levels, from documentation improvements to complex features. If you can write code and use Git, you can contribute.",
+      answer: "Not at all! Phase 1 requires only ideas—no coding needed. Phase 2 has issues for all skill levels. If you can write code and use Git, you can contribute.",
     },
     {
       question: "Is this really free to participate?",
       answer: "100% free. This is open-source. You're contributing to a community project that benefits everyone. No fees, no catches.",
     },
     {
-      question: "What if my PR doesn't get merged?",
-      answer: "Every attempt is a learning opportunity. You'll get feedback from maintainers, and you can iterate. Many successful contributors started with rejected PRs.",
+      question: "How are submissions judged?",
+      answer: "Phase 1 uses a 100-point rubric across market potential, clarity, feasibility, originality, and alignment. Phase 2 evaluates code quality, completeness, documentation, test coverage, and architecture. Three judges per submission.",
     },
     {
-      question: "How do bounties work?",
-      answer: "Some issues have monetary bounties attached (marked with 💰). Complete the issue, get the bounty. Simple. Check issue labels for current bounties.",
+      question: "What if my PR doesn't get merged?",
+      answer: "Every attempt is a learning opportunity. You'll get feedback from maintainers, and you can iterate. Many successful contributors started with rejected PRs.",
     },
     {
       question: "Can I participate from anywhere?",
@@ -235,7 +254,7 @@ export default function Hackathon() {
               ))}
             </div>
             <span className="text-sm text-gray-300">
-              <span className="text-white font-semibold">500+</span> builders already participating
+              <span className="text-white font-semibold">1,000+</span> participants expected
             </span>
           </motion.div>
 
@@ -268,7 +287,7 @@ export default function Hackathon() {
             transition={{ delay: 0.25 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 11th, 2026 Hackathon
+            February 11, 2026 · 13-Week Program · Two Phases
           </motion.p>
 
           {/* PAS: Agitate & Solution */}
@@ -278,7 +297,7 @@ export default function Hackathon() {
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
-            Most developers never ship their AI projects. Join the builders who do.
+            A two-phase program designed to crowdsource ideas and convert them into production code.
             <span className="text-blue-400 font-medium"> Contribute to Cortex Linux</span> — the open-source AI layer for Linux.
           </motion.p>
 
@@ -291,7 +310,7 @@ export default function Hackathon() {
           >
             <p className="text-sm text-gray-400 mb-4 flex items-center justify-center gap-2">
               <Clock size={16} className="text-blue-400" />
-              Hackathon ends in:
+              Hackathon starts in:
             </p>
             <CountdownTimer />
           </motion.div>
@@ -328,16 +347,20 @@ export default function Hackathon() {
             className="flex flex-wrap justify-center gap-6 sm:gap-12 mt-12 pt-8 border-t border-white/10"
           >
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">1,200+</p>
-              <p className="text-sm text-gray-400">GitHub Stars</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">1,000+</p>
+              <p className="text-sm text-gray-400">Participants</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">89</p>
-              <p className="text-sm text-gray-400">Contributors</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">$5.35K</p>
+              <p className="text-sm text-gray-400">Prize Pool</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">$3,000+</p>
-              <p className="text-sm text-gray-400">In Bounties</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">13</p>
+              <p className="text-sm text-gray-400">Weeks</p>
+            </div>
+            <div className="text-center">
+              <p className="text-2xl sm:text-3xl font-bold text-white">30+</p>
+              <p className="text-sm text-gray-400">Merged PRs</p>
             </div>
           </motion.div>
         </div>
@@ -356,8 +379,145 @@ export default function Hackathon() {
         </motion.div>
       </section>
 
-      {/* Why Join Section */}
+      {/* Two-Phase Overview Section */}
       <section className="py-20 px-4 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Two Phases, <span className="text-blue-400">One Goal</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Phase 1 captures ideas. Phase 2 turns the best ones into production code.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Phase 1 Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 rounded-2xl p-8"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                  <Lightbulb className="text-purple-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{phase1Details.title}</h3>
+                  <p className="text-purple-400 text-sm font-medium">{phase1Details.weeks}</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 mb-6">{phase1Details.description}</p>
+              
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: {phase1Details.total}</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {phase1Details.prizes.map((prize) => (
+                    <div key={prize.place} className="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2">
+                      <span className="text-gray-400 text-sm">{prize.place}</span>
+                      <span className="text-purple-400 font-semibold">{prize.amount}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Judging Categories</h4>
+                <div className="space-y-2">
+                  {phase1Details.categories.map((cat) => (
+                    <div key={cat.name} className="flex items-center gap-3">
+                      <span className="text-purple-400 font-mono text-sm w-12">{cat.weight}</span>
+                      <span className="text-white font-medium">{cat.name}</span>
+                      <span className="text-gray-500 text-sm hidden sm:block">— {cat.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Phase 2 Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-2xl p-8"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                  <Code2 className="text-blue-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{phase2Details.title}</h3>
+                  <p className="text-blue-400 text-sm font-medium">{phase2Details.weeks}</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-400 mb-6">{phase2Details.description}</p>
+              
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: {phase2Details.total}</h4>
+                <div className="grid grid-cols-3 gap-2">
+                  {phase2Details.prizes.map((prize) => (
+                    <div key={prize.place} className="text-center bg-white/5 rounded-lg px-3 py-3">
+                      <span className="text-blue-400 font-bold text-lg block">{prize.amount}</span>
+                      <span className="text-gray-400 text-xs">{prize.place}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Code Judging Criteria</h4>
+                <div className="space-y-2">
+                  {phase2Details.criteria.map((crit) => (
+                    <div key={crit.name} className="flex items-center gap-3">
+                      <span className="text-blue-400 font-mono text-sm w-12">{crit.weight}</span>
+                      <span className="text-white font-medium">{crit.name}</span>
+                      <span className="text-gray-500 text-sm hidden sm:block">— {crit.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Timeline Visual */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6"
+          >
+            <h4 className="text-center text-white font-semibold mb-6">13-Week Timeline</h4>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-purple-500" />
+                <span className="text-sm text-gray-400">Phase 1: 4 weeks</span>
+              </div>
+              <ArrowRight className="text-gray-600 hidden sm:block" size={20} />
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-gray-500" />
+                <span className="text-sm text-gray-400">Transition: 1 week</span>
+              </div>
+              <ArrowRight className="text-gray-600 hidden sm:block" size={20} />
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-blue-500" />
+                <span className="text-sm text-gray-400">Phase 2: 8 weeks</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Why Join Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -394,8 +554,8 @@ export default function Hackathon() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
+      {/* How to Participate */}
+      <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -404,7 +564,7 @@ export default function Hackathon() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Start Shipping in <span className="text-blue-400">3 Steps</span>
+              How to <span className="text-blue-400">Participate</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               No applications. No waitlists. Just start building.
@@ -412,42 +572,85 @@ export default function Hackathon() {
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="relative"
-              >
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 h-full flex flex-col">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-4xl font-bold text-blue-400/30 font-mono">{step.number}</span>
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                      <step.icon className="text-blue-400" size={24} />
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
-                  <p className="text-gray-400 text-sm mb-6 flex-grow">{step.description}</p>
-                  <a
-                    href={step.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
-                    data-testid={`link-step-cta-${index + 1}`}
-                  >
-                    {step.cta}
-                    <ArrowRight size={16} />
-                  </a>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-4xl font-bold text-blue-400/30 font-mono">01</span>
+                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                  <Star className="text-blue-400" size={24} />
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="text-blue-400/30" size={24} />
-                  </div>
-                )}
-              </motion.div>
-            ))}
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Star & Fork</h3>
+              <p className="text-gray-400 text-sm mb-4">Star the repo and fork it to your GitHub account. Takes 30 seconds.</p>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
+                data-testid="link-step-star"
+              >
+                Star on GitHub
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-4xl font-bold text-blue-400/30 font-mono">02</span>
+                <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                  <Lightbulb className="text-purple-400" size={24} />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Phase 1: Submit Ideas</h3>
+              <p className="text-gray-400 text-sm mb-4">Open a GitHub Issue with your idea. Monetization, features, marketing—all welcome.</p>
+              <a
+                href={GITHUB_ISSUES_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium text-sm transition-colors"
+                data-testid="link-step-ideas"
+              >
+                Submit an Idea
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-4xl font-bold text-blue-400/30 font-mono">03</span>
+                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                  <GitPullRequest className="text-blue-400" size={24} />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Phase 2: Ship Code</h3>
+              <p className="text-gray-400 text-sm mb-4">Form a team (2-5 people), build your idea, and submit a Pull Request.</p>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
+                data-testid="link-step-code"
+              >
+                Start Building
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
           </div>
 
           {/* Terminal Preview */}
@@ -482,7 +685,7 @@ export default function Hackathon() {
       </section>
 
       {/* Tracks Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -531,7 +734,7 @@ export default function Hackathon() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
+      <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -566,9 +769,9 @@ export default function Hackathon() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
               <Sparkles size={16} />
-              Limited spots remaining
+              $5,350 in prizes across both phases
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
@@ -576,15 +779,15 @@ export default function Hackathon() {
             </h2>
             
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-              The best way to learn AI is to build with it. Join 500+ developers who are
-              shipping real AI tools this week. Your first PR is waiting.
+              The best way to learn AI is to build with it. Join 1,000+ developers in a 
+              13-week program designed to turn your ideas into production code.
             </p>
 
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] transition-all duration-300"
               data-testid="final-cta-github"
             >
               <Github size={28} />
@@ -592,9 +795,20 @@ export default function Hackathon() {
               <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <p className="text-gray-500 text-sm mt-6">
-              No signup required. Just start contributing.
-            </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-10">
+              <div className="flex items-center gap-2 text-gray-400">
+                <CheckCircle2 size={18} className="text-emerald-400" />
+                <span className="text-sm">Free to participate</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <CheckCircle2 size={18} className="text-emerald-400" />
+                <span className="text-sm">Global & async</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+                <CheckCircle2 size={18} className="text-emerald-400" />
+                <span className="text-sm">All skill levels</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
