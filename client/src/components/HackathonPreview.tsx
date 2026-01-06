@@ -83,8 +83,8 @@ export default function HackathonPreview() {
               </div>
 
               {/* Headline */}
-              <h3 className="text-white text-3xl md:text-4xl font-bold text-center">
-                Build with <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent" style={{ fontSize: '50px' }}>Cortex</span>
+              <h3 className="text-white font-bold text-center" style={{ fontSize: '50px' }}>
+                Build with <span className="gradient-text">Cortex</span>
               </h3>
               
               {/* Value proposition */}
