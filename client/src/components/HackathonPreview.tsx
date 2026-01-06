@@ -54,16 +54,23 @@ export default function HackathonPreview() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="group relative"
         >
-          {/* Subtle glow on hover */}
-          <div className="absolute -inset-4 rounded-[32px] bg-blue-500/5 opacity-0 group-hover:opacity-100 blur-2xl transition-opacity duration-500" />
+          {/* Subtle animated gradient border - purple to blue 3D effect */}
+          <div 
+            className="absolute -inset-[1px] rounded-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+            style={{
+              background: 'linear-gradient(135deg, #8b5cf6, #3b82f6, #8b5cf6, #3b82f6)',
+              backgroundSize: '300% 300%',
+              animation: 'gradientShift 8s ease infinite',
+            }}
+          />
           
           {/* Main card */}
-          <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/10 group-hover:border-white/15 transition-colors duration-300 overflow-hidden">
+          <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/5 overflow-hidden">
             {/* Subtle top accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
             
             {/* Inner ambient glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-32 bg-gradient-to-b from-blue-500/[0.05] to-transparent blur-xl" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-32 bg-gradient-to-b from-blue-500/[0.04] to-transparent blur-xl" />
             
             <div className="relative px-8 py-10 md:px-12 md:py-14">
               {/* Hackathon badge with pulse glow */}
