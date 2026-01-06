@@ -254,12 +254,22 @@ export default function Hackathon() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
               Build AI Tools That Ship
             </span>
           </motion.h1>
+
+          {/* Date Subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25 }}
+            className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
+          >
+            February 11th, 2026 Hackathon
+          </motion.p>
 
           {/* PAS: Agitate & Solution */}
           <motion.p

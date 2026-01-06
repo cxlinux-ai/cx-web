@@ -420,11 +420,21 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-10 px-2"
+            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-2"
           >
             Describe what you want. Cortex handles the rest. From automation scripts to system configuration,
             data analysis to coding workflows — unlimited possibilities with natural language.
           </motion.p>
+
+          {/* Hackathon Preview - Prominent placement */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mb-8"
+          >
+            <HackathonPreview />
+          </motion.div>
 
           {/* Demo - Hidden on small screens, show simple CTA instead */}
           <motion.div
@@ -481,9 +491,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-      
-      {/* Hackathon Preview Section */}
-      <HackathonPreview />
       
       {/* Built For Section - Who This Is For */}
       <section className="py-20 px-4 border-t border-white/5">
