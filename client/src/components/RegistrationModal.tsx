@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,12 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   const validateForm = () => {
     const newErrors: { name?: string; email?: string; phone?: string } = {};
@@ -89,11 +96,14 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 flex items-center justify-center p-4"
+          style={{ zIndex: 9999 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -102,7 +112,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
           
           <motion.div
-            className="relative w-full max-w-md bg-[#0d0d0d] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-[#0d0d0d] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-10"
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -252,4 +262,6 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }
