@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Clock } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import RegistrationModal from "./RegistrationModal";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const HACKATHON_DATE = new Date("2026-02-11T00:00:00");
@@ -39,8 +40,15 @@ function useCountdown(targetDate: Date) {
 
 export default function HackathonPreview() {
   const countdown = useCountdown(HACKATHON_DATE);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
+    <>
+      <RegistrationModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        redirectUrl={GITHUB_URL}
+      />
     <motion.section
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -184,12 +192,10 @@ export default function HackathonPreview() {
               {/* CTA area with 3D buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 {/* Primary CTA - 3D button */}
-                <motion.a
-                  href={GITHUB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px]"
-                  data-testid="link-hackathon-github"
+                <motion.button
+                  onClick={() => setIsModalOpen(true)}
+                  className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px] cursor-pointer"
+                  data-testid="button-start-building"
                   whileHover={{ y: -2, scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -198,9 +204,9 @@ export default function HackathonPreview() {
                   }}
                 >
                   <Github size={18} strokeWidth={2.5} />
-                  <span>Start Building</span>
+                  <span>Start Building Now</span>
                   <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
-                </motion.a>
+                </motion.button>
                 
                 {/* Secondary CTA */}
                 <Link
@@ -217,5 +223,6 @@ export default function HackathonPreview() {
         </motion.div>
       </div>
     </motion.section>
+    </>
   );
 }

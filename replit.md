@@ -19,6 +19,12 @@ Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer fo
 - Psychological marketing: Clarity, Authority, Aspiration, Curiosity
 
 **Current Status (January 2026):**
+- **NEW: Hackathon Registration Modal** - Popup form when clicking "Start Building Now" with:
+  - Name and email (required), phone number (optional with checkbox)
+  - Form validation and error messages
+  - Success animation before GitHub redirect
+  - PostgreSQL database storage for registrations
+  - API endpoint `/api/hackathon/register`
 - **MAJOR CONTENT REFRAME (January 2026):** Complete website repositioning from "AI package manager" to "AI Layer for Linux" with unlimited capabilities across all pages
 - Complete landing page with 15+ sections including hero, problem/solution, security, comparison, use cases, pricing, testimonials, contributors, blog preview
 - "New to Cortex?" preview card on homepage after Built For section linking to Getting Started guide

@@ -26,3 +26,21 @@ export const contributorSchema = z.object({
 });
 
 export type Contributor = z.infer<typeof contributorSchema>;
+
+// Hackathon Registration
+export const hackathonRegistrations = pgTable("hackathon_registrations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  phone: text("phone"),
+  registeredAt: text("registered_at").notNull().default(sql`now()`),
+});
+
+export const insertHackathonRegistrationSchema = createInsertSchema(hackathonRegistrations).pick({
+  name: true,
+  email: true,
+  phone: true,
+});
+
+export type InsertHackathonRegistration = z.infer<typeof insertHackathonRegistrationSchema>;
+export type HackathonRegistration = typeof hackathonRegistrations.$inferSelect;

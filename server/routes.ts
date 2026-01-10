@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import type { Contributor } from "@shared/schema";
+import { insertHackathonRegistrationSchema } from "@shared/schema";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
@@ -253,6 +254,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("GitHub contributors API error:", error instanceof Error ? error.message : "Unknown error");
       res.json(contributorsCache?.data || FALLBACK_CONTRIBUTORS);
+    }
+  });
+
+  // Hackathon registration endpoint
+  app.post("/api/hackathon/register", async (req, res) => {
+    try {
+      const result = insertHackathonRegistrationSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        return res.status(400).json({ 
+          error: "Invalid registration data",
+          details: result.error.flatten() 
+        });
+      }
+
+      const { name, email, phone } = result.data;
+
+      const existing = await storage.getHackathonRegistrationByEmail(email);
+      if (existing) {
+        return res.status(200).json({ 
+          message: "Already registered",
+          registration: existing 
+        });
+      }
+
+      const registration = await storage.createHackathonRegistration({
+        name,
+        email,
+        phone: phone || undefined,
+      });
+
+      res.status(201).json({ 
+        message: "Registration successful",
+        registration 
+      });
+    } catch (error) {
+      console.error("Registration error:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ error: "Registration failed" });
     }
   });
 
