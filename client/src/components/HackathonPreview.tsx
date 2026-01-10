@@ -168,12 +168,39 @@ export default function HackathonPreview() {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       <div 
-                        className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-blue-500/20 transition-all duration-300"
-                        style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+                        className="relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-blue-500/20 transition-all duration-300 overflow-hidden"
+                        style={{ 
+                          boxShadow: "0 8px 32px rgba(0,0,0,0.4), 0 4px 16px rgba(59,130,246,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
+                          transform: "perspective(500px) rotateX(2deg)",
+                        }}
                       >
-                        <span className="font-bold text-blue-400 font-mono" style={{ fontSize: '50px' }}>
+                        {/* 3D depth layers - back numbers */}
+                        <span 
+                          className="absolute inset-0 flex items-center justify-center font-bold text-blue-400/[0.08] font-mono select-none"
+                          style={{ fontSize: '70px', transform: 'translateZ(-30px) scale(1.15)' }}
+                          aria-hidden="true"
+                        >
                           {String(value).padStart(2, "0")}
                         </span>
+                        <span 
+                          className="absolute inset-0 flex items-center justify-center font-bold text-blue-400/[0.15] font-mono select-none"
+                          style={{ fontSize: '70px', transform: 'translateY(2px) translateX(1px)' }}
+                          aria-hidden="true"
+                        >
+                          {String(value).padStart(2, "0")}
+                        </span>
+                        {/* Main number with glow */}
+                        <span 
+                          className="relative font-bold text-blue-400 font-mono"
+                          style={{ 
+                            fontSize: '70px',
+                            textShadow: '0 0 20px rgba(59,130,246,0.5), 0 0 40px rgba(59,130,246,0.3), 0 4px 8px rgba(0,0,0,0.3)',
+                          }}
+                        >
+                          {String(value).padStart(2, "0")}
+                        </span>
+                        {/* Top highlight */}
+                        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
                       </div>
                       <span className="text-[10px] sm:text-xs text-gray-500 mt-2 block capitalize">{unit}</span>
                     </motion.div>
