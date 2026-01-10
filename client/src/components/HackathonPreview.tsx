@@ -168,26 +168,10 @@ export default function HackathonPreview() {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       <div 
-                        className="relative bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-md border border-white/[0.08] rounded-2xl px-5 py-6 sm:px-6 sm:py-7 min-w-[80px] sm:min-w-[100px] group-hover/timer:border-blue-400/30 transition-all duration-500"
-                        style={{ 
-                          boxShadow: "0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06)",
-                        }}
+                        className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-blue-500/20 transition-all duration-300"
+                        style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
                       >
-                        {/* Subtle glow behind number */}
-                        <div 
-                          className="absolute inset-0 rounded-2xl opacity-0 group-hover/timer:opacity-100 transition-opacity duration-500"
-                          style={{ 
-                            background: "radial-gradient(circle at center, rgba(59,130,246,0.12), transparent 70%)",
-                          }}
-                        />
-                        {/* Main number */}
-                        <span 
-                          className="relative block text-center font-semibold text-white font-mono tracking-tight"
-                          style={{ 
-                            fontSize: '48px',
-                            lineHeight: '1',
-                          }}
-                        >
+                        <span className="font-bold text-blue-400 font-mono" style={{ fontSize: '70px' }}>
                           {String(value).padStart(2, "0")}
                         </span>
                       </div>
