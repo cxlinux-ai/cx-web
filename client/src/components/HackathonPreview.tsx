@@ -168,10 +168,10 @@ export default function HackathonPreview() {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                       <div 
-                        className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-3 sm:p-4 min-w-[55px] sm:min-w-[70px] group-hover/timer:border-blue-500/20 transition-all duration-300"
+                        className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-blue-500/20 transition-all duration-300"
                         style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
                       >
-                        <span className="text-xl sm:text-2xl font-bold text-blue-400 font-mono">
+                        <span className="font-bold text-blue-400 font-mono" style={{ fontSize: '50px' }}>
                           {String(value).padStart(2, "0")}
                         </span>
                       </div>
