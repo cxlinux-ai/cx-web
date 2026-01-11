@@ -406,7 +406,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="gradient-text">The AI Layer for Linux</span>
+            <span className="gradient-text">AI for Linux</span>
             <br />
             <span className="text-white">Execute Your Intent</span>
           </motion.h1>
@@ -487,7 +487,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-      
       {/* Built For Section - Who This Is For */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
@@ -552,7 +551,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-
       {/* New to Cortex? - Getting Started Preview */}
       <section className="py-16 px-4 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
@@ -601,7 +599,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-
       {/* Interactive Product Preview */}
       <section id="preview" className="py-24 px-4 relative">
         <div className="max-w-6xl mx-auto">
