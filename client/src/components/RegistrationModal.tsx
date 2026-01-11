@@ -93,10 +93,11 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="absolute inset-0 bg-black/80" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" style={{ zIndex: 1 }} onClick={onClose} />
       
       <motion.div
         className="relative w-full max-w-md bg-[#111] border border-white/20 rounded-2xl shadow-2xl"
+        style={{ zIndex: 2 }}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}
