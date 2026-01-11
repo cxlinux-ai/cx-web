@@ -379,7 +379,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               href="https://github.com/cortexlinux/cortex"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-blue-400/50 transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-brand-blue/50 transition-all"
               data-testid="link-github-stars"
             >
               <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
@@ -394,7 +394,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span className="text-gray-300">MIT Licensed</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
-              <Tag size={12} className="text-blue-400 sm:w-3.5 sm:h-3.5" />
+              <Tag size={12} className="text-brand-blue sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">v2.4.0</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
@@ -459,7 +459,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               rel="noopener noreferrer"
               className="block"
             >
-              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-blue-500/30 transition-all">
+              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
                 Try Cortex CLI
               </button>
@@ -542,14 +542,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all duration-300"
+                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 hover:bg-white/[0.07] transition-all duration-300"
                 data-testid={`built-for-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
-                <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-                  <item.icon className="w-6 h-6 text-blue-400" />
+                <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-4 group-hover:bg-brand-blue/20 transition-colors">
+                  <item.icon className="w-6 h-6 text-brand-blue" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                <p className="text-blue-400 text-sm font-medium mb-2">{item.description}</p>
+                <p className="text-brand-blue text-sm font-medium mb-2">{item.description}</p>
                 <p className="text-gray-500 text-sm">{item.detail}</p>
               </motion.div>
             ))}
@@ -566,15 +566,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="relative group"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/20 to-brand-blue/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-blue/30 transition-all duration-300">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-brand-blue flex items-center justify-center">
                       <Rocket className="w-5 h-5 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-blue-400 uppercase tracking-wide">New to Cortex?</span>
+                    <span className="text-sm font-medium text-brand-blue uppercase tracking-wide">New to Cortex?</span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                     Start Your Journey Today
@@ -586,7 +586,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/getting-started"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] hover:scale-105 transition-all duration-300"
                     data-testid="button-homepage-getting-started"
                   >
                     Getting Started Guide
@@ -711,8 +711,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 className="glass-card glass-card-hover rounded-2xl p-8 cursor-pointer transition-colors duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center flex-shrink-0">
-                    <feature.icon size={24} className="text-blue-400" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-blue/20 flex items-center justify-center flex-shrink-0">
+                    <feature.icon size={24} className="text-brand-blue" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -740,7 +740,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       </div>
                     </motion.div>
                     
-                    <button className="text-blue-400 text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-colors">
+                    <button className="text-brand-blue text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-colors">
                       {expandedFeature === i ? "Hide code" : "View code"}
                       <ChevronRight size={14} className={`transition-transform duration-200 ${expandedFeature === i ? "rotate-90" : ""}`} />
                     </button>
@@ -807,7 +807,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <section id="architecture" className="py-32 px-4 border-t border-white/5 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-3xl" />
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
 
@@ -818,7 +818,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-blue-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
               <Layers size={14} />
               <span>System Architecture</span>
             </div>
@@ -836,9 +836,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div className="hidden md:flex items-center justify-center gap-4 lg:gap-8">
               {/* Step 1: Input */}
               <div className="flex flex-col items-center">
-                <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/30 flex flex-col items-center justify-center p-4">
-                  <Terminal size={28} className="text-blue-400 mb-2" />
-                  <span className="text-xs text-blue-400 font-medium">INPUT</span>
+                <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 border border-brand-blue/30 flex flex-col items-center justify-center p-4">
+                  <Terminal size={28} className="text-brand-blue mb-2" />
+                  <span className="text-xs text-brand-blue font-medium">INPUT</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Natural Language</span>
               </div>
@@ -947,8 +947,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 key={i}
                 className="flex gap-4 p-6 glass-card rounded-xl"
               >
-                <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                  <feature.icon size={24} className="text-blue-400" />
+                <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center flex-shrink-0">
+                  <feature.icon size={24} className="text-brand-blue" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -963,7 +963,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
         {/* Background gradient accents */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
           <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
 
@@ -974,7 +974,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-blue-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
               <CircleDot size={14} />
               <span>Feature Comparison</span>
             </div>
@@ -1000,11 +1000,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   Feature
                 </div>
                 <div className="p-6 text-center relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-blue-500/5" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/10 to-brand-blue/5" />
                   <div className="relative">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 mb-2">
-                      <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                      <span className="text-blue-400 font-bold text-sm">CORTEX</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/20 border border-brand-blue/30 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
+                      <span className="text-brand-blue font-bold text-sm">CORTEX</span>
                     </div>
                     <p className="text-xs text-blue-300/60">Recommended</p>
                   </div>
@@ -1026,8 +1026,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   >
                     {/* Feature Name with Icon */}
                     <div className="p-5 flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center group-hover:border-blue-500/30 transition-colors duration-200">
-                        <row.icon size={16} className="text-gray-400 group-hover:text-blue-400 transition-colors" />
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center group-hover:border-brand-blue/30 transition-colors duration-200">
+                        <row.icon size={16} className="text-gray-400 group-hover:text-brand-blue transition-colors" />
                       </div>
                       <span className="text-gray-200 font-medium group-hover:text-white transition-colors">
                         {row.feature}
@@ -1090,7 +1090,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </div>
 
               {/* Table Footer */}
-              <div className="p-6 border-t border-white/10 bg-gradient-to-r from-blue-500/5 via-transparent to-transparent">
+              <div className="p-6 border-t border-white/10 bg-gradient-to-r from-brand-blue/5 via-transparent to-transparent">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3 text-sm text-gray-400">
                     <div className="flex items-center gap-2">
@@ -1109,7 +1109,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                   <button
                     onClick={() => onNavigate("join")}
-                    className="group flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                    className="group flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-blue text-white font-semibold text-sm hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
                   >
                     Try Cortex Free
                     <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
@@ -1128,8 +1128,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               >
                 {/* Feature Header */}
                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-white/5">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/20 flex items-center justify-center">
-                    <row.icon size={18} className="text-blue-400" />
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue/20 to-purple-500/20 border border-brand-blue/20 flex items-center justify-center">
+                    <row.icon size={18} className="text-brand-blue" />
                   </div>
                   <span className="text-white font-semibold text-lg">{row.feature}</span>
                 </div>
@@ -1137,8 +1137,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 {/* Comparison Grid */}
                 <div className="grid grid-cols-3 gap-3">
                   {/* Cortex */}
-                  <div className="text-center p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                    <div className="text-xs text-blue-400 font-semibold mb-2">Cortex</div>
+                  <div className="text-center p-3 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
+                    <div className="text-xs text-brand-blue font-semibold mb-2">Cortex</div>
                     {row.cortex === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
@@ -1189,7 +1189,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div className="pt-4">
               <button
                 onClick={() => onNavigate("join")}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-brand-blue text-white font-semibold hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
               >
                 Start Building with Cortex — Free
                 <ArrowRight size={16} />
@@ -1257,39 +1257,39 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {/* Enterprise Edition */}
             <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col relative">
               <div className="absolute -top-3 right-8">
-                <span className="px-4 py-1.5 bg-blue-500 text-white text-sm font-semibold rounded-full">
+                <span className="px-4 py-1.5 bg-brand-blue text-white text-sm font-semibold rounded-full">
                   FOR TEAMS
                 </span>
               </div>
               
               <div>
                 <h3 className="text-2xl font-bold mb-2">Enterprise Edition</h3>
-                <div className="text-4xl font-bold text-blue-400 mb-2"><span className="gradient-text">Custom</span></div>
+                <div className="text-4xl font-bold text-brand-blue mb-2"><span className="gradient-text">Custom</span></div>
                 <p className="text-gray-400 mb-8">Contact for Pricing</p>
                 
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>Everything in Community</span>
                   </li>
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>Priority support (24/7)</span>
                   </li>
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>Compliance reporting</span>
                   </li>
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>Role-based access control</span>
                   </li>
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>Custom integrations</span>
                   </li>
                   <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-blue-400 flex-shrink-0" />
+                    <Check size={18} className="text-brand-blue flex-shrink-0" />
                     <span>SLA guarantees</span>
                   </li>
                 </ul>

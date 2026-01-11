@@ -29,7 +29,7 @@ import Footer from "@/components/Footer";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
-const HACKATHON_DATE = new Date("2026-02-11T00:00:00");
+const HACKATHON_DATE = new Date("2026-02-17T00:00:00");
 
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
@@ -64,7 +64,7 @@ function CountdownTimer() {
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="text-center">
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[80px]">
-            <span className="text-2xl sm:text-4xl font-bold text-blue-400 font-mono">
+            <span className="text-2xl sm:text-4xl font-bold text-brand-blue font-mono">
               {String(value).padStart(2, "0")}
             </span>
           </div>
@@ -92,7 +92,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       >
         <span className="font-medium text-white pr-4">{question}</span>
         {isOpen ? (
-          <ChevronUp className="text-blue-400 flex-shrink-0" size={20} />
+          <ChevronUp className="text-brand-blue flex-shrink-0" size={20} />
         ) : (
           <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
         )}
@@ -294,7 +294,7 @@ export default function Hackathon() {
             transition={{ delay: 0.25 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 11, 2026 · 13-Week Program · Two Phases
+            February 17, 2026 · 13-Week Program · Two Phases
           </motion.p>
 
           {/* PAS: Agitate & Solution */}
@@ -304,9 +304,9 @@ export default function Hackathon() {
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
-            A two-phase program designed to <span className="text-emerald-400 font-medium">crowdsource monetization strategies</span> and 
+            A two-phase program designed to <span className="text-terminal-green font-bold">crowdsource monetization strategies</span> and 
             convert the best ideas into production code with measurable ROI.
-            <span className="text-blue-400 font-medium"> Contribute to Cortex Linux</span> — the open-source AI layer for Linux.
+            <span className="text-brand-blue font-medium"> Contribute to Cortex Linux</span> — the open-source AI layer for Linux.
           </motion.p>
 
           {/* Urgency: Countdown */}
@@ -317,7 +317,7 @@ export default function Hackathon() {
             className="mb-8"
           >
             <p className="text-sm text-gray-400 mb-4 flex items-center justify-center gap-2">
-              <Clock size={16} className="text-blue-400" />
+              <Clock size={16} className="text-brand-blue" />
               Hackathon starts in:
             </p>
             <CountdownTimer />
@@ -334,7 +334,7 @@ export default function Hackathon() {
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] transition-all duration-300"
+              className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
               data-testid="hero-cta-github"
             >
               <Github size={24} />
@@ -384,12 +384,12 @@ export default function Hackathon() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
               <Target size={16} />
               Main Goal: Crowdsource Monetization Strategies
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Two Phases, <span className="text-blue-400">One Goal</span>
+              Two Phases, <span className="text-brand-blue">One Goal</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Generate features that enable sustainable revenue. Phase 1 captures monetization ideas. Phase 2 turns them into production code.
@@ -417,12 +417,12 @@ export default function Hackathon() {
               <p className="text-gray-400 mb-6">{phase1Details.description}</p>
               
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: {phase1Details.total}</h4>
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: <span className="text-terminal-green glow-terminal-green">{phase1Details.total}</span></h4>
                 <div className="grid grid-cols-2 gap-2">
                   {phase1Details.prizes.map((prize) => (
                     <div key={prize.place} className="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2">
                       <span className="text-gray-400 text-sm">{prize.place}</span>
-                      <span className="text-purple-400 font-semibold">{prize.amount}</span>
+                      <span className="text-terminal-green font-semibold">{prize.amount}</span>
                     </div>
                   ))}
                 </div>
@@ -433,7 +433,7 @@ export default function Hackathon() {
                 <div className="space-y-2">
                   {phase1Details.categories.map((cat) => (
                     <div key={cat.name} className="flex items-center gap-3">
-                      <span className="text-purple-400 font-mono text-sm w-12">{cat.weight}</span>
+                      <span className="text-terminal-green font-mono text-sm w-12">{cat.weight}</span>
                       <span className="text-white font-medium">{cat.name}</span>
                       <span className="text-gray-500 text-sm hidden sm:block">— {cat.description}</span>
                     </div>
@@ -450,23 +450,23 @@ export default function Hackathon() {
               className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-2xl p-8"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                  <Code2 className="text-blue-400" size={24} />
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                  <Code2 className="text-brand-blue" size={24} />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">{phase2Details.title}</h3>
-                  <p className="text-blue-400 text-sm font-medium">{phase2Details.weeks}</p>
+                  <p className="text-brand-blue text-sm font-medium">{phase2Details.weeks}</p>
                 </div>
               </div>
               
               <p className="text-gray-400 mb-6">{phase2Details.description}</p>
               
               <div className="mb-6">
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: {phase2Details.total}</h4>
+                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: <span className="text-terminal-green glow-terminal-green">{phase2Details.total}</span></h4>
                 <div className="grid grid-cols-3 gap-2">
                   {phase2Details.prizes.map((prize) => (
                     <div key={prize.place} className="text-center bg-white/5 rounded-lg px-3 py-3">
-                      <span className="text-blue-400 font-bold text-lg block">{prize.amount}</span>
+                      <span className="text-terminal-green font-bold text-lg block">{prize.amount}</span>
                       <span className="text-gray-400 text-xs">{prize.place}</span>
                     </div>
                   ))}
@@ -478,7 +478,7 @@ export default function Hackathon() {
                 <div className="space-y-2">
                   {phase2Details.criteria.map((crit) => (
                     <div key={crit.name} className="flex items-center gap-3">
-                      <span className="text-blue-400 font-mono text-sm w-12">{crit.weight}</span>
+                      <span className="text-brand-blue font-mono text-sm w-12">{crit.weight}</span>
                       <span className="text-white font-medium">{crit.name}</span>
                       <span className="text-gray-500 text-sm hidden sm:block">— {crit.description}</span>
                     </div>
@@ -526,7 +526,7 @@ export default function Hackathon() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Why Builders <span className="text-blue-400">Choose Cortex</span>
+              Why Builders <span className="text-brand-blue">Choose Cortex</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               This isn't just another hackathon. It's your entry into the AI revolution.
@@ -541,10 +541,10 @@ export default function Hackathon() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-300"
+                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-brand-blue/50 hover:shadow-[0_0_30px_rgba(0,102,255,0.15)] transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <benefit.icon className="text-blue-400" size={24} />
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <benefit.icon className="text-brand-blue" size={24} />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{benefit.title}</h3>
                 <p className="text-gray-400 text-sm">{benefit.description}</p>
@@ -564,7 +564,7 @@ export default function Hackathon() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              How to <span className="text-blue-400">Participate</span>
+              How to <span className="text-brand-blue">Participate</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               No applications. No waitlists. Just start building.
@@ -579,9 +579,9 @@ export default function Hackathon() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
             >
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl font-bold text-blue-400/30 font-mono">01</span>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                  <Star className="text-blue-400" size={24} />
+                <span className="text-4xl font-bold text-brand-blue/30 font-mono">01</span>
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                  <Star className="text-brand-blue" size={24} />
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Star & Fork</h3>
@@ -590,7 +590,7 @@ export default function Hackathon() {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
+                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue/80 font-medium text-sm transition-colors"
                 data-testid="link-step-star"
               >
                 Star on GitHub
@@ -633,9 +633,9 @@ export default function Hackathon() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
             >
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl font-bold text-blue-400/30 font-mono">03</span>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                  <GitPullRequest className="text-blue-400" size={24} />
+                <span className="text-4xl font-bold text-brand-blue/30 font-mono">03</span>
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                  <GitPullRequest className="text-brand-blue" size={24} />
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Phase 2: Ship Code</h3>
@@ -644,7 +644,7 @@ export default function Hackathon() {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
+                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue/80 font-medium text-sm transition-colors"
                 data-testid="link-step-code"
               >
                 Start Building
@@ -676,8 +676,8 @@ export default function Hackathon() {
               <p className="text-gray-400 mt-2">
                 <span className="text-emerald-400">$</span> npm install && npm run dev
               </p>
-              <p className="text-blue-400 mt-4">
-                <span className="text-emerald-400">✓</span> Ready to build something amazing!
+              <p className="text-brand-blue mt-4">
+                <span className="text-terminal-green">✓</span> Ready to build something amazing!
               </p>
             </div>
           </motion.div>
@@ -694,7 +694,7 @@ export default function Hackathon() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="text-blue-400">Track</span>
+              Choose Your <span className="text-brand-blue">Track</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Pick what excites you. Every contribution counts.
@@ -712,7 +712,7 @@ export default function Hackathon() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-blue-400/50 transition-all duration-300 cursor-pointer"
+                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-brand-blue/50 transition-all duration-300 cursor-pointer"
                 data-testid={`track-${track.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className={`w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -769,13 +769,13 @@ export default function Hackathon() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
               <Sparkles size={16} />
-              $5,350 in prizes across both phases
+              <span className="font-bold">$5,350</span> in prizes across both phases
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Stop Learning. <span className="text-blue-400">Start Shipping.</span>
+              Stop Learning. <span className="text-brand-blue">Start Shipping.</span>
             </h2>
             
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
@@ -787,7 +787,7 @@ export default function Hackathon() {
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-blue-500 hover:bg-blue-600 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(59,130,246,0.5)] hover:shadow-[0_0_60px_rgba(59,130,246,0.7)] transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-10 py-5 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(0,102,255,0.5)] hover:shadow-[0_0_60px_rgba(0,102,255,0.7)] transition-all duration-300"
               data-testid="final-cta-github"
             >
               <Github size={28} />
