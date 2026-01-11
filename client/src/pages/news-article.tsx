@@ -19,7 +19,11 @@ export default function NewsArticlePage() {
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://cortexlinux.com";
     const articleUrl = `${siteUrl}/news/${release.slug}`;
 
+    const originalTitle = document.title;
     document.title = `${release.title} | Cortex Linux News`;
+
+    const createdElements: HTMLElement[] = [];
+    const originalValues: Map<HTMLElement, string> = new Map();
 
     const setMeta = (name: string, content: string) => {
       let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
@@ -27,6 +31,9 @@ export default function NewsArticlePage() {
         meta = document.createElement("meta");
         meta.name = name;
         document.head.appendChild(meta);
+        createdElements.push(meta);
+      } else {
+        originalValues.set(meta, meta.content);
       }
       meta.content = content;
     };
@@ -37,6 +44,9 @@ export default function NewsArticlePage() {
         meta = document.createElement("meta");
         meta.setAttribute("property", property);
         document.head.appendChild(meta);
+        createdElements.push(meta);
+      } else {
+        originalValues.set(meta, meta.content);
       }
       meta.content = content;
     };
@@ -58,10 +68,15 @@ export default function NewsArticlePage() {
     setMeta("twitter:description", release.summary);
 
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    let canonicalCreated = false;
+    let originalCanonical = "";
     if (!canonical) {
       canonical = document.createElement("link");
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
+      canonicalCreated = true;
+    } else {
+      originalCanonical = canonical.href;
     }
     canonical.href = articleUrl;
 
@@ -93,17 +108,30 @@ export default function NewsArticlePage() {
       "keywords": release.tags?.join(", ") || "Cortex Linux, AI, Linux"
     };
 
-    let script = document.querySelector('script[type="application/ld+json"][data-news="true"]') as HTMLScriptElement;
-    if (!script) {
-      script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.setAttribute("data-news", "true");
-      document.head.appendChild(script);
-    }
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.setAttribute("data-news", "true");
     script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
 
     return () => {
-      document.title = "Cortex Linux";
+      document.title = originalTitle;
+
+      createdElements.forEach(el => el.remove());
+
+      originalValues.forEach((value, element) => {
+        if (element instanceof HTMLMetaElement) {
+          element.content = value;
+        }
+      });
+
+      if (canonicalCreated && canonical) {
+        canonical.remove();
+      } else if (canonical && originalCanonical) {
+        canonical.href = originalCanonical;
+      }
+
+      script.remove();
     };
   }, [release, setLocation]);
 
