@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCortexDemo } from "@/hooks/useCortexDemo";
-import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight } from "lucide-react";
+import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight, ArrowRight } from "lucide-react";
 
 const EXAMPLE_PROMPTS = [
   "Automate my backup script",
@@ -307,16 +307,20 @@ export default function InteractiveDemoHero() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="text-center space-y-3 sm:space-y-4"
         >
-          <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-500 hover:opacity-90 text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 shadow-lg hover:shadow-blue-500/50 transition-all"
-            >
-              <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
-              <span className="hidden sm:inline">Install the CLI for Unlimited Access</span>
-              <span className="sm:hidden">Install CLI for Full Access</span>
-            </Button>
-          </a>
+          <motion.a 
+            href="https://github.com/cortexlinux/cortex" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            data-testid="button-install-cli"
+          >
+            <Download className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.5} />
+            <span className="hidden sm:inline">Install the CLI for Unlimited Access</span>
+            <span className="sm:hidden">Install CLI</span>
+            <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
+          </motion.a>
           <p className="text-xs sm:text-sm text-gray-500">
             Free forever · Open source · No credit card
           </p>
