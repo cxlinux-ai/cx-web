@@ -127,24 +127,6 @@ export default function HackathonPreview() {
               />
               
               <div className="relative px-8 py-10 md:px-12 md:py-14">
-                {/* Hackathon badge */}
-                <div className="flex justify-center mb-8">
-                  <motion.div 
-                    className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20"
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    transition={{ duration: 0.2 }}
-                    style={{ boxShadow: "0 4px 12px rgba(0,102,255,0.15)" }}
-                  >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue" />
-                    </span>
-                    <span className="relative text-[13px] font-semibold text-brand-blue tracking-wide uppercase">
-                      Hackathon · Feb 17, 2026
-                    </span>
-                  </motion.div>
-                </div>
-
                 {/* Headline - Bold */}
                 <h3 
                   className="text-white font-bold text-center mb-3 leading-tight"
@@ -163,6 +145,23 @@ export default function HackathonPreview() {
                 
                 {/* Countdown timer */}
                 <div className="mb-10">
+                  {/* Hackathon badge */}
+                  <div className="flex justify-center mb-4">
+                    <motion.div 
+                      className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ boxShadow: "0 4px 12px rgba(0,102,255,0.15)" }}
+                    >
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue" />
+                      </span>
+                      <span className="relative text-[13px] font-semibold text-brand-blue tracking-wide uppercase">
+                        Hackathon · Feb 17, 2026
+                      </span>
+                    </motion.div>
+                  </div>
                   <p className="text-sm text-gray-500 mb-5 flex items-center justify-center gap-2">
                     <Clock size={16} className="text-brand-blue" />
                     Hackathon starts in:
