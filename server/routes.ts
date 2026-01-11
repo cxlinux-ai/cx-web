@@ -4,6 +4,7 @@ import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import type { Contributor } from "@shared/schema";
 import { insertHackathonRegistrationSchema } from "@shared/schema";
+import stripeRoutes from "./stripe";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
@@ -256,6 +257,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(contributorsCache?.data || FALLBACK_CONTRIBUTORS);
     }
   });
+
+  // Mount Stripe routes (webhook needs raw body, so it's handled in stripe.ts)
+  app.use("/api/stripe", stripeRoutes);
 
   // Hackathon registration endpoint
   app.post("/api/hackathon/register", async (req, res) => {
