@@ -1,5 +1,6 @@
-import { type User, type InsertUser, type HackathonRegistration, type InsertHackathonRegistration } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { type User, type InsertUser, type HackathonRegistration, type InsertHackathonRegistration, users, hackathonRegistrations } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -9,49 +10,39 @@ export interface IStorage {
   getHackathonRegistrationByEmail(email: string): Promise<HackathonRegistration | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private hackathonRegistrations: Map<string, HackathonRegistration>;
-
-  constructor() {
-    this.users = new Map();
-    this.hackathonRegistrations = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const result = await db.select().from(users).where(eq(users.username, username)).limit(1);
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
 
   async createHackathonRegistration(registration: InsertHackathonRegistration): Promise<HackathonRegistration> {
-    const id = randomUUID();
-    const newRegistration: HackathonRegistration = {
-      ...registration,
-      id,
+    const result = await db.insert(hackathonRegistrations).values({
+      name: registration.name,
+      email: registration.email,
       phone: registration.phone || null,
-      registeredAt: new Date().toISOString(),
-    };
-    this.hackathonRegistrations.set(id, newRegistration);
-    return newRegistration;
+    }).returning();
+    return result[0];
   }
 
   async getHackathonRegistrationByEmail(email: string): Promise<HackathonRegistration | undefined> {
-    return Array.from(this.hackathonRegistrations.values()).find(
-      (reg) => reg.email.toLowerCase() === email.toLowerCase(),
-    );
+    const result = await db
+      .select()
+      .from(hackathonRegistrations)
+      .where(eq(hackathonRegistrations.email, email.toLowerCase()))
+      .limit(1);
+    return result[0];
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
