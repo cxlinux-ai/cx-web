@@ -19,6 +19,8 @@ import License from "./pages/license";
 import GettingStarted from "./pages/getting-started";
 import Hackathon from "./pages/hackathon";
 import StartupPage from "./pages/startup";
+import NewsPage from "./pages/news";
+import NewsArticlePage from "./pages/news-article";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -170,6 +172,15 @@ export default function App() {
                   Blog
                 </Link>
                 <Link
+                  href="/news"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location.startsWith("/news") ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                  }`}
+                  data-testid="link-news"
+                >
+                  News
+                </Link>
+                <Link
                   href="/status"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/status" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
@@ -275,6 +286,14 @@ export default function App() {
                     Blog
                   </Link>
                   <Link
+                    href="/news"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    data-testid="mobile-link-news"
+                  >
+                    News
+                  </Link>
+                  <Link
                     href="/status"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
@@ -319,6 +338,8 @@ export default function App() {
             <Route path="/getting-started" component={GettingStarted} />
             <Route path="/hackathon" component={Hackathon} />
             <Route path="/startup" component={StartupPage} />
+            <Route path="/news" component={NewsPage} />
+            <Route path="/news/:slug" component={NewsArticlePage} />
           </Switch>
 
           <Toaster />
