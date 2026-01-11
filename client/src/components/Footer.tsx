@@ -39,7 +39,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">Blog</Link></li>
               <li><Link href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</Link></li>
-              <li><Link href="/beta" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</Link></li>
+              <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
               <li><Link href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</Link></li>
             </ul>
           </div>

@@ -29,7 +29,7 @@ export class DatabaseStorage implements IStorage {
   async createHackathonRegistration(registration: InsertHackathonRegistration): Promise<HackathonRegistration> {
     const result = await db.insert(hackathonRegistrations).values({
       name: registration.name,
-      email: registration.email,
+      email: registration.email.toLowerCase(),
       phone: registration.phone || null,
     }).returning();
     return result[0];

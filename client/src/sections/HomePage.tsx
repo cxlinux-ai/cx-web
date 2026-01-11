@@ -2258,7 +2258,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">Blog</a></li>
                 <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</button></li>
-                <li><a href="/beta" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
+                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
                 <li><a href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</a></li>
               </ul>
             </div>

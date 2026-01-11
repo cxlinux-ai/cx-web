@@ -192,13 +192,15 @@ export default function App() {
                   <Star size={14} className="text-yellow-400" />
                   <span>1.2k</span>
                 </a>
-                <Link
-                  href="/beta"
+                <a
+                  href="https://github.com/cortexlinux/cortex"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
                   data-testid="button-try-beta"
                 >
                   Get Started
-                </Link>
+                </a>
               </div>
 
               {/* Mobile Menu Button */}
@@ -271,14 +273,16 @@ export default function App() {
                     </span>
                     Hackathon
                   </Link>
-                  <Link
-                    href="/beta"
+                  <a
+                    href="https://github.com/cortexlinux/cortex"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300"
                     data-testid="mobile-button-try-beta"
                   >
                     Get Started
-                  </Link>
+                  </a>
                 </motion.div>
               </motion.div>
             )}
