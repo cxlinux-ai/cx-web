@@ -27,6 +27,14 @@ Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer fo
 - Text Glow: `drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]`
 
 **Current Status (January 2026):**
+- **NEW: Sapiens 0.27B Reasoning Engine** - Multi-agent supervisor system for AI reasoning:
+  - Python-based backend in `sapiens_engine/` directory
+  - Multi-agent system: Planner, Executor, Validator, Corrector agents
+  - Iterative refinement loop (max 5 iterations, early stop at 85% confidence)
+  - Flask API on port 8100: `/reason`, `/plan`, `/debug`, `/optimize`, `/health`
+  - Systemd service configuration at `sapiens.service` for auto-start
+  - Full offline capability, runs on CPU (~200MB RAM)
+  - Entry point: `python run_sapiens.py --port 8100`
 - **NEW: Hackathon Registration Modal** - Popup form when clicking "Start Building Now" with:
   - Name and email (required), phone number (optional with checkbox)
   - Form validation and error messages
