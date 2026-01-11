@@ -18,6 +18,14 @@ Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer fo
 - Tone: Professional, trustworthy, cutting-edge but addresses security concerns directly
 - Psychological marketing: Clarity, Authority, Aspiration, Curiosity
 
+**Blue Glow Effects (Hover States):**
+- Standard Glow: `shadow-[0_0_15px_rgba(59,130,246,0.4)]`
+- Medium Glow: `shadow-[0_0_20px_rgba(59,130,246,0.5)]`
+- Strong Glow: `shadow-[0_0_25px_rgba(59,130,246,0.5)]`
+- Large Glow: `shadow-[0_0_30px_rgba(59,130,246,0.5)]`
+- Icon Glow: `drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]`
+- Text Glow: `drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]`
+
 **Current Status (January 2026):**
 - **NEW: Hackathon Registration Modal** - Popup form when clicking "Start Building Now" with:
   - Name and email (required), phone number (optional with checkbox)
