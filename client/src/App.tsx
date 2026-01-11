@@ -18,6 +18,7 @@ import Status from "./pages/status";
 import License from "./pages/license";
 import GettingStarted from "./pages/getting-started";
 import Hackathon from "./pages/hackathon";
+import StartupPage from "./pages/startup";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -177,6 +178,15 @@ export default function App() {
                 >
                   Status
                 </Link>
+                <Link
+                  href="/startup"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/startup" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                  }`}
+                  data-testid="link-startup"
+                >
+                  Startup
+                </Link>
               </div>
 
               {/* GitHub Stars & Get Started Button (Desktop) */}
@@ -273,6 +283,14 @@ export default function App() {
                     Status
                   </Link>
                   <Link
+                    href="/startup"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    data-testid="mobile-link-startup"
+                  >
+                    Startup
+                  </Link>
+                  <Link
                     href="/beta"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
@@ -300,6 +318,7 @@ export default function App() {
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
             <Route path="/hackathon" component={Hackathon} />
+            <Route path="/startup" component={StartupPage} />
           </Switch>
 
           <Toaster />
