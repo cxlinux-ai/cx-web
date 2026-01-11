@@ -194,14 +194,11 @@ export default function HackathonPreview() {
                   {/* Primary CTA - 3D button */}
                   <motion.button
                     onClick={() => setIsModalOpen(true)}
-                    className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-white text-black font-semibold text-[15px] cursor-pointer"
+                    className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
                     data-testid="button-start-building"
                     whileHover={{ y: -2, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    style={{ 
-                      boxShadow: "0 4px 14px rgba(255,255,255,0.15), 0 2px 6px rgba(0,0,0,0.1)",
-                    }}
                   >
                     <Github size={18} strokeWidth={2.5} />
                     <span>Start Building Now</span>
