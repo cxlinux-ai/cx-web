@@ -195,11 +195,11 @@ export default function StartupPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 px-2"
+            className="font-bold leading-tight mb-6 px-2"
           >
-            <span className="gradient-text">The Linux Built</span>
+            <span className="gradient-text text-[82px] font-extrabold">The Linux Built</span>
             <br />
-            <span className="text-white">for AI Founders</span>
+            <span className="text-white text-[82px] font-extrabold">for AI Founders</span>
           </motion.h1>
 
           {/* Subheadline */}
