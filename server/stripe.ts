@@ -13,9 +13,22 @@ import {
 } from "@shared/schema";
 import { z } from "zod";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
+let stripe: Stripe | null = null;
+
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+} else {
+  console.warn("STRIPE_SECRET_KEY not configured - Stripe endpoints will be disabled");
+}
 
 const router = Router();
+
+const requireStripe = (req: Request, res: Response, next: Function) => {
+  if (!stripe) {
+    return res.status(503).json({ error: "Stripe is not configured. Please set STRIPE_SECRET_KEY." });
+  }
+  next();
+};
 
 // =============================================================================
 // CUSTOMER ENDPOINTS
@@ -28,7 +41,7 @@ const createCustomerSchema = z.object({
   metadata: z.record(z.string()).optional(),
 });
 
-router.post("/customers", async (req: Request, res: Response) => {
+router.post("/customers", requireStripe, async (req: Request, res: Response) => {
   try {
     const result = createCustomerSchema.safeParse(req.body);
     if (!result.success) {
@@ -50,7 +63,7 @@ router.post("/customers", async (req: Request, res: Response) => {
       });
     }
 
-    const stripeCustomer = await stripe.customers.create({
+    const stripeCustomer = await stripe!.customers.create({
       email,
       name,
       metadata: metadata || {},
@@ -74,7 +87,7 @@ router.post("/customers", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/customers/:id", async (req: Request, res: Response) => {
+router.get("/customers/:id", requireStripe, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -106,7 +119,7 @@ const createSubscriptionSchema = z.object({
   metadata: z.record(z.string()).optional(),
 });
 
-router.post("/subscriptions", async (req: Request, res: Response) => {
+router.post("/subscriptions", requireStripe, async (req: Request, res: Response) => {
   try {
     const result = createSubscriptionSchema.safeParse(req.body);
     if (!result.success) {
@@ -137,7 +150,7 @@ router.post("/subscriptions", async (req: Request, res: Response) => {
       subscriptionParams.trial_period_days = trialDays;
     }
 
-    const stripeSubscription = await stripe.subscriptions.create(subscriptionParams);
+    const stripeSubscription = await stripe!.subscriptions.create(subscriptionParams);
 
     const subData = stripeSubscription as any;
     const [subscription] = await db
@@ -168,7 +181,7 @@ router.post("/subscriptions", async (req: Request, res: Response) => {
   }
 });
 
-router.delete("/subscriptions/:id", async (req: Request, res: Response) => {
+router.delete("/subscriptions/:id", requireStripe, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { immediately } = req.query;
@@ -186,9 +199,9 @@ router.delete("/subscriptions/:id", async (req: Request, res: Response) => {
     let stripeSubscription: Stripe.Subscription;
 
     if (immediately === "true") {
-      stripeSubscription = await stripe.subscriptions.cancel(subscription.stripeSubscriptionId);
+      stripeSubscription = await stripe!.subscriptions.cancel(subscription.stripeSubscriptionId);
     } else {
-      stripeSubscription = await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+      stripeSubscription = await stripe!.subscriptions.update(subscription.stripeSubscriptionId, {
         cancel_at_period_end: true,
       });
     }
@@ -211,7 +224,7 @@ router.delete("/subscriptions/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/subscriptions/:id/pause", async (req: Request, res: Response) => {
+router.post("/subscriptions/:id/pause", requireStripe, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -225,7 +238,7 @@ router.post("/subscriptions/:id/pause", async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Subscription not found" });
     }
 
-    const stripeSubscription = await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+    const stripeSubscription = await stripe!.subscriptions.update(subscription.stripeSubscriptionId, {
       pause_collection: { behavior: "mark_uncollectible" },
     });
 
@@ -246,7 +259,7 @@ router.post("/subscriptions/:id/pause", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/subscriptions/:id/resume", async (req: Request, res: Response) => {
+router.post("/subscriptions/:id/resume", requireStripe, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -260,7 +273,7 @@ router.post("/subscriptions/:id/resume", async (req: Request, res: Response) => 
       return res.status(404).json({ error: "Subscription not found" });
     }
 
-    const stripeSubscription = await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+    const stripeSubscription = await stripe!.subscriptions.update(subscription.stripeSubscriptionId, {
       pause_collection: null,
     });
 
@@ -293,7 +306,7 @@ const createPaymentSchema = z.object({
   metadata: z.record(z.string()).optional(),
 });
 
-router.post("/payments", async (req: Request, res: Response) => {
+router.post("/payments", requireStripe, async (req: Request, res: Response) => {
   try {
     const result = createPaymentSchema.safeParse(req.body);
     if (!result.success) {
@@ -312,7 +325,7 @@ router.post("/payments", async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Customer not found" });
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await stripe!.paymentIntents.create({
       amount: Math.round(amount * 100),
       currency,
       customer: customer.stripeCustomerId,
@@ -355,7 +368,7 @@ const createRefundSchema = z.object({
   reason: z.enum(["duplicate", "fraudulent", "requested_by_customer"]).optional(),
 });
 
-router.post("/refunds", async (req: Request, res: Response) => {
+router.post("/refunds", requireStripe, async (req: Request, res: Response) => {
   try {
     const result = createRefundSchema.safeParse(req.body);
     if (!result.success) {
@@ -386,7 +399,7 @@ router.post("/refunds", async (req: Request, res: Response) => {
       refundParams.reason = reason;
     }
 
-    const stripeRefund = await stripe.refunds.create(refundParams);
+    const stripeRefund = await stripe!.refunds.create(refundParams);
 
     const [refund] = await db
       .insert(stripeRefunds)
@@ -411,7 +424,7 @@ router.post("/refunds", async (req: Request, res: Response) => {
 // WEBHOOK ENDPOINT
 // =============================================================================
 
-router.post("/webhooks", async (req: Request, res: Response) => {
+router.post("/webhooks", requireStripe, async (req: Request, res: Response) => {
   const sig = req.headers["stripe-signature"] as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -424,7 +437,7 @@ router.post("/webhooks", async (req: Request, res: Response) => {
 
   try {
     const rawBody = (req as any).rawBody;
-    event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
+    event = stripe!.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
     console.error("Webhook signature verification failed:", err);
     return res.status(400).json({ error: "Invalid signature" });
