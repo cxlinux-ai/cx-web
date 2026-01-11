@@ -154,24 +154,6 @@ export default function App() {
                   Get Started
                 </Link>
                 <Link
-                  href="/faq"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/faq" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
-                  }`}
-                  data-testid="link-faq"
-                >
-                  FAQ
-                </Link>
-                <Link
-                  href="/blog"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/blog") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
-                  }`}
-                  data-testid="link-blog"
-                >
-                  Blog
-                </Link>
-                <Link
                   href="/news"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location.startsWith("/news") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
@@ -179,15 +161,6 @@ export default function App() {
                   data-testid="link-news"
                 >
                   News
-                </Link>
-                <Link
-                  href="/status"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/status" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
-                  }`}
-                  data-testid="link-status"
-                >
-                  Status
                 </Link>
                 <Link
                   href="/startup"
@@ -277,42 +250,18 @@ export default function App() {
                   <Link
                     href="/getting-started"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
                     data-testid="mobile-link-getting-started"
                   >
                     Get Started
                   </Link>
                   <Link
-                    href="/faq"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                    data-testid="mobile-link-faq"
-                  >
-                    FAQ
-                  </Link>
-                  <Link
-                    href="/blog"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                    data-testid="mobile-link-blog"
-                  >
-                    Blog
-                  </Link>
-                  <Link
                     href="/news"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
                     data-testid="mobile-link-news"
                   >
                     News
-                  </Link>
-                  <Link
-                    href="/status"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                    data-testid="mobile-link-status"
-                  >
-                    Status
                   </Link>
                   <Link
                     href="/startup"
