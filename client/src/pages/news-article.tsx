@@ -247,10 +247,55 @@ export default function NewsArticlePage() {
                 </div>
               )}
 
+              {release.subheadings && release.subheadings.map((section, index) => (
+                <div key={index} className="mt-10">
+                  <h3 className="text-xl font-semibold mb-4 text-white">{section.title}</h3>
+                  {section.paragraphs.map((para, pIndex) => (
+                    <p key={pIndex} className="text-gray-300 leading-relaxed mb-4">
+                      {para}
+                    </p>
+                  ))}
+                  {release.bulletPoints?.find(bp => bp.heading === section.title) && (
+                    <ul className="list-none space-y-3 my-6">
+                      {release.bulletPoints.find(bp => bp.heading === section.title)?.items.map((item, iIndex) => (
+                        <li key={iIndex} className="flex items-start gap-3 text-gray-300">
+                          <span className="text-blue-400 mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {section.title === "How to Participate" && release.links && (
+                    <ul className="list-none space-y-2 my-6">
+                      {release.links.map((link, lIndex) => (
+                        <li key={lIndex} className="flex items-center gap-2">
+                          <span className="text-gray-400">{link.label}:</span>
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:text-blue-300 transition-colors"
+                          >
+                            {link.url}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+
               {release.boilerplate && (
                 <div className="mt-12 pt-8 border-t border-white/10">
                   <h3 className="text-lg font-semibold mb-4 text-white">About Cortex Linux</h3>
                   <p className="text-gray-400">{release.boilerplate}</p>
+                </div>
+              )}
+
+              {release.companyBoilerplate && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold mb-4 text-white">About AI Venture Holdings LLC</h3>
+                  <p className="text-gray-400">{release.companyBoilerplate}</p>
                 </div>
               )}
 
@@ -262,6 +307,9 @@ export default function NewsArticlePage() {
                   </h3>
                   <div className="space-y-2 text-gray-400">
                     <p className="font-medium text-white">{release.contactInfo.name}</p>
+                    {release.contactInfo.title && (
+                      <p className="text-sm">{release.contactInfo.title}</p>
+                    )}
                     <p className="flex items-center gap-2">
                       <Mail size={14} />
                       <a href={`mailto:${release.contactInfo.email}`} className="text-blue-400 hover:text-blue-300">
