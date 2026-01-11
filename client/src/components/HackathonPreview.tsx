@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import RegistrationModal from "./RegistrationModal";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
-const HACKATHON_DATE = new Date("2026-02-11T00:00:00");
+const HACKATHON_DATE = new Date("2026-02-17T00:00:00");
 
 function useCountdown(targetDate: Date) {
   const [timeLeft, setTimeLeft] = useState({
@@ -140,7 +140,7 @@ export default function HackathonPreview() {
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue" />
                     </span>
                     <span className="relative text-[13px] font-semibold text-brand-blue tracking-wide uppercase">
-                      Hackathon · Feb 11, 2026
+                      Hackathon · Feb 17, 2026
                     </span>
                   </motion.div>
                 </div>
@@ -153,7 +153,7 @@ export default function HackathonPreview() {
                   Shape the <span className="gradient-text">Future of Cortex Linux</span>
                 </h3>
                 <p className="text-center text-xl md:text-2xl font-semibold text-gray-300 mb-6">
-                  <span className="text-terminal-green">$15,000 in Prizes</span> · First AI Linux Hackathon
+                  <span className="text-terminal-green">$5,350 in Prizes</span> · First AI Linux Hackathon
                 </p>
                 
                 {/* Value proposition */}

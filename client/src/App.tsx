@@ -136,8 +136,8 @@ export default function App() {
                     onClick={() => scrollToSection(link.id)}
                     className={`text-base font-medium transition-colors duration-300 ${
                       location === "/" && activeSection === link.id
-                        ? "text-blue-400"
-                        : "text-gray-400 hover:text-blue-400"
+                        ? "text-brand-blue"
+                        : "text-gray-400 hover:text-brand-blue"
                     }`}
                     data-testid={`link-${link.id}`}
                   >
@@ -147,7 +147,7 @@ export default function App() {
                 <Link
                   href="/getting-started"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/getting-started" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-getting-started"
                 >
@@ -156,7 +156,7 @@ export default function App() {
                 <Link
                   href="/faq"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/faq" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location === "/faq" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-faq"
                 >
@@ -165,7 +165,7 @@ export default function App() {
                 <Link
                   href="/blog"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/blog") ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location.startsWith("/blog") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-blog"
                 >
@@ -174,7 +174,7 @@ export default function App() {
                 <Link
                   href="/news"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/news") ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location.startsWith("/news") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-news"
                 >
@@ -183,7 +183,7 @@ export default function App() {
                 <Link
                   href="/status"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/status" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location === "/status" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-status"
                 >
@@ -192,11 +192,24 @@ export default function App() {
                 <Link
                   href="/startup"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/startup" ? "text-blue-400" : "text-gray-400 hover:text-blue-400"
+                    location === "/startup" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-startup"
                 >
                   Startup
+                </Link>
+                <Link
+                  href="/hackathon"
+                  className={`relative text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
+                    location === "/hackathon" ? "text-terminal-green" : "text-terminal-green hover:text-white"
+                  }`}
+                  data-testid="link-hackathon"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
+                  </span>
+                  Hackathon
                 </Link>
               </div>
 
@@ -304,15 +317,27 @@ export default function App() {
                   <Link
                     href="/startup"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
                     data-testid="mobile-link-startup"
                   >
                     Startup
                   </Link>
                   <Link
+                    href="/hackathon"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 w-full text-left py-2 text-terminal-green hover:text-white transition-colors duration-300"
+                    data-testid="mobile-link-hackathon"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
+                    </span>
+                    Hackathon
+                  </Link>
+                  <Link
                     href="/beta"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
+                    className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300"
                     data-testid="mobile-button-try-beta"
                   >
                     Get Started
