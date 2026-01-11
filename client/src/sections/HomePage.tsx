@@ -699,7 +699,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Complete <span className="gradient-text">AI Layer</span></h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">The AI Features <span className="gradient-text">Linux Admins Asked For</span></h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Everything you need to control your Linux system through natural language — from system administration to development workflows.</p>
           </motion.div>
 
