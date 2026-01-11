@@ -389,10 +389,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">Open Source</span>
             </div>
-            <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-mit-licensed">
-              <Scale size={12} className="text-emerald-400 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">MIT Licensed</span>
-            </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
               <Tag size={12} className="text-brand-blue sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">v2.4.0</span>
