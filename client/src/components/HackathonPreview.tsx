@@ -208,7 +208,7 @@ export default function HackathonPreview() {
                   {/* Secondary CTA */}
                   <Link
                     href="/hackathon"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-[15px] text-gray-400 hover:text-brand-blue transition-colors duration-300 group/link"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-[15px] text-gray-400 hover:text-white transition-colors duration-300 group/link"
                     data-testid="link-hackathon-details"
                   >
                     <span>Learn more</span>
