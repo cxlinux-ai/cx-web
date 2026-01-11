@@ -125,9 +125,9 @@ export default function InteractiveDemoHero() {
           {/* Glow effect - hidden on mobile for performance */}
           <div className="hidden sm:block absolute -inset-1 bg-gradient-to-r from-purple-600/20 via-cyan-500/20 to-purple-600/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
           
-          <Card className="relative bg-gray-950/90 border-gray-800/50 backdrop-blur-xl overflow-hidden rounded-lg sm:rounded-xl shadow-2xl">
+          <Card className="relative bg-gray-950/90 border-gray-500/50 backdrop-blur-xl overflow-hidden rounded-lg sm:rounded-xl shadow-2xl">
             {/* Terminal Header with macOS-style controls */}
-            <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-900/80 border-b border-gray-800/50">
+            <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-900/80 border-b border-gray-500/50">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1 sm:gap-1.5">
                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
@@ -161,7 +161,7 @@ export default function InteractiveDemoHero() {
 
             <CardContent className="p-0">
               {/* Input Section */}
-              <div className="p-3 sm:p-4 md:p-5 bg-gray-900/40 border-b border-gray-800/50">
+              <div className="p-3 sm:p-4 md:p-5 bg-gray-900/40 border-b border-gray-500/50">
                 <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                   <div className="flex gap-2 sm:gap-3">
                     <div className="flex-1 relative group/input">
@@ -172,7 +172,7 @@ export default function InteractiveDemoHero() {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Describe any task you want to accomplish..."
-                        className="pl-7 sm:pl-9 bg-gray-950/60 border-gray-700/50 text-white placeholder:text-gray-500 focus:border-purple-500/70 focus:ring-2 focus:ring-purple-500/20 h-10 sm:h-11 md:h-12 text-sm sm:text-base rounded-lg transition-all"
+                        className="pl-7 sm:pl-9 bg-gray-950/60 border-gray-500/60 text-white placeholder:text-gray-500 focus:border-purple-500/70 focus:ring-2 focus:ring-purple-500/20 h-10 sm:h-11 md:h-12 text-sm sm:text-base rounded-lg transition-all"
                         disabled={isLoading}
                         data-testid="input-demo-command"
                       />
@@ -202,7 +202,7 @@ export default function InteractiveDemoHero() {
                         type="button"
                         onClick={() => handleExampleClick(example)}
                         disabled={isLoading}
-                        className="group/chip flex-shrink-0 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm bg-gray-800/40 border border-gray-700/50 rounded-md sm:rounded-lg text-gray-400 hover:text-white hover:border-purple-500/40 hover:bg-purple-500/10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                        className="group/chip flex-shrink-0 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm bg-gray-800/40 border border-gray-500/50 rounded-md sm:rounded-lg text-gray-400 hover:text-white hover:border-purple-500/40 hover:bg-purple-500/10 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                         data-testid={`button-example-${example.toLowerCase().replace(/\s+/g, '-')}`}
                       >
                         <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-400 opacity-0 group-hover/chip:opacity-100 transition-opacity hidden sm:block" />
@@ -268,7 +268,7 @@ export default function InteractiveDemoHero() {
                 </div>
 
                 {/* Status Bar */}
-                <div className="flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900/50 border-t border-gray-800/50 text-[10px] sm:text-xs text-gray-500">
+                <div className="flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-900/50 border-t border-gray-500/50 text-[10px] sm:text-xs text-gray-500">
                   <div className="flex items-center gap-2 sm:gap-3">
                     <span className="flex items-center gap-1 sm:gap-1.5">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500/80 animate-pulse" />
@@ -352,8 +352,8 @@ function formatOutput(content: string): React.ReactNode {
       const code = part.replace(/```\w*\n?/g, "").trim();
       const lines = code.split('\n');
       return (
-        <div key={i} className="my-2 sm:my-3 rounded-md sm:rounded-lg overflow-hidden bg-black/60 border border-gray-800/50">
-          <div className="flex items-center justify-between px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-800/50 border-b border-gray-800/50">
+        <div key={i} className="my-2 sm:my-3 rounded-md sm:rounded-lg overflow-hidden bg-black/60 border border-gray-500/50">
+          <div className="flex items-center justify-between px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-800/50 border-b border-gray-500/50">
             <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-500">bash</span>
           </div>
           <code className="block p-2 sm:p-3 text-green-400 overflow-x-auto text-[11px] sm:text-xs md:text-sm">
