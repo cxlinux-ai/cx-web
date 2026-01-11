@@ -127,23 +127,17 @@ export default function App() {
 
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
-                {[
-                  { name: "Docs", id: "preview" },
-                  { name: "Security", id: "security" },
-                ].map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => scrollToSection(link.id)}
-                    className={`text-base font-medium transition-colors duration-300 ${
-                      location === "/" && activeSection === link.id
-                        ? "text-brand-blue"
-                        : "text-gray-400 hover:text-brand-blue"
-                    }`}
-                    data-testid={`link-${link.id}`}
-                  >
-                    {link.name}
-                  </button>
-                ))}
+                <button
+                  onClick={() => scrollToSection("security")}
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/" && activeSection === "security"
+                      ? "text-brand-blue"
+                      : "text-gray-400 hover:text-brand-blue"
+                  }`}
+                  data-testid="link-security"
+                >
+                  Security
+                </button>
                 <Link
                   href="/getting-started"
                   className={`text-base font-medium transition-colors duration-300 ${
@@ -169,7 +163,7 @@ export default function App() {
                   }`}
                   data-testid="link-startup"
                 >
-                  Startup
+                  Startups
                 </Link>
                 <Link
                   href="/hackathon"
@@ -234,19 +228,13 @@ export default function App() {
                   transition={{ duration: 0.2, delay: 0.1 }}
                   className="px-4 py-6 space-y-4"
                 >
-                  {[
-                    { name: "Docs", id: "preview" },
-                    { name: "Security", id: "security" },
-                  ].map((link) => (
-                    <button
-                      key={link.id}
-                      onClick={() => scrollToSection(link.id)}
-                      className="block w-full text-left py-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
-                      data-testid={`mobile-link-${link.id}`}
-                    >
-                      {link.name}
-                    </button>
-                  ))}
+                  <button
+                    onClick={() => scrollToSection("security")}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    data-testid="mobile-link-security"
+                  >
+                    Security
+                  </button>
                   <Link
                     href="/getting-started"
                     onClick={() => setMobileMenuOpen(false)}
@@ -269,7 +257,7 @@ export default function App() {
                     className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
                     data-testid="mobile-link-startup"
                   >
-                    Startup
+                    Startups
                   </Link>
                   <Link
                     href="/hackathon"
