@@ -537,7 +537,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 hover:bg-white/[0.07] transition-all duration-300"
+                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 hover:bg-white/[0.07] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
                 data-testid={`built-for-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-4 group-hover:bg-brand-blue/20 transition-colors">
@@ -701,7 +701,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <div
                 key={i}
                 onClick={() => setExpandedFeature(expandedFeature === i ? null : i)}
-                className="glass-card glass-card-hover rounded-2xl p-8 cursor-pointer transition-colors duration-300"
+                className="glass-card glass-card-hover rounded-2xl p-8 cursor-pointer transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-blue/20 flex items-center justify-center flex-shrink-0">
@@ -938,7 +938,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="flex gap-4 p-6 glass-card rounded-xl"
+                className="flex gap-4 p-6 glass-card rounded-xl hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center flex-shrink-0">
                   <feature.icon size={24} className="text-brand-blue" />
@@ -1204,7 +1204,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Community Edition */}
-            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col">
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
               <div>
                 <h3 className="text-2xl font-bold mb-2">Community Edition</h3>
                 <div className="text-4xl font-bold text-emerald-400 mb-2">FREE</div>
@@ -1248,7 +1248,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
 
             {/* Enterprise Edition */}
-            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col relative">
+            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col relative hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
               <div className="absolute -top-3 right-8">
                 <span className="px-4 py-1.5 bg-brand-blue text-white text-sm font-semibold rounded-full">
                   FOR TEAMS
