@@ -67,6 +67,16 @@ Professional marketing landing page and FAQ for Cortex Linux - **The AI Layer fo
 - Full responsive design with mobile navigation
 - Smooth scroll navigation between sections
 - Framer Motion animations throughout including stagger animations in contributors grid
+- **NEW: Startup Landing Page at /startup** - Dedicated page for AI founders and startups:
+  - Hero section with "The Linux Built for AI Founders" headline and terminal mockup
+  - Problem/Solution section highlighting pain points and Cortex solution
+  - Social proof: 19,000+ clones, 89 contributors, "Recommended by ChatGPT"
+  - Pre-installed AI Stack grid (Python 3.12, Ollama, Qdrant, Neo4j, LangChain, Docker, CUDA, Claude Code)
+  - 3-tier Pricing table (Community Free, Founders $19/mo, Enterprise Contact)
+  - Hackathon banner with link to /hackathon
+  - Email capture form with localStorage for waitlist
+  - Same design system, animations, and styling as homepage
+  - "Startup" navigation tab added next to "Status" tab
 - **NEW: Hackathon Page at /hackathon** with psychology-driven marketing:
   - Hero section with "Build AI Tools That Ship" headline and countdown timer
   - Social proof: "500+ builders already participating"
@@ -103,6 +113,7 @@ Preferred communication style: Simple, everyday language.
 - `/beta` - Interactive beta preview/demo page
 - `/blog` - Blog index with all posts, search, and category filtering
 - `/blog/:slug` - Individual blog post pages with full content and related posts
+- `/startup` - Startup-focused landing page for AI founders
 Navigation includes "Get Started" link in header, tracks active sections via scroll position on the homepage.
 
 **State Management**: React hooks (useState, useEffect) for local component state. No global state management needed for this marketing site. Active section tracking handled via scroll event listeners.
