@@ -517,16 +517,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-      {/* Mission Statement - Why Cortex Exists */}
-      <section className="py-20 px-4" data-testid="section-mission-statement">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-            Cortex Linux exists to make AI a first-class system capability — not a plugin, not a workaround.
-            <br className="hidden md:block" />
-            It treats intelligence as infrastructure, built directly into the operating system.
-          </p>
-        </div>
-      </section>
       {/* Built For Section - Who This Is For */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
