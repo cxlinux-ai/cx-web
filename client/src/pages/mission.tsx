@@ -106,7 +106,7 @@ const currentTasks = [
 
 const coreContributors = [
   { name: "Mike Morgan", role: "CEO", github: "mikejmorgan-ai" },
-  { name: "Suyash D", role: "Lead Engineer", github: "Suyashd999", customImage: "/images/suyash-d.png" },
+  { name: "Suyash D", role: "Lead Engineer · Hackathon Leader", github: "Suyashd999", customImage: "/images/suyash-d.png" },
   { name: "Ansh Grover", role: "Main Reviewer", github: "Anshgrover23" }
 ];
 

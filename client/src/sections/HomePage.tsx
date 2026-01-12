@@ -2442,9 +2442,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               },
               {
                 name: "Suyash D",
-                role: "Lead Engineer · Infrastructure · Core contributor",
+                role: "Lead Engineer · Hackathon Leader · Core contributor",
                 github: "Suyashd999",
-                avatar: "/assets/suyash.png"
+                avatar: "/images/suyash-d.png"
               },
               {
                 name: "Dhruv",
