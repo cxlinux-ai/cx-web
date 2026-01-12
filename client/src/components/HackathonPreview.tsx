@@ -60,73 +60,17 @@ export default function HackathonPreview() {
         <div className="max-w-4xl mx-auto">
           <motion.div
             whileHover={{ 
-              y: -6, 
-              rotateX: 2, 
-              rotateY: -1,
+              y: -4,
               transition: { duration: 0.3, ease: "easeOut" }
             }}
-            className="group relative"
-            style={{ transformStyle: "preserve-3d" }}
+            className="group relative overflow-hidden rounded-2xl"
           >
-            {/* Base shadow layer - realistic elevation */}
-            <div 
-              className="absolute inset-0 rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none"
-              style={{ 
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 12px 24px -8px rgba(0, 0, 0, 0.3)",
-                transform: "translateZ(-20px)",
-              }}
-            />
+            {/* Transparent gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-emerald-600/10" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgNDBIMHoiLz48cGF0aCBkPSJNMCAwaDFMMSA0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgMUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50" />
             
-            {/* Ambient glow layer - subsurface lighting effect */}
-            <motion.div 
-              className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-              style={{
-                background: "radial-gradient(ellipse at center, rgba(0,102,255,0.08), rgba(0,102,255,0.05), transparent 70%)",
-                filter: "blur(30px)",
-                transform: "translateZ(-15px)",
-              }}
-            />
-            
-            {/* Animated gradient border - brand blue 3D effect */}
-            <div 
-              className="absolute -inset-[1px] rounded-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"
-              style={{
-                background: 'linear-gradient(135deg, #0066FF, #0066FF, #0066FF, #0066FF)',
-                backgroundSize: '300% 300%',
-                animation: 'gradientShift 8s ease infinite',
-              }}
-            />
-            
-            {/* Main card - mid layer */}
-            <div 
-              className="relative rounded-2xl bg-[#0a0a0f] border border-white/[0.05] overflow-hidden"
-              style={{ 
-                transform: "translateZ(0)",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)",
-              }}
-            >
-              {/* Top reflection line */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-              
-              {/* Gradient reflection overlay - top accent */}
-              <div 
-                className="absolute top-0 left-0 right-0 h-1/3 opacity-30 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: "linear-gradient(135deg, rgba(0,102,255,0.08), rgba(0,102,255,0.06), transparent)",
-                  filter: "blur(20px)",
-                }}
-              />
-              
-              {/* Ambient glow - subsurface lighting */}
-              <div 
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-40 opacity-60 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: "radial-gradient(ellipse at top, rgba(0,102,255,0.06), transparent)",
-                  filter: "blur(25px)",
-                }}
-              />
-              
-              <div className="relative px-8 py-10 md:px-12 md:py-14">
+            {/* Main card content */}
+            <div className="relative px-8 py-10 md:px-12 md:py-14">
                 {/* Headline - Bold */}
                 <h3 
                   className="text-white font-bold text-center mb-3 leading-tight"
@@ -219,7 +163,6 @@ export default function HackathonPreview() {
                   </Link>
                 </div>
               </div>
-            </div>
           </motion.div>
         </div>
       </motion.section>
