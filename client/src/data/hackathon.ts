@@ -105,12 +105,12 @@ export const hackathonPhases: HackathonPhase[] = [
       "Write tests for your code"
     ],
     prizes: [
-      { place: "1st Place", amount: "$1,500" },
-      { place: "2nd Place", amount: "$1,000" },
-      { place: "3rd Place", amount: "$750" },
-      { place: "4th-6th Place", amount: "$250 each" }
+      { place: "1st Place", amount: "$4,500" },
+      { place: "2nd Place", amount: "$3,000" },
+      { place: "3rd Place", amount: "$2,250" },
+      { place: "4th-6th Place", amount: "$750 each" }
     ],
-    prizeTotal: "$4,000",
+    prizeTotal: "$12,000",
     criteria: [
       { name: "Code Quality", weight: "30%", description: "Readability, structure, best practices" },
       { name: "Usefulness", weight: "25%", description: "Real-world value, problem solved" },
@@ -142,12 +142,12 @@ export const hackathonPhases: HackathonPhase[] = [
       "Share on social media with #CortexHackathon"
     ],
     prizes: [
-      { place: "Best Demo", amount: "$400" },
-      { place: "Community Choice", amount: "$300" },
-      { place: "Most Creative", amount: "$200" },
-      { place: "Runner-ups (2)", amount: "$50 each" }
+      { place: "Best Demo", amount: "$1,200" },
+      { place: "Community Choice", amount: "$900" },
+      { place: "Most Creative", amount: "$600" },
+      { place: "Runner-ups (2)", amount: "$150 each" }
     ],
-    prizeTotal: "$1,000",
+    prizeTotal: "$3,000",
     activities: [
       "Community voting on demos",
       "Maintainer technical review",
@@ -306,9 +306,9 @@ export const hackathonConfig = {
   tagline: "Code is the currency. Shipping is the signal.",
   startDate: new Date("2026-02-17T00:00:00"),
   totalWeeks: 13,
-  totalPrizePool: "$5,000",
-  buildSprintPrize: "$4,000",
-  demoPrize: "$1,000",
+  totalPrizePool: "$15,000",
+  buildSprintPrize: "$12,000",
+  demoPrize: "$3,000",
   expectedParticipants: "500+",
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
@@ -378,8 +378,8 @@ export const hackathonBenefits = [
     description: "Connect with 500+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $5,000 in Prizes",
-    description: "Real money for real code. $4,000 for Build Sprint, $1,000 for Demo Week. Plus maintainer roles, swag, and recognition."
+    title: "Compete for $15,000 in Prizes",
+    description: "Real money for real code. $12,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles, swag, and recognition."
   },
   {
     title: "Shape the Future of Cortex",
