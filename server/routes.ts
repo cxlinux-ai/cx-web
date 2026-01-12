@@ -266,6 +266,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Mount Referral routes (viral growth system)
   app.use("/api/referral", referralRoutes);
 
+  // Mount Bounties routes (bounty board)
+  app.use("/api/bounties", bountiesRoutes);
+
   // Hackathon registration endpoint
   app.post("/api/hackathon/register", async (req, res) => {
     try {

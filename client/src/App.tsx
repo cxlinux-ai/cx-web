@@ -23,6 +23,8 @@ import StartupPage from "./pages/startup";
 import NewsPage from "./pages/news";
 import NewsArticlePage from "./pages/news-article";
 import AdminRegistrations from "./pages/admin-registrations";
+import BountiesPage from "./pages/bounties";
+import WaitlistPage from "./pages/waitlist";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -173,6 +175,16 @@ export default function App() {
                   onClick={() => analytics.trackCTAClick('ai_agencies', 'main_nav')}
                 >AI Agencies</Link>
                 <Link
+                  href="/bounties"
+                  className={`text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
+                    location === "/bounties" ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                  }`}
+                  data-testid="link-bounties"
+                  onClick={() => analytics.trackCTAClick('bounties', 'main_nav')}
+                >
+                  Bounties
+                </Link>
+                <Link
                   href="/hackathon"
                   className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 ${
                     location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
@@ -284,6 +296,17 @@ export default function App() {
                     AI Agencies
                   </Link>
                   <Link
+                    href="/bounties"
+                    onClick={() => {
+                      analytics.trackCTAClick('bounties', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-green-400 transition-colors duration-300"
+                    data-testid="mobile-link-bounties"
+                  >
+                    Bounties
+                  </Link>
+                  <Link
                     href="/hackathon"
                     onClick={() => {
                       analytics.trackCTAClick('hackathon', 'mobile_nav');
@@ -336,6 +359,8 @@ export default function App() {
             <Route path="/startup" component={StartupPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />
+            <Route path="/bounties" component={BountiesPage} />
+            <Route path="/waitlist" component={WaitlistPage} />
             <Route path="/admin/registrations" component={AdminRegistrations} />
           </Switch>
           </main>
