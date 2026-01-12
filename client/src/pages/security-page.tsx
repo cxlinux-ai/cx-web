@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
@@ -16,8 +17,14 @@ import {
   Eye
 } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function SecurityPage() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.security);
+    return cleanup;
+  }, []);
+
   const coreDesignSections = [
     {
       icon: Lock,

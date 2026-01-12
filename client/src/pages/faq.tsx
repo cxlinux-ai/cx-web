@@ -1,8 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Shield, Settings, DollarSign, Cpu, Target, Rocket, Wrench, Search } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 interface Question {
   q: string;
@@ -16,6 +17,11 @@ interface FAQCategory {
 }
 
 export default function FAQ() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.faq);
+    return cleanup;
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const faqData: FAQCategory[] = [

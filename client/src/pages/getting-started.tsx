@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
@@ -24,6 +25,7 @@ import {
 } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -40,6 +42,11 @@ const staggerContainer = {
 };
 
 export default function GettingStarted() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.gettingStarted);
+    return cleanup;
+  }, []);
+
   const quickNavCards = [
     {
       title: "Installation Guide",

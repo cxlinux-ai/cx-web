@@ -6,8 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCortexDemo } from "@/hooks/useCortexDemo";
 import { ArrowLeft, Send, Terminal, Loader2, Copy, Check, Download, Sparkles } from "lucide-react";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function BetaPage() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.beta);
+    return cleanup;
+  }, []);
+
   const [input, setInput] = useState("");
   const [copied, setCopied] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);

@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, Shield, Database, Cookie, Users, FileText, Bell, Mail } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function Privacy() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.privacy);
+    return cleanup;
+  }, []);
+
   const sections = [
     {
       icon: Database,

@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { CheckCircle2, Activity, Globe, Terminal, Github, Clock } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 interface StatusItem {
   name: string;
@@ -9,6 +11,11 @@ interface StatusItem {
 }
 
 export default function Status() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.status);
+    return cleanup;
+  }, []);
+
   const services: StatusItem[] = [
     {
       name: "API",

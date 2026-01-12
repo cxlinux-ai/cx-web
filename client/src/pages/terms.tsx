@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronLeft, FileCheck, Scale, UserCheck, AlertTriangle, ShieldOff, Gavel } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function Terms() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.terms);
+    return cleanup;
+  }, []);
+
   const sections = [
     {
       icon: FileCheck,

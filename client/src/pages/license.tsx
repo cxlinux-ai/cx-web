@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import { Scale, Github, ExternalLink } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function License() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.license);
+    return cleanup;
+  }, []);
+
   const currentYear = new Date().getFullYear();
 
   return (

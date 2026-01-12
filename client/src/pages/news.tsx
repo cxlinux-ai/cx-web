@@ -1,10 +1,17 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Calendar, ArrowRight, Newspaper, Tag } from "lucide-react";
 import { pressReleases } from "@/data/pressReleases";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 export default function NewsPage() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.news);
+    return cleanup;
+  }, []);
+
   const sortedReleases = [...pressReleases].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
