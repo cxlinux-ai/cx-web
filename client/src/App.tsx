@@ -127,6 +127,15 @@ export default function App() {
 
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
+                <Link
+                  href="/getting-started"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                  }`}
+                  data-testid="link-getting-started"
+                >
+                  Get Started
+                </Link>
                 <button
                   onClick={() => scrollToSection("security")}
                   className={`text-base font-medium transition-colors duration-300 ${
@@ -138,15 +147,6 @@ export default function App() {
                 >
                   Security
                 </button>
-                <Link
-                  href="/getting-started"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
-                  }`}
-                  data-testid="link-getting-started"
-                >
-                  Get Started
-                </Link>
                 <Link
                   href="/news"
                   className={`text-base font-medium transition-colors duration-300 ${
@@ -228,13 +228,6 @@ export default function App() {
                   transition={{ duration: 0.2, delay: 0.1 }}
                   className="px-4 py-6 space-y-4"
                 >
-                  <button
-                    onClick={() => scrollToSection("security")}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-security"
-                  >
-                    Security
-                  </button>
                   <Link
                     href="/getting-started"
                     onClick={() => setMobileMenuOpen(false)}
@@ -243,6 +236,13 @@ export default function App() {
                   >
                     Get Started
                   </Link>
+                  <button
+                    onClick={() => scrollToSection("security")}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    data-testid="mobile-link-security"
+                  >
+                    Security
+                  </button>
                   <Link
                     href="/news"
                     onClick={() => setMobileMenuOpen(false)}
