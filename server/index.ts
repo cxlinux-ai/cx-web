@@ -72,6 +72,7 @@ app.use((req, res, next) => {
 app.use(demoApi);
 
 (async () => {
+  try {
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -114,5 +115,9 @@ app.use(demoApi);
     }
   } else {
     log("Discord bot not started (DISCORD_BOT_TOKEN not set)");
+  }
+  } catch (error) {
+    console.error("Server startup error:", error);
+    process.exit(1);
   }
 })();

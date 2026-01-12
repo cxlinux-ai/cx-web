@@ -14,7 +14,23 @@
       "Bash(ls:*)",
       "Bash(sort:*)",
       "Bash(grep:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(node /tmp/test_server.js:*)",
+      "Bash(timeout 10 npx tsx:*)",
+      "Bash(node -e \"\nconst { spawn } = require\\(''child_process''\\);\nconst proc = spawn\\(''npx'', [''tsx'', ''server/index.ts''], {\n  env: { ...process.env, NODE_ENV: ''development'' },\n  stdio: [''inherit'', ''pipe'', ''pipe'']\n}\\);\nproc.stdout.on\\(''data'', d => console.log\\(''STDOUT:'', d.toString\\(\\)\\)\\);\nproc.stderr.on\\(''data'', d => console.log\\(''STDERR:'', d.toString\\(\\)\\)\\);\nproc.on\\(''error'', e => console.log\\(''ERROR:'', e.message\\)\\);\nproc.on\\(''exit'', code => console.log\\(''EXIT CODE:'', code\\)\\);\nsetTimeout\\(\\(\\) => {\n  console.log\\(''Timeout, killing...''\\);\n  proc.kill\\(\\);\n}, 10000\\);\n\")",
+      "Bash(lsof:*)",
+      "Bash(ss:*)",
+      "Bash(node:*)",
+      "Bash(NODE_ENV=development npx tsx:*)",
+      "Bash(NODE_ENV=development timeout 10 npx tsx:*)",
+      "Bash(NODE_ENV=development timeout 8 npx tsx:*)",
+      "Bash(NODE_ENV=production timeout 8 npx tsx:*)",
+      "Bash(pgrep:*)",
+      "Bash(echo:*)",
+      "Bash(if [ -n \"$GITHUB_PUBLIC_TOKEN\" ])",
+      "Bash(then)",
+      "Bash(else)",
+      "Bash(fi)"
     ]
   }
 }

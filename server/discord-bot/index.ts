@@ -101,10 +101,10 @@ function storeResponseForFeedback(
   recentResponses.set(messageId, { question, answer, timestamp: Date.now() });
 }
 
-// Validate token
-if (!DISCORD_TOKEN) {
-  console.error("[Bot] DISCORD_BOT_TOKEN is not set");
-  process.exit(1);
+// Validate token - don't exit process, just skip bot initialization
+const BOT_ENABLED = !!DISCORD_TOKEN;
+if (!BOT_ENABLED) {
+  console.log("[Bot] DISCORD_BOT_TOKEN is not set - bot will not start");
 }
 
 // Create Discord client
@@ -531,6 +531,10 @@ process.on("SIGTERM", () => {
  * Start the Discord bot
  */
 export async function startBot(): Promise<void> {
+  if (!BOT_ENABLED) {
+    console.log("[Bot] Bot is disabled - skipping startup");
+    return;
+  }
   console.log("[Bot] Connecting to Discord...");
   await client.login(DISCORD_TOKEN);
 }

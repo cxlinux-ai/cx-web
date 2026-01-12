@@ -364,24 +364,49 @@ async function fetchBountiesFromGitHub(): Promise<{
 }> {
   const token = process.env.GITHUB_PUBLIC_TOKEN;
 
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "User-Agent": "Cortex-Linux-Bounties-Board",
-    "X-GitHub-Api-Version": "2022-11-28",
+  // Build headers - we'll try with token first, then without if it fails
+  const buildHeaders = (useToken: boolean): Record<string, string> => {
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github+json",
+      "User-Agent": "Cortex-Linux-Bounties-Board",
+      "X-GitHub-Api-Version": "2022-11-28",
+    };
+    if (useToken && token) {
+      headers.Authorization = `token ${token}`;
+    }
+    return headers;
   };
-
-  if (token) {
-    headers.Authorization = `token ${token}`;
-  }
 
   // Fetch open bounties
   const openUrl = "https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:open+label:bounty&sort=created&order=desc&per_page=100";
   const closedUrl = "https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:closed+label:bounty&sort=updated&order=desc&per_page=100";
 
-  const [openResponse, closedResponse] = await Promise.all([
-    fetch(openUrl, { headers }),
-    fetch(closedUrl, { headers }),
-  ]);
+  // Try with token first, fallback to without if auth fails
+  let openResponse, closedResponse;
+  let useToken = !!token;
+
+  const doFetch = async (withToken: boolean) => {
+    const headers = buildHeaders(withToken);
+    return Promise.all([
+      fetch(openUrl, { headers }),
+      fetch(closedUrl, { headers }),
+    ]);
+  };
+
+  try {
+    [openResponse, closedResponse] = await doFetch(useToken);
+
+    // If token auth failed (401), retry without token
+    if (useToken && (openResponse.status === 401 || closedResponse.status === 401)) {
+      console.log("[Bounties] Token auth failed (401), retrying without token...");
+      [openResponse, closedResponse] = await doFetch(false);
+    }
+  } catch (fetchErr) {
+    console.error("[Bounties] Network fetch error:", fetchErr);
+    throw new Error(`Network error fetching from GitHub: ${fetchErr instanceof Error ? fetchErr.message : "Unknown error"}`);
+  }
+
+  console.log("[Bounties] GitHub API response status:", openResponse.status, closedResponse.status);
 
   // Check for rate limiting
   if (openResponse.status === 403 || closedResponse.status === 403) {
