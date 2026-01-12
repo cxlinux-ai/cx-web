@@ -21,6 +21,7 @@ import Hackathon from "./pages/hackathon";
 import StartupPage from "./pages/startup";
 import NewsPage from "./pages/news";
 import NewsArticlePage from "./pages/news-article";
+import AdminRegistrations from "./pages/admin-registrations";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -304,6 +305,7 @@ export default function App() {
             <Route path="/startup" component={StartupPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />
+            <Route path="/admin/registrations" component={AdminRegistrations} />
           </Switch>
 
           <Toaster />

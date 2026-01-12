@@ -8,6 +8,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createHackathonRegistration(registration: InsertHackathonRegistration): Promise<HackathonRegistration>;
   getHackathonRegistrationByEmail(email: string): Promise<HackathonRegistration | undefined>;
+  getAllHackathonRegistrations(): Promise<HackathonRegistration[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -42,6 +43,14 @@ export class DatabaseStorage implements IStorage {
       .where(eq(hackathonRegistrations.email, email.toLowerCase()))
       .limit(1);
     return result[0];
+  }
+
+  async getAllHackathonRegistrations(): Promise<HackathonRegistration[]> {
+    const result = await db
+      .select()
+      .from(hackathonRegistrations)
+      .orderBy(hackathonRegistrations.registeredAt);
+    return result;
   }
 }
 

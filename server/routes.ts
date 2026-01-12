@@ -299,6 +299,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get all hackathon registrations (admin endpoint)
+  app.get("/api/hackathon/registrations", async (req, res) => {
+    try {
+      const registrations = await storage.getAllHackathonRegistrations();
+      res.json(registrations);
+    } catch (error) {
+      console.error("Failed to fetch registrations:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ error: "Failed to fetch registrations" });
+    }
+  });
+
+  // Export registrations as CSV
+  app.get("/api/hackathon/registrations/csv", async (req, res) => {
+    try {
+      const registrations = await storage.getAllHackathonRegistrations();
+      
+      const csvHeader = "Name,Email,Phone,Registered At\n";
+      const csvRows = registrations.map(r => 
+        `"${r.name}","${r.email}","${r.phone || ''}","${r.registeredAt}"`
+      ).join("\n");
+      
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", "attachment; filename=hackathon-registrations.csv");
+      res.send(csvHeader + csvRows);
+    } catch (error) {
+      console.error("Failed to export registrations:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ error: "Failed to export registrations" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
