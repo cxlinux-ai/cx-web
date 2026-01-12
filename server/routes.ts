@@ -6,6 +6,7 @@ import type { Contributor } from "@shared/schema";
 import { insertHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
 import referralRoutes from "./referral";
+import bountiesRoutes from "./bounties";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
