@@ -381,25 +381,82 @@ function StatsCard({
 }
 
 function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => void }) {
+  const isFiltered = filter !== "all";
+
   return (
-    <div className="text-center py-16">
-      <div className="text-6xl mb-4">🎉</div>
-      <h3 className="text-xl font-semibold text-white mb-2">
-        {filter === "all" ? "No bounties found" : `No ${filter} bounties`}
-      </h3>
-      <p className="text-slate-400 mb-6">
-        {filter === "all"
-          ? "Check back later for new bounty opportunities."
-          : "Try adjusting your filters or check back later."}
-      </p>
-      {filter !== "all" && (
-        <button
-          onClick={onClear}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
-        >
-          Clear Filters
-        </button>
-      )}
+    <div className="text-center py-16 px-4">
+      <div className="max-w-md mx-auto">
+        {/* Icon */}
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+          <svg className="w-10 h-10 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-2xl font-bold text-white mb-3">
+          {isFiltered ? `No ${filter} bounties` : "No Live Bounties Yet"}
+        </h3>
+
+        {/* Description */}
+        <p className="text-slate-400 mb-6 leading-relaxed">
+          {isFiltered ? (
+            "Try adjusting your filters to see more results."
+          ) : (
+            <>
+              Bounties are added when there are open issues labeled with a dollar amount on our GitHub. 
+              Want to earn rewards? Watch our repository for new opportunities.
+            </>
+          )}
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          {isFiltered ? (
+            <button
+              onClick={onClear}
+              className="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium"
+              data-testid="button-clear-filters"
+            >
+              Clear Filters
+            </button>
+          ) : (
+            <>
+              <a
+                href="https://github.com/cortexlinux"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors font-medium"
+                data-testid="link-github-org"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
+                </svg>
+                View GitHub Org
+              </a>
+              <a
+                href="https://github.com/cortexlinux/cortex/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium"
+                data-testid="link-propose-bounty"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                View Open Issues
+              </a>
+            </>
+          )}
+        </div>
+
+        {/* Footer note */}
+        {!isFiltered && (
+          <p className="text-sm text-slate-500 mt-8">
+            Issues labeled with dollar amounts (e.g., $100, $500) will appear here as bounties.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

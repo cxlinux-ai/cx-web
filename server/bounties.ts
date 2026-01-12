@@ -317,165 +317,17 @@ async function getBounties(): Promise<BountiesCache["data"]> {
 }
 
 // ==========================================
-// FALLBACK DATA
+// EMPTY DATA (No mock fallback - real data only)
 // ==========================================
 
-const FALLBACK_BOUNTIES: BountiesCache["data"] = {
-  open: [
-    {
-      id: 1,
-      number: 234,
-      title: "Windows Subsystem for Linux Support",
-      url: "https://github.com/cortexlinux/cortex/issues/234",
-      state: "open",
-      createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: null,
-      author: {
-        username: "mikelinke",
-        avatarUrl: "https://avatars.githubusercontent.com/u/1?v=4",
-        profileUrl: "https://github.com/mikelinke",
-      },
-      bountyAmount: 500,
-      bountyLabel: "$500",
-      difficulty: "advanced",
-      labels: [
-        { name: "Python", color: "3572A5" },
-        { name: "Windows", color: "0078D6" },
-        { name: "Integration", color: "7057ff" },
-      ],
-      comments: 23,
-      description: "Add support for running Cortex Linux on Windows through WSL2. This involves detecting the WSL environment and adapting package management accordingly...",
-    },
-    {
-      id: 2,
-      number: 156,
-      title: "Nix Package Manager Integration",
-      url: "https://github.com/cortexlinux/cortex/issues/156",
-      state: "open",
-      createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: null,
-      author: {
-        username: "nixfan",
-        avatarUrl: "https://avatars.githubusercontent.com/u/2?v=4",
-        profileUrl: "https://github.com/nixfan",
-      },
-      bountyAmount: 300,
-      bountyLabel: "$300",
-      difficulty: "medium",
-      labels: [
-        { name: "Nix", color: "5277C3" },
-        { name: "Package Manager", color: "fbca04" },
-      ],
-      comments: 15,
-      description: "Implement support for the Nix package manager alongside apt, dnf, and pacman. This should include proper detection and command translation...",
-    },
-    {
-      id: 3,
-      number: 189,
-      title: "Improved Error Messages",
-      url: "https://github.com/cortexlinux/cortex/issues/189",
-      state: "open",
-      createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: null,
-      author: {
-        username: "uxdesigner",
-        avatarUrl: "https://avatars.githubusercontent.com/u/3?v=4",
-        profileUrl: "https://github.com/uxdesigner",
-      },
-      bountyAmount: 150,
-      bountyLabel: "$150",
-      difficulty: "beginner",
-      labels: [
-        { name: "UX", color: "d4c5f9" },
-        { name: "CLI", color: "1d76db" },
-      ],
-      comments: 8,
-      description: "Make error messages more user-friendly and actionable. Include suggestions for how to fix common issues...",
-    },
-    {
-      id: 4,
-      number: 201,
-      title: "Shell Completion Improvements",
-      url: "https://github.com/cortexlinux/cortex/issues/201",
-      state: "open",
-      createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: null,
-      author: {
-        username: "shellwizard",
-        avatarUrl: "https://avatars.githubusercontent.com/u/4?v=4",
-        profileUrl: "https://github.com/shellwizard",
-      },
-      bountyAmount: 100,
-      bountyLabel: "$100",
-      difficulty: "medium",
-      labels: [
-        { name: "Bash", color: "89e051" },
-        { name: "Zsh", color: "c1c1c1" },
-        { name: "Fish", color: "4aae46" },
-      ],
-      comments: 12,
-      description: "Improve shell completion for bash, zsh, and fish shells. Add context-aware completions for common commands...",
-    },
-  ],
-  closed: [
-    {
-      id: 5,
-      number: 145,
-      title: "Add Dark Mode Support",
-      url: "https://github.com/cortexlinux/cortex/issues/145",
-      state: "closed",
-      createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-      author: {
-        username: "darkthemer",
-        avatarUrl: "https://avatars.githubusercontent.com/u/5?v=4",
-        profileUrl: "https://github.com/darkthemer",
-      },
-      bountyAmount: 100,
-      bountyLabel: "$100",
-      difficulty: "beginner",
-      labels: [
-        { name: "CSS", color: "563d7c" },
-        { name: "React", color: "61dafb" },
-      ],
-      comments: 18,
-      description: "Implement dark mode support for the web interface. Use system preferences by default with manual toggle...",
-    },
-    {
-      id: 6,
-      number: 132,
-      title: "Docker Container Support",
-      url: "https://github.com/cortexlinux/cortex/issues/132",
-      state: "closed",
-      createdAt: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
-      closedAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
-      author: {
-        username: "containerking",
-        avatarUrl: "https://avatars.githubusercontent.com/u/6?v=4",
-        profileUrl: "https://github.com/containerking",
-      },
-      bountyAmount: 200,
-      bountyLabel: "$200",
-      difficulty: "medium",
-      labels: [
-        { name: "Docker", color: "2496ed" },
-        { name: "DevOps", color: "0db7ed" },
-      ],
-      comments: 25,
-      description: "Create official Docker images for Cortex Linux and document usage patterns...",
-    },
-  ],
+const EMPTY_BOUNTIES: BountiesCache["data"] = {
+  open: [],
+  closed: [],
   stats: {
-    totalOpen: 4,
-    totalClosed: 2,
-    totalOpenAmount: 1050,
-    totalClosedAmount: 300,
+    totalOpen: 0,
+    totalClosed: 0,
+    totalOpenAmount: 0,
+    totalClosedAmount: 0,
   },
 };
 
@@ -511,12 +363,12 @@ router.get("/", bountiesLimiter, async (req: Request, res: Response) => {
         return res.json(response);
       }
 
-      // Return fallback data
+      // Return empty data (no mock fallback)
       const response: BountiesResponse = {
         success: true,
-        data: FALLBACK_BOUNTIES,
+        data: EMPTY_BOUNTIES,
         cached: false,
-        error: "Using fallback data due to GitHub API error",
+        error: "Unable to fetch from GitHub. No bounties available.",
       };
       return res.json(response);
     }
@@ -556,11 +408,11 @@ router.get("/stats", bountiesLimiter, async (req: Request, res: Response) => {
       stats: data.stats,
     });
   } catch (error) {
-    // Return fallback stats
+    // Return empty stats (no mock fallback)
     res.json({
       success: true,
-      stats: FALLBACK_BOUNTIES.stats,
-      error: "Using fallback stats",
+      stats: EMPTY_BOUNTIES.stats,
+      error: "Unable to fetch from GitHub",
     });
   }
 });
