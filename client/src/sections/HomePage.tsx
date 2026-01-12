@@ -1216,70 +1216,46 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
             {/* Community Edition */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0, duration: 0.5, ease: "easeOut" }}
               className="group relative"
-              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Background glow layer */}
-              <div className="absolute inset-4 rounded-3xl bg-gradient-to-b from-emerald-500/10 via-emerald-500/5 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              
               {/* Card */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] p-8 flex flex-col h-full hover:border-white/20 hover:shadow-[0_25px_60px_-20px_rgba(16,185,129,0.2)] hover:-translate-y-2 transition-all duration-500">
-                {/* Inner highlight */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.04] via-transparent to-transparent pointer-events-none" />
-                
+              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col h-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
                 <div className="relative">
-                  {/* Status chip */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-medium text-emerald-400 uppercase tracking-[0.15em]">Open Source</span>
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all duration-500">
-                    <Zap size={26} className="text-emerald-400" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-1 text-white">Community</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-white">Community</h3>
                   <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-5xl font-bold text-emerald-400">Free</span>
+                    <span className="text-4xl font-bold text-white">Free</span>
                   </div>
-                  <p className="text-gray-500 text-sm mb-8">Forever open source</p>
+                  <p className="text-gray-500 text-sm mb-6">Open source forever</p>
                   
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-3 mb-8">
                     {[
                       "Full AI capabilities",
                       "All core features",
-                      "Open source (Apache 2.0)",
+                      "Apache 2.0 license",
                       "Community support",
                       "Unlimited personal use",
-                    ].map((feature, idx) => (
-                      <li 
-                        key={feature} 
-                        className="flex items-center gap-3 text-gray-300 transition-all duration-300"
-                        style={{ transitionDelay: `${idx * 40}ms` }}
-                      >
-                        <div className="w-5 h-5 rounded-full bg-emerald-500/10 ring-1 ring-emerald-400/30 flex items-center justify-center flex-shrink-0">
-                          <Check size={10} className="text-emerald-400" />
-                        </div>
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-center gap-2.5 text-gray-400">
+                        <Check size={14} className="text-emerald-500 flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                <div className="relative mt-auto">
+                <div className="mt-auto">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn relative block w-full py-4 text-center rounded-xl font-semibold bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-300"
+                    className="block w-full py-3 text-center rounded-lg font-medium bg-white/[0.04] border border-white/[0.08] text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-200"
                     data-testid="button-download-free"
                   >
-                    <span className="relative z-10">Download Free</span>
+                    Download Free
                   </a>
                 </div>
               </div>
@@ -1287,52 +1263,33 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
             {/* Pro Edition - Highlighted */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative md:-mt-6 md:mb-6"
-              style={{ transformStyle: "preserve-3d" }}
+              transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+              className="group relative md:-mt-4 md:mb-4"
             >
-              {/* Large background glow */}
-              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-b from-blue-500/20 via-blue-600/10 to-transparent blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+              {/* Subtle glow */}
+              <div className="absolute -inset-px rounded-xl bg-gradient-to-b from-blue-500/20 via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
               
-              {/* Animated gradient border */}
-              <div className="pricing-gradient-border" />
-              
-              {/* Card background */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-[#0f172a] via-[#0a0f1a] to-[#060a12] p-8 flex flex-col h-full hover:-translate-y-2 transition-all duration-500">
-                {/* Glass overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/[0.08] via-transparent to-purple-500/[0.04] pointer-events-none" />
-                
+              {/* Card */}
+              <div className="relative rounded-xl bg-[#0d1117] border border-blue-500/30 p-7 flex flex-col h-full hover:border-blue-500/50 hover:shadow-[0_8px_30px_-12px_rgba(59,130,246,0.25)] hover:-translate-y-1 transition-all duration-300">
                 {/* Popular badge */}
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-10">
-                  <div className="px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full text-sm font-bold shadow-[0_4px_20px_rgba(59,130,246,0.5),0_0_40px_rgba(59,130,246,0.3)] flex items-center gap-2 border border-blue-400/30">
-                    <Star size={14} className="fill-current text-white" />
-                    <span>Most Popular</span>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="px-3 py-1 bg-blue-500 rounded-full text-xs font-semibold text-white">
+                    Most Popular
                   </div>
                 </div>
                 
-                <div className="relative pt-2">
-                  {/* Status chip */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/25 mb-6">
-                    <Rocket size={10} className="text-blue-400" />
-                    <span className="text-[10px] font-medium text-blue-400 uppercase tracking-[0.15em]">Pro Plan</span>
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/30 to-blue-600/15 border border-blue-500/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] transition-all duration-500">
-                    <Rocket size={26} className="text-blue-400" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-1 text-white">Founders</h3>
+                <div className="relative pt-3">
+                  <h3 className="text-lg font-semibold mb-3 text-white">Founders</h3>
                   <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-blue-300 via-blue-400 to-blue-300 bg-clip-text text-transparent">$19</span>
-                    <span className="text-gray-400 text-lg">/month</span>
+                    <span className="text-4xl font-bold text-white">$19</span>
+                    <span className="text-gray-500">/month</span>
                   </div>
-                  <p className="text-gray-500 text-sm mb-8">For serious AI builders</p>
+                  <p className="text-gray-500 text-sm mb-6">For serious AI builders</p>
                   
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-3 mb-8">
                     {[
                       "Everything in Community",
                       "Priority support (24/7)",
@@ -1340,33 +1297,24 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       "GPU inference engine",
                       "Performance analytics",
                       "Team collaboration",
-                    ].map((feature, idx) => (
-                      <li 
-                        key={feature} 
-                        className="flex items-center gap-3 text-gray-200 transition-all duration-300"
-                        style={{ transitionDelay: `${idx * 40}ms` }}
-                      >
-                        <div className="w-5 h-5 rounded-full bg-blue-500/15 ring-1 ring-blue-400/40 flex items-center justify-center flex-shrink-0">
-                          <Check size={10} className="text-blue-400" />
-                        </div>
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-center gap-2.5 text-gray-300">
+                        <Check size={14} className="text-blue-400 flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                <div className="relative mt-auto">
+                <div className="mt-auto">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn relative block w-full py-4 text-center rounded-xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-400 hover:to-blue-500 hover:shadow-[0_8px_30px_rgba(59,130,246,0.4),0_0_50px_rgba(59,130,246,0.2)] transition-all duration-300 border border-blue-400/30"
+                    className="block w-full py-3 text-center rounded-lg font-medium bg-blue-500 text-white hover:bg-blue-400 transition-all duration-200"
                     data-testid="button-get-founders"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Get Started
-                      <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </span>
+                    Get Started
                   </a>
                 </div>
               </div>
@@ -1374,40 +1322,22 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
             {/* Enterprise Edition */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
               className="group relative"
-              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Background glow layer */}
-              <div className="absolute inset-4 rounded-3xl bg-gradient-to-b from-purple-500/10 via-purple-500/5 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              
               {/* Card */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] p-8 flex flex-col h-full hover:border-white/20 hover:shadow-[0_25px_60px_-20px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-all duration-500">
-                {/* Inner highlight */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.04] via-transparent to-transparent pointer-events-none" />
-                
+              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col h-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
                 <div className="relative">
-                  {/* Status chip */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6">
-                    <Building size={10} className="text-purple-400" />
-                    <span className="text-[10px] font-medium text-purple-400 uppercase tracking-[0.15em]">Enterprise</span>
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-all duration-500">
-                    <Building size={26} className="text-purple-400" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold mb-1 text-white">Enterprise</h3>
+                  <h3 className="text-lg font-semibold mb-3 text-white">Enterprise</h3>
                   <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-5xl font-bold bg-gradient-to-r from-purple-300 via-purple-400 to-purple-300 bg-clip-text text-transparent">Custom</span>
+                    <span className="text-4xl font-bold text-white">Custom</span>
                   </div>
-                  <p className="text-gray-500 text-sm mb-8">For large organizations</p>
+                  <p className="text-gray-500 text-sm mb-6">For large organizations</p>
                   
-                  <ul className="space-y-4 mb-8">
+                  <ul className="space-y-3 mb-8">
                     {[
                       "Everything in Founders",
                       "Dedicated support team",
@@ -1415,28 +1345,22 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       "SLA guarantees (99.9%)",
                       "Compliance reporting",
                       "On-premise deployment",
-                    ].map((feature, idx) => (
-                      <li 
-                        key={feature} 
-                        className="flex items-center gap-3 text-gray-300 transition-all duration-300"
-                        style={{ transitionDelay: `${idx * 40}ms` }}
-                      >
-                        <div className="w-5 h-5 rounded-full bg-purple-500/10 ring-1 ring-purple-400/30 flex items-center justify-center flex-shrink-0">
-                          <Check size={10} className="text-purple-400" />
-                        </div>
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-center gap-2.5 text-gray-400">
+                        <Check size={14} className="text-purple-400 flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                <div className="relative mt-auto">
+                <div className="mt-auto">
                   <a
                     href="mailto:sales@cortexlinux.com"
-                    className="group/btn relative block w-full py-4 text-center rounded-xl font-semibold bg-white/[0.03] border border-white/10 hover:bg-white/[0.08] hover:border-purple-500/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] transition-all duration-300"
+                    className="block w-full py-3 text-center rounded-lg font-medium bg-white/[0.04] border border-white/[0.08] text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-200"
                     data-testid="button-contact-sales"
                   >
-                    <span className="relative z-10">Contact Sales</span>
+                    Contact Sales
                   </a>
                 </div>
               </div>
