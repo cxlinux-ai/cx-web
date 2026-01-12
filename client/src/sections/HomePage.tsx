@@ -2332,13 +2332,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 Get Started
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
-              <button
-                onClick={() => onNavigate("preview")}
+              <a
+                href="https://discord.gg/cortexlinux"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 glass-card rounded-xl text-lg font-semibold hover:border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
+                onClick={() => analytics.trackCTAClick('discord', 'hero_footer')}
+                data-testid="link-talk-to-us"
               >
                 <MessageCircle size={20} />
-                Talk to Us
-              </button>
+                Join Discord
+              </a>
             </div>
 
             {/* Trust Indicators */}
