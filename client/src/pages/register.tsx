@@ -29,8 +29,8 @@ export default function Register() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3">
-            Join the <span className="text-blue-400">Hackathon</span>
+          <h1 className="text-[50px] font-bold mb-3">
+            Join the <span className="gradient-text">Hackathon</span>
           </h1>
           <p className="text-gray-400 max-w-xl mx-auto">
             Cortex Linux Hackathon 2026 · February 17, 2026
