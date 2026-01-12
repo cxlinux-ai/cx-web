@@ -165,8 +165,8 @@ export default function App() {
                 >AI Agencies</Link>
                 <Link
                   href="/hackathon"
-                  className={`relative text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
-                    location === "/hackathon" ? "text-terminal-green" : "text-terminal-green hover:text-white"
+                  className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 ${
+                    location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
                   }`}
                   data-testid="link-hackathon"
                 >
