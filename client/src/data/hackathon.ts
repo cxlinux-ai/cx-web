@@ -1,3 +1,173 @@
+// ============================================
+// IDEathon Submission Template
+// ============================================
+export interface IDEathonSubmissionField {
+  id: string;
+  label: string;
+  description: string;
+  required: boolean;
+  type: "text" | "textarea" | "select";
+  placeholder?: string;
+  options?: string[];
+}
+
+export const ideathonSubmissionTemplate: IDEathonSubmissionField[] = [
+  {
+    id: "feature_name",
+    label: "Feature Name",
+    description: "A clear, concise name for your proposed feature",
+    required: true,
+    type: "text",
+    placeholder: "e.g., Enterprise SSO Integration"
+  },
+  {
+    id: "problem_statement",
+    label: "Problem Statement / Pain Point",
+    description: "What specific problem does this feature solve? Who experiences this pain?",
+    required: true,
+    type: "textarea",
+    placeholder: "Describe the problem in detail..."
+  },
+  {
+    id: "proposed_solution",
+    label: "Proposed Solution",
+    description: "A short description of how your feature addresses the problem",
+    required: true,
+    type: "textarea",
+    placeholder: "Explain your solution approach..."
+  },
+  {
+    id: "target_audience",
+    label: "Target Audience",
+    description: "Who will benefit from this feature?",
+    required: true,
+    type: "select",
+    options: ["Enterprise Users", "Startups", "Individual Developers", "DevOps Teams", "Data Scientists", "System Administrators"]
+  },
+  {
+    id: "monetization_impact",
+    label: "Expected Monetization Impact",
+    description: "How could this feature generate revenue for Cortex Linux?",
+    required: true,
+    type: "textarea",
+    placeholder: "e.g., Premium tier feature, usage-based pricing, enterprise licensing..."
+  },
+  {
+    id: "implementation_outline",
+    label: "Implementation Outline",
+    description: "Technical approach, dependencies, and estimated complexity",
+    required: true,
+    type: "textarea",
+    placeholder: "Describe technical requirements, API integrations, dependencies..."
+  },
+  {
+    id: "prototype_link",
+    label: "Optional Prototype / Mockup",
+    description: "Link to Figma, screenshot, or demo (optional but encouraged)",
+    required: false,
+    type: "text",
+    placeholder: "https://figma.com/..."
+  }
+];
+
+// ============================================
+// Roadmap / Tasks Checklist
+// ============================================
+export interface RoadmapTask {
+  id: string;
+  number: number;
+  title: string;
+  description: string;
+  status: "completed" | "in-progress" | "pending";
+  category: "planning" | "website" | "legal" | "launch" | "tracking";
+}
+
+export const roadmapTasks: RoadmapTask[] = [
+  {
+    id: "define-template",
+    number: 1,
+    title: "Define Phase 1 Template",
+    description: "Finalize IDEathon submission fields & examples",
+    status: "completed",
+    category: "planning"
+  },
+  {
+    id: "update-copy",
+    number: 2,
+    title: "Update Hackathon Page Copy",
+    description: "Brand IDEathon vs Hackathon phases clearly",
+    status: "completed",
+    category: "website"
+  },
+  {
+    id: "create-pdf",
+    number: 3,
+    title: "Create Downloadable PDF",
+    description: "Professional layout with rules, legal, and branding",
+    status: "in-progress",
+    category: "legal"
+  },
+  {
+    id: "website-integration",
+    number: 4,
+    title: "Website Integration",
+    description: "PDF download button, timeline, progress tracker",
+    status: "in-progress",
+    category: "website"
+  },
+  {
+    id: "email-registration",
+    number: 5,
+    title: "Email Registration & Tracking",
+    description: "Ensure all participants are captured in database",
+    status: "completed",
+    category: "tracking"
+  },
+  {
+    id: "legal-review",
+    number: 6,
+    title: "Internal Legal Review",
+    description: "IP rights, prize rules, and conduct policy check",
+    status: "pending",
+    category: "legal"
+  },
+  {
+    id: "launch-phase1",
+    number: 7,
+    title: "Launch Phase 1 (IDEathon)",
+    description: "Communicate branding & submission instructions",
+    status: "pending",
+    category: "launch"
+  },
+  {
+    id: "collect-submissions",
+    number: 8,
+    title: "Collect Submissions",
+    description: "Review IDEathon ideas using template criteria",
+    status: "pending",
+    category: "tracking"
+  },
+  {
+    id: "launch-phase2",
+    number: 9,
+    title: "Launch Phase 2 (Hackathon)",
+    description: "Start code-first building with approved ideas",
+    status: "pending",
+    category: "launch"
+  },
+  {
+    id: "track-metrics",
+    number: 10,
+    title: "Track Participation & Metrics",
+    description: "GitHub contributions, demos, engagement stats",
+    status: "pending",
+    category: "tracking"
+  }
+];
+
+// ============================================
+// Champion Ambassador
+// ============================================
 export interface ChampionAmbassador {
   name: string;
   title: string;
@@ -55,45 +225,69 @@ export interface HackathonPhase {
   };
 }
 
+// ============================================
+// IDEathon Phase (Phase 1)
+// ============================================
+export interface IDEathonPhase {
+  id: string;
+  title: string;
+  subtitle: string;
+  weeks: string;
+  duration: string;
+  goal: string;
+  description: string;
+  color: string;
+  bgGradient: string;
+  borderColor: string;
+  judgingCriteria: { name: string; weight: string; description: string }[];
+  prizes: { place: string; amount: string }[];
+  prizeTotal: string;
+  cta: { text: string; href: string; external?: boolean };
+}
+
+export const ideathonPhase: IDEathonPhase = {
+  id: "ideathon",
+  title: "Cortex IDEathon",
+  subtitle: "Idea-to-Feature",
+  weeks: "Weeks 1-3",
+  duration: "3 weeks",
+  goal: "Generate monetizable feature ideas",
+  description: "Submit structured product ideas for monetizable features in Cortex Linux. Focus on enterprise services, premium integrations, and revenue-generating capabilities. No marketing or sales strategies—just actionable product ideas.",
+  color: "text-amber-400",
+  bgGradient: "from-amber-500/10 to-transparent",
+  borderColor: "border-amber-500/20",
+  judgingCriteria: [
+    { name: "Innovation & Originality", weight: "30%", description: "Novel approach to the problem" },
+    { name: "Feasibility", weight: "25%", description: "Realistic for Cortex Linux implementation" },
+    { name: "Monetization Potential", weight: "25%", description: "Clear revenue generation path" },
+    { name: "Completeness", weight: "20%", description: "Full use of submission template" }
+  ],
+  prizes: [
+    { place: "Best Idea", amount: "$1,000" },
+    { place: "Most Innovative", amount: "$750" },
+    { place: "Best Enterprise Feature", amount: "$500" },
+    { place: "Honorable Mentions (3)", amount: "$250 each" }
+  ],
+  prizeTotal: "$3,000",
+  cta: {
+    text: "Submit Your Idea",
+    href: "https://forms.cortexlinux.com/ideathon",
+    external: true
+  }
+};
+
+// ============================================
+// Hackathon Phases (Phase 2)
+// ============================================
 export const hackathonPhases: HackathonPhase[] = [
   {
-    id: "onboarding",
-    number: 1,
-    title: "Onboarding",
-    weeks: "Weeks 1-2",
-    duration: "2 weeks",
-    goal: "Eliminate non-builders early",
-    description: "Get set up with Cortex Linux, complete the guided tutorial, and join the community. This phase ensures every participant has a working environment and understands the codebase before the build sprint begins.",
-    color: "text-emerald-400",
-    bgGradient: "from-emerald-500/10 to-transparent",
-    borderColor: "border-emerald-500/20",
-    requirements: [
-      "Install Cortex Linux on your system",
-      "Complete the guided onboarding tutorial",
-      "Join Discord and introduce yourself",
-      "Star the GitHub repository",
-      "Submit your first 'hello world' command"
-    ],
-    rewards: [
-      "Digital completion certificate",
-      "Limited edition hackathon swag",
-      "Early Contributor badge on profile",
-      "Access to exclusive Discord channels"
-    ],
-    cta: {
-      text: "Start Onboarding",
-      href: "/getting-started",
-      external: false
-    }
-  },
-  {
     id: "build-sprint",
-    number: 2,
+    number: 1,
     title: "Build Sprint",
-    weeks: "Weeks 3-8",
+    weeks: "Weeks 4-9",
     duration: "6 weeks",
     goal: "Ship real things",
-    description: "The main event. Build a Cortex feature, plugin, extension, or integration. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
+    description: "The main event. Build a Cortex feature, plugin, extension, or integration based on IDEathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
     color: "text-blue-400",
     bgGradient: "from-blue-500/10 to-transparent",
     borderColor: "border-blue-500/20",
@@ -126,9 +320,9 @@ export const hackathonPhases: HackathonPhase[] = [
   },
   {
     id: "demo-week",
-    number: 3,
+    number: 2,
     title: "Demo Week",
-    weeks: "Weeks 9-10",
+    weeks: "Weeks 10-11",
     duration: "2 weeks",
     goal: "Visibility + social proof",
     description: "Show off what you built. Create a short demo video, make your GitHub repo public, and let the community vote. This is where your work gets recognized and shared.",
@@ -162,9 +356,9 @@ export const hackathonPhases: HackathonPhase[] = [
   },
   {
     id: "merge-ship",
-    number: 4,
+    number: 3,
     title: "Merge & Ship",
-    weeks: "Weeks 11-13",
+    weeks: "Weeks 12-14",
     duration: "3 weeks",
     goal: "Convert builders into maintainers",
     description: "The final phase where your code gets production-ready. Work directly with maintainers on code reviews, get your PRs merged, and potentially become a long-term contributor to Cortex Linux.",
@@ -303,23 +497,26 @@ export const growthStrategy: GrowthChannel[] = [
 
 export const hackathonConfig = {
   name: "Cortex Hackathon 2026",
-  tagline: "Code is the currency. Shipping is the signal.",
+  tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
-  totalWeeks: 13,
-  totalPrizePool: "$15,000",
+  totalWeeks: 14,
+  totalPrizePool: "$18,000",
+  ideathonPrize: "$3,000",
   buildSprintPrize: "$12,000",
   demoPrize: "$3,000",
   expectedParticipants: "500+",
+  expectedIdeas: "200+",
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
   discordUrl: "https://discord.gg/cortexlinux",
+  rulesDocUrl: "/downloads/cortex-hackathon-rules-2026.pdf",
   philosophy: {
-    principle: "Code is the currency. Shipping is the signal.",
-    description: "This hackathon requires installation and usage of Cortex, produces real GitHub PRs, generates demos and technical content, and turns participants into contributors—not spectators.",
+    principle: "Ideas become features. Features become revenue.",
+    description: "Phase 1 (IDEathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for Cortex Linux.",
     values: [
-      "Builders over idea people",
+      "Actionable ideas over vague concepts",
+      "Monetizable features over marketing strategies",
       "Shipped code over slide decks",
-      "Real PRs over theoretical proposals",
       "Long-term contributors over one-time participants"
     ]
   }
@@ -327,43 +524,47 @@ export const hackathonConfig = {
 
 export const hackathonFaqs = [
   {
-    question: "What makes this hackathon different?",
-    answer: "This is a CODE-FIRST hackathon. No pitch decks, no business plans, no monetization strategies. You must install Cortex, write code, and ship something real. We're looking for builders who become long-term contributors, not idea people."
+    question: "What's the difference between IDEathon and Hackathon?",
+    answer: "IDEathon (Phase 1, Weeks 1-3) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 4-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
-    question: "Do I need to be an expert developer?",
-    answer: "You need to be able to write code and use Git. Phase 1 ensures everyone can get Cortex running. If you can complete the onboarding tutorial, you can participate. We have tracks for all skill levels from CLI commands to advanced AI integrations."
+    question: "Do I need technical skills for the IDEathon?",
+    answer: "Not necessarily! IDEathon focuses on product thinking—identifying pain points and proposing features. However, understanding technical feasibility helps. Your idea should be something that could realistically be built into Cortex Linux."
+  },
+  {
+    question: "Can I build my own idea in Phase 2?",
+    answer: "Yes! You can build from approved IDEathon ideas or bring your own. What matters is that you ship real code via GitHub PRs. Original ideas still need to follow the feature guidelines."
   },
   {
     question: "Can I participate solo or do I need a team?",
-    answer: "Both! Solo developers are welcome. Teams of 2-5 are also great for larger features. What matters is what you ship, not how many people shipped it."
+    answer: "Both! Solo developers are welcome. Teams of 2-5 are great for larger features. What matters is what you ship, not how many people shipped it."
   },
   {
     question: "What if my PR doesn't get merged during the hackathon?",
-    answer: "Phase 4 (Merge & Ship) is specifically designed for this. You'll work directly with maintainers to refine your code. Even if it takes a few iterations, quality contributions will eventually merge. Many successful open-source contributors started with rejected PRs."
+    answer: "The Merge & Ship phase (Weeks 12-14) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
   },
   {
     question: "What do I need to participate?",
-    answer: "A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. Cortex works with Python 3.8+ and most Linux distributions. The onboarding phase will help you get everything set up."
+    answer: "For IDEathon: Just a web browser and good ideas. For Hackathon: A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. Cortex works with Python 3.8+ and most Linux distributions."
   },
   {
     question: "How are submissions judged?",
-    answer: "Build Sprint (Phase 2) is judged on Code Quality (30%), Usefulness (25%), Architecture (20%), Documentation (15%), and Test Coverage (10%). Demo Week includes community voting plus maintainer review. Three judges minimum per submission."
+    answer: "IDEathon: Innovation (30%), Feasibility (25%), Monetization Potential (25%), Completeness (20%). Hackathon: Code Quality (30%), Usefulness (25%), Architecture (20%), Documentation (15%), Test Coverage (10%)."
   },
   {
     question: "Is there a registration fee?",
     answer: "100% free. This is open source. You're contributing to a community project that benefits everyone. No fees, no catches, no hidden costs."
   },
   {
-    question: "Can I participate from anywhere?",
-    answer: "Yes! This is a global, async hackathon. Work on your own schedule, from anywhere in the world. All communication happens on GitHub and Discord. Weekly live sessions are recorded for different time zones."
+    question: "Where can I find the official rules?",
+    answer: "Download the complete Rules & Expectations PDF from the hackathon page. It covers eligibility, submission guidelines, IP rights, prizes, and code of conduct."
   }
 ];
 
 export const hackathonBenefits = [
   {
-    title: "Real Open Source Experience",
-    description: "Your code becomes part of a production project with real users. This isn't a toy—it's software people depend on."
+    title: "Two Ways to Contribute",
+    description: "Submit feature ideas in IDEathon (no coding required) or build real code in Hackathon. Both paths lead to recognition and rewards."
   },
   {
     title: "Mentorship from Champions",
@@ -378,8 +579,8 @@ export const hackathonBenefits = [
     description: "Connect with 500+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $15,000 in Prizes",
-    description: "Real money for real code. $12,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles, swag, and recognition."
+    title: "Compete for $18,000 in Prizes",
+    description: "Real money for real contributions. $3,000 for IDEathon, $12,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",
