@@ -438,7 +438,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="gradient-text text-[82px] font-extrabold pl-[10px] pr-[10px]">The First Native AI Linux Layer</span>
+            <span className="text-white text-[82px] font-extrabold pl-[10px] pr-[10px]">The First Native</span>
+            <br />
+            <span className="gradient-text text-[82px] font-extrabold pl-[10px] pr-[10px]">AI Linux Layer</span>
           </motion.h1>
 
           {/* Subheadline */}
