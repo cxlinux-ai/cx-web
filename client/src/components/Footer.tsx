@@ -31,7 +31,7 @@ export default function Footer() {
               <li><Link href="/#pricing" className="hover:text-white transition-colors" data-testid="footer-link-pricing">Pricing</Link></li>
               <li><Link href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-docs">Documentation</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">FAQ</Link></li>
-              <li><Link href="/hackathon" className="hover:text-terminal-green transition-colors" data-testid="footer-link-hackathon">Hackathon</Link></li>
+              <li><Link href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">Hackathon</Link></li>
             </ul>
           </div>
 
@@ -43,7 +43,6 @@ export default function Footer() {
               <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
               <li><Link href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</Link></li>
               <li><Link href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">Mission</Link></li>
-              <li><Link href="/bounties" className="hover:text-green-400 transition-colors" data-testid="footer-link-bounties-resources">Bounty Board</Link></li>
             </ul>
           </div>
 
@@ -53,8 +52,8 @@ export default function Footer() {
               <li><a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">Discord</a></li>
               <li><a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
               <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
-              <li><Link href="/bounties" className="hover:text-green-400 transition-colors" data-testid="footer-link-bounties">Bounties</Link></li>
-              <li><Link href="/waitlist" className="hover:text-blue-400 transition-colors" data-testid="footer-link-waitlist">Join Waitlist</Link></li>
+              <li><Link href="/bounties" className="hover:text-white transition-colors" data-testid="footer-link-bounties">Bounties</Link></li>
+              <li><Link href="/waitlist" className="hover:text-white transition-colors" data-testid="footer-link-waitlist">Join Waitlist</Link></li>
             </ul>
           </div>
 
