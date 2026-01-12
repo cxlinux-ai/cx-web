@@ -490,7 +490,7 @@ const FALLBACK_BOUNTIES: BountiesCache["data"] = {
 router.get("/", bountiesLimiter, async (req: Request, res: Response) => {
   try {
     const now = Date.now();
-    const isCached = bountiesCache && now < bountiesCache.expiresAt;
+    const isCached = !!(bountiesCache && now < bountiesCache.expiresAt);
 
     let data: BountiesCache["data"];
 
