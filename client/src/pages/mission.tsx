@@ -106,7 +106,7 @@ const currentTasks = [
 
 const coreContributors = [
   { name: "Mike Morgan", role: "CEO", github: "mikejmorgan-ai" },
-  { name: "Suyash D", role: "Lead Engineer", github: "Suyashd999" },
+  { name: "Suyash D", role: "Lead Engineer", github: "Suyashd999", customImage: "/images/suyash-d.png" },
   { name: "Ansh Grover", role: "Main Reviewer", github: "Anshgrover23" }
 ];
 
@@ -541,9 +541,9 @@ export default function MissionPage() {
                   data-testid={`link-contributor-${contributor.github}`}
                 >
                   <img
-                    src={`https://github.com/${contributor.github}.png`}
+                    src={contributor.customImage || `https://github.com/${contributor.github}.png`}
                     alt={`${contributor.name}, ${contributor.role}`}
-                    className="w-16 h-16 rounded-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 ring-2 ring-white/10 group-hover:ring-brand-blue/50"
+                    className="w-16 h-16 rounded-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 ring-2 ring-white/10 group-hover:ring-brand-blue/50"
                     loading="lazy"
                   />
                 </a>
