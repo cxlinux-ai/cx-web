@@ -22,14 +22,13 @@ export default function Register() {
     <div className="min-h-screen bg-black text-white">
       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-      
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <h1 className="text-[50px] font-bold mb-3">
+          <h1 className="text-[50px] font-bold mt-[0px] mb-[0px] pt-[10px] pb-[10px]">
             Join the <span className="gradient-text">Hackathon</span>
           </h1>
           <p className="text-gray-400 max-w-xl mx-auto">
