@@ -1,0 +1,166 @@
+CortexLinux.com A/B Testing Roadmap
+1️⃣ Goals of A/B Testing
+
+Optimize titles, meta descriptions, and hero text for higher CTR.
+
+Test headlines, copy, and CTAs for user engagement.
+
+Increase dwell time and internal navigation.
+
+Validate layout and design changes for usability and conversion.
+
+Maintain canonical URLs and SEO-friendly structure.
+
+2️⃣ Priority Pages
+Page	A/B Focus	KPI / Metric
+Home	Hero headline, CTA text, hero image	Bounce rate, CTA clicks, scroll depth
+Tutorials / Task Pages	Intro paragraph, “Traditional vs Cortex” sections, CTA placement	CTR to internal pages, dwell time, scroll depth
+Blog Posts	Titles, meta descriptions, featured image, intro	CTR from search, scroll depth, social shares
+Press / News	Card summary text, hover effects, “Read More” links	CTR to full article, shares, dwell time
+Hackathon	CTA copy (“Join IDEathon / Hackathon”), countdown timer visibility	Signups, form completions, email captures
+Security / Privacy Pages	Headline phrasing, trust anchors	Bounce rate, scroll depth, PDF downloads
+3️⃣ Testable Elements
+Home Page
+
+Hero H1: Test different formulations (e.g., “AI LINUX for Developers” vs “The AI Layer for Linux”).
+
+Subheadline: Pain-focused vs benefit-focused.
+
+CTA Buttons: Text, color, placement.
+
+Hero Image: Static vs animated, different AI/terminal visuals.
+
+Trust Anchors: “Built by Real People” placement.
+
+Tutorials / Task Pages
+
+Intro paragraph length and tone (short vs detailed).
+
+“Traditional vs Cortex” section ordering.
+
+CTA placement: top vs bottom of page.
+
+Internal link suggestions: showing related tasks prominently.
+
+Tips / warnings callouts: visual emphasis (highlighted vs subtle).
+
+Blog Posts
+
+Title A/B: primary keyword placement vs natural human-readable title.
+
+Meta description variations for CTR.
+
+Featured image variations (AI-generated vs screenshot).
+
+Intro paragraph phrasing.
+
+Press / News
+
+Card summary: 2–3 line summary variations.
+
+“Read Full Article” CTA placement.
+
+Hover effects: shadow vs glow vs none.
+
+Publication date visibility.
+
+Hackathon Pages
+
+CTA text: “Join IDEathon” vs “Submit Idea”
+
+Countdown timer: visibility, font size, placement
+
+Email capture form placement: modal vs inline
+
+Security / Privacy
+
+Headline phrasing: “Your system, your control” vs “Cortex is secure by design”
+
+Trust proof section placement: hero vs below fold
+
+FAQ accordion layout variations
+
+4️⃣ A/B Testing Process
+
+Step 1: Identify Objective
+
+Example: Increase CTA clicks by 15%
+
+Track via GA4 and heatmaps
+
+Step 2: Select Element to Test
+
+Start with high-traffic pages: home page → blog posts → tutorials
+
+Step 3: Create Variants
+
+Keep one control version
+
+Create 1–2 variants for each element
+
+Step 4: Implement Tracking
+
+GA4 events for clicks, scroll depth, dwell time
+
+Heatmaps (Hotjar / Microsoft Clarity) for interaction
+
+Conversion tracking (email capture, form submissions)
+
+Step 5: Run Test
+
+Minimum duration: 2–3 weeks or until statistically significant
+
+Traffic allocation: 50/50 for control vs variant
+
+Step 6: Measure & Analyze
+
+CTR, scroll depth, dwell time, bounce rate, conversions
+
+Identify winning variant for each KPI
+
+Step 7: Iterate
+
+Deploy winning version permanently
+
+Move to next element to test
+
+5️⃣ A/B Testing Roadmap by Timeline
+Phase	Focus	Duration	Pages / Elements
+Phase 1	Home page hero, CTA, trust anchor	2–3 weeks	Hero H1, subheadline, primary CTA, trust section
+Phase 2	Tutorials / Task Pages	3–4 weeks	Intro paragraph, “Traditional vs Cortex”, CTA placement, related links
+Phase 3	Blog Posts	2–3 weeks	Titles, meta descriptions, intro, featured image
+Phase 4	Press / News	2 weeks	Card summaries, Read More CTA, hover effect, publication date
+Phase 5	Hackathon / Security Pages	2–3 weeks	CTA copy, countdown timer, form placement, FAQ layout
+6️⃣ Tracking Metrics
+
+CTR: click-through from search results or internal links
+
+Dwell Time: time spent on page
+
+Bounce Rate: exit without interaction
+
+Scroll Depth: % of page viewed
+
+Conversions: form submissions, email signups, hackathon registration
+
+Internal Navigation: clicks on related pages / tutorials
+
+7️⃣ Tools & Setup
+
+GA4 / Google Search Console: track engagement & CTR
+
+Hotjar / Microsoft Clarity: heatmaps and session recordings
+
+Optimizely / Split.io / VWO: for A/B test management (optional)
+
+Internal Spreadsheet: track variant, KPI, winning version
+
+8️⃣ Notes
+
+Always keep canonical URLs to prevent SEO issues.
+
+Run one major A/B test per element at a time to avoid confounding results.
+
+Prioritize high-traffic pages first.
+
+Combine findings from SEO, UX, and conversion metrics for holistic optimization.

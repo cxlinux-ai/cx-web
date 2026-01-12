@@ -261,8 +261,10 @@ export default function Hackathon() {
                 <img
                   key={i}
                   src={avatar}
-                  alt={`Contributor ${i + 1}`}
+                  alt={`Cortex Linux hackathon contributor ${i + 1}`}
                   className="w-6 h-6 rounded-full border-2 border-black object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>

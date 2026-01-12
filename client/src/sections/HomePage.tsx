@@ -1487,7 +1487,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 >
                   <img
                     src={contributor.avatar_url}
-                    alt={contributor.login}
+                    alt={`${contributor.login} - Cortex Linux contributor`}
                     loading="lazy"
                     decoding="async"
                     className="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-400 transition-all"

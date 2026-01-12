@@ -129,24 +129,42 @@ export const seoConfigs = {
     description: 'Transform how you use Linux with Cortex. Execute any task through natural language - automation, security, DevOps, system administration. Open source, sandboxed, instant rollback.',
     canonicalPath: '/',
     keywords: ['AI Linux', 'natural language Linux', 'Linux automation', 'AI operating system', 'Cortex Linux', 'intelligent Linux'],
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
-      name: 'Cortex Linux',
-      applicationCategory: 'OperatingSystem',
-      operatingSystem: 'Linux',
-      description: 'The AI Layer for Linux. Execute any task through natural language commands.',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD'
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'Cortex Linux',
+        applicationCategory: 'OperatingSystem',
+        operatingSystem: 'Linux',
+        description: 'The AI Layer for Linux. Execute any task through natural language commands.',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD'
+        },
+        author: {
+          '@type': 'Organization',
+          name: 'Cortex Linux',
+          url: 'https://cortexlinux.com'
+        }
       },
-      author: {
+      {
+        '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Cortex Linux',
-        url: 'https://cortexlinux.com'
+        url: 'https://cortexlinux.com',
+        logo: 'https://cortexlinux.com/og-image.png',
+        sameAs: [
+          'https://github.com/cortexlinux/cortex',
+          'https://twitter.com/cortexlinux'
+        ],
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: 'hello@cortexlinux.com',
+          contactType: 'customer support'
+        }
       }
-    }
+    ]
   },
 
   hackathon: {

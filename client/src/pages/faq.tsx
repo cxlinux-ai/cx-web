@@ -207,9 +207,9 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section aria-labelledby="faq-heading" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
+          <h1 id="faq-heading" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
@@ -320,7 +320,7 @@ export default function FAQ() {
             </a>
           </div>
         </div>
-      </div>
+      </section>
 
       <Footer />
     </div>

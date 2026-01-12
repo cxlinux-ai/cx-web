@@ -209,9 +209,11 @@ export default function BlogPostPage() {
               {!imageError ? (
                 <img
                   src={post.image}
-                  alt={post.imageAlt || post.title}
+                  alt={post.imageAlt || `${post.title} - Cortex Linux blog`}
                   className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   onLoad={() => setImageLoaded(true)}
                   onError={() => setImageError(true)}
                 />

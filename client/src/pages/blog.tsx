@@ -67,7 +67,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen pt-20 pb-16">
       {/* Header */}
-      <div className="max-w-6xl mx-auto px-4 mb-12">
+      <section aria-labelledby="blog-heading" className="max-w-6xl mx-auto px-4 mb-12">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8">
           <ChevronLeft size={16} />
           Back to Home
@@ -78,7 +78,7 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 id="blog-heading" className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Cortex</span>{" "}
             <span className="gradient-text">Blog</span>
           </h1>
@@ -86,7 +86,7 @@ export default function Blog() {
             Technical insights, tutorials, and best practices for Linux automation and AI-powered workflows
           </p>
         </motion.div>
-      </div>
+      </section>
 
       {/* Start Here Section - only shows when no search/filter active */}
       {!searchTerm && !selectedCategory && (

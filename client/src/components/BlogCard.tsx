@@ -29,11 +29,12 @@ export default function BlogCard({ post, index = 0 }: BlogCardProps) {
           {post.image && !imageError ? (
             <img
               src={post.image}
-              alt={post.imageAlt || post.title}
+              alt={post.imageAlt || `${post.title} - Cortex Linux blog article`}
               className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               loading="lazy"
+              decoding="async"
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
             />

@@ -114,7 +114,8 @@ export default function App() {
       <TooltipProvider>
         <div className="min-h-screen bg-black text-white">
           {/* Navigation */}
-          <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/50 border-b border-white/10 h-16">
+          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/50 border-b border-white/10 h-16">
+            <nav className="h-full" aria-label="Main navigation">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
               {/* Logo */}
               <button
@@ -286,9 +287,11 @@ export default function App() {
               </motion.div>
             )}
             </AnimatePresence>
-          </nav>
+            </nav>
+          </header>
 
           {/* Routes */}
+          <main>
           <Switch>
             <Route path="/" component={() => <HomePage onNavigate={scrollToSection} />} />
             <Route path="/faq" component={FAQ} />
@@ -307,6 +310,7 @@ export default function App() {
             <Route path="/news/:slug" component={NewsArticlePage} />
             <Route path="/admin/registrations" component={AdminRegistrations} />
           </Switch>
+          </main>
 
           <Toaster />
         </div>
