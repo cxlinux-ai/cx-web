@@ -1,0 +1,8 @@
+{
+  "label": "User Guide",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn how to use Cortex Linux for daily tasks. Natural language commands, package management, and system configuration."
+  }
+}
