@@ -33,9 +33,7 @@ import {
   MessageSquare,
   FileText,
   Lightbulb,
-  ListChecks,
   Download,
-  Circle,
 } from "lucide-react";
 import { FaTwitter, FaDiscord, FaReddit, FaYoutube } from "react-icons/fa";
 import { SiDevdotto, SiProducthunt } from "react-icons/si";
@@ -52,7 +50,6 @@ import {
   growthStrategy,
   ideathonPhase,
   ideathonSubmissionTemplate,
-  roadmapTasks,
 } from "@/data/hackathon";
 
 const GITHUB_URL = hackathonConfig.githubUrl;
@@ -254,14 +251,6 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
   );
 }
 
-const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  planning: { bg: "bg-blue-500/10", text: "text-blue-300", border: "border-blue-500/20" },
-  website: { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/20" },
-  legal: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/20" },
-  launch: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/20" },
-  tracking: { bg: "bg-cyan-500/10", text: "text-cyan-400", border: "border-cyan-500/20" },
-};
-
 export default function Hackathon() {
   useEffect(() => {
     const cleanup = updateSEO(seoConfigs.hackathon);
@@ -281,9 +270,6 @@ export default function Hackathon() {
     "Product Hunt": SiProducthunt,
     "YouTube": FaYoutube,
   };
-
-  const completedTasks = roadmapTasks.filter(t => t.status === "completed").length;
-  const progressPercentage = Math.round((completedTasks / roadmapTasks.length) * 100);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -1273,86 +1259,6 @@ export default function Hackathon() {
                 <p className="text-sm text-gray-400">{benefit.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Roadmap Section */}
-      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
-              <ListChecks size={16} />
-              Launch Roadmap
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Our <span className="text-blue-300">Progress</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto mb-6">
-              Track our preparation for the hackathon launch. We're building in public.
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <div className="flex-1 max-w-xs h-3 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500"
-                  style={{ width: `${progressPercentage}%` }}
-                />
-              </div>
-              <span className="text-lg font-bold text-emerald-400" data-testid="roadmap-progress">
-                {progressPercentage}%
-              </span>
-            </div>
-          </motion.div>
-
-          <div className="space-y-3" data-testid="roadmap-tasks">
-            {roadmapTasks.map((task, index) => {
-              const colors = categoryColors[task.category] || categoryColors.planning;
-              return (
-                <motion.div
-                  key={task.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className={`flex items-center gap-4 p-4 rounded-xl border ${colors.border} ${colors.bg}`}
-                  data-testid={`roadmap-task-${task.id}`}
-                >
-                  <div className="flex-shrink-0">
-                    {task.status === "completed" ? (
-                      <CheckCircle2 size={24} className="text-emerald-400" />
-                    ) : task.status === "in-progress" ? (
-                      <div className="relative">
-                        <Circle size={24} className="text-amber-400" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-                        </div>
-                      </div>
-                    ) : (
-                      <Circle size={24} className="text-gray-500" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-mono text-gray-500">#{task.number}</span>
-                      <h4 className={`font-medium ${task.status === "completed" ? "text-gray-400 line-through" : "text-white"}`}>
-                        {task.title}
-                      </h4>
-                    </div>
-                    <p className="text-sm text-gray-500 truncate">{task.description}</p>
-                  </div>
-                  <div className="flex-shrink-0">
-                    <span className={`text-xs px-2 py-1 rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}>
-                      {task.category}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
           </div>
         </div>
       </section>
