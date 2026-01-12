@@ -366,12 +366,12 @@ export default function Hackathon() {
               className="group flex items-center gap-3 px-6 py-3 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(0,102,255,0.3)] hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] transition-all duration-300"
               data-testid="hero-cta-github"
               onClick={() => {
-                analytics.trackCTAClick('start_building', 'hackathon_hero');
+                analytics.trackCTAClick('sign_in_now', 'hackathon_hero');
                 analytics.trackConversion('hackathon_signup');
               }}
             >
               <Github size={20} />
-              Start Building
+              Sign In Now
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
@@ -1330,12 +1330,12 @@ export default function Hackathon() {
                 className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
                 data-testid="final-cta-github"
                 onClick={() => {
-                  analytics.trackCTAClick('start_building', 'hackathon_final_cta');
+                  analytics.trackCTAClick('sign_in_now', 'hackathon_final_cta');
                   analytics.trackConversion('hackathon_signup');
                 }}
               >
                 <Github size={24} />
-                Start Building Now
+                Sign In Now
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a

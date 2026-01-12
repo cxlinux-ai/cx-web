@@ -234,13 +234,13 @@ export default function HackathonPreview() {
                       setIsModalOpen(true);
                     }}
                     className="group/btn relative z-20 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
-                    data-testid="button-start-building"
+                    data-testid="button-sign-in-now"
                     whileHover={{ y: -2, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     <Github size={18} strokeWidth={2.5} />
-                    <span>Start Building Now</span>
+                    <span>Sign In Now</span>
                     <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
                   </motion.button>
                   

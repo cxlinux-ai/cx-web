@@ -1217,7 +1217,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 onClick={() => onNavigate("join")}
                 className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-brand-blue text-white font-semibold hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
               >
-                Start Building with Cortex — Free
+                Sign In Now
                 <ArrowRight size={16} />
               </button>
             </div>
