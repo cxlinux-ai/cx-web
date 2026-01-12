@@ -7,6 +7,7 @@ import { insertHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
 import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
+import PDFDocument from "pdfkit";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
@@ -334,6 +335,130 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to export registrations:", error instanceof Error ? error.message : "Unknown error");
       res.status(500).json({ error: "Failed to export registrations" });
+    }
+  });
+
+  // Generate Hackathon Rules PDF
+  app.get("/downloads/cortex-hackathon-rules-2026.pdf", (req, res) => {
+    try {
+      const doc = new PDFDocument({ size: "A4", margin: 50 });
+      
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", "inline; filename=cortex-hackathon-rules-2026.pdf");
+      
+      doc.pipe(res);
+      
+      // Title
+      doc.fontSize(28).font("Helvetica-Bold").fillColor("#0066ff")
+         .text("Cortex Hackathon 2026", { align: "center" });
+      doc.moveDown(0.5);
+      doc.fontSize(16).font("Helvetica").fillColor("#666666")
+         .text("Official Rules & Guidelines", { align: "center" });
+      doc.moveDown(2);
+      
+      // Overview
+      doc.fontSize(18).font("Helvetica-Bold").fillColor("#1a1a1a")
+         .text("Overview");
+      doc.moveDown(0.5);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("The Cortex Hackathon 2026 is a 14-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $15,000.", { align: "left", lineGap: 4 });
+      doc.moveDown(1.5);
+      
+      // Phase 1: IDEathon
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#f59e0b")
+         .text("Phase 1: Cortex IDEathon");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("Timeline: Weeks 1-4 (4 weeks)", { lineGap: 3 })
+         .text("Prize Pool: $3,000", { lineGap: 3 })
+         .text("Goal: Generate monetizable feature ideas for Cortex Linux", { lineGap: 3 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica-Bold").text("Prize Breakdown:", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("  • Best Idea: $1,000", { lineGap: 2 })
+         .text("  • Most Innovative: $800", { lineGap: 2 })
+         .text("  • Best Enterprise Feature: $600", { lineGap: 2 })
+         .text("  • Honorable Mentions (3): $200 each", { lineGap: 2 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("  • Innovation & Originality: 30%", { lineGap: 2 })
+         .text("  • Feasibility: 25%", { lineGap: 2 })
+         .text("  • Monetization Potential: 25%", { lineGap: 2 })
+         .text("  • Completeness: 20%", { lineGap: 2 });
+      doc.moveDown(1.5);
+      
+      // Phase 2: Hackathon
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#3b82f6")
+         .text("Phase 2: Cortex Hackathon");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("Timeline: Weeks 5-14 (10 weeks)", { lineGap: 3 })
+         .text("Prize Pool: $12,000", { lineGap: 3 })
+         .text("Goal: Build and ship production-ready code", { lineGap: 3 });
+      doc.moveDown(0.5);
+      
+      // Build Sprint
+      doc.font("Helvetica-Bold").text("Build Sprint (Weeks 5-9):", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("Build features, plugins, extensions, or integrations for Cortex Linux.", { lineGap: 3 })
+         .text("Submit via GitHub Pull Request with comprehensive documentation.", { lineGap: 3 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica-Bold").text("Prize Breakdown:", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("  • 1st Place: $5,000", { lineGap: 2 })
+         .text("  • 2nd Place: $3,000", { lineGap: 2 })
+         .text("  • 3rd Place: $2,000", { lineGap: 2 })
+         .text("  • 4th-7th Place: $500 each", { lineGap: 2 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("  • Code Quality: 30%", { lineGap: 2 })
+         .text("  • Usefulness: 25%", { lineGap: 2 })
+         .text("  • Architecture: 20%", { lineGap: 2 })
+         .text("  • Documentation: 15%", { lineGap: 2 })
+         .text("  • Test Coverage: 10%", { lineGap: 2 });
+      doc.moveDown(0.5);
+      
+      // Review Period
+      doc.font("Helvetica-Bold").text("Review Period (Weeks 10-14):", { lineGap: 3 });
+      doc.font("Helvetica")
+         .text("Submissions are reviewed by the Cortex maintainer team. One-on-one code reviews, PR refinement, and final judging. Winners announced at end of Week 14.", { lineGap: 3 });
+      doc.moveDown(1.5);
+      
+      // Eligibility
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#1a1a1a")
+         .text("Eligibility & Rules");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("• Open to anyone 18 years or older", { lineGap: 3 })
+         .text("• Solo participants or teams of 2-5 members", { lineGap: 3 })
+         .text("• All submissions must be original work", { lineGap: 3 })
+         .text("• Code must be submitted under MIT license", { lineGap: 3 })
+         .text("• Employees of Cortex Linux and their families are not eligible", { lineGap: 3 })
+         .text("• All submissions become property of Cortex Linux project", { lineGap: 3 })
+         .text("• Decisions by judges are final", { lineGap: 3 });
+      doc.moveDown(1.5);
+      
+      // Contact
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#1a1a1a")
+         .text("Contact & Resources");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("• Website: https://cortexlinux.com/hackathon", { lineGap: 3 })
+         .text("• GitHub: https://github.com/cortexlinux/cortex", { lineGap: 3 })
+         .text("• Discord: https://discord.gg/cortexlinux", { lineGap: 3 })
+         .text("• Email: hackathon@cortexlinux.com", { lineGap: 3 });
+      doc.moveDown(2);
+      
+      // Footer
+      doc.fontSize(9).font("Helvetica").fillColor("#999999")
+         .text("© 2026 Cortex Linux. All rights reserved. Last updated: January 2026", { align: "center" });
+      
+      doc.end();
+    } catch (error) {
+      console.error("PDF generation error:", error);
+      res.status(500).json({ error: "Failed to generate PDF" });
     }
   });
 

@@ -249,8 +249,8 @@ export const ideathonPhase: IDEathonPhase = {
   id: "ideathon",
   title: "Cortex IDEathon",
   subtitle: "Idea-to-Feature",
-  weeks: "Weeks 1-3",
-  duration: "3 weeks",
+  weeks: "Weeks 1-4",
+  duration: "4 weeks",
   goal: "Generate monetizable feature ideas",
   description: "Submit structured product ideas for monetizable features in Cortex Linux. Focus on enterprise services, premium integrations, and revenue-generating capabilities. No marketing or sales strategies—just actionable product ideas.",
   color: "text-amber-400",
@@ -264,9 +264,9 @@ export const ideathonPhase: IDEathonPhase = {
   ],
   prizes: [
     { place: "Best Idea", amount: "$1,000" },
-    { place: "Most Innovative", amount: "$750" },
-    { place: "Best Enterprise Feature", amount: "$500" },
-    { place: "Honorable Mentions (3)", amount: "$250 each" }
+    { place: "Most Innovative", amount: "$800" },
+    { place: "Best Enterprise Feature", amount: "$600" },
+    { place: "Honorable Mentions (3)", amount: "$200 each" }
   ],
   prizeTotal: "$3,000",
   cta: {
@@ -284,8 +284,8 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "build-sprint",
     number: 1,
     title: "Build Sprint",
-    weeks: "Weeks 4-9",
-    duration: "6 weeks",
+    weeks: "Weeks 5-9",
+    duration: "5 weeks",
     goal: "Ship real things",
     description: "The main event. Build a Cortex feature, plugin, extension, or integration based on IDEathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
     color: "text-blue-400",
@@ -299,10 +299,10 @@ export const hackathonPhases: HackathonPhase[] = [
       "Write tests for your code"
     ],
     prizes: [
-      { place: "1st Place", amount: "$4,500" },
+      { place: "1st Place", amount: "$5,000" },
       { place: "2nd Place", amount: "$3,000" },
-      { place: "3rd Place", amount: "$2,250" },
-      { place: "4th-6th Place", amount: "$750 each" }
+      { place: "3rd Place", amount: "$2,000" },
+      { place: "4th-7th Place", amount: "$500 each" }
     ],
     prizeTotal: "$12,000",
     criteria: [
@@ -319,38 +319,25 @@ export const hackathonPhases: HackathonPhase[] = [
     }
   },
   {
-    id: "demo-week",
+    id: "review-period",
     number: 2,
-    title: "Demo Week",
-    weeks: "Weeks 10-11",
-    duration: "2 weeks",
-    goal: "Visibility + social proof",
-    description: "Show off what you built. Create a short demo video, make your GitHub repo public, and let the community vote. This is where your work gets recognized and shared.",
+    title: "Review Period",
+    weeks: "Weeks 10-14",
+    duration: "5 weeks",
+    goal: "Code review & judging",
+    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 14.",
     color: "text-purple-400",
     bgGradient: "from-purple-500/10 to-transparent",
     borderColor: "border-purple-500/20",
-    requirements: [
-      "Create a 2-5 minute demo video",
-      "Public GitHub repository or merged PR",
-      "Written walkthrough or blog post",
-      "Share on social media with #CortexHackathon"
-    ],
-    prizes: [
-      { place: "Best Demo", amount: "$1,200" },
-      { place: "Community Choice", amount: "$900" },
-      { place: "Most Creative", amount: "$600" },
-      { place: "Runner-ups (2)", amount: "$150 each" }
-    ],
-    prizeTotal: "$3,000",
     activities: [
-      "Community voting on demos",
-      "Maintainer technical review",
-      "Live demo showcase stream",
-      "Social media amplification"
+      "One-on-one code reviews with maintainers",
+      "PR refinement and iteration",
+      "Final judging by core team",
+      "Winner announcements"
     ],
     cta: {
-      text: "Submit Demo",
-      href: "https://github.com/cortexlinux/cortex/discussions",
+      text: "View Pull Requests",
+      href: "https://github.com/cortexlinux/cortex/pulls",
       external: true
     }
   }
@@ -472,8 +459,7 @@ export const hackathonConfig = {
   totalWeeks: 14,
   totalPrizePool: "$15,000",
   ideathonPrize: "$3,000",
-  buildSprintPrize: "$9,000",
-  demoPrize: "$3,000",
+  buildSprintPrize: "$12,000",
   expectedParticipants: "3,000+",
   expectedIdeas: "200+",
   expectedPRs: "100+",
@@ -495,7 +481,7 @@ export const hackathonConfig = {
 export const hackathonFaqs = [
   {
     question: "What's the difference between IDEathon and Hackathon?",
-    answer: "IDEathon (Phase 1, Weeks 1-3) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 4-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
+    answer: "IDEathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
     question: "Do I need technical skills for the IDEathon?",
@@ -511,7 +497,7 @@ export const hackathonFaqs = [
   },
   {
     question: "What if my PR doesn't get merged during the hackathon?",
-    answer: "The Merge & Ship phase (Weeks 12-14) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
+    answer: "The Review Period (Weeks 10-14) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
   },
   {
     question: "What do I need to participate?",

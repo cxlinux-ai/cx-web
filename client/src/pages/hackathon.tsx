@@ -145,7 +145,7 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-gradient-to-br ${phase.bgGradient} border ${phase.borderColor} rounded-2xl p-6 relative overflow-hidden`}
+      className={`bg-gradient-to-br ${phase.bgGradient} border ${phase.borderColor} rounded-2xl p-6 relative overflow-hidden h-full flex flex-col`}
     >
       <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
         <span className={`text-2xl font-bold ${phase.color}`}>{phase.number}</span>
@@ -540,7 +540,7 @@ export default function Hackathon() {
                   <Lightbulb className="text-amber-400" size={28} />
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-wide text-amber-400 mb-2 block">
-                  Phase 1 · Weeks 1-3
+                  Phase 1 · Weeks 1-4
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                   Cortex IDEathon
@@ -586,7 +586,7 @@ export default function Hackathon() {
                   <Code2 className="text-blue-400" size={28} />
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-wide text-blue-400 mb-2 block">
-                  Phase 2 · Weeks 4-14
+                  Phase 2 · Weeks 5-14
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                   Cortex Hackathon
@@ -600,11 +600,11 @@ export default function Hackathon() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
                     <Trophy size={16} className="text-terminal-green" />
-                    <span className="text-terminal-green font-semibold">$15,000</span>
+                    <span className="text-terminal-green font-semibold">$12,000</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-gray-400" />
-                    <span className="text-gray-400">11 weeks</span>
+                    <span className="text-gray-400">10 weeks</span>
                   </div>
                 </div>
                 <a
