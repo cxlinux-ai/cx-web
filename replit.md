@@ -14,7 +14,7 @@ Preferred communication style: Simple, everyday language.
 
 The frontend is built with **React 18+ and TypeScript**, bundled using **Vite**. **shadcn/ui components** based on **Radix UI primitives** form the UI component library, adhering to a "new-york" style with a dark mode optimized color scheme. **Tailwind CSS** is used for styling, with custom utility classes and CSS variables for theming, incorporating glass-morphism effects and gradients. **Framer Motion** handles declarative animations. The design system consistently uses updated brand colors (Tech blue, Terminal green), rounded corners, low-opacity borders, and glow shadow effects.
 
-**Routing** is managed by `wouter` for a multi-page application, including routes for the landing page, getting started guide, FAQ, blog, news, and a dedicated startup landing page. State management primarily uses React hooks for local component state, with active section tracking via scroll listeners. The design adopts a **mobile-first responsive approach** with Tailwind breakpoints.
+**Routing** is managed by `wouter` for a multi-page application, including routes for the landing page, getting started guide, FAQ, blog, news, mission page, and a dedicated startup landing page. State management primarily uses React hooks for local component state, with active section tracking via scroll listeners. The design adopts a **mobile-first responsive approach** with Tailwind breakpoints.
 
 ### Backend Architecture
 
