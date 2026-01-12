@@ -1213,13 +1213,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
             {/* Mobile CTA */}
             <div className="pt-4">
-              <button
-                onClick={() => onNavigate("join")}
+              <Link
+                href="/register"
                 className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-brand-blue text-white font-semibold hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
               >
-                Sign In Now
+                Sign Up Now
                 <ArrowRight size={16} />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
