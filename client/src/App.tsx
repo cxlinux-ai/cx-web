@@ -28,6 +28,7 @@ import ReferralsPage from "./pages/referrals";
 import MissionPage from "./pages/mission";
 import ComparePage from "./pages/compare";
 import CompareAnalyticsPage from "./pages/compare-analytics";
+import HackathonRulesPage from "./pages/hackathon-rules";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -359,6 +360,7 @@ export default function App() {
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
             <Route path="/hackathon" component={Hackathon} />
+            <Route path="/hackathon-rules" component={HackathonRulesPage} />
             <Route path="/startup" component={StartupPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />

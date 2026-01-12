@@ -64,6 +64,7 @@ export default function Footer() {
               <li><Link href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms of Service</Link></li>
               <li><Link href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">Security</Link></li>
               <li><Link href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (MIT)</Link></li>
+              <li><Link href="/hackathon-rules" className="hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">Hackathon Rules</Link></li>
             </ul>
           </div>
         </div>

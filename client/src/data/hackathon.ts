@@ -465,7 +465,7 @@ export const hackathonConfig = {
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
   discordUrl: "https://discord.gg/cortexlinux",
-  rulesDocUrl: "/downloads/cortex-hackathon-rules-2026.pdf",
+  rulesDocUrl: "/hackathon-rules",
   philosophy: {
     principle: "Ideas become features. Features become revenue.",
     description: "Phase 1 (IDEathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for Cortex Linux.",

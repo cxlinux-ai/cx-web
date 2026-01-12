@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -319,19 +320,17 @@ export default function Hackathon() {
                 <span className="text-white font-medium">Join Discord</span>
               </div>
             </a>
-            <a
-              href={hackathonConfig.rulesDocUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/hackathon-rules"
               className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 rounded-xl transition-all group"
               data-testid="step-view-rules"
             >
               <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm">3</div>
               <div className="flex items-center gap-2">
                 <FileText size={18} className="text-emerald-400" />
-                <span className="text-white font-medium">View Rules</span>
+                <span className="text-white font-medium">See More Details</span>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
