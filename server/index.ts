@@ -3,6 +3,7 @@ import helmet from "helmet";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import demoApi from "./demo-api";
+import { startBot } from "./discord-bot/index.js";
 
 const app = express();
 
@@ -102,4 +103,16 @@ app.use(demoApi);
   }, () => {
     log(`serving on port ${port}`);
   });
+
+  // Start Discord bot if token is configured
+  if (process.env.DISCORD_BOT_TOKEN) {
+    try {
+      await startBot();
+      log("Discord bot started successfully");
+    } catch (error) {
+      console.error("Failed to start Discord bot:", error);
+    }
+  } else {
+    log("Discord bot not started (DISCORD_BOT_TOKEN not set)");
+  }
 })();

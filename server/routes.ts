@@ -11,6 +11,25 @@ import oauthRoutes from "./oauth";
 import discordBot from "./discord-bot";
 import PDFDocument from "pdfkit";
 
+// Keep-alive: Self-ping to prevent sleep
+const SELF_PING_INTERVAL = 4 * 60 * 1000; // 4 minutes
+let keepAliveInterval: NodeJS.Timeout | null = null;
+
+function startKeepAlive(baseUrl: string) {
+  if (keepAliveInterval) return;
+
+  keepAliveInterval = setInterval(async () => {
+    try {
+      await fetch(`${baseUrl}/api/health`);
+      console.log("[Keep-Alive] Ping successful");
+    } catch (error) {
+      console.log("[Keep-Alive] Ping failed, will retry");
+    }
+  }, SELF_PING_INTERVAL);
+
+  console.log("[Keep-Alive] Self-ping started (every 4 minutes)");
+}
+
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
 const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
@@ -61,6 +80,20 @@ const githubApiLimiter = rateLimit({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for keep-alive pings
+  app.get("/api/health", (req, res) => {
+    res.json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      bot: process.env.DISCORD_BOT_TOKEN ? "configured" : "not configured",
+    });
+  });
+
+  // Start keep-alive self-ping (for Replit deployments)
+  const baseUrl = process.env.REPLIT_URL || process.env.BASE_URL || "https://cortexlinux.com";
+  startKeepAlive(baseUrl);
+
   // GitHub API endpoint to fetch repository stats
   app.get("/api/github/stats", githubApiLimiter, async (req, res) => {
     try {

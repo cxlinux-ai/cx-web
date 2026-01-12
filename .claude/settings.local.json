@@ -10,7 +10,11 @@
       "WebFetch(domain:api.github.com)",
       "Bash(npx tsc:*)",
       "WebFetch(domain:we.tl)",
-      "WebFetch(domain:wetransfer.com)"
+      "WebFetch(domain:wetransfer.com)",
+      "Bash(ls:*)",
+      "Bash(sort:*)",
+      "Bash(grep:*)",
+      "Bash(curl:*)"
     ]
   }
 }
