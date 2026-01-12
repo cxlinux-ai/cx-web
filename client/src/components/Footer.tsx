@@ -1,6 +1,89 @@
 import { Github } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { scrollToElement } from "@/lib/smooth-scroll";
+
+interface SmoothLinkProps {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  "data-testid"?: string;
+}
+
+function SmoothLink({ href, children, className, "data-testid": testId }: SmoothLinkProps) {
+  const [, setLocation] = useLocation();
+
+  const isHashLink = href.includes("#");
+  const isExternalLink = href.startsWith("http") || href.startsWith("mailto:");
+
+  if (isExternalLink) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        data-testid={testId}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  if (isHashLink) {
+    const [pathname, hash] = href.split("#");
+    const targetPath = pathname === "" ? "/" : pathname;
+    
+    return (
+      <a
+        href={href}
+        className={className}
+        data-testid={testId}
+        onClick={(e) => {
+          e.preventDefault();
+          const currentPath = window.location.pathname;
+
+          if (currentPath === targetPath) {
+            scrollToElement(hash);
+            window.history.pushState(null, "", `${targetPath}#${hash}`);
+          } else {
+            setLocation(targetPath);
+            const maxAttempts = 60;
+            let attempts = 0;
+            
+            const waitForRouteAndScroll = () => {
+              attempts++;
+              const nowPath = window.location.pathname;
+              
+              if (nowPath === targetPath) {
+                const element = document.getElementById(hash);
+                if (element) {
+                  scrollToElement(hash);
+                  window.history.replaceState(null, "", `${targetPath}#${hash}`);
+                  return;
+                }
+              }
+              
+              if (attempts < maxAttempts) {
+                setTimeout(waitForRouteAndScroll, 50);
+              }
+            };
+            
+            setTimeout(waitForRouteAndScroll, 100);
+          }
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className} data-testid={testId}>
+      {children}
+    </Link>
+  );
+}
 
 export default function Footer() {
   return (
@@ -27,44 +110,124 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-white">Product</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/#about" className="hover:text-white transition-colors" data-testid="footer-link-features">Features</Link></li>
-              <li><Link href="/#pricing" className="hover:text-white transition-colors" data-testid="footer-link-pricing">Pricing</Link></li>
-              <li><Link href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-docs">Documentation</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">FAQ</Link></li>
-              <li><Link href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">Hackathon</Link></li>
+              <li>
+                <SmoothLink href="/#about" className="hover:text-white transition-colors" data-testid="footer-link-features">
+                  Features
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/#pricing" className="hover:text-white transition-colors" data-testid="footer-link-pricing">
+                  Pricing
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-docs">
+                  Documentation
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">
+                  FAQ
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">
+                  Hackathon
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-white">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">Blog</Link></li>
-              <li><Link href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</Link></li>
-              <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
-              <li><Link href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</Link></li>
-              <li><Link href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">Mission</Link></li>
+              <li>
+                <SmoothLink href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">
+                  Blog
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-api">
+                  API Reference
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/getting-started" className="hover:text-white transition-colors" data-testid="footer-link-get-started">
+                  Get Started
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">
+                  Status
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">
+                  Mission
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-white">Community</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">Discord</a></li>
-              <li><a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
-              <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
-              <li><Link href="/bounties" className="hover:text-white transition-colors" data-testid="footer-link-bounties">Bounties</Link></li>
-              <li><Link href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-referrals">Referrals</Link></li>
+              <li>
+                <a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">
+                  Discord
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <SmoothLink href="/bounties" className="hover:text-white transition-colors" data-testid="footer-link-bounties">
+                  Bounties
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-referrals">
+                  Referrals
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4 text-white">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms of Service</Link></li>
-              <li><Link href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">Security</Link></li>
-              <li><Link href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (MIT)</Link></li>
-              <li><Link href="/hackathon-rules" className="hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">Hackathon Rules</Link></li>
+              <li>
+                <SmoothLink href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">
+                  Privacy Policy
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">
+                  Terms of Service
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">
+                  Security
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">
+                  License (MIT)
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/hackathon-rules" className="hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">
+                  Hackathon Rules
+                </SmoothLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -72,10 +235,18 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-500">&copy; 2025 Cortex Linux. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-gray-500">
-            <Link href="/privacy" className="hover:text-white transition-colors" data-testid="footer-bottom-privacy">Privacy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors" data-testid="footer-bottom-terms">Terms</Link>
-            <Link href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-bottom-security">Security</Link>
-            <Link href="/status" className="hover:text-white transition-colors" data-testid="footer-bottom-status">Status</Link>
+            <SmoothLink href="/privacy" className="hover:text-white transition-colors" data-testid="footer-bottom-privacy">
+              Privacy
+            </SmoothLink>
+            <SmoothLink href="/terms" className="hover:text-white transition-colors" data-testid="footer-bottom-terms">
+              Terms
+            </SmoothLink>
+            <SmoothLink href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-bottom-security">
+              Security
+            </SmoothLink>
+            <SmoothLink href="/status" className="hover:text-white transition-colors" data-testid="footer-bottom-status">
+              Status
+            </SmoothLink>
           </div>
           <div className="flex gap-4">
             <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
