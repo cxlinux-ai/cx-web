@@ -276,7 +276,7 @@ export default function Hackathon() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex items-center justify-center gap-3 mb-6"
+            className="flex items-center justify-center gap-3 mb-6 py-2.5"
           >
             <div className="flex -space-x-3">
               {[
