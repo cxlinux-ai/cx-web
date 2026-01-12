@@ -353,36 +353,6 @@ export const hackathonPhases: HackathonPhase[] = [
       href: "https://github.com/cortexlinux/cortex/discussions",
       external: true
     }
-  },
-  {
-    id: "merge-ship",
-    number: 3,
-    title: "Merge & Ship",
-    weeks: "Weeks 12-14",
-    duration: "3 weeks",
-    goal: "Convert builders into maintainers",
-    description: "The final phase where your code gets production-ready. Work directly with maintainers on code reviews, get your PRs merged, and potentially become a long-term contributor to Cortex Linux.",
-    color: "text-yellow-400",
-    bgGradient: "from-yellow-500/10 to-transparent",
-    borderColor: "border-yellow-500/20",
-    activities: [
-      "One-on-one code reviews with maintainers",
-      "PR refinement and iteration",
-      "Merge into main branch",
-      "Maintainer onboarding for top contributors"
-    ],
-    rewards: [
-      "Maintainer role for top contributors",
-      "Public recognition in release notes",
-      "Long-term influence over Cortex roadmap",
-      "Direct access to core team",
-      "Reference letter for future opportunities"
-    ],
-    cta: {
-      text: "View Pull Requests",
-      href: "https://github.com/cortexlinux/cortex/pulls",
-      external: true
-    }
   }
 ];
 

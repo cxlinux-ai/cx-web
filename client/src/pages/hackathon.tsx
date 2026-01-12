@@ -868,10 +868,10 @@ export default function Hackathon() {
               Phase 2
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-brand-blue">Cortex Hackathon</span>
+              <span className="gradient-text">Cortex Hackathon</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Build, Demo, and Ship. Three stages to turn your code into production-ready contributions.
+              Build and Ship. Two stages to turn your code into production-ready contributions.
             </p>
           </motion.div>
 
@@ -898,7 +898,7 @@ export default function Hackathon() {
           </motion.div>
 
           {/* Phase Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {hackathonPhases.map((phase, index) => (
               <PhaseCard key={phase.id} phase={phase} index={index} />
             ))}
