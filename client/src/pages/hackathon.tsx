@@ -520,16 +520,10 @@ export default function Hackathon() {
               </Link>
             </div>
             
-            {/* Big Prize Pool & Thanks */}
+            {/* Big Prize Pool */}
             <div className="mt-12 text-center">
               <p className="text-terminal-green font-bold" style={{ fontSize: '50px' }}>$15,000</p>
-              <p className="text-xl text-gray-300 mb-4">Total Prize Pool</p>
-              <p className="text-2xl sm:text-3xl font-bold text-white">
-                Thank You for Being Part of This Journey!
-              </p>
-              <p className="text-gray-400 mt-2 max-w-xl mx-auto">
-                Your participation helps shape the future of AI-native Linux. Whether you submit ideas or code, you're making a difference.
-              </p>
+              <p className="text-xl text-gray-300">Total Prize Pool</p>
             </div>
           </motion.div>
         </div>
