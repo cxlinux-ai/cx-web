@@ -544,7 +544,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <item.icon className="w-6 h-6 text-brand-blue" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                <p className="text-brand-blue text-sm font-medium mb-2">{item.description}</p>
+                <p className="text-sm font-medium mb-2 text-[#93c5fd]">{item.description}</p>
                 <p className="text-gray-500 text-sm">{item.detail}</p>
               </motion.div>
             ))}
