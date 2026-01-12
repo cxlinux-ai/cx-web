@@ -486,7 +486,7 @@ export default function HackathonRulesPage() {
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                  <span>The hackathon and its rules are governed by French law and any disputes will be resolved under French jurisdiction.</span>
+                  <span>The hackathon and its rules are governed by US law and any disputes will be resolved under US jurisdiction.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-blue-400 mt-1 flex-shrink-0" />
