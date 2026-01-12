@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import Footer from "@/components/Footer";
 import { WaitlistSignup, ReferralDashboard, Leaderboard } from "@/components/referral";
+import { Users, Gift, Trophy, Zap, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
-export default function WaitlistPage() {
+interface SignupResponse {
+  message: string;
+  referralCode: string;
+  position: number;
+  totalWaitlist: number;
+  verificationRequired?: boolean;
+}
+
+export default function ReferralsPage() {
   const [referralCode, setReferralCode] = useState<string | null>(null);
   const [showDashboard, setShowDashboard] = useState(false);
+  const [, setLocation] = useLocation();
+
+  // Redirect /waitlist to /referrals for backward compatibility
+  useEffect(() => {
+    if (window.location.pathname === "/waitlist") {
+      const searchParams = window.location.search;
+      setLocation(`/referrals${searchParams}`);
+    }
+  }, [setLocation]);
 
   // Check URL for referral code on mount
-  useState(() => {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
     if (ref) {
@@ -20,11 +40,11 @@ export default function WaitlistPage() {
       setShowDashboard(true);
       setReferralCode(storedCode);
     }
-  });
+  }, []);
 
-  const handleSignupSuccess = (code: string) => {
-    localStorage.setItem("cortex_referral_code", code);
-    setReferralCode(code);
+  const handleSignupSuccess = (data: SignupResponse) => {
+    localStorage.setItem("cortex_referral_code", data.referralCode);
+    setReferralCode(data.referralCode);
     setShowDashboard(true);
   };
 
@@ -34,14 +54,57 @@ export default function WaitlistPage() {
       <div className="h-16" />
 
       {/* Hero Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Join the <span className="text-blue-300">Cortex Linux</span> Waitlist
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Get early access to the AI-native operating system. Refer friends to move up the list and unlock exclusive rewards.
-          </p>
+      <section className="py-16 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px]" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm mb-6"
+          >
+            <Gift size={16} />
+            Referral Program
+          </motion.div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+          >
+            <span className="gradient-text">Invite Friends, Earn Rewards</span>
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-400 max-w-2xl mx-auto mb-8"
+          >
+            Join the Cortex Linux community. Refer friends to move up the list and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-tracks.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-6 text-sm text-gray-400"
+          >
+            <span className="flex items-center gap-2">
+              <Users size={16} className="text-blue-300" />
+              1,200+ members
+            </span>
+            <span className="flex items-center gap-2">
+              <Trophy size={16} className="text-yellow-400" />
+              6 reward tiers
+            </span>
+            <span className="flex items-center gap-2">
+              <Zap size={16} className="text-emerald-400" />
+              Instant perks
+            </span>
+          </motion.div>
         </div>
       </section>
 
@@ -64,7 +127,7 @@ export default function WaitlistPage() {
               {/* Signup Form */}
               <div>
                 <WaitlistSignup
-                  referredBy={referralCode || undefined}
+                  referralCode={referralCode || undefined}
                   onSuccess={handleSignupSuccess}
                 />
               </div>

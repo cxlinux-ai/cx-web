@@ -55,6 +55,7 @@ import {
   Info,
   Building,
   Mail,
+  Gift,
 } from "lucide-react";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
@@ -2353,6 +2354,19 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <BadgeCheck size={16} className="text-purple-400" />
                 <span>MIT Licensed</span>
               </div>
+            </div>
+            
+            {/* Referral Link */}
+            <div className="mt-6">
+              <Link
+                href="/referrals"
+                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-purple-400 transition-colors"
+                data-testid="link-referrals-cta"
+              >
+                <Gift size={14} className="text-purple-400" />
+                Invite friends and earn rewards
+                <ArrowRight size={14} />
+              </Link>
             </div>
 
             <p className="text-sm text-gray-500 mt-4">No credit card required · Deploy in 30 seconds · Free forever</p>

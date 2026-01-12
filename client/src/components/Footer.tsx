@@ -53,7 +53,7 @@ export default function Footer() {
               <li><a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
               <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
               <li><Link href="/bounties" className="hover:text-white transition-colors" data-testid="footer-link-bounties">Bounties</Link></li>
-              <li><Link href="/waitlist" className="hover:text-white transition-colors" data-testid="footer-link-waitlist">Join Waitlist</Link></li>
+              <li><Link href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-referrals">Referrals</Link></li>
             </ul>
           </div>
 

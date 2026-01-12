@@ -1422,6 +1422,45 @@ export default function Hackathon() {
         </div>
       </section>
 
+      {/* Referral Program Snippet */}
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 border border-purple-500/20 rounded-2xl p-6 sm:p-8"
+            data-testid="hackathon-referral-snippet"
+          >
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center">
+                  <Gift size={32} className="text-purple-400" />
+                </div>
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-xl font-bold text-white mb-2">
+                  Want a Head Start? Refer Friends!
+                </h3>
+                <p className="text-gray-400 text-sm mb-4">
+                  Join our referral program. Invite friends and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-track entry.
+                </p>
+                <a
+                  href="/referrals"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-500 hover:bg-purple-600 rounded-xl text-white font-medium text-sm transition-colors"
+                  data-testid="hackathon-referral-cta"
+                  onClick={() => analytics.trackCTAClick('referral_program', 'hackathon_page')}
+                >
+                  <Users size={16} />
+                  Join Referral Program
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-3xl mx-auto">

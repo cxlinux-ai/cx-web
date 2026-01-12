@@ -24,7 +24,7 @@ import NewsPage from "./pages/news";
 import NewsArticlePage from "./pages/news-article";
 import AdminRegistrations from "./pages/admin-registrations";
 import BountiesPage from "./pages/bounties";
-import WaitlistPage from "./pages/waitlist";
+import ReferralsPage from "./pages/referrals";
 import MissionPage from "./pages/mission";
 import ComparePage from "./pages/compare";
 import CompareAnalyticsPage from "./pages/compare-analytics";
@@ -363,7 +363,8 @@ export default function App() {
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />
             <Route path="/bounties" component={BountiesPage} />
-            <Route path="/waitlist" component={WaitlistPage} />
+            <Route path="/referrals" component={ReferralsPage} />
+            <Route path="/waitlist" component={ReferralsPage} />
             <Route path="/mission" component={MissionPage} />
             <Route path="/compare/:competitor" component={ComparePage} />
             <Route path="/compare-analytics" component={CompareAnalyticsPage} />
