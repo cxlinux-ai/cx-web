@@ -1,18 +1,33 @@
 /**
- * Quick Start Widget Styles
+ * Quick Start Widget Styles - Polished Dark Theme
  *
- * Styling for the install command widget with copy functionality.
+ * Enhanced styling with glass morphism and glow effects
+ * for the install command widget with copy functionality.
  */
 
 .widget {
-  background: var(--ifm-color-emphasis-100);
-  border-radius: 12px;
-  padding: 16px;
-  border: 1px solid var(--ifm-color-emphasis-200);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
 }
 
 .widget.inline {
-  margin: 24px 0;
+  margin: 28px 0;
 }
 
 .widget.sidebar {
@@ -21,99 +36,139 @@
   top: calc(var(--ifm-navbar-height) + 16px);
 }
 
+/* Hover effect with glow */
+.widget:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.15),
+    0 0 0 1px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
 /* Header */
 .header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .icon {
-  font-size: 18px;
+  font-size: 20px;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(250, 204, 21, 0.5)); }
+  50% { filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.8)); }
 }
 
 .title {
   font-weight: 600;
-  font-size: 14px;
-  color: var(--ifm-color-emphasis-800);
+  font-size: 15px;
+  color: #e2e8f0;
+  letter-spacing: -0.01em;
 }
 
-/* Command Container */
+/* Command Container - Terminal style */
 .commandContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  padding: 12px;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9));
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  border-radius: 12px;
+  padding: 14px 16px;
   position: relative;
+}
+
+.commandContainer::before {
+  content: '$';
+  color: #10b981;
+  font-family: 'JetBrains Mono', var(--ifm-font-family-monospace);
+  font-weight: 600;
+  margin-right: 8px;
 }
 
 .command {
   flex: 1;
-  font-family: var(--ifm-font-family-monospace);
-  font-size: 12px;
-  color: var(--ifm-color-emphasis-900);
+  font-family: 'JetBrains Mono', var(--ifm-font-family-monospace);
+  font-size: 13px;
+  color: #10b981;
   word-break: break-all;
   background: none;
   padding: 0;
   line-height: 1.5;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
-/* Copy Button */
+/* Copy Button - Enhanced */
 .copyButton {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--ifm-color-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .copyButton:hover {
-  background: var(--ifm-color-primary-dark);
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.copyButton:active {
+  transform: scale(0.95);
 }
 
 .copyButton.copied {
-  background: var(--ifm-color-success);
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .copyIcon,
 .checkIcon {
-  font-size: 16px;
+  font-size: 18px;
   color: white;
 }
 
 .checkIcon {
   font-weight: bold;
+  animation: checkBounce 0.3s ease;
 }
 
-/* Feedback */
+@keyframes checkBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Feedback Toast */
 .feedback {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  padding: 8px 12px;
-  background: var(--ifm-color-success-lightest);
-  color: var(--ifm-color-success-darkest);
-  border-radius: 6px;
-  font-size: 12px;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.1));
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  border-radius: 10px;
+  font-size: 13px;
   font-weight: 500;
-  animation: fadeIn 0.2s ease;
+  animation: slideIn 0.2s ease;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -122,25 +177,80 @@
 }
 
 .feedbackIcon {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Hint */
 .hint {
-  margin-top: 12px;
-  font-size: 11px;
-  color: var(--ifm-color-emphasis-600);
+  margin-top: 14px;
+  font-size: 12px;
+  color: #64748b;
   text-align: center;
 }
 
-/* Dark Mode */
+/* Sidebar special styling */
+.widget.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8, #3b82f6);
+  background-size: 200% 100%;
+  animation: gradientSlide 3s linear infinite;
+  border-radius: 16px 16px 0 0;
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Dark Mode - Docusaurus */
 [data-theme='dark'] .widget {
-  background: var(--ifm-color-emphasis-100);
-  border-color: var(--ifm-color-emphasis-300);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  border-color: rgba(59, 130, 246, 0.25);
 }
 
 [data-theme='dark'] .commandContainer {
-  background: var(--ifm-color-emphasis-200);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5));
+  border-color: rgba(100, 116, 139, 0.4);
+}
+
+/* Light Mode */
+[data-theme='light'] .widget {
+  background: white;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='light'] .widget:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+}
+
+[data-theme='light'] .title {
+  color: #1e293b;
+}
+
+[data-theme='light'] .commandContainer {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme='light'] .command {
+  color: #10b981;
+}
+
+[data-theme='light'] .hint {
+  color: #64748b;
+}
+
+[data-theme='light'] .feedback {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #059669;
 }
 
 /* Mobile */
@@ -150,29 +260,21 @@
     position: static;
   }
 
+  .widget {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
   .command {
     font-size: 11px;
   }
-}
 
-/* Hover effect for the whole widget */
-.widget:hover {
-  border-color: var(--ifm-color-primary-lighter);
-}
+  .commandContainer {
+    padding: 12px 14px;
+  }
 
-/* When used as sidebar, add special styling */
-.widget.sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-primary-light));
-  border-radius: 12px 12px 0 0;
-}
-
-.widget.sidebar {
-  position: relative;
-  overflow: hidden;
+  .copyButton {
+    width: 36px;
+    height: 36px;
+  }
 }

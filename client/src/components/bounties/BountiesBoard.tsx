@@ -122,20 +122,40 @@ function getLabelColor(hexColor: string): string {
 
 function BountyCard({ bounty }: { bounty: Bounty }) {
   const isHighValue = (bounty.bountyAmount || 0) >= 300;
+  const isPremium = (bounty.bountyAmount || 0) >= 500;
 
   return (
     <div
       className={`
-        relative bg-slate-800/50 border border-slate-700/50 rounded-xl p-6
-        transition-all duration-200 hover:bg-slate-800/80 hover:border-slate-600/50
-        hover:shadow-lg hover:shadow-primary-500/5
-        ${isHighValue ? "ring-1 ring-yellow-500/30" : ""}
+        relative rounded-xl p-6 group
+        transition-all duration-300 ease-out
+        ${isPremium 
+          ? "bg-gradient-to-br from-yellow-500/10 via-slate-800/80 to-slate-800/80 border-2 border-yellow-500/40 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/20 hover:border-yellow-500/60" 
+          : isHighValue 
+            ? "bg-gradient-to-br from-blue-500/10 via-slate-800/70 to-slate-800/70 border border-blue-500/30 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
+            : "bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800/80 hover:border-slate-600/50"
+        }
+        hover:-translate-y-1
       `}
     >
+      {/* Premium Glow Effect - subtle */}
+      {isPremium && (
+        <div className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-yellow-500/10 via-amber-500/10 to-yellow-500/10 blur-lg opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
+      )}
+      
       {/* High Value Badge */}
       {isHighValue && (
-        <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-xs font-bold px-2 py-0.5 rounded-full">
-          High Value
+        <div 
+          className={`
+            absolute -top-3 -right-3 text-xs font-bold px-3 py-1 rounded-full shadow-lg
+            ${isPremium 
+              ? "bg-gradient-to-r from-yellow-400 to-amber-500 text-black" 
+              : "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+            }
+          `}
+          data-testid={`badge-bounty-${isPremium ? 'premium' : 'high-value'}`}
+        >
+          {isPremium ? "Premium Bounty" : "High Value"}
         </div>
       )}
 
@@ -162,7 +182,15 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
         <div className="flex items-center gap-3">
           {/* Bounty Amount */}
           {bounty.bountyAmount && (
-            <span className="text-xl font-bold text-green-400">
+            <span className={`
+              text-xl font-bold
+              ${(bounty.bountyAmount || 0) >= 500 
+                ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" 
+                : (bounty.bountyAmount || 0) >= 300 
+                  ? "text-blue-400 drop-shadow-[0_0_6px_rgba(96,165,250,0.4)]"
+                  : "text-green-400"
+              }
+            `}>
               {formatCurrency(bounty.bountyAmount)}
             </span>
           )}
@@ -268,10 +296,23 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
         href={bounty.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-sm text-primary-400 hover:text-primary-300 transition-colors"
+        data-testid={`link-claim-bounty-${bounty.number}`}
+        className={`
+          inline-flex items-center gap-2 text-sm font-medium
+          px-4 py-2 rounded-lg border transition-all duration-200
+          ${(bounty.bountyAmount || 0) >= 500
+            ? "text-yellow-400 border-yellow-500/30 bg-yellow-500/10 hover:bg-yellow-500/20 hover:border-yellow-500/50"
+            : (bounty.bountyAmount || 0) >= 300
+              ? "text-blue-400 border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 hover:border-blue-500/50"
+              : "text-blue-400 border-slate-600 bg-slate-700/50 hover:bg-slate-700 hover:border-blue-500/50"
+          }
+        `}
       >
-        View on GitHub
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
+        </svg>
+        Claim Bounty
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
