@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, CheckCircle, Github, Linkedin, Users, User, ArrowRight, X } from "lucide-react";
+import { Loader2, CheckCircle, Github, Linkedin, Users, User, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,8 +30,8 @@ import { useToast } from "@/hooks/use-toast";
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
+  discordUsername: z.string().min(2, "Discord username is required"),
   country: z.string().optional(),
-  currentRole: z.enum(["Student", "Professional", "Indie Hacker", "Other"]),
   organization: z.string().optional(),
   githubUrl: z.string()
     .min(1, "GitHub URL is required")
@@ -40,19 +40,25 @@ const formSchema = z.object({
       "Please enter a valid GitHub URL or username"
     ),
   linkedinUrl: z.string().optional(),
+  technicalRole: z.string().min(1, "Please select your technical role"),
+  technicalRoleOther: z.string().optional(),
   linuxExperience: z.number().min(1).max(5),
   aiMlExperience: z.number().min(1).max(5),
   programmingLanguages: z.array(z.string()).min(1, "Select at least one programming language"),
+  whyJoinHackathon: z.array(z.string()).min(1, "Please select at least one reason"),
+  whyJoinOther: z.string().optional(),
+  cortexAreaInterest: z.string().min(1, "Please select an area of interest"),
+  whatExcitesYou: z.string().optional(),
+  contributionPlan: z.string().optional(),
+  postHackathonInvolvement: z.array(z.string()).optional(),
+  threeYearVision: z.string().optional(),
   teamOrSolo: z.enum(["team", "solo"]),
   teamName: z.string().optional(),
-  projectIdea: z.string().min(10, "Please describe your project idea (at least 10 characters)"),
-  usedCortexBefore: z.enum(["yes", "no", "whats_that"]),
-  howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-const PROGRAMMING_LANGUAGES = ["Python", "Rust", "Go", "JavaScript", "C/C++", "Other"];
+const PROGRAMMING_LANGUAGES = ["Python", "Rust", "Go", "JavaScript/TypeScript", "C/C++", "Other"];
 
 const COUNTRIES = [
   "United States", "Canada", "United Kingdom", "Germany", "France", "India", 
@@ -60,9 +66,69 @@ const COUNTRIES = [
   "Netherlands", "Sweden", "Spain", "Italy", "Mexico", "Argentina", "Other"
 ];
 
+const TECHNICAL_ROLES = [
+  { value: "backend", label: "Backend / Systems" },
+  { value: "frontend", label: "Frontend" },
+  { value: "ml_ai", label: "ML / AI" },
+  { value: "devops", label: "DevOps / Infra" },
+  { value: "security", label: "Security" },
+  { value: "research", label: "Research" },
+  { value: "student", label: "Student / Learning" },
+  { value: "other", label: "Other" },
+];
+
+const WHY_JOIN_OPTIONS = [
+  { value: "learn_linux", label: "Learn systems / Linux internals" },
+  { value: "build_meaningful", label: "Build something meaningful" },
+  { value: "open_source", label: "Contribute to open source" },
+  { value: "compete_prizes", label: "Compete & win prizes" },
+  { value: "career_growth", label: "Get noticed / career growth" },
+  { value: "ai_os_curiosity", label: "Curiosity about AI + OS" },
+  { value: "other", label: "Other" },
+];
+
+const CORTEX_AREAS = [
+  { value: "ai_native", label: "AI-native OS features" },
+  { value: "dev_tooling", label: "Developer tooling" },
+  { value: "performance", label: "Performance / kernel work" },
+  { value: "security", label: "Security / isolation" },
+  { value: "enterprise", label: "Enterprise features" },
+  { value: "docs_ecosystem", label: "Documentation / ecosystem" },
+];
+
+const POST_HACKATHON_OPTIONS = [
+  { value: "continue_contributing", label: "Continue contributing" },
+  { value: "future_hackathons", label: "Join future hackathons" },
+  { value: "beta_tester", label: "Early access / beta tester" },
+  { value: "paid_contributor", label: "Paid contributor / contractor" },
+  { value: "full_time", label: "Full-time role (future)" },
+  { value: "community", label: "Community only" },
+];
+
 interface HackathonRegistrationFormProps {
   onSuccess?: () => void;
   onClose?: () => void;
+}
+
+function SectionHeader({ number, title, subtitle, optional }: { number: number; title: string; subtitle?: string; optional?: boolean }) {
+  return (
+    <div className="flex items-start gap-4 mb-6">
+      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-semibold text-sm">
+        {number}
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+          {title}
+          {optional && <span className="text-xs font-normal text-gray-500 bg-white/5 px-2 py-0.5 rounded">(Optional)</span>}
+        </h3>
+        {subtitle && <p className="text-sm text-gray-400 mt-0.5">{subtitle}</p>}
+      </div>
+    </div>
+  );
+}
+
+function SectionDivider() {
+  return <div className="border-t border-white/10 my-8" />;
 }
 
 export default function HackathonRegistrationForm({ onSuccess, onClose }: HackathonRegistrationFormProps) {
@@ -75,23 +141,31 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
     defaultValues: {
       fullName: "",
       email: "",
+      discordUsername: "",
       country: "",
-      currentRole: "Student",
       organization: "",
       githubUrl: "",
       linkedinUrl: "",
+      technicalRole: "",
+      technicalRoleOther: "",
       linuxExperience: 3,
       aiMlExperience: 3,
       programmingLanguages: [],
+      whyJoinHackathon: [],
+      whyJoinOther: "",
+      cortexAreaInterest: "",
+      whatExcitesYou: "",
+      contributionPlan: "",
+      postHackathonInvolvement: [],
+      threeYearVision: "",
       teamOrSolo: "solo",
       teamName: "",
-      projectIdea: "",
-      usedCortexBefore: "no",
-      howHeardAboutUs: "GitHub",
     },
   });
 
   const teamOrSolo = form.watch("teamOrSolo");
+  const technicalRole = form.watch("technicalRole");
+  const whyJoinHackathon = form.watch("whyJoinHackathon");
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -155,6 +229,25 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
     form.trigger("programmingLanguages");
   };
 
+  const handleWhyJoinToggle = (value: string, checked: boolean) => {
+    const current = form.getValues("whyJoinHackathon");
+    if (checked) {
+      form.setValue("whyJoinHackathon", [...current, value]);
+    } else {
+      form.setValue("whyJoinHackathon", current.filter(v => v !== value));
+    }
+    form.trigger("whyJoinHackathon");
+  };
+
+  const handlePostHackathonToggle = (value: string, checked: boolean) => {
+    const current = form.getValues("postHackathonInvolvement") || [];
+    if (checked) {
+      form.setValue("postHackathonInvolvement", [...current, value]);
+    } else {
+      form.setValue("postHackathonInvolvement", current.filter(v => v !== value));
+    }
+  };
+
   if (isSuccess) {
     return (
       <motion.div
@@ -167,47 +260,124 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
         </div>
         <h3 className="text-2xl font-bold text-white mb-3">You're Registered!</h3>
         <p className="text-gray-400 mb-4">Welcome to the Cortex Linux Hackathon 2026</p>
-        <p className="text-sm text-gray-500">Check your email for next steps and important updates.</p>
+        <p className="text-sm text-gray-500">Check your email for next steps and join our Discord community.</p>
       </motion.div>
     );
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        
+        {/* SECTION 1: Identity & Contact */}
+        <SectionHeader 
+          number={1} 
+          title="Your Information" 
+          subtitle="Let us know who you are"
+        />
+        
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">Full Name <span className="text-red-400">*</span></FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Your full name"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                      data-testid="input-fullname"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">Email <span className="text-red-400">*</span></FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="email"
+                      placeholder="you@example.com"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                      data-testid="input-email"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="discordUsername"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300 flex items-center gap-2">
+                    <MessageCircle size={16} className="text-[#5865F2]" /> Discord Username <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="username#1234 or username"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                      data-testid="input-discord"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">Country</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-country">
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-[#1a1a2e] border-white/20">
+                      {COUNTRIES.map((country) => (
+                        <SelectItem key={country} value={country} className="text-white hover:bg-white/10">
+                          {country}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
-            name="fullName"
+            name="organization"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">Full Name <span className="text-red-400">*</span></FormLabel>
+                <FormLabel className="text-gray-300">Organization (School/Company)</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="Your full name"
+                    placeholder="Where do you work or study?"
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                    data-testid="input-fullname"
-                  />
-                </FormControl>
-                <FormMessage className="text-red-400" />
-              </FormItem>
-            )}
-          />
-          
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300">Email <span className="text-red-400">*</span></FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="email"
-                    placeholder="you@example.com"
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                    data-testid="input-email"
+                    data-testid="input-organization"
                   />
                 </FormControl>
                 <FormMessage className="text-red-400" />
@@ -216,23 +386,76 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <SectionDivider />
+
+        {/* SECTION 2: Technical Profile */}
+        <SectionHeader 
+          number={2} 
+          title="Technical Background" 
+          subtitle="Help us understand your skills"
+        />
+
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="githubUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300 flex items-center gap-2">
+                    <Github size={16} /> GitHub <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="https://github.com/username"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                      data-testid="input-github"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="linkedinUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300 flex items-center gap-2">
+                    <Linkedin size={16} /> LinkedIn
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="https://linkedin.com/in/username"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                      data-testid="input-linkedin"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
-            name="country"
+            name="technicalRole"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">Country</FormLabel>
+                <FormLabel className="text-gray-300">Primary Technical Role <span className="text-red-400">*</span></FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-country">
-                      <SelectValue placeholder="Select country" />
+                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-technical-role">
+                      <SelectValue placeholder="Select your primary role" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-[#1a1a2e] border-white/20">
-                    {COUNTRIES.map((country) => (
-                      <SelectItem key={country} value={country} className="text-white hover:bg-white/10">
-                        {country}
+                    {TECHNICAL_ROLES.map((role) => (
+                      <SelectItem key={role.value} value={role.value} className="text-white hover:bg-white/10">
+                        {role.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -242,310 +465,286 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="currentRole"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300">Current Role <span className="text-red-400">*</span></FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-role">
-                      <SelectValue placeholder="Select your role" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-[#1a1a2e] border-white/20">
-                    <SelectItem value="Student" className="text-white hover:bg-white/10">Student</SelectItem>
-                    <SelectItem value="Professional" className="text-white hover:bg-white/10">Professional</SelectItem>
-                    <SelectItem value="Indie Hacker" className="text-white hover:bg-white/10">Indie Hacker</SelectItem>
-                    <SelectItem value="Other" className="text-white hover:bg-white/10">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage className="text-red-400" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="organization"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-gray-300">Organization (School/Company)</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="Where do you work or study?"
-                  className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                  data-testid="input-organization"
+          <AnimatePresence>
+            {technicalRole === "other" && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FormField
+                  control={form.control}
+                  name="technicalRoleOther"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Describe your role</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="What best describes your technical focus?"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                          data-testid="input-role-other"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage className="text-red-400" />
-            </FormItem>
-          )}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="githubUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300 flex items-center gap-2">
-                  <Github size={16} /> GitHub <span className="text-red-400">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="https://github.com/username"
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                    data-testid="input-github"
-                  />
-                </FormControl>
-                <FormMessage className="text-red-400" />
-              </FormItem>
+              </motion.div>
             )}
-          />
+          </AnimatePresence>
 
           <FormField
             control={form.control}
-            name="linkedinUrl"
-            render={({ field }) => (
+            name="programmingLanguages"
+            render={() => (
               <FormItem>
-                <FormLabel className="text-gray-300 flex items-center gap-2">
-                  <Linkedin size={16} /> LinkedIn (Optional)
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="https://linkedin.com/in/username"
-                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                    data-testid="input-linkedin"
-                  />
-                </FormControl>
-                <FormMessage className="text-red-400" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="linuxExperience"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300">Linux Experience (1-5) <span className="text-red-400">*</span></FormLabel>
-                <FormControl>
-                  <div className="flex gap-2 pt-2">
-                    {[1, 2, 3, 4, 5].map((level) => (
-                      <button
-                        key={level}
-                        type="button"
-                        onClick={() => field.onChange(level)}
-                        className={`w-10 h-10 rounded-lg border transition-all ${
-                          field.value === level 
-                            ? "bg-blue-500 border-blue-400 text-white" 
-                            : "bg-white/5 border-white/20 text-gray-400 hover:border-blue-400"
-                        }`}
-                        data-testid={`linux-exp-${level}`}
-                      >
-                        {level}
-                      </button>
-                    ))}
-                  </div>
-                </FormControl>
-                <p className="text-xs text-gray-500 mt-1">1 = Beginner, 5 = Expert</p>
-                <FormMessage className="text-red-400" />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="aiMlExperience"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300">AI/ML Experience (1-5) <span className="text-red-400">*</span></FormLabel>
-                <FormControl>
-                  <div className="flex gap-2 pt-2">
-                    {[1, 2, 3, 4, 5].map((level) => (
-                      <button
-                        key={level}
-                        type="button"
-                        onClick={() => field.onChange(level)}
-                        className={`w-10 h-10 rounded-lg border transition-all ${
-                          field.value === level 
-                            ? "bg-blue-500 border-blue-400 text-white" 
-                            : "bg-white/5 border-white/20 text-gray-400 hover:border-blue-400"
-                        }`}
-                        data-testid={`aiml-exp-${level}`}
-                      >
-                        {level}
-                      </button>
-                    ))}
-                  </div>
-                </FormControl>
-                <p className="text-xs text-gray-500 mt-1">1 = Beginner, 5 = Expert</p>
-                <FormMessage className="text-red-400" />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="programmingLanguages"
-          render={() => (
-            <FormItem>
-              <FormLabel className="text-gray-300">Programming Languages <span className="text-red-400">*</span></FormLabel>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                {PROGRAMMING_LANGUAGES.map((lang) => (
-                  <div
-                    key={lang}
-                    className="flex items-center space-x-2"
-                  >
-                    <Checkbox
-                      id={`lang-${lang}`}
-                      checked={form.watch("programmingLanguages").includes(lang)}
-                      onCheckedChange={(checked) => handleLanguageToggle(lang, checked === true)}
-                      className="border-white/30 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
-                      data-testid={`lang-${lang.toLowerCase().replace(/[^a-z]/g, '')}`}
-                    />
-                    <Label htmlFor={`lang-${lang}`} className="text-sm text-gray-300 cursor-pointer">
-                      {lang}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-              <FormMessage className="text-red-400" />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="teamOrSolo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-gray-300">Team or Solo? <span className="text-red-400">*</span></FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex gap-4 pt-2"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="solo" id="solo" className="border-white/30 text-blue-500" data-testid="radio-solo" />
-                    <Label htmlFor="solo" className="flex items-center gap-2 text-gray-300 cursor-pointer">
-                      <User size={16} /> Solo
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="team" id="team" className="border-white/30 text-blue-500" data-testid="radio-team" />
-                    <Label htmlFor="team" className="flex items-center gap-2 text-gray-300 cursor-pointer">
-                      <Users size={16} /> Team
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage className="text-red-400" />
-            </FormItem>
-          )}
-        />
-
-        <AnimatePresence>
-          {teamOrSolo === "team" && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FormField
-                control={form.control}
-                name="teamName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-gray-300">Team Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Your team name"
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
-                        data-testid="input-teamname"
+                <FormLabel className="text-gray-300">Programming Languages <span className="text-red-400">*</span></FormLabel>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                  {PROGRAMMING_LANGUAGES.map((lang) => (
+                    <div key={lang} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`lang-${lang}`}
+                        checked={form.watch("programmingLanguages").includes(lang)}
+                        onCheckedChange={(checked) => handleLanguageToggle(lang, checked === true)}
+                        className="border-white/30 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                        data-testid={`lang-${lang.toLowerCase().replace(/[^a-z]/g, '')}`}
                       />
-                    </FormControl>
-                    <FormMessage className="text-red-400" />
-                  </FormItem>
-                )}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <FormField
-          control={form.control}
-          name="projectIdea"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-gray-300">Project Idea <span className="text-red-400">*</span></FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Describe what you want to build with Cortex Linux..."
-                  className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 min-h-[100px] resize-none"
-                  data-testid="textarea-project-idea"
-                />
-              </FormControl>
-              <FormMessage className="text-red-400" />
-            </FormItem>
-          )}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="usedCortexBefore"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-300">Used Cortex Before? <span className="text-red-400">*</span></FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-used-cortex">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-[#1a1a2e] border-white/20">
-                    <SelectItem value="yes" className="text-white hover:bg-white/10">Yes, I have!</SelectItem>
-                    <SelectItem value="no" className="text-white hover:bg-white/10">No, not yet</SelectItem>
-                    <SelectItem value="whats_that" className="text-white hover:bg-white/10">What's that?</SelectItem>
-                  </SelectContent>
-                </Select>
+                      <Label htmlFor={`lang-${lang}`} className="text-sm text-gray-300 cursor-pointer">
+                        {lang}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
                 <FormMessage className="text-red-400" />
               </FormItem>
             )}
           />
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="linuxExperience"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">Linux Experience <span className="text-red-400">*</span></FormLabel>
+                  <FormControl>
+                    <div className="flex gap-2 pt-2">
+                      {[1, 2, 3, 4, 5].map((level) => (
+                        <button
+                          key={level}
+                          type="button"
+                          onClick={() => field.onChange(level)}
+                          className={`w-10 h-10 rounded-lg border transition-all ${
+                            field.value === level 
+                              ? "bg-blue-500 border-blue-400 text-white" 
+                              : "bg-white/5 border-white/20 text-gray-400 hover:border-blue-400"
+                          }`}
+                          data-testid={`linux-exp-${level}`}
+                        >
+                          {level}
+                        </button>
+                      ))}
+                    </div>
+                  </FormControl>
+                  <p className="text-xs text-gray-500 mt-1">1 = Beginner, 5 = Expert</p>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="aiMlExperience"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">AI/ML Experience <span className="text-red-400">*</span></FormLabel>
+                  <FormControl>
+                    <div className="flex gap-2 pt-2">
+                      {[1, 2, 3, 4, 5].map((level) => (
+                        <button
+                          key={level}
+                          type="button"
+                          onClick={() => field.onChange(level)}
+                          className={`w-10 h-10 rounded-lg border transition-all ${
+                            field.value === level 
+                              ? "bg-blue-500 border-blue-400 text-white" 
+                              : "bg-white/5 border-white/20 text-gray-400 hover:border-blue-400"
+                          }`}
+                          data-testid={`aiml-exp-${level}`}
+                        >
+                          {level}
+                        </button>
+                      ))}
+                    </div>
+                  </FormControl>
+                  <p className="text-xs text-gray-500 mt-1">1 = Beginner, 5 = Expert</p>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <SectionDivider />
+
+        {/* SECTION 3: Participation */}
+        <SectionHeader 
+          number={3} 
+          title="Participation Style" 
+          subtitle="How do you want to compete?"
+        />
+
+        <div className="space-y-4">
           <FormField
             control={form.control}
-            name="howHeardAboutUs"
+            name="teamOrSolo"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">How did you hear about us? <span className="text-red-400">*</span></FormLabel>
+                <FormLabel className="text-gray-300">Team or Solo? <span className="text-red-400">*</span></FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex gap-4 pt-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="solo" id="solo" className="border-white/30 text-blue-500" data-testid="radio-solo" />
+                      <Label htmlFor="solo" className="flex items-center gap-2 text-gray-300 cursor-pointer">
+                        <User size={16} /> Solo
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="team" id="team" className="border-white/30 text-blue-500" data-testid="radio-team" />
+                      <Label htmlFor="team" className="flex items-center gap-2 text-gray-300 cursor-pointer">
+                        <Users size={16} /> Team
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <AnimatePresence>
+            {teamOrSolo === "team" && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FormField
+                  control={form.control}
+                  name="teamName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Team Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Your team name"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                          data-testid="input-teamname"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <SectionDivider />
+
+        {/* SECTION 4: Motivations */}
+        <SectionHeader 
+          number={4} 
+          title="Your Motivations" 
+          subtitle="What brings you to this hackathon?"
+        />
+
+        <div className="space-y-5">
+          <FormField
+            control={form.control}
+            name="whyJoinHackathon"
+            render={() => (
+              <FormItem>
+                <FormLabel className="text-gray-300">Why did you join this hackathon? <span className="text-red-400">*</span></FormLabel>
+                <p className="text-xs text-gray-500 mb-2">Select all that apply</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {WHY_JOIN_OPTIONS.map((option) => (
+                    <div key={option.value} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`why-${option.value}`}
+                        checked={form.watch("whyJoinHackathon").includes(option.value)}
+                        onCheckedChange={(checked) => handleWhyJoinToggle(option.value, checked === true)}
+                        className="border-white/30 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                        data-testid={`why-${option.value}`}
+                      />
+                      <Label htmlFor={`why-${option.value}`} className="text-sm text-gray-300 cursor-pointer">
+                        {option.label}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <AnimatePresence>
+            {whyJoinHackathon.includes("other") && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FormField
+                  control={form.control}
+                  name="whyJoinOther"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Tell us more</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="What's your other reason?"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500"
+                          data-testid="input-why-other"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <FormField
+            control={form.control}
+            name="cortexAreaInterest"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300">Which Cortex Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-how-heard">
-                      <SelectValue placeholder="Select" />
+                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-cortex-area">
+                      <SelectValue placeholder="Select an area" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-[#1a1a2e] border-white/20">
-                    <SelectItem value="Twitter" className="text-white hover:bg-white/10">Twitter / X</SelectItem>
-                    <SelectItem value="GitHub" className="text-white hover:bg-white/10">GitHub</SelectItem>
-                    <SelectItem value="Discord" className="text-white hover:bg-white/10">Discord</SelectItem>
-                    <SelectItem value="Friend" className="text-white hover:bg-white/10">Friend / Referral</SelectItem>
-                    <SelectItem value="Other" className="text-white hover:bg-white/10">Other</SelectItem>
+                    {CORTEX_AREAS.map((area) => (
+                      <SelectItem key={area.value} value={area.value} className="text-white hover:bg-white/10">
+                        {area.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage className="text-red-400" />
@@ -554,28 +753,135 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
           />
         </div>
 
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold h-14 text-base rounded-xl"
-          data-testid="button-submit-registration"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-              Registering...
-            </>
-          ) : (
-            <>
-              Register for Hackathon
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </>
-          )}
-        </Button>
+        <SectionDivider />
 
-        <p className="text-xs text-gray-500 text-center">
-          By registering, you agree to receive hackathon updates via email and accept our terms of participation.
-        </p>
+        {/* SECTION 5: Your Vision (Optional) */}
+        <SectionHeader 
+          number={5} 
+          title="Your Vision" 
+          subtitle="Help us understand your ideas"
+          optional
+        />
+
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="whatExcitesYou"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300">What excites you most about Cortex Linux?</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    placeholder="Share what draws you to this project..."
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 min-h-[80px] resize-none"
+                    data-testid="textarea-excites"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="contributionPlan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300">What do you plan to build or contribute?</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    placeholder="Idea, feature, tooling, infra, docs, research, etc. It's okay if this is rough or exploratory."
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 min-h-[80px] resize-none"
+                    data-testid="textarea-contribution"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <SectionDivider />
+
+        {/* SECTION 6: Post-Hackathon (Optional) */}
+        <SectionHeader 
+          number={6} 
+          title="Beyond the Hackathon" 
+          subtitle="Help us shape the future of Cortex Linux"
+          optional
+        />
+
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="postHackathonInvolvement"
+            render={() => (
+              <FormItem>
+                <FormLabel className="text-gray-300">How would you like to stay involved after the hackathon?</FormLabel>
+                <p className="text-xs text-gray-500 mb-2">Select all that apply</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {POST_HACKATHON_OPTIONS.map((option) => (
+                    <div key={option.value} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`post-${option.value}`}
+                        checked={(form.watch("postHackathonInvolvement") || []).includes(option.value)}
+                        onCheckedChange={(checked) => handlePostHackathonToggle(option.value, checked === true)}
+                        className="border-white/30 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                        data-testid={`post-${option.value}`}
+                      />
+                      <Label htmlFor={`post-${option.value}`} className="text-sm text-gray-300 cursor-pointer">
+                        {option.label}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="threeYearVision"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300">If Cortex Linux succeeds in 3 years, what do you hope it becomes?</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    placeholder="Share your vision for the future of Cortex Linux..."
+                    className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 min-h-[80px] resize-none"
+                    data-testid="textarea-vision"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="pt-6">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold h-14 text-base rounded-xl"
+            data-testid="button-submit-registration"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Registering...
+              </>
+            ) : (
+              <>
+                Register for Hackathon
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </>
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );
