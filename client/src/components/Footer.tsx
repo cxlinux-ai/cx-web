@@ -42,6 +42,7 @@ export default function Footer() {
               <li><Link href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</Link></li>
               <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
               <li><Link href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</Link></li>
+              <li><Link href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">Mission</Link></li>
               <li><Link href="/bounties" className="hover:text-green-400 transition-colors" data-testid="footer-link-bounties-resources">Bounty Board</Link></li>
             </ul>
           </div>

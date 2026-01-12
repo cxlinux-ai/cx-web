@@ -25,6 +25,7 @@ import NewsArticlePage from "./pages/news-article";
 import AdminRegistrations from "./pages/admin-registrations";
 import BountiesPage from "./pages/bounties";
 import WaitlistPage from "./pages/waitlist";
+import MissionPage from "./pages/mission";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -361,6 +362,7 @@ export default function App() {
             <Route path="/news/:slug" component={NewsArticlePage} />
             <Route path="/bounties" component={BountiesPage} />
             <Route path="/waitlist" component={WaitlistPage} />
+            <Route path="/mission" component={MissionPage} />
             <Route path="/admin/registrations" component={AdminRegistrations} />
           </Switch>
           </main>

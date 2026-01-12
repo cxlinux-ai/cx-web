@@ -517,6 +517,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
+      {/* Mission Statement - Why Cortex Exists */}
+      <section className="py-20 px-4" data-testid="section-mission-statement">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            Cortex Linux exists to make AI a first-class system capability — not a plugin, not a workaround.
+            <br className="hidden md:block" />
+            It treats intelligence as infrastructure, built directly into the operating system.
+          </p>
+        </div>
+      </section>
       {/* Built For Section - Who This Is For */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
@@ -2521,6 +2531,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</button></li>
                 <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
                 <li><a href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</a></li>
+                <li><a href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">Mission</a></li>
               </ul>
             </div>
 
