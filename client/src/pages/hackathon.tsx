@@ -26,7 +26,6 @@ import {
   Quote,
   Video,
   Rocket,
-  TrendingUp,
   Globe,
   Play,
   Award,
@@ -35,8 +34,7 @@ import {
   Lightbulb,
   Download,
 } from "lucide-react";
-import { FaTwitter, FaDiscord, FaReddit, FaYoutube } from "react-icons/fa";
-import { SiDevdotto, SiProducthunt } from "react-icons/si";
+import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
@@ -47,7 +45,6 @@ import {
   hackathonConfig,
   hackathonBenefits,
   hackathonFaqs,
-  growthStrategy,
   ideathonPhase,
   ideathonSubmissionTemplate,
 } from "@/data/hackathon";
@@ -262,13 +259,6 @@ export default function Hackathon() {
     "plugins": Layers,
     "ai-integrations": Brain,
     "infra-tools": Shield,
-  };
-
-  const platformIcons: Record<string, typeof SiDevdotto> = {
-    "DEV.to / Hashnode": SiDevdotto,
-    "Reddit": FaReddit,
-    "Product Hunt": SiProducthunt,
-    "YouTube": FaYoutube,
   };
 
   return (
@@ -1263,84 +1253,6 @@ export default function Hackathon() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Growth Strategy Section */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
-              <TrendingUp size={16} />
-              Global Reach
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Where We're <span className="text-blue-300">Spreading the Word</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Our multi-channel growth strategy ensures maximum visibility for your contributions.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {growthStrategy.map((channel, index) => {
-              const Icon = platformIcons[channel.platform] || Globe;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-6"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
-                    <Icon className="text-purple-400" size={24} />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-1">{channel.platform}</h3>
-                  <p className="text-xs text-gray-500 mb-3">{channel.description}</p>
-                  <p className="text-sm text-gray-400 mb-3">{channel.strategy}</p>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Users size={14} className="text-terminal-green" />
-                    <span className="text-sm text-terminal-green font-medium">{channel.expectedReach}</span>
-                  </div>
-                  {channel.links && channel.links.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {channel.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs px-2 py-1 rounded bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white transition-colors"
-                          data-testid={`link-growth-${channel.platform.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${i}`}
-                        >
-                          {link.text}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-8 text-center"
-          >
-            <p className="text-gray-400">
-              Total Expected Organic Reach:{" "}
-              <span className="text-2xl font-bold text-terminal-green">225K+ developers</span>
-            </p>
-          </motion.div>
         </div>
       </section>
 
