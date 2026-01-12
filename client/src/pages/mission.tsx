@@ -5,6 +5,7 @@ import {
   ArrowLeft, 
   ArrowRight,
   Brain, 
+  Check,
   Cpu, 
   Shield, 
   Target,
@@ -12,9 +13,6 @@ import {
   Code2,
   Users,
   GitBranch,
-  CheckCircle2,
-  Circle,
-  Clock,
   Zap,
   Lock,
   Globe,
@@ -54,55 +52,11 @@ const missionPillars = [
   }
 ];
 
-const roadmapPhases = [
-  {
-    phase: "Phase 1",
-    title: "Foundation",
-    status: "completed",
-    quarter: "Q4 2024",
-    milestones: [
-      "Core CLI with natural language processing",
-      "Sandboxed execution environment",
-      "Preview-before-execute safety layer",
-      "Initial documentation and guides"
-    ]
-  },
-  {
-    phase: "Phase 2",
-    title: "Builder Release",
-    status: "in-progress",
-    quarter: "Q1 2025",
-    milestones: [
-      "Enhanced AI reasoning engine",
-      "Multi-step workflow automation",
-      "Community plugin architecture",
-      "Comprehensive test coverage"
-    ]
-  },
-  {
-    phase: "Phase 3",
-    title: "Enterprise Ready",
-    status: "upcoming",
-    quarter: "Q2 2025",
-    milestones: [
-      "Zero-trust execution mode",
-      "Audit logging and compliance",
-      "Team collaboration features",
-      "Enterprise SSO integration"
-    ]
-  },
-  {
-    phase: "Phase 4",
-    title: "Ecosystem Growth",
-    status: "planned",
-    quarter: "Q3 2025",
-    milestones: [
-      "Third-party plugin marketplace",
-      "Cloud platform integrations",
-      "Advanced AI model options",
-      "Enterprise support program"
-    ]
-  }
+const roadmapItems = [
+  { quarter: "Q1 2026", items: ["Core Release", "AI Streaming"], status: "completed" },
+  { quarter: "Q2 2026", items: ["Plugin System", "Edge Functions"], status: "current" },
+  { quarter: "Q3 2026", items: ["Enterprise SSO", "Team Workspaces"], status: "planned" },
+  { quarter: "Q4 2026", items: ["Mobile SDK", "v3.0 Launch"], status: "planned" },
 ];
 
 const currentTasks = [
@@ -166,39 +120,6 @@ export default function MissionPage() {
     });
     return cleanup;
   }, []);
-
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "completed":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <CheckCircle2 size={12} />
-            Completed
-          </span>
-        );
-      case "in-progress":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
-            <Clock size={12} className="animate-pulse" />
-            In Progress
-          </span>
-        );
-      case "upcoming":
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-400 border border-amber-500/30">
-            <Circle size={12} />
-            Upcoming
-          </span>
-        );
-      default:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-500/20 text-gray-400 border border-gray-500/30">
-            <Circle size={12} />
-            Planned
-          </span>
-        );
-    }
-  };
 
   const getPriorityBadge = (priority: string) => {
     switch (priority) {
@@ -329,121 +250,193 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* Roadmap Section */}
-      <section className="py-20 px-4 border-t border-white/5 relative overflow-hidden" id="roadmap">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
+      {/* Roadmap Timeline */}
+      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden" id="roadmap">
+        {/* Subtle background blobs */}
+        <div className="bg-blob bg-blob-blue w-[500px] h-[500px] top-0 left-1/4 opacity-40" style={{ animationDelay: '2s' }} />
+        <div className="bg-blob bg-blob-blue w-[400px] h-[400px] bottom-0 right-1/3 opacity-30" style={{ animationDelay: '8s' }} />
+        
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
-              <Rocket size={14} />
-              <span>Development Roadmap</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Where We're <span className="gradient-text">Headed</span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              <span className="gradient-text">Roadmap</span>
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Our transparent development timeline. Track our progress and see what's coming next.
-            </p>
+            <p className="text-gray-400 text-lg">Building the future of AI-native development</p>
           </motion.div>
 
           {/* Desktop Timeline */}
-          <div className="hidden lg:block relative">
-            {/* Timeline Line */}
-            <div className="absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500/50 via-blue-500/50 to-gray-500/30" />
+          <div className="hidden md:block relative">
+            {/* Timeline Track */}
+            <div className="absolute top-8 left-0 right-0 h-1 bg-gray-800 rounded-full overflow-hidden">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: "37.5%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                className="h-full bg-gradient-to-r from-green-500 via-green-400 to-blue-500 rounded-full"
+              />
+            </div>
             
+            {/* Timeline Items */}
             <div className="grid grid-cols-4 gap-6">
-              {roadmapPhases.map((phase, i) => (
+              {roadmapItems.map((item, i) => (
                 <motion.div
-                  key={phase.phase}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="relative"
+                  transition={{ delay: i * 0.25, duration: 0.8 }}
+                  className="relative pt-16"
                   data-testid={`roadmap-phase-${i + 1}`}
                 >
                   {/* Timeline Dot */}
-                  <div className={`absolute top-6 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 ${
-                    phase.status === "completed" ? "bg-emerald-500 border-emerald-400" :
-                    phase.status === "in-progress" ? "bg-blue-500 border-blue-400 animate-pulse" :
-                    "bg-gray-700 border-gray-600"
-                  }`} />
-
-                  <div className="pt-16 px-4">
-                    <div className="mb-3">
-                      {getStatusBadge(phase.status)}
+                  <div className="absolute top-5 left-1/2 -translate-x-1/2">
+                    <div
+                      className={`w-6 h-6 rounded-full border-4 border-black transition-all duration-2000 ${
+                        item.status === "completed"
+                          ? "bg-green-500 shadow-[0_0_20px_rgba(34,197,94,0.6)]"
+                          : item.status === "current"
+                          ? "bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.6)] animate-pulse"
+                          : "bg-gray-700"
+                      }`}
+                    />
+                  </div>
+                  
+                  {/* Card */}
+                  <div
+                    className={`p-5 rounded-xl backdrop-blur-xl transition-all duration-300 ${
+                      item.status === "completed"
+                        ? "bg-green-500/10 border border-green-500/30 hover:border-green-400/50"
+                        : item.status === "current"
+                        ? "bg-blue-500/10 border border-blue-500/30 hover:border-blue-300/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
+                        : "bg-white/5 border border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    <div className={`text-xs font-bold uppercase tracking-wider mb-3 ${
+                      item.status === "completed"
+                        ? "text-green-400"
+                        : item.status === "current"
+                        ? "text-blue-300"
+                        : "text-gray-500"
+                    }`}>
+                      {item.quarter}
                     </div>
-                    <span className="text-xs text-gray-500 uppercase tracking-wider">{phase.phase}</span>
-                    <h3 className="text-lg font-semibold text-white mb-1">{phase.title}</h3>
-                    <p className="text-sm text-blue-300 mb-4">{phase.quarter}</p>
-                    
-                    <ul className="space-y-2">
-                      {phase.milestones.map((milestone, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-gray-400">
-                          <CheckCircle2 size={14} className={`mt-0.5 flex-shrink-0 ${
-                            phase.status === "completed" ? "text-emerald-400" : "text-gray-600"
-                          }`} />
-                          {milestone}
-                        </li>
+                    <div className="space-y-2">
+                      {item.items.map((task, j) => (
+                        <div
+                          key={j}
+                          className={`flex items-center gap-2 text-sm ${
+                            item.status === "completed"
+                              ? "text-white"
+                              : item.status === "current"
+                              ? "text-gray-200"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {item.status === "completed" ? (
+                            <Check size={14} className="text-green-400 flex-shrink-0" />
+                          ) : item.status === "current" ? (
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                          ) : (
+                            <div className="w-1.5 h-1.5 rounded-full bg-gray-600 flex-shrink-0" />
+                          )}
+                          {task}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Mobile Timeline */}
-          <div className="lg:hidden space-y-6">
-            {roadmapPhases.map((phase, i) => (
-              <motion.div
-                key={phase.phase}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+          {/* Mobile Timeline (Vertical) */}
+          <div className="md:hidden relative">
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-800">
+              <motion.div 
+                initial={{ height: 0 }}
+                whileInView={{ height: "37.5%" }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative pl-8 border-l-2 border-gray-700"
-                data-testid={`roadmap-phase-mobile-${i + 1}`}
-              >
-                {/* Timeline Dot */}
-                <div className={`absolute -left-2 top-0 w-4 h-4 rounded-full border-2 ${
-                  phase.status === "completed" ? "bg-emerald-500 border-emerald-400" :
-                  phase.status === "in-progress" ? "bg-blue-500 border-blue-400 animate-pulse" :
-                  "bg-gray-700 border-gray-600"
-                }`} />
-
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <span className="text-xs text-gray-500 uppercase tracking-wider">{phase.phase}</span>
-                      <h3 className="text-lg font-semibold text-white">{phase.title}</h3>
-                    </div>
-                    {getStatusBadge(phase.status)}
+                transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                className="w-full bg-gradient-to-b from-green-500 to-blue-500"
+              />
+            </div>
+            
+            <div className="space-y-6">
+              {roadmapItems.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative pl-12"
+                  data-testid={`roadmap-phase-mobile-${i + 1}`}
+                >
+                  {/* Dot */}
+                  <div className="absolute left-2 top-5 -translate-x-1/2">
+                    <div
+                      className={`w-5 h-5 rounded-full border-4 border-black ${
+                        item.status === "completed"
+                          ? "bg-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)]"
+                          : item.status === "current"
+                          ? "bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] animate-pulse"
+                          : "bg-gray-700"
+                      }`}
+                    />
                   </div>
-                  <p className="text-sm text-blue-300 mb-3">{phase.quarter}</p>
                   
-                  <ul className="space-y-2">
-                    {phase.milestones.map((milestone, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-gray-400">
-                        <CheckCircle2 size={14} className={`mt-0.5 flex-shrink-0 ${
-                          phase.status === "completed" ? "text-emerald-400" : "text-gray-600"
-                        }`} />
-                        {milestone}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
+                  {/* Card */}
+                  <div
+                    className={`p-4 rounded-xl backdrop-blur-xl ${
+                      item.status === "completed"
+                        ? "bg-green-500/10 border border-green-500/30"
+                        : item.status === "current"
+                        ? "bg-blue-500/10 border border-blue-500/30"
+                        : "bg-white/5 border border-white/10"
+                    }`}
+                  >
+                    <div className={`text-xs font-bold uppercase tracking-wider mb-2 ${
+                      item.status === "completed"
+                        ? "text-green-400"
+                        : item.status === "current"
+                        ? "text-blue-300"
+                        : "text-gray-500"
+                    }`}>
+                      {item.quarter}
+                    </div>
+                    <div className="space-y-1.5">
+                      {item.items.map((task, j) => (
+                        <div
+                          key={j}
+                          className={`flex items-center gap-2 text-sm ${
+                            item.status === "completed"
+                              ? "text-white"
+                              : item.status === "current"
+                              ? "text-gray-200"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {item.status === "completed" ? (
+                            <Check size={14} className="text-green-400 flex-shrink-0" />
+                          ) : item.status === "current" ? (
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                          ) : (
+                            <div className="w-1.5 h-1.5 rounded-full bg-gray-600 flex-shrink-0" />
+                          )}
+                          {task}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
