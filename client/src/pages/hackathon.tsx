@@ -703,7 +703,7 @@ export default function Hackathon() {
               Program Roadmap
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              14-Week Program Timeline
+              13-Week Program Timeline
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               Clear milestones from start to finish. Know exactly what happens and when.
@@ -765,7 +765,7 @@ export default function Hackathon() {
                 </div>
               </motion.div>
 
-              {/* Week 10-14: Review Period */}
+              {/* Week 10-13: Review Period */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -774,13 +774,13 @@ export default function Hackathon() {
                 className="flex gap-4 sm:gap-6"
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  10-14
+                  10-13
                 </div>
                 <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 size={18} className="text-emerald-400" />
                     <h3 className="font-bold text-white">Review & Winners</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-14</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-13</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
                   <div className="flex items-center gap-4 text-sm">
