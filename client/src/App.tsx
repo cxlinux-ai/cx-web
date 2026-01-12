@@ -162,9 +162,7 @@ export default function App() {
                     location === "/startup" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
                   }`}
                   data-testid="link-startup"
-                >
-                  Startups
-                </Link>
+                >AI Agencys</Link>
                 <Link
                   href="/hackathon"
                   className={`relative text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
