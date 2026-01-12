@@ -2427,22 +2427,22 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="flex flex-wrap justify-center gap-12 md:gap-16">
             {[
               {
-                name: championAmbassador.name,
-                role: `${championAmbassador.title} · ${championAmbassador.achievement}`,
-                github: championAmbassador.github,
-                avatar: championAmbassador.avatar
+                name: "Mike Morgan",
+                role: "CEO · Vision & Strategy · Open-source advocate",
+                github: "mikejmorgan-ai",
+                avatar: "https://github.com/mikejmorgan-ai.png"
               },
               {
-                name: "Mike Linke",
-                role: "Founder · Systems Engineering · Open-source maintainer",
-                github: "mikelinke",
-                avatar: "https://github.com/mikelinke.png"
+                name: "Suyash D",
+                role: "Lead Engineer · Infrastructure · Core contributor",
+                github: "Suyashd999",
+                avatar: "https://github.com/Suyashd999.png"
               },
               {
-                name: "Alex Chen",
-                role: "Lead Engineer · Infrastructure · Linux kernel contributor",
-                github: "alexchen",
-                avatar: "https://github.com/alexchen.png"
+                name: "Ansh Grover",
+                role: "Main Reviewer · Code Quality · Open-source maintainer",
+                github: "Anshgrover23",
+                avatar: "https://github.com/Anshgrover23.png"
               }
             ].map((founder) => (
               <figure key={founder.github} className="flex flex-col items-center text-center group">
