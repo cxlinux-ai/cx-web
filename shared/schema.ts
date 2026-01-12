@@ -566,6 +566,29 @@ export const VERIFICATION_REQUIREMENTS = {
   suspiciousActivityThreshold: 3,
 } as const;
 
+/**
+ * IP-based Referral Codes - One referral code per IP address
+ * No email required - instant referral link generation
+ */
+export const ipReferralCodes = pgTable("ip_referral_codes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  ipAddress: text("ip_address").notNull().unique(),
+  referralCode: text("referral_code").notNull().unique(),
+  
+  // Browser fingerprint for additional fraud prevention
+  userAgent: text("user_agent"),
+  fingerprint: text("fingerprint"), // Canvas/WebGL fingerprint hash
+  
+  // Stats
+  totalReferrals: integer("total_referrals").default(0),
+  clickCount: integer("click_count").default(0),
+  
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  lastAccessedAt: timestamp("last_accessed_at").notNull().defaultNow(),
+});
+
+export type IpReferralCode = typeof ipReferralCodes.$inferSelect;
+
 // Validation schemas for API
 export const waitlistSignupSchema = z.object({
   email: z.string().email("Invalid email address"),

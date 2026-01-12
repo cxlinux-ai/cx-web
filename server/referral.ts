@@ -30,6 +30,8 @@ import {
   type WaitlistEntry,
   type ReferralEvent,
   hackathonRegistrations,
+  ipReferralCodes,
+  type IpReferralCode,
 } from "@shared/schema";
 
 const router = Router();
@@ -65,9 +67,32 @@ const apiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+// IP-based referral code generation limiter (3 per minute per IP)
+const generateLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 3,
+  message: { error: "Too many requests. Please try again later." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // ==========================================
 // HELPER FUNCTIONS
 // ==========================================
+
+/**
+ * Extract client IP from request headers
+ */
+function getClientIp(req: Request): string {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string") {
+    return forwarded.split(",")[0].trim();
+  }
+  if (Array.isArray(forwarded) && forwarded.length > 0) {
+    return forwarded[0].split(",")[0].trim();
+  }
+  return req.ip || req.socket.remoteAddress || "unknown";
+}
 
 /**
  * Generate a unique, URL-safe referral code
@@ -134,6 +159,111 @@ async function getWaitlistCount(): Promise<number> {
   const result = await db.select({ count: count() }).from(waitlistEntries);
   return result[0]?.count || 0;
 }
+
+// ==========================================
+// IP-BASED REFERRAL CODE GENERATION
+// ==========================================
+
+/**
+ * POST /api/referral/generate
+ * Generate or retrieve a referral code for the current IP address
+ * One code per IP - returns existing code if already generated
+ */
+router.post("/generate", generateLimiter, async (req: Request, res: Response) => {
+  try {
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers["user-agent"] || null;
+    const fingerprint = req.body?.fingerprint || null;
+
+    // Check if IP already has a referral code
+    const existing = await db
+      .select()
+      .from(ipReferralCodes)
+      .where(eq(ipReferralCodes.ipAddress, clientIp))
+      .limit(1);
+
+    if (existing.length > 0) {
+      // Update last accessed time
+      await db
+        .update(ipReferralCodes)
+        .set({ lastAccessedAt: new Date() })
+        .where(eq(ipReferralCodes.id, existing[0].id));
+
+      return res.json({
+        referralCode: existing[0].referralCode,
+        totalReferrals: existing[0].totalReferrals || 0,
+        clickCount: existing[0].clickCount || 0,
+        isNew: false,
+      });
+    }
+
+    // Generate unique referral code
+    let newReferralCode = generateReferralCode();
+    let attempts = 0;
+    while (attempts < 10) {
+      const codeExists = await db
+        .select()
+        .from(ipReferralCodes)
+        .where(eq(ipReferralCodes.referralCode, newReferralCode))
+        .limit(1);
+
+      if (codeExists.length === 0) break;
+      newReferralCode = generateReferralCode();
+      attempts++;
+    }
+
+    // Create new IP referral code entry
+    const [newEntry] = await db
+      .insert(ipReferralCodes)
+      .values({
+        ipAddress: clientIp,
+        referralCode: newReferralCode,
+        userAgent,
+        fingerprint,
+      })
+      .returning();
+
+    res.json({
+      referralCode: newEntry.referralCode,
+      totalReferrals: 0,
+      clickCount: 0,
+      isNew: true,
+    });
+  } catch (error) {
+    console.error("Referral generate error:", error);
+    res.status(500).json({ error: "Failed to generate referral code" });
+  }
+});
+
+/**
+ * GET /api/referral/my-link
+ * Get referral code and stats for the current IP address
+ */
+router.get("/my-link", apiLimiter, async (req: Request, res: Response) => {
+  try {
+    const clientIp = getClientIp(req);
+
+    const existing = await db
+      .select()
+      .from(ipReferralCodes)
+      .where(eq(ipReferralCodes.ipAddress, clientIp))
+      .limit(1);
+
+    if (existing.length === 0) {
+      return res.status(404).json({ error: "No referral code found for this IP" });
+    }
+
+    res.json({
+      referralCode: existing[0].referralCode,
+      totalReferrals: existing[0].totalReferrals || 0,
+      clickCount: existing[0].clickCount || 0,
+      createdAt: existing[0].createdAt,
+    });
+  } catch (error) {
+    console.error("My link error:", error);
+    res.status(500).json({ error: "Failed to get referral link" });
+  }
+});
 
 // ==========================================
 // WAITLIST SIGNUP
