@@ -178,7 +178,7 @@ export default function App() {
                 <Link
                   href="/bounties"
                   className={`text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
-                    location === "/bounties" ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                    location === "/bounties" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-bounties"
                   onClick={() => analytics.trackCTAClick('bounties', 'main_nav')}
@@ -303,7 +303,7 @@ export default function App() {
                       analytics.trackCTAClick('bounties', 'mobile_nav');
                       setMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-green-400 transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-bounties"
                   >
                     Bounties
