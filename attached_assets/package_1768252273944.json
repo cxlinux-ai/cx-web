@@ -1,0 +1,28 @@
+{
+  "name": "discord-claude-bot",
+  "version": "1.0.0",
+  "description": "CortexLinuxAI Discord bot powered by Claude API",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "claude",
+    "ai",
+    "cortexlinux"
+  ],
+  "author": "CortexLinux",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
