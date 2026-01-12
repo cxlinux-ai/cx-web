@@ -252,6 +252,8 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
 }
 
 export default function Hackathon() {
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+
   useEffect(() => {
     const cleanup = updateSEO(seoConfigs.hackathon);
     return cleanup;
@@ -266,6 +268,47 @@ export default function Hackathon() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* Registration Modal */}
+      <AnimatePresence>
+        {showRegistrationModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={(e) => e.target === e.currentTarget && setShowRegistrationModal(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-900 border border-white/10 rounded-2xl shadow-2xl"
+            >
+              <div className="sticky top-0 z-10 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-white">Hackathon Registration</h2>
+                  <p className="text-sm text-gray-400">Join the Cortex Hackathon 2026</p>
+                </div>
+                <button
+                  onClick={() => setShowRegistrationModal(false)}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <X size={20} className="text-gray-400" />
+                </button>
+              </div>
+              <div className="p-6">
+                <HackathonRegistrationForm
+                  onSuccess={() => {
+                    setTimeout(() => setShowRegistrationModal(false), 3000);
+                  }}
+                  onClose={() => setShowRegistrationModal(false)}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
@@ -362,21 +405,19 @@ export default function Hackathon() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-6 py-3 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(0,102,255,0.3)] hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] transition-all duration-300"
-              data-testid="hero-cta-github"
+            <button
               onClick={() => {
-                analytics.trackCTAClick('sign_in_now', 'hackathon_hero');
+                setShowRegistrationModal(true);
+                analytics.trackCTAClick('register_now', 'hackathon_hero');
                 analytics.trackConversion('hackathon_signup');
               }}
+              className="group flex items-center gap-3 px-6 py-3 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(0,102,255,0.3)] hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] transition-all duration-300"
+              data-testid="hero-cta-register"
             >
-              <Github size={20} />
-              Sign In Now
+              <ClipboardList size={20} />
+              Register Now
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </button>
             <a
               href={DISCORD_URL}
               target="_blank"
@@ -418,7 +459,7 @@ export default function Hackathon() {
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
               <Trophy size={16} className="text-yellow-400" />
-              $15,000 in Prizes
+              <span className="text-terminal-green font-semibold">$15,000</span> in Prizes
             </span>
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
@@ -1324,21 +1365,19 @@ export default function Hackathon() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
-                data-testid="final-cta-github"
+              <button
                 onClick={() => {
-                  analytics.trackCTAClick('sign_in_now', 'hackathon_final_cta');
+                  setShowRegistrationModal(true);
+                  analytics.trackCTAClick('register_now', 'hackathon_final_cta');
                   analytics.trackConversion('hackathon_signup');
                 }}
+                className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
+                data-testid="final-cta-register"
               >
-                <Github size={24} />
-                Sign In Now
+                <ClipboardList size={24} />
+                Register Now
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
               <a
                 href={DISCORD_URL}
                 target="_blank"
