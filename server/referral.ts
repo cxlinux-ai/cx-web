@@ -265,6 +265,89 @@ router.get("/my-link", apiLimiter, async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * GET /api/referral/ip-dashboard
+ * Get dashboard data for IP-based referral code (no email required)
+ */
+router.get("/ip-dashboard", apiLimiter, async (req: Request, res: Response) => {
+  try {
+    const clientIp = getClientIp(req);
+
+    const existing = await db
+      .select()
+      .from(ipReferralCodes)
+      .where(eq(ipReferralCodes.ipAddress, clientIp))
+      .limit(1);
+
+    if (existing.length === 0) {
+      return res.status(404).json({ error: "No referral code found for this IP" });
+    }
+
+    const ipCode = existing[0];
+
+    // Get click events for this referral code
+    const events = await db
+      .select()
+      .from(referralEvents)
+      .where(eq(referralEvents.referralCode, ipCode.referralCode))
+      .orderBy(desc(referralEvents.createdAt))
+      .limit(50);
+
+    // Calculate stats
+    const clickCount = events.filter((e) => e.eventType === "click").length;
+    const signupCount = events.filter((e) => e.eventType === "signup").length;
+    const shareCount = events.filter((e) => e.eventType === "shared").length;
+
+    // Determine tier based on total referrals
+    const totalReferrals = ipCode.totalReferrals || 0;
+    const tier = determineTier(totalReferrals);
+
+    // Calculate rewards
+    const rewardsUnlocked = [];
+    if (totalReferrals >= 1) rewardsUnlocked.push({ tier: "bronze", reward: "+100 spots", unlocked: true });
+    if (totalReferrals >= 3) rewardsUnlocked.push({ tier: "silver", reward: "+500 spots", unlocked: true });
+    if (totalReferrals >= 5) rewardsUnlocked.push({ tier: "gold", reward: "Discord Role", unlocked: true });
+    if (totalReferrals >= 10) rewardsUnlocked.push({ tier: "platinum", reward: "1 Free Pro Month", unlocked: true });
+    if (totalReferrals >= 25) rewardsUnlocked.push({ tier: "diamond", reward: "Founding Badge", unlocked: true });
+    if (totalReferrals >= 50) rewardsUnlocked.push({ tier: "legendary", reward: "Hackathon Fast-Track", unlocked: true });
+
+    // Next reward
+    const nextReward = totalReferrals < 1
+      ? { tier: "bronze", referralsNeeded: 1 - totalReferrals, reward: "+100 spots" }
+      : totalReferrals < 3
+        ? { tier: "silver", referralsNeeded: 3 - totalReferrals, reward: "+500 spots" }
+        : totalReferrals < 5
+          ? { tier: "gold", referralsNeeded: 5 - totalReferrals, reward: "Discord Role" }
+          : totalReferrals < 10
+            ? { tier: "platinum", referralsNeeded: 10 - totalReferrals, reward: "1 Free Pro Month" }
+            : totalReferrals < 25
+              ? { tier: "diamond", referralsNeeded: 25 - totalReferrals, reward: "Founding Badge" }
+              : totalReferrals < 50
+                ? { tier: "legendary", referralsNeeded: 50 - totalReferrals, reward: "Hackathon Fast-Track" }
+                : null;
+
+    res.json({
+      referralCode: ipCode.referralCode,
+      referralLink: `https://cortexlinux.com/referrals?ref=${ipCode.referralCode}`,
+      currentTier: tier,
+      stats: {
+        totalReferrals: totalReferrals,
+        clicks: ipCode.clickCount || clickCount,
+        shares: shareCount,
+        signups: signupCount,
+      },
+      rewards: {
+        unlocked: rewardsUnlocked,
+        next: nextReward,
+      },
+      createdAt: ipCode.createdAt,
+    });
+  } catch (error) {
+    console.error("IP dashboard error:", error);
+    res.status(500).json({ error: "Failed to load dashboard" });
+  }
+});
+
 // ==========================================
 // WAITLIST SIGNUP
 // ==========================================
@@ -506,12 +589,42 @@ router.post("/click", clickLimiter, async (req: Request, res: Response) => {
     }
 
     const { referralCode, source } = validation.data;
+    const upperCode = referralCode.toUpperCase();
 
-    // Verify referral code exists
+    // Check IP-based referral codes first
+    const ipEntry = await db
+      .select()
+      .from(ipReferralCodes)
+      .where(eq(ipReferralCodes.referralCode, upperCode))
+      .limit(1);
+
+    if (ipEntry.length > 0) {
+      // Increment click count for IP-based referral
+      await db
+        .update(ipReferralCodes)
+        .set({
+          clickCount: sql`${ipReferralCodes.clickCount} + 1`,
+          lastAccessedAt: new Date(),
+        })
+        .where(eq(ipReferralCodes.id, ipEntry[0].id));
+
+      // Track click event
+      await db.insert(referralEvents).values({
+        referralCode: upperCode,
+        eventType: "click",
+        source: source || "direct",
+        ipAddress: getClientIp(req),
+        userAgent: req.headers["user-agent"] || null,
+      });
+
+      return res.json({ success: true });
+    }
+
+    // Fallback: Check waitlist entries
     const entry = await db
       .select()
       .from(waitlistEntries)
-      .where(eq(waitlistEntries.referralCode, referralCode.toUpperCase()))
+      .where(eq(waitlistEntries.referralCode, upperCode))
       .limit(1);
 
     if (entry.length === 0) {
@@ -520,10 +633,10 @@ router.post("/click", clickLimiter, async (req: Request, res: Response) => {
 
     // Track click event
     await db.insert(referralEvents).values({
-      referralCode: referralCode.toUpperCase(),
+      referralCode: upperCode,
       eventType: "click",
       source: source || "direct",
-      ipAddress: req.ip || null,
+      ipAddress: getClientIp(req),
       userAgent: req.headers["user-agent"] || null,
     });
 

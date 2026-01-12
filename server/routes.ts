@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import type { Contributor } from "@shared/schema";
-import { insertHackathonRegistrationSchema } from "@shared/schema";
+import { insertHackathonRegistrationSchema, fullHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
 import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
@@ -308,45 +308,131 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Mount OAuth routes (Discord, GitHub authentication)
   app.use("/api/oauth", oauthRoutes);
 
-  // Hackathon registration endpoint
+  // Admin API key middleware
+  const requireAdminApiKey = (req: any, res: any, next: any) => {
+    const apiKey = req.headers["x-api-key"];
+    const adminApiKey = process.env.ADMIN_API_KEY;
+    
+    if (!adminApiKey) {
+      return res.status(500).json({ success: false, error: "Admin API key not configured" });
+    }
+    
+    if (apiKey !== adminApiKey) {
+      return res.status(401).json({ success: false, error: "Unauthorized: Invalid API key" });
+    }
+    
+    next();
+  };
+
+  // Legacy hackathon registration endpoint (backward compatibility)
   app.post("/api/hackathon/register", async (req, res) => {
     try {
       const result = insertHackathonRegistrationSchema.safeParse(req.body);
       
       if (!result.success) {
         return res.status(400).json({ 
+          success: false,
           error: "Invalid registration data",
           details: result.error.flatten() 
         });
       }
 
-      const { name, email, phone } = result.data;
+      const { fullName, name, email, phone, githubUrl } = result.data;
 
       const existing = await storage.getHackathonRegistrationByEmail(email);
       if (existing) {
         return res.status(200).json({ 
+          success: true,
           message: "Already registered",
           registration: existing 
         });
       }
 
       const registration = await storage.createHackathonRegistration({
-        name,
+        fullName: fullName || name || "",
+        name: name || fullName,
         email,
         phone: phone || undefined,
+        githubUrl: githubUrl || "",
       });
 
       res.status(201).json({ 
+        success: true,
         message: "Registration successful",
         registration 
       });
     } catch (error) {
       console.error("Registration error:", error instanceof Error ? error.message : "Unknown error");
-      res.status(500).json({ error: "Registration failed" });
+      res.status(500).json({ success: false, error: "Registration failed" });
     }
   });
 
-  // Get all hackathon registrations (admin endpoint)
+  // New comprehensive registration endpoint
+  app.post("/api/register", async (req, res) => {
+    try {
+      const result = fullHackathonRegistrationSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        return res.status(400).json({ 
+          success: false,
+          error: "Invalid registration data",
+          details: result.error.flatten() 
+        });
+      }
+
+      const data = result.data;
+
+      // Check for duplicate email
+      const emailExists = await storage.checkEmailExists(data.email);
+      if (emailExists) {
+        return res.status(409).json({ 
+          success: false,
+          error: "This email is already registered for the hackathon" 
+        });
+      }
+
+      const registration = await storage.createFullRegistration(data);
+
+      res.status(201).json({ 
+        success: true,
+        message: "Registration successful",
+        registration 
+      });
+    } catch (error) {
+      console.error("Registration error:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ success: false, error: "Registration failed" });
+    }
+  });
+
+  // Get all registrations (protected)
+  app.get("/api/registrations", requireAdminApiKey, async (req, res) => {
+    try {
+      const registrations = await storage.getAllHackathonRegistrations();
+      res.json({ success: true, data: registrations });
+    } catch (error) {
+      console.error("Failed to fetch registrations:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ success: false, error: "Failed to fetch registrations" });
+    }
+  });
+
+  // Get single registration by ID (protected)
+  app.get("/api/registrations/:id", requireAdminApiKey, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const registration = await storage.getRegistrationById(id);
+      
+      if (!registration) {
+        return res.status(404).json({ success: false, error: "Registration not found" });
+      }
+      
+      res.json({ success: true, data: registration });
+    } catch (error) {
+      console.error("Failed to fetch registration:", error instanceof Error ? error.message : "Unknown error");
+      res.status(500).json({ success: false, error: "Failed to fetch registration" });
+    }
+  });
+
+  // Legacy endpoint for backward compatibility
   app.get("/api/hackathon/registrations", async (req, res) => {
     try {
       const registrations = await storage.getAllHackathonRegistrations();
@@ -362,9 +448,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const registrations = await storage.getAllHackathonRegistrations();
       
-      const csvHeader = "Name,Email,Phone,Registered At\n";
+      const csvHeader = "Full Name,Email,Country,Role,Organization,GitHub,LinkedIn,Linux Exp,AI/ML Exp,Languages,Team/Solo,Team Name,Project Idea,Used Cortex,How Heard,Registered At\n";
       const csvRows = registrations.map(r => 
-        `"${r.name}","${r.email}","${r.phone || ''}","${r.registeredAt}"`
+        `"${r.fullName || r.name || ''}","${r.email}","${r.country || ''}","${r.currentRole || ''}","${r.organization || ''}","${r.githubUrl || ''}","${r.linkedinUrl || ''}","${r.linuxExperience || ''}","${r.aiMlExperience || ''}","${r.programmingLanguages || ''}","${r.teamOrSolo || ''}","${r.teamName || ''}","${(r.projectIdea || '').replace(/"/g, '""')}","${r.usedCortexBefore || ''}","${r.howHeardAboutUs || ''}","${r.registeredAt}"`
       ).join("\n");
       
       res.setHeader("Content-Type", "text/csv");

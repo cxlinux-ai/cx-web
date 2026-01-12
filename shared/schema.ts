@@ -27,22 +27,82 @@ export const contributorSchema = z.object({
 
 export type Contributor = z.infer<typeof contributorSchema>;
 
-// Hackathon Registration
+// Hackathon Registration - Extended with comprehensive fields
 export const hackathonRegistrations = pgTable("hackathon_registrations", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  name: text("name").notNull(),
+  fullName: text("full_name").default(""),
   email: text("email").notNull().unique(),
+  country: text("country"),
+  currentRole: text("current_role"),
+  organization: text("organization"),
+  githubUrl: text("github_url").default(""),
+  linkedinUrl: text("linkedin_url"),
+  linuxExperience: integer("linux_experience"),
+  aiMlExperience: integer("ai_ml_experience"),
+  programmingLanguages: text("programming_languages"),
+  teamOrSolo: text("team_or_solo"),
+  teamName: text("team_name"),
+  projectIdea: text("project_idea"),
+  usedCortexBefore: text("used_cortex_before"),
+  howHeardAboutUs: text("how_heard_about_us"),
+  registeredAt: timestamp("registered_at").notNull().defaultNow(),
+  // Legacy fields for backward compatibility
+  name: text("name"),
   phone: text("phone"),
-  registeredAt: text("registered_at").notNull().default(sql`now()`),
 });
 
-export const insertHackathonRegistrationSchema = createInsertSchema(hackathonRegistrations).pick({
-  name: true,
-  email: true,
-  phone: true,
+// Insert schema with comprehensive validation
+export const insertHackathonRegistrationSchema = createInsertSchema(hackathonRegistrations)
+  .omit({ id: true, registeredAt: true })
+  .extend({
+    fullName: z.string().min(2, "Full name must be at least 2 characters"),
+    email: z.string().email("Please enter a valid email address"),
+    country: z.string().optional(),
+    currentRole: z.enum(["Student", "Professional", "Indie Hacker", "Other"]).optional(),
+    organization: z.string().optional(),
+    githubUrl: z.string()
+      .min(1, "GitHub URL is required")
+      .refine(
+        (url) => url.startsWith("https://github.com/") || url.startsWith("github.com/") || /^[a-zA-Z0-9_-]+$/.test(url),
+        "Please enter a valid GitHub URL or username"
+      ),
+    linkedinUrl: z.string().optional(),
+    linuxExperience: z.number().min(1).max(5).optional(),
+    aiMlExperience: z.number().min(1).max(5).optional(),
+    programmingLanguages: z.string().optional(),
+    teamOrSolo: z.enum(["team", "solo"]).optional(),
+    teamName: z.string().optional(),
+    projectIdea: z.string().optional(),
+    usedCortexBefore: z.enum(["yes", "no", "whats_that"]).optional(),
+    howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]).optional(),
+  });
+
+// Full registration schema for new comprehensive form
+export const fullHackathonRegistrationSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  country: z.string().optional(),
+  currentRole: z.enum(["Student", "Professional", "Indie Hacker", "Other"]),
+  organization: z.string().optional(),
+  githubUrl: z.string()
+    .min(1, "GitHub URL is required")
+    .refine(
+      (url) => url.startsWith("https://github.com/") || url.startsWith("github.com/") || /^[a-zA-Z0-9_-]+$/.test(url),
+      "Please enter a valid GitHub URL or username"
+    ),
+  linkedinUrl: z.string().optional(),
+  linuxExperience: z.number().min(1).max(5),
+  aiMlExperience: z.number().min(1).max(5),
+  programmingLanguages: z.array(z.string()).min(1, "Select at least one programming language"),
+  teamOrSolo: z.enum(["team", "solo"]),
+  teamName: z.string().optional(),
+  projectIdea: z.string().min(10, "Please describe your project idea (at least 10 characters)"),
+  usedCortexBefore: z.enum(["yes", "no", "whats_that"]),
+  howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]),
 });
 
 export type InsertHackathonRegistration = z.infer<typeof insertHackathonRegistrationSchema>;
+export type FullHackathonRegistration = z.infer<typeof fullHackathonRegistrationSchema>;
 export type HackathonRegistration = typeof hackathonRegistrations.$inferSelect;
 
 // Stripe Customers
