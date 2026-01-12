@@ -352,7 +352,7 @@ export default function Hackathon() {
               {[
                 { name: "Mike", avatar: "https://github.com/mikejmorgan-ai.png" },
                 { name: "Suyash", avatar: "/assets/suyash.png" },
-                { name: "Dhruv", avatar: "https://github.com/Dhruv-89.png" },
+                { name: "Dhruv", avatar: "/assets/dhruv.png" },
                 { name: "Ansh", avatar: "https://github.com/Anshgrover23.png" }
               ].map((contributor, i) => (
                 <img

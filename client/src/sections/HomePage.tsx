@@ -2450,7 +2450,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Dhruv",
                 role: "Lead Engineer · Architecture · Core contributor",
                 github: "Dhruv-89",
-                avatar: "https://github.com/Dhruv-89.png"
+                avatar: "/assets/dhruv.png"
               },
               {
                 name: "Ansh Grover",
