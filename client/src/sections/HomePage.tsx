@@ -51,6 +51,7 @@ import {
   MousePointer2,
   Rocket,
   Info,
+  Building,
 } from "lucide-react";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
@@ -1191,114 +1192,209 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-      {/* Pricing Section */}
-      <section id="pricing" className="py-32 px-4 relative">
-        {/* Subtle background blobs */}
-        <div className="bg-blob bg-blob-blue w-[600px] h-[600px] top-0 left-1/4 -translate-x-1/2" style={{ animationDelay: '1s' }} />
-        <div className="bg-blob bg-blob-blue w-[400px] h-[400px] bottom-20 right-10" style={{ animationDelay: '5s' }} />
+      {/* Pricing Section - Premium 3-Tier */}
+      <section id="pricing" className="py-32 px-4 relative overflow-hidden">
+        {/* Animated background effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent" />
+        <div className="bg-blob bg-blob-blue w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" style={{ animationDelay: '0s' }} />
         
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16">
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Sparkles size={16} className="text-brand-blue" />
+              <span className="text-sm text-gray-400">Simple, transparent pricing</span>
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your <span className="gradient-text">Edition</span></h2>
-          </div>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">Start free, upgrade when you're ready to scale. No hidden fees.</p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {/* Community Edition */}
-            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Community Edition</h3>
-                <div className="text-4xl font-bold text-emerald-400 mb-2">FREE</div>
-                <p className="text-gray-400 mb-8">Open Source Forever</p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 flex flex-col hover:border-white/20 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500"
+            >
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-6">
+                  <Zap size={24} className="text-emerald-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Community</h3>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-4xl font-bold text-emerald-400">Free</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-8">Open source forever</p>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
-                    <span>Full AI capabilities</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
-                    <span>All core features</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
-                    <span>Open source (Apache 2.0)</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
-                    <span>Community support</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-emerald-400 flex-shrink-0" />
-                    <span>Unlimited personal use</span>
-                  </li>
+                  {[
+                    "Full AI capabilities",
+                    "All core features",
+                    "Open source (Apache 2.0)",
+                    "Community support",
+                    "Unlimited personal use",
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-emerald-400" />
+                      </div>
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               
-              <div className="mt-auto">
+              <div className="relative mt-auto">
                 <a
                   href="https://github.com/cortexlinux/cortex"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full py-4 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
+                  className="block w-full py-4 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                   data-testid="button-download-free"
                 >
                   Download Free
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Enterprise Edition */}
-            <div className="glass-card rounded-2xl p-8 border border-white/10 flex flex-col relative hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
-              <div className="absolute -top-3 right-8">
-                <span className="px-4 py-1.5 bg-brand-blue text-white text-sm font-semibold rounded-full">
-                  FOR TEAMS
-                </span>
+            {/* Pro Edition - Highlighted */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative rounded-2xl p-8 flex flex-col md:-mt-4 md:mb-4 transition-all duration-500"
+            >
+              {/* Animated gradient border */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-brand-blue via-blue-400 to-brand-blue opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-blue-950/80 via-black/90 to-black/95 backdrop-blur-xl" />
+              
+              {/* Popular badge */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                <div className="px-4 py-1.5 bg-brand-blue rounded-full text-sm font-semibold shadow-[0_0_20px_rgba(59,130,246,0.5)] flex items-center gap-1.5">
+                  <Star size={14} className="fill-current" />
+                  Most Popular
+                </div>
               </div>
               
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Enterprise Edition</h3>
-                <div className="text-4xl font-bold text-brand-blue mb-2"><span className="gradient-text">Custom</span></div>
-                <p className="text-gray-400 mb-8">Contact for Pricing</p>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-brand-blue/30 flex items-center justify-center mb-6">
+                  <Rocket size={24} className="text-brand-blue" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Founders</h3>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-4xl font-bold text-[#93c5fd]">$19</span>
+                  <span className="text-gray-400">/month</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-8">For serious AI builders</p>
                 
                 <ul className="space-y-4 mb-8">
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>Everything in Community</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>Priority support (24/7)</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>Compliance reporting</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>Role-based access control</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>Custom integrations</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-gray-300">
-                    <Check size={18} className="text-brand-blue flex-shrink-0" />
-                    <span>SLA guarantees</span>
-                  </li>
+                  {[
+                    "Everything in Community",
+                    "Priority support (24/7)",
+                    "Early package releases",
+                    "GPU inference engine",
+                    "Performance analytics",
+                    "Team collaboration",
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-brand-blue/30 flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-brand-blue" />
+                      </div>
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               
-              <div className="mt-auto">
+              <div className="relative mt-auto">
+                <a
+                  href="https://github.com/cortexlinux/cortex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-4 text-center rounded-xl font-semibold bg-brand-blue text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all duration-300"
+                  data-testid="button-get-founders"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Enterprise Edition */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 flex flex-col hover:border-white/20 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-500"
+            >
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-6">
+                  <Building size={24} className="text-purple-400" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Enterprise</h3>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-4xl font-bold gradient-text">Custom</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-8">For large organizations</p>
+                
+                <ul className="space-y-4 mb-8">
+                  {[
+                    "Everything in Founders",
+                    "Dedicated support team",
+                    "Custom integrations",
+                    "SLA guarantees (99.9%)",
+                    "Compliance reporting",
+                    "On-premise deployment",
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-gray-300">
+                      <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                        <Check size={12} className="text-purple-400" />
+                      </div>
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="relative mt-auto">
                 <a
                   href="mailto:sales@cortexlinux.com"
-                  className="block w-full py-4 text-center rounded-xl font-semibold bg-blue-500 hover:bg-blue-600 transition-colors"
+                  className="block w-full py-4 text-center rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                   data-testid="button-contact-sales"
                 >
                   Contact Sales
                 </a>
               </div>
-            </div>
+            </motion.div>
           </div>
+          
+          {/* Trust indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
+              <Shield size={16} className="text-emerald-400" />
+              30-day money-back guarantee. Cancel anytime.
+            </p>
+          </motion.div>
         </div>
       </section>
       {/* Open Source Dashboard */}
