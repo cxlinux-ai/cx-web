@@ -15,7 +15,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { MobileSelect } from "@/components/ui/mobile-select";
 
 // ==========================================
 // TYPES
@@ -733,37 +732,29 @@ export function BountiesBoard() {
             </div>
 
             {/* Filter Dropdown */}
-            <div className="w-full md:w-48">
-              <MobileSelect
-                value={filter}
-                onValueChange={(val) => setFilter(val as FilterStatus)}
-                options={[
-                  { value: "all", label: "All Bounties" },
-                  { value: "open", label: "Open Only" },
-                  { value: "closed", label: "Completed Only" },
-                ]}
-                placeholder="Filter"
-                title="Filter Bounties"
-                data-testid="select-filter"
-              />
-            </div>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as FilterStatus)}
+              className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer"
+              data-testid="select-filter"
+            >
+              <option value="all" className="bg-gray-900">All Bounties</option>
+              <option value="open" className="bg-gray-900">Open Only</option>
+              <option value="closed" className="bg-gray-900">Completed Only</option>
+            </select>
 
             {/* Sort Dropdown */}
-            <div className="w-full md:w-48">
-              <MobileSelect
-                value={sort}
-                onValueChange={(val) => setSort(val as SortOption)}
-                options={[
-                  { value: "newest", label: "Newest First" },
-                  { value: "oldest", label: "Oldest First" },
-                  { value: "most_active", label: "Most Active" },
-                  { value: "highest_bounty", label: "Highest Bounty" },
-                ]}
-                placeholder="Sort"
-                title="Sort Bounties"
-                data-testid="select-sort"
-              />
-            </div>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortOption)}
+              className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer"
+              data-testid="select-sort"
+            >
+              <option value="newest" className="bg-gray-900">Newest First</option>
+              <option value="oldest" className="bg-gray-900">Oldest First</option>
+              <option value="most_active" className="bg-gray-900">Most Active</option>
+              <option value="highest_bounty" className="bg-gray-900">Highest Bounty</option>
+            </select>
           </div>
         </div>
 

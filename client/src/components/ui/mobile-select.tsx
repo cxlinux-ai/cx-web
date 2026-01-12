@@ -80,7 +80,7 @@ export function MobileSelect({
             </button>
           </div>
           
-          <div className="flex-1 overflow-y-auto p-2 pb-8">
+          <div className="flex-1 overflow-y-auto p-2">
             {options.map((option) => (
               <button
                 key={option.value}
@@ -99,6 +99,16 @@ export function MobileSelect({
                 )}
               </button>
             ))}
+          </div>
+          
+          <div className="p-4 border-t border-white/10 safe-area-bottom">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="w-full py-3 rounded-lg bg-white/10 text-gray-300 text-base font-medium active:bg-white/20 transition-colors"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       )}
