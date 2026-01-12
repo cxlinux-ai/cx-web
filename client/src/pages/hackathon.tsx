@@ -523,29 +523,64 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
-          {/* Quick Stats - Updated */}
+          {/* 3 Simple Steps to Participate */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-wrap justify-center gap-6 sm:gap-12 mt-12 pt-8 border-t border-white/10"
-            data-testid="quick-stats-section"
+            className="mt-12 pt-8 border-t border-white/10"
+            data-testid="participate-steps-section"
           >
-            <div className="text-center" data-testid="stat-prize-pool">
-              <p className="text-2xl sm:text-3xl font-bold text-terminal-green">{hackathonConfig.totalPrizePool}</p>
-              <p className="text-sm text-gray-400">Total Prize Pool</p>
+            <h3 className="text-xl sm:text-2xl font-bold text-white text-center mb-8">
+              3 Simple Steps to Participate
+            </h3>
+            <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-3 p-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-yellow-500/40 rounded-xl transition-all text-center"
+                data-testid="step-1-star"
+              >
+                <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-black font-bold text-lg">1</div>
+                <Star size={24} className="text-yellow-400" />
+                <span className="text-white font-semibold">Star the Repo</span>
+                <span className="text-gray-400 text-sm">Show your support on GitHub</span>
+              </a>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-3 p-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/40 rounded-xl transition-all text-center"
+                data-testid="step-2-discord"
+              >
+                <div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-lg">2</div>
+                <FaDiscord size={24} className="text-purple-400" />
+                <span className="text-white font-semibold">Join Discord</span>
+                <span className="text-gray-400 text-sm">Connect with the community</span>
+              </a>
+              <Link
+                href="/hackathon-rules"
+                className="flex flex-col items-center gap-3 p-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 rounded-xl transition-all text-center"
+                data-testid="step-3-rules"
+              >
+                <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-lg">3</div>
+                <FileText size={24} className="text-emerald-400" />
+                <span className="text-white font-semibold">View Rules</span>
+                <span className="text-gray-400 text-sm">Read the full guidelines</span>
+              </Link>
             </div>
-            <div className="text-center" data-testid="stat-participants">
-              <p className="text-2xl sm:text-3xl font-bold text-white">{hackathonConfig.expectedParticipants}</p>
-              <p className="text-sm text-gray-400">Participants</p>
-            </div>
-            <div className="text-center" data-testid="stat-ideas">
-              <p className="text-2xl sm:text-3xl font-bold text-amber-400">{hackathonConfig.expectedIdeas}</p>
-              <p className="text-sm text-gray-400">Ideas Expected</p>
-            </div>
-            <div className="text-center" data-testid="stat-prs">
-              <p className="text-2xl sm:text-3xl font-bold text-blue-300">{hackathonConfig.expectedPRs}</p>
-              <p className="text-sm text-gray-400">PRs Expected</p>
+            
+            {/* Big Prize Pool & Thanks */}
+            <div className="mt-12 text-center">
+              <p className="text-terminal-green font-bold" style={{ fontSize: '50px' }}>$15,000</p>
+              <p className="text-xl text-gray-300 mb-4">Total Prize Pool</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">
+                Thank You for Being Part of This Journey!
+              </p>
+              <p className="text-gray-400 mt-2 max-w-xl mx-auto">
+                Your participation helps shape the future of AI-native Linux. Whether you submit ideas or code, you're making a difference.
+              </p>
             </div>
           </motion.div>
         </div>
