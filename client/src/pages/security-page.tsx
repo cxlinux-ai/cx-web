@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
@@ -7,301 +7,582 @@ import {
   Bug, 
   Award, 
   CheckCircle, 
-  AlertCircle, 
   Mail,
   Lock,
-  Package,
   RotateCcw,
-  FileCheck,
+  Eye,
+  EyeOff,
   Server,
-  Eye
+  Cloud,
+  Cpu,
+  ChevronDown,
+  ChevronUp,
+  X,
+  FileText,
+  Terminal,
+  Database,
+  Key,
+  Play,
+  Pause,
+  Download
 } from "lucide-react";
 import Footer from "@/components/Footer";
-import { updateSEO, seoConfigs } from "@/lib/seo";
+import { updateSEO } from "@/lib/seo";
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-colors"
+        data-testid={`faq-toggle-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
+        aria-expanded={isOpen}
+      >
+        <span className="font-medium text-white pr-4">{question}</span>
+        {isOpen ? (
+          <ChevronUp className="text-brand-blue flex-shrink-0" size={20} />
+        ) : (
+          <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
+        )}
+      </button>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="px-5 pb-5"
+        >
+          <p className="text-gray-400 leading-relaxed">{answer}</p>
+        </motion.div>
+      )}
+    </div>
+  );
+}
 
 export default function SecurityPage() {
   useEffect(() => {
-    const cleanup = updateSEO(seoConfigs.security);
+    const cleanup = updateSEO({
+      title: 'Security | Cortex Linux - Your System, Your Control',
+      description: 'Cortex Linux is designed with security-first principles. Learn about our sandboxed execution, dry-run defaults, rollback support, and privacy commitments for production Linux environments.',
+      canonicalPath: '/security',
+      keywords: ['Cortex Linux security', 'CLI security', 'sandboxed execution', 'Firejail', 'AI privacy', 'local LLM', 'command safety']
+    });
     return cleanup;
   }, []);
 
-  const coreDesignSections = [
+  const privacyCommitments = [
     {
-      icon: Lock,
-      title: "Principle of Least Privilege",
-      content: `Cortex operates with the minimum permissions necessary for each task. By default, operations run in user space without elevated privileges. When administrative access is required, users are prompted explicitly and shown exactly what will be executed before confirmation.`
+      icon: Play,
+      title: "Dry-Run Default",
+      description: "Every command shows planned actions before execution. You see exactly what will happen before confirming."
     },
     {
       icon: Shield,
-      title: "No Root by Default",
-      content: `The system does not run with root permissions under normal operation. Elevated privileges are requested only when strictly necessary, and users maintain full visibility into what actions require administrative access and why.`
-    },
-    {
-      icon: FileCheck,
-      title: "Reproducible Builds",
-      content: `All official releases are built deterministically. Given the same source code and build environment, the resulting binaries are identical. This allows independent verification that distributed binaries match the published source code.`
-    }
-  ];
-
-  const supplyChainSections = [
-    {
-      icon: Package,
-      title: "Verified Sources",
-      content: `Dependencies are fetched only from known, authenticated sources. Package integrity is verified against published checksums before installation. The dependency tree is locked to specific versions to prevent unexpected changes.`
-    },
-    {
-      icon: Eye,
-      title: "Checksums and Integrity Validation",
-      content: `Every downloaded component is validated against cryptographic checksums. Signature verification is performed where available. Failed integrity checks halt installation and alert the user rather than proceeding silently.`
-    },
-    {
-      icon: Server,
-      title: "Sandboxed Execution",
-      content: `Commands execute within isolated environments with restricted filesystem and network access. This containment limits the potential impact of compromised or misbehaving software. Users can inspect and adjust sandbox policies as needed.`
-    }
-  ];
-
-  const operationalSections = [
-    {
-      icon: CheckCircle,
-      title: "Deterministic Installs",
-      content: `Installation outcomes are predictable and repeatable. The same configuration produces the same result across different machines and time periods. This consistency simplifies debugging and reduces environment-specific issues.`
-    },
-    {
-      icon: FileCheck,
-      title: "Version Pinning",
-      content: `All dependencies are pinned to specific versions by default. Updates occur only when explicitly requested, allowing users to control when changes are introduced. Lock files ensure consistent environments across team members and deployments.`
+      title: "Sandbox Isolation",
+      description: "Commands run in Firejail containers with restricted filesystem and network access. Isolated by default."
     },
     {
       icon: RotateCcw,
-      title: "Safe Rollbacks",
-      content: `System state is captured before significant changes. If an update causes issues, users can revert to the previous working state. Rollback operations are tested as part of the release process to ensure reliability when needed.`
+      title: "Rollback Support",
+      description: "One command to undo any changes. System state is captured before significant operations for instant recovery."
+    },
+    {
+      icon: EyeOff,
+      title: "Data Minimization",
+      description: "Only command text is sent to AI backends. File contents, environment variables, and secrets never leave your machine."
+    },
+    {
+      icon: Eye,
+      title: "Telemetry Transparency",
+      description: "Anonymous usage metrics only: command frequency, error rates. Disable with --no-telemetry flag. No command content collected."
+    },
+    {
+      icon: Cpu,
+      title: "Local-First Options",
+      description: "Full support for local LLM backends via Ollama. Run entirely offline with no external data transmission."
     }
   ];
 
-  const additionalSections = [
+  const aiProviders = [
     {
-      icon: Bug,
-      title: "Vulnerability Disclosure",
-      content: `We accept responsible disclosure of security vulnerabilities.
-
-How to Report:
-1. Email security@cortexlinux.com with details of the vulnerability
-2. Include steps to reproduce, potential impact, and any proof-of-concept
-3. Allow up to 90 days for us to address the issue before public disclosure
-
-What to Expect:
-- Acknowledgment within 48 hours of your report
-- Regular updates on our progress
-- Credit in our security advisories (if desired)
-- No legal action for good-faith security research`
+      name: "OpenAI (GPT-4)",
+      dataRetention: "30 days for abuse monitoring",
+      training: "API data not used for training",
+      encryption: "TLS 1.2+ in transit, AES-256 at rest",
+      compliance: "SOC 2 Type II, GDPR compliant"
     },
     {
-      icon: Award,
-      title: "Bug Bounty Program",
-      content: `We reward security researchers who help keep Cortex Linux secure.
-
-Scope:
-- Cortex Linux core software and CLI
-- Official web properties (cortexlinux.com)
-- API endpoints and authentication systems
-
-Rewards:
-- Critical vulnerabilities: Up to $5,000
-- High severity: Up to $2,500
-- Medium severity: Up to $1,000
-- Low severity: Up to $250
-
-Submit reports to: security@cortexlinux.com`
+      name: "Anthropic (Claude)",
+      dataRetention: "30 days for safety evaluation",
+      training: "API data not used for training by default",
+      encryption: "TLS 1.3 in transit, encrypted at rest",
+      compliance: "SOC 2 Type II, privacy-focused"
     },
     {
-      icon: AlertCircle,
-      title: "Incident Response",
-      content: `Our incident response process ensures rapid and effective handling of security events:
-
-Detection:
-- 24/7 automated monitoring and alerting
-- Anomaly detection for unusual activity
-- Regular log analysis and threat hunting
-
-Response:
-- Immediate containment of identified threats
-- Root cause analysis and remediation
-- Communication to affected users within 72 hours
-- Post-incident review and improvements
-
-Target response times:
-- Critical: 4 hours
-- High: 24 hours
-- Medium: 72 hours
-- Low: 7 days`
-    },
-    {
-      icon: Mail,
-      title: "Security Contact",
-      content: `For security-related inquiries:
-
-Email: security@cortexlinux.com
-PGP Key: Available at cortexlinux.com/security.asc
-
-For general inquiries:
-- GitHub Issues: github.com/cortexlinux/cortex/issues
-- Discord: discord.gg/cortexlinux
-
-Enterprise customers with specific security requirements can contact us for custom assessments and dedicated support.`
+      name: "Local Models (Ollama)",
+      dataRetention: "No external transmission",
+      training: "N/A - fully local",
+      encryption: "N/A - data stays on device",
+      compliance: "Complete data sovereignty"
     }
   ];
+
+  const neverDoItems = [
+    "Train on your commands",
+    "Store command history on our servers",
+    "Access files without explicit commands",
+    "Execute without confirmation (in safe mode)",
+    "Share data with third parties",
+    "Log sensitive environment variables"
+  ];
+
+  const faqItems = [
+    {
+      question: "What if the AI suggests a dangerous command?",
+      answer: "Cortex operates in dry-run mode by default. Before any command executes, you see exactly what will happen — files modified, packages installed, services affected. Commands flagged as potentially destructive (rm -rf, chmod 777, etc.) trigger additional warnings. You can also enable safe mode which requires explicit confirmation for all system-modifying operations."
+    },
+    {
+      question: "Can Cortex access my SSH keys or secrets?",
+      answer: "Cortex cannot read files unless you explicitly include them in a command context. SSH keys, API tokens, and other secrets in standard locations (~/.ssh, ~/.config) are never accessed or transmitted. The AI only sees command text you provide, not your filesystem contents. Environment variables containing secrets are filtered before any external transmission."
+    },
+    {
+      question: "How do I audit what Cortex has executed?",
+      answer: "Every command Cortex executes is logged to ~/.cortex/history.log with timestamps, the original request, the generated command, and execution results. Use 'cortex history' to view recent commands or 'cortex history --export' to generate a full audit report. In enterprise environments, logs can be forwarded to your SIEM system."
+    },
+    {
+      question: "Is my data sent to AI providers?",
+      answer: "Only the command text you provide is sent to AI backends for processing. File contents, environment variables, and system state are never transmitted. For maximum privacy, use local models via Ollama — all processing happens on your machine with zero external data transmission."
+    },
+    {
+      question: "How does the Firejail sandbox work?",
+      answer: "Firejail creates an isolated execution environment with restricted capabilities. Commands run with limited filesystem access (read-only for most paths), no network access by default, and separated process namespaces. You can customize sandbox profiles for specific use cases. The sandbox prevents malicious or accidental damage to your system."
+    }
+  ];
+
+  const faqSchema = useMemo(() => ({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  }), []);
 
   return (
-    <div className="min-h-screen pt-20 pb-16 bg-black text-white">
-      <div className="max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8" data-testid="link-back-home">
-          <ChevronLeft size={16} />
-          Back to Home
-        </Link>
+    <div className="min-h-screen bg-[#0A0A0A] text-white print:bg-white print:text-black">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Security</span>{" "}
-            <span className="gradient-text">Policy</span>
-          </h1>
-          <p className="text-gray-400 text-lg">
-            How we design, build, and operate Cortex Linux with security in mind
-          </p>
-        </motion.div>
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent" />
+        <div className="max-w-4xl mx-auto relative z-10">
+          <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8 print:hidden" data-testid="link-back-home">
+            <ChevronLeft size={16} />
+            Back to Home
+          </Link>
 
-        {/* Security-First Design */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-12"
-        >
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Shield size={24} className="text-blue-400" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 mb-6">
+              <Shield className="text-emerald-400" size={16} />
+              <span className="text-emerald-400 text-sm font-medium">Security-First Design</span>
             </div>
-            Security-First Design
-          </h2>
-          <div className="space-y-4">
-            {coreDesignSections.map((section, index) => (
-              <div
-                key={section.title}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
-                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
-                </div>
-                <p className="text-gray-400 leading-relaxed text-sm">
-                  {section.content}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Supply Chain Protection */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Package size={24} className="text-blue-400" />
-            </div>
-            Supply Chain Protection
-          </h2>
-          <div className="space-y-4">
-            {supplyChainSections.map((section, index) => (
-              <div
-                key={section.title}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
-                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
-                </div>
-                <p className="text-gray-400 leading-relaxed text-sm">
-                  {section.content}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Operational Reliability */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12"
-        >
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Server size={24} className="text-blue-400" />
-            </div>
-            Operational Reliability
-          </h2>
-          <div className="space-y-4">
-            {operationalSections.map((section, index) => (
-              <div
-                key={section.title}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
-                  <h3 className="text-lg font-semibold text-white">{section.title}</h3>
-                </div>
-                <p className="text-gray-400 leading-relaxed text-sm">
-                  {section.content}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Additional Sections */}
-        <div className="space-y-6">
-          {additionalSections.map((section, index) => (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + index * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-xl p-6"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-400" />
-                </div>
-                <h2 className="text-xl font-semibold text-white">{section.title}</h2>
-              </div>
-              <div className="text-gray-400 whitespace-pre-line leading-relaxed text-sm">
-                {section.content}
-              </div>
-            </motion.div>
-          ))}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="heading-security">
+              Your system, <span className="text-brand-blue">your control</span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Cortex is designed with security-first principles for production Linux environments. 
+              Preview before execute. Sandbox by default. Rollback anytime.
+            </p>
+          </motion.div>
         </div>
+      </section>
 
-        {/* Transparency Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 p-6 border border-white/10 rounded-xl bg-white/5"
-        >
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Security is an ongoing process, not a destination. We continuously review and improve our practices as threats evolve and new techniques emerge. This document reflects our current approach and will be updated as our security posture develops. Questions or concerns about our security practices can be directed to security@cortexlinux.com.
+      {/* Security Architecture Diagram */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Security Architecture</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Understanding exactly what happens when you use Cortex
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {/* What stays local */}
+            <div className="p-6 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-emerald-500/20 rounded-lg">
+                  <Cpu className="text-emerald-400" size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-emerald-400">What Stays On Your Machine</h3>
+              </div>
+              <ul className="space-y-3 text-gray-300 text-sm">
+                <li className="flex items-start gap-2">
+                  <CheckCircle size={16} className="text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span>All file contents and directory structures</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle size={16} className="text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span>Environment variables and secrets</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle size={16} className="text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span>SSH keys and authentication tokens</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle size={16} className="text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span>Command execution and results</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle size={16} className="text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <span>System state snapshots for rollback</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* What is transmitted */}
+            <div className="p-6 rounded-xl bg-blue-500/5 border border-blue-500/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-blue-500/20 rounded-lg">
+                  <Cloud className="text-blue-400" size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-blue-400">What Goes to AI (Cloud Mode)</h3>
+              </div>
+              <ul className="space-y-3 text-gray-300 text-sm">
+                <li className="flex items-start gap-2">
+                  <Terminal size={16} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                  <span>Your natural language command text only</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Terminal size={16} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                  <span>Optional: Selected context you explicitly share</span>
+                </li>
+              </ul>
+              <div className="mt-4 p-3 bg-white/5 rounded-lg">
+                <p className="text-xs text-gray-500">
+                  With local models (Ollama), nothing leaves your machine. Full air-gap support available.
+                </p>
+              </div>
+            </div>
+
+            {/* Sandbox execution */}
+            <div className="p-6 rounded-xl bg-orange-500/5 border border-orange-500/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-orange-500/20 rounded-lg">
+                  <Shield className="text-orange-400" size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-orange-400">Firejail Sandbox</h3>
+              </div>
+              <ul className="space-y-3 text-gray-300 text-sm">
+                <li className="flex items-start gap-2">
+                  <Lock size={16} className="text-orange-400 mt-0.5 flex-shrink-0" />
+                  <span>Isolated filesystem namespace</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Lock size={16} className="text-orange-400 mt-0.5 flex-shrink-0" />
+                  <span>Network access disabled by default</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Lock size={16} className="text-orange-400 mt-0.5 flex-shrink-0" />
+                  <span>Read-only access to system paths</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Lock size={16} className="text-orange-400 mt-0.5 flex-shrink-0" />
+                  <span>Capability dropping (no raw sockets, etc.)</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Rollback mechanism */}
+            <div className="p-6 rounded-xl bg-purple-500/5 border border-purple-500/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-purple-500/20 rounded-lg">
+                  <RotateCcw className="text-purple-400" size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-purple-400">Rollback Architecture</h3>
+              </div>
+              <ul className="space-y-3 text-gray-300 text-sm">
+                <li className="flex items-start gap-2">
+                  <Database size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span>Pre-execution state snapshots</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Database size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span>Filesystem change tracking</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Database size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span>Package state versioning</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Database size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span>One-command recovery: cortex rollback</span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Privacy Commitments */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Privacy Commitments</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Built-in safeguards for production environments
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {privacyCommitments.map((commitment, index) => (
+              <motion.div
+                key={commitment.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 transition-colors"
+                data-testid={`privacy-commitment-${commitment.title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-4">
+                  <commitment.icon className="text-brand-blue" size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{commitment.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{commitment.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI Provider Comparison */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">AI Provider Privacy Comparison</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Choose the backend that matches your privacy requirements
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="overflow-x-auto"
+          >
+            <table className="w-full text-left text-sm" data-testid="ai-provider-table">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="py-4 px-4 font-semibold text-white">Provider</th>
+                  <th className="py-4 px-4 font-semibold text-white">Data Retention</th>
+                  <th className="py-4 px-4 font-semibold text-white">Training Policy</th>
+                  <th className="py-4 px-4 font-semibold text-white">Encryption</th>
+                  <th className="py-4 px-4 font-semibold text-white">Compliance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {aiProviders.map((provider, index) => (
+                  <tr key={provider.name} className="border-b border-white/5 hover:bg-white/5">
+                    <td className="py-4 px-4 font-medium text-white">{provider.name}</td>
+                    <td className="py-4 px-4 text-gray-400">{provider.dataRetention}</td>
+                    <td className="py-4 px-4 text-gray-400">{provider.training}</td>
+                    <td className="py-4 px-4 text-gray-400">{provider.encryption}</td>
+                    <td className="py-4 px-4 text-gray-400">{provider.compliance}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* What We Never Do */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">What We Never Do</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Hard limits that are non-negotiable
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
+            {neverDoItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 p-4 rounded-xl bg-red-500/5 border border-red-500/20"
+                data-testid={`never-do-${index}`}
+              >
+                <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                  <X className="text-red-400" size={16} />
+                </div>
+                <span className="text-gray-300">{item}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Security Reporting */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Security Reporting</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              We take security vulnerabilities seriously
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-6 rounded-xl bg-white/5 border border-white/10"
+            >
+              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
+                <Bug className="text-blue-400" size={24} />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Vulnerability Disclosure</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Report security issues responsibly. We acknowledge within 48 hours and aim to fix critical issues within 7 days.
+              </p>
+              <a
+                href="mailto:security@cortexlinux.com"
+                className="text-brand-blue hover:underline text-sm"
+                data-testid="link-security-email"
+              >
+                security@cortexlinux.com
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="p-6 rounded-xl bg-white/5 border border-white/10"
+            >
+              <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+                <Award className="text-emerald-400" size={24} />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Bug Bounty Program</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Rewards for valid security reports: Critical up to $5,000, High up to $2,500, Medium up to $1,000.
+              </p>
+              <span className="text-gray-500 text-sm">
+                Scope: CLI, web properties, APIs
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="p-6 rounded-xl bg-white/5 border border-white/10"
+            >
+              <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4">
+                <Key className="text-purple-400" size={24} />
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Encrypted Reports</h3>
+              <p className="text-gray-400 text-sm mb-4">
+                For sensitive disclosures, use our PGP key to encrypt your report.
+              </p>
+              <a
+                href="/security.asc"
+                className="text-brand-blue hover:underline text-sm flex items-center gap-1"
+                data-testid="link-pgp-key"
+              >
+                <Download size={14} />
+                Download PGP Key
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 px-4 border-t border-white/5">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Common security and privacy questions
+            </p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {faqItems.map((item, index) => (
+              <FAQItem key={index} question={item.question} answer={item.answer} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Print/Download Notice */}
+      <section className="py-8 px-4 border-t border-white/5 print:hidden">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-gray-500 text-sm">
+            This page is optimized for printing. Use your browser's print function (Ctrl/Cmd+P) to save as PDF.
           </p>
-        </motion.div>
-      </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

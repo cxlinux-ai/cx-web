@@ -143,20 +143,18 @@ export default function App() {
                 >
                   Get Started
                 </Link>
-                <button
-                  onClick={() => {
-                    analytics.trackCTAClick('security', 'main_nav');
-                    scrollToSection("security");
-                  }}
+                <Link
+                  href="/security"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/" && activeSection === "security"
+                    location === "/security" || location === "/security-policy"
                       ? "text-[#93c5fd]"
                       : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-security"
+                  onClick={() => analytics.trackCTAClick('security', 'main_nav')}
                 >
                   Security
-                </button>
+                </Link>
                 <Link
                   href="/news"
                   className={`text-base font-medium transition-colors duration-300 ${
@@ -264,16 +262,17 @@ export default function App() {
                   >
                     Get Started
                   </Link>
-                  <button
+                  <Link
+                    href="/security"
                     onClick={() => {
                       analytics.trackCTAClick('security', 'mobile_nav');
-                      scrollToSection("security");
+                      setMobileMenuOpen(false);
                     }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-security"
                   >
                     Security
-                  </button>
+                  </Link>
                   <Link
                     href="/news"
                     onClick={() => {
@@ -353,6 +352,7 @@ export default function App() {
             <Route path="/privacy" component={Privacy} />
             <Route path="/terms" component={Terms} />
             <Route path="/security-policy" component={SecurityPage} />
+            <Route path="/security" component={SecurityPage} />
             <Route path="/status" component={Status} />
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
