@@ -63,6 +63,7 @@ import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
 import HackathonPreview from "@/components/HackathonPreview";
+import Footer from "@/components/Footer";
 import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
 import { homeHeroTest } from "@/data/ab-tests";
@@ -2494,113 +2495,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-            {/* Logo & Description */}
-            <div className="col-span-2">
-              <button 
-                onClick={() => onNavigate("home")}
-                className="text-2xl font-bold mb-4 text-left"
-                data-testid="footer-logo"
-              >
-                <span className="text-white">CORTEX</span>{" "}
-                <span className="text-blue-300">LINUX</span>
-              </button>
-              <p className="text-gray-400 text-sm max-w-xs mb-4">
-                Open-source AI infrastructure for the modern developer.
-              </p>
-              <div className="space-y-2 text-sm text-gray-400">
-                <a 
-                  href="https://maps.app.goo.gl/J3LDbMyKgzwZUJ1y8" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
-                  data-testid="footer-address"
-                >
-                  A75 Towne Ridge Parkway, Suite 125<br />
-                  Sandy UT, 84070
-                </a>
-                <a 
-                  href="tel:385-608-4343" 
-                  className="block hover:text-white transition-colors"
-                  data-testid="footer-phone"
-                >
-                  (385) 608-4343
-                </a>
-              </div>
-            </div>
-
-            {/* Product */}
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Product</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><button onClick={() => onNavigate("about")} className="hover:text-white transition-colors" data-testid="footer-link-features">Features</button></li>
-                <li><button onClick={() => onNavigate("pricing")} className="hover:text-white transition-colors" data-testid="footer-link-pricing">Pricing</button></li>
-                <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-docs">Documentation</button></li>
-                <li><a href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">FAQ</a></li>
-              </ul>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Resources</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">Blog</a></li>
-                <li><button onClick={() => onNavigate("preview")} className="hover:text-white transition-colors" data-testid="footer-link-api">API Reference</button></li>
-                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-get-started">Get Started</a></li>
-                <li><a href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">Status</a></li>
-                <li><a href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">Mission</a></li>
-              </ul>
-            </div>
-
-            {/* Community */}
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Community</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">Discord</a></li>
-                <li><a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
-                <li><a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
-                <li><button onClick={() => onNavigate("join")} className="hover:text-white transition-colors" data-testid="footer-link-community">Join Community</button></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Legal</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">Privacy Policy</a></li>
-                <li><a href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms of Service</a></li>
-                <li><a href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">Security</a></li>
-                <li><a href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (MIT)</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-500">&copy; 2025 Cortex Linux. All rights reserved.</p>
-            <div className="flex gap-6 text-sm text-gray-500">
-              <a href="/privacy" className="hover:text-white transition-colors" data-testid="footer-bottom-privacy">Privacy</a>
-              <a href="/terms" className="hover:text-white transition-colors" data-testid="footer-bottom-terms">Terms</a>
-              <a href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-bottom-security">Security</a>
-              <a href="/status" className="hover:text-white transition-colors" data-testid="footer-bottom-status">Status</a>
-            </div>
-            <div className="flex gap-4">
-              <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
-                <FaTwitter size={20} />
-              </a>
-              <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
-                <Github size={20} />
-              </a>
-              <a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
-                <FaDiscord size={20} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
