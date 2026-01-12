@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { MobileSelect } from "@/components/ui/mobile-select";
 import {
   Form,
   FormControl,
@@ -348,19 +349,14 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
                 <FormItem>
                   <FormLabel className="text-gray-300">Country</FormLabel>
                   <FormControl>
-                    <select
-                      {...field}
-                      className="flex h-11 sm:h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
-                      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.75rem center', backgroundSize: '1.25rem' }}
+                    <MobileSelect
+                      value={field.value || ""}
+                      onValueChange={field.onChange}
+                      options={COUNTRIES.map(c => ({ value: c, label: c }))}
+                      placeholder="Select country"
+                      title="Select Country"
                       data-testid="select-country"
-                    >
-                      <option value="" className="bg-[#1a1a2e] text-gray-400">Select country</option>
-                      {COUNTRIES.map((country) => (
-                        <option key={country} value={country} className="bg-[#1a1a2e] text-white">
-                          {country}
-                        </option>
-                      ))}
-                    </select>
+                    />
                   </FormControl>
                   <FormMessage className="text-red-400" />
                 </FormItem>
@@ -449,19 +445,14 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
               <FormItem>
                 <FormLabel className="text-gray-300">Primary Technical Role <span className="text-red-400">*</span></FormLabel>
                 <FormControl>
-                  <select
-                    {...field}
-                    className="flex h-11 sm:h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.75rem center', backgroundSize: '1.25rem' }}
+                  <MobileSelect
+                    value={field.value || ""}
+                    onValueChange={field.onChange}
+                    options={TECHNICAL_ROLES}
+                    placeholder="Select your primary role"
+                    title="Select Technical Role"
                     data-testid="select-technical-role"
-                  >
-                    <option value="" className="bg-[#1a1a2e] text-gray-400">Select your primary role</option>
-                    {TECHNICAL_ROLES.map((role) => (
-                      <option key={role.value} value={role.value} className="bg-[#1a1a2e] text-white">
-                        {role.label}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
@@ -770,19 +761,14 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
               <FormItem>
                 <FormLabel className="text-gray-300">Which Cortex Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
                 <FormControl>
-                  <select
-                    {...field}
-                    className="flex h-11 sm:h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.75rem center', backgroundSize: '1.25rem' }}
+                  <MobileSelect
+                    value={field.value || ""}
+                    onValueChange={field.onChange}
+                    options={CORTEX_AREAS}
+                    placeholder="Select an area"
+                    title="Select Area of Interest"
                     data-testid="select-cortex-area"
-                  >
-                    <option value="" className="bg-[#1a1a2e] text-gray-400">Select an area</option>
-                    {CORTEX_AREAS.map((area) => (
-                      <option key={area.value} value={area.value} className="bg-[#1a1a2e] text-white">
-                        {area.label}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
