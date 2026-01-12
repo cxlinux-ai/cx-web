@@ -33,6 +33,7 @@ import {
   FileText,
   Lightbulb,
   Download,
+  ClipboardList,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -472,7 +473,7 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
-          {/* 3 Simple Steps to Participate */}
+          {/* 4 Simple Steps to Participate */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -481,9 +482,9 @@ export default function Hackathon() {
             data-testid="participate-steps-section"
           >
             <h3 className="text-xl sm:text-2xl font-bold text-white text-center mb-8">
-              3 Simple Steps to Participate
+              4 Simple Steps to Participate
             </h3>
-            <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <a
                 href={GITHUB_URL}
                 target="_blank"
@@ -518,6 +519,16 @@ export default function Hackathon() {
                 <span className="text-white font-semibold">View Rules</span>
                 <span className="text-gray-400 text-sm">Read the full guidelines</span>
               </Link>
+              <button
+                onClick={() => setShowRegistrationModal(true)}
+                className="flex flex-col items-center gap-3 p-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-xl transition-all text-center"
+                data-testid="step-4-register"
+              >
+                <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg">4</div>
+                <ClipboardList size={24} className="text-blue-400" />
+                <span className="text-white font-semibold">Fill in the Form</span>
+                <span className="text-gray-400 text-sm">Complete your registration</span>
+              </button>
             </div>
             
             {/* Big Prize Pool */}
