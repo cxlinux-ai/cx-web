@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "wouter";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 import {
   Github,
   Star,
@@ -294,6 +295,11 @@ function InteractiveCodeEditor({
 }
 
 export default function HomePage({ onNavigate }: HomePageProps) {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.home);
+    return cleanup;
+  }, []);
+
   const { data: githubStats } = useQuery<GitHubStats>({
     queryKey: ["/api/github/stats"],
     refetchInterval: 60000,

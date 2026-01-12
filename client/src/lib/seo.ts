@@ -124,6 +124,31 @@ export function useSEO(config: SEOConfig) {
 }
 
 export const seoConfigs = {
+  home: {
+    title: 'Cortex Linux - The AI Layer for Linux | Execute Any Task with Natural Language',
+    description: 'Transform how you use Linux with Cortex. Execute any task through natural language - automation, security, DevOps, system administration. Open source, sandboxed, instant rollback.',
+    canonicalPath: '/',
+    keywords: ['AI Linux', 'natural language Linux', 'Linux automation', 'AI operating system', 'Cortex Linux', 'intelligent Linux'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Cortex Linux',
+      applicationCategory: 'OperatingSystem',
+      operatingSystem: 'Linux',
+      description: 'The AI Layer for Linux. Execute any task through natural language commands.',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD'
+      },
+      author: {
+        '@type': 'Organization',
+        name: 'Cortex Linux',
+        url: 'https://cortexlinux.com'
+      }
+    }
+  },
+
   hackathon: {
     title: 'AI Linux Hackathon 2026 - $15,000 in Prizes | Cortex Linux',
     description: 'Join the first AI Linux hackathon. Build monetization strategies and production features for Cortex Linux. $15,000 prize pool. February 17, 2026.',
@@ -212,10 +237,56 @@ export const seoConfigs = {
   },
   
   faq: {
-    title: 'Cortex Linux FAQ - Common Questions Answered',
-    description: 'Frequently asked questions about Cortex Linux. Learn about security, pricing, how it works, and technical requirements.',
+    title: 'Cortex Linux FAQ - Security, Pricing & How It Works',
+    description: 'Answers to common questions about Cortex Linux: Is it safe? How does it work? What hardware do I need? Free vs paid tiers explained.',
     canonicalPath: '/faq',
-    keywords: ['Cortex Linux FAQ', 'AI Linux questions', 'security', 'pricing', 'how it works']
+    keywords: ['Cortex Linux FAQ', 'AI Linux questions', 'is Cortex safe', 'Cortex pricing', 'AI Linux requirements'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is Cortex safe? Won\'t it break my system?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Cortex is designed with security as the #1 priority. Every command runs in an isolated Firejail container. You see and approve every command before it runs. We create snapshots before major changes for instant rollback. Dangerous commands are blocked automatically.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'How is Cortex different from Warp, Gemini CLI, or Claude Code?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Cortex is an OS-level AI layer, not a terminal wrapper or code editor. It executes ANY task on Linux with multi-step workflow orchestration, system-wide awareness, and hardware-aware optimization. Package management is just one of unlimited capabilities.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Is Cortex free or paid?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Both! Community Edition is free forever and open source (Apache 2.0) with full AI capabilities. Enterprise Edition adds priority support, compliance features, and SLA guarantees for companies.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'What hardware do I need to run Cortex?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Cloud mode works on any Linux machine with 4GB+ RAM and internet. Local mode (optional) requires NVIDIA RTX 3060+ or equivalent with 8GB+ VRAM. Most users run cloud mode.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Does Cortex work offline?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Hybrid approach: Cloud mode (default) uses Claude API, Local mode runs LLM locally requiring GPU, or Hybrid mode uses local for simple tasks and cloud for complex ones.'
+          }
+        }
+      ]
+    }
   },
   
   security: {
