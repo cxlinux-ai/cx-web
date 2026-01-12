@@ -387,7 +387,7 @@ export default function StartupPage() {
               className="text-center p-6 rounded-xl bg-white/5 border border-white/10"
             >
               <div className="text-4xl md:text-5xl font-bold text-emerald-400 mb-2">
-                {contributors}
+                20+
               </div>
               <div className="text-gray-400">Contributors</div>
             </motion.div>

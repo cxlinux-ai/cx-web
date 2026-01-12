@@ -1442,7 +1442,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {[
               { icon: Star, value: stars, label: "GitHub Stars", suffix: "" },
               { icon: GitFork, value: githubStats?.forks || 47, label: "Forks", suffix: "" },
-              { icon: Users, value: contributorCount, label: "Contributors", suffix: "" },
+              { icon: Users, value: "20+", label: "Contributors", suffix: "" },
             ].map((stat, i) => (
               <div
                 key={i}
