@@ -211,15 +211,15 @@ export const seoConfigs = {
   },
 
   hackathon: {
-    title: 'AI Linux Hackathon 2026 - $15,000 in Prizes | Cortex IDEathon & Hackathon',
-    description: 'Join the Cortex IDEathon & Hackathon 2026. Phase 1: Submit monetizable feature ideas. Phase 2: Build real code. $15,000 prize pool. February 17, 2026.',
+    title: 'AI Linux Hackathon 2026 - $15,000 in Prizes | Cortex Ideathon & Hackathon',
+    description: 'Join the Cortex Ideathon & Hackathon 2026. Phase 1: Submit monetizable feature ideas. Phase 2: Build real code. $15,000 prize pool. February 17, 2026.',
     canonicalPath: '/hackathon',
-    keywords: ['AI hackathon', 'Linux hackathon', 'open source hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'IDEathon'],
+    keywords: ['AI hackathon', 'Linux hackathon', 'open source hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'Ideathon'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
-      name: 'Cortex IDEathon & Hackathon 2026',
-      description: 'A two-phase, 14-week program: Phase 1 (IDEathon, Weeks 1-4) generates monetizable feature ideas. Phase 2 (Hackathon, Weeks 5-14) builds real code via GitHub PRs. $15,000 total prize pool ($3,000 IDEathon + $12,000 Hackathon). Free to participate, open to developers worldwide.',
+      name: 'Cortex Ideathon & Hackathon 2026',
+      description: 'A two-phase, 13-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas. Phase 2 (Hackathon, Weeks 5-13) builds real code via GitHub PRs. $15,000 total prize pool ($3,000 Ideathon + $12,000 Hackathon). Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
       endDate: '2026-05-25',
       url: 'https://cortexlinux.com/hackathon',

@@ -346,7 +346,7 @@ export default function HackathonRulesPage() {
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: IDEathon — $3,000</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: Ideathon — $3,000</h3>
                   <p className="text-gray-400 text-sm mb-4">Submit monetizable feature ideas via GitHub Issues.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">

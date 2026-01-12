@@ -107,7 +107,7 @@ const roadmapPhases = [
 
 const currentTasks = [
   {
-    title: "Complete IDEathon Infrastructure",
+    title: "Complete Ideathon Infrastructure",
     priority: "high",
     category: "Hackathon",
     owner: "Core Team",

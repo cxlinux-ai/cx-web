@@ -1,7 +1,7 @@
 // ============================================
-// IDEathon Submission Template
+// Ideathon Submission Template
 // ============================================
-export interface IDEathonSubmissionField {
+export interface IdeathonSubmissionField {
   id: string;
   label: string;
   description: string;
@@ -11,7 +11,7 @@ export interface IDEathonSubmissionField {
   options?: string[];
 }
 
-export const ideathonSubmissionTemplate: IDEathonSubmissionField[] = [
+export const ideathonSubmissionTemplate: IdeathonSubmissionField[] = [
   {
     id: "feature_name",
     label: "Feature Name",
@@ -87,7 +87,7 @@ export const roadmapTasks: RoadmapTask[] = [
     id: "define-template",
     number: 1,
     title: "Define Phase 1 Template",
-    description: "Finalize IDEathon submission fields & examples",
+    description: "Finalize Ideathon submission fields & examples",
     status: "completed",
     category: "planning"
   },
@@ -95,7 +95,7 @@ export const roadmapTasks: RoadmapTask[] = [
     id: "update-copy",
     number: 2,
     title: "Update Hackathon Page Copy",
-    description: "Brand IDEathon vs Hackathon phases clearly",
+    description: "Brand Ideathon vs Hackathon phases clearly",
     status: "completed",
     category: "website"
   },
@@ -134,7 +134,7 @@ export const roadmapTasks: RoadmapTask[] = [
   {
     id: "launch-phase1",
     number: 7,
-    title: "Launch Phase 1 (IDEathon)",
+    title: "Launch Phase 1 (Ideathon)",
     description: "Communicate branding & submission instructions",
     status: "pending",
     category: "launch"
@@ -143,7 +143,7 @@ export const roadmapTasks: RoadmapTask[] = [
     id: "collect-submissions",
     number: 8,
     title: "Collect Submissions",
-    description: "Review IDEathon ideas using template criteria",
+    description: "Review Ideathon ideas using template criteria",
     status: "pending",
     category: "tracking"
   },
@@ -226,9 +226,9 @@ export interface HackathonPhase {
 }
 
 // ============================================
-// IDEathon Phase (Phase 1)
+// Ideathon Phase (Phase 1)
 // ============================================
-export interface IDEathonPhase {
+export interface IdeathonPhase {
   id: string;
   title: string;
   subtitle: string;
@@ -245,9 +245,9 @@ export interface IDEathonPhase {
   cta: { text: string; href: string; external?: boolean };
 }
 
-export const ideathonPhase: IDEathonPhase = {
+export const ideathonPhase: IdeathonPhase = {
   id: "ideathon",
-  title: "Cortex IDEathon",
+  title: "Cortex Ideathon",
   subtitle: "Idea-to-Feature",
   weeks: "Weeks 1-4",
   duration: "4 weeks",
@@ -287,7 +287,7 @@ export const hackathonPhases: HackathonPhase[] = [
     weeks: "Weeks 5-9",
     duration: "5 weeks",
     goal: "Ship real things",
-    description: "The main event. Build a Cortex feature, plugin, extension, or integration based on IDEathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
+    description: "The main event. Build a Cortex feature, plugin, extension, or integration based on Ideathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
     color: "text-blue-300",
     bgGradient: "from-blue-500/10 to-transparent",
     borderColor: "border-blue-500/20",
@@ -468,7 +468,7 @@ export const hackathonConfig = {
   rulesDocUrl: "/hackathon-rules",
   philosophy: {
     principle: "Ideas become features. Features become revenue.",
-    description: "Phase 1 (IDEathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for Cortex Linux.",
+    description: "Phase 1 (Ideathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for Cortex Linux.",
     values: [
       "Actionable ideas over vague concepts",
       "Monetizable features over marketing strategies",
@@ -480,16 +480,16 @@ export const hackathonConfig = {
 
 export const hackathonFaqs = [
   {
-    question: "What's the difference between IDEathon and Hackathon?",
-    answer: "IDEathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
+    question: "What's the difference between Ideathon and Hackathon?",
+    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
-    question: "Do I need technical skills for the IDEathon?",
-    answer: "Not necessarily! IDEathon focuses on product thinking—identifying pain points and proposing features. However, understanding technical feasibility helps. Your idea should be something that could realistically be built into Cortex Linux."
+    question: "Do I need technical skills for the Ideathon?",
+    answer: "Not necessarily! Ideathon focuses on product thinking—identifying pain points and proposing features. However, understanding technical feasibility helps. Your idea should be something that could realistically be built into Cortex Linux."
   },
   {
     question: "Can I build my own idea in Phase 2?",
-    answer: "Yes! You can build from approved IDEathon ideas or bring your own. What matters is that you ship real code via GitHub PRs. Original ideas still need to follow the feature guidelines."
+    answer: "Yes! You can build from approved Ideathon ideas or bring your own. What matters is that you ship real code via GitHub PRs. Original ideas still need to follow the feature guidelines."
   },
   {
     question: "Can I participate solo or do I need a team?",
@@ -501,11 +501,11 @@ export const hackathonFaqs = [
   },
   {
     question: "What do I need to participate?",
-    answer: "For IDEathon: Just a web browser and good ideas. For Hackathon: A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. Cortex works with Python 3.8+ and most Linux distributions."
+    answer: "For Ideathon: Just a web browser and good ideas. For Hackathon: A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. Cortex works with Python 3.8+ and most Linux distributions."
   },
   {
     question: "How are submissions judged?",
-    answer: "IDEathon: Innovation (30%), Feasibility (25%), Monetization Potential (25%), Completeness (20%). Hackathon: Code Quality (30%), Usefulness (25%), Architecture (20%), Documentation (15%), Test Coverage (10%)."
+    answer: "Ideathon: Innovation (30%), Feasibility (25%), Monetization Potential (25%), Completeness (20%). Hackathon: Code Quality (30%), Usefulness (25%), Architecture (20%), Documentation (15%), Test Coverage (10%)."
   },
   {
     question: "Is there a registration fee?",
@@ -520,7 +520,7 @@ export const hackathonFaqs = [
 export const hackathonBenefits = [
   {
     title: "Two Ways to Contribute",
-    description: "Submit feature ideas in IDEathon (no coding required) or build real code in Hackathon. Both paths lead to recognition and rewards."
+    description: "Submit feature ideas in Ideathon (no coding required) or build real code in Hackathon. Both paths lead to recognition and rewards."
   },
   {
     title: "Mentorship from Champions",
@@ -536,7 +536,7 @@ export const hackathonBenefits = [
   },
   {
     title: "Compete for $15,000 in Prizes",
-    description: "Real money for real contributions. $3,000 for IDEathon, $9,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
+    description: "Real money for real contributions. $3,000 for Ideathon, $9,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",

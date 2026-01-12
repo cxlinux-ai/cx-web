@@ -59,7 +59,7 @@ export const hackathonCtaTest: ABTestConfig = {
       id: 'control',
       weight: 50,
       content: {
-        cta_text: 'Join IDEathon',
+        cta_text: 'Join Ideathon',
         cta_subtext: 'Phase 1 is open for submissions',
       },
     },

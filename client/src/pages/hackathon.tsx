@@ -594,7 +594,7 @@ export default function Hackathon() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* IDEathon Banner - Amber themed */}
+            {/* Ideathon Banner - Amber themed */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -611,7 +611,7 @@ export default function Hackathon() {
                   Phase 1 · Weeks 1-4
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                  Cortex IDEathon
+                  Cortex Ideathon
                 </h3>
                 <p className="text-lg text-amber-300 font-medium mb-4">
                   Build the Features of Tomorrow
@@ -716,7 +716,7 @@ export default function Hackathon() {
             
             {/* Timeline items */}
             <div className="space-y-6">
-              {/* Week 1-4: IDEathon */}
+              {/* Week 1-4: Ideathon */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -729,7 +729,7 @@ export default function Hackathon() {
                 <div className="flex-1 bg-amber-500/10 border border-amber-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Lightbulb size={18} className="text-amber-400" />
-                    <h3 className="font-bold text-white">Phase 1: IDEathon</h3>
+                    <h3 className="font-bold text-white">Phase 1: Ideathon</h3>
                     <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400">Weeks 1-4</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Submit monetizable feature ideas. No coding required.</p>
@@ -882,7 +882,7 @@ export default function Hackathon() {
         </div>
       </section>
 
-      {/* Phase 1: IDEathon Section */}
+      {/* Phase 1: Ideathon Section */}
       <section id="ideathon-section" className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
