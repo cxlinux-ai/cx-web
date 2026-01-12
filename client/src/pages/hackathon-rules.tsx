@@ -359,7 +359,7 @@ export default function HackathonRulesPage() {
                     </li>
                     <li className="flex justify-between">
                       <span>3rd Place</span>
-                      <span className="text-emerald-400 font-semibold">$500</span>
+                      <span className="text-emerald-400 font-semibold">$250</span>
                     </li>
                     <li className="flex justify-between">
                       <span>4th–10th Place</span>

@@ -263,10 +263,10 @@ export const ideathonPhase: IdeathonPhase = {
     { name: "Completeness", weight: "20%", description: "Full use of submission template" }
   ],
   prizes: [
-    { place: "Best Idea", amount: "$1,000" },
-    { place: "Most Innovative", amount: "$800" },
-    { place: "Best Enterprise Feature", amount: "$600" },
-    { place: "Honorable Mentions (3)", amount: "$200 each" }
+    { place: "1st Place", amount: "$1,000" },
+    { place: "2nd Place", amount: "$750" },
+    { place: "3rd Place", amount: "$250" },
+    { place: "4th–10th Place", amount: "$100 each" }
   ],
   prizeTotal: "$3,000",
   cta: {
@@ -322,10 +322,10 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "review-period",
     number: 2,
     title: "Review Period",
-    weeks: "Weeks 10-14",
-    duration: "5 weeks",
+    weeks: "Weeks 10-13",
+    duration: "4 weeks",
     goal: "Code review & judging",
-    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 14.",
+    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 13.",
     color: "text-purple-400",
     bgGradient: "from-purple-500/10 to-transparent",
     borderColor: "border-purple-500/20",
@@ -481,7 +481,7 @@ export const hackathonConfig = {
 export const hackathonFaqs = [
   {
     question: "What's the difference between Ideathon and Hackathon?",
-    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-14) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
+    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-13) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
     question: "Do I need technical skills for the Ideathon?",
@@ -497,7 +497,7 @@ export const hackathonFaqs = [
   },
   {
     question: "What if my PR doesn't get merged during the hackathon?",
-    answer: "The Review Period (Weeks 10-14) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
+    answer: "The Review Period (Weeks 10-13) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
   },
   {
     question: "What do I need to participate?",

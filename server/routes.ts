@@ -375,10 +375,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Prize Breakdown:", { lineGap: 3 });
       doc.font("Helvetica")
-         .text("  • Best Idea: $1,000", { lineGap: 2 })
-         .text("  • Most Innovative: $800", { lineGap: 2 })
-         .text("  • Best Enterprise Feature: $600", { lineGap: 2 })
-         .text("  • Honorable Mentions (3): $200 each", { lineGap: 2 });
+         .text("  • 1st Place: $1,000", { lineGap: 2 })
+         .text("  • 2nd Place: $750", { lineGap: 2 })
+         .text("  • 3rd Place: $250", { lineGap: 2 })
+         .text("  • 4th-10th Place: $100 each", { lineGap: 2 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
       doc.font("Helvetica")
@@ -393,7 +393,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Phase 2: Cortex Hackathon");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("Timeline: Weeks 5-14 (10 weeks)", { lineGap: 3 })
+         .text("Timeline: Weeks 5-13 (9 weeks)", { lineGap: 3 })
          .text("Prize Pool: $12,000", { lineGap: 3 })
          .text("Goal: Build and ship production-ready code", { lineGap: 3 });
       doc.moveDown(0.5);
