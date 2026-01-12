@@ -1194,43 +1194,52 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
       {/* Pricing Section - Premium 3-Tier */}
       <section id="pricing" className="py-32 px-4 relative overflow-hidden">
-        {/* Animated background effects */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent" />
-        <div className="bg-blob bg-blob-blue w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" style={{ animationDelay: '0s' }} />
+        {/* Subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
         
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-14"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Sparkles size={16} className="text-brand-blue" />
-              <span className="text-sm text-gray-400">Simple, transparent pricing</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your <span className="gradient-text">Edition</span></h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">Start free, upgrade when you're ready to scale. No hidden fees.</p>
+            <p className="text-blue-400 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, transparent pricing</h2>
+            <p className="text-gray-400 text-base max-w-lg mx-auto">Start free, upgrade when you need more. No hidden fees, cancel anytime.</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
             {/* Community Edition */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.5, ease: "easeOut" }}
+              transition={{ delay: 0, duration: 0.4 }}
               className="group relative flex"
             >
-              {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col w-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
-                <div className="relative flex-1">
-                  <h3 className="text-lg font-semibold mb-3 text-white">Community</h3>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold text-white">Free</span>
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
+                {/* Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                      <Users size={16} className="text-emerald-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Community</h3>
                   </div>
-                  <p className="text-gray-500 text-sm mb-6">Open source forever</p>
-                  
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">$0</span>
+                    <span className="text-gray-500 text-sm">/forever</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">Perfect for individual developers</p>
+                </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06] mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">What's included</p>
                   <ul className="space-y-3">
                     {[
                       "Full AI capabilities",
@@ -1238,81 +1247,96 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       "Apache 2.0 license",
                       "Community support",
                       "Unlimited personal use",
-                      " ",
-                    ].map((feature, i) => (
-                      <li key={i} className={`flex items-center gap-2.5 ${feature.trim() ? 'text-gray-400' : 'invisible'}`}>
-                        <Check size={14} className="text-emerald-500 flex-shrink-0" />
-                        <span className="text-sm">{feature || "Placeholder"}</span>
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
+                        <Check size={15} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
+                {/* Button */}
                 <div className="mt-8">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-3 text-center rounded-lg font-medium bg-white/[0.04] border border-white/[0.08] text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-200"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
                     data-testid="button-download-free"
                   >
-                    Download Free
+                    Get Started Free
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            {/* Pro Edition - Highlighted */}
+            {/* Founders Edition - Featured */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
+              transition={{ delay: 0.1, duration: 0.4 }}
               className="group relative flex"
             >
-              {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-blue-500/30 p-7 flex flex-col w-full hover:border-blue-500/50 hover:shadow-[0_8px_30px_-12px_rgba(59,130,246,0.25)] hover:-translate-y-1 transition-all duration-300">
-                {/* Popular badge */}
+              {/* Glow effect */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-blue-500/20 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-blue-500/40 p-6 flex flex-col w-full">
+                {/* Badge */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <div className="px-3 py-1 bg-blue-500 rounded-full text-xs font-semibold text-white">
-                    Most Popular
+                  <div className="px-3 py-1 bg-blue-500 rounded-full text-[11px] font-semibold text-white shadow-lg shadow-blue-500/20">
+                    Recommended
                   </div>
                 </div>
                 
-                <div className="relative flex-1 pt-2">
-                  <h3 className="text-lg font-semibold mb-3 text-white">Founders</h3>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold text-white">$19</span>
-                    <span className="text-gray-500">/month</span>
+                {/* Header */}
+                <div className="mb-6 pt-1">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                      <Zap size={16} className="text-blue-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Founders</h3>
                   </div>
-                  <p className="text-gray-500 text-sm mb-6">For serious AI builders</p>
-                  
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">$19</span>
+                    <span className="text-gray-500 text-sm">/month</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">For serious AI builders</p>
+                </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-blue-500/20 mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Community, plus</p>
                   <ul className="space-y-3">
                     {[
-                      "Everything in Community",
                       "Priority support (24/7)",
-                      "Early package releases",
+                      "Early access to features",
                       "GPU inference engine",
                       "Performance analytics",
-                      "Team collaboration",
+                      "Team collaboration tools",
                     ].map((feature) => (
-                      <li key={feature} className="flex items-center gap-2.5 text-gray-300">
-                        <Check size={14} className="text-blue-400 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-300">
+                        <Check size={15} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
+                {/* Button */}
                 <div className="mt-8">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full py-3 text-center rounded-lg font-medium bg-blue-500 text-white hover:bg-blue-400 transition-all duration-200"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-blue-500 text-white hover:bg-blue-400 transition-colors duration-150"
                     data-testid="button-get-founders"
                   >
-                    Get Started
+                    Start Free Trial
                   </a>
                 </div>
               </div>
@@ -1323,39 +1347,51 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+              transition={{ delay: 0.2, duration: 0.4 }}
               className="group relative flex"
             >
-              {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col w-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
-                <div className="relative flex-1">
-                  <h3 className="text-lg font-semibold mb-3 text-white">Enterprise</h3>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold text-white">Custom</span>
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
+                {/* Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                      <Building size={16} className="text-purple-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Enterprise</h3>
                   </div>
-                  <p className="text-gray-500 text-sm mb-6">For large organizations</p>
-                  
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">Custom</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">For teams and organizations</p>
+                </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06] mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Founders, plus</p>
                   <ul className="space-y-3">
                     {[
-                      "Everything in Founders",
-                      "Dedicated support team",
+                      "Dedicated account manager",
                       "Custom integrations",
-                      "SLA guarantees (99.9%)",
-                      "Compliance reporting",
+                      "99.9% SLA guarantee",
+                      "Compliance & security",
                       "On-premise deployment",
                     ].map((feature) => (
-                      <li key={feature} className="flex items-center gap-2.5 text-gray-400">
-                        <Check size={14} className="text-purple-400 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
+                        <Check size={15} className="text-purple-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
+                {/* Button */}
                 <div className="mt-8">
                   <a
                     href="mailto:sales@cortexlinux.com"
-                    className="block w-full py-3 text-center rounded-lg font-medium bg-white/[0.04] border border-white/[0.08] text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-200"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
                     data-testid="button-contact-sales"
                   >
                     Contact Sales
@@ -1365,18 +1401,26 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </motion.div>
           </div>
           
-          {/* Trust indicator */}
+          {/* Trust indicators */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="text-center mt-12"
+            transition={{ delay: 0.3 }}
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"
           >
-            <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
-              <Shield size={16} className="text-emerald-400" />
-              30-day money-back guarantee. Cancel anytime.
-            </p>
+            <div className="flex items-center gap-2">
+              <Shield size={14} className="text-emerald-400" />
+              <span>30-day money back</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock size={14} className="text-gray-400" />
+              <span>Secure payment</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Sparkles size={14} className="text-gray-400" />
+              <span>Cancel anytime</span>
+            </div>
           </motion.div>
         </div>
       </section>
