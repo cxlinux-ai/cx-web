@@ -18,13 +18,13 @@ const STATS_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let issuesCache: { data: any[]; timestamp: number } | null = null;
 const ISSUES_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
-// Fallback data for when GitHub is unavailable
+// Fallback data for when GitHub is unavailable (Real data from https://github.com/cortexlinux/Cortex)
 const FALLBACK_STATS = {
   openIssues: 12,
-  contributors: 89,
-  mergedPRs: 156,
-  stars: 1250,
-  forks: 340
+  contributors: 5,
+  mergedPRs: 323,
+  stars: 25,
+  forks: 47
 };
 
 const FALLBACK_ISSUES = [

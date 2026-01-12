@@ -76,8 +76,8 @@ export default function StartupPage() {
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true });
   
-  const clones = useCountUp(19000, 2000, statsInView);
-  const contributors = useCountUp(89, 2000, statsInView);
+  const clones = useCountUp(47, 2000, statsInView);  // Real forks from GitHub
+  const contributors = useCountUp(5, 2000, statsInView);  // Real contributors
   
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -360,9 +360,9 @@ export default function StartupPage() {
               className="text-center p-6 rounded-xl bg-white/5 border border-white/10"
             >
               <div className="text-4xl md:text-5xl font-bold text-brand-blue mb-2">
-                {clones.toLocaleString()}+
+                {clones.toLocaleString()}
               </div>
-              <div className="text-gray-400">Clones in 14 days</div>
+              <div className="text-gray-400">GitHub Forks</div>
             </motion.div>
 
             <motion.div

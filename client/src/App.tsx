@@ -188,7 +188,7 @@ export default function App() {
                 >
                   <Github size={16} />
                   <Star size={14} className="text-yellow-400" />
-                  <span>1.2k</span>
+                  <span>25</span>
                 </a>
                 <a
                   href="https://github.com/cortexlinux/cortex"

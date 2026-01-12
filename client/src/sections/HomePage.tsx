@@ -305,9 +305,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true });
   
-  const stars = useCountUp(githubStats?.stars || 1250, 2000, statsInView);
-  const forks = useCountUp(githubStats?.forks || 340, 2000, statsInView);
-  const contributorCount = useCountUp(githubStats?.contributors || 89, 2000, statsInView);
+  const stars = useCountUp(githubStats?.stars || 25, 2000, statsInView);
+  const forks = useCountUp(githubStats?.forks || 47, 2000, statsInView);
+  const contributorCount = useCountUp(githubStats?.contributors || 5, 2000, statsInView);
 
   const [activeTab, setActiveTab] = useState<"npm" | "yarn" | "pnpm" | "bun">("npm");
   const [activeDemo, setActiveDemo] = useState(0);
@@ -383,7 +383,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               data-testid="link-github-stars"
             >
               <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1,250"} stars</span>
+              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "25"} stars</span>
             </a>
             <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-open-source">
               <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
