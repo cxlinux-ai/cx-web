@@ -273,54 +273,6 @@ export default function Hackathon() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* How to Participate - Sticky Banner */}
-      <section className="bg-gradient-to-r from-blue-900/30 via-blue-800/20 to-blue-900/30 border-b border-blue-500/20 py-4 px-4">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-center text-sm text-blue-300 font-semibold uppercase tracking-wide mb-3">
-            3 Simple Steps to Participate
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-xl transition-all group"
-              data-testid="step-star-repo"
-            >
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">1</div>
-              <div className="flex items-center gap-2">
-                <Star size={18} className="text-yellow-400" />
-                <span className="text-white font-medium">Star the Repo</span>
-              </div>
-            </a>
-            <a
-              href={DISCORD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/40 rounded-xl transition-all group"
-              data-testid="step-join-discord"
-            >
-              <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm">2</div>
-              <div className="flex items-center gap-2">
-                <FaDiscord size={18} className="text-purple-400" />
-                <span className="text-white font-medium">Join Discord</span>
-              </div>
-            </a>
-            <Link
-              href="/hackathon-rules"
-              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 rounded-xl transition-all group"
-              data-testid="step-view-rules"
-            >
-              <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm">3</div>
-              <div className="flex items-center gap-2">
-                <FileText size={18} className="text-emerald-400" />
-                <span className="text-white font-medium">See More Details</span>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
@@ -527,6 +479,57 @@ export default function Hackathon() {
                   </a>
                 )}
               </div>
+            </div>
+          </motion.div>
+
+          {/* 3 Simple Steps to Participate */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+            className="mt-10 max-w-3xl mx-auto"
+          >
+            <p className="text-center text-sm text-blue-300 font-semibold uppercase tracking-wide mb-4">
+              3 Simple Steps to Participate
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-xl transition-all"
+                data-testid="step-star-repo"
+              >
+                <div className="w-7 h-7 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xs">1</div>
+                <div className="flex items-center gap-2">
+                  <Star size={16} className="text-yellow-400" />
+                  <span className="text-white font-medium text-sm">Star the Repo</span>
+                </div>
+              </a>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/40 rounded-xl transition-all"
+                data-testid="step-join-discord"
+              >
+                <div className="w-7 h-7 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-xs">2</div>
+                <div className="flex items-center gap-2">
+                  <FaDiscord size={16} className="text-purple-400" />
+                  <span className="text-white font-medium text-sm">Join Discord</span>
+                </div>
+              </a>
+              <Link
+                href="/hackathon-rules"
+                className="flex items-center gap-3 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 rounded-xl transition-all"
+                data-testid="step-view-rules"
+              >
+                <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-xs">3</div>
+                <div className="flex items-center gap-2">
+                  <FileText size={16} className="text-emerald-400" />
+                  <span className="text-white font-medium text-sm">See Details</span>
+                </div>
+              </Link>
             </div>
           </motion.div>
 
