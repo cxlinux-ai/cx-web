@@ -26,6 +26,8 @@ import AdminRegistrations from "./pages/admin-registrations";
 import BountiesPage from "./pages/bounties";
 import WaitlistPage from "./pages/waitlist";
 import MissionPage from "./pages/mission";
+import ComparePage from "./pages/compare";
+import CompareAnalyticsPage from "./pages/compare-analytics";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -363,6 +365,8 @@ export default function App() {
             <Route path="/bounties" component={BountiesPage} />
             <Route path="/waitlist" component={WaitlistPage} />
             <Route path="/mission" component={MissionPage} />
+            <Route path="/compare/:competitor" component={ComparePage} />
+            <Route path="/compare-analytics" component={CompareAnalyticsPage} />
             <Route path="/admin/registrations" component={AdminRegistrations} />
           </Switch>
           </main>
