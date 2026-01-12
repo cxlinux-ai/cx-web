@@ -2,10 +2,11 @@ import { useParams, Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, Calendar, Clock, User, Tag, ArrowRight } from "lucide-react";
 import { getPostBySlug, getRelatedPosts, BlogPost } from "@/data/blogPosts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { updateSEO } from "@/lib/seo";
+import analytics from "@/lib/analytics";
 
 // Simple markdown to HTML converter
 function formatContent(content: string): string {
@@ -96,6 +97,8 @@ export default function BlogPostPage() {
   const relatedPosts = slug ? getRelatedPosts(slug, 2) : [];
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [articleCompleted, setArticleCompleted] = useState(false);
+  const articleEndRef = useRef<HTMLDivElement>(null);
 
   const toc = post ? extractTOC(post.content) : [];
 
@@ -103,7 +106,30 @@ export default function BlogPostPage() {
     window.scrollTo(0, 0);
     setImageLoaded(false);
     setImageError(false);
+    setArticleCompleted(false);
   }, [slug]);
+
+  useEffect(() => {
+    if (!post || !slug || articleCompleted) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !articleCompleted) {
+            setArticleCompleted(true);
+            analytics.trackEngagement('article_completed', slug);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (articleEndRef.current) {
+      observer.observe(articleEndRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [post, slug, articleCompleted]);
 
   // Update SEO tags dynamically
   useEffect(() => {
@@ -260,6 +286,9 @@ export default function BlogPostPage() {
               </span>
             ))}
           </motion.div>
+          
+          {/* Article completion tracking marker */}
+          <div ref={articleEndRef} className="h-1" />
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (

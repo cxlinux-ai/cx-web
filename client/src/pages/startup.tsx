@@ -33,6 +33,7 @@ import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
 import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
+import analytics from "@/lib/analytics";
 
 function useCountUp(end: number, duration: number = 2000, start: boolean = true) {
   const [count, setCount] = useState(0);
@@ -107,8 +108,14 @@ export default function StartupPage() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      localStorage.setItem("startup_waitlist_email", email);
-      setEmailSubmitted(true);
+      try {
+        localStorage.setItem("startup_waitlist_email", email);
+        setEmailSubmitted(true);
+        analytics.trackFormSubmit('founders_waitlist', true);
+        analytics.trackConversion('waitlist_signup');
+      } catch (error) {
+        analytics.trackFormSubmit('founders_waitlist', false);
+      }
     }
   };
 

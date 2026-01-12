@@ -1,0 +1,124 @@
+**Objective:**
+Build a **server-side Bounties Board** for Cortex Linux that dynamically displays GitHub issues labeled `"bounty"` from the `cortexlinux` organization. The board must be **fast, cache-aware, and fully interactive**, with a polished dark-themed Tailwind UI.
+
+---
+
+## 1. Backend Requirements
+
+**API Endpoint**
+
+* Route: `/api/bounties` (or `/bounties.json`)
+* Fetch **Open** and **Closed** bounties from GitHub:
+
+```text
+Open: https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:open+label:bounty
+Closed: https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:closed+label:bounty
+```
+
+**Caching**
+
+* Store results **in-memory** for 30 minutes
+* Serve cached data to all visitors
+* Only call GitHub API when cache expires
+
+**Error Handling**
+
+* Handle rate limits (`403`), API downtime, and network errors gracefully
+* Return structured error message to frontend with retry instructions
+
+**Data to Extract Per Issue**
+
+* `id`, `number`, `title`, `html_url`, `state` (`open` / `closed`), `created_at`, `closed_at`
+* `user.login`, `user.avatar_url`, `user.html_url`
+* `labels` (extract bounty amount if present)
+* `comments`, `body`
+
+**Tech Stack**
+
+* Node.js + Express **or** Python + Flask (your choice)
+* Include **CORS headers** if frontend is separate
+
+---
+
+## 2. Frontend Requirements
+
+**Layout**
+
+* Card-based layout per bounty:
+
+  * **Title** → link to GitHub
+  * **Status**: Open / Completed
+  * **Author**: username + avatar
+  * **Bounty Amount**: extracted from labels
+  * **Comment count**
+  * **Created / Closed date**
+* Responsive grid or list for desktop + mobile
+
+**Interactions**
+
+* **Filter dropdown**: All / Open / Completed
+* **Sort dropdown**: Newest / Oldest / Most Active (by comment count)
+* **Search bar**: filter by keyword in title or body
+* **Loading skeleton** while fetching
+* **Error state** with retry button
+* **Auto-refresh** data every 30 minutes
+
+**Styling**
+
+* Tailwind CSS, **dark theme**
+* Clean, readable card UI
+* Hover effects for links/buttons
+* Mobile-first responsive design
+
+**Optional Enhancements**
+
+* Highlight newly added bounties
+* Badge for “High-value bounty” if label amount > threshold
+* Pagination if > 50 bounties
+
+---
+
+## 3. Integration & Flow
+
+1. Frontend calls `/api/bounties`
+2. Backend returns cached JSON
+3. Frontend renders cards with filter/sort/search functionality
+4. Auto-refresh triggers re-fetch and updates cards smoothly
+
+---
+
+## 4. Deliverables
+
+* Backend endpoint with caching + error handling
+* Frontend page or component rendering all bounties
+* Filter, sort, search, loading, error states
+* Tailwind CSS dark theme
+* Fully responsive layout
+* Optional: GitHub OAuth for user-specific enhancements (not required)
+
+---
+
+**Notes for AI / Developer**
+
+* Focus on **robust caching** to avoid GitHub rate limits
+* UX must handle **loading, empty states, and errors gracefully**
+* Make the board **interactive, searchable, and visually appealing**
+* Ensure **all data points** from GitHub issues are surfaced
+
+---
+
+This prompt is now structured for **direct implementation** — backend + frontend logic, caching, UX states, styling, and GitHub integration are all clearly defined.
+
+---
+
+If you want, I can **also draft a Replit-ready project structure** with:
+
+* Express API + in-memory caching
+* React frontend with Tailwind
+* Filter/sort/search logic
+* Loading/error states
+* Auto-refresh
+
+…so you could literally run it on Replit in one go.
+
+Do you want me to do that?

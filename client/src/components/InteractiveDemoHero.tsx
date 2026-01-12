@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCortexDemo } from "@/hooks/useCortexDemo";
 import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight, ArrowRight } from "lucide-react";
+import analytics from "@/lib/analytics";
 
 const EXAMPLE_PROMPTS = [
   "Automate my backup script",
@@ -78,7 +79,13 @@ export default function InteractiveDemoHero() {
             Ready for the full experience with unlimited access?
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <a 
+              href="https://github.com/cortexlinux/cortex" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-full sm:w-auto"
+              onClick={() => analytics.trackCTAClick('install_cortex_cli', 'hero_limit_reached')}
+            >
               <Button 
                 size="lg"
                 className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-cyan-500 hover:opacity-90 text-sm sm:text-base md:text-lg px-6 sm:px-8 py-4 sm:py-5 md:py-6"
@@ -315,6 +322,7 @@ export default function InteractiveDemoHero() {
             whileHover={{ y: -2, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             data-testid="button-install-cli"
+            onClick={() => analytics.trackCTAClick('install_cli', 'hero')}
           >
             <Download className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.5} />
             <span className="hidden sm:inline">Install the CLI for Unlimited Access</span>

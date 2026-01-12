@@ -175,3 +175,230 @@ export const insertStripeInvoicePaymentSchema = createInsertSchema(stripeInvoice
 
 export type InsertStripeInvoicePayment = z.infer<typeof insertStripeInvoicePaymentSchema>;
 export type StripeInvoicePayment = typeof stripeInvoicePayments.$inferSelect;
+
+// ==========================================
+// VIRAL REFERRAL SYSTEM
+// ==========================================
+
+/**
+ * Waitlist Entries - Early access signups with referral tracking
+ * Each entry gets a unique referral code and position in line
+ */
+export const waitlistEntries = pgTable("waitlist_entries", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").default(false),
+  verificationToken: text("verification_token"),
+  verificationExpires: timestamp("verification_expires"),
+
+  // Referral tracking
+  referralCode: text("referral_code").notNull().unique(),
+  referredByCode: text("referred_by_code"), // The code that referred this user
+
+  // Position tracking (updated dynamically based on referrals)
+  originalPosition: integer("original_position").notNull(),
+  currentPosition: integer("current_position").notNull(),
+
+  // OAuth connections (bonus perks)
+  githubUsername: text("github_username"),
+  githubConnected: boolean("github_connected").default(false),
+  twitterUsername: text("twitter_username"),
+  twitterConnected: boolean("twitter_connected").default(false),
+
+  // Stats
+  totalReferrals: integer("total_referrals").default(0),
+  verifiedReferrals: integer("verified_referrals").default(0),
+
+  // Tier/rewards tracking
+  currentTier: text("current_tier").default("none"), // none, bronze, silver, gold, platinum, diamond
+  rewardsUnlocked: text("rewards_unlocked").default("[]"), // JSON array of reward IDs
+
+  // Timestamps
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const insertWaitlistEntrySchema = createInsertSchema(waitlistEntries).pick({
+  email: true,
+  referredByCode: true,
+  githubUsername: true,
+  twitterUsername: true,
+});
+
+export type InsertWaitlistEntry = z.infer<typeof insertWaitlistEntrySchema>;
+export type WaitlistEntry = typeof waitlistEntries.$inferSelect;
+
+/**
+ * Referral Events - Track all referral actions and conversions
+ */
+export const referralEvents = pgTable("referral_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referralCode: text("referral_code").notNull(), // The code that generated this event
+  eventType: text("event_type").notNull(), // click, signup, verified, installed, shared
+
+  // Event metadata
+  source: text("source"), // twitter, linkedin, email, direct, github_badge, install_share
+  referredEmail: text("referred_email"), // Only filled after signup
+  ipAddress: text("ip_address"), // For rate limiting and fraud detection
+  userAgent: text("user_agent"),
+
+  // Conversion tracking
+  convertedToSignup: boolean("converted_to_signup").default(false),
+  convertedToVerified: boolean("converted_to_verified").default(false),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertReferralEventSchema = createInsertSchema(referralEvents).pick({
+  referralCode: true,
+  eventType: true,
+  source: true,
+  referredEmail: true,
+  ipAddress: true,
+  userAgent: true,
+});
+
+export type InsertReferralEvent = z.infer<typeof insertReferralEventSchema>;
+export type ReferralEvent = typeof referralEvents.$inferSelect;
+
+/**
+ * Rewards - Define available rewards and their requirements
+ */
+export const referralRewards = pgTable("referral_rewards", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  tier: text("tier").notNull(), // bronze, silver, gold, platinum, diamond
+  referralsRequired: integer("referrals_required").notNull(),
+  positionBoost: integer("position_boost").default(0), // How many spots to move up
+
+  // Reward details
+  rewardType: text("reward_type").notNull(), // position_boost, discord_role, pro_month, badge, hackathon_perk
+  rewardValue: text("reward_value"), // Additional details (e.g., role name, months, badge ID)
+
+  // Display
+  iconEmoji: text("icon_emoji"),
+  isActive: boolean("is_active").default(true),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type ReferralReward = typeof referralRewards.$inferSelect;
+
+/**
+ * User Rewards - Track which rewards each user has earned/claimed
+ */
+export const userRewards = pgTable("user_rewards", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  waitlistEntryId: varchar("waitlist_entry_id").references(() => waitlistEntries.id).notNull(),
+  rewardId: varchar("reward_id").references(() => referralRewards.id).notNull(),
+
+  earnedAt: timestamp("earned_at").notNull().defaultNow(),
+  claimedAt: timestamp("claimed_at"),
+  isClaimed: boolean("is_claimed").default(false),
+});
+
+export type UserReward = typeof userRewards.$inferSelect;
+
+/**
+ * Shareable Content - Track viral shares (install cards, command shares, etc.)
+ */
+export const shareableContent = pgTable("shareable_content", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  waitlistEntryId: varchar("waitlist_entry_id").references(() => waitlistEntries.id),
+
+  contentType: text("content_type").notNull(), // waitlist_card, install_success, command_share, github_badge
+  contentData: text("content_data"), // JSON with type-specific data
+
+  // OG image generation
+  ogImageUrl: text("og_image_url"),
+  ogImageGenerated: boolean("og_image_generated").default(false),
+
+  // Tracking
+  shareCount: integer("share_count").default(0),
+  clickCount: integer("click_count").default(0),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type ShareableContent = typeof shareableContent.$inferSelect;
+
+/**
+ * Builder Referrals - Hackathon-specific referral tracking
+ */
+export const builderReferrals = pgTable("builder_referrals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referrerWaitlistId: varchar("referrer_waitlist_id").references(() => waitlistEntries.id).notNull(),
+
+  // Builder being referred
+  builderEmail: text("builder_email").notNull(),
+  builderName: text("builder_name"),
+
+  // Hackathon tracking
+  hackathonRegistrationId: varchar("hackathon_registration_id").references(() => hackathonRegistrations.id),
+  teamName: text("team_name"),
+  projectSubmitted: boolean("project_submitted").default(false),
+
+  // Status
+  status: text("status").default("invited"), // invited, registered, submitted
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const insertBuilderReferralSchema = createInsertSchema(builderReferrals).pick({
+  referrerWaitlistId: true,
+  builderEmail: true,
+  builderName: true,
+});
+
+export type InsertBuilderReferral = z.infer<typeof insertBuilderReferralSchema>;
+export type BuilderReferral = typeof builderReferrals.$inferSelect;
+
+/**
+ * Leaderboard Snapshots - Weekly leaderboard data for challenges
+ */
+export const leaderboardSnapshots = pgTable("leaderboard_snapshots", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+
+  periodType: text("period_type").notNull(), // weekly, monthly, all_time
+  periodStart: timestamp("period_start").notNull(),
+  periodEnd: timestamp("period_end").notNull(),
+
+  // Top referrers (JSON array)
+  rankings: text("rankings").notNull(), // JSON array of {position, referralCode, displayName, score, isAnonymous}
+
+  // Challenge type (if applicable)
+  challengeType: text("challenge_type"), // most_referrals, best_command, most_installs
+  challengeName: text("challenge_name"),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type LeaderboardSnapshot = typeof leaderboardSnapshots.$inferSelect;
+
+// Reward tier definitions (used in logic, not in DB)
+export const REWARD_TIERS = {
+  bronze: { referrals: 1, positionBoost: 100, tier: "bronze" },
+  silver: { referrals: 3, positionBoost: 500, tier: "silver" },
+  gold: { referrals: 5, positionBoost: 0, tier: "gold", specialReward: "discord_role" },
+  platinum: { referrals: 10, positionBoost: 0, tier: "platinum", specialReward: "pro_month" },
+  diamond: { referrals: 25, positionBoost: 0, tier: "diamond", specialReward: "founding_badge" },
+  legendary: { referrals: 50, positionBoost: 0, tier: "legendary", specialReward: "hackathon_fasttrack" },
+} as const;
+
+// Validation schemas for API
+export const waitlistSignupSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  referralCode: z.string().optional(),
+  githubUsername: z.string().optional(),
+  twitterUsername: z.string().optional(),
+});
+
+export const referralClickSchema = z.object({
+  referralCode: z.string().min(1),
+  source: z.string().optional(),
+});
+
+export type WaitlistSignup = z.infer<typeof waitlistSignupSchema>;
+export type ReferralClick = z.infer<typeof referralClickSchema>;

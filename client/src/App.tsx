@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Menu, X, Sparkles, Github, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import analytics from "@/lib/analytics";
 import FAQ from "./pages/faq";
 import BetaPage from "./pages/beta";
 import Blog from "./pages/blog";
@@ -135,11 +136,15 @@ export default function App() {
                     location === "/getting-started" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-getting-started"
+                  onClick={() => analytics.trackCTAClick('getting_started', 'main_nav')}
                 >
                   Get Started
                 </Link>
                 <button
-                  onClick={() => scrollToSection("security")}
+                  onClick={() => {
+                    analytics.trackCTAClick('security', 'main_nav');
+                    scrollToSection("security");
+                  }}
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/" && activeSection === "security"
                       ? "text-[#93c5fd]"
@@ -155,6 +160,7 @@ export default function App() {
                     location.startsWith("/news") ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-news"
+                  onClick={() => analytics.trackCTAClick('news', 'main_nav')}
                 >
                   News
                 </Link>
@@ -164,6 +170,7 @@ export default function App() {
                     location === "/startup" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-startup"
+                  onClick={() => analytics.trackCTAClick('ai_agencies', 'main_nav')}
                 >AI Agencies</Link>
                 <Link
                   href="/hackathon"
@@ -171,6 +178,7 @@ export default function App() {
                     location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
                   }`}
                   data-testid="link-hackathon"
+                  onClick={() => analytics.trackCTAClick('hackathon', 'main_nav')}
                 >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
@@ -187,6 +195,7 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-400/50 hover:text-white transition-all"
+                  onClick={() => analytics.trackCTAClick('star_on_github', 'header')}
                 >
                   <Github size={16} />
                   <Star size={14} className="text-yellow-400" />
@@ -198,6 +207,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
                   data-testid="button-try-beta"
+                  onClick={() => analytics.trackCTAClick('get_started', 'header')}
                 >
                   Get Started
                 </a>
@@ -232,14 +242,20 @@ export default function App() {
                 >
                   <Link
                     href="/getting-started"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      analytics.trackCTAClick('getting_started', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-getting-started"
                   >
                     Get Started
                   </Link>
                   <button
-                    onClick={() => scrollToSection("security")}
+                    onClick={() => {
+                      analytics.trackCTAClick('security', 'mobile_nav');
+                      scrollToSection("security");
+                    }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-security"
                   >
@@ -247,7 +263,10 @@ export default function App() {
                   </button>
                   <Link
                     href="/news"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      analytics.trackCTAClick('news', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-news"
                   >
@@ -255,7 +274,10 @@ export default function App() {
                   </Link>
                   <Link
                     href="/startup"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      analytics.trackCTAClick('ai_agencies', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-startup"
                   >
@@ -263,7 +285,10 @@ export default function App() {
                   </Link>
                   <Link
                     href="/hackathon"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      analytics.trackCTAClick('hackathon', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
                     className="flex items-center gap-2 w-full text-left py-2 text-terminal-green hover:text-white transition-colors duration-300"
                     data-testid="mobile-link-hackathon"
                   >
@@ -277,7 +302,10 @@ export default function App() {
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      analytics.trackCTAClick('get_started', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
                     className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300"
                     data-testid="mobile-button-try-beta"
                   >

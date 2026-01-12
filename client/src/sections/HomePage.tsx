@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "wouter";
 import { updateSEO, seoConfigs } from "@/lib/seo";
+import analytics from "@/lib/analytics";
 import {
   Github,
   Star,
@@ -61,6 +62,8 @@ import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
 import HackathonPreview from "@/components/HackathonPreview";
+import { useABVariant } from "@/hooks/useABVariant";
+import { abTests } from "@/lib/ab-testing";
 
 interface GitHubStats {
   openIssues: number;
@@ -323,6 +326,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
+  // A/B Testing for hero headline
+  const { variant: headlineVariant } = useABVariant(abTests.heroHeadline);
+  const headlines: Record<string, string> = {
+    control: 'Execute Your Intent',
+    variant_a: 'Linux, But Smarter',
+    variant_b: 'AI-Powered Linux',
+  };
+
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
@@ -426,7 +437,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           >
             <span className="gradient-text text-[82px] font-extrabold pl-[10px] pr-[10px]">AI LINUX</span>
             <br />
-            <span className="text-white">Execute Your Intent</span>
+            <span className="text-white">{headlines[headlineVariant] || headlines.control}</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -472,6 +483,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               target="_blank" 
               rel="noopener noreferrer"
               className="block"
+              onClick={() => analytics.trackCTAClick('try_cortex_cli', 'hero_mobile')}
             >
               <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
@@ -2305,6 +2317,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                onClick={() => analytics.trackCTAClick('get_started', 'hero_footer')}
               >
                 Get Started
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

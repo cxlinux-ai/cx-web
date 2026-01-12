@@ -5,6 +5,7 @@ import { storage } from "./storage";
 import type { Contributor } from "@shared/schema";
 import { insertHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
+import referralRoutes from "./referral";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
@@ -260,6 +261,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Mount Stripe routes (webhook needs raw body, so it's handled in stripe.ts)
   app.use("/api/stripe", stripeRoutes);
+
+  // Mount Referral routes (viral growth system)
+  app.use("/api/referral", referralRoutes);
 
   // Hackathon registration endpoint
   app.post("/api/hackathon/register", async (req, res) => {

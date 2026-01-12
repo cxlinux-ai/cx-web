@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
+import analytics from "@/lib/analytics";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
@@ -344,6 +345,11 @@ export default function Hackathon() {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
               data-testid="hero-cta-github"
+              onClick={() => {
+                analytics.trackCTAClick('start_building', 'hackathon_hero');
+                analytics.trackFormSubmit('hackathon_registration', true);
+                analytics.trackConversion('hackathon_signup');
+              }}
             >
               <Github size={24} />
               Start Building Now
@@ -797,6 +803,11 @@ export default function Hackathon() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-10 py-5 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(0,102,255,0.5)] hover:shadow-[0_0_60px_rgba(0,102,255,0.7)] transition-all duration-300"
               data-testid="final-cta-github"
+              onClick={() => {
+                analytics.trackCTAClick('join_hackathon', 'hackathon_footer');
+                analytics.trackFormSubmit('hackathon_registration', true);
+                analytics.trackConversion('hackathon_signup');
+              }}
             >
               <Github size={28} />
               Join the Hackathon
