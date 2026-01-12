@@ -11,13 +11,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Form,
   FormControl,
   FormField,
@@ -354,20 +347,21 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-gray-300">Country</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-country">
-                        <SelectValue placeholder="Select country" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
+                  <FormControl>
+                    <select
+                      {...field}
+                      className="flex h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
+                      style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.5rem center', backgroundSize: '1.25rem' }}
+                      data-testid="select-country"
+                    >
+                      <option value="" className="bg-[#1a1a2e] text-gray-400">Select country</option>
                       {COUNTRIES.map((country) => (
-                        <SelectItem key={country} value={country} className="text-white hover:bg-white/10">
+                        <option key={country} value={country} className="bg-[#1a1a2e] text-white">
                           {country}
-                        </SelectItem>
+                        </option>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </select>
+                  </FormControl>
                   <FormMessage className="text-red-400" />
                 </FormItem>
               )}
@@ -454,20 +448,21 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-300">Primary Technical Role <span className="text-red-400">*</span></FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-technical-role">
-                      <SelectValue placeholder="Select your primary role" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
+                <FormControl>
+                  <select
+                    {...field}
+                    className="flex h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.5rem center', backgroundSize: '1.25rem' }}
+                    data-testid="select-technical-role"
+                  >
+                    <option value="" className="bg-[#1a1a2e] text-gray-400">Select your primary role</option>
                     {TECHNICAL_ROLES.map((role) => (
-                      <SelectItem key={role.value} value={role.value} className="text-white hover:bg-white/10">
+                      <option key={role.value} value={role.value} className="bg-[#1a1a2e] text-white">
                         {role.label}
-                      </SelectItem>
+                      </option>
                     ))}
-                  </SelectContent>
-                </Select>
+                  </select>
+                </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
             )}
@@ -774,20 +769,21 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-300">Which Cortex Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-white/5 border-white/20 text-white" data-testid="select-cortex-area">
-                      <SelectValue placeholder="Select an area" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
+                <FormControl>
+                  <select
+                    {...field}
+                    className="flex h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.5rem center', backgroundSize: '1.25rem' }}
+                    data-testid="select-cortex-area"
+                  >
+                    <option value="" className="bg-[#1a1a2e] text-gray-400">Select an area</option>
                     {CORTEX_AREAS.map((area) => (
-                      <SelectItem key={area.value} value={area.value} className="text-white hover:bg-white/10">
+                      <option key={area.value} value={area.value} className="bg-[#1a1a2e] text-white">
                         {area.label}
-                      </SelectItem>
+                      </option>
                     ))}
-                  </SelectContent>
-                </Select>
+                  </select>
+                </FormControl>
                 <FormMessage className="text-red-400" />
               </FormItem>
             )}
