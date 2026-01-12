@@ -28,7 +28,7 @@ export default function Register() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <h1 className="text-[50px] font-bold mt-[0px] mb-[0px] pt-[10px] pb-[10px]">
+          <h1 className="text-[32px] sm:text-[42px] md:text-[50px] font-bold mt-0 mb-0 pt-2 pb-2">
             Join the <span className="gradient-text">Hackathon</span>
           </h1>
           <p className="text-gray-400 max-w-xl mx-auto">

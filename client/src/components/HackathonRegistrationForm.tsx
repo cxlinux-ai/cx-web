@@ -360,7 +360,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
                         <SelectValue placeholder="Select country" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-[#1a1a2e] border-white/20">
+                    <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
                       {COUNTRIES.map((country) => (
                         <SelectItem key={country} value={country} className="text-white hover:bg-white/10">
                           {country}
@@ -460,7 +460,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
                       <SelectValue placeholder="Select your primary role" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-[#1a1a2e] border-white/20">
+                  <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
                     {TECHNICAL_ROLES.map((role) => (
                       <SelectItem key={role.value} value={role.value} className="text-white hover:bg-white/10">
                         {role.label}
@@ -780,7 +780,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
                       <SelectValue placeholder="Select an area" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-[#1a1a2e] border-white/20">
+                  <SelectContent position="popper" className="bg-[#1a1a2e] border-white/20 max-h-60">
                     {CORTEX_AREAS.map((area) => (
                       <SelectItem key={area.value} value={area.value} className="text-white hover:bg-white/10">
                         {area.label}
