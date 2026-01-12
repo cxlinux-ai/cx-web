@@ -1,114 +1,90 @@
 /**
- * Referral Link Generator Component
+ * Waitlist Signup Component
  *
- * Automatically generates a unique referral link per IP address.
- * No email required - instant referral link generation and display.
+ * Email-based waitlist signup with referral tracking.
+ * Shows friendly message if user is already registered.
  */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import { Mail, Copy, Check, ChevronRight, Sparkles, Users, Trophy, Star, Share2, Link2 } from "lucide-react";
+import { Copy, Check, Users, Trophy, Share2, Link2, Mail, Loader2, PartyPopper, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 
-interface ReferralData {
+interface SignupResponse {
+  message: string;
   referralCode: string;
-  totalReferrals: number;
-  clickCount: number;
-  isNew: boolean;
+  position?: number;
+  totalWaitlist?: number;
+  verificationRequired?: boolean;
+  alreadyRegistered?: boolean;
+  emailVerified?: boolean;
 }
 
 interface WaitlistSignupProps {
   referralCode?: string;
-  onSuccess?: (data: ReferralData) => void;
+  onSuccess?: (data: SignupResponse) => void;
 }
 
 export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }: WaitlistSignupProps) {
-  const [referralData, setReferralData] = useState<ReferralData | null>(null);
+  const [email, setEmail] = useState("");
+  const [signupData, setSignupData] = useState<SignupResponse | null>(null);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generateMutation = useMutation({
-    mutationFn: async () => {
-      const response = await apiRequest("POST", "/api/referral/generate", {});
+  const signupMutation = useMutation({
+    mutationFn: async (userEmail: string) => {
+      const response = await apiRequest("POST", "/api/referral/signup", {
+        email: userEmail,
+        referralCode: initialReferralCode,
+      });
       return response.json();
     },
-    onSuccess: (data: ReferralData) => {
-      setReferralData(data);
+    onSuccess: (data: SignupResponse) => {
+      setSignupData(data);
       setError(null);
       onSuccess?.(data);
     },
     onError: () => {
-      setError("Failed to generate referral link. Please refresh the page.");
+      setError("Failed to join waitlist. Please try again.");
     },
   });
 
-  useEffect(() => {
-    generateMutation.mutate();
-  }, []);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setError(null);
+    signupMutation.mutate(email.trim());
+  };
 
   const handleCopyLink = async () => {
-    if (!referralData) return;
-    const link = `https://cortexlinux.com/referrals?ref=${referralData.referralCode}`;
+    if (!signupData) return;
+    const link = `https://cortexlinux.com/referrals?ref=${signupData.referralCode}`;
     await navigator.clipboard.writeText(link);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const shareOnTwitter = () => {
-    if (!referralData) return;
+    if (!signupData) return;
     const text = encodeURIComponent(
-      "Just discovered Cortex Linux - AI that actually understands Linux.\nJoin me and get early access 👇"
+      "Just joined the Cortex Linux waitlist - AI that actually understands Linux.\nJoin me and get early access 👇"
     );
-    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${referralData.referralCode}`);
+    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${signupData.referralCode}`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
   };
 
   const shareOnLinkedIn = () => {
-    if (!referralData) return;
-    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${referralData.referralCode}`);
+    if (!signupData) return;
+    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${signupData.referralCode}`);
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank");
   };
 
-  if (generateMutation.isPending) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
-      >
-        <div className="flex flex-col items-center justify-center py-8">
-          <div className="w-8 h-8 border-2 border-blue-400/30 border-t-blue-400 rounded-full animate-spin mb-4" />
-          <p className="text-gray-400">Generating your unique referral link...</p>
-        </div>
-      </motion.div>
-    );
-  }
-
-  if (error) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
-      >
-        <div className="text-center">
-          <p className="text-red-400 mb-4">{error}</p>
-          <Button
-            onClick={() => generateMutation.mutate()}
-            className="bg-blue-500 hover:bg-blue-600"
-            data-testid="button-retry-generate"
-          >
-            Try Again
-          </Button>
-        </div>
-      </motion.div>
-    );
-  }
-
-  if (referralData) {
+  // Show success state after signup
+  if (signupData) {
+    const isAlreadyRegistered = signupData.alreadyRegistered;
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -120,14 +96,47 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", delay: 0.2 }}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-4"
+            className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
+              isAlreadyRegistered ? "bg-blue-500/20" : "bg-green-500/20"
+            }`}
           >
-            <Link2 className="w-8 h-8 text-blue-400" />
+            {isAlreadyRegistered ? (
+              <PartyPopper className="w-8 h-8 text-blue-400" />
+            ) : (
+              <Check className="w-8 h-8 text-green-400" />
+            )}
           </motion.div>
-          <h2 className="text-2xl font-bold text-white mb-2">Your Referral Link</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">
+            {isAlreadyRegistered ? "Welcome Back!" : "You're In!"}
+          </h2>
           <p className="text-gray-400">
-            Share this link to earn rewards and unlock exclusive perks!
+            {isAlreadyRegistered
+              ? "You're already on the waitlist. Here's your referral link!"
+              : "Check your email to verify and unlock your referral rewards."
+            }
           </p>
+          {signupData.position && !isAlreadyRegistered && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-white/10"
+            >
+              <span className="text-gray-400">Your position:</span>
+              <span className="text-xl font-bold text-white">#{signupData.position}</span>
+            </motion.div>
+          )}
+          {isAlreadyRegistered && !signupData.emailVerified && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-4 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20"
+            >
+              <p className="text-sm text-yellow-400">
+                Don't forget to verify your email to activate your referral rewards!
+              </p>
+            </motion.div>
+          )}
         </div>
 
         <div className="mb-6">
@@ -135,7 +144,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
             <Input
               type="text"
               readOnly
-              value={`cortexlinux.com/referrals?ref=${referralData.referralCode}`}
+              value={`cortexlinux.com/referrals?ref=${signupData.referralCode}`}
               className="bg-black/40 border-white/10 text-gray-300 text-sm font-mono"
               data-testid="input-referral-link"
             />
@@ -145,45 +154,19 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
               className="shrink-0 border-white/20 hover:bg-white/10"
               data-testid="button-copy-link"
             >
-              {copied ? <Check className="w-4 h-4 text-terminal-green" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
             </Button>
           </div>
           {copied && (
             <motion.p
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-sm text-terminal-green mt-2 text-center"
+              className="text-sm text-green-400 mt-2 text-center"
             >
               Link copied to clipboard!
             </motion.p>
           )}
         </div>
-
-        {referralData.totalReferrals > 0 && (
-          <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl p-6 mb-6 text-center border border-white/10">
-            <div className="flex items-center justify-center gap-8">
-              <div>
-                <div className="text-3xl font-bold text-white mb-1">
-                  {referralData.totalReferrals}
-                </div>
-                <div className="text-gray-400 flex items-center justify-center gap-2 text-sm">
-                  <Users className="w-4 h-4" />
-                  Referrals
-                </div>
-              </div>
-              <div className="h-12 w-px bg-white/10" />
-              <div>
-                <div className="text-3xl font-bold text-white mb-1">
-                  {referralData.clickCount}
-                </div>
-                <div className="text-gray-400 flex items-center justify-center gap-2 text-sm">
-                  <Share2 className="w-4 h-4" />
-                  Clicks
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
@@ -213,7 +196,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
               onClick={() => {
                 const subject = encodeURIComponent("Check out Cortex Linux");
                 const body = encodeURIComponent(
-                  `Hey! I thought you might like Cortex Linux - AI that understands Linux.\n\nJoin here: https://cortexlinux.com/referrals?ref=${referralData.referralCode}`
+                  `Hey! I thought you might like Cortex Linux - AI that understands Linux.\n\nJoin here: https://cortexlinux.com/referrals?ref=${signupData.referralCode}`
                 );
                 window.location.href = `mailto:?subject=${subject}&body=${body}`;
               }}
@@ -254,7 +237,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
                   {tier.reward}
                 </span>
                 {referralData.totalReferrals >= tier.count && (
-                  <Check className="w-3 h-3 text-terminal-green" />
+                  <Check className="w-3 h-3 text-green-400" />
                 )}
               </div>
             ))}
@@ -265,9 +248,9 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-3 p-4 rounded-xl bg-terminal-green/10 border border-terminal-green/20"
+            className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20"
           >
-            <Sparkles className="w-5 h-5 text-terminal-green" />
+            <Check className="w-5 h-5 text-green-400" />
             <p className="text-sm text-gray-300">
               You were referred by a friend! Welcome to the community.
             </p>

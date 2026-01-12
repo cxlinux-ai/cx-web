@@ -380,9 +380,11 @@ router.post("/signup", signupLimiter, async (req: Request, res: Response) => {
 
     if (existing.length > 0) {
       return res.status(200).json({
-        message: "Already registered",
+        message: "You're already on the waitlist! Check your email for your referral link.",
+        alreadyRegistered: true,
         referralCode: existing[0].referralCode,
         position: existing[0].currentPosition,
+        emailVerified: existing[0].emailVerified,
       });
     }
 
