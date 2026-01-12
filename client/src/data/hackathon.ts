@@ -464,7 +464,7 @@ export const hackathonConfig = {
   expectedIdeas: "4000+",
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
-  discordUrl: "https://discord.gg/cortexlinux",
+  discordUrl: "https://discord.gg/ASvzWcuTfk",
   rulesDocUrl: "/hackathon-rules",
   philosophy: {
     principle: "Ideas become features. Features become revenue.",

@@ -489,7 +489,7 @@ export default function GettingStarted() {
             viewport={{ once: true }}
           >
             <a 
-              href="https://discord.gg/cortexlinux" 
+              href="https://discord.gg/ASvzWcuTfk" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-center group"

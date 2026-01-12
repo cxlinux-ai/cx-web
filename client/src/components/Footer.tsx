@@ -173,7 +173,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Community</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">
+                <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">
                   Discord
                 </a>
               </li>
@@ -255,7 +255,7 @@ export default function Footer() {
             <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
               <Github size={20} />
             </a>
-            <a href="https://discord.gg/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
+            <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
               <FaDiscord size={20} />
             </a>
           </div>

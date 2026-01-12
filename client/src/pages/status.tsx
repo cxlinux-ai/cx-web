@@ -193,7 +193,7 @@ export default function Status() {
               Follow on Twitter
             </a>
             <a
-              href="https://discord.gg/uCqHvxjU83"
+              href="https://discord.gg/ASvzWcuTfk"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"

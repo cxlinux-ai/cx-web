@@ -622,7 +622,7 @@ export function BountiesBoard() {
           
           {/* Discord Assignment Note */}
           <a
-            href="https://discord.gg/cortexlinux"
+            href="https://discord.gg/ASvzWcuTfk"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 hover:border-purple-500/50 rounded-lg transition-all text-purple-300 text-sm font-medium"
@@ -801,7 +801,7 @@ export function BountiesBoard() {
               Join the Discord and ask to be part of the team or work on a PR!
             </p>
             <a
-              href="https://discord.gg/cortexlinux"
+              href="https://discord.gg/ASvzWcuTfk"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-white font-medium transition-colors shadow-lg shadow-indigo-500/25"

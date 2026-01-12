@@ -38,7 +38,7 @@ Key Cortex Linux features to know:
 Links to share when relevant:
 - Website: https://cortexlinux.com
 - GitHub: https://github.com/cortexlinux/cortex
-- Discord: https://discord.gg/cortexlinux
+- Discord: https://discord.gg/ASvzWcuTfk
 - Hackathon: https://cortexlinux.com/hackathon
 - Referral Program: https://cortexlinux.com/referrals`;
 

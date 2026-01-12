@@ -70,7 +70,7 @@ Get your link: https://cortexlinux.com/referrals`,
     keywords: ["discord", "community", "chat", "help", "support"],
     category: "community",
     content: `**Join Our Community:**
-- Discord: https://discord.gg/cortexlinux
+- Discord: https://discord.gg/ASvzWcuTfk
 - GitHub: https://github.com/cortexlinux/cortex
 - Twitter: @cortexlinux
 

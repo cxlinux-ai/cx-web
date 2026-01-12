@@ -209,48 +209,38 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
           </div>
         </div>
 
-        <div className="bg-white/5 rounded-xl p-4 mb-6">
+        <div className="bg-white/5 rounded-xl p-4">
           <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
             <Trophy className="w-4 h-4 text-yellow-400" />
             Unlock Rewards with Referrals
           </h4>
           <div className="flex flex-wrap gap-2">
             {[
-              { count: 1, reward: "Bronze Badge", color: "bg-amber-700" },
-              { count: 3, reward: "Silver Status", color: "bg-gray-400" },
-              { count: 5, reward: "Gold Tier", color: "bg-yellow-500" },
-              { count: 10, reward: "Platinum Perks", color: "bg-cyan-400" },
-              { count: 25, reward: "Diamond Elite", color: "bg-purple-500" },
+              { count: 1, reward: "+100 spots", color: "bg-amber-700" },
+              { count: 3, reward: "+500 spots", color: "bg-gray-400" },
+              { count: 5, reward: "Discord Role", color: "bg-yellow-500" },
+              { count: 10, reward: "Free Pro Month", color: "bg-cyan-400" },
             ].map((tier) => (
               <div
                 key={tier.count}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${
-                  referralData.totalReferrals >= tier.count
-                    ? "bg-white/10 border-white/20"
-                    : "bg-white/5 border-white/10"
-                }`}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10"
               >
                 <span className={`w-5 h-5 rounded-full ${tier.color} flex items-center justify-center text-xs font-bold text-black`}>
                   {tier.count}
                 </span>
-                <span className={`text-xs ${referralData.totalReferrals >= tier.count ? "text-white" : "text-gray-400"}`}>
-                  {tier.reward}
-                </span>
-                {referralData.totalReferrals >= tier.count && (
-                  <Check className="w-3 h-3 text-green-400" />
-                )}
+                <span className="text-xs text-gray-400">{tier.reward}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {initialReferralCode && (
+        {initialReferralCode && !isAlreadyRegistered && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20"
+            className="mt-6 flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20"
           >
-            <Check className="w-5 h-5 text-green-400" />
+            <Sparkles className="w-5 h-5 text-green-400" />
             <p className="text-sm text-gray-300">
               You were referred by a friend! Welcome to the community.
             </p>
@@ -260,7 +250,89 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
     );
   }
 
-  return null;
+  // Email signup form
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
+    >
+      <div className="text-center mb-8">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", delay: 0.1 }}
+          className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-4"
+        >
+          <Mail className="w-8 h-8 text-blue-400" />
+        </motion.div>
+        <h2 className="text-2xl font-bold text-white mb-2">Join the Waitlist</h2>
+        <p className="text-gray-400">
+          Get early access and earn rewards by referring friends.
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="bg-black/40 border-white/10 text-white placeholder:text-gray-500 h-12"
+            required
+            data-testid="input-email"
+          />
+        </div>
+
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-sm text-red-400"
+          >
+            {error}
+          </motion.p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={signupMutation.isPending || !email.trim()}
+          className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold"
+          data-testid="button-join-waitlist"
+        >
+          {signupMutation.isPending ? (
+            <span className="flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Joining...
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              Join Waitlist
+              <Sparkles className="w-4 h-4" />
+            </span>
+          )}
+        </Button>
+      </form>
+
+      {initialReferralCode && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-6 flex items-center gap-3 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20"
+        >
+          <Users className="w-5 h-5 text-blue-400" />
+          <p className="text-sm text-gray-300">
+            You were invited by a friend! Join to help them earn rewards.
+          </p>
+        </motion.div>
+      )}
+
+      <p className="text-xs text-gray-500 text-center mt-4">
+        We'll send you a verification email. No spam, ever.
+      </p>
+    </motion.div>
+  );
 }
 
 export default WaitlistSignup;

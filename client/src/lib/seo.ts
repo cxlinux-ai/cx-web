@@ -169,7 +169,7 @@ export const seoConfigs = {
         sameAs: [
           'https://github.com/cortexlinux/cortex',
           'https://twitter.com/cortexlinux',
-          'https://discord.gg/cortexlinux'
+          'https://discord.gg/ASvzWcuTfk'
         ],
         contactPoint: {
           '@type': 'ContactPoint',

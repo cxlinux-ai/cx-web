@@ -179,7 +179,7 @@ export default function FAQ() {
         },
         {
           q: "Where can I get help?",
-          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/uCqHvxjU83\n• GitHub Issues: github.com/cortexlinux/cortex/issues\n• Documentation: docs.cortexlinux.com\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cortexlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
+          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/ASvzWcuTfk\n• GitHub Issues: github.com/cortexlinux/cortex/issues\n• Documentation: docs.cortexlinux.com\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cortexlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
         },
         {
           q: "Is my data private?",
@@ -294,7 +294,7 @@ export default function FAQ() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://discord.gg/uCqHvxjU83"
+              href="https://discord.gg/ASvzWcuTfk"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"

@@ -97,7 +97,7 @@ Last updated: December 2025`
 
 Email: privacy@cortexlinux.com
 GitHub: github.com/cortexlinux/cortex/issues
-Discord: discord.gg/cortexlinux
+Discord: discord.gg/ASvzWcuTfk
 
 We aim to respond to all privacy requests within 30 days.
 

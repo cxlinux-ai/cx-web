@@ -162,7 +162,7 @@ const config: Config = {
           items: [
             {
               label: 'Discord',
-              href: 'https://discord.gg/cortexlinux',
+              href: 'https://discord.gg/ASvzWcuTfk',
             },
             {
               label: 'Twitter',

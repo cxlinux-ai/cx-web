@@ -619,7 +619,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("• Website: https://cortexlinux.com/hackathon", { lineGap: 3 })
          .text("• GitHub: https://github.com/cortexlinux/cortex", { lineGap: 3 })
-         .text("• Discord: https://discord.gg/cortexlinux", { lineGap: 3 })
+         .text("• Discord: https://discord.gg/ASvzWcuTfk", { lineGap: 3 })
          .text("• Email: hackathon@cortexlinux.com", { lineGap: 3 });
       doc.moveDown(2);
       

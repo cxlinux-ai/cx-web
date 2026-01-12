@@ -124,7 +124,7 @@ export default function MissionPage() {
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="https://discord.gg/cortexlinux"
+                href="https://discord.gg/ASvzWcuTfk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 glass-card rounded-xl font-semibold hover:border-blue-300/50 transition-all duration-300 flex items-center justify-center gap-2"
@@ -548,7 +548,7 @@ export default function MissionPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
-                  href="https://discord.gg/cortexlinux"
+                  href="https://discord.gg/ASvzWcuTfk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] rounded-lg text-white font-medium transition-colors"

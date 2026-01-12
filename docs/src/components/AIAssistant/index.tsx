@@ -92,7 +92,7 @@ const FALLBACK_RESPONSE = {
   answer: "This isn't documented yet — check our Discord for help from the community, or browse the documentation using the search bar.",
   links: [
     { title: 'FAQ', url: '/docs/faq' },
-    { title: 'Join Discord', url: 'https://discord.gg/cortexlinux' },
+    { title: 'Join Discord', url: 'https://discord.gg/ASvzWcuTfk' },
   ],
 };
 

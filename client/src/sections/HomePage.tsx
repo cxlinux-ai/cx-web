@@ -2077,7 +2077,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: FaDiscord, name: "Discord", color: "hover:border-indigo-500", link: "https://discord.gg/cortexlinux" },
+              { icon: FaDiscord, name: "Discord", color: "hover:border-indigo-500", link: "https://discord.gg/ASvzWcuTfk" },
               { icon: FaTwitter, name: "Twitter", color: "hover:border-sky-500", link: "https://twitter.com/cortexlinux" },
               { icon: Github, name: "GitHub", color: "hover:border-gray-500", link: "https://github.com/cortexlinux/cortex/discussions" },
             ].map((platform, i) => (
@@ -2326,7 +2326,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="https://discord.gg/cortexlinux"
+                href="https://discord.gg/ASvzWcuTfk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 glass-card rounded-xl text-lg font-semibold hover:border-blue-300/50 transition-all duration-300 flex items-center justify-center gap-2"
