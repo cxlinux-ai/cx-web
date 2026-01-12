@@ -33,88 +33,72 @@ export const pressReleases: PressRelease[] = [
     title: "Cortex Linux Announces Global AI Hackathon for Developers Worldwide",
     headline: "Cortex Linux Announces Global AI Hackathon for Developers Worldwide",
     date: "2026-01-11",
-    dateline: "SALT LAKE CITY, UT",
-    summary: "First hackathon for AI-native Linux operating system opens registration — prizes to be announced at launch. AI Venture Holdings announces the Cortex Linux Hackathon 2026, a global competition for developers to build features for Cortex Linux.",
+    dateline: "Salt Lake City, UT",
+    summary: "Cortex Linux today announced its first global AI Hackathon, inviting developers, researchers, and builders from around the world to participate in shaping the future of AI-native operating systems.",
     content: [
-      "AI Venture Holdings LLC today announced the Cortex Linux Hackathon 2026, a global competition inviting developers to build the future of AI-powered Linux system administration. The hackathon launches February 17, 2026, with cash prizes and additional rewards to be announced on launch day.",
-      "Cortex Linux is an open-source, AI-native Linux distribution that translates natural language commands into system operations. Instead of memorizing complex terminal syntax or searching through documentation, users describe what they want in plain English — like \"install a secure web server with SSL certificates\" — and the Cortex AI package manager handles the installation, configuration, and troubleshooting automatically."
-    ],
-    quotes: [
-      {
-        text: "We're building the AI layer for Linux. Enterprise teams spend billions on system administration that AI can streamline. This hackathon invites the global developer community to help shape what AI-powered infrastructure should become.",
-        author: "Michael J. Morgan",
-        title: "CEO and Founder, AI Venture Holdings LLC"
-      }
+      "Cortex Linux today announced its first global AI Hackathon, inviting developers, researchers, and builders from around the world to participate in shaping the future of AI-native operating systems. The event marks a major milestone for Cortex Linux as it opens its ecosystem to the global developer community and accelerates innovation around AI-first system design.",
+      "Designed for engineers who want to build closer to the system layer, the hackathon challenges participants to explore how artificial intelligence can be embedded directly into the operating system — not as an add-on, but as a foundational capability. Cortex Linux positions itself as an AI-native Linux distribution built specifically for developers, startups, and AI-first teams who need performance, security, and intelligence working together by default."
     ],
     subheadings: [
       {
-        title: "Two-Phase Competition Structure",
+        title: "A Hackathon Built for the Next Generation of System-Level AI",
         paragraphs: [
-          "Phase 1: Ideation — Participants submit innovative proposals for new features, enterprise integrations, monetization strategies, and technical improvements to the Cortex Linux platform. The best ideas advance to Phase 2 and receive cash awards.",
-          "Phase 2: Implementation — Selected teams build their proposals as working code, submitted via GitHub pull requests to the official Cortex Linux repository. Winning implementations become part of the core platform, with contributors credited in the project.",
-          "Prize amounts and category awards will be announced on the February 17 launch date. Registration is now open."
+          "Unlike traditional hackathons that focus on applications or surface-level integrations, the Cortex Linux AI Hackathon emphasizes deep technical innovation. Participants are encouraged to build tools, workflows, and system-level enhancements that leverage Cortex Linux's AI layer, automation primitives, and developer-first architecture.",
+          "By focusing on the operating system itself, Cortex Linux aims to unlock entirely new categories of AI-powered software that are not constrained by traditional application boundaries."
         ]
       },
       {
-        title: "Beyond Prizes: Real Career Value",
+        title: "Open, Global, and Community-Driven",
         paragraphs: [
-          "The Cortex Linux Hackathon offers participants more than cash prizes:"
+          "The hackathon is open to developers worldwide, with participation available fully online. Cortex Linux is committed to fostering an open and inclusive developer ecosystem, welcoming contributors ranging from independent hackers and students to startup teams and experienced system engineers.",
+          "As an open-source–driven project, Cortex Linux views this hackathon as more than a competition — it is an invitation to co-create the platform. Selected submissions may influence future roadmap decisions, core features, and long-term architectural direction.",
+          "Prizes, recognition, and post-hackathon opportunities will be announced closer to launch, with a focus on rewarding projects that demonstrate technical depth, originality, and real-world impact."
         ]
       },
       {
-        title: "Why AI-Native Linux Matters",
+        title: "Why This Matters",
         paragraphs: [
-          "Linux powers 96% of cloud infrastructure, yet system administration remains largely manual. Administrators memorize thousands of commands, flags, and configuration patterns — knowledge that takes years to acquire. Cortex Linux bridges this gap with AI that understands intent and translates it to action.",
-          "The project targets a massive market opportunity: enterprise IT teams seeking to reduce training costs, documentation overhead, and human error in system operations. With provisional patents filed and an Apache 2.0 open-source license, Cortex Linux combines community-driven development with enterprise-ready features."
-        ]
-      },
-      {
-        title: "How to Participate",
-        paragraphs: [
-          "Developers of all skill levels can register now:"
+          "As AI systems grow more powerful, the limitations of traditional operating systems become increasingly apparent. Cortex Linux was created to address this gap by rethinking how intelligence, automation, and security should exist below the application layer.",
+          "This hackathon represents a concrete step toward that vision — empowering developers to experiment, prototype, and push boundaries at the system level, where the next wave of AI innovation is expected to emerge."
         ]
       }
     ],
     bulletPoints: [
       {
-        heading: "Beyond Prizes: Real Career Value",
+        heading: "Focus Areas for Participants",
         items: [
-          "GitHub Contributions — Merged pull requests to a growing open-source AI infrastructure project",
-          "Certificates — Official participation certificates for all contributors",
-          "Mentorship — Direct access to senior Linux and AI developers",
-          "Community — Networking with developers worldwide through Discord and live events",
-          "Recognition — LinkedIn endorsements and portfolio-worthy project experience"
+          "AI-assisted system administration and observability",
+          "Intelligent developer tooling embedded at the OS level",
+          "Autonomous infrastructure workflows",
+          "Secure AI-driven system optimization",
+          "New paradigms for human–machine interaction at the operating system layer"
         ]
       }
     ],
     links: [
       { label: "Official Website", url: "https://cortexlinux.com" },
       { label: "Hackathon Details", url: "https://cortexlinux.com/hackathon" },
-      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" },
-      { label: "YouTube Channel", url: "https://youtube.com/@cortexlinux" },
-      { label: "Discord Community", url: "https://discord.gg/cortexlinux" }
+      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" }
     ],
     contactInfo: {
-      name: "Michael J. Morgan",
-      title: "CEO and Founder, AI Venture Holdings LLC",
+      name: "Press Team",
+      title: "Cortex Linux",
       email: "press@cortexlinux.com"
     },
-    boilerplate: "Cortex Linux is the AI layer for Linux — an open-source AI-native operating system that translates natural language into system commands. Built on Debian/Ubuntu, Cortex combines the stability of enterprise Linux with intelligent automation powered by large language models. The project is developed by AI Venture Holdings LLC, a Utah-based technology company focused on AI-powered infrastructure tools.",
-    companyBoilerplate: "AI Venture Holdings LLC develops AI-powered tools for enterprise infrastructure. The company's flagship project, Cortex Linux, targets the growing demand for intelligent system administration in cloud and on-premises environments. Learn more at https://cortexlinux.com.",
-    tags: ["Hackathon", "AI", "Open Source", "Developer Community", "Linux", "Competition"],
+    boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with an open-source core and a strong emphasis on developer experience, security, and long-term maintainability.",
+    companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cortexlinux.com.",
+    tags: ["Hackathon", "AI", "Open Source", "Developer Community", "Linux", "Global Event"],
     keywords: [
       "AI Linux distribution",
       "AI-native operating system",
       "Linux hackathon 2026",
-      "natural language Linux",
-      "AI package manager",
-      "open source AI infrastructure",
+      "global AI hackathon",
+      "system-level AI",
+      "AI infrastructure",
       "Cortex Linux",
-      "AI system administration",
-      "Linux automation",
       "developer hackathon",
       "open source hackathon",
-      "enterprise Linux AI"
+      "AI-first system design"
     ]
   }
 ];
