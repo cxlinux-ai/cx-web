@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useParams, useLocation } from "wouter";
 import { Calendar, ArrowLeft, Tag, Share2, Mail, Phone, Building } from "lucide-react";
 import { getPressReleaseBySlug, getRecentPressReleases } from "@/data/pressReleases";
+import { updateSEO } from "@/lib/seo";
 import Footer from "@/components/Footer";
 
 export default function NewsArticlePage() {
@@ -17,68 +18,13 @@ export default function NewsArticlePage() {
     }
 
     const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://cortexlinux.com";
-    const articleUrl = `${siteUrl}/news/${release.slug}`;
 
-    const originalTitle = document.title;
-    document.title = `${release.title} | Cortex Linux News`;
-
-    const createdElements: HTMLElement[] = [];
-    const originalValues: Map<HTMLElement, string> = new Map();
-
-    const setMeta = (name: string, content: string) => {
-      let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.name = name;
-        document.head.appendChild(meta);
-        createdElements.push(meta);
-      } else {
-        originalValues.set(meta, meta.content);
-      }
-      meta.content = content;
-    };
-
-    const setOgMeta = (property: string, content: string) => {
-      let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("property", property);
-        document.head.appendChild(meta);
-        createdElements.push(meta);
-      } else {
-        originalValues.set(meta, meta.content);
-      }
-      meta.content = content;
-    };
-
-    setMeta("description", release.summary);
-    setMeta("keywords", release.tags?.join(", ") || "Cortex Linux, AI, Linux, Press Release");
-
-    setOgMeta("og:title", release.title);
-    setOgMeta("og:description", release.summary);
-    setOgMeta("og:type", "article");
-    setOgMeta("og:url", articleUrl);
-    setOgMeta("og:site_name", "Cortex Linux");
-    if (release.image) {
-      setOgMeta("og:image", release.image);
-    }
-
-    setMeta("twitter:card", "summary_large_image");
-    setMeta("twitter:title", release.title);
-    setMeta("twitter:description", release.summary);
-
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
-    let canonicalCreated = false;
-    let originalCanonical = "";
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-      canonicalCreated = true;
-    } else {
-      originalCanonical = canonical.href;
-    }
-    canonical.href = articleUrl;
+    const keywords = [
+      "press release",
+      "cortex linux",
+      "AI Linux",
+      ...(release.tags || [])
+    ];
 
     const jsonLd = {
       "@context": "https://schema.org",
@@ -103,36 +49,20 @@ export default function NewsArticlePage() {
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": articleUrl
+        "@id": `${siteUrl}/news/${release.slug}`
       },
       "keywords": release.tags?.join(", ") || "Cortex Linux, AI, Linux"
     };
 
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.setAttribute("data-news", "true");
-    script.textContent = JSON.stringify(jsonLd);
-    document.head.appendChild(script);
-
-    return () => {
-      document.title = originalTitle;
-
-      createdElements.forEach(el => el.remove());
-
-      originalValues.forEach((value, element) => {
-        if (element instanceof HTMLMetaElement) {
-          element.content = value;
-        }
-      });
-
-      if (canonicalCreated && canonical) {
-        canonical.remove();
-      } else if (canonical && originalCanonical) {
-        canonical.href = originalCanonical;
-      }
-
-      script.remove();
-    };
+    return updateSEO({
+      title: `${release.headline || release.title} | Cortex Linux News`,
+      description: release.summary,
+      canonicalPath: `/news/${release.slug}`,
+      ogType: "article",
+      ogImage: release.image,
+      keywords,
+      jsonLd
+    });
   }, [release, setLocation]);
 
   if (!release) {

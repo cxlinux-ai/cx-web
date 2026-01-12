@@ -5,6 +5,7 @@ import { getPostBySlug, getRelatedPosts, BlogPost } from "@/data/blogPosts";
 import { useEffect, useState } from "react";
 import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
+import { updateSEO } from "@/lib/seo";
 
 // Simple markdown to HTML converter
 function formatContent(content: string): string {
@@ -104,94 +105,18 @@ export default function BlogPostPage() {
     setImageError(false);
   }, [slug]);
 
-  // Update document title and meta tags
+  // Update SEO tags dynamically
   useEffect(() => {
-    const originalTitle = document.title;
-    const createdElements: Element[] = [];
-    const originalValues: Map<Element, string> = new Map();
+    if (!post) return;
 
-    if (post) {
-      document.title = post.seoTitle || post.title;
-      
-      // Update meta description - cache original value
-      let metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.setAttribute('name', 'description');
-        document.head.appendChild(metaDesc);
-        createdElements.push(metaDesc);
-      } else {
-        originalValues.set(metaDesc, metaDesc.getAttribute('content') || '');
-      }
-      metaDesc.setAttribute('content', post.seoDescription || post.excerpt);
-
-      // Add canonical URL
-      const canonicalUrl = `https://cortexlinux.com/blog/${post.slug}`;
-      let canonicalTag = document.querySelector('link[rel="canonical"]');
-      if (!canonicalTag) {
-        canonicalTag = document.createElement('link');
-        canonicalTag.setAttribute('rel', 'canonical');
-        document.head.appendChild(canonicalTag);
-        createdElements.push(canonicalTag);
-      } else {
-        originalValues.set(canonicalTag, canonicalTag.getAttribute('href') || '');
-      }
-      canonicalTag.setAttribute('href', canonicalUrl);
-
-      // Update OG tags - cache original values
-      const ogTags = [
-        { property: 'og:title', content: post.seoTitle || post.title },
-        { property: 'og:description', content: post.seoDescription || post.excerpt },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:image', content: post.image || '' },
-        { property: 'og:url', content: canonicalUrl },
-      ];
-
-      ogTags.forEach(({ property, content }) => {
-        let tag = document.querySelector(`meta[property="${property}"]`);
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('property', property);
-          document.head.appendChild(tag);
-          createdElements.push(tag);
-        } else {
-          originalValues.set(tag, tag.getAttribute('content') || '');
-        }
-        tag.setAttribute('content', content);
-      });
-
-      // Update Twitter Card tags
-      const twitterTags = [
-        { name: 'twitter:title', content: post.seoTitle || post.title },
-        { name: 'twitter:description', content: post.seoDescription || post.excerpt },
-        { name: 'twitter:image', content: post.image || '' },
-      ];
-
-      twitterTags.forEach(({ name, content }) => {
-        let tag = document.querySelector(`meta[name="${name}"]`);
-        if (!tag) {
-          tag = document.createElement('meta');
-          tag.setAttribute('name', name);
-          document.head.appendChild(tag);
-          createdElements.push(tag);
-        } else {
-          originalValues.set(tag, tag.getAttribute('content') || '');
-        }
-        tag.setAttribute('content', content);
-      });
-
-      // Add JSON-LD structured data with unique ID for this component
-      const jsonLdId = 'blog-post-jsonld';
-      let scriptTag = document.getElementById(jsonLdId);
-      if (!scriptTag) {
-        scriptTag = document.createElement('script');
-        scriptTag.id = jsonLdId;
-        scriptTag.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(scriptTag);
-        createdElements.push(scriptTag);
-      }
-      
-      const jsonLd = {
+    return updateSEO({
+      title: `${post.title} | Cortex Linux Blog`,
+      description: post.seoDescription || post.excerpt,
+      canonicalPath: `/blog/${post.slug}`,
+      ogType: 'article',
+      ...(post.image && { ogImage: post.image }),
+      keywords: [post.category, 'cortex linux', 'AI Linux'],
+      jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
@@ -203,26 +128,8 @@ export default function BlogPostPage() {
         datePublished: post.date,
         image: post.image,
         wordCount: post.wordCount,
-      };
-      scriptTag.textContent = JSON.stringify(jsonLd);
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.title = originalTitle;
-      
-      // Restore original values for existing elements
-      originalValues.forEach((value, element) => {
-        element.setAttribute('content', value);
-      });
-      
-      // Remove created elements
-      createdElements.forEach(el => {
-        if (el.parentNode) {
-          el.parentNode.removeChild(el);
-        }
-      });
-    };
+      }
+    });
   }, [post]);
 
   if (!post) {

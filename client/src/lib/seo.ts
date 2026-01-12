@@ -157,9 +157,11 @@ export const seoConfigs = {
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
-      name: 'Cortex Linux AI Hackathon 2026',
-      description: 'Build monetization strategies and production features for the AI Layer for Linux. $15,000 in prizes.',
+      name: 'Cortex Hackathon 2026',
+      description: 'A two-phase, 13-week open-source hackathon to crowdsource monetization strategies and production features for Cortex Linux. Phase 1 (Weeks 1-4): Submit ideas for monetization strategies, features, and marketing via GitHub Issues with a 100-point rubric. Phase 2 (Weeks 6-13): Build production code and submit via GitHub Pull Requests. $15,000 total prize pool. Free to participate, open to developers of all skill levels worldwide. 100% open source (Apache 2.0).',
       startDate: '2026-02-17',
+      endDate: '2026-05-18',
+      url: 'https://cortexlinux.com/hackathon',
       eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
       location: {
@@ -171,10 +173,12 @@ export const seoConfigs = {
         name: 'Cortex Linux',
         url: 'https://cortexlinux.com'
       },
+      image: 'https://cortexlinux.com/og-image.png',
       offers: {
         '@type': 'Offer',
         price: '0',
         priceCurrency: 'USD',
+        url: 'https://cortexlinux.com/hackathon',
         availability: 'https://schema.org/InStock'
       }
     }
@@ -209,28 +213,58 @@ export const seoConfigs = {
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      name: 'How to Get Started with Cortex Linux',
-      description: 'Complete guide to installing and using Cortex Linux, the AI Layer for Linux.',
+      name: 'Getting Started with Cortex Linux',
+      description: 'Complete guide to installing and using Cortex Linux, the AI Layer for Linux. Learn how to choose an installation method, install Cortex, verify the setup, run your first command, and unlock unlimited possibilities on Linux.',
+      totalTime: 'PT15M',
+      estimatedCost: {
+        '@type': 'PriceSpecification',
+        'priceCurrency': 'USD',
+        'price': '0'
+      },
+      tool: [
+        {
+          '@type': 'HowToTool',
+          'name': 'Cortex Linux'
+        },
+        {
+          '@type': 'HowToTool',
+          'name': 'Linux System'
+        },
+        {
+          '@type': 'HowToTool',
+          'name': 'Terminal'
+        }
+      ],
       step: [
         {
           '@type': 'HowToStep',
-          name: 'Choose Installation Method',
-          text: 'Select from fresh install, dual-boot, virtual machine, or WSL2'
+          'position': '1',
+          'name': 'Choose Your Installation Method',
+          'text': 'Cortex Linux supports multiple installation methods: fresh install, dual-boot, virtual machine, or WSL2. Choose the method that best fits your workflow and system setup.'
         },
         {
           '@type': 'HowToStep',
-          name: 'Download Cortex Linux',
-          text: 'Download the ISO from the official website or clone from GitHub'
+          'position': '2',
+          'name': 'Install Cortex Linux',
+          'text': 'Download the ISO from the official website or clone from GitHub. Create a bootable USB or mount in a virtual machine. Follow the interactive installer wizard which will handle all dependencies automatically in approximately 15 minutes.'
         },
         {
           '@type': 'HowToStep',
-          name: 'Install and Configure',
-          text: 'Follow the installation wizard and configure your preferences'
+          'position': '3',
+          'name': 'Verify Installation',
+          'text': 'Confirm that Cortex is properly installed by running diagnostic commands. Check your installation with cortex --version, verify hardware detection with cortex hw detect, and review system health with cortex diagnose.'
         },
         {
           '@type': 'HowToStep',
-          name: 'Run Your First Command',
-          text: 'Use natural language to tell Cortex what you want to accomplish'
+          'position': '4',
+          'name': 'Run Your First Command',
+          'text': 'Experience the power of intent-based computing by describing what you want to accomplish in natural language. For example: "cortex configure my nginx web server with SSL" or "cortex set up automated daily backups to S3". Preview commands before execution.'
+        },
+        {
+          '@type': 'HowToStep',
+          'position': '5',
+          'name': 'Do Anything on Linux',
+          'text': 'Cortex is your intelligent Linux assistant for unlimited tasks. Use it for system administration, DevOps, development environments, security hardening, and literally anything else you can do on Linux. Simply ask Cortex to do what you need.'
         }
       ]
     }
