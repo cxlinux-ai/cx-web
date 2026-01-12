@@ -398,8 +398,8 @@ export default function Hackathon() {
                 analytics.trackCTAClick('download_rules', 'hackathon_hero');
               }}
             >
-              <Download size={18} />
-              Rules PDF
+              <FileText size={18} />
+              Rules
             </a>
           </motion.div>
 
