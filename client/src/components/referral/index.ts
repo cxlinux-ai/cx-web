@@ -9,3 +9,5 @@ export { ReferralDashboard, default as ReferralDashboardDefault } from "./Referr
 export { Leaderboard, default as LeaderboardDefault } from "./Leaderboard";
 export { BuilderInvite, default as BuilderInviteDefault } from "./BuilderInvite";
 export { ShareCard, default as ShareCardDefault } from "./ShareCard";
+export { VerificationStatus, default as VerificationStatusDefault } from "./VerificationStatus";
+export { RewardTiers, default as RewardTiersDefault } from "./RewardTiers";

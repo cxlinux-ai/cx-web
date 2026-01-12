@@ -202,16 +202,46 @@ export const waitlistEntries = pgTable("waitlist_entries", {
   // OAuth connections (bonus perks)
   githubUsername: text("github_username"),
   githubConnected: boolean("github_connected").default(false),
+  githubId: text("github_id"), // GitHub user ID for PR verification
+  githubAccessToken: text("github_access_token"), // Encrypted OAuth token
   twitterUsername: text("twitter_username"),
   twitterConnected: boolean("twitter_connected").default(false),
 
+  // Discord verification (required for referral to count)
+  discordId: text("discord_id"),
+  discordUsername: text("discord_username"),
+  discordConnected: boolean("discord_connected").default(false),
+  discordAccessToken: text("discord_access_token"), // Encrypted OAuth token
+  discordJoinedServer: boolean("discord_joined_server").default(false),
+  discordAcceptedRules: boolean("discord_accepted_rules").default(false),
+  discordVerifiedAt: timestamp("discord_verified_at"),
+
+  // GitHub contribution tracking (required for referral to count)
+  prCompleted: boolean("pr_completed").default(false),
+  prCount: integer("pr_count").default(0),
+  firstPrUrl: text("first_pr_url"),
+  firstPrMergedAt: timestamp("first_pr_merged_at"),
+
+  // Hackathon participation (alternative to PR for referral verification)
+  hackathonParticipated: boolean("hackathon_participated").default(false),
+  hackathonId: varchar("hackathon_id").references(() => hackathonRegistrations.id),
+
+  // Full verification status (discord_verified && (pr_completed || hackathon_participated))
+  fullyVerified: boolean("fully_verified").default(false),
+  fullyVerifiedAt: timestamp("fully_verified_at"),
+
   // Stats
   totalReferrals: integer("total_referrals").default(0),
-  verifiedReferrals: integer("verified_referrals").default(0),
+  verifiedReferrals: integer("verified_referrals").default(0), // Only fully verified referrals count
 
   // Tier/rewards tracking
-  currentTier: text("current_tier").default("none"), // none, bronze, silver, gold, platinum, diamond
+  currentTier: text("current_tier").default("none"), // none, bronze, silver, gold, platinum, diamond, legendary
   rewardsUnlocked: text("rewards_unlocked").default("[]"), // JSON array of reward IDs
+
+  // Ambassador status (20+ referrals)
+  isAmbassador: boolean("is_ambassador").default(false),
+  ambassadorSince: timestamp("ambassador_since"),
+  featuredOnContributors: boolean("featured_on_contributors").default(false),
 
   // Timestamps
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -377,14 +407,163 @@ export const leaderboardSnapshots = pgTable("leaderboard_snapshots", {
 
 export type LeaderboardSnapshot = typeof leaderboardSnapshots.$inferSelect;
 
+/**
+ * GitHub Contributions - Track PRs and contributions for verification
+ */
+export const githubContributions = pgTable("github_contributions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  waitlistEntryId: varchar("waitlist_entry_id").references(() => waitlistEntries.id).notNull(),
+
+  // PR details
+  prNumber: integer("pr_number").notNull(),
+  prUrl: text("pr_url").notNull(),
+  prTitle: text("pr_title").notNull(),
+  repoOwner: text("repo_owner").notNull(), // e.g., "cortexlinux"
+  repoName: text("repo_name").notNull(), // e.g., "cortex"
+
+  // Status
+  state: text("state").notNull(), // open, closed, merged
+  isMerged: boolean("is_merged").default(false),
+  mergedAt: timestamp("merged_at"),
+
+  // Verification
+  isVerified: boolean("is_verified").default(false), // Manually or automatically verified as legitimate
+  verifiedAt: timestamp("verified_at"),
+  verifiedBy: text("verified_by"), // "auto" or admin user ID
+
+  // Metadata
+  additions: integer("additions").default(0),
+  deletions: integer("deletions").default(0),
+  changedFiles: integer("changed_files").default(0),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export type GitHubContribution = typeof githubContributions.$inferSelect;
+
+/**
+ * Discord Verification Events - Track Discord OAuth and server join events
+ */
+export const discordVerificationEvents = pgTable("discord_verification_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  waitlistEntryId: varchar("waitlist_entry_id").references(() => waitlistEntries.id).notNull(),
+
+  eventType: text("event_type").notNull(), // oauth_started, oauth_completed, server_joined, rules_accepted, verified
+  eventData: text("event_data"), // JSON with event-specific data
+
+  // Status
+  success: boolean("success").default(false),
+  errorMessage: text("error_message"),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type DiscordVerificationEvent = typeof discordVerificationEvents.$inferSelect;
+
+/**
+ * Fraud Detection - Track suspicious activity
+ */
+export const fraudDetection = pgTable("fraud_detection", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+
+  // Associated entities
+  waitlistEntryId: varchar("waitlist_entry_id").references(() => waitlistEntries.id),
+  referralCode: text("referral_code"),
+  ipAddress: text("ip_address"),
+
+  // Detection
+  riskLevel: text("risk_level").notNull(), // low, medium, high, critical
+  riskReasons: text("risk_reasons").notNull(), // JSON array of reasons
+  riskScore: integer("risk_score").default(0), // 0-100
+
+  // Actions taken
+  actionTaken: text("action_taken"), // none, flagged, blocked, manual_review
+  reviewedBy: text("reviewed_by"),
+  reviewedAt: timestamp("reviewed_at"),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type FraudDetection = typeof fraudDetection.$inferSelect;
+
 // Reward tier definitions (used in logic, not in DB)
 export const REWARD_TIERS = {
-  bronze: { referrals: 1, positionBoost: 100, tier: "bronze" },
-  silver: { referrals: 3, positionBoost: 500, tier: "silver" },
-  gold: { referrals: 5, positionBoost: 0, tier: "gold", specialReward: "discord_role" },
-  platinum: { referrals: 10, positionBoost: 0, tier: "platinum", specialReward: "pro_month" },
-  diamond: { referrals: 25, positionBoost: 0, tier: "diamond", specialReward: "founding_badge" },
-  legendary: { referrals: 50, positionBoost: 0, tier: "legendary", specialReward: "hackathon_fasttrack" },
+  bronze: {
+    referrals: 1,
+    positionBoost: 100,
+    tier: "bronze",
+    badge: "Early Supporter",
+    description: "Custom 'Early Supporter' badge",
+    icon: "shield",
+    color: "#cd7f32",
+  },
+  silver: {
+    referrals: 3,
+    positionBoost: 500,
+    tier: "silver",
+    badge: "Community Builder",
+    description: "Access to private Discord channels + early beta features",
+    icon: "users",
+    color: "#c0c0c0",
+    specialReward: "discord_access",
+  },
+  gold: {
+    referrals: 5,
+    positionBoost: 0,
+    tier: "gold",
+    badge: "Pioneer",
+    description: "Exclusive swag pack (stickers + future crypto token airdrop)",
+    icon: "gift",
+    color: "#ffd700",
+    specialReward: "swag_pack",
+  },
+  platinum: {
+    referrals: 10,
+    positionBoost: 0,
+    tier: "platinum",
+    badge: "Champion",
+    description: "Free month of premium service / AI integrations",
+    icon: "crown",
+    color: "#e5e4e2",
+    specialReward: "pro_month",
+  },
+  diamond: {
+    referrals: 20,
+    positionBoost: 0,
+    tier: "diamond",
+    badge: "Ambassador",
+    description: "Featured on contributors page + Cortex 'Ambassador' title",
+    icon: "star",
+    color: "#b9f2ff",
+    specialReward: "ambassador",
+  },
+  legendary: {
+    referrals: 50,
+    positionBoost: 0,
+    tier: "legendary",
+    badge: "Legend",
+    description: "Lifetime VIP access + direct line to founders",
+    icon: "flame",
+    color: "linear-gradient(135deg, #ffd700, #ff6b6b)",
+    specialReward: "vip_lifetime",
+  },
+} as const;
+
+// Verification requirements
+export const VERIFICATION_REQUIREMENTS = {
+  // Referral only counts if the referred user completes these
+  discordRequired: true,
+  contributionRequired: true, // Either PR or hackathon
+
+  // Minimum contribution requirements
+  minPrAdditions: 10, // At least 10 lines added
+  minPrFiles: 1, // At least 1 file changed
+
+  // Anti-fraud thresholds
+  maxReferralsPerIp: 5,
+  maxReferralsPerDay: 20,
+  suspiciousActivityThreshold: 3,
 } as const;
 
 // Validation schemas for API

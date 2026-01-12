@@ -7,6 +7,7 @@ import { insertHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
 import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
+import oauthRoutes from "./oauth";
 import PDFDocument from "pdfkit";
 
 // Simple in-memory cache for contributors
@@ -269,6 +270,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Mount Bounties routes (bounty board)
   app.use("/api/bounties", bountiesRoutes);
+
+  // Mount OAuth routes (Discord, GitHub authentication)
+  app.use("/api/oauth", oauthRoutes);
 
   // Hackathon registration endpoint
   app.post("/api/hackathon/register", async (req, res) => {
