@@ -130,7 +130,7 @@ export default function App() {
                 <Link
                   href="/getting-started"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location === "/getting-started" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-getting-started"
                 >
@@ -140,8 +140,8 @@ export default function App() {
                   onClick={() => scrollToSection("security")}
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/" && activeSection === "security"
-                      ? "text-brand-blue"
-                      : "text-gray-400 hover:text-brand-blue"
+                      ? "text-[#93c5fd]"
+                      : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-security"
                 >
@@ -150,7 +150,7 @@ export default function App() {
                 <Link
                   href="/news"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/news") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location.startsWith("/news") ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-news"
                 >
@@ -159,7 +159,7 @@ export default function App() {
                 <Link
                   href="/startup"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/startup" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location === "/startup" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-startup"
                 >AI Agencys</Link>
@@ -231,14 +231,14 @@ export default function App() {
                   <Link
                     href="/getting-started"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-getting-started"
                   >
                     Get Started
                   </Link>
                   <button
                     onClick={() => scrollToSection("security")}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-security"
                   >
                     Security
@@ -246,7 +246,7 @@ export default function App() {
                   <Link
                     href="/news"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-news"
                   >
                     News
@@ -254,7 +254,7 @@ export default function App() {
                   <Link
                     href="/startup"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-startup"
                   >
                     Startups
