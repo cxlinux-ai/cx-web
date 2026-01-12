@@ -132,6 +132,18 @@ export const seoConfigs = {
     jsonLd: [
       {
         '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Cortex Linux',
+        url: 'https://cortexlinux.com',
+        description: 'The AI Layer for Linux - Execute any task through natural language commands.',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://cortexlinux.com/search?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
+        }
+      },
+      {
+        '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         name: 'Cortex Linux',
         applicationCategory: 'OperatingSystem',
@@ -156,29 +168,60 @@ export const seoConfigs = {
         logo: 'https://cortexlinux.com/og-image.png',
         sameAs: [
           'https://github.com/cortexlinux/cortex',
-          'https://twitter.com/cortexlinux'
+          'https://twitter.com/cortexlinux',
+          'https://discord.gg/cortexlinux'
         ],
         contactPoint: {
           '@type': 'ContactPoint',
           email: 'hello@cortexlinux.com',
           contactType: 'customer support'
         }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What is Cortex Linux?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Cortex Linux is an AI-powered layer for Linux that lets you execute any task through natural language commands. It supports automation, security, DevOps, and system administration with sandboxed execution and instant rollback.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'Is Cortex Linux free?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Yes, Cortex Linux is 100% free and open source under the Apache 2.0 license. You can install it on any Linux distribution.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'How does Cortex Linux ensure safety?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Cortex Linux uses sandboxed execution to preview commands before running them. Every action has instant rollback capability, and nothing runs without your explicit approval.'
+            }
+          }
+        ]
       }
     ]
   },
 
   hackathon: {
-    title: 'AI Linux Hackathon 2026 - $15,000 in Prizes | Cortex Linux',
-    description: 'Join the first AI Linux hackathon. Build monetization strategies and production features for Cortex Linux. $15,000 prize pool. February 17, 2026.',
+    title: 'AI Linux Hackathon 2026 - $18,000 in Prizes | Cortex IDEathon & Hackathon',
+    description: 'Join the Cortex IDEathon & Hackathon 2026. Phase 1: Submit monetizable feature ideas. Phase 2: Build real code. $18,000 prize pool. February 17, 2026.',
     canonicalPath: '/hackathon',
-    keywords: ['AI hackathon', 'Linux hackathon', 'open source hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition'],
+    keywords: ['AI hackathon', 'Linux hackathon', 'open source hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'IDEathon'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
-      name: 'Cortex Hackathon 2026',
-      description: 'A two-phase, 13-week open-source hackathon to crowdsource monetization strategies and production features for Cortex Linux. Phase 1 (Weeks 1-4): Submit ideas for monetization strategies, features, and marketing via GitHub Issues with a 100-point rubric. Phase 2 (Weeks 6-13): Build production code and submit via GitHub Pull Requests. $15,000 total prize pool. Free to participate, open to developers of all skill levels worldwide. 100% open source (Apache 2.0).',
+      name: 'Cortex IDEathon & Hackathon 2026',
+      description: 'A two-phase, 14-week program: Phase 1 (IDEathon, Weeks 1-3) generates monetizable feature ideas. Phase 2 (Hackathon, Weeks 4-14) builds real code via GitHub PRs. $18,000 total prize pool ($3,000 IDEathon + $12,000 Build Sprint + $3,000 Demo Week). Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
-      endDate: '2026-05-18',
+      endDate: '2026-05-25',
       url: 'https://cortexlinux.com/hackathon',
       eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
