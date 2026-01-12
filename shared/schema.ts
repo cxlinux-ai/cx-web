@@ -42,6 +42,7 @@ export const hackathonRegistrations = pgTable("hackathon_registrations", {
   programmingLanguages: text("programming_languages"),
   teamOrSolo: text("team_or_solo"),
   teamName: text("team_name"),
+  phaseParticipation: text("phase_participation"), // phase1, phase2, or both
   projectIdea: text("project_idea"),
   usedCortexBefore: text("used_cortex_before"),
   howHeardAboutUs: text("how_heard_about_us"),
@@ -72,6 +73,7 @@ export const insertHackathonRegistrationSchema = createInsertSchema(hackathonReg
     programmingLanguages: z.string().optional(),
     teamOrSolo: z.enum(["team", "solo"]).optional(),
     teamName: z.string().optional(),
+    phaseParticipation: z.enum(["phase1", "phase2", "both"]).optional(),
     projectIdea: z.string().optional(),
     usedCortexBefore: z.enum(["yes", "no", "whats_that"]).optional(),
     howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]).optional(),

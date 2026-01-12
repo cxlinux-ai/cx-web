@@ -54,6 +54,7 @@ const formSchema = z.object({
   threeYearVision: z.string().optional(),
   teamOrSolo: z.enum(["team", "solo"]),
   teamName: z.string().optional(),
+  phaseParticipation: z.enum(["phase1", "phase2", "both"]),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -103,6 +104,12 @@ const POST_HACKATHON_OPTIONS = [
   { value: "paid_contributor", label: "Paid contributor / contractor" },
   { value: "full_time", label: "Full-time role (future)" },
   { value: "community", label: "Community only" },
+];
+
+const PHASE_OPTIONS = [
+  { value: "both", label: "Both phases", description: "Ideathon + Hackathon (recommended)" },
+  { value: "phase1", label: "Phase 1 only", description: "Ideathon (Weeks 1-4)" },
+  { value: "phase2", label: "Phase 2 only", description: "Hackathon (Weeks 5-13)" },
 ];
 
 interface HackathonRegistrationFormProps {
@@ -160,6 +167,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
       threeYearVision: "",
       teamOrSolo: "solo",
       teamName: "",
+      phaseParticipation: "both",
     },
   });
 
@@ -596,7 +604,40 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
           subtitle="How do you want to compete?"
         />
 
-        <div className="space-y-4">
+        <div className="space-y-5">
+          <FormField
+            control={form.control}
+            name="phaseParticipation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-300">Which phase(s) do you want to participate in? <span className="text-red-400">*</span></FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col gap-3 pt-2"
+                  >
+                    {PHASE_OPTIONS.map((phase) => (
+                      <div key={phase.value} className="flex items-start space-x-3">
+                        <RadioGroupItem 
+                          value={phase.value} 
+                          id={`phase-${phase.value}`} 
+                          className="border-white/30 text-blue-500 mt-0.5" 
+                          data-testid={`radio-phase-${phase.value}`} 
+                        />
+                        <Label htmlFor={`phase-${phase.value}`} className="flex flex-col cursor-pointer">
+                          <span className="text-gray-300">{phase.label}</span>
+                          <span className="text-xs text-gray-500">{phase.description}</span>
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage className="text-red-400" />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="teamOrSolo"
