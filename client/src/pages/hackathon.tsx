@@ -286,18 +286,68 @@ export default function Hackathon() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* How to Participate - Sticky Banner */}
+      <section className="bg-gradient-to-r from-blue-900/30 via-blue-800/20 to-blue-900/30 border-b border-blue-500/20 py-4 px-4">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-center text-sm text-blue-300 font-semibold uppercase tracking-wide mb-3">
+            3 Simple Steps to Participate
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-xl transition-all group"
+              data-testid="step-star-repo"
+            >
+              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">1</div>
+              <div className="flex items-center gap-2">
+                <Star size={18} className="text-yellow-400" />
+                <span className="text-white font-medium">Star the Repo</span>
+              </div>
+            </a>
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/40 rounded-xl transition-all group"
+              data-testid="step-join-discord"
+            >
+              <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-sm">2</div>
+              <div className="flex items-center gap-2">
+                <FaDiscord size={18} className="text-purple-400" />
+                <span className="text-white font-medium">Join Discord</span>
+              </div>
+            </a>
+            <a
+              href={hackathonConfig.rulesDocUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 rounded-xl transition-all group"
+              data-testid="step-view-rules"
+            >
+              <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm">3</div>
+              <div className="flex items-center gap-2">
+                <FileText size={18} className="text-emerald-400" />
+                <span className="text-white font-medium">View Rules</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-4 pt-20 pb-16 overflow-hidden">
+      <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px]" />
         
-        <div className="max-w-5xl mx-auto text-center relative z-10">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Problem Statement */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="text-gray-400 text-lg mb-4"
+            className="text-gray-400 text-base mb-3"
           >
             Want to contribute to open source but don't know where to start?
           </motion.p>
@@ -361,53 +411,53 @@ export default function Hackathon() {
             <CountdownTimer />
           </motion.div>
 
-          {/* Primary CTA with PDF Download */}
+          {/* Primary CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
+              className="group flex items-center gap-3 px-6 py-3 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(0,102,255,0.3)] hover:shadow-[0_0_30px_rgba(0,102,255,0.5)] transition-all duration-300"
               data-testid="hero-cta-github"
               onClick={() => {
                 analytics.trackCTAClick('start_building', 'hackathon_hero');
                 analytics.trackConversion('hackathon_signup');
               }}
             >
-              <Github size={24} />
-              Start Building Now
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <Github size={20} />
+              Start Building
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href={DISCORD_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 border-2 border-white/20 hover:border-white/40 rounded-xl text-white font-medium transition-colors"
+              className="flex items-center gap-2 px-5 py-3 border border-white/20 hover:border-white/40 rounded-xl text-white font-medium transition-colors"
               data-testid="hero-cta-discord"
               onClick={() => {
                 analytics.trackCTAClick('join_discord', 'hackathon_hero');
               }}
             >
-              <FaDiscord size={20} />
+              <FaDiscord size={18} />
               Join Discord
             </a>
             <a
               href={hackathonConfig.rulesDocUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 border-2 border-amber-500/30 hover:border-amber-500/50 bg-amber-500/10 rounded-xl text-amber-400 font-medium transition-colors"
+              className="flex items-center gap-2 px-5 py-3 border border-amber-500/30 hover:border-amber-500/50 bg-amber-500/10 rounded-xl text-amber-400 font-medium transition-colors"
               data-testid="download-rules-pdf"
               onClick={() => {
                 analytics.trackCTAClick('download_rules', 'hackathon_hero');
               }}
             >
-              <Download size={20} />
-              Download Rules PDF
+              <Download size={18} />
+              Rules PDF
             </a>
           </motion.div>
 
@@ -415,42 +465,47 @@ export default function Hackathon() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.55 }}
-            className="flex items-center justify-center gap-2 text-gray-400 mt-4"
+            className="flex items-center justify-center gap-4 text-gray-400 mt-4"
           >
-            <Gift size={18} className="text-emerald-400" />
-            <span className="text-sm">100% Free to participate</span>
+            <span className="flex items-center gap-2 text-sm">
+              <Gift size={16} className="text-emerald-400" />
+              100% Free
+            </span>
+            <span className="text-gray-600">·</span>
+            <span className="flex items-center gap-2 text-sm">
+              <Trophy size={16} className="text-yellow-400" />
+              $15,000 in Prizes
+            </span>
+            <span className="text-gray-600">·</span>
+            <span className="flex items-center gap-2 text-sm">
+              <Users size={16} className="text-blue-300" />
+              Open to Everyone
+            </span>
           </motion.div>
 
-          {/* Champion Ambassador Spotlight */}
+          {/* Champion Ambassador Spotlight - Smaller */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="mt-12 max-w-xl mx-auto"
+            className="mt-10 max-w-md mx-auto"
             data-testid="hackathon-champion-spotlight"
           >
-            <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6">
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4">
+              <div className="flex items-center gap-3">
                 <img
                   src={championAmbassador.avatar}
                   alt={championAmbassador.name}
-                  className="w-20 h-20 rounded-full border-4 border-brand-blue shadow-[0_0_30px_rgba(0,102,255,0.4)]"
+                  className="w-12 h-12 rounded-full border-2 border-blue-500/50"
                   loading="lazy"
                 />
-                <div className="text-center sm:text-left">
-                  <p className="text-xs uppercase tracking-wide text-blue-300 font-semibold mb-1">
+                <div className="text-left">
+                  <p className="text-xs uppercase tracking-wide text-blue-300 font-medium">
                     Champion Ambassador
                   </p>
-                  <h3 className="text-xl font-bold text-white">{championAmbassador.name}</h3>
-                  <p className="text-sm text-gray-400 mt-1">
-                    {championAmbassador.achievement}
-                  </p>
-                  <p className="text-xs text-terminal-green font-medium mt-1">
-                    {championAmbassador.achievementDetail}
-                  </p>
+                  <p className="text-sm font-semibold text-white">{championAmbassador.name}</p>
+                  <p className="text-xs text-gray-400">{championAmbassador.achievement}</p>
                 </div>
-              </div>
-              <div className="flex flex-wrap justify-center gap-2 mt-4">
                 <a
                   href={`https://github.com/${championAmbassador.github}`}
                   target="_blank"
@@ -621,53 +676,154 @@ export default function Hackathon() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
-        <div className="max-w-5xl mx-auto">
+      {/* Clear Program Roadmap */}
+      <section className="py-16 px-4 bg-gradient-to-b from-blue-950/10 to-transparent" id="program-roadmap">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
-              <Zap size={16} />
-              Our Philosophy
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-4">
+              <Calendar size={16} />
+              Program Roadmap
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-white">Not Your Average</span>{" "}
-              <span className="text-blue-300">Hackathon</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+              14-Week Program Timeline
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Clear milestones from start to finish. Know exactly what happens and when.
+            </p>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-500 via-blue-500 to-emerald-500 hidden sm:block" />
+            
+            {/* Timeline items */}
+            <div className="space-y-6">
+              {/* Week 1-4: IDEathon */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex gap-4 sm:gap-6"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-black font-bold text-sm relative z-10">
+                  1-4
+                </div>
+                <div className="flex-1 bg-amber-500/10 border border-amber-500/20 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Lightbulb size={18} className="text-amber-400" />
+                    <h3 className="font-bold text-white">Phase 1: IDEathon</h3>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400">Weeks 1-4</span>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-2">Submit monetizable feature ideas. No coding required.</p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="text-terminal-green font-semibold">$3,000 in prizes</span>
+                    <span className="text-gray-500">Top 10 ideas win</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Week 5-9: Build Sprint */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="flex gap-4 sm:gap-6"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
+                  5-9
+                </div>
+                <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Code2 size={18} className="text-blue-300" />
+                    <h3 className="font-bold text-white">Phase 2: Build Sprint</h3>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 5-9</span>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-2">Code and submit Pull Requests. Build real features.</p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="text-blue-300 font-medium">Active development period</span>
+                    <span className="text-gray-500">GitHub PRs</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Week 10-14: Review Period */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex gap-4 sm:gap-6"
+              >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
+                  10-14
+                </div>
+                <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <CheckCircle2 size={18} className="text-emerald-400" />
+                    <h3 className="font-bold text-white">Review & Winners</h3>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-14</span>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="text-terminal-green font-semibold">$12,000 in prizes</span>
+                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy Section - Simplified */}
+      <section className="py-16 px-4 relative">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+              <span className="text-white">Code First,</span>{" "}
+              <span className="text-blue-300">Not Pitch Decks</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
               {hackathonConfig.philosophy.description}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Traditional vs Code-First */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-red-500/5 border border-red-500/20 rounded-2xl p-6"
+              className="bg-red-500/5 border border-red-500/20 rounded-xl p-5"
             >
-              <h3 className="text-lg font-bold text-red-400 mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-bold text-red-400 mb-3 flex items-center gap-2">
                 <span className="line-through opacity-50">Traditional Hackathons</span>
               </h3>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start gap-3">
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
                   <span>Pitch decks and business plans</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
                   <span>Monetization strategy focus</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
                   <span>Ideas without implementation</span>
                 </li>
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-2">
                   <span className="text-red-400">✗</span>
                   <span>One-time participants</span>
                 </li>
