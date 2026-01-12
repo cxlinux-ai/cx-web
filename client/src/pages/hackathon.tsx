@@ -341,71 +341,80 @@ export default function Hackathon() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px]" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Contributor Avatars + Participants */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="flex items-center justify-center gap-3 mb-6"
+          >
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-black flex items-center justify-center text-white text-xs font-medium"
+                  title={`Contributor ${i}`}
+                >
+                  C{i}
+                </div>
+              ))}
+            </div>
+            <span className="text-gray-400 text-sm">
+              <span className="text-white font-semibold">1,000+</span> participants expected
+            </span>
+          </motion.div>
+
           {/* Problem Statement */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-gray-400 text-base mb-3"
+            transition={{ delay: 0.15 }}
+            className="text-gray-400 text-base mb-4"
           >
-            Want to contribute to open source but don't know where to start?
+            Want to build with AI but don't know where to start?
           </motion.p>
 
-          {/* Main Headline - Tagline */}
+          {/* Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
           >
-            <span className="gradient-text">
-              {hackathonConfig.tagline}
-            </span>
+            <span className="gradient-text">Cortex Hackathon 2026</span>
           </motion.h1>
 
-          {/* Hackathon Name */}
+          {/* Date Subtitle */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
-            className="text-xl sm:text-2xl text-white font-semibold mb-2"
-          >
-            {hackathonConfig.name}
-          </motion.p>
-
-          {/* Date Subtitle - Updated to TWO PHASES */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            14-WEEK PROGRAM · TWO PHASES
+            February 17, 2026 · 13-Week Program · Two Phases
           </motion.p>
 
-          {/* Solution Statement - Updated to mention both phases */}
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
+            transition={{ delay: 0.3 }}
+            className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8"
           >
-            <span className="text-amber-400 font-bold">Phase 1: IDEathon</span> — Submit monetizable feature ideas.{" "}
-            <span className="text-blue-300 font-bold">Phase 2: Hackathon</span> — Build and ship real code via GitHub PRs.
-            Both paths lead to prizes, recognition, and long-term contribution to{" "}
-            <span className="text-blue-300 font-medium">Cortex Linux</span>.
+            A two-phase program designed to crowdsource monetization strategies and convert the best ideas into production code with measurable ROI. Contribute to{" "}
+            <span className="text-blue-300 font-medium">Cortex Linux</span> — the open-source AI layer for Linux.
           </motion.p>
 
           {/* Urgency: Countdown */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.35 }}
             className="mb-8"
           >
             <p className="text-sm text-gray-400 mb-4 flex items-center justify-center gap-2">
               <Clock size={16} className="text-blue-300" />
-              Program starts in:
+              Hackathon starts in:
             </p>
             <CountdownTimer />
           </motion.div>
