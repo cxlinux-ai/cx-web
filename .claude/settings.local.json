@@ -7,7 +7,10 @@
       "Bash(gh repo view:*)",
       "Bash(git clone:*)",
       "Bash(npm install:*)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(npx tsc:*)",
+      "WebFetch(domain:we.tl)",
+      "WebFetch(domain:wetransfer.com)"
     ]
   }
 }
