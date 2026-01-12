@@ -178,7 +178,7 @@ export default function HackathonPreview() {
                           className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-brand-blue/20 group-hover/timer:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 flex flex-col items-center"
                           style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
                         >
-                          <span className="font-bold text-brand-blue font-mono" style={{ fontSize: '70px' }}>
+                          <span className="font-bold font-mono text-[#93c5fd]" style={{ fontSize: '70px' }}>
                             {String(value).padStart(2, "0")}
                           </span>
                           <span className="text-[10px] sm:text-xs text-gray-500 capitalize">{unit}</span>
