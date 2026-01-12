@@ -351,7 +351,7 @@ export default function HackathonRulesPage() {
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
                       <span>1st Place</span>
-                      <span className="text-emerald-400 font-semibold">$1,000</span>
+                      <span className="text-emerald-400 font-semibold">$1,300</span>
                     </li>
                     <li className="flex justify-between">
                       <span>2nd Place</span>

@@ -263,7 +263,7 @@ export const ideathonPhase: IdeathonPhase = {
     { name: "Completeness", weight: "20%", description: "Full use of submission template" }
   ],
   prizes: [
-    { place: "1st Place", amount: "$1,000" },
+    { place: "1st Place", amount: "$1,300" },
     { place: "2nd Place", amount: "$750" },
     { place: "3rd Place", amount: "$250" },
     { place: "4th–10th Place", amount: "$100 each" }
