@@ -33,6 +33,7 @@ import {
   ipReferralCodes,
   type IpReferralCode,
 } from "@shared/schema";
+import { sendVerificationEmail, sendWelcomeEmail } from "./email";
 
 const router = Router();
 
@@ -462,9 +463,11 @@ router.post("/signup", signupLimiter, async (req: Request, res: Response) => {
         .where(eq(waitlistEntries.id, referrerEntry.id));
     }
 
-    // TODO: Send verification email
-    // In production, integrate with email service (SendGrid, Postmark, etc.)
-    console.log(`Verification link: /api/referral/verify?token=${verificationToken}`);
+    // Send verification email
+    const emailSent = await sendVerificationEmail(normalizedEmail, verificationToken);
+    if (!emailSent) {
+      console.error(`Failed to send verification email to ${normalizedEmail}`);
+    }
 
     res.status(201).json({
       message: "Successfully joined waitlist! Check your email to verify.",
@@ -524,6 +527,12 @@ router.get("/verify", async (req: Request, res: Response) => {
         updatedAt: new Date(),
       })
       .where(eq(waitlistEntries.id, waitlistEntry.id));
+
+    // Send welcome email
+    const welcomeEmailSent = await sendWelcomeEmail(waitlistEntry.email, waitlistEntry.referralCode);
+    if (!welcomeEmailSent) {
+      console.error(`Failed to send welcome email to ${waitlistEntry.email}`);
+    }
 
     // If referred, update referrer's verified referrals and position
     if (waitlistEntry.referredByCode) {

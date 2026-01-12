@@ -6,7 +6,8 @@
 
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Only initialize Resend if API key is available
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 const FROM_EMAIL = process.env.FROM_EMAIL || 'Cortex Linux <hello@cortexlinux.com>';
 const BASE_URL = process.env.BASE_URL || 'https://cortexlinux.com';
