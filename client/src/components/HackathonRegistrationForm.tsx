@@ -465,13 +465,13 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             )}
           />
 
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {technicalRole === "other" && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
               >
                 <FormField
                   control={form.control}
@@ -628,13 +628,13 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             )}
           />
 
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {teamOrSolo === "team" && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
               >
                 <FormField
                   control={form.control}
@@ -697,13 +697,13 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             )}
           />
 
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {whyJoinHackathon.includes("other") && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
               >
                 <FormField
                   control={form.control}
