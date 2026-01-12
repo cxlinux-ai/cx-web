@@ -100,7 +100,7 @@ export const pressReleases: PressRelease[] = [
       "open source hackathon",
       "AI-first system design"
     ],
-    image: "/attached_assets/stock_images/coding_hackathon_dev_1f49254e.jpg"
+    image: "/images/coding_hackathon_dev_1f49254e.jpg"
   },
   {
     slug: "cortex-linux-v25-released-enhanced-ai-automation",
@@ -175,7 +175,7 @@ export const pressReleases: PressRelease[] = [
       "Linux AI integration",
       "developer productivity Linux"
     ],
-    image: "/attached_assets/stock_images/software_development_fa9eac1f.jpg"
+    image: "/images/software_development_fa9eac1f.jpg"
   }
 ];
 
