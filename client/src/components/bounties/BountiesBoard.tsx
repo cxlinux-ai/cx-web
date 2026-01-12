@@ -41,6 +41,8 @@ interface Bounty {
   updatedAt: string;
   closedAt: string | null;
   author: BountyAuthor;
+  repositoryName: string;  // e.g., "cortex", "cortex-cli"
+  repositoryUrl: string;   // Full GitHub repo URL
   bountyAmount: number | null;
   bountyLabel: string | null;
   difficulty: "beginner" | "medium" | "advanced" | null;
@@ -228,7 +230,26 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
       )}
 
       {/* Meta Info */}
-      <div className="flex items-center gap-4 text-sm text-slate-400 mb-4">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400 mb-4">
+        {/* Repository */}
+        <a
+          href={bounty.repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 hover:text-blue-300 transition-colors"
+          title={`View ${bounty.repositoryName} repository`}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+            />
+          </svg>
+          <span className="font-medium">{bounty.repositoryName}</span>
+        </a>
+
         {/* Author */}
         <a
           href={bounty.author.profileUrl}
@@ -495,7 +516,9 @@ export function BountiesBoard() {
   const [search, setSearch] = useState("");
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
 
-  // Fetch bounties
+  // Fetch bounties from server API
+  // Server caches data for 5 minutes to prevent GitHub rate limits
+  // Client refreshes every 5 minutes to stay in sync with server cache
   const {
     data: response,
     isLoading,
@@ -508,8 +531,8 @@ export function BountiesBoard() {
       const res = await apiRequest("GET", "/api/bounties");
       return res.json();
     },
-    refetchInterval: 30 * 60 * 1000, // Auto-refresh every 30 minutes
-    staleTime: 5 * 60 * 1000, // Consider data stale after 5 minutes
+    refetchInterval: 5 * 60 * 1000, // Auto-refresh every 5 minutes (matches server cache)
+    staleTime: 4 * 60 * 1000, // Consider data stale after 4 minutes (slightly before server refresh)
   });
 
   // Update last refresh time
@@ -534,7 +557,7 @@ export function BountiesBoard() {
       bounties = [...response.data.open, ...response.data.closed];
     }
 
-    // Apply search
+    // Apply search (searches title, description, author, repository, and labels)
     if (search.trim()) {
       const searchLower = search.toLowerCase();
       bounties = bounties.filter(
@@ -542,6 +565,7 @@ export function BountiesBoard() {
           b.title.toLowerCase().includes(searchLower) ||
           b.description.toLowerCase().includes(searchLower) ||
           b.author.username.toLowerCase().includes(searchLower) ||
+          b.repositoryName.toLowerCase().includes(searchLower) ||
           b.labels.some((l) => l.name.toLowerCase().includes(searchLower))
       );
     }
@@ -773,7 +797,7 @@ export function BountiesBoard() {
               </svg>
               View GitHub Organization
             </a>
-            <p className="text-sm text-gray-500 mt-4">Data refreshes automatically every 30 minutes</p>
+            <p className="text-sm text-gray-500 mt-4">Data refreshes automatically every 5 minutes</p>
           </div>
         </div>
       </div>

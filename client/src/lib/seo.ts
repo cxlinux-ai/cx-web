@@ -424,5 +424,42 @@ export const seoConfigs = {
     description: 'Try the interactive Cortex Linux beta preview. Experience AI-powered Linux commands in your browser.',
     canonicalPath: '/beta',
     noIndex: true
+  },
+
+  bounties: {
+    title: 'Bounty Board - Earn Rewards Contributing to Cortex Linux',
+    description: 'Browse open bounties and earn rewards for contributing to Cortex Linux open source projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
+    canonicalPath: '/bounties',
+    keywords: ['open source bounties', 'GitHub bounties', 'Cortex Linux contributions', 'paid open source', 'developer rewards', 'bug bounty', 'feature bounty'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Cortex Linux Bounty Board',
+      description: 'Open source bounties for contributing to Cortex Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
+      url: 'https://cortexlinux.com/bounties',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Open Bounties',
+          description: 'Browse currently available bounties ready to be claimed'
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Completed Bounties',
+          description: 'View successfully completed bounties and total payouts'
+        }
+      ],
+      mainEntity: {
+        '@type': 'Organization',
+        name: 'Cortex Linux',
+        url: 'https://cortexlinux.com',
+        sameAs: [
+          'https://github.com/cortexlinux',
+          'https://twitter.com/cortexlinux'
+        ]
+      }
+    }
   }
 };

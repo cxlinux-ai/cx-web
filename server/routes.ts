@@ -8,6 +8,7 @@ import stripeRoutes from "./stripe";
 import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
 import oauthRoutes from "./oauth";
+import discordBot from "./discord-bot";
 import PDFDocument from "pdfkit";
 
 // Simple in-memory cache for contributors
@@ -339,6 +340,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to export registrations:", error instanceof Error ? error.message : "Unknown error");
       res.status(500).json({ error: "Failed to export registrations" });
+    }
+  });
+
+  // Discord Bot Admin Routes
+  app.get("/api/admin/discord/status", async (req, res) => {
+    try {
+      const status = await discordBot.getBotStatus();
+      res.json(status);
+    } catch (error) {
+      console.error("Discord bot status error:", error);
+      res.status(500).json({ error: "Failed to get bot status" });
+    }
+  });
+
+  app.post("/api/admin/discord/batch-verify", async (req, res) => {
+    try {
+      const result = await discordBot.batchVerifyMembers();
+      res.json({
+        message: "Batch verification completed",
+        ...result
+      });
+    } catch (error) {
+      console.error("Batch verify error:", error);
+      res.status(500).json({ error: "Failed to batch verify members" });
+    }
+  });
+
+  app.post("/api/admin/discord/sync-roles", async (req, res) => {
+    try {
+      await discordBot.syncTierRoles();
+      res.json({ message: "Role sync completed" });
+    } catch (error) {
+      console.error("Role sync error:", error);
+      res.status(500).json({ error: "Failed to sync roles" });
+    }
+  });
+
+  app.post("/api/admin/discord/verify-user", async (req, res) => {
+    try {
+      const { discordId } = req.body;
+      if (!discordId) {
+        return res.status(400).json({ error: "Missing discordId" });
+      }
+      const result = await discordBot.verifyDiscordUser(discordId);
+      res.json(result);
+    } catch (error) {
+      console.error("User verify error:", error);
+      res.status(500).json({ error: "Failed to verify user" });
     }
   });
 

@@ -3,12 +3,41 @@
  *
  * Fetches and caches GitHub issues labeled "bounty" from the cortexlinux organization.
  *
+ * =============================================================================
+ * ARCHITECTURE OVERVIEW
+ * =============================================================================
+ *
+ * Data Flow:
+ *   Client Request -> Rate Limiter -> Cache Check -> GitHub API (if needed) -> Response
+ *
+ * Caching Strategy (CRITICAL for GitHub Rate Limits):
+ * - GitHub's unauthenticated API allows only 60 requests/hour
+ * - GitHub's authenticated API allows 5,000 requests/hour
+ * - We use SERVER-SIDE caching (not client-side) because:
+ *   1. All users share the same cache, reducing total API calls
+ *   2. One cache refresh serves ALL concurrent users
+ *   3. Client-side caching would mean each user makes their own API calls
+ *   4. Server controls cache invalidation centrally
+ *
+ * Cache Duration: 5 minutes
+ * - Provides fresh enough data for bounty hunters
+ * - With 60 req/hour limit, we could refresh 12x/hour (every 5 min)
+ * - Leaves buffer for other GitHub API endpoints
+ *
+ * Cache Invalidation:
+ * - Automatic: Cache expires after TTL
+ * - Manual: POST /api/bounties/refresh (admin endpoint)
+ * - Graceful: On API failure, serve stale cache with warning
+ *
+ * =============================================================================
+ *
  * Features:
- * - In-memory caching (30 minutes)
+ * - In-memory caching (5 minutes TTL)
  * - Fetches both open and closed bounties
- * - Rate limit handling
+ * - Rate limit handling with graceful degradation
  * - Structured error responses
- * - Extracts bounty amounts from labels
+ * - Extracts bounty amounts from labels, title, and body
+ * - Repository name extraction for multi-repo support
  */
 
 import { Router, type Request, type Response } from "express";
@@ -45,6 +74,8 @@ interface GitHubIssue {
   labels: GitHubLabel[];
   comments: number;
   body: string | null;
+  // Repository info from search API (nested object)
+  repository_url: string;
 }
 
 interface GitHubSearchResponse {
@@ -67,6 +98,8 @@ interface Bounty {
     avatarUrl: string;
     profileUrl: string;
   };
+  repositoryName: string; // e.g., "cortex", "cortex-cli"
+  repositoryUrl: string;  // Full GitHub repo URL
   bountyAmount: number | null;
   bountyLabel: string | null;
   difficulty: "beginner" | "medium" | "advanced" | null;
@@ -103,7 +136,11 @@ interface BountiesResponse {
 // CACHE
 // ==========================================
 
-const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+// Cache duration: 5 minutes (300,000ms)
+// Why 5 minutes? GitHub allows 60 unauthenticated requests/hour.
+// 5-minute cache = max 12 refreshes/hour, leaving headroom for other endpoints.
+// With auth token: 5,000 requests/hour makes this even more conservative.
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let bountiesCache: BountiesCache | null = null;
 
 // ==========================================
@@ -123,34 +160,103 @@ const bountiesLimiter = rateLimit({
 // ==========================================
 
 /**
- * Extract bounty amount from labels
- * Looks for patterns like "$500", "bounty:$200", "reward:150", etc.
+ * Extract bounty amount from multiple sources (labels, title, body)
+ *
+ * Priority order:
+ * 1. Labels (most reliable, structured data)
+ * 2. Title (commonly used pattern like "$200 - Fix bug")
+ * 3. Body (fallback, looks for reward/bounty mentions)
+ *
+ * Supported patterns:
+ * - Labels: "$500", "bounty:$200", "reward:150", "bounty-500", "500-bounty"
+ * - Title/Body: "$500", "💰500", "💰 500", "bounty: $200", "reward $150"
  */
-function extractBountyAmount(labels: GitHubLabel[]): { amount: number | null; label: string | null } {
+function extractBountyAmount(
+  labels: GitHubLabel[],
+  title: string,
+  body: string | null
+): { amount: number | null; label: string | null; source: "label" | "title" | "body" | null } {
+
+  // 1. Check labels first (most authoritative)
   for (const label of labels) {
     const name = label.name.toLowerCase();
 
     // Match patterns: $500, $100, bounty:$200, reward:150
     const dollarMatch = name.match(/\$(\d+)/);
     if (dollarMatch) {
-      return { amount: parseInt(dollarMatch[1], 10), label: label.name };
+      return { amount: parseInt(dollarMatch[1], 10), label: label.name, source: "label" };
     }
 
     // Match patterns: bounty-500, reward-100
     const dashMatch = name.match(/(?:bounty|reward)-(\d+)/);
     if (dashMatch) {
-      return { amount: parseInt(dashMatch[1], 10), label: label.name };
+      return { amount: parseInt(dashMatch[1], 10), label: label.name, source: "label" };
     }
 
     // Match patterns: 500-bounty, 100-reward
     const suffixMatch = name.match(/(\d+)-(?:bounty|reward)/);
     if (suffixMatch) {
-      return { amount: parseInt(suffixMatch[1], 10), label: label.name };
+      return { amount: parseInt(suffixMatch[1], 10), label: label.name, source: "label" };
     }
   }
 
-  // Check title for bounty amount as fallback
-  return { amount: null, label: null };
+  // 2. Check title for bounty amount
+  const titlePatterns = [
+    /\$(\d+)/,                           // $500
+    /💰\s*(\d+)/,                        // 💰500 or 💰 500
+    /bounty[:\s]+\$?(\d+)/i,             // bounty: $500, bounty 500
+    /reward[:\s]+\$?(\d+)/i,             // reward: $500, reward 500
+    /\[(\d+)\s*(?:USD|dollars?)?\]/i,    // [500 USD], [500]
+  ];
+
+  for (const pattern of titlePatterns) {
+    const match = title.match(pattern);
+    if (match) {
+      return { amount: parseInt(match[1], 10), label: null, source: "title" };
+    }
+  }
+
+  // 3. Check body as fallback (only first 1000 chars for performance)
+  if (body) {
+    const bodySnippet = body.slice(0, 1000).toLowerCase();
+    const bodyPatterns = [
+      /bounty[:\s]+\$?(\d+)/i,
+      /reward[:\s]+\$?(\d+)/i,
+      /💰\s*(\d+)/,
+      /prize[:\s]+\$?(\d+)/i,
+      /payout[:\s]+\$?(\d+)/i,
+    ];
+
+    for (const pattern of bodyPatterns) {
+      const match = bodySnippet.match(pattern);
+      if (match) {
+        return { amount: parseInt(match[1], 10), label: null, source: "body" };
+      }
+    }
+  }
+
+  return { amount: null, label: null, source: null };
+}
+
+/**
+ * Extract repository name from GitHub API repository_url
+ * e.g., "https://api.github.com/repos/cortexlinux/cortex" -> "cortex"
+ */
+function extractRepositoryInfo(repositoryUrl: string): { name: string; url: string } {
+  // repository_url format: https://api.github.com/repos/{owner}/{repo}
+  const match = repositoryUrl.match(/repos\/([^\/]+)\/([^\/]+)$/);
+  if (match) {
+    const [, owner, repo] = match;
+    return {
+      name: repo,
+      url: `https://github.com/${owner}/${repo}`,
+    };
+  }
+  // Fallback
+  return {
+    name: "cortex",
+    url: "https://github.com/cortexlinux/cortex",
+  };
 }
 
 /**
@@ -193,16 +299,36 @@ function filterDisplayLabels(labels: GitHubLabel[]): Array<{ name: string; color
 
 /**
  * Transform GitHub issue to Bounty format
+ *
+ * Handles data normalization and extraction of structured fields
+ * from the raw GitHub API response.
  */
 function transformIssue(issue: GitHubIssue): Bounty {
-  const { amount, label } = extractBountyAmount(issue.labels);
+  // Extract bounty amount from labels, title, and body
+  const { amount, label } = extractBountyAmount(issue.labels, issue.title, issue.body);
   const difficulty = extractDifficulty(issue.labels);
   const displayLabels = filterDisplayLabels(issue.labels);
 
-  // Truncate description to reasonable length
-  const description = issue.body
-    ? issue.body.slice(0, 300) + (issue.body.length > 300 ? "..." : "")
+  // Extract repository information
+  const repoInfo = extractRepositoryInfo(issue.repository_url);
+
+  // Truncate description to reasonable length for preview
+  // Strip markdown formatting for cleaner display
+  let description = issue.body
+    ? issue.body
+        .replace(/#{1,6}\s/g, "")        // Remove headers
+        .replace(/\*\*|__/g, "")         // Remove bold
+        .replace(/\*|_/g, "")            // Remove italic
+        .replace(/```[\s\S]*?```/g, "")  // Remove code blocks
+        .replace(/`[^`]+`/g, "")         // Remove inline code
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Convert links to text
+        .replace(/\n+/g, " ")            // Normalize newlines
+        .trim()
     : "";
+
+  if (description.length > 300) {
+    description = description.slice(0, 300) + "...";
+  }
 
   return {
     id: issue.id,
@@ -218,6 +344,8 @@ function transformIssue(issue: GitHubIssue): Bounty {
       avatarUrl: issue.user.avatar_url,
       profileUrl: issue.user.html_url,
     },
+    repositoryName: repoInfo.name,
+    repositoryUrl: repoInfo.url,
     bountyAmount: amount,
     bountyLabel: label,
     difficulty,
