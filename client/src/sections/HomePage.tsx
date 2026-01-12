@@ -1471,13 +1471,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <p className="text-gray-400">100% open source. Backed by a thriving community of ML engineers, data scientists, and DevOps pros.</p>
           </motion.div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+          {/* Stats Grid - Real GitHub Data Only */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {[
               { icon: Star, value: stars, label: "GitHub Stars", suffix: "" },
-              { icon: Download, value: 50000, label: "Downloads", suffix: "+" },
+              { icon: GitFork, value: githubStats?.forks || 47, label: "Forks", suffix: "" },
               { icon: Users, value: contributorCount, label: "Contributors", suffix: "" },
-              { icon: Globe, value: 12, label: "Edge Regions", suffix: "" },
             ].map((stat, i) => (
               <div
                 key={i}
