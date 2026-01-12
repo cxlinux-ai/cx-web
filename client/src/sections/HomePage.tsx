@@ -1213,41 +1213,42 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">Start free, upgrade when you're ready to scale. No hidden fees.</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {/* Community Edition */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0, duration: 0.5, ease: "easeOut" }}
-              className="group relative"
+              className="group relative flex"
             >
               {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col h-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
-                <div className="relative">
+              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col w-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
+                <div className="relative flex-1">
                   <h3 className="text-lg font-semibold mb-3 text-white">Community</h3>
                   <div className="flex items-baseline gap-1 mb-1">
                     <span className="text-4xl font-bold text-white">Free</span>
                   </div>
                   <p className="text-gray-500 text-sm mb-6">Open source forever</p>
                   
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3">
                     {[
                       "Full AI capabilities",
                       "All core features",
                       "Apache 2.0 license",
                       "Community support",
                       "Unlimited personal use",
-                    ].map((feature) => (
-                      <li key={feature} className="flex items-center gap-2.5 text-gray-400">
+                      " ",
+                    ].map((feature, i) => (
+                      <li key={i} className={`flex items-center gap-2.5 ${feature.trim() ? 'text-gray-400' : 'invisible'}`}>
                         <Check size={14} className="text-emerald-500 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <span className="text-sm">{feature || "Placeholder"}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
-                <div className="mt-auto">
+                <div className="mt-8">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
@@ -1267,13 +1268,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-              className="group relative md:-mt-4 md:mb-4"
+              className="group relative flex"
             >
-              {/* Subtle glow */}
-              <div className="absolute -inset-px rounded-xl bg-gradient-to-b from-blue-500/20 via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
-              
               {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-blue-500/30 p-7 flex flex-col h-full hover:border-blue-500/50 hover:shadow-[0_8px_30px_-12px_rgba(59,130,246,0.25)] hover:-translate-y-1 transition-all duration-300">
+              <div className="relative rounded-xl bg-[#0d1117] border border-blue-500/30 p-7 flex flex-col w-full hover:border-blue-500/50 hover:shadow-[0_8px_30px_-12px_rgba(59,130,246,0.25)] hover:-translate-y-1 transition-all duration-300">
                 {/* Popular badge */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <div className="px-3 py-1 bg-blue-500 rounded-full text-xs font-semibold text-white">
@@ -1281,7 +1279,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                 </div>
                 
-                <div className="relative pt-3">
+                <div className="relative flex-1 pt-2">
                   <h3 className="text-lg font-semibold mb-3 text-white">Founders</h3>
                   <div className="flex items-baseline gap-1 mb-1">
                     <span className="text-4xl font-bold text-white">$19</span>
@@ -1289,7 +1287,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </div>
                   <p className="text-gray-500 text-sm mb-6">For serious AI builders</p>
                   
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3">
                     {[
                       "Everything in Community",
                       "Priority support (24/7)",
@@ -1306,7 +1304,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </ul>
                 </div>
                 
-                <div className="mt-auto">
+                <div className="mt-8">
                   <a
                     href="https://github.com/cortexlinux/cortex"
                     target="_blank"
@@ -1326,18 +1324,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
-              className="group relative"
+              className="group relative flex"
             >
               {/* Card */}
-              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col h-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
-                <div className="relative">
+              <div className="relative rounded-xl bg-[#0d1117] border border-white/[0.06] p-7 flex flex-col w-full hover:border-white/[0.12] hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] hover:-translate-y-1 transition-all duration-300">
+                <div className="relative flex-1">
                   <h3 className="text-lg font-semibold mb-3 text-white">Enterprise</h3>
                   <div className="flex items-baseline gap-1 mb-1">
                     <span className="text-4xl font-bold text-white">Custom</span>
                   </div>
                   <p className="text-gray-500 text-sm mb-6">For large organizations</p>
                   
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3">
                     {[
                       "Everything in Founders",
                       "Dedicated support team",
@@ -1354,7 +1352,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   </ul>
                 </div>
                 
-                <div className="mt-auto">
+                <div className="mt-8">
                   <a
                     href="mailto:sales@cortexlinux.com"
                     className="block w-full py-3 text-center rounded-lg font-medium bg-white/[0.04] border border-white/[0.08] text-white hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-200"
