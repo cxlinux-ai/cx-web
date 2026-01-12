@@ -2433,6 +2433,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 avatar: "https://github.com/Suyashd999.png"
               },
               {
+                name: "Dhruv",
+                role: "Lead Engineer · Architecture · Core contributor",
+                github: "Dhruv-89",
+                avatar: "https://github.com/Dhruv-89.png"
+              },
+              {
                 name: "Ansh Grover",
                 role: "Main Reviewer · Code Quality · Open-source maintainer",
                 github: "Anshgrover23",
