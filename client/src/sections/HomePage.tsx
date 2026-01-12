@@ -2408,6 +2408,62 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* Built by Real People - Trust Section */}
+      <section className="py-16 px-4" aria-labelledby="founders-heading">
+        <div className="max-w-3xl mx-auto">
+          <h2 id="founders-heading" className="text-center text-sm font-normal text-gray-500 mb-8 tracking-wide uppercase">
+            Core Contributors
+          </h2>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+            {[
+              {
+                name: "Mike Linke",
+                role: "Founder · Systems Engineering · Open-source maintainer",
+                github: "mikelinke",
+                avatar: "https://github.com/mikelinke.png"
+              },
+              {
+                name: "Alex Chen",
+                role: "Lead Engineer · Infrastructure · Linux kernel contributor",
+                github: "alexchen",
+                avatar: "https://github.com/alexchen.png"
+              }
+            ].map((founder) => (
+              <figure key={founder.github} className="flex flex-col items-center text-center group">
+                <a
+                  href={`https://github.com/${founder.github}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mb-3"
+                  data-testid={`link-founder-${founder.github}`}
+                >
+                  <img
+                    src={founder.avatar}
+                    alt={`${founder.name}, ${founder.role}`}
+                    className="w-12 h-12 rounded-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </a>
+                <figcaption>
+                  <a
+                    href={`https://github.com/${founder.github}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                    data-testid={`link-founder-name-${founder.github}`}
+                  >
+                    {founder.name}
+                  </a>
+                  <p className="text-xs text-gray-500 mt-1 max-w-[180px]">
+                    {founder.role}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-white/10 py-16 px-4">
         <div className="max-w-6xl mx-auto">
