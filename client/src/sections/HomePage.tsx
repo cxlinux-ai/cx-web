@@ -64,7 +64,7 @@ import InteractiveDemoHero from "@/components/InteractiveDemoHero";
 import HackathonPreview from "@/components/HackathonPreview";
 import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
-import { abTests } from "@/lib/ab-testing";
+import { homeHeroTest } from "@/data/ab-tests";
 
 interface GitHubStats {
   openIssues: number;
@@ -328,11 +328,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // A/B Testing for hero headline
-  const { variant: headlineVariant } = useABVariant(abTests.heroHeadline);
+  const { variant: headlineVariant } = useABVariant(homeHeroTest);
   const headlines: Record<string, string> = {
     control: 'Execute Your Intent',
-    variant_a: 'Linux, But Smarter',
-    variant_b: 'AI-Powered Linux',
+    variant_b: 'AI-Native Linux for Developers',
   };
 
   const handleEmailSubmit = (e: React.FormEvent) => {

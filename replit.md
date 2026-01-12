@@ -29,8 +29,8 @@ The backend utilizes **Express.js with Node.js and TypeScript**. During developm
 - **UI/UX:** Emphasizes glass-morphism, blue glow effects on hover, dark theme, and a professional, cutting-edge aesthetic.
 - **Content Strategy:** Features a comprehensive landing page with 15+ sections, a robust blog system with 14 detailed articles, an enhanced "Getting Started" guide with learning paths, and dedicated pages for news and startups. Content is SEO-optimized with meta tags, JSON-LD, and internal linking.
 - **Analytics:** Integrated **Google Analytics 4 (GA4)** with custom event tracking for user interactions and conversions.
-- **A/B Testing:** A framework is in place for A/B testing hero headlines, CTAs, and hackathon prompts, integrated with GA4 for variant tracking.
-- **Hackathon Integration:** Includes a hackathon registration modal with form validation and PostgreSQL storage, a dedicated hackathon page with psychology-driven marketing, and FOMO elements.
+- **A/B Testing Framework:** A comprehensive A/B testing system in `client/src/lib/ab-testing.ts` with ABTestConfig interface, localStorage persistence, GA4 event tracking (ab_test_variant, ab_test_click, ab_test_scroll, ab_test_conversion), useABTest hook, and ABTestProvider. Default test configs in `client/src/data/ab-tests.ts` for home_hero, home_cta, and hackathon_cta variants.
+- **Hackathon Integration:** Two-phase program (IDEathon + Hackathon) with $18,000 prize pool split ($3K IDEathon, $12K Build Sprint, $3K Demo Week). Features hackathon registration modal, dedicated page with roadmap tracker, and FOMO elements.
 - **AI Reasoning Engine (Sapiens):** A core component providing multi-agent AI reasoning, planning, execution, validation, and correction, accessible via a Flask API.
 - **Responsive Design:** Mobile-first approach ensuring optimal viewing across devices.
 

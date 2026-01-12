@@ -106,19 +106,20 @@ export function getVariant(testId: string, testRegistry: Map<string, ABTestConfi
   const test = testRegistry.get(testId);
   if (!test) return null;
   
-  if (!isTestActive(test)) {
-    return test.variants[0];
-  }
-  
   const storedId = getStoredVariantId(testId);
   if (storedId) {
     const storedVariant = test.variants.find(v => v.id === storedId);
     if (storedVariant) return storedVariant;
   }
   
+  if (!isTestActive(test)) {
+    const defaultVariant = test.variants[0];
+    storeVariantId(testId, defaultVariant.id);
+    return defaultVariant;
+  }
+  
   const variant = selectVariant(test.variants);
   storeVariantId(testId, variant.id);
-  
   trackVariantAssignment(testId, variant.id);
   
   return variant;
@@ -223,39 +224,4 @@ export const defaultVariant: Variant = {
   id: 'control',
   weight: 100,
   content: {},
-};
-
-export const abTests = {
-  heroHeadline: {
-    testId: 'hero_headline_v1',
-    variants: [
-      { id: 'control', weight: 50, content: { headline: 'Execute Your Intent' } },
-      { id: 'variant_a', weight: 25, content: { headline: 'Linux, But Smarter' } },
-      { id: 'variant_b', weight: 25, content: { headline: 'AI-Powered Linux' } },
-    ],
-    metrics: ['ctr', 'scroll_depth', 'dwell_time'],
-    status: 'active' as const,
-    startDate: new Date('2026-01-01'),
-  },
-  heroCTA: {
-    testId: 'hero_cta_v1',
-    variants: [
-      { id: 'control', weight: 50, content: { cta: 'Get Started' } },
-      { id: 'variant_a', weight: 25, content: { cta: 'Try Cortex Free' } },
-      { id: 'variant_b', weight: 25, content: { cta: 'Start Building' } },
-    ],
-    metrics: ['ctr', 'conversion_rate'],
-    status: 'active' as const,
-    startDate: new Date('2026-01-01'),
-  },
-  hackathonCTA: {
-    testId: 'hackathon_cta_v1',
-    variants: [
-      { id: 'control', weight: 50, content: { cta: 'Join the Hackathon' } },
-      { id: 'variant_a', weight: 50, content: { cta: 'Start Building Now' } },
-    ],
-    metrics: ['ctr', 'registration_rate'],
-    status: 'active' as const,
-    startDate: new Date('2026-01-01'),
-  },
 };
