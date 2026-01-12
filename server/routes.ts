@@ -361,12 +361,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Overview");
       doc.moveDown(0.5);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("The Cortex Hackathon 2026 is a 14-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $15,000.", { align: "left", lineGap: 4 });
+         .text("The Cortex Hackathon 2026 is a 13-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $15,000.", { align: "left", lineGap: 4 });
       doc.moveDown(1.5);
       
-      // Phase 1: IDEathon
+      // Phase 1: Ideathon
       doc.fontSize(16).font("Helvetica-Bold").fillColor("#f59e0b")
-         .text("Phase 1: Cortex IDEathon");
+         .text("Phase 1: Cortex Ideathon");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("Timeline: Weeks 1-4 (4 weeks)", { lineGap: 3 })
