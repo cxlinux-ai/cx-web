@@ -309,7 +309,7 @@ export default function Hackathon() {
             transition={{ delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
           >
-            <span className="bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
+            <span className="gradient-text">
               {hackathonConfig.tagline}
             </span>
           </motion.h1>
