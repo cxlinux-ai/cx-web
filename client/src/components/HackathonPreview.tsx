@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Clock } from "lucide-react";
 import { Link } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import RegistrationModal from "./RegistrationModal";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
@@ -41,6 +41,24 @@ function useCountdown(targetDate: Date) {
 export default function HackathonPreview() {
   const countdown = useCountdown(HACKATHON_DATE);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 2;
+    const rotateX = ((centerY - e.clientY) / (rect.height / 2)) * 2;
+    setTransform({ rotateX, rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setTransform({ rotateX: 0, rotateY: 0 });
+    setIsHovered(false);
+  };
 
   return (
     <>
@@ -55,22 +73,57 @@ export default function HackathonPreview() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="py-12 px-4"
-        style={{ perspective: "1000px" }}
+        style={{ perspective: "1200px" }}
       >
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            whileHover={{ 
-              y: -4,
-              transition: { duration: 0.3, ease: "easeOut" }
+          <div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={handleMouseLeave}
+            className="group relative rounded-2xl"
+            style={{
+              transform: `perspective(1200px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) translateY(${isHovered ? -6 : 0}px)`,
+              transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+              transformStyle: "preserve-3d",
             }}
-            className="group relative overflow-hidden rounded-2xl"
           >
-            {/* Transparent gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-emerald-600/10" />
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgNDBIMHoiLz48cGF0aCBkPSJNMCAwaDFMMSA0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgMUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50" />
+            {/* Soft metallic edge glow - only on hover */}
+            <div 
+              className="absolute -inset-[1px] rounded-2xl pointer-events-none transition-opacity duration-500"
+              style={{
+                opacity: isHovered ? 0.5 : 0,
+                background: "linear-gradient(135deg, rgba(147,197,253,0.15), rgba(59,130,246,0.1), rgba(147,197,253,0.08))",
+                filter: "blur(1px)",
+              }}
+            />
             
-            {/* Main card content */}
-            <div className="relative px-8 py-10 md:px-12 md:py-14">
+            {/* Ambient glow beneath card */}
+            <div 
+              className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-500"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                boxShadow: "0 20px 50px -15px rgba(59,130,246,0.15), 0 10px 30px -10px rgba(0,0,0,0.3)",
+              }}
+            />
+            
+            {/* Main card surface */}
+            <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/[0.06] overflow-hidden">
+              {/* Top inner highlight - metallic reflection */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none transition-opacity duration-500"
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)",
+                  opacity: isHovered ? 1 : 0.5,
+                }}
+              />
+              
+              {/* Subtle gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/[0.06] via-purple-600/[0.04] to-emerald-600/[0.06]" />
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgNDBIMHoiLz48cGF0aCBkPSJNMCAwaDFMMSA0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgMUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=')] opacity-40" />
+              
+              {/* Content container */}
+              <div className="relative px-8 py-10 md:px-12 md:py-14">
                 {/* Headline - Bold */}
                 <h3 
                   className="text-white font-bold text-center mb-3 leading-tight"
@@ -163,7 +216,8 @@ export default function HackathonPreview() {
                   </Link>
                 </div>
               </div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </motion.section>
     </>
