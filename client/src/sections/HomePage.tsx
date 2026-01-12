@@ -569,7 +569,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     <div className="w-10 h-10 rounded-lg bg-brand-blue flex items-center justify-center">
                       <Rocket className="w-5 h-5 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-brand-blue uppercase tracking-wide">New to Cortex?</span>
+                    <span className="text-sm font-medium uppercase tracking-wide text-[#93c5fd]">New to Cortex?</span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                     Start Your Journey Today
