@@ -129,7 +129,9 @@ export default function App() {
               <div className="hidden md:flex items-center space-x-6">
                 <Link
                   href="/getting-started"
-                  className="text-base font-medium transition-colors duration-300 hover:text-brand-blue text-[#93c5fd]"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                  }`}
                   data-testid="link-getting-started"
                 >
                   Get Started
