@@ -2444,7 +2444,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Suyash D",
                 role: "Lead Engineer · Infrastructure · Core contributor",
                 github: "Suyashd999",
-                avatar: "https://github.com/Suyashd999.png"
+                avatar: "/assets/suyash.png"
               },
               {
                 name: "Dhruv",

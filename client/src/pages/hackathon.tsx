@@ -349,14 +349,19 @@ export default function Hackathon() {
             className="flex items-center justify-center gap-3 mb-6"
           >
             <div className="flex -space-x-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div
+              {[
+                { name: "Mike", avatar: "https://github.com/mikejmorgan-ai.png" },
+                { name: "Suyash", avatar: "/assets/suyash.png" },
+                { name: "Dhruv", avatar: "https://github.com/Dhruv-89.png" },
+                { name: "Ansh", avatar: "https://github.com/Anshgrover23.png" }
+              ].map((contributor, i) => (
+                <img
                   key={i}
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-black flex items-center justify-center text-white text-xs font-medium"
-                  title={`Contributor ${i}`}
-                >
-                  C{i}
-                </div>
+                  src={contributor.avatar}
+                  alt={contributor.name}
+                  className="w-10 h-10 rounded-full border-2 border-black object-cover"
+                  title={contributor.name}
+                />
               ))}
             </div>
             <span className="text-gray-400 text-sm">
