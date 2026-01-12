@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, Trophy, Users, Calendar } from "lucide-react";
+import { Trophy, Users, Calendar } from "lucide-react";
 import HackathonRegistrationForm from "@/components/HackathonRegistrationForm";
 import { updateSEO } from "@/lib/seo";
 
@@ -25,15 +24,6 @@ export default function Register() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="relative z-10 max-w-3xl mx-auto px-4 py-12">
-        <Link 
-          href="/hackathon"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
-          data-testid="link-back-hackathon"
-        >
-          <ArrowLeft size={18} />
-          Back to Hackathon
-        </Link>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
