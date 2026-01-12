@@ -86,7 +86,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div 
       className="fixed inset-0 flex items-center justify-center p-4"
       style={{ zIndex: 99999 }}
@@ -240,6 +240,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
           </AnimatePresence>
         </div>
       </motion.div>
-    </div>
+    </div>,
+    document.body
   );
 }
