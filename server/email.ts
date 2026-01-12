@@ -16,6 +16,11 @@ const BASE_URL = process.env.BASE_URL || 'https://cortexlinux.com';
  * Send verification email to new signups
  */
 export async function sendVerificationEmail(email: string, verificationToken: string): Promise<boolean> {
+  if (!resend) {
+    console.log(`[Email] Skipping verification email (no API key). Token: ${verificationToken}`);
+    return true; // Return true to not block signup flow
+  }
+
   const verificationLink = `${BASE_URL}/api/referral/verify?token=${verificationToken}`;
 
   try {
@@ -107,6 +112,11 @@ export async function sendVerificationEmail(email: string, verificationToken: st
  * Send welcome email after email verification
  */
 export async function sendWelcomeEmail(email: string, referralCode: string): Promise<boolean> {
+  if (!resend) {
+    console.log(`[Email] Skipping welcome email (no API key). Code: ${referralCode}`);
+    return true; // Return true to not block verification flow
+  }
+
   const referralLink = `${BASE_URL}/referrals?ref=${referralCode}`;
   const dashboardLink = `${BASE_URL}/referrals?code=${referralCode}`;
 
