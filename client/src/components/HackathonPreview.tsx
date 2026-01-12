@@ -50,8 +50,8 @@ export default function HackathonPreview() {
     const rect = cardRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 2;
-    const rotateX = ((centerY - e.clientY) / (rect.height / 2)) * 2;
+    const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 1;
+    const rotateX = ((centerY - e.clientY) / (rect.height / 2)) * 1;
     setTransform({ rotateX, rotateY });
   };
 
@@ -88,33 +88,72 @@ export default function HackathonPreview() {
               transformStyle: "preserve-3d",
             }}
           >
-            {/* Soft metallic edge glow - only on hover */}
+            {/* 3D Border effect - light edge on top/left, shadow on bottom/right */}
             <div 
-              className="absolute -inset-[1px] rounded-2xl pointer-events-none transition-opacity duration-500"
+              className="absolute -inset-[1px] rounded-2xl pointer-events-none transition-all duration-500"
               style={{
-                opacity: isHovered ? 0.5 : 0,
-                background: "linear-gradient(135deg, rgba(147,197,253,0.15), rgba(59,130,246,0.1), rgba(147,197,253,0.08))",
-                filter: "blur(1px)",
+                opacity: isHovered ? 1 : 0,
+                background: `linear-gradient(
+                  ${135 + transform.rotateY * 5}deg,
+                  rgba(255,255,255,0.12) 0%,
+                  rgba(147,197,253,0.08) 25%,
+                  transparent 50%,
+                  rgba(0,0,0,0.15) 75%,
+                  rgba(0,0,0,0.25) 100%
+                )`,
               }}
             />
             
-            {/* Ambient glow beneath card */}
+            {/* Outer glow - soft blue ambient */}
+            <div 
+              className="absolute -inset-1 rounded-2xl pointer-events-none transition-all duration-500"
+              style={{
+                opacity: isHovered ? 0.6 : 0,
+                background: "radial-gradient(ellipse at center, rgba(59,130,246,0.08), transparent 70%)",
+                filter: "blur(8px)",
+              }}
+            />
+            
+            {/* Dynamic shadow based on tilt */}
             <div 
               className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-500"
               style={{
                 opacity: isHovered ? 1 : 0,
-                boxShadow: "0 20px 50px -15px rgba(59,130,246,0.15), 0 10px 30px -10px rgba(0,0,0,0.3)",
+                boxShadow: `
+                  ${-transform.rotateY * 3}px ${transform.rotateX * 3 + 15}px 40px -10px rgba(0,0,0,0.4),
+                  ${-transform.rotateY * 1}px ${transform.rotateX * 1 + 8}px 20px -5px rgba(0,0,0,0.2)
+                `,
               }}
             />
             
             {/* Main card surface */}
-            <div className="relative rounded-2xl bg-[#0a0a0f] border border-white/[0.06] overflow-hidden">
-              {/* Top inner highlight - metallic reflection */}
+            <div 
+              className="relative rounded-2xl bg-[#0a0a0f] overflow-hidden"
+              style={{
+                border: "1px solid transparent",
+                backgroundImage: `
+                  linear-gradient(#0a0a0f, #0a0a0f),
+                  linear-gradient(${135 + transform.rotateY * 10}deg, 
+                    rgba(255,255,255,${isHovered ? 0.15 : 0.06}) 0%, 
+                    rgba(147,197,253,${isHovered ? 0.1 : 0.03}) 30%, 
+                    rgba(255,255,255,${isHovered ? 0.04 : 0.02}) 50%, 
+                    rgba(0,0,0,${isHovered ? 0.3 : 0.1}) 100%
+                  )
+                `,
+                backgroundOrigin: "border-box",
+                backgroundClip: "padding-box, border-box",
+                transition: "all 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+              }}
+            >
+              {/* Top inner highlight - metallic reflection that moves with tilt */}
               <div 
-                className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none transition-opacity duration-500"
+                className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none transition-all duration-500"
                 style={{
-                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)",
-                  opacity: isHovered ? 1 : 0.5,
+                  background: `linear-gradient(90deg, 
+                    transparent ${20 - transform.rotateY * 5}%, 
+                    rgba(255,255,255,${isHovered ? 0.2 : 0.08}) 50%, 
+                    transparent ${80 - transform.rotateY * 5}%
+                  )`,
                 }}
               />
               
