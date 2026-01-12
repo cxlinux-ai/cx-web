@@ -205,7 +205,7 @@ export default function HackathonRulesPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                  <span>Participants retain ownership of their work but grant the Organizer a non-exclusive, worldwide, royalty-free license to use, modify, and distribute submitted work for open-source purposes.</span>
+                  <span>Cortex Linux retains full access and ownership of all submitted code, ideas, and documentation for use in the Cortex Linux project.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
