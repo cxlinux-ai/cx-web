@@ -16,23 +16,39 @@ import {
   ChevronUp,
   Sparkles,
   Target,
-  Lightbulb,
   Shield,
   Gift,
   BookOpen,
-  FileText,
   Layers,
   Calendar,
   CheckCircle2,
+  Quote,
+  Video,
+  Rocket,
+  TrendingUp,
+  Globe,
+  Play,
+  Award,
+  MessageSquare,
 } from "lucide-react";
+import { FaTwitter, FaDiscord, FaReddit, FaYoutube } from "react-icons/fa";
+import { SiDevdotto, SiProducthunt } from "react-icons/si";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
-import { championAmbassador } from "@/data/hackathon";
+import {
+  championAmbassador,
+  hackathonPhases,
+  buildTracks,
+  hackathonConfig,
+  hackathonBenefits,
+  hackathonFaqs,
+  growthStrategy,
+} from "@/data/hackathon";
 
-const GITHUB_URL = "https://github.com/cortexlinux/cortex";
-const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
-const HACKATHON_DATE = new Date("2026-02-17T00:00:00");
+const GITHUB_URL = hackathonConfig.githubUrl;
+const DISCORD_URL = hackathonConfig.discordUrl;
+const HACKATHON_DATE = hackathonConfig.startDate;
 
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
@@ -114,130 +130,141 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className={`bg-gradient-to-br ${phase.bgGradient} border ${phase.borderColor} rounded-2xl p-6 relative overflow-hidden`}
+    >
+      <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
+        <span className={`text-2xl font-bold ${phase.color}`}>{phase.number}</span>
+      </div>
+      
+      <div className="mb-4">
+        <span className={`text-xs font-semibold uppercase tracking-wide ${phase.color}`}>
+          {phase.weeks}
+        </span>
+        <h3 className="text-xl font-bold text-white mt-1">{phase.title}</h3>
+        <p className="text-sm text-gray-500 italic mt-1">Goal: {phase.goal}</p>
+      </div>
+      
+      <p className="text-gray-400 text-sm mb-4">{phase.description}</p>
+      
+      {phase.requirements && (
+        <div className="mb-4">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Requirements</h4>
+          <ul className="space-y-1">
+            {phase.requirements.map((req, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                <CheckCircle2 size={14} className={`${phase.color} flex-shrink-0 mt-0.5`} />
+                <span>{req}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {phase.prizes && (
+        <div className="mb-4">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">
+            Prize Pool: <span className="text-terminal-green">{phase.prizeTotal}</span>
+          </h4>
+          <div className="grid grid-cols-2 gap-2">
+            {phase.prizes.map((prize, i) => (
+              <div key={i} className="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2">
+                <span className="text-gray-400 text-xs">{prize.place}</span>
+                <span className="text-terminal-green font-semibold text-sm">{prize.amount}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {phase.criteria && (
+        <div className="mb-4">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Judging Criteria</h4>
+          <div className="space-y-1">
+            {phase.criteria.map((crit, i) => (
+              <div key={i} className="flex items-center gap-2 text-xs">
+                <span className={`${phase.color} font-mono w-10`}>{crit.weight}</span>
+                <span className="text-white">{crit.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {phase.activities && (
+        <div className="mb-4">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Activities</h4>
+          <ul className="space-y-1">
+            {phase.activities.map((activity, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                <Play size={14} className={`${phase.color} flex-shrink-0 mt-0.5`} />
+                <span>{activity}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {phase.rewards && (
+        <div className="mb-4">
+          <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Rewards</h4>
+          <ul className="space-y-1">
+            {phase.rewards.map((reward, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                <Gift size={14} className={`${phase.color} flex-shrink-0 mt-0.5`} />
+                <span>{reward}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {phase.cta && (
+        <a
+          href={phase.cta.href}
+          target={phase.cta.external ? "_blank" : undefined}
+          rel={phase.cta.external ? "noopener noreferrer" : undefined}
+          className={`mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors w-full ${
+            phase.number === 1 ? "bg-emerald-500 hover:bg-emerald-600 text-white" :
+            phase.number === 2 ? "bg-blue-500 hover:bg-blue-600 text-white" :
+            phase.number === 3 ? "bg-purple-500 hover:bg-purple-600 text-white" :
+            "bg-yellow-500 hover:bg-yellow-600 text-black"
+          }`}
+          data-testid={`phase-${phase.id}-cta`}
+        >
+          {phase.cta.text}
+          <ArrowRight size={16} />
+        </a>
+      )}
+    </motion.div>
+  );
+}
+
 export default function Hackathon() {
   useEffect(() => {
     const cleanup = updateSEO(seoConfigs.hackathon);
     return cleanup;
   }, []);
 
-  const phase1Details = {
-    title: "Phase 1: Ideation",
-    weeks: "Weeks 1-4",
-    description: "Submit monetization strategies and feature ideas via GitHub Issues. Monetization weighted at 40% — our top priority.",
-    prizes: [
-      { place: "1st Place", amount: "$200" },
-      { place: "2nd Place", amount: "$150" },
-      { place: "3rd Place", amount: "$100" },
-      { place: "4th-10th", amount: "$50 each" },
-    ],
-    total: "$850",
-    categories: [
-      { name: "Monetization", weight: "40%", description: "Revenue models, pricing strategies" },
-      { name: "Features", weight: "30%", description: "New capabilities, integrations" },
-      { name: "Marketing", weight: "20%", description: "Growth tactics, community building" },
-      { name: "Other", weight: "10%", description: "Operations, partnerships, docs" },
-    ],
+  const trackIcons: Record<string, typeof Terminal> = {
+    "cli-commands": Terminal,
+    "plugins": Layers,
+    "ai-integrations": Brain,
+    "infra-tools": Shield,
   };
 
-  const phase2Details = {
-    title: "Phase 2: Execution",
-    weeks: "Weeks 6-13",
-    description: "Build real features via GitHub PRs. Teams of 2-5 convert ideas into production code.",
-    prizes: [
-      { place: "1st Place", amount: "$2,000" },
-      { place: "2nd Place", amount: "$1,500" },
-      { place: "3rd Place", amount: "$1,000" },
-    ],
-    total: "$4,500",
-    criteria: [
-      { name: "Code Quality", weight: "25%", description: "Readability, structure, best practices" },
-      { name: "Completeness", weight: "25%", description: "Full functionality, edge cases" },
-      { name: "Documentation", weight: "20%", description: "README, comments, API docs" },
-      { name: "Test Coverage", weight: "15%", description: "Unit & integration tests" },
-      { name: "Architecture", weight: "15%", description: "Style guide, patterns" },
-    ],
+  const platformIcons: Record<string, typeof SiDevdotto> = {
+    "DEV.to / Hashnode": SiDevdotto,
+    "Reddit": FaReddit,
+    "Product Hunt": SiProducthunt,
+    "YouTube": FaYoutube,
   };
-
-  const benefits = [
-    {
-      icon: Brain,
-      title: "Learn AI Development",
-      description: "Get hands-on experience building real AI-powered tools that developers actually use.",
-    },
-    {
-      icon: Code2,
-      title: "Build Your Portfolio",
-      description: "Your contributions become part of a growing open-source project with 1,200+ stars.",
-    },
-    {
-      icon: Users,
-      title: "Join 1,000+ Builders",
-      description: "Connect with developers globally who ship real products, not just tutorials.",
-    },
-    {
-      icon: Trophy,
-      title: "Win $5,350 in Prizes",
-      description: "Compete for prizes across two phases, plus mentorship and recognition.",
-    },
-  ];
-
-  const tracks = [
-    {
-      icon: Terminal,
-      title: "CLI Commands",
-      description: "Build new natural language commands for Cortex",
-      difficulty: "Beginner",
-      color: "text-emerald-400",
-    },
-    {
-      icon: Brain,
-      title: "AI Integrations",
-      description: "Integrate new AI models and providers",
-      difficulty: "Intermediate",
-      color: "text-blue-400",
-    },
-    {
-      icon: Shield,
-      title: "Security Features",
-      description: "Enhance sandbox and permission systems",
-      difficulty: "Advanced",
-      color: "text-purple-400",
-    },
-    {
-      icon: BookOpen,
-      title: "Documentation",
-      description: "Write guides, tutorials, and examples",
-      difficulty: "Beginner",
-      color: "text-yellow-400",
-    },
-  ];
-
-  const faqs = [
-    {
-      question: "What is the two-phase structure?",
-      answer: "Phase 1 (Weeks 1-4) focuses on ideation—submit ideas via GitHub Issues. Phase 2 (Weeks 6-13) is execution—teams build and submit code via Pull Requests. This design maximizes idea capture while ensuring quality code delivery.",
-    },
-    {
-      question: "Do I need to be an expert developer?",
-      answer: "Not at all! Phase 1 requires only ideas—no coding needed. Phase 2 has issues for all skill levels. If you can write code and use Git, you can contribute.",
-    },
-    {
-      question: "Is this really free to participate?",
-      answer: "100% free. This is open-source. You're contributing to a community project that benefits everyone. No fees, no catches.",
-    },
-    {
-      question: "How are submissions judged?",
-      answer: "Phase 1 uses a 100-point rubric across market potential, clarity, feasibility, originality, and alignment. Phase 2 evaluates code quality, completeness, documentation, test coverage, and architecture. Three judges per submission.",
-    },
-    {
-      question: "What if my PR doesn't get merged?",
-      answer: "Every attempt is a learning opportunity. You'll get feedback from maintainers, and you can iterate. Many successful contributors started with rejected PRs.",
-    },
-    {
-      question: "Can I participate from anywhere?",
-      answer: "Yes! This is a global, async hackathon. Work on your own schedule, from anywhere in the world. All communication happens on GitHub and Discord.",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -247,45 +274,17 @@ export default function Hackathon() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px]" />
         
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          {/* Social Proof Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-6"
-          >
-            <div className="flex -space-x-2">
-              {[
-                "https://avatars.githubusercontent.com/u/1?v=4",
-                "https://avatars.githubusercontent.com/u/2?v=4",
-                "https://avatars.githubusercontent.com/u/3?v=4",
-                "https://avatars.githubusercontent.com/u/4?v=4",
-              ].map((avatar, i) => (
-                <img
-                  key={i}
-                  src={avatar}
-                  alt={`Cortex Linux hackathon contributor ${i + 1}`}
-                  className="w-6 h-6 rounded-full border-2 border-black object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ))}
-            </div>
-            <span className="text-sm text-gray-300">
-              <span className="text-white font-semibold">1,000+</span> participants expected
-            </span>
-          </motion.div>
-
-          {/* PAS: Problem */}
+          {/* Problem Statement */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
             className="text-gray-400 text-lg mb-4"
           >
-            Want to build with AI but don't know where to start?
+            Want to contribute to open source but don't know where to start?
           </motion.p>
 
-          {/* Main Headline */}
+          {/* Main Headline - Tagline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -293,30 +292,40 @@ export default function Hackathon() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
-              Cortex Hackathon 2026
+              {hackathonConfig.tagline}
             </span>
           </motion.h1>
+
+          {/* Hackathon Name */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25 }}
+            className="text-xl sm:text-2xl text-white font-semibold mb-2"
+          >
+            {hackathonConfig.name}
+          </motion.p>
 
           {/* Date Subtitle */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.25 }}
+            transition={{ delay: 0.3 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 17, 2026 · 13-Week Program · Two Phases
+            February 17, 2026 · {hackathonConfig.totalWeeks}-Week Program · Four Phases
           </motion.p>
 
-          {/* PAS: Agitate & Solution */}
+          {/* Solution Statement */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.35 }}
             className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
-            A two-phase program designed to <span className="text-terminal-green font-bold">crowdsource monetization strategies</span> and 
-            convert the best ideas into production code with measurable ROI.
-            <span className="text-brand-blue font-medium"> Contribute to Cortex Linux</span> — the open-source AI layer for Linux.
+            A builder-focused hackathon where you ship <span className="text-terminal-green font-bold">real GitHub PRs</span>.
+            No pitch decks. No slide presentations. Just code that gets merged into{" "}
+            <span className="text-brand-blue font-medium">Cortex Linux</span> — the open-source AI layer for Linux.
           </motion.p>
 
           {/* Urgency: Countdown */}
@@ -348,7 +357,6 @@ export default function Hackathon() {
               data-testid="hero-cta-github"
               onClick={() => {
                 analytics.trackCTAClick('start_building', 'hackathon_hero');
-                analytics.trackFormSubmit('hackathon_registration', true);
                 analytics.trackConversion('hackathon_signup');
               }}
             >
@@ -356,493 +364,539 @@ export default function Hackathon() {
               Start Building Now
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <div className="flex items-center gap-2 text-gray-400">
-              <Gift size={18} className="text-emerald-400" />
-              <span className="text-sm">100% Free to participate</span>
-            </div>
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 border-2 border-white/20 hover:border-white/40 rounded-xl text-white font-medium transition-colors"
+              data-testid="hero-cta-discord"
+              onClick={() => {
+                analytics.trackCTAClick('join_discord', 'hackathon_hero');
+              }}
+            >
+              <FaDiscord size={20} />
+              Join Discord
+            </a>
           </motion.div>
 
-          {/* Champion Ambassador Spotlight */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.55 }}
+            className="flex items-center justify-center gap-2 text-gray-400 mt-4"
+          >
+            <Gift size={18} className="text-emerald-400" />
+            <span className="text-sm">100% Free to participate</span>
+          </motion.div>
+
+          {/* Champion Ambassador Spotlight - FACE of the Hackathon */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10"
+            className="mt-12 max-w-xl mx-auto"
             data-testid="hackathon-champion-spotlight"
           >
-            <img
-              src={championAmbassador.avatar}
-              alt={championAmbassador.name}
-              className="w-12 h-12 rounded-full border-2 border-brand-blue"
-              loading="lazy"
-            />
-            <div className="text-left">
-              <p className="text-sm font-medium text-white">
-                Judged by <span className="text-brand-blue">{championAmbassador.name}</span>
-              </p>
-              <p className="text-xs text-gray-400">
-                {championAmbassador.achievement} · {championAmbassador.achievementDetail}
-              </p>
+            <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <img
+                  src={championAmbassador.avatar}
+                  alt={championAmbassador.name}
+                  className="w-20 h-20 rounded-full border-4 border-brand-blue shadow-[0_0_30px_rgba(0,102,255,0.4)]"
+                  loading="lazy"
+                />
+                <div className="text-center sm:text-left">
+                  <p className="text-xs uppercase tracking-wide text-brand-blue font-semibold mb-1">
+                    Champion Ambassador
+                  </p>
+                  <h3 className="text-xl font-bold text-white">{championAmbassador.name}</h3>
+                  <p className="text-sm text-gray-400 mt-1">
+                    {championAmbassador.achievement}
+                  </p>
+                  <p className="text-xs text-terminal-green font-medium mt-1">
+                    {championAmbassador.achievementDetail}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2 mt-4">
+                <a
+                  href={`https://github.com/${championAmbassador.github}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                  data-testid="champion-github-link"
+                >
+                  <Github size={14} />
+                  GitHub
+                </a>
+                {championAmbassador.linkedin && (
+                  <a
+                    href={`https://linkedin.com/in/${championAmbassador.linkedin}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                    data-testid="champion-linkedin-link"
+                  >
+                    LinkedIn
+                  </a>
+                )}
+              </div>
             </div>
-            <a
-              href={`https://github.com/${championAmbassador.github}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
-              data-testid="champion-github-link"
-            >
-              <Github size={16} className="inline mr-1" />
-              GitHub
-            </a>
           </motion.div>
 
           {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 0.7 }}
             className="flex flex-wrap justify-center gap-6 sm:gap-12 mt-12 pt-8 border-t border-white/10"
           >
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">1,000+</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{hackathonConfig.expectedParticipants}</p>
               <p className="text-sm text-gray-400">Participants</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">$5.35K</p>
+              <p className="text-2xl sm:text-3xl font-bold text-terminal-green">{hackathonConfig.totalPrizePool}</p>
               <p className="text-sm text-gray-400">Prize Pool</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">13</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{hackathonConfig.totalWeeks}</p>
               <p className="text-sm text-gray-400">Weeks</p>
             </div>
             <div className="text-center">
-              <p className="text-2xl sm:text-3xl font-bold text-white">30+</p>
-              <p className="text-sm text-gray-400">Merged PRs</p>
-            </div>
-          </motion.div>
-        </div>
-
-      </section>
-
-      {/* Two-Phase Overview Section */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
-              <Target size={16} />
-              Main Goal: Crowdsource Monetization Strategies
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Two Phases, <span className="text-brand-blue">One Goal</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Generate features that enable sustainable revenue. Phase 1 captures monetization ideas. Phase 2 turns them into production code.
-            </p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Phase 1 Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-purple-500/10 to-transparent border border-purple-500/20 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
-                  <Lightbulb className="text-purple-400" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{phase1Details.title}</h3>
-                  <p className="text-purple-400 text-sm font-medium">{phase1Details.weeks}</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-400 mb-6">{phase1Details.description}</p>
-              
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: <span className="text-terminal-green glow-terminal-green">{phase1Details.total}</span></h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {phase1Details.prizes.map((prize) => (
-                    <div key={prize.place} className="flex justify-between items-center bg-white/5 rounded-lg px-3 py-2">
-                      <span className="text-gray-400 text-sm">{prize.place}</span>
-                      <span className="text-terminal-green font-semibold">{prize.amount}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Judging Categories</h4>
-                <div className="space-y-2">
-                  {phase1Details.categories.map((cat) => (
-                    <div key={cat.name} className="flex items-center gap-3">
-                      <span className="text-terminal-green font-mono text-sm w-12">{cat.weight}</span>
-                      <span className="text-white font-medium">{cat.name}</span>
-                      <span className="text-gray-500 text-sm hidden sm:block">— {cat.description}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Phase 2 Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
-                  <Code2 className="text-brand-blue" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{phase2Details.title}</h3>
-                  <p className="text-brand-blue text-sm font-medium">{phase2Details.weeks}</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-400 mb-6">{phase2Details.description}</p>
-              
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Prize Pool: <span className="text-terminal-green glow-terminal-green">{phase2Details.total}</span></h4>
-                <div className="grid grid-cols-3 gap-2">
-                  {phase2Details.prizes.map((prize) => (
-                    <div key={prize.place} className="text-center bg-white/5 rounded-lg px-3 py-3">
-                      <span className="text-terminal-green font-bold text-lg block">{prize.amount}</span>
-                      <span className="text-gray-400 text-xs">{prize.place}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-white mb-3 uppercase tracking-wide">Code Judging Criteria</h4>
-                <div className="space-y-2">
-                  {phase2Details.criteria.map((crit) => (
-                    <div key={crit.name} className="flex items-center gap-3">
-                      <span className="text-brand-blue font-mono text-sm w-12">{crit.weight}</span>
-                      <span className="text-white font-medium">{crit.name}</span>
-                      <span className="text-gray-500 text-sm hidden sm:block">— {crit.description}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Timeline Visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6"
-          >
-            <h4 className="text-center text-white font-semibold mb-6">13-Week Timeline</h4>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-purple-500" />
-                <span className="text-sm text-gray-400">Phase 1: 4 weeks</span>
-              </div>
-              <ArrowRight className="text-gray-600 hidden sm:block" size={20} />
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-gray-500" />
-                <span className="text-sm text-gray-400">Transition: 1 week</span>
-              </div>
-              <ArrowRight className="text-gray-600 hidden sm:block" size={20} />
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-blue-500" />
-                <span className="text-sm text-gray-400">Phase 2: 8 weeks</span>
-              </div>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{hackathonConfig.expectedPRs}</p>
+              <p className="text-sm text-gray-400">PRs Expected</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Champion Ambassador Section */}
-      <section className="py-20 px-4 border-t border-white/10">
-        <div className="max-w-4xl mx-auto">
+      {/* Philosophy Section */}
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Meet Your <span className="text-brand-blue">Champion Ambassador</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <Zap size={16} />
+              Our Philosophy
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <span className="text-white">Not Your Average</span>{" "}
+              <span className="text-brand-blue">Hackathon</span>
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Learn from someone who's been there. Suyash brings real hackathon experience to guide your journey.
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              {hackathonConfig.philosophy.description}
             </p>
           </motion.div>
 
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Traditional vs Code-First */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-red-500/5 border border-red-500/20 rounded-2xl p-6"
+            >
+              <h3 className="text-lg font-bold text-red-400 mb-4 flex items-center gap-2">
+                <span className="line-through opacity-50">Traditional Hackathons</span>
+              </h3>
+              <ul className="space-y-3 text-gray-400">
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400">✗</span>
+                  <span>Pitch decks and business plans</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400">✗</span>
+                  <span>Monetization strategy focus</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400">✗</span>
+                  <span>Ideas without implementation</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400">✗</span>
+                  <span>One-time participants</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-terminal-green/5 border border-terminal-green/20 rounded-2xl p-6"
+            >
+              <h3 className="text-lg font-bold text-terminal-green mb-4 flex items-center gap-2">
+                <Rocket size={18} />
+                Cortex Hackathon
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                {hackathonConfig.philosophy.values.map((value, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 size={18} className="text-terminal-green flex-shrink-0 mt-0.5" />
+                    <span>{value}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+
+          {/* Quote highlight */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10"
-            data-testid="ambassador-spotlight-section"
+            className="mt-12 text-center"
           >
-            <div className="flex-shrink-0">
-              <img
-                src={championAmbassador.avatar}
-                alt={championAmbassador.name}
-                className="w-24 h-24 rounded-full border-4 border-brand-blue/50"
-                loading="lazy"
-              />
-            </div>
-            <div className="flex-1 text-center md:text-left">
-              <h3 className="text-xl font-bold text-white mb-1">{championAmbassador.name}</h3>
-              <p className="text-brand-blue font-medium mb-3">{championAmbassador.title}</p>
-              <ul className="space-y-2 text-gray-400 text-sm mb-4">
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Trophy size={14} className="text-yellow-500" />
-                  {championAmbassador.achievement}
-                </li>
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Star size={14} className="text-brand-blue" />
-                  {championAmbassador.achievementDetail}
-                </li>
-                <li className="flex items-center gap-2 justify-center md:justify-start">
-                  <Users size={14} className="text-terminal-green" />
-                  {championAmbassador.reach}
-                </li>
-              </ul>
-              {championAmbassador.quote && (
-                <blockquote className="text-gray-300 italic border-l-2 border-brand-blue pl-4">
-                  "{championAmbassador.quote}"
-                </blockquote>
-              )}
-            </div>
+            <blockquote className="relative inline-block max-w-2xl">
+              <Quote className="absolute -top-4 -left-4 text-brand-blue/30" size={32} />
+              <p className="text-2xl sm:text-3xl font-bold text-white italic">
+                "{hackathonConfig.philosophy.principle}"
+              </p>
+              <Quote className="absolute -bottom-4 -right-4 text-brand-blue/30 rotate-180" size={32} />
+            </blockquote>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
-        <div className="max-w-6xl mx-auto">
+      {/* Four-Phase Structure Section */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-brand-blue text-sm mb-6">
+              <Calendar size={16} />
+              13-Week Journey
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Why Builders <span className="text-brand-blue">Choose Cortex</span>
+              Four Phases, <span className="text-brand-blue">One Goal</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              This isn't just another hackathon. It's your entry into the AI revolution.
+              From onboarding to shipping. Each phase is designed to filter, build, showcase, and merge real contributions.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((benefit, index) => (
+          {/* Timeline Visual */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 bg-white/5 border border-white/10 rounded-2xl p-6"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {hackathonPhases.map((phase, i) => (
+                <div key={phase.id} className="flex items-center gap-2">
+                  <div className={`w-4 h-4 rounded-full ${phase.color.replace('text-', 'bg-').replace('-400', '-500')}`} />
+                  <span className="text-sm text-gray-400">
+                    Phase {phase.number}: {phase.duration}
+                  </span>
+                  {i < hackathonPhases.length - 1 && (
+                    <ArrowRight className="text-gray-600 hidden sm:block ml-2" size={16} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Phase Cards Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {hackathonPhases.map((phase, index) => (
+              <PhaseCard key={phase.id} phase={phase} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Build Tracks Section */}
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm mb-6">
+              <Code2 size={16} />
+              Choose Your Track
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              What Will You <span className="text-brand-blue">Build</span>?
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Pick a track that matches your skills and interests. All contributions welcome.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {buildTracks.map((track, index) => {
+              const Icon = trackIcons[track.id] || Terminal;
+              return (
+                <motion.div
+                  key={track.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-colors"
+                >
+                  <div className={`w-12 h-12 rounded-xl ${track.color.replace('text-', 'bg-').replace('-400', '-500/20')} flex items-center justify-center mb-4`}>
+                    <Icon className={track.color} size={24} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">{track.title}</h3>
+                  <p className="text-sm text-gray-400 mb-4">{track.description}</p>
+                  
+                  <div className="mb-4">
+                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                      track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
+                      track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-400" :
+                      "bg-purple-500/20 text-purple-400"
+                    }`}>
+                      {track.difficulty}
+                    </span>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Examples</h4>
+                    <ul className="space-y-1">
+                      {track.examples.map((example, i) => (
+                        <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
+                          <span className={track.color}>•</span>
+                          {example}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Champion Ambassador Expanded Section */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent border border-blue-500/20 rounded-3xl p-8 sm:p-12"
+          >
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-sm mb-6">
+                  <Award size={16} />
+                  Meet Your Champion
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                  {championAmbassador.name}
+                </h2>
+                <p className="text-xl text-brand-blue font-medium mb-2">
+                  {championAmbassador.title}
+                </p>
+                <p className="text-gray-400 mb-4">
+                  {championAmbassador.achievement}
+                </p>
+                <p className="text-terminal-green font-semibold text-lg mb-6">
+                  {championAmbassador.achievementDetail}
+                </p>
+                
+                {championAmbassador.quote && (
+                  <blockquote className="relative bg-white/5 rounded-xl p-4 mb-6">
+                    <Quote className="absolute top-2 left-2 text-brand-blue/30" size={20} />
+                    <p className="text-white italic pl-6">
+                      "{championAmbassador.quote}"
+                    </p>
+                  </blockquote>
+                )}
+                
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href={`https://github.com/${championAmbassador.github}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                    data-testid="ambassador-github"
+                  >
+                    <Github size={18} />
+                    <span className="text-sm font-medium">GitHub</span>
+                  </a>
+                  {championAmbassador.linkedin && (
+                    <a
+                      href={`https://linkedin.com/in/${championAmbassador.linkedin}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                      data-testid="ambassador-linkedin"
+                    >
+                      <span className="text-sm font-medium">LinkedIn</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <img
+                  src={championAmbassador.avatar}
+                  alt={championAmbassador.name}
+                  className="w-48 h-48 rounded-full border-4 border-brand-blue shadow-[0_0_60px_rgba(0,102,255,0.4)] mb-6"
+                  loading="lazy"
+                />
+                
+                <div className="w-full space-y-3">
+                  <h3 className="text-sm font-semibold text-white uppercase tracking-wide text-center mb-3">
+                    {championAmbassador.name}'s Roles
+                  </h3>
+                  {championAmbassador.roles.map((role, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 bg-white/5 rounded-lg px-4 py-2"
+                    >
+                      <CheckCircle2 size={16} className="text-brand-blue" />
+                      <span className="text-sm text-gray-300">{role}</span>
+                    </div>
+                  ))}
+                  {championAmbassador.liveCodingSchedule && (
+                    <div className="flex items-center gap-3 bg-terminal-green/10 border border-terminal-green/20 rounded-lg px-4 py-2 mt-4">
+                      <Video size={16} className="text-terminal-green" />
+                      <span className="text-sm text-terminal-green">{championAmbassador.liveCodingSchedule}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-blue text-sm mb-6">
+              <Trophy size={16} />
+              Why Participate
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              What You <span className="text-brand-blue">Get</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Beyond the prizes, you're building real skills, real connections, and real portfolio pieces.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {hackathonBenefits.map((benefit, index) => (
               <motion.div
-                key={benefit.title}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-brand-blue/50 hover:shadow-[0_0_30px_rgba(0,102,255,0.15)] transition-all duration-300"
+                className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-brand-blue/30 transition-colors"
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <benefit.icon className="text-brand-blue" size={24} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{benefit.title}</h3>
-                <p className="text-gray-400 text-sm">{benefit.description}</p>
+                <h3 className="text-lg font-bold text-white mb-2">{benefit.title}</h3>
+                <p className="text-sm text-gray-400">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How to Participate */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              How to <span className="text-brand-blue">Participate</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              No applications. No waitlists. Just start building.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl font-bold text-brand-blue/30 font-mono">01</span>
-                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
-                  <Star className="text-brand-blue" size={24} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Star & Fork</h3>
-              <p className="text-gray-400 text-sm mb-4">Star the repo and fork it to your GitHub account. Takes 30 seconds.</p>
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue/80 font-medium text-sm transition-colors"
-                data-testid="link-step-star"
-              >
-                Star on GitHub
-                <ArrowRight size={16} />
-              </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl font-bold text-blue-400/30 font-mono">02</span>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
-                  <Lightbulb className="text-purple-400" size={24} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Phase 1: Submit Ideas</h3>
-              <p className="text-gray-400 text-sm mb-4">Open a GitHub Issue with your idea. Monetization, features, marketing—all welcome.</p>
-              <a
-                href={GITHUB_ISSUES_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium text-sm transition-colors"
-                data-testid="link-step-ideas"
-              >
-                Submit an Idea
-                <ArrowRight size={16} />
-              </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-4xl font-bold text-brand-blue/30 font-mono">03</span>
-                <div className="w-12 h-12 rounded-xl bg-brand-blue/20 flex items-center justify-center">
-                  <GitPullRequest className="text-brand-blue" size={24} />
-                </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Phase 2: Ship Code</h3>
-              <p className="text-gray-400 text-sm mb-4">Form a team (2-5 people), build your idea, and submit a Pull Request.</p>
-              <a
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-brand-blue hover:text-brand-blue/80 font-medium text-sm transition-colors"
-                data-testid="link-step-code"
-              >
-                Start Building
-                <ArrowRight size={16} />
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Terminal Preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden"
-          >
-            <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
-              <div className="w-3 h-3 rounded-full bg-red-500/80" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <div className="w-3 h-3 rounded-full bg-green-500/80" />
-              <span className="text-gray-400 text-sm ml-2 font-mono">terminal</span>
-            </div>
-            <div className="p-6 font-mono text-sm">
-              <p className="text-gray-400">
-                <span className="text-emerald-400">$</span> git clone {GITHUB_URL}
-              </p>
-              <p className="text-gray-400 mt-2">
-                <span className="text-emerald-400">$</span> cd cortex
-              </p>
-              <p className="text-gray-400 mt-2">
-                <span className="text-emerald-400">$</span> npm install && npm run dev
-              </p>
-              <p className="text-brand-blue mt-4">
-                <span className="text-terminal-green">✓</span> Ready to build something amazing!
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Tracks Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
+      {/* Growth Strategy Section */}
+      <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <TrendingUp size={16} />
+              Global Reach
+            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="text-brand-blue">Track</span>
+              Where We're <span className="text-brand-blue">Spreading the Word</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Pick what excites you. Every contribution counts.
+              Our multi-channel growth strategy ensures maximum visibility for your contributions.
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tracks.map((track, index) => (
-              <motion.a
-                key={track.title}
-                href={GITHUB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-brand-blue/50 transition-all duration-300 cursor-pointer"
-                data-testid={`track-${track.title.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                <div className={`w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <track.icon className={track.color} size={24} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{track.title}</h3>
-                <p className="text-gray-400 text-sm mb-4">{track.description}</p>
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                  track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
-                  track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-400" :
-                  "bg-purple-500/20 text-purple-400"
-                }`}>
-                  {track.difficulty}
-                </span>
-              </motion.a>
-            ))}
+            {growthStrategy.map((channel, index) => {
+              const Icon = platformIcons[channel.platform] || Globe;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-6"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                    <Icon className="text-purple-400" size={24} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">{channel.platform}</h3>
+                  <p className="text-xs text-gray-500 mb-3">{channel.description}</p>
+                  <p className="text-sm text-gray-400 mb-3">{channel.strategy}</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Users size={14} className="text-terminal-green" />
+                    <span className="text-sm text-terminal-green font-medium">{channel.expectedReach}</span>
+                  </div>
+                  {channel.links && channel.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {channel.links.map((link, i) => (
+                        <a
+                          key={i}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs px-2 py-1 rounded bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white transition-colors"
+                          data-testid={`link-growth-${channel.platform.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${i}`}
+                        >
+                          {link.text}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-8 text-center"
+          >
+            <p className="text-gray-400">
+              Total Expected Organic Reach:{" "}
+              <span className="text-2xl font-bold text-terminal-green">225K+ developers</span>
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -850,16 +904,17 @@ export default function Hackathon() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Got Questions?
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm mb-6">
+              <MessageSquare size={16} />
+              Common Questions
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Frequently Asked <span className="text-brand-blue">Questions</span>
             </h2>
-            <p className="text-gray-400">
-              We've got answers. If not, ask on Discord.
-            </p>
           </motion.div>
 
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {hackathonFaqs.map((faq, index) => (
               <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}
           </div>
@@ -867,61 +922,56 @@ export default function Hackathon() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/20 rounded-full blur-[120px]" />
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <section className="py-20 px-4 relative">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-3xl p-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
-              <Sparkles size={16} />
-              <span className="font-bold">$5,350</span> in prizes across both phases
-            </div>
-            
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Stop Learning. <span className="text-brand-blue">Start Shipping.</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Ready to Ship Real Code?
             </h2>
-            
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-              The best way to learn AI is to build with it. Join 1,000+ developers in a 
-              13-week program designed to turn your ideas into production code.
+            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+              Join {hackathonConfig.expectedParticipants} builders competing for {hackathonConfig.totalPrizePool} in prizes.
+              Your contributions become part of Cortex Linux — forever.
             </p>
-
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-10 py-5 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-xl shadow-[0_0_40px_rgba(0,102,255,0.5)] hover:shadow-[0_0_60px_rgba(0,102,255,0.7)] transition-all duration-300"
-              data-testid="final-cta-github"
-              onClick={() => {
-                analytics.trackCTAClick('join_hackathon', 'hackathon_footer');
-                analytics.trackFormSubmit('hackathon_registration', true);
-                analytics.trackConversion('hackathon_signup');
-              }}
-            >
-              <Github size={28} />
-              Join the Hackathon
-              <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <div className="flex flex-wrap justify-center gap-6 mt-10">
-              <div className="flex items-center gap-2 text-gray-400">
-                <CheckCircle2 size={18} className="text-emerald-400" />
-                <span className="text-sm">Free to participate</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400">
-                <CheckCircle2 size={18} className="text-emerald-400" />
-                <span className="text-sm">Global & async</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400">
-                <CheckCircle2 size={18} className="text-emerald-400" />
-                <span className="text-sm">All skill levels</span>
-              </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-8 py-4 bg-brand-blue hover:opacity-90 rounded-xl text-white font-semibold text-lg shadow-[0_0_30px_rgba(0,102,255,0.4)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300"
+                data-testid="final-cta-github"
+                onClick={() => {
+                  analytics.trackCTAClick('start_building', 'hackathon_final_cta');
+                  analytics.trackConversion('hackathon_signup');
+                }}
+              >
+                <Github size={24} />
+                Start Building Now
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 border-2 border-white/20 hover:border-white/40 rounded-xl text-white font-medium transition-colors"
+                data-testid="final-cta-discord"
+                onClick={() => {
+                  analytics.trackCTAClick('join_discord', 'hackathon_final_cta');
+                }}
+              >
+                <FaDiscord size={20} />
+                Join Discord Community
+              </a>
             </div>
+            
+            <p className="text-sm text-gray-500 mt-6">
+              {hackathonConfig.tagline}
+            </p>
           </motion.div>
         </div>
       </section>
