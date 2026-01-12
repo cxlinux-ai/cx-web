@@ -189,7 +189,7 @@ export const championAmbassador: ChampionAmbassador = {
   achievementDetail: "Won against 300,000+ contestants in India's largest hackathon",
   reach: "50K+ India developer network",
   github: "suyashdongre",
-  avatar: "https://github.com/suyashdongre.png",
+  avatar: "/assets/suyash.png",
   linkedin: "suyashdongre",
   quote: "The best hackathons are BUILD competitions. Ship code, not slide decks.",
   roles: [
