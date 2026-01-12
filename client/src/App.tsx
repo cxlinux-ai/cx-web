@@ -188,7 +188,7 @@ export default function App() {
                 </Link>
                 <Link
                   href="/hackathon"
-                  className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 ${
+                  className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 group ${
                     location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
                   }`}
                   data-testid="link-hackathon"
@@ -198,7 +198,10 @@ export default function App() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
                   </span>
-                  Hackathon
+                  <span className="relative">
+                    Hackathon
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-terminal-green transition-all duration-300 ${location === "/hackathon" ? "w-full" : "w-0 group-hover:w-full"}`} />
+                  </span>
                 </Link>
               </div>
 
