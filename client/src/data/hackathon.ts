@@ -461,7 +461,7 @@ export const hackathonConfig = {
   ideathonPrize: "$3,000",
   buildSprintPrize: "$12,000",
   expectedParticipants: "5,000+",
-  expectedIdeas: "2000+",
+  expectedIdeas: "4000+",
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
   discordUrl: "https://discord.gg/cortexlinux",
