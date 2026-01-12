@@ -26,6 +26,8 @@ import {
   Building,
   Lock,
   Sparkles,
+  Github,
+  Play,
 } from "lucide-react";
 import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
 import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
@@ -217,49 +219,83 @@ export default function StartupPage() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="font-bold leading-tight mb-6 px-2"
           >
-            <span className="gradient-text text-[82px] font-extrabold">The Linux Built</span>
+            <span className="gradient-text text-4xl sm:text-5xl md:text-6xl lg:text-[82px] font-extrabold">The Linux Built</span>
             <br />
-            <span className="text-white text-[82px] font-extrabold">for AI Founders</span>
+            <span className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-[82px] font-extrabold">for AI Founders</span>
           </motion.h1>
 
-          {/* Subheadline */}
+          {/* Micro-Proof Strip - Credibility markers */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6"
+          >
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+              <Layers size={12} className="text-brand-blue" />
+              <span>Pre-installed AI Toolchain</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+              <Zap size={12} className="text-emerald-400" />
+              <span>Zero Configuration</span>
+            </div>
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+              <Github size={12} className="text-gray-300" />
+              <span>Open-Source Core</span>
+            </div>
+            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
+              <Code2 size={12} className="text-orange-400" />
+              <span>Built by AI Engineers</span>
+            </div>
+          </motion.div>
+
+          {/* Subheadline - Emotionally engaging */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 px-2"
           >
-            AI tooling pre-installed. Zero configuration. Ship faster.
+            Stop wrestling with dependencies. Start shipping your AI product. 
+            Cortex comes with everything you need — configured and ready.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Differentiated by psychological intent */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-4"
           >
             <a
               href="https://github.com/cortexlinux/cortex"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-lg glow-brand-blue hover:scale-105 transition-all duration-300"
-              data-testid="button-download-free"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-lg shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:scale-[1.02] transition-all duration-300"
+              data-testid="button-install-cortex"
             >
               <Download size={20} />
-              Download Free
+              Install Cortex Linux
             </a>
-            <a
-              href="https://github.com/cortexlinux/cortex"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/getting-started"
               className="flex items-center justify-center gap-2 px-8 py-4 border border-white/20 rounded-xl text-white font-semibold text-lg hover:bg-white/5 hover:border-brand-blue/50 transition-all duration-300"
-              data-testid="button-founders-edition"
+              data-testid="button-see-how-it-works"
             >
-              Get Founders Edition - $19/mo
-              <ArrowRight size={20} />
-            </a>
+              <Play size={20} />
+              See How It Works
+            </Link>
           </motion.div>
+          
+          {/* Supporting text */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-xs text-gray-500 text-center mb-12"
+          >
+            Free forever · Open source · MIT Licensed
+          </motion.p>
 
           {/* Terminal Mockup */}
           <motion.div
