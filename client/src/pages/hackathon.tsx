@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Github,
   Star,
@@ -34,13 +34,12 @@ import {
   Lightbulb,
   Download,
   ClipboardList,
-  X,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
-import HackathonRegistrationForm from "@/components/HackathonRegistrationForm";
+import RegistrationModal from "@/components/RegistrationModal";
 import {
   championAmbassador,
   hackathonPhases,
@@ -269,45 +268,10 @@ export default function Hackathon() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Registration Modal */}
-      <AnimatePresence>
-        {showRegistrationModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-            onClick={(e) => e.target === e.currentTarget && setShowRegistrationModal(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-900 border border-white/10 rounded-2xl shadow-2xl"
-            >
-              <div className="sticky top-0 z-10 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-bold text-white">Hackathon Registration</h2>
-                  <p className="text-sm text-gray-400">Join the Cortex Hackathon 2026</p>
-                </div>
-                <button
-                  onClick={() => setShowRegistrationModal(false)}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                >
-                  <X size={20} className="text-gray-400" />
-                </button>
-              </div>
-              <div className="p-6">
-                <HackathonRegistrationForm
-                  onSuccess={() => {
-                    setTimeout(() => setShowRegistrationModal(false), 3000);
-                  }}
-                  onClose={() => setShowRegistrationModal(false)}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <RegistrationModal
+        isOpen={showRegistrationModal}
+        onClose={() => setShowRegistrationModal(false)}
+      />
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
