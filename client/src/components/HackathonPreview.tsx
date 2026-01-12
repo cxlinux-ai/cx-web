@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Clock } from "lucide-react";
 import { Link } from "wouter";
-import { useState, useEffect, useRef } from "react";
-import RegistrationModal from "./RegistrationModal";
+import { useEffect, useRef, useState } from "react";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const HACKATHON_DATE = new Date("2026-02-17T00:00:00");
@@ -40,7 +39,6 @@ function useCountdown(targetDate: Date) {
 
 export default function HackathonPreview() {
   const countdown = useCountdown(HACKATHON_DATE);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -62,11 +60,6 @@ export default function HackathonPreview() {
 
   return (
     <>
-      <RegistrationModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)}
-        redirectUrl={GITHUB_URL}
-      />
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -227,22 +220,15 @@ export default function HackathonPreview() {
                 {/* CTA area with 3D buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
                   {/* Primary CTA - 3D button */}
-                  <motion.button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsModalOpen(true);
-                    }}
+                  <Link
+                    href="/register"
                     className="group/btn relative z-20 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
-                    data-testid="button-sign-in-now"
-                    whileHover={{ y: -2, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    data-testid="button-sign-up-now"
                   >
                     <Github size={18} strokeWidth={2.5} />
-                    <span>Sign In Now</span>
+                    <span>Sign Up Now</span>
                     <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
-                  </motion.button>
+                  </Link>
                   
                   {/* Secondary CTA */}
                   <Link
