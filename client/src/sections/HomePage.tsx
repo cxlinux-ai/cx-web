@@ -62,6 +62,7 @@ import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
 import HackathonPreview from "@/components/HackathonPreview";
+import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
 import { abTests } from "@/lib/ab-testing";
 
@@ -2426,6 +2427,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </h2>
           <div className="flex flex-wrap justify-center gap-12 md:gap-16">
             {[
+              {
+                name: championAmbassador.name,
+                role: `${championAmbassador.title} · ${championAmbassador.achievement}`,
+                github: championAmbassador.github,
+                avatar: championAmbassador.avatar
+              },
               {
                 name: "Mike Linke",
                 role: "Founder · Systems Engineering · Open-source maintainer",

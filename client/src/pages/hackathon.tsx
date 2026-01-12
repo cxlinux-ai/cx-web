@@ -28,6 +28,7 @@ import {
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
+import { championAmbassador } from "@/data/hackathon";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
@@ -361,6 +362,40 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
+          {/* Champion Ambassador Spotlight */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10"
+            data-testid="hackathon-champion-spotlight"
+          >
+            <img
+              src={championAmbassador.avatar}
+              alt={championAmbassador.name}
+              className="w-12 h-12 rounded-full border-2 border-brand-blue"
+              loading="lazy"
+            />
+            <div className="text-left">
+              <p className="text-sm font-medium text-white">
+                Judged by <span className="text-brand-blue">{championAmbassador.name}</span>
+              </p>
+              <p className="text-xs text-gray-400">
+                {championAmbassador.achievement} · {championAmbassador.achievementDetail}
+              </p>
+            </div>
+            <a
+              href={`https://github.com/${championAmbassador.github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 px-4 py-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+              data-testid="champion-github-link"
+            >
+              <Github size={16} className="inline mr-1" />
+              GitHub
+            </a>
+          </motion.div>
+
           {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -525,6 +560,65 @@ export default function Hackathon() {
                 <div className="w-4 h-4 rounded-full bg-blue-500" />
                 <span className="text-sm text-gray-400">Phase 2: 8 weeks</span>
               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Champion Ambassador Section */}
+      <section className="py-20 px-4 border-t border-white/10">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Meet Your <span className="text-brand-blue">Champion Ambassador</span>
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Learn from someone who's been there. Suyash brings real hackathon experience to guide your journey.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10"
+            data-testid="ambassador-spotlight-section"
+          >
+            <div className="flex-shrink-0">
+              <img
+                src={championAmbassador.avatar}
+                alt={championAmbassador.name}
+                className="w-24 h-24 rounded-full border-4 border-brand-blue/50"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h3 className="text-xl font-bold text-white mb-1">{championAmbassador.name}</h3>
+              <p className="text-brand-blue font-medium mb-3">{championAmbassador.title}</p>
+              <ul className="space-y-2 text-gray-400 text-sm mb-4">
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Trophy size={14} className="text-yellow-500" />
+                  {championAmbassador.achievement}
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Star size={14} className="text-brand-blue" />
+                  {championAmbassador.achievementDetail}
+                </li>
+                <li className="flex items-center gap-2 justify-center md:justify-start">
+                  <Users size={14} className="text-terminal-green" />
+                  {championAmbassador.reach}
+                </li>
+              </ul>
+              {championAmbassador.quote && (
+                <blockquote className="text-gray-300 italic border-l-2 border-brand-blue pl-4">
+                  "{championAmbassador.quote}"
+                </blockquote>
+              )}
             </div>
           </motion.div>
         </div>
