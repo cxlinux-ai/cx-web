@@ -39,7 +39,6 @@ import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
-import RegistrationModal from "@/components/RegistrationModal";
 import {
   championAmbassador,
   hackathonPhases,
@@ -251,8 +250,6 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
 }
 
 export default function Hackathon() {
-  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-
   useEffect(() => {
     const cleanup = updateSEO(seoConfigs.hackathon);
     return cleanup;
@@ -267,11 +264,6 @@ export default function Hackathon() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Registration Modal */}
-      <RegistrationModal
-        isOpen={showRegistrationModal}
-        onClose={() => setShowRegistrationModal(false)}
-      />
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
@@ -369,9 +361,9 @@ export default function Hackathon() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
-            <button
+            <Link
+              href="/register"
               onClick={() => {
-                setShowRegistrationModal(true);
                 analytics.trackCTAClick('register_now', 'hackathon_hero');
                 analytics.trackConversion('hackathon_signup');
               }}
@@ -381,7 +373,7 @@ export default function Hackathon() {
               <ClipboardList size={20} />
               Register Now
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
             <a
               href={DISCORD_URL}
               target="_blank"
@@ -526,8 +518,8 @@ export default function Hackathon() {
                 <span className="text-white font-semibold">View Rules</span>
                 <span className="text-gray-400 text-sm">Read the full guidelines</span>
               </Link>
-              <button
-                onClick={() => setShowRegistrationModal(true)}
+              <Link
+                href="/register"
                 className="flex flex-col items-center gap-3 p-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/40 rounded-xl transition-all text-center"
                 data-testid="step-4-register"
               >
@@ -535,7 +527,7 @@ export default function Hackathon() {
                 <ClipboardList size={24} className="text-blue-400" />
                 <span className="text-white font-semibold">Fill in the Form</span>
                 <span className="text-gray-400 text-sm">Complete your registration</span>
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -1329,9 +1321,9 @@ export default function Hackathon() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button
+              <Link
+                href="/register"
                 onClick={() => {
-                  setShowRegistrationModal(true);
                   analytics.trackCTAClick('register_now', 'hackathon_final_cta');
                   analytics.trackConversion('hackathon_signup');
                 }}
@@ -1341,7 +1333,7 @@ export default function Hackathon() {
                 <ClipboardList size={24} />
                 Register Now
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
               <a
                 href={DISCORD_URL}
                 target="_blank"

@@ -29,6 +29,7 @@ import MissionPage from "./pages/mission";
 import ComparePage from "./pages/compare";
 import CompareAnalyticsPage from "./pages/compare-analytics";
 import HackathonRulesPage from "./pages/hackathon-rules";
+import Register from "./pages/register";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -364,6 +365,7 @@ export default function App() {
             <Route path="/getting-started" component={GettingStarted} />
             <Route path="/hackathon" component={Hackathon} />
             <Route path="/hackathon-rules" component={HackathonRulesPage} />
+            <Route path="/register" component={Register} />
             <Route path="/startup" component={StartupPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />
