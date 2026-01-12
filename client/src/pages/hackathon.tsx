@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   Star,
@@ -34,11 +34,13 @@ import {
   Lightbulb,
   Download,
   ClipboardList,
+  X,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
+import HackathonRegistrationForm from "@/components/HackathonRegistrationForm";
 import {
   championAmbassador,
   hackathonPhases,
@@ -529,12 +531,6 @@ export default function Hackathon() {
                 <span className="text-white font-semibold">Fill in the Form</span>
                 <span className="text-gray-400 text-sm">Complete your registration</span>
               </button>
-            </div>
-            
-            {/* Big Prize Pool */}
-            <div className="mt-12 text-center">
-              <p className="text-terminal-green font-bold" style={{ fontSize: '50px' }}>$15,000</p>
-              <p className="text-xl text-gray-300">Total Prize Pool</p>
             </div>
           </motion.div>
         </div>
