@@ -127,16 +127,17 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
   return (
     <div
       className={`
-        relative rounded-xl p-6 group
+        relative glass-card rounded-2xl p-6 group
         transition-all duration-300 ease-out
         ${isPremium 
-          ? "bg-gradient-to-br from-yellow-500/10 via-slate-800/80 to-slate-800/80 border-2 border-yellow-500/40 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/20 hover:border-yellow-500/60" 
+          ? "border-yellow-500/40 hover:border-yellow-500/60 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/20" 
           : isHighValue 
-            ? "bg-gradient-to-br from-blue-500/10 via-slate-800/70 to-slate-800/70 border border-blue-500/30 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
-            : "bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800/80 hover:border-slate-600/50"
+            ? "border-blue-500/30 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10"
+            : "hover:border-white/20"
         }
         hover:-translate-y-1
       `}
+      data-testid={`bounty-card-${bounty.number}`}
     >
       {/* Premium Glow Effect - subtle */}
       {isPremium && (
@@ -327,27 +328,27 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
 
 function BountyCardSkeleton() {
   return (
-    <div className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-6 animate-pulse">
+    <div className="glass-card rounded-2xl p-6 animate-pulse">
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-3 h-3 rounded-full bg-slate-600" />
-          <div className="w-12 h-4 bg-slate-600 rounded" />
+          <div className="w-3 h-3 rounded-full bg-white/10" />
+          <div className="w-12 h-4 bg-white/10 rounded" />
         </div>
         <div className="flex items-center gap-3">
-          <div className="w-16 h-6 bg-slate-600 rounded" />
-          <div className="w-16 h-5 bg-slate-600 rounded" />
+          <div className="w-16 h-6 bg-white/10 rounded-lg" />
+          <div className="w-16 h-5 bg-white/10 rounded-lg" />
         </div>
       </div>
-      <div className="h-6 bg-slate-600 rounded w-3/4 mb-2" />
-      <div className="h-4 bg-slate-600 rounded w-full mb-4" />
+      <div className="h-6 bg-white/10 rounded-lg w-3/4 mb-2" />
+      <div className="h-4 bg-white/10 rounded w-full mb-4" />
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-24 h-4 bg-slate-600 rounded" />
-        <div className="w-16 h-4 bg-slate-600 rounded" />
-        <div className="w-20 h-4 bg-slate-600 rounded" />
+        <div className="w-24 h-4 bg-white/10 rounded" />
+        <div className="w-16 h-4 bg-white/10 rounded" />
+        <div className="w-20 h-4 bg-white/10 rounded" />
       </div>
       <div className="flex gap-2">
-        <div className="w-16 h-5 bg-slate-600 rounded" />
-        <div className="w-16 h-5 bg-slate-600 rounded" />
+        <div className="w-16 h-5 bg-white/10 rounded-lg" />
+        <div className="w-16 h-5 bg-white/10 rounded-lg" />
       </div>
     </div>
   );
@@ -385,10 +386,10 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
 
   return (
     <div className="text-center py-16 px-4">
-      <div className="max-w-md mx-auto">
+      <div className="glass-card rounded-2xl p-8 max-w-md mx-auto">
         {/* Icon */}
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-          <svg className="w-10 h-10 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
@@ -399,7 +400,7 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
         </h3>
 
         {/* Description */}
-        <p className="text-slate-400 mb-6 leading-relaxed">
+        <p className="text-gray-400 mb-6 leading-relaxed">
           {isFiltered ? (
             "Try adjusting your filters to see more results."
           ) : (
@@ -415,7 +416,7 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
           {isFiltered ? (
             <button
               onClick={onClear}
-              className="px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium"
+              className="px-6 py-2.5 bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-xl transition-colors font-medium"
               data-testid="button-clear-filters"
             >
               Clear Filters
@@ -426,7 +427,7 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
                 href="https://github.com/cortexlinux"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors font-medium"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors font-medium shadow-lg shadow-blue-500/25"
                 data-testid="link-github-org"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -438,7 +439,7 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
                 href="https://github.com/cortexlinux/cortex/issues"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-xl transition-colors font-medium"
                 data-testid="link-propose-bounty"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -452,7 +453,7 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
 
         {/* Footer note */}
         {!isFiltered && (
-          <p className="text-sm text-slate-500 mt-8">
+          <p className="text-sm text-gray-500 mt-8">
             Issues labeled with dollar amounts (e.g., $100, $500) will appear here as bounties.
           </p>
         )}
@@ -463,16 +464,23 @@ function EmptyState({ filter, onClear }: { filter: FilterStatus; onClear: () => 
 
 function ErrorState({ error, onRetry }: { error: string; onRetry: () => void }) {
   return (
-    <div className="text-center py-16">
-      <div className="text-6xl mb-4">⚠️</div>
-      <h3 className="text-xl font-semibold text-white mb-2">Failed to load bounties</h3>
-      <p className="text-slate-400 mb-6">{error}</p>
-      <button
-        onClick={onRetry}
-        className="px-6 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg transition-colors"
-      >
-        Retry
-      </button>
+    <div className="text-center py-16 px-4">
+      <div className="glass-card rounded-2xl p-8 max-w-md mx-auto">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-white mb-2">Failed to load bounties</h3>
+        <p className="text-gray-400 mb-6">{error}</p>
+        <button
+          onClick={onRetry}
+          className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors font-medium shadow-lg shadow-blue-500/25"
+          data-testid="button-retry"
+        >
+          Try Again
+        </button>
+      </div>
     </div>
   );
 }
@@ -566,161 +574,156 @@ export function BountiesBoard() {
   const stats = response?.data?.stats;
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto px-4 py-12 relative z-10">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-2">
-            <h1 className="text-3xl font-bold flex items-center gap-3">
-              <span className="text-4xl">💰</span>
-              Bounty Board
-            </h1>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              {isFetching && (
-                <span className="flex items-center gap-2">
-                  <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                    />
-                  </svg>
-                  Refreshing...
-                </span>
-              )}
-              {lastRefresh && !isFetching && (
-                <span>Updated {formatTimeAgo(lastRefresh.toISOString())}</span>
-              )}
-              <button
-                onClick={() => refetch()}
-                disabled={isFetching}
-                className="p-1.5 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50"
-                title="Refresh"
-              >
-                <svg
-                  className={`w-4 h-4 ${isFetching ? "animate-spin" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-              </button>
+        <div className="mb-12 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
+              <svg className="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
           </div>
-          <p className="text-slate-400">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
+            <span className="gradient-text">Bounty Board</span>
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-4">
             Earn rewards by contributing to Cortex Linux open source projects.
           </p>
-        </div>
-
-        {/* Stats Cards */}
-        {stats && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <StatsCard
-              label="Open Bounties"
-              value={stats.totalOpen}
-              subValue={formatCurrency(stats.totalOpenAmount) + " available"}
-              color="text-green-400"
-              icon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+          <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
+            {isFetching && (
+              <span className="flex items-center gap-2 text-blue-300">
+                <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
-              }
-            />
-            <StatsCard
-              label="Completed"
-              value={stats.totalClosed}
-              subValue={formatCurrency(stats.totalClosedAmount) + " paid out"}
-              color="text-slate-400"
-              icon={
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                Refreshing...
+              </span>
+            )}
+            {lastRefresh && !isFetching && (
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-              }
-            />
-          </div>
-        )}
-
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          {/* Search */}
-          <div className="flex-1">
-            <div className="relative">
+                Updated {formatTimeAgo(lastRefresh.toISOString())}
+              </span>
+            )}
+            <button
+              onClick={() => refetch()}
+              disabled={isFetching}
+              className="flex items-center gap-2 px-3 py-1.5 glass-card rounded-lg hover:border-blue-500/40 transition-colors disabled:opacity-50"
+              title="Refresh"
+              data-testid="button-refresh-bounties"
+            >
               <svg
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+                className={`w-4 h-4 text-blue-300 ${isFetching ? "animate-spin" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
-              <input
-                type="text"
-                placeholder="Search bounties..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              />
+              <span className="text-gray-300 text-sm">Refresh</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        {stats && (
+          <div className="grid grid-cols-2 gap-4 mb-8 max-w-2xl mx-auto">
+            <div className="glass-card rounded-2xl p-6 border-green-500/20 hover:border-green-500/40 transition-colors" data-testid="stats-open">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-green-400">{stats.totalOpen}</div>
+                  <div className="text-sm text-gray-400">Open Bounties</div>
+                </div>
+              </div>
+              <div className="text-sm text-green-300/80">{formatCurrency(stats.totalOpenAmount)} available</div>
+            </div>
+            <div className="glass-card rounded-2xl p-6 border-blue-500/20 hover:border-blue-500/40 transition-colors" data-testid="stats-completed">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-blue-300">{stats.totalClosed}</div>
+                  <div className="text-sm text-gray-400">Completed</div>
+                </div>
+              </div>
+              <div className="text-sm text-blue-300/80">{formatCurrency(stats.totalClosedAmount)} paid out</div>
             </div>
           </div>
+        )}
 
-          {/* Filter Dropdown */}
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value as FilterStatus)}
-            className="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-          >
-            <option value="all">All Bounties</option>
-            <option value="open">Open Only</option>
-            <option value="closed">Completed Only</option>
-          </select>
+        {/* Filters */}
+        <div className="glass-card rounded-2xl p-4 mb-8">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1">
+              <div className="relative">
+                <svg
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search bounties..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-colors"
+                  data-testid="input-search-bounties"
+                />
+              </div>
+            </div>
 
-          {/* Sort Dropdown */}
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as SortOption)}
-            className="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="most_active">Most Active</option>
-            <option value="highest_bounty">Highest Bounty</option>
-          </select>
+            {/* Filter Dropdown */}
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as FilterStatus)}
+              className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer"
+              data-testid="select-filter"
+            >
+              <option value="all" className="bg-gray-900">All Bounties</option>
+              <option value="open" className="bg-gray-900">Open Only</option>
+              <option value="closed" className="bg-gray-900">Completed Only</option>
+            </select>
+
+            {/* Sort Dropdown */}
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortOption)}
+              className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 cursor-pointer"
+              data-testid="select-sort"
+            >
+              <option value="newest" className="bg-gray-900">Newest First</option>
+              <option value="oldest" className="bg-gray-900">Oldest First</option>
+              <option value="most_active" className="bg-gray-900">Most Active</option>
+              <option value="highest_bounty" className="bg-gray-900">Highest Bounty</option>
+            </select>
+          </div>
         </div>
 
         {/* Results Count */}
         {!isLoading && !error && (
-          <div className="text-sm text-slate-400 mb-4">
-            Showing {filteredBounties.length} bounties
-            {search && ` matching "${search}"`}
+          <div className="text-sm text-gray-400 mb-6">
+            Showing <span className="text-blue-300 font-medium">{filteredBounties.length}</span> bounties
+            {search && <span className="text-gray-500"> matching "{search}"</span>}
           </div>
         )}
 
@@ -746,20 +749,32 @@ export function BountiesBoard() {
           </div>
         )}
 
-        {/* Footer */}
-        <div className="mt-8 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-          <p>
-            Want to contribute?{" "}
+        {/* Footer CTA */}
+        <div className="mt-12 text-center">
+          <div className="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+              <svg className="w-6 h-6 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Want to contribute?</h3>
+            <p className="text-gray-400 mb-6">
+              Check out our GitHub organization for open issues and start earning rewards.
+            </p>
             <a
               href="https://github.com/cortexlinux"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary-400 hover:text-primary-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-white font-medium transition-colors shadow-lg shadow-blue-500/25"
+              data-testid="link-github-org"
             >
-              Check out our GitHub organization
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" />
+              </svg>
+              View GitHub Organization
             </a>
-          </p>
-          <p className="mt-1">Data refreshes automatically every 30 minutes</p>
+            <p className="text-sm text-gray-500 mt-4">Data refreshes automatically every 30 minutes</p>
+          </div>
         </div>
       </div>
     </div>
