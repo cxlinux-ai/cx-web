@@ -330,7 +330,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   // A/B Testing for hero headline
   const { variant: headlineVariant } = useABVariant(homeHeroTest);
   const headlines: Record<string, string> = {
-    control: 'Execute Your Intent',
+    control: 'Linux, But Smarter',
     variant_b: 'AI-Native Linux for Developers',
   };
 
