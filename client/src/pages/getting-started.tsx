@@ -257,11 +257,11 @@ export default function GettingStarted() {
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${card.color} flex items-center justify-center mb-4`}>
                       <card.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition-colors">
                       {card.title}
                     </h3>
                     <p className="text-gray-400 mb-4">{card.description}</p>
-                    <div className="flex items-center text-blue-400 text-sm font-medium">
+                    <div className="flex items-center text-blue-300 text-sm font-medium">
                       Read Guide <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -283,7 +283,7 @@ export default function GettingStarted() {
           >
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-blue-400" />
+                <Shield className="w-5 h-5 text-blue-300" />
               </div>
               <h2 className="text-3xl font-bold text-white">Prerequisites</h2>
             </div>
@@ -301,7 +301,7 @@ export default function GettingStarted() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                      <req.icon className="w-4 h-4 text-blue-400" />
+                      <req.icon className="w-4 h-4 text-blue-300" />
                     </div>
                     <span className="text-gray-300">{req.text}</span>
                   </motion.div>
@@ -310,7 +310,7 @@ export default function GettingStarted() {
               
               <div className="mt-8 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
                 <p className="text-sm text-gray-300">
-                  <strong className="text-blue-400">Note:</strong> Cortex Linux is built on Ubuntu 24.04 LTS. 
+                  <strong className="text-blue-300">Note:</strong> Cortex Linux is built on Ubuntu 24.04 LTS. 
                   If your hardware runs Ubuntu, it will run Cortex Linux. GPU support requires NVIDIA drivers 530+.
                 </p>
               </div>
@@ -329,7 +329,7 @@ export default function GettingStarted() {
           >
             <div className="flex items-center gap-3 mb-12">
               <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Rocket className="w-5 h-5 text-blue-400" />
+                <Rocket className="w-5 h-5 text-blue-300" />
               </div>
               <h2 className="text-3xl font-bold text-white">Step-by-Step Setup</h2>
             </div>
@@ -384,7 +384,7 @@ export default function GettingStarted() {
           >
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Play className="w-5 h-5 text-blue-400" />
+                <Play className="w-5 h-5 text-blue-300" />
               </div>
               <h2 className="text-3xl font-bold text-white">Video Tutorial</h2>
             </div>
@@ -416,7 +416,7 @@ export default function GettingStarted() {
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Book className="w-5 h-5 text-blue-400" />
+                <Book className="w-5 h-5 text-blue-300" />
               </div>
               <h2 className="text-3xl font-bold text-white">Learning Paths</h2>
             </div>
@@ -447,10 +447,10 @@ export default function GettingStarted() {
                     <li key={resIndex}>
                       <Link 
                         href={resource.link}
-                        className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors text-sm group"
+                        className="flex items-center gap-2 text-gray-300 hover:text-blue-300 transition-colors text-sm group"
                         data-testid={`resource-link-${index}-${resIndex}`}
                       >
-                        <ArrowRight className="w-3 h-3 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3 h-3 text-blue-300 group-hover:translate-x-1 transition-transform" />
                         {resource.title}
                       </Link>
                     </li>
@@ -473,7 +473,7 @@ export default function GettingStarted() {
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Users className="w-5 h-5 text-blue-400" />
+                <Users className="w-5 h-5 text-blue-300" />
               </div>
               <h2 className="text-3xl font-bold text-white">Community and Support</h2>
             </div>
@@ -522,7 +522,7 @@ export default function GettingStarted() {
               data-testid="link-faq"
             >
               <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500/30 transition-colors">
-                <HelpCircle className="w-6 h-6 text-blue-400" />
+                <HelpCircle className="w-6 h-6 text-blue-300" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">FAQ</h3>
               <p className="text-gray-400 text-sm">Find answers to common questions</p>

@@ -207,7 +207,7 @@ export default function App() {
                   href="https://github.com/cortexlinux/cortex"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-400/50 hover:text-white transition-all"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-300/50 hover:text-white transition-all"
                   onClick={() => analytics.trackCTAClick('star_on_github', 'header')}
                 >
                   <Github size={16} />

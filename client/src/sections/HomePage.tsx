@@ -419,7 +419,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span className="text-gray-300">Open Source</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
-              <Tag size={12} className="text-brand-blue sm:w-3.5 sm:h-3.5" />
+              <Tag size={12} className="text-blue-300 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">v2.4.0</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
@@ -571,7 +571,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 data-testid={`built-for-${item.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-4 group-hover:bg-brand-blue/20 transition-colors">
-                  <item.icon className="w-6 h-6 text-brand-blue" />
+                  <item.icon className="w-6 h-6 text-blue-300" />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
                 <p className="text-sm font-medium mb-2 text-[#93c5fd]">{item.description}</p>
@@ -735,7 +735,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-blue/20 flex items-center justify-center flex-shrink-0">
-                    <feature.icon size={24} className="text-brand-blue" />
+                    <feature.icon size={24} className="text-blue-300" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -763,7 +763,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       </div>
                     </motion.div>
                     
-                    <button className="text-brand-blue text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-colors">
+                    <button className="text-blue-300 text-sm flex items-center gap-1 mt-3 hover:gap-2 transition-colors">
                       {expandedFeature === i ? "Hide code" : "View code"}
                       <ChevronRight size={14} className={`transition-transform duration-200 ${expandedFeature === i ? "rotate-90" : ""}`} />
                     </button>
@@ -841,7 +841,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
               <Layers size={14} />
               <span>System Architecture</span>
             </div>
@@ -860,8 +860,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               {/* Step 1: Input */}
               <div className="flex flex-col items-center">
                 <div className="w-32 lg:w-40 h-24 rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-blue/5 border border-brand-blue/30 flex flex-col items-center justify-center p-4">
-                  <Terminal size={28} className="text-brand-blue mb-2" />
-                  <span className="text-xs text-brand-blue font-medium">INPUT</span>
+                  <Terminal size={28} className="text-blue-300 mb-2" />
+                  <span className="text-xs text-blue-300 font-medium">INPUT</span>
                 </div>
                 <span className="text-xs text-gray-500 mt-2 text-center">Natural Language</span>
               </div>
@@ -920,7 +920,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 { icon: CheckCircle2, label: "EXECUTE", sublabel: "Sandboxed Runtime", color: "green" },
               ].map((step, i) => {
                 const colorMap: Record<string, string> = {
-                  blue: "from-blue-500/10 to-blue-600/5 border-blue-500/30 text-blue-400",
+                  blue: "from-blue-500/10 to-blue-600/5 border-blue-500/30 text-blue-300",
                   purple: "from-purple-500/15 to-purple-600/5 border-purple-500/40 text-purple-400",
                   cyan: "from-cyan-500/10 to-cyan-600/5 border-cyan-500/30 text-cyan-400",
                   green: "from-green-500/10 to-green-600/5 border-green-500/30 text-green-400",
@@ -971,7 +971,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 className="flex gap-4 p-6 glass-card rounded-xl hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-lg bg-brand-blue/10 flex items-center justify-center flex-shrink-0">
-                  <feature.icon size={24} className="text-brand-blue" />
+                  <feature.icon size={24} className="text-blue-300" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -997,7 +997,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
               <CircleDot size={14} />
               <span>Feature Comparison</span>
             </div>
@@ -1027,7 +1027,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="relative">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/20 border border-brand-blue/30 mb-2">
                       <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
-                      <span className="text-brand-blue font-bold text-sm">CORTEX</span>
+                      <span className="text-blue-300 font-bold text-sm">CORTEX</span>
                     </div>
                     <p className="text-xs text-blue-300/60">Recommended</p>
                   </div>
@@ -1050,7 +1050,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     {/* Feature Name with Icon */}
                     <div className="p-5 flex items-center gap-3">
                       <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center group-hover:border-brand-blue/30 transition-colors duration-200">
-                        <row.icon size={16} className="text-gray-400 group-hover:text-brand-blue transition-colors" />
+                        <row.icon size={16} className="text-gray-400 group-hover:text-blue-300 transition-colors" />
                       </div>
                       <span className="text-gray-200 font-medium group-hover:text-white transition-colors">
                         {row.feature}
@@ -1152,7 +1152,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 {/* Feature Header */}
                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-white/5">
                   <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue/20 to-purple-500/20 border border-brand-blue/20 flex items-center justify-center">
-                    <row.icon size={18} className="text-brand-blue" />
+                    <row.icon size={18} className="text-blue-300" />
                   </div>
                   <span className="text-white font-semibold text-lg">{row.feature}</span>
                 </div>
@@ -1161,7 +1161,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="grid grid-cols-3 gap-3">
                   {/* Cortex */}
                   <div className="text-center p-3 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
-                    <div className="text-xs text-brand-blue font-semibold mb-2">Cortex</div>
+                    <div className="text-xs text-blue-300 font-semibold mb-2">Cortex</div>
                     {row.cortex === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
@@ -1233,7 +1233,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-14"
           >
-            <p className="text-blue-400 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
+            <p className="text-blue-300 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, transparent pricing</h2>
             <p className="text-gray-400 text-base max-w-lg mx-auto">Start free, upgrade when you need more. No hidden fees, cancel anytime.</p>
           </motion.div>
@@ -1323,7 +1323,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="mb-6 pt-1">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                      <Zap size={16} className="text-blue-400" />
+                      <Zap size={16} className="text-blue-300" />
                     </div>
                     <h3 className="text-base font-semibold text-white">Founders</h3>
                   </div>
@@ -1349,7 +1349,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       "Team collaboration tools",
                     ].map((feature) => (
                       <li key={feature} className="flex items-start gap-2.5 text-gray-300">
-                        <Check size={15} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                        <Check size={15} className="text-blue-300 flex-shrink-0 mt-0.5" />
                         <span className="text-sm leading-tight">{feature}</span>
                       </li>
                     ))}
@@ -1478,7 +1478,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 className="glass-card rounded-xl p-6 text-center"
                 data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
               >
-                <stat.icon size={24} className="text-blue-400 mx-auto mb-3" />
+                <stat.icon size={24} className="text-blue-300 mx-auto mb-3" />
                 <div className="text-3xl font-bold mb-1">{stat.value.toLocaleString()}{stat.suffix}</div>
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </div>
@@ -1502,7 +1502,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     alt={`${contributor.login} - Cortex Linux contributor`}
                     loading="lazy"
                     decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-400 transition-all"
+                    className="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-300 transition-all"
                   />
                 </a>
               ))}
@@ -1518,7 +1518,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 href="https://github.com/cortexlinux/cortex"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-400 hover:underline"
+                className="flex items-center gap-2 text-blue-300 hover:underline"
               >
                 <Github size={16} />
                 View on GitHub
@@ -1631,7 +1631,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
               {/* Doc Links */}
               <div className="border-t border-white/5 px-6 py-4 flex gap-6 flex-wrap bg-black/20">
-                <a href="https://github.com/cortexlinux/cortex#readme" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Full Documentation</a>
+                <a href="https://github.com/cortexlinux/cortex#readme" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 hover:text-blue-300 transition-colors">Full Documentation</a>
                 <a href="https://github.com/cortexlinux/cortex/wiki" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
                 <a href="https://github.com/cortexlinux/cortex/tree/main/examples" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
               </div>
@@ -2035,7 +2035,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               { label: "Context Memory", icon: Brain, color: "violet" },
             ].map((item, i) => {
               const colorMap: Record<string, string> = {
-                blue: "text-blue-400 border-blue-500/30 bg-blue-500/5",
+                blue: "text-blue-300 border-blue-500/30 bg-blue-500/5",
                 indigo: "text-indigo-400 border-indigo-500/30 bg-indigo-500/5",
                 purple: "text-purple-400 border-purple-500/30 bg-purple-500/5",
                 green: "text-emerald-400 border-emerald-500/30 bg-emerald-500/5",
@@ -2158,7 +2158,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       item.status === "completed"
                         ? "bg-green-500/10 border border-green-500/30 hover:border-green-400/50"
                         : item.status === "current"
-                        ? "bg-blue-500/10 border border-blue-500/30 hover:border-blue-400/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
+                        ? "bg-blue-500/10 border border-blue-500/30 hover:border-blue-300/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
                         : "bg-white/5 border border-white/10 hover:border-white/20"
                     }`}
                   >
@@ -2166,7 +2166,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       item.status === "completed"
                         ? "text-green-400"
                         : item.status === "current"
-                        ? "text-blue-400"
+                        ? "text-blue-300"
                         : "text-gray-500"
                     }`}>
                       {item.quarter}
@@ -2249,7 +2249,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       item.status === "completed"
                         ? "text-green-400"
                         : item.status === "current"
-                        ? "text-blue-400"
+                        ? "text-blue-300"
                         : "text-gray-500"
                     }`}>
                       {item.quarter}
@@ -2326,7 +2326,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 href="https://discord.gg/cortexlinux"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 glass-card rounded-xl text-lg font-semibold hover:border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
+                className="px-8 py-4 glass-card rounded-xl text-lg font-semibold hover:border-blue-300/50 transition-all duration-300 flex items-center justify-center gap-2"
                 onClick={() => analytics.trackCTAClick('discord', 'hero_footer')}
                 data-testid="link-talk-to-us"
               >
@@ -2342,7 +2342,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <span>SOC 2 Compliant</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Shield size={16} className="text-blue-400" />
+                <Shield size={16} className="text-blue-300" />
                 <span>GDPR Ready</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-open-source">
@@ -2369,7 +2369,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
           >
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-blue/20 flex items-center justify-center">
-              <Mail className="w-8 h-8 text-brand-blue" />
+              <Mail className="w-8 h-8 text-blue-300" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Notified When <span className="gradient-text">Founders Edition</span> Launches
@@ -2486,7 +2486,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 data-testid="footer-logo"
               >
                 <span className="text-white">CORTEX</span>{" "}
-                <span className="text-blue-400">LINUX</span>
+                <span className="text-blue-300">LINUX</span>
               </button>
               <p className="text-gray-400 text-sm max-w-xs mb-4">
                 Open-source AI infrastructure for the modern developer.

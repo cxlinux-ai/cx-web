@@ -42,7 +42,7 @@ const missionPillars = [
     description: "Not a prototype or research project. Designed for developers and engineering teams who need reliability alongside intelligence.",
     gradient: "from-blue-500/20 to-blue-600/5",
     borderColor: "border-blue-500/30",
-    iconColor: "text-blue-400"
+    iconColor: "text-blue-300"
   },
   {
     icon: Shield,
@@ -178,7 +178,7 @@ export default function MissionPage() {
         );
       case "in-progress":
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
             <Clock size={12} className="animate-pulse" />
             In Progress
           </span>
@@ -233,7 +233,7 @@ export default function MissionPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
               <Target size={14} />
               <span>Our Mission</span>
             </div>
@@ -263,7 +263,7 @@ export default function MissionPage() {
                 href="https://discord.gg/cortexlinux"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 glass-card rounded-xl font-semibold hover:border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
+                className="px-6 py-3 glass-card rounded-xl font-semibold hover:border-blue-300/50 transition-all duration-300 flex items-center justify-center gap-2"
                 data-testid="link-discord-community"
               >
                 <FaDiscord size={18} />
@@ -274,7 +274,7 @@ export default function MissionPage() {
             {/* Trust Metrics */}
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <div className="flex items-center gap-2" data-testid="badge-mission-open-source">
-                <Code2 size={16} className="text-brand-blue" />
+                <Code2 size={16} className="text-blue-300" />
                 <span>100% Open Source</span>
               </div>
               <div className="flex items-center gap-2" data-testid="badge-mission-community">
@@ -343,7 +343,7 @@ export default function MissionPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
               <Rocket size={14} />
               <span>Development Roadmap</span>
             </div>
@@ -384,7 +384,7 @@ export default function MissionPage() {
                     </div>
                     <span className="text-xs text-gray-500 uppercase tracking-wider">{phase.phase}</span>
                     <h3 className="text-lg font-semibold text-white mb-1">{phase.title}</h3>
-                    <p className="text-sm text-brand-blue mb-4">{phase.quarter}</p>
+                    <p className="text-sm text-blue-300 mb-4">{phase.quarter}</p>
                     
                     <ul className="space-y-2">
                       {phase.milestones.map((milestone, j) => (
@@ -429,7 +429,7 @@ export default function MissionPage() {
                     </div>
                     {getStatusBadge(phase.status)}
                   </div>
-                  <p className="text-sm text-brand-blue mb-3">{phase.quarter}</p>
+                  <p className="text-sm text-blue-300 mb-3">{phase.quarter}</p>
                   
                   <ul className="space-y-2">
                     {phase.milestones.map((milestone, j) => (
@@ -457,7 +457,7 @@ export default function MissionPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
               <Zap size={14} />
               <span>Current Priorities</span>
             </div>
@@ -491,12 +491,12 @@ export default function MissionPage() {
                       </span>
                       {getPriorityBadge(task.priority)}
                     </div>
-                    <h3 className="text-white font-medium group-hover:text-brand-blue transition-colors">
+                    <h3 className="text-white font-medium group-hover:text-blue-300 transition-colors">
                       {task.title}
                     </h3>
                     <p className="text-sm text-gray-500 mt-1">{task.owner}</p>
                   </div>
-                  <GitBranch size={18} className="text-gray-600 group-hover:text-brand-blue transition-colors flex-shrink-0" />
+                  <GitBranch size={18} className="text-gray-600 group-hover:text-blue-300 transition-colors flex-shrink-0" />
                 </div>
               </motion.a>
             ))}
@@ -507,7 +507,7 @@ export default function MissionPage() {
               href="https://github.com/cortexlinux/cortex/issues"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-brand-blue hover:text-blue-300 transition-colors"
+              className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-300 transition-colors"
               data-testid="link-view-all-issues"
             >
               View all issues on GitHub
@@ -587,7 +587,7 @@ export default function MissionPage() {
               className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
-                <Code2 size={24} className="text-blue-400" />
+                <Code2 size={24} className="text-blue-300" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">For Developers</h3>
               <p className="text-gray-400 text-sm mb-6">

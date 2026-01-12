@@ -46,7 +46,7 @@ export default function AdminRegistrations() {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/hackathon" className="inline-flex items-center gap-2 text-brand-blue hover:text-blue-400 mb-6 transition-colors" data-testid="link-back-hackathon">
+        <Link href="/hackathon" className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-300 mb-6 transition-colors" data-testid="link-back-hackathon">
           <ArrowLeft size={16} />
           Back to Hackathon
         </Link>
@@ -57,7 +57,7 @@ export default function AdminRegistrations() {
           className="mb-8"
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            Hackathon <span className="text-brand-blue">Registrations</span>
+            Hackathon <span className="text-blue-300">Registrations</span>
           </h1>
           <p className="text-gray-400">
             Track and manage all hackathon participants
@@ -72,7 +72,7 @@ export default function AdminRegistrations() {
         >
           <div className="glass-card p-6 rounded-xl">
             <div className="flex items-center gap-3 mb-2">
-              <Users className="text-brand-blue" size={24} />
+              <Users className="text-blue-300" size={24} />
               <span className="text-gray-400">Total Registrations</span>
             </div>
             <p className="text-3xl font-bold">{registrations?.length || 0}</p>
@@ -164,7 +164,7 @@ export default function AdminRegistrations() {
                     >
                       <td className="p-4 text-gray-500">{index + 1}</td>
                       <td className="p-4 font-medium">{registration.name}</td>
-                      <td className="p-4 text-brand-blue">{registration.email}</td>
+                      <td className="p-4 text-blue-300">{registration.email}</td>
                       <td className="p-4 text-gray-400">{registration.phone || "—"}</td>
                       <td className="p-4 text-gray-400 text-sm">
                         <div className="flex items-center gap-2">

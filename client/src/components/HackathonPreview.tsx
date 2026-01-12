@@ -171,7 +171,7 @@ export default function HackathonPreview() {
                   Shape the <span className="gradient-text">future of Cortex Linux</span>
                 </h3>
                 <p className="text-center text-xl md:text-2xl font-semibold text-gray-300 mb-6">
-                  <span className="text-terminal-green">$18,000 in Prizes</span> · First AI Linux Hackathon
+                  <span className="text-terminal-green">$15,000 in Prizes</span> · First AI Linux Hackathon
                 </p>
                 
                 {/* Value proposition */}
@@ -199,7 +199,7 @@ export default function HackathonPreview() {
                     </motion.div>
                   </div>
                   <p className="text-sm text-gray-500 mb-5 flex items-center justify-center gap-2">
-                    <Clock size={16} className="text-brand-blue" />
+                    <Clock size={16} className="text-blue-300" />
                     Hackathon starts in:
                   </p>
                   <div className="flex gap-3 sm:gap-4 justify-center">

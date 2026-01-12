@@ -108,7 +108,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
           Back to Home
         </Link>
@@ -139,7 +139,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-400" />
+                  <section.icon size={20} className="text-blue-300" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>

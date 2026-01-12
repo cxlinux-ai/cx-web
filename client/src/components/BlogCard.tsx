@@ -81,7 +81,7 @@ export default function BlogCard({ post, index = 0 }: BlogCardProps) {
               </span>
             </div>
             
-            <span className="flex items-center gap-1 text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="flex items-center gap-1 text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity">
               Read <ArrowRight size={12} />
             </span>
           </div>

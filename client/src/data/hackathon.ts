@@ -288,7 +288,7 @@ export const hackathonPhases: HackathonPhase[] = [
     duration: "5 weeks",
     goal: "Ship real things",
     description: "The main event. Build a Cortex feature, plugin, extension, or integration based on IDEathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
-    color: "text-blue-400",
+    color: "text-blue-300",
     bgGradient: "from-blue-500/10 to-transparent",
     borderColor: "border-blue-500/20",
     requirements: [
@@ -375,7 +375,7 @@ export const buildTracks: BuildTrack[] = [
       "Cloud provider connectors",
       "Database management plugins"
     ],
-    color: "text-blue-400"
+    color: "text-blue-300"
   },
   {
     id: "ai-integrations",

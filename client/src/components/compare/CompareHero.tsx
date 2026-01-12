@@ -34,7 +34,7 @@ export function CompareHero({ comparison, variant, context }: CompareHeroProps) 
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-blue-500/10 text-blue-300 border border-blue-500/20 mb-6">
             Comparison Guide
           </span>
 
@@ -85,7 +85,7 @@ export function CompareHero({ comparison, variant, context }: CompareHeroProps) 
               <thead>
                 <tr className="border-b border-gray-800">
                   <th className="py-2 px-4 text-gray-400 font-medium">Feature</th>
-                  <th className="py-2 px-4 text-blue-400 font-medium">Cortex Linux</th>
+                  <th className="py-2 px-4 text-blue-300 font-medium">Cortex Linux</th>
                   <th className="py-2 px-4 text-gray-400 font-medium">{comparison.competitorDisplayName}</th>
                 </tr>
               </thead>

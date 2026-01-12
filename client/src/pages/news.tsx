@@ -124,7 +124,7 @@ export default function NewsPage() {
             className="text-center mb-12"
           >
             <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm mb-6"
               data-testid="badge-press-room"
             >
               <Newspaper size={16} />
@@ -186,7 +186,7 @@ export default function NewsPage() {
                         {formatDate(featuredRelease.date)}
                       </time>
                       <h3 
-                        className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 group-hover:text-blue-400 transition-colors leading-tight"
+                        className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 group-hover:text-blue-300 transition-colors leading-tight"
                         data-testid={`title-featured-${featuredRelease.slug}`}
                       >
                         {featuredRelease.headline || featuredRelease.title}
@@ -208,7 +208,7 @@ export default function NewsPage() {
                         </div>
                       )}
                       <div 
-                        className="inline-flex items-center gap-2 text-blue-400 font-medium group-hover:gap-3 transition-all"
+                        className="inline-flex items-center gap-2 text-blue-300 font-medium group-hover:gap-3 transition-all"
                         data-testid={`link-read-featured-${featuredRelease.slug}`}
                       >
                         Read Full Article
@@ -287,7 +287,7 @@ export default function NewsPage() {
                       </time>
 
                       <h2 
-                        className="text-lg font-bold mb-3 group-hover:text-blue-400 transition-colors leading-tight line-clamp-2"
+                        className="text-lg font-bold mb-3 group-hover:text-blue-300 transition-colors leading-tight line-clamp-2"
                         style={{ fontSize: '18px' }}
                         data-testid={`title-news-${release.slug}`}
                       >
@@ -316,7 +316,7 @@ export default function NewsPage() {
                       )}
 
                       <div 
-                        className="inline-flex items-center gap-2 text-blue-400 text-sm font-medium group-hover:gap-3 transition-all mt-auto"
+                        className="inline-flex items-center gap-2 text-blue-300 text-sm font-medium group-hover:gap-3 transition-all mt-auto"
                         data-testid={`link-read-article-${release.slug}`}
                       >
                         Read More

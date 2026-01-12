@@ -42,7 +42,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       >
         <span className="font-medium text-white pr-4">{question}</span>
         {isOpen ? (
-          <ChevronUp className="text-brand-blue flex-shrink-0" size={20} />
+          <ChevronUp className="text-blue-300 flex-shrink-0" size={20} />
         ) : (
           <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
         )}
@@ -185,7 +185,7 @@ export default function SecurityPage() {
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-transparent" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8 print:hidden" data-testid="link-back-home">
+          <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8 print:hidden" data-testid="link-back-home">
             <ChevronLeft size={16} />
             Back to Home
           </Link>
@@ -200,7 +200,7 @@ export default function SecurityPage() {
               <span className="text-emerald-400 text-sm font-medium">Security-First Design</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="heading-security">
-              Your system, <span className="text-brand-blue">your control</span>
+              Your system, <span className="text-blue-300">your control</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Cortex is designed with security-first principles for production Linux environments. 
@@ -267,17 +267,17 @@ export default function SecurityPage() {
             <div className="p-6 rounded-xl bg-blue-500/5 border border-blue-500/20">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-blue-500/20 rounded-lg">
-                  <Cloud className="text-blue-400" size={20} />
+                  <Cloud className="text-blue-300" size={20} />
                 </div>
-                <h3 className="text-lg font-semibold text-blue-400">What Goes to AI (Cloud Mode)</h3>
+                <h3 className="text-lg font-semibold text-blue-300">What Goes to AI (Cloud Mode)</h3>
               </div>
               <ul className="space-y-3 text-gray-300 text-sm">
                 <li className="flex items-start gap-2">
-                  <Terminal size={16} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                  <Terminal size={16} className="text-blue-300 mt-0.5 flex-shrink-0" />
                   <span>Your natural language command text only</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Terminal size={16} className="text-blue-400 mt-0.5 flex-shrink-0" />
+                  <Terminal size={16} className="text-blue-300 mt-0.5 flex-shrink-0" />
                   <span>Optional: Selected context you explicitly share</span>
                 </li>
               </ul>
@@ -374,7 +374,7 @@ export default function SecurityPage() {
                 data-testid={`privacy-commitment-${commitment.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 <div className="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center mb-4">
-                  <commitment.icon className="text-brand-blue" size={20} />
+                  <commitment.icon className="text-blue-300" size={20} />
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-2">{commitment.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{commitment.description}</p>
@@ -491,7 +491,7 @@ export default function SecurityPage() {
               className="p-6 rounded-xl bg-white/5 border border-white/10"
             >
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-                <Bug className="text-blue-400" size={24} />
+                <Bug className="text-blue-300" size={24} />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Vulnerability Disclosure</h3>
               <p className="text-gray-400 text-sm mb-4">
@@ -499,7 +499,7 @@ export default function SecurityPage() {
               </p>
               <a
                 href="mailto:security@cortexlinux.com"
-                className="text-brand-blue hover:underline text-sm"
+                className="text-blue-300 hover:underline text-sm"
                 data-testid="link-security-email"
               >
                 security@cortexlinux.com
@@ -541,7 +541,7 @@ export default function SecurityPage() {
               </p>
               <a
                 href="/security.asc"
-                className="text-brand-blue hover:underline text-sm flex items-center gap-1"
+                className="text-blue-300 hover:underline text-sm flex items-center gap-1"
                 data-testid="link-pgp-key"
               >
                 <Download size={14} />

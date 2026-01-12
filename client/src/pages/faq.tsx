@@ -238,7 +238,7 @@ export default function FAQ() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                  <category.icon className="h-6 w-6 text-blue-400" />
+                  <category.icon className="h-6 w-6 text-blue-300" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   {category.category}
@@ -258,7 +258,7 @@ export default function FAQ() {
                       data-testid={`question-${globalQuestionIndex}`}
                       className="border-white/10"
                     >
-                      <AccordionTrigger className="text-left hover:no-underline hover:text-blue-400 transition-colors">
+                      <AccordionTrigger className="text-left hover:no-underline hover:text-blue-300 transition-colors">
                         <span className="text-lg font-semibold pr-4">
                           {question.q}
                         </span>

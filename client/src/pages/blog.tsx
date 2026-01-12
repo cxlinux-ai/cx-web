@@ -68,7 +68,7 @@ export default function Blog() {
     <div className="min-h-screen pt-20 pb-16">
       {/* Header */}
       <section aria-labelledby="blog-heading" className="max-w-6xl mx-auto px-4 mb-12">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8">
           <ChevronLeft size={16} />
           Back to Home
         </Link>

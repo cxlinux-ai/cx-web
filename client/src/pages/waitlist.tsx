@@ -37,7 +37,7 @@ export default function WaitlistPage() {
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Join the <span className="text-blue-400">Cortex Linux</span> Waitlist
+            Join the <span className="text-blue-300">Cortex Linux</span> Waitlist
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Get early access to the AI-native operating system. Refer friends to move up the list and unlock exclusive rewards.

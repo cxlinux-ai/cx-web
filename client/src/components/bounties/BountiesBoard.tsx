@@ -187,7 +187,7 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
               ${(bounty.bountyAmount || 0) >= 500 
                 ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" 
                 : (bounty.bountyAmount || 0) >= 300 
-                  ? "text-blue-400 drop-shadow-[0_0_6px_rgba(96,165,250,0.4)]"
+                  ? "text-blue-300 drop-shadow-[0_0_6px_rgba(96,165,250,0.4)]"
                   : "text-green-400"
               }
             `}>
@@ -303,8 +303,8 @@ function BountyCard({ bounty }: { bounty: Bounty }) {
           ${(bounty.bountyAmount || 0) >= 500
             ? "text-yellow-400 border-yellow-500/30 bg-yellow-500/10 hover:bg-yellow-500/20 hover:border-yellow-500/50"
             : (bounty.bountyAmount || 0) >= 300
-              ? "text-blue-400 border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 hover:border-blue-500/50"
-              : "text-blue-400 border-slate-600 bg-slate-700/50 hover:bg-slate-700 hover:border-blue-500/50"
+              ? "text-blue-300 border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 hover:border-blue-500/50"
+              : "text-blue-300 border-slate-600 bg-slate-700/50 hover:bg-slate-700 hover:border-blue-500/50"
           }
         `}
       >

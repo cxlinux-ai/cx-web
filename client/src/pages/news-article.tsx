@@ -135,7 +135,7 @@ export default function NewsArticlePage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Link href="/news">
-              <span className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mb-8 cursor-pointer" data-testid="link-back-to-news">
+              <span className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-300 transition-colors mb-8 cursor-pointer" data-testid="link-back-to-news">
                 <ArrowLeft size={16} />
                 Back to News
               </span>
@@ -144,7 +144,7 @@ export default function NewsArticlePage() {
             <header className="mb-12" data-testid="article-header">
               <Badge 
                 variant="outline" 
-                className="mb-4 border-blue-500/30 bg-blue-500/10 text-blue-400"
+                className="mb-4 border-blue-500/30 bg-blue-500/10 text-blue-300"
                 data-testid="badge-press-release"
               >
                 <Newspaper size={12} className="mr-1" />
@@ -153,7 +153,7 @@ export default function NewsArticlePage() {
 
               <div className="flex flex-wrap items-center gap-3 text-base mb-6">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
-                  <Calendar size={16} className="text-blue-400" />
+                  <Calendar size={16} className="text-blue-300" />
                   <time dateTime={release.date} className="font-medium text-white" data-testid="text-publish-date">
                     {formatDate(release.date)}
                   </time>
@@ -178,7 +178,7 @@ export default function NewsArticlePage() {
                   {release.tags.map(tag => (
                     <span
                       key={tag}
-                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-400"
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-300"
                       data-testid={`tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
                     >
                       <Tag size={12} />
@@ -235,7 +235,7 @@ export default function NewsArticlePage() {
                     <ul className="list-none space-y-3 my-6">
                       {release.bulletPoints.find(bp => bp.heading === section.title)?.items.map((item, iIndex) => (
                         <li key={iIndex} className="flex items-start gap-3 text-gray-300">
-                          <span className="text-blue-400 mt-1">•</span>
+                          <span className="text-blue-300 mt-1">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -250,7 +250,7 @@ export default function NewsArticlePage() {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-400 hover:text-blue-300 transition-colors"
+                            className="text-blue-300 hover:text-blue-300 transition-colors"
                             data-testid={`link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             {link.url}
@@ -291,7 +291,7 @@ export default function NewsArticlePage() {
                       <Mail size={14} />
                       <a 
                         href={`mailto:${release.contactInfo.email}`} 
-                        className="text-blue-400 hover:text-blue-300"
+                        className="text-blue-300 hover:text-blue-300"
                         data-testid="link-contact-email"
                       >
                         {release.contactInfo.email}
@@ -302,7 +302,7 @@ export default function NewsArticlePage() {
                         <Phone size={14} />
                         <a 
                           href={`tel:${release.contactInfo.phone}`} 
-                          className="text-blue-400 hover:text-blue-300"
+                          className="text-blue-300 hover:text-blue-300"
                           data-testid="link-contact-phone"
                         >
                           {release.contactInfo.phone}
@@ -335,7 +335,7 @@ export default function NewsArticlePage() {
                         <Calendar size={12} />
                         <time dateTime={pr.date}>{formatDate(pr.date)}</time>
                       </div>
-                      <h3 className="font-semibold group-hover:text-blue-400 transition-colors">
+                      <h3 className="font-semibold group-hover:text-blue-300 transition-colors">
                         {pr.title}
                       </h3>
                     </div>

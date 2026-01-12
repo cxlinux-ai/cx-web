@@ -91,7 +91,7 @@ function CountdownTimer() {
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="text-center">
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg p-3 sm:p-4 min-w-[60px] sm:min-w-[80px]">
-            <span className="text-2xl sm:text-4xl font-bold text-brand-blue font-mono">
+            <span className="text-2xl sm:text-4xl font-bold text-blue-300 font-mono">
               {String(value).padStart(2, "0")}
             </span>
           </div>
@@ -119,7 +119,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       >
         <span className="font-medium text-white pr-4">{question}</span>
         {isOpen ? (
-          <ChevronUp className="text-brand-blue flex-shrink-0" size={20} />
+          <ChevronUp className="text-blue-300 flex-shrink-0" size={20} />
         ) : (
           <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
         )}
@@ -254,7 +254,7 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
 }
 
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  planning: { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/20" },
+  planning: { bg: "bg-blue-500/10", text: "text-blue-300", border: "border-blue-500/20" },
   website: { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/20" },
   legal: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/20" },
   launch: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/20" },
@@ -342,9 +342,9 @@ export default function Hackathon() {
             className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           >
             <span className="text-amber-400 font-bold">Phase 1: IDEathon</span> — Submit monetizable feature ideas.{" "}
-            <span className="text-brand-blue font-bold">Phase 2: Hackathon</span> — Build and ship real code via GitHub PRs.
+            <span className="text-blue-300 font-bold">Phase 2: Hackathon</span> — Build and ship real code via GitHub PRs.
             Both paths lead to prizes, recognition, and long-term contribution to{" "}
-            <span className="text-brand-blue font-medium">Cortex Linux</span>.
+            <span className="text-blue-300 font-medium">Cortex Linux</span>.
           </motion.p>
 
           {/* Urgency: Countdown */}
@@ -355,7 +355,7 @@ export default function Hackathon() {
             className="mb-8"
           >
             <p className="text-sm text-gray-400 mb-4 flex items-center justify-center gap-2">
-              <Clock size={16} className="text-brand-blue" />
+              <Clock size={16} className="text-blue-300" />
               Program starts in:
             </p>
             <CountdownTimer />
@@ -438,7 +438,7 @@ export default function Hackathon() {
                   loading="lazy"
                 />
                 <div className="text-center sm:text-left">
-                  <p className="text-xs uppercase tracking-wide text-brand-blue font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wide text-blue-300 font-semibold mb-1">
                     Champion Ambassador
                   </p>
                   <h3 className="text-xl font-bold text-white">{championAmbassador.name}</h3>
@@ -497,7 +497,7 @@ export default function Hackathon() {
               <p className="text-sm text-gray-400">Ideas Expected</p>
             </div>
             <div className="text-center" data-testid="stat-prs">
-              <p className="text-2xl sm:text-3xl font-bold text-brand-blue">{hackathonConfig.expectedPRs}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-blue-300">{hackathonConfig.expectedPRs}</p>
               <p className="text-sm text-gray-400">PRs Expected</p>
             </div>
           </motion.div>
@@ -518,7 +518,7 @@ export default function Hackathon() {
               Two Pathways
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="text-brand-blue">Journey</span>
+              Choose Your <span className="text-blue-300">Journey</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Contribute ideas in Phase 1 or build code in Phase 2. Both paths lead to recognition and rewards.
@@ -583,9 +583,9 @@ export default function Hackathon() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6">
-                  <Code2 className="text-blue-400" size={28} />
+                  <Code2 className="text-blue-300" size={28} />
                 </div>
-                <span className="text-xs font-semibold uppercase tracking-wide text-blue-400 mb-2 block">
+                <span className="text-xs font-semibold uppercase tracking-wide text-blue-300 mb-2 block">
                   Phase 2 · Weeks 5-14
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
@@ -636,7 +636,7 @@ export default function Hackathon() {
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               <span className="text-white">Not Your Average</span>{" "}
-              <span className="text-brand-blue">Hackathon</span>
+              <span className="text-blue-300">Hackathon</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               {hackathonConfig.philosophy.description}
@@ -703,11 +703,11 @@ export default function Hackathon() {
             className="mt-12 text-center"
           >
             <blockquote className="relative inline-block max-w-2xl">
-              <Quote className="absolute -top-4 -left-4 text-brand-blue/30" size={32} />
+              <Quote className="absolute -top-4 -left-4 text-blue-300/30" size={32} />
               <p className="text-2xl sm:text-3xl font-bold text-white italic">
                 {hackathonConfig.philosophy.principle}
               </p>
-              <Quote className="absolute -bottom-4 -right-4 text-brand-blue/30 rotate-180" size={32} />
+              <Quote className="absolute -bottom-4 -right-4 text-blue-300/30 rotate-180" size={32} />
             </blockquote>
           </motion.div>
         </div>
@@ -863,7 +863,7 @@ export default function Hackathon() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm mb-6">
               <Code2 size={16} />
               Phase 2
             </div>
@@ -920,7 +920,7 @@ export default function Hackathon() {
               Choose Your Track
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              What Will You <span className="text-brand-blue">Build</span>?
+              What Will You <span className="text-blue-300">Build</span>?
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Pick a track that matches your skills and interests. All contributions welcome.
@@ -948,7 +948,7 @@ export default function Hackathon() {
                   <div className="mb-4">
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                       track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
-                      track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-400" :
+                      track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300" :
                       "bg-purple-500/20 text-purple-400"
                     }`}>
                       {track.difficulty}
@@ -991,7 +991,7 @@ export default function Hackathon() {
                 <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                   {championAmbassador.name}
                 </h2>
-                <p className="text-xl text-brand-blue font-medium mb-2">
+                <p className="text-xl text-blue-300 font-medium mb-2">
                   {championAmbassador.title}
                 </p>
                 <p className="text-gray-400 mb-4">
@@ -1003,7 +1003,7 @@ export default function Hackathon() {
                 
                 {championAmbassador.quote && (
                   <blockquote className="relative bg-white/5 rounded-xl p-4 mb-6">
-                    <Quote className="absolute top-2 left-2 text-brand-blue/30" size={20} />
+                    <Quote className="absolute top-2 left-2 text-blue-300/30" size={20} />
                     <p className="text-white italic pl-6">
                       "{championAmbassador.quote}"
                     </p>
@@ -1052,7 +1052,7 @@ export default function Hackathon() {
                       key={i}
                       className="flex items-center gap-3 bg-white/5 rounded-lg px-4 py-2"
                     >
-                      <CheckCircle2 size={16} className="text-brand-blue" />
+                      <CheckCircle2 size={16} className="text-blue-300" />
                       <span className="text-sm text-gray-300">{role}</span>
                     </div>
                   ))}
@@ -1078,12 +1078,12 @@ export default function Hackathon() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-blue text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-blue-300 text-sm mb-6">
               <Trophy size={16} />
               Why Participate
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              What You <span className="text-brand-blue">Get</span>
+              What You <span className="text-blue-300">Get</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Beyond the prizes, you're building real skills, real connections, and real portfolio pieces.
@@ -1122,7 +1122,7 @@ export default function Hackathon() {
               Launch Roadmap
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Our <span className="text-brand-blue">Progress</span>
+              Our <span className="text-blue-300">Progress</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto mb-6">
               Track our preparation for the hackathon launch. We're building in public.
@@ -1202,7 +1202,7 @@ export default function Hackathon() {
               Global Reach
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Where We're <span className="text-brand-blue">Spreading the Word</span>
+              Where We're <span className="text-blue-300">Spreading the Word</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Our multi-channel growth strategy ensures maximum visibility for your contributions.
@@ -1280,7 +1280,7 @@ export default function Hackathon() {
               Common Questions
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Frequently Asked <span className="text-brand-blue">Questions</span>
+              Frequently Asked <span className="text-blue-300">Questions</span>
             </h2>
           </motion.div>
 

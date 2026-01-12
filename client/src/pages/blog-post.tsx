@@ -31,9 +31,9 @@ function formatContent(content: string): string {
     // Italic
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     // Links - internal
-    .replace(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/g, '<a href="/blog/$2" class="text-blue-400 hover:text-blue-300 underline underline-offset-2">$1</a>')
+    .replace(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/g, '<a href="/blog/$2" class="text-blue-300 hover:text-blue-300 underline underline-offset-2">$1</a>')
     // Links - external
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline underline-offset-2">$1</a>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-300 hover:text-blue-300 underline underline-offset-2">$1</a>')
     // Tables
     .replace(/^\|(.+)\|$/gm, (match) => {
       const cells = match.split('|').filter(c => c.trim());
@@ -163,7 +163,7 @@ export default function BlogPostPage() {
       <div className="min-h-screen pt-20 pb-16 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Post not found</h1>
-          <Link href="/blog" className="text-blue-400 hover:underline">
+          <Link href="/blog" className="text-blue-300 hover:underline">
             Back to Blog
           </Link>
         </div>
@@ -177,7 +177,7 @@ export default function BlogPostPage() {
         {/* Main Content */}
         <article className="flex-1 max-w-4xl">
           {/* Back link */}
-          <Link href="/blog" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8">
             <ChevronLeft size={16} />
             Back to Blog
           </Link>
@@ -188,7 +188,7 @@ export default function BlogPostPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <span className="inline-block mb-4 px-3 py-1 text-sm font-medium bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400">
+            <span className="inline-block mb-4 px-3 py-1 text-sm font-medium bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300">
               {post.category}
             </span>
             

@@ -38,11 +38,11 @@ export function InternalLinks({ comparison }: InternalLinksProps) {
                   className="group flex items-center gap-3 p-4 rounded-lg bg-gray-900/50 border border-gray-800 hover:border-blue-500/30 hover:bg-gray-800/50 transition-all"
                   data-testid={`link-internal-${link.text.toLowerCase().replace(/\s+/g, '-')}`}
                 >
-                  <Icon className="h-5 w-5 text-blue-400" />
+                  <Icon className="h-5 w-5 text-blue-300" />
                   <span className="text-gray-300 group-hover:text-white transition-colors">
                     {link.text}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-gray-600 group-hover:text-blue-400 ml-auto transition-colors" />
+                  <ArrowRight className="h-4 w-4 text-gray-600 group-hover:text-blue-300 ml-auto transition-colors" />
                 </Link>
               );
             })}

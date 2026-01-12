@@ -67,7 +67,7 @@ function MigrationStepCard({ step, isLast }: MigrationStepCardProps) {
     >
       <div className="flex gap-4">
         <div className="flex flex-col items-center">
-          <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold">
+          <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-300 font-bold">
             {step.step}
           </div>
           {!isLast && (

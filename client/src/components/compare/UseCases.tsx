@@ -70,7 +70,7 @@ function UseCaseCard({ useCase, competitorName, onView }: UseCaseCardProps) {
         <div className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-2 h-2 rounded-full bg-blue-500" />
-            <h4 className="font-semibold text-blue-400">With Cortex Linux</h4>
+            <h4 className="font-semibold text-blue-300">With Cortex Linux</h4>
           </div>
 
           <div className="bg-black/50 rounded-lg p-4 mb-4 font-mono text-sm text-green-400 overflow-x-auto">
@@ -79,11 +79,11 @@ function UseCaseCard({ useCase, competitorName, onView }: UseCaseCardProps) {
 
           <div className="flex flex-wrap gap-4 text-sm">
             <div className="flex items-center gap-2 text-gray-300">
-              <Clock className="h-4 w-4 text-blue-400" />
+              <Clock className="h-4 w-4 text-blue-300" />
               <span>{useCase.cortexTime}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-300">
-              <Terminal className="h-4 w-4 text-blue-400" />
+              <Terminal className="h-4 w-4 text-blue-300" />
               <span>{useCase.cortexSteps} step{useCase.cortexSteps > 1 ? 's' : ''}</span>
             </div>
           </div>

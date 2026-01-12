@@ -124,7 +124,7 @@ export default function Status() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                  <service.icon className="h-6 w-6 text-blue-400" />
+                  <service.icon className="h-6 w-6 text-blue-300" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white">

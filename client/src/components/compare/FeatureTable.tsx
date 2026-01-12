@@ -31,7 +31,7 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
         >
           <div className="text-center mb-12">
             <span 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm font-medium mb-4"
               data-testid="badge-cortex-leads-count"
             >
               <Sparkles className="h-4 w-4" />
@@ -55,8 +55,8 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                     </th>
                     <th className="py-5 px-6 text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span className="text-blue-400 font-bold text-lg">Cortex Linux</span>
-                        <span className="text-xs text-blue-400/60">Our solution</span>
+                        <span className="text-blue-300 font-bold text-lg">Cortex Linux</span>
+                        <span className="text-xs text-blue-300/60">Our solution</span>
                       </div>
                     </th>
                     <th className="py-5 px-6 text-center">

@@ -113,7 +113,7 @@ export default function CompareAnalyticsPage() {
             <CardContent className="pt-6">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                  <Users className="h-5 w-5 text-blue-400" />
+                  <Users className="h-5 w-5 text-blue-300" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Your Traffic Source</p>
@@ -181,7 +181,7 @@ export default function CompareAnalyticsPage() {
                     onClick={() => setSelectedComparison(m.slug)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                       selectedComparison === m.slug
-                        ? 'bg-blue-500/20 border border-blue-500/30 text-blue-400'
+                        ? 'bg-blue-500/20 border border-blue-500/30 text-blue-300'
                         : 'bg-gray-800/50 text-gray-300 hover:bg-gray-800'
                     }`}
                   >
@@ -206,7 +206,7 @@ export default function CompareAnalyticsPage() {
                     {Object.entries(activeExperiments).map(([slug, variantId]) => (
                       <div key={slug} className="flex justify-between items-center text-sm">
                         <span className="text-gray-400">vs {slug}</span>
-                        <span className="px-2 py-1 rounded bg-blue-500/20 text-blue-400">{variantId}</span>
+                        <span className="px-2 py-1 rounded bg-blue-500/20 text-blue-300">{variantId}</span>
                       </div>
                     ))}
                   </div>
@@ -292,7 +292,7 @@ function VariantCard({ variant }: VariantCardProps) {
   return (
     <div className="border border-gray-800 rounded-lg p-4">
       <div className="flex items-center gap-2 mb-4">
-        <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium">
+        <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-sm font-medium">
           {variant.variantId}
         </span>
       </div>

@@ -192,9 +192,9 @@ export default function StartupPage() {
     { icon: FaPython, name: "Python 3.12 + uv", color: "text-yellow-400" },
     { icon: SiOllama, name: "Ollama", color: "text-white" },
     { icon: Database, name: "Qdrant Vector DB", color: "text-purple-400" },
-    { icon: SiNeo4J, name: "Neo4j Graph DB", color: "text-brand-blue" },
+    { icon: SiNeo4J, name: "Neo4j Graph DB", color: "text-blue-300" },
     { icon: Brain, name: "LangChain", color: "text-emerald-400" },
-    { icon: FaDocker, name: "Docker + Compose", color: "text-brand-blue" },
+    { icon: FaDocker, name: "Docker + Compose", color: "text-blue-300" },
     { icon: Cpu, name: "CUDA Toolkit", color: "text-green-400" },
     { icon: Code2, name: "Claude Code Ready", color: "text-orange-400" },
   ];
@@ -214,7 +214,7 @@ export default function StartupPage() {
             className="flex justify-center mb-6"
           >
             <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
-              <Rocket size={16} className="text-brand-blue" />
+              <Rocket size={16} className="text-blue-300" />
               <span className="text-gray-300">Built for AI Founders</span>
             </div>
           </motion.div>
@@ -239,7 +239,7 @@ export default function StartupPage() {
             className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6"
           >
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
-              <Layers size={12} className="text-brand-blue" />
+              <Layers size={12} className="text-blue-300" />
               <span>Pre-installed AI Toolchain</span>
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
@@ -337,7 +337,7 @@ export default function StartupPage() {
                     <Check size={14} />
                     <span>Neo4j ready at localhost:7474...</span>
                   </div>
-                  <div className="flex items-center gap-2 mt-3 text-brand-blue">
+                  <div className="flex items-center gap-2 mt-3 text-blue-300">
                     <Zap size={14} />
                     <TypewriterText text="AI stack ready. Start building." speed={30} />
                   </div>
@@ -422,7 +422,7 @@ export default function StartupPage() {
               viewport={{ once: true }}
               className="text-center p-6 rounded-xl bg-white/5 border border-white/10"
             >
-              <div className="text-4xl md:text-5xl font-bold text-brand-blue mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-blue-300 mb-2">
                 {clones.toLocaleString()}
               </div>
               <div className="text-gray-400">GitHub Forks</div>
@@ -545,7 +545,7 @@ export default function StartupPage() {
             viewport={{ once: true }}
             className="text-center mb-14"
           >
-            <p className="text-blue-400 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
+            <p className="text-blue-300 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, transparent pricing</h2>
             <p className="text-gray-400 text-base max-w-lg mx-auto">Start free, upgrade when you need more. No hidden fees, cancel anytime.</p>
           </motion.div>
@@ -635,7 +635,7 @@ export default function StartupPage() {
                 <div className="mb-6 pt-1">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                      <Zap size={16} className="text-blue-400" />
+                      <Zap size={16} className="text-blue-300" />
                     </div>
                     <h3 className="text-base font-semibold text-white">Founders</h3>
                   </div>
@@ -661,7 +661,7 @@ export default function StartupPage() {
                       "Team collaboration tools",
                     ].map((feature) => (
                       <li key={feature} className="flex items-start gap-2.5 text-gray-300">
-                        <Check size={15} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                        <Check size={15} className="text-blue-300 flex-shrink-0 mt-0.5" />
                         <span className="text-sm leading-tight">{feature}</span>
                       </li>
                     ))}
@@ -780,14 +780,14 @@ export default function StartupPage() {
             
             <div className="relative p-8 md:p-12 text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Rocket className="text-brand-blue" size={24} />
-                <span className="text-brand-blue font-semibold">Limited Time Event</span>
+                <Rocket className="text-blue-300" size={24} />
+                <span className="text-blue-300 font-semibold">Limited Time Event</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Cortex Linux Hackathon 2026
               </h2>
               <p className="text-xl text-gray-300 mb-6">
-                February 17 — 14 weeks — <span className="text-emerald-400 font-semibold">$18,000 in prizes</span>
+                February 17 — 14 weeks — <span className="text-emerald-400 font-semibold">$15,000 in prizes</span>
               </p>
               <Link
                 href="/hackathon"
@@ -811,7 +811,7 @@ export default function StartupPage() {
             viewport={{ once: true }}
           >
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-blue/20 flex items-center justify-center">
-              <Mail className="w-8 h-8 text-brand-blue" />
+              <Mail className="w-8 h-8 text-blue-300" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Notified When <span className="gradient-text">Founders Edition</span> Launches

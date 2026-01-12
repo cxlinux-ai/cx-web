@@ -117,7 +117,7 @@ SOFTWARE.`}
             For trademark inquiries, contact:{" "}
             <a
               href="mailto:legal@cortexlinux.com"
-              className="text-blue-400 hover:underline"
+              className="text-blue-300 hover:underline"
             >
               legal@cortexlinux.com
             </a>
