@@ -155,47 +155,44 @@ export default function HackathonPreview() {
               <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgNDBIMHoiLz48cGF0aCBkPSJNMCAwaDFMMSA0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgMUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=')] opacity-40" />
               
               {/* Content container */}
-              <div className="relative px-8 py-10 md:px-12 md:py-14">
+              <div className="relative px-4 py-6 sm:px-8 sm:py-10 md:px-12 md:py-14">
                 {/* Headline - Bold */}
-                <h3 
-                  className="text-white font-bold text-center mb-3 leading-tight"
-                  style={{ fontSize: '46px' }}
-                >
+                <h3 className="text-white font-bold text-center mb-2 sm:mb-3 leading-tight text-xl sm:text-3xl md:text-4xl lg:text-[46px]">
                   Shape the <span className="gradient-text">future of Cortex Linux</span>
                 </h3>
-                <p className="text-center text-xl md:text-2xl font-semibold text-gray-300 mb-6">
+                <p className="text-center text-sm sm:text-xl md:text-2xl font-semibold text-gray-300 mb-4 sm:mb-6">
                   <span className="text-terminal-green">$15,000 in Prizes</span> · First AI Linux Hackathon
                 </p>
                 
                 {/* Value proposition */}
-                <p className="text-gray-400 text-center text-base md:text-lg max-w-lg mx-auto mb-10 leading-[1.8]">
+                <p className="text-gray-400 text-center text-sm sm:text-base md:text-lg max-w-lg mx-auto mb-6 sm:mb-10 leading-relaxed sm:leading-[1.8]">
                   Build monetization strategies & production features for Cortex. Two phases. Real impact. Real rewards.
                 </p>
                 
                 {/* Countdown timer */}
-                <div className="mb-10">
+                <div className="mb-6 sm:mb-10">
                   {/* Hackathon badge */}
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-3 sm:mb-4">
                     <motion.div 
-                      className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20"
+                      className="relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20"
                       whileHover={{ scale: 1.03, y: -2 }}
                       transition={{ duration: 0.2 }}
                       style={{ boxShadow: "0 4px 12px rgba(0,102,255,0.15)" }}
                     >
-                      <span className="relative flex h-2 w-2">
+                      <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-brand-blue" />
                       </span>
-                      <span className="relative text-[13px] font-semibold tracking-wide uppercase text-[#93c5fd]">
+                      <span className="relative text-[11px] sm:text-[13px] font-semibold tracking-wide uppercase text-[#93c5fd]">
                         Hackathon · Feb 17, 2026
                       </span>
                     </motion.div>
                   </div>
-                  <p className="text-sm text-gray-500 mb-5 flex items-center justify-center gap-2">
-                    <Clock size={16} className="text-blue-300" />
+                  <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-5 flex items-center justify-center gap-1.5 sm:gap-2">
+                    <Clock size={14} className="text-blue-300 sm:w-4 sm:h-4" />
                     Hackathon starts in:
                   </p>
-                  <div className="flex gap-3 sm:gap-4 justify-center">
+                  <div className="grid grid-cols-4 gap-2 sm:flex sm:gap-4 justify-center max-w-xs sm:max-w-none mx-auto">
                     {Object.entries(countdown).map(([unit, value]) => (
                       <motion.div 
                         key={unit} 
@@ -204,13 +201,13 @@ export default function HackathonPreview() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                       >
                         <div 
-                          className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-brand-blue/20 group-hover/timer:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 flex flex-col items-center"
+                          className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-2 sm:p-4 md:p-5 min-w-0 sm:min-w-[80px] md:min-w-[90px] group-hover/timer:border-brand-blue/20 group-hover/timer:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 flex flex-col items-center"
                           style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
                         >
-                          <span className="font-bold font-mono text-[#93c5fd] text-[70px]">
+                          <span className="font-bold font-mono text-[#93c5fd] text-2xl sm:text-4xl md:text-5xl lg:text-[70px]">
                             {String(value).padStart(2, "0")}
                           </span>
-                          <span className="text-[10px] sm:text-xs text-gray-500 capitalize">{unit}</span>
+                          <span className="text-[9px] sm:text-[10px] md:text-xs text-gray-500 capitalize">{unit}</span>
                         </div>
                       </motion.div>
                     ))}
@@ -218,22 +215,22 @@ export default function HackathonPreview() {
                 </div>
                 
                 {/* CTA area with 3D buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 relative z-10">
                   {/* Primary CTA - 3D button */}
                   <Link
                     href="/register"
-                    className="group/btn relative z-20 w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
+                    className="group/btn relative z-20 w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-2.5 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-sm sm:text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"
                     data-testid="button-sign-up-now"
                   >
-                    <Github size={18} strokeWidth={2.5} />
+                    <Github size={16} strokeWidth={2.5} className="sm:w-[18px] sm:h-[18px]" />
                     <span>Sign Up Now</span>
-                    <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
+                    <ArrowRight size={14} strokeWidth={2.5} className="sm:w-4 sm:h-4 opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
                   </Link>
                   
                   {/* Secondary CTA */}
                   <Link
                     href="/hackathon"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 text-[15px] text-gray-400 hover:text-white transition-colors duration-300 group/link"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-4 text-sm sm:text-[15px] text-gray-400 hover:text-white transition-colors duration-300 group/link"
                     data-testid="link-hackathon-details"
                   >
                     <span>Learn more</span>

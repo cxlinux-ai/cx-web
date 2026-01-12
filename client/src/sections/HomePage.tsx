@@ -396,11 +396,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-start pt-24 sm:pt-28 px-4 relative overflow-hidden">
-        <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" />
-        <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50" />
+      <section id="home" className="min-h-screen flex flex-col justify-center items-center py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+        <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden sm:block" />
+        <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block" />
         
-        <div className="max-w-6xl mx-auto text-center relative z-10">
+        <div className="w-full max-w-6xl mx-auto text-center relative z-10">
           {/* Trust Badges */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
