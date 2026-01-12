@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Search, ChevronLeft, Clock, Calendar } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { blogPosts, getAllCategories } from "@/data/blogPosts";
 import { Input } from "@/components/ui/input";
 import BlogCard from "@/components/BlogCard";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 const FEATURED_POSTS = [
   {
@@ -33,6 +34,11 @@ const FEATURED_POSTS = [
 ];
 
 export default function Blog() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.blog);
+    return cleanup;
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 

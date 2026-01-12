@@ -30,6 +30,7 @@ import {
 import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
 import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 function useCountUp(end: number, duration: number = 2000, start: boolean = true) {
   const [count, setCount] = useState(0);
@@ -76,6 +77,11 @@ function TypewriterText({ text, speed = 50 }: { text: string; speed?: number }) 
 }
 
 export default function StartupPage() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.startup);
+    return cleanup;
+  }, []);
+
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true });
   

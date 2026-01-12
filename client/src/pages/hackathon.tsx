@@ -26,6 +26,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Footer from "@/components/Footer";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 
 const GITHUB_URL = "https://github.com/cortexlinux/cortex";
 const GITHUB_ISSUES_URL = "https://github.com/cortexlinux/cortex/issues";
@@ -112,6 +113,11 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function Hackathon() {
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.hackathon);
+    return cleanup;
+  }, []);
+
   const phase1Details = {
     title: "Phase 1: Ideation",
     weeks: "Weeks 1-4",
