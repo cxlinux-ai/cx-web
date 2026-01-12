@@ -23,6 +23,9 @@ import {
   Clock,
   Mail,
   ExternalLink,
+  Building,
+  Lock,
+  Sparkles,
 } from "lucide-react";
 import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
 import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
@@ -481,82 +484,236 @@ export default function StartupPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing-table" className="py-24 px-4 border-t border-white/5 bg-white/[0.02]">
-        <div className="max-w-6xl mx-auto">
+      {/* Pricing Section - Premium 3-Tier */}
+      <section id="pricing-table" className="py-32 px-4 relative overflow-hidden border-t border-white/5">
+        {/* Subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
+        
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-14"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Simple, <span className="gradient-text">Transparent</span> Pricing
-            </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Start free, upgrade when you're ready to scale
-            </p>
+            <p className="text-blue-400 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, transparent pricing</h2>
+            <p className="text-gray-400 text-base max-w-lg mx-auto">Start free, upgrade when you need more. No hidden fees, cancel anytime.</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier, index) => (
-              <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`relative p-8 rounded-2xl ${
-                  tier.highlighted
-                    ? "bg-gradient-to-b from-brand-blue/20 to-transparent border-2 border-brand-blue/50"
-                    : "bg-white/5 border border-white/10"
-                }`}
-              >
-                {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-blue rounded-full text-sm font-semibold">
-                    Most Popular
+          <div className="grid md:grid-cols-3 gap-5 items-stretch">
+            {/* Community Edition */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0, duration: 0.4 }}
+              className="group relative flex"
+            >
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
+                {/* Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                      <Users size={16} className="text-emerald-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Community</h3>
                   </div>
-                )}
-                <div className="text-center mb-8">
-                  <h3 className="text-xl font-semibold mb-2">{tier.name}</h3>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-bold text-terminal-green">{tier.price}</span>
-                    <span className="text-gray-400">{tier.period}</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">$0</span>
+                    <span className="text-gray-500 text-sm">/forever</span>
                   </div>
-                  <p className="text-gray-400 text-sm mt-2">{tier.description}</p>
+                  <p className="text-gray-500 text-sm mt-2">Perfect for individual developers</p>
                 </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06] mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">What's included</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Full AI capabilities",
+                      "All core features",
+                      "Apache 2.0 license",
+                      "Community support",
+                      "Unlimited personal use",
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
+                        <Check size={15} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Button */}
+                <div className="mt-8">
+                  <a
+                    href="https://github.com/cortexlinux/cortex"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
+                    data-testid="button-pricing-community"
+                  >
+                    Get Started Free
+                  </a>
+                </div>
+              </div>
+            </motion.div>
 
-                <ul className="space-y-3 mb-8">
-                  {tier.features.map((feature) => (
-                    <li key={feature.name} className="flex items-center gap-3">
-                      {feature.included ? (
-                        <Check className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                      ) : (
-                        <X className="w-5 h-5 text-gray-600 flex-shrink-0" />
-                      )}
-                      <span className={feature.included ? "text-gray-300" : "text-gray-600"}>
-                        {feature.name}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+            {/* Founders Edition - Featured */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.4 }}
+              className="group relative flex"
+            >
+              {/* Glow effect */}
+              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-blue-500/20 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-blue-500/40 p-6 flex flex-col w-full">
+                {/* Badge */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="px-3 py-1 bg-blue-500 rounded-full text-[11px] font-semibold text-white shadow-lg shadow-blue-500/20">
+                    Recommended
+                  </div>
+                </div>
+                
+                {/* Header */}
+                <div className="mb-6 pt-1">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                      <Zap size={16} className="text-blue-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Founders</h3>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">$19</span>
+                    <span className="text-gray-500 text-sm">/month</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">For serious AI builders</p>
+                </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-blue-500/20 mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Community, plus</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Priority support (24/7)",
+                      "Early access to features",
+                      "GPU inference engine",
+                      "Performance analytics",
+                      "Team collaboration tools",
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-300">
+                        <Check size={15} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Button */}
+                <div className="mt-8">
+                  <a
+                    href="https://github.com/cortexlinux/cortex"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-blue-500 text-white hover:bg-blue-400 transition-colors duration-150"
+                    data-testid="button-pricing-founders"
+                  >
+                    Start Free Trial
+                  </a>
+                </div>
+              </div>
+            </motion.div>
 
-                <a
-                  href={tier.ctaLink}
-                  target={tier.ctaLink.startsWith("http") ? "_blank" : undefined}
-                  rel={tier.ctaLink.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className={`block w-full py-3 rounded-xl font-semibold text-center transition-all duration-300 ${
-                    tier.highlighted
-                      ? "bg-brand-blue text-white glow-brand-blue"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
-                  data-testid={`button-pricing-${tier.name.toLowerCase()}`}
-                >
-                  {tier.cta}
-                </a>
-              </motion.div>
-            ))}
+            {/* Enterprise Edition */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="group relative flex"
+            >
+              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
+                {/* Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                      <Building size={16} className="text-purple-400" />
+                    </div>
+                    <h3 className="text-base font-semibold text-white">Enterprise</h3>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold text-white">Custom</span>
+                  </div>
+                  <p className="text-gray-500 text-sm mt-2">For teams and organizations</p>
+                </div>
+                
+                {/* Divider */}
+                <div className="h-px bg-white/[0.06] mb-6" />
+                
+                {/* Features */}
+                <div className="flex-1">
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Founders, plus</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Dedicated account manager",
+                      "Custom integrations",
+                      "99.9% SLA guarantee",
+                      "Compliance & security",
+                      "On-premise deployment",
+                    ].map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
+                        <Check size={15} className="text-purple-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-sm leading-tight">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Button */}
+                <div className="mt-8">
+                  <a
+                    href="mailto:sales@cortexlinux.com"
+                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
+                    data-testid="button-pricing-enterprise"
+                  >
+                    Contact Sales
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </div>
+          
+          {/* Trust indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"
+          >
+            <div className="flex items-center gap-2">
+              <Shield size={14} className="text-emerald-400" />
+              <span>30-day money back</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock size={14} className="text-gray-400" />
+              <span>Secure payment</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Sparkles size={14} className="text-gray-400" />
+              <span>Cancel anytime</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 

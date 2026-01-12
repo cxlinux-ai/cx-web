@@ -162,7 +162,7 @@ export default function App() {
                     location === "/startup" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
                   data-testid="link-startup"
-                >AI Agencys</Link>
+                >AI Agencies</Link>
                 <Link
                   href="/hackathon"
                   className={`relative text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
@@ -257,7 +257,7 @@ export default function App() {
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
                     data-testid="mobile-link-startup"
                   >
-                    Startups
+                    AI Agencies
                   </Link>
                   <Link
                     href="/hackathon"
