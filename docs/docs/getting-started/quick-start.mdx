@@ -1,0 +1,211 @@
+---
+sidebar_position: 2
+title: Quick Start
+description: Get up and running with Cortex Linux in 5 minutes. Learn the basics of natural language system management.
+keywords: [quickstart, tutorial, beginner, getting started, natural language]
+---
+
+# Quick Start
+
+This 5-minute guide will get you from zero to productivity with Cortex Linux. You'll learn the core concepts and execute your first AI-powered commands.
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+- [Installed Cortex Linux](/docs/getting-started/installation)
+- An API key from a [supported AI backend](/docs/reference/supported-ai-backends) (Anthropic Claude or OpenAI)
+
+## Step 1: Configure Your AI Backend
+
+Set up your preferred AI provider:
+
+```bash
+# Using Anthropic Claude (recommended)
+export CORTEX_AI_PROVIDER=anthropic
+export ANTHROPIC_API_KEY=sk-ant-xxx...
+
+# Or using OpenAI
+export CORTEX_AI_PROVIDER=openai
+export OPENAI_API_KEY=sk-xxx...
+```
+
+:::tip Make it Permanent
+Add these exports to your `~/.bashrc` or `~/.zshrc` to persist across sessions.
+:::
+
+## Step 2: Your First Command
+
+Try a simple command to verify everything works:
+
+```bash
+cortex "what is my current disk usage"
+```
+
+Cortex will:
+1. Parse your natural language request
+2. Generate the appropriate shell command
+3. Display the command for your approval
+4. Execute and show the results
+
+**Example output:**
+
+```
+> Understanding request: "what is my current disk usage"
+
+Suggested command:
+  df -h
+
+Execute this command? [Y/n]: y
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       500G  150G  350G  30% /
+/dev/sda2       1.0T  400G  600G  40% /home
+```
+
+## Step 3: Install Software
+
+Use natural language to install packages:
+
+```bash
+cortex "install docker and docker compose"
+```
+
+**Example interaction:**
+
+```
+> Understanding request: "install docker and docker compose"
+
+I'll help you install Docker and Docker Compose. Here's the plan:
+
+1. Install Docker Engine
+2. Add your user to the docker group
+3. Install Docker Compose plugin
+
+Suggested commands:
+  sudo apt-get update
+  sudo apt-get install docker.io docker-compose-v2
+  sudo usermod -aG docker $USER
+
+Execute these commands? [Y/n]:
+```
+
+## Step 4: Try Dry-Run Mode
+
+Preview commands without executing them using the `--dry-run` flag:
+
+```bash
+cortex --dry-run "remove all unused docker images"
+```
+
+This is perfect for:
+- Learning what commands Cortex would run
+- Reviewing potentially destructive operations
+- Understanding complex system tasks
+
+## Step 5: Create Aliases
+
+Speed up common tasks with aliases:
+
+```bash
+# Add to your shell configuration
+alias cx="cortex"
+alias cxd="cortex --dry-run"
+```
+
+Now you can use:
+
+```bash
+cx "update all packages"
+cxd "clean up temp files"
+```
+
+## Common Commands to Try
+
+Here are some useful commands to explore Cortex's capabilities:
+
+### System Information
+
+```bash
+cortex "show system information"
+cortex "how much memory is available"
+cortex "list all running services"
+cortex "what processes are using the most CPU"
+```
+
+### Package Management
+
+```bash
+cortex "install nodejs and npm"
+cortex "update all packages"
+cortex "search for packages related to python"
+cortex "remove vim and install neovim"
+```
+
+### File Operations
+
+```bash
+cortex "find all log files larger than 100MB"
+cortex "show disk usage by directory in /home"
+cortex "list files modified in the last 24 hours"
+```
+
+### Network
+
+```bash
+cortex "show all open ports"
+cortex "check if port 8080 is available"
+cortex "display network interfaces and their IPs"
+```
+
+### Services
+
+```bash
+cortex "restart nginx"
+cortex "check status of all failed services"
+cortex "enable ssh to start on boot"
+```
+
+## Understanding the Output
+
+Cortex provides structured output to keep you informed:
+
+```
+> Understanding request: "your request here"
+
+Context:
+  - Detected OS: Ubuntu 22.04
+  - Package manager: apt
+  - User: john (sudo available)
+
+Suggested command:
+  command here
+
+Explanation:
+  Brief description of what this command does and why
+  it was chosen for your specific system.
+
+Execute this command? [Y/n]:
+```
+
+## Safety Features
+
+Cortex includes built-in safety features:
+
+- **Confirmation prompts** before executing any command
+- **Dry-run mode** to preview without executing
+- **Rollback support** for reversible operations
+- **Warning flags** for potentially dangerous commands
+
+:::warning Dangerous Command Detection
+When Cortex detects a potentially dangerous command (like `rm -rf`), it will display additional warnings and require explicit confirmation.
+:::
+
+## What's Next?
+
+Now that you understand the basics, explore more features:
+
+- [Configuration](/docs/getting-started/configuration) - Customize Cortex behavior
+- [Natural Language Commands](/docs/user-guide/natural-language-commands) - Master the command syntax
+- [Dry-Run Mode](/docs/user-guide/dry-run-mode) - Safe command preview
+- [Rollback & Recovery](/docs/user-guide/rollback-recovery) - Undo changes when needed
