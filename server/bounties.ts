@@ -397,16 +397,15 @@ async function fetchBountiesFromGitHub(): Promise<{
     [openResponse, closedResponse] = await doFetch(useToken);
 
     // If token auth failed (401), retry without token
+    // This handles expired/revoked tokens gracefully
     if (useToken && (openResponse.status === 401 || closedResponse.status === 401)) {
-      console.log("[Bounties] Token auth failed (401), retrying without token...");
+      console.log("[Bounties] Token auth failed, retrying without authentication...");
       [openResponse, closedResponse] = await doFetch(false);
     }
   } catch (fetchErr) {
     console.error("[Bounties] Network fetch error:", fetchErr);
     throw new Error(`Network error fetching from GitHub: ${fetchErr instanceof Error ? fetchErr.message : "Unknown error"}`);
   }
-
-  console.log("[Bounties] GitHub API response status:", openResponse.status, closedResponse.status);
 
   // Check for rate limiting
   if (openResponse.status === 403 || closedResponse.status === 403) {
