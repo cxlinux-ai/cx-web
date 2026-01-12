@@ -1568,3 +1568,35 @@ body:not(.page-transition-blur) {
 .bg-gradient-radial {
   background: radial-gradient(ellipse at center, var(--tw-gradient-from), var(--tw-gradient-to));
 }
+
+/* Rotating gradient border for pricing cards */
+@keyframes rotate-gradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pricing-gradient-border {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.25rem;
+  background: conic-gradient(from 0deg, #3b82f6, #60a5fa, #93c5fd, #60a5fa, #3b82f6);
+  animation: rotate-gradient 8s linear infinite;
+  opacity: 0.7;
+  transition: opacity 0.5s ease;
+}
+
+.pricing-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(1.25rem - 2px);
+  background: linear-gradient(to bottom, #0f172a, #0a0f1a, #060a12);
+}
+
+.group:hover .pricing-gradient-border {
+  opacity: 1;
+}
