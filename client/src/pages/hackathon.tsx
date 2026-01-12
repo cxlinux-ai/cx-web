@@ -705,7 +705,7 @@ export default function Hackathon() {
             <blockquote className="relative inline-block max-w-2xl">
               <Quote className="absolute -top-4 -left-4 text-brand-blue/30" size={32} />
               <p className="text-2xl sm:text-3xl font-bold text-white italic">
-                "{hackathonConfig.philosophy.principle}"
+                {hackathonConfig.philosophy.principle}
               </p>
               <Quote className="absolute -bottom-4 -right-4 text-brand-blue/30 rotate-180" size={32} />
             </blockquote>
