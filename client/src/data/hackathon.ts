@@ -186,7 +186,7 @@ export const championAmbassador: ChampionAmbassador = {
   name: "Suyash Dongre",
   title: "Champion Ambassador",
   achievement: "Smart India Hackathon Grand Final Winner",
-  achievementDetail: "Won ₹300,000 (300K) in India's largest hackathon",
+  achievementDetail: "Won against 300,000+ contestants in India's largest hackathon",
   reach: "50K+ India developer network",
   github: "suyashdongre",
   avatar: "https://github.com/suyashdongre.png",
@@ -504,7 +504,7 @@ export const hackathonConfig = {
   ideathonPrize: "$3,000",
   buildSprintPrize: "$12,000",
   demoPrize: "$3,000",
-  expectedParticipants: "500+",
+  expectedParticipants: "3,000+",
   expectedIdeas: "200+",
   expectedPRs: "100+",
   githubUrl: "https://github.com/cortexlinux/cortex",
@@ -568,7 +568,7 @@ export const hackathonBenefits = [
   },
   {
     title: "Mentorship from Champions",
-    description: "Learn directly from Suyash Dongre (300K hackathon winner) and the Cortex core team through live coding sessions and code reviews."
+    description: "Learn directly from Suyash Dongre (winner against 300K+ contestants) and the Cortex core team through live coding sessions and code reviews."
   },
   {
     title: "Build Your Portfolio",
@@ -576,7 +576,7 @@ export const hackathonBenefits = [
   },
   {
     title: "Join a Builder Community",
-    description: "Connect with 500+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
+    description: "Connect with 3,000+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
     title: "Compete for $18,000 in Prizes",
