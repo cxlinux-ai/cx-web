@@ -12,8 +12,7 @@ import {
   Rocket,
   Code2,
   Users,
-  GitBranch,
-  Zap,
+  Heart,
   Lock,
   Globe,
   Building2,
@@ -59,51 +58,6 @@ const roadmapItems = [
   { quarter: "Q4 2026", items: ["Mobile SDK", "v3.0 Launch"], status: "planned" },
 ];
 
-const currentTasks = [
-  {
-    title: "Complete Ideathon Infrastructure",
-    priority: "high",
-    category: "Hackathon",
-    owner: "Core Team",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  },
-  {
-    title: "Ship CLI Zero-Trust Mode",
-    priority: "high",
-    category: "Security",
-    owner: "Security Team",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  },
-  {
-    title: "Enhance Multi-Step Workflows",
-    priority: "medium",
-    category: "Core",
-    owner: "Engineering",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  },
-  {
-    title: "Plugin Architecture v2",
-    priority: "medium",
-    category: "Platform",
-    owner: "Platform Team",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  },
-  {
-    title: "Expand Test Coverage to 90%",
-    priority: "medium",
-    category: "Quality",
-    owner: "QA Team",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  },
-  {
-    title: "Documentation Overhaul",
-    priority: "low",
-    category: "Docs",
-    owner: "DevRel",
-    link: "https://github.com/cortexlinux/cortex/issues"
-  }
-];
-
 const coreContributors = [
   { name: "Mike Morgan", role: "CEO", github: "mikejmorgan-ai" },
   { name: "Suyash D", role: "Lead Engineer · Hackathon Leader", github: "Suyashd999", customImage: "/images/suyash-d.png" },
@@ -120,17 +74,6 @@ export default function MissionPage() {
     });
     return cleanup;
   }, []);
-
-  const getPriorityBadge = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return <span className="px-2 py-0.5 rounded text-xs font-medium bg-red-500/20 text-red-400 border border-red-500/30">High</span>;
-      case "medium":
-        return <span className="px-2 py-0.5 rounded text-xs font-medium bg-amber-500/20 text-amber-400 border border-amber-500/30">Medium</span>;
-      default:
-        return <span className="px-2 py-0.5 rounded text-xs font-medium bg-gray-500/20 text-gray-400 border border-gray-500/30">Low</span>;
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -441,72 +384,192 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* Current Tasks Section */}
-      <section className="py-20 px-4 border-t border-white/5">
-        <div className="max-w-5xl mx-auto">
+      {/* About Us Section */}
+      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-4xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-brand-blue/10 to-purple-500/10 border border-brand-blue/20 text-blue-300 text-sm mb-6">
-              <Zap size={14} />
-              <span>Current Priorities</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-500/10 to-orange-500/10 border border-rose-500/20 text-rose-300 text-sm mb-6">
+              <Heart size={14} className="fill-rose-400" />
+              <span>Our Story</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What We're <span className="gradient-text">Working On</span>
+              The <span className="gradient-text">People</span> Behind Cortex
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              Transparency in action. See our current focus areas and how you can contribute.
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+              Every great project starts with a simple question. Ours was: 
+              <span className="text-white italic"> "Why does working with Linux still feel like 1999?"</span>
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentTasks.map((task, i) => (
-              <motion.a
-                key={task.title}
-                href={task.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="group p-4 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 hover:bg-white/[0.07] transition-all duration-300"
-                data-testid={`task-${task.title.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 rounded text-xs font-medium bg-white/10 text-gray-300">
-                        {task.category}
-                      </span>
-                      {getPriorityBadge(task.priority)}
+          {/* Founder Stories */}
+          <div className="space-y-8">
+            {/* Mike Morgan - CEO */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group relative"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      <img
+                        src="https://github.com/mike-terran.png"
+                        alt="Mike Morgan, CEO and Founder of Cortex Linux"
+                        className="w-20 h-20 rounded-full object-cover ring-2 ring-blue-500/30 group-hover:ring-blue-400/50 transition-all duration-300"
+                        loading="lazy"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+                        <Sparkles size={12} className="text-white" />
+                      </div>
                     </div>
-                    <h3 className="text-white font-medium group-hover:text-blue-300 transition-colors">
-                      {task.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 mt-1">{task.owner}</p>
                   </div>
-                  <GitBranch size={18} className="text-gray-600 group-hover:text-blue-300 transition-colors flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <h3 className="text-xl font-semibold text-white">Mike Morgan</h3>
+                      <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium">
+                        CEO & Founder
+                      </span>
+                    </div>
+                    <div className="space-y-4 text-gray-300 leading-relaxed">
+                      <p>
+                        It started at 3 AM, debugging a production server that refused to cooperate. 
+                        Mike had spent <span className="text-white">fifteen years</span> in Linux operations, 
+                        and in that moment of exhaustion, he realized something profound: 
+                        <span className="text-blue-300 font-medium"> we're still solving problems the same way we did decades ago.</span>
+                      </p>
+                      <p>
+                        The tools had improved, sure. But the fundamental experience? 
+                        Memorizing cryptic commands, hunting through man pages, copying from Stack Overflow 
+                        and hoping it wouldn't break something else. 
+                        <span className="text-white"> There had to be a better way.</span>
+                      </p>
+                      <p className="text-gray-400 italic border-l-2 border-blue-500/40 pl-4">
+                        "I didn't want to build another wrapper or chatbot. I wanted to build what Linux 
+                        should feel like in 2026—intelligent, intuitive, and most importantly, 
+                        <span className="text-blue-300"> something that actually understands what you're trying to do.</span>"
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </motion.a>
-            ))}
+              </div>
+            </motion.div>
+
+            {/* Connection Line */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              className="flex justify-center"
+            >
+              <div className="w-px h-12 bg-gradient-to-b from-blue-500/40 to-purple-500/40" />
+            </motion.div>
+
+            {/* Jorg - Partner */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group relative"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-purple-500/30 transition-all duration-300">
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      <img
+                        src="https://github.com/jorg-ai.png"
+                        alt="Jorg, Co-Founder and Development Lead of Cortex Linux"
+                        className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
+                        loading="lazy"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
+                        <Code2 size={12} className="text-white" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <h3 className="text-xl font-semibold text-white">Jorg</h3>
+                      <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-medium">
+                        Co-Founder & Dev Lead
+                      </span>
+                    </div>
+                    <div className="space-y-4 text-gray-300 leading-relaxed">
+                      <p>
+                        When Mike shared his vision, Jorg didn't just see a project—he saw 
+                        <span className="text-white"> a movement</span>. 
+                        With a background in full-stack development and a passion for open source, 
+                        he knew exactly what it would take to turn this dream into reality.
+                      </p>
+                      <p>
+                        Jorg took on the mission of building Cortex from the ground up: 
+                        architecting the website, managing the growing community of developers, 
+                        and ensuring every contributor feels <span className="text-purple-300 font-medium">valued and heard</span>. 
+                        He's the heartbeat of our development team.
+                      </p>
+                      <p className="text-gray-400 italic border-l-2 border-purple-500/40 pl-4">
+                        "Open source isn't just about code—it's about <span className="text-purple-300">people</span>. 
+                        Every pull request, every issue, every Discord message represents someone 
+                        who believes in what we're building. That trust is sacred to me."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          <div className="text-center mt-8">
-            <a
-              href="https://github.com/cortexlinux/cortex/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-300 transition-colors"
-              data-testid="link-view-all-issues"
-            >
-              View all issues on GitHub
-              <ArrowRight size={16} />
-            </a>
-          </div>
+          {/* Call to Action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-block p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
+              <p className="text-gray-300 mb-4">
+                This isn't just our story anymore. <span className="text-white font-medium">It's yours too.</span>
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="https://discord.gg/cortexlinux"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] rounded-lg text-white font-medium transition-colors"
+                  data-testid="button-join-community"
+                >
+                  <FaDiscord size={18} />
+                  Join Our Community
+                </a>
+                <a
+                  href="https://github.com/cortexlinux/cortex"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-medium transition-colors"
+                  data-testid="button-star-github"
+                >
+                  <Github size={18} />
+                  Star on GitHub
+                </a>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
