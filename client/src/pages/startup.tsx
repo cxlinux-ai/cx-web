@@ -25,7 +25,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
-import { SiNeo4J, SiOllama } from "react-icons/si";
+import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
 import Footer from "@/components/Footer";
 
 function useCountUp(end: number, duration: number = 2000, start: boolean = true) {
@@ -78,6 +78,17 @@ export default function StartupPage() {
   
   const clones = useCountUp(47, 2000, statsInView);  // Real forks from GitHub
   const contributors = useCountUp(5, 2000, statsInView);  // Real contributors
+  
+  const trustedLogos = [
+    { icon: SiVercel, name: "Vercel" },
+    { icon: SiStripe, name: "Stripe" },
+    { icon: SiLinear, name: "Linear" },
+    { icon: SiSupabase, name: "Supabase" },
+    { icon: SiRailway, name: "Railway" },
+    { icon: SiPlanetscale, name: "Planetscale" },
+    { icon: SiClerk, name: "Clerk" },
+    { icon: SiResend, name: "Resend" },
+  ];
   
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -406,18 +417,28 @@ export default function StartupPage() {
             </motion.div>
           </div>
 
-          {/* Trusted By Logos Placeholder */}
+          {/* Trusted By Logos - Infinite Scroll */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="overflow-hidden"
           >
-            <p className="text-sm text-gray-500 mb-4">Trusted by developers from</p>
-            <div className="flex flex-wrap justify-center gap-8 opacity-50">
-              {["Y Combinator", "Anthropic", "OpenAI", "Google", "Meta", "Microsoft"].map((company) => (
-                <span key={company} className="text-gray-400 font-semibold">{company}</span>
-              ))}
+            <div className="text-center mb-8">
+              <p className="text-sm text-gray-500 uppercase tracking-widest">Trusted by developers from</p>
+            </div>
+            <div className="relative">
+              <div className="logo-scroll flex gap-16 items-center">
+                {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-gray-500 hover:text-white transition-colors duration-300 opacity-60 hover:opacity-100"
+                  >
+                    <logo.icon size={24} />
+                    <span className="text-lg font-semibold">{logo.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
