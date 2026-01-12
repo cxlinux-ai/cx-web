@@ -93,10 +93,6 @@ export default function ReferralsPage() {
             className="flex flex-wrap justify-center gap-6 text-sm text-gray-400"
           >
             <span className="flex items-center gap-2">
-              <Users size={16} className="text-blue-300" />
-              1,200+ members
-            </span>
-            <span className="flex items-center gap-2">
               <Trophy size={16} className="text-yellow-400" />
               6 reward tiers
             </span>
