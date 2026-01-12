@@ -500,9 +500,9 @@ export const hackathonConfig = {
   tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
   totalWeeks: 14,
-  totalPrizePool: "$18,000",
+  totalPrizePool: "$15,000",
   ideathonPrize: "$3,000",
-  buildSprintPrize: "$12,000",
+  buildSprintPrize: "$9,000",
   demoPrize: "$3,000",
   expectedParticipants: "3,000+",
   expectedIdeas: "200+",
@@ -579,8 +579,8 @@ export const hackathonBenefits = [
     description: "Connect with 3,000+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $18,000 in Prizes",
-    description: "Real money for real contributions. $3,000 for IDEathon, $12,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
+    title: "Compete for $15,000 in Prizes",
+    description: "Real money for real contributions. $3,000 for IDEathon, $9,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",

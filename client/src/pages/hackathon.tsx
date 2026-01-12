@@ -600,7 +600,7 @@ export default function Hackathon() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
                     <Trophy size={16} className="text-terminal-green" />
-                    <span className="text-terminal-green font-semibold">$18,000</span>
+                    <span className="text-terminal-green font-semibold">$15,000</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-gray-400" />
