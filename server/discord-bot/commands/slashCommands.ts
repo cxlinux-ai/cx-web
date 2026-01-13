@@ -22,6 +22,24 @@ import { clearHistory, getStats as getMemoryStats } from "../memory/conversation
 import { getRemainingQuestions, canAskQuestion, incrementUsage } from "../utils/dailyLimit.js";
 import { createResponseEmbed, createErrorEmbed, COLORS } from "../utils/embeds.js";
 
+// Admin role ID for restricted commands
+const ADMIN_ROLE_ID = "1450564628911489156";
+
+/**
+ * Check if user has admin role
+ */
+function hasAdminRole(interaction: ChatInputCommandInteraction): boolean {
+  if (!interaction.guild || !interaction.member) return false;
+  const member = interaction.member;
+  if ('roles' in member && member.roles) {
+    const roles = member.roles;
+    if ('cache' in roles) {
+      return roles.cache.has(ADMIN_ROLE_ID);
+    }
+  }
+  return false;
+}
+
 // Define slash commands
 export const commands = [
   new SlashCommandBuilder()
@@ -242,11 +260,19 @@ async function handleHelpCommand(
 }
 
 /**
- * Handle /stats command
+ * Handle /stats command (admin only)
  */
 async function handleStatsCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
+  if (!hasAdminRole(interaction)) {
+    await interaction.reply({
+      content: "You need the Admin role to use this command.",
+      ephemeral: true,
+    });
+    return;
+  }
+
   const memStats = getMemoryStats();
   const ragStats = getRagStats();
 
@@ -386,6 +412,14 @@ async function handleClearCommand(
 async function handleRefreshCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
+  if (!hasAdminRole(interaction)) {
+    await interaction.reply({
+      content: "You need the Admin role to use this command.",
+      ephemeral: true,
+    });
+    return;
+  }
+
   await interaction.deferReply({ ephemeral: true });
 
   try {
@@ -406,11 +440,19 @@ async function handleRefreshCommand(
 }
 
 /**
- * Handle /purge command (moderator only)
+ * Handle /purge command (admin only)
  */
 async function handlePurgeCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
+  if (!hasAdminRole(interaction)) {
+    await interaction.reply({
+      content: "You need the Admin role to use this command.",
+      ephemeral: true,
+    });
+    return;
+  }
+
   const amount = interaction.options.getInteger("amount", true);
 
   if (!interaction.channel || interaction.channel.type !== ChannelType.GuildText) {
