@@ -27,6 +27,7 @@ import {
   commands,
   handleSlashCommand,
   handleButtonInteraction,
+  handleApplicationModal,
 } from "./commands/slashCommands.js";
 import { shouldRespond, extractQuestion } from "./utils/shouldRespond.js";
 import {
@@ -319,26 +320,18 @@ client.on(Events.MessageUpdate, async (oldMessage, newMessage) => {
   }
 });
 
-// Slash command and button handler
+// Slash command, button, and modal handler
 client.on(Events.InteractionCreate, async (interaction) => {
   try {
     if (interaction.isChatInputCommand()) {
       await handleSlashCommand(interaction);
     } else if (interaction.isButton()) {
-      const [action, type, value] = interaction.customId.split(":");
-
-      if (action === "feedback" && recentResponses.has(value)) {
-        const isHelpful = type === "helpful";
-        await interaction.reply({
-          content: isHelpful
-            ? "Thanks for the feedback!"
-            : "Got it, I'll try to do better.",
-          ephemeral: true,
-        });
-        return;
-      }
-
       await handleButtonInteraction(interaction);
+    } else if (interaction.isModalSubmit()) {
+      // Handle modal submissions
+      if (interaction.customId === "application_modal") {
+        await handleApplicationModal(interaction);
+      }
     }
   } catch (error) {
     console.error("[Bot] Interaction error:", error);

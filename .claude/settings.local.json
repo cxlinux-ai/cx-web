@@ -34,7 +34,9 @@
       "Bash(git push)",
       "Bash(git checkout:*)",
       "Bash(git push:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(pkill:*)",
+      "Bash(NODE_ENV=development tsx:*)"
     ]
   }
 }
