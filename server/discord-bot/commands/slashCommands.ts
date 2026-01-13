@@ -40,7 +40,8 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("stats")
-    .setDescription("Show bot statistics"),
+    .setDescription("Show bot statistics (Moderator only)")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
   new SlashCommandBuilder()
     .setName("referral")
@@ -74,6 +75,11 @@ export const commands = [
   new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Check if the bot is online"),
+
+  new SlashCommandBuilder()
+    .setName("refresh")
+    .setDescription("Refresh the knowledge base (Admin only)")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 ];
 
 /**
@@ -112,6 +118,9 @@ export async function handleSlashCommand(
         break;
       case "ping":
         await handlePingCommand(interaction);
+        break;
+      case "refresh":
+        await handleRefreshCommand(interaction);
         break;
       default:
         await interaction.reply({
@@ -188,17 +197,23 @@ async function handleHelpCommand(
     .setDescription("I'm the official AI assistant for Cortex Linux!")
     .addFields(
       {
-        name: "Commands",
+        name: "Everyone",
         value: [
           "`/cortex <question>` - Ask me anything about Cortex Linux",
           "`/help` - Show this help message",
-          "`/stats` - View bot statistics",
           "`/referral` - Learn about our referral program",
           "`/hackathon` - Get hackathon information",
           "`/clear` - Clear your conversation history",
-          "`/purge <amount>` - Delete messages (Mod only)",
           "`/links` - Get important links",
           "`/ping` - Check bot status",
+        ].join("\n"),
+      },
+      {
+        name: "Moderator Only",
+        value: [
+          "`/stats` - View bot statistics",
+          "`/purge <amount>` - Delete 1-100 messages",
+          "`/refresh` - Refresh knowledge base (Admin)",
         ].join("\n"),
       },
       {
@@ -363,6 +378,31 @@ async function handleClearCommand(
     ],
     ephemeral: true,
   });
+}
+
+/**
+ * Handle /refresh command (admin only)
+ */
+async function handleRefreshCommand(
+  interaction: ChatInputCommandInteraction
+): Promise<void> {
+  await interaction.deferReply({ ephemeral: true });
+
+  try {
+    await refreshKnowledgeBase();
+    await interaction.editReply({
+      embeds: [
+        createResponseEmbed("Knowledge base has been refreshed successfully!", {
+          title: "Refresh Complete",
+          color: COLORS.success,
+        }),
+      ],
+    });
+  } catch (error) {
+    await interaction.editReply({
+      embeds: [createErrorEmbed("Failed to refresh knowledge base.")],
+    });
+  }
 }
 
 /**
