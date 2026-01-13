@@ -2505,7 +2505,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Santiago",
                 role: "Co-Founder · Marketing & Logistics · Community builder",
                 github: "jorg-4",
-                avatar: "https://github.com/jorg-4.png"
+                avatar: "/images/santiago.png"
               },
               {
                 name: "Suyash D",
@@ -2524,6 +2524,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 role: "Main Reviewer · Code Quality · Open-source maintainer",
                 github: "Anshgrover23",
                 avatar: "https://github.com/Anshgrover23.png"
+              },
+              {
+                name: "Sahil",
+                role: "Developer & Judge · Partner Relations · Core contributor",
+                github: "sahil",
+                avatar: "/images/sahil.png"
               }
             ].map((founder) => (
               <figure key={founder.github} className="flex flex-col items-center text-center group">
