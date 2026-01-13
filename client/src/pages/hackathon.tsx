@@ -1311,7 +1311,7 @@ export default function Hackathon() {
                 aka: "Jorg",
                 role: "Co-Founder & Marketing Manager",
                 description: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics.",
-                avatar: "https://github.com/Jorgxander.png",
+                avatar: "/images/santiago.png",
                 github: "Jorgxander"
               },
               {
