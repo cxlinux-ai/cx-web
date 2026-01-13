@@ -612,8 +612,11 @@ async function handleBountiesCommand(
   await interaction.deferReply();
 
   try {
-    // Fetch bounties from our API
-    const response = await fetch("http://localhost:5000/api/bounties");
+    // Fetch bounties from our API - use public domain if available
+    const baseUrl = process.env.REPLIT_DEV_DOMAIN 
+      ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+      : process.env.API_BASE_URL || "http://localhost:5000";
+    const response = await fetch(`${baseUrl}/api/bounties`);
     
     if (!response.ok) {
       throw new Error("Failed to fetch bounties");
