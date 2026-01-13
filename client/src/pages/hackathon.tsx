@@ -1429,7 +1429,7 @@ export default function Hackathon() {
                 aka: "Jorg",
                 role: "Co-Founder & Marketing Manager",
                 shortDescription: "Co-founded the hackathon and manages all logistics.",
-                fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Santiago's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
+                fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
                 avatar: "https://github.com/jorg-4.png",
                 github: "jorg-4",
                 highlight: true,
