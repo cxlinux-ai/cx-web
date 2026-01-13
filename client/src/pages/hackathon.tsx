@@ -393,7 +393,7 @@ export default function Hackathon() {
           >
             <div className="flex -space-x-3">
               {[
-                { name: "Mike", avatar: "https://github.com/mikejmorgan-ai.png" },
+                { name: "Mike", avatar: "/assets/mike.png" },
                 { name: "Suyash", avatar: "/assets/suyash.png" },
                 { name: "Dhruv", avatar: "/assets/dhruv.png" },
                 { name: "Ansh", avatar: "https://github.com/Anshgrover23.png" }
@@ -1408,10 +1408,10 @@ export default function Hackathon() {
                 role: "CEO & Founder",
                 shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
                 fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
-                avatar: "/images/mike.png",
+                avatar: "/assets/mike.png",
                 github: "mikejmorgan-ai",
                 highlight: true,
-                expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy"]
+                expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy", "Sales & Fundraising"]
               },
               {
                 name: "Santiago",
