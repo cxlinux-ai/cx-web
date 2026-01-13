@@ -66,8 +66,7 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("stats")
-    .setDescription("Show bot statistics (Moderator only)")
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+    .setDescription("Show bot statistics (Admin only)"),
 
   new SlashCommandBuilder()
     .setName("referral")
@@ -83,7 +82,7 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("purge")
-    .setDescription("Delete messages from this channel (Moderator only)")
+    .setDescription("Delete messages from this channel (Admin only)")
     .addIntegerOption((option) =>
       option
         .setName("amount")
@@ -91,8 +90,7 @@ export const commands = [
         .setRequired(true)
         .setMinValue(1)
         .setMaxValue(100)
-    )
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+    ),
 
   new SlashCommandBuilder()
     .setName("links")
@@ -104,13 +102,11 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("refresh")
-    .setDescription("Refresh the knowledge base (Admin only)")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setDescription("Refresh the knowledge base (Admin only)"),
 
   new SlashCommandBuilder()
     .setName("setup-server")
-    .setDescription("Set up server roles, channels, and permissions (Admin only)")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setDescription("Set up server roles, channels, and permissions (Admin only)"),
 
   new SlashCommandBuilder()
     .setName("apply")
@@ -118,18 +114,17 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("approve")
-    .setDescription("Approve a user's application (Moderator only)")
+    .setDescription("Approve a user's application (Admin only)")
     .addUserOption((option) =>
       option
         .setName("user")
         .setDescription("The user to approve")
         .setRequired(true)
-    )
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+    ),
 
   new SlashCommandBuilder()
     .setName("reject")
-    .setDescription("Reject a user's application (Moderator only)")
+    .setDescription("Reject a user's application (Admin only)")
     .addUserOption((option) =>
       option
         .setName("user")
@@ -141,8 +136,7 @@ export const commands = [
         .setName("reason")
         .setDescription("Reason for rejection (optional)")
         .setRequired(false)
-    )
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+    ),
 ];
 
 /**
