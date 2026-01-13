@@ -1408,7 +1408,7 @@ export default function Hackathon() {
                 role: "CEO & Founder",
                 shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
                 fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
-                avatar: "https://github.com/mikejmorgan-ai.png",
+                avatar: "/images/mike.png",
                 github: "mikejmorgan-ai",
                 highlight: true,
                 expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy"]

@@ -2499,7 +2499,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Mike Morgan",
                 role: "CEO · Vision & Strategy · Open-source advocate",
                 github: "mikejmorgan-ai",
-                avatar: "https://github.com/mikejmorgan-ai.png"
+                avatar: "/images/mike.png"
               },
               {
                 name: "Santiago",
