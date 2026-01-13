@@ -8,6 +8,7 @@ import {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   ButtonInteraction,
+  ModalSubmitInteraction,
   EmbedBuilder,
   ActionRowBuilder,
   ButtonBuilder,
@@ -15,6 +16,13 @@ import {
   PermissionFlagsBits,
   TextChannel,
   ChannelType,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  GuildMember,
+  Role,
+  CategoryChannel,
+  OverwriteResolvable,
 } from "discord.js";
 import { generateResponse } from "../llm/claude.js";
 import { refreshKnowledgeBase, getStats as getRagStats } from "../rag/retriever.js";
@@ -98,6 +106,43 @@ export const commands = [
     .setName("refresh")
     .setDescription("Refresh the knowledge base (Admin only)")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+
+  new SlashCommandBuilder()
+    .setName("setup-server")
+    .setDescription("Set up server roles, channels, and permissions (Admin only)")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+
+  new SlashCommandBuilder()
+    .setName("apply")
+    .setDescription("Apply to become a contributor/participant"),
+
+  new SlashCommandBuilder()
+    .setName("approve")
+    .setDescription("Approve a user's application (Moderator only)")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to approve")
+        .setRequired(true)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+
+  new SlashCommandBuilder()
+    .setName("reject")
+    .setDescription("Reject a user's application (Moderator only)")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to reject")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for rejection (optional)")
+        .setRequired(false)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 ];
 
 /**

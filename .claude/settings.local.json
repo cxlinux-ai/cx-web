@@ -33,7 +33,8 @@
       "Bash(fi)",
       "Bash(git push)",
       "Bash(git checkout:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(xargs:*)"
     ]
   }
 }
