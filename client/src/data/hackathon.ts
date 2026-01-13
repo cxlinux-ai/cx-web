@@ -62,9 +62,9 @@ export const ideathonSubmissionTemplate: IdeathonSubmissionField[] = [
   },
   {
     id: "prototype_link",
-    label: "Optional Prototype / Mockup",
-    description: "Link to Figma, screenshot, or demo (optional but encouraged)",
-    required: false,
+    label: "Prototype / Mockup",
+    description: "Link to Figma, screenshot, or demo (required)",
+    required: true,
     type: "text",
     placeholder: "https://figma.com/..."
   }
