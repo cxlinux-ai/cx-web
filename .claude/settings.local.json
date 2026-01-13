@@ -44,7 +44,9 @@
       "WebFetch(domain:discord.gg)",
       "WebFetch(domain:discord.com)",
       "Bash(chmod:*)",
-      "Bash(npm run check:*)"
+      "Bash(npm run check:*)",
+      "Bash(fuser:*)",
+      "Bash(netstat:*)"
     ]
   }
 }
