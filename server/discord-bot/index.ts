@@ -72,13 +72,7 @@ import {
   handleWelcomeSelect,
   isWelcomeInteraction,
 } from "./utils/welcomeFlow.js";
-import {
-  addXP,
-  getUserStats,
-  getLeaderboard,
-  checkAchievements,
-  XP_REWARDS,
-} from "./utils/gamification.js";
+// Gamification disabled - imports removed
 import {
   initReminders,
   parseTime,
@@ -326,7 +320,7 @@ client.once(Events.ClientReady, async () => {
 
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("[Bot] Ready and operational!");
-  console.log("[Bot] Features: RAG, A/B Testing, Reminders, Digests, Gamification");
+  console.log("[Bot] Features: RAG, A/B Testing, Reminders, Digests");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 });
 
@@ -336,9 +330,6 @@ client.on(Events.GuildMemberAdd, async (member) => {
 
   // Verify member for referral system
   await verifyMember(member.user.id);
-
-  // Award XP for joining
-  addXP(member.user.id, XP_REWARDS.join, "Joined the server");
 
   // Start interactive welcome flow (with buttons and personalization)
   try {
@@ -581,10 +572,6 @@ client.on(Events.MessageCreate, async (message) => {
       message.channel.sendTyping().catch(() => {});
     }, 5000);
 
-    // Award XP for asking a question
-    const xpResult = addXP(userId, XP_REWARDS.askQuestion, "Asked a question");
-    const achievements = checkAchievements(userId);
-
     // Check for code execution request
     if (isCodeExecutionRequest(question)) {
       const codeBlock = parseCodeBlock(question);
@@ -661,19 +648,6 @@ client.on(Events.MessageCreate, async (message) => {
     if (shouldShowFollowUps(question, response)) {
       const suggestions = getFollowUpSuggestions(question);
       content += formatFollowUps(suggestions);
-    }
-
-    // Add level up notification if applicable
-    if (xpResult.leveledUp) {
-      content += `\n\n🎉 **Level Up!** You're now level ${xpResult.newLevel}!`;
-    }
-
-    // Add achievement notifications
-    if (achievements.length > 0) {
-      const newAchievements = achievements.filter((a) => a.new);
-      if (newAchievements.length > 0) {
-        content += `\n\n🏆 **Achievement Unlocked:** ${newAchievements.map((a) => a.name).join(", ")}`;
-      }
     }
 
     // Add remaining questions indicator
