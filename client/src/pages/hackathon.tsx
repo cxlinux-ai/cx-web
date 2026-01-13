@@ -1449,13 +1449,13 @@ export default function Hackathon() {
               {
                 name: "Sahil",
                 aka: "The Pioneer",
-                role: "Judge, Reviewer & Manager",
-                shortDescription: "Cortex's first contributor since day one.",
-                fullDescription: "Cortex's first contributor who has been part of the team since day one. Leads partnership efforts and sponsor acquisition. Sahil's early belief in the project helped shape its direction. Today, he focuses on building relationships with sponsors and partners, ensuring the hackathon has the resources needed to reward talented developers.",
+                role: "Developer & Judge",
+                shortDescription: "Cortex's first contributor and core developer.",
+                fullDescription: "Cortex's first contributor who has been part of the team since day one as a core developer. Beyond his development work, Sahil has helped gather partners and sponsors for the hackathon. His early belief in the project helped shape its technical direction, and he continues to contribute code while supporting the hackathon's growth.",
                 avatar: "/images/sahil.png",
                 github: "sahil",
                 highlight: false,
-                expertise: ["Partnerships", "Business Dev", "Open Source", "Mentoring"]
+                expertise: ["Full-Stack Dev", "Open Source", "Partner Relations", "Code Review"]
               },
               {
                 name: "Dhruv",
