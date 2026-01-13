@@ -1301,6 +1301,121 @@ export default function Hackathon() {
         </div>
       </section>
 
+      {/* Meet the Team Section */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm mb-6">
+              <Users size={16} />
+              The People Behind the Hackathon
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Meet the <span className="text-blue-300">Team</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              The passionate individuals making the Cortex Hackathon 2026 possible
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Mike Morgan",
+                aka: "AI Data God",
+                role: "CEO & Founder",
+                description: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI.",
+                avatar: "https://github.com/mikejmorgan-ai.png",
+                github: "mikejmorgan-ai"
+              },
+              {
+                name: "Santiago",
+                aka: "Jorg",
+                role: "Co-Founder & Marketing Manager",
+                description: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics.",
+                avatar: "https://github.com/Jorgxander.png",
+                github: "Jorgxander"
+              },
+              {
+                name: "Suyash Dongre",
+                aka: "Winner of India's Largest Hackathon",
+                role: "Judge, Reviewer & Manager",
+                description: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging.",
+                avatar: "/images/suyash-d.png",
+                github: "Suyashd999"
+              },
+              {
+                name: "Sahil",
+                aka: "The Pioneer",
+                role: "Judge, Reviewer & Manager",
+                description: "Cortex's first contributor who has been part of the team since day one. Leads partnership efforts and sponsor acquisition.",
+                avatar: "/images/sahil.png",
+                github: "sahil"
+              },
+              {
+                name: "Dhruv",
+                aka: "Expert Dev",
+                role: "Judge, Reviewer & Manager",
+                description: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality.",
+                avatar: "/assets/dhruv.png",
+                github: "Dhruv-89"
+              }
+            ].map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300 group"
+                data-testid={`team-member-${member.name.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="relative flex-shrink-0">
+                    <img
+                      src={member.avatar}
+                      alt={member.name}
+                      className="w-16 h-16 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-blue-500/30 transition-all"
+                      loading="lazy"
+                    />
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
+                      <Sparkles size={10} className="text-white" />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-white truncate">{member.name}</h3>
+                    <p className="text-blue-300 text-sm italic">"{member.aka}"</p>
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium">
+                    {member.role}
+                  </span>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {member.description}
+                </p>
+                {member.github && (
+                  <a
+                    href={`https://github.com/${member.github}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-4 text-gray-500 hover:text-white text-sm transition-colors"
+                  >
+                    <Github size={14} />
+                    @{member.github}
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-4xl mx-auto text-center">
