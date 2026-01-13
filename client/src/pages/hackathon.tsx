@@ -1275,32 +1275,6 @@ export default function Hackathon() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm mb-6">
-              <MessageSquare size={16} />
-              Common Questions
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Frequently Asked <span className="text-blue-300">Questions</span>
-            </h2>
-          </motion.div>
-
-          <div className="space-y-4">
-            {hackathonFaqs.map((faq, index) => (
-              <FAQItem key={index} question={faq.question} answer={faq.answer} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Meet the Team Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1363,6 +1337,14 @@ export default function Hackathon() {
                 description: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality.",
                 avatar: "/assets/dhruv.png",
                 github: "Dhruv-89"
+              },
+              {
+                name: "Ansh Grover",
+                aka: "The Gatekeeper",
+                role: "Main Reviewer & PR Merger",
+                description: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging.",
+                avatar: "https://github.com/Anshgrover23.png",
+                github: "Anshgrover23"
               }
             ].map((member, index) => (
               <motion.div
@@ -1411,6 +1393,32 @@ export default function Hackathon() {
                   </a>
                 )}
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm mb-6">
+              <MessageSquare size={16} />
+              Common Questions
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Frequently Asked <span className="text-blue-300">Questions</span>
+            </h2>
+          </motion.div>
+
+          <div className="space-y-4">
+            {hackathonFaqs.map((faq, index) => (
+              <FAQItem key={index} question={faq.question} answer={faq.answer} />
             ))}
           </div>
         </div>
