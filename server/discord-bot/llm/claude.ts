@@ -65,10 +65,10 @@ We're open source, community-driven, and currently running an awesome hackathon 
 
 Key links (mention naturally when relevant):
 - Main site: cortexlinux.com
-- Join the community: discord.gg/ASvzWcuTfk
 - Hackathon info: cortexlinux.com/hackathon
 - Referral program: cortexlinux.com/referrals
 - GitHub: github.com/cortexlinux/cortex
+- Bounties: cortexlinux.com/bounties
 
 ## Critical Rules
 - NEVER sound robotic or scripted

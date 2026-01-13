@@ -136,7 +136,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["register", "sign up", "hackathon how", "start", "begin"],
     category: "hackathon",
     priority: 8,
-    content: `To join the hackathon, head to cortexlinux.com/hackathon and register with your email. You'll get access to our Discord channels for participants, the submission portal, and updates. You can participate solo or form teams of up to four people. Join our Discord at discord.gg/ASvzWcuTfk for the hackathon channels.`,
+    content: `To join the hackathon, head to cortexlinux.com/hackathon and register with your email. You'll get access to participant channels, the submission portal, and updates. You can participate solo or form teams of up to four people.`,
   },
   {
     keywords: ["deadline", "when", "date", "timeline", "schedule", "end"],
@@ -170,7 +170,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["discord", "community", "chat", "help", "support", "contact", "talk to"],
     category: "community",
     priority: 9,
-    content: `Join our Discord at discord.gg/ASvzWcuTfk! It's the best place to get help, chat with other users, and stay updated. We have channels for general discussion, tech support, development talk, and hackathon coordination. The community is super welcoming to newcomers.`,
+    content: `The Discord community is the best place to get help, chat with other users, and stay updated. We have channels for general discussion, tech support, development talk, and hackathon coordination. The community is super welcoming to newcomers.`,
   },
   {
     keywords: ["github", "source", "code", "contribute", "open source", "repo", "repository"],

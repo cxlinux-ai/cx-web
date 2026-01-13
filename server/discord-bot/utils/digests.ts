@@ -183,7 +183,7 @@ export function createWeeklyDigestEmbed(stats: DigestStats): EmbedBuilder {
       }
     )
     .setTimestamp()
-    .setFooter({ text: "Join the conversation at discord.gg/ASvzWcuTfk" });
+    .setFooter({ text: "The AI Layer for Linux" });
 }
 
 /**

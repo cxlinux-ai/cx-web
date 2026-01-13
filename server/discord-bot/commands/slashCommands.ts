@@ -152,6 +152,10 @@ export const commands = [
         .setDescription("Reason for rejection (optional)")
         .setRequired(false)
     ),
+
+  new SlashCommandBuilder()
+    .setName("bounties")
+    .setDescription("View open bounties and PRs with rewards"),
 ];
 
 /**
@@ -205,6 +209,9 @@ export async function handleSlashCommand(
         break;
       case "reject":
         await handleRejectCommand(interaction);
+        break;
+      case "bounties":
+        await handleBountiesCommand(interaction);
         break;
       default:
         await interaction.reply({
@@ -566,7 +573,7 @@ async function handleLinksCommand(
     .addFields(
       { name: "Website", value: "[cortexlinux.com](https://cortexlinux.com)", inline: true },
       { name: "GitHub", value: "[github.com/cortexlinux](https://github.com/cortexlinux)", inline: true },
-      { name: "Discord", value: "[discord.gg/ASvzWcuTfk](https://discord.gg/ASvzWcuTfk)", inline: true },
+      { name: "Bounties", value: "[/bounties](https://cortexlinux.com/bounties)", inline: true },
       { name: "Hackathon", value: "[/hackathon](https://cortexlinux.com/hackathon)", inline: true },
       { name: "Referrals", value: "[/referrals](https://cortexlinux.com/referrals)", inline: true },
       { name: "Blog", value: "[/blog](https://cortexlinux.com/blog)", inline: true }
@@ -594,6 +601,96 @@ async function handlePingCommand(
     .setTimestamp();
 
   await interaction.reply({ embeds: [embed] });
+}
+
+/**
+ * Handle /bounties command - fetches open bounties from GitHub
+ */
+async function handleBountiesCommand(
+  interaction: ChatInputCommandInteraction
+): Promise<void> {
+  await interaction.deferReply();
+
+  try {
+    // Fetch bounties from our API
+    const response = await fetch("http://localhost:5000/api/bounties");
+    
+    if (!response.ok) {
+      throw new Error("Failed to fetch bounties");
+    }
+
+    const data = await response.json();
+    
+    if (!data.success || !data.data) {
+      throw new Error("Invalid bounty data");
+    }
+
+    const { open, stats } = data.data;
+    
+    // Create main embed
+    const embed = new EmbedBuilder()
+      .setColor(COLORS.primary)
+      .setTitle("Open Bounties & PRs")
+      .setDescription(
+        `Found **${stats.totalOpen}** open bounties worth **$${stats.totalOpenAmount.toLocaleString()}** total!\n\n` +
+        `View all bounties at [cortexlinux.com/bounties](https://cortexlinux.com/bounties)`
+      )
+      .setTimestamp();
+
+    // Add top bounties (max 10)
+    const topBounties = open.slice(0, 10);
+    
+    if (topBounties.length > 0) {
+      const bountiesList = topBounties.map((bounty: any) => {
+        const amount = bounty.bountyAmount ? `$${bounty.bountyAmount}` : "TBD";
+        const difficulty = bounty.difficulty ? ` (${bounty.difficulty})` : "";
+        const repo = bounty.repositoryName || "cortex";
+        return `**[#${bounty.number}](${bounty.url})** - ${amount}${difficulty}\n${bounty.title.slice(0, 60)}${bounty.title.length > 60 ? "..." : ""} *(${repo})*`;
+      }).join("\n\n");
+      
+      embed.addFields({
+        name: "Top Bounties",
+        value: bountiesList || "No open bounties at this time",
+        inline: false
+      });
+    } else {
+      embed.addFields({
+        name: "Status",
+        value: "No open bounties at this time. Check back later!",
+        inline: false
+      });
+    }
+
+    // Add stats
+    embed.addFields(
+      { name: "Total Paid Out", value: `$${stats.totalClosedAmount.toLocaleString()}`, inline: true },
+      { name: "Completed", value: `${stats.totalClosed} bounties`, inline: true }
+    );
+
+    embed.setFooter({ text: "Contribute to Cortex and earn rewards!" });
+
+    await interaction.editReply({ embeds: [embed] });
+  } catch (error: any) {
+    console.error("[Bot] Bounties command error:", error.message);
+    
+    // Fallback response
+    const fallbackEmbed = new EmbedBuilder()
+      .setColor(COLORS.warning)
+      .setTitle("Bounties Board")
+      .setDescription(
+        "Check out open bounties and contribute to Cortex Linux!\n\n" +
+        "**Browse all bounties:**\n" +
+        "[cortexlinux.com/bounties](https://cortexlinux.com/bounties)\n\n" +
+        "**How it works:**\n" +
+        "1. Find a bounty you want to work on\n" +
+        "2. Comment on the GitHub issue to claim it\n" +
+        "3. Submit a PR and get paid when merged!\n\n" +
+        "Bounties range from $50 to $500+ depending on complexity."
+      )
+      .setFooter({ text: "Contribute and earn!" });
+
+    await interaction.editReply({ embeds: [fallbackEmbed] });
+  }
 }
 
 /**
