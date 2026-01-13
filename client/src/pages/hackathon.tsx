@@ -316,7 +316,7 @@ export default function Hackathon() {
             transition={{ delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
           >
-            <span className="gradient-text">Cortex Hackathon 2026</span>
+            <span className="text-white">Cortex</span> <span className="gradient-text">Hackathon 2026</span>
           </motion.h1>
 
           {/* Date Subtitle */}
