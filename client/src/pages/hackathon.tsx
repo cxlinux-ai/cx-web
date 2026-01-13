@@ -1322,7 +1322,7 @@ export default function Hackathon() {
                 aka: "Winner of India's Largest Hackathon",
                 role: "Judge, Reviewer & Manager",
                 description: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging.",
-                avatar: "https://github.com/Suyashd999.png",
+                avatar: "/images/suyash-d.png",
                 github: "Suyashd999",
                 highlight: false
               },
@@ -1340,7 +1340,7 @@ export default function Hackathon() {
                 aka: "Expert Dev",
                 role: "Judge, Reviewer & Manager",
                 description: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality.",
-                avatar: "https://github.com/Dhruv-89.png",
+                avatar: "/assets/dhruv.png",
                 github: "Dhruv-89",
                 highlight: false
               },
