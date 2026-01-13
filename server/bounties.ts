@@ -165,7 +165,7 @@ const bountiesLimiter = rateLimit({
  * Priority order:
  * 1. Labels (most reliable, structured data)
  * 2. Title (commonly used pattern like "$200 - Fix bug")
- * 3. Body (fallback, looks for reward/bounty mentions)
+ * 3. Body (searches entire body for bounty/reward mentions)
  *
  * Supported patterns:
  * - Labels: "$500", "bounty:$200", "reward:150", "bounty-500", "500-bounty"
@@ -216,21 +216,47 @@ function extractBountyAmount(
     }
   }
 
-  // 3. Check body as fallback (only first 1000 chars for performance)
+  // 3. Check entire body for bounty amounts
   if (body) {
-    const bodySnippet = body.slice(0, 1000).toLowerCase();
+    const bodyLower = body.toLowerCase();
+    
+    // Extended patterns for body - search the entire content
     const bodyPatterns = [
-      /bounty[:\s]+\$?(\d+)/i,
-      /reward[:\s]+\$?(\d+)/i,
-      /💰\s*(\d+)/,
-      /prize[:\s]+\$?(\d+)/i,
-      /payout[:\s]+\$?(\d+)/i,
+      /bounty[:\s]*\$?(\d+)/i,                    // bounty: $500, bounty $500, bounty 500
+      /reward[:\s]*\$?(\d+)/i,                    // reward: $500, reward 500
+      /💰\s*\$?(\d+)/,                            // 💰500, 💰$500
+      /prize[:\s]*\$?(\d+)/i,                     // prize: $500
+      /payout[:\s]*\$?(\d+)/i,                    // payout: $500
+      /\$(\d+)\s*(?:usd|dollars?|bounty|reward)?/i, // $500, $500 USD, $500 bounty
+      /(\d+)\s*(?:usd|dollars?)\s*(?:bounty|reward)?/i, // 500 USD, 500 dollars bounty
+      /payment[:\s]*\$?(\d+)/i,                   // payment: $500
+      /compensation[:\s]*\$?(\d+)/i,              // compensation: $500
+      /amount[:\s]*\$?(\d+)/i,                    // amount: $500
+      /value[:\s]*\$?(\d+)/i,                     // value: $500
+      /worth[:\s]*\$?(\d+)/i,                     // worth $500
+      /pay[:\s]*\$?(\d+)/i,                       // pay: $500
+      /earn[:\s]*\$?(\d+)/i,                      // earn $500
+      /get[:\s]*\$?(\d+)/i,                       // get $500
     ];
 
     for (const pattern of bodyPatterns) {
-      const match = bodySnippet.match(pattern);
+      const match = bodyLower.match(pattern);
       if (match) {
-        return { amount: parseInt(match[1], 10), label: null, source: "body" };
+        const amount = parseInt(match[1], 10);
+        // Sanity check: bounty should be between $1 and $10000
+        if (amount >= 1 && amount <= 10000) {
+          return { amount, label: null, source: "body" };
+        }
+      }
+    }
+    
+    // Final fallback: look for any dollar amount in the body
+    const anyDollarMatch = body.match(/\$(\d+)/);
+    if (anyDollarMatch) {
+      const amount = parseInt(anyDollarMatch[1], 10);
+      // Only accept reasonable bounty amounts
+      if (amount >= 10 && amount <= 5000) {
+        return { amount, label: null, source: "body" };
       }
     }
   }
