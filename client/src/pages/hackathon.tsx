@@ -387,19 +387,17 @@ export default function Hackathon() {
               <FaDiscord size={18} />
               Join Discord
             </a>
-            <a
-              href={hackathonConfig.rulesDocUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/hackathon-rules"
               className="flex items-center gap-2 px-5 py-3 border border-amber-500/30 hover:border-amber-500/50 bg-amber-500/10 rounded-xl text-amber-400 font-medium transition-colors"
-              data-testid="download-rules-pdf"
+              data-testid="view-rules-link"
               onClick={() => {
-                analytics.trackCTAClick('download_rules', 'hackathon_hero');
+                analytics.trackCTAClick('view_rules', 'hackathon_hero');
               }}
             >
               <FileText size={18} />
               Rules
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
