@@ -1276,27 +1276,28 @@ export default function Hackathon() {
       </section>
 
       {/* Meet the Team Section */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-blue-950/20 pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-blue-300 text-sm mb-6">
               <Users size={16} />
               The People Behind the Hackathon
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Meet the <span className="text-blue-300">Team</span>
+              Meet the <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Team</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              The passionate individuals making the Cortex Hackathon 2026 possible
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+              The passionate individuals making Cortex Hackathon 2026 possible
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 name: "Mike Morgan",
@@ -1304,7 +1305,8 @@ export default function Hackathon() {
                 role: "CEO & Founder",
                 description: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI.",
                 avatar: "https://github.com/mikejmorgan-ai.png",
-                github: "mikejmorgan-ai"
+                github: "mikejmorgan-ai",
+                highlight: true
               },
               {
                 name: "Santiago",
@@ -1312,15 +1314,17 @@ export default function Hackathon() {
                 role: "Co-Founder & Marketing Manager",
                 description: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics.",
                 avatar: "/images/santiago.png",
-                github: "Jorgxander"
+                github: "jorg-4",
+                highlight: true
               },
               {
                 name: "Suyash Dongre",
                 aka: "Winner of India's Largest Hackathon",
                 role: "Judge, Reviewer & Manager",
                 description: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging.",
-                avatar: "/images/suyash-d.png",
-                github: "Suyashd999"
+                avatar: "https://github.com/Suyashd999.png",
+                github: "Suyashd999",
+                highlight: false
               },
               {
                 name: "Sahil",
@@ -1328,15 +1332,17 @@ export default function Hackathon() {
                 role: "Judge, Reviewer & Manager",
                 description: "Cortex's first contributor who has been part of the team since day one. Leads partnership efforts and sponsor acquisition.",
                 avatar: "/images/sahil.png",
-                github: "sahil"
+                github: "sahil",
+                highlight: false
               },
               {
                 name: "Dhruv",
                 aka: "Expert Dev",
                 role: "Judge, Reviewer & Manager",
                 description: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality.",
-                avatar: "/assets/dhruv.png",
-                github: "Dhruv-89"
+                avatar: "https://github.com/Dhruv-89.png",
+                github: "Dhruv-89",
+                highlight: false
               },
               {
                 name: "Ansh Grover",
@@ -1344,54 +1350,57 @@ export default function Hackathon() {
                 role: "Main Reviewer & PR Merger",
                 description: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging.",
                 avatar: "https://github.com/Anshgrover23.png",
-                github: "Anshgrover23"
+                github: "Anshgrover23",
+                highlight: false
               }
             ].map((member, index) => (
               <motion.div
                 key={member.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300 group"
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className={`relative group ${member.highlight ? 'lg:scale-105' : ''}`}
                 data-testid={`team-member-${member.name.toLowerCase().replace(/\s+/g, '-')}`}
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative flex-shrink-0">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      className="w-16 h-16 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-blue-500/30 transition-all"
-                      loading="lazy"
-                    />
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
-                      <Sparkles size={10} className="text-white" />
+                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${member.highlight ? 'from-blue-500/20 via-purple-500/10 to-cyan-500/20' : 'from-white/5 to-white/0'} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`relative bg-gradient-to-br ${member.highlight ? 'from-blue-500/10 via-transparent to-purple-500/10 border-blue-500/30' : 'from-white/5 to-white/[0.02] border-white/10'} backdrop-blur-xl border rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-500 h-full`}>
+                  <div className="flex flex-col items-center text-center">
+                    <div className="relative mb-6">
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${member.highlight ? 'from-blue-500 to-purple-500' : 'from-blue-500/50 to-cyan-500/50'} blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        className={`relative w-24 h-24 rounded-full object-cover ring-4 ${member.highlight ? 'ring-blue-500/50' : 'ring-white/10'} group-hover:ring-blue-400/50 transition-all duration-300 shadow-2xl`}
+                        loading="lazy"
+                      />
+                      <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full ${member.highlight ? 'bg-gradient-to-br from-blue-500 to-purple-500' : 'bg-blue-500'} flex items-center justify-center shadow-lg`}>
+                        <Sparkles size={14} className="text-white" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-white truncate">{member.name}</h3>
-                    <p className="text-blue-300 text-sm italic">"{member.aka}"</p>
+                    
+                    <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                    <p className="text-blue-300 text-sm italic mb-3">"{member.aka}"</p>
+                    
+                    <span className={`inline-block px-4 py-1.5 rounded-full ${member.highlight ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200' : 'bg-blue-500/20 text-blue-300'} text-xs font-semibold mb-4`}>
+                      {member.role}
+                    </span>
+                    
+                    <p className="text-gray-400 text-sm leading-relaxed mb-5 line-clamp-3">
+                      {member.description}
+                    </p>
+                    
+                    <a
+                      href={`https://github.com/${member.github}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400/30 text-gray-400 hover:text-white text-sm transition-all duration-300"
+                    >
+                      <Github size={16} />
+                      @{member.github}
+                    </a>
                   </div>
                 </div>
-                <div className="mb-3">
-                  <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium">
-                    {member.role}
-                  </span>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {member.description}
-                </p>
-                {member.github && (
-                  <a
-                    href={`https://github.com/${member.github}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 text-gray-500 hover:text-white text-sm transition-colors"
-                  >
-                    <Github size={14} />
-                    @{member.github}
-                  </a>
-                )}
               </motion.div>
             ))}
           </div>
