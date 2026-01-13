@@ -1030,7 +1030,7 @@ async function handleApplyCommand(
     .setCustomId("area_time")
     .setLabel("Area of Interest & Weekly Time Commitment")
     .setStyle(TextInputStyle.Paragraph)
-    .setPlaceholder("Area: LLM routing / CLI / infra / security / docs\nTime: e.g., 10-15 hours/week\nWill you follow contributing guidelines? Yes/No")
+    .setPlaceholder("Area: LLM/CLI/infra/security/docs, Time: 10-15 hrs/week")
     .setRequired(true)
     .setMaxLength(300);
 
