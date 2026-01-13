@@ -249,6 +249,120 @@ function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: 
   );
 }
 
+interface TeamMember {
+  name: string;
+  aka: string;
+  role: string;
+  shortDescription: string;
+  fullDescription: string;
+  avatar: string;
+  github: string;
+  highlight: boolean;
+  expertise: string[];
+}
+
+function TeamMemberCard({ member, index }: { member: TeamMember; index: number }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <motion.div
+      key={member.name}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className={`relative group ${member.highlight ? 'lg:scale-105' : ''}`}
+      data-testid={`team-member-${member.name.toLowerCase().replace(/\s+/g, '-')}`}
+    >
+      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${member.highlight ? 'from-blue-500/20 via-purple-500/10 to-cyan-500/20' : 'from-white/5 to-white/0'} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      <motion.div
+        layout
+        onClick={() => setIsExpanded(!isExpanded)}
+        className={`relative bg-gradient-to-br ${member.highlight ? 'from-blue-500/10 via-transparent to-purple-500/10 border-blue-500/30' : 'from-white/5 to-white/[0.02] border-white/10'} backdrop-blur-xl border rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-500 h-full cursor-pointer`}
+      >
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-6">
+            <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${member.highlight ? 'from-blue-500 to-purple-500' : 'from-blue-500/50 to-cyan-500/50'} blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
+            <img
+              src={member.avatar}
+              alt={member.name}
+              className={`relative w-24 h-24 rounded-full object-cover ring-4 ${member.highlight ? 'ring-blue-500/50' : 'ring-white/10'} group-hover:ring-blue-400/50 transition-all duration-300 shadow-2xl`}
+              loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=3b82f6&color=fff&size=96`;
+              }}
+            />
+            <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full ${member.highlight ? 'bg-gradient-to-br from-blue-500 to-purple-500' : 'bg-blue-500'} flex items-center justify-center shadow-lg`}>
+              <Sparkles size={14} className="text-white" />
+            </div>
+          </div>
+          
+          <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+          <p className="text-blue-300 text-sm italic mb-3">"{member.aka}"</p>
+          
+          <span className={`inline-block px-4 py-1.5 rounded-full ${member.highlight ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200' : 'bg-blue-500/20 text-blue-300'} text-xs font-semibold mb-4`}>
+            {member.role}
+          </span>
+          
+          <motion.div
+            initial={false}
+            animate={{ height: isExpanded ? 'auto' : '4.5rem' }}
+            className="overflow-hidden"
+          >
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              {isExpanded ? member.fullDescription : member.shortDescription}
+            </p>
+            
+            {isExpanded && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="mt-4"
+              >
+                <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Expertise</h4>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {member.expertise.map((skill, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+          
+          <button
+            className="inline-flex items-center gap-1 mt-3 text-blue-400 hover:text-blue-300 text-xs transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsExpanded(!isExpanded);
+            }}
+          >
+            {isExpanded ? 'Show less' : 'Learn more'}
+            {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          </button>
+          
+          <a
+            href={`https://github.com/${member.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400/30 text-gray-400 hover:text-white text-sm transition-all duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Github size={16} />
+            @{member.github}
+          </a>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Hackathon() {
   useEffect(() => {
     const cleanup = updateSEO(seoConfigs.hackathon);
@@ -1293,7 +1407,7 @@ export default function Hackathon() {
               Meet the <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Team</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              The passionate individuals making Cortex Hackathon 2026 possible
+              Click on any card to learn more about our team members
             </p>
           </motion.div>
 
@@ -1303,105 +1417,70 @@ export default function Hackathon() {
                 name: "Mike Morgan",
                 aka: "AI Data God",
                 role: "CEO & Founder",
-                description: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI.",
+                shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
+                fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
                 avatar: "https://github.com/mikejmorgan-ai.png",
                 github: "mikejmorgan-ai",
-                highlight: true
+                highlight: true,
+                expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy"]
               },
               {
                 name: "Santiago",
                 aka: "Jorg",
                 role: "Co-Founder & Marketing Manager",
-                description: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics.",
-                avatar: "/images/santiago.png",
+                shortDescription: "Co-founded the hackathon and manages all logistics.",
+                fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Santiago's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
+                avatar: "https://github.com/jorg-4.png",
                 github: "jorg-4",
-                highlight: true
+                highlight: true,
+                expertise: ["Marketing", "Community Building", "Event Management", "Growth"]
               },
               {
                 name: "Suyash Dongre",
                 aka: "Winner of India's Largest Hackathon",
                 role: "Judge, Reviewer & Manager",
-                description: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging.",
+                shortDescription: "Smart India Hackathon Grand Final Winner.",
+                fullDescription: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging. Suyash understands what it takes to win at the highest level and brings that perspective to evaluating submissions. His technical expertise and fair judgment ensure that the best projects rise to the top.",
                 avatar: "/images/suyash-d.png",
                 github: "Suyashd999",
-                highlight: false
+                highlight: false,
+                expertise: ["Hackathons", "Full-Stack Dev", "Problem Solving", "Judging"]
               },
               {
                 name: "Sahil",
                 aka: "The Pioneer",
                 role: "Judge, Reviewer & Manager",
-                description: "Cortex's first contributor who has been part of the team since day one. Leads partnership efforts and sponsor acquisition.",
+                shortDescription: "Cortex's first contributor since day one.",
+                fullDescription: "Cortex's first contributor who has been part of the team since day one. Leads partnership efforts and sponsor acquisition. Sahil's early belief in the project helped shape its direction. Today, he focuses on building relationships with sponsors and partners, ensuring the hackathon has the resources needed to reward talented developers.",
                 avatar: "/images/sahil.png",
                 github: "sahil",
-                highlight: false
+                highlight: false,
+                expertise: ["Partnerships", "Business Dev", "Open Source", "Mentoring"]
               },
               {
                 name: "Dhruv",
                 aka: "Expert Dev",
                 role: "Judge, Reviewer & Manager",
-                description: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality.",
+                shortDescription: "Technical expert overseeing review logistics.",
+                fullDescription: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality. Dhruv's meticulous approach to code review means every submission gets the attention it deserves. He's developed the evaluation criteria that helps judges assess projects consistently and fairly.",
                 avatar: "/assets/dhruv.png",
                 github: "Dhruv-89",
-                highlight: false
+                highlight: false,
+                expertise: ["Code Review", "Backend Dev", "System Design", "Quality Assurance"]
               },
               {
                 name: "Ansh Grover",
                 aka: "The Gatekeeper",
                 role: "Main Reviewer & PR Merger",
-                description: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging.",
+                shortDescription: "Ensures code quality across all submissions.",
+                fullDescription: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging. As the main PR merger, Ansh is the final checkpoint before code becomes part of Cortex. His standards ensure that all contributions meet the project's quality bar.",
                 avatar: "https://github.com/Anshgrover23.png",
                 github: "Anshgrover23",
-                highlight: false
+                highlight: false,
+                expertise: ["Code Review", "Git Workflow", "CI/CD", "Documentation"]
               }
             ].map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`relative group ${member.highlight ? 'lg:scale-105' : ''}`}
-                data-testid={`team-member-${member.name.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${member.highlight ? 'from-blue-500/20 via-purple-500/10 to-cyan-500/20' : 'from-white/5 to-white/0'} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                <div className={`relative bg-gradient-to-br ${member.highlight ? 'from-blue-500/10 via-transparent to-purple-500/10 border-blue-500/30' : 'from-white/5 to-white/[0.02] border-white/10'} backdrop-blur-xl border rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-500 h-full`}>
-                  <div className="flex flex-col items-center text-center">
-                    <div className="relative mb-6">
-                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${member.highlight ? 'from-blue-500 to-purple-500' : 'from-blue-500/50 to-cyan-500/50'} blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
-                      <img
-                        src={member.avatar}
-                        alt={member.name}
-                        className={`relative w-24 h-24 rounded-full object-cover ring-4 ${member.highlight ? 'ring-blue-500/50' : 'ring-white/10'} group-hover:ring-blue-400/50 transition-all duration-300 shadow-2xl`}
-                        loading="lazy"
-                      />
-                      <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full ${member.highlight ? 'bg-gradient-to-br from-blue-500 to-purple-500' : 'bg-blue-500'} flex items-center justify-center shadow-lg`}>
-                        <Sparkles size={14} className="text-white" />
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-blue-300 text-sm italic mb-3">"{member.aka}"</p>
-                    
-                    <span className={`inline-block px-4 py-1.5 rounded-full ${member.highlight ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30 text-blue-200' : 'bg-blue-500/20 text-blue-300'} text-xs font-semibold mb-4`}>
-                      {member.role}
-                    </span>
-                    
-                    <p className="text-gray-400 text-sm leading-relaxed mb-5 line-clamp-3">
-                      {member.description}
-                    </p>
-                    
-                    <a
-                      href={`https://github.com/${member.github}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-400/30 text-gray-400 hover:text-white text-sm transition-all duration-300"
-                    >
-                      <Github size={16} />
-                      @{member.github}
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
+              <TeamMemberCard key={member.name} member={member} index={index} />
             ))}
           </div>
         </div>

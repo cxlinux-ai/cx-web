@@ -2505,7 +2505,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Santiago",
                 role: "Co-Founder · Marketing & Logistics · Community builder",
                 github: "jorg-4",
-                avatar: "/images/santiago.png"
+                avatar: "https://github.com/jorg-4.png"
               },
               {
                 name: "Suyash D",
@@ -2539,6 +2539,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     alt={`${founder.name}, ${founder.role}`}
                     className="w-12 h-12 rounded-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
                     loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(founder.name)}&background=3b82f6&color=fff&size=48`;
+                    }}
                   />
                 </a>
                 <figcaption>
