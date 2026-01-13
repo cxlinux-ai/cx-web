@@ -122,8 +122,8 @@ export async function getBountyContext(question: string): Promise<string> {
   return `
 
 CURRENT BOUNTY DATA (Live from GitHub):
-GitHub Bounties: github.com/cortexlinux - issues labeled "bounty"
-Web Bounty Board: cortexlinux.com/bounties
+GitHub Bounties: https://github.com/cortexlinux - issues labeled "bounty"
+Web Bounty Board: https://cortexlinux.com/bounties
 
 Stats: ${stats.totalOpen} open bounties worth $${stats.totalOpenAmount.toLocaleString()} available
 Completed: ${stats.totalClosed} bounties, $${stats.totalClosedAmount.toLocaleString()} paid out
@@ -134,7 +134,7 @@ ${openBountiesList}
 RECENTLY COMPLETED:
 ${recentlyCompleted}
 
-IMPORTANT: When discussing bounties, ALWAYS include the GitHub link (github.com/cortexlinux) and the web bounty board (cortexlinux.com/bounties).
+IMPORTANT: When discussing bounties, ALWAYS include FULL URLs with https:// - use https://github.com/cortexlinux and https://cortexlinux.com/bounties.
 Reference actual bounty numbers, amounts, and direct links from the list above.
 For bounties without set amounts, say the bounty amount will be discussed with the team.`;
 }
