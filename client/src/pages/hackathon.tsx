@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
   Star,
@@ -14,7 +14,6 @@ import {
   Clock,
   ArrowRight,
   ChevronDown,
-  ChevronUp,
   Sparkles,
   Target,
   Shield,
@@ -114,11 +113,13 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         data-testid={`faq-toggle-${question.slice(0, 20).replace(/\s+/g, "-").toLowerCase()}`}
       >
         <span className="font-medium text-white pr-4">{question}</span>
-        {isOpen ? (
-          <ChevronUp className="text-blue-300 flex-shrink-0" size={20} />
-        ) : (
-          <ChevronDown className="text-gray-400 flex-shrink-0" size={20} />
-        )}
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0"
+        >
+          <ChevronDown className={isOpen ? "text-blue-300" : "text-gray-400"} size={20} />
+        </motion.span>
       </button>
       {isOpen && (
         <motion.div
@@ -261,9 +262,108 @@ interface TeamMember {
   expertise: string[];
 }
 
-function TeamMemberCard({ member, index }: { member: TeamMember; index: number }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+const teamMembers: TeamMember[] = [
+  {
+    name: "Mike Morgan",
+    aka: "AI Data God",
+    role: "CEO & Founder",
+    shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
+    fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
+    avatar: "/images/mike.png",
+    github: "mikejmorgan-ai",
+    highlight: true,
+    expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy", "Sales & Fundraising"]
+  },
+  {
+    name: "Santiago",
+    aka: "Jorg",
+    role: "Co-Founder & Marketing Manager",
+    shortDescription: "Co-founded the hackathon and manages all logistics.",
+    fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
+    avatar: "/images/santiago.png",
+    github: "jorg-4",
+    highlight: true,
+    expertise: ["Marketing", "Community Building", "Event Management", "Growth"]
+  },
+  {
+    name: "Suyash Dongre",
+    aka: "Winner of India's Largest Hackathon",
+    role: "Judge, Reviewer & Manager",
+    shortDescription: "Smart India Hackathon Grand Final Winner.",
+    fullDescription: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging. Suyash understands what it takes to win at the highest level and brings that perspective to evaluating submissions. His technical expertise and fair judgment ensure that the best projects rise to the top.",
+    avatar: "/images/suyash-d.png",
+    github: "Suyashd999",
+    highlight: false,
+    expertise: ["Hackathons", "Full-Stack Dev", "Problem Solving", "Judging"]
+  },
+  {
+    name: "Sahil",
+    aka: "The Pioneer",
+    role: "Developer & Judge",
+    shortDescription: "Cortex's first contributor and core developer.",
+    fullDescription: "Cortex's first contributor who has been part of the team since day one as a core developer. Beyond his development work, Sahil has helped gather partners and sponsors for the hackathon. His early belief in the project helped shape its technical direction, and he continues to contribute code while supporting the hackathon's growth.",
+    avatar: "/images/sahil.png",
+    github: "sahil",
+    highlight: false,
+    expertise: ["Full-Stack Dev", "Open Source", "Partner Relations", "Code Review"]
+  },
+  {
+    name: "Dhruv",
+    aka: "Expert Dev",
+    role: "Judge, Reviewer & Manager",
+    shortDescription: "Technical expert overseeing review logistics.",
+    fullDescription: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality. Dhruv's meticulous approach to code review means every submission gets the attention it deserves. He's developed the evaluation criteria that helps judges assess projects consistently and fairly.",
+    avatar: "/assets/dhruv.png",
+    github: "Dhruv-89",
+    highlight: false,
+    expertise: ["Code Review", "Backend Dev", "System Design", "Quality Assurance"]
+  },
+  {
+    name: "Ansh Grover",
+    aka: "The Gatekeeper",
+    role: "Main Reviewer & PR Merger",
+    shortDescription: "Ensures code quality across all submissions.",
+    fullDescription: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging. As the main PR merger, Ansh is the final checkpoint before code becomes part of Cortex. His standards ensure that all contributions meet the project's quality bar.",
+    avatar: "https://github.com/Anshgrover23.png",
+    github: "Anshgrover23",
+    highlight: false,
+    expertise: ["Code Review", "Git Workflow", "CI/CD", "Documentation"]
+  }
+];
 
+function TeamAccordion() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {teamMembers.map((member, index) => (
+        <TeamMemberCard
+          key={member.name}
+          member={member}
+          index={index}
+          isExpanded={expandedIndex === index}
+          onToggle={() => handleToggle(index)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function TeamMemberCard({ 
+  member, 
+  index, 
+  isExpanded, 
+  onToggle 
+}: { 
+  member: TeamMember; 
+  index: number; 
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
   return (
     <motion.div
       key={member.name}
@@ -277,7 +377,8 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
       <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${member.highlight ? 'from-blue-500/20 via-purple-500/10 to-cyan-500/20' : 'from-white/5 to-white/0'} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
       <motion.div
         layout
-        onClick={() => setIsExpanded(!isExpanded)}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        onClick={onToggle}
         className={`relative bg-gradient-to-br ${member.highlight ? 'from-blue-500/10 via-transparent to-purple-500/10 border-blue-500/30' : 'from-white/5 to-white/[0.02] border-white/10'} backdrop-blur-xl border rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-500 h-full cursor-pointer`}
       >
         <div className="flex flex-col items-center text-center">
@@ -307,44 +408,63 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
           
           <motion.div
             initial={false}
-            animate={{ height: isExpanded ? 'auto' : '4.5rem' }}
+            animate={{ 
+              height: isExpanded ? 'auto' : '4.5rem',
+              opacity: 1
+            }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+            <motion.p 
+              className="text-gray-400 text-sm leading-relaxed mb-4"
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
               {isExpanded ? member.fullDescription : member.shortDescription}
-            </p>
+            </motion.p>
             
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mt-4"
-              >
-                <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Expertise</h4>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {member.expertise.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+            <AnimatePresence mode="wait">
+              {isExpanded && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="mt-4"
+                >
+                  <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Expertise</h4>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {member.expertise.map((skill, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.05, duration: 0.2 }}
+                        className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
           
           <button
             className="inline-flex items-center gap-1 mt-3 text-blue-400 hover:text-blue-300 text-xs transition-colors"
             onClick={(e) => {
               e.stopPropagation();
-              setIsExpanded(!isExpanded);
+              onToggle();
             }}
           >
             {isExpanded ? 'Show less' : 'Learn more'}
-            {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            <motion.span
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown size={14} />
+            </motion.span>
           </button>
           
           <a
@@ -1400,78 +1520,7 @@ export default function Hackathon() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Mike Morgan",
-                aka: "AI Data God",
-                role: "CEO & Founder",
-                shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
-                fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
-                avatar: "/assets/mike.png",
-                github: "mikejmorgan-ai",
-                highlight: true,
-                expertise: ["AI/ML", "Data Science", "Linux Systems", "Product Strategy", "Sales & Fundraising"]
-              },
-              {
-                name: "Santiago",
-                aka: "Jorg",
-                role: "Co-Founder & Marketing Manager",
-                shortDescription: "Co-founded the hackathon and manages all logistics.",
-                fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
-                avatar: "/assets/santiago.png",
-                github: "jorg-4",
-                highlight: true,
-                expertise: ["Marketing", "Community Building", "Event Management", "Growth"]
-              },
-              {
-                name: "Suyash Dongre",
-                aka: "Winner of India's Largest Hackathon",
-                role: "Judge, Reviewer & Manager",
-                shortDescription: "Smart India Hackathon Grand Final Winner.",
-                fullDescription: "Smart India Hackathon Grand Final Winner who competed against 300,000+ contestants. Brings competitive hackathon experience to judging. Suyash understands what it takes to win at the highest level and brings that perspective to evaluating submissions. His technical expertise and fair judgment ensure that the best projects rise to the top.",
-                avatar: "/images/suyash-d.png",
-                github: "Suyashd999",
-                highlight: false,
-                expertise: ["Hackathons", "Full-Stack Dev", "Problem Solving", "Judging"]
-              },
-              {
-                name: "Sahil",
-                aka: "The Pioneer",
-                role: "Developer & Judge",
-                shortDescription: "Cortex's first contributor and core developer.",
-                fullDescription: "Cortex's first contributor who has been part of the team since day one as a core developer. Beyond his development work, Sahil has helped gather partners and sponsors for the hackathon. His early belief in the project helped shape its technical direction, and he continues to contribute code while supporting the hackathon's growth.",
-                avatar: "/images/sahil.png",
-                github: "sahil",
-                highlight: false,
-                expertise: ["Full-Stack Dev", "Open Source", "Partner Relations", "Code Review"]
-              },
-              {
-                name: "Dhruv",
-                aka: "Expert Dev",
-                role: "Judge, Reviewer & Manager",
-                shortDescription: "Technical expert overseeing review logistics.",
-                fullDescription: "Technical expert who oversees review logistics, ensuring fair and thorough evaluation of all submissions with deep attention to code quality. Dhruv's meticulous approach to code review means every submission gets the attention it deserves. He's developed the evaluation criteria that helps judges assess projects consistently and fairly.",
-                avatar: "/assets/dhruv.png",
-                github: "Dhruv-89",
-                highlight: false,
-                expertise: ["Code Review", "Backend Dev", "System Design", "Quality Assurance"]
-              },
-              {
-                name: "Ansh Grover",
-                aka: "The Gatekeeper",
-                role: "Main Reviewer & PR Merger",
-                shortDescription: "Ensures code quality across all submissions.",
-                fullDescription: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging. As the main PR merger, Ansh is the final checkpoint before code becomes part of Cortex. His standards ensure that all contributions meet the project's quality bar.",
-                avatar: "https://github.com/Anshgrover23.png",
-                github: "Anshgrover23",
-                highlight: false,
-                expertise: ["Code Review", "Git Workflow", "CI/CD", "Documentation"]
-              }
-            ].map((member, index) => (
-              <TeamMemberCard key={member.name} member={member} index={index} />
-            ))}
-          </div>
+          <TeamAccordion />
         </div>
       </section>
       {/* FAQ Section */}
