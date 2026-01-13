@@ -130,13 +130,16 @@ async function registerSlashCommands(): Promise<void> {
     console.log("[Bot] Registering slash commands...");
     const commandData = commands.map((cmd) => cmd.toJSON());
 
-    if (GUILD_ID) {
+    // Use configured GUILD_ID or auto-detect from first guild
+    const guildId = GUILD_ID || client.guilds.cache.first()?.id;
+
+    if (guildId) {
       // Guild-specific (instant)
       await rest.put(
-        Routes.applicationGuildCommands(client.user!.id, GUILD_ID),
+        Routes.applicationGuildCommands(client.user!.id, guildId),
         { body: commandData }
       );
-      console.log(`[Bot] Registered ${commandData.length} commands to guild`);
+      console.log(`[Bot] Registered ${commandData.length} commands to guild ${guildId}`);
     } else {
       // Global (takes up to 1 hour)
       await rest.put(Routes.applicationCommands(client.user!.id), {
