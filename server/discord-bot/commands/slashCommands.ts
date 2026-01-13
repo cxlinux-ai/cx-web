@@ -12,6 +12,9 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  PermissionFlagsBits,
+  TextChannel,
+  ChannelType,
 } from "discord.js";
 import { generateResponse } from "../llm/claude.js";
 import { refreshKnowledgeBase, getStats as getRagStats } from "../rag/retriever.js";
@@ -50,6 +53,27 @@ export const commands = [
   new SlashCommandBuilder()
     .setName("clear")
     .setDescription("Clear your conversation history with the bot"),
+
+  new SlashCommandBuilder()
+    .setName("purge")
+    .setDescription("Delete messages from this channel (Moderator only)")
+    .addIntegerOption((option) =>
+      option
+        .setName("amount")
+        .setDescription("Number of messages to delete (1-100)")
+        .setRequired(true)
+        .setMinValue(1)
+        .setMaxValue(100)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+
+  new SlashCommandBuilder()
+    .setName("links")
+    .setDescription("Get important Cortex Linux links"),
+
+  new SlashCommandBuilder()
+    .setName("ping")
+    .setDescription("Check if the bot is online"),
 ];
 
 /**
@@ -79,6 +103,15 @@ export async function handleSlashCommand(
         break;
       case "clear":
         await handleClearCommand(interaction);
+        break;
+      case "purge":
+        await handlePurgeCommand(interaction);
+        break;
+      case "links":
+        await handleLinksCommand(interaction);
+        break;
+      case "ping":
+        await handlePingCommand(interaction);
         break;
       default:
         await interaction.reply({
@@ -163,6 +196,9 @@ async function handleHelpCommand(
           "`/referral` - Learn about our referral program",
           "`/hackathon` - Get hackathon information",
           "`/clear` - Clear your conversation history",
+          "`/purge <amount>` - Delete messages (Mod only)",
+          "`/links` - Get important links",
+          "`/ping` - Check bot status",
         ].join("\n"),
       },
       {
@@ -327,6 +363,80 @@ async function handleClearCommand(
     ],
     ephemeral: true,
   });
+}
+
+/**
+ * Handle /purge command (moderator only)
+ */
+async function handlePurgeCommand(
+  interaction: ChatInputCommandInteraction
+): Promise<void> {
+  const amount = interaction.options.getInteger("amount", true);
+
+  if (!interaction.channel || interaction.channel.type !== ChannelType.GuildText) {
+    await interaction.reply({
+      content: "This command can only be used in text channels.",
+      ephemeral: true,
+    });
+    return;
+  }
+
+  const channel = interaction.channel as TextChannel;
+
+  try {
+    const deleted = await channel.bulkDelete(amount, true);
+    await interaction.reply({
+      content: `Successfully deleted ${deleted.size} message(s).`,
+      ephemeral: true,
+    });
+  } catch (error) {
+    await interaction.reply({
+      content: "Failed to delete messages. Messages older than 14 days cannot be bulk deleted.",
+      ephemeral: true,
+    });
+  }
+}
+
+/**
+ * Handle /links command
+ */
+async function handleLinksCommand(
+  interaction: ChatInputCommandInteraction
+): Promise<void> {
+  const embed = new EmbedBuilder()
+    .setColor(COLORS.primary)
+    .setTitle("Cortex Linux Links")
+    .addFields(
+      { name: "Website", value: "[cortexlinux.com](https://cortexlinux.com)", inline: true },
+      { name: "GitHub", value: "[github.com/cortexlinux](https://github.com/cortexlinux)", inline: true },
+      { name: "Discord", value: "[discord.gg/ASvzWcuTfk](https://discord.gg/ASvzWcuTfk)", inline: true },
+      { name: "Hackathon", value: "[/hackathon](https://cortexlinux.com/hackathon)", inline: true },
+      { name: "Referrals", value: "[/referrals](https://cortexlinux.com/referrals)", inline: true },
+      { name: "Blog", value: "[/blog](https://cortexlinux.com/blog)", inline: true }
+    )
+    .setFooter({ text: "The AI Layer for Linux" });
+
+  await interaction.reply({ embeds: [embed] });
+}
+
+/**
+ * Handle /ping command
+ */
+async function handlePingCommand(
+  interaction: ChatInputCommandInteraction
+): Promise<void> {
+  const latency = Date.now() - interaction.createdTimestamp;
+
+  const embed = new EmbedBuilder()
+    .setColor(COLORS.success)
+    .setTitle("Pong!")
+    .addFields(
+      { name: "Bot Latency", value: `${latency}ms`, inline: true },
+      { name: "Status", value: "Online", inline: true }
+    )
+    .setTimestamp();
+
+  await interaction.reply({ embeds: [embed] });
 }
 
 /**
