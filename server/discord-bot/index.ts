@@ -86,10 +86,7 @@ import {
   generateDigest,
   scheduleDigest,
 } from "./utils/digests.js";
-import {
-  shouldCreateThread,
-  createDiscussionThread,
-} from "./utils/threadSupport.js";
+// Thread feature removed
 import {
   isCodeExecutionRequest,
   parseCodeBlock,
@@ -608,17 +605,6 @@ client.on(Events.MessageCreate, async (message) => {
     // Store user message
     addMessage(message, "user", question);
 
-    // Check if this should spawn a thread for complex discussion
-    // Get conversation history length for context
-    const historyLength = getMemoryStats().totalMessages;
-    let createdThread: Awaited<ReturnType<typeof createDiscussionThread>> = null;
-    if (shouldCreateThread(question, historyLength)) {
-      createdThread = await createDiscussionThread(message, question);
-      if (createdThread) {
-        console.log(`[Bot] Created thread ${createdThread.name} for complex question`);
-      }
-    }
-
     // Generate response
     const response = await generateResponse(question, message);
 
@@ -670,45 +656,24 @@ client.on(Events.MessageCreate, async (message) => {
 
       for (let i = 0; i < chunks.length; i++) {
         if (i === 0) {
-          // If in thread, send to thread; otherwise reply to original message
-          const reply = createdThread 
-            ? await createdThread.send({
-                content: chunks[i],
-                components: chunks.length === 1 ? [createFeedbackButtons(message.id)] : [],
-              })
-            : await message.reply({
-                content: chunks[i],
-                components: chunks.length === 1 ? [createFeedbackButtons(message.id)] : [],
-              });
+          const reply = await message.reply({
+            content: chunks[i],
+            components: chunks.length === 1 ? [createFeedbackButtons(message.id)] : [],
+          });
           messageResponseMap.set(message.id, reply.id);
         } else {
-          // Send subsequent chunks to thread or channel
-          if (createdThread) {
-            await createdThread.send({
-              content: chunks[i],
-              components: i === chunks.length - 1 ? [createFeedbackButtons(message.id)] : [],
-            });
-          } else {
-            await message.channel.send({
-              content: chunks[i],
-              components: i === chunks.length - 1 ? [createFeedbackButtons(message.id)] : [],
-            });
-          }
+          await message.channel.send({
+            content: chunks[i],
+            components: i === chunks.length - 1 ? [createFeedbackButtons(message.id)] : [],
+          });
         }
       }
     } else {
-      // If in thread, send to thread; otherwise reply to original message
-      const reply = createdThread
-        ? await createdThread.send({
-            content,
-            embeds: richEmbed ? [richEmbed] : [],
-            components: [createFeedbackButtons(message.id)],
-          })
-        : await message.reply({
-            content,
-            embeds: richEmbed ? [richEmbed] : [],
-            components: [createFeedbackButtons(message.id)],
-          });
+      const reply = await message.reply({
+        content,
+        embeds: richEmbed ? [richEmbed] : [],
+        components: [createFeedbackButtons(message.id)],
+      });
       messageResponseMap.set(message.id, reply.id);
     }
 
