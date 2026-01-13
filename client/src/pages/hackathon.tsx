@@ -377,13 +377,22 @@ function TeamMemberCard({
       <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${member.highlight ? 'from-blue-500/20 via-purple-500/10 to-cyan-500/20' : 'from-white/5 to-white/0'} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
       <motion.div
         layout
-        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+        transition={{ 
+          layout: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+        }}
         onClick={onToggle}
         className={`relative bg-gradient-to-br ${member.highlight ? 'from-blue-500/10 via-transparent to-purple-500/10 border-blue-500/30' : 'from-white/5 to-white/[0.02] border-white/10'} backdrop-blur-xl border rounded-3xl p-8 hover:border-blue-400/40 transition-all duration-500 h-full cursor-pointer`}
       >
         <div className="flex flex-col items-center text-center">
           <div className="relative mb-6">
-            <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${member.highlight ? 'from-blue-500 to-purple-500' : 'from-blue-500/50 to-cyan-500/50'} blur-lg opacity-30 group-hover:opacity-50 transition-opacity`} />
+            <motion.div 
+              className={`absolute inset-0 rounded-full bg-gradient-to-br ${member.highlight ? 'from-blue-500 to-purple-500' : 'from-blue-500/50 to-cyan-500/50'} opacity-30 group-hover:opacity-50 transition-opacity`}
+              animate={{ 
+                filter: isExpanded ? 'blur(20px)' : 'blur(12px)',
+                scale: isExpanded ? 1.15 : 1
+              }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            />
             <img
               src={member.avatar}
               alt={member.name}
@@ -410,15 +419,22 @@ function TeamMemberCard({
             initial={false}
             animate={{ 
               height: isExpanded ? 'auto' : '4.5rem',
-              opacity: 1
+              filter: isExpanded ? 'blur(0px)' : 'blur(0px)'
             }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ 
+              duration: 0.55, 
+              ease: [0.22, 1, 0.36, 1]
+            }}
             className="overflow-hidden"
           >
             <motion.p 
               className="text-gray-400 text-sm leading-relaxed mb-4"
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
+              initial={false}
+              animate={{ 
+                opacity: 1,
+                filter: 'blur(0px)'
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               {isExpanded ? member.fullDescription : member.shortDescription}
             </motion.p>
@@ -426,10 +442,13 @@ function TeamMemberCard({
             <AnimatePresence mode="wait">
               {isExpanded && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  initial={{ opacity: 0, y: -15, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
+                  transition={{ 
+                    duration: 0.45, 
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
                   className="mt-4"
                 >
                   <h4 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">Expertise</h4>
@@ -437,9 +456,13 @@ function TeamMemberCard({
                     {member.expertise.map((skill, i) => (
                       <motion.span
                         key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.05, duration: 0.2 }}
+                        initial={{ opacity: 0, scale: 0.7, filter: 'blur(4px)' }}
+                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                        transition={{ 
+                          delay: i * 0.06, 
+                          duration: 0.35,
+                          ease: [0.22, 1, 0.36, 1]
+                        }}
                         className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
                       >
                         {skill}
@@ -461,7 +484,7 @@ function TeamMemberCard({
             {isExpanded ? 'Show less' : 'Learn more'}
             <motion.span
               animate={{ rotate: isExpanded ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               <ChevronDown size={14} />
             </motion.span>
@@ -513,7 +536,7 @@ export default function Hackathon() {
           >
             <div className="flex -space-x-3">
               {[
-                { name: "Mike", avatar: "/assets/mike.png" },
+                { name: "Mike", avatar: "/images/mike.png" },
                 { name: "Suyash", avatar: "/assets/suyash.png" },
                 { name: "Dhruv", avatar: "/assets/dhruv.png" },
                 { name: "Ansh", avatar: "https://github.com/Anshgrover23.png" }
