@@ -169,12 +169,25 @@ export async function escalate(
   const { reason, priority, suggestedAction } = result;
 
   try {
-    // Build mention string
+    // Build mention string - prefer Admin role
     let mention = "";
-    if (MODERATOR_ROLE) {
-      mention = `<@&${MODERATOR_ROLE}>`;
-    } else if (ADMIN_ROLE) {
+    
+    // Try to find Admin role by ID or by name
+    if (ADMIN_ROLE) {
       mention = `<@&${ADMIN_ROLE}>`;
+    } else if (message.guild) {
+      // Look for Admin role by name
+      const adminRole = message.guild.roles.cache.find(
+        (role) => role.name.toLowerCase() === "admin"
+      );
+      if (adminRole) {
+        mention = `<@&${adminRole.id}>`;
+      }
+    }
+    
+    // Fallback to moderator role
+    if (!mention && MODERATOR_ROLE) {
+      mention = `<@&${MODERATOR_ROLE}>`;
     }
 
     // Create escalation message for the user
@@ -225,10 +238,10 @@ export async function escalate(
  */
 export function formatEscalationNotice(priority: string): string {
   const notices: Record<string, string> = {
-    urgent: "\n\n🚨 **I've flagged this as urgent and alerted the team.**",
-    high: "\n\n⚠️ **I've notified the team to assist you.**",
-    medium: "\n\n📢 **A team member has been notified.**",
-    low: "\n\n💬 **Feel free to wait for a team member or ask me more questions.**",
+    urgent: "\n\nI've flagged this as urgent and alerted the team.",
+    high: "\n\nI've notified the team to assist you.",
+    medium: "\n\nA team member has been notified.",
+    low: "\n\nFeel free to wait for a team member or ask me more questions.",
   };
   return notices[priority] || "";
 }
