@@ -34,6 +34,7 @@ import { hasImages, analyzeImages } from "../utils/imageAnalysis.js";
 import { hasAttachments, processAttachments, formatAttachmentsForContext } from "../utils/attachmentContext.js";
 import { analyzeEscalation, escalate, formatEscalationNotice } from "../utils/humanEscalation.js";
 import { searchCustomEntries } from "../utils/knowledgeBaseEditor.js";
+import { shouldFetchBounties, getBountyContext } from "../utils/bountyContext.js";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -281,6 +282,16 @@ export async function generateResponse(
       contextPromises.push(
         getGitHubContext(question).catch((e) => {
           console.error("[Claude] GitHub fetch failed:", e.message);
+          return "";
+        })
+      );
+    }
+
+    // 4. Bounty context (for bounty/PR questions)
+    if (shouldFetchBounties(question)) {
+      contextPromises.push(
+        getBountyContext(question).catch((e) => {
+          console.error("[Claude] Bounty fetch failed:", e.message);
           return "";
         })
       );

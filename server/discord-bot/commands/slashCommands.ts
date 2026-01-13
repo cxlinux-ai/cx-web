@@ -645,7 +645,7 @@ async function handleBountiesCommand(
     
     if (topBounties.length > 0) {
       const bountiesList = topBounties.map((bounty: any) => {
-        const amount = bounty.bountyAmount ? `$${bounty.bountyAmount}` : "TBD";
+        const amount = bounty.bountyAmount ? `$${bounty.bountyAmount}` : "Bounty to be discussed";
         const difficulty = bounty.difficulty ? ` (${bounty.difficulty})` : "";
         const repo = bounty.repositoryName || "cortex";
         return `**[#${bounty.number}](${bounty.url})** - ${amount}${difficulty}\n${bounty.title.slice(0, 60)}${bounty.title.length > 60 ? "..." : ""} *(${repo})*`;
