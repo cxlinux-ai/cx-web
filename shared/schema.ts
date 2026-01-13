@@ -666,3 +666,91 @@ export const referralClickSchema = z.object({
 
 export type WaitlistSignup = z.infer<typeof waitlistSignupSchema>;
 export type ReferralClick = z.infer<typeof referralClickSchema>;
+
+// ==========================================
+// DISCORD BOT - CONVERSATIONS & FEEDBACK
+// ==========================================
+
+/**
+ * Bot Conversations - Persistent conversation memory
+ */
+export const botConversations = pgTable("bot_conversations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+
+  // Discord identifiers
+  discordUserId: text("discord_user_id").notNull(),
+  discordChannelId: text("discord_channel_id").notNull(),
+  discordGuildId: text("discord_guild_id"),
+
+  // Conversation data
+  messages: text("messages").notNull().default("[]"), // JSON array of messages
+  messageCount: integer("message_count").default(0),
+
+  // Summary for long conversations
+  summary: text("summary"),
+  lastSummarizedAt: timestamp("last_summarized_at"),
+
+  // Timestamps
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  lastMessageAt: timestamp("last_message_at").notNull().defaultNow(),
+});
+
+export type BotConversation = typeof botConversations.$inferSelect;
+
+/**
+ * Bot Feedback - Track thumbs up/down on responses
+ */
+export const botFeedback = pgTable("bot_feedback", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+
+  // Discord identifiers
+  discordUserId: text("discord_user_id").notNull(),
+  discordMessageId: text("discord_message_id").notNull(),
+
+  // The Q&A pair
+  question: text("question").notNull(),
+  answer: text("answer").notNull(),
+
+  // Feedback
+  rating: text("rating").notNull(), // "positive" or "negative"
+  feedbackText: text("feedback_text"), // Optional user comment
+
+  // Context
+  modelUsed: text("model_used"), // opus, sonnet, haiku
+  wasFromCache: boolean("was_from_cache").default(false),
+
+  // Timestamps
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type BotFeedback = typeof botFeedback.$inferSelect;
+
+/**
+ * Bot Analytics - Track usage and performance
+ */
+export const botAnalytics = pgTable("bot_analytics", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+
+  // Discord identifiers
+  discordUserId: text("discord_user_id").notNull(),
+  discordGuildId: text("discord_guild_id"),
+
+  // Request details
+  question: text("question").notNull(),
+  questionCategory: text("question_category"), // Detected category
+
+  // Response details
+  modelUsed: text("model_used").notNull(),
+  tokensUsed: integer("tokens_used").default(0),
+  responseTimeMs: integer("response_time_ms"),
+  wasFromCache: boolean("was_from_cache").default(false),
+
+  // Outcome
+  successful: boolean("successful").default(true),
+  errorType: text("error_type"),
+
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type BotAnalytics = typeof botAnalytics.$inferSelect;

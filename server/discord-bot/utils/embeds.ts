@@ -99,10 +99,193 @@ export function createLinkButton(
   );
 }
 
+/**
+ * Create a hackathon info embed
+ */
+export function createHackathonEmbed(): EmbedBuilder {
+  return new EmbedBuilder()
+    .setColor(COLORS.primary)
+    .setTitle("Cortex Hackathon 2026")
+    .setDescription("Build the future of AI-powered Linux!")
+    .addFields(
+      {
+        name: "Total Prizes",
+        value: "$15,000",
+        inline: true,
+      },
+      {
+        name: "Phases",
+        value: "Ideathon + Build",
+        inline: true,
+      },
+      {
+        name: "Team Size",
+        value: "1-4 people",
+        inline: true,
+      },
+      {
+        name: "Phase 1: Ideathon",
+        value: "Submit feature ideas - $3,000 in prizes",
+        inline: false,
+      },
+      {
+        name: "Phase 2: Build",
+        value: "Implement your features - $12,000 in prizes",
+        inline: false,
+      }
+    )
+    .setFooter({ text: "cortexlinux.com/hackathon" });
+}
+
+/**
+ * Create a referral tiers embed
+ */
+export function createReferralTiersEmbed(): EmbedBuilder {
+  return new EmbedBuilder()
+    .setColor(COLORS.info)
+    .setTitle("Referral Tiers")
+    .setDescription("Invite friends and earn rewards!")
+    .addFields(
+      {
+        name: "Bronze (1 referral)",
+        value: "Badge + 100 spots up",
+        inline: true,
+      },
+      {
+        name: "Silver (3 referrals)",
+        value: "Discord access",
+        inline: true,
+      },
+      {
+        name: "Gold (5 referrals)",
+        value: "Swag pack",
+        inline: true,
+      },
+      {
+        name: "Platinum (10 referrals)",
+        value: "1 month Pro free",
+        inline: true,
+      },
+      {
+        name: "Diamond (20 referrals)",
+        value: "Ambassador status",
+        inline: true,
+      },
+      {
+        name: "Legendary (50 referrals)",
+        value: "Lifetime VIP",
+        inline: true,
+      }
+    )
+    .setFooter({ text: "cortexlinux.com/referrals" });
+}
+
+/**
+ * Create an installation guide embed
+ */
+export function createInstallEmbed(): EmbedBuilder {
+  return new EmbedBuilder()
+    .setColor(COLORS.success)
+    .setTitle("Installing Cortex Linux")
+    .addFields(
+      {
+        name: "Requirements",
+        value: "64-bit CPU, 4GB+ RAM, 20GB disk",
+        inline: false,
+      },
+      {
+        name: "Step 1",
+        value: "Download ISO from cortexlinux.com/download",
+        inline: false,
+      },
+      {
+        name: "Step 2",
+        value: "Flash to USB with Rufus/Etcher/dd",
+        inline: false,
+      },
+      {
+        name: "Step 3",
+        value: "Boot from USB and follow installer",
+        inline: false,
+      }
+    )
+    .setFooter({ text: "AI assists with disk partitioning!" });
+}
+
+/**
+ * Create a bot stats embed
+ */
+export function createStatsEmbed(stats: {
+  activeConversations: number;
+  totalMessages: number;
+  cacheHitRate?: number;
+  avgResponseTime?: number;
+}): EmbedBuilder {
+  const embed = new EmbedBuilder()
+    .setColor(COLORS.info)
+    .setTitle("Bot Statistics")
+    .addFields(
+      {
+        name: "Active Conversations",
+        value: stats.activeConversations.toString(),
+        inline: true,
+      },
+      {
+        name: "Total Messages",
+        value: stats.totalMessages.toString(),
+        inline: true,
+      }
+    );
+
+  if (stats.cacheHitRate !== undefined) {
+    embed.addFields({
+      name: "Cache Hit Rate",
+      value: `${stats.cacheHitRate}%`,
+      inline: true,
+    });
+  }
+
+  if (stats.avgResponseTime !== undefined) {
+    embed.addFields({
+      name: "Avg Response Time",
+      value: `${stats.avgResponseTime}ms`,
+      inline: true,
+    });
+  }
+
+  return embed;
+}
+
+/**
+ * Detect if response should use rich embed
+ */
+export function shouldUseEmbed(question: string): "hackathon" | "referral" | "install" | null {
+  const lower = question.toLowerCase();
+
+  if (/\b(hackathon|prize|competition|contest)\b/.test(lower) && /\b(info|detail|about|tell)\b/.test(lower)) {
+    return "hackathon";
+  }
+
+  if (/\b(referral|tier|invite|reward)\b/.test(lower) && /\b(what|how|info|all)\b/.test(lower)) {
+    return "referral";
+  }
+
+  if (/\b(install|setup)\b/.test(lower) && /\b(how|guide|step|start)\b/.test(lower)) {
+    return "install";
+  }
+
+  return null;
+}
+
 export default {
   COLORS,
   createResponseEmbed,
   createErrorEmbed,
   createFeedbackButtons,
   createLinkButton,
+  createHackathonEmbed,
+  createReferralTiersEmbed,
+  createInstallEmbed,
+  createStatsEmbed,
+  shouldUseEmbed,
 };

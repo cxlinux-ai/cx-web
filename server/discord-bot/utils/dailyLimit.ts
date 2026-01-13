@@ -132,7 +132,7 @@ export function getUsageStats(): { totalUsers: number; totalQueries: number } {
   let totalQueries = 0;
   const today = getToday();
 
-  for (const [, usage] of usageMap) {
+  for (const [, usage] of Array.from(usageMap.entries())) {
     if (usage.date === today) {
       totalQueries += usage.count;
     }

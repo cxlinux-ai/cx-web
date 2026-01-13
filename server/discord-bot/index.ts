@@ -20,6 +20,7 @@ import {
   Events,
   ChannelType,
   Message,
+  GuildMember,
 } from "discord.js";
 import { generateResponse, initializeRAG } from "./llm/claude.js";
 import { refreshKnowledgeBase } from "./rag/retriever.js";
@@ -28,7 +29,13 @@ import {
   handleSlashCommand,
   handleButtonInteraction,
   handleApplicationModal,
+  storeQAForFeedback,
 } from "./commands/slashCommands.js";
+import {
+  getFollowUpSuggestions,
+  formatFollowUps,
+  shouldShowFollowUps,
+} from "./utils/followUpSuggestions.js";
 import { shouldRespond, extractQuestion } from "./utils/shouldRespond.js";
 import {
   canAskQuestion,
@@ -46,11 +53,71 @@ import {
   createResponseEmbed,
   createErrorEmbed,
   createFeedbackButtons,
+  createHackathonEmbed,
+  createReferralTiersEmbed,
+  createInstallEmbed,
+  createStatsEmbed,
+  shouldUseEmbed,
   COLORS,
 } from "./utils/embeds.js";
+import { getAnalyticsSummary } from "./utils/analytics.js";
 import { db } from "../db.js";
 import { eq, and } from "drizzle-orm";
 import { waitlistEntries } from "@shared/schema";
+
+// New feature imports
+import {
+  startWelcomeFlow,
+  handleWelcomeButton,
+  handleWelcomeSelect,
+  isWelcomeInteraction,
+} from "./utils/welcomeFlow.js";
+import {
+  addXP,
+  getUserStats,
+  getLeaderboard,
+  checkAchievements,
+  XP_REWARDS,
+} from "./utils/gamification.js";
+import {
+  initReminders,
+  parseTime,
+  createReminder,
+  getUserReminders,
+  cancelReminder,
+  formatReminderList,
+} from "./utils/reminders.js";
+import {
+  initDigests,
+  generateDigest,
+  scheduleDigest,
+} from "./utils/digests.js";
+import {
+  shouldCreateThread,
+  createDiscussionThread,
+} from "./utils/threadSupport.js";
+import {
+  isCodeExecutionRequest,
+  parseCodeBlock,
+  detectLanguage,
+  executeCode,
+  createExecutionEmbed,
+  isCodeSafe,
+} from "./utils/codeSandbox.js";
+import {
+  createAddModal,
+  createEditModal,
+  handleAddSubmission,
+  handleEditSubmission,
+  handleApproval,
+  isKBInteraction,
+  createPendingListEmbed,
+  createApprovalButtons,
+  createEntryDetailEmbed,
+  searchCustomEntries,
+  getKBStats,
+} from "./utils/knowledgeBaseEditor.js";
+import { initExperiments } from "./utils/abTesting.js";
 
 // Environment variables
 const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN || process.env.DISCORD_TOKEN || "";
@@ -71,36 +138,22 @@ const TIER_ROLES: Record<string, string> = {
 // Track message -> response for edit detection
 const messageResponseMap = new Map<string, string>();
 
-// Store recent Q&A for feedback
-const recentResponses = new Map<
-  string,
-  { question: string; answer: string; timestamp: number }
->();
+// Track messages being processed to prevent duplicate responses
+const processingMessages = new Set<string>();
 
 // Cleanup old entries periodically
 function cleanupMaps(): void {
   if (messageResponseMap.size > 100) {
-    const entries = [...messageResponseMap.entries()];
+    const entries = Array.from(messageResponseMap.entries());
     const toDelete = entries.slice(0, entries.length - 100);
     toDelete.forEach(([key]) => messageResponseMap.delete(key));
   }
-
-  if (recentResponses.size > 200) {
-    const oldest = [...recentResponses.entries()].sort(
-      (a, b) => a[1].timestamp - b[1].timestamp
-    )[0];
-    recentResponses.delete(oldest[0]);
+  // Clean up processing set (shouldn't have stale entries, but just in case)
+  if (processingMessages.size > 50) {
+    processingMessages.clear();
   }
 }
 setInterval(cleanupMaps, 60000);
-
-function storeResponseForFeedback(
-  messageId: string,
-  question: string,
-  answer: string
-): void {
-  recentResponses.set(messageId, { question, answer, timestamp: Date.now() });
-}
 
 // Validate token - don't exit process, just skip bot initialization
 const BOT_ENABLED = !!DISCORD_TOKEN;
@@ -253,6 +306,18 @@ client.once(Events.ClientReady, async () => {
   console.log("[Bot] Initializing knowledge base...");
   await initializeRAG();
 
+  // Initialize A/B testing experiments
+  console.log("[Bot] Initializing A/B testing...");
+  initExperiments();
+
+  // Initialize reminder system
+  console.log("[Bot] Initializing reminders...");
+  initReminders(client);
+
+  // Initialize digest system
+  console.log("[Bot] Initializing digests...");
+  initDigests(client);
+
   // Register slash commands
   await registerSlashCommands();
 
@@ -261,34 +326,41 @@ client.once(Events.ClientReady, async () => {
 
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("[Bot] Ready and operational!");
+  console.log("[Bot] Features: RAG, A/B Testing, Reminders, Digests, Gamification");
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 });
 
-// New member event - verify and send welcome DM
+// New member event - verify and start interactive welcome flow
 client.on(Events.GuildMemberAdd, async (member) => {
   console.log(`[Bot] New member: ${member.user.tag}`);
 
   // Verify member for referral system
   await verifyMember(member.user.id);
 
-  // Send welcome DM
+  // Award XP for joining
+  addXP(member.user.id, XP_REWARDS.join, "Joined the server");
+
+  // Start interactive welcome flow (with buttons and personalization)
   try {
-    await member.send(
-      `Hey! Welcome to the Cortex Linux server.\n\n` +
-        `I'm the AI support bot. You can:\n` +
-        `• Mention me: \`@${client.user!.username} how do I install?\`\n` +
-        `• Use slash commands: \`/cortex help\`\n` +
-        `• Reply to my messages to continue a conversation\n\n` +
-        `You get 5 free questions per day (unlimited for verified members).\n\n` +
-        `**Quick Links:**\n` +
-        `• Website: https://cortexlinux.com\n` +
-        `• GitHub: https://github.com/cortexlinux/cortex\n` +
-        `• Hackathon: https://cortexlinux.com/hackathon\n` +
-        `• Referrals: https://cortexlinux.com/referrals`
-    );
-    console.log(`[Bot] Sent welcome DM to ${member.user.tag}`);
+    await startWelcomeFlow(member);
+    console.log(`[Bot] Started welcome flow for ${member.user.tag}`);
   } catch {
-    console.log(`[Bot] Couldn't DM ${member.user.tag} (DMs disabled)`);
+    // Fallback to simple welcome if interactive flow fails (DMs disabled)
+    console.log(`[Bot] Couldn't start welcome flow for ${member.user.tag} (DMs disabled)`);
+    try {
+      await member.send(
+        `Hey! Welcome to the Cortex Linux server.\n\n` +
+          `I'm the AI support bot. You can:\n` +
+          `• Mention me: \`@${client.user!.username} how do I install?\`\n` +
+          `• Use slash commands: \`/cortex help\`\n` +
+          `• Reply to my messages to continue a conversation\n\n` +
+          `**Quick Links:**\n` +
+          `• Website: https://cortexlinux.com\n` +
+          `• Hackathon: https://cortexlinux.com/hackathon`
+      );
+    } catch {
+      // Can't DM user at all
+    }
   }
 });
 
@@ -323,16 +395,71 @@ client.on(Events.MessageUpdate, async (oldMessage, newMessage) => {
   }
 });
 
-// Slash command, button, and modal handler
+// Slash command, button, select, and modal handler
 client.on(Events.InteractionCreate, async (interaction) => {
   try {
     if (interaction.isChatInputCommand()) {
       await handleSlashCommand(interaction);
     } else if (interaction.isButton()) {
+      // Handle different button types
+      const customId = interaction.customId;
+
+      // Welcome flow buttons
+      if (isWelcomeInteraction(customId)) {
+        await handleWelcomeButton(interaction);
+        return;
+      }
+
+      // KB approval/preview buttons
+      if (isKBInteraction(customId)) {
+        if (customId.startsWith("kb_approve:")) {
+          const entryId = customId.split(":")[1];
+          await handleApproval(interaction, entryId, true);
+        } else if (customId.startsWith("kb_reject:")) {
+          const entryId = customId.split(":")[1];
+          await handleApproval(interaction, entryId, false);
+        } else if (customId.startsWith("kb_preview:")) {
+          const entryId = customId.split(":")[1];
+          const entries = searchCustomEntries("");
+          const entry = entries.find((e) => e.id === entryId);
+          if (entry) {
+            await interaction.reply({
+              embeds: [createEntryDetailEmbed(entry)],
+              ephemeral: true,
+            });
+          } else {
+            await interaction.reply({
+              content: "Entry not found.",
+              ephemeral: true,
+            });
+          }
+        }
+        return;
+      }
+
+      // Standard feedback/other buttons
       await handleButtonInteraction(interaction);
+    } else if (interaction.isStringSelectMenu()) {
+      // Handle select menus (welcome flow)
+      if (isWelcomeInteraction(interaction.customId)) {
+        await handleWelcomeSelect(interaction);
+      }
     } else if (interaction.isModalSubmit()) {
-      // Handle modal submissions
-      if (interaction.customId === "application_modal") {
+      const customId = interaction.customId;
+
+      // Handle KB modals
+      if (customId === "kb_add_modal") {
+        await handleAddSubmission(interaction);
+        return;
+      }
+      if (customId.startsWith("kb_edit_modal:")) {
+        const entryId = customId.split(":")[1];
+        await handleEditSubmission(interaction, entryId);
+        return;
+      }
+
+      // Handle application modal
+      if (customId === "application_modal") {
         await handleApplicationModal(interaction);
       }
     }
@@ -343,8 +470,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 // Message handler
 client.on(Events.MessageCreate, async (message) => {
+  // Prevent duplicate processing of the same message
+  if (processingMessages.has(message.id)) {
+    console.log(`[Bot] Skipping duplicate message: ${message.id}`);
+    return;
+  }
+
   const shouldReply = await shouldRespond(message, client.user!.id);
   if (!shouldReply) return;
+
+  // Mark message as being processed
+  processingMessages.add(message.id);
 
   const userId = message.author.id;
   const username = message.author.username;
@@ -381,7 +517,7 @@ client.on(Events.MessageCreate, async (message) => {
           createResponseEmbed(
             `**Knowledge base refreshed!**\n\n` +
               `• Total chunks: **${stats.totalDocuments}**\n` +
-              `• Sources: ${Object.entries(stats.sources)
+              `• Categories: ${Object.entries(stats.categories)
                 .map(([k, v]) => `${k}: ${v}`)
                 .join(", ")}`,
             { title: "RAG Refresh Complete", color: COLORS.success }
@@ -413,15 +549,23 @@ client.on(Events.MessageCreate, async (message) => {
   // Stats
   if (lowerQuestion === "!stats") {
     const memStats = getMemoryStats();
+    const analyticsStats = await getAnalyticsSummary(24);
+
     await message.reply({
       embeds: [
+        createStatsEmbed({
+          activeConversations: memStats.activeConversations,
+          totalMessages: memStats.totalMessages,
+          cacheHitRate: analyticsStats.cacheHitRate,
+          avgResponseTime: analyticsStats.avgResponseTime,
+        }),
         createResponseEmbed(
-          `**Memory:**\n` +
-            `• Active conversations: ${memStats.activeConversations}\n` +
-            `• Total messages: ${memStats.totalMessages}\n\n` +
-            `**Your Status:**\n` +
-            `• Remaining questions: ${getRemainingQuestions(userId, member)}`,
-          { title: "Bot Stats", color: COLORS.info }
+          `**Your Status:**\n` +
+            `• Remaining questions: ${getRemainingQuestions(userId, member)}\n\n` +
+            `**24h Analytics:**\n` +
+            `• Total interactions: ${analyticsStats.totalInteractions}\n` +
+            `• Error rate: ${analyticsStats.errorRate}%`,
+          { color: COLORS.info }
         ),
       ],
     });
@@ -437,8 +581,55 @@ client.on(Events.MessageCreate, async (message) => {
       message.channel.sendTyping().catch(() => {});
     }, 5000);
 
+    // Award XP for asking a question
+    const xpResult = addXP(userId, XP_REWARDS.askQuestion, "Asked a question");
+    const achievements = checkAchievements(userId);
+
+    // Check for code execution request
+    if (isCodeExecutionRequest(question)) {
+      const codeBlock = parseCodeBlock(question);
+      if (codeBlock) {
+        const language = codeBlock.language || detectLanguage(codeBlock.code) || "javascript";
+        const safetyCheck = isCodeSafe(codeBlock.code);
+
+        if (safetyCheck.safe) {
+          console.log(`[Bot] Executing ${language} code for ${username}`);
+          const result = await executeCode(codeBlock.code, language);
+          clearInterval(typingInterval);
+
+          await message.reply({
+            embeds: [createExecutionEmbed(result)],
+          });
+          processingMessages.delete(message.id);
+          return;
+        } else {
+          clearInterval(typingInterval);
+          await message.reply({
+            embeds: [
+              createErrorEmbed(
+                "Code Blocked",
+                `Can't run this code: ${safetyCheck.reason}`
+              ),
+            ],
+          });
+          processingMessages.delete(message.id);
+          return;
+        }
+      }
+    }
+
     // Store user message
     addMessage(message, "user", question);
+
+    // Check if this should spawn a thread for complex discussion
+    // Get conversation history length for context
+    const historyLength = getMemoryStats().totalMessages;
+    if (shouldCreateThread(question, historyLength)) {
+      const thread = await createDiscussionThread(message, question);
+      if (thread) {
+        console.log(`[Bot] Created thread ${thread.name} for complex question`);
+      }
+    }
 
     // Generate response
     const response = await generateResponse(question, message);
@@ -452,8 +643,40 @@ client.on(Events.MessageCreate, async (message) => {
     incrementUsage(userId, member);
     const remaining = getRemainingQuestions(userId, member);
 
-    // Build reply
+    // Check if we should include a rich embed
+    const embedType = shouldUseEmbed(question);
+    let richEmbed = null;
+    if (embedType === "hackathon") {
+      richEmbed = createHackathonEmbed();
+    } else if (embedType === "referral") {
+      richEmbed = createReferralTiersEmbed();
+    } else if (embedType === "install") {
+      richEmbed = createInstallEmbed();
+    }
+
+    // Build reply with optional follow-up suggestions
     let content = response;
+
+    // Add follow-up suggestions (occasionally, for substantive responses)
+    if (shouldShowFollowUps(question, response)) {
+      const suggestions = getFollowUpSuggestions(question);
+      content += formatFollowUps(suggestions);
+    }
+
+    // Add level up notification if applicable
+    if (xpResult.leveledUp) {
+      content += `\n\n🎉 **Level Up!** You're now level ${xpResult.newLevel}!`;
+    }
+
+    // Add achievement notifications
+    if (achievements.length > 0) {
+      const newAchievements = achievements.filter((a) => a.new);
+      if (newAchievements.length > 0) {
+        content += `\n\n🏆 **Achievement Unlocked:** ${newAchievements.map((a) => a.name).join(", ")}`;
+      }
+    }
+
+    // Add remaining questions indicator
     if (remaining !== "unlimited") {
       content += `\n\n-# ${remaining} question${remaining !== 1 ? "s" : ""} remaining today`;
     }
@@ -487,18 +710,23 @@ client.on(Events.MessageCreate, async (message) => {
     } else {
       const reply = await message.reply({
         content,
+        embeds: richEmbed ? [richEmbed] : [],
         components: [createFeedbackButtons(message.id)],
       });
       messageResponseMap.set(message.id, reply.id);
     }
 
-    storeResponseForFeedback(message.id, question, response);
+    // Store Q&A for feedback tracking
+    storeQAForFeedback(message.id, question, response);
     console.log(`[Bot] Responded to ${username}. Remaining: ${remaining}`);
   } catch (error: any) {
     console.error(`[Bot] Error responding to ${username}:`, error.message);
     await message.reply({
       embeds: [createErrorEmbed("Sorry, I encountered an error", error.message)],
     });
+  } finally {
+    // Clean up processing tracker
+    processingMessages.delete(message.id);
   }
 });
 
@@ -523,6 +751,9 @@ process.on("SIGTERM", () => {
   process.exit(0);
 });
 
+// Track if bot is already starting/started
+let botStarting = false;
+
 /**
  * Start the Discord bot
  */
@@ -531,6 +762,19 @@ export async function startBot(): Promise<void> {
     console.log("[Bot] Bot is disabled - skipping startup");
     return;
   }
+
+  // Prevent multiple startups
+  if (botStarting) {
+    console.log("[Bot] Bot is already starting/started - skipping duplicate startup");
+    return;
+  }
+
+  if (client.isReady()) {
+    console.log("[Bot] Bot is already connected - skipping startup");
+    return;
+  }
+
+  botStarting = true;
   console.log("[Bot] Connecting to Discord...");
   await client.login(DISCORD_TOKEN);
 }

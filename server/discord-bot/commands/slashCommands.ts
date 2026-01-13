@@ -28,6 +28,21 @@ import { generateResponse } from "../llm/claude.js";
 import { refreshKnowledgeBase, getStats as getRagStats } from "../rag/retriever.js";
 import { clearHistory, getStats as getMemoryStats } from "../memory/conversationMemory.js";
 import { getRemainingQuestions, canAskQuestion, incrementUsage } from "../utils/dailyLimit.js";
+import { getCacheStats } from "../utils/responseCache.js";
+import { db } from "../../db.js";
+import { botFeedback } from "@shared/schema";
+
+// Store recent Q&A for feedback (shared with index.ts)
+const recentQA = new Map<string, { question: string; answer: string }>();
+
+export function storeQAForFeedback(messageId: string, question: string, answer: string): void {
+  recentQA.set(messageId, { question, answer });
+  // Clean up old entries
+  if (recentQA.size > 500) {
+    const oldest = recentQA.keys().next().value;
+    if (oldest) recentQA.delete(oldest);
+  }
+}
 import { createResponseEmbed, createErrorEmbed, COLORS } from "../utils/embeds.js";
 
 // Admin role ID for restricted commands
@@ -1391,10 +1406,29 @@ export async function handleButtonInteraction(
 
   if (action === "feedback") {
     const isHelpful = type === "helpful";
+    const messageId = value;
+
+    // Store feedback in database
+    try {
+      const qa = recentQA.get(messageId);
+      if (qa) {
+        await db.insert(botFeedback).values({
+          discordUserId: interaction.user.id,
+          discordMessageId: messageId,
+          question: qa.question,
+          answer: qa.answer,
+          rating: isHelpful ? "positive" : "negative",
+        });
+        console.log(`[Feedback] ${isHelpful ? "Positive" : "Negative"} feedback stored`);
+      }
+    } catch (error) {
+      console.error("[Feedback] Failed to store:", error);
+    }
+
     await interaction.reply({
       content: isHelpful
-        ? "Thanks for the feedback!"
-        : "Sorry to hear that. I'll try to do better.",
+        ? "Thanks for the feedback! Glad I could help."
+        : "Thanks for letting me know. I'll keep improving!",
       ephemeral: true,
     });
   } else if (action === "app") {
@@ -1407,4 +1441,5 @@ export default {
   handleSlashCommand,
   handleButtonInteraction,
   handleApplicationModal,
+  storeQAForFeedback,
 };
