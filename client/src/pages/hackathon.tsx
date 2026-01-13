@@ -286,7 +286,7 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
             <img
               src={member.avatar}
               alt={member.name}
-              className={`relative w-24 h-24 rounded-full object-cover ring-4 ${member.highlight ? 'ring-blue-500/50' : 'ring-white/10'} group-hover:ring-blue-400/50 transition-all duration-300 shadow-2xl`}
+              className={`relative w-24 h-24 rounded-full object-cover object-top ring-4 ${member.highlight ? 'ring-blue-500/50' : 'ring-white/10'} group-hover:ring-blue-400/50 transition-all duration-300 shadow-2xl`}
               loading="lazy"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -378,7 +378,6 @@ export default function Hackathon() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col justify-center px-4 pt-16 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
@@ -409,7 +408,7 @@ export default function Hackathon() {
               ))}
             </div>
             <span className="text-gray-400 text-sm">
-              <span className="text-white font-semibold">1,000+</span> participants expected
+              <span className="text-white font-semibold">5,000+</span> participants expected
             </span>
           </motion.div>
 
@@ -644,7 +643,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Split View Section - Two Hero Banners */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -761,7 +759,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Clear Program Roadmap */}
       <section className="py-16 px-4 bg-gradient-to-b from-blue-950/10 to-transparent" id="program-roadmap">
         <div className="max-w-4xl mx-auto">
@@ -866,7 +863,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Philosophy Section - Simplified */}
       <section className="py-16 px-4 relative">
         <div className="max-w-4xl mx-auto">
@@ -954,7 +950,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Phase 1: Ideathon Section */}
       <section id="ideathon-section" className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1095,7 +1090,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Phase 2: Hackathon Section */}
       <section id="hackathon-section" className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-7xl mx-auto">
@@ -1147,7 +1141,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Build Tracks Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1214,7 +1207,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Champion Ambassador Expanded Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-5xl mx-auto">
@@ -1310,7 +1302,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Benefits Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1349,7 +1340,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Referral Program Snippet */}
       <section className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
@@ -1388,7 +1378,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Meet the Team Section */}
       <section className="py-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-blue-950/20 pointer-events-none" />
@@ -1430,7 +1419,7 @@ export default function Hackathon() {
                 role: "Co-Founder & Marketing Manager",
                 shortDescription: "Co-founded the hackathon and manages all logistics.",
                 fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
-                avatar: "/images/santiago.png",
+                avatar: "/assets/santiago.png",
                 github: "jorg-4",
                 highlight: true,
                 expertise: ["Marketing", "Community Building", "Event Management", "Growth"]
@@ -1485,7 +1474,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* FAQ Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-3xl mx-auto">
@@ -1511,7 +1499,6 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-
       {/* Final CTA Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-4xl mx-auto text-center">
@@ -1564,7 +1551,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

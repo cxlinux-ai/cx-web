@@ -2505,7 +2505,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Santiago",
                 role: "Co-Founder · Marketing & Logistics · Community builder",
                 github: "jorg-4",
-                avatar: "/images/santiago.png"
+                avatar: "/assets/santiago.png"
               },
               {
                 name: "Suyash D",
@@ -2543,7 +2543,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <img
                     src={founder.avatar}
                     alt={`${founder.name}, ${founder.role}`}
-                    className="w-12 h-12 rounded-full grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                    className="w-12 h-12 rounded-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
                     loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
