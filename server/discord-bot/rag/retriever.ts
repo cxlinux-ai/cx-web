@@ -118,19 +118,19 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["hackathon", "contribute", "prize", "competition", "build", "participate", "join", "enter"],
     category: "hackathon",
     priority: 10,
-    content: `The Cortex Hackathon 2026 has fifteen thousand dollars in total prizes! It's in two phases. The Ideathon runs weeks one through four where you submit feature ideas and can win from the three thousand dollar prize pool. Then the main Hackathon is weeks five through thirteen where you actually build features, with twelve thousand in prizes. All skill levels welcome.`,
+    content: `The Cortex Hackathon 2026 has fifteen thousand dollars in total prizes. It's in two phases. The Ideathon runs weeks one through four where you submit feature ideas and can win from the three thousand dollar prize pool distributed across thirty winners: Top 3 get $250 each, Top 10 (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. Then the main Hackathon is weeks five through thirteen where you build features, with twelve thousand in prizes. All skill levels welcome.`,
   },
   {
     keywords: ["ideathon", "idea", "submit", "proposal", "phase 1", "first phase"],
     category: "hackathon",
     priority: 7,
-    content: `The Ideathon is the first phase where you don't need to code anything. Just submit your best ideas for Cortex features. Think about what would make the AI assistant better, what integrations would be useful, or what pain points in Linux could be solved. Three thousand dollars in prizes for the best ideas.`,
+    content: `The Ideathon is the first phase where you don't need to code anything. Just submit your best ideas for Cortex features. Think about what would make the AI assistant better, what integrations would be useful, or what pain points in Linux could be solved. Three thousand dollars in prizes distributed to thirty winners across three tiers: Top 3 Grand Winners, Top 10 Excellence Winners, and Top 30 Ideathon Winners.`,
   },
   {
     keywords: ["hackathon prize", "win", "reward", "money", "award", "winner"],
     category: "hackathon",
     priority: 8,
-    content: `Prize breakdown: Ideathon has three thousand total with first place getting fifteen hundred. The main Hackathon has twelve thousand with first place getting five thousand, second getting three thousand, third getting two thousand, and additional prizes for categories like best AI feature, best UX, and community choice.`,
+    content: `Prize breakdown: Ideathon has three thousand total distributed to 30 winners - Top 3 Grand Winners get $250 each, Top 10 Excellence (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. The main Hackathon has twelve thousand with first place getting five thousand, second three thousand, third two thousand, and ranks 4-7 getting $500 each.`,
   },
   {
     keywords: ["register", "sign up", "hackathon how", "start", "begin"],

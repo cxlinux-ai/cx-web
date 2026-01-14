@@ -242,8 +242,41 @@ export interface IdeathonPhase {
   judgingCriteria: { name: string; weight: string; description: string }[];
   prizes: { place: string; amount: string }[];
   prizeTotal: string;
+  prizeExplanation?: string;
   cta: { text: string; href: string; external?: boolean };
 }
+
+export interface IdeathonPrizeCategory {
+  heading: string;
+  description: string;
+  prizes: { place: string; amount: string }[];
+}
+
+export const ideathonPrizeCategories: IdeathonPrizeCategory[] = [
+  {
+    heading: "Top 3 Grand Winners",
+    description: "The three most innovative and impactful ideas",
+    prizes: [
+      { place: "1st Place", amount: "$250" },
+      { place: "2nd Place", amount: "$250" },
+      { place: "3rd Place", amount: "$250" }
+    ]
+  },
+  {
+    heading: "Top 10 Excellence Winners",
+    description: "Ranks 4-10: Outstanding ideas with strong potential",
+    prizes: [
+      { place: "4th-10th Place", amount: "$130 each" }
+    ]
+  },
+  {
+    heading: "Top 30 Ideathon Winners",
+    description: "Ranks 11-30: High-quality ideas recognized for their merit",
+    prizes: [
+      { place: "11th-30th Place", amount: "$67 each" }
+    ]
+  }
+];
 
 export const ideathonPhase: IdeathonPhase = {
   id: "ideathon",
@@ -263,12 +296,12 @@ export const ideathonPhase: IdeathonPhase = {
     { name: "Completeness", weight: "20%", description: "Full use of submission template" }
   ],
   prizes: [
-    { place: "1st Place", amount: "$1,300" },
-    { place: "2nd Place", amount: "$750" },
-    { place: "3rd Place", amount: "$250" },
-    { place: "4th–10th Place", amount: "$100 each" }
+    { place: "Top 3 Grand Winners", amount: "$250 each" },
+    { place: "Top 10 Excellence (4th-10th)", amount: "$130 each" },
+    { place: "Top 30 Ideathon (11th-30th)", amount: "$67 each" }
   ],
   prizeTotal: "$3,000",
+  prizeExplanation: "To encourage innovation and recognize a wide range of outstanding ideas, the Ideathon awards prizes across three tiers. This inclusive structure ensures fair recognition for multiple high-quality submissions while rewarding exceptional ideas at the top.",
   cta: {
     text: "Submit Your Idea",
     href: "https://forms.cortexlinux.com/ideathon",

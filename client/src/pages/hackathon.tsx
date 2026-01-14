@@ -47,6 +47,7 @@ import {
   hackathonFaqs,
   ideathonPhase,
   ideathonSubmissionTemplate,
+  ideathonPrizeCategories,
 } from "@/data/hackathon";
 
 const GITHUB_URL = hackathonConfig.githubUrl;
@@ -1191,7 +1192,7 @@ export default function Hackathon() {
                 className="bg-gradient-to-br from-amber-500/5 to-transparent border border-amber-500/20 rounded-2xl p-6"
                 data-testid="ideathon-prizes"
               >
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
                       <Trophy className="text-amber-400" size={20} />
@@ -1200,11 +1201,26 @@ export default function Hackathon() {
                   </div>
                   <span className="text-2xl font-bold text-terminal-green">{ideathonPhase.prizeTotal}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {ideathonPhase.prizes.map((prize, i) => (
-                    <div key={i} className="bg-white/5 rounded-lg px-4 py-3 border border-white/10">
-                      <p className="text-gray-400 text-sm">{prize.place}</p>
-                      <p className="text-terminal-green font-bold text-lg">{prize.amount}</p>
+                
+                {ideathonPhase.prizeExplanation && (
+                  <p className="text-gray-400 text-sm mb-5 leading-relaxed">
+                    {ideathonPhase.prizeExplanation}
+                  </p>
+                )}
+
+                <div className="space-y-4">
+                  {ideathonPrizeCategories.map((category, catIndex) => (
+                    <div key={catIndex} className="bg-white/5 rounded-lg p-4 border border-white/10">
+                      <h4 className="text-amber-400 font-semibold text-sm mb-1">{category.heading}</h4>
+                      <p className="text-gray-500 text-xs mb-3">{category.description}</p>
+                      <div className="space-y-2">
+                        {category.prizes.map((prize, prizeIndex) => (
+                          <div key={prizeIndex} className="flex justify-between items-center">
+                            <span className="text-gray-300 text-sm">{prize.place}</span>
+                            <span className="text-terminal-green font-bold">{prize.amount}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>

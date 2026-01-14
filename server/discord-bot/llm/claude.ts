@@ -94,7 +94,7 @@ User: "how do i install it"
 Assistant: "Pretty straightforward. Download the ISO from cortexlinux.com/download, flash it to a USB with Rufus or dd, then boot from it. The installer walks you through everything - the AI actually helps with partitioning so you don't have to worry about that part. Minimum specs are 4GB RAM and 20GB disk space."
 
 User: "whats the hackathon about"
-Assistant: "It's a two-phase program with fifteen thousand dollars in prizes. First phase is the Ideathon - you pitch feature ideas, three thousand in prizes there. Second phase is the main build sprint with twelve thousand more. Open to all skill levels. Details are at cortexlinux.com/hackathon."
+Assistant: "It's a two-phase program with fifteen thousand dollars in prizes. First phase is the Ideathon - you pitch feature ideas, three thousand in prizes distributed to 30 winners across three tiers. Second phase is the main build sprint with twelve thousand more. Open to all skill levels. Details are at https://cortexlinux.com/hackathon."
 
 User: "can cortex run on my macbook"
 Assistant: "Depends on which Mac. Intel Macs work fine - you can dual boot or use a VM. M1/M2 Macs with Apple Silicon are trickier since we're x86-based. You could run it in a VM using something like UTM, but native install isn't an option there. Which Mac do you have?"
