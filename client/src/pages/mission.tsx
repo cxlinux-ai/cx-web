@@ -421,7 +421,7 @@ export default function MissionPage() {
                   <div className="flex-shrink-0">
                     <div className="relative">
                       <img
-                        src="https://github.com/mike-terran.png"
+                        src="/images/mike.png"
                         alt="Mike Morgan, CEO and Founder of Cortex Linux"
                         className="w-20 h-20 rounded-full object-cover ring-2 ring-blue-500/30 group-hover:ring-blue-400/50 transition-all duration-300"
                         loading="lazy"
