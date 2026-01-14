@@ -147,7 +147,6 @@ export default function MissionPage() {
           </motion.div>
         </div>
       </section>
-
       {/* Mission Pillars */}
       <section className="py-20 px-4 border-t border-white/5">
         <div className="max-w-5xl mx-auto">
@@ -186,7 +185,6 @@ export default function MissionPage() {
           </div>
         </div>
       </section>
-
       {/* Roadmap Timeline */}
       <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden" id="roadmap">
         {/* Subtle background blobs */}
@@ -377,7 +375,6 @@ export default function MissionPage() {
           </div>
         </div>
       </section>
-
       {/* About Us Section */}
       <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -500,7 +497,7 @@ export default function MissionPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <h3 className="text-xl font-semibold text-white">Santiago</h3>
+                      <h3 className="text-xl font-semibold text-white">Santiago Gonzalez</h3>
                       <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-medium">
                         Co-Founder & Marketing Lead
                       </span>
@@ -569,7 +566,6 @@ export default function MissionPage() {
           </motion.div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20 px-4 border-t border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
@@ -630,7 +626,6 @@ export default function MissionPage() {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );
