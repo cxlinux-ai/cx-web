@@ -476,7 +476,7 @@ export default function MissionPage() {
                   <div className="flex-shrink-0">
                     <div className="relative">
                       <img
-                        src="/images/jorg-cropped.png"
+                        src="/images/jorg-profile.png"
                         alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
                         className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
                         loading="lazy"
@@ -578,7 +578,7 @@ export default function MissionPage() {
                   name: "Santiago",
                   role: "Co-Founder · Marketing & Logistics · Community builder",
                   github: "jorg-4",
-                  avatar: "/images/jorg-cropped.png"
+                  avatar: "/images/jorg-profile.png"
                 },
                 {
                   name: "Suyash D",
