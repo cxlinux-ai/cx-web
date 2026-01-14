@@ -492,9 +492,10 @@ export default function MissionPage() {
                   <div className="flex-shrink-0">
                     <div className="relative">
                       <img
-                        src="https://github.com/jorg-ai.png"
+                        src="/images/jorg-profile.png"
                         alt="Jorg, Co-Founder and Development Lead of Cortex Linux"
                         className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
+                        style={{ objectPosition: "center 25%" }}
                         loading="lazy"
                       />
                       <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
