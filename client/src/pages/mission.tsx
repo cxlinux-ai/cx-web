@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { 
-  ArrowLeft, 
   ArrowRight,
   Brain, 
   Check,
@@ -79,13 +78,6 @@ export default function MissionPage() {
         </div>
 
         <div className="max-w-4xl mx-auto relative z-10">
-          <Link href="/">
-            <span className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors mb-8 cursor-pointer text-sm" data-testid="link-back-home">
-              <ArrowLeft size={16} />
-              Back to Home
-            </span>
-          </Link>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
