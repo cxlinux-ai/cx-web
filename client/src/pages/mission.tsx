@@ -474,14 +474,14 @@ export default function MissionPage() {
               <div className="relative p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/10 hover:border-purple-500/30 transition-all duration-300">
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                   <div className="flex-shrink-0">
-                    <div className="relative">
+                    <div className="relative overflow-hidden rounded-full w-20 h-20">
                       <img
                       src="/images/jorg-profile.png"
                       alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
-                      className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
+                      className="w-full h-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
                       style={{
-                        objectPosition: "50% 0%", // X: 50% = centered horizontally, Y: 0% = top
-                        transform: "scale(1.2)",   // Zoom in 120%
+                        objectPosition: "50% 0%", // X: 50% = centered, Y: 0% = top
+                        transform: "scale(1.5)",   // Zoom in 150%
                       }}
                       loading="lazy"
                       />
