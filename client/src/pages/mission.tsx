@@ -572,7 +572,7 @@ export default function MissionPage() {
                   name: "Mike Morgan",
                   role: "CEO · Vision & Strategy · Open-source advocate",
                   github: "mikejmorgan-ai",
-                  avatar: "/images/mike.png"
+                  avatar: "/assets/mike.png"
                 },
                 {
                   name: "Santiago",
