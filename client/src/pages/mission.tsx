@@ -507,14 +507,13 @@ export default function MissionPage() {
                       <p>
                         When Mike shared his vision, Jorg didn't just see a project—he saw 
                         <span className="text-white"> a movement</span>. 
-                        With a background in full-stack development and a passion for open source, 
-                        he knew exactly what it would take to turn this dream into reality.
+                        For the past three years, he's worked closely with Mike to learn the ins and outs of AI, 
+                        while taking on the mission of keeping Cortex aligned and thriving.
                       </p>
                       <p>
-                        Jorg took on the mission of building Cortex from the ground up: 
-                        architecting the website, managing the growing community of developers, 
-                        and ensuring every contributor feels <span className="text-purple-300 font-medium">valued and heard</span>. 
-                        He's the heartbeat of our development team.
+                        Jorg built the website from the ground up, manages incoming developers and contributors, 
+                        and ensures that operations and marketing run smoothly. 
+                        He's <span className="text-purple-300 font-medium">the glue that holds the project together</span>.
                       </p>
                       <p className="text-gray-400 italic border-l-2 border-purple-500/40 pl-4">
                         "Open source isn't just about code—it's about <span className="text-purple-300">people</span>. 
