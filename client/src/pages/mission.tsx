@@ -432,12 +432,13 @@ export default function MissionPage() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <div className="flex flex-wrap items-center gap-3 mb-1">
                       <h3 className="text-xl font-semibold text-white">Mike Morgan</h3>
                       <span className="px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium">
                         CEO & Founder
                       </span>
                     </div>
+                    <p className="text-gray-500 text-sm italic mb-3">"AI Data God"</p>
                     <div className="space-y-4 text-gray-300 leading-relaxed">
                       <p>
                         It started at 3 AM, debugging a system that refused to cooperate. 
@@ -487,9 +488,9 @@ export default function MissionPage() {
                     <div className="relative">
                       <img
                         src="/images/jorg-profile.png"
-                        alt="Jorg, Co-Founder and Development Lead of Cortex Linux"
+                        alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
                         className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
-                        style={{ objectPosition: "center 25%" }}
+                        style={{ objectPosition: "35% 25%" }}
                         loading="lazy"
                       />
                       <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
@@ -498,12 +499,13 @@ export default function MissionPage() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                      <h3 className="text-xl font-semibold text-white">Jorg</h3>
+                    <div className="flex flex-wrap items-center gap-3 mb-1">
+                      <h3 className="text-xl font-semibold text-white">Santiago</h3>
                       <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-medium">
-                        Co-Founder & Dev Lead
+                        Co-Founder & Marketing Lead
                       </span>
                     </div>
+                    <p className="text-gray-500 text-sm italic mb-3">"Jorg"</p>
                     <div className="space-y-4 text-gray-300 leading-relaxed">
                       <p>
                         When Mike shared his vision, Jorg didn't just see a project—he saw 
