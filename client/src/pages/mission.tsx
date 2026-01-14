@@ -58,12 +58,6 @@ const roadmapItems = [
   { quarter: "Q4 2026", items: ["Mobile SDK", "v3.0 Launch"], status: "planned" },
 ];
 
-const coreContributors = [
-  { name: "Mike Morgan", role: "CEO", github: "mikejmorgan-ai" },
-  { name: "Suyash D", role: "Lead Engineer · Hackathon Leader", github: "Suyashd999", customImage: "/images/suyash-d.png" },
-  { name: "Ansh Grover", role: "Main Reviewer", github: "Anshgrover23" }
-];
-
 export default function MissionPage() {
   useEffect(() => {
     const cleanup = updateSEO({
@@ -571,60 +565,6 @@ export default function MissionPage() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Core Contributors */}
-      <section className="py-16 px-4 border-t border-white/5">
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-sm font-normal text-gray-500 tracking-wide uppercase">
-              Core Contributors
-            </h2>
-          </motion.div>
-
-          <div className="flex flex-wrap justify-center gap-12">
-            {coreContributors.map((contributor) => (
-              <motion.figure
-                key={contributor.github}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center group"
-              >
-                <a
-                  href={`https://github.com/${contributor.github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mb-3"
-                  data-testid={`link-contributor-${contributor.github}`}
-                >
-                  <img
-                    src={contributor.customImage || `https://github.com/${contributor.github}.png`}
-                    alt={`${contributor.name}, ${contributor.role}`}
-                    className="w-16 h-16 rounded-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300 ring-2 ring-white/10 group-hover:ring-brand-blue/50"
-                    loading="lazy"
-                  />
-                </a>
-                <figcaption>
-                  <a
-                    href={`https://github.com/${contributor.github}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
-                  >
-                    {contributor.name}
-                  </a>
-                  <p className="text-xs text-gray-500 mt-1">{contributor.role}</p>
-                </figcaption>
-              </motion.figure>
-            ))}
-          </div>
         </div>
       </section>
 
