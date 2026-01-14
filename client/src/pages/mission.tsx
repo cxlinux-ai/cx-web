@@ -480,12 +480,11 @@ export default function MissionPage() {
                       alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
                       className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
                       style={{
-                        // === VERTICAL CROP (Y works best) ===
-                        objectPosition: "50% 0%",  // Y: 0%=top, 50%=center, 100%=bottom
+                        // === CROPPING CONTROLS ===
+                        objectPosition: "20% 0%",  // Format: "X% Y%" | X: 0%=left, 50%=center, 100%=right | Y: 0%=top, 50%=center, 100%=bottom
                         
-                        // === HORIZONTAL SHIFT (use translateX with higher scale) ===
-                        // First increase scale (1.5+), then translateX moves left(-) or right(+)
-                        transform: "scale(1.5) translateX(-15px) translateY(0px)",
+                        // === ZOOM & POSITION CONTROLS ===
+                        transform: "scale(1) translateX(0px) translateY(0px)",  // scale: 1=100%, 1.5=150% | translateX: negative=left, positive=right | translateY: negative=up, positive=down
                       }}
                       loading="lazy"
                       />
