@@ -440,21 +440,21 @@ export default function MissionPage() {
                     </div>
                     <div className="space-y-4 text-gray-300 leading-relaxed">
                       <p>
-                        It started at 3 AM, debugging a production server that refused to cooperate. 
-                        Mike had spent <span className="text-white">fifteen years</span> in Linux operations, 
-                        and in that moment of exhaustion, he realized something profound: 
-                        <span className="text-blue-300 font-medium"> we're still solving problems the same way we did decades ago.</span>
+                        It started at 3 AM, debugging a system that refused to cooperate. 
+                        Mike, with <span className="text-white">over 20 years of experience in AI</span>, 
+                        realized something profound in that moment of exhaustion: 
+                        <span className="text-blue-300 font-medium"> even with all our advances, we were still solving problems the same way we did decades ago.</span>
                       </p>
                       <p>
-                        The tools had improved, sure. But the fundamental experience? 
-                        Memorizing cryptic commands, hunting through man pages, copying from Stack Overflow 
-                        and hoping it wouldn't break something else. 
+                        The tools had evolved, certainly. But the fundamental experience? 
+                        Wrestling with complexity, piecing together solutions from fragmented sources, 
+                        and hoping the system would behave. 
                         <span className="text-white"> There had to be a better way.</span>
                       </p>
                       <p className="text-gray-400 italic border-l-2 border-blue-500/40 pl-4">
-                        "I didn't want to build another wrapper or chatbot. I wanted to build what Linux 
-                        should feel like in 2026—intelligent, intuitive, and most importantly, 
-                        <span className="text-blue-300"> something that actually understands what you're trying to do.</span>"
+                        "I didn't want to build another wrapper or interface. I wanted to create what computing 
+                        should feel like in 2026—intelligent, intuitive, and, most importantly, 
+                        <span className="text-blue-300"> truly understanding what you're trying to achieve.</span>"
                       </p>
                     </div>
                   </div>
