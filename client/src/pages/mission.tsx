@@ -476,14 +476,14 @@ export default function MissionPage() {
                   <div className="flex-shrink-0">
                     <div className="relative">
                       <img
-                        src="/images/jorg-profile.png"
-                        alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
-                        className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
-                        style={{
-                          objectPosition: "50% 0%",  // X: 0%=left, 50%=center, 100%=right | Y: 0%=top, 50%=center, 100%=bottom
-                          transform: "scale(1)",     // Zoom: 1=normal, 1.5=150%, 2=200%
-                        }}
-                        loading="lazy"
+                      src="/images/jorg-profile.png"
+                      alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
+                      className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
+                      style={{
+                        objectPosition: "80% 0%", // X: 20% = slightly left, Y: 50% = center
+                        transform: "scale(1.2)",   // Zoom in 120%
+                      }}
+                      loading="lazy"
                       />
                       <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
                         <Code2 size={12} className="text-white" />
