@@ -480,8 +480,11 @@ export default function MissionPage() {
                       alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
                       className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
                       style={{
-                        objectPosition: "50% 0%", // X: 50% = centered horizontally, Y: 0% = top
-                        transform: "scale(1.2)",   // Zoom in 120%
+                        // === CROPPING CONTROLS ===
+                        objectPosition: "50% 0%",  // Format: "X% Y%" | X: 0%=left, 50%=center, 100%=right | Y: 0%=top, 50%=center, 100%=bottom
+                        
+                        // === ZOOM & POSITION CONTROLS ===
+                        transform: "scale(1.2) translateX(0px) translateY(0px)",  // scale: 1=100%, 1.5=150% | translateX: negative=left, positive=right | translateY: negative=up, positive=down
                       }}
                       loading="lazy"
                       />
