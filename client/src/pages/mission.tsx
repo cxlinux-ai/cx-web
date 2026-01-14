@@ -562,6 +562,94 @@ export default function MissionPage() {
               </div>
             </div>
           </motion.div>
+
+          {/* Core Contributors */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-16"
+          >
+            <h3 className="text-center text-sm font-normal text-gray-500 mb-8 tracking-wide uppercase">
+              Core Contributors
+            </h3>
+            <div className="flex flex-wrap justify-center gap-12 md:gap-16">
+              {[
+                {
+                  name: "Mike Morgan",
+                  role: "CEO · Vision & Strategy · Open-source advocate",
+                  github: "mikejmorgan-ai",
+                  avatar: "/images/mike.png"
+                },
+                {
+                  name: "Santiago",
+                  role: "Co-Founder · Marketing & Logistics · Community builder",
+                  github: "jorg-4",
+                  avatar: "/images/jorg-cropped.png"
+                },
+                {
+                  name: "Suyash D",
+                  role: "Lead Engineer · Hackathon Leader · Core contributor",
+                  github: "Suyashd999",
+                  avatar: "/images/suyash-d.png"
+                },
+                {
+                  name: "Dhruv",
+                  role: "Lead Engineer · Architecture · Core contributor",
+                  github: "Dhruv-89",
+                  avatar: "/assets/dhruv.png"
+                },
+                {
+                  name: "Ansh Grover",
+                  role: "Main Reviewer · Code Quality · Open-source maintainer",
+                  github: "Anshgrover23",
+                  avatar: "https://github.com/Anshgrover23.png"
+                },
+                {
+                  name: "Sahil",
+                  role: "Developer & Judge · Partner Relations · Core contributor",
+                  github: "sahil",
+                  avatar: "/images/sahil.png"
+                }
+              ].map((contributor) => (
+                <figure key={contributor.github} className="flex flex-col items-center text-center group">
+                  <a
+                    href={`https://github.com/${contributor.github}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mb-3"
+                    data-testid={`link-contributor-${contributor.github}`}
+                  >
+                    <img
+                      src={contributor.avatar}
+                      alt={`${contributor.name}, ${contributor.role}`}
+                      className="w-12 h-12 rounded-full object-cover object-top grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(contributor.name)}&background=3b82f6&color=fff&size=48`;
+                      }}
+                    />
+                  </a>
+                  <figcaption>
+                    <a
+                      href={`https://github.com/${contributor.github}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors"
+                      data-testid={`link-contributor-name-${contributor.github}`}
+                    >
+                      {contributor.name}
+                    </a>
+                    <p className="text-xs text-gray-500 mt-1 max-w-[180px]">
+                      {contributor.role}
+                    </p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
       {/* CTA Section */}
