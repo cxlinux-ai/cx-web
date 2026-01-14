@@ -582,7 +582,7 @@ export default function MissionPage() {
                   name: "Santiago",
                   role: "Co-Founder · Marketing & Logistics · Community builder",
                   github: "jorg-4",
-                  avatar: "/images/jorg-profile-old.png"
+                  avatar: "/images/jorg-camera.png"
                 },
                 {
                   name: "Suyash D",

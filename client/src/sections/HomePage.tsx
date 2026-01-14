@@ -2505,7 +2505,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 name: "Santiago",
                 role: "Co-Founder · Marketing & Logistics · Community builder",
                 github: "jorg-4",
-                avatar: "/assets/santiago.png"
+                avatar: "/images/jorg-camera.png"
               },
               {
                 name: "Suyash D",
