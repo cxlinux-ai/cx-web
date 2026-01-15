@@ -166,6 +166,11 @@ export default function Footer() {
                   Mission
                 </SmoothLink>
               </li>
+              <li>
+                <SmoothLink href="/support" className="hover:text-white transition-colors" data-testid="footer-link-support">
+                  Support
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 
