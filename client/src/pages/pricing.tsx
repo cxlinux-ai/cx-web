@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { ChevronLeft, Check, Sparkles, Building2, Rocket, Crown, ExternalLink, Loader2 } from "lucide-react";
+import { Check, Sparkles, Building2, Rocket, Crown, ExternalLink, Loader2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { useToast } from "@/hooks/use-toast";
@@ -207,11 +206,6 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8" data-testid="link-back-home">
-          <ChevronLeft size={16} />
-          Back to Home
-        </Link>
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
