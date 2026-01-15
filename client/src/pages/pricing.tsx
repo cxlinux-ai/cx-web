@@ -19,7 +19,7 @@ const STRIPE_PRICES = {
     annual: '' // TODO: Add Enterprise annual price ID when created
   },
   managed: {
-    monthly: 'price_1SpnIWJ4X1wkC4Es2sHn9WuW',
+    monthly: 'price_1SpodLJ4X1wkC4Es1Y0OX1Mn',
     annual: '' // TODO: Add Managed annual price ID when created
   }
 };
