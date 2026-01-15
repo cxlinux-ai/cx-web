@@ -682,6 +682,50 @@ router.get("/analytics/revenue", async (req: Request, res: Response) => {
   }
 });
 
+// =============================================================================
+// CHECKOUT SESSION ENDPOINT (for Pricing Page)
+// =============================================================================
+
+const createCheckoutSessionSchema = z.object({
+  priceId: z.string(),
+  annual: z.boolean().optional(),
+});
+
+router.post("/create-checkout-session", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const result = createCheckoutSessionSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: "Invalid request", details: result.error.flatten() });
+    }
+
+    const { priceId } = result.data;
+    
+    const baseUrl = process.env.REPLIT_DEV_DOMAIN 
+      ? `https://${process.env.REPLIT_DEV_DOMAIN}`
+      : process.env.REPLIT_DOMAINS 
+        ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
+        : 'https://cortexlinux.com';
+
+    const session = await stripe!.checkout.sessions.create({
+      mode: 'subscription',
+      payment_method_types: ['card'],
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: `${baseUrl}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/pricing`,
+      allow_promotion_codes: true,
+      subscription_data: {
+        trial_period_days: 14
+      }
+    });
+
+    console.log(`Created checkout session: ${session.id}`);
+    res.status(200).json({ url: session.url });
+  } catch (error: any) {
+    console.error("Create checkout session error:", error);
+    res.status(500).json({ error: error.message || "Failed to create checkout session" });
+  }
+});
+
 router.get("/analytics/subscriptions", async (req: Request, res: Response) => {
   try {
     const subscriptionStats = await db

@@ -426,6 +426,71 @@ export const seoConfigs = {
     noIndex: true
   },
 
+  pricing: {
+    title: 'Pricing - Simple, Transparent Plans | Cortex Linux',
+    description: 'Choose the right Cortex Linux plan for you. From free Community edition to Enterprise with SSO, audit logs, and 24/7 support. 14-day free trial on all paid plans.',
+    canonicalPath: '/pricing',
+    keywords: ['Cortex Linux pricing', 'AI Linux subscription', 'Linux automation pricing', 'enterprise Linux plans'],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'Cortex Linux',
+      description: 'The AI Layer for Linux - Execute any task through natural language commands.',
+      brand: {
+        '@type': 'Brand',
+        name: 'Cortex Linux'
+      },
+      offers: [
+        {
+          '@type': 'Offer',
+          name: 'Community',
+          price: '0',
+          priceCurrency: 'USD',
+          description: 'Free tier with local LLM and CLI access'
+        },
+        {
+          '@type': 'Offer',
+          name: 'Pro',
+          price: '20',
+          priceCurrency: 'USD',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '20',
+            priceCurrency: 'USD',
+            billingDuration: 'P1M'
+          },
+          description: 'Cloud LLMs, Web Console, up to 3 servers'
+        },
+        {
+          '@type': 'Offer',
+          name: 'Enterprise',
+          price: '99',
+          priceCurrency: 'USD',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '99',
+            priceCurrency: 'USD',
+            billingDuration: 'P1M'
+          },
+          description: 'SSO/LDAP, Audit logs, Compliance, 99.9% SLA'
+        },
+        {
+          '@type': 'Offer',
+          name: 'Managed',
+          price: '299',
+          priceCurrency: 'USD',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: '299',
+            priceCurrency: 'USD',
+            billingDuration: 'P1M'
+          },
+          description: 'Fully managed infrastructure with 24/7 dedicated support'
+        }
+      ]
+    }
+  },
+
   bounties: {
     title: 'Bounty Board - Earn Rewards Contributing to Cortex Linux',
     description: 'Browse open bounties and earn rewards for contributing to Cortex Linux open source projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
