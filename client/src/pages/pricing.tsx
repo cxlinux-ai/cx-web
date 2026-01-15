@@ -11,16 +11,16 @@ import { Switch } from "@/components/ui/switch";
 
 const STRIPE_PRICES = {
   pro: {
-    monthly: 'price_1SplSDJYu2dtDKcZK5xtW7Mx',
-    annual: 'price_1SplW0JYu2dtDKcZY2LnD5qE'
+    monthly: 'price_1SpmgkJ4X1wkC4EsOjFxixLH',
+    annual: '' // TODO: Add Pro annual price ID when created
   },
   enterprise: {
-    monthly: 'price_1SplWCJYu2dtDKcZ3gvLplfr',
-    annual: 'price_1SplWCJYu2dtDKcZCn2ZHFxm'
+    monthly: 'price_1SpmgqJ4X1wkC4EsrG1pCG6p',
+    annual: '' // TODO: Add Enterprise annual price ID when created
   },
   managed: {
-    monthly: 'price_1SplWGJYu2dtDKcZJBiik4mV',
-    annual: 'price_1SplWHJYu2dtDKcZgG2RvuFx'
+    monthly: '', // TODO: Add Managed monthly price ID when created
+    annual: ''   // TODO: Add Managed annual price ID when created
   }
 };
 
@@ -163,11 +163,21 @@ export default function PricingPage() {
       return;
     }
 
-    setLoading(tier.name);
-
     const priceId = annual 
       ? STRIPE_PRICES[tier.stripeKey].annual
       : STRIPE_PRICES[tier.stripeKey].monthly;
+
+    // Check if price ID is configured
+    if (!priceId) {
+      toast({
+        title: "Coming Soon",
+        description: `${tier.name} ${annual ? 'annual' : 'monthly'} pricing is not yet available. Please try monthly billing or contact us.`,
+        variant: "default"
+      });
+      return;
+    }
+
+    setLoading(tier.name);
 
     try {
       const response = await apiRequest('POST', '/api/stripe/create-checkout-session', { 
