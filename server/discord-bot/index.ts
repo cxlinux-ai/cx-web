@@ -115,17 +115,6 @@ const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN || process.env.DISCORD_TOKEN
 const DISCORD_SERVER_ID = process.env.DISCORD_SERVER_ID || "";
 const GUILD_ID = process.env.GUILD_ID || DISCORD_SERVER_ID;
 
-// Role IDs for tiers
-const TIER_ROLES: Record<string, string> = {
-  bronze: process.env.DISCORD_ROLE_BRONZE || "",
-  silver: process.env.DISCORD_ROLE_SILVER || "",
-  gold: process.env.DISCORD_ROLE_GOLD || "",
-  platinum: process.env.DISCORD_ROLE_PLATINUM || "",
-  diamond: process.env.DISCORD_ROLE_DIAMOND || "",
-  legendary: process.env.DISCORD_ROLE_LEGENDARY || "",
-  verified: process.env.DISCORD_ROLE_VERIFIED || "",
-};
-
 // Track message -> response for edit detection
 const messageResponseMap = new Map<string, string>();
 
@@ -197,44 +186,6 @@ async function registerSlashCommands(): Promise<void> {
 }
 
 /**
- * Assign tier role to Discord member
- */
-async function assignTierRole(
-  discordId: string,
-  tier: string
-): Promise<boolean> {
-  if (!DISCORD_SERVER_ID) return false;
-
-  try {
-    const guild = client.guilds.cache.get(DISCORD_SERVER_ID);
-    if (!guild) return false;
-
-    const member = await guild.members.fetch(discordId).catch(() => null);
-    if (!member) return false;
-
-    // Remove existing tier roles
-    for (const [tierName, roleId] of Object.entries(TIER_ROLES)) {
-      if (roleId && tierName !== tier && member.roles.cache.has(roleId)) {
-        await member.roles.remove(roleId).catch(() => {});
-      }
-    }
-
-    // Add new tier role
-    const roleId = TIER_ROLES[tier];
-    if (roleId) {
-      await member.roles.add(roleId).catch(() => {});
-      console.log(`[Bot] Assigned ${tier} role to ${member.user.tag}`);
-      return true;
-    }
-
-    return false;
-  } catch (error) {
-    console.error(`[Bot] Failed to assign role:`, error);
-    return false;
-  }
-}
-
-/**
  * Verify a Discord user and update referral status
  */
 async function verifyMember(discordId: string): Promise<void> {
@@ -262,22 +213,6 @@ async function verifyMember(discordId: string): Promise<void> {
         updatedAt: new Date(),
       })
       .where(eq(waitlistEntries.id, user.id));
-
-    // Assign verified role
-    if (TIER_ROLES.verified) {
-      const guild = client.guilds.cache.get(DISCORD_SERVER_ID);
-      if (guild) {
-        const member = await guild.members.fetch(discordId).catch(() => null);
-        if (member) {
-          await member.roles.add(TIER_ROLES.verified).catch(() => {});
-        }
-      }
-    }
-
-    // Assign tier role if applicable
-    if (user.currentTier && user.currentTier !== "none") {
-      await assignTierRole(discordId, user.currentTier);
-    }
 
     console.log(`[Bot] Verified member: ${discordId}`);
   } catch (error) {
@@ -758,6 +693,5 @@ export default {
   startBot,
   getBotClient,
   isBotReady,
-  assignTierRole,
   verifyMember,
 };

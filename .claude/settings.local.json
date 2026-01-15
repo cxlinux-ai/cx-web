@@ -46,7 +46,10 @@
       "Bash(chmod:*)",
       "Bash(npm run check:*)",
       "Bash(fuser:*)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "Bash(npx tsx:*)",
+      "Bash(printenv:*)",
+      "Bash(pm2 restart:*)"
     ]
   }
 }

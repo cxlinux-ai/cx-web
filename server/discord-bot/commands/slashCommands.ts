@@ -15,14 +15,13 @@ import {
   ButtonStyle,
   PermissionFlagsBits,
   TextChannel,
+  VoiceChannel,
   ChannelType,
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
   GuildMember,
-  Role,
   CategoryChannel,
-  OverwriteResolvable,
 } from "discord.js";
 import { generateResponse } from "../llm/claude.js";
 import { refreshKnowledgeBase, getStats as getRagStats } from "../rag/retriever.js";
@@ -45,20 +44,18 @@ export function storeQAForFeedback(messageId: string, question: string, answer: 
 }
 import { createResponseEmbed, createErrorEmbed, COLORS } from "../utils/embeds.js";
 
-// Admin role ID for restricted commands
-const ADMIN_ROLE_ID = "1450564628911489156";
-
 /**
- * Check if user has admin role
+ * Check if user has admin permissions (using Discord's built-in permission system)
  */
-function hasAdminRole(interaction: ChatInputCommandInteraction): boolean {
+function hasAdminPermission(interaction: ChatInputCommandInteraction): boolean {
   if (!interaction.guild || !interaction.member) return false;
   const member = interaction.member;
-  if ('roles' in member && member.roles) {
-    const roles = member.roles;
-    if ('cache' in roles) {
-      return roles.cache.has(ADMIN_ROLE_ID);
+  if ('permissions' in member) {
+    const permissions = member.permissions;
+    if (typeof permissions === 'string') {
+      return BigInt(permissions) & PermissionFlagsBits.Administrator ? true : false;
     }
+    return permissions.has(PermissionFlagsBits.Administrator) || permissions.has(PermissionFlagsBits.ManageGuild);
   }
   return false;
 }
@@ -347,7 +344,7 @@ async function handleHelpCommand(
 async function handleStatsCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
+  if (!hasAdminPermission(interaction)) {
     await interaction.reply({
       content: "You need the Admin role to use this command.",
       ephemeral: true,
@@ -494,7 +491,7 @@ async function handleClearCommand(
 async function handleRefreshCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
+  if (!hasAdminPermission(interaction)) {
     await interaction.reply({
       content: "You need the Admin role to use this command.",
       ephemeral: true,
@@ -527,7 +524,7 @@ async function handleRefreshCommand(
 async function handlePurgeCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
+  if (!hasAdminPermission(interaction)) {
     await interaction.reply({
       content: "You need the Admin role to use this command.",
       ephemeral: true,
@@ -771,251 +768,486 @@ async function handleBountiesCommand(
 }
 
 /**
- * Server setup configuration
+ * Server setup configuration for Cortex Linux Discord
+ * Organizes existing channels into logical categories
+ * Adds topics and welcome messages to each channel
  */
 const SERVER_SETUP = {
-  roles: [
-    { name: "Participant", color: 0xf59e0b, reason: "Approved hackathon participants" },
-    { name: "Applicant", color: 0x6b7280, reason: "Pending application review" },
-    { name: "Dev Team", color: 0x8b5cf6, reason: "Internal development team" },
-  ],
   categories: [
     {
-      name: "PUBLIC",
-      emoji: "📢",
+      name: "START HERE",
+      emoji: "👋",
       channels: [
-        { name: "welcome", type: "text", readOnly: true },
-        { name: "rules", type: "text", readOnly: true },
-        { name: "apply-here", type: "text", readOnly: false },
-        { name: "announcements", type: "text", readOnly: true },
+        {
+          name: "welcome",
+          topic: "Welcome to Cortex Linux! Read this channel to get started.",
+          welcome: {
+            title: "Welcome to Cortex Linux!",
+            description: "The AI Layer for Linux. We're building the future of intelligent computing.",
+            color: 0x6366f1,
+            fields: [
+              { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cortexlinux-ai" },
+              { name: "Links", value: "[Website](https://cortexlinux.com) • [GitHub](https://github.com/cortexlinux) • [Hackathon](https://cortexlinux.com/hackathon)" },
+            ]
+          }
+        },
+        {
+          name: "announcements",
+          topic: "Official announcements, updates, and news from the Cortex team.",
+          skipIfNoAccess: true,
+        },
+        {
+          name: "rules",
+          topic: "Community guidelines and rules.",
+          welcome: {
+            title: "Community Rules",
+            description: "Keep it friendly and productive!",
+            color: 0xf59e0b,
+            fields: [
+              { name: "1. Be Respectful", value: "Treat everyone with respect. No harassment, hate speech, or personal attacks." },
+              { name: "2. Stay On Topic", value: "Use the right channels for your discussions. Keep it relevant." },
+              { name: "3. No Spam", value: "No excessive self-promotion, repeated messages, or irrelevant links." },
+              { name: "4. Help Each Other", value: "Share knowledge, answer questions, and contribute positively." },
+              { name: "5. Have Fun", value: "This is a community - enjoy it!" },
+            ]
+          }
+        },
+        {
+          name: "verification",
+          topic: "Verify your account to access all channels.",
+        },
       ],
-      visibility: "everyone",
     },
     {
-      name: "HACKATHON",
-      emoji: "🏆",
+      name: "CORTEX AI",
+      emoji: "🤖",
       channels: [
-        { name: "hackathon-general", type: "text", readOnly: false },
-        { name: "team-formation", type: "text", readOnly: false },
-        { name: "hackathon-questions", type: "text", readOnly: false },
-        { name: "submissions", type: "text", readOnly: false },
+        {
+          name: "cortexlinux-ai",
+          topic: "Chat with the Cortex AI assistant! Mention @CortexLinuxAI or use /cortex",
+          welcome: {
+            title: "Cortex AI Assistant",
+            description: "I'm here to help with anything Cortex Linux related!",
+            color: 0x10b981,
+            fields: [
+              { name: "How to Use", value: "• **Mention me:** @CortexLinuxAI how do I install?\n• **Slash command:** `/cortex your question`\n• **Reply:** Just reply to my messages to continue" },
+              { name: "What I Can Help With", value: "Installation, configuration, troubleshooting, features, hackathon info, and more!" },
+            ]
+          }
+        },
+        {
+          name: "prompts",
+          topic: "Share and discover great prompts for the Cortex AI.",
+        },
+        {
+          name: "help",
+          topic: "Need help? Ask here and the community or AI will assist you.",
+          welcome: {
+            title: "Need Help?",
+            description: "Ask your questions here! The community and AI are ready to help.",
+            color: 0x3b82f6,
+            fields: [
+              { name: "Tips for Getting Help", value: "• Be specific about your problem\n• Share error messages if any\n• Mention what you've already tried" },
+            ]
+          }
+        },
       ],
-      visibility: "participant",
     },
     {
       name: "COMMUNITY",
       emoji: "💬",
       channels: [
-        { name: "general", type: "text", readOnly: false },
-        { name: "help", type: "text", readOnly: false },
-        { name: "showcase", type: "text", readOnly: false },
-        { name: "off-topic", type: "text", readOnly: false },
+        {
+          name: "general",
+          topic: "General chat about anything! Meet the community.",
+        },
+        {
+          name: "questions",
+          topic: "Technical questions about Linux, AI, development, and more.",
+        },
+        {
+          name: "your-roles",
+          topic: "Pick your roles and interests.",
+        },
       ],
-      visibility: "participant",
     },
     {
-      name: "DEV TEAM",
-      emoji: "🔧",
+      name: "CONTRIBUTE",
+      emoji: "🚀",
       channels: [
-        { name: "pr-reviews", type: "text", readOnly: false },
-        { name: "internal", type: "text", readOnly: false },
-        { name: "bot-testing", type: "text", readOnly: false },
+        {
+          name: "hackathon",
+          topic: "$15,000 in prizes! Build the future of AI-powered Linux.",
+          welcome: {
+            title: "Cortex Hackathon 2026",
+            description: "$15,000 in prizes - Build the future of AI-powered Linux!",
+            color: 0xf59e0b,
+            fields: [
+              { name: "Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000 • Plus category prizes!" },
+              { name: "How to Join", value: "Register at [cortexlinux.com/hackathon](https://cortexlinux.com/hackathon)" },
+            ]
+          }
+        },
+        {
+          name: "bounties",
+          topic: "Earn money by contributing! Use /bounties to see open tasks.",
+          welcome: {
+            title: "Bounty Board",
+            description: "Get paid to contribute to Cortex Linux!",
+            color: 0x22c55e,
+            fields: [
+              { name: "How It Works", value: "1. Use `/bounties` to see open tasks\n2. Comment on the GitHub issue to claim\n3. Submit a PR and get paid when merged!" },
+              { name: "Bounty Range", value: "$50 - $500+ depending on complexity" },
+            ]
+          }
+        },
+        {
+          name: "git-updates",
+          topic: "Live feed of GitHub activity - commits, PRs, and issues.",
+        },
       ],
-      visibility: "devteam",
     },
     {
-      name: "STAFF",
-      emoji: "📋",
+      name: "DEVELOPMENT",
+      emoji: "💻",
       channels: [
-        { name: "candidature-review", type: "text", readOnly: false },
-        { name: "mod-logs", type: "text", readOnly: false },
-        { name: "staff-chat", type: "text", readOnly: false },
+        {
+          name: "dev-chat",
+          topic: "Technical discussion for contributors and developers.",
+        },
+        {
+          name: "internal",
+          topic: "Internal team discussions and coordination.",
+        },
       ],
-      visibility: "staff",
+    },
+    {
+      name: "TEAM",
+      emoji: "👥",
+      channels: [
+        {
+          name: "moderator-only",
+          topic: "Moderator discussions and coordination.",
+        },
+        {
+          name: "marketing",
+          topic: "Marketing strategy and content planning.",
+        },
+        {
+          name: "role-updates",
+          topic: "Role change notifications and logs.",
+        },
+        {
+          name: "candidature-review",
+          topic: "Review contributor applications. Use /approve or /reject.",
+        },
+      ],
+    },
+    {
+      name: "VOICE",
+      emoji: "🎙️",
+      channels: [],
+      isVoice: true,
     },
   ],
+  voiceChannels: [
+    { name: "Voice Meetings", newName: "General Voice", status: "Jump in and chat!" },
+    { name: "Dev", newName: "Dev Talk", status: "Technical discussions" },
+  ],
+  preserveCategories: ["Claimed Tickets", "Closed Tickets"],
 };
 
 /**
  * Handle /setup-server command (Admin only)
+ * Reorganizes channels, sets topics, and sends welcome messages
  */
 async function handleSetupServerCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
-    await interaction.reply({
-      content: "You need the Admin role to use this command.",
-      ephemeral: true,
+  // Try to acknowledge the interaction first
+  try {
+    await interaction.deferReply({ ephemeral: true });
+  } catch (err: any) {
+    console.error("[Setup] Failed to defer reply:", err.message);
+    // Try a regular reply as fallback
+    try {
+      await interaction.reply({
+        content: `Error: ${err.message}\n\nMake sure the bot has permission to send messages in this channel.`,
+        ephemeral: true,
+      });
+    } catch {
+      // Can't respond at all
+    }
+    return;
+  }
+
+  if (!hasAdminPermission(interaction)) {
+    await interaction.editReply({
+      content: "You need Administrator permission to use this command.",
     });
     return;
   }
 
   const guild = interaction.guild;
   if (!guild) {
-    await interaction.reply({
+    await interaction.editReply({
       content: "This command can only be used in a server.",
-      ephemeral: true,
     });
     return;
   }
 
-  await interaction.deferReply({ ephemeral: true });
+  // Check bot permissions
+  const botMember = guild.members.me;
+  if (!botMember) {
+    await interaction.editReply({
+      content: "Could not find bot member in server.",
+    });
+    return;
+  }
 
-  const results: string[] = [];
-  const createdRoles: Map<string, Role> = new Map();
+  // Log bot permissions for debugging
+  console.log("[Setup] Bot permissions:", botMember.permissions.toArray());
+
+  const requiredPerms = [
+    { flag: PermissionFlagsBits.ManageChannels, name: "Manage Channels" },
+    { flag: PermissionFlagsBits.SendMessages, name: "Send Messages" },
+    { flag: PermissionFlagsBits.EmbedLinks, name: "Embed Links" },
+    { flag: PermissionFlagsBits.ViewChannel, name: "View Channels" },
+  ];
+
+  const missingPerms = requiredPerms.filter(p => !botMember.permissions.has(p.flag));
+
+  if (missingPerms.length > 0) {
+    await interaction.editReply({
+      embeds: [
+        new EmbedBuilder()
+          .setColor(COLORS.error)
+          .setTitle("Missing Bot Permissions")
+          .setDescription(
+            "The bot needs these permissions to set up the server:\n\n" +
+            missingPerms.map(p => `❌ **${p.name}**`).join("\n") +
+            "\n\nPlease update the bot's role permissions and try again."
+          )
+      ],
+    });
+    return;
+  }
+
+  const stats = {
+    categoriesCreated: 0,
+    channelsMoved: 0,
+    topicsSet: 0,
+    welcomesSent: 0,
+    voiceRenamed: 0,
+    skipped: 0,
+    errors: [] as string[],
+  };
 
   try {
-    // Step 1: Create roles
-    results.push("**Creating roles...**");
-    for (const roleConfig of SERVER_SETUP.roles) {
-      const existingRole = guild.roles.cache.find((r) => r.name === roleConfig.name);
-      if (existingRole) {
-        createdRoles.set(roleConfig.name, existingRole);
-        results.push(`• ${roleConfig.name}: Already exists`);
-      } else {
-        const newRole = await guild.roles.create({
-          name: roleConfig.name,
-          color: roleConfig.color,
-          reason: roleConfig.reason,
-        });
-        createdRoles.set(roleConfig.name, newRole);
-        results.push(`• ${roleConfig.name}: Created`);
-      }
-    }
+    await guild.channels.fetch();
 
-    // Get moderator role (users with ManageMessages permission)
-    const modRole = guild.roles.cache.find((r) => r.permissions.has(PermissionFlagsBits.ManageMessages) && !r.managed && r.name !== "@everyone");
-
-    // Step 2: Create categories and channels
-    results.push("\n**Creating categories & channels...**");
-
+    // Step 1: Organize text channels into categories
+    let categoryPosition = 0;
     for (const categoryConfig of SERVER_SETUP.categories) {
       const categoryName = `${categoryConfig.emoji} ${categoryConfig.name}`;
 
-      // Check if category exists
+      // Find or create category
       let category = guild.channels.cache.find(
-        (c) => c.type === ChannelType.GuildCategory && c.name === categoryName
+        (c) => c.type === ChannelType.GuildCategory &&
+               (c.name === categoryName ||
+                c.name === categoryConfig.name ||
+                c.name.endsWith(categoryConfig.name))
       ) as CategoryChannel | undefined;
 
-      if (!category) {
-        // Build permission overwrites based on visibility
-        const permissionOverwrites: OverwriteResolvable[] = [];
-
-        if (categoryConfig.visibility === "everyone") {
-          // Everyone can view, but can't send by default
-          permissionOverwrites.push({
-            id: guild.roles.everyone.id,
-            allow: [],
-            deny: [PermissionFlagsBits.SendMessages],
-          });
-        } else if (categoryConfig.visibility === "participant") {
-          // Hide from everyone, show to Participant role
-          permissionOverwrites.push({
-            id: guild.roles.everyone.id,
-            deny: [PermissionFlagsBits.ViewChannel],
-          });
-          const participantRole = createdRoles.get("Participant");
-          if (participantRole) {
-            permissionOverwrites.push({
-              id: participantRole.id,
-              allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
-            });
-          }
-        } else if (categoryConfig.visibility === "devteam") {
-          // Hide from everyone, show to Dev Team role
-          permissionOverwrites.push({
-            id: guild.roles.everyone.id,
-            deny: [PermissionFlagsBits.ViewChannel],
-          });
-          const devTeamRole = createdRoles.get("Dev Team");
-          if (devTeamRole) {
-            permissionOverwrites.push({
-              id: devTeamRole.id,
-              allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
-            });
-          }
-        } else if (categoryConfig.visibility === "staff") {
-          // Hide from everyone, show to mods/admins
-          permissionOverwrites.push({
-            id: guild.roles.everyone.id,
-            deny: [PermissionFlagsBits.ViewChannel],
-          });
-          if (modRole) {
-            permissionOverwrites.push({
-              id: modRole.id,
-              allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
-            });
-          }
+      try {
+        if (!category) {
+          category = await guild.channels.create({
+            name: categoryName,
+            type: ChannelType.GuildCategory,
+            position: categoryPosition,
+          }) as CategoryChannel;
+          stats.categoriesCreated++;
+        } else if (category.name !== categoryName) {
+          await category.setName(categoryName);
         }
-
-        category = await guild.channels.create({
-          name: categoryName,
-          type: ChannelType.GuildCategory,
-          permissionOverwrites,
-        }) as CategoryChannel;
-        results.push(`• Category "${categoryName}": Created`);
-      } else {
-        results.push(`• Category "${categoryName}": Already exists`);
+        await category.setPosition(categoryPosition);
+      } catch (err: any) {
+        stats.errors.push(`Category "${categoryConfig.name}": ${err.message}`);
+        continue;
       }
 
-      // Create channels in category
-      for (const channelConfig of categoryConfig.channels) {
-        const existingChannel = guild.channels.cache.find(
-          (c) => c.name === channelConfig.name && c.parentId === category!.id
-        );
+      categoryPosition++;
 
-        if (!existingChannel) {
-          const channelOverwrites: OverwriteResolvable[] = [];
+      // Handle voice category
+      if (categoryConfig.isVoice) {
+        for (const vcConfig of SERVER_SETUP.voiceChannels) {
+          try {
+            const vc = guild.channels.cache.find(
+              (c) => c.type === ChannelType.GuildVoice &&
+                     (c.name.toLowerCase() === vcConfig.name.toLowerCase() ||
+                      c.name.toLowerCase() === vcConfig.newName.toLowerCase())
+            ) as VoiceChannel | undefined;
 
-          // For PUBLIC category channels
-          if (categoryConfig.visibility === "everyone") {
-            if (channelConfig.readOnly) {
-              // Read-only: everyone can view, no one can send
-              channelOverwrites.push({
-                id: guild.roles.everyone.id,
-                allow: [PermissionFlagsBits.ViewChannel],
-                deny: [PermissionFlagsBits.SendMessages],
-              });
+            if (vc) {
+              // Check if bot can access this voice channel
+              const vcPerms = vc.permissionsFor(botMember);
+              if (!vcPerms?.has(PermissionFlagsBits.ViewChannel) || !vcPerms?.has(PermissionFlagsBits.ManageChannels)) {
+                stats.skipped++;
+                continue;
+              }
+
+              if (vc.parentId !== category.id) {
+                await vc.setParent(category.id, { lockPermissions: false });
+              }
+              if (vc.name !== vcConfig.newName) {
+                await vc.setName(vcConfig.newName);
+                stats.voiceRenamed++;
+              }
+            }
+          } catch (err: any) {
+            if (!err.message.includes("Missing") && !err.message.includes("Access")) {
+              stats.errors.push(`Voice "${vcConfig.name}": ${err.message}`);
             } else {
-              // Apply-here: everyone can view AND send
-              channelOverwrites.push({
-                id: guild.roles.everyone.id,
-                allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
-              });
+              stats.skipped++;
+            }
+          }
+        }
+        continue;
+      }
+
+      // Process each channel in the category
+      for (const channelConfig of categoryConfig.channels) {
+        try {
+          const channel = guild.channels.cache.find(
+            (c) => c.type === ChannelType.GuildText &&
+                   c.name.toLowerCase() === channelConfig.name.toLowerCase()
+          ) as TextChannel | undefined;
+
+          if (!channel) continue;
+
+          // Check if bot can access this channel
+          const botPerms = channel.permissionsFor(botMember);
+          if (!botPerms?.has(PermissionFlagsBits.ViewChannel)) {
+            stats.skipped++;
+            continue; // Silently skip - bot can't see this channel
+          }
+
+          // Move to category if needed (requires ManageChannels)
+          if (channel.parentId !== category.id) {
+            if (botPerms.has(PermissionFlagsBits.ManageChannels)) {
+              await channel.setParent(category.id, { lockPermissions: false });
+              stats.channelsMoved++;
+            } else {
+              stats.skipped++;
             }
           }
 
-          await guild.channels.create({
-            name: channelConfig.name,
-            type: ChannelType.GuildText,
-            parent: category.id,
-            permissionOverwrites: channelOverwrites.length > 0 ? channelOverwrites : undefined,
-          });
-          results.push(`  - #${channelConfig.name}: Created`);
-        } else {
-          results.push(`  - #${channelConfig.name}: Already exists`);
+          // Set topic if different (requires ManageChannels)
+          if (channelConfig.topic && channel.topic !== channelConfig.topic) {
+            if (botPerms.has(PermissionFlagsBits.ManageChannels)) {
+              await channel.setTopic(channelConfig.topic);
+              stats.topicsSet++;
+            }
+          }
+
+          // Send welcome message if configured (requires SendMessages)
+          if (channelConfig.welcome && botPerms.has(PermissionFlagsBits.SendMessages)) {
+            const messages = await channel.messages.fetch({ limit: 5 });
+            const hasBotWelcome = messages.some(
+              (m) => m.author.id === interaction.client.user?.id &&
+                     m.embeds.length > 0 &&
+                     m.embeds[0].title === channelConfig.welcome?.title
+            );
+
+            if (!hasBotWelcome) {
+              const welcomeEmbed = new EmbedBuilder()
+                .setColor(channelConfig.welcome.color)
+                .setTitle(channelConfig.welcome.title)
+                .setDescription(channelConfig.welcome.description);
+
+              if (channelConfig.welcome.fields) {
+                welcomeEmbed.addFields(channelConfig.welcome.fields);
+              }
+
+              await channel.send({ embeds: [welcomeEmbed] });
+              stats.welcomesSent++;
+            }
+          }
+        } catch (err: any) {
+          // Only log unexpected errors, not permission issues
+          if (!err.message.includes("Missing") && !err.message.includes("Access")) {
+            stats.errors.push(`#${channelConfig.name}: ${err.message}`);
+          } else {
+            stats.skipped++;
+          }
         }
       }
     }
 
-    // Summary
+    // Step 2: Clean up empty default categories
+    const oldCategories = ["Text Channels", "Voice Channels"];
+    for (const oldName of oldCategories) {
+      try {
+        const oldCat = guild.channels.cache.find(
+          (c) => c.type === ChannelType.GuildCategory && c.name === oldName
+        );
+        if (oldCat) {
+          const children = guild.channels.cache.filter((c) => c.parentId === oldCat.id);
+          if (children.size === 0) {
+            await oldCat.delete("Server setup - removing empty category");
+          }
+        }
+      } catch (err: any) {
+        stats.errors.push(`Cleanup "${oldName}": ${err.message}`);
+      }
+    }
+
+    // Build summary
     const embed = new EmbedBuilder()
-      .setColor(COLORS.success)
-      .setTitle("Server Setup Complete")
-      .setDescription(results.join("\n"))
+      .setColor(stats.errors.length > 0 ? COLORS.warning : COLORS.success)
+      .setTitle("Server Setup Complete!")
+      .setDescription("Your Discord server has been organized and configured.")
       .addFields(
         {
-          name: "Next Steps",
+          name: "Changes Made",
           value: [
-            "1. Users can apply with `/apply`",
-            "2. Review applications in #candidature-review",
-            "3. Use `/approve @user` or `/reject @user` to process",
-          ].join("\n"),
+            `📁 Categories: **${stats.categoriesCreated}** created`,
+            `↪️ Channels moved: **${stats.channelsMoved}**`,
+            `📝 Topics set: **${stats.topicsSet}**`,
+            `👋 Welcome messages: **${stats.welcomesSent}**`,
+            `🎙️ Voice renamed: **${stats.voiceRenamed}**`,
+            stats.skipped > 0 ? `⏭️ Skipped (no access): **${stats.skipped}**` : "",
+          ].filter(Boolean).join("\n"),
+          inline: false,
+        },
+        {
+          name: "Server Structure",
+          value: SERVER_SETUP.categories
+            .map(c => `${c.emoji} **${c.name}**`)
+            .join("\n"),
+          inline: true,
+        },
+        {
+          name: "Preserved",
+          value: SERVER_SETUP.preserveCategories.join("\n") || "None",
+          inline: true,
         }
-      )
-      .setTimestamp();
+      );
+
+    if (stats.errors.length > 0) {
+      embed.addFields({
+        name: `⚠️ Issues (${stats.errors.length})`,
+        value: stats.errors.slice(0, 5).join("\n") +
+               (stats.errors.length > 5 ? `\n...and ${stats.errors.length - 5} more` : ""),
+        inline: false,
+      });
+    }
+
+    embed.setFooter({ text: "Run /setup-server again anytime to refresh" })
+         .setTimestamp();
 
     await interaction.editReply({ embeds: [embed] });
+    console.log(`[Setup] Server setup completed:`, stats);
   } catch (error: any) {
     console.error("[Setup] Error:", error);
     await interaction.editReply({
@@ -1034,27 +1266,6 @@ async function handleApplyCommand(
   if (!guild) {
     await interaction.reply({
       content: "This command can only be used in a server.",
-      ephemeral: true,
-    });
-    return;
-  }
-
-  // Check if user already has Applicant or Participant role
-  const member = interaction.member as GuildMember;
-  const applicantRole = guild.roles.cache.find((r) => r.name === "Applicant");
-  const participantRole = guild.roles.cache.find((r) => r.name === "Participant");
-
-  if (participantRole && member.roles.cache.has(participantRole.id)) {
-    await interaction.reply({
-      content: "You're already an approved participant!",
-      ephemeral: true,
-    });
-    return;
-  }
-
-  if (applicantRole && member.roles.cache.has(applicantRole.id)) {
-    await interaction.reply({
-      content: "You already have a pending application. Please wait for review.",
       ephemeral: true,
     });
     return;
@@ -1145,12 +1356,8 @@ export async function handleApplicationModal(
     const opensource = interaction.fields.getTextInputValue("opensource");
     const areaTime = interaction.fields.getTextInputValue("area_time");
 
-    // Assign Applicant role
+    // Note: No "Applicant" role assigned - application tracked via review channel embed
     const member = interaction.member as GuildMember;
-    const applicantRole = guild.roles.cache.find((r) => r.name === "Applicant");
-    if (applicantRole) {
-      await member.roles.add(applicantRole);
-    }
 
     // Find the candidature-review channel
     const reviewChannel = guild.channels.cache.find(
@@ -1251,9 +1458,9 @@ export async function handleApplicationModal(
 async function handleApproveCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
+  if (!hasAdminPermission(interaction)) {
     await interaction.reply({
-      content: "You need moderator permissions to use this command.",
+      content: "You need Administrator permission to use this command.",
       ephemeral: true,
     });
     return;
@@ -1282,33 +1489,15 @@ async function handleApproveCommand(
   await interaction.deferReply({ ephemeral: true });
 
   try {
-    const applicantRole = guild.roles.cache.find((r) => r.name === "Applicant");
-    const participantRole = guild.roles.cache.find((r) => r.name === "Participant");
-
-    if (!participantRole) {
-      await interaction.editReply({
-        content: "Participant role not found. Please run `/setup-server` first.",
-      });
-      return;
-    }
-
-    // Remove Applicant role if they have it
-    if (applicantRole && targetMember.roles.cache.has(applicantRole.id)) {
-      await targetMember.roles.remove(applicantRole);
-    }
-
-    // Add Participant role
-    await targetMember.roles.add(participantRole);
-
     // DM the user
     try {
       await targetUser.send(
-        `🎉 **Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
+        `**Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
         `You now have access to:\n` +
-        `• Hackathon channels\n` +
-        `• Community discussions\n` +
-        `• Team formation\n\n` +
-        `Welcome to the team! Check out the hackathon channels to get started.`
+        `- Community channels\n` +
+        `- Hackathon discussions\n` +
+        `- Bounties & contributions\n\n` +
+        `Welcome to the team! Check out the community channels to get started.`
       );
     } catch {
       // User has DMs disabled
@@ -1334,7 +1523,7 @@ async function handleApproveCommand(
     await interaction.editReply({
       embeds: [
         createResponseEmbed(
-          `${targetUser} has been approved and given the Participant role.`,
+          `${targetUser} has been approved!`,
           { title: "User Approved", color: COLORS.success }
         ),
       ],
@@ -1354,9 +1543,9 @@ async function handleApproveCommand(
 async function handleRejectCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
-  if (!hasAdminRole(interaction)) {
+  if (!hasAdminPermission(interaction)) {
     await interaction.reply({
-      content: "You need moderator permissions to use this command.",
+      content: "You need Administrator permission to use this command.",
       ephemeral: true,
     });
     return;
@@ -1386,13 +1575,6 @@ async function handleRejectCommand(
   await interaction.deferReply({ ephemeral: true });
 
   try {
-    const applicantRole = guild.roles.cache.find((r) => r.name === "Applicant");
-
-    // Remove Applicant role if they have it
-    if (applicantRole && targetMember.roles.cache.has(applicantRole.id)) {
-      await targetMember.roles.remove(applicantRole);
-    }
-
     // DM the user
     try {
       await targetUser.send(
@@ -1458,9 +1640,10 @@ export async function handleApplicationButton(
     return;
   }
 
-  // Check if user has permission
+  // Check if user has permission (Administrator or Manage Guild)
   const member = interaction.member as GuildMember;
-  if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
+  if (!member.permissions.has(PermissionFlagsBits.Administrator) &&
+      !member.permissions.has(PermissionFlagsBits.ManageGuild)) {
     await interaction.reply({
       content: "You don't have permission to process applications.",
       ephemeral: true,
@@ -1480,32 +1663,16 @@ export async function handleApplicationButton(
   await interaction.deferReply({ ephemeral: true });
 
   try {
-    const applicantRole = guild.roles.cache.find((r) => r.name === "Applicant");
-    const participantRole = guild.roles.cache.find((r) => r.name === "Participant");
-
     if (action === "approve") {
-      if (!participantRole) {
-        await interaction.editReply({
-          content: "Participant role not found. Please run `/setup-server` first.",
-        });
-        return;
-      }
-
-      // Remove Applicant, add Participant
-      if (applicantRole && targetMember.roles.cache.has(applicantRole.id)) {
-        await targetMember.roles.remove(applicantRole);
-      }
-      await targetMember.roles.add(participantRole);
-
       // DM user
       try {
         await targetMember.send(
-          `🎉 **Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
+          `**Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
           `You now have access to:\n` +
-          `• Hackathon channels\n` +
-          `• Community discussions\n` +
-          `• Team formation\n\n` +
-          `Welcome to the team! Check out the hackathon channels to get started.`
+          `- Community channels\n` +
+          `- Hackathon discussions\n` +
+          `- Bounties & contributions\n\n` +
+          `Welcome to the team! Check out the community channels to get started.`
         );
       } catch {
         // DMs disabled
@@ -1523,16 +1690,11 @@ export async function handleApplicationButton(
       });
 
       await interaction.editReply({
-        content: `✅ ${targetMember.user.tag} has been approved!`,
+        content: `${targetMember.user.tag} has been approved!`,
       });
 
       console.log(`[Bot] ${targetMember.user.tag} approved via button by ${interaction.user.tag}`);
     } else if (action === "reject") {
-      // Remove Applicant role
-      if (applicantRole && targetMember.roles.cache.has(applicantRole.id)) {
-        await targetMember.roles.remove(applicantRole);
-      }
-
       // DM user
       try {
         await targetMember.send(
@@ -1557,7 +1719,7 @@ export async function handleApplicationButton(
       });
 
       await interaction.editReply({
-        content: `❌ ${targetMember.user.tag} has been rejected.`,
+        content: `${targetMember.user.tag} has been rejected.`,
       });
 
       console.log(`[Bot] ${targetMember.user.tag} rejected via button by ${interaction.user.tag}`);

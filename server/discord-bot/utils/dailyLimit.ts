@@ -1,19 +1,11 @@
 /**
  * Daily Question Limit System
  *
- * Tracks daily usage per user with role-based bypass.
+ * Tracks daily usage per user. Discord server members get unlimited access.
  */
 
-// Daily limit for free users
+// Daily limit for users outside the Discord server
 const DAILY_LIMIT = 5;
-
-// Role IDs that bypass limits (add your Discord role IDs here)
-const PRIVILEGED_ROLES = [
-  process.env.DISCORD_ROLE_OWNER || "1450564628911489156",
-  process.env.DISCORD_ROLE_ADMIN || "",
-  process.env.DISCORD_ROLE_MODERATOR || "",
-  process.env.DISCORD_ROLE_VERIFIED || "",
-].filter(Boolean);
 
 // Track usage: userId -> { count, date }
 const usageMap = new Map<string, { count: number; date: string }>();
@@ -26,18 +18,12 @@ function getToday(): string {
 }
 
 /**
- * Check if user has a privileged role
+ * Check if user is a Discord server member (has unlimited access)
+ * Any Discord server member gets unlimited questions
  */
 export function isPrivileged(member: any): boolean {
-  if (!member?.roles?.cache) return false;
-
-  for (const roleId of PRIVILEGED_ROLES) {
-    if (member.roles.cache.has(roleId)) {
-      return true;
-    }
-  }
-
-  return false;
+  // If they have a member object, they're in the server = unlimited
+  return !!member;
 }
 
 /**
@@ -110,10 +96,9 @@ export function getRemainingQuestions(
 export function getLimitExceededMessage(): string {
   return (
     `You've reached your daily question limit (${DAILY_LIMIT} questions).\n\n` +
-    `**Ways to get unlimited access:**\n` +
-    `• Join our Discord server and verify\n` +
-    `• Participate in the hackathon\n` +
-    `• Complete a referral verification\n\n` +
+    `**Get unlimited access:**\n` +
+    `• Join our Discord server for unlimited questions!\n` +
+    `• https://discord.gg/cortexlinux\n\n` +
     `Your limit resets at midnight UTC.`
   );
 }
