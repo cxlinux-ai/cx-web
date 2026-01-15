@@ -46,7 +46,7 @@ export function storeQAForFeedback(messageId: string, question: string, answer: 
 import { createResponseEmbed, createErrorEmbed, COLORS } from "../utils/embeds.js";
 
 // Admin role ID for restricted commands
-const ADMIN_ROLE_ID = "1450564628911489156";
+const ADMIN_ROLE_ID = "8";
 
 /**
  * Check if user has admin role
