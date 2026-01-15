@@ -46,7 +46,7 @@ export function storeQAForFeedback(messageId: string, question: string, answer: 
 import { createResponseEmbed, createErrorEmbed, COLORS } from "../utils/embeds.js";
 
 // Admin role ID for restricted commands
-const ADMIN_ROLE_ID = "8";
+const ADMIN_ROLE_ID = "1450564628911489156";
 
 /**
  * Check if user has admin role
@@ -545,18 +545,72 @@ async function handlePurgeCommand(
     return;
   }
 
+  await interaction.deferReply({ ephemeral: true });
+
   const channel = interaction.channel as TextChannel;
+  const fourteenDaysAgo = Date.now() - (14 * 24 * 60 * 60 * 1000);
 
   try {
-    const deleted = await channel.bulkDelete(amount, true);
-    await interaction.reply({
-      content: `Successfully deleted ${deleted.size} message(s).`,
-      ephemeral: true,
-    });
+    // Fetch messages first
+    const messages = await channel.messages.fetch({ limit: amount });
+    
+    if (messages.size === 0) {
+      await interaction.editReply({ content: "No messages found to delete." });
+      return;
+    }
+
+    // Separate messages by age
+    const recentMessages = messages.filter(msg => msg.createdTimestamp > fourteenDaysAgo);
+    const oldMessages = messages.filter(msg => msg.createdTimestamp <= fourteenDaysAgo);
+
+    let bulkDeleted = 0;
+    let individuallyDeleted = 0;
+    let failed = 0;
+
+    // Bulk delete recent messages (< 14 days old)
+    if (recentMessages.size > 0) {
+      try {
+        const deleted = await channel.bulkDelete(recentMessages, true);
+        bulkDeleted = deleted.size;
+      } catch (err) {
+        // If bulk delete fails, try individually
+        for (const msg of Array.from(recentMessages.values())) {
+          try {
+            await msg.delete();
+            individuallyDeleted++;
+          } catch {
+            failed++;
+          }
+        }
+      }
+    }
+
+    // Individually delete old messages (> 14 days old)
+    for (const msg of Array.from(oldMessages.values())) {
+      try {
+        await msg.delete();
+        individuallyDeleted++;
+      } catch {
+        failed++;
+      }
+    }
+
+    const total = bulkDeleted + individuallyDeleted;
+    let response = `Successfully deleted ${total} message(s).`;
+    
+    if (failed > 0) {
+      response += ` Failed to delete ${failed} message(s).`;
+    }
+    
+    if (oldMessages.size > 0) {
+      response += ` (${oldMessages.size} older messages deleted individually)`;
+    }
+
+    await interaction.editReply({ content: response });
   } catch (error) {
-    await interaction.reply({
-      content: "Failed to delete messages. Messages older than 14 days cannot be bulk deleted.",
-      ephemeral: true,
+    console.error("[Purge] Error:", error);
+    await interaction.editReply({
+      content: "Failed to delete messages. Make sure the bot has 'Manage Messages' permission.",
     });
   }
 }
