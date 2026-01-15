@@ -1,14 +1,29 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useLocation } from "wouter";
-import { CheckCircle2, ArrowRight, Github, MessageCircle, Book } from "lucide-react";
+import { Link } from "wouter";
+import { CheckCircle2, Copy, Check, Terminal, ExternalLink } from "lucide-react";
+import { SiDiscord } from "react-icons/si";
 import Footer from "@/components/Footer";
 import { updateSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+
+interface SessionData {
+  success: boolean;
+  email: string;
+  planName: string;
+  licenseKey: string;
+  subscriptionId: string;
+  trialEnd: string | null;
+}
 
 export default function PricingSuccessPage() {
-  const [, navigate] = useLocation();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [sessionData, setSessionData] = useState<SessionData | null>(null);
+  const [copiedKey, setCopiedKey] = useState(false);
+  const [copiedInstall, setCopiedInstall] = useState(false);
+  const [copiedOneliner, setCopiedOneliner] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const cleanup = updateSEO({
@@ -22,7 +37,7 @@ export default function PricingSuccessPage() {
     const sessionId = urlParams.get('session_id');
 
     if (sessionId) {
-      setStatus('success');
+      fetchSessionDetails(sessionId);
     } else {
       setStatus('error');
     }
@@ -30,12 +45,55 @@ export default function PricingSuccessPage() {
     return cleanup;
   }, []);
 
+  const fetchSessionDetails = async (sessionId: string) => {
+    try {
+      const response = await fetch(`/api/stripe/session/${sessionId}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setSessionData(data);
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Failed to fetch session:', error);
+      setStatus('error');
+    }
+  };
+
+  const copyToClipboard = async (text: string, type: 'key' | 'install' | 'oneliner') => {
+    try {
+      await navigator.clipboard.writeText(text);
+      if (type === 'key') {
+        setCopiedKey(true);
+        setTimeout(() => setCopiedKey(false), 2000);
+      } else if (type === 'install') {
+        setCopiedInstall(true);
+        setTimeout(() => setCopiedInstall(false), 2000);
+      } else {
+        setCopiedOneliner(true);
+        setTimeout(() => setCopiedOneliner(false), 2000);
+      }
+      toast({
+        title: "Copied!",
+        description: "Copied to clipboard",
+      });
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Please copy manually",
+        variant: "destructive",
+      });
+    }
+  };
+
   if (status === 'loading') {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-black">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-gray-400">Confirming your subscription...</p>
+          <p className="text-gray-400">Retrieving your license key...</p>
         </div>
       </div>
     );
@@ -43,10 +101,10 @@ export default function PricingSuccessPage() {
 
   if (status === 'error') {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-black">
         <div className="text-center max-w-md px-4">
           <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-6">
-            <span className="text-3xl">!</span>
+            <span className="text-3xl text-red-400">!</span>
           </div>
           <h1 className="text-2xl font-bold text-white mb-4">Something went wrong</h1>
           <p className="text-gray-400 mb-8">
@@ -60,7 +118,7 @@ export default function PricingSuccessPage() {
             </Button>
             <Button variant="outline" asChild className="w-full" data-testid="link-contact-support">
               <a
-                href="https://discord.gg/ASvzWcuTfk"
+                href="https://discord.gg/uCqHvxjU83"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -73,9 +131,12 @@ export default function PricingSuccessPage() {
     );
   }
 
+  const installCommand = `pip install cortex-pro\ncortex-pro activate ${sessionData?.licenseKey}`;
+  const onelinerCommand = `pip install cortex-pro && cortex-pro activate ${sessionData?.licenseKey}`;
+
   return (
-    <div className="min-h-screen pt-20 pb-16">
-      <div className="max-w-2xl mx-auto px-4 text-center">
+    <div className="min-h-screen pt-20 pb-16 bg-black">
+      <div className="max-w-3xl mx-auto px-4">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -89,96 +150,172 @@ export default function PricingSuccessPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
+          className="text-center"
         >
-          <h1 className="text-4xl font-bold text-white mb-4">
-            Welcome to Cortex Pro!
+          <h1 className="text-4xl font-bold text-white mb-2">
+            Welcome to Cortex {sessionData?.planName}!
           </h1>
           <p className="text-gray-400 text-lg mb-8">
-            Your 14-day free trial has started. Check your email for login instructions and your license key.
+            Your 14-day free trial has started. Here's everything you need to get going.
           </p>
+        </motion.div>
 
-          {/* Quick Start Actions */}
-          <div className="grid gap-4 mb-12">
-            <a
-              href="https://github.com/cortexlinux/cortex#installation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl hover:border-blue-500/50 transition-colors group"
-              data-testid="link-quickstart"
+        {/* License Key Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+            <Terminal size={20} className="text-blue-400" />
+            Your License Key
+          </h2>
+          <div className="flex items-center gap-3">
+            <code className="flex-1 bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-terminal-green text-sm md:text-base break-all">
+              {sessionData?.licenseKey}
+            </code>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => copyToClipboard(sessionData?.licenseKey || '', 'key')}
+              data-testid="button-copy-license"
             >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/20 rounded-lg">
-                  <Book size={24} className="text-blue-300" />
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold text-white">Quick Start Guide</h3>
-                  <p className="text-sm text-gray-400">Get up and running in 5 minutes</p>
-                </div>
-              </div>
-              <ArrowRight size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-            </a>
-
-            <a
-              href="https://github.com/cortexlinux/cortex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl hover:border-white/20 transition-colors group"
-              data-testid="link-github"
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-lg">
-                  <Github size={24} className="text-gray-300" />
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold text-white">GitHub Repository</h3>
-                  <p className="text-sm text-gray-400">Access the source code and contribute</p>
-                </div>
-              </div>
-              <ArrowRight size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-            </a>
-
-            <a
-              href="https://discord.gg/ASvzWcuTfk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl hover:border-white/20 transition-colors group"
-              data-testid="link-discord"
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-white/10 rounded-lg">
-                  <MessageCircle size={24} className="text-gray-300" />
-                </div>
-                <div className="text-left">
-                  <h3 className="font-semibold text-white">Join Discord</h3>
-                  <p className="text-sm text-gray-400">Connect with the community and get support</p>
-                </div>
-              </div>
-              <ArrowRight size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-            </a>
+              {copiedKey ? <Check size={18} className="text-terminal-green" /> : <Copy size={18} />}
+            </Button>
           </div>
+          <p className="text-gray-500 text-sm mt-3">
+            Save this key - you'll need it to activate Cortex on your systems.
+          </p>
+        </motion.div>
 
-          {/* What's Next */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6 text-left mb-8">
-            <h3 className="font-semibold text-white mb-4">What happens next?</h3>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-terminal-green mt-0.5 flex-shrink-0" />
-                <span>You'll receive a welcome email with your license key and setup instructions</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-terminal-green mt-0.5 flex-shrink-0" />
-                <span>Your 14-day free trial starts today - no charge until trial ends</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-terminal-green mt-0.5 flex-shrink-0" />
-                <span>Cancel anytime before the trial ends - no questions asked</span>
-              </li>
-            </ul>
+        {/* Installation Commands */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6"
+        >
+          <h2 className="text-lg font-semibold text-white mb-4">Install Cortex Pro</h2>
+          
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-400">Standard installation:</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => copyToClipboard(installCommand, 'install')}
+                  className="h-7 px-2"
+                  data-testid="button-copy-install"
+                >
+                  {copiedInstall ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
+                  <span className="ml-1 text-xs">Copy</span>
+                </Button>
+              </div>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                <code className="text-sm text-gray-300">
+                  <span className="text-gray-500">$</span> pip install cortex-pro{'\n'}
+                  <span className="text-gray-500">$</span> cortex-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                </code>
+              </pre>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-400">Or one-liner:</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => copyToClipboard(onelinerCommand, 'oneliner')}
+                  className="h-7 px-2"
+                  data-testid="button-copy-oneliner"
+                >
+                  {copiedOneliner ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
+                  <span className="ml-1 text-xs">Copy</span>
+                </Button>
+              </div>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                <code className="text-sm text-gray-300">
+                  <span className="text-gray-500">$</span> pip install cortex-pro && cortex-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                </code>
+              </pre>
+            </div>
           </div>
+        </motion.div>
 
+        {/* Next Steps */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="bg-white/5 border border-white/10 rounded-xl p-6 mb-8"
+        >
+          <h2 className="text-lg font-semibold text-white mb-4">Next Steps</h2>
+          <ol className="space-y-3 text-gray-400">
+            <li className="flex items-start gap-3">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">1</span>
+              <span>Open a terminal on any Linux system</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">2</span>
+              <span>Run the install command above to activate Cortex</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">3</span>
+              <span>Start using natural language: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cortex install nginx</code></span>
+            </li>
+          </ol>
+        </motion.div>
+
+        {/* Help Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4 text-sm"
+        >
+          <span className="text-gray-500">Need help?</span>
+          <a
+            href="https://discord.gg/uCqHvxjU83"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+            data-testid="link-discord"
+          >
+            <SiDiscord size={16} />
+            Discord
+          </a>
+          <span className="text-gray-600">|</span>
+          <a
+            href="https://github.com/cortexlinux/cortex"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+            data-testid="link-docs"
+          >
+            <ExternalLink size={14} />
+            Documentation
+          </a>
+          <span className="text-gray-600">|</span>
+          <Link
+            href="/support"
+            className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+            data-testid="link-support"
+          >
+            Support
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="text-center mt-8"
+        >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-blue-300 transition-colors text-sm"
             data-testid="link-home"
           >
             Return to Homepage

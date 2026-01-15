@@ -726,6 +726,69 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
   }
 });
 
+// =============================================================================
+// SESSION DETAILS ENDPOINT (for Success Page)
+// =============================================================================
+
+const PRICE_TO_TIER: Record<string, { name: string; prefix: string }> = {
+  'price_1SpotMJ4X1wkC4EspVzV5tT6': { name: 'Pro', prefix: 'CORTEX-PRO-' },
+  'price_1SpotMJ4X1wkC4Es3tuZGVHY': { name: 'Pro', prefix: 'CORTEX-PRO-' },
+  'price_1SpotNJ4X1wkC4EsN13pV2dA': { name: 'Enterprise', prefix: 'CORTEX-ENT-' },
+  'price_1SpotNJ4X1wkC4Esw5ienNNQ': { name: 'Enterprise', prefix: 'CORTEX-ENT-' },
+  'price_1SpotOJ4X1wkC4Es7ZqOzh1H': { name: 'Managed', prefix: 'CORTEX-MNG-' },
+  'price_1SpotOJ4X1wkC4EslmMmWWZI': { name: 'Managed', prefix: 'CORTEX-MNG-' },
+};
+
+function generateLicenseKey(prefix: string): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let key = prefix;
+  for (let i = 0; i < 4; i++) {
+    if (i > 0) key += '-';
+    for (let j = 0; j < 4; j++) {
+      key += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+  }
+  return key;
+}
+
+router.get("/session/:sessionId", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const { sessionId } = req.params;
+
+    if (!sessionId) {
+      return res.status(400).json({ error: "Session ID is required" });
+    }
+
+    const session = await stripe!.checkout.sessions.retrieve(sessionId, {
+      expand: ['subscription', 'customer', 'line_items']
+    });
+
+    if (!session) {
+      return res.status(404).json({ error: "Session not found" });
+    }
+
+    const customer = session.customer as Stripe.Customer;
+    const subscription = session.subscription as Stripe.Subscription;
+    const lineItems = session.line_items?.data || [];
+    const priceId = lineItems[0]?.price?.id || '';
+
+    const tierInfo = PRICE_TO_TIER[priceId] || { name: 'Pro', prefix: 'CORTEX-PRO-' };
+    const licenseKey = generateLicenseKey(tierInfo.prefix);
+
+    res.json({
+      success: true,
+      email: customer?.email || session.customer_email,
+      planName: tierInfo.name,
+      licenseKey,
+      subscriptionId: subscription?.id,
+      trialEnd: subscription?.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null,
+    });
+  } catch (error: any) {
+    console.error("Get session error:", error);
+    res.status(500).json({ error: error.message || "Failed to get session details" });
+  }
+});
+
 router.get("/analytics/subscriptions", async (req: Request, res: Response) => {
   try {
     const subscriptionStats = await db
