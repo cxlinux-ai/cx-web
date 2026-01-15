@@ -229,7 +229,6 @@ export default function PricingPage() {
               Monthly
             </span>
             <Switch
-              className="bg-[#93c5fd]"
               checked={annual}
               onCheckedChange={setAnnual}
               data-testid="toggle-annual"
