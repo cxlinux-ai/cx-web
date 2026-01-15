@@ -11,16 +11,16 @@ import { Switch } from "@/components/ui/switch";
 
 const STRIPE_PRICES = {
   pro: {
-    monthly: 'price_1SpmgkJ4X1wkC4EsOjFxixLH',
-    annual: '' // TODO: Add Pro annual price ID when created
+    monthly: 'price_1SpokEJYu2dtDKcZ0UKi8XPq',
+    annual: 'price_1SpokFJYu2dtDKcZRnzZzLyL'
   },
   enterprise: {
-    monthly: 'price_1SpmgqJ4X1wkC4EsrG1pCG6p',
-    annual: '' // TODO: Add Enterprise annual price ID when created
+    monthly: 'price_1SpokFJYu2dtDKcZblaTxfHy',
+    annual: 'price_1SpokGJYu2dtDKcZDtwdSTOI'
   },
   managed: {
-    monthly: 'price_1SpodLJ4X1wkC4Es1Y0OX1Mn',
-    annual: '' // TODO: Add Managed annual price ID when created
+    monthly: 'price_1SpokGJYu2dtDKcZOlGG7myM',
+    annual: 'price_1SpokHJYu2dtDKcZeJSmcQ6J'
   }
 };
 
