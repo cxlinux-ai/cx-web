@@ -11,16 +11,16 @@ import { Switch } from "@/components/ui/switch";
 
 const STRIPE_PRICES = {
   pro: {
-    monthly: 'price_1SpokEJYu2dtDKcZ0UKi8XPq',
-    annual: 'price_1SpokFJYu2dtDKcZRnzZzLyL'
+    monthly: 'price_1SpotMJ4X1wkC4EspVzV5tT6',
+    annual: 'price_1SpotMJ4X1wkC4Es3tuZGVHY'
   },
   enterprise: {
-    monthly: 'price_1SpokFJYu2dtDKcZblaTxfHy',
-    annual: 'price_1SpokGJYu2dtDKcZDtwdSTOI'
+    monthly: 'price_1SpotNJ4X1wkC4EsN13pV2dA',
+    annual: 'price_1SpotNJ4X1wkC4Esw5ienNNQ'
   },
   managed: {
-    monthly: 'price_1SpokGJYu2dtDKcZOlGG7myM',
-    annual: 'price_1SpokHJYu2dtDKcZeJSmcQ6J'
+    monthly: 'price_1SpotOJ4X1wkC4Es7ZqOzh1H',
+    annual: 'price_1SpotOJ4X1wkC4EslmMmWWZI'
   }
 };
 
@@ -243,7 +243,7 @@ export default function PricingPage() {
               className={`text-sm font-medium transition-colors ${annual ? 'text-white' : 'text-gray-500'}`}
               data-testid="text-annual-label"
             >
-              Annual <span className="text-terminal-green text-xs">(Save 20%)</span>
+              Annual <span className="text-terminal-green text-xs">(Save 10%)</span>
             </span>
           </div>
         </motion.div>
