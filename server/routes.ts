@@ -9,6 +9,7 @@ import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
 import oauthRoutes from "./oauth";
 import discordBot from "./discord-bot";
+import licenseRoutes from "./license";
 import PDFDocument from "pdfkit";
 
 // Keep-alive: Self-ping to prevent sleep
@@ -307,6 +308,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Mount OAuth routes (Discord, GitHub authentication)
   app.use("/api/oauth", oauthRoutes);
+
+  // Mount License validation routes
+  app.use("/api/license", licenseRoutes);
 
   // Admin API key middleware
   const requireAdminApiKey = (req: any, res: any, next: any) => {
