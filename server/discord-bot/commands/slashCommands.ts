@@ -586,12 +586,29 @@ async function handlePurgeCommand(
     }
 
     // Individually delete old messages (> 14 days old)
+    let lastError = "";
     for (const msg of Array.from(oldMessages.values())) {
       try {
         await msg.delete();
         individuallyDeleted++;
-      } catch {
+      } catch (err: any) {
         failed++;
+        lastError = err?.message || String(err);
+        console.error("[Purge] Failed to delete message:", err?.message || err);
+      }
+    }
+
+    // Also try to delete recent messages individually if bulk failed
+    if (bulkDeleted === 0 && recentMessages.size > 0) {
+      for (const msg of Array.from(recentMessages.values())) {
+        try {
+          await msg.delete();
+          individuallyDeleted++;
+        } catch (err: any) {
+          failed++;
+          lastError = err?.message || String(err);
+          console.error("[Purge] Failed to delete message:", err?.message || err);
+        }
       }
     }
 
@@ -600,17 +617,20 @@ async function handlePurgeCommand(
     
     if (failed > 0) {
       response += ` Failed to delete ${failed} message(s).`;
+      if (lastError) {
+        response += ` Error: ${lastError}`;
+      }
     }
     
-    if (oldMessages.size > 0) {
-      response += ` (${oldMessages.size} older messages deleted individually)`;
+    if (oldMessages.size > 0 && individuallyDeleted > 0) {
+      response += ` (${Math.min(oldMessages.size, individuallyDeleted)} older messages deleted individually)`;
     }
 
     await interaction.editReply({ content: response });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[Purge] Error:", error);
     await interaction.editReply({
-      content: "Failed to delete messages. Make sure the bot has 'Manage Messages' permission.",
+      content: `Failed to delete messages: ${error?.message || "Unknown error"}. Make sure the bot has 'Manage Messages' permission.`,
     });
   }
 }
