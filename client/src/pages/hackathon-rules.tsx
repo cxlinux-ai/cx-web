@@ -341,21 +341,21 @@ export default function HackathonRulesPage() {
               </div>
 
               <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-emerald-500/10 border border-yellow-500/30 rounded-xl mb-6 text-center">
-                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$15,000</span></p>
+                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$17,000</span></p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: Ideathon — $3,000</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: Ideathon — $3,800</h3>
                   <p className="text-gray-400 text-sm mb-4">Submit monetizable feature ideas via GitHub Issues.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
                       <span>1st Place</span>
-                      <span className="text-emerald-400 font-semibold">$1,300</span>
+                      <span className="text-emerald-400 font-semibold">$250</span>
                     </li>
                     <li className="flex justify-between">
                       <span>2nd Place</span>
-                      <span className="text-emerald-400 font-semibold">$750</span>
+                      <span className="text-emerald-400 font-semibold">$250</span>
                     </li>
                     <li className="flex justify-between">
                       <span>3rd Place</span>
@@ -363,13 +363,18 @@ export default function HackathonRulesPage() {
                     </li>
                     <li className="flex justify-between">
                       <span>4th–10th Place</span>
-                      <span className="text-emerald-400 font-semibold">$100 each</span>
+                      <span className="text-emerald-400 font-semibold">$150 worth each</span>
+                    </li>
+                    <li className="flex justify-between">
+                      <span>11th–30th Place</span>
+                      <span className="text-emerald-400 font-semibold">$100 worth each</span>
                     </li>
                   </ul>
+                  <p className="text-xs text-gray-500 mt-3">11th-30th: Goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $12,000</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $12,800</h3>
                   <p className="text-gray-400 text-sm mb-4">Build and ship real code via Pull Requests.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
@@ -386,9 +391,10 @@ export default function HackathonRulesPage() {
                     </li>
                     <li className="flex justify-between">
                       <span>4th–7th Place</span>
-                      <span className="text-blue-300 font-semibold">$500 each</span>
+                      <span className="text-blue-300 font-semibold">$700 worth each</span>
                     </li>
                   </ul>
+                  <p className="text-xs text-gray-500 mt-3">4th-7th: Goodie package + 2 months managed service</p>
                 </div>
               </div>
 

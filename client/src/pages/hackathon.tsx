@@ -670,7 +670,7 @@ export default function Hackathon() {
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
               <Trophy size={16} className="text-yellow-400" />
-              <span className="text-terminal-green font-semibold">$15,000</span> in Prizes
+              <span className="text-terminal-green font-semibold">$17,000</span> in Prizes
             </span>
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
@@ -883,7 +883,7 @@ export default function Hackathon() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
                     <Trophy size={16} className="text-terminal-green" />
-                    <span className="text-terminal-green font-semibold">$12,000</span>
+                    <span className="text-terminal-green font-semibold">$12,800</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-gray-400" />
@@ -948,8 +948,8 @@ export default function Hackathon() {
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Submit monetizable feature ideas. No coding required.</p>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-terminal-green font-semibold">$3,000 in prizes</span>
-                    <span className="text-gray-500">Top 10 ideas win</span>
+                    <span className="text-terminal-green font-semibold">$3,800 in prizes</span>
+                    <span className="text-gray-500">Top 30 ideas win</span>
                   </div>
                 </div>
               </motion.div>
@@ -998,8 +998,8 @@ export default function Hackathon() {
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-terminal-green font-semibold">$12,000 in prizes</span>
-                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K</span>
+                    <span className="text-terminal-green font-semibold">$12,800 in prizes</span>
+                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K, 4th-7th: $700</span>
                   </div>
                 </div>
               </motion.div>

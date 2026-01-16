@@ -266,14 +266,14 @@ export const ideathonPrizeCategories: IdeathonPrizeCategory[] = [
     heading: "Top 10 Excellence Winners",
     description: "Ranks 4-10: Outstanding ideas with strong potential",
     prizes: [
-      { place: "4th-10th Place", amount: "$130 each" }
+      { place: "4th-10th Place", amount: "$150 worth each" }
     ]
   },
   {
     heading: "Top 30 Ideathon Winners",
-    description: "Ranks 11-30: High-quality ideas recognized for their merit",
+    description: "Ranks 11-30: Exclusive goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium",
     prizes: [
-      { place: "11th-30th Place", amount: "$67 each" }
+      { place: "11th-30th Place", amount: "$100 worth each" }
     ]
   }
 ];
@@ -297,10 +297,10 @@ export const ideathonPhase: IdeathonPhase = {
   ],
   prizes: [
     { place: "Top 3 Grand Winners", amount: "$250 each" },
-    { place: "Top 10 Excellence (4th-10th)", amount: "$130 each" },
-    { place: "Top 30 Ideathon (11th-30th)", amount: "$67 each" }
+    { place: "Top 10 Excellence (4th-10th)", amount: "$150 worth each" },
+    { place: "Top 30 Ideathon (11th-30th)", amount: "$100 worth each" }
   ],
-  prizeTotal: "$3,000",
+  prizeTotal: "$3,800",
   prizeExplanation: "To encourage innovation and recognize a wide range of outstanding ideas, the Ideathon awards prizes across three tiers. This inclusive structure ensures fair recognition for multiple high-quality submissions while rewarding exceptional ideas at the top.",
   cta: {
     text: "Submit Your Idea",
@@ -335,9 +335,9 @@ export const hackathonPhases: HackathonPhase[] = [
       { place: "1st Place", amount: "$5,000" },
       { place: "2nd Place", amount: "$3,000" },
       { place: "3rd Place", amount: "$2,000" },
-      { place: "4th-7th Place", amount: "$500 each" }
+      { place: "4th-7th Place", amount: "$700 worth each" }
     ],
-    prizeTotal: "$12,000",
+    prizeTotal: "$12,800",
     criteria: [
       { name: "Code Quality", weight: "30%", description: "Readability, structure, best practices" },
       { name: "Usefulness", weight: "25%", description: "Real-world value, problem solved" },
@@ -490,9 +490,9 @@ export const hackathonConfig = {
   tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
   totalWeeks: 14,
-  totalPrizePool: "$15,000",
-  ideathonPrize: "$3,000",
-  buildSprintPrize: "$12,000",
+  totalPrizePool: "$17,000",
+  ideathonPrize: "$3,800",
+  buildSprintPrize: "$12,800",
   expectedParticipants: "5,000+",
   expectedIdeas: "4000+",
   expectedPRs: "100+",
@@ -568,8 +568,8 @@ export const hackathonBenefits = [
     description: "Connect with 3,000+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $15,000 in Prizes",
-    description: "Real money for real contributions. $3,000 for Ideathon, $9,000 for Build Sprint, $3,000 for Demo Week. Plus maintainer roles and swag."
+    title: "Compete for $17,000 in Prizes",
+    description: "Real money for real contributions. $3,800 for Ideathon, $12,800 for Build Sprint. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",

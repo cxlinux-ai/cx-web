@@ -161,7 +161,7 @@ export default function HackathonPreview() {
                   Shape the <span className="gradient-text">future of Cortex Linux</span>
                 </h3>
                 <p className="text-center text-sm sm:text-xl md:text-2xl font-semibold text-gray-300 mb-4 sm:mb-6">
-                  <span className="text-terminal-green">$15,000 in Prizes</span> · First AI Linux Hackathon
+                  <span className="text-terminal-green">$17,000 in Prizes</span> · First AI Linux Hackathon
                 </p>
                 
                 {/* Value proposition */}

@@ -110,7 +110,7 @@ export function createHackathonEmbed(): EmbedBuilder {
     .addFields(
       {
         name: "Total Prizes",
-        value: "$15,000",
+        value: "$17,000",
         inline: true,
       },
       {

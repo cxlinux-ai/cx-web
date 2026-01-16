@@ -429,16 +429,16 @@ async function handleHackathonCommand(
   const embed = new EmbedBuilder()
     .setColor(0xf59e0b)
     .setTitle("Cortex Linux Hackathon 2026")
-    .setDescription("$15,000 in prizes - Build the future of AI-powered Linux!")
+    .setDescription("$17,000 in prizes - Build the future of AI-powered Linux!")
     .addFields(
       {
         name: "Phase 1: Ideathon",
-        value: "Weeks 1-4 | $3,000 prizes\nSubmit monetizable feature ideas",
+        value: "Weeks 1-4 | $3,800 prizes\nSubmit monetizable feature ideas",
         inline: true,
       },
       {
         name: "Phase 2: Hackathon",
-        value: "Weeks 5-13 | $12,000 prizes\nBuild production-ready code",
+        value: "Weeks 5-13 | $12,800 prizes\nBuild production-ready code",
         inline: true,
       },
       {
@@ -447,7 +447,7 @@ async function handleHackathonCommand(
       },
       {
         name: "Top Prizes",
-        value: "1st: $5,000 | 2nd: $3,000 | 3rd: $2,000",
+        value: "1st: $5,000 | 2nd: $3,000 | 3rd: $2,000 | 4th-7th: $700",
       }
     )
     .setURL("https://cortexlinux.com/hackathon");
@@ -877,13 +877,13 @@ const SERVER_SETUP = {
       channels: [
         {
           name: "hackathon",
-          topic: "$15,000 in prizes! Build the future of AI-powered Linux.",
+          topic: "$17,000 in prizes! Build the future of AI-powered Linux.",
           welcome: {
             title: "Cortex Hackathon 2026",
-            description: "$15,000 in prizes - Build the future of AI-powered Linux!",
+            description: "$17,000 in prizes - Build the future of AI-powered Linux!",
             color: 0xf59e0b,
             fields: [
-              { name: "Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000 • Plus category prizes!" },
+              { name: "Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000 • 4th-7th: $700" },
               { name: "How to Join", value: "Register at [cortexlinux.com/hackathon](https://cortexlinux.com/hackathon)" },
             ]
           }

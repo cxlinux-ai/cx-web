@@ -8,7 +8,7 @@ export default function Register() {
   useEffect(() => {
     const cleanup = updateSEO({
       title: "Register - Cortex Hackathon 2026",
-      description: "Join the Cortex Linux Hackathon 2026. $15,000 in prizes. Register now to participate.",
+      description: "Join the Cortex Linux Hackathon 2026. $17,000 in prizes. Register now to participate.",
       keywords: ["hackathon", "registration", "cortex linux", "AI", "linux"],
     });
     return cleanup;
@@ -44,7 +44,7 @@ export default function Register() {
         >
           <div className="flex items-center gap-2 text-sm">
             <Trophy size={18} className="text-terminal-green" />
-            <span className="text-terminal-green font-semibold">$15,000</span>
+            <span className="text-terminal-green font-semibold">$17,000</span>
             <span className="text-gray-400">in Prizes</span>
           </div>
           <div className="flex items-center gap-2 text-sm">

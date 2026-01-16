@@ -289,7 +289,7 @@ async function completeWelcomeFlow(
       message += "Ready to install? Check out `/cortex how do I install?` or visit **cortexlinux.com/download**\n\n";
       break;
     case "hackathon":
-      message += "Awesome! Check out **cortexlinux.com/hackathon** for all the details. We have $15,000 in prizes! 🏆\n\n";
+      message += "Awesome! Check out **cortexlinux.com/hackathon** for all the details. We have $17,000 in prizes! 🏆\n\n";
       break;
     case "contribute":
       message += "We love contributors! Check out our GitHub at **github.com/cortexlinux/cortex** and join the #dev channel.\n\n";
