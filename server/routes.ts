@@ -591,8 +591,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("  • 1st Place: $250", { lineGap: 2 })
          .text("  • 2nd Place: $250", { lineGap: 2 })
          .text("  • 3rd Place: $250", { lineGap: 2 })
-         .text("  • 4th-10th Place: $150 worth each", { lineGap: 2 })
-         .text("  • 11th-30th Place: $100 worth each (Goodie package + 1 month Premium)", { lineGap: 2 });
+         .text("  • 4th-10th Place: $150 each", { lineGap: 2 })
+         .text("  • 11th-30th Place: $100 each (Goodie package + 1 month Premium)", { lineGap: 2 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
       doc.font("Helvetica")
@@ -623,7 +623,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("  • 1st Place: $5,000", { lineGap: 2 })
          .text("  • 2nd Place: $3,000", { lineGap: 2 })
          .text("  • 3rd Place: $2,000", { lineGap: 2 })
-         .text("  • 4th-7th Place: $700 worth each (Goodie package + 2 months managed)", { lineGap: 2 });
+         .text("  • 4th-7th Place: $700 each (Goodie package + 2 months managed)", { lineGap: 2 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
       doc.font("Helvetica")

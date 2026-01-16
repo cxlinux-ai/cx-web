@@ -363,11 +363,11 @@ export default function HackathonRulesPage() {
                     </li>
                     <li className="flex justify-between">
                       <span>4th–10th Place</span>
-                      <span className="text-emerald-400 font-semibold">$150 worth each</span>
+                      <span className="text-emerald-400 font-semibold">$150 each</span>
                     </li>
                     <li className="flex justify-between">
                       <span>11th–30th Place</span>
-                      <span className="text-emerald-400 font-semibold">$100 worth each</span>
+                      <span className="text-emerald-400 font-semibold">$100 each</span>
                     </li>
                   </ul>
                   <p className="text-xs text-gray-500 mt-3">11th-30th: Goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium</p>
@@ -391,7 +391,7 @@ export default function HackathonRulesPage() {
                     </li>
                     <li className="flex justify-between">
                       <span>4th–7th Place</span>
-                      <span className="text-blue-300 font-semibold">$700 worth each</span>
+                      <span className="text-blue-300 font-semibold">$700 each</span>
                     </li>
                   </ul>
                   <p className="text-xs text-gray-500 mt-3">4th-7th: Goodie package + 2 months managed service</p>
