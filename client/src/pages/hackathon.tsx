@@ -571,10 +571,18 @@ export default function Hackathon() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 leading-tight"
           >
-            <span className="text-white">Cortex</span> <span className="gradient-text">Hackathon 2026</span>
+            <span className="text-white">The First</span> <span className="gradient-text">AI Linux Hackathon</span>
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.22 }}
+            className="text-xl sm:text-2xl md:text-3xl text-blue-300 font-semibold tracking-wide mb-4"
+          >
+            Worldwide
+          </motion.p>
 
           {/* Date Subtitle */}
           <motion.p

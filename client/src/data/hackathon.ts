@@ -486,7 +486,7 @@ export const growthStrategy: GrowthChannel[] = [
 ];
 
 export const hackathonConfig = {
-  name: "Cortex Hackathon 2026",
+  name: "The First AI Linux Hackathon Worldwide",
   tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
   totalWeeks: 14,
