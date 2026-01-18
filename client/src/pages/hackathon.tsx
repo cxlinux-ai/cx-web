@@ -1503,14 +1503,14 @@ export default function Hackathon() {
               Category Awards
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              More Ways to <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Win</span>
+              More Ways to <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Win</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Separate from main prizes — win in your specialty and get Cortex Linux Premium
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {categoryPrizes.map((category, index) => {
               const iconMap: Record<string, typeof Trophy> = {
                 Puzzle,
