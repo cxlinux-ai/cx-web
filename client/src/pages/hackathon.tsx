@@ -1061,9 +1061,7 @@ export default function Hackathon() {
               Everyone Gets Perks
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                {builderPack.title}
-              </span>
+              <span className="gradient-text">Cortex Hackathon</span> Builder Pack
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               {builderPack.description}
