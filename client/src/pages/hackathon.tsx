@@ -343,6 +343,229 @@ const teamMembers: TeamMember[] = [
   }
 ];
 
+const trackVisuals: Record<string, { gradient: string; snippet: string; icon: string }> = {
+  "cli-commands": {
+    gradient: "from-emerald-500/20 via-emerald-500/10 to-transparent",
+    snippet: `$ cortex organize ~/Downloads
+Analyzing 247 files...
+Created: Documents/PDFs (42 files)
+Created: Images/Screenshots (89 files)
+Created: Archives (31 files)
+Moved: 85 misc files to categorized folders
+Done in 2.3s`,
+    icon: "Terminal"
+  },
+  "plugins": {
+    gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
+    snippet: `// vscode-cortex-extension/index.ts
+import { CortexPlugin } from '@cortex/sdk';
+
+export class VSCodeBridge extends CortexPlugin {
+  async onCommand(cmd: string) {
+    const result = await this.execute(cmd);
+    vscode.window.showInformation(result);
+  }
+}`,
+    icon: "Puzzle"
+  },
+  "ai-integrations": {
+    gradient: "from-purple-500/20 via-purple-500/10 to-transparent",
+    snippet: `$ cortex "analyze my nginx logs for errors"
+Loading local LLM (Llama 3.1 8B)...
+Scanning /var/log/nginx/error.log
+
+Found 3 critical issues:
+- SSL certificate expires in 7 days
+- Rate limiting triggered 142 times
+- 502 errors from upstream server`,
+    icon: "Brain"
+  },
+  "infra-tools": {
+    gradient: "from-yellow-500/20 via-amber-500/10 to-transparent",
+    snippet: `$ cortex deploy --staging
+Building container image...
+Pushing to registry: cortex.io/myapp:v2.1
+Updating Kubernetes deployment...
+Rolling update: 3/3 pods ready
+Health check passed
+Deployment complete!`,
+    icon: "Server"
+  }
+};
+
+const trackIcons: Record<string, typeof Terminal> = {
+  "cli-commands": Terminal,
+  "plugins": Puzzle,
+  "ai-integrations": Brain,
+  "infra-tools": Layers
+};
+
+function BuildTracksShowcase() {
+  const [activeTrack, setActiveTrack] = useState(buildTracks[0].id);
+  const currentTrack = buildTracks.find(t => t.id === activeTrack) || buildTracks[0];
+  const visual = trackVisuals[activeTrack];
+  const Icon = trackIcons[activeTrack] || Terminal;
+
+  return (
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+      {/* Preview Panel */}
+      <motion.div
+        key={activeTrack}
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        className="relative"
+      >
+        <div className={`relative rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-xl overflow-hidden`}>
+          {/* Gradient overlay */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} pointer-events-none`} />
+          
+          {/* Animated orbs */}
+          <div className="absolute top-10 right-10 w-32 h-32 bg-current opacity-10 rounded-full blur-3xl" 
+               style={{ color: currentTrack.color.includes('emerald') ? '#10b981' : 
+                               currentTrack.color.includes('blue') ? '#3b82f6' : 
+                               currentTrack.color.includes('purple') ? '#a855f7' : '#eab308' }} />
+          <div className="absolute bottom-10 left-10 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl"
+               style={{ color: currentTrack.color.includes('emerald') ? '#10b981' : 
+                               currentTrack.color.includes('blue') ? '#3b82f6' : 
+                               currentTrack.color.includes('purple') ? '#a855f7' : '#eab308' }} />
+          
+          {/* Terminal header */}
+          <div className="relative z-10 flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-black/30">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            </div>
+            <span className="text-xs text-gray-500 font-mono ml-2">cortex-terminal</span>
+          </div>
+          
+          {/* Code content */}
+          <div className="relative z-10 p-6">
+            <pre className="font-mono text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">
+              <AnimatePresence mode="wait">
+                <motion.code
+                  key={activeTrack}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {visual.snippet}
+                </motion.code>
+              </AnimatePresence>
+            </pre>
+          </div>
+          
+          {/* Bottom info bar */}
+          <div className="relative z-10 flex items-center justify-between px-4 py-3 border-t border-white/10 bg-black/20">
+            <div className="flex items-center gap-2">
+              <Icon className={currentTrack.color} size={16} />
+              <span className="text-xs text-gray-400">{currentTrack.title}</span>
+            </div>
+            <span className={`text-xs px-2 py-0.5 rounded-full ${
+              currentTrack.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
+              currentTrack.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300" :
+              "bg-purple-500/20 text-purple-400"
+            }`}>
+              {currentTrack.difficulty}
+            </span>
+          </div>
+        </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-white/5 rounded-2xl -z-10" />
+        <div className="absolute -top-4 -left-4 w-16 h-16 border border-white/5 rounded-xl -z-10" />
+      </motion.div>
+      
+      {/* Track Navigator */}
+      <div className="space-y-4">
+        {buildTracks.map((track, index) => {
+          const TrackIcon = trackIcons[track.id] || Terminal;
+          const isActive = track.id === activeTrack;
+          
+          return (
+            <motion.button
+              key={track.id}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setActiveTrack(track.id)}
+              data-testid={`track-tab-${track.id}`}
+              className={`w-full text-left p-5 rounded-xl border transition-all ${
+                isActive 
+                  ? `bg-gradient-to-r ${
+                      track.id === "cli-commands" ? "from-emerald-500/10 to-transparent border-emerald-500/30" :
+                      track.id === "plugins" ? "from-blue-500/10 to-transparent border-blue-500/30" :
+                      track.id === "ai-integrations" ? "from-purple-500/10 to-transparent border-purple-500/30" :
+                      "from-yellow-500/10 to-transparent border-yellow-500/30"
+                    }`
+                  : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
+              }`}
+            >
+              <div className="flex items-start gap-4">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${
+                  isActive 
+                    ? track.color.replace('text-', 'bg-').replace('-400', '-500/20').replace('-300', '-500/20')
+                    : "bg-white/10"
+                }`}>
+                  <TrackIcon className={isActive ? track.color : "text-gray-400"} size={24} />
+                </div>
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className={`font-bold ${isActive ? "text-white" : "text-gray-300"}`}>
+                      {track.title}
+                    </h3>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${
+                      track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
+                      track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300" :
+                      "bg-purple-500/20 text-purple-400"
+                    }`}>
+                      {track.difficulty}
+                    </span>
+                  </div>
+                  <p className={`text-sm ${isActive ? "text-gray-300" : "text-gray-500"} line-clamp-2`}>
+                    {track.description}
+                  </p>
+                  
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="mt-3 pt-3 border-t border-white/10"
+                    >
+                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Example Projects</p>
+                      <div className="flex flex-wrap gap-2">
+                        {track.examples.slice(0, 3).map((example, i) => (
+                          <span 
+                            key={i}
+                            className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10"
+                          >
+                            {example}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+                
+                <ArrowRight 
+                  className={`flex-shrink-0 transition-all ${
+                    isActive ? `${track.color} translate-x-1` : "text-gray-600"
+                  }`} 
+                  size={20} 
+                />
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function TeamAccordion() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
@@ -1443,69 +1666,7 @@ export default function Hackathon() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-5">
-            {buildTracks.map((track, index) => {
-              const Icon = trackIcons[track.id] || Terminal;
-              const spanClasses = 
-                track.id === "cli-commands" ? "lg:col-span-3 lg:row-span-2" :
-                track.id === "plugins" ? "lg:col-span-3" :
-                track.id === "ai-integrations" ? "lg:col-span-3" :
-                "lg:col-span-6";
-              const isLarge = track.id === "cli-commands";
-              const isFullWidth = track.id === "infra-tools";
-              
-              return (
-                <motion.div
-                  key={track.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  data-testid={`track-${track.id}`}
-                  className={`${spanClasses} bg-gradient-to-br ${
-                    track.id === "cli-commands" ? "from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/20" :
-                    track.id === "plugins" ? "from-blue-500/10 via-blue-500/5 to-transparent border-blue-500/20" :
-                    track.id === "ai-integrations" ? "from-purple-500/10 via-purple-500/5 to-transparent border-purple-500/20" :
-                    "from-yellow-500/10 via-yellow-500/5 to-transparent border-yellow-500/20"
-                  } border rounded-2xl p-6 hover:bg-white/5 transition-all group`}
-                >
-                  <div className={`flex ${isFullWidth ? "flex-col sm:flex-row sm:items-start gap-6" : "flex-col"}`}>
-                    <div className={`flex-shrink-0 ${isFullWidth ? "" : ""}`}>
-                      <div className={`${isLarge ? "w-16 h-16" : "w-12 h-12"} rounded-xl ${track.color.replace('text-', 'bg-').replace('-400', '-500/20').replace('-300', '-500/20')} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className={track.color} size={isLarge ? 32 : 24} />
-                      </div>
-                      <div className="mb-3">
-                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
-                          track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" :
-                          track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" :
-                          "bg-purple-500/20 text-purple-400 border border-purple-500/30"
-                        }`}>
-                          {track.difficulty}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h3 className={`${isLarge ? "text-xl" : "text-lg"} font-bold text-white mb-2`}>{track.title}</h3>
-                      <p className={`${isLarge ? "text-base" : "text-sm"} text-gray-400 mb-4`}>{track.description}</p>
-                      
-                      <div>
-                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Examples</h4>
-                        <ul className={`${isFullWidth ? "grid sm:grid-cols-3 gap-2" : "space-y-1.5"}`}>
-                          {track.examples.map((example, i) => (
-                            <li key={i} className={`${isLarge ? "text-sm" : "text-xs"} text-gray-400 flex items-start gap-2`}>
-                              <span className={`${track.color} mt-0.5`}>•</span>
-                              {example}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+          <BuildTracksShowcase />
         </div>
       </section>
       {/* Category Prize Awards Section */}
