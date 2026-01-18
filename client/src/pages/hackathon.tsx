@@ -1096,7 +1096,7 @@ export default function Hackathon() {
             transition={{ delay: 0.25 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 17, 2026 · 17-Week Program · Two Phases
+            February 17, 2026 · 13-Week Program · Two Phases
           </motion.p>
 
           {/* Description */}
@@ -1183,7 +1183,7 @@ export default function Hackathon() {
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
               <Trophy size={16} className="text-yellow-400" />
-              <span className="text-terminal-green font-semibold">$15,000</span> in Prizes
+              <span className="text-terminal-green font-semibold">$18,700</span> in Prizes
             </span>
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
@@ -1531,7 +1531,7 @@ export default function Hackathon() {
               Program Roadmap
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              17-Week <span className="gradient-text">Program Timeline</span>
+              13-Week <span className="gradient-text">Program Timeline</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               Clear milestones from start to finish. Know exactly what happens and when.
@@ -1562,13 +1562,13 @@ export default function Hackathon() {
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Submit monetizable feature ideas. No coding required.</p>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-terminal-green font-semibold">$3,000 in prizes</span>
+                    <span className="text-terminal-green font-semibold">$3,800 in prizes</span>
                     <span className="text-gray-500">Top 30 ideas win</span>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Week 5-8: Break */}
+              {/* Week 5-9: Build Sprint */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -1576,35 +1576,14 @@ export default function Hackathon() {
                 transition={{ delay: 0.1 }}
                 className="flex gap-4 sm:gap-6"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  5-8
-                </div>
-                <div className="flex-1 bg-gray-500/10 border border-gray-500/30 rounded-xl p-5 border-dashed">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock size={18} className="text-gray-400" />
-                    <h3 className="font-bold text-gray-300">1-Month Break</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-gray-500/20 text-gray-400">Weeks 5-8</span>
-                  </div>
-                  <p className="text-sm text-gray-500">Prepare for Phase 2. Review winning ideas. Form teams.</p>
-                </div>
-              </motion.div>
-
-              {/* Week 9-13: Build Sprint */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex gap-4 sm:gap-6"
-              >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  9-13
+                  5-9
                 </div>
                 <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Code2 size={18} className="text-blue-300" />
                     <h3 className="font-bold text-white">Phase 2: Build Sprint</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 9-13</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 5-9</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code and submit Pull Requests. Build real features.</p>
                   <div className="flex items-center gap-4 text-sm">
@@ -1614,27 +1593,27 @@ export default function Hackathon() {
                 </div>
               </motion.div>
 
-              {/* Week 14-17: Review Period */}
+              {/* Week 10-13: Review Period */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.2 }}
                 className="flex gap-4 sm:gap-6"
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  14-17
+                  10-13
                 </div>
                 <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 size={18} className="text-emerald-400" />
                     <h3 className="font-bold text-white">Review & Winners</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 14-17</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-13</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
                   <div className="flex items-center gap-4 text-sm flex-wrap">
-                    <span className="text-terminal-green font-semibold">$12,000 in prizes</span>
-                    <span className="text-gray-500">1st: $6K, 2nd: $3.5K, 3rd: $2.5K</span>
+                    <span className="text-terminal-green font-semibold">$10K cash + $4.9K worth of prizes</span>
+                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K | 4th-10th: $700 worth of goodies + 2 months managed service</span>
                   </div>
                 </div>
               </motion.div>
@@ -1927,122 +1906,10 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
-          {/* Phase Details - Full Information */}
-          <div className="space-y-16">
+          {/* Phase Cards Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
             {hackathonPhases.map((phase, index) => (
-              <motion.div
-                key={phase.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative"
-              >
-                {/* Phase Header */}
-                <div className={`border-l-4 ${phase.number === 1 ? "border-blue-500" : "border-purple-500"} pl-6 mb-8`}>
-                  <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <span className={`text-sm font-semibold uppercase tracking-wider ${phase.color}`}>
-                      Stage {phase.number}
-                    </span>
-                    <span className="text-gray-600">|</span>
-                    <span className="text-sm text-gray-400">{phase.weeks}</span>
-                    <span className="text-gray-600">|</span>
-                    <span className="text-sm text-gray-400">{phase.duration}</span>
-                    {phase.prizeTotal && (
-                      <>
-                        <span className="text-gray-600">|</span>
-                        <span className="text-sm font-semibold text-terminal-green">{phase.prizeTotal}</span>
-                      </>
-                    )}
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{phase.title}</h3>
-                  <p className="text-lg text-gray-500 italic">Goal: {phase.goal}</p>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-300 text-base leading-relaxed mb-8 max-w-3xl">
-                  {phase.description}
-                </p>
-
-                {/* Content Grid */}
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  {/* Requirements or Activities */}
-                  {(phase.requirements || phase.activities) && (
-                    <div>
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
-                        <CheckCircle2 size={16} className={phase.color} />
-                        {phase.requirements ? "Requirements" : "Activities"}
-                      </h4>
-                      <ul className="space-y-3">
-                        {(phase.requirements || phase.activities || []).map((item, i) => (
-                          <li key={i} className="flex items-start gap-3 text-gray-400">
-                            <ArrowRight size={14} className={`mt-1 flex-shrink-0 ${phase.color}`} />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Prizes */}
-                  {phase.prizes && phase.prizes.length > 0 && (
-                    <div>
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
-                        <Trophy size={16} className="text-terminal-green" />
-                        Prize Breakdown
-                      </h4>
-                      <div className="space-y-2">
-                        {phase.prizes.map((prize, i) => (
-                          <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                            <span className="text-gray-400">{prize.place}</span>
-                            <span className="font-semibold text-terminal-green">{prize.amount}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Judging Criteria */}
-                {phase.criteria && phase.criteria.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
-                      <Star size={16} className="text-amber-400" />
-                      Judging Criteria
-                    </h4>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {phase.criteria.map((criterion, i) => (
-                        <div key={i} className="flex items-start gap-3">
-                          <span className={`text-sm font-bold ${phase.color} min-w-[40px]`}>{criterion.weight}</span>
-                          <div>
-                            <span className="text-white font-medium">{criterion.name}</span>
-                            <p className="text-sm text-gray-500">{criterion.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* CTA */}
-                {phase.cta && (
-                  <a
-                    href={phase.cta.href}
-                    target={phase.cta.external ? "_blank" : undefined}
-                    rel={phase.cta.external ? "noopener noreferrer" : undefined}
-                    className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${phase.color} hover:underline`}
-                    data-testid={`phase-${phase.id}-cta`}
-                  >
-                    {phase.cta.text}
-                    <ArrowRight size={16} />
-                  </a>
-                )}
-
-                {/* Divider between phases */}
-                {index < hackathonPhases.length - 1 && (
-                  <div className="mt-12 border-t border-white/10" />
-                )}
-              </motion.div>
+              <PhaseCard key={phase.id} phase={phase} index={index} />
             ))}
           </div>
         </div>

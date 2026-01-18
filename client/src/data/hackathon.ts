@@ -317,7 +317,7 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "build-sprint",
     number: 1,
     title: "Build Sprint",
-    weeks: "Weeks 9-13",
+    weeks: "Weeks 5-9",
     duration: "5 weeks",
     goal: "Ship real things",
     description: "The main event. Build a Cortex feature, plugin, extension, or integration based on Ideathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
@@ -332,11 +332,12 @@ export const hackathonPhases: HackathonPhase[] = [
       "Write tests for your code"
     ],
     prizes: [
-      { place: "1st Place", amount: "$6,000" },
-      { place: "2nd Place", amount: "$3,500" },
-      { place: "3rd Place", amount: "$2,500" }
+      { place: "1st Place", amount: "$5,000" },
+      { place: "2nd Place", amount: "$3,000" },
+      { place: "3rd Place", amount: "$2,000" },
+      { place: "4th-10th Place", amount: "$700 worth of goodies + 2 months managed service each" }
     ],
-    prizeTotal: "$12,000",
+    prizeTotal: "$10,000 cash + $4,900 worth in prizes",
     criteria: [
       { name: "Code Quality", weight: "30%", description: "Readability, structure, best practices" },
       { name: "Usefulness", weight: "25%", description: "Real-world value, problem solved" },
@@ -354,10 +355,10 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "review-period",
     number: 2,
     title: "Review Period",
-    weeks: "Weeks 14-17",
+    weeks: "Weeks 10-13",
     duration: "4 weeks",
     goal: "Code review & judging",
-    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 17.",
+    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 13.",
     color: "text-purple-400",
     bgGradient: "from-purple-500/10 to-transparent",
     borderColor: "border-purple-500/20",
@@ -488,10 +489,10 @@ export const hackathonConfig = {
   name: "The First AI Linux Hackathon Worldwide",
   tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
-  totalWeeks: 17,
-  totalPrizePool: "$15,000",
-  ideathonPrize: "$3,000",
-  buildSprintPrize: "$12,000",
+  totalWeeks: 14,
+  totalPrizePool: "$13,800 cash + $4,900 worth of prizes",
+  ideathonPrize: "$3,800",
+  buildSprintPrize: "$10,000 cash + $4,900 worth",
   expectedParticipants: "5,000+",
   expectedIdeas: "4000+",
   expectedPRs: "100+",
@@ -513,7 +514,7 @@ export const hackathonConfig = {
 export const hackathonFaqs = [
   {
     question: "What's the difference between Ideathon and Hackathon?",
-    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. After a 1-month break, Hackathon (Phase 2, Weeks 9-17) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
+    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-13) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
     question: "Do I need technical skills for the Ideathon?",
@@ -529,7 +530,7 @@ export const hackathonFaqs = [
   },
   {
     question: "What if my PR doesn't get merged during the hackathon?",
-    answer: "The Review Period (Weeks 14-17) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
+    answer: "The Review Period (Weeks 10-13) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
   },
   {
     question: "What do I need to participate?",
@@ -636,8 +637,8 @@ export const hackathonBenefits = [
     description: "Connect with 3,000+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $15,000 in Prizes",
-    description: "Real rewards for real contributions. $3,000 for Ideathon, $12,000 for Build Sprint. Plus maintainer roles and swag."
+    title: "Compete for $18,700 in Prizes",
+    description: "Real rewards for real contributions. $3,800 for Ideathon, $10,000 cash + $4,900 worth of goodies for Build Sprint. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",

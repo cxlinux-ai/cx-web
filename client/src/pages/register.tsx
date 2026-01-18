@@ -44,7 +44,7 @@ export default function Register() {
         >
           <div className="flex items-center gap-2 text-sm">
             <Trophy size={18} className="text-terminal-green" />
-            <span className="text-terminal-green font-semibold">$15,000</span>
+            <span className="text-terminal-green font-semibold">$18,700</span>
             <span className="text-gray-400">in Prizes</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
@@ -53,7 +53,7 @@ export default function Register() {
           </div>
           <div className="flex items-center gap-2 text-sm">
             <Calendar size={18} className="text-amber-400" />
-            <span className="text-gray-400">17-Week Program</span>
+            <span className="text-gray-400">13-Week Program</span>
           </div>
         </motion.div>
 

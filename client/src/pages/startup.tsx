@@ -787,7 +787,7 @@ export default function StartupPage() {
                 Cortex Linux Hackathon 2026
               </h2>
               <p className="text-xl text-gray-300 mb-6">
-                February 17 — 17 weeks — <span className="text-emerald-400 font-semibold">$15,000 in prizes</span>
+                February 17 — 14 weeks — <span className="text-emerald-400 font-semibold">$18,700 in prizes</span>
               </p>
               <Link
                 href="/hackathon"
