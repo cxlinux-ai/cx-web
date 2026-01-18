@@ -398,258 +398,6 @@ function useCountUp(target: number, duration: number = 2000, startOnView: boolea
   return { count, ref };
 }
 
-// Category Prizes Ribbon Configuration
-const ribbonConfigs = [
-  {
-    id: "best-plugin",
-    gradient: "bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-blue-700/90",
-    glowColor: "shadow-blue-500/30",
-    iconBg: "bg-gradient-to-br from-blue-400 to-blue-600",
-    badgeBg: "bg-blue-500/20 border-blue-400/40 text-blue-300",
-    accentColor: "text-blue-300",
-  },
-  {
-    id: "best-automation",
-    gradient: "bg-gradient-to-r from-emerald-600/90 via-emerald-500/80 to-emerald-700/90",
-    glowColor: "shadow-emerald-500/30",
-    iconBg: "bg-gradient-to-br from-emerald-400 to-emerald-600",
-    badgeBg: "bg-emerald-500/20 border-emerald-400/40 text-emerald-300",
-    accentColor: "text-emerald-300",
-  },
-  {
-    id: "best-enterprise",
-    gradient: "bg-gradient-to-r from-purple-600/90 via-purple-500/80 to-purple-700/90",
-    glowColor: "shadow-purple-500/30",
-    iconBg: "bg-gradient-to-br from-purple-400 to-purple-600",
-    badgeBg: "bg-purple-500/20 border-purple-400/40 text-purple-300",
-    accentColor: "text-purple-300",
-  },
-];
-
-function CategoryPrizesRibbonSection() {
-  const isMobile = useIsMobile();
-  const { count, ref: countRef } = useCountUp(3, 1500);
-
-  const iconMap: Record<string, typeof Trophy> = {
-    Puzzle,
-    Workflow,
-    Building2,
-    Heart,
-  };
-
-  return (
-    <div ref={countRef} data-testid="category-prizes-ribbon-container">
-      {/* Header with animated count */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-12"
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
-          <Crown size={16} />
-          Category Awards
-        </div>
-        
-        {/* Animated Count Header */}
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <motion.span
-            key={count}
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent"
-            data-testid="category-count-animated"
-          >
-            {count}
-          </motion.span>
-          <div className="text-left">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              Category
-            </h2>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              <span className="gradient-text">Awards</span>
-            </h2>
-          </div>
-        </div>
-        
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Win in your specialty and receive Cortex Linux Premium
-        </p>
-      </motion.div>
-
-      {/* Ribbons Container */}
-      <div className="relative">
-        {/* Desktop: Layered Ribbons */}
-        {!isMobile ? (
-          <div className="space-y-[-8px]" data-testid="ribbons-desktop">
-            {categoryPrizes.map((category, index) => {
-              const config = ribbonConfigs[index] || ribbonConfigs[0];
-              const Icon = iconMap[category.icon] || Trophy;
-              
-              return (
-                <motion.div
-                  key={category.id}
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15, type: "spring", stiffness: 100 }}
-                  whileHover={{ 
-                    y: -4, 
-                    scale: 1.01,
-                    transition: { duration: 0.2 } 
-                  }}
-                  className={`relative z-[${30 - index * 10}] group cursor-pointer`}
-                  style={{ zIndex: 30 - index * 10 }}
-                  data-testid={`ribbon-${category.id}`}
-                >
-                  {/* Ribbon Shadow/Depth */}
-                  <div className="absolute inset-0 bg-black/30 rounded-2xl blur-sm translate-y-2 group-hover:translate-y-3 group-hover:blur-md transition-all duration-300" />
-                  
-                  {/* Main Ribbon */}
-                  <div className={`relative ${config.gradient} rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300`}>
-                    {/* Metallic overlay effect */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
-                    
-                    {/* Ribbon Content */}
-                    <div className="relative flex items-center gap-4 sm:gap-6 p-5 sm:p-6">
-                      {/* Left: Medallion Icon with Glow */}
-                      <div className="relative flex-shrink-0">
-                        {/* Glow effect */}
-                        <div className={`absolute inset-0 ${config.iconBg} rounded-full blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-300`} />
-                        
-                        {/* Medallion */}
-                        <div className={`relative w-16 h-16 sm:w-20 sm:h-20 ${config.iconBg} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                          {/* Inner ring */}
-                          <div className="absolute inset-1 rounded-full border-2 border-white/20" />
-                          <Icon className="text-white drop-shadow-lg" size={32} />
-                        </div>
-                      </div>
-
-                      {/* Center: Title + Description */}
-                      <div className="flex-1 min-w-0">
-                        {/* Embossed Title Effect */}
-                        <h3 
-                          className="text-lg sm:text-xl font-bold text-white mb-1"
-                          style={{
-                            textShadow: "0 1px 0 rgba(255,255,255,0.2), 0 -1px 0 rgba(0,0,0,0.4)",
-                          }}
-                          data-testid={`ribbon-title-${category.id}`}
-                        >
-                          {category.title}
-                        </h3>
-                        <p className="text-sm text-white/70 line-clamp-2">
-                          {category.description}
-                        </p>
-                      </div>
-
-                      {/* Right: Prize Badge */}
-                      <div className="flex-shrink-0">
-                        <div 
-                          className={`px-4 py-2 rounded-full border ${config.badgeBg} backdrop-blur-sm font-semibold text-sm sm:text-base whitespace-nowrap`}
-                          data-testid={`ribbon-prize-${category.id}`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <Sparkles size={14} className={config.accentColor} />
-                            <span>{category.prize}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom highlight line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        ) : (
-          /* Mobile: Layered Ribbons (compact) - preserves visual layering */
-          <div className="space-y-[-4px]" data-testid="ribbons-mobile-layered">
-            {categoryPrizes.map((category, index) => {
-              const config = ribbonConfigs[index] || ribbonConfigs[0];
-              const Icon = iconMap[category.icon] || Trophy;
-              
-              return (
-                <motion.div
-                  key={category.id}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, type: "spring", stiffness: 120 }}
-                  className="relative"
-                  style={{ zIndex: 30 - index * 10 }}
-                  data-testid={`ribbon-mobile-${category.id}`}
-                >
-                  {/* Shadow for depth */}
-                  <div className="absolute inset-0 bg-black/25 rounded-xl blur-sm translate-y-1" />
-                  
-                  {/* Ribbon */}
-                  <div className={`relative ${config.gradient} rounded-xl overflow-hidden border border-white/10`}>
-                    {/* Metallic overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
-                    
-                    {/* Ribbon Content */}
-                    <div className="relative flex items-center gap-3 p-4">
-                      {/* Medallion Icon */}
-                      <div className="relative flex-shrink-0">
-                        <div className={`absolute inset-0 ${config.iconBg} rounded-full blur-md opacity-40`} />
-                        <div className={`relative w-12 h-12 ${config.iconBg} rounded-full flex items-center justify-center shadow-md`}>
-                          <div className="absolute inset-0.5 rounded-full border border-white/20" />
-                          <Icon className="text-white" size={22} />
-                        </div>
-                      </div>
-                      
-                      {/* Title + Description */}
-                      <div className="flex-1 min-w-0">
-                        <h3 
-                          className="text-sm font-bold text-white mb-0.5"
-                          style={{
-                            textShadow: "0 1px 0 rgba(255,255,255,0.2), 0 -1px 0 rgba(0,0,0,0.4)",
-                          }}
-                        >
-                          {category.title}
-                        </h3>
-                        <p className="text-xs text-white/60 line-clamp-1">
-                          {category.description}
-                        </p>
-                      </div>
-                      
-                      {/* Prize Chip */}
-                      <div 
-                        className={`flex-shrink-0 px-2.5 py-1 rounded-full border ${config.badgeBg} text-xs font-semibold whitespace-nowrap`}
-                      >
-                        <div className="flex items-center gap-1">
-                          <Sparkles size={10} className={config.accentColor} />
-                          <span>{category.prize.replace('Cortex Linux ', '')}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Bottom highlight */}
-                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Legal Footnote */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-center text-sm text-gray-500 mt-10 flex items-center justify-center gap-2"
-        data-testid="category-prizes-footnote"
-      >
-        <Award size={14} className="text-gray-600" />
-        Additional to main hackathon prizes
-      </motion.p>
-    </div>
-  );
-}
 
 function PhaseCinematicDeck() {
   const [activePhase, setActivePhase] = useState(0);
@@ -3306,11 +3054,69 @@ export default function Hackathon() {
           <BuildTracksShowcase />
         </div>
       </section>
-      {/* Category Prize Awards Section - Layered Ribbon System */}
+      {/* Category Prize Awards Section */}
       <section className="py-20 px-4 relative" data-testid="category-prizes-section">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-transparent to-blue-950/10 pointer-events-none" />
-        <div className="max-w-5xl mx-auto relative">
-          <CategoryPrizesRibbonSection />
+        <div className="max-w-6xl mx-auto relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <Crown size={16} />
+              Category Awards
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              More Ways to <span className="gradient-text">Win</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Separate from main prizes — win in your specialty and get Cortex Linux Premium
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {categoryPrizes.map((category, index) => {
+              const iconMap: Record<string, typeof Trophy> = {
+                Puzzle,
+                Workflow,
+                Building2,
+                Heart,
+              };
+              const Icon = iconMap[category.icon] || Trophy;
+              return (
+                <motion.div
+                  key={category.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`bg-white/5 backdrop-blur-sm border ${category.borderColor} rounded-2xl p-6 hover:bg-white/10 transition-all hover:scale-[1.02] group`}
+                  data-testid={`category-prize-${category.id}`}
+                >
+                  <div className={`w-14 h-14 rounded-xl ${category.color.replace('text-', 'bg-').replace('-400', '-500/20')} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <Icon className={category.color} size={28} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">{category.title}</h3>
+                  <p className="text-sm text-gray-400 mb-4">{category.description}</p>
+                  <div className="flex items-center gap-2 mt-auto">
+                    <Sparkles size={14} className={category.color} />
+                    <span className={`text-sm font-semibold ${category.color}`}>{category.prize}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-gray-500 mt-8"
+          >
+            Category winners are additional to main hackathon prizes — you can win both!
+          </motion.p>
         </div>
       </section>
       {/* Champion Ambassador Expanded Section */}
