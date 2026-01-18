@@ -102,7 +102,7 @@ const POST_HACKATHON_OPTIONS = [
 const PHASE_OPTIONS = [
   { value: "both", label: "Both phases", description: "Ideathon + Hackathon (recommended)" },
   { value: "phase1", label: "Phase 1 only", description: "Ideathon (Weeks 1-4)" },
-  { value: "phase2", label: "Phase 2 only", description: "Hackathon (Weeks 5-13)" },
+  { value: "phase2", label: "Phase 2 only", description: "Hackathon (Weeks 9-17)" },
 ];
 
 interface HackathonRegistrationFormProps {

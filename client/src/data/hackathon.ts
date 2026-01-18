@@ -235,6 +235,7 @@ export interface IdeathonPhase {
   weeks: string;
   duration: string;
   goal: string;
+  intermission?: string;
   description: string;
   color: string;
   bgGradient: string;
@@ -285,6 +286,7 @@ export const ideathonPhase: IdeathonPhase = {
   weeks: "Weeks 1-4",
   duration: "4 weeks",
   goal: "Generate monetizable feature ideas",
+  intermission: "Weeks 5-8: 1-Month Prep Period (Team Formation, Repository Setup, Mentor Briefings)",
   description: "Submit structured product ideas for monetizable features in Cortex Linux. Focus on enterprise services, premium integrations, and revenue-generating capabilities. No marketing or sales strategies—just actionable product ideas.",
   color: "text-amber-400",
   bgGradient: "from-amber-500/10 to-transparent",
@@ -317,7 +319,7 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "build-sprint",
     number: 1,
     title: "Build Sprint",
-    weeks: "Weeks 5-9",
+    weeks: "Weeks 9-13",
     duration: "5 weeks",
     goal: "Ship real things",
     description: "The main event. Build a Cortex feature, plugin, extension, or integration based on Ideathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
@@ -355,10 +357,10 @@ export const hackathonPhases: HackathonPhase[] = [
     id: "review-period",
     number: 2,
     title: "Review Period",
-    weeks: "Weeks 10-13",
+    weeks: "Weeks 14-17",
     duration: "4 weeks",
     goal: "Code review & judging",
-    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 13.",
+    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 17.",
     color: "text-purple-400",
     bgGradient: "from-purple-500/10 to-transparent",
     borderColor: "border-purple-500/20",
@@ -514,7 +516,7 @@ export const hackathonConfig = {
 export const hackathonFaqs = [
   {
     question: "What's the difference between Ideathon and Hackathon?",
-    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 5-13) is for building those ideas into real code. You can participate in both or just Phase 2 if you want to code from day one."
+    answer: "Ideathon (Phase 1, Weeks 1-4) is for submitting monetizable feature ideas using our structured template. Hackathon (Phase 2, Weeks 9-17) is for building those ideas into real code. There's a 1-month prep period (Weeks 5-8) for team formation and mentor briefings. You can participate in both or just Phase 2 if you want to code from day one."
   },
   {
     question: "Do I need technical skills for the Ideathon?",
@@ -530,7 +532,7 @@ export const hackathonFaqs = [
   },
   {
     question: "What if my PR doesn't get merged during the hackathon?",
-    answer: "The Review Period (Weeks 10-13) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
+    answer: "The Review Period (Weeks 14-17) is specifically for this. You'll work directly with maintainers to refine your code. Quality contributions will eventually merge."
   },
   {
     question: "What do I need to participate?",

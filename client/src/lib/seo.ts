@@ -219,7 +219,7 @@ export const seoConfigs = {
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: 'The First AI Linux Hackathon Worldwide',
-      description: 'The first-ever AI Linux Hackathon. A two-phase, 13-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas. Phase 2 (Hackathon, Weeks 5-13) builds real code via GitHub PRs. $13,800 cash + $4,900 worth of prizes. Free to participate, open to developers worldwide.',
+      description: 'The first-ever AI Linux Hackathon. A two-phase, 17-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas, followed by a 1-month prep period. Phase 2 (Hackathon, Weeks 9-17) builds real code via GitHub PRs. $13,800 cash + $4,900 worth of prizes. Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
       endDate: '2026-05-25',
       url: 'https://cortexlinux.com/hackathon',

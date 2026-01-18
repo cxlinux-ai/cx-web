@@ -159,6 +159,260 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+function Phase3DSlideshow() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  
+  return (
+    <div className="relative" style={{ perspective: "1200px" }}>
+      {/* 3D Slideshow Container */}
+      <div className="relative min-h-[600px] overflow-visible">
+        {hackathonPhases.map((phase, index) => {
+          const isActive = index === activeSlide;
+          const offset = index - activeSlide;
+          
+          return (
+            <motion.div
+              key={phase.id}
+              initial={false}
+              animate={{
+                rotateY: offset * 15,
+                x: offset * 120,
+                z: isActive ? 0 : -200,
+                opacity: isActive ? 1 : 0.3,
+                scale: isActive ? 1 : 0.85,
+              }}
+              transition={{
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              style={{
+                transformStyle: "preserve-3d",
+                position: index === 0 ? "relative" : "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+              }}
+              className={`${isActive ? "z-20 pointer-events-auto" : "z-10 pointer-events-none"}`}
+            >
+              {/* Glowing background effect */}
+              <div 
+                className={`absolute -inset-4 rounded-3xl blur-2xl transition-opacity duration-500 ${
+                  isActive ? "opacity-30" : "opacity-0"
+                }`}
+                style={{
+                  background: phase.id === "build-sprint" 
+                    ? "linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.2))"
+                    : "linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.2))"
+                }}
+              />
+              
+              {/* Main slide content */}
+              <div 
+                className={`relative bg-gradient-to-br ${phase.bgGradient} backdrop-blur-xl border ${phase.borderColor} rounded-3xl p-8 sm:p-10 shadow-2xl`}
+                style={{
+                  boxShadow: isActive 
+                    ? phase.id === "build-sprint"
+                      ? "0 25px 80px -20px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(255,255,255,0.05)"
+                      : "0 25px 80px -20px rgba(168, 85, 247, 0.4), 0 0 0 1px rgba(255,255,255,0.05)"
+                    : "none"
+                }}
+              >
+                {/* Phase header */}
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <motion.span 
+                      className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${phase.color} mb-3`}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <span className={`w-2 h-2 rounded-full ${phase.color.replace('text-', 'bg-')}`} />
+                      {phase.weeks}
+                    </motion.span>
+                    <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2">{phase.title}</h3>
+                    <p className="text-lg text-gray-400 italic">Goal: {phase.goal}</p>
+                  </div>
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${
+                    phase.id === "build-sprint" ? "from-blue-500 to-blue-600" : "from-purple-500 to-purple-600"
+                  } flex items-center justify-center shadow-lg`}>
+                    {phase.id === "build-sprint" ? (
+                      <Code2 size={32} className="text-white" />
+                    ) : (
+                      <CheckCircle2 size={32} className="text-white" />
+                    )}
+                  </div>
+                </div>
+                
+                {/* Description */}
+                <p className="text-gray-300 text-base leading-relaxed mb-8 max-w-3xl">
+                  {phase.description}
+                </p>
+                
+                {/* Content grid */}
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Left column */}
+                  <div className="space-y-6">
+                    {phase.requirements && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
+                          <Target size={16} className={phase.color} />
+                          Requirements
+                        </h4>
+                        <ul className="space-y-3">
+                          {phase.requirements.map((req, i) => (
+                            <motion.li 
+                              key={i} 
+                              className="flex items-start gap-3 text-gray-300"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
+                              transition={{ delay: 0.2 + i * 0.05 }}
+                            >
+                              <CheckCircle2 size={18} className={`${phase.color} flex-shrink-0 mt-0.5`} />
+                              <span>{req}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {phase.activities && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
+                          <Play size={16} className={phase.color} />
+                          Activities
+                        </h4>
+                        <ul className="space-y-3">
+                          {phase.activities.map((activity, i) => (
+                            <motion.li 
+                              key={i} 
+                              className="flex items-start gap-3 text-gray-300"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
+                              transition={{ delay: 0.2 + i * 0.05 }}
+                            >
+                              <Play size={16} className={`${phase.color} flex-shrink-0 mt-0.5`} />
+                              <span>{activity}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Right column */}
+                  <div className="space-y-6">
+                    {phase.prizes && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
+                          <Trophy size={16} className="text-terminal-green" />
+                          Prize Pool: <span className="text-terminal-green ml-1">{phase.prizeTotal}</span>
+                        </h4>
+                        <div className="space-y-2">
+                          {phase.prizes.map((prize, i) => (
+                            <motion.div 
+                              key={i} 
+                              className="flex justify-between items-center bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/5"
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              animate={{ opacity: isActive ? 1 : 0.5, scale: 1 }}
+                              transition={{ delay: 0.3 + i * 0.05 }}
+                            >
+                              <span className="text-gray-300">{prize.place}</span>
+                              <span className="text-terminal-green font-bold">{prize.amount}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {phase.criteria && (
+                      <div>
+                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4">
+                          Judging Criteria
+                        </h4>
+                        <div className="space-y-3">
+                          {phase.criteria.map((crit, i) => (
+                            <motion.div 
+                              key={i} 
+                              className="flex items-center gap-3"
+                              initial={{ opacity: 0, x: 10 }}
+                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
+                              transition={{ delay: 0.3 + i * 0.05 }}
+                            >
+                              <div className={`w-12 h-8 rounded-lg ${phase.color.replace('text-', 'bg-').replace('-300', '-500/20').replace('-400', '-500/20')} flex items-center justify-center`}>
+                                <span className={`${phase.color} font-mono text-sm font-bold`}>{crit.weight}</span>
+                              </div>
+                              <span className="text-gray-300">{crit.name}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* CTA */}
+                {phase.cta && (
+                  <motion.div 
+                    className="mt-8 pt-6 border-t border-white/10"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <a
+                      href={phase.cta.href}
+                      target={phase.cta.external ? "_blank" : undefined}
+                      rel={phase.cta.external ? "noopener noreferrer" : undefined}
+                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                        phase.id === "build-sprint"
+                          ? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25"
+                          : "bg-purple-500 hover:bg-purple-600 text-white shadow-lg shadow-purple-500/25"
+                      }`}
+                    >
+                      {phase.cta.text}
+                      <ArrowRight size={18} />
+                    </a>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+      
+      {/* Slide navigation */}
+      <div className="flex items-center justify-center gap-4 mt-8">
+        {hackathonPhases.map((phase, index) => (
+          <button
+            key={phase.id}
+            onClick={() => setActiveSlide(index)}
+            data-testid={`phase-nav-${phase.id}`}
+            className={`group relative px-6 py-3 rounded-xl transition-all duration-300 ${
+              index === activeSlide
+                ? `${phase.color.replace('text-', 'bg-').replace('-300', '-500').replace('-400', '-500')} text-white shadow-lg`
+                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              {phase.id === "build-sprint" ? (
+                <Code2 size={16} />
+              ) : (
+                <CheckCircle2 size={16} />
+              )}
+              <span className="font-medium">{phase.title}</span>
+            </span>
+            {index === activeSlide && (
+              <motion.div
+                layoutId="activePhaseIndicator"
+                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-white"
+              />
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function PhaseCard({ phase, index }: { phase: typeof hackathonPhases[0]; index: number }) {
   return (
     <motion.div
@@ -1096,7 +1350,7 @@ export default function Hackathon() {
             transition={{ delay: 0.25 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 17, 2026 · 13-Week Program · Two Phases
+            February 17, 2026 · 17-Week Program · Two Phases
           </motion.p>
 
           {/* Description */}
@@ -1483,7 +1737,7 @@ export default function Hackathon() {
                   <Code2 className="text-blue-300" size={28} />
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-wide text-blue-300 mb-2 block">
-                  Phase 2 · Weeks 5-14
+                  Phase 2 · Weeks 9-17
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                   Cortex Hackathon
@@ -1501,7 +1755,7 @@ export default function Hackathon() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-gray-400" />
-                    <span className="text-gray-400">10 weeks</span>
+                    <span className="text-gray-400">9 weeks</span>
                   </div>
                 </div>
                 <a
@@ -1531,7 +1785,7 @@ export default function Hackathon() {
               Program Roadmap
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              13-Week <span className="gradient-text">Program Timeline</span>
+              17-Week <span className="gradient-text">Program Timeline</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               Clear milestones from start to finish. Know exactly what happens and when.
@@ -1568,7 +1822,7 @@ export default function Hackathon() {
                 </div>
               </motion.div>
 
-              {/* Week 5-9: Build Sprint */}
+              {/* Week 5-8: Prep Period */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -1576,14 +1830,40 @@ export default function Hackathon() {
                 transition={{ delay: 0.1 }}
                 className="flex gap-4 sm:gap-6"
               >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
+                  5-8
+                </div>
+                <div className="flex-1 bg-white/5 border border-white/10 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Users size={18} className="text-gray-400" />
+                    <h3 className="font-bold text-white">Prep Period</h3>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-gray-400">Weeks 5-8</span>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-2">Form teams, set up repositories, attend mentor briefings.</p>
+                  <div className="flex items-center gap-4 text-sm flex-wrap">
+                    <span className="text-gray-400">Team Formation</span>
+                    <span className="text-gray-400">Repository Setup</span>
+                    <span className="text-gray-400">Mentor Sessions</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Week 9-13: Build Sprint */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex gap-4 sm:gap-6"
+              >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  5-9
+                  9-13
                 </div>
                 <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Code2 size={18} className="text-blue-300" />
                     <h3 className="font-bold text-white">Phase 2: Build Sprint</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 5-9</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 9-13</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code and submit Pull Requests. Build real features.</p>
                   <div className="flex items-center gap-4 text-sm">
@@ -1593,22 +1873,22 @@ export default function Hackathon() {
                 </div>
               </motion.div>
 
-              {/* Week 10-13: Review Period */}
+              {/* Week 14-17: Review Period */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
                 className="flex gap-4 sm:gap-6"
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  10-13
+                  14-17
                 </div>
                 <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 size={18} className="text-emerald-400" />
                     <h3 className="font-bold text-white">Review & Winners</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-13</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 14-17</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
                   <div className="flex items-center gap-4 text-sm flex-wrap">
@@ -1884,34 +2164,8 @@ export default function Hackathon() {
             </p>
           </motion.div>
 
-          {/* Timeline Visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 bg-white/5 border border-white/10 rounded-2xl p-6"
-          >
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {hackathonPhases.map((phase, i) => (
-                <div key={phase.id} className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded-full ${phase.color.replace('text-', 'bg-').replace('-400', '-500')}`} />
-                  <span className="text-sm text-gray-400">
-                    {phase.title}: {phase.duration}
-                  </span>
-                  {i < hackathonPhases.length - 1 && (
-                    <ArrowRight className="text-gray-600 hidden sm:block ml-2" size={16} />
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Phase Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {hackathonPhases.map((phase, index) => (
-              <PhaseCard key={phase.id} phase={phase} index={index} />
-            ))}
-          </div>
+          {/* 3D Phase Slideshow */}
+          <Phase3DSlideshow />
         </div>
       </section>
       {/* Build Tracks Section */}
