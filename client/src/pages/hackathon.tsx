@@ -1681,7 +1681,7 @@ export default function Hackathon() {
               Why Participate
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              What You <span className="text-blue-300">Get</span>
+              What You <span className="gradient-text">Get</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Beyond the prizes, you're building real skills, real connections, and real portfolio pieces.
@@ -1706,8 +1706,26 @@ export default function Hackathon() {
         </div>
       </section>
       {/* Referral Program - Unlock Rewards */}
-      <section className="py-16 px-4">
+      <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <Gift size={16} />
+              Referral Program
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Invite Friends, <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Earn Rewards</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Share your unique link and unlock exclusive perks as your network grows
+            </p>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1722,9 +1740,6 @@ export default function Hackathon() {
               <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center">
-                      <Gift size={24} className="text-purple-400" />
-                    </div>
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
                       <Users size={14} className="text-blue-300" />
                       <span className="text-sm text-gray-300">
