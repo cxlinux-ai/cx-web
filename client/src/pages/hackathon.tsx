@@ -42,8 +42,18 @@ import {
   Building2,
   Heart,
   Crown,
-  BarChart3,
-  TrendingUp,
+  FolderOpen,
+  Film,
+  Check,
+  GitBranch,
+  FileSearch,
+  AlertTriangle,
+  XCircle,
+  Server,
+  Box,
+  Upload,
+  RefreshCw,
+  Image,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -499,96 +509,239 @@ function BuildTracksShowcase() {
           </div>
         </div>
         
-        {/* Skills & Stats Visualization */}
+        {/* Track-Specific Illustration */}
         <motion.div
-          key={`stats-${activeTrack}`}
+          key={`illustration-${activeTrack}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
-          className="mt-6 grid grid-cols-2 gap-4"
+          className="mt-6"
         >
-          {/* Skills Bar Chart */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <BarChart3 size={14} className="text-gray-400" />
-              <span className="text-xs text-gray-400 uppercase tracking-wide">Skills Needed</span>
+          {activeTrack === "cli-commands" && (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <FolderOpen size={16} className="text-emerald-400" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">File Organization</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { name: "Photos", files: ["vacation.jpg", "selfie.png", "cat.gif"], color: "emerald", icon: Image },
+                  { name: "Documents", files: ["resume.pdf", "notes.txt", "report.docx"], color: "blue", icon: FileText },
+                  { name: "Videos", files: ["tutorial.mp4", "clip.mov"], color: "purple", icon: Film }
+                ].map((folder, folderIdx) => (
+                  <motion.div
+                    key={folder.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: folderIdx * 0.15 }}
+                    className={`relative p-3 rounded-lg bg-${folder.color}-500/10 border border-${folder.color}-500/20`}
+                  >
+                    <div className={`flex items-center gap-2 mb-2 text-${folder.color}-400`}>
+                      <folder.icon size={14} />
+                      <span className="text-xs font-medium">{folder.name}</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {folder.files.map((file, fileIdx) => (
+                        <motion.div
+                          key={file}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: folderIdx * 0.15 + fileIdx * 0.1 + 0.3 }}
+                          className="flex items-center gap-1.5 text-xs text-gray-400 bg-black/20 px-2 py-1 rounded"
+                        >
+                          <ArrowRight size={10} className={`text-${folder.color}-400`} />
+                          <span className="truncate">{file}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-center gap-2 text-xs text-gray-500">
+                <Check size={14} className="text-emerald-400" />
+                <span>7 files organized into 3 folders</span>
+              </div>
             </div>
-            <div className="space-y-3">
-              {visual.skills.map((skill, i) => (
-                <div key={skill.name}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-gray-300">{skill.name}</span>
-                    <span className="text-xs text-gray-500">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
-                      className={`h-full ${skill.color} rounded-full`}
-                    />
-                  </div>
+          )}
+
+          {activeTrack === "plugins" && (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Puzzle size={16} className="text-blue-400" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Plugin Architecture</span>
+              </div>
+              <div className="relative">
+                <div className="flex justify-center mb-4">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20"
+                  >
+                    <Terminal size={28} className="text-white" />
+                  </motion.div>
                 </div>
-              ))}
+                <div className="text-center text-xs text-gray-400 mb-4">Cortex Core</div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { name: "Security Scanner", status: "active", icon: Shield },
+                    { name: "Git Integration", status: "active", icon: GitBranch },
+                    { name: "Log Analyzer", status: "pending", icon: FileSearch }
+                  ].map((plugin, i) => (
+                    <motion.div
+                      key={plugin.name}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.12 + 0.3 }}
+                      className="relative"
+                    >
+                      <div className="absolute left-1/2 -top-4 w-px h-4 bg-gradient-to-b from-blue-500/50 to-transparent" />
+                      <div className={`p-3 rounded-lg border ${
+                        plugin.status === "active" 
+                          ? "bg-blue-500/10 border-blue-500/30" 
+                          : "bg-white/5 border-white/10"
+                      }`}>
+                        <plugin.icon size={16} className={plugin.status === "active" ? "text-blue-400 mx-auto mb-1.5" : "text-gray-500 mx-auto mb-1.5"} />
+                        <p className="text-xs text-center text-gray-300 leading-tight">{plugin.name}</p>
+                        <div className={`mt-2 text-center text-[10px] px-1.5 py-0.5 rounded-full ${
+                          plugin.status === "active" 
+                            ? "bg-emerald-500/20 text-emerald-400" 
+                            : "bg-amber-500/20 text-amber-400"
+                        }`}>
+                          {plugin.status}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-          
-          {/* Activity Graph (GitHub-style) */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <TrendingUp size={14} className="text-gray-400" />
-              <span className="text-xs text-gray-400 uppercase tracking-wide">Activity</span>
-            </div>
-            <div className="grid grid-cols-7 gap-1">
-              {Array.from({ length: 28 }).map((_, i) => {
-                const intensities = [0.1, 0.2, 0.35, 0.45, 0.55, 0.7, 0.85, 0.95];
-                const intensity = intensities[i % intensities.length];
-                const getColor = () => {
-                  if (currentTrack.color.includes('emerald')) {
-                    return intensity > 0.8 ? 'bg-emerald-500' :
-                           intensity > 0.5 ? 'bg-emerald-500/60' :
-                           intensity > 0.3 ? 'bg-emerald-500/30' : 'bg-white/10';
-                  } else if (currentTrack.color.includes('purple')) {
-                    return intensity > 0.8 ? 'bg-purple-500' :
-                           intensity > 0.5 ? 'bg-purple-500/60' :
-                           intensity > 0.3 ? 'bg-purple-500/30' : 'bg-white/10';
-                  } else if (currentTrack.color.includes('amber') || currentTrack.color.includes('yellow')) {
-                    return intensity > 0.8 ? 'bg-amber-500' :
-                           intensity > 0.5 ? 'bg-amber-500/60' :
-                           intensity > 0.3 ? 'bg-amber-500/30' : 'bg-white/10';
-                  }
-                  return intensity > 0.8 ? 'bg-blue-500' :
-                         intensity > 0.5 ? 'bg-blue-500/60' :
-                         intensity > 0.3 ? 'bg-blue-500/30' : 'bg-white/10';
-                };
-                return (
+          )}
+
+          {activeTrack === "ai-integrations" && (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Brain size={16} className="text-purple-400" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">AI Log Analysis</span>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { type: "critical", message: "SSL certificate expires in 7 days", icon: AlertTriangle },
+                  { type: "warning", message: "Rate limiting triggered 142 times", icon: Zap },
+                  { type: "error", message: "502 errors from upstream server", icon: XCircle }
+                ].map((issue, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.2, delay: i * 0.02 }}
-                    className={`aspect-square rounded-sm ${getColor()}`}
-                    title={`${Math.floor(intensity * 10)} contributions`}
-                  />
-                );
-              })}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.15 }}
+                    className={`flex items-start gap-3 p-3 rounded-lg ${
+                      issue.type === "critical" ? "bg-red-500/10 border border-red-500/20" :
+                      issue.type === "warning" ? "bg-amber-500/10 border border-amber-500/20" :
+                      "bg-orange-500/10 border border-orange-500/20"
+                    }`}
+                  >
+                    <issue.icon size={16} className={
+                      issue.type === "critical" ? "text-red-400 mt-0.5" :
+                      issue.type === "warning" ? "text-amber-400 mt-0.5" :
+                      "text-orange-400 mt-0.5"
+                    } />
+                    <div className="flex-1">
+                      <span className={`text-[10px] uppercase font-medium ${
+                        issue.type === "critical" ? "text-red-400" :
+                        issue.type === "warning" ? "text-amber-400" :
+                        "text-orange-400"
+                      }`}>{issue.type}</span>
+                      <p className="text-sm text-gray-300">{issue.message}</p>
+                    </div>
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ repeat: Infinity, duration: 2, delay: i * 0.5 }}
+                      className={`w-2 h-2 rounded-full ${
+                        issue.type === "critical" ? "bg-red-500" :
+                        issue.type === "warning" ? "bg-amber-500" :
+                        "bg-orange-500"
+                      }`}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                <span className="text-xs text-gray-500">Powered by Llama 3.1 8B</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                  <span className="text-xs text-purple-400">Analyzing...</span>
+                </div>
+              </div>
             </div>
-            {/* Stats row */}
-            <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
-              <div className="text-center">
-                <div className="text-lg font-bold text-white">{visual.stats.participants}</div>
-                <div className="text-xs text-gray-500">Participants</div>
+          )}
+
+          {activeTrack === "infra-tools" && (
+            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Server size={16} className="text-amber-400" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Deployment Pipeline</span>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-terminal-green">{visual.stats.avgScore}</div>
-                <div className="text-xs text-gray-500">Avg Score</div>
+              <div className="space-y-2">
+                {[
+                  { step: "Build", status: "complete", icon: Box },
+                  { step: "Push to Registry", status: "complete", icon: Upload },
+                  { step: "Update K8s", status: "complete", icon: RefreshCw },
+                  { step: "Health Check", status: "complete", icon: Check }
+                ].map((stage, i) => (
+                  <motion.div
+                    key={stage.step}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.2 }}
+                    className="flex items-center gap-3"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: i * 0.2 + 0.1 }}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        stage.status === "complete" 
+                          ? "bg-emerald-500/20" 
+                          : "bg-amber-500/20"
+                      }`}
+                    >
+                      <stage.icon size={14} className={
+                        stage.status === "complete" ? "text-emerald-400" : "text-amber-400"
+                      } />
+                    </motion.div>
+                    <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ delay: i * 0.2 + 0.2, duration: 0.4 }}
+                        className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
+                      />
+                    </div>
+                    <span className="text-xs text-gray-400 w-28">{stage.step}</span>
+                    <Check size={14} className="text-emerald-400" />
+                  </motion.div>
+                ))}
               </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-white">{visual.stats.submissions}</div>
-                <div className="text-xs text-gray-500">PRs</div>
+              <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center">
+                {[
+                  { label: "Pods", value: "3/3" },
+                  { label: "Version", value: "v2.1" },
+                  { label: "Status", value: "Healthy" }
+                ].map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 + i * 0.1 }}
+                    className="p-2 rounded-lg bg-black/20"
+                  >
+                    <div className="text-sm font-bold text-emerald-400">{stat.value}</div>
+                    <div className="text-[10px] text-gray-500">{stat.label}</div>
+                  </motion.div>
+                ))}
               </div>
             </div>
-          </div>
+          )}
         </motion.div>
         
         {/* Decorative elements */}
