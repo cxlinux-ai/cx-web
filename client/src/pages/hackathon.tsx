@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
   Github,
   Star,
@@ -54,7 +55,9 @@ import {
   Upload,
   RefreshCw,
   Image,
+  ExternalLink,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
@@ -159,255 +162,817 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-function Phase3DSlideshow() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  
+// Builder Pack Value Cycler - Kinetic Typography
+const builderPackValueProps = [
+  { text: "$5 Credit to Explore", icon: Zap },
+  { text: "Direct Access to Mentors", icon: MessageSquare },
+  { text: "Team Matching & Resources", icon: Users },
+];
+
+function BuilderPackValueCycler() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % builderPackValueProps.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative" style={{ perspective: "1200px" }}>
-      {/* 3D Slideshow Container */}
-      <div className="relative min-h-[600px] overflow-visible">
-        {hackathonPhases.map((phase, index) => {
-          const isActive = index === activeSlide;
-          const offset = index - activeSlide;
-          
-          return (
-            <motion.div
-              key={phase.id}
-              initial={false}
-              animate={{
-                rotateY: offset * 15,
-                x: offset * 120,
-                z: isActive ? 0 : -200,
-                opacity: isActive ? 1 : 0.3,
-                scale: isActive ? 1 : 0.85,
-              }}
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              style={{
-                transformStyle: "preserve-3d",
-                position: index === 0 ? "relative" : "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-              }}
-              className={`${isActive ? "z-20 pointer-events-auto" : "z-10 pointer-events-none"}`}
+    <div className="relative h-16 overflow-hidden" data-testid="builder-pack-value-cycler">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex items-center"
+        >
+          <div className="flex items-center gap-4 px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+            {(() => {
+              const IconComponent = builderPackValueProps[currentIndex].icon;
+              return <IconComponent size={24} className="text-cyan-400" />;
+            })()}
+            <motion.span 
+              className="text-xl sm:text-2xl font-semibold text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
             >
-              {/* Glowing background effect */}
-              <div 
-                className={`absolute -inset-4 rounded-3xl blur-2xl transition-opacity duration-500 ${
-                  isActive ? "opacity-30" : "opacity-0"
-                }`}
-                style={{
-                  background: phase.id === "build-sprint" 
-                    ? "linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.2))"
-                    : "linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.2))"
-                }}
-              />
-              
-              {/* Main slide content */}
-              <div 
-                className={`relative bg-gradient-to-br ${phase.bgGradient} backdrop-blur-xl border ${phase.borderColor} rounded-3xl p-8 sm:p-10 shadow-2xl`}
-                style={{
-                  boxShadow: isActive 
-                    ? phase.id === "build-sprint"
-                      ? "0 25px 80px -20px rgba(59, 130, 246, 0.4), 0 0 0 1px rgba(255,255,255,0.05)"
-                      : "0 25px 80px -20px rgba(168, 85, 247, 0.4), 0 0 0 1px rgba(255,255,255,0.05)"
-                    : "none"
-                }}
-              >
-                {/* Phase header */}
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <motion.span 
-                      className={`inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${phase.color} mb-3`}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <span className={`w-2 h-2 rounded-full ${phase.color.replace('text-', 'bg-')}`} />
-                      {phase.weeks}
-                    </motion.span>
-                    <h3 className="text-3xl sm:text-4xl font-bold text-white mb-2">{phase.title}</h3>
-                    <p className="text-lg text-gray-400 italic">Goal: {phase.goal}</p>
-                  </div>
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${
-                    phase.id === "build-sprint" ? "from-blue-500 to-blue-600" : "from-purple-500 to-purple-600"
-                  } flex items-center justify-center shadow-lg`}>
-                    {phase.id === "build-sprint" ? (
-                      <Code2 size={32} className="text-white" />
-                    ) : (
-                      <CheckCircle2 size={32} className="text-white" />
-                    )}
-                  </div>
-                </div>
-                
-                {/* Description */}
-                <p className="text-gray-300 text-base leading-relaxed mb-8 max-w-3xl">
-                  {phase.description}
-                </p>
-                
-                {/* Content grid */}
-                <div className="grid md:grid-cols-2 gap-8">
-                  {/* Left column */}
-                  <div className="space-y-6">
-                    {phase.requirements && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
-                          <Target size={16} className={phase.color} />
-                          Requirements
-                        </h4>
-                        <ul className="space-y-3">
-                          {phase.requirements.map((req, i) => (
-                            <motion.li 
-                              key={i} 
-                              className="flex items-start gap-3 text-gray-300"
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
-                              transition={{ delay: 0.2 + i * 0.05 }}
-                            >
-                              <CheckCircle2 size={18} className={`${phase.color} flex-shrink-0 mt-0.5`} />
-                              <span>{req}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    
-                    {phase.activities && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
-                          <Play size={16} className={phase.color} />
-                          Activities
-                        </h4>
-                        <ul className="space-y-3">
-                          {phase.activities.map((activity, i) => (
-                            <motion.li 
-                              key={i} 
-                              className="flex items-start gap-3 text-gray-300"
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
-                              transition={{ delay: 0.2 + i * 0.05 }}
-                            >
-                              <Play size={16} className={`${phase.color} flex-shrink-0 mt-0.5`} />
-                              <span>{activity}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Right column */}
-                  <div className="space-y-6">
-                    {phase.prizes && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4 flex items-center gap-2">
-                          <Trophy size={16} className="text-terminal-green" />
-                          Prize Pool: <span className="text-terminal-green ml-1">{phase.prizeTotal}</span>
-                        </h4>
-                        <div className="space-y-2">
-                          {phase.prizes.map((prize, i) => (
-                            <motion.div 
-                              key={i} 
-                              className="flex justify-between items-center bg-white/5 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/5"
-                              initial={{ opacity: 0, scale: 0.95 }}
-                              animate={{ opacity: isActive ? 1 : 0.5, scale: 1 }}
-                              transition={{ delay: 0.3 + i * 0.05 }}
-                            >
-                              <span className="text-gray-300">{prize.place}</span>
-                              <span className="text-terminal-green font-bold">{prize.amount}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    
-                    {phase.criteria && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-white uppercase tracking-wide mb-4">
-                          Judging Criteria
-                        </h4>
-                        <div className="space-y-3">
-                          {phase.criteria.map((crit, i) => (
-                            <motion.div 
-                              key={i} 
-                              className="flex items-center gap-3"
-                              initial={{ opacity: 0, x: 10 }}
-                              animate={{ opacity: isActive ? 1 : 0.5, x: 0 }}
-                              transition={{ delay: 0.3 + i * 0.05 }}
-                            >
-                              <div className={`w-12 h-8 rounded-lg ${phase.color.replace('text-', 'bg-').replace('-300', '-500/20').replace('-400', '-500/20')} flex items-center justify-center`}>
-                                <span className={`${phase.color} font-mono text-sm font-bold`}>{crit.weight}</span>
-                              </div>
-                              <span className="text-gray-300">{crit.name}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                {/* CTA */}
-                {phase.cta && (
-                  <motion.div 
-                    className="mt-8 pt-6 border-t border-white/10"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <a
-                      href={phase.cta.href}
-                      target={phase.cta.external ? "_blank" : undefined}
-                      rel={phase.cta.external ? "noopener noreferrer" : undefined}
-                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                        phase.id === "build-sprint"
-                          ? "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25"
-                          : "bg-purple-500 hover:bg-purple-600 text-white shadow-lg shadow-purple-500/25"
-                      }`}
-                    >
-                      {phase.cta.text}
-                      <ArrowRight size={18} />
-                    </a>
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
+              {builderPackValueProps[currentIndex].text.split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 * i, duration: 0.3 }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.span>
+          </div>
+        </motion.div>
+      </AnimatePresence>
       
-      {/* Slide navigation */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        {hackathonPhases.map((phase, index) => (
+      {/* Progress Indicators */}
+      <div className="absolute bottom-0 left-0 flex gap-2">
+        {builderPackValueProps.map((_, i) => (
           <button
-            key={phase.id}
-            onClick={() => setActiveSlide(index)}
-            data-testid={`phase-nav-${phase.id}`}
-            className={`group relative px-6 py-3 rounded-xl transition-all duration-300 ${
-              index === activeSlide
-                ? `${phase.color.replace('text-', 'bg-').replace('-300', '-500').replace('-400', '-500')} text-white shadow-lg`
-                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className={`h-1 rounded-full transition-all duration-300 ${
+              i === currentIndex ? "w-8 bg-cyan-400" : "w-2 bg-white/20 hover:bg-white/30"
             }`}
-          >
-            <span className="flex items-center gap-2">
-              {phase.id === "build-sprint" ? (
-                <Code2 size={16} />
-              ) : (
-                <CheckCircle2 size={16} />
-              )}
-              <span className="font-medium">{phase.title}</span>
-            </span>
-            {index === activeSlide && (
-              <motion.div
-                layoutId="activePhaseIndicator"
-                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-white"
-              />
-            )}
-          </button>
+            data-testid={`value-prop-indicator-${i}`}
+            aria-label={`View value proposition ${i + 1}`}
+          />
         ))}
+      </div>
+    </div>
+  );
+}
+
+// Builder Pack Glass Panel with Parallax
+interface BuilderPackPerk {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+function BuilderPackGlassPanel({ perks }: { perks: BuilderPackPerk[] }) {
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const prefersReducedMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+    
+    // Max 3 degrees rotation for subtle effect (reduced from 5)
+    const maxRotate = 3;
+    setRotateX((-mouseY / (rect.height / 2)) * maxRotate);
+    setRotateY((mouseX / (rect.width / 2)) * maxRotate);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case "Zap": return Zap;
+      case "MessageSquare": return MessageSquare;
+      case "BookOpen": return BookOpen;
+      case "Users": return Users;
+      default: return Gift;
+    }
+  };
+
+  return (
+    <motion.div
+      className="relative"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{
+        rotateX,
+        rotateY,
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      style={{ transformStyle: "preserve-3d" }}
+      data-testid="builder-pack-glass-panel"
+    >
+      {/* Gradient glow behind panel */}
+      <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-purple-500/20 rounded-3xl blur-2xl opacity-60" />
+      
+      {/* Main glass panel */}
+      <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            backgroundSize: "40px 40px"
+          }} />
+        </div>
+        
+        {/* Header */}
+        <div className="relative mb-6 pb-6 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center">
+              <Sparkles size={20} className="text-cyan-300" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">What&apos;s Included</h3>
+              <p className="text-sm text-gray-400">Free for all participants</p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Perks List */}
+        <div className="relative space-y-4" style={{ transform: "translateZ(10px)" }}>
+          {perks.map((perk, index) => {
+            const IconComponent = getIconComponent(perk.icon);
+            return (
+              <motion.div
+                key={perk.title}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-transparent hover:border-cyan-500/20 transition-all duration-300 group"
+                data-testid={`perk-item-${perk.title.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:from-cyan-500/30 group-hover:to-blue-500/30 transition-all duration-300">
+                  <IconComponent size={20} className="text-cyan-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300">
+                    {perk.title}
+                  </h4>
+                  <p className="text-sm text-gray-400 mt-0.5">{perk.description}</p>
+                </div>
+                <CheckCircle2 size={18} className="text-cyan-500/50 flex-shrink-0 mt-1" />
+              </motion.div>
+            );
+          })}
+        </div>
+        
+        {/* Bottom accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+      </div>
+    </motion.div>
+  );
+}
+
+// Animated Count-Up Hook
+function useCountUp(target: number, duration: number = 2000, startOnView: boolean = true) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(!startOnView);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * target));
+      
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [target, duration, hasStarted]);
+
+  useEffect(() => {
+    if (!startOnView || !ref.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [startOnView]);
+
+  return { count, ref };
+}
+
+// Category Prizes Ribbon Configuration
+const ribbonConfigs = [
+  {
+    id: "best-plugin",
+    gradient: "bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-blue-700/90",
+    glowColor: "shadow-blue-500/30",
+    iconBg: "bg-gradient-to-br from-blue-400 to-blue-600",
+    badgeBg: "bg-blue-500/20 border-blue-400/40 text-blue-300",
+    accentColor: "text-blue-300",
+  },
+  {
+    id: "best-automation",
+    gradient: "bg-gradient-to-r from-emerald-600/90 via-emerald-500/80 to-emerald-700/90",
+    glowColor: "shadow-emerald-500/30",
+    iconBg: "bg-gradient-to-br from-emerald-400 to-emerald-600",
+    badgeBg: "bg-emerald-500/20 border-emerald-400/40 text-emerald-300",
+    accentColor: "text-emerald-300",
+  },
+  {
+    id: "best-enterprise",
+    gradient: "bg-gradient-to-r from-purple-600/90 via-purple-500/80 to-purple-700/90",
+    glowColor: "shadow-purple-500/30",
+    iconBg: "bg-gradient-to-br from-purple-400 to-purple-600",
+    badgeBg: "bg-purple-500/20 border-purple-400/40 text-purple-300",
+    accentColor: "text-purple-300",
+  },
+];
+
+function CategoryPrizesRibbonSection() {
+  const isMobile = useIsMobile();
+  const { count, ref: countRef } = useCountUp(3, 1500);
+
+  const iconMap: Record<string, typeof Trophy> = {
+    Puzzle,
+    Workflow,
+    Building2,
+    Heart,
+  };
+
+  return (
+    <div ref={countRef} data-testid="category-prizes-ribbon-container">
+      {/* Header with animated count */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mb-12"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+          <Crown size={16} />
+          Category Awards
+        </div>
+        
+        {/* Animated Count Header */}
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <motion.span
+            key={count}
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent"
+            data-testid="category-count-animated"
+          >
+            {count}
+          </motion.span>
+          <div className="text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+              Category
+            </h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              <span className="gradient-text">Awards</span>
+            </h2>
+          </div>
+        </div>
+        
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Win in your specialty and receive Cortex Linux Premium
+        </p>
+      </motion.div>
+
+      {/* Ribbons Container */}
+      <div className="relative">
+        {/* Desktop: Layered Ribbons */}
+        {!isMobile ? (
+          <div className="space-y-[-8px]" data-testid="ribbons-desktop">
+            {categoryPrizes.map((category, index) => {
+              const config = ribbonConfigs[index] || ribbonConfigs[0];
+              const Icon = iconMap[category.icon] || Trophy;
+              
+              return (
+                <motion.div
+                  key={category.id}
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, type: "spring", stiffness: 100 }}
+                  whileHover={{ 
+                    y: -4, 
+                    scale: 1.01,
+                    transition: { duration: 0.2 } 
+                  }}
+                  className={`relative z-[${30 - index * 10}] group cursor-pointer`}
+                  style={{ zIndex: 30 - index * 10 }}
+                  data-testid={`ribbon-${category.id}`}
+                >
+                  {/* Ribbon Shadow/Depth */}
+                  <div className="absolute inset-0 bg-black/30 rounded-2xl blur-sm translate-y-2 group-hover:translate-y-3 group-hover:blur-md transition-all duration-300" />
+                  
+                  {/* Main Ribbon */}
+                  <div className={`relative ${config.gradient} rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300`}>
+                    {/* Metallic overlay effect */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
+                    
+                    {/* Ribbon Content */}
+                    <div className="relative flex items-center gap-4 sm:gap-6 p-5 sm:p-6">
+                      {/* Left: Medallion Icon with Glow */}
+                      <div className="relative flex-shrink-0">
+                        {/* Glow effect */}
+                        <div className={`absolute inset-0 ${config.iconBg} rounded-full blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-300`} />
+                        
+                        {/* Medallion */}
+                        <div className={`relative w-16 h-16 sm:w-20 sm:h-20 ${config.iconBg} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          {/* Inner ring */}
+                          <div className="absolute inset-1 rounded-full border-2 border-white/20" />
+                          <Icon className="text-white drop-shadow-lg" size={32} />
+                        </div>
+                      </div>
+
+                      {/* Center: Title + Description */}
+                      <div className="flex-1 min-w-0">
+                        {/* Embossed Title Effect */}
+                        <h3 
+                          className="text-lg sm:text-xl font-bold text-white mb-1"
+                          style={{
+                            textShadow: "0 1px 0 rgba(255,255,255,0.2), 0 -1px 0 rgba(0,0,0,0.4)",
+                          }}
+                          data-testid={`ribbon-title-${category.id}`}
+                        >
+                          {category.title}
+                        </h3>
+                        <p className="text-sm text-white/70 line-clamp-2">
+                          {category.description}
+                        </p>
+                      </div>
+
+                      {/* Right: Prize Badge */}
+                      <div className="flex-shrink-0">
+                        <div 
+                          className={`px-4 py-2 rounded-full border ${config.badgeBg} backdrop-blur-sm font-semibold text-sm sm:text-base whitespace-nowrap`}
+                          data-testid={`ribbon-prize-${category.id}`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <Sparkles size={14} className={config.accentColor} />
+                            <span>{category.prize}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom highlight line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
+          /* Mobile: Layered Ribbons (compact) - preserves visual layering */
+          <div className="space-y-[-4px]" data-testid="ribbons-mobile-layered">
+            {categoryPrizes.map((category, index) => {
+              const config = ribbonConfigs[index] || ribbonConfigs[0];
+              const Icon = iconMap[category.icon] || Trophy;
+              
+              return (
+                <motion.div
+                  key={category.id}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: "spring", stiffness: 120 }}
+                  className="relative"
+                  style={{ zIndex: 30 - index * 10 }}
+                  data-testid={`ribbon-mobile-${category.id}`}
+                >
+                  {/* Shadow for depth */}
+                  <div className="absolute inset-0 bg-black/25 rounded-xl blur-sm translate-y-1" />
+                  
+                  {/* Ribbon */}
+                  <div className={`relative ${config.gradient} rounded-xl overflow-hidden border border-white/10`}>
+                    {/* Metallic overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/20 pointer-events-none" />
+                    
+                    {/* Ribbon Content */}
+                    <div className="relative flex items-center gap-3 p-4">
+                      {/* Medallion Icon */}
+                      <div className="relative flex-shrink-0">
+                        <div className={`absolute inset-0 ${config.iconBg} rounded-full blur-md opacity-40`} />
+                        <div className={`relative w-12 h-12 ${config.iconBg} rounded-full flex items-center justify-center shadow-md`}>
+                          <div className="absolute inset-0.5 rounded-full border border-white/20" />
+                          <Icon className="text-white" size={22} />
+                        </div>
+                      </div>
+                      
+                      {/* Title + Description */}
+                      <div className="flex-1 min-w-0">
+                        <h3 
+                          className="text-sm font-bold text-white mb-0.5"
+                          style={{
+                            textShadow: "0 1px 0 rgba(255,255,255,0.2), 0 -1px 0 rgba(0,0,0,0.4)",
+                          }}
+                        >
+                          {category.title}
+                        </h3>
+                        <p className="text-xs text-white/60 line-clamp-1">
+                          {category.description}
+                        </p>
+                      </div>
+                      
+                      {/* Prize Chip */}
+                      <div 
+                        className={`flex-shrink-0 px-2.5 py-1 rounded-full border ${config.badgeBg} text-xs font-semibold whitespace-nowrap`}
+                      >
+                        <div className="flex items-center gap-1">
+                          <Sparkles size={10} className={config.accentColor} />
+                          <span>{category.prize.replace('Cortex Linux ', '')}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom highlight */}
+                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Legal Footnote */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="text-center text-sm text-gray-500 mt-10 flex items-center justify-center gap-2"
+        data-testid="category-prizes-footnote"
+      >
+        <Award size={14} className="text-gray-600" />
+        Additional to main hackathon prizes
+      </motion.p>
+    </div>
+  );
+}
+
+function PhaseCinematicDeck() {
+  const [activePhase, setActivePhase] = useState(0);
+  const buildSprint = hackathonPhases[0];
+  const reviewPeriod = hackathonPhases[1];
+
+  return (
+    <div className="relative">
+      {/* Timeline Scrubber */}
+      <div className="flex items-center justify-center gap-1 mb-12">
+        <div className="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
+          {hackathonPhases.map((phase, index) => (
+            <button
+              key={phase.id}
+              onClick={() => setActivePhase(index)}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft' && index > 0) setActivePhase(index - 1);
+                if (e.key === 'ArrowRight' && index < hackathonPhases.length - 1) setActivePhase(index + 1);
+              }}
+              data-testid={`phase-scrubber-${phase.id}`}
+              className={`relative px-8 py-3 rounded-full font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
+                index === activePhase
+                  ? "text-white"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              {index === activePhase && (
+                <motion.div
+                  layoutId="phaseActiveIndicator"
+                  className={`absolute inset-0 rounded-full ${
+                    phase.id === "build-sprint" 
+                      ? "bg-gradient-to-r from-blue-600 to-blue-500" 
+                      : "bg-gradient-to-r from-purple-600 to-purple-500"
+                  }`}
+                  transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-2">
+                {phase.id === "build-sprint" ? <Code2 size={16} /> : <CheckCircle2 size={16} />}
+                {phase.title}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Panel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activePhase}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {activePhase === 0 ? (
+            <BuildSprintPanel phase={buildSprint} />
+          ) : (
+            <ReviewPeriodPanel phase={reviewPeriod} />
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function BuildSprintPanel({ phase }: { phase: typeof hackathonPhases[0] }) {
+  return (
+    <div className="relative">
+      {/* Subtle gradient backdrop */}
+      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-blue-500/20 via-transparent to-purple-500/10 opacity-50" />
+      
+      <div className="relative bg-[#0a0f1a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+        {/* Header with timeline indicator */}
+        <div className="relative px-8 py-6 border-b border-white/5">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500 animate-pulse" />
+                <span className="text-blue-400 text-sm font-medium tracking-wide uppercase">{phase.weeks}</span>
+                <span className="text-gray-600 mx-2">|</span>
+                <span className="text-gray-400 text-sm">{phase.duration}</span>
+              </div>
+              <h3 className="text-3xl font-bold text-white">{phase.title}</h3>
+            </div>
+            <div className="hidden sm:flex items-center gap-3 px-5 py-3 rounded-2xl bg-terminal-green/10 border border-terminal-green/20">
+              <Trophy size={24} className="text-terminal-green" />
+              <div>
+                <span className="text-xs text-gray-400 block">Prize Pool</span>
+                <span className="text-xl font-bold text-terminal-green">{phase.prizeTotal}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid lg:grid-cols-3 gap-0">
+          {/* Overview Column */}
+          <div className="p-8 border-b lg:border-b-0 lg:border-r border-white/5">
+            <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-4">
+              <Target size={14} />
+              Overview
+            </div>
+            <p className="text-gray-300 leading-relaxed mb-6">{phase.description}</p>
+            
+            <h4 className="text-white font-semibold text-sm mb-3">Requirements</h4>
+            <ul className="space-y-2">
+              {phase.requirements?.map((req, i) => (
+                <motion.li 
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-start gap-2 text-sm text-gray-400"
+                >
+                  <CheckCircle2 size={14} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                  <span>{req}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Prizes Column */}
+          <div className="p-8 border-b lg:border-b-0 lg:border-r border-white/5">
+            <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-4">
+              <Trophy size={14} />
+              Prize Distribution
+            </div>
+            <div className="space-y-3">
+              {phase.prizes?.map((prize, i) => {
+                const isTop3 = i < 3;
+                const medals = ["bg-gradient-to-r from-yellow-500 to-amber-400", "bg-gradient-to-r from-gray-300 to-gray-400", "bg-gradient-to-r from-amber-600 to-amber-700"];
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className={`flex items-center justify-between p-4 rounded-xl ${
+                      isTop3 ? "bg-white/5 border border-white/10" : "bg-white/[0.02]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {isTop3 && (
+                        <div className={`w-8 h-8 rounded-full ${medals[i]} flex items-center justify-center text-black font-bold text-sm`}>
+                          {i + 1}
+                        </div>
+                      )}
+                      <span className={`${isTop3 ? "text-white font-medium" : "text-gray-400 text-sm"}`}>
+                        {prize.place}
+                      </span>
+                    </div>
+                    <span className={`font-bold ${isTop3 ? "text-terminal-green text-lg" : "text-terminal-green/70 text-sm"}`}>
+                      {prize.amount}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Judging Column */}
+          <div className="p-8">
+            <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-4">
+              <Star size={14} />
+              Judging Criteria
+            </div>
+            <div className="space-y-4">
+              {phase.criteria?.map((crit, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-white text-sm font-medium">{crit.name}</span>
+                    <span className="text-blue-400 font-mono text-sm font-bold">{crit.weight}</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: crit.weight }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + i * 0.1, duration: 0.8 }}
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {phase.cta && (
+              <Button
+                asChild
+                className="w-full mt-8 bg-blue-600 hover:bg-blue-700"
+              >
+                <a
+                  href={phase.cta.href}
+                  target={phase.cta.external ? "_blank" : undefined}
+                  rel={phase.cta.external ? "noopener noreferrer" : undefined}
+                  data-testid="build-sprint-cta"
+                >
+                  {phase.cta.text}
+                  <ArrowRight size={16} className="ml-2" />
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReviewPeriodPanel({ phase }: { phase: typeof hackathonPhases[0] }) {
+  return (
+    <div className="relative">
+      <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-purple-500/20 via-transparent to-pink-500/10 opacity-50" />
+      
+      <div className="relative bg-[#0a0f1a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden">
+        {/* Header */}
+        <div className="px-8 py-6 border-b border-white/5">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-3 h-3 rounded-full bg-purple-500" />
+                <span className="text-purple-400 text-sm font-medium tracking-wide uppercase">{phase.weeks}</span>
+                <span className="text-gray-600 mx-2">|</span>
+                <span className="text-gray-400 text-sm">{phase.duration}</span>
+              </div>
+              <h3 className="text-3xl font-bold text-white">{phase.title}</h3>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
+              <CheckCircle2 size={20} className="text-purple-400" />
+              <span className="text-purple-300 font-medium">Final Evaluation</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Two Column Layout */}
+        <div className="grid md:grid-cols-2 gap-0">
+          {/* Left: Description & Activities */}
+          <div className="p-8 border-b md:border-b-0 md:border-r border-white/5">
+            <p className="text-gray-300 leading-relaxed mb-8">{phase.description}</p>
+            
+            <h4 className="flex items-center gap-2 text-white font-semibold text-sm mb-4">
+              <Play size={14} className="text-purple-400" />
+              Review Activities
+            </h4>
+            <div className="space-y-4">
+              {phase.activities?.map((activity, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-purple-400 font-bold text-sm">{i + 1}</span>
+                  </div>
+                  <span className="text-gray-300">{activity}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Timeline Visual */}
+          <div className="p-8">
+            <h4 className="flex items-center gap-2 text-white font-semibold text-sm mb-6">
+              <Calendar size={14} className="text-purple-400" />
+              Review Timeline
+            </h4>
+            <div className="relative">
+              <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-purple-500/50 via-purple-500/20 to-transparent" />
+              <div className="space-y-6">
+                {[
+                  { week: "Week 14", title: "Submission Deadline", desc: "All PRs must be finalized" },
+                  { week: "Week 15", title: "Initial Review", desc: "Maintainer code review begins" },
+                  { week: "Week 16", title: "Refinement", desc: "Iteration with feedback" },
+                  { week: "Week 17", title: "Final Judging", desc: "Winners announced" },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="relative pl-10"
+                  >
+                    <div className="absolute left-2 top-1 w-4 h-4 rounded-full bg-purple-500/30 border-2 border-purple-500" />
+                    <div className="text-xs text-purple-400 font-medium mb-1">{item.week}</div>
+                    <div className="text-white font-medium">{item.title}</div>
+                    <div className="text-gray-500 text-sm">{item.desc}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {phase.cta && (
+              <Button
+                asChild
+                variant="outline"
+                className="w-full mt-8 border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+              >
+                <a
+                  href={phase.cta.href}
+                  target={phase.cta.external ? "_blank" : undefined}
+                  rel={phase.cta.external ? "noopener noreferrer" : undefined}
+                  data-testid="review-period-cta"
+                >
+                  {phase.cta.text}
+                  <ExternalLink size={16} className="ml-2" />
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -695,34 +1260,95 @@ function BuildTracksShowcase() {
   const currentTrack = buildTracks.find(t => t.id === activeTrack) || buildTracks[0];
   const visual = trackVisuals[activeTrack];
   const Icon = trackIcons[activeTrack] || Terminal;
+  
+  // Parallax motion values for hover effects
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Smooth spring-based transforms for parallax (5-8px range)
+  const parallaxX = useSpring(useTransform(mouseX, [-200, 200], [-6, 6]), { stiffness: 150, damping: 20 });
+  const parallaxY = useSpring(useTransform(mouseY, [-200, 200], [-6, 6]), { stiffness: 150, damping: 20 });
+  
+  // Deeper parallax for background layers
+  const deepParallaxX = useSpring(useTransform(mouseX, [-200, 200], [-8, 8]), { stiffness: 100, damping: 25 });
+  const deepParallaxY = useSpring(useTransform(mouseY, [-200, 200], [-8, 8]), { stiffness: 100, damping: 25 });
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+  
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+  
+  // Get track-specific color for glows
+  const getTrackColor = () => {
+    if (currentTrack.color.includes('emerald')) return '#10b981';
+    if (currentTrack.color.includes('blue')) return '#3b82f6';
+    if (currentTrack.color.includes('purple')) return '#a855f7';
+    return '#eab308';
+  };
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-      {/* Preview Panel */}
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12" data-testid="build-tracks-showcase">
+      {/* Preview Panel with Isometric 3D */}
       <motion.div
+        ref={containerRef}
         key={activeTrack}
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className="relative"
+        style={{ perspective: "1000px" }}
+        data-testid="track-preview-panel"
+        role="region"
+        aria-label={`${currentTrack.title} preview illustration`}
       >
-        <div className={`relative rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-xl overflow-hidden`}>
+        {/* Isometric Terminal Preview */}
+        <motion.div
+          className="relative rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-xl overflow-hidden"
+          style={{
+            transformStyle: "preserve-3d",
+            x: parallaxX,
+            y: parallaxY,
+          }}
+        >
           {/* Gradient overlay */}
           <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} pointer-events-none`} />
           
-          {/* Animated orbs */}
-          <div className="absolute top-10 right-10 w-32 h-32 bg-current opacity-10 rounded-full blur-3xl" 
-               style={{ color: currentTrack.color.includes('emerald') ? '#10b981' : 
-                               currentTrack.color.includes('blue') ? '#3b82f6' : 
-                               currentTrack.color.includes('purple') ? '#a855f7' : '#eab308' }} />
-          <div className="absolute bottom-10 left-10 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl"
-               style={{ color: currentTrack.color.includes('emerald') ? '#10b981' : 
-                               currentTrack.color.includes('blue') ? '#3b82f6' : 
-                               currentTrack.color.includes('purple') ? '#a855f7' : '#eab308' }} />
+          {/* Animated orbs with deeper parallax */}
+          <motion.div 
+            className="absolute top-10 right-10 w-32 h-32 bg-current opacity-10 rounded-full blur-3xl" 
+            style={{ 
+              color: getTrackColor(),
+              x: deepParallaxX,
+              y: deepParallaxY,
+            }}
+            aria-hidden="true"
+          />
+          <motion.div 
+            className="absolute bottom-10 left-10 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl"
+            style={{ 
+              color: getTrackColor(),
+              x: deepParallaxX,
+              y: deepParallaxY,
+            }}
+            aria-hidden="true"
+          />
           
           {/* Terminal header */}
           <div className="relative z-10 flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-black/30">
-            <div className="flex gap-1.5">
+            <div className="flex gap-1.5" role="img" aria-label="Terminal window controls">
               <div className="w-3 h-3 rounded-full bg-red-500/80" />
               <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
@@ -750,7 +1376,7 @@ function BuildTracksShowcase() {
           {/* Bottom info bar */}
           <div className="relative z-10 flex items-center justify-between px-4 py-3 border-t border-white/10 bg-black/20">
             <div className="flex items-center gap-2">
-              <Icon className={currentTrack.color} size={16} />
+              <Icon className={currentTrack.color} size={16} aria-hidden="true" />
               <span className="text-xs text-gray-400">{currentTrack.title}</span>
             </div>
             <span className={`text-xs px-2 py-0.5 rounded-full ${
@@ -761,246 +1387,515 @@ function BuildTracksShowcase() {
               {currentTrack.difficulty}
             </span>
           </div>
-        </div>
+        </motion.div>
         
-        {/* Track-Specific Illustration */}
+        {/* Isometric 3D Track Illustrations */}
         <motion.div
           key={`illustration-${activeTrack}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
           className="mt-6"
+          style={{ perspective: "1200px" }}
+          data-testid={`track-illustration-${activeTrack}`}
         >
+          {/* CLI Commands - Layered Terminal Windows */}
           {activeTrack === "cli-commands" && (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <motion.div 
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
+              style={{
+                transformStyle: "preserve-3d",
+                transform: "rotateX(12deg) rotateY(-12deg)",
+              }}
+              role="img"
+              aria-label="CLI Commands illustration showing layered terminal windows organizing files into folders"
+            >
+              {/* Glow effect behind */}
+              <div 
+                className="absolute -inset-4 bg-emerald-500/10 rounded-2xl blur-2xl -z-10"
+                aria-hidden="true"
+              />
+              
               <div className="flex items-center gap-2 mb-4">
-                <FolderOpen size={16} className="text-emerald-400" />
-                <span className="text-xs text-gray-400 uppercase tracking-wide">File Organization</span>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-emerald-400/30 blur-md rounded-full" aria-hidden="true" />
+                  <FolderOpen size={16} className="text-emerald-400 relative z-10" aria-hidden="true" />
+                </div>
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Layered Terminal Windows</span>
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              
+              {/* Stacked Terminal Windows with Z-depth */}
+              <div className="relative h-48" style={{ transformStyle: "preserve-3d" }}>
                 {[
-                  { name: "Photos", files: ["vacation.jpg", "selfie.png", "cat.gif"], color: "emerald", icon: Image },
-                  { name: "Documents", files: ["resume.pdf", "notes.txt", "report.docx"], color: "blue", icon: FileText },
-                  { name: "Videos", files: ["tutorial.mp4", "clip.mov"], color: "purple", icon: Film }
-                ].map((folder, folderIdx) => (
+                  { name: "Documents", files: ["resume.pdf", "notes.txt"], color: "blue", zOffset: 0, icon: FileText },
+                  { name: "Photos", files: ["vacation.jpg", "selfie.png"], color: "emerald", zOffset: 20, icon: Image },
+                  { name: "Videos", files: ["tutorial.mp4"], color: "purple", zOffset: 40, icon: Film }
+                ].map((window, windowIdx) => (
                   <motion.div
-                    key={folder.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: folderIdx * 0.15 }}
-                    className={`relative p-3 rounded-lg bg-${folder.color}-500/10 border border-${folder.color}-500/20`}
+                    key={window.name}
+                    initial={{ opacity: 0, y: 30, rotateX: -20 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ delay: windowIdx * 0.15, type: "spring", stiffness: 100 }}
+                    className="absolute inset-x-0"
+                    style={{
+                      transform: `translateZ(${window.zOffset}px) translateY(${windowIdx * 20}px)`,
+                      transformStyle: "preserve-3d",
+                      zIndex: 3 - windowIdx,
+                    }}
+                    data-testid={`cli-window-${window.name.toLowerCase()}`}
                   >
-                    <div className={`flex items-center gap-2 mb-2 text-${folder.color}-400`}>
-                      <folder.icon size={14} />
-                      <span className="text-xs font-medium">{folder.name}</span>
-                    </div>
-                    <div className="space-y-1.5">
-                      {folder.files.map((file, fileIdx) => (
-                        <motion.div
-                          key={file}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: folderIdx * 0.15 + fileIdx * 0.1 + 0.3 }}
-                          className="flex items-center gap-1.5 text-xs text-gray-400 bg-black/20 px-2 py-1 rounded"
-                        >
-                          <ArrowRight size={10} className={`text-${folder.color}-400`} />
-                          <span className="truncate">{file}</span>
-                        </motion.div>
-                      ))}
-                    </div>
+                    <motion.div 
+                      className={`bg-slate-900/90 backdrop-blur border border-${window.color}-500/30 rounded-lg overflow-hidden shadow-lg`}
+                      style={{ x: parallaxX, y: parallaxY }}
+                    >
+                      {/* Window header */}
+                      <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-black/40">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                          <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                          <div className="w-2 h-2 rounded-full bg-green-500/60" />
+                        </div>
+                        <div className={`flex items-center gap-1.5 text-${window.color}-400`}>
+                          <window.icon size={12} aria-hidden="true" />
+                          <span className="text-xs font-medium">{window.name}</span>
+                        </div>
+                      </div>
+                      {/* Window content */}
+                      <div className="p-3 space-y-1.5">
+                        {window.files.map((file, fileIdx) => (
+                          <motion.div
+                            key={file}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: windowIdx * 0.15 + fileIdx * 0.1 + 0.3 }}
+                            className="flex items-center gap-2 text-xs text-gray-400 bg-black/30 px-2 py-1.5 rounded"
+                          >
+                            <ArrowRight size={10} className={`text-${window.color}-400`} aria-hidden="true" />
+                            <span className="truncate">{file}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
+              
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-center gap-2 text-xs text-gray-500">
-                <Check size={14} className="text-emerald-400" />
-                <span>7 files organized into 3 folders</span>
+                <Check size={14} className="text-emerald-400" aria-hidden="true" />
+                <span>5 files organized into 3 folders</span>
               </div>
-            </div>
+            </motion.div>
           )}
 
+          {/* Plugins - Stacked Modular Blocks/Puzzle Pieces */}
           {activeTrack === "plugins" && (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <motion.div 
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
+              style={{
+                transformStyle: "preserve-3d",
+                transform: "rotateX(12deg) rotateY(-12deg)",
+              }}
+              role="img"
+              aria-label="Plugins illustration showing stacked modular blocks connecting to Cortex Core"
+            >
+              {/* Glow effect behind */}
+              <div 
+                className="absolute -inset-4 bg-blue-500/10 rounded-2xl blur-2xl -z-10"
+                aria-hidden="true"
+              />
+              
               <div className="flex items-center gap-2 mb-4">
-                <Puzzle size={16} className="text-blue-400" />
-                <span className="text-xs text-gray-400 uppercase tracking-wide">Plugin Architecture</span>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-blue-400/30 blur-md rounded-full" aria-hidden="true" />
+                  <Puzzle size={16} className="text-blue-400 relative z-10" aria-hidden="true" />
+                </div>
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Modular Plugin Architecture</span>
               </div>
-              <div className="relative">
-                <div className="flex justify-center mb-4">
+              
+              <div className="relative" style={{ transformStyle: "preserve-3d" }}>
+                {/* Core block with glow */}
+                <div className="flex justify-center mb-6">
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20"
+                    initial={{ scale: 0, rotateY: -180 }}
+                    animate={{ scale: 1, rotateY: 0 }}
+                    transition={{ type: "spring", stiffness: 100 }}
+                    className="relative"
+                    style={{ 
+                      transformStyle: "preserve-3d",
+                      transform: "translateZ(30px)",
+                    }}
+                    data-testid="plugin-core-block"
                   >
-                    <Terminal size={28} className="text-white" />
+                    {/* Glow behind core */}
+                    <div className="absolute inset-0 bg-blue-500/40 blur-xl rounded-xl" aria-hidden="true" />
+                    <motion.div 
+                      className="relative w-20 h-20 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-blue-500/30 border border-blue-400/30"
+                      style={{ x: parallaxX, y: parallaxY }}
+                    >
+                      <Terminal size={32} className="text-white" aria-hidden="true" />
+                    </motion.div>
                   </motion.div>
                 </div>
                 <div className="text-center text-xs text-gray-400 mb-4">Cortex Core</div>
-                <div className="grid grid-cols-3 gap-3">
+                
+                {/* Stacked Plugin Blocks */}
+                <div className="grid grid-cols-3 gap-3" style={{ transformStyle: "preserve-3d" }}>
                   {[
-                    { name: "Security Scanner", status: "active", icon: Shield },
-                    { name: "Git Integration", status: "active", icon: GitBranch },
-                    { name: "Log Analyzer", status: "pending", icon: FileSearch }
+                    { name: "Security", status: "active", icon: Shield, zOffset: 20 },
+                    { name: "Git Tools", status: "active", icon: GitBranch, zOffset: 15 },
+                    { name: "Analytics", status: "pending", icon: FileSearch, zOffset: 10 }
                   ].map((plugin, i) => (
                     <motion.div
                       key={plugin.name}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.12 + 0.3 }}
+                      initial={{ opacity: 0, y: 30, rotateX: -30 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      transition={{ delay: i * 0.12 + 0.3, type: "spring" }}
                       className="relative"
+                      style={{
+                        transform: `translateZ(${plugin.zOffset}px)`,
+                        transformStyle: "preserve-3d",
+                      }}
+                      data-testid={`plugin-block-${plugin.name.toLowerCase().replace(' ', '-')}`}
                     >
-                      <div className="absolute left-1/2 -top-4 w-px h-4 bg-gradient-to-b from-blue-500/50 to-transparent" />
-                      <div className={`p-3 rounded-lg border ${
-                        plugin.status === "active" 
-                          ? "bg-blue-500/10 border-blue-500/30" 
-                          : "bg-white/5 border-white/10"
-                      }`}>
-                        <plugin.icon size={16} className={plugin.status === "active" ? "text-blue-400 mx-auto mb-1.5" : "text-gray-500 mx-auto mb-1.5"} />
-                        <p className="text-xs text-center text-gray-300 leading-tight">{plugin.name}</p>
-                        <div className={`mt-2 text-center text-[10px] px-1.5 py-0.5 rounded-full ${
+                      {/* Connection line with glow */}
+                      <div className="absolute left-1/2 -top-6 w-px h-6">
+                        <div className="absolute inset-0 bg-blue-500/50" aria-hidden="true" />
+                        <div className="absolute inset-0 bg-blue-400/30 blur-sm" aria-hidden="true" />
+                      </div>
+                      
+                      <motion.div 
+                        className={`p-4 rounded-xl border-2 backdrop-blur-sm ${
                           plugin.status === "active" 
-                            ? "bg-emerald-500/20 text-emerald-400" 
-                            : "bg-amber-500/20 text-amber-400"
+                            ? "bg-blue-500/15 border-blue-500/40 shadow-lg shadow-blue-500/10" 
+                            : "bg-white/5 border-white/20"
+                        }`}
+                        style={{ x: parallaxX, y: parallaxY }}
+                      >
+                        {/* Icon with glow */}
+                        <div className="relative flex justify-center mb-2">
+                          {plugin.status === "active" && (
+                            <div className="absolute inset-0 bg-blue-400/30 blur-lg rounded-full" aria-hidden="true" />
+                          )}
+                          <plugin.icon size={20} className={plugin.status === "active" ? "text-blue-400 relative z-10" : "text-gray-500 relative z-10"} aria-hidden="true" />
+                        </div>
+                        <p className="text-xs text-center text-gray-300 font-medium">{plugin.name}</p>
+                        <div className={`mt-2 text-center text-[10px] px-2 py-0.5 rounded-full ${
+                          plugin.status === "active" 
+                            ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" 
+                            : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
                         }`}>
                           {plugin.status}
                         </div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           )}
 
+          {/* AI Integrations - Neural Network Style Connections */}
           {activeTrack === "ai-integrations" && (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <motion.div 
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
+              style={{
+                transformStyle: "preserve-3d",
+                transform: "rotateX(12deg) rotateY(-12deg)",
+              }}
+              role="img"
+              aria-label="AI Integrations illustration showing neural network-style connections between AI nodes"
+            >
+              {/* Glow effect behind */}
+              <div 
+                className="absolute -inset-4 bg-purple-500/10 rounded-2xl blur-2xl -z-10"
+                aria-hidden="true"
+              />
+              
               <div className="flex items-center gap-2 mb-4">
-                <Brain size={16} className="text-purple-400" />
-                <span className="text-xs text-gray-400 uppercase tracking-wide">AI Log Analysis</span>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-purple-400/30 blur-md rounded-full" aria-hidden="true" />
+                  <Brain size={16} className="text-purple-400 relative z-10" aria-hidden="true" />
+                </div>
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Neural Network Connections</span>
               </div>
-              <div className="space-y-3">
-                {[
-                  { type: "critical", message: "SSL certificate expires in 7 days", icon: AlertTriangle },
-                  { type: "warning", message: "Rate limiting triggered 142 times", icon: Zap },
-                  { type: "error", message: "502 errors from upstream server", icon: XCircle }
-                ].map((issue, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.15 }}
-                    className={`flex items-start gap-3 p-3 rounded-lg ${
-                      issue.type === "critical" ? "bg-red-500/10 border border-red-500/20" :
-                      issue.type === "warning" ? "bg-amber-500/10 border border-amber-500/20" :
-                      "bg-orange-500/10 border border-orange-500/20"
-                    }`}
-                  >
-                    <issue.icon size={16} className={
-                      issue.type === "critical" ? "text-red-400 mt-0.5" :
-                      issue.type === "warning" ? "text-amber-400 mt-0.5" :
-                      "text-orange-400 mt-0.5"
-                    } />
-                    <div className="flex-1">
-                      <span className={`text-[10px] uppercase font-medium ${
-                        issue.type === "critical" ? "text-red-400" :
-                        issue.type === "warning" ? "text-amber-400" :
-                        "text-orange-400"
-                      }`}>{issue.type}</span>
-                      <p className="text-sm text-gray-300">{issue.message}</p>
-                    </div>
+              
+              {/* Neural Network Visualization */}
+              <div className="relative h-56" style={{ transformStyle: "preserve-3d" }} data-testid="ai-neural-network">
+                {/* SVG Connection Lines */}
+                <svg className="absolute inset-0 w-full h-full" style={{ transform: "translateZ(-10px)" }} aria-hidden="true">
+                  <defs>
+                    <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#a855f7" stopOpacity="0.6" />
+                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.3" />
+                    </linearGradient>
+                  </defs>
+                  {/* Connection paths */}
+                  <motion.path
+                    d="M80,40 Q140,80 200,60"
+                    stroke="url(#neuralGradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                  />
+                  <motion.path
+                    d="M80,40 Q120,100 200,120"
+                    stroke="url(#neuralGradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                  />
+                  <motion.path
+                    d="M80,120 Q140,100 200,60"
+                    stroke="url(#neuralGradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                  <motion.path
+                    d="M80,120 Q100,140 200,120"
+                    stroke="url(#neuralGradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1, delay: 0.6 }}
+                  />
+                </svg>
+                
+                {/* Input Layer */}
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 space-y-6" style={{ transform: "translateZ(20px)" }}>
+                  {[
+                    { icon: FileText, label: "Logs" },
+                    { icon: Server, label: "Metrics" }
+                  ].map((node, i) => (
                     <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ repeat: Infinity, duration: 2, delay: i * 0.5 }}
-                      className={`w-2 h-2 rounded-full ${
-                        issue.type === "critical" ? "bg-red-500" :
-                        issue.type === "warning" ? "bg-amber-500" :
-                        "bg-orange-500"
-                      }`}
-                    />
+                      key={node.label}
+                      initial={{ opacity: 0, scale: 0, x: -20 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      transition={{ delay: i * 0.15, type: "spring" }}
+                      className="relative"
+                      style={{ x: parallaxX, y: parallaxY }}
+                      data-testid={`ai-node-input-${node.label.toLowerCase()}`}
+                    >
+                      <div className="absolute inset-0 bg-purple-500/30 blur-lg rounded-full" aria-hidden="true" />
+                      <div className="relative w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center">
+                        <node.icon size={18} className="text-purple-400" aria-hidden="true" />
+                      </div>
+                      <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-gray-500 whitespace-nowrap">{node.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                {/* Hidden Layer - Central AI Brain */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                  style={{ 
+                    transform: "translateZ(40px) translateX(-50%) translateY(-50%)",
+                    x: parallaxX, 
+                    y: parallaxY 
+                  }}
+                  data-testid="ai-central-brain"
+                >
+                  <div className="absolute inset-0 bg-purple-500/40 blur-2xl rounded-full" aria-hidden="true" />
+                  <motion.div 
+                    className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-purple-500/40 border border-purple-400/40"
+                    animate={{ 
+                      boxShadow: ["0 0 20px rgba(168, 85, 247, 0.4)", "0 0 40px rgba(168, 85, 247, 0.6)", "0 0 20px rgba(168, 85, 247, 0.4)"]
+                    }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                  >
+                    <Brain size={28} className="text-white" aria-hidden="true" />
                   </motion.div>
-                ))}
-              </div>
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-gray-500">Powered by Llama 3.1 8B</span>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
-                  <span className="text-xs text-purple-400">Analyzing...</span>
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-purple-400 font-medium whitespace-nowrap">LLM Core</span>
+                </motion.div>
+                
+                {/* Output Layer */}
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 space-y-6" style={{ transform: "translateZ(20px)" }}>
+                  {[
+                    { icon: AlertTriangle, label: "Alerts", color: "amber" },
+                    { icon: Lightbulb, label: "Insights", color: "emerald" }
+                  ].map((node, i) => (
+                    <motion.div
+                      key={node.label}
+                      initial={{ opacity: 0, scale: 0, x: 20 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      transition={{ delay: 0.6 + i * 0.15, type: "spring" }}
+                      className="relative"
+                      style={{ x: parallaxX, y: parallaxY }}
+                      data-testid={`ai-node-output-${node.label.toLowerCase()}`}
+                    >
+                      <div className={`absolute inset-0 bg-${node.color}-500/30 blur-lg rounded-full`} aria-hidden="true" />
+                      <div className={`relative w-12 h-12 rounded-xl bg-${node.color}-500/20 border border-${node.color}-500/40 flex items-center justify-center`}>
+                        <node.icon size={18} className={`text-${node.color}-400`} aria-hidden="true" />
+                      </div>
+                      <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-gray-500 whitespace-nowrap">{node.label}</span>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            </div>
+              
+              <div className="mt-2 pt-3 border-t border-white/10 flex items-center justify-between">
+                <span className="text-xs text-gray-500">Powered by Llama 3.1 8B</span>
+                <div className="flex items-center gap-1.5">
+                  <motion.div 
+                    className="w-1.5 h-1.5 rounded-full bg-purple-500"
+                    animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    aria-hidden="true"
+                  />
+                  <span className="text-xs text-purple-400">Processing...</span>
+                </div>
+              </div>
+            </motion.div>
           )}
 
+          {/* Infra Tools - Pipeline/Deployment Stages */}
           {activeTrack === "infra-tools" && (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <motion.div 
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
+              style={{
+                transformStyle: "preserve-3d",
+                transform: "rotateX(12deg) rotateY(-12deg)",
+              }}
+              role="img"
+              aria-label="Infrastructure Tools illustration showing deployment pipeline stages"
+            >
+              {/* Glow effect behind */}
+              <div 
+                className="absolute -inset-4 bg-amber-500/10 rounded-2xl blur-2xl -z-10"
+                aria-hidden="true"
+              />
+              
               <div className="flex items-center gap-2 mb-4">
-                <Server size={16} className="text-amber-400" />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-amber-400/30 blur-md rounded-full" aria-hidden="true" />
+                  <Server size={16} className="text-amber-400 relative z-10" aria-hidden="true" />
+                </div>
                 <span className="text-xs text-gray-400 uppercase tracking-wide">Deployment Pipeline</span>
               </div>
-              <div className="space-y-2">
-                {[
-                  { step: "Build", status: "complete", icon: Box },
-                  { step: "Push to Registry", status: "complete", icon: Upload },
-                  { step: "Update K8s", status: "complete", icon: RefreshCw },
-                  { step: "Health Check", status: "complete", icon: Check }
-                ].map((stage, i) => (
-                  <motion.div
-                    key={stage.step}
-                    initial={{ opacity: 0, x: -15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.2 }}
-                    className="flex items-center gap-3"
-                  >
+              
+              {/* 3D Pipeline Stages */}
+              <div className="relative" style={{ transformStyle: "preserve-3d" }} data-testid="infra-pipeline">
+                <div className="space-y-3">
+                  {[
+                    { step: "Build", status: "complete", icon: Box, zOffset: 40 },
+                    { step: "Push Registry", status: "complete", icon: Upload, zOffset: 30 },
+                    { step: "Update K8s", status: "complete", icon: RefreshCw, zOffset: 20 },
+                    { step: "Health Check", status: "complete", icon: Check, zOffset: 10 }
+                  ].map((stage, i) => (
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: i * 0.2 + 0.1 }}
-                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                        stage.status === "complete" 
-                          ? "bg-emerald-500/20" 
-                          : "bg-amber-500/20"
-                      }`}
+                      key={stage.step}
+                      initial={{ opacity: 0, x: -30, rotateY: -20 }}
+                      animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                      transition={{ delay: i * 0.15, type: "spring", stiffness: 100 }}
+                      className="relative"
+                      style={{
+                        transform: `translateZ(${stage.zOffset}px)`,
+                        transformStyle: "preserve-3d",
+                      }}
+                      data-testid={`pipeline-stage-${stage.step.toLowerCase().replace(' ', '-')}`}
                     >
-                      <stage.icon size={14} className={
-                        stage.status === "complete" ? "text-emerald-400" : "text-amber-400"
-                      } />
+                      <motion.div 
+                        className="flex items-center gap-3 bg-slate-900/60 backdrop-blur rounded-xl p-3 border border-white/10"
+                        style={{ x: parallaxX, y: parallaxY }}
+                      >
+                        {/* Stage icon with glow */}
+                        <div className="relative">
+                          <div className={`absolute inset-0 ${stage.status === "complete" ? "bg-emerald-500/30" : "bg-amber-500/30"} blur-md rounded-lg`} aria-hidden="true" />
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: i * 0.15 + 0.1, type: "spring" }}
+                            className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
+                              stage.status === "complete" 
+                                ? "bg-emerald-500/20 border border-emerald-500/40" 
+                                : "bg-amber-500/20 border border-amber-500/40"
+                            }`}
+                          >
+                            <stage.icon size={18} className={
+                              stage.status === "complete" ? "text-emerald-400" : "text-amber-400"
+                            } aria-hidden="true" />
+                          </motion.div>
+                        </div>
+                        
+                        {/* Progress bar */}
+                        <div className="flex-1">
+                          <span className="text-sm text-gray-300 font-medium">{stage.step}</span>
+                          <div className="mt-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: "100%" }}
+                              transition={{ delay: i * 0.15 + 0.2, duration: 0.5 }}
+                              className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Status indicator */}
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: i * 0.15 + 0.4, type: "spring" }}
+                        >
+                          <Check size={18} className="text-emerald-400" aria-hidden="true" />
+                        </motion.div>
+                      </motion.div>
+                      
+                      {/* Connector line */}
+                      {i < 3 && (
+                        <div className="absolute left-6 top-full w-px h-3 bg-gradient-to-b from-emerald-500/50 to-transparent" aria-hidden="true" />
+                      )}
                     </motion.div>
-                    <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        transition={{ delay: i * 0.2 + 0.2, duration: 0.4 }}
-                        className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
-                      />
-                    </div>
-                    <span className="text-xs text-gray-400 w-28">{stage.step}</span>
-                    <Check size={14} className="text-emerald-400" />
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
               </div>
-              <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center">
+              
+              {/* Stats Footer */}
+              <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center" style={{ transform: "translateZ(5px)" }}>
                 {[
-                  { label: "Pods", value: "3/3" },
-                  { label: "Version", value: "v2.1" },
-                  { label: "Status", value: "Healthy" }
+                  { label: "Pods", value: "3/3", color: "emerald" },
+                  { label: "Version", value: "v2.1", color: "blue" },
+                  { label: "Status", value: "Healthy", color: "emerald" }
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 + i * 0.1 }}
-                    className="p-2 rounded-lg bg-black/20"
+                    className="relative p-2 rounded-lg bg-black/30 border border-white/5"
+                    style={{ x: parallaxX, y: parallaxY }}
+                    data-testid={`pipeline-stat-${stat.label.toLowerCase()}`}
                   >
-                    <div className="text-sm font-bold text-emerald-400">{stat.value}</div>
-                    <div className="text-[10px] text-gray-500">{stat.label}</div>
+                    <div className={`absolute inset-0 bg-${stat.color}-500/5 rounded-lg`} aria-hidden="true" />
+                    <div className={`text-sm font-bold text-${stat.color}-400 relative z-10`}>{stat.value}</div>
+                    <div className="text-[10px] text-gray-500 relative z-10">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
         </motion.div>
         
-        {/* Decorative elements */}
-        <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-white/5 rounded-2xl -z-10" />
-        <div className="absolute -top-4 -left-4 w-16 h-16 border border-white/5 rounded-xl -z-10" />
+        {/* Decorative elements with depth */}
+        <motion.div 
+          className="absolute -bottom-4 -right-4 w-24 h-24 border border-white/5 rounded-2xl -z-10" 
+          style={{ x: deepParallaxX, y: deepParallaxY }}
+          aria-hidden="true"
+        />
+        <motion.div 
+          className="absolute -top-4 -left-4 w-16 h-16 border border-white/5 rounded-xl -z-10" 
+          style={{ x: deepParallaxX, y: deepParallaxY }}
+          aria-hidden="true"
+        />
       </motion.div>
       
       {/* Track Navigator */}
@@ -1263,6 +2158,237 @@ function TeamMemberCard({
         </div>
       </motion.div>
     </motion.div>
+  );
+}
+
+const journeyMilestones = [
+  {
+    id: "contracts",
+    icon: GitPullRequest,
+    headline: "Long-term Contracts",
+    description: "Outstanding contributors may be considered for ongoing development contracts with Cortex Linux",
+    tag: "Career Opportunity",
+    gradient: "from-terminal-green/20 to-emerald-900/10",
+    borderColor: "border-terminal-green/30",
+    iconBg: "bg-terminal-green/20",
+    iconColor: "text-terminal-green",
+    tagBg: "bg-terminal-green/10",
+    tagColor: "text-terminal-green",
+  },
+  {
+    id: "relationships",
+    icon: Users,
+    headline: "Ongoing Relationships",
+    description: "Join our inner circle of contributors with direct access to the core team and roadmap discussions",
+    tag: "Community Access",
+    gradient: "from-blue-500/20 to-blue-900/10",
+    borderColor: "border-blue-500/30",
+    iconBg: "bg-blue-500/20",
+    iconColor: "text-blue-400",
+    tagBg: "bg-blue-500/10",
+    tagColor: "text-blue-400",
+  },
+  {
+    id: "collaborations",
+    icon: Rocket,
+    headline: "Future Collaborations",
+    description: "Be first in line for future projects, beta features, and collaborative opportunities",
+    tag: "Early Access",
+    gradient: "from-purple-500/20 to-purple-900/10",
+    borderColor: "border-purple-500/30",
+    iconBg: "bg-purple-500/20",
+    iconColor: "text-purple-400",
+    tagBg: "bg-purple-500/10",
+    tagColor: "text-purple-400",
+  },
+  {
+    id: "recognition",
+    icon: Award,
+    headline: "Core Team Recognition",
+    description: "Top performers receive public recognition, recommendations, and potential advisory roles in the ecosystem",
+    tag: "Prestige",
+    gradient: "from-amber-500/20 to-amber-900/10",
+    borderColor: "border-amber-500/30",
+    iconBg: "bg-amber-500/20",
+    iconColor: "text-amber-400",
+    tagBg: "bg-amber-500/10",
+    tagColor: "text-amber-400",
+  },
+];
+
+function RelationshipJourneyRail() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    const progress = maxScroll > 0 ? scrollLeft / maxScroll : 0;
+    setScrollProgress(progress);
+    
+    const panelWidth = container.scrollWidth / journeyMilestones.length;
+    const newIndex = Math.round(scrollLeft / panelWidth);
+    setActiveIndex(Math.min(newIndex, journeyMilestones.length - 1));
+  };
+
+  return (
+    <section 
+      className="py-20 px-4 relative overflow-hidden"
+      data-testid="relationship-journey-section"
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-0">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:w-[30%] lg:pr-8 lg:sticky lg:top-24 lg:self-start"
+            data-testid="journey-narrative-panel"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-terminal-green/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
+              <Handshake size={16} />
+              Beyond the Hackathon
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+              Build a <span className="gradient-text">Lasting Relationship</span>
+            </h2>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Top performers aren&apos;t just winning prizes — they&apos;re opening doors to ongoing opportunities with Cortex Linux. Your journey doesn&apos;t end when the hackathon does.
+            </p>
+            
+            <div className="hidden lg:block">
+              <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <ArrowRight size={14} />
+                <span>Scroll to explore the journey</span>
+              </div>
+              
+              <div className="flex gap-2">
+                {journeyMilestones.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      const container = document.getElementById('journey-scroll-track');
+                      if (container) {
+                        const panelWidth = container.scrollWidth / journeyMilestones.length;
+                        container.scrollTo({ left: panelWidth * idx, behavior: 'smooth' });
+                      }
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      idx === activeIndex 
+                        ? 'w-8 bg-terminal-green' 
+                        : 'w-2 bg-white/20 hover:bg-white/30'
+                    }`}
+                    data-testid={`journey-indicator-${idx}`}
+                    aria-label={`Go to milestone ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10"
+            >
+              <p className="text-sm text-gray-400">
+                <span className="text-terminal-green font-medium">Note:</span> Specific opportunities are discussed individually based on hackathon performance and project alignment with Cortex Linux goals.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <div className="lg:w-[70%] relative">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 rounded-full overflow-hidden z-10 hidden lg:block">
+              <motion.div
+                className="h-full bg-gradient-to-r from-terminal-green via-blue-500 to-purple-500 rounded-full"
+                style={{ width: `${scrollProgress * 100}%` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                data-testid="journey-progress-bar"
+              />
+              <motion.div
+                className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white shadow-lg shadow-white/30"
+                style={{ left: `calc(${scrollProgress * 100}% - 6px)` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                data-testid="journey-progress-dot"
+              />
+            </div>
+
+            <div
+              id="journey-scroll-track"
+              className="flex lg:flex-row flex-col gap-6 lg:gap-0 lg:overflow-x-auto lg:snap-x lg:snap-mandatory lg:scroll-smooth lg:pt-8 lg:pb-4 hide-scrollbar"
+              onScroll={handleScroll}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              data-testid="journey-scroll-track"
+            >
+              {journeyMilestones.map((milestone, index) => {
+                const IconComponent = milestone.icon;
+                return (
+                  <motion.div
+                    key={milestone.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="lg:min-w-[320px] lg:w-[320px] lg:flex-shrink-0 lg:snap-center lg:px-3"
+                    data-testid={`journey-milestone-${milestone.id}`}
+                  >
+                    <div className={`
+                      relative h-full p-6 rounded-2xl
+                      bg-gradient-to-br ${milestone.gradient}
+                      backdrop-blur-xl border ${milestone.borderColor}
+                      hover:border-opacity-60 transition-all duration-300
+                      group
+                    `}>
+                      <div className="absolute inset-0 rounded-2xl bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      <div className="relative z-10">
+                        <div className={`w-14 h-14 rounded-xl ${milestone.iconBg} flex items-center justify-center mb-5`}>
+                          <IconComponent size={28} className={milestone.iconColor} />
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-white mb-3">{milestone.headline}</h3>
+                        
+                        <p className="text-gray-400 text-sm leading-relaxed mb-5">
+                          {milestone.description}
+                        </p>
+                        
+                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${milestone.tagBg} ${milestone.tagColor} text-xs font-medium`}>
+                          <CheckCircle2 size={12} />
+                          {milestone.tag}
+                        </div>
+                      </div>
+                      
+                      <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <div className="flex lg:hidden justify-center gap-2 mt-6">
+              {journeyMilestones.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    idx === activeIndex 
+                      ? 'w-8 bg-terminal-green' 
+                      : 'w-2 bg-white/20'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -1569,90 +2695,78 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-      {/* Builder Pack Section */}
-      <section className="py-16 px-4 relative overflow-hidden" id="builder-pack" data-testid="builder-pack-section">
+      {/* Builder Pack Section - Split Screen Narrative */}
+      <section className="py-20 px-4 relative overflow-hidden" id="builder-pack" data-testid="builder-pack-section">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px]" />
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[100px]" />
         
-        <div className="max-w-5xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm mb-6">
-              <Gift size={16} />
-              Everyone Gets Perks
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="gradient-text">Cortex Hackathon</span>
-            </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">
-              {builderPack.description}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {builderPack.perks.map((perk, index) => {
-              const IconComponent = perk.icon === "Zap" ? Zap 
-                : perk.icon === "MessageSquare" ? MessageSquare 
-                : perk.icon === "BookOpen" ? BookOpen 
-                : Users;
-              const isCredit = perk.title.includes("$5");
-              
-              return (
-                <motion.div
-                  key={perk.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`relative group ${isCredit ? 'col-span-2 lg:col-span-1' : ''}`}
-                  data-testid={`perk-card-${perk.title.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  {isCredit && (
-                    <div className="gradient-text" />
-                  )}
-                  <div className={`relative h-full bg-white/5 backdrop-blur-xl border ${isCredit ? 'border-cyan-500/40' : 'border-white/10'} rounded-2xl p-6 hover:border-cyan-400/40 transition-all duration-300`}>
-                    <div className={`w-12 h-12 rounded-xl ${isCredit ? 'bg-gradient-to-br from-cyan-500/30 to-blue-500/30' : 'bg-white/10'} flex items-center justify-center mb-4`}>
-                      <IconComponent size={24} className={isCredit ? 'text-cyan-300' : 'text-blue-300'} />
-                    </div>
-                    <h3 className={`text-lg font-bold mb-2 ${isCredit ? 'text-cyan-300' : 'text-white'}`}>
-                      {perk.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm">{perk.description}</p>
-                    {isCredit && (
-                      <div className="absolute top-3 right-3">
-                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold">
-                          <Sparkles size={12} />
-                          FREE
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="text-center mt-8"
-          >
-            <Link
-              href="/register"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
-              data-testid="builder-pack-register-cta"
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left Column - Kinetic Typography */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col justify-center"
             >
-              <ClipboardList size={18} />
-              Claim Your Builder Pack
-              <ArrowRight size={18} />
-            </Link>
-          </motion.div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm mb-6 w-fit">
+                <Gift size={16} />
+                Everyone Gets Perks
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
+                Your{" "}
+                <span className="gradient-text">Builder Pack</span>
+              </h2>
+              
+              <p className="text-gray-400 mb-8 text-lg">
+                {builderPack.description}
+              </p>
+
+              {/* Kinetic Typography Cycling Value Props */}
+              <BuilderPackValueCycler />
+
+              {/* CTA Ladder */}
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <Button
+                  asChild
+                  className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                  data-testid="builder-pack-claim-cta"
+                >
+                  <Link href="/register">
+                    <Gift size={18} className="mr-2" />
+                    Claim Your Builder Pack
+                    <ArrowRight size={18} className="ml-2" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-white/20 hover:bg-white/5"
+                  data-testid="builder-pack-discord-cta"
+                >
+                  <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer">
+                    <FaDiscord size={18} className="mr-2" />
+                    Join Discord
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Right Column - Glass Panel with Perks List */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+              style={{ perspective: "1000px" }}
+            >
+              <BuilderPackGlassPanel perks={builderPack.perks} />
+            </motion.div>
+          </div>
         </div>
       </section>
       {/* Split View Section - Two Hero Banners */}
@@ -2164,8 +3278,8 @@ export default function Hackathon() {
             </p>
           </motion.div>
 
-          {/* 3D Phase Slideshow */}
-          <Phase3DSlideshow />
+          {/* Phase 2 Cinematic Deck */}
+          <PhaseCinematicDeck />
         </div>
       </section>
       {/* Build Tracks Section */}
@@ -2192,68 +3306,11 @@ export default function Hackathon() {
           <BuildTracksShowcase />
         </div>
       </section>
-      {/* Category Prize Awards Section */}
-      <section className="py-20 px-4 relative">
+      {/* Category Prize Awards Section - Layered Ribbon System */}
+      <section className="py-20 px-4 relative" data-testid="category-prizes-section">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-transparent to-blue-950/10 pointer-events-none" />
-        <div className="max-w-6xl mx-auto relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
-              <Crown size={16} />
-              Category Awards
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              More Ways to <span className="gradient-text">Win</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Separate from main prizes — win in your specialty and get Cortex Linux Premium
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {categoryPrizes.map((category, index) => {
-              const iconMap: Record<string, typeof Trophy> = {
-                Puzzle,
-                Workflow,
-                Building2,
-                Heart,
-              };
-              const Icon = iconMap[category.icon] || Trophy;
-              return (
-                <motion.div
-                  key={category.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`bg-white/5 backdrop-blur-sm border ${category.borderColor} rounded-2xl p-6 hover:bg-white/10 transition-all hover:scale-[1.02] group`}
-                >
-                  <div className={`w-14 h-14 rounded-xl ${category.color.replace('text-', 'bg-').replace('-400', '-500/20')} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon className={category.color} size={28} />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{category.title}</h3>
-                  <p className="text-sm text-gray-400 mb-4">{category.description}</p>
-                  <div className="flex items-center gap-2 mt-auto">
-                    <Sparkles size={14} className={category.color} />
-                    <span className={`text-sm font-semibold ${category.color}`}>{category.prize}</span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-sm text-gray-500 mt-8"
-          >
-            Category winners are additional to main hackathon prizes — you can win both!
-          </motion.p>
+        <div className="max-w-5xl mx-auto relative">
+          <CategoryPrizesRibbonSection />
         </div>
       </section>
       {/* Champion Ambassador Expanded Section */}
@@ -2558,88 +3615,8 @@ export default function Hackathon() {
           <TeamAccordion />
         </div>
       </section>
-      {/* Long-term Relationship Messaging */}
-      <section className="py-20 px-4 relative">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-terminal-green/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
-              <Handshake size={16} />
-              Beyond the Hackathon
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Build a <span className="gradient-text">Lasting Relationship</span>
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Top performers aren't just winning prizes — they're opening doors to ongoing opportunities with Cortex Linux
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-terminal-green/10 to-emerald-900/5 border border-terminal-green/20 rounded-2xl p-6 text-center"
-            >
-              <div className="w-14 h-14 rounded-xl bg-terminal-green/20 flex items-center justify-center mx-auto mb-4">
-                <GitPullRequest size={28} className="text-terminal-green" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">Long-term Contracts</h3>
-              <p className="text-sm text-gray-400">
-                Outstanding contributors may be considered for ongoing development contracts with Cortex Linux
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-blue-500/10 to-blue-900/5 border border-blue-500/20 rounded-2xl p-6 text-center"
-            >
-              <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
-                <Users size={28} className="text-blue-400" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">Ongoing Relationships</h3>
-              <p className="text-sm text-gray-400">
-                Join our inner circle of contributors with direct access to the core team and roadmap discussions
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 border border-purple-500/20 rounded-2xl p-6 text-center"
-            >
-              <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
-                <Rocket size={28} className="text-purple-400" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2">Future Collaborations</h3>
-              <p className="text-sm text-gray-400">
-                Be first in line for future projects, beta features, and collaborative opportunities
-              </p>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
-          >
-            <p className="text-sm text-gray-400">
-              <span className="text-terminal-green font-medium">Note:</span> Specific opportunities are discussed individually based on hackathon performance and project alignment with Cortex Linux goals
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Long-term Relationship Journey Rail */}
+      <RelationshipJourneyRail />
       {/* Partner/Sponsor Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
         <div className="max-w-6xl mx-auto">
