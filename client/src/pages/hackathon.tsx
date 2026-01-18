@@ -1137,93 +1137,69 @@ function BuildTracksShowcase() {
           </div>
         </motion.div>
         
-        {/* Isometric 3D Track Illustrations */}
+        {/* Track Illustrations */}
         <motion.div
           key={`illustration-${activeTrack}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
           className="mt-6"
-          style={{ perspective: "1200px" }}
           data-testid={`track-illustration-${activeTrack}`}
         >
           {/* CLI Commands - Layered Terminal Windows */}
           {activeTrack === "cli-commands" && (
             <motion.div 
-              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
-              style={{
-                transformStyle: "preserve-3d",
-                transform: "rotateX(12deg) rotateY(-12deg)",
-              }}
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5"
               role="img"
               aria-label="CLI Commands illustration showing layered terminal windows organizing files into folders"
             >
-              {/* Glow effect behind */}
-              <div 
-                className="absolute -inset-4 bg-emerald-500/10 rounded-2xl blur-2xl -z-10"
-                aria-hidden="true"
-              />
-              
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-emerald-400/30 blur-md rounded-full" aria-hidden="true" />
-                  <FolderOpen size={16} className="text-emerald-400 relative z-10" aria-hidden="true" />
-                </div>
-                <span className="text-xs text-gray-400 uppercase tracking-wide">Layered Terminal Windows</span>
+                <FolderOpen size={16} className="text-emerald-400" aria-hidden="true" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">File Organization</span>
               </div>
               
-              {/* Stacked Terminal Windows with Z-depth */}
-              <div className="relative h-48" style={{ transformStyle: "preserve-3d" }}>
+              {/* Stacked Terminal Windows */}
+              <div className="space-y-3">
                 {[
-                  { name: "Documents", files: ["resume.pdf", "notes.txt"], color: "blue", zOffset: 0, icon: FileText },
-                  { name: "Photos", files: ["vacation.jpg", "selfie.png"], color: "emerald", zOffset: 20, icon: Image },
-                  { name: "Videos", files: ["tutorial.mp4"], color: "purple", zOffset: 40, icon: Film }
+                  { name: "Documents", files: ["resume.pdf", "notes.txt"], color: "blue", icon: FileText },
+                  { name: "Photos", files: ["vacation.jpg", "selfie.png"], color: "emerald", icon: Image },
+                  { name: "Videos", files: ["tutorial.mp4"], color: "purple", icon: Film }
                 ].map((window, windowIdx) => (
                   <motion.div
                     key={window.name}
-                    initial={{ opacity: 0, y: 30, rotateX: -20 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ delay: windowIdx * 0.15, type: "spring", stiffness: 100 }}
-                    className="absolute inset-x-0"
-                    style={{
-                      transform: `translateZ(${window.zOffset}px) translateY(${windowIdx * 20}px)`,
-                      transformStyle: "preserve-3d",
-                      zIndex: 3 - windowIdx,
-                    }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: windowIdx * 0.1 }}
                     data-testid={`cli-window-${window.name.toLowerCase()}`}
+                    className="bg-slate-900/90 backdrop-blur border border-white/10 rounded-lg overflow-hidden"
                   >
-                    <motion.div 
-                      className={`bg-slate-900/90 backdrop-blur border border-${window.color}-500/30 rounded-lg overflow-hidden shadow-lg`}
-                      style={{ x: parallaxX, y: parallaxY }}
-                    >
-                      {/* Window header */}
-                      <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-black/40">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-red-500/60" />
-                          <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
-                          <div className="w-2 h-2 rounded-full bg-green-500/60" />
-                        </div>
-                        <div className={`flex items-center gap-1.5 text-${window.color}-400`}>
-                          <window.icon size={12} aria-hidden="true" />
-                          <span className="text-xs font-medium">{window.name}</span>
-                        </div>
+                    {/* Window header */}
+                    <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 bg-black/40">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 rounded-full bg-red-500/60" />
+                        <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
+                        <div className="w-2 h-2 rounded-full bg-green-500/60" />
                       </div>
-                      {/* Window content */}
-                      <div className="p-3 space-y-1.5">
-                        {window.files.map((file, fileIdx) => (
-                          <motion.div
-                            key={file}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: windowIdx * 0.15 + fileIdx * 0.1 + 0.3 }}
-                            className="flex items-center gap-2 text-xs text-gray-400 bg-black/30 px-2 py-1.5 rounded"
-                          >
-                            <ArrowRight size={10} className={`text-${window.color}-400`} aria-hidden="true" />
-                            <span className="truncate">{file}</span>
-                          </motion.div>
-                        ))}
+                      <div className={`flex items-center gap-1.5 text-${window.color}-400`}>
+                        <window.icon size={12} aria-hidden="true" />
+                        <span className="text-xs font-medium">{window.name}</span>
                       </div>
-                    </motion.div>
+                    </div>
+                    {/* Window content */}
+                    <div className="p-3 space-y-1.5">
+                      {window.files.map((file, fileIdx) => (
+                        <motion.div
+                          key={file}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: windowIdx * 0.1 + fileIdx * 0.05 + 0.2 }}
+                          className="flex items-center gap-2 text-xs text-gray-400 bg-black/30 px-2 py-1.5 rounded"
+                        >
+                          <ArrowRight size={10} className={`text-${window.color}-400`} aria-hidden="true" />
+                          <span className="truncate">{file}</span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -1235,96 +1211,58 @@ function BuildTracksShowcase() {
             </motion.div>
           )}
 
-          {/* Plugins - Stacked Modular Blocks/Puzzle Pieces */}
+          {/* Plugins - Modular Blocks */}
           {activeTrack === "plugins" && (
             <motion.div 
-              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
-              style={{
-                transformStyle: "preserve-3d",
-                transform: "rotateX(12deg) rotateY(-12deg)",
-              }}
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5"
               role="img"
-              aria-label="Plugins illustration showing stacked modular blocks connecting to Cortex Core"
+              aria-label="Plugins illustration showing modular blocks connecting to Cortex Core"
             >
-              {/* Glow effect behind */}
-              <div 
-                className="absolute -inset-4 bg-blue-500/10 rounded-2xl blur-2xl -z-10"
-                aria-hidden="true"
-              />
-              
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-blue-400/30 blur-md rounded-full" aria-hidden="true" />
-                  <Puzzle size={16} className="text-blue-400 relative z-10" aria-hidden="true" />
-                </div>
-                <span className="text-xs text-gray-400 uppercase tracking-wide">Modular Plugin Architecture</span>
+                <Puzzle size={16} className="text-blue-400" aria-hidden="true" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">Plugin Architecture</span>
               </div>
               
-              <div className="relative" style={{ transformStyle: "preserve-3d" }}>
-                {/* Core block with glow */}
+              <div className="relative">
+                {/* Core block */}
                 <div className="flex justify-center mb-6">
                   <motion.div
-                    initial={{ scale: 0, rotateY: -180 }}
-                    animate={{ scale: 1, rotateY: 0 }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 100 }}
-                    className="relative"
-                    style={{ 
-                      transformStyle: "preserve-3d",
-                      transform: "translateZ(30px)",
-                    }}
                     data-testid="plugin-core-block"
+                    className="w-20 h-20 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg border border-blue-400/30"
                   >
-                    {/* Glow behind core */}
-                    <div className="absolute inset-0 bg-blue-500/40 blur-xl rounded-xl" aria-hidden="true" />
-                    <motion.div 
-                      className="relative w-20 h-20 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-blue-500/30 border border-blue-400/30"
-                      style={{ x: parallaxX, y: parallaxY }}
-                    >
-                      <Terminal size={32} className="text-white" aria-hidden="true" />
-                    </motion.div>
+                    <Terminal size={32} className="text-white" aria-hidden="true" />
                   </motion.div>
                 </div>
                 <div className="text-center text-xs text-gray-400 mb-4">Cortex Core</div>
                 
-                {/* Stacked Plugin Blocks */}
-                <div className="grid grid-cols-3 gap-3" style={{ transformStyle: "preserve-3d" }}>
+                {/* Plugin Blocks */}
+                <div className="grid grid-cols-3 gap-3">
                   {[
-                    { name: "Security", status: "active", icon: Shield, zOffset: 20 },
-                    { name: "Git Tools", status: "active", icon: GitBranch, zOffset: 15 },
-                    { name: "Analytics", status: "pending", icon: FileSearch, zOffset: 10 }
+                    { name: "Security", status: "active", icon: Shield },
+                    { name: "Git Tools", status: "active", icon: GitBranch },
+                    { name: "Analytics", status: "pending", icon: FileSearch }
                   ].map((plugin, i) => (
                     <motion.div
                       key={plugin.name}
-                      initial={{ opacity: 0, y: 30, rotateX: -30 }}
-                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                      transition={{ delay: i * 0.12 + 0.3, type: "spring" }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 + 0.2 }}
                       className="relative"
-                      style={{
-                        transform: `translateZ(${plugin.zOffset}px)`,
-                        transformStyle: "preserve-3d",
-                      }}
                       data-testid={`plugin-block-${plugin.name.toLowerCase().replace(' ', '-')}`}
                     >
-                      {/* Connection line with glow */}
-                      <div className="absolute left-1/2 -top-6 w-px h-6">
-                        <div className="absolute inset-0 bg-blue-500/50" aria-hidden="true" />
-                        <div className="absolute inset-0 bg-blue-400/30 blur-sm" aria-hidden="true" />
-                      </div>
+                      {/* Connection line */}
+                      <div className="absolute left-1/2 -top-6 w-px h-6 bg-blue-500/50" aria-hidden="true" />
                       
-                      <motion.div 
-                        className={`p-4 rounded-xl border-2 backdrop-blur-sm ${
-                          plugin.status === "active" 
-                            ? "bg-blue-500/15 border-blue-500/40 shadow-lg shadow-blue-500/10" 
-                            : "bg-white/5 border-white/20"
-                        }`}
-                        style={{ x: parallaxX, y: parallaxY }}
-                      >
-                        {/* Icon with glow */}
-                        <div className="relative flex justify-center mb-2">
-                          {plugin.status === "active" && (
-                            <div className="absolute inset-0 bg-blue-400/30 blur-lg rounded-full" aria-hidden="true" />
-                          )}
-                          <plugin.icon size={20} className={plugin.status === "active" ? "text-blue-400 relative z-10" : "text-gray-500 relative z-10"} aria-hidden="true" />
+                      <div className={`p-4 rounded-xl border ${
+                        plugin.status === "active" 
+                          ? "bg-blue-500/15 border-blue-500/40" 
+                          : "bg-white/5 border-white/20"
+                      }`}>
+                        <div className="flex justify-center mb-2">
+                          <plugin.icon size={20} className={plugin.status === "active" ? "text-blue-400" : "text-gray-500"} aria-hidden="true" />
                         </div>
                         <p className="text-xs text-center text-gray-300 font-medium">{plugin.name}</p>
                         <div className={`mt-2 text-center text-[10px] px-2 py-0.5 rounded-full ${
@@ -1334,7 +1272,7 @@ function BuildTracksShowcase() {
                         }`}>
                           {plugin.status}
                         </div>
-                      </motion.div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -1342,97 +1280,49 @@ function BuildTracksShowcase() {
             </motion.div>
           )}
 
-          {/* AI Integrations - Neural Network Style Connections */}
+          {/* AI Integrations - Neural Network Style */}
           {activeTrack === "ai-integrations" && (
             <motion.div 
-              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
-              style={{
-                transformStyle: "preserve-3d",
-                transform: "rotateX(12deg) rotateY(-12deg)",
-              }}
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5"
               role="img"
               aria-label="AI Integrations illustration showing neural network-style connections between AI nodes"
             >
-              {/* Glow effect behind */}
-              <div 
-                className="absolute -inset-4 bg-purple-500/10 rounded-2xl blur-2xl -z-10"
-                aria-hidden="true"
-              />
-              
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-purple-400/30 blur-md rounded-full" aria-hidden="true" />
-                  <Brain size={16} className="text-purple-400 relative z-10" aria-hidden="true" />
-                </div>
-                <span className="text-xs text-gray-400 uppercase tracking-wide">Neural Network Connections</span>
+                <Brain size={16} className="text-purple-400" aria-hidden="true" />
+                <span className="text-xs text-gray-400 uppercase tracking-wide">AI Pipeline</span>
               </div>
               
               {/* Neural Network Visualization */}
-              <div className="relative h-56" style={{ transformStyle: "preserve-3d" }} data-testid="ai-neural-network">
+              <div className="relative h-56" data-testid="ai-neural-network">
                 {/* SVG Connection Lines */}
-                <svg className="absolute inset-0 w-full h-full" style={{ transform: "translateZ(-10px)" }} aria-hidden="true">
+                <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
                   <defs>
                     <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="#a855f7" stopOpacity="0.6" />
                       <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.3" />
                     </linearGradient>
                   </defs>
-                  {/* Connection paths */}
-                  <motion.path
-                    d="M80,40 Q140,80 200,60"
-                    stroke="url(#neuralGradient)"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                  />
-                  <motion.path
-                    d="M80,40 Q120,100 200,120"
-                    stroke="url(#neuralGradient)"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.4 }}
-                  />
-                  <motion.path
-                    d="M80,120 Q140,100 200,60"
-                    stroke="url(#neuralGradient)"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                  />
-                  <motion.path
-                    d="M80,120 Q100,140 200,120"
-                    stroke="url(#neuralGradient)"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                  />
+                  <motion.path d="M80,40 Q140,80 200,60" stroke="url(#neuralGradient)" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.3 }} />
+                  <motion.path d="M80,40 Q120,100 200,120" stroke="url(#neuralGradient)" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.4 }} />
+                  <motion.path d="M80,120 Q140,100 200,60" stroke="url(#neuralGradient)" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.5 }} />
+                  <motion.path d="M80,120 Q100,140 200,120" stroke="url(#neuralGradient)" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.6 }} />
                 </svg>
                 
                 {/* Input Layer */}
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 space-y-6" style={{ transform: "translateZ(20px)" }}>
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 space-y-6">
                   {[
                     { icon: FileText, label: "Logs" },
                     { icon: Server, label: "Metrics" }
                   ].map((node, i) => (
                     <motion.div
                       key={node.label}
-                      initial={{ opacity: 0, scale: 0, x: -20 }}
-                      animate={{ opacity: 1, scale: 1, x: 0 }}
-                      transition={{ delay: i * 0.15, type: "spring" }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.15 }}
                       className="relative"
-                      style={{ x: parallaxX, y: parallaxY }}
                       data-testid={`ai-node-input-${node.label.toLowerCase()}`}
                     >
-                      <div className="absolute inset-0 bg-purple-500/30 blur-lg rounded-full" aria-hidden="true" />
-                      <div className="relative w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center">
                         <node.icon size={18} className="text-purple-400" aria-hidden="true" />
                       </div>
                       <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-gray-500 whitespace-nowrap">{node.label}</span>
@@ -1440,49 +1330,35 @@ function BuildTracksShowcase() {
                   ))}
                 </div>
                 
-                {/* Hidden Layer - Central AI Brain */}
+                {/* Central AI Brain */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3, type: "spring" }}
+                  transition={{ delay: 0.3 }}
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                  style={{ 
-                    transform: "translateZ(40px) translateX(-50%) translateY(-50%)",
-                    x: parallaxX, 
-                    y: parallaxY 
-                  }}
                   data-testid="ai-central-brain"
                 >
-                  <div className="absolute inset-0 bg-purple-500/40 blur-2xl rounded-full" aria-hidden="true" />
-                  <motion.div 
-                    className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-purple-500/40 border border-purple-400/40"
-                    animate={{ 
-                      boxShadow: ["0 0 20px rgba(168, 85, 247, 0.4)", "0 0 40px rgba(168, 85, 247, 0.6)", "0 0 20px rgba(168, 85, 247, 0.4)"]
-                    }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                  >
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center shadow-lg border border-purple-400/40">
                     <Brain size={28} className="text-white" aria-hidden="true" />
-                  </motion.div>
+                  </div>
                   <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-purple-400 font-medium whitespace-nowrap">LLM Core</span>
                 </motion.div>
                 
                 {/* Output Layer */}
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 space-y-6" style={{ transform: "translateZ(20px)" }}>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 space-y-6">
                   {[
                     { icon: AlertTriangle, label: "Alerts", color: "amber" },
                     { icon: Lightbulb, label: "Insights", color: "emerald" }
                   ].map((node, i) => (
                     <motion.div
                       key={node.label}
-                      initial={{ opacity: 0, scale: 0, x: 20 }}
-                      animate={{ opacity: 1, scale: 1, x: 0 }}
-                      transition={{ delay: 0.6 + i * 0.15, type: "spring" }}
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6 + i * 0.15 }}
                       className="relative"
-                      style={{ x: parallaxX, y: parallaxY }}
                       data-testid={`ai-node-output-${node.label.toLowerCase()}`}
                     >
-                      <div className={`absolute inset-0 bg-${node.color}-500/30 blur-lg rounded-full`} aria-hidden="true" />
-                      <div className={`relative w-12 h-12 rounded-xl bg-${node.color}-500/20 border border-${node.color}-500/40 flex items-center justify-center`}>
+                      <div className={`w-12 h-12 rounded-xl bg-${node.color}-500/20 border border-${node.color}-500/40 flex items-center justify-center`}>
                         <node.icon size={18} className={`text-${node.color}-400`} aria-hidden="true" />
                       </div>
                       <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] text-gray-500 whitespace-nowrap">{node.label}</span>
@@ -1506,73 +1382,44 @@ function BuildTracksShowcase() {
             </motion.div>
           )}
 
-          {/* Infra Tools - Pipeline/Deployment Stages */}
+          {/* Infra Tools - Pipeline Stages */}
           {activeTrack === "infra-tools" && (
             <motion.div 
-              className="relative bg-white/5 border border-white/10 rounded-xl p-5 overflow-visible"
-              style={{
-                transformStyle: "preserve-3d",
-                transform: "rotateX(12deg) rotateY(-12deg)",
-              }}
+              className="relative bg-white/5 border border-white/10 rounded-xl p-5"
               role="img"
               aria-label="Infrastructure Tools illustration showing deployment pipeline stages"
             >
-              {/* Glow effect behind */}
-              <div 
-                className="absolute -inset-4 bg-amber-500/10 rounded-2xl blur-2xl -z-10"
-                aria-hidden="true"
-              />
-              
               <div className="flex items-center gap-2 mb-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-amber-400/30 blur-md rounded-full" aria-hidden="true" />
-                  <Server size={16} className="text-amber-400 relative z-10" aria-hidden="true" />
-                </div>
+                <Server size={16} className="text-amber-400" aria-hidden="true" />
                 <span className="text-xs text-gray-400 uppercase tracking-wide">Deployment Pipeline</span>
               </div>
               
-              {/* 3D Pipeline Stages */}
-              <div className="relative" style={{ transformStyle: "preserve-3d" }} data-testid="infra-pipeline">
+              {/* Pipeline Stages */}
+              <div className="relative" data-testid="infra-pipeline">
                 <div className="space-y-3">
                   {[
-                    { step: "Build", status: "complete", icon: Box, zOffset: 40 },
-                    { step: "Push Registry", status: "complete", icon: Upload, zOffset: 30 },
-                    { step: "Update K8s", status: "complete", icon: RefreshCw, zOffset: 20 },
-                    { step: "Health Check", status: "complete", icon: Check, zOffset: 10 }
+                    { step: "Build", status: "complete", icon: Box },
+                    { step: "Push Registry", status: "complete", icon: Upload },
+                    { step: "Update K8s", status: "complete", icon: RefreshCw },
+                    { step: "Health Check", status: "complete", icon: Check }
                   ].map((stage, i) => (
                     <motion.div
                       key={stage.step}
-                      initial={{ opacity: 0, x: -30, rotateY: -20 }}
-                      animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                      transition={{ delay: i * 0.15, type: "spring", stiffness: 100 }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
                       className="relative"
-                      style={{
-                        transform: `translateZ(${stage.zOffset}px)`,
-                        transformStyle: "preserve-3d",
-                      }}
                       data-testid={`pipeline-stage-${stage.step.toLowerCase().replace(' ', '-')}`}
                     >
-                      <motion.div 
-                        className="flex items-center gap-3 bg-slate-900/60 backdrop-blur rounded-xl p-3 border border-white/10"
-                        style={{ x: parallaxX, y: parallaxY }}
-                      >
-                        {/* Stage icon with glow */}
-                        <div className="relative">
-                          <div className={`absolute inset-0 ${stage.status === "complete" ? "bg-emerald-500/30" : "bg-amber-500/30"} blur-md rounded-lg`} aria-hidden="true" />
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: i * 0.15 + 0.1, type: "spring" }}
-                            className={`relative w-10 h-10 rounded-lg flex items-center justify-center ${
-                              stage.status === "complete" 
-                                ? "bg-emerald-500/20 border border-emerald-500/40" 
-                                : "bg-amber-500/20 border border-amber-500/40"
-                            }`}
-                          >
-                            <stage.icon size={18} className={
-                              stage.status === "complete" ? "text-emerald-400" : "text-amber-400"
-                            } aria-hidden="true" />
-                          </motion.div>
+                      <div className="flex items-center gap-3 bg-slate-900/60 backdrop-blur rounded-xl p-3 border border-white/10">
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          stage.status === "complete" 
+                            ? "bg-emerald-500/20 border border-emerald-500/40" 
+                            : "bg-amber-500/20 border border-amber-500/40"
+                        }`}>
+                          <stage.icon size={18} className={
+                            stage.status === "complete" ? "text-emerald-400" : "text-amber-400"
+                          } aria-hidden="true" />
                         </div>
                         
                         {/* Progress bar */}
@@ -1582,21 +1429,14 @@ function BuildTracksShowcase() {
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: "100%" }}
-                              transition={{ delay: i * 0.15 + 0.2, duration: 0.5 }}
+                              transition={{ delay: i * 0.1 + 0.2, duration: 0.5 }}
                               className="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full"
                             />
                           </div>
                         </div>
                         
-                        {/* Status indicator */}
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: i * 0.15 + 0.4, type: "spring" }}
-                        >
-                          <Check size={18} className="text-emerald-400" aria-hidden="true" />
-                        </motion.div>
-                      </motion.div>
+                        <Check size={18} className="text-emerald-400" aria-hidden="true" />
+                      </div>
                       
                       {/* Connector line */}
                       {i < 3 && (
@@ -1608,7 +1448,7 @@ function BuildTracksShowcase() {
               </div>
               
               {/* Stats Footer */}
-              <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center" style={{ transform: "translateZ(5px)" }}>
+              <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center">
                 {[
                   { label: "Pods", value: "3/3", color: "emerald" },
                   { label: "Version", value: "v2.1", color: "blue" },
@@ -1618,14 +1458,12 @@ function BuildTracksShowcase() {
                     key={stat.label}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                    className="relative p-2 rounded-lg bg-black/30 border border-white/5"
-                    style={{ x: parallaxX, y: parallaxY }}
+                    transition={{ delay: 0.6 + i * 0.1 }}
+                    className="p-2 rounded-lg bg-black/30 border border-white/5"
                     data-testid={`pipeline-stat-${stat.label.toLowerCase()}`}
                   >
-                    <div className={`absolute inset-0 bg-${stat.color}-500/5 rounded-lg`} aria-hidden="true" />
-                    <div className={`text-sm font-bold text-${stat.color}-400 relative z-10`}>{stat.value}</div>
-                    <div className="text-[10px] text-gray-500 relative z-10">{stat.label}</div>
+                    <div className={`text-sm font-bold text-${stat.color}-400`}>{stat.value}</div>
+                    <div className="text-[10px] text-gray-500">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
