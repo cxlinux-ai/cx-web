@@ -40,70 +40,81 @@ interface Tier {
 
 const tiers: Tier[] = [
   {
-    name: 'Community',
+    name: 'Core',
     icon: Rocket,
     price: { monthly: 0, annual: 0 },
-    description: 'Perfect for learning and personal projects',
+    description: 'Everything you need to get started',
     features: [
-      'Local LLM (Mistral 7B)',
-      'Full CLI access',
-      'Community Discord',
-      'Basic documentation',
-      '1 server'
+      'Full CLI commands',
+      'Natural language to apt',
+      'Local LLM (Ollama)',
+      'Dry-run safety mode',
+      'Rollback support',
+      'Hardware detection',
+      'Network diagnostics',
+      'Basic security audit',
+      '1 system'
     ],
     cta: 'Download Free',
     ctaLink: 'https://github.com/cortexlinux/cortex',
     highlighted: false
   },
   {
-    name: 'Pro',
+    name: 'Core+',
     icon: Sparkles,
     price: { monthly: 20, annual: 192 },
-    description: 'For professionals who need cloud AI power',
+    description: 'Unlimited systems for commercial use',
     features: [
-      'Everything in Community',
-      'Cloud LLMs (GPT-4, Claude)',
-      'Web Console',
-      'Email support',
-      'Up to 3 servers',
-      '90-day history'
+      'Everything in Core',
+      'Unlimited systems',
+      'Commercial use permitted',
+      'Email support (48hr)',
+      'License management portal'
     ],
     cta: 'Start Free Trial',
     stripeKey: 'pro',
+    highlighted: false,
+    badge: 'PER SYSTEM'
+  },
+  {
+    name: 'Pro',
+    icon: Building2,
+    price: { monthly: 99, annual: 948 },
+    description: 'Cloud AI power for teams',
+    features: [
+      'Everything in Core+',
+      'Cloud LLM fallback (Claude/GPT-4)',
+      'Team management dashboard',
+      'Usage analytics',
+      'Audit logging',
+      'REST API access',
+      'Early access to features',
+      'Priority support (24hr)',
+      '25 systems included',
+      '+$10/system beyond 25'
+    ],
+    cta: 'Start Free Trial',
+    stripeKey: 'enterprise',
     highlighted: true,
     badge: 'MOST POPULAR'
   },
   {
     name: 'Enterprise',
-    icon: Building2,
-    price: { monthly: 99, annual: 948 },
-    description: 'For teams requiring compliance & security',
-    features: [
-      'Everything in Pro',
-      'SSO/LDAP integration',
-      'Audit logs',
-      'Compliance reports (SOC2, HIPAA)',
-      'Up to 50 servers',
-      '99.9% SLA',
-      'Slack support'
-    ],
-    cta: 'Start Free Trial',
-    stripeKey: 'enterprise',
-    highlighted: false
-  },
-  {
-    name: 'Managed',
     icon: Crown,
     price: { monthly: 299, annual: 2868 },
-    description: 'We handle everything for you',
+    description: 'Full compliance & dedicated support',
     features: [
-      'Everything in Enterprise',
-      'Fully managed infrastructure',
-      '24/7 dedicated support',
+      'Everything in Pro',
+      'Web admin console',
+      'SSO/SAML integration',
+      'Compliance reports (SOC2, HIPAA, ISO 27001)',
+      'Air-gapped deployment',
       'Custom integrations',
-      'Unlimited servers',
-      '99.99% SLA',
-      'Dedicated CSM'
+      '99.9% SLA guarantee',
+      'Dedicated support channel',
+      'Quarterly business reviews',
+      '100 systems included',
+      '+$5/system beyond 100'
     ],
     cta: 'Schedule Demo',
     ctaLink: 'https://calendly.com/cortexlinux/demo',
@@ -112,17 +123,18 @@ const tiers: Tier[] = [
 ];
 
 const comparisonFeatures = [
-  ['Local LLM (Mistral 7B)', true, true, true, true],
-  ['Cloud LLMs (GPT/Claude)', false, true, true, true],
-  ['Web Console', false, true, true, true],
-  ['Servers', '1', '3', '50', 'Unlimited'],
-  ['History Retention', '7 days', '90 days', '1 year', 'Unlimited'],
-  ['SSO/LDAP', false, false, true, true],
+  ['Local LLM (Ollama)', true, true, true, true],
+  ['Cloud LLM Fallback', false, false, true, true],
+  ['Team Dashboard', false, false, true, true],
+  ['Systems', '1', 'Unlimited', '25 included', '100 included'],
+  ['Additional Systems', '-', '$20/each', '$10/each', '$5/each'],
+  ['License', 'BSL 1.1', 'Commercial', 'Commercial', 'Commercial'],
+  ['SSO/SAML', false, false, false, true],
   ['Audit Logs', false, false, true, true],
-  ['Compliance Reports', false, false, true, true],
-  ['SLA', 'None', 'None', '99.9%', '99.99%'],
-  ['Support', 'Community', 'Email', 'Slack', '24/7 Dedicated'],
-  ['Managed Infrastructure', false, false, false, true],
+  ['Compliance Reports', false, false, false, true],
+  ['SLA', 'None', 'None', 'None', '99.9%'],
+  ['Support', 'Community', 'Email (48hr)', 'Priority (24hr)', 'Dedicated'],
+  ['Air-gapped Deployment', false, false, false, true],
 ];
 
 const faqs = [

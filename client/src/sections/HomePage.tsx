@@ -375,68 +375,65 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
   const pricingTiers: PricingTier[] = [
     {
-      name: 'Community',
+      name: 'Core',
       icon: Rocket,
       price: { monthly: 0, annual: 0 },
-      description: 'Perfect for learning and personal projects',
+      description: 'Everything you need to get started',
       features: [
-        'Local LLM (Mistral 7B)',
-        'Full CLI access',
-        'Community Discord',
-        'Basic documentation',
-        '1 server'
+        'Full CLI commands',
+        'Local LLM (Ollama)',
+        'Dry-run safety mode',
+        'Rollback support',
+        '1 system'
       ],
       cta: 'Download Free',
       ctaLink: 'https://github.com/cortexlinux/cortex',
       highlighted: false
     },
     {
-      name: 'Pro',
+      name: 'Core+',
       icon: Sparkles,
       price: { monthly: 20, annual: 192 },
-      description: 'For professionals who need cloud AI power',
+      description: 'Unlimited systems for commercial use',
       features: [
-        'Everything in Community',
-        'Cloud LLMs (GPT-4, Claude)',
-        'Web Console',
-        'Email support',
-        'Up to 3 servers',
-        '90-day history'
+        'Everything in Core',
+        'Unlimited systems',
+        'Commercial license',
+        'Email support (48hr)'
       ],
       cta: 'Start Free Trial',
       stripeKey: 'pro',
+      highlighted: false,
+      badge: 'PER SYSTEM'
+    },
+    {
+      name: 'Pro',
+      icon: Building2,
+      price: { monthly: 99, annual: 948 },
+      description: 'Cloud AI power for teams',
+      features: [
+        'Everything in Core+',
+        'Cloud LLM fallback',
+        'Team dashboard',
+        'Audit logging',
+        '25 systems included'
+      ],
+      cta: 'Start Free Trial',
+      stripeKey: 'enterprise',
       highlighted: true,
       badge: 'MOST POPULAR'
     },
     {
       name: 'Enterprise',
-      icon: Building2,
-      price: { monthly: 99, annual: 948 },
-      description: 'For teams requiring compliance & security',
-      features: [
-        'Everything in Pro',
-        'SSO/LDAP integration',
-        'Audit logs',
-        'Compliance reports (SOC2, HIPAA)',
-        'Up to 50 servers',
-        '99.9% SLA'
-      ],
-      cta: 'Start Free Trial',
-      stripeKey: 'enterprise',
-      highlighted: false
-    },
-    {
-      name: 'Managed',
       icon: Crown,
       price: { monthly: 299, annual: 2868 },
-      description: 'We handle everything for you',
+      description: 'Full compliance & dedicated support',
       features: [
-        'Everything in Enterprise',
-        'Fully managed infrastructure',
-        '24/7 dedicated support',
-        'Custom integrations',
-        'Unlimited servers',
-        '99.99% SLA'
+        'Everything in Pro',
+        'SSO/SAML integration',
+        'Compliance reports',
+        '99.9% SLA',
+        '100 systems included'
       ],
       cta: 'Schedule Demo',
       ctaLink: 'https://calendly.com/cortexlinux/demo',
