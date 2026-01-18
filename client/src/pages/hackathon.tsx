@@ -1443,9 +1443,17 @@ export default function Hackathon() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-5">
             {buildTracks.map((track, index) => {
               const Icon = trackIcons[track.id] || Terminal;
+              const spanClasses = 
+                track.id === "cli-commands" ? "lg:col-span-3 lg:row-span-2" :
+                track.id === "plugins" ? "lg:col-span-3" :
+                track.id === "ai-integrations" ? "lg:col-span-3" :
+                "lg:col-span-6";
+              const isLarge = track.id === "cli-commands";
+              const isFullWidth = track.id === "infra-tools";
+              
               return (
                 <motion.div
                   key={track.id}
@@ -1453,34 +1461,46 @@ export default function Hackathon() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-colors"
+                  data-testid={`track-${track.id}`}
+                  className={`${spanClasses} bg-gradient-to-br ${
+                    track.id === "cli-commands" ? "from-emerald-500/10 via-emerald-500/5 to-transparent border-emerald-500/20" :
+                    track.id === "plugins" ? "from-blue-500/10 via-blue-500/5 to-transparent border-blue-500/20" :
+                    track.id === "ai-integrations" ? "from-purple-500/10 via-purple-500/5 to-transparent border-purple-500/20" :
+                    "from-yellow-500/10 via-yellow-500/5 to-transparent border-yellow-500/20"
+                  } border rounded-2xl p-6 hover:bg-white/5 transition-all group`}
                 >
-                  <div className={`w-12 h-12 rounded-xl ${track.color.replace('text-', 'bg-').replace('-400', '-500/20')} flex items-center justify-center mb-4`}>
-                    <Icon className={track.color} size={24} />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{track.title}</h3>
-                  <p className="text-sm text-gray-400 mb-4">{track.description}</p>
-                  
-                  <div className="mb-4">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                      track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" :
-                      track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300" :
-                      "bg-purple-500/20 text-purple-400"
-                    }`}>
-                      {track.difficulty}
-                    </span>
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Examples</h4>
-                    <ul className="space-y-1">
-                      {track.examples.map((example, i) => (
-                        <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
-                          <span className={track.color}>•</span>
-                          {example}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className={`flex ${isFullWidth ? "flex-col sm:flex-row sm:items-start gap-6" : "flex-col"}`}>
+                    <div className={`flex-shrink-0 ${isFullWidth ? "" : ""}`}>
+                      <div className={`${isLarge ? "w-16 h-16" : "w-12 h-12"} rounded-xl ${track.color.replace('text-', 'bg-').replace('-400', '-500/20').replace('-300', '-500/20')} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <Icon className={track.color} size={isLarge ? 32 : 24} />
+                      </div>
+                      <div className="mb-3">
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+                          track.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" :
+                          track.difficulty === "Intermediate" ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" :
+                          "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                        }`}>
+                          {track.difficulty}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h3 className={`${isLarge ? "text-xl" : "text-lg"} font-bold text-white mb-2`}>{track.title}</h3>
+                      <p className={`${isLarge ? "text-base" : "text-sm"} text-gray-400 mb-4`}>{track.description}</p>
+                      
+                      <div>
+                        <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Examples</h4>
+                        <ul className={`${isFullWidth ? "grid sm:grid-cols-3 gap-2" : "space-y-1.5"}`}>
+                          {track.examples.map((example, i) => (
+                            <li key={i} className={`${isLarge ? "text-sm" : "text-xs"} text-gray-400 flex items-start gap-2`}>
+                              <span className={`${track.color} mt-0.5`}>•</span>
+                              {example}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               );
