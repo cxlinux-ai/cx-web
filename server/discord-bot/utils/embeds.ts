@@ -105,12 +105,12 @@ export function createLinkButton(
 export function createHackathonEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.primary)
-    .setTitle("Cortex Hackathon 2026")
+    .setTitle("The First AI Linux Hackathon Worldwide")
     .setDescription("Build the future of AI-powered Linux!")
     .addFields(
       {
         name: "Total Prizes",
-        value: "$17,000",
+        value: "$13.8K cash + $4.9K prizes",
         inline: true,
       },
       {
@@ -125,12 +125,12 @@ export function createHackathonEmbed(): EmbedBuilder {
       },
       {
         name: "Phase 1: Ideathon",
-        value: "Submit feature ideas - $3,000 in prizes",
+        value: "Submit feature ideas - $3,800 in prizes",
         inline: false,
       },
       {
         name: "Phase 2: Build",
-        value: "Implement your features - $12,000 in prizes",
+        value: "1st-3rd: $10K cash | 4th-10th: $700 worth of goodies + 2mo managed service (not cash)",
         inline: false,
       }
     )
@@ -143,41 +143,36 @@ export function createHackathonEmbed(): EmbedBuilder {
 export function createReferralTiersEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.info)
-    .setTitle("Referral Tiers")
-    .setDescription("Invite friends and earn rewards!")
+    .setTitle("Referral Rewards Program")
+    .setDescription("Invite hackathon participants and earn rewards! Referrals must register for BOTH phases and submit work to count.")
     .addFields(
       {
-        name: "Bronze (1 referral)",
-        value: "Badge + 100 spots up",
+        name: "Starter Tier (5 referrals)",
+        value: "$20 worth of Cortex Linux credit",
         inline: true,
       },
       {
-        name: "Silver (3 referrals)",
-        value: "Discord access",
+        name: "Community Tier (20 referrals)",
+        value: "Goodies package: shirt, water bottle, notebook",
         inline: true,
       },
       {
-        name: "Gold (5 referrals)",
-        value: "Swag pack",
+        name: "Ambassador Tier (50 referrals)",
+        value: "Cortex Linux Premium (3 months) + full goodies bundle",
         inline: true,
       },
       {
-        name: "Platinum (10 referrals)",
-        value: "1 month Pro free",
-        inline: true,
+        name: "Multi-University Recruiter",
+        value: "Recruit from 3+ universities for special recognition",
+        inline: false,
       },
       {
-        name: "Diamond (20 referrals)",
-        value: "Ambassador status",
-        inline: true,
-      },
-      {
-        name: "Legendary (50 referrals)",
-        value: "Lifetime VIP",
-        inline: true,
+        name: "Community Ambassador",
+        value: "Bring large groups for ambassador status + direct team access",
+        inline: false,
       }
     )
-    .setFooter({ text: "cortexlinux.com/referrals" });
+    .setFooter({ text: "cortexlinux.com/referrals • Referrals must complete both hackathon phases" });
 }
 
 /**

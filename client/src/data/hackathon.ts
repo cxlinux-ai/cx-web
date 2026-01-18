@@ -335,9 +335,9 @@ export const hackathonPhases: HackathonPhase[] = [
       { place: "1st Place", amount: "$5,000" },
       { place: "2nd Place", amount: "$3,000" },
       { place: "3rd Place", amount: "$2,000" },
-      { place: "4th-7th Place", amount: "$700 each" }
+      { place: "4th-10th Place", amount: "$700 worth of goodies + 2 months managed service each" }
     ],
-    prizeTotal: "$12,800",
+    prizeTotal: "$10,000 cash + $4,900 worth in prizes",
     criteria: [
       { name: "Code Quality", weight: "30%", description: "Readability, structure, best practices" },
       { name: "Usefulness", weight: "25%", description: "Real-world value, problem solved" },
@@ -490,9 +490,9 @@ export const hackathonConfig = {
   tagline: "From Ideas to Code. From Code to Production.",
   startDate: new Date("2026-02-17T00:00:00"),
   totalWeeks: 14,
-  totalPrizePool: "$17,000",
+  totalPrizePool: "$13,800 cash + $4,900 worth of prizes",
   ideathonPrize: "$3,800",
-  buildSprintPrize: "$12,800",
+  buildSprintPrize: "$10,000 cash + $4,900 worth",
   expectedParticipants: "5,000+",
   expectedIdeas: "4000+",
   expectedPRs: "100+",
@@ -568,8 +568,8 @@ export const hackathonBenefits = [
     description: "Connect with 3,000+ developers globally who ship real products, not just tutorials. Builders who became maintainers started right here."
   },
   {
-    title: "Compete for $17,000 in Prizes",
-    description: "Real money for real contributions. $3,800 for Ideathon, $12,800 for Build Sprint. Plus maintainer roles and swag."
+    title: "Compete for $18,700 in Prizes",
+    description: "Real rewards for real contributions. $3,800 for Ideathon, $10,000 cash + $4,900 worth of goodies for Build Sprint. Plus maintainer roles and swag."
   },
   {
     title: "Shape the Future of Cortex",

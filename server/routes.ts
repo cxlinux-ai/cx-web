@@ -574,7 +574,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Overview");
       doc.moveDown(0.5);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("The Cortex Hackathon 2026 is a 13-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $17,000.", { align: "left", lineGap: 4 });
+         .text("The Cortex Hackathon 2026 is a 13-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $18,700 ($13,800 cash + $4,900 worth of goodies & services).", { align: "left", lineGap: 4 });
       doc.moveDown(1.5);
       
       // Phase 1: Ideathon
@@ -608,7 +608,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("Timeline: Weeks 5-13 (9 weeks)", { lineGap: 3 })
-         .text("Prize Pool: $12,800", { lineGap: 3 })
+         .text("Prize Pool: $10,000 cash + $4,900 worth of goodies", { lineGap: 3 })
          .text("Goal: Build and ship production-ready code", { lineGap: 3 });
       doc.moveDown(0.5);
       
@@ -623,7 +623,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("  • 1st Place: $5,000", { lineGap: 2 })
          .text("  • 2nd Place: $3,000", { lineGap: 2 })
          .text("  • 3rd Place: $2,000", { lineGap: 2 })
-         .text("  • 4th-7th Place: $700 each (Goodie package + 2 months managed)", { lineGap: 2 });
+         .text("  • 4th-10th Place: $700 worth of goodies + 2 months managed service each (not cash)", { lineGap: 2 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Judging Criteria:", { lineGap: 3 });
       doc.font("Helvetica")

@@ -341,7 +341,8 @@ export default function HackathonRulesPage() {
               </div>
 
               <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-emerald-500/10 border border-yellow-500/30 rounded-xl mb-6 text-center">
-                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$17,000</span></p>
+                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$13,800 cash + $4,900 worth of prizes</span></p>
+                <p className="text-sm text-gray-400 mt-1">(1st-3rd place cash, 4th-10th place goodies + managed service)</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -374,7 +375,7 @@ export default function HackathonRulesPage() {
                 </div>
 
                 <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $12,800</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $10,000 cash + $4,900 worth of prizes</h3>
                   <p className="text-gray-400 text-sm mb-4">Build and ship real code via Pull Requests.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
@@ -390,11 +391,11 @@ export default function HackathonRulesPage() {
                       <span className="text-blue-300 font-semibold">$2,000</span>
                     </li>
                     <li className="flex justify-between">
-                      <span>4th–7th Place</span>
-                      <span className="text-blue-300 font-semibold">$700 each</span>
+                      <span>4th–10th Place</span>
+                      <span className="text-blue-300 font-semibold">$700 worth of goodies each</span>
                     </li>
                   </ul>
-                  <p className="text-xs text-gray-500 mt-3">4th-7th: Goodie package + 2 months managed service</p>
+                  <p className="text-xs text-gray-500 mt-3">4th-10th: $700 worth of goodies + 2 months Cortex Linux managed service (not cash)</p>
                 </div>
               </div>
 

@@ -33,6 +33,10 @@ import {
   Lightbulb,
   Download,
   ClipboardList,
+  Mail,
+  Handshake,
+  Building,
+  Megaphone,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -678,7 +682,7 @@ export default function Hackathon() {
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
               <Trophy size={16} className="text-yellow-400" />
-              <span className="text-terminal-green font-semibold">$17,000</span> in Prizes
+              <span className="text-terminal-green font-semibold">$18,700</span> in Prizes
             </span>
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
@@ -891,7 +895,7 @@ export default function Hackathon() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
                     <Trophy size={16} className="text-terminal-green" />
-                    <span className="text-terminal-green font-semibold">$12,800</span>
+                    <span className="text-terminal-green font-semibold">$10K cash + prizes</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock size={16} className="text-gray-400" />
@@ -1005,9 +1009,9 @@ export default function Hackathon() {
                     <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-13</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className="text-terminal-green font-semibold">$12,800 in prizes</span>
-                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K, 4th-7th: $700</span>
+                  <div className="flex items-center gap-4 text-sm flex-wrap">
+                    <span className="text-terminal-green font-semibold">$10K cash + $4.9K worth of prizes</span>
+                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K | 4th-10th: $700 worth of goodies + 2 months managed service</span>
                   </div>
                 </div>
               </motion.div>
@@ -1570,6 +1574,240 @@ export default function Hackathon() {
           <TeamAccordion />
         </div>
       </section>
+      {/* Long-term Relationship Messaging */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-terminal-green/10 border border-terminal-green/30 text-terminal-green text-sm mb-6">
+              <Handshake size={16} />
+              Beyond the Hackathon
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Build a <span className="text-terminal-green">Lasting Relationship</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Top performers aren't just winning prizes — they're opening doors to ongoing opportunities with Cortex Linux
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-terminal-green/10 to-emerald-900/5 border border-terminal-green/20 rounded-2xl p-6 text-center"
+            >
+              <div className="w-14 h-14 rounded-xl bg-terminal-green/20 flex items-center justify-center mx-auto mb-4">
+                <GitPullRequest size={28} className="text-terminal-green" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Long-term Contracts</h3>
+              <p className="text-sm text-gray-400">
+                Outstanding contributors may be considered for ongoing development contracts with Cortex Linux
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-blue-500/10 to-blue-900/5 border border-blue-500/20 rounded-2xl p-6 text-center"
+            >
+              <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
+                <Users size={28} className="text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Ongoing Relationships</h3>
+              <p className="text-sm text-gray-400">
+                Join our inner circle of contributors with direct access to the core team and roadmap discussions
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 border border-purple-500/20 rounded-2xl p-6 text-center"
+            >
+              <div className="w-14 h-14 rounded-xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
+                <Rocket size={28} className="text-purple-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Future Collaborations</h3>
+              <p className="text-sm text-gray-400">
+                Be first in line for future projects, beta features, and collaborative opportunities
+              </p>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
+          >
+            <p className="text-sm text-gray-400">
+              <span className="text-terminal-green font-medium">Note:</span> Specific opportunities are discussed individually based on hackathon performance and project alignment with Cortex Linux goals
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Partner/Sponsor Section */}
+      <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <Handshake size={16} />
+              Partnership Opportunities
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Partner With <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Cortex Linux</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Join our hackathon as a partner and connect with {hackathonConfig.expectedParticipants} talented developers, designers, and innovators
+            </p>
+          </motion.div>
+
+          {/* Partner Categories */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-gradient-to-br from-blue-500/10 to-blue-900/5 border border-blue-500/20 rounded-2xl p-6"
+            >
+              <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+                <Building size={24} className="text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Universities</h3>
+              <p className="text-sm text-gray-400 mb-4">
+                Promote your CS/engineering programs to engaged student developers. Great for recruitment and visibility.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-blue-400" />
+                  Logo on website
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-blue-400" />
+                  Social media shoutouts
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-blue-400" />
+                  Discord announcement
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 border border-purple-500/20 rounded-2xl p-6"
+            >
+              <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                <Star size={24} className="text-purple-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Tech Partners</h3>
+              <p className="text-sm text-gray-400 mb-4">
+                Showcase your tools, APIs, or services to developers actively building projects.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-purple-400" />
+                  Prominent branding
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-purple-400" />
+                  Track sponsorship options
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-purple-400" />
+                  Direct participant access
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-pink-500/10 to-pink-900/5 border border-pink-500/20 rounded-2xl p-6"
+            >
+              <div className="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center mb-4">
+                <Megaphone size={24} className="text-pink-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Influencers</h3>
+              <p className="text-sm text-gray-400 mb-4">
+                Tech content creators can partner with us to promote the hackathon and Cortex Linux.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-pink-400" />
+                  Co-marketing opportunities
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-pink-400" />
+                  Community crossover
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-pink-400" />
+                  Exclusive content access
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+
+          {/* Partnership CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 border border-purple-500/20 rounded-2xl p-8 text-center"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Interested in Partnering?</h3>
+            <p className="text-gray-400 max-w-xl mx-auto mb-6">
+              We discuss partnership terms individually to ensure mutual benefit. Reach out and let's explore how we can work together.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href="mailto:partnerships@cortexlinux.com?subject=Hackathon Partnership Inquiry"
+                className="flex items-center gap-2 px-6 py-3 bg-purple-500 hover:bg-purple-600 rounded-xl text-white font-medium transition-colors"
+                data-testid="cta-partnership-email"
+              >
+                <Mail size={18} />
+                partnerships@cortexlinux.com
+              </a>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 rounded-xl text-white font-medium transition-colors"
+                data-testid="cta-partnership-discord"
+              >
+                <FaDiscord size={18} />
+                Join Discord to Chat
+              </a>
+            </div>
+            <p className="text-xs text-gray-500 mt-4">
+              All partnerships include website visibility, social media mentions, and Discord announcements
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-3xl mx-auto">

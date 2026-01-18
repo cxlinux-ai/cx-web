@@ -428,8 +428,8 @@ async function handleHackathonCommand(
 ): Promise<void> {
   const embed = new EmbedBuilder()
     .setColor(0xf59e0b)
-    .setTitle("Cortex Linux Hackathon 2026")
-    .setDescription("$17,000 in prizes - Build the future of AI-powered Linux!")
+    .setTitle("The First AI Linux Hackathon Worldwide")
+    .setDescription("$13,800 cash + $4,900 worth of prizes - Build the future of AI-powered Linux!")
     .addFields(
       {
         name: "Phase 1: Ideathon",
@@ -438,7 +438,7 @@ async function handleHackathonCommand(
       },
       {
         name: "Phase 2: Hackathon",
-        value: "Weeks 5-13 | $12,800 prizes\nBuild production-ready code",
+        value: "Weeks 5-13 | $10K cash + prizes\nBuild production-ready code",
         inline: true,
       },
       {
@@ -447,7 +447,7 @@ async function handleHackathonCommand(
       },
       {
         name: "Top Prizes",
-        value: "1st: $5,000 | 2nd: $3,000 | 3rd: $2,000 | 4th-7th: $700",
+        value: "1st: $5K | 2nd: $3K | 3rd: $2K | 4th-10th: $700 worth of goodies + 2mo managed service",
       }
     )
     .setURL("https://cortexlinux.com/hackathon");
@@ -877,13 +877,14 @@ const SERVER_SETUP = {
       channels: [
         {
           name: "hackathon",
-          topic: "$17,000 in prizes! Build the future of AI-powered Linux.",
+          topic: "$18,700 in prizes! Build the future of AI-powered Linux.",
           welcome: {
-            title: "Cortex Hackathon 2026",
-            description: "$17,000 in prizes - Build the future of AI-powered Linux!",
+            title: "The First AI Linux Hackathon Worldwide",
+            description: "$13,800 cash + $4,900 worth of prizes - Build the future of AI-powered Linux!",
             color: 0xf59e0b,
             fields: [
-              { name: "Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000 • 4th-7th: $700" },
+              { name: "Cash Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000" },
+              { name: "4th-10th Place", value: "$700 worth of goodies + 2 months Cortex managed service each" },
               { name: "How to Join", value: "Register at [cortexlinux.com/hackathon](https://cortexlinux.com/hackathon)" },
             ]
           }
