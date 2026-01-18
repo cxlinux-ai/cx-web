@@ -42,6 +42,8 @@ import {
   Building2,
   Heart,
   Crown,
+  BarChart3,
+  TrendingUp,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -343,7 +345,7 @@ const teamMembers: TeamMember[] = [
   }
 ];
 
-const trackVisuals: Record<string, { gradient: string; snippet: string; icon: string }> = {
+const trackVisuals: Record<string, { gradient: string; snippet: string; icon: string; skills: { name: string; level: number; color: string }[]; stats: { submissions: number; avgScore: number; participants: number } }> = {
   "cli-commands": {
     gradient: "from-emerald-500/20 via-emerald-500/10 to-transparent",
     snippet: `$ cortex organize ~/Downloads
@@ -353,7 +355,13 @@ Created: Images/Screenshots (89 files)
 Created: Archives (31 files)
 Moved: 85 misc files to categorized folders
 Done in 2.3s`,
-    icon: "Terminal"
+    icon: "Terminal",
+    skills: [
+      { name: "Bash/Shell", level: 85, color: "bg-emerald-500" },
+      { name: "Python", level: 60, color: "bg-blue-500" },
+      { name: "Regex", level: 45, color: "bg-purple-500" },
+    ],
+    stats: { submissions: 127, avgScore: 8.4, participants: 342 }
   },
   "plugins": {
     gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
@@ -366,7 +374,13 @@ export class VSCodeBridge extends CortexPlugin {
     vscode.window.showInformation(result);
   }
 }`,
-    icon: "Puzzle"
+    icon: "Puzzle",
+    skills: [
+      { name: "TypeScript", level: 90, color: "bg-blue-500" },
+      { name: "Node.js", level: 75, color: "bg-emerald-500" },
+      { name: "API Design", level: 65, color: "bg-purple-500" },
+    ],
+    stats: { submissions: 89, avgScore: 8.7, participants: 256 }
   },
   "ai-integrations": {
     gradient: "from-purple-500/20 via-purple-500/10 to-transparent",
@@ -378,7 +392,13 @@ Found 3 critical issues:
 - SSL certificate expires in 7 days
 - Rate limiting triggered 142 times
 - 502 errors from upstream server`,
-    icon: "Brain"
+    icon: "Brain",
+    skills: [
+      { name: "Python/ML", level: 95, color: "bg-purple-500" },
+      { name: "LLM APIs", level: 80, color: "bg-pink-500" },
+      { name: "Data Processing", level: 70, color: "bg-blue-500" },
+    ],
+    stats: { submissions: 156, avgScore: 8.9, participants: 421 }
   },
   "infra-tools": {
     gradient: "from-yellow-500/20 via-amber-500/10 to-transparent",
@@ -389,7 +409,13 @@ Updating Kubernetes deployment...
 Rolling update: 3/3 pods ready
 Health check passed
 Deployment complete!`,
-    icon: "Server"
+    icon: "Server",
+    skills: [
+      { name: "Docker/K8s", level: 85, color: "bg-amber-500" },
+      { name: "Linux Admin", level: 90, color: "bg-emerald-500" },
+      { name: "Networking", level: 60, color: "bg-blue-500" },
+    ],
+    stats: { submissions: 72, avgScore: 8.6, participants: 198 }
   }
 };
 
@@ -472,6 +498,98 @@ function BuildTracksShowcase() {
             </span>
           </div>
         </div>
+        
+        {/* Skills & Stats Visualization */}
+        <motion.div
+          key={`stats-${activeTrack}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="mt-6 grid grid-cols-2 gap-4"
+        >
+          {/* Skills Bar Chart */}
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <BarChart3 size={14} className="text-gray-400" />
+              <span className="text-xs text-gray-400 uppercase tracking-wide">Skills Needed</span>
+            </div>
+            <div className="space-y-3">
+              {visual.skills.map((skill, i) => (
+                <div key={skill.name}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-gray-300">{skill.name}</span>
+                    <span className="text-xs text-gray-500">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${skill.level}%` }}
+                      transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
+                      className={`h-full ${skill.color} rounded-full`}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Activity Graph (GitHub-style) */}
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <TrendingUp size={14} className="text-gray-400" />
+              <span className="text-xs text-gray-400 uppercase tracking-wide">Activity</span>
+            </div>
+            <div className="grid grid-cols-7 gap-1">
+              {Array.from({ length: 28 }).map((_, i) => {
+                const intensities = [0.1, 0.2, 0.35, 0.45, 0.55, 0.7, 0.85, 0.95];
+                const intensity = intensities[i % intensities.length];
+                const getColor = () => {
+                  if (currentTrack.color.includes('emerald')) {
+                    return intensity > 0.8 ? 'bg-emerald-500' :
+                           intensity > 0.5 ? 'bg-emerald-500/60' :
+                           intensity > 0.3 ? 'bg-emerald-500/30' : 'bg-white/10';
+                  } else if (currentTrack.color.includes('purple')) {
+                    return intensity > 0.8 ? 'bg-purple-500' :
+                           intensity > 0.5 ? 'bg-purple-500/60' :
+                           intensity > 0.3 ? 'bg-purple-500/30' : 'bg-white/10';
+                  } else if (currentTrack.color.includes('amber') || currentTrack.color.includes('yellow')) {
+                    return intensity > 0.8 ? 'bg-amber-500' :
+                           intensity > 0.5 ? 'bg-amber-500/60' :
+                           intensity > 0.3 ? 'bg-amber-500/30' : 'bg-white/10';
+                  }
+                  return intensity > 0.8 ? 'bg-blue-500' :
+                         intensity > 0.5 ? 'bg-blue-500/60' :
+                         intensity > 0.3 ? 'bg-blue-500/30' : 'bg-white/10';
+                };
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2, delay: i * 0.02 }}
+                    className={`aspect-square rounded-sm ${getColor()}`}
+                    title={`${Math.floor(intensity * 10)} contributions`}
+                  />
+                );
+              })}
+            </div>
+            {/* Stats row */}
+            <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+              <div className="text-center">
+                <div className="text-lg font-bold text-white">{visual.stats.participants}</div>
+                <div className="text-xs text-gray-500">Participants</div>
+              </div>
+              <div className="text-center">
+                <div className="text-lg font-bold text-terminal-green">{visual.stats.avgScore}</div>
+                <div className="text-xs text-gray-500">Avg Score</div>
+              </div>
+              <div className="text-center">
+                <div className="text-lg font-bold text-white">{visual.stats.submissions}</div>
+                <div className="text-xs text-gray-500">PRs</div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
         
         {/* Decorative elements */}
         <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-white/5 rounded-2xl -z-10" />
@@ -1087,7 +1205,7 @@ export default function Hackathon() {
                   data-testid={`perk-card-${perk.title.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {isCredit && (
-                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
+                    <div className="gradient-text" />
                   )}
                   <div className={`relative h-full bg-white/5 backdrop-blur-xl border ${isCredit ? 'border-cyan-500/40' : 'border-white/10'} rounded-2xl p-6 hover:border-cyan-400/40 transition-all duration-300`}>
                     <div className={`w-12 h-12 rounded-xl ${isCredit ? 'bg-gradient-to-br from-cyan-500/30 to-blue-500/30' : 'bg-white/10'} flex items-center justify-center mb-4`}>
@@ -1144,7 +1262,7 @@ export default function Hackathon() {
               Two Pathways
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Choose Your <span className="text-blue-300">Journey</span>
+              Choose Your <span className="gradient-text">Journey</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Contribute ideas in Phase 1 or build code in Phase 2. Both paths lead to recognition and rewards.
@@ -1260,7 +1378,7 @@ export default function Hackathon() {
               Program Roadmap
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              13-Week Program Timeline
+              13-Week <span className="gradient-text">Program Timeline</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               Clear milestones from start to finish. Know exactly what happens and when.
@@ -1361,7 +1479,7 @@ export default function Hackathon() {
           >
             <h2 className="text-2xl sm:text-3xl font-bold mb-3">
               <span className="text-white">Code First,</span>{" "}
-              <span className="text-blue-300">Not Pitch Decks</span>
+              <span className="gradient-text">Not Pitch Decks</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               {hackathonConfig.philosophy.description}
@@ -1657,7 +1775,7 @@ export default function Hackathon() {
               Choose Your Track
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              What Will You <span className="text-blue-300">Build</span>?
+              What Will You <span className="gradient-text">Build?</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Pick a track that matches your skills and interests. All contributions welcome.
@@ -1682,7 +1800,7 @@ export default function Hackathon() {
               Category Awards
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              More Ways to <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Win</span>
+              More Ways to <span className="gradient-text">Win</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Separate from main prizes — win in your specialty and get Cortex Linux Premium
@@ -2023,7 +2141,7 @@ export default function Hackathon() {
               The People Behind the Hackathon
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Meet the <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Team</span>
+              Meet the <span className="gradient-text">Team</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
               Click on any card to learn more about our team members
@@ -2047,7 +2165,7 @@ export default function Hackathon() {
               Beyond the Hackathon
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Build a <span className="text-terminal-green">Lasting Relationship</span>
+              Build a <span className="gradient-text">Lasting Relationship</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Top performers aren't just winning prizes — they're opening doors to ongoing opportunities with Cortex Linux
@@ -2129,7 +2247,7 @@ export default function Hackathon() {
               Partnership Opportunities
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Partner With <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Cortex Linux</span>
+              Partner With <span className="gradient-text">Cortex Linux</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Join our hackathon as a partner and connect with {hackathonConfig.expectedParticipants} talented developers, designers, and innovators
