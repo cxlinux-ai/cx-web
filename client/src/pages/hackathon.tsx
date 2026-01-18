@@ -1927,77 +1927,121 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
-          {/* Streamlined Timeline */}
-          <div className="space-y-6">
+          {/* Phase Details - Full Information */}
+          <div className="space-y-16">
             {hackathonPhases.map((phase, index) => (
               <motion.div
                 key={phase.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="relative"
               >
-                <div className="flex gap-4 md:gap-6">
-                  <div className="flex flex-col items-center">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-lg ${
-                      phase.number === 1 ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" :
-                      "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                    }`}>
-                      {phase.number}
-                    </div>
-                    {index < hackathonPhases.length - 1 && (
-                      <div className="w-0.5 flex-1 bg-gradient-to-b from-white/20 to-transparent mt-3" />
+                {/* Phase Header */}
+                <div className={`border-l-4 ${phase.number === 1 ? "border-blue-500" : "border-purple-500"} pl-6 mb-8`}>
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <span className={`text-sm font-semibold uppercase tracking-wider ${phase.color}`}>
+                      Stage {phase.number}
+                    </span>
+                    <span className="text-gray-600">|</span>
+                    <span className="text-sm text-gray-400">{phase.weeks}</span>
+                    <span className="text-gray-600">|</span>
+                    <span className="text-sm text-gray-400">{phase.duration}</span>
+                    {phase.prizeTotal && (
+                      <>
+                        <span className="text-gray-600">|</span>
+                        <span className="text-sm font-semibold text-terminal-green">{phase.prizeTotal}</span>
+                      </>
                     )}
                   </div>
-                  
-                  <div className="flex-1 pb-8">
-                    <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <h3 className="text-xl font-bold text-white">{phase.title}</h3>
-                      <span className={`text-xs px-2.5 py-1 rounded-full ${
-                        phase.number === 1 ? "bg-blue-500/20 text-blue-300" : "bg-purple-500/20 text-purple-300"
-                      }`}>
-                        {phase.weeks}
-                      </span>
-                      {phase.prizeTotal && (
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-terminal-green/20 text-terminal-green">
-                          {phase.prizeTotal}
-                        </span>
-                      )}
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">{phase.title}</h3>
+                  <p className="text-lg text-gray-500 italic">Goal: {phase.goal}</p>
+                </div>
+
+                {/* Description */}
+                <p className="text-gray-300 text-base leading-relaxed mb-8 max-w-3xl">
+                  {phase.description}
+                </p>
+
+                {/* Content Grid */}
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  {/* Requirements or Activities */}
+                  {(phase.requirements || phase.activities) && (
+                    <div>
+                      <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+                        <CheckCircle2 size={16} className={phase.color} />
+                        {phase.requirements ? "Requirements" : "Activities"}
+                      </h4>
+                      <ul className="space-y-3">
+                        {(phase.requirements || phase.activities || []).map((item, i) => (
+                          <li key={i} className="flex items-start gap-3 text-gray-400">
+                            <ArrowRight size={14} className={`mt-1 flex-shrink-0 ${phase.color}`} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="text-sm text-gray-500 italic mb-3">Goal: {phase.goal}</p>
-                    <p className="text-gray-400 text-sm mb-4 max-w-2xl">{phase.description}</p>
-                    
-                    <div className="flex flex-wrap gap-3">
-                      {phase.requirements && phase.requirements.slice(0, 3).map((req, i) => (
-                        <span key={i} className="text-xs px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 border border-white/10">
-                          {req.length > 40 ? req.slice(0, 40) + '...' : req}
-                        </span>
+                  )}
+
+                  {/* Prizes */}
+                  {phase.prizes && phase.prizes.length > 0 && (
+                    <div>
+                      <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+                        <Trophy size={16} className="text-terminal-green" />
+                        Prize Breakdown
+                      </h4>
+                      <div className="space-y-2">
+                        {phase.prizes.map((prize, i) => (
+                          <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                            <span className="text-gray-400">{prize.place}</span>
+                            <span className="font-semibold text-terminal-green">{prize.amount}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Judging Criteria */}
+                {phase.criteria && phase.criteria.length > 0 && (
+                  <div className="mb-8">
+                    <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4 flex items-center gap-2">
+                      <Star size={16} className="text-amber-400" />
+                      Judging Criteria
+                    </h4>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {phase.criteria.map((criterion, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <span className={`text-sm font-bold ${phase.color} min-w-[40px]`}>{criterion.weight}</span>
+                          <div>
+                            <span className="text-white font-medium">{criterion.name}</span>
+                            <p className="text-sm text-gray-500">{criterion.description}</p>
+                          </div>
+                        </div>
                       ))}
-                      {phase.activities && phase.activities.slice(0, 3).map((activity, i) => (
-                        <span key={i} className="text-xs px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 border border-white/10">
-                          {activity.length > 40 ? activity.slice(0, 40) + '...' : activity}
-                        </span>
-                      ))}
-                      {phase.cta && (
-                        <a
-                          href={phase.cta.href}
-                          target={phase.cta.external ? "_blank" : undefined}
-                          rel={phase.cta.external ? "noopener noreferrer" : undefined}
-                          className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg font-medium transition-colors ${
-                            phase.number === 1 
-                              ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30" 
-                              : "bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
-                          }`}
-                          data-testid={`phase-${phase.id}-cta`}
-                        >
-                          {phase.cta.text}
-                          <ArrowRight size={12} />
-                        </a>
-                      )}
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* CTA */}
+                {phase.cta && (
+                  <a
+                    href={phase.cta.href}
+                    target={phase.cta.external ? "_blank" : undefined}
+                    rel={phase.cta.external ? "noopener noreferrer" : undefined}
+                    className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${phase.color} hover:underline`}
+                    data-testid={`phase-${phase.id}-cta`}
+                  >
+                    {phase.cta.text}
+                    <ArrowRight size={16} />
+                  </a>
+                )}
+
+                {/* Divider between phases */}
+                {index < hackathonPhases.length - 1 && (
+                  <div className="mt-12 border-t border-white/10" />
+                )}
               </motion.div>
             ))}
           </div>
