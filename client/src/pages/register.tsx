@@ -44,7 +44,7 @@ export default function Register() {
         >
           <div className="flex items-center gap-2 text-sm">
             <Trophy size={18} className="text-terminal-green" />
-            <span className="text-terminal-green font-semibold">$18,700</span>
+            <span className="text-terminal-green font-semibold">$15,000</span>
             <span className="text-gray-400">in Prizes</span>
           </div>
           <div className="flex items-center gap-2 text-sm">

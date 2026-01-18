@@ -1183,7 +1183,7 @@ export default function Hackathon() {
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
               <Trophy size={16} className="text-yellow-400" />
-              <span className="text-terminal-green font-semibold">$18,700</span> in Prizes
+              <span className="text-terminal-green font-semibold">$15,000</span> in Prizes
             </span>
             <span className="text-gray-600">·</span>
             <span className="flex items-center gap-2 text-sm">
@@ -1906,10 +1906,78 @@ export default function Hackathon() {
             </div>
           </motion.div>
 
-          {/* Phase Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* Streamlined Timeline */}
+          <div className="space-y-6">
             {hackathonPhases.map((phase, index) => (
-              <PhaseCard key={phase.id} phase={phase} index={index} />
+              <motion.div
+                key={phase.id}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative"
+              >
+                <div className="flex gap-4 md:gap-6">
+                  <div className="flex flex-col items-center">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-lg ${
+                      phase.number === 1 ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" :
+                      "bg-purple-500/20 text-purple-300 border border-purple-500/30"
+                    }`}>
+                      {phase.number}
+                    </div>
+                    {index < hackathonPhases.length - 1 && (
+                      <div className="w-0.5 flex-1 bg-gradient-to-b from-white/20 to-transparent mt-3" />
+                    )}
+                  </div>
+                  
+                  <div className="flex-1 pb-8">
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-white">{phase.title}</h3>
+                      <span className={`text-xs px-2.5 py-1 rounded-full ${
+                        phase.number === 1 ? "bg-blue-500/20 text-blue-300" : "bg-purple-500/20 text-purple-300"
+                      }`}>
+                        {phase.weeks}
+                      </span>
+                      {phase.prizeTotal && (
+                        <span className="text-xs px-2.5 py-1 rounded-full bg-terminal-green/20 text-terminal-green">
+                          {phase.prizeTotal}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500 italic mb-3">Goal: {phase.goal}</p>
+                    <p className="text-gray-400 text-sm mb-4 max-w-2xl">{phase.description}</p>
+                    
+                    <div className="flex flex-wrap gap-3">
+                      {phase.requirements && phase.requirements.slice(0, 3).map((req, i) => (
+                        <span key={i} className="text-xs px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 border border-white/10">
+                          {req.length > 40 ? req.slice(0, 40) + '...' : req}
+                        </span>
+                      ))}
+                      {phase.activities && phase.activities.slice(0, 3).map((activity, i) => (
+                        <span key={i} className="text-xs px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 border border-white/10">
+                          {activity.length > 40 ? activity.slice(0, 40) + '...' : activity}
+                        </span>
+                      ))}
+                      {phase.cta && (
+                        <a
+                          href={phase.cta.href}
+                          target={phase.cta.external ? "_blank" : undefined}
+                          rel={phase.cta.external ? "noopener noreferrer" : undefined}
+                          className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                            phase.number === 1 
+                              ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30" 
+                              : "bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
+                          }`}
+                          data-testid={`phase-${phase.id}-cta`}
+                        >
+                          {phase.cta.text}
+                          <ArrowRight size={12} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

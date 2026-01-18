@@ -341,61 +341,57 @@ export default function HackathonRulesPage() {
               </div>
 
               <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-emerald-500/10 border border-yellow-500/30 rounded-xl mb-6 text-center">
-                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$13,800 cash + $4,900 worth of prizes</span></p>
-                <p className="text-sm text-gray-400 mt-1">(1st-3rd place cash, 4th-10th place goodies + managed service)</p>
+                <p className="text-2xl font-bold text-white">Total Prize Pool: <span className="text-emerald-400">$15,000</span></p>
+                <p className="text-sm text-gray-400 mt-1">($3,000 Ideathon + $12,000 Build Sprint)</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl border border-emerald-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: Ideathon — $3,800</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 1: Ideathon — $3,000</h3>
                   <p className="text-gray-400 text-sm mb-4">Submit monetizable feature ideas via GitHub Issues.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
                       <span>1st Place</span>
-                      <span className="text-emerald-400 font-semibold">$250</span>
+                      <span className="text-emerald-400 font-semibold">$500</span>
                     </li>
                     <li className="flex justify-between">
                       <span>2nd Place</span>
-                      <span className="text-emerald-400 font-semibold">$250</span>
+                      <span className="text-emerald-400 font-semibold">$400</span>
                     </li>
                     <li className="flex justify-between">
                       <span>3rd Place</span>
-                      <span className="text-emerald-400 font-semibold">$250</span>
+                      <span className="text-emerald-400 font-semibold">$300</span>
                     </li>
                     <li className="flex justify-between">
                       <span>4th–10th Place</span>
-                      <span className="text-emerald-400 font-semibold">$150 each</span>
+                      <span className="text-emerald-400 font-semibold">$200 each</span>
                     </li>
                     <li className="flex justify-between">
-                      <span>11th–30th Place</span>
+                      <span>11th–15th Place</span>
                       <span className="text-emerald-400 font-semibold">$100 each</span>
                     </li>
                   </ul>
-                  <p className="text-xs text-gray-500 mt-3">11th-30th: Goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium</p>
+                  <p className="text-xs text-gray-500 mt-3">All winners receive a mention in the Cortex Linux contributor hall of fame</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
-                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $10,000 cash + $4,900 worth of prizes</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">Phase 2: Hackathon — $12,000</h3>
                   <p className="text-gray-400 text-sm mb-4">Build and ship real code via Pull Requests.</p>
                   <ul className="space-y-2 text-gray-400 text-sm">
                     <li className="flex justify-between">
                       <span>1st Place</span>
-                      <span className="text-blue-300 font-semibold">$5,000</span>
+                      <span className="text-blue-300 font-semibold">$6,000</span>
                     </li>
                     <li className="flex justify-between">
                       <span>2nd Place</span>
-                      <span className="text-blue-300 font-semibold">$3,000</span>
+                      <span className="text-blue-300 font-semibold">$3,500</span>
                     </li>
                     <li className="flex justify-between">
                       <span>3rd Place</span>
-                      <span className="text-blue-300 font-semibold">$2,000</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span>4th–10th Place</span>
-                      <span className="text-blue-300 font-semibold">$700 worth of goodies each</span>
+                      <span className="text-blue-300 font-semibold">$2,500</span>
                     </li>
                   </ul>
-                  <p className="text-xs text-gray-500 mt-3">4th-10th: $700 worth of goodies + 2 months Cortex Linux managed service (not cash)</p>
+                  <p className="text-xs text-gray-500 mt-3">Top 3 also receive maintainer roles and exclusive swag</p>
                 </div>
               </div>
 
