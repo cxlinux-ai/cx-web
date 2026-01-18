@@ -93,7 +93,7 @@ export default function HackathonRulesPage() {
                 <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
               </div>
               <p className="text-gray-400 leading-relaxed">
-                Cortex Linux ("Organizer") is hosting the Cortex Hackathon 2026, a global, 13-week program designed to crowdsource monetization strategies and transform the best ideas into production-ready code. Participation in the hackathon implies agreement with the following rules, terms, and conditions.
+                Cortex Linux ("Organizer") is hosting the Cortex Hackathon 2026, a global, 17-week program designed to crowdsource monetization strategies and transform the best ideas into production-ready code. Participation in the hackathon implies agreement with the following rules, terms, and conditions.
               </p>
               <p className="text-gray-400 leading-relaxed mt-4">
                 This document outlines legal responsibilities, participant commitments, intellectual property considerations, code of conduct, judging criteria, and other essential rules.

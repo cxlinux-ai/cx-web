@@ -1096,7 +1096,7 @@ export default function Hackathon() {
             transition={{ delay: 0.25 }}
             className="text-sm sm:text-base text-gray-500 tracking-widest uppercase mb-6"
           >
-            February 17, 2026 · 13-Week Program · Two Phases
+            February 17, 2026 · 17-Week Program · Two Phases
           </motion.p>
 
           {/* Description */}
@@ -1531,7 +1531,7 @@ export default function Hackathon() {
               Program Roadmap
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-              13-Week <span className="gradient-text">Program Timeline</span>
+              17-Week <span className="gradient-text">Program Timeline</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
               Clear milestones from start to finish. Know exactly what happens and when.
@@ -1562,13 +1562,13 @@ export default function Hackathon() {
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Submit monetizable feature ideas. No coding required.</p>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-terminal-green font-semibold">$3,800 in prizes</span>
+                    <span className="text-terminal-green font-semibold">$3,000 in prizes</span>
                     <span className="text-gray-500">Top 30 ideas win</span>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Week 5-9: Build Sprint */}
+              {/* Week 5-8: Break */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -1576,14 +1576,35 @@ export default function Hackathon() {
                 transition={{ delay: 0.1 }}
                 className="flex gap-4 sm:gap-6"
               >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gray-600 flex items-center justify-center text-white font-bold text-sm relative z-10">
+                  5-8
+                </div>
+                <div className="flex-1 bg-gray-500/10 border border-gray-500/30 rounded-xl p-5 border-dashed">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Clock size={18} className="text-gray-400" />
+                    <h3 className="font-bold text-gray-300">1-Month Break</h3>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-gray-500/20 text-gray-400">Weeks 5-8</span>
+                  </div>
+                  <p className="text-sm text-gray-500">Prepare for Phase 2. Review winning ideas. Form teams.</p>
+                </div>
+              </motion.div>
+
+              {/* Week 9-13: Build Sprint */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex gap-4 sm:gap-6"
+              >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  5-9
+                  9-13
                 </div>
                 <div className="flex-1 bg-blue-500/10 border border-blue-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <Code2 size={18} className="text-blue-300" />
                     <h3 className="font-bold text-white">Phase 2: Build Sprint</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 5-9</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300">Weeks 9-13</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code and submit Pull Requests. Build real features.</p>
                   <div className="flex items-center gap-4 text-sm">
@@ -1593,27 +1614,27 @@ export default function Hackathon() {
                 </div>
               </motion.div>
 
-              {/* Week 10-13: Review Period */}
+              {/* Week 14-17: Review Period */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
                 className="flex gap-4 sm:gap-6"
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-sm relative z-10">
-                  10-13
+                  14-17
                 </div>
                 <div className="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 size={18} className="text-emerald-400" />
                     <h3 className="font-bold text-white">Review & Winners</h3>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 10-13</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">Weeks 14-17</span>
                   </div>
                   <p className="text-sm text-gray-400 mb-2">Code review, judging, and winner announcement.</p>
                   <div className="flex items-center gap-4 text-sm flex-wrap">
-                    <span className="text-terminal-green font-semibold">$10K cash + $4.9K worth of prizes</span>
-                    <span className="text-gray-500">1st: $5K, 2nd: $3K, 3rd: $2K | 4th-10th: $700 worth of goodies + 2 months managed service</span>
+                    <span className="text-terminal-green font-semibold">$12,000 in prizes</span>
+                    <span className="text-gray-500">1st: $6K, 2nd: $3.5K, 3rd: $2.5K</span>
                   </div>
                 </div>
               </motion.div>
