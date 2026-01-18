@@ -135,7 +135,7 @@ export function createHackathonEmbed(): EmbedBuilder {
       },
       {
         name: "Category Awards",
-        value: "Best Plugin, Best Automation, Best Enterprise, Community Choice: Premium subscriptions",
+        value: "Best Plugin, Best Automation, Best Enterprise: 6 months Premium each",
         inline: false,
       }
     )

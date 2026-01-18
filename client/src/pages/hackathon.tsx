@@ -821,7 +821,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Builder Pack Section */}
       <section className="py-16 px-4 relative overflow-hidden" id="builder-pack" data-testid="builder-pack-section">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
@@ -910,7 +909,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Split View Section - Two Hero Banners */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1733,7 +1731,7 @@ export default function Hackathon() {
                     <div className="hidden sm:block w-px h-4 bg-white/20" />
                     <div className="flex items-center gap-1.5 text-blue-300/80">
                       <Clock size={14} />
-                      <span>Referrals close 2 weeks before deadline</span>
+                      <span>Referrals close 3 days before deadline</span>
                     </div>
                   </div>
                   
@@ -1923,7 +1921,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* Partner/Sponsor Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
         <div className="max-w-6xl mx-auto">
@@ -2074,7 +2071,6 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
-
       {/* FAQ Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-3xl mx-auto">

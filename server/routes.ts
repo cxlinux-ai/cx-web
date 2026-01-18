@@ -658,8 +658,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.font("Helvetica")
          .text("  • Best Plugin/Extension: 6 months Premium", { lineGap: 2 })
          .text("  • Best Automation Workflow: 6 months Premium", { lineGap: 2 })
-         .text("  • Best Enterprise Feature: 6 months Premium", { lineGap: 2 })
-         .text("  • Community Choice Award: 3 months Premium", { lineGap: 2 });
+         .text("  • Best Enterprise Feature: 6 months Premium", { lineGap: 2 });
       doc.moveDown(0.5);
       doc.font("Helvetica").fillColor("#666666")
          .text("Note: Category awards can be won in addition to main placement prizes.", { lineGap: 3 });

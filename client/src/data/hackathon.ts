@@ -616,15 +616,6 @@ export const categoryPrizes: CategoryPrize[] = [
     icon: "Building2",
     color: "text-purple-400",
     borderColor: "border-purple-500/30"
-  },
-  {
-    id: "community-choice",
-    title: "Community Choice Award",
-    description: "Voted by fellow hackathon participants",
-    prize: "3 months Cortex Linux Premium",
-    icon: "Heart",
-    color: "text-pink-400",
-    borderColor: "border-pink-500/30"
   }
 ];
 

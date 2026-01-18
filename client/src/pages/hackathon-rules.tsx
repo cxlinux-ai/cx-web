@@ -416,10 +416,6 @@ export default function HackathonRulesPage() {
                     <span>Best Enterprise Feature</span>
                     <span className="text-purple-300 font-semibold">6 months Premium</span>
                   </li>
-                  <li className="flex justify-between">
-                    <span>Community Choice Award</span>
-                    <span className="text-purple-300 font-semibold">3 months Premium</span>
-                  </li>
                 </ul>
                 <p className="text-xs text-gray-500 mt-3">Category awards can be won in addition to main placement prizes.</p>
               </div>
