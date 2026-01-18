@@ -24,11 +24,15 @@ import {
   Mail,
   ExternalLink,
   Building,
+  Building2,
+  Crown,
   Lock,
   Sparkles,
   Github,
   Play,
+  ChevronRight,
 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { FaDiscord, FaTwitter, FaPython, FaDocker } from "react-icons/fa";
 import { SiNeo4J, SiOllama, SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
 import Footer from "@/components/Footer";
@@ -103,6 +107,74 @@ export default function StartupPage() {
   ];
   
   const [email, setEmail] = useState("");
+  const [annual, setAnnual] = useState(false);
+
+  // 4-Tier Pricing matching HomePage
+  const pricingTiers = [
+    {
+      name: 'Core',
+      icon: Rocket,
+      price: { monthly: 0, annual: 0 },
+      description: 'Everything you need to get started',
+      features: [
+        'Full CLI commands',
+        'Local LLM (Ollama)',
+        'Dry-run safety mode',
+        'Rollback support',
+        '1 system'
+      ],
+      cta: 'Download Free',
+      ctaLink: 'https://github.com/cortexlinux/cortex',
+      highlighted: false
+    },
+    {
+      name: 'Core+',
+      icon: Sparkles,
+      price: { monthly: 20, annual: 192 },
+      description: 'Unlimited systems for commercial use',
+      features: [
+        'Everything in Core',
+        'Unlimited systems',
+        'Commercial license',
+        'Email support (48hr)'
+      ],
+      cta: 'Start Free Trial',
+      highlighted: false,
+      badge: 'PER SYSTEM'
+    },
+    {
+      name: 'Pro',
+      icon: Building2,
+      price: { monthly: 99, annual: 948 },
+      description: 'Cloud AI power for teams',
+      features: [
+        'Everything in Core+',
+        'Cloud LLM fallback',
+        'Team dashboard',
+        'Audit logging',
+        '25 systems included'
+      ],
+      cta: 'Start Free Trial',
+      highlighted: true,
+      badge: 'MOST POPULAR'
+    },
+    {
+      name: 'Enterprise',
+      icon: Crown,
+      price: { monthly: 299, annual: 2868 },
+      description: 'Full compliance & dedicated support',
+      features: [
+        'Everything in Pro',
+        'SSO/SAML integration',
+        'Compliance reports',
+        '99.9% SLA',
+        '100 systems included'
+      ],
+      cta: 'Schedule Demo',
+      ctaLink: 'https://calendly.com/cortexlinux/demo',
+      highlighted: false
+    }
+  ];
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
@@ -118,97 +190,6 @@ export default function StartupPage() {
       }
     }
   };
-
-  const pricingTiers = [
-    {
-      name: "Core",
-      price: "Free",
-      period: "forever",
-      description: "Everything you need to get started",
-      features: [
-        { name: "Full CLI commands", included: true },
-        { name: "Local LLM (Ollama)", included: true },
-        { name: "Dry-run safety mode", included: true },
-        { name: "Rollback support", included: true },
-        { name: "Hardware detection", included: true },
-        { name: "Community support", included: true },
-        { name: "1 system limit", included: true },
-        { name: "Commercial use", included: false },
-        { name: "Cloud LLM fallback", included: false },
-        { name: "Team dashboard", included: false },
-        { name: "SSO/SAML", included: false },
-      ],
-      cta: "Download Free",
-      ctaLink: "https://github.com/cortexlinux/cortex",
-      highlighted: false,
-    },
-    {
-      name: "Core+",
-      price: "$20",
-      period: "/system/mo",
-      description: "Unlimited systems for commercial use",
-      features: [
-        { name: "Full CLI commands", included: true },
-        { name: "Local LLM (Ollama)", included: true },
-        { name: "Dry-run safety mode", included: true },
-        { name: "Rollback support", included: true },
-        { name: "Hardware detection", included: true },
-        { name: "Community support", included: true },
-        { name: "Unlimited systems", included: true },
-        { name: "Commercial use", included: true },
-        { name: "Cloud LLM fallback", included: false },
-        { name: "Team dashboard", included: false },
-        { name: "SSO/SAML", included: false },
-      ],
-      cta: "Get Core+",
-      ctaLink: "https://github.com/cortexlinux/cortex",
-      highlighted: false,
-    },
-    {
-      name: "Pro",
-      price: "$99",
-      period: "/month",
-      description: "Cloud AI power for teams",
-      features: [
-        { name: "Everything in Core+", included: true },
-        { name: "Cloud LLM fallback", included: true },
-        { name: "Team dashboard", included: true },
-        { name: "Usage analytics", included: true },
-        { name: "Audit logging", included: true },
-        { name: "REST API access", included: true },
-        { name: "25 systems included", included: true },
-        { name: "Priority support (24hr)", included: true },
-        { name: "+$10/system beyond 25", included: true },
-        { name: "SSO/SAML", included: false },
-        { name: "Air-gapped deployment", included: false },
-      ],
-      cta: "Start Free Trial",
-      ctaLink: "https://github.com/cortexlinux/cortex",
-      highlighted: true,
-    },
-    {
-      name: "Enterprise",
-      price: "$299",
-      period: "/month",
-      description: "Full compliance & dedicated support",
-      features: [
-        { name: "Everything in Pro", included: true },
-        { name: "Web admin console", included: true },
-        { name: "SSO/SAML integration", included: true },
-        { name: "Compliance reports", included: true },
-        { name: "Air-gapped deployment", included: true },
-        { name: "Custom integrations", included: true },
-        { name: "100 systems included", included: true },
-        { name: "99.9% SLA guarantee", included: true },
-        { name: "Dedicated support", included: true },
-        { name: "+$5/system beyond 100", included: true },
-        { name: "Quarterly reviews", included: true },
-      ],
-      cta: "Schedule Demo",
-      ctaLink: "https://calendly.com/cortexlinux/demo",
-      highlighted: false,
-    },
-  ];
 
   const preInstalledStack = [
     { icon: FaPython, name: "Python 3.12 + uv", color: "text-yellow-400" },
@@ -555,213 +536,121 @@ export default function StartupPage() {
         </div>
       </section>
 
-      {/* Pricing Section - Premium 3-Tier */}
-      <section id="pricing-table" className="py-32 px-4 relative overflow-hidden border-t border-white/5">
+      {/* Pricing Section - 4-Tier matching HomePage */}
+      <section id="pricing" className="py-32 px-4 relative overflow-hidden border-t border-white/5">
         {/* Subtle background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
         
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-14"
+            className="text-center mb-12"
           >
             <p className="text-blue-300 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, transparent pricing</h2>
-            <p className="text-gray-400 text-base max-w-lg mx-auto">Start free, upgrade when you need more. No hidden fees, cancel anytime.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, Transparent Pricing</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Start free, scale as you grow. All plans include a 14-day free trial.
+            </p>
+
+            {/* Annual Toggle */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <span 
+                className={`text-sm font-medium transition-colors ${annual ? 'text-gray-500' : 'text-white'}`}
+                data-testid="text-monthly-label-startup"
+              >
+                Monthly
+              </span>
+              <Switch
+                checked={annual}
+                onCheckedChange={setAnnual}
+                data-testid="toggle-annual-startup"
+              />
+              <span 
+                className={`text-sm font-medium transition-colors ${annual ? 'text-white' : 'text-gray-500'}`}
+                data-testid="text-annual-label-startup"
+              >
+                Annual <span className="text-terminal-green text-xs">(Save 10%)</span>
+              </span>
+            </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-5 items-stretch">
-            {/* Community Edition */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.4 }}
-              className="group relative flex"
-            >
-              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
-                {/* Header */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                      <Users size={16} className="text-emerald-400" />
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {pricingTiers.map((tier, i) => {
+              const Icon = tier.icon;
+              return (
+                <motion.div
+                  key={tier.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`relative rounded-2xl p-6 ${
+                    tier.highlighted
+                      ? 'bg-gradient-to-b from-blue-600/20 to-purple-600/20 border-2 border-blue-500 lg:scale-105'
+                      : 'bg-white/5 border border-white/10'
+                  }`}
+                  data-testid={`pricing-card-${tier.name.toLowerCase()}-startup`}
+                >
+                  {tier.badge && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                        {tier.badge}
+                      </span>
                     </div>
-                    <h3 className="text-base font-semibold text-white">Community</h3>
+                  )}
+                  
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`p-2 rounded-lg ${tier.highlighted ? 'bg-blue-500/20' : 'bg-white/10'}`}>
+                      <Icon size={20} className={tier.highlighted ? 'text-blue-300' : 'text-gray-300'} />
+                    </div>
+                    <h3 className="text-xl font-bold text-white">{tier.name}</h3>
                   </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-white">$0</span>
-                    <span className="text-gray-500 text-sm">/forever</span>
+                  
+                  <p className="text-gray-400 text-sm h-10">{tier.description}</p>
+                  
+                  <div className="mt-4 mb-6">
+                    <span className="text-4xl font-bold text-white">
+                      ${annual ? Math.round(tier.price.annual / 12) : tier.price.monthly}
+                    </span>
+                    <span className="text-gray-400">/mo</span>
+                    {annual && tier.price.annual > 0 && (
+                      <p className="text-sm text-gray-500 mt-1">
+                        ${tier.price.annual} billed annually
+                      </p>
+                    )}
                   </div>
-                  <p className="text-gray-500 text-sm mt-2">Perfect for individual developers</p>
-                </div>
-                
-                {/* Divider */}
-                <div className="h-px bg-white/[0.06] mb-6" />
-                
-                {/* Features */}
-                <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">What's included</p>
-                  <ul className="space-y-3">
-                    {[
-                      "Full AI capabilities",
-                      "All core features",
-                      "Apache 2.0 license",
-                      "Community support",
-                      "Unlimited personal use",
-                    ].map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
-                        <Check size={15} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm leading-tight">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Button */}
-                <div className="mt-8">
-                  <a
-                    href="https://github.com/cortexlinux/cortex"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
-                    data-testid="button-pricing-community"
-                  >
-                    Get Started Free
-                  </a>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Founders Edition - Featured */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              className="group relative flex"
-            >
-              {/* Glow effect */}
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-blue-500/20 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              <div className="relative rounded-2xl bg-[#0a0a0a] border border-blue-500/40 p-6 flex flex-col w-full">
-                {/* Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <div className="px-3 py-1 bg-blue-500 rounded-full text-[11px] font-semibold text-white shadow-lg shadow-blue-500/20">
-                    Recommended
-                  </div>
-                </div>
-                
-                {/* Header */}
-                <div className="mb-6 pt-1">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                      <Zap size={16} className="text-blue-300" />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">Founders</h3>
-                  </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-white">$19</span>
-                    <span className="text-gray-500 text-sm">/month</span>
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">For serious AI builders</p>
-                </div>
-                
-                {/* Divider */}
-                <div className="h-px bg-blue-500/20 mb-6" />
-                
-                {/* Features */}
-                <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Community, plus</p>
-                  <ul className="space-y-3">
-                    {[
-                      "Priority support (24/7)",
-                      "Early access to features",
-                      "GPU inference engine",
-                      "Performance analytics",
-                      "Team collaboration tools",
-                    ].map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-gray-300">
-                        <Check size={15} className="text-blue-300 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm leading-tight">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                {/* Button */}
-                <div className="mt-8">
                   <a
-                    href="https://github.com/cortexlinux/cortex"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-blue-500 text-white hover:bg-blue-400 transition-colors duration-150"
-                    data-testid="button-pricing-founders"
+                    href={tier.ctaLink || '#'}
+                    target={tier.ctaLink ? "_blank" : undefined}
+                    rel={tier.ctaLink ? "noopener noreferrer" : undefined}
+                    className={`block w-full py-2.5 text-center rounded-lg text-sm font-medium transition-colors duration-150 ${
+                      tier.highlighted
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500'
+                        : tier.price.monthly === 0
+                          ? 'bg-white/10 text-white hover:bg-white/15'
+                          : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                    }`}
+                    data-testid={`button-checkout-${tier.name.toLowerCase()}-startup`}
                   >
-                    Start Free Trial
+                    {tier.cta}
+                    {tier.ctaLink && <ExternalLink size={14} className="inline ml-1" />}
                   </a>
-                </div>
-              </div>
-            </motion.div>
 
-            {/* Enterprise Edition */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-              className="group relative flex"
-            >
-              <div className="relative rounded-2xl bg-[#0a0a0a] border border-white/[0.08] p-6 flex flex-col w-full hover:border-white/[0.15] transition-all duration-200">
-                {/* Header */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
-                      <Building size={16} className="text-purple-400" />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">Enterprise</h3>
-                  </div>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold text-white">Custom</span>
-                  </div>
-                  <p className="text-gray-500 text-sm mt-2">For teams and organizations</p>
-                </div>
-                
-                {/* Divider */}
-                <div className="h-px bg-white/[0.06] mb-6" />
-                
-                {/* Features */}
-                <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-4">Everything in Founders, plus</p>
-                  <ul className="space-y-3">
-                    {[
-                      "Dedicated account manager",
-                      "Custom integrations",
-                      "99.9% SLA guarantee",
-                      "Compliance & security",
-                      "On-premise deployment",
-                    ].map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5 text-gray-400">
-                        <Check size={15} className="text-purple-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm leading-tight">{feature}</span>
+                  <ul className="mt-6 space-y-3">
+                    {tier.features.map((feature, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm">
+                        <Check size={16} className="text-terminal-green mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-                
-                {/* Button */}
-                <div className="mt-8">
-                  <a
-                    href="mailto:sales@cortexlinux.com"
-                    className="block w-full py-2.5 text-center rounded-lg text-sm font-medium bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.08] transition-colors duration-150"
-                    data-testid="button-pricing-enterprise"
-                  >
-                    Contact Sales
-                  </a>
-                </div>
-              </div>
-            </motion.div>
+                </motion.div>
+              );
+            })}
           </div>
           
           {/* Trust indicators */}
@@ -770,7 +659,7 @@ export default function StartupPage() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"
+            className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"
           >
             <div className="flex items-center gap-2">
               <Shield size={14} className="text-emerald-400" />
@@ -784,6 +673,24 @@ export default function StartupPage() {
               <Sparkles size={14} className="text-gray-400" />
               <span>Cancel anytime</span>
             </div>
+          </motion.div>
+
+          {/* Link to full pricing page */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-8"
+          >
+            <Link 
+              href="/pricing" 
+              className="text-blue-300 hover:text-blue-200 transition-colors text-sm inline-flex items-center gap-1"
+              data-testid="link-full-pricing-startup"
+            >
+              View full comparison & FAQ
+              <ChevronRight size={14} />
+            </Link>
           </motion.div>
         </div>
       </section>
