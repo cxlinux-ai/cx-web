@@ -640,6 +640,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Submissions are reviewed by the Cortex maintainer team. One-on-one code reviews, PR refinement, and final judging. Winners announced at end of Week 14.", { lineGap: 3 });
       doc.moveDown(1.5);
       
+      // Builder Pack
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#10b981")
+         .text("Builder Pack");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("All participants who submit a valid entry receive a $5 Cortex Linux credit as a thank you for participating.", { lineGap: 3 });
+      doc.moveDown(1.5);
+      
+      // Category Awards
+      doc.fontSize(16).font("Helvetica-Bold").fillColor("#a855f7")
+         .text("Category Awards");
+      doc.moveDown(0.3);
+      doc.fontSize(11).font("Helvetica").fillColor("#333333")
+         .text("Additional prizes awarded alongside main placement prizes:", { lineGap: 3 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica")
+         .text("  • Best Plugin/Extension: 6 months Premium", { lineGap: 2 })
+         .text("  • Best Automation Workflow: 6 months Premium", { lineGap: 2 })
+         .text("  • Best Enterprise Feature: 6 months Premium", { lineGap: 2 })
+         .text("  • Community Choice Award: 3 months Premium", { lineGap: 2 });
+      doc.moveDown(0.5);
+      doc.font("Helvetica").fillColor("#666666")
+         .text("Note: Category awards can be won in addition to main placement prizes.", { lineGap: 3 });
+      doc.fillColor("#333333");
+      doc.moveDown(1.5);
+      
       // Eligibility
       doc.fontSize(16).font("Helvetica-Bold").fillColor("#1a1a1a")
          .text("Eligibility & Rules");

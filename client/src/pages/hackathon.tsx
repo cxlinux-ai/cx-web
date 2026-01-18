@@ -37,6 +37,11 @@ import {
   Handshake,
   Building,
   Megaphone,
+  Puzzle,
+  Workflow,
+  Building2,
+  Heart,
+  Crown,
 } from "lucide-react";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -52,6 +57,8 @@ import {
   ideathonPhase,
   ideathonSubmissionTemplate,
   ideathonPrizeCategories,
+  builderPack,
+  categoryPrizes,
 } from "@/data/hackathon";
 
 const GITHUB_URL = hackathonConfig.githubUrl;
@@ -691,6 +698,21 @@ export default function Hackathon() {
             </span>
           </motion.div>
 
+          {/* $5 Credit Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mt-6"
+            data-testid="hero-credit-badge"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+              <Gift size={18} className="text-cyan-400" />
+              <span className="text-cyan-300 font-semibold text-sm">$5 Cortex Credit</span>
+              <span className="text-gray-400 text-sm">for all participants</span>
+            </div>
+          </motion.div>
+
           {/* Champion Ambassador Spotlight - Smaller */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -799,6 +821,96 @@ export default function Hackathon() {
           </motion.div>
         </div>
       </section>
+
+      {/* Builder Pack Section */}
+      <section className="py-16 px-4 relative overflow-hidden" id="builder-pack" data-testid="builder-pack-section">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px]" />
+        
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-sm mb-6">
+              <Gift size={16} />
+              Everyone Gets Perks
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                {builderPack.title}
+              </span>
+            </h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              {builderPack.description}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {builderPack.perks.map((perk, index) => {
+              const IconComponent = perk.icon === "Zap" ? Zap 
+                : perk.icon === "MessageSquare" ? MessageSquare 
+                : perk.icon === "BookOpen" ? BookOpen 
+                : Users;
+              const isCredit = perk.title.includes("$5");
+              
+              return (
+                <motion.div
+                  key={perk.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`relative group ${isCredit ? 'col-span-2 lg:col-span-1' : ''}`}
+                  data-testid={`perk-card-${perk.title.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  {isCredit && (
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
+                  )}
+                  <div className={`relative h-full bg-white/5 backdrop-blur-xl border ${isCredit ? 'border-cyan-500/40' : 'border-white/10'} rounded-2xl p-6 hover:border-cyan-400/40 transition-all duration-300`}>
+                    <div className={`w-12 h-12 rounded-xl ${isCredit ? 'bg-gradient-to-br from-cyan-500/30 to-blue-500/30' : 'bg-white/10'} flex items-center justify-center mb-4`}>
+                      <IconComponent size={24} className={isCredit ? 'text-cyan-300' : 'text-blue-300'} />
+                    </div>
+                    <h3 className={`text-lg font-bold mb-2 ${isCredit ? 'text-cyan-300' : 'text-white'}`}>
+                      {perk.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm">{perk.description}</p>
+                    {isCredit && (
+                      <div className="absolute top-3 right-3">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold">
+                          <Sparkles size={12} />
+                          FREE
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center mt-8"
+          >
+            <Link
+              href="/register"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 rounded-xl text-white font-semibold shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300"
+              data-testid="builder-pack-register-cta"
+            >
+              <ClipboardList size={18} />
+              Claim Your Builder Pack
+              <ArrowRight size={18} />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Split View Section - Two Hero Banners */}
       <section className="py-20 px-4 relative">
         <div className="max-w-6xl mx-auto">
@@ -1378,6 +1490,70 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
+      {/* Category Prize Awards Section */}
+      <section className="py-20 px-4 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-transparent to-blue-950/10 pointer-events-none" />
+        <div className="max-w-6xl mx-auto relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm mb-6">
+              <Crown size={16} />
+              Category Awards
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              More Ways to <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Win</span>
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Separate from main prizes — win in your specialty and get Cortex Linux Premium
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categoryPrizes.map((category, index) => {
+              const iconMap: Record<string, typeof Trophy> = {
+                Puzzle,
+                Workflow,
+                Building2,
+                Heart,
+              };
+              const Icon = iconMap[category.icon] || Trophy;
+              return (
+                <motion.div
+                  key={category.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`bg-white/5 backdrop-blur-sm border ${category.borderColor} rounded-2xl p-6 hover:bg-white/10 transition-all hover:scale-[1.02] group`}
+                >
+                  <div className={`w-14 h-14 rounded-xl ${category.color.replace('text-', 'bg-').replace('-400', '-500/20')} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <Icon className={category.color} size={28} />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">{category.title}</h3>
+                  <p className="text-sm text-gray-400 mb-4">{category.description}</p>
+                  <div className="flex items-center gap-2 mt-auto">
+                    <Sparkles size={14} className={category.color} />
+                    <span className={`text-sm font-semibold ${category.color}`}>{category.prize}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-gray-500 mt-8"
+          >
+            Category winners are additional to main hackathon prizes — you can win both!
+          </motion.p>
+        </div>
+      </section>
       {/* Champion Ambassador Expanded Section */}
       <section className="py-20 px-4 relative bg-gradient-to-b from-transparent via-blue-950/5 to-transparent">
         <div className="max-w-5xl mx-auto">
@@ -1511,39 +1687,130 @@ export default function Hackathon() {
           </div>
         </div>
       </section>
-      {/* Referral Program Snippet */}
-      <section className="py-12 px-4">
-        <div className="max-w-4xl mx-auto">
+      {/* Referral Program - Unlock Rewards */}
+      <section className="py-16 px-4">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 border border-purple-500/20 rounded-2xl p-6 sm:p-8"
+            className="bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-purple-500/10 border border-purple-500/20 rounded-2xl p-6 sm:p-8 relative overflow-hidden"
             data-testid="hackathon-referral-snippet"
           >
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="flex-shrink-0">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center">
-                  <Gift size={32} className="text-purple-400" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10">
+              <div className="flex flex-col lg:flex-row gap-8">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-500/30 flex items-center justify-center">
+                      <Gift size={24} className="text-purple-400" />
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+                      <Users size={14} className="text-blue-300" />
+                      <span className="text-sm text-gray-300">
+                        <span className="text-white font-semibold">127</span> builders already sharing
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                    Your Network = Your Advantage
+                  </h3>
+                  <p className="text-gray-400 mb-2 max-w-lg">
+                    The builders who win big aren't just skilled — they build communities. Each friend you bring earns you real rewards while expanding the hackathon ecosystem.
+                  </p>
+                  <p className="text-gray-300 text-sm mb-4 max-w-lg">
+                    <span className="text-emerald-400 font-medium">No cap on rewards.</span> Top referrers from past events have earned over $200 in credits and full Premium bundles.
+                  </p>
+                  
+                  <div className="flex flex-wrap items-center gap-3 text-sm mb-6">
+                    <div className="flex items-center gap-1.5 text-amber-400/90">
+                      <Zap size={14} />
+                      <span>Only 50 spots at Legendary tier</span>
+                    </div>
+                    <div className="hidden sm:block w-px h-4 bg-white/20" />
+                    <div className="flex items-center gap-1.5 text-blue-300/80">
+                      <Clock size={14} />
+                      <span>Referrals close 2 weeks before deadline</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Link
+                      href="/referrals"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 rounded-xl text-white font-semibold transition-all shadow-lg shadow-purple-500/20"
+                      data-testid="hackathon-referral-cta"
+                      onClick={() => analytics.trackCTAClick('get_referral_link', 'hackathon_page')}
+                    >
+                      <Sparkles size={18} />
+                      Get Your Link
+                      <ArrowRight size={16} />
+                    </Link>
+                    <span className="text-xs text-gray-500">
+                      Takes 10 seconds · No email required
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="flex-1 text-center sm:text-left">
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Want a Head Start? Refer Friends!
-                </h3>
-                <p className="text-gray-400 text-sm mb-4">
-                  Join our referral program. Invite friends and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-track entry.
-                </p>
-                <a
-                  href="/referrals"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-500 hover:bg-purple-600 rounded-xl text-white font-medium text-sm transition-colors"
-                  data-testid="hackathon-referral-cta"
-                  onClick={() => analytics.trackCTAClick('referral_program', 'hackathon_page')}
-                >
-                  <Users size={16} />
-                  Join Referral Program
-                  <ArrowRight size={16} />
-                </a>
+                
+                <div className="flex-shrink-0 lg:w-80">
+                  <div className="space-y-3">
+                    <div className="bg-white/5 border border-emerald-500/30 rounded-xl p-4 relative">
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <CheckCircle2 size={14} className="text-white" />
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                          <Gift size={18} className="text-emerald-400" />
+                        </div>
+                        <div>
+                          <div className="text-xs text-emerald-400 font-medium">5 Referrals</div>
+                          <div className="text-white font-semibold">$20 Credit</div>
+                        </div>
+                      </div>
+                      <div className="w-full bg-white/10 rounded-full h-1.5">
+                        <div className="bg-emerald-500 h-1.5 rounded-full w-full" />
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white/5 border border-purple-500/30 rounded-xl p-4 relative opacity-80">
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-purple-500/50 flex items-center justify-center border border-purple-400/50">
+                        <Star size={12} className="text-purple-300" />
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                          <Star size={18} className="text-purple-400" />
+                        </div>
+                        <div>
+                          <div className="text-xs text-purple-400 font-medium">20 Referrals</div>
+                          <div className="text-white font-semibold">Exclusive Goodies</div>
+                        </div>
+                      </div>
+                      <div className="w-full bg-white/10 rounded-full h-1.5">
+                        <div className="bg-purple-500 h-1.5 rounded-full w-1/4" />
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 relative opacity-60">
+                      <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center border border-gray-600">
+                        <Trophy size={12} className="text-gray-400" />
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                          <Trophy size={18} className="text-yellow-500/50" />
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500 font-medium">50 Referrals</div>
+                          <div className="text-gray-400 font-semibold">Premium Bundle</div>
+                        </div>
+                      </div>
+                      <div className="w-full bg-white/10 rounded-full h-1.5">
+                        <div className="bg-yellow-500/50 h-1.5 rounded-full w-0" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

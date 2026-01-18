@@ -106,7 +106,7 @@ export function createHackathonEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.primary)
     .setTitle("The First AI Linux Hackathon Worldwide")
-    .setDescription("Build the future of AI-powered Linux!")
+    .setDescription("Build the future of AI-powered Linux! All participants receive a $5 Cortex Linux credit.")
     .addFields(
       {
         name: "Total Prizes",
@@ -131,6 +131,11 @@ export function createHackathonEmbed(): EmbedBuilder {
       {
         name: "Phase 2: Build",
         value: "1st-3rd: $10K cash | 4th-10th: $700 worth of goodies + 2mo managed service (not cash)",
+        inline: false,
+      },
+      {
+        name: "Category Awards",
+        value: "Best Plugin, Best Automation, Best Enterprise, Community Choice: Premium subscriptions",
         inline: false,
       }
     )

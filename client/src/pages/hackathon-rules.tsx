@@ -399,6 +399,36 @@ export default function HackathonRulesPage() {
                 </div>
               </div>
 
+              {/* Category Awards */}
+              <div className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl border border-purple-500/20 mb-6">
+                <h3 className="text-lg font-semibold text-white mb-3">Category Awards</h3>
+                <p className="text-gray-400 text-sm mb-4">Additional prizes awarded alongside main prizes:</p>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li className="flex justify-between">
+                    <span>Best Plugin/Extension</span>
+                    <span className="text-purple-300 font-semibold">6 months Premium</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Best Automation Workflow</span>
+                    <span className="text-purple-300 font-semibold">6 months Premium</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Best Enterprise Feature</span>
+                    <span className="text-purple-300 font-semibold">6 months Premium</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Community Choice Award</span>
+                    <span className="text-purple-300 font-semibold">3 months Premium</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-gray-500 mt-3">Category awards can be won in addition to main placement prizes.</p>
+              </div>
+
+              {/* Builder Pack */}
+              <div className="p-4 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl mb-6">
+                <p className="text-sm text-emerald-300"><strong>Builder Pack:</strong> All participants who submit a valid entry receive a <span className="text-white font-semibold">$5 Cortex Linux credit</span> as a thank you for participating.</p>
+              </div>
+
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />

@@ -550,6 +550,84 @@ export const hackathonFaqs = [
   }
 ];
 
+// ============================================
+// Builder Pack - Free Credits for Participants
+// ============================================
+export interface BuilderPerkItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface BuilderPackData {
+  title: string;
+  description: string;
+  perks: BuilderPerkItem[];
+}
+
+export const builderPack: BuilderPackData = {
+  title: "Builder Pack",
+  description: "Every registered participant gets free credits and resources",
+  perks: [
+    { icon: "Zap", title: "$5 Cortex Credit", description: "Free credits to explore Cortex Linux AI features" },
+    { icon: "MessageSquare", title: "Discord Access", description: "Private channels with mentors and other builders" },
+    { icon: "BookOpen", title: "Documentation Pack", description: "Early access to API docs and tutorials" },
+    { icon: "Users", title: "Team Matching", description: "Find teammates in our Discord community" }
+  ]
+};
+
+// ============================================
+// Category Prize Tracks (Premium Subscriptions)
+// ============================================
+export interface CategoryPrize {
+  id: string;
+  title: string;
+  description: string;
+  prize: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+}
+
+export const categoryPrizes: CategoryPrize[] = [
+  {
+    id: "best-plugin",
+    title: "Best Plugin/Extension",
+    description: "Most innovative and well-crafted plugin or extension",
+    prize: "6 months Cortex Linux Premium",
+    icon: "Puzzle",
+    color: "text-blue-400",
+    borderColor: "border-blue-500/30"
+  },
+  {
+    id: "best-automation",
+    title: "Best Automation Workflow",
+    description: "Most useful automation that saves real developer time",
+    prize: "6 months Cortex Linux Premium",
+    icon: "Workflow",
+    color: "text-emerald-400",
+    borderColor: "border-emerald-500/30"
+  },
+  {
+    id: "best-enterprise",
+    title: "Best Enterprise Feature",
+    description: "Feature with highest enterprise/business value",
+    prize: "6 months Cortex Linux Premium",
+    icon: "Building2",
+    color: "text-purple-400",
+    borderColor: "border-purple-500/30"
+  },
+  {
+    id: "community-choice",
+    title: "Community Choice Award",
+    description: "Voted by fellow hackathon participants",
+    prize: "3 months Cortex Linux Premium",
+    icon: "Heart",
+    color: "text-pink-400",
+    borderColor: "border-pink-500/30"
+  }
+];
+
 export const hackathonBenefits = [
   {
     title: "Two Ways to Contribute",
