@@ -8,7 +8,7 @@ export default function Register() {
   useEffect(() => {
     const cleanup = updateSEO({
       title: "Register - The First AI Linux Hackathon Worldwide",
-      description: "Join the first AI Linux Hackathon. $13,800 cash + $4,900 worth of prizes. Register now to participate.",
+      description: "Join the first AI Linux Hackathon. $18,800 in prizes. Register now to participate.",
       keywords: ["hackathon", "registration", "cortex linux", "AI", "linux", "worldwide"],
     });
     return cleanup;
