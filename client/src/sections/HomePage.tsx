@@ -512,11 +512,41 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     variant_b: 'AI-Native Linux for Developers',
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      localStorage.setItem("founders_waitlist_email", email);
-      setEmailSubmitted(true);
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/email-capture", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "founders_waitlist",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        localStorage.setItem("founders_waitlist_email", email);
+        setEmailSubmitted(true);
+      } else {
+        setSubmitError(result.error || "Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      console.error("Email submission error:", error);
+      setSubmitError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -2571,24 +2601,44 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <p className="text-gray-400">We'll notify you when Founders Edition is available.</p>
               </motion.div>
             ) : (
-              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="founder@startup.com"
-                  required
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-brand-blue focus:outline-none transition-colors"
-                  data-testid="input-email-capture"
-                />
-                <button
-                  type="submit"
-                  className="px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold glow-brand-blue transition-all duration-300"
-                  data-testid="button-email-submit"
-                >
-                  Notify Me
-                </button>
-              </form>
+              <div className="max-w-md mx-auto">
+                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="founder@startup.com"
+                    required
+                    disabled={isSubmitting}
+                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-brand-blue focus:outline-none transition-colors disabled:opacity-50"
+                    data-testid="input-email-capture"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold glow-brand-blue transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    data-testid="button-email-submit"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Notify Me"
+                    )}
+                  </button>
+                </form>
+                {submitError && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 text-red-400 text-sm text-center"
+                  >
+                    {submitError}
+                  </motion.p>
+                )}
+              </div>
             )}
           </motion.div>
         </div>
