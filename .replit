@@ -46,4 +46,4 @@ integrations = ["github:1.0.0"]
 
 [userenv.shared]
 GUILD_ID = "1436619978227843182"
-GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx31asWH9W9Njgf2hSa__wRyBmmPlgg46euuxME41Hag4EFxYSSszdTSgdcMCPYFtj0/exec"
+GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx0GDvG0F4pVPSSOZmhSR7TLPnMfeLKJTCth2zSIwjEVfhnoI9cPalnpBMPGRUI5d8UIw/exec"
