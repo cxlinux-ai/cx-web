@@ -83,11 +83,11 @@ export default function FAQ() {
       questions: [
         {
           q: "Is Cortex free or paid?",
-          a: "Both!\n\nCOMMUNITY EDITION: Free forever, open source (Apache 2.0)\n• Full AI capabilities\n• All core features\n• Perfect for individual developers and students\n\nENTERPRISE EDITION: Paid subscriptions for companies\n• Everything in Community\n• Priority support (24/7)\n• Compliance & audit features\n• Custom integrations\n• SLA guarantees\n\nSimilar to Red Hat's model: Open core, enterprise support."
+          a: "Both!\n\nCORE EDITION: Free tier with essential features\n• Core AI capabilities\n• Basic features\n• Perfect for getting started\n\nPAID TIERS: Core+, Pro, and Enterprise for growing needs\n• Advanced features\n• Priority support (24/7)\n• Compliance & audit features\n• Custom integrations\n• SLA guarantees\n\nFlexible pricing that scales with your needs."
         },
         {
           q: "What's the business model?",
-          a: "Open source community edition with enterprise subscriptions:\n\nRevenue sources:\n1. Enterprise licenses (companies pay for support & compliance)\n2. Professional services (custom integrations, training)\n3. Cloud hosting (optional managed Cortex instances)\n\nIndividual developers: Always free\nCompanies: Pay for support, compliance, SLA"
+          a: "Tiered subscription model:\n\nRevenue sources:\n1. Subscription licenses (individuals and companies)\n2. Professional services (custom integrations, training)\n3. Cloud hosting (optional managed Cortex instances)\n\nFree tier: Get started at no cost\nPaid tiers: Unlock advanced features and support"
         },
         {
           q: "Who is Cortex for?",
@@ -95,7 +95,7 @@ export default function FAQ() {
         },
         {
           q: "Can I use it for commercial projects?",
-          a: "Yes! Apache 2.0 license means:\n\n• Free for commercial use\n• Can modify and distribute\n• No licensing fees\n• Patent protection included\n\nEnterprise edition adds support and compliance, but Community edition is fully commercial-ready."
+          a: "Yes! All paid tiers are fully commercial-ready:\n\n• Core+, Pro, and Enterprise tiers available\n• Commercial licensing included\n• Enterprise features for compliance\n• Priority support options\n\nChoose the tier that fits your commercial needs."
         }
       ]
     },

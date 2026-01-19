@@ -4,6 +4,8 @@
 
 Cortex Linux is marketed as "The AI Layer for Linux," an intelligent assistant designed to execute unlimited tasks on Linux systems using natural language commands. Its core value proposition lies in its ability to translate natural language intent into multi-step Linux execution, covering automation, configuration, scripting, data analysis, and workflow management. The project emphasizes safety through sandboxed execution, preview-before-execute features, and instant rollback capabilities. The brand targets developers, system administrators, data scientists, DevOps teams, and power users with a professional, trustworthy, and cutting-edge tone, directly addressing security concerns. The project aims to position Cortex as a comprehensive AI solution for Linux, moving beyond simple package management to offer broad, intelligent system interaction.
 
+**IMPORTANT: Cortex Linux is NOT open source.** The project uses a tiered subscription model (Core/Core+/Pro/Enterprise). All "open source" references have been removed from the website.
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

@@ -126,7 +126,7 @@ export function useSEO(config: SEOConfig) {
 export const seoConfigs = {
   home: {
     title: 'Cortex Linux - The AI Layer for Linux | Execute Any Task with Natural Language',
-    description: 'Transform how you use Linux with Cortex. Execute any task through natural language - automation, security, DevOps, system administration. Open source, sandboxed, instant rollback.',
+    description: 'Transform how you use Linux with Cortex. Execute any task through natural language - automation, security, DevOps, system administration. Sandboxed execution, instant rollback.',
     canonicalPath: '/',
     keywords: ['AI Linux', 'natural language Linux', 'Linux automation', 'AI operating system', 'Cortex Linux', 'intelligent Linux'],
     jsonLd: [
@@ -194,7 +194,7 @@ export const seoConfigs = {
             name: 'Is Cortex Linux free?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Yes, Cortex Linux is 100% free and open source under the Apache 2.0 license. You can install it on any Linux distribution.'
+              text: 'Cortex Linux offers a free tier to get started. Paid tiers (Core+, Pro, Enterprise) unlock advanced features and priority support.'
             }
           },
           {
@@ -214,7 +214,7 @@ export const seoConfigs = {
     title: 'The First AI Linux Hackathon Worldwide - $18,800 in Prizes | Cortex Linux',
     description: 'Join the first-ever AI Linux Hackathon. Phase 1: Submit monetizable feature ideas. Phase 2: Build real code. $18,800 in prizes. February 17, 2026. Open worldwide.',
     canonicalPath: '/hackathon',
-    keywords: ['first AI Linux hackathon', 'AI hackathon worldwide', 'Linux hackathon', 'open source hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'Ideathon'],
+    keywords: ['first AI Linux hackathon', 'AI hackathon worldwide', 'Linux hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'Ideathon'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
@@ -361,7 +361,7 @@ export const seoConfigs = {
           name: 'Is Cortex free or paid?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Both! Community Edition is free forever and open source (Apache 2.0) with full AI capabilities. Enterprise Edition adds priority support, compliance features, and SLA guarantees for companies.'
+            text: 'Both! Core Edition is free to get started. Paid tiers (Core+, Pro, Enterprise) add advanced features, priority support, compliance features, and SLA guarantees.'
           }
         },
         {
@@ -407,7 +407,7 @@ export const seoConfigs = {
   
   license: {
     title: 'MIT License | Cortex Linux',
-    description: 'Cortex Linux is open-source software licensed under the MIT License. Free to use, modify, and distribute.',
+    description: 'Cortex Linux software is licensed under the MIT License. Free to use, modify, and distribute.',
     canonicalPath: '/license',
     noIndex: false
   },
@@ -493,14 +493,14 @@ export const seoConfigs = {
 
   bounties: {
     title: 'Bounty Board - Earn Rewards Contributing to Cortex Linux',
-    description: 'Browse open bounties and earn rewards for contributing to Cortex Linux open source projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
+    description: 'Browse open bounties and earn rewards for contributing to Cortex Linux projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
     canonicalPath: '/bounties',
-    keywords: ['open source bounties', 'GitHub bounties', 'Cortex Linux contributions', 'paid open source', 'developer rewards', 'bug bounty', 'feature bounty'],
+    keywords: ['developer bounties', 'GitHub bounties', 'Cortex Linux contributions', 'developer rewards', 'bug bounty', 'feature bounty'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       name: 'Cortex Linux Bounty Board',
-      description: 'Open source bounties for contributing to Cortex Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
+      description: 'Bounties for contributing to Cortex Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
       url: 'https://cortexlinux.com/bounties',
       itemListElement: [
         {

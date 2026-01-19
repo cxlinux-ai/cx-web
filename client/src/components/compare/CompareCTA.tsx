@@ -114,7 +114,7 @@ export function CompareCTA({ comparison, variant, context, placement }: CompareC
           </div>
 
           <div className="flex flex-wrap gap-6 justify-center text-sm text-gray-500">
-            <span>Free and open source</span>
+            <span>Free tier available</span>
             <span>Works offline</span>
             <span>No migration required</span>
           </div>

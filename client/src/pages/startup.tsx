@@ -251,7 +251,7 @@ export default function StartupPage() {
             </div>
             <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
               <Github size={12} className="text-gray-300" />
-              <span>Open-Source Core</span>
+              <span>View on GitHub</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
               <Code2 size={12} className="text-orange-400" />
@@ -304,7 +304,7 @@ export default function StartupPage() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-xs text-gray-500 text-center mb-12"
           >
-            Free forever · Open source · MIT Licensed
+            Free tier available · No credit card required
           </motion.p>
 
           {/* Terminal Mockup */}

@@ -103,7 +103,7 @@ export default function Footer() {
               The AI Layer for Linux. Execute any task with natural language.
             </p>
             <p className="text-gray-500 text-xs">
-              Built in public. Open source on GitHub.
+              Built for developers. Available on GitHub.
             </p>
           </div>
 

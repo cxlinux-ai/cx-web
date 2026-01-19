@@ -26,7 +26,7 @@ If you are using the Software on behalf of an organization, you represent that y
     {
       icon: Scale,
       title: "License Grant",
-      content: `Cortex Linux is open-source software licensed under the MIT License, which grants you the right to:
+      content: `Cortex Linux software is licensed under the MIT License, which grants you the right to:
 
 • Use the Software for any purpose, including commercial applications
 • Copy, modify, and distribute the Software

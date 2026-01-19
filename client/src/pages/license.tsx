@@ -18,7 +18,7 @@ export default function License() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-400/20 border border-emerald-400/30 mb-6">
             <Scale className="h-4 w-4 text-emerald-400" />
             <span className="text-sm font-medium text-emerald-400">
-              Open Source
+              Software License
             </span>
           </div>
           <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
@@ -26,7 +26,7 @@ export default function License() {
             <span className="gradient-text">License</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            Cortex Linux is free and open source software
+            Cortex Linux software licensing terms
           </p>
         </div>
 
@@ -108,7 +108,7 @@ SOFTWARE.`}
           </h2>
           <p className="text-gray-300 leading-relaxed">
             "Cortex Linux" and the Cortex logo are trademarks of the Cortex
-            Linux project. While the software itself is open source under the
+            Linux project. While the software is licensed under the
             MIT license, use of the Cortex name and branding for derivative
             works requires written permission. This ensures users can
             distinguish official releases from community modifications.

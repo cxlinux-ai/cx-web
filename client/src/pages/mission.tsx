@@ -42,8 +42,8 @@ const missionPillars = [
   },
   {
     icon: Shield,
-    title: "Open & Accountable",
-    description: "Open source because infrastructure should be inspectable. Public roadmaps, documented decisions, and community-first development.",
+    title: "Transparent & Accountable",
+    description: "Infrastructure should be inspectable. Public roadmaps, documented decisions, and community-first development.",
     gradient: "from-emerald-500/20 to-emerald-600/5",
     borderColor: "border-emerald-500/30",
     iconColor: "text-emerald-400"
@@ -63,7 +63,7 @@ export default function MissionPage() {
       title: 'Our Mission & Roadmap | Cortex Linux',
       description: 'Cortex Linux exists to make AI a first-class system capability. Explore our mission, development roadmap, current priorities, and how you can contribute.',
       canonicalPath: '/mission',
-      keywords: ['Cortex Linux mission', 'AI operating system', 'AI-native Linux', 'AI infrastructure', 'Cortex roadmap', 'open source roadmap']
+      keywords: ['Cortex Linux mission', 'AI operating system', 'AI-native Linux', 'AI infrastructure', 'Cortex roadmap', 'development roadmap']
     });
     return cleanup;
   }, []);
@@ -123,17 +123,17 @@ export default function MissionPage() {
 
             {/* Trust Metrics */}
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
-              <div className="flex items-center gap-2" data-testid="badge-mission-open-source">
+              <div className="flex items-center gap-2" data-testid="badge-mission-enterprise">
                 <Code2 size={16} className="text-blue-300" />
-                <span>100% Open Source</span>
+                <span>Enterprise Ready</span>
               </div>
               <div className="flex items-center gap-2" data-testid="badge-mission-community">
                 <Users size={16} className="text-emerald-400" />
                 <span>Community Driven</span>
               </div>
-              <div className="flex items-center gap-2" data-testid="badge-mission-mit">
+              <div className="flex items-center gap-2" data-testid="badge-mission-secure">
                 <Shield size={16} className="text-purple-400" />
-                <span>MIT Licensed</span>
+                <span>Secure & Reliable</span>
               </div>
             </div>
           </motion.div>
@@ -514,7 +514,7 @@ export default function MissionPage() {
                         He's <span className="text-purple-300 font-medium">the glue that holds the project together</span>.
                       </p>
                       <p className="text-gray-400 italic border-l-2 border-purple-500/40 pl-4">
-                        "Open source isn't just about code—it's about <span className="text-purple-300">people</span>. 
+                        "Building great software isn't just about code—it's about <span className="text-purple-300">people</span>. 
                         Every pull request, every issue, every Discord message represents someone 
                         who believes in what we're building. That trust is sacred to me."
                       </p>
@@ -577,7 +577,7 @@ export default function MissionPage() {
               {[
                 {
                   name: "Mike Morgan",
-                  role: "CEO · Vision & Strategy · Open-source advocate",
+                  role: "CEO · Vision & Strategy · Community advocate",
                   github: "mikejmorgan-ai",
                   avatar: "/assets/mike.png"
                 },
@@ -601,7 +601,7 @@ export default function MissionPage() {
                 },
                 {
                   name: "Ansh Grover",
-                  role: "Main Reviewer · Code Quality · Open-source maintainer",
+                  role: "Main Reviewer · Code Quality · Core maintainer",
                   github: "Anshgrover23",
                   avatar: "https://github.com/Anshgrover23.png"
                 },

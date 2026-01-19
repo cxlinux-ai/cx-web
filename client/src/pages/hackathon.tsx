@@ -896,7 +896,7 @@ const teamMembers: TeamMember[] = [
     avatar: "/images/sahil.png",
     github: "sahil",
     highlight: false,
-    expertise: ["Full-Stack Dev", "Open Source", "Partner Relations", "Code Review"]
+    expertise: ["Full-Stack Dev", "Community", "Partner Relations", "Code Review"]
   },
   {
     name: "Dhruv",
@@ -2073,7 +2073,7 @@ export default function Hackathon() {
             className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8"
           >
             A two-phase program designed to crowdsource monetization strategies and convert the best ideas into production code with measurable ROI. Contribute to{" "}
-            <span className="text-blue-300 font-medium">Cortex Linux</span> — the open-source AI layer for Linux.
+            <span className="text-blue-300 font-medium">Cortex Linux</span> — the AI layer for Linux.
           </motion.p>
 
           {/* Urgency: Countdown */}

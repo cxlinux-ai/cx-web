@@ -23,7 +23,7 @@ function mapReleaseToFilter(release: typeof pressReleases[0]): FilterTag[] {
   if (releaseTags.some(t => t.includes("hackathon") || t.includes("event") || t.includes("global"))) {
     tags.push("Hackathon");
   }
-  if (releaseTags.some(t => t.includes("community") || t.includes("open source") || t.includes("contributor"))) {
+  if (releaseTags.some(t => t.includes("community") || t.includes("contributor"))) {
     tags.push("Community");
   }
   

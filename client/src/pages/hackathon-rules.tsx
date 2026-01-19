@@ -554,7 +554,7 @@ export default function HackathonRulesPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                  <span>They accept that their contributions may be used for open-source and commercial purposes by the Organizer.</span>
+                  <span>They accept that their contributions may be used for commercial purposes by the Organizer.</span>
                 </li>
               </ul>
             </motion.div>

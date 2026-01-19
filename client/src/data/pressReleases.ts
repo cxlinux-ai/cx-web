@@ -51,7 +51,7 @@ export const pressReleases: PressRelease[] = [
         title: "Open, Global, and Community-Driven",
         paragraphs: [
           "The hackathon is open to developers worldwide, with participation available fully online. Cortex Linux is committed to fostering an open and inclusive developer ecosystem, welcoming contributors ranging from independent hackers and students to startup teams and experienced system engineers.",
-          "As an open-source–driven project, Cortex Linux views this hackathon as more than a competition — it is an invitation to co-create the platform. Selected submissions may influence future roadmap decisions, core features, and long-term architectural direction.",
+          "As a community-driven project, Cortex Linux views this hackathon as more than a competition — it is an invitation to co-create the platform. Selected submissions may influence future roadmap decisions, core features, and long-term architectural direction.",
           "Prizes, recognition, and post-hackathon opportunities will be announced closer to launch, with a focus on rewarding projects that demonstrate technical depth, originality, and real-world impact."
         ]
       },
@@ -85,9 +85,9 @@ export const pressReleases: PressRelease[] = [
       title: "Cortex Linux",
       email: "press@cortexlinux.com"
     },
-    boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with an open-source core and a strong emphasis on developer experience, security, and long-term maintainability.",
+    boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
     companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cortexlinux.com.",
-    tags: ["Hackathon", "AI", "Open Source", "Developer Community", "Linux", "Global Event"],
+    tags: ["Hackathon", "AI", "Developer Community", "Linux", "Global Event"],
     keywords: [
       "AI Linux distribution",
       "AI-native operating system",
@@ -97,7 +97,6 @@ export const pressReleases: PressRelease[] = [
       "AI infrastructure",
       "Cortex Linux",
       "developer hackathon",
-      "open source hackathon",
       "AI-first system design"
     ],
     image: "/images/coding_hackathon_dev_1f49254e.jpg"
@@ -161,7 +160,7 @@ export const pressReleases: PressRelease[] = [
       title: "Cortex Linux",
       email: "press@cortexlinux.com"
     },
-    boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with an open-source core and a strong emphasis on developer experience, security, and long-term maintainability.",
+    boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
     tags: ["Product Release", "v2.5", "AI Automation", "Natural Language", "Security", "Linux", "Update"],
     keywords: [
       "Cortex Linux v2.5",

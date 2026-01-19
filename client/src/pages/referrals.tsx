@@ -516,7 +516,7 @@ export default function ReferralsPage() {
                     <div>
                       <h3 className="font-semibold text-white mb-1">Grow the Community</h3>
                       <p className="text-gray-400 text-sm">
-                        Help build the open-source Linux community while earning rewards for your contributions.
+                        Help build the Linux community while earning rewards for your contributions.
                       </p>
                     </div>
                   </div>

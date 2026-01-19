@@ -470,7 +470,7 @@ export const growthStrategy: GrowthChannel[] = [
   {
     platform: "Product Hunt",
     description: "Launch as build hackathon",
-    strategy: "Frame as 'Open Source AI Hackathon' with community voting",
+    strategy: "Frame as 'AI Linux Hackathon' with community voting",
     expectedReach: "25K+ makers",
     links: [
       { text: "Follow on PH", href: "https://producthunt.com/products/cortex-linux" }
@@ -544,7 +544,7 @@ export const hackathonFaqs = [
   },
   {
     question: "Is there a registration fee?",
-    answer: "100% free. This is open source. You're contributing to a community project that benefits everyone. No fees, no catches, no hidden costs."
+    answer: "100% free. You're contributing to a community project that benefits everyone. No fees, no catches, no hidden costs."
   },
   {
     question: "Where can I find the official rules?",
@@ -632,7 +632,7 @@ export const hackathonBenefits = [
   },
   {
     title: "Build Your Portfolio",
-    description: "Merged PRs on a growing open-source project look great on your resume. Hiring managers love candidates with real contribution history."
+    description: "Merged PRs on a growing project look great on your resume. Hiring managers love candidates with real contribution history."
   },
   {
     title: "Join a Builder Community",

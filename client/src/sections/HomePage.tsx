@@ -518,7 +518,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const comparisonData = [
-    { feature: "Open Source", icon: Github, cortex: true, toolA: false, toolB: false },
     { feature: "Self-Hostable", icon: Server, cortex: true, toolA: false, toolB: true },
     { feature: "Natural Language Interface", icon: MessageCircle, cortex: true, toolA: "partial", toolB: false },
     { feature: "Unlimited Task Scope", icon: Infinity, cortex: true, toolA: false, toolB: false },
@@ -576,9 +575,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "25"} stars</span>
             </a>
-            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-open-source">
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-github">
               <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">Open Source</span>
+              <span className="text-gray-300">View on GitHub</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
               <Tag size={12} className="text-blue-300 sm:w-3.5 sm:h-3.5" />
@@ -652,7 +651,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </button>
             </a>
             <p className="text-xs text-gray-500 text-center">
-              Free forever · Open source · No credit card
+              Free tier available · No credit card required
             </p>
           </motion.div>
 
@@ -1547,7 +1546,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </motion.div>
         </div>
       </section>
-      {/* Open Source Dashboard */}
+      {/* Community Dashboard */}
       <section ref={statsRef} className="py-24 px-4 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -1557,7 +1556,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Join a Growing <span className="gradient-text">Community</span> of Engineers</h2>
-            <p className="text-gray-400">100% open source. Backed by a thriving community of ML engineers, data scientists, and DevOps pros.</p>
+            <p className="text-gray-400">Backed by a thriving community of ML engineers, data scientists, and DevOps pros.</p>
           </motion.div>
 
           {/* Stats Grid - Real GitHub Data Only */}
@@ -2439,13 +2438,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <Shield size={16} className="text-blue-300" />
                 <span>GDPR Ready</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-open-source">
-                <Github size={16} className="text-gray-400" />
-                <span>100% Open Source</span>
+              <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-secure">
+                <Shield size={16} className="text-blue-400" />
+                <span>Enterprise Ready</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-mit-licensed">
+              <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-support">
                 <BadgeCheck size={16} className="text-purple-400" />
-                <span>MIT Licensed</span>
+                <span>24/7 Support</span>
               </div>
             </div>
             
@@ -2589,7 +2588,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             {[
               {
                 name: "Mike Morgan",
-                role: "CEO · Vision & Strategy · Open-source advocate",
+                role: "CEO · Vision & Strategy · Community advocate",
                 github: "mikejmorgan-ai",
                 avatar: "/assets/mike.png"
               },
@@ -2613,7 +2612,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               },
               {
                 name: "Ansh Grover",
-                role: "Main Reviewer · Code Quality · Open-source maintainer",
+                role: "Main Reviewer · Code Quality · Core maintainer",
                 github: "Anshgrover23",
                 avatar: "https://github.com/Anshgrover23.png"
               },

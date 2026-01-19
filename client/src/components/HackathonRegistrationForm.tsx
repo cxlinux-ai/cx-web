@@ -74,7 +74,7 @@ const TECHNICAL_ROLES = [
 const WHY_JOIN_OPTIONS = [
   { value: "learn_linux", label: "Learn systems / Linux internals" },
   { value: "build_meaningful", label: "Build something meaningful" },
-  { value: "open_source", label: "Contribute to open source" },
+  { value: "contribute", label: "Contribute to the ecosystem" },
   { value: "compete_prizes", label: "Compete & win prizes" },
   { value: "career_growth", label: "Get noticed / career growth" },
   { value: "ai_os_curiosity", label: "Curiosity about AI + OS" },

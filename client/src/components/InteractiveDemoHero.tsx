@@ -330,7 +330,7 @@ export default function InteractiveDemoHero() {
             <ArrowRight size={16} strokeWidth={2.5} className="opacity-60 group-hover/btn:translate-x-1 group-hover/btn:opacity-100 transition-all duration-300" />
           </motion.a>
           <p className="text-xs sm:text-sm text-gray-500">
-            Free forever · Open source · No credit card
+            Free tier available · No credit card required
           </p>
         </motion.div>
       </motion.div>

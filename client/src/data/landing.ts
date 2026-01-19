@@ -140,9 +140,8 @@ export const testimonials = [
 export const communityFeatures = [
   "Full AI capabilities",
   "All core features",
-  "Open source (Apache 2.0)",
   "Community support",
-  "Unlimited personal use"
+  "Free tier available"
 ];
 
 export const enterpriseFeatures = [
