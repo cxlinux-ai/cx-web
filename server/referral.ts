@@ -32,6 +32,7 @@ import {
   hackathonRegistrations,
   ipReferralCodes,
   type IpReferralCode,
+  visitorReferrals,
 } from "@shared/schema";
 import { sendVerificationEmail, sendWelcomeEmail } from "./email";
 
@@ -655,6 +656,112 @@ router.post("/click", clickLimiter, async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Click tracking error:", error);
     res.status(500).json({ error: "Failed to track click" });
+  }
+});
+
+// ==========================================
+// VISITOR REFERRAL TRACKING
+// ==========================================
+
+/**
+ * POST /api/referral/track-visitor
+ * Track when a visitor arrives via a referral link
+ * Stores IP -> referral code mapping for later attribution
+ */
+router.post("/track-visitor", clickLimiter, async (req: Request, res: Response) => {
+  try {
+    const { referralCode, source, landingPage } = req.body;
+    
+    if (!referralCode) {
+      return res.status(400).json({ error: "Referral code required" });
+    }
+    
+    const upperCode = referralCode.toUpperCase();
+    const clientIp = getClientIp(req);
+    const userAgent = req.headers["user-agent"] || null;
+    
+    // Verify the referral code exists (either in ipReferralCodes or waitlistEntries)
+    const ipCodeExists = await db
+      .select()
+      .from(ipReferralCodes)
+      .where(eq(ipReferralCodes.referralCode, upperCode))
+      .limit(1);
+    
+    const waitlistCodeExists = await db
+      .select()
+      .from(waitlistEntries)
+      .where(eq(waitlistEntries.referralCode, upperCode))
+      .limit(1);
+    
+    if (ipCodeExists.length === 0 && waitlistCodeExists.length === 0) {
+      return res.status(404).json({ error: "Invalid referral code" });
+    }
+    
+    // Check if this IP already has a recent visitor referral (within 30 days)
+    const existingVisitor = await db
+      .select()
+      .from(visitorReferrals)
+      .where(eq(visitorReferrals.visitorIp, clientIp))
+      .limit(1);
+    
+    if (existingVisitor.length > 0) {
+      // Update existing entry with latest referral code (last referral wins)
+      await db
+        .update(visitorReferrals)
+        .set({
+          referralCode: upperCode,
+          source: source || existingVisitor[0].source,
+          landingPage: landingPage || existingVisitor[0].landingPage,
+          userAgent,
+        })
+        .where(eq(visitorReferrals.id, existingVisitor[0].id));
+      
+      return res.json({ success: true, updated: true });
+    }
+    
+    // Create new visitor referral tracking entry
+    await db.insert(visitorReferrals).values({
+      visitorIp: clientIp,
+      referralCode: upperCode,
+      source: source || "direct",
+      userAgent,
+      landingPage: landingPage || "/",
+    });
+    
+    res.json({ success: true, created: true });
+  } catch (error) {
+    console.error("Visitor tracking error:", error);
+    res.status(500).json({ error: "Failed to track visitor" });
+  }
+});
+
+/**
+ * GET /api/referral/check-visitor
+ * Check if current IP has a stored referral attribution
+ */
+router.get("/check-visitor", apiLimiter, async (req: Request, res: Response) => {
+  try {
+    const clientIp = getClientIp(req);
+    
+    const visitor = await db
+      .select()
+      .from(visitorReferrals)
+      .where(eq(visitorReferrals.visitorIp, clientIp))
+      .limit(1);
+    
+    if (visitor.length === 0) {
+      return res.json({ hasReferral: false });
+    }
+    
+    res.json({
+      hasReferral: true,
+      referralCode: visitor[0].referralCode,
+      source: visitor[0].source,
+      createdAt: visitor[0].createdAt,
+    });
+  } catch (error) {
+    console.error("Check visitor error:", error);
+    res.status(500).json({ error: "Failed to check visitor" });
   }
 });
 

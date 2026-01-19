@@ -664,6 +664,26 @@ export const ipReferralCodes = pgTable("ip_referral_codes", {
 
 export type IpReferralCode = typeof ipReferralCodes.$inferSelect;
 
+/**
+ * Visitor Referrals - Track when visitors arrive via referral links
+ * Maps visitor IP to the referral code they came from
+ * Used to attribute hackathon registrations to referrers
+ */
+export const visitorReferrals = pgTable("visitor_referrals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  visitorIp: text("visitor_ip").notNull(),
+  referralCode: text("referral_code").notNull(),
+  source: text("source"), // where they came from (twitter, discord, etc.)
+  userAgent: text("user_agent"),
+  landingPage: text("landing_page"), // which page they landed on
+  convertedToRegistration: boolean("converted_to_registration").default(false),
+  registrationEmail: text("registration_email"), // email if they registered
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull().default(sql`NOW() + INTERVAL '30 days'`),
+});
+
+export type VisitorReferral = typeof visitorReferrals.$inferSelect;
+
 // Validation schemas for API
 export const waitlistSignupSchema = z.object({
   email: z.string().email("Invalid email address"),

@@ -40,6 +40,31 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
+  // Track visitor referral on page load (if ?ref=CODE is present)
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get("ref");
+    
+    if (refCode) {
+      // Track this visitor's referral for attribution
+      fetch("/api/referral/track-visitor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referralCode: refCode,
+          source: urlParams.get("utm_source") || "referral",
+          landingPage: window.location.pathname,
+        }),
+      }).catch(() => {
+        // Silently fail - don't interrupt user experience
+      });
+      
+      // Also store in localStorage as backup
+      localStorage.setItem("cortex_referral_code", refCode);
+      localStorage.setItem("cortex_referral_time", Date.now().toString());
+    }
+  }, []);
+
   // Handle pending scroll after navigation
   useEffect(() => {
     if (location === "/" && pendingScroll) {
