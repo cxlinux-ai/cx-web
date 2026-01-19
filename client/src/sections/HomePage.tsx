@@ -76,6 +76,19 @@ import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
 import { homeHeroTest } from "@/data/ab-tests";
 
+// ============================================
+// SECTION PADDING CONFIGURATION
+// Change this single value to adjust all section padding across the homepage
+// ============================================
+const SECTION_PADDING = {
+  // Hero section (with header) - smaller padding
+  hero: "py-12 sm:py-16",
+  // Standard sections - consistent medium padding  
+  standard: "py-16",
+  // Large/featured sections - slightly more emphasis
+  large: "py-20",
+};
+
 interface GitHubStats {
   openIssues: number;
   contributors: number;
@@ -557,7 +570,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col justify-center items-center py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+      <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-4 sm:px-6 relative overflow-hidden`}>
         <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden sm:block" />
         <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block" />
         
@@ -661,7 +674,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Social Proof - Logo Wall */}
-      <section className="py-16 border-t border-white/5 overflow-hidden">
+      <section className={`${SECTION_PADDING.standard} border-t border-white/5 overflow-hidden`}>
         <div className="text-center mb-8">
           <p className="text-sm text-gray-500 uppercase tracking-widest">Optimized for today’s developer ecosystem</p>
           <p className="text-xs text-gray-600 mt-2">Adopted by 1000+ developers worldwide</p>
@@ -681,7 +694,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Built For Section - Who This Is For */}
-      <section className="py-20 px-4 border-t border-white/5">
+      <section className={`${SECTION_PADDING.standard} px-4 border-t border-white/5`}>
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -745,7 +758,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* New to Cortex? - Getting Started Preview */}
-      <section className="py-16 px-4 border-t border-white/5">
+      <section className={`${SECTION_PADDING.standard} px-4 border-t border-white/5`}>
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -793,7 +806,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Interactive Product Preview */}
-      <section id="preview" className="py-24 px-4 relative">
+      <section id="preview" className={`${SECTION_PADDING.large} px-4 relative`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -873,7 +886,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Features Grid - Bento Style */}
-      <section id="about" className="py-24 px-4 border-t border-white/5 relative">
+      <section id="about" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative`}>
         {/* Subtle background blobs */}
         <div className="bg-blob bg-blob-blue w-[500px] h-[500px] -top-32 -right-32" style={{ animationDelay: '0s' }} />
         <div className="bg-blob bg-blob-blue w-[400px] h-[400px] bottom-20 -left-20" style={{ animationDelay: '4s' }} />
@@ -938,7 +951,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Live Demo Playground */}
-      <section className="py-24 px-4 border-t border-white/5 relative">
+      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative`}>
         {/* Subtle background blobs */}
         <div className="bg-blob bg-blob-blue w-[450px] h-[450px] top-1/4 -left-24" style={{ animationDelay: '2s' }} />
         <div className="bg-blob bg-blob-blue w-[350px] h-[350px] bottom-10 right-0" style={{ animationDelay: '6s' }} />
@@ -990,7 +1003,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Architecture Diagram - Enhanced 3D Layered Visualization */}
-      <section id="architecture" className="py-32 px-4 border-t border-white/5 relative overflow-hidden">
+      <section id="architecture" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative overflow-hidden`}>
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-3xl" />
@@ -1110,7 +1123,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
       </section>
       {/* Security Section */}
-      <section id="security" className="py-24 px-4 border-t border-white/5">
+      <section id="security" className={`${SECTION_PADDING.large} px-4 border-t border-white/5`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1146,7 +1159,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Comparison Table - Enhanced Design */}
-      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
+      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative overflow-hidden`}>
         {/* Background gradient accents */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
@@ -1385,7 +1398,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Pricing Section - 4-Tier with Stripe Integration */}
-      <section id="pricing" className="py-32 px-4 relative overflow-hidden">
+      <section id="pricing" className={`${SECTION_PADDING.large} px-4 relative overflow-hidden`}>
         {/* Subtle background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
         
@@ -1550,7 +1563,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Community Dashboard */}
-      <section ref={statsRef} className="py-24 px-4 border-t border-white/5">
+      <section ref={statsRef} className={`${SECTION_PADDING.large} px-4 border-t border-white/5`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1633,7 +1646,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Documentation Preview */}
-      <section className="py-24 px-4 border-t border-white/5">
+      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5`}>
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1736,7 +1749,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* AI Processing Visualization - Premium Enhanced Version */}
-      <section id="ai-processing" className="py-32 px-4 border-t border-white/5 overflow-hidden relative">
+      <section id="ai-processing" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 overflow-hidden relative`}>
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl" />
@@ -2152,7 +2165,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Community Section */}
-      <section className="py-24 px-4 border-t border-white/5 relative">
+      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative`}>
         {/* Subtle background blobs */}
         <div className="bg-blob bg-blob-blue w-[500px] h-[500px] top-10 -right-20" style={{ animationDelay: '3s' }} />
         <div className="bg-blob bg-blob-blue w-[350px] h-[350px] bottom-0 left-10" style={{ animationDelay: '7s' }} />
@@ -2193,7 +2206,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Roadmap Timeline */}
-      <section className="py-24 px-4 border-t border-white/5 relative overflow-hidden">
+      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative overflow-hidden`}>
         {/* Subtle background blobs */}
         <div className="bg-blob bg-blob-blue w-[500px] h-[500px] top-0 left-1/4 opacity-40" style={{ animationDelay: '2s' }} />
         <div className="bg-blob bg-blob-blue w-[400px] h-[400px] bottom-0 right-1/3 opacity-30" style={{ animationDelay: '8s' }} />
@@ -2395,7 +2408,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       {/* Blog Preview Section */}
       <BlogPreview />
       {/* Final CTA */}
-      <section id="join" className="py-32 px-4 relative overflow-hidden">
+      <section id="join" className={`${SECTION_PADDING.large} px-4 relative overflow-hidden`}>
         <div className="gradient-glow left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-30" />
         
         <div className="max-w-3xl mx-auto text-center relative z-10">
@@ -2470,7 +2483,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Referral Program Snippet */}
-      <section id="referral-program" className="py-16 px-4 border-t border-white/5">
+      <section id="referral-program" className={`${SECTION_PADDING.standard} px-4 border-t border-white/5`}>
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -2530,7 +2543,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Email Capture Section */}
-      <section id="email-capture" className="py-24 px-4 border-t border-white/5 bg-white/[0.02]">
+      <section id="email-capture" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 bg-white/[0.02]`}>
         <div className="max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -2582,7 +2595,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* Built by Real People - Trust Section */}
-      <section className="py-16 px-4" aria-labelledby="founders-heading">
+      <section className={`${SECTION_PADDING.standard} px-4`} aria-labelledby="founders-heading">
         <div className="max-w-3xl mx-auto">
           <h2 id="founders-heading" className="text-center text-sm font-normal text-gray-500 mb-8 tracking-wide uppercase">
             Core Contributors
