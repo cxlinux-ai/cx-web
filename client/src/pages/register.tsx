@@ -67,7 +67,7 @@ export default function Register() {
             <Zap size={16} className="text-amber-400" />
             <span className="text-sm font-medium">
               <span className="text-white">60 seconds</span>
-              <span className="text-gray-400"> to join the revolution</span>
+              <span className="text-gray-400"> to join the hackathon</span>
             </span>
           </div>
         </motion.div>
