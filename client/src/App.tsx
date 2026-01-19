@@ -216,6 +216,16 @@ export default function App() {
                   Bounties
                 </Link>
                 <Link
+                  href="/referrals"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/referrals" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
+                  }`}
+                  data-testid="link-referrals"
+                  onClick={() => analytics.trackCTAClick('referrals', 'main_nav')}
+                >
+                  Referrals
+                </Link>
+                <Link
                   href="/hackathon"
                   className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 group ${
                     location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
@@ -340,6 +350,17 @@ export default function App() {
                     data-testid="mobile-link-bounties"
                   >
                     Bounties
+                  </Link>
+                  <Link
+                    href="/referrals"
+                    onClick={() => {
+                      analytics.trackCTAClick('referrals', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
+                    data-testid="mobile-link-referrals"
+                  >
+                    Referrals
                   </Link>
                   <Link
                     href="/hackathon"
