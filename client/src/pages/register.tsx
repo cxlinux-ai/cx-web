@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Trophy, Users, Calendar } from "lucide-react";
+import { Trophy, Users, Calendar, Zap } from "lucide-react";
 import HackathonRegistrationForm from "@/components/HackathonRegistrationForm";
 import { updateSEO } from "@/lib/seo";
 
@@ -54,6 +54,21 @@ export default function Register() {
           <div className="flex items-center gap-2 text-sm">
             <Calendar size={18} className="text-amber-400" />
             <span className="text-gray-400">13-Week Program</span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.15 }}
+          className="flex justify-center mb-6"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-emerald-500/20 border border-blue-500/30">
+            <Zap size={16} className="text-amber-400" />
+            <span className="text-sm font-medium">
+              <span className="text-white">60 seconds</span>
+              <span className="text-gray-400"> to join the revolution</span>
+            </span>
           </div>
         </motion.div>
 
