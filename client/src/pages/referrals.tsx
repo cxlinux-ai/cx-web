@@ -221,19 +221,19 @@ export default function ReferralsPage() {
               </ul>
             </motion.div>
 
-            {/* Tier 2: Goodies Package */}
+            {/* Tier 2: Goodies Package + $50 Credit */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 border-2 border-purple-500/30 rounded-2xl p-6 relative overflow-hidden transform md:scale-105 md:-translate-y-2"
+              className="bg-gradient-to-br from-purple-500/10 to-purple-900/5 border-2 border-purple-500/30 rounded-2xl p-6 pt-8 relative transform md:scale-105 md:-translate-y-2"
             >
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full z-10">
                 POPULAR
               </div>
               <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/10 rounded-full blur-2xl" />
-              <div className="flex items-center gap-3 mb-4 mt-2">
+              <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
                   <span className="text-2xl font-bold text-purple-400">20</span>
                 </div>
@@ -243,10 +243,14 @@ export default function ReferralsPage() {
                 </div>
               </div>
               <div className="mb-4">
-                <div className="text-3xl font-bold text-purple-400 mb-1">Goodies Package</div>
-                <div className="text-sm text-gray-400">Exclusive Cortex Linux Swag</div>
+                <div className="text-3xl font-bold text-purple-400 mb-1">$50 + Goodies</div>
+                <div className="text-sm text-gray-400">Credit + Exclusive Swag Package</div>
               </div>
               <ul className="space-y-2 text-sm text-gray-300">
+                <li className="flex items-center gap-2">
+                  <Zap size={14} className="text-purple-400" />
+                  $50 Cortex Linux Credit
+                </li>
                 <li className="flex items-center gap-2">
                   <Gift size={14} className="text-purple-400" />
                   Cortex Linux T-Shirt
@@ -262,7 +266,7 @@ export default function ReferralsPage() {
               </ul>
             </motion.div>
 
-            {/* Tier 3: Premium + Bundle */}
+            {/* Tier 3: Premium + Bundle + $200 Credit */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -281,10 +285,14 @@ export default function ReferralsPage() {
                 </div>
               </div>
               <div className="mb-4">
-                <div className="text-3xl font-bold text-yellow-400 mb-1">Premium + Bundle</div>
+                <div className="text-3xl font-bold text-yellow-400 mb-1">$200 + Premium</div>
                 <div className="text-sm text-gray-400">The Ultimate Package</div>
               </div>
               <ul className="space-y-2 text-sm text-gray-300">
+                <li className="flex items-center gap-2">
+                  <Zap size={14} className="text-yellow-400" />
+                  $200 Cortex Linux Credit
+                </li>
                 <li className="flex items-center gap-2">
                   <Trophy size={14} className="text-yellow-400" />
                   Cortex Linux Premium (3 months)
@@ -533,11 +541,11 @@ export default function ReferralsPage() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-400">20 referrals</span>
-                    <span className="text-purple-400 font-medium">Swag package</span>
+                    <span className="text-purple-400 font-medium">$50 + swag package</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-400">50 referrals</span>
-                    <span className="text-yellow-400 font-medium">Premium + bundle</span>
+                    <span className="text-yellow-400 font-medium">$200 + premium + bundle</span>
                   </div>
                 </div>
               </div>
