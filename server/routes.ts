@@ -472,6 +472,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const clientIp = getClientIp(req);
       let referrerCode = "";
       let referrerSource = "";
+      let referrerEmail = "";
       
       try {
         const visitorRef = await db
@@ -483,6 +484,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (visitorRef.length > 0 && !visitorRef[0].convertedToRegistration) {
           referrerCode = visitorRef[0].referralCode;
           referrerSource = visitorRef[0].source || "referral";
+          
+          // Get the referrer's email from ipReferralCodes table
+          const referrerInfo = await db
+            .select()
+            .from(ipReferralCodes)
+            .where(eq(ipReferralCodes.referralCode, referrerCode))
+            .limit(1);
+          
+          if (referrerInfo.length > 0 && referrerInfo[0].email) {
+            referrerEmail = referrerInfo[0].email;
+          }
           
           // Mark as converted
           await db
@@ -502,7 +514,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             })
             .where(eq(ipReferralCodes.referralCode, referrerCode));
           
-          console.log(`[Referral] Registration attributed to referrer: ${referrerCode}`);
+          console.log(`[Referral] Registration attributed to referrer: ${referrerCode} (${referrerEmail})`);
         }
       } catch (refError) {
         console.error("[Referral] Error checking visitor referral:", refError);
@@ -553,6 +565,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           threeYearVision: data.threeYearVision || "",
           // Referral Attribution
           referredBy: referrerCode,
+          referrerEmail: referrerEmail,
           referralSource: referrerSource,
         };
 
