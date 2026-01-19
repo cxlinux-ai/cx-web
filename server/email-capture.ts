@@ -66,30 +66,42 @@ router.post("/", emailLimiter, async (req, res) => {
 
     console.log(`[Email Capture] Submitting email: ${email} from source: ${source}`);
 
+    // Google Apps Script requires following redirects and specific content type
     const response = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "text/plain;charset=utf-8",
       },
       body: JSON.stringify(payload),
+      redirect: "follow",
     });
 
+    console.log(`[Email Capture] Response status: ${response.status}`);
+    
     // Google Apps Script returns text, try to parse as JSON
     const responseText = await response.text();
+    console.log(`[Email Capture] Response text: ${responseText.substring(0, 200)}`);
+    
     let result;
     try {
       result = JSON.parse(responseText);
     } catch {
-      // If it's not JSON, check if response was OK
-      if (response.ok) {
+      // If it's not JSON but contains success indicators, treat as success
+      if (response.ok || responseText.includes("success")) {
         result = { success: true };
+      } else if (responseText.includes("Page Not Found") || responseText.includes("DOCTYPE")) {
+        console.error("[Email Capture] Google Sheets URL returned HTML - check deployment settings");
+        return res.status(500).json({
+          success: false,
+          error: "Email service configuration error. Please contact support.",
+        });
       } else {
-        throw new Error(`Google Sheets returned: ${responseText}`);
+        throw new Error(`Google Sheets returned: ${responseText.substring(0, 200)}`);
       }
     }
 
-    if (!response.ok) {
-      console.error("[Email Capture] Google Sheets error:", responseText);
+    if (!response.ok && !result?.success) {
+      console.error("[Email Capture] Google Sheets error:", responseText.substring(0, 500));
       return res.status(500).json({
         success: false,
         error: "Failed to save email. Please try again.",
