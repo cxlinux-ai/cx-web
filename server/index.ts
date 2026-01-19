@@ -8,6 +8,9 @@ import { startBot } from "./discord-bot/index.js";
 const app = express();
 
 // Security headers with Helmet
+// Trust proxy for correct IP detection behind reverse proxy
+app.set('trust proxy', true);
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
