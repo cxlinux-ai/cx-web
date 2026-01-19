@@ -600,7 +600,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section */}
-      <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-2 sm:px-2 relative overflow-hidden`}>
+      <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-2 sm:px-4 relative overflow-hidden`}>
         <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden sm:block" />
         <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block" />
         
@@ -609,7 +609,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+            className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-2 sm:mb-2"
           >
             <a
               href="https://github.com/cortexlinux/cortex"
