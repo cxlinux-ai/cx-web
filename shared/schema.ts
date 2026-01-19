@@ -81,11 +81,13 @@ export const insertHackathonRegistrationSchema = createInsertSchema(hackathonReg
 
 // Full registration schema for new comprehensive form
 export const fullHackathonRegistrationSchema = z.object({
+  // Section 1: Personal Info
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
+  discordUsername: z.string().min(2, "Discord username is required"),
   country: z.string().optional(),
-  currentRole: z.enum(["Student", "Professional", "Indie Hacker", "Other"]),
   organization: z.string().optional(),
+  // Section 2: Technical Background
   githubUrl: z.string()
     .min(1, "GitHub URL is required")
     .refine(
@@ -93,14 +95,25 @@ export const fullHackathonRegistrationSchema = z.object({
       "Please enter a valid GitHub URL or username"
     ),
   linkedinUrl: z.string().optional(),
+  technicalRole: z.string().min(1, "Please select your technical role"),
+  technicalRoleOther: z.string().optional(),
+  programmingLanguages: z.array(z.string()).min(1, "Select at least one programming language"),
   linuxExperience: z.number().min(1).max(5),
   aiMlExperience: z.number().min(1).max(5),
-  programmingLanguages: z.array(z.string()).min(1, "Select at least one programming language"),
+  // Section 3: Participation
+  phaseParticipation: z.enum(["phase1", "phase2", "both"]),
   teamOrSolo: z.enum(["team", "solo"]),
   teamName: z.string().optional(),
-  projectIdea: z.string().min(10, "Please describe your project idea (at least 10 characters)"),
-  usedCortexBefore: z.enum(["yes", "no", "whats_that"]),
-  howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]),
+  // Section 4: Motivations
+  whyJoinHackathon: z.array(z.string()).min(1, "Please select at least one reason"),
+  whyJoinOther: z.string().optional(),
+  cortexAreaInterest: z.string().min(1, "Please select an area of interest"),
+  // Section 5: Vision (Optional)
+  whatExcitesYou: z.string().optional(),
+  contributionPlan: z.string().optional(),
+  // Section 6: Beyond Hackathon (Optional)
+  postHackathonInvolvement: z.array(z.string()).optional(),
+  threeYearVision: z.string().optional(),
 });
 
 export type InsertHackathonRegistration = z.infer<typeof insertHackathonRegistrationSchema>;

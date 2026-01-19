@@ -456,6 +456,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const registration = await storage.createFullRegistration(data);
 
+      // Send to Google Sheets (fire and forget - don't block response)
+      const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+      if (sheetsWebhookUrl) {
+        const sheetData = {
+          source: "hackathon_registration",
+          timestamp: new Date().toISOString(),
+          // Section 1: Personal Info
+          fullName: data.fullName || "",
+          email: data.email || "",
+          discordUsername: data.discordUsername || "",
+          country: data.country || "",
+          organization: data.organization || "",
+          // Section 2: Technical Background
+          githubUrl: data.githubUrl || "",
+          linkedinUrl: data.linkedinUrl || "",
+          technicalRole: data.technicalRole || "",
+          technicalRoleOther: data.technicalRoleOther || "",
+          programmingLanguages: Array.isArray(data.programmingLanguages) 
+            ? data.programmingLanguages.join(", ") 
+            : "",
+          linuxExperience: data.linuxExperience || "",
+          aiMlExperience: data.aiMlExperience || "",
+          // Section 3: Participation
+          phaseParticipation: data.phaseParticipation || "",
+          teamOrSolo: data.teamOrSolo || "",
+          teamName: data.teamName || "",
+          // Section 4: Motivations
+          whyJoinHackathon: Array.isArray(data.whyJoinHackathon) 
+            ? data.whyJoinHackathon.join(", ") 
+            : "",
+          whyJoinOther: data.whyJoinOther || "",
+          cortexAreaInterest: data.cortexAreaInterest || "",
+          // Section 5: Vision
+          whatExcitesYou: data.whatExcitesYou || "",
+          contributionPlan: data.contributionPlan || "",
+          // Section 6: Beyond Hackathon
+          postHackathonInvolvement: Array.isArray(data.postHackathonInvolvement) 
+            ? data.postHackathonInvolvement.join(", ") 
+            : "",
+          threeYearVision: data.threeYearVision || "",
+        };
+
+        fetch(sheetsWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetData),
+        }).catch((err) => {
+          console.error("[Google Sheets] Failed to send registration:", err.message);
+        });
+      }
+
       res.status(201).json({ 
         success: true,
         message: "Registration successful",
