@@ -722,7 +722,18 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
     res.status(200).json({ url: session.url });
   } catch (error: any) {
     console.error("Create checkout session error:", error);
-    res.status(500).json({ error: error.message || "Failed to create checkout session" });
+    
+    // Provide user-friendly error messages
+    let userMessage = "Failed to create checkout session";
+    if (error.message?.includes("product is not active")) {
+      userMessage = "This plan is currently being set up. Please try again later or contact support.";
+    } else if (error.message?.includes("No such price")) {
+      userMessage = "This pricing option is not available. Please refresh and try again.";
+    } else if (error.message) {
+      userMessage = error.message;
+    }
+    
+    res.status(500).json({ error: userMessage });
   }
 });
 

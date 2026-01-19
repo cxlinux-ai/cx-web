@@ -205,9 +205,12 @@ export default function PricingPage() {
       }
     } catch (error: any) {
       console.error('Checkout error:', error);
+      const errorMessage = error.message || "Unable to start checkout. Please try again.";
       toast({
-        title: "Checkout Error",
-        description: error.message || "Unable to start checkout. Please try again.",
+        title: "Checkout Unavailable",
+        description: errorMessage.includes("being set up") 
+          ? "This plan is currently being configured. Please try again later or contact support@cortexlinux.com"
+          : errorMessage,
         variant: "destructive"
       });
     } finally {
