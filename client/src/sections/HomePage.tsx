@@ -82,11 +82,11 @@ import { homeHeroTest } from "@/data/ab-tests";
 // ============================================
 const SECTION_PADDING = {
   // Hero section (with header) - smaller padding
-  hero: "py-12 sm:py-16",
+  hero: "py-8 sm:py-8",
   // Standard sections - consistent medium padding  
-  standard: "py-16",
+  standard: "py-8",
   // Large/featured sections - slightly more emphasis
-  large: "py-20",
+  large: "py-8",
 };
 
 interface GitHubStats {
@@ -600,7 +600,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section */}
-      <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-4 sm:px-6 relative overflow-hidden`}>
+      <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-2 sm:px-2 relative overflow-hidden`}>
         <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 hidden sm:block" />
         <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50 hidden sm:block" />
         
@@ -981,7 +981,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
       {/* Live Demo Playground */}
-      <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative`}>
+      <section className={`${SECTION_PADDING.large} px-2 border-t border-white/5 relative`}>
         {/* Subtle background blobs */}
         <div className="bg-blob bg-blob-blue w-[450px] h-[450px] top-1/4 -left-24" style={{ animationDelay: '2s' }} />
         <div className="bg-blob bg-blob-blue w-[350px] h-[350px] bottom-10 right-0" style={{ animationDelay: '6s' }} />
@@ -1153,7 +1153,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
       </section>
       {/* Security Section */}
-      <section id="security" className={`${SECTION_PADDING.large} px-4 border-t border-white/5`}>
+      <section id="security" className={`${SECTION_PADDING.standard} px-2 border-t border-white/5`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1440,7 +1440,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="text-center mb-12"
           >
             <p className="text-blue-300 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple, Transparent Pricing</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Simple 
+              <span className="gradient-text"> Transparent Pricing</span> </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Start free, scale as you grow. All plans include a 14-day free trial.
             </p>
