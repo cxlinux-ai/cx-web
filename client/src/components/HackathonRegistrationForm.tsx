@@ -281,7 +281,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             Stay updated on hackathon news, connect with other participants, find teammates, and get support from the community.
           </p>
           <a
-            href="https://discord.gg/cortexlinux"
+            href="https://discord.gg/ASvzWcuTfk"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
