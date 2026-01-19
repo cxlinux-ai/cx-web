@@ -12,13 +12,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Truck } from 'lucide-react'
+import { Truck, Eye, EyeOff } from 'lucide-react'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { toast } from 'sonner'
 
 export default function PosterRegisterPage() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
   const [userId, setUserId] = useState<string>('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -108,17 +111,25 @@ export default function PosterRegisterPage() {
   }
 
   return (
-    <div id="poster-register-page" className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <Card id="poster-register-card" className="w-full max-w-2xl">
+    <div id="poster-register-page" className="min-h-screen bg-slate-50 dark:bg-buildhaul-navy flex items-center justify-center p-4 transition-colors relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-buildhaul-navy dark:to-buildhaul-slate" />
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+      <Card id="poster-register-card" className="w-full max-w-2xl relative z-10 bg-white dark:bg-buildhaul-slate/50 backdrop-blur-xl border-slate-200 dark:border-white/10">
         <CardHeader id="poster-register-header">
           <div id="poster-register-logo" className="flex items-center justify-center gap-2 mb-4">
-            <Truck className="h-8 w-8 text-blue-900" />
-            <span className="text-2xl font-bold text-blue-900">BuildHaul</span>
+            <div className="w-10 h-10 bg-gradient-to-br from-buildhaul-orange to-orange-600 rounded-xl flex items-center justify-center">
+              <Truck className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-2xl font-bold text-buildhaul-navy dark:text-white">
+              Build<span className="text-buildhaul-orange">Haul</span>
+            </span>
           </div>
-          <CardTitle id="poster-register-title" className="text-2xl text-center">
+          <CardTitle id="poster-register-title" className="text-2xl text-center text-buildhaul-navy dark:text-white">
             {step === 1 ? 'Create Your Account' : 'Set Up Your Company'}
           </CardTitle>
-          <CardDescription id="poster-register-description" className="text-center">
+          <CardDescription id="poster-register-description" className="text-center dark:text-slate-400">
             {step === 1 ? 'Step 1 of 2: Personal Information' : 'Step 2 of 2: Company Details'}
           </CardDescription>
         </CardHeader>
@@ -153,21 +164,39 @@ export default function PosterRegisterPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" {...registerUser('password')} />
+                  <div className="relative">
+                    <Input id="password" type={showPassword ? 'text' : 'password'} {...registerUser('password')} />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    >
+                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                   {userErrors.password && (
                     <p className="text-sm text-red-600">{userErrors.password.message}</p>
                   )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input id="confirmPassword" type="password" {...registerUser('confirmPassword')} />
+                  <div className="relative">
+                    <Input id="confirmPassword" type={showConfirmPassword ? 'text' : 'password'} {...registerUser('confirmPassword')} />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    >
+                      {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
                   {userErrors.confirmPassword && (
                     <p className="text-sm text-red-600">{userErrors.confirmPassword.message}</p>
                   )}
                 </div>
               </div>
 
-              <Button id="user-submit-button" type="submit" className="w-full bg-blue-900 hover:bg-blue-800" disabled={loading}>
+              <Button id="user-submit-button" type="submit" className="w-full bg-buildhaul-orange hover:bg-orange-600" disabled={loading}>
                 {loading ? 'Creating Account...' : 'Continue'}
               </Button>
             </form>
@@ -249,7 +278,7 @@ export default function PosterRegisterPage() {
                 </div>
               </div>
 
-              <Button id="company-submit-button" type="submit" className="w-full bg-blue-900 hover:bg-blue-800" disabled={loading}>
+              <Button id="company-submit-button" type="submit" className="w-full bg-buildhaul-orange hover:bg-orange-600" disabled={loading}>
                 {loading ? 'Creating Company...' : 'Complete Registration'}
               </Button>
             </form>
