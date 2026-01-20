@@ -135,6 +135,11 @@ export default function Footer() {
                   Hackathon
                 </SmoothLink>
               </li>
+              <li>
+                <SmoothLink href="/architecture" className="hover:text-white transition-colors" data-testid="footer-link-architecture">
+                  Architecture
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 

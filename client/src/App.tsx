@@ -33,6 +33,7 @@ import Register from "./pages/register";
 import PricingPage from "./pages/pricing";
 import PricingSuccessPage from "./pages/pricing-success";
 import SupportPage from "./pages/support";
+import ArchitecturePage from "./pages/architecture";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -407,6 +408,7 @@ export default function App() {
             <Route path="/pricing" component={PricingPage} />
             <Route path="/pricing/success" component={PricingSuccessPage} />
             <Route path="/support" component={SupportPage} />
+            <Route path="/architecture" component={ArchitecturePage} />
           </Switch>
           </main>
 
