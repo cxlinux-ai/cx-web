@@ -15,12 +15,12 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.googletagmanager.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.googletagmanager.com", "https://js.stripe.com", "https://r.wdfl.co", "https://cdn.retellai.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "https://api.github.com", "https://api.anthropic.com", "wss:", "ws:"],
-      frameSrc: ["'self'"],
+      connectSrc: ["'self'", "https://api.github.com", "https://api.anthropic.com", "https://api.stripe.com", "https://r.wdfl.co", "wss:", "ws:"],
+      frameSrc: ["'self'", "https://js.stripe.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },
@@ -28,6 +28,12 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" },
 }));
+
+// Add Permissions-Policy header for Stripe payment
+app.use((req, res, next) => {
+  res.setHeader('Permissions-Policy', 'payment=(self "https://js.stripe.com")');
+  next();
+});
 
 declare module 'http' {
   interface IncomingMessage {
