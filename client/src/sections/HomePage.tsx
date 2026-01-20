@@ -2417,24 +2417,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="text-center mt-14"
-          >
-            <a
-              href="https://github.com/cortexlinux/cortex/discussions"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/10 text-gray-400 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/10 transition-all duration-300"
-            >
-              Suggest a feature
-              <ArrowRight size={16} />
-            </a>
-          </motion.div>
-        </div>
+                  </div>
       </section>
       {/* Blog Preview Section */}
       <BlogPreview />
