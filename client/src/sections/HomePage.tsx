@@ -787,55 +787,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-      {/* New to Cortex? - Getting Started Preview */}
-      <section className={`${SECTION_PADDING.standard} px-4 border-t border-white/5`}>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/20 to-brand-blue/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-blue/30 transition-all duration-300">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-brand-blue flex items-center justify-center">
-                      <Rocket className="w-5 h-5 text-white" />
-                    </div>
-                    <span className="text-sm font-medium uppercase tracking-wide text-[#93c5fd]">New to Cortex?</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    Start Your Journey Today
-                  </h3>
-                  <p className="text-gray-400 text-lg max-w-xl">
-                    Our step-by-step guide will take you from installation to running your first AI-powered workflow in minutes.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Link
-                    href="/getting-started"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] hover:scale-105 transition-all duration-300"
-                    data-testid="button-homepage-getting-started"
-                  >
-                    Getting Started Guide
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    href="/blog/install-cortex-linux-beginner-guide"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-white font-medium hover:bg-white/5 transition-all duration-300"
-                    data-testid="link-homepage-install-guide"
-                  >
-                    Installation Guide
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-      {/* Interactive Product Preview */}
+            {/* Interactive Product Preview */}
       <section id="preview" className={`${SECTION_PADDING.large} px-4 relative`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
