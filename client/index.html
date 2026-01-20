@@ -4,19 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <meta name="description" content="Cortex Linux - The world's first AI-Native Operating System. Linux that understands natural language. No documentation required." />
-    <meta name="keywords" content="AI, Linux, Operating System, Natural Language, Open Source, Cortex" />
-    <meta name="author" content="Cortex Linux Team" />
+    <meta name="keywords" content="AI, Linux, Operating System, Natural Language, Open Source, Cortex, Package Manager, Ubuntu, Debian, DevOps, MLOps" />
+    <meta name="author" content="AI Venture Holdings LLC" />
     <meta name="robots" content="index, follow" />
-    
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE" />
-    
+
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <title>Cortex Linux - AI-Native Operating System</title>
-    <link rel="icon" type="image/jpeg" href="/favicon-cx.jpg" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon-cx.jpg" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#8b5cf6" />
+
     <link rel="canonical" href="https://cortexlinux.com" />
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cortexlinux.com" />
@@ -27,24 +35,26 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Cortex Linux" />
     <meta property="og:locale" content="en_US" />
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@cortexlinux" />
     <meta name="twitter:url" content="https://cortexlinux.com" />
     <meta name="twitter:title" content="Cortex Linux - AI-Native Operating System" />
     <meta name="twitter:description" content="Linux that understands natural language. No documentation required. Just ask, and Cortex executes." />
     <meta name="twitter:image" content="https://cortexlinux.com/og-image.png" />
-    <meta name="twitter:creator" content="@cortexlinux" />
-    
+    <meta name="twitter:creator" content="@mikejmorgan" />
+
     <!-- Font Preloading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    
-    <!-- DNS Prefetch for External Resources -->
+
+    <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://api.github.com" />
-    
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP31FWZGC3"></script>
     <script>
@@ -52,20 +62,29 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-DP31FWZGC3', {
-        anonymize_ip: true
+        anonymize_ip: true,
+        cookie_flags: 'SameSite=None;Secure'
       });
     </script>
-    
-    <!-- Microsoft Clarity - Uncomment and replace YOUR_PROJECT_ID when ready
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "YOUR_PROJECT_ID");
+
+    <!-- Rewardful Affiliate Tracking -->
+    <script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
+    <script async src='https://r.wdfl.co/rw.js' data-rewardful='e45bd0'></script>
+
+    <!-- Retell AI Voice Agent -->
+    <script async src="https://cdn.retellai.com/widget.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+        if (window.RetellWebWidget) {
+          window.RetellWebWidget.init({
+            agentId: "agent_2b6e629ab659e29d581864193d",
+            position: "bottom-right",
+            buttonColor: "#8b5cf6"
+          });
+        }
+      });
     </script>
-    -->
-    
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     [
@@ -73,13 +92,25 @@
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Cortex Linux",
+        "legalName": "AI Venture Holdings LLC",
         "url": "https://cortexlinux.com",
-        "logo": "https://cortexlinux.com/favicon.png",
+        "logo": "https://cortexlinux.com/logo.png",
+        "foundingDate": "2024",
+        "founders": [{
+          "@type": "Person",
+          "name": "Michael J. Morgan"
+        }],
         "sameAs": [
           "https://github.com/cortexlinux/cortex",
           "https://twitter.com/cortexlinux",
-          "https://discord.gg/ASvzWcuTfk"
+          "https://discord.gg/uCqHvxjU83",
+          "https://linkedin.com/company/cortexlinux"
         ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "mike@cortexlinux.com",
+          "contactType": "customer support"
+        },
         "description": "The world's first AI-Native Operating System. Linux that understands natural language."
       },
       {
@@ -88,16 +119,15 @@
         "name": "Cortex Linux",
         "operatingSystem": "Linux",
         "applicationCategory": "DeveloperApplication",
-        "description": "AI-Native Linux operating system that understands natural language commands for ML workflows",
+        "description": "AI-Native Linux package manager that understands natural language commands",
+        "downloadUrl": "https://github.com/cortexlinux/cortex",
+        "softwareVersion": "0.1.0",
+        "releaseNotes": "https://github.com/cortexlinux/cortex/releases",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "127"
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         }
       },
       {
