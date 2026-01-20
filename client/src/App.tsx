@@ -177,16 +177,16 @@ export default function App() {
                   Get Started
                 </Link>
                 <Link
-                  href="/security"
+                  href="/pricing"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/security" || location === "/security-policy"
+                    location === "/pricing"
                       ? "text-[#93c5fd]"
                       : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
-                  data-testid="link-security"
-                  onClick={() => analytics.trackCTAClick('security', 'main_nav')}
+                  data-testid="link-pricing"
+                  onClick={() => analytics.trackCTAClick('pricing', 'main_nav')}
                 >
-                  Security
+                  Pricing
                 </Link>
                 <Link
                   href="/news"
@@ -299,15 +299,15 @@ export default function App() {
                     Get Started
                   </Link>
                   <Link
-                    href="/security"
+                    href="/pricing"
                     onClick={() => {
-                      analytics.trackCTAClick('security', 'mobile_nav');
+                      analytics.trackCTAClick('pricing', 'mobile_nav');
                       setMobileMenuOpen(false);
                     }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-security"
+                    data-testid="mobile-link-pricing"
                   >
-                    Security
+                    Pricing
                   </Link>
                   <Link
                     href="/news"
