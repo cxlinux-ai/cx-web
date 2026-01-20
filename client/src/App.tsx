@@ -206,16 +206,6 @@ export default function App() {
                   onClick={() => analytics.trackCTAClick('ai_agencies', 'main_nav')}
                 >AI Agencies</Link>
                 <Link
-                  href="/bounties"
-                  className={`text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
-                    location === "/bounties" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-bounties"
-                  onClick={() => analytics.trackCTAClick('bounties', 'main_nav')}
-                >
-                  Bounties
-                </Link>
-                <Link
                   href="/referrals"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/referrals" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
@@ -339,17 +329,6 @@ export default function App() {
                     data-testid="mobile-link-startup"
                   >
                     AI Agencies
-                  </Link>
-                  <Link
-                    href="/bounties"
-                    onClick={() => {
-                      analytics.trackCTAClick('bounties', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-bounties"
-                  >
-                    Bounties
                   </Link>
                   <Link
                     href="/referrals"
