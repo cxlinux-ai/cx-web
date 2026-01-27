@@ -1,0 +1,35 @@
+{
+  "project": "cortex-linux",
+  "last_updated": "2025-01-23",
+  "current_milestone": "v0.2.0-alpha",
+
+  "active_features": [],
+
+  "blockers": [],
+
+  "recently_completed": [],
+
+  "next_actions": [
+    {
+      "repo": "cortex",
+      "action": "Review and understand codebase structure",
+      "priority": "high"
+    },
+    {
+      "repo": "cortex-docs",
+      "action": "Document current API",
+      "priority": "medium"
+    }
+  ],
+
+  "cross_repo_notes": [
+    "cortex-cli depends on cortex core - update core first",
+    "cortex-distro embeds cortex and cortex-llm - rebuild ISOs after updates",
+    "apt-repo receives packages from CI - don't manually add packages"
+  ],
+
+  "sessions": {
+    "active": [],
+    "history": []
+  }
+}

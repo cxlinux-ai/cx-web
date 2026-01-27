@@ -1,0 +1,222 @@
+{
+  "project": "cortex-linux",
+  "current": "v0.2.0-beta",
+  "master_plan": "MASTER_PLAN.md",
+
+  "phases": {
+    "phase1_consolidation": {
+      "name": "Consolidation",
+      "duration": "Weeks 1-2",
+      "status": "in-progress",
+      "goal": "Ship v0.2.0 with clear value proposition",
+      "tasks": [
+        {"task": "Merge cortex-cli into cortex or clarify separation", "status": "pending", "priority": "P0"},
+        {"task": "Fix shell injection in coordinator.py", "status": "pending", "priority": "P0"},
+        {"task": "Complete dangerous pattern list (46 -> 60+)", "status": "pending", "priority": "P0"},
+        {"task": "Implement Pro license validation", "status": "pending", "priority": "P1"},
+        {"task": "Build first .deb package", "status": "pending", "priority": "P1"},
+        {"task": "Set up apt.cortexlinux.com", "status": "pending", "priority": "P1"},
+        {"task": "Write installation documentation", "status": "pending", "priority": "P1"}
+      ]
+    },
+    "phase2_distribution": {
+      "name": "Distribution",
+      "duration": "Weeks 3-4",
+      "status": "planned",
+      "goal": "Installable via apt on any Debian/Ubuntu",
+      "tasks": [
+        {"task": "Build cortex-core meta-package", "status": "pending", "priority": "P0"},
+        {"task": "Build cortex-full meta-package", "status": "pending", "priority": "P0"},
+        {"task": "CI/CD for automated .deb builds", "status": "pending", "priority": "P0"},
+        {"task": "Generate GPG signing key", "status": "pending", "priority": "P0"},
+        {"task": "Test installation on clean VMs", "status": "pending", "priority": "P0"},
+        {"task": "Write quickstart guide", "status": "pending", "priority": "P1"}
+      ]
+    },
+    "phase3_pro_launch": {
+      "name": "Pro Launch",
+      "duration": "Weeks 5-6",
+      "status": "planned",
+      "goal": "Revenue generation begins",
+      "tasks": [
+        {"task": "Stripe integration", "status": "pending", "priority": "P0"},
+        {"task": "License key generation system", "status": "pending", "priority": "P0"},
+        {"task": "Pro feature gates implementation", "status": "pending", "priority": "P0"},
+        {"task": "Landing page with pricing", "status": "pending", "priority": "P0"},
+        {"task": "Onboarding flow", "status": "pending", "priority": "P1"},
+        {"task": "Support channel (Discord/Slack)", "status": "pending", "priority": "P1"}
+      ]
+    },
+    "phase4_distro": {
+      "name": "Distro Release",
+      "duration": "Weeks 7-8",
+      "status": "planned",
+      "goal": "Bootable Cortex Linux ISO",
+      "tasks": [
+        {"task": "Build netinst ISO (~500MB)", "status": "pending", "priority": "P0"},
+        {"task": "Build offline ISO (~2-4GB)", "status": "pending", "priority": "P1"},
+        {"task": "NVIDIA variant with CUDA", "status": "pending", "priority": "P1"},
+        {"task": "Test on real hardware (Dell, HP, Supermicro)", "status": "pending", "priority": "P0"},
+        {"task": "Release to GitHub Releases", "status": "pending", "priority": "P0"},
+        {"task": "Announcement blog post", "status": "pending", "priority": "P1"}
+      ]
+    }
+  },
+
+  "milestones": {
+    "v0.1.0": {
+      "status": "released",
+      "date": "2025-01-01",
+      "summary": "Initial public release - Core functionality",
+      "features_completed": [
+        "Multi-LLM routing (Claude, GPT-4, Ollama, Kimi K2)",
+        "Natural language package resolution",
+        "Firejail sandboxing with 46 dangerous patterns",
+        "Installation history + rollback",
+        "Hardware detection (GPU/CPU)",
+        "Voice input via Whisper",
+        "Interactive TUI dashboard",
+        "MCP server for IDE integration",
+        "5-language internationalization",
+        "C++ daemon (cortexd)"
+      ]
+    },
+    "v0.2.0": {
+      "status": "in-progress",
+      "target": "2025-02",
+      "summary": "Production-ready with monetization",
+      "features": {
+        "cortex": [
+          "Pro license validation",
+          "Security hardening (shell injection fix)",
+          "Extended dangerous patterns (60+)",
+          "Cost tracking dashboard",
+          "Improved error messages"
+        ],
+        "cortex-llm": [
+          "GPU auto-detection improvements",
+          "Model recommendations by hardware",
+          "Streaming response support"
+        ],
+        "cortex-distro": [
+          "cortex-core meta-package",
+          "cortex-full meta-package",
+          "Automated ISO builds"
+        ],
+        "apt-repo": [
+          "GPG signing infrastructure",
+          "GitHub Pages hosting",
+          "CI/CD package publishing"
+        ],
+        "cortex-docs": [
+          "Installation guide",
+          "API reference",
+          "Pro features documentation"
+        ]
+      }
+    },
+    "v0.3.0": {
+      "status": "planned",
+      "target": "2025-Q2",
+      "summary": "Enterprise features and polish",
+      "features": {
+        "cortex": [
+          "Team license support",
+          "SSO integration",
+          "Audit export (compliance)",
+          "Custom LLM endpoints"
+        ],
+        "cortex-distro": [
+          "Desktop ISO variant",
+          "ARM64 support",
+          "Offline enterprise ISO"
+        ],
+        "cortex-network": [
+          "Full WiFi management",
+          "Firewall configuration",
+          "VPN setup assistant"
+        ]
+      }
+    },
+    "v1.0.0": {
+      "status": "planned",
+      "target": "2025-Q3",
+      "summary": "Stable release",
+      "criteria": [
+        "1,000+ GitHub stars",
+        "100+ paying Pro users",
+        "99.5% apt repo uptime",
+        "ISO boots on 90% tested hardware",
+        "85% test coverage",
+        "Security audit passed"
+      ]
+    }
+  },
+
+  "priorities": {
+    "INFLUENCER_LAUNCH": {
+      "status": "ACTIVE_SPRINT",
+      "deadline": "2026-02-07",
+      "week1_install": [
+        "cortex-distro: Build .deb package (P0)",
+        "apt-repo: GPG signing key (P0)",
+        "apt-repo: apt.cortexlinux.com live (P0)",
+        "cortex: Install script at cortexlinux.com/install (P0)",
+        "QA: Test on clean Ubuntu 24.04 VM (P0)"
+      ],
+      "week2_demo": [
+        "cortex: Fix shell injection coordinator.py (P0)",
+        "cortex: Expand dangerous patterns 46→60+ (P0)",
+        "cortex: Demo script CUDA install (P0)",
+        "cortex: Demo script LAMP stack (P0)",
+        "cortex: Demo script disk query (P0)",
+        "marketing: Record 3 GIFs for README (P0)"
+      ]
+    },
+    "this_week": [
+      "cortex-distro: Build .deb package",
+      "apt-repo: GPG signing + GitHub Pages",
+      "cortex: Install script",
+      "QA: Clean VM test"
+    ],
+    "this_month": [
+      "apt-repo: Set up apt.cortexlinux.com",
+      "cortex: Stripe integration",
+      "cortex-distro: CI/CD automated builds",
+      "QA: VM test matrix creation",
+      "Website: Landing page with pricing"
+    ],
+    "blocked": [],
+    "on_hold": [
+      "cortex-network: Full implementation (after v0.2.0)"
+    ]
+  },
+
+  "metrics": {
+    "success_criteria_v020": {
+      "clean_apt_install": false,
+      "test_installations": 0,
+      "p0_security_issues": "unknown",
+      "documentation_coverage": "50%",
+      "response_time_local": "unknown"
+    },
+    "targets": {
+      "github_stars_6mo": 2500,
+      "github_stars_12mo": 10000,
+      "pro_subscribers_6mo": 200,
+      "pro_subscribers_12mo": 1000,
+      "test_coverage": "85%"
+    }
+  },
+
+  "team": {
+    "funding_direction": "Mike",
+    "developer_influencer": "Edward",
+    "development": "TBD",
+    "needed": [
+      {"role": "DevOps Engineer", "priority": "P0", "timing": "Immediate"},
+      {"role": "Security Auditor", "priority": "P1", "timing": "Before v1.0"},
+      {"role": "Technical Writer", "priority": "P2", "timing": "After v0.2.0"}
+    ]
+  }
+}
