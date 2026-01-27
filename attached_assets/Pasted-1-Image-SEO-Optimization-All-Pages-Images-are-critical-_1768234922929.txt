@@ -1,0 +1,195 @@
+1️⃣ Image SEO Optimization (All Pages)
+
+Images are critical for both SEO and UX. Here’s a detailed approach:
+
+a. File Naming
+
+Use descriptive, keyword-rich file names.
+
+✅ Good: linux-docker-permissions-guide.png
+
+❌ Bad: image123.png
+
+Keep it lowercase and use hyphens (-) instead of underscores (_).
+
+b. Alt Text
+
+Every <img> tag must have a unique, descriptive alt attribute.
+
+Example: <img src="gpu-setup.png" alt="Setting up GPU drivers on Ubuntu for AI workflows">
+
+Include primary keywords naturally without keyword stuffing.
+
+Helpful for accessibility and image search traffic.
+
+c. Image Size & Format
+
+Compress images to reduce LCP and improve load speed.
+
+Use modern formats:
+
+WebP (preferred) or AVIF for quality with small file size.
+
+PNG for screenshots, SVG for icons/graphics.
+
+Ensure retina/2x versions for high-res screens without slowing down page load.
+
+d. Responsive Images
+
+Use <img srcset> or Next.js/React image components to serve different resolutions per device.
+
+Lazy-load non-critical images (loading="lazy") to reduce render-blocking.
+
+e. Structured Data
+
+Include image URL in JSON-LD schemas for blog posts, tutorials, press releases.
+
+Example for an article:
+
+"image": [
+  "https://cxlinux-ai.com/images/linux-docker-permissions-guide.png"
+]
+
+f. Unique Featured Images
+
+Each blog, tutorial, or press article must have a unique image.
+
+Avoid stock repetition — AI-generated visuals, screenshots, or diagrams are preferred.
+
+Helps with CTR in social shares and improves image search ranking.
+
+2️⃣ On-Page SEO (All Pages)
+a. Meta Titles and Descriptions
+
+Title tag: ≤ 60 characters, include primary keyword.
+
+Meta description: ≤ 160 characters, enticing, summarizes content.
+
+Example:
+
+<title>Fix Docker Permissions on Linux – Cortex Guide</title>
+<meta name="description" content="Step-by-step guide to fix Docker permissions on Linux without errors. Learn the Cortex way for AI-assisted setups.">
+
+b. Headings Hierarchy
+
+Only one <h1> per page.
+
+Use <h2> for main sections, <h3> for subtopics.
+
+Include keywords naturally in headings.
+
+c. Internal Linking
+
+Link to relevant tutorials and blog posts naturally.
+
+Helps crawlability, dwell time, and SEO authority.
+
+Example: “Learn more about GPU driver setup for AI Linux
+”
+
+d. Schema Markup
+
+Articles / Blog posts: Article or NewsArticle schema.
+
+FAQ sections: FAQPage schema.
+
+Events: Hackathon schema with start/end dates.
+
+Include images in schema for rich results.
+
+3️⃣ Technical SEO
+a. HTML & Semantics
+
+Semantic HTML5 tags: <header>, <main>, <section>, <article>, <aside>, <footer>.
+
+<figure> and <figcaption> for images.
+
+b. URL Structure
+
+Clean, descriptive URLs:
+
+✅ /blog/linux-docker-permissions
+
+❌ /blog/post?id=12345
+
+c. Sitemap & Robots.txt
+
+Generate XML sitemap including all pages, press, tutorials, blog posts.
+
+Update robots.txt to block:
+
+/admin/
+
+/drafts/
+
+Submit sitemap to Google Search Console.
+
+d. Page Speed
+
+Optimize Largest Contentful Paint (LCP):
+
+Compress images.
+
+Minify CSS & JS.
+
+Lazy-load below-the-fold images.
+
+Use CDN for static assets.
+
+Google Lighthouse score target: >90 for performance.
+
+e. Canonical URLs
+
+Every page must have <link rel="canonical"> to avoid duplicate content issues.
+
+4️⃣ Content & Copywriting SEO
+a. Long-Tail Keyword Targeting
+
+Each tutorial, blog, or press article should target specific developer queries.
+
+Example: “fix Docker permissions on Ubuntu 22.04 AI pipeline”
+
+b. Readability & Engagement
+
+Use:
+
+Short paragraphs
+
+Bullet lists
+
+Code blocks for commands
+
+Tip/warning callouts for clarity
+
+c. Unique Visuals
+
+Reinforce the content with screenshots, diagrams, mock terminals.
+
+Include keywords in captions for SEO benefits.
+
+5️⃣ Social SEO (OpenGraph / Twitter Cards)
+
+Add OpenGraph meta tags for sharing:
+
+<meta property="og:title" content="Fix Docker Permissions on Linux – Cortex Guide" />
+<meta property="og:description" content="Step-by-step guide to fix Docker permissions on Linux without errors." />
+<meta property="og:image" content="https://cxlinux-ai.com/images/docker-permissions-guide.png" />
+<meta property="og:type" content="article" />
+
+
+Twitter cards:
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Fix Docker Permissions on Linux – Cortex Guide" />
+<meta name="twitter:description" content="Step-by-step guide to fix Docker permissions on Linux without errors." />
+<meta name="twitter:image" content="https://cxlinux-ai.com/images/docker-permissions-guide.png" />
+
+6️⃣ Advanced SEO Enhancements
+
+Lazy-load GIFs / interactive demos below the fold.
+
+Interactive tables or code snippets to improve dwell time.
+
+Alt + title text combination for all icons and UI elements.
+
+Link to authoritative sources when relevant (Linux documentation, GitHub repos).

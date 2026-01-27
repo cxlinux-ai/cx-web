@@ -1,0 +1,380 @@
+---
+sidebar_position: 6
+title: FAQ
+description: Frequently asked questions about Cortex Linux. Common issues, troubleshooting, and general information.
+keywords: [faq, questions, help, troubleshooting, support]
+---
+
+# Frequently Asked Questions
+
+Common questions about Cortex Linux. Can't find your answer? Ask in our [Discord](https://discord.gg/ASvzWcuTfk) or [GitHub Discussions](https://github.com/cxlinux-ai/cortex-linux/discussions).
+
+## General Questions
+
+### What is Cortex Linux?
+
+Cortex Linux is an AI-powered command-line tool that lets you manage your Linux system using natural language. Instead of memorizing exact commands, you describe what you want to do, and Cortex figures out the right commands.
+
+```bash
+# Instead of: sudo apt update && sudo apt install nginx && sudo systemctl enable nginx
+cortex "install nginx and enable it on boot"
+```
+
+### Is Cortex a Linux distribution?
+
+No. Cortex is a **tool** that works on existing Linux distributions like Ubuntu, Fedora, Arch, and many others. It enhances your current system without replacing it.
+
+### What distributions are supported?
+
+Cortex supports:
+
+- **Debian-based**: Ubuntu, Debian, Linux Mint, Pop!_OS
+- **Red Hat-based**: Fedora, RHEL, CentOS, Rocky Linux
+- **Arch-based**: Arch Linux, Manjaro, EndeavourOS
+- **Others**: openSUSE, Alpine Linux, Gentoo
+
+### Is Cortex free?
+
+Yes! Cortex is open source and free to use. The local AI model runs on your machine at no cost.
+
+Optional cloud backends (OpenAI, Anthropic) have their own costs if you choose to use them.
+
+### Do I need an internet connection?
+
+**No** - Cortex's local AI model works completely offline.
+
+**Yes** - Only if you choose to use cloud AI backends or need to install packages from online repositories.
+
+---
+
+## Installation
+
+### How do I install Cortex?
+
+```bash
+curl -fsSL https://cxlinux-ai.com/install.sh | bash
+```
+
+See [Installation Guide](/docs/getting-started/installation) for detailed instructions.
+
+### Why does installation require sudo?
+
+Cortex needs sudo to:
+- Install to system directories (`/usr/local/bin`)
+- Download and set up AI models
+- Configure shell completions
+
+The Cortex binary itself runs as your user.
+
+### Can I install without root/sudo?
+
+Yes, use the local installation option:
+
+```bash
+curl -fsSL https://cxlinux-ai.com/install.sh | bash -s -- --local
+```
+
+This installs to `~/.cortex/` instead of system directories.
+
+### How do I update Cortex?
+
+```bash
+cortex update
+```
+
+Or reinstall using the installation script.
+
+### How do I uninstall?
+
+```bash
+cortex uninstall
+```
+
+Or manually remove:
+```bash
+sudo rm /usr/local/bin/cortex
+rm -rf ~/.cortex
+```
+
+---
+
+## Usage
+
+### Is my data private?
+
+**With local backend (default):** Yes, completely. All processing happens on your machine. Nothing is sent anywhere.
+
+**With cloud backends:** Your prompts are sent to the AI provider (OpenAI, Anthropic). Review their privacy policies.
+
+### What if Cortex makes a mistake?
+
+1. **Preview first** - Use dry-run mode: `cortex --dry-run "your command"`
+2. **Confirm** - Cortex shows what it will do before executing
+3. **Rollback** - If something goes wrong: `cortex rollback`
+
+### Can Cortex damage my system?
+
+Cortex has safety measures:
+
+- Confirms before dangerous operations
+- Creates snapshots before changes
+- Blocks obviously harmful commands
+- Dry-run mode for previewing
+
+However, like any powerful tool, use it responsibly. Always review what Cortex proposes before confirming.
+
+### Why didn't Cortex understand my command?
+
+Try:
+
+1. **Be more specific**: "install python" → "install python 3.11 with pip"
+2. **Rephrase**: Different wording might help
+3. **Check dry-run**: `cortex --dry-run "your command"` to see interpretation
+4. **Use verbose**: `cortex --verbose "your command"` for more info
+
+### How do I use Cortex in scripts?
+
+Use non-interactive mode:
+
+```bash
+#!/bin/bash
+export CORTEX_YES=true
+export CORTEX_NONINTERACTIVE=true
+
+cortex "install nginx"
+cortex "configure nginx for static site"
+```
+
+### Does Cortex work with sudo?
+
+Yes, Cortex will use sudo when needed:
+
+```bash
+cortex "install nginx"  # Automatically uses sudo for apt/dnf
+```
+
+For explicit sudo usage:
+```bash
+cortex "run apt update with sudo"
+```
+
+---
+
+## AI and Models
+
+### How does the AI work?
+
+Cortex uses a fine-tuned language model trained specifically for Linux system administration. It:
+
+1. Understands your natural language request
+2. Maps it to appropriate system commands
+3. Considers your distribution and context
+4. Executes or previews the commands
+
+### What AI backends are available?
+
+| Backend | Privacy | Cost | Requirements |
+|---------|---------|------|--------------|
+| Local (default) | Full | Free | 4-8GB RAM |
+| Ollama | Full | Free | 4-8GB RAM |
+| OpenAI | Low | Paid | API key |
+| Anthropic | Low | Paid | API key |
+
+### How do I change the AI backend?
+
+```bash
+# Use OpenAI
+cortex backend set openai
+cortex config set backend.api_key YOUR_KEY
+
+# Use local
+cortex backend set local
+```
+
+### Does Cortex learn from my usage?
+
+**Local backend:** No, the model doesn't learn or update based on your usage.
+
+**Cloud backends:** Check provider policies. Cortex doesn't store your queries.
+
+### How accurate is Cortex?
+
+For common tasks (installations, service management, basic configuration), accuracy is high (>95%). For complex or unusual requests, review with dry-run mode first.
+
+---
+
+## Performance
+
+### How much RAM does Cortex need?
+
+| Model | Minimum RAM |
+|-------|-------------|
+| cortex-3b | 4GB |
+| cortex-7b (default) | 8GB |
+| cortex-13b | 16GB |
+
+### Is Cortex slow?
+
+First command after starting may take 2-3 seconds for model loading. Subsequent commands are faster (<1 second).
+
+Cloud backends may be faster but have network latency.
+
+### Does Cortex use GPU?
+
+Cortex automatically uses GPU acceleration if available:
+- NVIDIA GPUs with CUDA
+- AMD GPUs with ROCm
+- Apple Silicon with Metal
+
+To force CPU-only:
+```bash
+cortex config set backend.acceleration cpu
+```
+
+---
+
+## Troubleshooting
+
+### "Command not found" after installation
+
+Restart your shell or run:
+```bash
+source ~/.bashrc  # or ~/.zshrc
+```
+
+Or add to PATH manually:
+```bash
+export PATH="$HOME/.cortex/bin:$PATH"
+```
+
+### "Permission denied" errors
+
+Check if the operation needs sudo:
+```bash
+cortex "install nginx"  # Cortex handles sudo
+```
+
+If issues persist:
+```bash
+cortex diagnose
+```
+
+### "AI backend not responding"
+
+For local backend:
+```bash
+# Check if model is loaded
+cortex backend test
+
+# Restart backend
+cortex backend restart
+```
+
+For cloud backends:
+- Check API key is valid
+- Check internet connection
+- Check rate limits
+
+### "Package not found"
+
+```bash
+# Update package lists
+cortex "update package lists"
+
+# Then try again
+cortex "install package-name"
+```
+
+### How do I report a bug?
+
+1. Check [existing issues](https://github.com/cxlinux-ai/cortex-linux/issues)
+2. Gather info: `cortex diagnose > diagnostics.txt`
+3. [Open new issue](https://github.com/cxlinux-ai/cortex-linux/issues/new)
+
+---
+
+## Comparison
+
+### How is Cortex different from ChatGPT?
+
+| Feature | Cortex | ChatGPT |
+|---------|--------|---------|
+| Runs locally | ✅ | ❌ |
+| Executes commands | ✅ | ❌ |
+| Linux-specific | ✅ | ❌ |
+| Rollback support | ✅ | ❌ |
+| Offline capable | ✅ | ❌ |
+
+### How is Cortex different from shell aliases?
+
+- **Aliases**: Static shortcuts you define
+- **Cortex**: Dynamic understanding of natural language
+
+```bash
+# Alias: Requires you to remember the alias name
+alias update='sudo apt update && sudo apt upgrade'
+
+# Cortex: Natural expression of intent
+cortex "update my system"
+cortex "update everything"
+cortex "apply all updates"
+```
+
+### How is Cortex different from tldr/cheat?
+
+- **tldr/cheat**: Show examples for specific commands
+- **Cortex**: Execute commands from your description
+
+```bash
+# tldr: Shows how to use tar
+tldr tar
+
+# Cortex: Does what you want
+cortex "extract archive.tar.gz to /opt"
+```
+
+---
+
+## Security
+
+### Is Cortex secure?
+
+Cortex follows security best practices:
+
+- Local AI keeps data on your machine
+- No telemetry (unless explicitly enabled)
+- Commands are validated before execution
+- Dangerous operations require confirmation
+
+### Can Cortex access my files?
+
+Only files you explicitly reference in commands. Cortex doesn't scan or index your files.
+
+### What about command injection?
+
+Cortex sanitizes inputs before constructing commands. However, always review commands in dry-run mode for sensitive operations.
+
+---
+
+## Getting Help
+
+### Where can I get help?
+
+- 📖 [Documentation](https://docs.cxlinux-ai.com)
+- 💬 [Discord](https://discord.gg/ASvzWcuTfk)
+- 🐛 [GitHub Issues](https://github.com/cxlinux-ai/cortex-linux/issues)
+- 💭 [Discussions](https://github.com/cxlinux-ai/cortex-linux/discussions)
+
+### How can I contribute?
+
+- Report bugs
+- Suggest features
+- Submit pull requests
+- Write documentation
+- Help others in Discord
+
+See [Contributing Guide](/docs/contributing/development-setup).
+
+### Is there paid support?
+
+Enterprise support is available. Contact enterprise@cxlinux-ai.com.

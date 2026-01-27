@@ -1,0 +1,258 @@
+**Objective**
+Build a reusable **comparison page system** for **Cortex Linux** and generate **three SEO-focused comparison pages**, with **built-in A/B testing and analytics specifically for users arriving from Google search**.
+
+The system must allow us to:
+
+* Test different page variants for organic traffic
+* Measure which messaging converts better
+* Clearly see results (CTR, engagement, conversion)
+* Iterate based on data, not opinion
+
+Tone: technical, honest, trust-building, developer-first.
+
+---
+
+## 1. Comparison Page Template (Reusable)
+
+Create a reusable template that supports:
+
+* Multiple competitors
+* Multiple A/B variants per page
+* Analytics + experiment tracking
+
+Route structure:
+
+```
+/compare/[competitor]
+```
+
+---
+
+## 2. A/B TESTING REQUIREMENTS (MANDATORY)
+
+### Traffic Segmentation
+
+* A/B tests must apply **only to users coming from Google / organic search**
+* Detect traffic source via:
+
+  * Referrer (`google.*`)
+  * UTM parameters
+* Non-Google traffic sees the default (control) variant
+
+---
+
+### Testable Elements (Variants)
+
+Support A/B testing for:
+
+**Hero Section**
+
+* Headline copy
+* Subheadline framing (speed vs safety vs ease)
+* CTA text (“Try Cortex Free” vs “See It In Action”)
+
+**Comparison Framing**
+
+* Feature table emphasis order
+* Icons vs text-heavy explanations
+
+**Use Case Section**
+
+* Scenario ordering
+* Time-saved emphasis vs error-reduction emphasis
+
+**CTA Placement**
+
+* Above-the-fold vs after use cases
+* Soft CTA vs strong CTA
+
+Each variant must be configurable without redeploying code (env flags or config).
+
+---
+
+### Variant Assignment
+
+* Deterministic assignment per user (cookie-based)
+* Persist variant across sessions
+* Even split by default (50/50)
+
+---
+
+## 3. ANALYTICS & VISIBILITY (CRITICAL)
+
+### Events to Track
+
+Track and store the following events:
+
+* Page view (with competitor + variant)
+* Scroll depth
+* Time on page
+* CTA clicks
+* Install clicks
+* Docs clicks
+* Conversion (GitHub click / CLI install)
+
+All events must include:
+
+* Competitor name
+* Variant ID
+* Traffic source (Google vs other)
+
+---
+
+### Dashboards & Results
+
+Provide:
+
+* A simple analytics dashboard (or SQL-ready schema)
+* Breakdown by:
+
+  * Competitor
+  * Variant
+  * Traffic source
+* Metrics:
+
+  * Conversion rate
+  * Bounce rate
+  * Avg time on page
+  * CTA click-through rate
+
+Answerable questions:
+
+* “Which headline converts better for Google traffic?”
+* “Does honesty (‘when not to use Cortex’) increase trust?”
+* “Which comparison wins installs?”
+
+---
+
+## 4. Comparison Page Template (Content Structure)
+
+### HERO
+
+* Dynamic headline:
+  **“Cortex Linux vs {Competitor}”**
+* Variant-tested subheadline
+* Primary CTA (variant-tested)
+* Secondary CTA: View Docs
+* Summary comparison table (scannable)
+
+---
+
+### SIDE-BY-SIDE FEATURE TABLE
+
+| Feature | Cortex Linux | {Competitor} |
+
+* ✅ / ❌ / ⚠️ icons
+* Tooltips explaining tradeoffs
+* Neutral, accurate language
+
+---
+
+### REAL-WORLD USE CASES
+
+3–4 realistic tasks.
+
+For each:
+
+* Task description
+* Cortex natural language command
+* Competitor commands/config
+* Time estimate (minutes)
+* Error risk
+
+---
+
+### “WHEN TO USE WHICH” (NON-NEGOTIABLE)
+
+Explicitly state:
+
+* When Cortex is better
+* When the competitor is better
+* Who should not switch yet
+
+(This section is tracked as a trust signal in analytics.)
+
+---
+
+### MIGRATION GUIDE
+
+* Step-by-step
+* What changes
+* What doesn’t
+* How to test safely (dry-run, rollback)
+
+---
+
+## 5. Generate These Three Pages
+
+### 1. Cortex Linux vs `apt`
+
+* Natural language vs package manager
+* Cortex wraps apt (no replacement anxiety)
+* Scenario: Install Nginx optimized for hardware
+
+---
+
+### 2. Cortex Linux vs Nix / NixOS
+
+* Declarative configs vs AI intent
+* Learning curve vs guarantees
+* Scenario: Reproducible dev environment
+* Positioning: coexistence, not replacement
+
+---
+
+### 3. Cortex Linux vs Manual CLI
+
+* Docs/search vs intent
+* Scenario: PostgreSQL replication
+* Include:
+
+  * Time saved
+  * Command count
+  * Failure points
+
+---
+
+## 6. SEO REQUIREMENTS
+
+Per page:
+
+* Target keyword: **“{Competitor} alternative”**
+* 1,500+ words unique content
+* FAQ section with schema markup
+* Internal links to:
+
+  * Features
+  * Docs
+  * Pricing
+* Clean semantic HTML
+
+---
+
+## 7. Technical Implementation
+
+* Framework: **Next.js**
+* Dynamic routing: `/compare/[competitor]`
+* Content: **MDX**
+* Shared comparison component library
+* A/B logic isolated and reusable
+* Analytics-compatible with:
+
+  * Plausible / PostHog / GA4
+  * Or custom Supabase events table
+
+---
+
+## 8. Output Expectations
+
+Generate:
+
+* Page template
+* Three complete comparison pages
+* A/B testing logic
+* Analytics event map
+* Example dashboard or queries
+* Clear comments explaining experimentation logic
+
+The system must allow us to **prove** which version works better for Google traffic.

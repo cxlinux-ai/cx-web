@@ -1,0 +1,141 @@
+Cortex Linux Hackathon 2026 — Legal Issues, Participant Commitments, and Rules
+
+Effective Date: January 12, 2026
+
+1. Introduction
+
+Cortex Linux (“Organizer”) is hosting the Cortex Hackathon 2026, a global, 13-week program designed to crowdsource monetization strategies and transform the best ideas into production-ready code. Participation in the hackathon implies agreement with the following rules, terms, and conditions.
+
+This document outlines legal responsibilities, participant commitments, intellectual property considerations, code of conduct, judging criteria, and other essential rules.
+
+2. Eligibility
+
+Open to individuals and teams (2–5 participants per team).
+
+Participants must be 13 years or older or meet local legal age requirements for entering competitions.
+
+Participants may join from any geographic location where participation is not prohibited by law.
+
+No prior application or payment is required; participation is 100% free.
+
+3. Registration and Participation
+
+Participants must star and fork the Cortex GitHub repository: https://github.com/cxlinux-ai/cortex
+.
+
+Phase 1: Ideation (Weeks 1–4)
+
+Submit monetization strategies, feature ideas, and growth tactics via GitHub Issues.
+
+Ideas will be judged based on Monetization (40%), Features (30%), Marketing (20%), and Other categories (10%).
+
+Phase 2: Execution (Weeks 6–13)
+
+Build and submit Pull Requests implementing your ideas.
+
+PRs will be judged on Code Quality (25%), Completeness (25%), Documentation (20%), Test Coverage (15%), and Architecture (15%).
+
+4. Intellectual Property (IP)
+
+All contributions (ideas, code, documentation) are submitted under the MIT License unless otherwise specified.
+
+Participants retain ownership of their work but grant the Organizer a non-exclusive, worldwide, royalty-free license to use, modify, and distribute submitted work for open-source purposes.
+
+Participants must not submit proprietary code or materials that they do not have the right to share.
+
+By participating, contributors confirm that their submissions do not infringe on third-party IP rights.
+
+5. Code of Conduct
+
+Participants are expected to:
+
+Treat all participants, organizers, and mentors with respect.
+
+Refrain from harassment, discrimination, or abusive behavior in any form.
+
+Maintain professional conduct in all communications, including Discord, GitHub, and other hackathon channels.
+
+Avoid spamming or plagiarizing content from other participants or external sources.
+
+Violation of the code of conduct may result in disqualification or removal from the hackathon.
+
+6. Submission Rules
+
+Submissions must be made via GitHub Issues (Phase 1) or Pull Requests (Phase 2).
+
+Each participant or team is responsible for ensuring code functionality, documentation, and testing.
+
+All submissions must comply with applicable laws, including but not limited to copyright, data privacy, and cybersecurity regulations.
+
+The Organizer reserves the right to disqualify submissions that contain malicious code, violate GitHub terms, or breach these rules.
+
+7. Privacy and Data Use
+
+The Organizer may collect participant information (e.g., GitHub username, email, submission content) for hackathon administration and prize distribution.
+
+Participant data will be handled according to Cortex Linux’s Privacy Policy: https://cxlinux-ai.com/privacy
+.
+
+By participating, contributors consent to the processing of personal data related to hackathon participation and judging.
+
+8. Prizes and Taxation
+
+Phase 1 Prize Pool: $850
+
+1st Place: $200 | 2nd Place: $150 | 3rd Place: $100 | 4th–10th Place: $50 each
+
+Phase 2 Prize Pool: $4,500
+
+1st Place: $2,000 | 2nd Place: $1,500 | 3rd Place: $1,000
+
+Participants are responsible for any taxes or duties arising from prize winnings in accordance with local laws.
+
+Prizes are non-transferable and cannot be exchanged for cash except as specified.
+
+9. Disqualification
+
+Participants may be disqualified for, but not limited to:
+
+Violation of the Code of Conduct or hackathon rules
+
+Submission of plagiarized or malicious content
+
+Failing to comply with legal or intellectual property requirements
+
+Manipulation of judging results or fraudulent claims
+
+10. Limitation of Liability
+
+Participation is at the participant’s own risk.
+
+The Organizer is not responsible for lost data, system failures, or security breaches affecting submissions.
+
+Participants agree to hold the Organizer harmless from claims, losses, or damages resulting from hackathon participation.
+
+11. Governing Law
+
+The hackathon and its rules are governed by French law and any disputes will be resolved under French jurisdiction.
+
+Organizer reserves the right to amend the rules or cancel the hackathon due to unforeseen circumstances.
+
+12. Acknowledgment and Agreement
+
+By participating in the Cortex Hackathon 2026, participants confirm that:
+
+They have read and understood this document.
+
+They agree to abide by all rules, legal obligations, and ethical standards.
+
+They accept that their contributions may be used for open-source and commercial purposes by the Organizer.
+
+Official Links & References:
+
+GitHub Repository: https://github.com/cxlinux-ai/cortex
+
+Privacy Policy: https://cxlinux-ai.com/privacy
+
+Terms of Service: https://cxlinux-ai.com/terms
+
+MIT License: https://cxlinux-ai.com/license
+
+Security Policy: https://cxlinux-ai.com/security-policy

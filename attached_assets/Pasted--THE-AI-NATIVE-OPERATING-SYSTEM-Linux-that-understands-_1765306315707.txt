@@ -1,0 +1,227 @@
+
+THE AI-NATIVE
+OPERATING SYSTEM
+Linux that understands natural language. No documentation required. Just ask, and Cortex executes.
+
+Join the Revolution
+View on GitHub
+Open Source
+Community Driven
+$50-100B Market
+Project Momentum
+0
+Active Issues
+$$$$$
+In Bounties
+0
+Contributors
+0
+PRs Merged
+Built by the Community
+Meet the developers, engineers, and AI enthusiasts building the future of Linux
+
+mikelinke
+mikelinke
+142 commits
+sarahchen
+sarahchen
+98 commits
+devops_alex
+devops_alex
+76 commits
+ai_researcher
+ai_researcher
+64 commits
+kernel_hacker
+kernel_hacker
+52 commits
+ml_engineer
+ml_engineer
+45 commits
+frontend_dev
+frontend_dev
+38 commits
+data_scientist
+data_scientist
+31 commits
+Want to contribute?
+
+Start Contributing on GitHub
+Tired of Fighting Your OS?
+47 Stack Overflow tabs to install CUDA
+
+Days wasted on dependency conflicts
+
+"Works on my machine" syndrome
+
+Configuration files in ancient runes
+
+Developers waste 30% of their time fighting the OS instead of building.
+
+Meet Cortex: Your AI System Administrator
+Natural Language Commands
+Tell Cortex what you need in plain English. It understands intent, not just keywords.
+
+cortex install tensorflow --optimize-gpu
+Hardware-Aware Optimization
+Automatically detects your GPU, CPU, and memory. Configures software for maximum performance.
+
+Detects NVIDIA RTX 4090 → Installs CUDA 12.3
+Self-Healing Configuration
+Fixes broken dependencies automatically. Rollback if anything goes wrong. Never repeat errors.
+
+Dependency conflict? Cortex resolves it.
+Enterprise-Grade Security
+Sandboxed Execution
+AI never has direct kernel access. Every command runs in isolated Firejail container.
+
+Preview Before Execute
+Review all commands before they run. You approve every system change.
+
+Instant Rollback
+Undo any change in seconds. Full system snapshots before major operations.
+
+Complete Audit Logging
+Track every command, every change. Full transparency for compliance.
+
+How Is Cortex Different?
+Feature	Warp/Gemini CLI	Claude Code	Cortex Linux
+AI-assisted commands			
+Hardware detection			
+Dependency resolution			
+GPU optimization			
+System configuration			
+OS-level integration			
+Preview commands			
+Rollback capability			
+Real Problems, Real Solutions
+FOR DATA SCIENTISTS
+Before:
+
+6 hours installing CUDA + TensorFlow + dependencies across 47 Stack Overflow tabs
+
+With Cortex:
+
+cortex install tensorflow --optimize-gpu (5 minutes)
+
+Time Saved: 5h 55m
+
+FOR DEVOPS ENGINEERS
+Before:
+
+4 hours configuring Oracle DB with manual dependency resolution
+
+With Cortex:
+
+cortex setup oracle-23-ai production-ready (4 minutes)
+
+Time Saved: 3h 56m
+
+FOR ML ENGINEERS
+Before:
+
+Version conflicts between PyTorch and CUDA, 3 hours debugging
+
+With Cortex:
+
+cortex install pytorch stable --compatible-cuda (automatic resolution)
+
+Time Saved: 3h
+
+FOR STUDENTS
+Before:
+
+"Works on my machine" but crashes on professor's system
+
+With Cortex:
+
+Reproducible environments, exact dependency versions
+
+Time Saved: Frustration: Eliminated
+
+What Makes Cortex Different?
+Natural Language Control
+Tell Cortex what you want in plain English. 'Install Docker for development' - and it handles dependencies, configuration, and security automatically.
+
+Enterprise-Grade Security
+Every command runs in isolated environments with AppArmor and Firejail. AI-validated actions prevent mistakes before they happen.
+
+Learns Your Workflow
+Cortex remembers your patterns, detects repetitive tasks, and suggests automation. It gets smarter with every interaction.
+
+Smart Package Management
+AI wrapper over apt that understands package relationships, resolves conflicts, and suggests optimal installation strategies.
+
+Time-Travel System Recovery
+Complete installation history with one-click rollback. Made a mistake? Revert to any previous system state instantly.
+
+Open Source
+Open source from day one. Built by developers, for developers. Contribute features and earn bounties.
+
+Build the Future of Linux
+For Developers
+Earn bounties for contributions ($25-$500 per feature)
+Work on cutting-edge AI + systems programming
+Join a global community of innovators
+2x bonus payment when we close seed funding
+Early contributor opportunities at a $50-100B market
+View Open Issues on GitHub
+Current Opportunities
+AI Context Memory System
+$200
+Python
+ML/AI
+SQLite
+Advanced
+View Issue on GitHub
+Network & Proxy Config
+$150
+Python
+Networking
+Medium
+View Issue on GitHub
+Plugin System
+$200
+Python
+Architecture
+Advanced
+View Issue on GitHub
+User Preferences System
+$100
+Python
+Config
+Beginner
+View Issue on GitHub
+Fund Open Source Innovation
+Bronze
+$1,000
+/month
+
+Logo on README
+Discord sponsor channel access
+Monthly progress reports
+Become Bronze Sponsor
+Most Popular
+Silver
+$5,000
+/month
+
+Everything in Bronze
+Priority feature requests
+Quarterly strategy calls
+Co-marketing opportunities
+Become Silver Sponsor
+Gold
+$10,000+
+/month
+
+Everything in Silver
+Dedicated support channel
+Early access to enterprise features
+Joint case studies
+Advisory board seat
+Become Gold Sponsor
+Enterprise Partnership
+Building on Cortex Linux? Let's discuss custom partnership opportunities including: white-label licensing, dedicated development resources, SLA guarantees, and equity participation.
+
+Contact for Enterprise

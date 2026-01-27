@@ -1,0 +1,223 @@
+---
+sidebar_position: 1
+title: Installation
+description: Install Cortex Linux on your system in minutes. Supports Ubuntu, Fedora, Arch, and other major distributions.
+keywords: [install, setup, download, linux, package manager]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installation
+
+Get Cortex Linux running on your system in under 5 minutes. Choose your preferred installation method below.
+
+## System Requirements
+
+Before installing, ensure your system meets these minimum requirements:
+
+| Requirement | Minimum | Recommended |
+|-------------|---------|-------------|
+| RAM | 2 GB | 4 GB+ |
+| Storage | 500 MB | 1 GB |
+| Python | 3.9+ | 3.11+ |
+| OS | Linux kernel 5.4+ | Latest LTS kernel |
+
+## Quick Install (Recommended)
+
+The fastest way to install Cortex Linux is using our install script:
+
+```bash title="Install Cortex Linux"
+curl -fsSL https://cxlinux-ai.com/install.sh | bash
+```
+
+This script automatically:
+- Detects your distribution and package manager
+- Installs all required dependencies
+- Configures your AI backend
+- Sets up shell completions
+
+## Package Manager Installation
+
+<Tabs>
+  <TabItem value="apt" label="Debian/Ubuntu" default>
+
+```bash
+# Add the Cortex repository
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
+
+curl -fsSL https://cxlinux-ai.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cortex.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/cortex.gpg] https://apt.cxlinux-ai.com stable main" | \
+  sudo tee /etc/apt/sources.list.d/cortex.list
+
+# Install Cortex
+sudo apt-get update
+sudo apt-get install cortex
+```
+
+  </TabItem>
+  <TabItem value="dnf" label="Fedora/RHEL">
+
+```bash
+# Add the Cortex repository
+sudo dnf config-manager --add-repo https://rpm.cxlinux-ai.com/cortex.repo
+
+# Install Cortex
+sudo dnf install cortex
+```
+
+  </TabItem>
+  <TabItem value="pacman" label="Arch Linux">
+
+```bash
+# Install from AUR using yay
+yay -S cortex-bin
+
+# Or using paru
+paru -S cortex-bin
+```
+
+  </TabItem>
+  <TabItem value="pip" label="pip (Universal)">
+
+```bash
+# Install via pip (requires Python 3.9+)
+pip install cortex-linux
+
+# Or with pipx for isolated installation
+pipx install cortex-linux
+```
+
+  </TabItem>
+</Tabs>
+
+## Building from Source
+
+For developers or those who want the latest features:
+
+```bash
+# Clone the repository
+git clone https://github.com/cxlinux-ai/cortex.git
+cd cortex
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install -e ".[dev]"
+
+# Verify installation
+cortex --version
+```
+
+## Verify Installation
+
+After installation, verify that Cortex is working correctly:
+
+```bash
+# Check version
+cortex --version
+# highlight-next-line
+# Output: Cortex Linux v1.0.0
+
+# Run a test command
+cortex "show system information"
+```
+
+## Post-Installation Setup
+
+After installing, you'll need to configure your AI backend. See the [Configuration](/docs/getting-started/configuration) guide for details.
+
+:::tip Shell Completions
+Enable shell completions for a better experience:
+
+```bash
+# Bash
+cortex completion bash >> ~/.bashrc
+
+# Zsh
+cortex completion zsh >> ~/.zshrc
+
+# Fish
+cortex completion fish > ~/.config/fish/completions/cortex.fish
+```
+:::
+
+## Troubleshooting
+
+### Common Issues
+
+<details>
+<summary>Command not found: cortex</summary>
+
+Ensure the installation directory is in your PATH:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Add this line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.).
+
+</details>
+
+<details>
+<summary>Permission denied during installation</summary>
+
+If you encounter permission errors, try installing with `--user`:
+
+```bash
+pip install --user cortex-linux
+```
+
+</details>
+
+<details>
+<summary>Python version too old</summary>
+
+Cortex requires Python 3.9 or newer. Check your version:
+
+```bash
+python3 --version
+```
+
+Use [pyenv](https://github.com/pyenv/pyenv) to manage multiple Python versions if needed.
+
+</details>
+
+## Uninstallation
+
+To remove Cortex Linux from your system:
+
+<Tabs>
+  <TabItem value="apt" label="Debian/Ubuntu" default>
+
+```bash
+sudo apt-get remove cortex
+sudo rm /etc/apt/sources.list.d/cortex.list
+```
+
+  </TabItem>
+  <TabItem value="dnf" label="Fedora/RHEL">
+
+```bash
+sudo dnf remove cortex
+```
+
+  </TabItem>
+  <TabItem value="pip" label="pip">
+
+```bash
+pip uninstall cortex-linux
+```
+
+  </TabItem>
+</Tabs>
+
+## Next Steps
+
+- Continue to the [Quick Start](/docs/getting-started/quick-start) guide
+- Learn about [Configuration](/docs/getting-started/configuration) options
+- Explore [Natural Language Commands](/docs/user-guide/natural-language-commands)

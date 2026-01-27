@@ -1,0 +1,97 @@
+You are performing a **full, site-wide SEO optimization pass** across **ALL pages of this website**.
+This is not a partial update or a quick fix — treat this as a **deep, professional SEO audit and implementation**.
+
+### Mandatory Instructions
+
+* **Use the provided SEO reference file as the single source of truth.**
+  Follow it strictly for structure, tone, keyword strategy, and best practices.
+* Spend **at least 20 minutes of focused work** on this task.
+* Re-check your work **2–3 times per page** before finalizing.
+* Do NOT invent SEO rules — apply only what is relevant, useful, and aligned with the provided SEO file.
+
+### Pages & Scope
+
+You must review and optimize **every distinct page**, including but not limited to:
+
+* Homepage
+* Hackathon
+* Startup / AI Agencies
+* Blog & blog post pages
+* News & news articles
+* Getting Started
+* Security
+* Privacy / Terms / Legal pages
+* Any landing or index pages
+
+No page should be skipped.
+
+### What Must Be Optimized
+
+For **each page**, ensure the following are correct, unique, and meaningful:
+
+#### 1. Metadata
+
+* `<title>`:
+
+  * Unique per page
+  * Clear, human-readable, keyword-focused
+  * No stuffing, no redundancy
+* `<meta name="description">`:
+
+  * Compelling, concise, informative
+  * Matches the page’s actual content and intent
+
+#### 2. Headings & Structure
+
+* Exactly **one H1 per page**
+* Logical hierarchy (H1 → H2 → H3)
+* Headings should describe **real content**, not marketing fluff
+* Remove duplicate or misleading headings
+
+#### 3. Content Quality & Intent
+
+* Content must clearly answer:
+
+  * What is this page about?
+  * Who is it for?
+  * Why does it matter?
+* Improve clarity, readability, and semantic relevance
+* Remove vague, empty, or repetitive text
+
+#### 4. Keywords & Semantics
+
+* Apply keywords **naturally**, based on page purpose
+* Use semantic variations instead of repetition
+* Avoid over-optimization or artificial phrasing
+
+#### 5. Internal Linking
+
+* Ensure relevant internal links exist between pages
+* Links should be contextual and useful, not forced
+
+#### 6. Technical SEO (Front-End Level)
+
+* Ensure clean, crawlable markup
+* Avoid duplicate titles/descriptions
+* Verify accessibility-friendly structure where applicable
+
+### Quality Control & Validation
+
+Before finishing:
+
+* Re-read each page as if you were a user AND a search engine
+* Confirm no two pages share the same SEO identity
+* Ensure changes improve **real usefulness**, not just rankings
+
+### Final Standard
+
+The end result should feel:
+
+* Trustworthy
+* Technically serious
+* Clear in purpose
+* Search-engine friendly **without sacrificing human readability**
+
+If any page feels generic, rushed, or SEO-stuffed — revise it until it doesn’t.
+
+This website should look like it was optimized by a **senior SEO + product expert**, not a template.

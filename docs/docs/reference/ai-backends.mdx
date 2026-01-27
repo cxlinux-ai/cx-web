@@ -1,0 +1,430 @@
+---
+sidebar_position: 3
+title: Supported AI Backends
+description: Configure and use different AI backends with Cortex Linux. Local models, OpenAI, Anthropic, and more.
+keywords: [ai, backends, models, openai, anthropic, ollama, local]
+---
+
+# Supported AI Backends
+
+Cortex supports multiple AI backends for natural language processing. Choose based on your privacy requirements, performance needs, and internet connectivity.
+
+## Backend Comparison
+
+| Backend | Privacy | Speed | Offline | Cost |
+|---------|---------|-------|---------|------|
+| Local (Cortex) | Excellent | Fast | Yes | Free |
+| Ollama | Excellent | Fast | Yes | Free |
+| OpenAI | Low | Very Fast | No | Pay-per-use |
+| Anthropic | Low | Very Fast | No | Pay-per-use |
+| Custom | Varies | Varies | Varies | Varies |
+
+## Local Backend (Default)
+
+The built-in Cortex model runs entirely on your machine. No data leaves your system.
+
+### Configuration
+
+```yaml
+backend:
+  provider: local
+  model: cortex-7b
+```
+
+### Available Models
+
+| Model | Size | RAM Required | Best For |
+|-------|------|--------------|----------|
+| `cortex-3b` | 3B params | 4GB | Low-resource systems |
+| `cortex-7b` | 7B params | 8GB | General use (default) |
+| `cortex-13b` | 13B params | 16GB | Complex operations |
+
+### Setup
+
+The local model is installed with Cortex:
+
+```bash
+# Check installed models
+cortex backend models
+
+# Download additional models
+cortex backend download cortex-13b
+
+# Set default model
+cortex config set backend.model cortex-13b
+```
+
+### Hardware Acceleration
+
+```yaml
+backend:
+  provider: local
+  model: cortex-7b
+  acceleration: auto  # auto, cuda, rocm, metal, cpu
+```
+
+| Value | Description |
+|-------|-------------|
+| `auto` | Auto-detect GPU (default) |
+| `cuda` | NVIDIA GPU |
+| `rocm` | AMD GPU |
+| `metal` | Apple Silicon |
+| `cpu` | CPU only |
+
+---
+
+## Ollama
+
+Use locally-running Ollama models for maximum privacy and flexibility.
+
+### Prerequisites
+
+```bash
+# Install Ollama
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Pull a model
+ollama pull llama2
+ollama pull codellama
+```
+
+### Configuration
+
+```yaml
+backend:
+  provider: ollama
+  model: codellama
+  api_url: http://localhost:11434
+```
+
+### Recommended Models
+
+| Model | Best For |
+|-------|----------|
+| `codellama` | Code-focused tasks |
+| `llama2` | General tasks |
+| `mistral` | Fast, efficient |
+| `mixtral` | Complex reasoning |
+
+### Setup
+
+```bash
+# Configure Ollama backend
+cortex backend set ollama
+
+# Specify model
+cortex config set backend.model codellama
+
+# Test connection
+cortex backend test
+```
+
+---
+
+## OpenAI
+
+Use OpenAI's GPT models for maximum capability.
+
+### Prerequisites
+
+1. Create an OpenAI account at https://platform.openai.com
+2. Generate an API key
+3. Add billing information
+
+### Configuration
+
+```yaml
+backend:
+  provider: openai
+  model: gpt-4
+  api_key: ${OPENAI_API_KEY}
+```
+
+### Available Models
+
+| Model | Speed | Cost | Best For |
+|-------|-------|------|----------|
+| `gpt-4` | Slower | Higher | Complex operations |
+| `gpt-4-turbo` | Fast | Medium | General use |
+| `gpt-3.5-turbo` | Very Fast | Low | Simple tasks |
+
+### Setup
+
+```bash
+# Set API key (recommended: environment variable)
+export OPENAI_API_KEY="sk-..."
+
+# Or configure directly (less secure)
+cortex backend config openai --api-key "sk-..."
+
+# Enable OpenAI backend
+cortex backend set openai
+
+# Test connection
+cortex backend test
+```
+
+### Rate Limiting
+
+```yaml
+backend:
+  provider: openai
+  model: gpt-4
+  rate_limit:
+    requests_per_minute: 60
+    tokens_per_minute: 90000
+```
+
+---
+
+## Anthropic (Claude)
+
+Use Anthropic's Claude models for excellent reasoning and safety.
+
+### Prerequisites
+
+1. Create an Anthropic account at https://console.anthropic.com
+2. Generate an API key
+
+### Configuration
+
+```yaml
+backend:
+  provider: anthropic
+  model: claude-3-opus
+  api_key: ${ANTHROPIC_API_KEY}
+```
+
+### Available Models
+
+| Model | Speed | Cost | Best For |
+|-------|-------|------|----------|
+| `claude-3-opus` | Slower | Higher | Complex tasks |
+| `claude-3-sonnet` | Fast | Medium | General use |
+| `claude-3-haiku` | Very Fast | Low | Simple tasks |
+
+### Setup
+
+```bash
+# Set API key
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Enable Anthropic backend
+cortex backend set anthropic
+
+# Set model
+cortex config set backend.model claude-3-sonnet
+
+# Test connection
+cortex backend test
+```
+
+---
+
+## Custom Backend
+
+Connect to any OpenAI-compatible API endpoint.
+
+### Configuration
+
+```yaml
+backend:
+  provider: custom
+  api_url: https://your-api.example.com/v1
+  api_key: ${CUSTOM_API_KEY}
+  model: your-model-name
+```
+
+### Compatible Services
+
+- Azure OpenAI
+- Amazon Bedrock
+- Google Vertex AI
+- Self-hosted vLLM
+- LocalAI
+- Text Generation WebUI
+
+### Example: Azure OpenAI
+
+```yaml
+backend:
+  provider: custom
+  api_url: https://your-resource.openai.azure.com
+  api_key: ${AZURE_OPENAI_KEY}
+  model: gpt-4
+  extra_headers:
+    api-version: "2024-02-01"
+```
+
+### Example: Self-hosted vLLM
+
+```yaml
+backend:
+  provider: custom
+  api_url: http://localhost:8000/v1
+  model: meta-llama/Llama-2-13b-chat-hf
+```
+
+---
+
+## Backend Switching
+
+### Command Line
+
+```bash
+# Quick switch
+cortex --backend openai "complex analysis task"
+cortex --backend local "simple package install"
+
+# Permanent switch
+cortex backend set openai
+```
+
+### Per-Project Configuration
+
+Create `.cortex.yaml` in your project:
+
+```yaml
+# .cortex.yaml - project-specific settings
+backend:
+  provider: openai
+  model: gpt-4
+```
+
+### Environment-Based
+
+```bash
+# Development
+export CORTEX_BACKEND=local
+
+# Production
+export CORTEX_BACKEND=openai
+```
+
+---
+
+## Fallback Configuration
+
+Configure automatic fallback if primary backend fails:
+
+```yaml
+backend:
+  provider: openai
+  model: gpt-4
+
+  fallback:
+    - provider: anthropic
+      model: claude-3-sonnet
+    - provider: local
+      model: cortex-7b
+```
+
+---
+
+## Caching
+
+Reduce API calls and costs with response caching:
+
+```yaml
+backend:
+  provider: openai
+  cache:
+    enabled: true
+    directory: ~/.cortex/cache
+    ttl_hours: 24
+    max_size_mb: 500
+```
+
+---
+
+## Monitoring and Costs
+
+### Usage Statistics
+
+```bash
+# View usage stats
+cortex backend stats
+
+# Output:
+# Backend: openai
+# This month:
+#   Requests: 1,234
+#   Tokens: 456,789
+#   Estimated cost: $12.34
+```
+
+### Cost Alerts
+
+```yaml
+backend:
+  provider: openai
+  cost_limit:
+    monthly_usd: 50
+    warn_at_percent: 80
+```
+
+---
+
+## Troubleshooting
+
+### Connection Issues
+
+```bash
+# Test backend connectivity
+cortex backend test
+
+# Verbose test
+cortex backend test --verbose
+```
+
+### Common Errors
+
+| Error | Solution |
+|-------|----------|
+| `API key invalid` | Check key is correct and has permissions |
+| `Rate limited` | Wait or configure rate limiting |
+| `Model not found` | Check model name spelling |
+| `Timeout` | Increase timeout or use faster model |
+| `Offline` | Switch to local backend |
+
+### Debug Mode
+
+```bash
+# Enable backend debugging
+CORTEX_DEBUG_BACKEND=true cortex "your command"
+```
+
+---
+
+## Security Best Practices
+
+### API Key Management
+
+```bash
+# Good: Environment variable
+export OPENAI_API_KEY="sk-..."
+
+# Good: Secret manager
+backend:
+  api_key: ${vault:secret/cortex/openai}
+
+# Bad: Hardcoded in config (don't do this)
+backend:
+  api_key: sk-abc123...
+```
+
+### Network Security
+
+For cloud backends, ensure:
+
+- HTTPS connections (automatic)
+- Firewall allows outbound to API endpoints
+- No sensitive data in prompts for non-private backends
+
+---
+
+## Related Documentation
+
+- [Configuration Options](/docs/reference/configuration-options) - All config settings
+- [Environment Variables](/docs/reference/environment-variables) - Environment configuration
+- [Installation](/docs/getting-started/installation) - Initial setup
