@@ -339,12 +339,12 @@ export default function PricingPage() {
                     )}
                   </ul>
 
-                  {tier.ctaLink.startsWith("http") ? (
+                  {tier.ctaLink.startsWith("http") || tier.ctaLink.startsWith("mailto:") ? (
                     <a
                       id={`pricing-cta-${tier.id}`}
                       href={tier.ctaLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={tier.ctaLink.startsWith("mailto:") ? undefined : "_blank"}
+                      rel={tier.ctaLink.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                       className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
                         tier.badge
                           ? "bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:shadow-lg hover:shadow-violet-500/30"
