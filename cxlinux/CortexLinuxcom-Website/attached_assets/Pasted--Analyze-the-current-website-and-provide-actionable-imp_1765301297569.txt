@@ -1,0 +1,39 @@
+"Analyze the current website and provide actionable improvements across **UI, UX, copywriting, marketing, and SEO**. The goal is to enhance **user engagement, clarity, conversion, and discoverability** without changing the brand identity or core design.
+
+Requirements:
+
+**UI/UX Improvements:**
+
+* Enhance visual hierarchy and spacing to make content easier to scan.
+* Add subtle animations, micro-interactions, and hover effects to increase engagement.
+* Optimize layout and white space to prevent repetition and improve readability.
+* Ensure full responsiveness across desktop, tablet, and mobile devices.
+* Suggest ways to make navigation, buttons, and interactive elements more intuitive.
+
+**Copywriting:**
+
+* Improve clarity, tone, and persuasiveness of headings, descriptions, and CTAs.
+* Use language that communicates the product’s value, differentiators, and benefits to the user.
+* Rewrite key sections (hero, features, AI demo, Quick Start, comparison tables) for stronger engagement.
+
+**Marketing & Conversion:**
+
+* Suggest improvements for CTAs, signup flows, demos, or download links.
+* Identify ways to highlight unique selling points and advantages over competitors.
+* Recommend trust-building elements like testimonials, stats, or live demos.
+* Provide ideas for social proof, onboarding hooks, or retention-focused features.
+
+**SEO & Discoverability:**
+
+* Identify opportunities to optimize headings, meta descriptions, alt texts, and keywords.
+* Suggest structured data, internal linking, and semantic markup improvements.
+* Recommend ways to improve page load, accessibility, and mobile performance for better ranking.
+
+**Deliverables:**
+
+* Specific UI/UX suggestions with examples.
+* Improved copy for all major sections with actionable text changes.
+* Marketing suggestions to increase engagement and conversions.
+* SEO recommendations with prioritization for maximum impact.
+
+Goal: Produce a holistic improvement plan that makes the website **more visually appealing, user-friendly, persuasive, discoverable, and conversion-oriented**, while retaining the core branding and functionality."

@@ -1,0 +1,506 @@
+---
+sidebar_position: 4
+title: Environment Variables
+description: All environment variables for configuring Cortex Linux behavior and settings.
+keywords: [environment, variables, config, settings, env]
+---
+
+# Environment Variables
+
+Cortex can be configured through environment variables. These override config file settings and are useful for scripts, CI/CD, and temporary overrides.
+
+## Core Variables
+
+### `CORTEX_CONFIG`
+
+Path to configuration file.
+
+```bash
+export CORTEX_CONFIG=/path/to/config.yaml
+```
+
+Default: `~/.config/cortex/config.yaml`
+
+---
+
+### `CORTEX_MODE`
+
+Default execution mode.
+
+```bash
+export CORTEX_MODE=dry-run
+```
+
+| Value | Description |
+|-------|-------------|
+| `execute` | Execute commands (default) |
+| `dry-run` | Preview only |
+
+---
+
+### `CORTEX_VERBOSE`
+
+Enable verbose output.
+
+```bash
+export CORTEX_VERBOSE=true
+```
+
+---
+
+### `CORTEX_QUIET`
+
+Suppress non-essential output.
+
+```bash
+export CORTEX_QUIET=true
+```
+
+---
+
+### `CORTEX_NO_COLOR`
+
+Disable colored output.
+
+```bash
+export CORTEX_NO_COLOR=true
+```
+
+---
+
+### `CORTEX_YES`
+
+Skip all confirmations (use with caution).
+
+```bash
+export CORTEX_YES=true
+```
+
+---
+
+## AI Backend Variables
+
+### `CORTEX_BACKEND`
+
+Select AI backend.
+
+```bash
+export CORTEX_BACKEND=openai
+```
+
+| Value | Description |
+|-------|-------------|
+| `local` | Local Cortex model (default) |
+| `openai` | OpenAI API |
+| `anthropic` | Anthropic Claude |
+| `ollama` | Local Ollama |
+| `custom` | Custom endpoint |
+
+---
+
+### `CORTEX_MODEL`
+
+Specify AI model.
+
+```bash
+export CORTEX_MODEL=gpt-4
+```
+
+---
+
+### `CORTEX_API_KEY`
+
+Generic API key (works with any backend).
+
+```bash
+export CORTEX_API_KEY=sk-abc123...
+```
+
+---
+
+### `CORTEX_API_URL`
+
+Custom API endpoint URL.
+
+```bash
+export CORTEX_API_URL=http://localhost:11434/api
+```
+
+---
+
+### `OPENAI_API_KEY`
+
+OpenAI-specific API key.
+
+```bash
+export OPENAI_API_KEY=sk-abc123...
+```
+
+---
+
+### `ANTHROPIC_API_KEY`
+
+Anthropic-specific API key.
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-abc123...
+```
+
+---
+
+### `OLLAMA_HOST`
+
+Ollama server address.
+
+```bash
+export OLLAMA_HOST=http://localhost:11434
+```
+
+---
+
+## Logging Variables
+
+### `CORTEX_LOG_LEVEL`
+
+Logging verbosity.
+
+```bash
+export CORTEX_LOG_LEVEL=debug
+```
+
+| Value | Description |
+|-------|-------------|
+| `debug` | Everything |
+| `info` | Normal (default) |
+| `warn` | Warnings and errors |
+| `error` | Errors only |
+
+---
+
+### `CORTEX_LOG_FILE`
+
+Log file path.
+
+```bash
+export CORTEX_LOG_FILE=/var/log/cortex.log
+```
+
+---
+
+### `CORTEX_DEBUG`
+
+Enable debug mode with detailed output.
+
+```bash
+export CORTEX_DEBUG=true
+```
+
+---
+
+### `CORTEX_DEBUG_BACKEND`
+
+Debug AI backend communication.
+
+```bash
+export CORTEX_DEBUG_BACKEND=true
+```
+
+---
+
+## Network Variables
+
+### `CORTEX_PROXY`
+
+HTTP proxy for network requests.
+
+```bash
+export CORTEX_PROXY=http://proxy.company.com:8080
+```
+
+---
+
+### `CORTEX_OFFLINE`
+
+Disable network features.
+
+```bash
+export CORTEX_OFFLINE=true
+```
+
+---
+
+### `CORTEX_TIMEOUT`
+
+Network timeout in seconds.
+
+```bash
+export CORTEX_TIMEOUT=60
+```
+
+---
+
+## Path Variables
+
+### `CORTEX_HOME`
+
+Base directory for Cortex data.
+
+```bash
+export CORTEX_HOME=/opt/cortex
+```
+
+Default: `~/.cortex`
+
+---
+
+### `CORTEX_CACHE_DIR`
+
+Cache directory.
+
+```bash
+export CORTEX_CACHE_DIR=/tmp/cortex-cache
+```
+
+Default: `~/.cortex/cache`
+
+---
+
+### `CORTEX_SNAPSHOT_DIR`
+
+Snapshot storage directory.
+
+```bash
+export CORTEX_SNAPSHOT_DIR=/var/backups/cortex
+```
+
+Default: `~/.cortex/snapshots`
+
+---
+
+### `CORTEX_PLUGIN_DIR`
+
+Plugin directory.
+
+```bash
+export CORTEX_PLUGIN_DIR=/opt/cortex/plugins
+```
+
+Default: `~/.cortex/plugins`
+
+---
+
+## Security Variables
+
+### `CORTEX_SUDO_ASKPASS`
+
+Custom sudo password prompt program.
+
+```bash
+export CORTEX_SUDO_ASKPASS=/usr/bin/ssh-askpass
+```
+
+---
+
+### `CORTEX_CONFIRM_LEVEL`
+
+Confirmation threshold.
+
+```bash
+export CORTEX_CONFIRM_LEVEL=high
+```
+
+| Value | Description |
+|-------|-------------|
+| `low` | Confirm almost everything |
+| `medium` | Confirm risky operations (default) |
+| `high` | Only confirm dangerous operations |
+| `none` | Never confirm |
+
+---
+
+## CI/CD Variables
+
+### `CI`
+
+Detected automatically. Adjusts behavior for CI environments.
+
+```bash
+export CI=true
+```
+
+Effects when `CI=true`:
+- Disables interactive prompts
+- Forces `--yes` for non-destructive operations
+- Uses plain text output (no spinners)
+- Disables color by default
+
+---
+
+### `CORTEX_CI`
+
+Explicitly enable CI mode.
+
+```bash
+export CORTEX_CI=true
+```
+
+---
+
+### `CORTEX_NONINTERACTIVE`
+
+Disable all interactive prompts.
+
+```bash
+export CORTEX_NONINTERACTIVE=true
+```
+
+---
+
+## Output Variables
+
+### `CORTEX_FORMAT`
+
+Default output format.
+
+```bash
+export CORTEX_FORMAT=json
+```
+
+| Value | Description |
+|-------|-------------|
+| `text` | Human-readable (default) |
+| `json` | JSON format |
+| `yaml` | YAML format |
+
+---
+
+### `CORTEX_WIDTH`
+
+Terminal width for formatting.
+
+```bash
+export CORTEX_WIDTH=120
+```
+
+Default: auto-detected
+
+---
+
+## Feature Flags
+
+### `CORTEX_SNAPSHOTS`
+
+Enable/disable snapshots.
+
+```bash
+export CORTEX_SNAPSHOTS=false
+```
+
+---
+
+### `CORTEX_TELEMETRY`
+
+Enable/disable anonymous telemetry.
+
+```bash
+export CORTEX_TELEMETRY=false
+```
+
+---
+
+### `CORTEX_UPDATES`
+
+Enable/disable update checks.
+
+```bash
+export CORTEX_UPDATES=false
+```
+
+---
+
+## Usage Examples
+
+### Development Environment
+
+```bash
+# .bashrc or .zshrc
+export CORTEX_MODE=dry-run
+export CORTEX_VERBOSE=true
+export CORTEX_BACKEND=local
+```
+
+### Production Server
+
+```bash
+# /etc/environment or systemd service
+CORTEX_MODE=execute
+CORTEX_CONFIRM_LEVEL=high
+CORTEX_BACKEND=local
+CORTEX_LOG_LEVEL=warn
+CORTEX_LOG_FILE=/var/log/cortex.log
+```
+
+### CI/CD Pipeline
+
+```yaml
+# GitHub Actions
+env:
+  CORTEX_CI: true
+  CORTEX_MODE: execute
+  CORTEX_YES: true
+  CORTEX_NO_COLOR: true
+  CORTEX_BACKEND: local
+```
+
+```yaml
+# GitLab CI
+variables:
+  CORTEX_CI: "true"
+  CORTEX_MODE: "execute"
+  CORTEX_NONINTERACTIVE: "true"
+```
+
+### Docker Container
+
+```dockerfile
+ENV CORTEX_HOME=/app/.cortex
+ENV CORTEX_BACKEND=local
+ENV CORTEX_MODE=execute
+ENV CORTEX_NONINTERACTIVE=true
+```
+
+### Air-Gapped System
+
+```bash
+export CORTEX_OFFLINE=true
+export CORTEX_BACKEND=local
+export CORTEX_UPDATES=false
+export CORTEX_TELEMETRY=false
+```
+
+## Priority Order
+
+Environment variables are processed in this priority (highest first):
+
+1. Command-line flags
+2. Environment variables
+3. Project config (`.cortex.yaml`)
+4. User config (`~/.config/cortex/config.yaml`)
+5. System config (`/etc/cortex/config.yaml`)
+6. Built-in defaults
+
+## Listing Active Variables
+
+```bash
+# Show all Cortex environment variables
+cortex config env
+
+# Show effective configuration
+cortex config show
+```
+
+## Related Documentation
+
+- [Configuration Options](/docs/reference/configuration-options) - File-based configuration
+- [CLI Commands](/docs/reference/cli-commands) - Command reference
+- [Tutorials: CI/CD Usage](/docs/tutorials/cicd-usage) - CI/CD integration

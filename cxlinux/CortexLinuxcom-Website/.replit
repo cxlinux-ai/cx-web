@@ -1,0 +1,49 @@
+modules = ["nodejs-20", "web", "python-3.11", "postgresql-16"]
+run = "npm run dev"
+hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+run = ["npm", "run", "start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[env]
+PORT = "5000"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[agent]
+expertMode = true
+integrations = ["github:1.0.0"]
+
+[userenv]
+
+[userenv.shared]
+GUILD_ID = "1436619978227843182"
+GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwj5pJ49Q6lCAjTqfV56ryWlCY4taMk3TMlRz9PNrspsJi-gr2fVwDecEGMaE6Gq0XgjQ/exec"

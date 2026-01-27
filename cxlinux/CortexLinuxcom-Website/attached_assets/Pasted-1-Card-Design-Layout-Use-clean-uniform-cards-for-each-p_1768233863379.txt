@@ -1,0 +1,107 @@
+1️⃣ Card Design / Layout
+
+Use clean, uniform cards for each press item.
+
+White or slightly off-white background with subtle shadow.
+
+Rounded corners (6–12px radius) for a modern look.
+
+Consistent padding and spacing between cards.
+
+Grid layout for desktop, stacked for mobile.
+
+2–3 columns on wide screens.
+
+1 column on mobile for readability.
+
+Include:
+
+Featured image / logo of the media outlet (if allowed legally)
+
+Publication date
+
+Short summary (2–3 lines)
+
+Optional “Read More” link.
+
+2️⃣ Typography
+
+Headline: Use a slightly larger, bold font (e.g., 18–20px for H2 within card)
+
+Summary: Regular weight, 14–16px, line height 1.5–1.6 for readability.
+
+Date / metadata: Smaller, muted color (e.g., gray-400) to separate from content hierarchy.
+
+3️⃣ Visual Cues
+
+Subtle hover effect on cards:
+
+Slight lift or shadow increase.
+
+Slight color tint or border glow on hover.
+
+Divider lines between sections to create separation.
+
+Consistent spacing: margin between cards and sections.
+
+4️⃣ Hierarchy & Readability
+
+Page H1: “Cortex Linux News & Press” — clear and concise.
+
+Card H2: Title of press item.
+
+Summary paragraph: 1–2 sentences explaining what’s important about this article.
+
+Avoid long blocks of text — journalists and readers scan.
+
+Optional: highlight keywords or notable coverage using bold.
+
+5️⃣ Structured Data & SEO
+
+Include FAQPage schema if applicable (for press Q&A).
+
+Use NewsArticle / Article schema for each press item:
+
+headline, description, author, datePublished, image, url.
+
+Helps Google show rich snippets with publication date, author, and image.
+
+6️⃣ Social Proof / Branding
+
+Add media logos (small, grayscale or muted) for credibility.
+
+Include GitHub / contributors / award badges subtly in page footer or sidebar.
+
+7️⃣ Optional Enhancements
+
+Featured press section at the top for the most prestigious or recent coverage.
+
+Carousel / slider for top 3–5 press items (if you want interactivity).
+
+Tag filters: “AI, Linux, Hackathon, Open Source” to allow users to browse by topic.
+
+Example Card Layout (Desktop)
++--------------------------------------------+
+| [IMAGE / LOGO]    TITLE H2                 |
+|                   Short 2–3 line summary  |
+|                   Date & "Read More" link |
++--------------------------------------------+
+
+
+On hover:
+
+Card lifts 2–4px
+
+Shadow deepens
+
+Subtle border glow
+
+Quick Wins:
+
+Align all images to same aspect ratio (e.g., 16:9) for uniformity.
+
+Use consistent font hierarchy and muted colors for metadata.
+
+Keep spacing and padding consistent.
+
+Add subtle hover effects to make it feel interactive and modern.

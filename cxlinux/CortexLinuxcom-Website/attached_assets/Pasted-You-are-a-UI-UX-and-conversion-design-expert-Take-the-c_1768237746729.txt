@@ -1,0 +1,43 @@
+You are a UI/UX and conversion design expert. Take the current Cortex Linux mission page and make it visually professional, modern, and highly readable, while keeping it developer-focused. Use psychology, copywriting, and marketing principles to improve clarity, engagement, and credibility without feeling corporate or marketing-heavy.
+
+Design Goals:
+
+Hierarchy & Readability:
+– Hero headline and subheadline should clearly communicate Cortex’s mission in 2–3 lines.
+– Use visual hierarchy with headings, subheadings, and spacing to guide eye movement.
+– Font: clean, developer-friendly, consistent across sections.
+
+Content Sections:
+– “Why Cortex Exists”: concise mission, human-focused explanation, calm tone.
+– “AI as Infrastructure”: visually differentiate this section; emphasize value proposition.
+– Add subtle visual separators or cards for each principle without heavy borders.
+
+Visuals & UI Effects:
+– Subtle 3D or shadow effects on highlighted sections to draw attention without distraction.
+– Use icons or illustrations (e.g., AI, terminal, infrastructure) to reinforce ideas.
+– Responsive design: scales gracefully on mobile, tablet, and desktop.
+
+Trust & Credibility Signals:
+– Include minimal “Built by Real People” callout here or link to trust section.
+– Use GitHub avatars or contributor count icons subtly.
+
+Copywriting & Psychology:
+– Reduce cognitive load; break text into digestible paragraphs.
+– Emphasize benefits, not features.
+– Use active, confident, human language.
+
+CTA / Navigation Integration:
+– Include a subtle link or button to “Get Started” or “Explore Features” without overwhelming content.
+– Ensure clear next step for the user.
+
+Accessibility & SEO:
+– Semantic HTML (<section>, <article>, <header>, <h1>–<h3>).
+– Alt text for any illustrations/icons.
+– Maintain color contrast for readability.
+
+Deliverables:
+– Updated page design with mockups or CSS/React component improvements.
+– Suggested typography, spacing, and color palette.
+– Optional micro-interactions (hover, subtle animation) to highlight key points.
+– Structured HTML/React ready for integration.
+– Improved clarity, credibility, and user focus on Cortex’s mission.”

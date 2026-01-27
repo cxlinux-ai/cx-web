@@ -1,0 +1,409 @@
+---
+sidebar_position: 4
+title: Dry-Run Mode
+description: Preview commands before execution. Understand exactly what Cortex will do without making changes.
+keywords: [dry-run, preview, safe mode, testing, simulation]
+---
+
+# Dry-Run Mode
+
+Dry-run mode lets you see exactly what Cortex will do before it does anything. This is essential for learning, validating complex operations, and building confidence with the system.
+
+## Why Use Dry-Run
+
+### Safety First
+
+Before executing potentially impactful commands:
+
+```bash
+# See what will happen
+cortex --dry-run "remove all packages installed in the last week"
+
+# Output shows:
+# Would remove: package1, package2, package3
+# Would free: 500MB disk space
+# Would NOT affect: system packages, dependencies
+```
+
+### Learning Tool
+
+Understand what commands translate to:
+
+```bash
+cortex --dry-run "set up a secure SSH server"
+
+# Shows you:
+# 1. Would install openssh-server
+# 2. Would modify /etc/ssh/sshd_config
+# 3. Would disable password authentication
+# 4. Would enable key-based auth only
+# 5. Would restart sshd service
+```
+
+### Validation
+
+Verify your intent was understood correctly:
+
+```bash
+cortex --dry-run "update only security packages"
+
+# Confirms Cortex will:
+# - Update: libssl, openssl, linux-image (security)
+# - Skip: nodejs, nginx (not security updates)
+```
+
+## Using Dry-Run
+
+### Command Line Flag
+
+```bash
+# Long form
+cortex --dry-run "your command"
+
+# Short form
+cortex -n "your command"
+```
+
+### Configuration Default
+
+Make dry-run the default mode:
+
+```bash
+# In ~/.config/cortex/config.yaml
+default_mode: dry-run
+
+# Or via command
+cortex config set default_mode dry-run
+```
+
+Then use `--execute` to actually run:
+
+```bash
+cortex --execute "install nginx"
+cortex -e "install nginx"
+```
+
+### Interactive Mode
+
+During execution preview:
+
+```
+┌─────────────────────────────────────────┐
+│ Cortex will execute:                    │
+├─────────────────────────────────────────┤
+│ apt install nginx                       │
+│ systemctl enable nginx                  │
+│ systemctl start nginx                   │
+├─────────────────────────────────────────┤
+│ [y] Execute  [n] Cancel  [d] Dry-run    │
+└─────────────────────────────────────────┘
+```
+
+Press `d` to switch to dry-run for that command.
+
+## Dry-Run Output
+
+### Standard Output
+
+```bash
+cortex --dry-run "install docker"
+```
+
+```
+═══════════════════════════════════════════════════════════════
+ DRY RUN - No changes will be made
+═══════════════════════════════════════════════════════════════
+
+📦 Package Operations:
+   └─ Would install: docker-ce docker-ce-cli containerd.io
+
+🔧 System Changes:
+   └─ Would add apt repository: docker-ce-stable
+   └─ Would add GPG key: Docker Release
+
+⚙️  Service Operations:
+   └─ Would enable: docker.service
+   └─ Would start: docker.service
+
+👤 Group Changes:
+   └─ Would add current user to: docker
+
+═══════════════════════════════════════════════════════════════
+ To execute, run: cortex --execute "install docker"
+═══════════════════════════════════════════════════════════════
+```
+
+### Verbose Dry-Run
+
+For more detail:
+
+```bash
+cortex --dry-run --verbose "configure the firewall for a web server"
+```
+
+```
+═══════════════════════════════════════════════════════════════
+ DRY RUN (VERBOSE) - No changes will be made
+═══════════════════════════════════════════════════════════════
+
+Step 1: Check firewall status
+   Command: ufw status
+   Purpose: Verify current firewall configuration
+
+Step 2: Enable firewall if not active
+   Command: ufw enable
+   Purpose: Activate the firewall
+   Note: Will prompt for confirmation
+
+Step 3: Allow SSH (prevent lockout)
+   Command: ufw allow 22/tcp
+   Purpose: Ensure SSH access is maintained
+
+Step 4: Allow HTTP traffic
+   Command: ufw allow 80/tcp
+   Purpose: Enable web server access
+
+Step 5: Allow HTTPS traffic
+   Command: ufw allow 443/tcp
+   Purpose: Enable secure web server access
+
+Step 6: Reload firewall
+   Command: ufw reload
+   Purpose: Apply all changes
+
+═══════════════════════════════════════════════════════════════
+```
+
+### Diff Output
+
+For configuration changes:
+
+```bash
+cortex --dry-run "optimize nginx for high traffic"
+```
+
+```
+═══════════════════════════════════════════════════════════════
+ Configuration Changes Preview
+═══════════════════════════════════════════════════════════════
+
+File: /etc/nginx/nginx.conf
+
+- worker_processes auto;
++ worker_processes 4;
+
+- worker_connections 768;
++ worker_connections 4096;
+
++ # Performance optimizations
++ worker_rlimit_nofile 65535;
++ multi_accept on;
++ use epoll;
+
+═══════════════════════════════════════════════════════════════
+```
+
+## Common Dry-Run Scenarios
+
+### Package Management
+
+```bash
+# System upgrades
+cortex --dry-run "upgrade all packages"
+
+# Removals
+cortex --dry-run "remove unused packages"
+
+# Major version upgrades
+cortex --dry-run "upgrade python to version 3.12"
+```
+
+### System Configuration
+
+```bash
+# Network changes
+cortex --dry-run "configure static IP address"
+
+# Service modifications
+cortex --dry-run "set up nginx as reverse proxy"
+
+# Security changes
+cortex --dry-run "harden SSH configuration"
+```
+
+### File Operations
+
+```bash
+# Permission changes
+cortex --dry-run "secure the /var/www directory"
+
+# Ownership changes
+cortex --dry-run "set up proper ownership for web files"
+
+# Bulk operations
+cortex --dry-run "clean up temporary files older than 7 days"
+```
+
+### User Management
+
+```bash
+# User creation
+cortex --dry-run "create deployment user with appropriate permissions"
+
+# Permission changes
+cortex --dry-run "add user to docker group"
+
+# Access modifications
+cortex --dry-run "configure sudo access for the dev team"
+```
+
+## Dry-Run with Explanation
+
+Combine dry-run with explanation mode:
+
+```bash
+cortex --dry-run --explain "set up automatic security updates"
+```
+
+```
+═══════════════════════════════════════════════════════════════
+ DRY RUN WITH EXPLANATION
+═══════════════════════════════════════════════════════════════
+
+Would execute: apt install unattended-upgrades
+
+📖 Explanation:
+   The unattended-upgrades package automatically installs
+   security updates. This is the standard Ubuntu/Debian
+   mechanism for keeping systems patched.
+
+Would execute: dpkg-reconfigure unattended-upgrades
+
+📖 Explanation:
+   Enables the service and configures it to run daily.
+   By default, only security updates are installed
+   automatically, not regular package updates.
+
+Would modify: /etc/apt/apt.conf.d/50unattended-upgrades
+
+📖 Explanation:
+   Configures which updates to install automatically.
+   Recommended settings:
+   - Security updates: enabled
+   - Regular updates: disabled
+   - Auto-reboot: disabled (manual control)
+
+═══════════════════════════════════════════════════════════════
+```
+
+## Exporting Dry-Run Output
+
+### Save to File
+
+```bash
+cortex --dry-run "major system update" > update-plan.txt
+```
+
+### JSON Format
+
+```bash
+cortex --dry-run --format json "install development tools"
+```
+
+```json
+{
+  "mode": "dry-run",
+  "operations": [
+    {
+      "type": "package_install",
+      "packages": ["build-essential", "git", "curl"],
+      "command": "apt install build-essential git curl"
+    }
+  ],
+  "estimated_changes": {
+    "packages_added": 3,
+    "disk_space": "150MB"
+  }
+}
+```
+
+### Share for Review
+
+```bash
+# Generate shareable summary
+cortex --dry-run --output summary "production deployment changes" | cortex share
+```
+
+## Best Practices
+
+### 1. Always Dry-Run First for Production
+
+```bash
+# Development - maybe skip dry-run
+cortex "install debugging tools"
+
+# Production - always dry-run
+cortex --dry-run "apply configuration changes"
+# Review output carefully
+cortex --execute "apply configuration changes"
+```
+
+### 2. Use for Learning
+
+```bash
+# Learn what common tasks involve
+cortex --dry-run "set up a LAMP stack"
+cortex --dry-run "configure a mail server"
+cortex --dry-run "install kubernetes"
+```
+
+### 3. Validate Understanding
+
+```bash
+# Confirm Cortex understood correctly
+cortex --dry-run "install postgres but not the graphical tools"
+# Check output shows only CLI packages
+```
+
+### 4. Document Changes
+
+```bash
+# Create audit trail
+cortex --dry-run "quarterly security hardening" > changes-q1-2024.txt
+# Review with team
+# Execute with confidence
+cortex --execute "quarterly security hardening"
+```
+
+## Limitations
+
+### What Dry-Run Cannot Show
+
+- Runtime errors (permissions, network issues)
+- Exact package versions (may change between dry-run and execute)
+- Interactive prompts (some installers require input)
+- Side effects of scripts (post-install scripts)
+
+### When to Use Caution
+
+Even after dry-run, be careful with:
+
+```bash
+# Data deletion
+cortex --dry-run "clean up old databases"
+# Verify backup exists before execute
+
+# Network changes
+cortex --dry-run "reconfigure network interfaces"
+# Have physical access or out-of-band management
+
+# Kernel updates
+cortex --dry-run "update kernel"
+# Ensure you can recover if boot fails
+```
+
+## Related Documentation
+
+- [Rollback & Recovery](/docs/user-guide/rollback-recovery) - Undo changes
+- [CLI Commands](/docs/reference/cli-commands) - Full command reference
+- [Configuration](/docs/getting-started/configuration) - Set dry-run as default

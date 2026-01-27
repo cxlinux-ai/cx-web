@@ -1,0 +1,472 @@
+---
+sidebar_position: 1
+title: CLI Commands
+description: Complete reference for all Cortex Linux CLI commands, flags, and options.
+keywords: [cli, commands, reference, flags, options, terminal]
+---
+
+# CLI Commands
+
+Complete reference for the Cortex CLI. All commands support natural language input and standard flags.
+
+## Basic Syntax
+
+```bash
+cortex [flags] "natural language command"
+cortex [flags] <subcommand> [args]
+```
+
+## Global Flags
+
+These flags work with any command:
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--dry-run` | `-n` | Preview without executing |
+| `--execute` | `-e` | Execute (overrides dry-run default) |
+| `--verbose` | `-v` | Detailed output |
+| `--quiet` | `-q` | Minimal output |
+| `--yes` | `-y` | Skip confirmations |
+| `--explain` | | Show reasoning |
+| `--help` | `-h` | Show help |
+| `--version` | `-V` | Show version |
+| `--config` | `-c` | Use specific config file |
+| `--format` | `-f` | Output format (text, json, yaml) |
+
+## Natural Language Commands
+
+The primary way to interact with Cortex:
+
+```bash
+cortex "your natural language request"
+```
+
+### Examples
+
+```bash
+# Package management
+cortex "install nodejs"
+cortex "update all packages"
+cortex "remove unused packages"
+
+# System configuration
+cortex "start nginx service"
+cortex "create user developer"
+cortex "open port 443 in firewall"
+
+# Information queries
+cortex "what version of python is installed?"
+cortex "show disk usage"
+cortex "is docker running?"
+```
+
+## Subcommands
+
+### `cortex config`
+
+Manage Cortex configuration.
+
+```bash
+# View all settings
+cortex config list
+
+# Get specific setting
+cortex config get default_mode
+
+# Set value
+cortex config set default_mode dry-run
+
+# Reset to default
+cortex config reset default_mode
+
+# Edit config file
+cortex config edit
+```
+
+#### Options
+
+| Option | Description |
+|--------|-------------|
+| `--global` | Apply to global config |
+| `--local` | Apply to local project config |
+
+---
+
+### `cortex history`
+
+View command history and operations.
+
+```bash
+# Show recent operations
+cortex history
+
+# Detailed history
+cortex history --verbose
+
+# Filter by type
+cortex history --type packages
+cortex history --type config
+cortex history --type services
+
+# Filter by date
+cortex history --since "2024-01-01"
+cortex history --today
+cortex history --last 10
+
+# Search history
+cortex history --search "nginx"
+```
+
+#### Options
+
+| Option | Description |
+|--------|-------------|
+| `--type TYPE` | Filter by operation type |
+| `--since DATE` | Show operations after date |
+| `--until DATE` | Show operations before date |
+| `--today` | Show today's operations |
+| `--last N` | Show last N operations |
+| `--search TEXT` | Search operation descriptions |
+| `--verbose` | Show detailed information |
+| `--json` | Output as JSON |
+
+---
+
+### `cortex rollback`
+
+Undo previous operations.
+
+```bash
+# Undo last operation
+cortex rollback
+
+# Undo specific operation
+cortex rollback 3
+cortex rollback "nginx installation"
+
+# Preview rollback
+cortex rollback --dry-run 3
+
+# Selective rollback
+cortex rollback 3 --only packages
+cortex rollback 3 --except firewall
+```
+
+#### Options
+
+| Option | Description |
+|--------|-------------|
+| `--dry-run` | Preview without executing |
+| `--only TYPE` | Only rollback specific type |
+| `--except TYPE` | Exclude specific type |
+| `--force` | Force rollback even with warnings |
+| `--confirm` | Require explicit confirmation |
+
+---
+
+### `cortex snapshot`
+
+Manage system snapshots.
+
+```bash
+# Create snapshot
+cortex snapshot create
+cortex snapshot create "before-upgrade"
+
+# List snapshots
+cortex snapshot list
+cortex snapshot list --verbose
+
+# Show snapshot details
+cortex snapshot show 1
+
+# Delete snapshot
+cortex snapshot delete 1
+
+# Restore from snapshot
+cortex snapshot restore 1
+
+# Export/import
+cortex snapshot export 1 -o backup.tar.gz
+cortex snapshot import backup.tar.gz
+
+# Cleanup
+cortex snapshot cleanup --older-than "30 days"
+```
+
+#### Subcommands
+
+| Subcommand | Description |
+|------------|-------------|
+| `create [NAME]` | Create new snapshot |
+| `list` | List all snapshots |
+| `show ID` | Show snapshot details |
+| `delete ID` | Delete snapshot |
+| `restore ID` | Restore from snapshot |
+| `export ID` | Export snapshot to file |
+| `import FILE` | Import snapshot from file |
+| `cleanup` | Remove old snapshots |
+| `verify ID` | Verify snapshot integrity |
+
+---
+
+### `cortex restore`
+
+Restore files, packages, or services.
+
+```bash
+# Restore file
+cortex restore /etc/nginx/nginx.conf
+
+# Restore from specific snapshot
+cortex restore /etc/nginx/ --from snapshot-1
+
+# Restore package version
+cortex restore nginx --version 1.22.0
+
+# Restore service state
+cortex restore service nginx
+
+# Restore to package default
+cortex restore /etc/nginx/nginx.conf --default
+```
+
+#### Options
+
+| Option | Description |
+|--------|-------------|
+| `--from SNAPSHOT` | Restore from specific snapshot |
+| `--version VERSION` | Restore specific version |
+| `--default` | Restore to package default |
+| `--dry-run` | Preview restoration |
+
+---
+
+### `cortex status`
+
+Show system and Cortex status.
+
+```bash
+# Overall status
+cortex status
+
+# Specific subsystem
+cortex status packages
+cortex status services
+cortex status network
+
+# JSON output
+cortex status --json
+```
+
+#### Options
+
+| Option | Description |
+|--------|-------------|
+| `--json` | JSON output |
+| `--watch` | Continuous monitoring |
+
+---
+
+### `cortex diagnose`
+
+Diagnose issues with services or system.
+
+```bash
+# Diagnose service
+cortex diagnose nginx
+
+# System diagnosis
+cortex diagnose system
+
+# Network diagnosis
+cortex diagnose network
+
+# Package issues
+cortex diagnose packages
+```
+
+---
+
+### `cortex repair`
+
+Automatically fix common issues.
+
+```bash
+# Repair service
+cortex repair nginx
+
+# Repair packages
+cortex repair packages
+
+# Full system repair
+cortex repair system
+
+# Dry run
+cortex repair nginx --dry-run
+```
+
+---
+
+### `cortex diff`
+
+Compare configurations and states.
+
+```bash
+# Current vs snapshot
+cortex diff /etc/nginx/nginx.conf snapshot-1
+
+# Two snapshots
+cortex diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
+
+# Current vs package default
+cortex diff /etc/nginx/nginx.conf --default
+```
+
+---
+
+### `cortex explain`
+
+Get explanations for commands or operations.
+
+```bash
+# Explain what command does
+cortex explain "apt install nginx"
+
+# Explain Cortex operation
+cortex explain snapshot-1
+
+# Explain concept
+cortex explain "what is systemd"
+```
+
+---
+
+### `cortex auth`
+
+Manage AI backend authentication.
+
+```bash
+# Login to backend
+cortex auth login
+
+# Check auth status
+cortex auth status
+
+# Logout
+cortex auth logout
+
+# Switch backend
+cortex auth switch local
+cortex auth switch openai
+```
+
+---
+
+### `cortex backend`
+
+Manage AI backend configuration.
+
+```bash
+# List backends
+cortex backend list
+
+# Show current backend
+cortex backend current
+
+# Set backend
+cortex backend set local
+cortex backend set openai
+
+# Test backend
+cortex backend test
+
+# Configure backend
+cortex backend config openai --api-key YOUR_KEY
+```
+
+---
+
+### `cortex update`
+
+Update Cortex itself.
+
+```bash
+# Check for updates
+cortex update --check
+
+# Update to latest
+cortex update
+
+# Update to specific version
+cortex update --version 2.1.0
+
+# Update to canary
+cortex update --canary
+```
+
+---
+
+### `cortex completion`
+
+Generate shell completions.
+
+```bash
+# Bash
+cortex completion bash > /etc/bash_completion.d/cortex
+
+# Zsh
+cortex completion zsh > ~/.zfunc/_cortex
+
+# Fish
+cortex completion fish > ~/.config/fish/completions/cortex.fish
+```
+
+---
+
+## Environment Variables
+
+Override settings via environment:
+
+| Variable | Description |
+|----------|-------------|
+| `CORTEX_CONFIG` | Config file path |
+| `CORTEX_MODE` | Default mode (execute/dry-run) |
+| `CORTEX_BACKEND` | AI backend to use |
+| `CORTEX_API_KEY` | API key for cloud backend |
+| `CORTEX_VERBOSE` | Enable verbose output |
+| `CORTEX_NO_COLOR` | Disable colored output |
+| `CORTEX_LOG_LEVEL` | Logging level |
+
+See [Environment Variables](/docs/reference/environment-variables) for complete list.
+
+## Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| 0 | Success |
+| 1 | General error |
+| 2 | Invalid arguments |
+| 3 | Permission denied |
+| 4 | Operation cancelled |
+| 5 | Network error |
+| 6 | Backend error |
+| 10 | Dry-run completed (no changes) |
+
+## Configuration Files
+
+Cortex reads configuration from:
+
+1. `/etc/cortex/config.yaml` - System-wide
+2. `~/.config/cortex/config.yaml` - User config
+3. `./.cortex.yaml` - Project config
+4. Environment variables
+5. Command-line flags
+
+Later sources override earlier ones.
+
+## Related Documentation
+
+- [Configuration Options](/docs/reference/configuration-options) - All config settings
+- [Environment Variables](/docs/reference/environment-variables) - Environment configuration
+- [Supported AI Backends](/docs/reference/ai-backends) - Backend setup

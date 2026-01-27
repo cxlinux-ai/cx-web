@@ -1,0 +1,153 @@
+✅ RECOMMENDED REMOVALS / CLEANUPS
+1. Repeated code blocks for features
+
+You have multiple copies of the same feature list:
+
+{ icon: Shield, title: "Sleep Better with Built-in Security", ... }
+{ icon: Globe, title: "Deploy Anywhere, Scale Automatically", ... }
+{ icon: Puzzle, title: "Extend Without Limits", ... }
+
+
+These appear three times in your pasted content.
+You should only keep them once.
+
+2. Repeated comparisonData arrays
+
+The entire comparisonData = [...] block also appears 3 times in the snippet.
+
+You should only keep:
+
+const comparisonData = [...]
+
+
+one single time, at the top of the file OR in a separate /data/comparison.ts.
+
+3. Repeated roadmap items
+
+roadmapItems = [...] also appears several times.
+
+This should be placed in a single data file, not repeated in your component.
+
+4. Repeated installCommands object
+
+You have:
+
+const installCommands = {
+ npm: "...",
+ yarn: "...",
+ pnpm: "...",
+ bun: "..."
+}
+
+
+This also appears multiple times.
+Keep one copy, ideally in a data/installCommands.ts file.
+
+5. Duplicated <section id="home"> blocks
+
+There are multiple instances of:
+
+<section id="home" className="min-h-screen ...">
+
+
+This should exist once only, at the top.
+Duplicates will break scrolling and anchor links.
+
+6. Duplicated Trust Badges / GitHub Stars block
+
+The block:
+
+<motion.div className="flex flex-wrap justify-center gap-3 mb-8">
+ <a href="https://github.com/cortexlinux/cortex" ...
+
+
+is repeated several times.
+Keep one version.
+
+7. Repetition due to AI tool loops
+
+It looks like the Replit Agent duplicated large chunks of the JSX while editing.
+
+Anything repeated within the same file (sections, arrays, UI blocks) should be deleted.
+
+⚠️ SECTIONS THAT MAY BE USELESS OR OVERLOADED
+8. Too many subsections added recently (pricing, sponsorship, developer issues)
+
+You added:
+
+Pricing section
+
+Sponsorship section
+
+Developer bounties section
+
+GitHub issues feed
+
+These are ALL good but stacked together, they create:
+
+✔️ Too much scrolling
+✔️ Too much information
+✔️ Section fatigue
+✔️ Reduced clarity of the core message
+
+💡 Recommended:
+Move sponsorship + developer opportunities + GitHub issues into a dedicated /community page.
+Keep pricing on homepage if you want conversions.
+
+9. Heavy gradient glows everywhere
+
+Your homepage currently loads:
+
+gradient-glow at top-left
+
+gradient-glow at bottom-right
+
+glass-card on almost all elements
+
+Section-based glows
+
+Background noise texture
+
+This is visually beautiful but also:
+➡️ GPU heavy
+➡️ Overused
+➡️ Causes repetition
+
+💡 Use glows sparingly—maybe only in hero + CTA.
+
+✨ RECOMMENDED CLEAN STRUCTURE (NO REPETITION)
+
+You should aim to keep the homepage structured like this:
+
+1. Hero Section
+
+– Gradient glow
+– H1 + Subtext
+– GitHub stars / trust badges
+– Install command
+
+2. Core Features (4 cards)
+
+– Security
+– Deploy anywhere
+– Extend without limits
+– Get started fast
+
+3. AI Processing Visualization
+
+– INPUT → PROCESS → CORTEX AI → EXECUTE → OUTPUT animation
+
+4. How Cortex Is Different (comparison table)
+
+– Simple
+– Clean
+– No extra clutter
+
+5. Pricing
+
+– Community Edition
+– Enterprise Edition
+
+6. Footer
+
+Minimal.

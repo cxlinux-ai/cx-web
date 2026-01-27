@@ -1,0 +1,246 @@
+You are a senior UX writer, front-end developer, and enterprise content strategist for a global SaaS platform. Your task is to create a dedicated “Beginner / Getting Started” page for Cortex Linux that is approachable, authoritative, and integrates seamlessly with the existing website design, UX, blog system, and homepage.
+
+Goals
+
+Make Cortex Linux accessible to beginners, students, and non-expert users.
+
+Reinforce the enterprise credibility of the platform.
+
+Maintain internationalization readiness (even if English-only).
+
+Follow the existing site visual system:
+
+Gradient text
+
+Glass-morphism cards
+
+Blue glow accents
+
+Consistent typography and spacing
+
+Responsive design
+
+Integrate educational blog posts as part of the learning journey for beginners.
+
+Add a small homepage preview / reference to this page to encourage onboarding without overwhelming users.
+
+Core Content Structure
+1️⃣ Hero / Intro Section
+
+Headline: “Getting Started with Cortex Linux”
+
+Subheadline: “Step-by-step guidance for students, new developers, and curious explorers.”
+
+Mission line: Optionally repeat the “Why Cortex” statement: “Cortex turns natural language into deterministic Linux systems — without sacrificing control.”
+
+CTA: “Start Your First Workflow” (primary), optionally “View Beginner Resources” (secondary)
+
+Visuals: Optional illustration or icon cards representing learning, coding, AI, or Linux workflows.
+
+2️⃣ “Why Cortex for Beginners”
+
+Short paragraph in calm, authoritative tone:
+
+Avoid buzzwords, hype, or slang
+
+Emphasize accessibility, clarity, and control
+
+Explain what Cortex does in plain language and why beginners can start quickly.
+
+Include icons or visual callouts for key benefits:
+
+Easy setup
+
+Deterministic workflows
+
+Step-by-step guidance
+
+3️⃣ Quick Start Guide
+
+List 3–5 beginner-friendly steps with short descriptions and optional CLI examples:
+
+Install Cortex
+
+Run a simple workflow
+
+Verify output
+
+Explore sample configurations
+
+Access beginner resources via the blog
+
+Include copy that reassures beginners, e.g., “No prior AI or Linux experience required”
+
+4️⃣ Beginner Blog Post Integration
+
+Include a card or grid layout linking to specific blog posts designed for beginners.
+
+Each card should include:
+
+Post title
+
+Excerpt in plain language
+
+Read time
+
+Category/tag (e.g., “Getting Started”, “Linux Basics”, “AI Workflows”)
+
+Thumbnail or minimal icon
+
+Hover effect consistent with site design (glass morphism + blue glow)
+
+When a card is clicked, redirect users to the full blog post without losing the beginner-friendly navigation context.
+
+Blog posts themselves should follow these guidelines:
+
+Step-by-step, actionable instructions
+
+Minimal jargon; define any technical terms
+
+Include screenshots, diagrams, or animated GIFs where helpful
+
+CTA at the end of each post: “Try it yourself” linking back to Cortex workflows or Quick Start steps
+
+SEO-friendly headings, meta descriptions, and structured data
+
+5️⃣ Homepage Preview Section (Non-Overwhelming)
+
+Small, visually distinct card or spotlight area on the homepage:
+
+Headline: “New to Cortex?”
+
+Description: “Explore our Beginner / Getting Started guide with tutorials, walkthroughs, and blog posts designed for new developers and students.”
+
+CTA Button: “Start Learning”
+
+Optional small icon or illustration hinting at learning or guidance
+
+Maintain glass-morphism card, gradient text, and blue glow accents consistent with homepage
+
+Placement:
+
+After hero and “Built For” sections or near blog preview
+
+Keep visually smaller than main CTAs to avoid cognitive overload
+
+Interaction: Clicking the preview takes users to the full Beginner page, maintaining smooth scroll behavior and navigation context.
+
+6️⃣ Use Cases by Audience
+
+ML Engineers → GPU drivers, PyTorch workflows
+
+DevOps → Reproducible infrastructure, CI/CD
+
+Startups → Rapid iteration, low infra debt
+
+Enterprises → Auditability, SLA-ready
+
+Students → Experimentation, learning Linux automation
+
+Use cards with gradient headers and hover effects, consistent with the homepage “Built for” section.
+
+7️⃣ Community & Help
+
+List available support channels for beginners:
+
+Discord
+
+GitHub Issues
+
+Documentation
+
+FAQ
+
+Optional: Highlight average response times or “community-first” support ethos.
+
+8️⃣ CTA / Next Steps
+
+Strong, clear primary CTA: “Start Building”
+
+Secondary CTA: “Explore Beginner Tutorials / Blog”
+
+Place prominently at the bottom of the page.
+
+UX & Design Requirements
+
+Maintain responsive design: mobile-first, tablet, desktop, wide layouts
+
+Use glass-morphism cards, gradient text, blue glow accents, and subtle animation consistent with the homepage
+
+Use consistent icons for step-by-step guidance, audience cards, blog posts, and homepage preview
+
+Ensure readability and accessibility:
+
+High contrast text
+
+Clear spacing
+
+Screen reader-friendly headings
+
+Smooth motion animation for staggered fade-in or hover effects
+
+Smooth scroll to top when navigating to a blog, section within the beginner page, or from homepage preview
+
+Internationalization Readiness
+
+Neutral date formats
+
+No slang or region-specific idioms
+
+Consistent terminology
+
+Optional language switcher placeholder (“EN”)
+
+Tone & Copy Rules
+
+Calm, confident, authoritative
+
+Avoid hype, exaggeration, or buzzwords
+
+Short, declarative sentences
+
+Preserve technical accuracy
+
+Reassure without overpromising
+
+Implementation Notes
+
+Page should be linked from the homepage navigation, blog sidebar, and optionally legal/FAQ pages
+
+Homepage includes small preview card linking to beginner page
+
+Reuse existing Footer component across all pages
+
+Integrate smooth scroll behavior for in-page links and redirection to blog posts
+
+Ensure SEO-friendly headings and meta tags
+
+Optional: Add interactive code snippet cards for Quick Start steps
+
+Blog post cards and Quick Start guides should be dynamic: automatically pull titles, excerpts, and tags from the blog CMS
+
+Validation Checklist
+
+Before finalizing:
+
+✅ Beginner-friendly navigation and copy
+
+✅ Homepage preview is clear, concise, and non-overwhelming
+
+✅ Blog posts designed to educate without overwhelming
+
+✅ Matches Cortex brand, design, and color system
+
+✅ Responsive across devices
+
+✅ Enterprise-safe tone
+
+✅ Readable, accessible, and internationalization-ready
+
+✅ Integrated with existing navigation, blog, and footer
+
+✅ Smooth redirection from beginner page to full blog posts
+
+✅ CTAs clearly drive engagement and learning
+
+Implement this Beginner / Getting Started page and homepage preview across all relevant areas of the website, particularly the homepage, blog, and legal/FAQ pages, to create a seamless onboarding experience and educational journey for new users.
