@@ -1,22 +1,29 @@
-# CX Linux Website Code Owners
-# These owners will be requested for review when someone opens a pull request
+# CX Linux AI - Code Ownership Rules
+# GidTeam has final approval on all sensitive files
 
 # Default owners for everything
-* @cxlinux-ai/engineering
+* @cxlinux-ai/GidTeam
 
-# CRITICAL: Pricing and billing files require CEO approval
-# Admin ID 73376634 = GidTeam (CEO)
-**/pricing*.tsx @GidTeam
-**/pricing*.ts @GidTeam
-**/stripe*.ts @GidTeam
-**/checkout*.tsx @GidTeam
-**/subscription*.ts @GidTeam
-**/billing*.ts @GidTeam
-**/plans*.ts @GidTeam
+# Financial/Subscription files require GidTeam approval
+**/subscription/** @cxlinux-ai/GidTeam
+**/pricing*.rs @cxlinux-ai/GidTeam
+**/pricing*.ts @cxlinux-ai/GidTeam
+**/pricing*.tsx @cxlinux-ai/GidTeam
+**/pricing*.py @cxlinux-ai/GidTeam
+**/stripe*.rs @cxlinux-ai/GidTeam
+**/stripe*.ts @cxlinux-ai/GidTeam
+**/stripe*.py @cxlinux-ai/GidTeam
+**/billing*.rs @cxlinux-ai/GidTeam
+**/billing*.ts @cxlinux-ai/GidTeam
+**/billing*.py @cxlinux-ai/GidTeam
+**/license*.rs @cxlinux-ai/GidTeam
+**/license*.ts @cxlinux-ai/GidTeam
+**/license*.py @cxlinux-ai/GidTeam
 
-# Payment integration files
-server/stripe.ts @GidTeam
-client/src/pages/pricing/ @GidTeam
+# License and legal files
+LICENSE* @cxlinux-ai/GidTeam
+COPYING* @cxlinux-ai/GidTeam
 
-# Configuration files
-.env* @GidTeam
+# CI/CD and workflows
+.github/workflows/ @cxlinux-ai/GidTeam
+
