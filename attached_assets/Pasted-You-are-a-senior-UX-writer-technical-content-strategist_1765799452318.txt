@@ -1,0 +1,123 @@
+You are a senior UX writer, technical content strategist, and front-end developer for a global SaaS platform. Your task is to create **3-4 beginner-focused blog posts** for Cortex Linux. These posts will serve as educational resources for the **Beginner / Getting Started** page and must be fully approachable, actionable, and beginner-friendly while maintaining enterprise credibility.
+
+---
+
+## Goals
+
+1. Make Cortex Linux **accessible to beginners, students, and non-expert users**.
+2. Reinforce the **trustworthiness and reliability** of the platform.
+3. Create posts that **encourage hands-on exploration** while remaining safe for first-time users.
+4. Prepare content that can **seamlessly integrate as clickable cards** on the Beginner page.
+
+---
+
+## Blog Post Structure
+
+For each post:
+
+### 1️⃣ Title
+
+* Clear, descriptive, beginner-friendly.
+* Avoid jargon or advanced abbreviations.
+* Examples:
+
+  * “Getting Started with Cortex: Your First Workflow”
+  * “How to Install Cortex and Run Your First AI Task”
+  * “Understanding Cortex Linux for Students and New Developers”
+
+### 2️⃣ Introduction
+
+* Short 2–3 sentence overview.
+* Explain the purpose of the post and what the reader will accomplish.
+* Emphasize **simplicity, clarity, and reassurance**.
+
+### 3️⃣ Step-by-Step Content
+
+* Break the content into 3–7 numbered steps.
+* Each step should include:
+
+  * **Actionable instructions**.
+  * Optional CLI or visual examples.
+  * Explanations in plain language.
+* Include **tips, warnings, or notes** in subtle callout boxes.
+
+### 4️⃣ Visuals / Media
+
+* Suggest **screenshots, GIFs, or diagrams** for clarity.
+* Optional: small icons or badges for steps.
+* Use **consistent style** with Beginner page (blue glow accents, glass-morphism style cards, subtle animations).
+
+### 5️⃣ CTA / Practice Section
+
+* Encourage readers to try the step themselves.
+* Examples:
+
+  * “Run your first workflow now”
+  * “Experiment with your own configuration”
+* Include link back to **Beginner / Getting Started page or Quick Start guide**.
+
+### 6️⃣ Optional Extra Section
+
+* FAQ-style tips or common mistakes.
+* Short “Next Steps” for further exploration.
+* Links to related blog posts for progressive learning.
+
+---
+
+## Technical & SEO Requirements
+
+* Clear headings and subheadings (H2/H3) for readability and SEO.
+* Meta description (~150 characters) summarizing content.
+* Tags / categories for filtering: “Getting Started”, “Linux Basics”, “AI Workflows”, “Beginner”.
+* Structured data markup (optional) to allow card preview integration.
+
+---
+
+## Tone & Style
+
+* Calm, confident, authoritative.
+* Avoid hype, buzzwords, and overly casual slang.
+* Short, declarative sentences.
+* Explain terms for absolute beginners.
+* Reassure without overpromising results.
+* Consistent with global professional SaaS tone.
+
+---
+
+## Blog Post Card Integration for Beginner Page
+
+* Each blog post must be easily referenceable as a **card** on the Beginner page:
+
+  * Title
+  * Short excerpt (30–50 words)
+  * Read time
+  * Category/tag
+  * Optional thumbnail/icon
+* Hover effect: glass-morphism + blue glow consistent with site.
+* Clicking card redirects to the **full post**.
+* Maintain **Beginner page navigation context**.
+
+---
+
+## Output Requirements
+
+* Generate **3–4 full blog posts** following the above structure.
+* Include **sample HTML / JSX snippet** for the card preview integration (optional but recommended for frontend use).
+* Each post should be **self-contained**, beginner-friendly, and ready for integration into the Cortex Linux blog system.
+
+---
+
+## Validation Checklist
+
+Before finishing, ensure:
+
+* ✅ Posts are **beginner-accessible** and hands-on.
+* ✅ Language is **clear, neutral, and authoritative**.
+* ✅ Step-by-step sections are actionable.
+* ✅ Visual/media suggestions align with **Beginner page design**.
+* ✅ Blog posts can be **dynamically referenced as cards**.
+* ✅ SEO, headings, and structured data are included.
+
+---
+
+Implement this prompt to produce **3–4 beginner-oriented blog posts** ready to be referenced from the Beginner page on Cortex Linux.

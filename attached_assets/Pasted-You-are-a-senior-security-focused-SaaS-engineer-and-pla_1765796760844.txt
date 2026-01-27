@@ -1,0 +1,145 @@
+You are a senior security-focused SaaS engineer and platform architect with experience shipping developer tools used by global enterprises.
+
+Your task is to **add a dedicated “Security & Reliability” section (or page)** that meets the expectations of **enterprise, security-conscious, and compliance-aware teams**.
+
+This section is **not marketing**. It is **reassurance**.
+
+---
+
+## Objectives
+
+* Establish Cortex Linux as **security-first by design**
+* Reassure global companies, platform engineers, and DevOps teams
+* Clearly communicate architectural principles, even where features are still evolving
+* Use precise, calm, technically credible language
+* Avoid hype, buzzwords, or unverifiable claims
+
+---
+
+## Placement
+
+Choose ONE of the following (both are acceptable):
+
+1. A **dedicated page**: `/security` or `/security-and-reliability`
+2. A **standalone homepage section** with a clear CTA to “View Security Details”
+
+The content must be easy to find from the footer.
+
+---
+
+## Required Structure (Must Follow)
+
+### Section Title
+
+Use a professional, trust-oriented title such as:
+
+* **Security & Reliability by Design**
+* **Built with Security and Operational Reliability in Mind**
+
+No emojis in the heading.
+
+---
+
+### 1️⃣ Security-First Design
+
+Introduce this section with a short, grounded paragraph explaining that security is an architectural principle, not an afterthought.
+
+Then list the following clearly:
+
+* **Principle of least privilege**
+  Components operate with only the permissions strictly required to function.
+
+* **No root by default**
+  Operations avoid elevated privileges unless explicitly required and user-approved.
+
+* **Reproducible builds**
+  Builds are designed to be deterministic, allowing verification and repeatability.
+
+If a feature is not fully implemented yet:
+
+* Clearly imply roadmap intent without overpromising
+* Use wording like “designed to”, “built around”, or “aims to support”
+
+---
+
+### 2️⃣ Supply Chain Protection
+
+Add a concise explanation of why supply chain integrity matters for modern developer tooling.
+
+Then include:
+
+* **Verified sources**
+  Dependencies are resolved from trusted, auditable sources.
+
+* **Checksums & integrity validation**
+  Artifacts are validated to detect tampering or corruption.
+
+* **Sandboxed execution**
+  Commands and install processes are isolated to reduce blast radius.
+
+Avoid claiming formal certifications unless they exist.
+
+---
+
+### 3️⃣ Operational Reliability
+
+Frame this as predictability and control — not uptime bragging.
+
+Include:
+
+* **Deterministic installs**
+  The same inputs produce the same outputs across environments.
+
+* **Version pinning**
+  Explicit version resolution to prevent unexpected breaking changes.
+
+* **Safe rollbacks**
+  Ability to revert changes when deployments or installs fail.
+
+If rollbacks are not fully automated yet:
+
+* Frame as “supported workflows” or “planned mechanisms”
+
+---
+
+## Tone & Copy Rules (Very Important)
+
+* Calm, precise, professional
+* No emojis inside the content
+* No exaggerated guarantees
+* No claims of “military-grade”, “bank-level”, or “unhackable”
+* Prefer architectural intent over marketing language
+
+This should read like something a **security engineer would trust**, not a landing page headline.
+
+---
+
+## Visual & UX Guidelines
+
+* Clean layout, generous spacing
+* Use subtle icons only if they reinforce clarity
+* No flashy animations
+* Emphasize readability and hierarchy
+* Mobile-friendly and accessible
+
+---
+
+## Optional (Strongly Recommended)
+
+End the section or page with a short transparency note such as:
+
+* “Security is an ongoing process. We believe in transparency and continuous improvement.”
+* Optional link to GitHub or future security disclosures page
+
+---
+
+## Final Validation Checklist
+
+Before finishing, confirm that:
+
+* Nothing is misleading or unverifiable
+* The content reassures without overselling
+* The section would pass a basic enterprise security review
+* It feels appropriate for a global developer platform
+
+Implement this cleanly and professionally.

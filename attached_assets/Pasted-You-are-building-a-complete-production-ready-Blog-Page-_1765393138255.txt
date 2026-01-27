@@ -1,0 +1,119 @@
+You are building a complete, production-ready **Blog Page + Blog Post System** for the Cortex Linux website.
+Your output should consist of:
+
+---
+
+## 🎯 OVERALL GOAL
+
+Create:
+
+1. A **fully designed blog index page** listing all posts with SEO-friendly previews.
+2. **10 complete, long, high-value blog posts**, professionally written.
+3. Generate **content, layout, structure, metadata, images, and internal links** automatically.
+4. All posts must feel **useful, educational, expert-level**, not salesy or overly promotional.
+5. Content must be **SEO-optimized**, technically accurate, and helpful for developers & ML users.
+6. Only use **images from Unsplash** *when they add value*, not on every post.
+
+---
+
+## ✍️ CONTENT + TONE GUIDELINES
+
+* Write like an expert technical educator.
+* Prioritize **useful explanations**, **frameworks**, **step-by-step guides**, **checklists**, **best practices**, **benchmarks**, etc.
+* No fluff. No filler. No generic marketing lines.
+* Avoid hype, superlatives, or sales pitches.
+* Give highly actionable insights.
+* Use clear headings (H2/H3/H4), short paragraphs, and bullet lists.
+
+---
+
+## 🧠 SEO & STRUCTURE REQUIREMENTS
+
+For each blog post:
+
+1. **SEO title** (engaging + keyword-rich)
+2. **SEO description** (150–160 chars)
+3. **URL slug** (short, lowercase, hyphens)
+4. **H1 title**
+5. **Table of contents**
+6. 1–3 Unsplash images *only if useful*
+7. Content length: **1200–2500 words**
+8. Strong use of:
+
+   * semantic HTML structure
+   * keyword variations
+   * internal links to other posts
+   * external authoritative sources (non-salesy)
+
+Include checklists, frameworks, code snippets, diagrams (ASCII or textual), and clear examples.
+
+---
+
+## 🖼 IMAGES (UNSPLASH)
+
+Only include images **when they genuinely help the reader**.
+Examples where an image *is useful*:
+
+* architecture diagrams
+* ML workflow illustrations
+* hardware/server racks
+* dev tools/CLI workflows
+  Limit to max **3 images per post**.
+
+---
+
+## 📄 BLOG INDEX PAGE
+
+Create a clean, modern blog index with:
+
+* Post cards
+* Title, excerpt, date, reading time
+* Light blue glow micro-accents matching Cortex Linux
+* Responsive grid (2–3 columns)
+* Smooth hover interactions
+* No horizontal scrolling
+* Internal link to each post
+
+---
+
+## 📝 TOPIC LIST (WRITE ~10 POSTS)
+
+Write ~10 long, deep, useful posts around these themes:
+
+1. **What “AI-Native Linux” Actually Means: A Practical Guide**
+2. **How to Run ML Workloads Without Config Hell (Beginner to Advanced)**
+3. **GPU Optimization: Real Techniques That Actually Matter**
+4. **Why Developers Are Moving Toward Declarative ML Environments**
+5. **How to Build a Reproducible ML Workflow in 2025**
+6. **Linux Performance Tuning for AI Engineers**
+7. **Containerization vs Bare-Metal for ML: What You Need to Know**
+8. **AI/ML Developer Environment Setup: Best Practices in 2025**
+9. **How To Troubleshoot CUDA, Drivers & GPU Errors the Smart Way**
+10. **Where ML Deployment Is Heading: Trends & Predictions for 2025–2030**
+
+You may adjust titles for clarity and SEO.
+
+---
+
+## 🧩 TECH REQUIREMENTS
+
+* Generate final output as clean, structured **Markdown**.
+* No placeholders — final, production-ready blog content.
+* Avoid including extremely long code blocks unless directly useful.
+* No lorem ipsum.
+* Make sure all posts cross-link each other naturally.
+
+---
+
+## 🔥 FINAL EXPECTATION
+
+Produce:
+
+* The **complete blog index page**
+* **10 fully written, optimized posts**
+* All formatted cleanly
+* Ready to paste into the project
+* With coherent navigation + internal linking
+* Optimized for UX, SEO, clarity, usefulness, and developer trust
+
+## Begin now.

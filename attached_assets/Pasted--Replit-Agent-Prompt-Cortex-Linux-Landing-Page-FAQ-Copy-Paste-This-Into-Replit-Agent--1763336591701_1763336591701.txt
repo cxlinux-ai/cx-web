@@ -1,0 +1,768 @@
+# 🚀 Replit Agent Prompt: Cortex Linux Landing Page + FAQ
+
+## Copy/Paste This Into Replit Agent
+
+```
+Create a professional landing page and FAQ for Cortex Linux - an AI-native operating system that makes Linux easy through natural language commands.
+
+BRAND IDENTITY:
+- Name: Cortex Linux
+- Tagline: "Linux that understands you. No documentation required."
+- Colors: Tech blue (#0066FF), Dark gray (#1a1a1a), Success green (#00FF00 for terminal)
+- Vibe: Professional, trustworthy, cutting-edge but safe
+- Target: Data scientists, ML engineers, DevOps teams, students
+- Tone: Confident but addresses security concerns directly
+
+BUILD TWO PAGES:
+
+═══════════════════════════════════════════════════════════════
+
+PAGE 1: LANDING PAGE (index.html)
+
+HERO SECTION:
+- Headline: "Linux That Understands You. No Documentation Required."
+- Subheadline: "Install complex software in minutes, not hours. AI handles dependencies, configuration, and optimization automatically."
+- Visual: Terminal animation showing:
+  Input: "cortex install oracle-23-ai --optimize-gpu"
+  Output: 
+    🧠 Analyzing system: NVIDIA RTX 4090 detected
+       Installing CUDA 12.3 + dependencies
+       Configuring Oracle for GPU acceleration
+       Running validation tests
+    ✅ Oracle 23 AI ready at localhost:1521 (4m 23s)
+- Two CTAs: "Join Beta Waitlist" (primary blue button) and "View on GitHub" (secondary outline button)
+
+PROBLEM SECTION:
+- Headline: "Tired of Fighting Your OS?"
+- Grid of 4 pain points with X icons:
+  ❌ 47 Stack Overflow tabs to install CUDA
+  ❌ Days wasted on dependency conflicts
+  ❌ "Works on my machine" syndrome
+  ❌ Configuration files in ancient runes
+- Bottom stat: "Developers waste 30% of their time fighting the OS instead of building."
+
+SOLUTION SECTION:
+- Headline: "Meet Cortex: Your AI System Administrator"
+- 3 feature cards with icons:
+
+  1. Natural Language Commands
+     Icon: 💬
+     "Tell Cortex what you need in plain English. It understands intent, not just keywords."
+     Example: cortex install tensorflow --optimize-gpu
+
+  2. Hardware-Aware Optimization
+     Icon: 🔧
+     "Automatically detects your GPU, CPU, and memory. Configures software for maximum performance."
+     Example: Detects NVIDIA RTX 4090 → Installs CUDA 12.3
+
+  3. Self-Healing Configuration
+     Icon: 🔄
+     "Fixes broken dependencies automatically. Rollback if anything goes wrong. Never repeat errors."
+     Example: Dependency conflict? Cortex resolves it.
+
+SECURITY SECTION (CRITICAL - addresses #1 concern):
+- Headline: "Enterprise-Grade Security"
+- Dark background panel with 4 security features:
+  
+  🔒 Sandboxed Execution
+  AI never has direct kernel access. Every command runs in isolated Firejail container.
+  
+  🔍 Preview Before Execute
+  Review all commands before they run. You approve every system change.
+  
+  ↩️ Instant Rollback
+  Undo any change in seconds. Full system snapshots before major operations.
+  
+  📝 Complete Audit Logging
+  Track every command, every change. Full transparency for compliance.
+
+COMPARISON TABLE:
+- Headline: "How Is Cortex Different?"
+- Table comparing Cortex vs Warp Terminal vs Gemini CLI vs Claude Code
+- Columns: Feature | Warp/Gemini CLI | Claude Code | Cortex Linux
+- Rows:
+  * AI-assisted commands: ✅ | ✅ | ✅
+  * Hardware detection: ❌ | ❌ | ✅
+  * Dependency resolution: ❌ | ❌ | ✅
+  * GPU optimization: ❌ | ❌ | ✅
+  * System configuration: ❌ | ❌ | ✅
+  * OS-level integration: ❌ | ❌ | ✅
+  * Preview commands: ✅ | ✅ | ✅
+  * Rollback capability: ❌ | ❌ | ✅
+
+USE CASES SECTION:
+- Headline: "Real Problems, Real Solutions"
+- 4 side-by-side comparisons (Before/After format):
+
+  FOR DATA SCIENTISTS:
+  ❌ Before: 6 hours installing CUDA + TensorFlow + dependencies across 47 Stack Overflow tabs
+  ✅ With Cortex: cortex install tensorflow --optimize-gpu (5 minutes)
+  Time Saved: 5h 55m
+
+  FOR DEVOPS ENGINEERS:
+  ❌ Before: 4 hours configuring Oracle DB with manual dependency resolution
+  ✅ With Cortex: cortex setup oracle-23-ai production-ready (4 minutes)
+  Time Saved: 3h 56m
+
+  FOR ML ENGINEERS:
+  ❌ Before: Version conflicts between PyTorch and CUDA, 3 hours debugging
+  ✅ With Cortex: cortex install pytorch stable --compatible-cuda (automatic resolution)
+  Time Saved: 3h
+
+  FOR STUDENTS:
+  ❌ Before: "Works on my machine" but crashes on professor's system
+  ✅ With Cortex: Reproducible environments, exact dependency versions
+  Frustration: Eliminated
+
+HOW IT WORKS SECTION:
+- Headline: "AI at the OS Level, Not Just Terminal Wrapper"
+- 3-step visual flow:
+
+  STEP 1: Natural Language Input
+  You: "Install Oracle optimized for my GPU"
+  
+  STEP 2: AI Analysis & Planning
+  - Detects hardware (NVIDIA RTX 4090)
+  - Resolves dependencies (CUDA 12.3 required)
+  - Plans installation sequence
+  - Generates preview of commands
+  
+  STEP 3: Sandboxed Execution
+  - You approve the plan
+  - Commands run in secure container
+  - Progress tracking
+  - Verification tests
+  - Success confirmation
+
+OPEN SOURCE SECTION:
+- Headline: "Built in the Open"
+- Stats: [X] GitHub Stars | [X] Contributors | [X] Open Issues
+- Text: "Apache 2.0 License. Community edition free forever. Enterprise features for companies."
+- GitHub button linking to: https://github.com/cortexlinux/cortex
+
+BUSINESS MODEL SECTION:
+- Headline: "Free for Developers. Paid for Enterprises."
+- 2-column comparison:
+
+  COMMUNITY EDITION (FREE):
+  ✅ Full AI capabilities
+  ✅ All core features
+  ✅ Open source (Apache 2.0)
+  ✅ Community support
+  ✅ Unlimited personal use
+  
+  ENTERPRISE EDITION:
+  ✅ Everything in Community
+  ✅ Priority support (24/7)
+  ✅ Compliance reporting
+  ✅ Role-based access control
+  ✅ Custom integrations
+  ✅ SLA guarantees
+  💰 Contact for pricing
+
+TESTIMONIALS SECTION (placeholder for future):
+- Headline: "Developers Love Cortex"
+- 3 placeholder cards:
+  "This saved me 20 hours on my last project setup." - [Beta Tester]
+  "Finally, Linux that doesn't fight back." - [Beta Tester]
+  "Security features give me confidence to use AI at system level." - [Beta Tester]
+
+FINAL CTA SECTION:
+- Headline: "Ready to Stop Fighting Your OS?"
+- Two paths:
+  
+  PATH 1: USE CORTEX
+  Button: "Join Beta Waitlist"
+  Subtext: "Get early access when we launch"
+  
+  PATH 2: BUILD CORTEX
+  Button: "View on GitHub"
+  Subtext: "Contribute and earn bounties ($25-500)"
+
+FOOTER:
+- Logo + tagline
+- Links: Home | FAQ | GitHub | Discord | Blog | Contact
+- Social: GitHub, Discord, Twitter/X
+- Email: mike@cortexlinux.com
+- Copyright: © 2025 Cortex Linux. Apache 2.0 License.
+- Legal: Privacy Policy | Terms of Service
+
+═══════════════════════════════════════════════════════════════
+
+PAGE 2: FAQ PAGE (faq.html)
+
+HERO:
+- Headline: "Frequently Asked Questions"
+- Subheadline: "Everything you need to know about Cortex Linux"
+- Search bar: "Search questions..." (filters FAQ items)
+
+FAQ CATEGORIES (expandable accordion style):
+
+CATEGORY 1: SECURITY & SAFETY
+Icon: 🔒
+
+Q1: Is Cortex safe? Won't it break my system?
+A: Cortex is designed with security as the #1 priority. Here's how we protect your system:
+   - Sandboxed Execution: Every command runs in an isolated Firejail container with no direct kernel access
+   - Preview Before Execute: You see and approve every command before it runs
+   - Instant Rollback: We create snapshots before major changes. Undo anything in seconds.
+   - Command Validation: Dangerous commands (like rm -rf /) are blocked automatically
+   - Audit Logging: Every action is logged for complete transparency
+   
+   Think of it like having a professional system administrator who shows you their plan before doing anything.
+
+Q2: How do you prevent dangerous commands like 'rm -rf /'?
+A: Multiple layers of protection:
+   1. Blacklist: Destructive commands are blocked by default
+   2. Dry-run mode: Test changes in simulation first
+   3. User confirmation: System-wide changes require your explicit approval
+   4. Severity scoring: AI classifies command risk level (safe/caution/danger)
+   5. Rollback ready: Even approved commands can be undone
+   
+   You can review our security architecture on GitHub: [link]
+
+Q3: What if the AI hallucinates or makes mistakes?
+A: We've built multiple safeguards:
+   - Command Validation: Every AI-generated command is validated against known patterns
+   - Testing First: Commands are tested in sandbox before running on your system
+   - Human-in-the-loop: You approve all critical operations
+   - Learning System: When errors occur, Cortex learns and never repeats them
+   - Confidence Scoring: Low-confidence suggestions require extra confirmation
+   
+   The AI suggests, you decide. Always.
+
+Q4: Does Cortex have root access to my system?
+A: No. Cortex runs with the same permissions as your user account. When root/sudo is needed:
+   1. Cortex asks for your sudo password (just like any other program)
+   2. Shows you exactly what will run with elevated permissions
+   3. Waits for your approval
+   4. You can always say no
+   
+   Cortex never stores your password or runs elevated commands without permission.
+
+Q5: Can I review commands before they execute?
+A: Yes, always. The workflow is:
+   1. You: "Install Oracle optimized for my GPU"
+   2. Cortex: Analyzes and shows you the plan:
+      - Will install: CUDA 12.3, Oracle 23c, dependencies X, Y, Z
+      - Will modify: /etc/oracle/config, ~/.bashrc
+      - Estimated time: 4 minutes
+   3. You: Approve or reject
+   4. Cortex: Executes only after approval
+   
+   You can also enable "explain mode" where Cortex describes what each command does in plain English.
+
+CATEGORY 2: HOW IT WORKS
+Icon: ⚙️
+
+Q6: How is Cortex different from Warp/Gemini CLI/Claude Code?
+A: Great question! Here's the key difference:
+   
+   TERMINAL WRAPPERS (Warp, Gemini CLI):
+   - Helps you write commands
+   - You still need to know what to install
+   - No hardware awareness
+   - No dependency resolution
+   
+   CODE EDITORS (Claude Code):
+   - Focused on writing code
+   - Not designed for system administration
+   - Doesn't handle OS-level configuration
+   
+   CORTEX (OS-LEVEL):
+   - Understands what you're trying to accomplish
+   - Detects your hardware automatically
+   - Resolves dependencies for you
+   - Configures entire stack (not just one command)
+   - Optimizes for your specific system
+   
+   Example: "Install TensorFlow optimized for my GPU"
+   - Warp: Helps you write "pip install tensorflow"
+   - Cortex: Detects RTX 4090 → Installs CUDA 12.3 → Installs TensorFlow-GPU 2.15 → Configures for your card → Runs verification
+   
+   [See full comparison table →]
+
+Q7: What does "AI-native OS" mean technically?
+A: Cortex is NOT replacing the Linux kernel. It's a layer that sits between you and the operating system:
+   
+   Traditional Linux: You → Terminal → Commands → OS
+   Cortex Linux: You → Natural Language → AI Layer → Commands → OS
+   
+   The AI layer:
+   - Translates your intent into commands
+   - Understands hardware and dependencies
+   - Generates installation plans
+   - Executes in sandboxed environment
+   - Learns from outcomes
+   
+   Under the hood, it's still Ubuntu 24.04. We're just making it understand you.
+
+Q8: Does Cortex replace Linux or wrap it?
+A: Cortex wraps Ubuntu 24.04 LTS. It's built on standard Debian packaging with an AI layer on top.
+   
+   What this means:
+   - ✅ All your normal Linux tools still work (apt, vim, git, etc.)
+   - ✅ You can drop to terminal anytime
+   - ✅ Existing scripts and tools are compatible
+   - ✅ You choose when to use Cortex vs manual commands
+   
+   Think of it as a smart assistant, not a replacement.
+
+Q9: Do I need to know Linux to use Cortex?
+A: No, that's the point! Cortex is designed for:
+   - Data scientists who need tools but don't want to become Linux experts
+   - Developers who want to focus on code, not configuration
+   - Students learning programming without fighting the OS
+   - Anyone frustrated by "dependency hell"
+   
+   You can learn Linux through Cortex. It explains what it's doing and why.
+
+Q10: Does it work offline or require internet?
+A: Hybrid approach:
+   - Cloud Mode (default): Uses Claude API, works on any machine
+   - Local Mode (optional): Runs LLM locally, requires GPU
+   - Hybrid Mode (best): Local for simple tasks, cloud for complex ones
+   
+   You choose based on your privacy needs and hardware.
+
+CATEGORY 3: BUSINESS & PRICING
+Icon: 💰
+
+Q11: Is Cortex free or paid?
+A: Both!
+   
+   COMMUNITY EDITION: Free forever, open source (Apache 2.0)
+   - Full AI capabilities
+   - All core features
+   - Perfect for individual developers and students
+   
+   ENTERPRISE EDITION: Paid subscriptions for companies
+   - Everything in Community
+   - Priority support (24/7)
+   - Compliance & audit features
+   - Custom integrations
+   - SLA guarantees
+   
+   Similar to Red Hat's model: Open core, enterprise support.
+
+Q12: What's the business model?
+A: Open source community edition with enterprise subscriptions:
+   
+   Revenue sources:
+   1. Enterprise licenses (companies pay for support & compliance)
+   2. Professional services (custom integrations, training)
+   3. Cloud hosting (optional managed Cortex instances)
+   
+   Individual developers: Always free
+   Companies: Pay for support, compliance, SLA
+
+Q13: Who is Cortex for?
+A: Primary users:
+   - Data Scientists: Tired of CUDA installation hell
+   - ML Engineers: Want tools working, not dependency debugging
+   - DevOps Teams: Need reproducible environments
+   - Students: Learning to code, not fight Linux
+   - Enterprises: Need compliance + easy Linux deployment
+   
+   If you've ever spent hours on Stack Overflow trying to install something, Cortex is for you.
+
+Q14: Can I use it for commercial projects?
+A: Yes! Apache 2.0 license means:
+   - ✅ Free for commercial use
+   - ✅ Can modify and distribute
+   - ✅ No licensing fees
+   - ✅ Patent protection included
+   
+   Enterprise edition adds support and compliance, but Community edition is fully commercial-ready.
+
+CATEGORY 4: TECHNICAL REQUIREMENTS
+Icon: 💻
+
+Q15: What hardware do I need?
+A: Cloud Mode (recommended): Any Linux machine
+   - CPU: Any modern processor
+   - RAM: 4GB+ recommended
+   - Disk: 10GB+ free space
+   - Internet: Required for AI API calls
+   
+   Local Mode (optional): Requires GPU
+   - GPU: NVIDIA RTX 3060+ or AMD equivalent
+   - RAM: 16GB+ recommended
+   - VRAM: 8GB+ on GPU
+   
+   Most users run cloud mode. Local is for air-gapped environments.
+
+Q16: Does it work on my laptop?
+A: Yes! If you can run Ubuntu 24.04, you can run Cortex.
+   
+   Tested on:
+   - ThinkPad X1 Carbon (no GPU, cloud mode)
+   - Dell XPS 15 (GTX 1650, hybrid mode)
+   - System76 Thelio (RTX 4090, local mode)
+   - Framework Laptop (integrated graphics, cloud mode)
+   
+   No gaming GPU needed unless you want local mode.
+
+Q17: Which Linux distributions are supported?
+A: Currently: Ubuntu 24.04 LTS (official support)
+   
+   Coming soon:
+   - Debian 12
+   - Fedora 40
+   - Arch Linux (community port)
+   
+   We started with Ubuntu because it has the largest user base and best package ecosystem.
+
+Q18: Do I need a GPU?
+A: Not required! GPU is optional and only needed for:
+   - Running AI locally (privacy/air-gapped environments)
+   - Heavy ML workloads you're installing
+   
+   The AI assistance itself works fine in cloud mode on any machine.
+
+CATEGORY 5: USE CASES
+Icon: 🎯
+
+Q19: What can Cortex actually do?
+A: Real examples from beta testers:
+   
+   "Install Oracle 23 AI optimized for my GPU"
+   → Detects hardware, installs CUDA 12.3, Oracle 23c, configures for RTX 4090, runs tests
+   
+   "Set up a Python data science environment"
+   → Installs Python 3.11, Jupyter, NumPy, Pandas, Matplotlib, TensorFlow (GPU), all compatible versions
+   
+   "Fix my broken NVIDIA driver"
+   → Analyzes error logs, identifies conflict, suggests fix, rolls back if needed
+   
+   "Install Kubernetes cluster for testing"
+   → Sets up minikube with correct versions, configures networking, provides sample deployment
+   
+   Anything you'd normally spend hours on Stack Overflow for.
+
+Q20: Can you show me real examples?
+A: [Video demos embedded here when available]
+   
+   Written examples:
+   
+   EXAMPLE 1: Data Scientist Installing TensorFlow
+   You: "I need TensorFlow for GPU training"
+   Cortex: 
+   🧠 Detected: NVIDIA RTX 3080 (10GB VRAM)
+      Installing: CUDA 11.8 (compatible with RTX 3080)
+      Installing: cuDNN 8.6
+      Installing: TensorFlow-GPU 2.15.0
+      Testing: GPU acceleration... ✅ Working
+      ✅ Ready! Try: python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+   
+   EXAMPLE 2: DevOps Setting Up PostgreSQL
+   You: "Install PostgreSQL production-ready with replication"
+   Cortex:
+   🧠 Planning installation...
+      Installing: PostgreSQL 15
+      Configuring: Max connections (300), shared buffers (4GB)
+      Setting up: Streaming replication (1 primary, 2 replicas)
+      Securing: Password policy, SSL certificates
+      Testing: Connection pooling, backup script
+      ✅ PostgreSQL ready at localhost:5432
+   
+   Time saved: Traditional setup = 3-4 hours. Cortex = 6 minutes.
+
+Q21: How much time does it save?
+A: Based on beta testing:
+   
+   Average time savings by task:
+   - CUDA installation: 5h 30m → 4 minutes (98% faster)
+   - Oracle DB setup: 4h 15m → 5 minutes (98% faster)
+   - Python ML environment: 2h 45m → 3 minutes (98% faster)
+   - Kubernetes cluster: 6h 20m → 8 minutes (98% faster)
+   
+   Average developer saves: 12-15 hours per week on environment setup and troubleshooting.
+   
+   ROI: If you value your time at $50/hour, Cortex saves you $600-750/week.
+
+Q22: What problems does it solve?
+A: The top 5 Linux frustrations:
+   
+   1. DEPENDENCY HELL ✅
+      Problem: Package A needs version 1, Package B needs version 2
+      Cortex: Resolves automatically or suggests containerization
+   
+   2. HARDWARE INCOMPATIBILITY ✅
+      Problem: Installed software, but GPU not working
+      Cortex: Detects hardware first, installs compatible drivers
+   
+   3. "WORKS ON MY MACHINE" ✅
+      Problem: Different environments = different results
+      Cortex: Reproducible installations with locked versions
+   
+   4. DOCUMENTATION OVERLOAD ✅
+      Problem: 50-page install guides for simple tools
+      Cortex: Natural language, no reading required
+   
+   5. TIME WASTE ✅
+      Problem: 30% of dev time on environment setup
+      Cortex: 98% time reduction on average
+
+CATEGORY 6: GETTING STARTED
+Icon: 🚀
+
+Q23: How do I install Cortex?
+A: Installation guide:
+   
+   STEP 1: Install on Ubuntu 24.04
+   curl -s https://install.cortexlinux.com | bash
+   
+   STEP 2: Configure AI provider
+   cortex config set-api-key [your-claude-api-key]
+   # Or use our managed cloud (free tier available)
+   
+   STEP 3: Try your first command
+   cortex install --help
+   
+   Full documentation: https://docs.cortexlinux.com/getting-started
+
+Q24: Is it ready to use now?
+A: Current status: Public Beta (November 2025)
+   
+   What works:
+   - ✅ Core AI capabilities
+   - ✅ Package installation
+   - ✅ Hardware detection
+   - ✅ Basic dependency resolution
+   
+   What's coming:
+   - 🟡 Advanced error recovery
+   - 🟡 Multi-step orchestration
+   - 🟡 Configuration file generation
+   
+   Ready for: Testing, non-critical environments, learning
+   Not yet for: Production servers (use Enterprise beta)
+
+Q25: When will it be production-ready?
+A: Roadmap:
+   
+   Q4 2025 (Now): Public Beta
+   - Core features working
+   - Community testing
+   - Bug fixes and polish
+   
+   Q1 2026: Production v1.0
+   - Enterprise features complete
+   - Security audit completed
+   - SLA-backed support available
+   
+   Q2 2026: Expansion
+   - Debian, Fedora support
+   - Additional AI models
+   - Plugin ecosystem
+   
+   Join beta now to influence features: [Beta waitlist button]
+
+Q26: How can I contribute?
+A: We welcome contributors! Options:
+   
+   1. CODE CONTRIBUTIONS
+      - Browse issues: github.com/cortexlinux/cortex/issues
+      - Bounties: $25-500 per merged PR
+      - Filter by: "priority: critical" for MVP blockers
+   
+   2. TESTING & FEEDBACK
+      - Try beta, report bugs
+      - Test bounties: $50-75
+      - Help improve documentation
+   
+   3. COMMUNITY SUPPORT
+      - Answer questions on Discord
+      - Write tutorials and guides
+      - Share your success stories
+   
+   First PR merged? Get $50 bonus from Instagram recruitment.
+   
+   [View Contributor Guide →]
+
+CATEGORY 7: TROUBLESHOOTING
+Icon: 🔧
+
+Q27: What if something goes wrong?
+A: Built-in recovery:
+   
+   1. INSTANT ROLLBACK
+      cortex rollback
+      → Undoes last change in seconds
+   
+   2. CHECK STATUS
+      cortex status
+      → Shows what Cortex did, current system state
+   
+   3. VIEW LOGS
+      cortex logs
+      → Full audit trail of all commands
+   
+   4. RESET TO CLEAN STATE
+      cortex reset
+      → Removes all Cortex changes, back to fresh Ubuntu
+   
+   Support: Discord community or enterprise@cortexlinux.com
+
+Q28: Can I uninstall Cortex?
+A: Yes, completely:
+   
+   cortex uninstall --full
+   
+   This removes:
+   - ✅ All Cortex components
+   - ✅ AI configuration
+   - ✅ Audit logs (optional: keep for compliance)
+   
+   Keeps:
+   - ✅ Software installed via Cortex (your tools stay)
+   - ✅ Your data and configurations
+   
+   Like it never existed (but your installed software remains).
+
+Q29: Where can I get help?
+A: Multiple support channels:
+   
+   FREE (Community):
+   - Discord: discord.gg/uCqHvxjU83
+   - GitHub Issues: github.com/cortexlinux/cortex/issues
+   - Documentation: docs.cortexlinux.com
+   - FAQ: This page!
+   
+   PAID (Enterprise):
+   - Email: enterprise@cortexlinux.com
+   - 24/7 phone support
+   - Dedicated Slack channel
+   - Custom integration help
+   
+   Average response times:
+   - Discord: 2-4 hours
+   - GitHub: 24 hours
+   - Enterprise: 15 minutes (SLA)
+
+Q30: Is my data private?
+A: Privacy commitment:
+   
+   WHAT WE COLLECT:
+   - Command prompts you give Cortex
+   - System metadata (OS version, hardware)
+   - Usage analytics (which features you use)
+   
+   WHAT WE DON'T COLLECT:
+   - ❌ Your actual data or files
+   - ❌ Passwords or credentials
+   - ❌ Source code or proprietary information
+   
+   YOUR CHOICES:
+   - Cloud mode: Prompts sent to AI API (encrypted)
+   - Local mode: Nothing leaves your machine
+   - Opt-out: Disable analytics anytime
+   
+   Full privacy policy: [link]
+
+STILL HAVE QUESTIONS?
+Can't find your answer? We're here to help:
+- Ask on Discord: [Discord button]
+- Email us: hello@cortexlinux.com
+- Open GitHub issue: [GitHub button]
+
+═══════════════════════════════════════════════════════════════
+
+DESIGN REQUIREMENTS:
+
+VISUAL STYLE:
+- Modern, clean, professional
+- Dark mode primary (with light mode toggle)
+- Terminal aesthetic where appropriate (monospace fonts, green text on dark)
+- Trust signals everywhere (lock icons, checkmarks, professional imagery)
+- Mobile responsive (50% of traffic will be mobile)
+
+COMPONENTS TO BUILD:
+- Smooth scroll between sections
+- Expandable FAQ accordion (open one closes others)
+- FAQ search filter (live filtering as you type)
+- Email capture form for waitlist (validates email, stores in localStorage for now)
+- Animated terminal demo in hero (typing effect)
+- Sticky header with navigation
+- Back to top button
+- Copy-to-clipboard for code snippets
+
+TECHNICAL SPECS:
+- Single-page application (SPA) or static HTML/CSS/JS (your choice)
+- No framework required unless you prefer (React, Vue, vanilla JS all fine)
+- Fast loading (<2 seconds)
+- SEO optimized (meta tags, structured data)
+- Accessible (WCAG 2.1 AA compliant)
+- Analytics ready (Google Analytics placeholder)
+
+COLOR PALETTE:
+- Primary Blue: #0066FF
+- Dark Background: #0a0a0a
+- Dark Surface: #1a1a1a
+- Terminal Green: #00FF00
+- Success Green: #10B981
+- Warning Orange: #F59E0B
+- Danger Red: #EF4444
+- Text White: #FFFFFF
+- Text Gray: #9CA3AF
+
+FONTS:
+- Headings: Inter or similar (bold, clean sans-serif)
+- Body: Inter or similar (regular)
+- Terminal/Code: JetBrains Mono or Fira Code (monospace)
+
+LINKS TO INCLUDE:
+- GitHub: https://github.com/cortexlinux/cortex
+- Discord: https://discord.gg/uCqHvxjU83
+- Email: mike@cortexlinux.com
+
+PLACEHOLDER CONTENT:
+- Use "[X]" for stats that will be filled in later (GitHub stars, contributors)
+- Use "[Beta Tester]" for testimonial names
+- Use placeholder for video embeds
+
+CREATE:
+1. index.html (landing page)
+2. faq.html (FAQ page)
+3. styles.css (shared styles)
+4. script.js (interactivity)
+5. README.md (deployment instructions)
+
+Make it look professional enough to show investors. This is a real startup seeking $2-3M in funding.
+```
+
+---
+
+## 🎯 What This Prompt Will Create
+
+**Replit Agent will build:**
+- ✅ Professional 2-page website
+- ✅ Fully responsive (mobile + desktop)
+- ✅ All content from Instagram analysis
+- ✅ Addresses security concerns directly
+- ✅ SEO optimized
+- ✅ Ready to deploy
+
+**Deployment options:**
+- Replit hosting (easiest)
+- Netlify
+- Vercel
+- GitHub Pages
+- Custom domain (cortexlinux.com)
+
+---
+
+## ⚡ After Replit Builds It
+
+**Next steps:**
+1. Review the site
+2. Test on mobile
+3. Add real GitHub stats
+4. Deploy to cortexlinux.com
+5. Share in Instagram comments
+6. Use for investor pitches
+
+**Time to complete:** 10-15 minutes with Replit Agent
+
+Ready to paste this into Replit?
