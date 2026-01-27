@@ -1,0 +1,22 @@
+# CX Linux Website Code Owners
+# These owners will be requested for review when someone opens a pull request
+
+# Default owners for everything
+* @cxlinux-ai/engineering
+
+# CRITICAL: Pricing and billing files require CEO approval
+# Admin ID 73376634 = GidTeam (CEO)
+**/pricing*.tsx @GidTeam
+**/pricing*.ts @GidTeam
+**/stripe*.ts @GidTeam
+**/checkout*.tsx @GidTeam
+**/subscription*.ts @GidTeam
+**/billing*.ts @GidTeam
+**/plans*.ts @GidTeam
+
+# Payment integration files
+server/stripe.ts @GidTeam
+client/src/pages/pricing/ @GidTeam
+
+# Configuration files
+.env* @GidTeam
