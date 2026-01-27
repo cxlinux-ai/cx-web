@@ -53,6 +53,10 @@ const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
     monthly: 'price_1SqYQkJ4X1wkC4Es8OMt79pZ',
     annual: 'price_1SqYQkJ4X1wkC4EsWYwUgceu'
   },
+  team: {
+    monthly: 'price_team_monthly',  // $99/month - Update with real Stripe price ID
+    annual: 'price_team_annual'     // $79/month billed annually
+  },
   enterprise: {
     monthly: 'price_1SqYQkJ4X1wkC4EsCFVBHYnT',
     annual: 'price_1SqYQlJ4X1wkC4EsJcPW7Of2'
@@ -61,15 +65,15 @@ const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
 
 const PLAN_NAMES: Record<string, string> = {
   pro: "Pro",
+  team: "Team",
   enterprise: "Enterprise",
-  managed: "Managed",
 };
 
 const createCheckoutSessionSchema = z.object({
   email: z.string().email(),
   name: z.string().min(1),
   company: z.string().optional(),
-  planId: z.enum(["pro", "enterprise", "managed"]),
+  planId: z.enum(["pro", "team", "enterprise"]),
   billingCycle: z.enum(["monthly", "annual"]),
   successUrl: z.string().url(),
   cancelUrl: z.string().url(),

@@ -31,8 +31,8 @@ const plans: Record<string, PlanDetails> = {
   pro: {
     id: "pro",
     name: "Pro",
-    price: 20,
-    annualPrice: 16,
+    price: 19,
+    annualPrice: 15,
     features: [
       "Cloud LLMs (GPT-4, Claude)",
       "Web console dashboard",
@@ -44,11 +44,27 @@ const plans: Record<string, PlanDetails> = {
     stripePriceIdAnnual: "price_pro_annual",
     icon: Zap,
   },
+  team: {
+    id: "team",
+    name: "Team",
+    price: 99,
+    annualPrice: 79,
+    features: [
+      "Everything in Pro",
+      "Team workspaces",
+      "Role-based access control",
+      "Shared command history",
+      "Priority support (4h)",
+    ],
+    stripePriceIdMonthly: "price_team_monthly",
+    stripePriceIdAnnual: "price_team_annual",
+    icon: Shield,
+  },
   enterprise: {
     id: "enterprise",
     name: "Enterprise",
-    price: 99,
-    annualPrice: 79,
+    price: 199,
+    annualPrice: 159,
     features: [
       "SSO/LDAP integration",
       "Audit logs & compliance",
@@ -58,22 +74,6 @@ const plans: Record<string, PlanDetails> = {
     ],
     stripePriceIdMonthly: "price_enterprise_monthly",
     stripePriceIdAnnual: "price_enterprise_annual",
-    icon: Shield,
-  },
-  managed: {
-    id: "managed",
-    name: "Managed",
-    price: 299,
-    annualPrice: 239,
-    features: [
-      "Fully managed infrastructure",
-      "24/7 phone support",
-      "99.99% SLA guarantee",
-      "Dedicated account manager",
-      "On-call engineering",
-    ],
-    stripePriceIdMonthly: "price_managed_monthly",
-    stripePriceIdAnnual: "price_managed_annual",
     icon: Server,
   },
 };
