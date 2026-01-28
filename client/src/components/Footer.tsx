@@ -20,7 +20,7 @@ export default function Footer() {
               The AI Layer for Linux. Execute any task with natural language.
             </p>
             <p className="text-gray-500 text-xs">
-              Built in public. Open source on GitHub.
+              Built in public. Source available on GitHub.
             </p>
           </div>
 
@@ -50,7 +50,8 @@ export default function Footer() {
               <li><a href="https://discord.gg/cxlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">Discord</a></li>
               <li><a href="https://twitter.com/cxlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">Twitter</a></li>
               <li><a href="https://github.com/cxlinux-ai/cx" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
-              <li><Link href="/#join" className="hover:text-white transition-colors" data-testid="footer-link-community">Join Community</Link></li>
+              <li><Link href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">Hackathon</Link></li>
+              <li><Link href="/careers" className="hover:text-white transition-colors" data-testid="footer-link-careers">Careers</Link></li>
             </ul>
           </div>
 
@@ -60,7 +61,7 @@ export default function Footer() {
               <li><Link href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms of Service</Link></li>
               <li><Link href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">Security</Link></li>
-              <li><Link href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (Apache 2.0)</Link></li>
+              <li><Link href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (BSL 1.1)</Link></li>
             </ul>
           </div>
         </div>

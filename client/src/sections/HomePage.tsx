@@ -363,11 +363,56 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div className="min-h-screen bg-black text-white noise-texture">
-      {/* Hero Section */}
+      {/* Hero Section with Parallax */}
       <section id="home" className="min-h-screen flex flex-col justify-start pt-24 sm:pt-28 px-4 relative overflow-hidden">
-        <div className="gradient-glow top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" />
-        <div className="gradient-glow bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 opacity-50" />
-        
+        {/* Parallax Background Layers */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.3), transparent),
+              radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.15), transparent),
+              radial-gradient(ellipse 50% 30% at 20% 80%, rgba(124, 58, 237, 0.2), transparent)
+            `,
+            backgroundAttachment: 'fixed',
+          }}
+        />
+        <motion.div
+          className="absolute inset-0 z-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          {/* Floating purple orbs with parallax effect */}
+          <motion.div
+            className="absolute w-96 h-96 rounded-full bg-purple-600/20 blur-3xl"
+            style={{ top: '10%', left: '15%' }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 20, 0],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute w-80 h-80 rounded-full bg-violet-500/15 blur-3xl"
+            style={{ top: '50%', right: '10%' }}
+            animate={{
+              y: [0, 40, 0],
+              x: [0, -30, 0],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute w-64 h-64 rounded-full bg-purple-400/10 blur-2xl"
+            style={{ bottom: '20%', left: '30%' }}
+            animate={{
+              y: [0, 25, 0],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
+
         <div className="max-w-6xl mx-auto text-center relative z-10">
           {/* Trust Badges */}
           <motion.div
@@ -379,18 +424,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               href="https://github.com/cxlinux-ai/cx"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-brand-blue/50 transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-purple-500/50 transition-all"
               data-testid="link-github-stars"
             >
               <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1,250"} stars</span>
             </a>
-            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-open-source">
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-source-available">
               <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">Open Source</span>
+              <span className="text-gray-300">Source Available</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
-              <Tag size={12} className="text-brand-blue sm:w-3.5 sm:h-3.5" />
+              <Tag size={12} className="text-purple-400 sm:w-3.5 sm:h-3.5" />
               <span className="text-gray-300">v2.4.0</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
@@ -399,16 +444,18 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Main Headline - Purple Gradient */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="gradient-text text-[82px] font-extrabold pl-[10px] pr-[10px]">AI LINUX</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-400 to-purple-500 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold">
+              The Agentic OS
+            </span>
             <br />
-            <span className="text-white">Execute Your Intent</span>
+            <span className="text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl">for Linux Fleet Management</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -416,28 +463,115 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-2"
+            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 sm:mb-10 px-2"
           >
-            Describe what you want. CX Linux handles the rest. From automation scripts to system configuration,
-            data analysis to coding workflows — unlimited possibilities with natural language.
+            Deploy AI agents across your entire Linux infrastructure. Natural language commands,
+            autonomous execution, fleet-wide orchestration — all from a single interface.
           </motion.p>
 
-          {/* Hackathon Preview - Prominent placement */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="mb-8"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
           >
-            <HackathonPreview />
+            <Link href="/pricing">
+              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 rounded-xl text-white font-semibold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all">
+                <Rocket size={20} />
+                Get Started
+              </button>
+            </Link>
+            <a
+              href="https://github.com/cxlinux-ai/cx"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-semibold text-lg hover:bg-white/10 hover:border-purple-500/30 transition-all">
+                <Github size={20} />
+                View on GitHub
+              </button>
+            </a>
           </motion.div>
 
-          {/* Demo - Hidden on small screens, show simple CTA instead */}
+          {/* Product GIF Carousel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="hidden sm:block"
+            className="relative w-full max-w-5xl mx-auto"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-purple-500/20 bg-black/50 backdrop-blur-xl shadow-2xl shadow-purple-500/10">
+              {/* Terminal Header */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-gray-900/80 border-b border-white/5">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <span className="text-xs text-gray-500 ml-2 font-mono">cx-linux ~ fleet-manager</span>
+              </div>
+
+              {/* GIF Carousel Container */}
+              <div className="relative overflow-hidden">
+                <div className="flex animate-scroll-x">
+                  {/* Placeholder for product GIFs - replace with actual GIF URLs */}
+                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-purple-900/20 to-violet-900/20 flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <Terminal size={48} className="text-purple-400 mx-auto mb-4" />
+                      <p className="text-gray-400 font-mono text-sm">$ cx "deploy nginx across all production servers"</p>
+                      <motion.p
+                        className="text-purple-400 font-mono text-sm mt-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1, duration: 0.5 }}
+                      >
+                        Deploying to 47 servers... Done in 12s
+                      </motion.p>
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-violet-900/20 to-purple-900/20 flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <Server size={48} className="text-violet-400 mx-auto mb-4" />
+                      <p className="text-gray-400 font-mono text-sm">$ cx "check disk usage and alert if &gt; 80%"</p>
+                      <motion.p
+                        className="text-violet-400 font-mono text-sm mt-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5, duration: 0.5 }}
+                      >
+                        Monitoring 156 volumes... 3 alerts triggered
+                      </motion.p>
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-purple-900/20 to-violet-900/20 flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <Shield size={48} className="text-purple-400 mx-auto mb-4" />
+                      <p className="text-gray-400 font-mono text-sm">$ cx "apply security patches to all Ubuntu hosts"</p>
+                      <motion.p
+                        className="text-purple-400 font-mono text-sm mt-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 2, duration: 0.5 }}
+                      >
+                        Patching 89 hosts... All secure
+                      </motion.p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Glow effect */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-violet-500/5 to-purple-500/10 rounded-3xl blur-xl -z-10" />
+          </motion.div>
+
+          {/* Demo - Hidden on small screens */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="hidden sm:block mt-12"
           >
             <InteractiveDemoHero />
           </motion.div>
@@ -447,21 +581,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="sm:hidden space-y-4"
+            className="sm:hidden space-y-4 mt-8"
           >
-            <a 
-              href="https://github.com/cxlinux-ai/cx" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
-                <Terminal size={20} />
-                Try CX Linux CLI
-              </button>
-            </a>
             <p className="text-xs text-gray-500 text-center">
-              Free forever · Open source · No credit card
+              Free tier available · BSL 1.1 Licensed · No credit card required
             </p>
           </motion.div>
 

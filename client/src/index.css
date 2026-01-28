@@ -1347,6 +1347,25 @@ table tbody tr:hover {
   animation-play-state: paused;
 }
 
+/* Product GIF carousel scroll */
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  33% { transform: translateX(0); }
+  38% { transform: translateX(-100%); }
+  66% { transform: translateX(-100%); }
+  71% { transform: translateX(-200%); }
+  95% { transform: translateX(-200%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 15s ease-in-out infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
 /* Typewriter animation */
 @keyframes blink-cursor {
   0%, 50% { border-color: #3b82f6; }
