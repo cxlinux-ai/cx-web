@@ -1,0 +1,338 @@
+---
+sidebar_position: 1
+title: Development Setup
+description: Set up your local development environment to contribute to Cortex Linux.
+keywords: [development, setup, contributing, build, local]
+---
+
+# Development Setup
+
+This guide walks you through setting up a local development environment for contributing to Cortex Linux.
+
+## Prerequisites
+
+- Linux system (Ubuntu 20.04+, Fedora 36+, or Arch Linux)
+- Git
+- Rust 1.70+
+- Python 3.10+
+- Node.js 18+ (for documentation)
+- Docker (optional, for testing)
+
+## Quick Start
+
+### 1. Fork and Clone
+
+```bash
+# Fork the repository on GitHub first, then:
+git clone https://github.com/YOUR_USERNAME/cortex-linux.git
+cd cortex-linux
+
+# Add upstream remote
+git remote add upstream https://github.com/cortexlinux/cortex-linux.git
+```
+
+### 2. Install Dependencies
+
+```bash
+# Using Cortex itself (if installed)
+cortex "install development dependencies for this project"
+
+# Or manually:
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+
+# Python dependencies
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+
+# Node.js (for docs)
+npm install
+```
+
+### 3. Build
+
+```bash
+# Debug build
+cargo build
+
+# Release build
+cargo build --release
+
+# Run tests
+cargo test
+```
+
+### 4. Run Locally
+
+```bash
+# Run debug build
+./target/debug/cortex "hello world"
+
+# Or add to PATH temporarily
+export PATH="$(pwd)/target/debug:$PATH"
+cortex "test command"
+```
+
+## Project Structure
+
+```
+cortex-linux/
+├── src/
+│   ├── main.rs           # Entry point
+│   ├── cli/              # CLI argument parsing
+│   ├── ai/               # AI backend integration
+│   ├── commands/         # Command execution
+│   ├── config/           # Configuration handling
+│   ├── packages/         # Package manager abstraction
+│   ├── snapshots/        # Snapshot and rollback
+│   └── utils/            # Shared utilities
+├── tests/
+│   ├── unit/             # Unit tests
+│   ├── integration/      # Integration tests
+│   └── fixtures/         # Test data
+├── docs/                 # Documentation (Docusaurus)
+├── scripts/              # Build and utility scripts
+├── Cargo.toml            # Rust dependencies
+├── requirements.txt      # Python dependencies
+└── README.md
+```
+
+## Development Workflow
+
+### Creating a Feature Branch
+
+```bash
+# Sync with upstream
+git fetch upstream
+git checkout main
+git merge upstream/main
+
+# Create feature branch
+git checkout -b feature/your-feature-name
+```
+
+### Making Changes
+
+1. Write code following our [Code Style](/docs/contributing/code-style) guide
+2. Add tests for new functionality
+3. Update documentation if needed
+4. Run the test suite
+
+### Running Tests
+
+```bash
+# All tests
+cargo test
+
+# Specific test
+cargo test test_name
+
+# With output
+cargo test -- --nocapture
+
+# Integration tests only
+cargo test --test integration
+
+# With coverage
+cargo tarpaulin --out html
+```
+
+### Linting and Formatting
+
+```bash
+# Format code
+cargo fmt
+
+# Check formatting
+cargo fmt --check
+
+# Lint
+cargo clippy
+
+# All checks
+cargo clippy -- -D warnings
+```
+
+### Building Documentation
+
+```bash
+cd docs
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm start
+
+# Build
+npm run build
+```
+
+## Local Testing Environments
+
+### Docker Testing
+
+```bash
+# Build test image
+docker build -t cortex-test -f Dockerfile.test .
+
+# Run tests in container
+docker run --rm cortex-test cargo test
+
+# Test on specific distro
+docker run --rm -it ubuntu:22.04 bash
+# Then install and test manually
+```
+
+### VM Testing
+
+For testing package manager integration:
+
+```bash
+# Vagrant (if available)
+vagrant up ubuntu
+vagrant ssh ubuntu
+
+# Or use multipass
+multipass launch -n cortex-test
+multipass shell cortex-test
+```
+
+## IDE Setup
+
+### VS Code
+
+Recommended extensions:
+
+```json
+{
+  "recommendations": [
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "serayuzgur.crates",
+    "vadimcn.vscode-lldb"
+  ]
+}
+```
+
+Settings:
+
+```json
+{
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "editor.formatOnSave": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  }
+}
+```
+
+### Neovim
+
+Using nvim-lspconfig:
+
+```lua
+require('lspconfig').rust_analyzer.setup {
+  settings = {
+    ['rust-analyzer'] = {
+      checkOnSave = {
+        command = 'clippy',
+      },
+    },
+  },
+}
+```
+
+### JetBrains (CLion/RustRover)
+
+- Install Rust plugin
+- Configure Cargo toolchain
+- Enable clippy on save
+
+## Debugging
+
+### VS Code
+
+```json
+// .vscode/launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug cortex",
+      "cargo": {
+        "args": ["build", "--bin=cortex"],
+        "filter": {
+          "name": "cortex",
+          "kind": "bin"
+        }
+      },
+      "args": ["install", "nginx"],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```
+
+### Command Line
+
+```bash
+# With rust-gdb
+rust-gdb ./target/debug/cortex
+
+# With rust-lldb
+rust-lldb ./target/debug/cortex
+
+# Enable debug logging
+RUST_LOG=debug ./target/debug/cortex "your command"
+```
+
+## Environment Variables for Development
+
+```bash
+# Enable debug output
+export RUST_LOG=debug
+export CORTEX_DEBUG=true
+
+# Use local AI model
+export CORTEX_BACKEND=local
+export CORTEX_MODEL=cortex-7b-dev
+
+# Skip package operations (for testing)
+export CORTEX_DRY_RUN=true
+```
+
+## Useful Commands
+
+```bash
+# Watch and rebuild on changes
+cargo watch -x build
+
+# Check for outdated dependencies
+cargo outdated
+
+# Security audit
+cargo audit
+
+# Generate docs
+cargo doc --open
+
+# Benchmark
+cargo bench
+```
+
+## Getting Help
+
+- [Discord](https://discord.gg/ASvzWcuTfk) - #dev-help channel
+- [GitHub Discussions](https://github.com/cortexlinux/cortex-linux/discussions)
+- Weekly dev meeting (Tuesdays, 5pm UTC)
+
+## Next Steps
+
+- [Bounty Program](/docs/contributing/bounty-program) - Get paid for contributions
+- [PR Guidelines](/docs/contributing/pr-guidelines) - How to submit changes
+- [Code Style](/docs/contributing/code-style) - Coding standards

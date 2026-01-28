@@ -1,0 +1,30 @@
+FROM python:{{ python_version | default('3.11') }}-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application
+COPY . .
+
+{% if collectstatic %}
+RUN python manage.py collectstatic --noinput
+{% endif %}
+
+EXPOSE {{ port | default(8000) }}
+
+{% if gunicorn %}
+CMD ["gunicorn", "--bind", "0.0.0.0:{{ port | default(8000) }}", "--workers", "{{ workers | default(4) }}", "{{ wsgi_app }}"]
+{% elif uvicorn %}
+CMD ["uvicorn", "{{ asgi_app }}", "--host", "0.0.0.0", "--port", "{{ port | default(8000) }}", "--workers", "{{ workers | default(4) }}"]
+{% else %}
+CMD ["python", "{{ entrypoint | default('app.py') }}"]
+{% endif %}

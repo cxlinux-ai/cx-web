@@ -1,0 +1,89 @@
+Visual Effects
+
+Glass Outline / Border
+
+When hovering, the card’s border has a faint, translucent “glass” outline.
+
+This outline can slightly shift or highlight along the edges depending on mouse position, giving a feeling of depth.
+
+The effect usually uses backdrop-filter: blur() or a semi-transparent gradient for the outline.
+
+Moving Glow / Light Reflection
+
+A small, subtle glow follows the mouse position inside the card.
+
+It simulates a light reflection or a “spotlight” on the surface of the card.
+
+This gives a pseudo-3D depth effect without actually rotating the card.
+
+Subtle 3D Movement
+
+The card can tilt slightly based on cursor position (rotateX and rotateY) to reinforce the 3D feeling.
+
+The rotation is subtle so it feels “floating” but does not break the current design.
+
+Maintaining Original Design
+
+The content, typography, and overall layout remain exactly the same.
+
+The hover and glow effects are purely visual enhancements layered on top.
+
+Technical Implementation Ideas
+
+Card Container
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05); /* translucent background */
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+Dynamic Glow
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y);
+  left: var(--mouse-x);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+}
+
+
+Hover / Tilt Effect (JS)
+
+const card = document.querySelector('.card');
+card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * 5; // subtle tilt
+    const rotateY = ((x - centerX) / centerX) * -5;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+});
+
+card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0)';
+});
+
+
+Key Notes
+
+The glow is subtle, low opacity, and follows the cursor dynamically.
+
+The tilt is very small (1–5° max) so it feels like floating rather than full 3D rotation.
+
+The original colors, typography, and layout remain untouched — it’s just an enhancement.

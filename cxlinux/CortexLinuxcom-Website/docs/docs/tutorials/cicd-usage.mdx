@@ -1,0 +1,641 @@
+---
+sidebar_position: 4
+title: CI/CD Usage
+description: Use Cortex in continuous integration and deployment pipelines. GitHub Actions, GitLab CI, Jenkins, and more.
+keywords: [ci, cd, continuous integration, deployment, github actions, gitlab ci]
+---
+
+# CI/CD Usage
+
+This tutorial covers using Cortex in CI/CD pipelines. Automate installations, configurations, and deployments with natural language commands.
+
+## Time Required
+
+- Basic setup: 15 minutes
+- Full pipeline: 30-60 minutes
+
+## Prerequisites
+
+- CI/CD platform access
+- Repository with code
+- Cortex installation script or pre-built image
+
+## GitHub Actions
+
+### Basic Setup
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Cortex
+        run: |
+          curl -fsSL https://cortexlinux.com/install.sh | bash
+          echo "$HOME/.cortex/bin" >> $GITHUB_PATH
+
+      - name: Setup environment
+        run: cortex "install all dependencies for this project"
+        env:
+          CORTEX_CI: true
+          CORTEX_YES: true
+
+      - name: Run tests
+        run: cortex "run the test suite"
+
+      - name: Build
+        run: cortex "build for production"
+```
+
+### Using Cortex Action
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cortexlinux/setup-cortex@v1
+        with:
+          version: 'latest'
+
+      - name: Setup and test
+        run: |
+          cortex "install dependencies"
+          cortex "run tests"
+        env:
+          CORTEX_CI: true
+```
+
+### Matrix Builds
+
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18, 20]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cortexlinux/setup-cortex@v1
+
+      - name: Setup Node ${{ matrix.node }}
+        run: cortex "install nodejs version ${{ matrix.node }}"
+        env:
+          CORTEX_CI: true
+
+      - name: Test
+        run: cortex "run tests"
+```
+
+### Deploy Workflow
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cortexlinux/setup-cortex@v1
+
+      - name: Build
+        run: cortex "build docker image for production"
+        env:
+          CORTEX_CI: true
+
+      - name: Push to registry
+        run: cortex "push image to docker hub"
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Deploy
+        run: cortex "deploy to kubernetes cluster"
+        env:
+          KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
+```
+
+---
+
+## GitLab CI
+
+### Basic Pipeline
+
+```yaml
+# .gitlab-ci.yml
+stages:
+  - setup
+  - test
+  - build
+  - deploy
+
+variables:
+  CORTEX_CI: "true"
+  CORTEX_YES: "true"
+
+before_script:
+  - curl -fsSL https://cortexlinux.com/install.sh | bash
+  - export PATH="$HOME/.cortex/bin:$PATH"
+
+test:
+  stage: test
+  script:
+    - cortex "install project dependencies"
+    - cortex "run tests"
+  artifacts:
+    reports:
+      junit: test-results.xml
+
+build:
+  stage: build
+  script:
+    - cortex "build for production"
+  artifacts:
+    paths:
+      - dist/
+
+deploy:
+  stage: deploy
+  script:
+    - cortex "deploy to production server"
+  only:
+    - main
+  environment:
+    name: production
+```
+
+### Using Cortex Docker Image
+
+```yaml
+# .gitlab-ci.yml
+image: cortexlinux/cortex:latest
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - cortex "install dependencies and run tests"
+
+deploy:
+  stage: deploy
+  script:
+    - cortex "deploy application"
+  only:
+    - main
+```
+
+### Multi-Project Pipeline
+
+```yaml
+# .gitlab-ci.yml
+stages:
+  - test
+  - trigger
+
+test:
+  stage: test
+  script:
+    - cortex "run tests"
+
+trigger-deploy:
+  stage: trigger
+  trigger:
+    project: mygroup/deploy-pipeline
+    branch: main
+  only:
+    - main
+```
+
+---
+
+## Jenkins
+
+### Jenkinsfile
+
+```groovy
+// Jenkinsfile
+pipeline {
+    agent any
+
+    environment {
+        CORTEX_CI = 'true'
+        CORTEX_YES = 'true'
+    }
+
+    stages {
+        stage('Setup Cortex') {
+            steps {
+                sh 'curl -fsSL https://cortexlinux.com/install.sh | bash'
+                sh 'export PATH="$HOME/.cortex/bin:$PATH"'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'cortex "install all project dependencies"'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'cortex "run test suite"'
+            }
+            post {
+                always {
+                    junit 'test-results/*.xml'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'cortex "build for production"'
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                sh 'cortex "deploy to production"'
+            }
+        }
+    }
+
+    post {
+        failure {
+            sh 'cortex "collect logs and diagnostics"'
+        }
+    }
+}
+```
+
+### Docker Agent
+
+```groovy
+pipeline {
+    agent {
+        docker {
+            image 'cortexlinux/cortex:latest'
+        }
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                sh 'cortex "install dependencies and run tests"'
+            }
+        }
+    }
+}
+```
+
+---
+
+## CircleCI
+
+### Config
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+
+executors:
+  cortex:
+    docker:
+      - image: cortexlinux/cortex:latest
+
+jobs:
+  test:
+    executor: cortex
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: cortex "install project dependencies"
+      - run:
+          name: Run tests
+          command: cortex "run tests"
+      - store_test_results:
+          path: test-results
+
+  deploy:
+    executor: cortex
+    steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: cortex "deploy to production"
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+```
+
+---
+
+## Azure DevOps
+
+### Pipeline YAML
+
+```yaml
+# azure-pipelines.yml
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  CORTEX_CI: 'true'
+  CORTEX_YES: 'true'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildJob
+        steps:
+          - script: |
+              curl -fsSL https://cortexlinux.com/install.sh | bash
+              export PATH="$HOME/.cortex/bin:$PATH"
+            displayName: 'Install Cortex'
+
+          - script: cortex "install dependencies"
+            displayName: 'Install Dependencies'
+
+          - script: cortex "run tests"
+            displayName: 'Run Tests'
+
+          - script: cortex "build for production"
+            displayName: 'Build'
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathtoPublish: 'dist'
+              artifactName: 'build'
+
+  - stage: Deploy
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: DeployJob
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: cortex "deploy application"
+                  displayName: 'Deploy'
+```
+
+---
+
+## Environment Variables for CI
+
+### Required Variables
+
+```bash
+# Always set in CI environments
+CORTEX_CI=true          # Enable CI mode
+CORTEX_YES=true         # Skip confirmations
+CORTEX_NONINTERACTIVE=true  # No interactive prompts
+```
+
+### Optional Variables
+
+```bash
+# Customize behavior
+CORTEX_MODE=execute     # Always execute (not dry-run)
+CORTEX_NO_COLOR=true    # Disable colored output
+CORTEX_FORMAT=json      # Machine-readable output
+CORTEX_LOG_LEVEL=warn   # Reduce log verbosity
+```
+
+### Secrets
+
+```bash
+# Never commit these - use CI secret management
+CORTEX_API_KEY=...      # If using cloud backend
+DOCKER_PASSWORD=...     # For registry auth
+KUBECONFIG=...          # For deployments
+```
+
+---
+
+## Common CI Tasks
+
+### Dependency Installation
+
+```yaml
+- run: cortex "install all dependencies for this project"
+```
+
+Cortex detects:
+- `package.json` → npm/yarn
+- `requirements.txt` → pip
+- `Cargo.toml` → cargo
+- `go.mod` → go mod
+
+### Running Tests
+
+```yaml
+- run: cortex "run tests and generate coverage report"
+```
+
+### Building
+
+```yaml
+- run: cortex "build for production optimizing for size"
+```
+
+### Docker Operations
+
+```yaml
+- run: cortex "build docker image tagged with git sha"
+- run: cortex "push image to registry"
+```
+
+### Deployment
+
+```yaml
+- run: cortex "deploy to kubernetes namespace production"
+```
+
+---
+
+## Caching
+
+### GitHub Actions
+
+```yaml
+- uses: actions/cache@v3
+  with:
+    path: ~/.cortex/cache
+    key: cortex-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      cortex-${{ runner.os }}-
+```
+
+### GitLab CI
+
+```yaml
+cache:
+  paths:
+    - ~/.cortex/cache/
+    - node_modules/
+```
+
+---
+
+## Error Handling
+
+### Retry Logic
+
+```yaml
+# GitHub Actions
+- run: cortex "install dependencies"
+  continue-on-error: false
+  timeout-minutes: 10
+```
+
+### Diagnostics on Failure
+
+```yaml
+- run: cortex "run tests"
+
+- if: failure()
+  run: cortex "collect diagnostic information"
+
+- if: failure()
+  uses: actions/upload-artifact@v3
+  with:
+    name: diagnostics
+    path: diagnostics/
+```
+
+---
+
+## Example Complete Pipeline
+
+### Full CI/CD with Cortex
+
+```yaml
+# .github/workflows/ci-cd.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  CORTEX_CI: true
+  CORTEX_YES: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cortexlinux/setup-cortex@v1
+      - run: cortex "run linter and format check"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cortexlinux/setup-cortex@v1
+      - run: cortex "install nodejs ${{ matrix.node }}"
+      - run: cortex "install dependencies"
+      - run: cortex "run tests with coverage"
+      - uses: codecov/codecov-action@v3
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cortexlinux/setup-cortex@v1
+      - run: cortex "build docker image"
+      - run: cortex "push to ghcr.io"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cortexlinux/setup-cortex@v1
+      - run: cortex "deploy to staging environment"
+        env:
+          KUBECONFIG: ${{ secrets.STAGING_KUBECONFIG }}
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cortexlinux/setup-cortex@v1
+      - run: cortex "deploy to production with rolling update"
+        env:
+          KUBECONFIG: ${{ secrets.PROD_KUBECONFIG }}
+```
+
+---
+
+## Next Steps
+
+- [Docker Integration](/docs/tutorials/docker-integration) - Container workflows
+- [Server Configuration](/docs/tutorials/server-configuration) - Deployment targets
+- [Environment Variables](/docs/reference/environment-variables) - CI configuration

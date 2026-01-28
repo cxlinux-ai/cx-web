@@ -1,0 +1,24 @@
+{
+  "project": "BuildHaul",
+  "ultimate_goal": "Construction logistics and haul tracking platform",
+  "milestones": [
+    {"id": 1, "name": "Foundation", "status": "complete"},
+    {"id": 2, "name": "Core Tracking", "status": "in_progress"},
+    {"id": 3, "name": "MVP", "status": "pending"},
+    {"id": 4, "name": "Beta Clients", "status": "pending"},
+    {"id": 5, "name": "Revenue", "status": "pending"},
+    {"id": 6, "name": "Scale", "status": "pending"}
+  ],
+  "current_milestone": 2,
+  "mvp_milestone": 3,
+  "launch_milestone": 6,
+  "mvp_completed_date": "",
+  "launch_eta": "Q2 2026",
+  "last_client_update": "2026-01-12",
+  "blockers": ["Waiting on GPS integration API"],
+  "kpis": [
+    {"name": "Trucks Tracked", "current": 0, "goal": 50, "unit": ""},
+    {"name": "Clients", "current": 1, "goal": 10, "unit": ""},
+    {"name": "MRR", "current": 0, "goal": 3000, "unit": "$"}
+  ]
+}

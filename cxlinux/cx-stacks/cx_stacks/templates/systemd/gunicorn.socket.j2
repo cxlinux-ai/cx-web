@@ -1,0 +1,9 @@
+[Unit]
+Description=Gunicorn socket for {{ name }}
+
+[Socket]
+ListenStream=/run/gunicorn/{{ name }}.sock
+SocketUser={{ user | default('www-data') }}
+
+[Install]
+WantedBy=sockets.target

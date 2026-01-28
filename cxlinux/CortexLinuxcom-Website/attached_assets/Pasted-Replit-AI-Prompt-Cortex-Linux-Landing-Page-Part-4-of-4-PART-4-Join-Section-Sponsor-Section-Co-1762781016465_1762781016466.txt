@@ -1,0 +1,411 @@
+Replit AI Prompt - Cortex Linux Landing Page (Part 4 of 4)
+PART 4: Join Section, Sponsor Section, Community & Footer
+Join Section
+Section Container:
+
+ID: "join" (for navigation anchor)
+Padding: py-20 px-4
+Background: bg-black
+Max width: max-w-7xl mx-auto
+
+Section Headline:
+
+Text: "Build the Future of Linux"
+Font: text-4xl md:text-5xl font-bold text-center mb-16
+Color: White with blue gradient on hover
+
+Two Column Layout:
+
+Grid: grid-cols-1 lg:grid-cols-2
+Gap: gap-12
+Items: items-start
+
+
+Left Column: Developer Benefits
+Benefits Card:
+
+Background: bg-white/5 backdrop-blur-xl
+Border: border border-white/10
+Rounded: rounded-2xl
+Padding: p-8
+Height: h-full
+
+Headline:
+
+Text: "For Developers"
+Font: text-2xl md:text-3xl font-bold mb-6
+Color: White
+
+Benefits List:
+Create 5 benefit items, each with:
+
+Icon + text layout (flex items-start gap-3)
+Icon: CheckCircle (lucide-react) in blue-400, size 24
+Text: text-gray-300, text-base md:text-lg
+
+Benefit Items:
+
+"🚀 Earn bounties for contributions ($25-$500 per feature)"
+"🎯 Work on cutting-edge AI + systems programming"
+"👥 Join a global community of innovators"
+"💰 2x bonus payment when we close seed funding"
+"📈 Early contributor opportunities at a $50-100B market"
+
+CTA Button (Below List):
+
+Margin top: mt-8
+Full width: w-full
+Text: "View Open Issues on GitHub"
+Link: https://github.com/cortexlinux/cortex/issues
+Style: px-8 py-4 bg-blue-500 rounded-lg font-semibold text-center
+Hover: Blue glow shadow + scale
+Icon: Github icon on left, ExternalLink icon on right
+
+
+Right Column: Open Issues Showcase
+Column Headline:
+
+Text: "Current Opportunities"
+Font: text-2xl md:text-3xl font-bold mb-6
+Color: White
+
+Issues Grid:
+
+Grid: grid-cols-1 gap-4
+Show 3-4 issue cards
+
+Individual Issue Card:
+
+Background: bg-white/5 backdrop-blur-xl
+Border: border border-white/10
+Rounded: rounded-xl
+Padding: p-6
+Hover: Border changes to blue-400, slight lift, blue glow
+Transition: transition-all duration-300
+
+Issue Card Content:
+
+Issue title (h4)
+Bounty amount badge
+Skills tags
+Difficulty badge
+"Claim Issue" button
+
+Issue Title:
+
+Font: text-lg md:text-xl font-bold mb-3
+Color: White
+
+Bounty Badge:
+
+Background: bg-green-500/20
+Text: text-green-400
+Padding: px-3 py-1
+Rounded: rounded-full
+Font: text-sm font-semibold
+Display: inline-block, mb-3
+
+Skills Tags Container:
+
+Flex: flex flex-wrap gap-2 mb-3
+
+Individual Skill Tag:
+
+Background: bg-blue-500/20
+Text: text-blue-400
+Padding: px-3 py-1
+Rounded: rounded-full
+Font: text-xs
+
+Difficulty Badge:
+
+Background: Changes based on difficulty
+
+Advanced: bg-red-500/20, text-red-400
+Medium: bg-yellow-500/20, text-yellow-400
+Beginner: bg-green-500/20, text-green-400
+
+
+Padding: px-3 py-1
+Rounded: rounded-full
+Font: text-xs font-semibold
+Margin bottom: mb-4
+
+Claim Button:
+
+Width: w-full
+Padding: px-4 py-2
+Border: border-2 border-blue-400
+Rounded: rounded-lg
+Font: text-sm font-semibold
+Hover: bg-blue-400/10
+Transition: transition-all
+
+Issue Data:
+Issue 1:
+
+Title: "AI Context Memory System"
+Bounty: "$200"
+Skills: ["Python", "ML/AI", "SQLite"]
+Difficulty: "Advanced"
+
+Issue 2:
+
+Title: "Network & Proxy Config"
+Bounty: "$150"
+Skills: ["Python", "Networking"]
+Difficulty: "Medium"
+
+Issue 3:
+
+Title: "Plugin System"
+Bounty: "$200"
+Skills: ["Python", "Architecture"]
+Difficulty: "Advanced"
+
+Issue 4 (Optional):
+
+Title: "User Preferences System"
+Bounty: "$100"
+Skills: ["Python", "Config"]
+Difficulty: "Beginner"
+
+
+Sponsor Section
+Section Container:
+
+ID: "sponsor"
+Padding: py-20 px-4
+Background: bg-gradient-to-b from-black to-blue-950/10
+Border top: border-t border-white/10
+
+Section Headline:
+
+Text: "Fund Open Source Innovation"
+Font: text-4xl md:text-5xl font-bold text-center mb-16
+Color: White
+
+Sponsor Tiers Grid:
+
+Grid: grid-cols-1 md:grid-cols-3 gap-8
+Max width: max-w-6xl mx-auto
+Margin bottom: mb-16
+
+Tier Card Structure:
+
+Background: bg-white/5 backdrop-blur-xl
+Border: border border-white/10 (featured tier: border-blue-400 border-2)
+Rounded: rounded-2xl
+Padding: p-8
+Height: Full (h-full)
+Position: relative
+Hover: Scale slightly, blue glow
+
+Featured Badge (Silver Tier Only):
+
+Position: absolute -top-4 left-1/2 transform -translate-x-1/2
+Background: bg-blue-500
+Padding: px-4 py-1
+Rounded: rounded-full
+Font: text-xs font-bold uppercase
+Text: "Most Popular"
+
+Tier Name:
+
+Font: text-2xl md:text-3xl font-bold mb-2
+Color: White
+
+Price:
+
+Font: text-4xl md:text-5xl font-black text-blue-400 mb-1
+Display: Block
+
+Period:
+
+Font: text-sm text-gray-400 mb-6
+Text: "/month"
+
+Features List:
+
+List items with checkmark icons
+Gap: space-y-3
+Margin bottom: mb-8
+
+Feature Item:
+
+Flex: flex items-start gap-2
+Icon: CheckCircle (size 20, text-blue-400)
+Text: text-sm text-gray-300
+
+CTA Button:
+
+Width: w-full
+Padding: px-6 py-3
+Styling varies by tier:
+
+Bronze/Gold: border-2 border-blue-400, hover:bg-blue-400/10
+Silver (featured): bg-blue-500, hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]
+
+
+Rounded: rounded-lg
+Font: font-semibold
+Transition: transition-all
+
+Tier Data:
+Bronze Tier:
+
+Price: "$1,000"
+Features: ["Logo on README", "Discord sponsor channel access", "Monthly progress reports"]
+Button: "Become Bronze Sponsor"
+
+Silver Tier (Featured):
+
+Price: "$5,000"
+Features: ["Everything in Bronze", "Priority feature requests", "Quarterly strategy calls", "Co-marketing opportunities"]
+Button: "Become Silver Sponsor"
+
+Gold Tier:
+
+Price: "$10,000+"
+Features: ["Everything in Silver", "Dedicated support channel", "Early access to enterprise features", "Joint case studies", "Advisory board seat"]
+Button: "Become Gold Sponsor"
+
+
+Enterprise Sponsorship Card (Full Width Below Tiers):
+
+Background: bg-gradient-to-r from-blue-500/10 to-purple-500/10
+Border: border-2 border-blue-400/50
+Rounded: rounded-2xl
+Padding: p-8 md:p-12
+Text center: text-center
+
+Enterprise Headline:
+
+Text: "Enterprise Partnership"
+Font: text-3xl md:text-4xl font-bold mb-4
+
+Enterprise Description:
+
+Text: "Building on Cortex Linux? Let's discuss custom partnership opportunities including: white-label licensing, dedicated development resources, SLA guarantees, and equity participation."
+Font: text-lg text-gray-300 mb-6
+Max width: max-w-3xl mx-auto
+
+Enterprise Button:
+
+Padding: px-8 py-4
+Background: bg-blue-500
+Rounded: rounded-lg
+Font: text-lg font-semibold
+Text: "Contact for Enterprise"
+Hover: Glow + scale
+Icon: ArrowRight on right side
+
+
+Community Section
+Section Container:
+
+Padding: py-20 px-4
+Background: bg-black
+Max width: max-w-4xl mx-auto
+Text center: text-center
+
+Headline:
+
+Text: "Join the Community"
+Font: text-4xl md:text-5xl font-bold mb-12
+
+Discord Card:
+
+Background: bg-white/5 backdrop-blur-xl with blue gradient overlay
+Border: border border-white/10
+Rounded: rounded-2xl
+Padding: p-12
+Hover: Blue glow, scale
+
+Discord Icon:
+
+Custom Discord icon or MessageCircle from lucide
+Size: w-20 h-20
+Color: text-blue-400
+Glow: drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]
+Margin: mx-auto mb-6
+
+Discord Title:
+
+Text: "Join Our Discord"
+Font: text-2xl md:text-3xl font-bold mb-3
+
+Discord Description:
+
+Text: "Real-time collaboration, bounty discussions, and technical support"
+Font: text-gray-400 mb-6
+
+Discord Button:
+
+Background: bg-blue-500
+Padding: px-8 py-4
+Rounded: rounded-lg
+Font: text-lg font-semibold
+Text: "Join Discord"
+Link: discord.gg/uCqHvxjU83
+Hover: Glow + scale
+
+Social Links (Below Discord Card):
+
+Flex: flex flex-wrap justify-center gap-6
+Margin top: mt-12
+
+Each social link:
+
+Flex: flex items-center gap-2
+Font: text-gray-400
+Hover: text-blue-400
+Transition: transition-colors
+Icon size: 20px
+
+Links:
+
+GitHub: github.com/cortexlinux/cortex
+Email: mike@cortexlinux.com
+Website: cortexlinux.com
+
+
+Footer
+Footer Container:
+
+Background: bg-black
+Border top: border-t border-white/10
+Padding: py-12 px-4
+
+Footer Content:
+
+Grid: grid-cols-1 md:grid-cols-3 gap-8
+Max width: max-w-7xl mx-auto
+
+Left Column - Branding:
+
+Logo: "CORTEX LINUX" (same styling as nav)
+Tagline: "AI-Native Operating System" (text-sm text-gray-400)
+Company: "Built by AI Venture Holdings LLC" (text-xs text-gray-500)
+
+Middle Column - Links:
+
+Headline: "Resources" (text-sm font-semibold mb-4)
+Links stack: space-y-2
+Links: Documentation, GitHub, Discord, Blog
+Style: text-sm text-gray-400 hover:text-blue-400
+
+Right Column - Info:
+
+Text: "Seeking $2-3M seed funding"
+Text: "Launching February 2025"
+Copyright: "© 2025 AI Venture Holdings LLC"
+All text-sm text-gray-400
+Space between: space-y-2
+
+Mobile Responsive:
+
+Stack vertically on mobile (grid-cols-1)
+Center align on mobile (text-center md:text-left)
+Increase spacing between sections
+

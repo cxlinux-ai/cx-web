@@ -1,0 +1,59 @@
+[project]
+name = "cx"
+version = "0.1.0"
+description = "CX - The AI Layer for Linux. Natural language system administration."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
+authors = [
+    {name = "CX Linux", email = "team@cxlinux.com"}
+]
+keywords = ["linux", "ai", "cli", "system-administration", "natural-language"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.7.0",
+    "pyyaml>=6.0",
+    "httpx>=0.26.0",
+    "python-dotenv>=1.0.0",
+    "cx-stacks>=0.1.0",
+    "cx-ops>=0.1.0",
+]
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=0.18.0",
+    "openai>=1.10.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "mypy>=1.7.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+cx = "cx.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cx"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true

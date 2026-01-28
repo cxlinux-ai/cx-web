@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex Linux Master Product & Delivery Plan</title>
+    <style>
+        @media print {
+            body { font-size: 11pt; }
+            h1 { page-break-before: avoid; }
+            h2 { page-break-before: always; }
+            h2:first-of-type { page-break-before: avoid; }
+            table { page-break-inside: avoid; }
+            pre { page-break-inside: avoid; }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        h1 {
+            color: #0066cc;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 25px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.85em;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        .meta {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            color: #28a745;
+        }
+        .warning {
+            color: #dc3545;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 30px 0;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+        }
+        .toc ol {
+            columns: 2;
+        }
+        .architecture-box {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Cortex Linux Master Product & Delivery Plan</h1>
+
+<div class="meta">
+    <strong>Version:</strong> 2.0<br>
+    <strong>Last Updated:</strong> January 23, 2025<br>
+    <strong>Status:</strong> Active Development
+</div>
+
+<div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+        <li>Current State Assessment</li>
+        <li>Revised Architecture</li>
+        <li>Licensing Strategy</li>
+        <li>LLM Strategy</li>
+        <li>Monetization Model</li>
+        <li>Differentiation Strategy</li>
+        <li>Development Roadmap</li>
+        <li>Risk Assessment</li>
+        <li>Success Metrics</li>
+        <li>Team & Roles</li>
+        <li>Immediate Action Items</li>
+        <li>Appendix</li>
+    </ol>
+</div>
+
+<hr>
+
+<h2>Executive Summary</h2>
+
+<p>Cortex Linux is an AI-native Linux distribution that transforms system administration through natural language. Unlike traditional package managers, Cortex understands intent: <code>"install something to edit PDFs"</code> resolves to the optimal package without memorizing <code>apt-get install okular</code>.</p>
+
+<div class="highlight">
+    <strong>What makes this different:</strong> This isn't a wrapper. It's a new paradigm where the LLM is the interface, not an assistant.
+</div>
+
+<hr>
+
+<h2>1. Current State Assessment</h2>
+
+<h3>What's Actually Built (vs. What's Planned)</h3>
+
+<table>
+    <tr>
+        <th>Component</th>
+        <th>Claimed Status</th>
+        <th>Actual Status</th>
+        <th>Lines of Code</th>
+    </tr>
+    <tr>
+        <td><strong>cortex</strong> (core)</td>
+        <td>MVP</td>
+        <td><strong class="success">Production-Ready</strong></td>
+        <td>38,300+</td>
+    </tr>
+    <tr>
+        <td><strong>cortex-cli</strong></td>
+        <td>Separate package</td>
+        <td><strong class="warning">Stub only</strong></td>
+        <td>~100</td>
+    </tr>
+    <tr>
+        <td><strong>cortex-llm</strong></td>
+        <td>Basic</td>
+        <td><strong class="success">Production-Ready</strong></td>
+        <td>2,500+</td>
+    </tr>
+    <tr>
+        <td><strong>cortex-network</strong></td>
+        <td>Planned</td>
+        <td>Skeleton</td>
+        <td>~500</td>
+    </tr>
+    <tr>
+        <td><strong>cortex-distro</strong></td>
+        <td>Planned</td>
+        <td><strong class="success">Production-Ready</strong></td>
+        <td>5,000+</td>
+    </tr>
+    <tr>
+        <td><strong>cortex-docs</strong></td>
+        <td>Basic</td>
+        <td>Functional (MkDocs)</td>
+        <td>50+ files</td>
+    </tr>
+    <tr>
+        <td><strong>apt-repo</strong></td>
+        <td>Planned</td>
+        <td>Infrastructure Ready</td>
+        <td>CI/CD configured</td>
+    </tr>
+    <tr>
+        <td><strong>Website</strong></td>
+        <td>Planned</td>
+        <td>In Development</td>
+        <td>React/Next.js</td>
+    </tr>
+</table>
+
+<h3>Core Package Deep Dive</h3>
+
+<p>The main <code>cortex</code> repo is <strong>far more advanced than the original plan suggests</strong>:</p>
+
+<h4>Implemented Features:</h4>
+<ul>
+    <li>Multi-LLM routing (Claude, GPT-4, Ollama, Kimi K2)</li>
+    <li>Intelligent task-based provider selection</li>
+    <li>Firejail sandboxing with 46 dangerous pattern detectors</li>
+    <li>Predictive error prevention (static + AI-powered)</li>
+    <li>Voice input via Whisper (F9 hotkey)</li>
+    <li>Installation history with SQLite + rollback</li>
+    <li>Hardware detection (NVIDIA, AMD, Intel GPUs)</li>
+    <li>System role detection (web server, dev machine, etc.)</li>
+    <li>MCP server for Claude/ChatGPT/Cursor integration</li>
+    <li>Interactive TUI dashboard</li>
+    <li>Internationalization (5 languages)</li>
+    <li>Self-update mechanism</li>
+    <li>Desktop notifications</li>
+    <li>Semantic caching for LLM responses</li>
+    <li>C++ daemon (cortexd) with IPC</li>
+</ul>
+
+<h4>Security Model (Already Implemented):</h4>
+<ol>
+    <li>Pattern-based command blocking (46 regex rules)</li>
+    <li>Static compatibility checks (kernel, RAM, disk)</li>
+    <li>Historical failure analysis</li>
+    <li>AI-powered risk assessment</li>
+    <li>Firejail process isolation</li>
+    <li>Full audit trail</li>
+</ol>
+
+<hr>
+
+<h2>2. Revised Architecture</h2>
+
+<h3>The Real Stack</h3>
+
+<div class="architecture-box">┌─────────────────────────────────────────────────────────────┐
+│                    CORTEX LINUX DISTRO                      │
+│              (Debian bookworm + Cortex pre-installed)       │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────┴───────────────────────────────┐
+│                      APT REPOSITORY                          │
+│  apt.cxlinux-ai.com (GitHub Pages + reprepro + GPG signed) │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────┴───────────────────────────────┐
+│                    META-PACKAGES                             │
+│  cortex-core │ cortex-full │ cortex-llm │ cortex-gpu-*     │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────┴───────────────────────────────┐
+│                    CORTEX CORE                               │
+│  CLI │ LLM Router │ Package Resolver │ Safety Layer         │
+│  Voice │ Dashboard │ Daemon │ MCP Server                    │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────┴───────────────────────────────┐
+│                    LLM LAYER                                 │
+│    Claude    │    GPT-4    │    Ollama   │    Kimi K2       │
+│   (Cloud)    │   (Cloud)   │   (Local)   │    (Cloud)       │
+└─────────────────────────────────────────────────────────────┘</div>
+
+<h3>Repository Responsibilities (Clarified)</h3>
+
+<table>
+    <tr>
+        <th>Repo</th>
+        <th>Actual Purpose</th>
+        <th>Dependencies</th>
+    </tr>
+    <tr>
+        <td><code>cortex</code></td>
+        <td><strong>Everything</strong> - CLI, LLM, safety, voice, daemon</td>
+        <td>None</td>
+    </tr>
+    <tr>
+        <td><code>cortex-cli</code></td>
+        <td><strong class="warning">DEPRECATED</strong> - merge into cortex or remove</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td><code>cortex-llm</code></td>
+        <td>Local inference runtime (llama.cpp)</td>
+        <td>Standalone</td>
+    </tr>
+    <tr>
+        <td><code>cortex-network</code></td>
+        <td>Network management module</td>
+        <td>cortex</td>
+    </tr>
+    <tr>
+        <td><code>cortex-distro</code></td>
+        <td>ISO builder + meta-packages</td>
+        <td>cortex, cortex-llm</td>
+    </tr>
+    <tr>
+        <td><code>cortex-docs</code></td>
+        <td>Documentation site</td>
+        <td>None</td>
+    </tr>
+    <tr>
+        <td><code>apt-repo</code></td>
+        <td>Package hosting</td>
+        <td>cortex-distro</td>
+    </tr>
+    <tr>
+        <td><code>Website</code></td>
+        <td>Marketing site</td>
+        <td>None</td>
+    </tr>
+</table>
+
+<div class="highlight">
+    <strong>Critical Decision:</strong> Merge <code>cortex-cli</code> into <code>cortex</code> or clearly define separation. Current state is confusing.
+</div>
+
+<hr>
+
+<h2>3. Licensing Strategy</h2>
+
+<h3>Recommended: Business Source License 1.1 (BSL)</h3>
+
+<p><strong>Current Implementation:</strong> ✅ Already using BSL 1.1 in cortex repo</p>
+
+<h4>License Parameters:</h4>
+<ul>
+    <li><strong>Change Date:</strong> 6 years from release</li>
+    <li><strong>Change License:</strong> Apache 2.0</li>
+    <li><strong>Additional Use Grant:</strong> Personal use on 1 system free</li>
+</ul>
+
+<h4>Why BSL Works:</h4>
+<ul>
+    <li>Allows community contribution and transparency</li>
+    <li>Prevents cloud providers from reselling</li>
+    <li>Time-limited restriction builds trust</li>
+    <li>Already used by CockroachDB, MariaDB, Sentry</li>
+</ul>
+
+<h3>Pro Features (License-Gated)</h3>
+
+<table>
+    <tr>
+        <th>Feature</th>
+        <th>Free (Core)</th>
+        <th>Pro</th>
+    </tr>
+    <tr>
+        <td>LLM Provider</td>
+        <td>Ollama only</td>
+        <td>Claude, GPT-4, Kimi K2</td>
+    </tr>
+    <tr>
+        <td>Voice Input</td>
+        <td>❌</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>External API Keys</td>
+        <td>❌</td>
+        <td>✅</td>
+    </tr>
+    <tr>
+        <td>Max Daily Queries</td>
+        <td>50</td>
+        <td>Unlimited</td>
+    </tr>
+    <tr>
+        <td>Predictive Prevention</td>
+        <td>Basic rules</td>
+        <td>AI-powered</td>
+    </tr>
+    <tr>
+        <td>Priority Support</td>
+        <td>Community</td>
+        <td>Email/Slack</td>
+    </tr>
+    <tr>
+        <td>Commercial Use</td>
+        <td>1 system</td>
+        <td>Unlimited</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>4. LLM Strategy (Revised)</h2>
+
+<h3>Current State (Already Implemented)</h3>
+
+<p>The original plan underestimated what's built:</p>
+
+<pre><code># From cortex/llm_router.py - ALREADY EXISTS
+TASK_TYPE_ROUTING = {
+    "package_install": "kimi",      # Best for system ops
+    "troubleshoot": "claude",       # Best for reasoning
+    "explain": "claude",            # Best for explanation
+    "search": "openai",             # Best for search
+    "general": "claude",            # Default
+}</code></pre>
+
+<h3>LLM Tier Strategy</h3>
+
+<h4>Tier 1: Local (Free)</h4>
+<ul>
+    <li>Ollama with Mistral 7B / Llama 3 8B</li>
+    <li>CPU inference (slower but works everywhere)</li>
+    <li>No internet required</li>
+    <li>~4GB VRAM recommended</li>
+</ul>
+
+<h4>Tier 2: Cloud Freemium</h4>
+<ul>
+    <li>Free tier with rate limits (50 queries/day)</li>
+    <li>Uses Cortex's API keys (we pay)</li>
+    <li>Semantic caching to reduce costs</li>
+    <li>Graceful degradation to local</li>
+</ul>
+
+<h4>Tier 3: Pro (User's Keys)</h4>
+<ul>
+    <li>User provides their own API keys</li>
+    <li>Unlimited queries</li>
+    <li>Access to premium models</li>
+    <li>Priority routing</li>
+</ul>
+
+<h3>Model Recommendations</h3>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Free (Local)</th>
+        <th>Pro (Cloud)</th>
+    </tr>
+    <tr>
+        <td>Package Resolution</td>
+        <td>Mistral 7B</td>
+        <td>Kimi K2</td>
+    </tr>
+    <tr>
+        <td>Troubleshooting</td>
+        <td>Llama 3 8B</td>
+        <td>Claude Opus</td>
+    </tr>
+    <tr>
+        <td>Code Generation</td>
+        <td>CodeLlama 7B</td>
+        <td>Claude Sonnet</td>
+    </tr>
+    <tr>
+        <td>Voice Transcription</td>
+        <td>Whisper base</td>
+        <td>Whisper large</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>5. Monetization Model</h2>
+
+<h3>Pricing Tiers</h3>
+
+<table>
+    <tr>
+        <th>Tier</th>
+        <th>Price</th>
+        <th>Target</th>
+    </tr>
+    <tr>
+        <td><strong>Free</strong></td>
+        <td>$0</td>
+        <td>Individual developers, hobbyists</td>
+    </tr>
+    <tr>
+        <td><strong>Pro</strong></td>
+        <td>$19/mo</td>
+        <td>Power users, freelancers</td>
+    </tr>
+    <tr>
+        <td><strong>Team</strong></td>
+        <td>$99/mo/seat</td>
+        <td>Small teams</td>
+    </tr>
+    <tr>
+        <td><strong>Enterprise</strong></td>
+        <td>Custom</td>
+        <td>Enterprises, compliance needs</td>
+    </tr>
+</table>
+
+<h3>Revenue Projections</h3>
+
+<h4>Conservative (Year 1):</h4>
+<ul>
+    <li>10,000 free users</li>
+    <li>500 Pro conversions (5%)</li>
+    <li>50 Team seats</li>
+    <li><strong>ARR: $142,200</strong></li>
+</ul>
+
+<h4>Optimistic (Year 1):</h4>
+<ul>
+    <li>50,000 free users</li>
+    <li>2,500 Pro (5%)</li>
+    <li>250 Team seats</li>
+    <li><strong>ARR: $717,000</strong></li>
+</ul>
+
+<hr>
+
+<h2>6. Differentiation Strategy</h2>
+
+<h3>What Makes Cortex Different</h3>
+
+<h4>Not Another Wrapper:</h4>
+<ul>
+    <li>Most "AI Linux tools" are thin wrappers around GPT</li>
+    <li>Cortex has deep system integration (daemon, hardware detection, sandboxing)</li>
+</ul>
+
+<h4>Not Just Package Management:</h4>
+<ul>
+    <li>Predictive error prevention</li>
+    <li>Role-based context awareness</li>
+    <li>Voice-first interface</li>
+    <li>Full rollback capability</li>
+</ul>
+
+<h4>Not Cloud-Dependent:</h4>
+<ul>
+    <li>Works fully offline with local LLMs</li>
+    <li>No mandatory telemetry</li>
+    <li>Self-hostable enterprise version</li>
+</ul>
+
+<h3>Marketing Angle</h3>
+
+<p><strong>Tagline:</strong> "Tell your server what you want. It figures out the rest."</p>
+
+<h4>Key Messages:</h4>
+<ol>
+    <li>"Never memorize another Linux command"</li>
+    <li>"AI that understands your system, not just your text"</li>
+    <li>"Safer than sudo - every command previewed and sandboxed"</li>
+</ol>
+
+<hr>
+
+<h2>7. Development Roadmap</h2>
+
+<h3>Phase 1: Consolidation (Weeks 1-2)</h3>
+
+<p><strong>Goal:</strong> Ship v0.2.0 with clear value proposition</p>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Owner</th>
+        <th>Priority</th>
+    </tr>
+    <tr>
+        <td>Merge cortex-cli into cortex or clarify</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Fix shell injection in coordinator.py</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Complete dangerous pattern list</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Implement Pro license validation</td>
+        <td>Dev</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>Build first .deb package</td>
+        <td>Dev</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>Set up apt.cxlinux-ai.com</td>
+        <td>DevOps</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>Write installation docs</td>
+        <td>Docs</td>
+        <td>P1</td>
+    </tr>
+</table>
+
+<h3>Phase 2: Distribution (Weeks 3-4)</h3>
+
+<p><strong>Goal:</strong> Installable via apt on any Debian/Ubuntu</p>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Owner</th>
+        <th>Priority</th>
+    </tr>
+    <tr>
+        <td>Build cortex-core meta-package</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Build cortex-full meta-package</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>CI/CD for automated builds</td>
+        <td>DevOps</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Generate signing key</td>
+        <td>DevOps</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Test installation on clean VMs</td>
+        <td>QA</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Write quickstart guide</td>
+        <td>Docs</td>
+        <td>P1</td>
+    </tr>
+</table>
+
+<h3>Phase 3: Pro Launch (Weeks 5-6)</h3>
+
+<p><strong>Goal:</strong> Revenue generation begins</p>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Owner</th>
+        <th>Priority</th>
+    </tr>
+    <tr>
+        <td>Stripe integration</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>License key system</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Pro feature gates</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Landing page with pricing</td>
+        <td>Marketing</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Onboarding flow</td>
+        <td>Dev</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>Support channel (Discord/Slack)</td>
+        <td>Community</td>
+        <td>P1</td>
+    </tr>
+</table>
+
+<h3>Phase 4: Distro (Weeks 7-8)</h3>
+
+<p><strong>Goal:</strong> Bootable Cortex Linux ISO</p>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Owner</th>
+        <th>Priority</th>
+    </tr>
+    <tr>
+        <td>Build netinst ISO</td>
+        <td>Dev</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Build offline ISO</td>
+        <td>Dev</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>NVIDIA variant</td>
+        <td>Dev</td>
+        <td>P1</td>
+    </tr>
+    <tr>
+        <td>Test on real hardware</td>
+        <td>QA</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Release to GitHub Releases</td>
+        <td>DevOps</td>
+        <td>P0</td>
+    </tr>
+    <tr>
+        <td>Announcement post</td>
+        <td>Marketing</td>
+        <td>P1</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>8. Risk Assessment</h2>
+
+<h3>Technical Risks</h3>
+
+<table>
+    <tr>
+        <th>Risk</th>
+        <th>Likelihood</th>
+        <th>Impact</th>
+        <th>Mitigation</th>
+    </tr>
+    <tr>
+        <td>Shell injection vulnerability</td>
+        <td>Medium</td>
+        <td>Critical</td>
+        <td>Code audit + fuzzing</td>
+    </tr>
+    <tr>
+        <td>LLM API costs exceed budget</td>
+        <td>High</td>
+        <td>High</td>
+        <td>Rate limiting + caching</td>
+    </tr>
+    <tr>
+        <td>Model quality degrades</td>
+        <td>Medium</td>
+        <td>Medium</td>
+        <td>Multi-provider fallback</td>
+    </tr>
+    <tr>
+        <td>Package conflicts</td>
+        <td>Medium</td>
+        <td>Medium</td>
+        <td>Extensive testing matrix</td>
+    </tr>
+</table>
+
+<h3>Business Risks</h3>
+
+<table>
+    <tr>
+        <th>Risk</th>
+        <th>Likelihood</th>
+        <th>Impact</th>
+        <th>Mitigation</th>
+    </tr>
+    <tr>
+        <td>Low conversion rate</td>
+        <td>High</td>
+        <td>High</td>
+        <td>Strong free tier + clear upgrade path</td>
+    </tr>
+    <tr>
+        <td>Cloud provider competition</td>
+        <td>Medium</td>
+        <td>Medium</td>
+        <td>Focus on local-first</td>
+    </tr>
+    <tr>
+        <td>Open source fork</td>
+        <td>Low</td>
+        <td>Medium</td>
+        <td>BSL license protects</td>
+    </tr>
+    <tr>
+        <td>Security incident</td>
+        <td>Low</td>
+        <td>Critical</td>
+        <td>Bug bounty + audits</td>
+    </tr>
+</table>
+
+<h3>Mitigation Already Implemented</h3>
+
+<ul>
+    <li>✅ Multi-LLM fallback (no single point of failure)</li>
+    <li>✅ Sandboxed execution (limits damage)</li>
+    <li>✅ Full audit logging (incident investigation)</li>
+    <li>✅ Rollback capability (recovery)</li>
+</ul>
+
+<hr>
+
+<h2>9. Success Metrics</h2>
+
+<h3>v0.2.0 Release Criteria</h3>
+
+<ul>
+    <li>☐ Clean install via <code>apt install cortex</code> works</li>
+    <li>☐ 10 successful test installations on different hardware</li>
+    <li>☐ Zero P0 security issues</li>
+    <li>☐ Documentation covers 80% of commands</li>
+    <li>☐ &lt;5s response time for basic queries (local LLM)</li>
+</ul>
+
+<h3>v1.0 Release Criteria</h3>
+
+<ul>
+    <li>☐ 1,000+ GitHub stars</li>
+    <li>☐ 100+ paying Pro users</li>
+    <li>☐ 99.5% uptime for apt repo</li>
+    <li>☐ &lt;2s response time for cached queries</li>
+    <li>☐ ISO boots on 90% of tested hardware</li>
+</ul>
+
+<h3>Long-term KPIs</h3>
+
+<table>
+    <tr>
+        <th>Metric</th>
+        <th>Target (6mo)</th>
+        <th>Target (12mo)</th>
+    </tr>
+    <tr>
+        <td>Monthly Active Users</td>
+        <td>5,000</td>
+        <td>25,000</td>
+    </tr>
+    <tr>
+        <td>Pro Subscribers</td>
+        <td>200</td>
+        <td>1,000</td>
+    </tr>
+    <tr>
+        <td>GitHub Stars</td>
+        <td>2,500</td>
+        <td>10,000</td>
+    </tr>
+    <tr>
+        <td>Documentation Coverage</td>
+        <td>90%</td>
+        <td>99%</td>
+    </tr>
+    <tr>
+        <td>Test Coverage</td>
+        <td>70%</td>
+        <td>85%</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>10. Team & Roles</h2>
+
+<h3>Current Structure</h3>
+
+<table>
+    <tr>
+        <th>Role</th>
+        <th>Person</th>
+        <th>Responsibility</th>
+    </tr>
+    <tr>
+        <td>Funding & Direction</td>
+        <td>Mike</td>
+        <td>Budget, strategy, go-to-market</td>
+    </tr>
+    <tr>
+        <td>Developer Influencer</td>
+        <td>Edward</td>
+        <td>Community, credibility, content</td>
+    </tr>
+    <tr>
+        <td>Development</td>
+        <td>[TBD]</td>
+        <td>Core engineering</td>
+    </tr>
+</table>
+
+<h3>Recommended Additions</h3>
+
+<table>
+    <tr>
+        <th>Role</th>
+        <th>Priority</th>
+        <th>Timing</th>
+    </tr>
+    <tr>
+        <td>DevOps Engineer</td>
+        <td>P0</td>
+        <td>Immediate (packaging, CI/CD)</td>
+    </tr>
+    <tr>
+        <td>Security Auditor</td>
+        <td>P1</td>
+        <td>Before v1.0</td>
+    </tr>
+    <tr>
+        <td>Technical Writer</td>
+        <td>P2</td>
+        <td>After v0.2.0</td>
+    </tr>
+    <tr>
+        <td>Community Manager</td>
+        <td>P2</td>
+        <td>At 5,000 users</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>11. Immediate Action Items</h2>
+
+<h3>This Week</h3>
+
+<ol>
+    <li><strong>Security Audit:</strong> Review coordinator.py shell=True usage</li>
+    <li><strong>Repo Cleanup:</strong> Decide cortex-cli fate (merge or delete)</li>
+    <li><strong>Packaging:</strong> Generate first .deb from cortex repo</li>
+    <li><strong>Documentation:</strong> Write "Getting Started" guide</li>
+    <li><strong>Licensing:</strong> Implement Pro feature flags</li>
+</ol>
+
+<h3>This Month</h3>
+
+<ol>
+    <li><strong>Infrastructure:</strong> Set up apt.cxlinux-ai.com</li>
+    <li><strong>CI/CD:</strong> Automated builds on tag</li>
+    <li><strong>Testing:</strong> Create VM test matrix</li>
+    <li><strong>Pro:</strong> Stripe integration</li>
+    <li><strong>Marketing:</strong> Landing page at cxlinux-ai.com</li>
+</ol>
+
+<hr>
+
+<h2>12. Appendix</h2>
+
+<h3>A. Repository URLs</h3>
+
+<ul>
+    <li>https://github.com/cxlinux-ai/cortex</li>
+    <li>https://github.com/cxlinux-ai/cortex-cli (deprecated?)</li>
+    <li>https://github.com/cxlinux-ai/cortex-llm</li>
+    <li>https://github.com/cxlinux-ai/cortex-network</li>
+    <li>https://github.com/cxlinux-ai/cortex-distro</li>
+    <li>https://github.com/cxlinux-ai/cortex-docs</li>
+    <li>https://github.com/cxlinux-ai/apt-repo</li>
+    <li>https://github.com/cxlinux-ai/CortexLinuxcom-Website</li>
+</ul>
+
+<h3>B. Key Files Reference</h3>
+
+<table>
+    <tr>
+        <th>File</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><code>cortex/cli.py</code></td>
+        <td>Main CLI entry point</td>
+    </tr>
+    <tr>
+        <td><code>cortex/llm_router.py</code></td>
+        <td>Multi-LLM routing logic</td>
+    </tr>
+    <tr>
+        <td><code>cortex/sandbox/sandbox_executor.py</code></td>
+        <td>Firejail integration</td>
+    </tr>
+    <tr>
+        <td><code>cortex/validators.py</code></td>
+        <td>46 dangerous pattern rules</td>
+    </tr>
+    <tr>
+        <td><code>cortex/licensing.py</code></td>
+        <td>License validation</td>
+    </tr>
+    <tr>
+        <td><code>cortex-distro/scripts/build.sh</code></td>
+        <td>ISO builder</td>
+    </tr>
+    <tr>
+        <td><code>apt-repo/deploy/</code></td>
+        <td>Repository infrastructure</td>
+    </tr>
+</table>
+
+<h3>C. Command Reference</h3>
+
+<pre><code># Core Commands
+cortex install "something to edit PDFs"
+cortex ask "why is my server slow"
+cortex remove nginx
+cortex history
+cortex rollback &lt;id&gt;
+
+# Voice
+cortex voice              # Continuous mode (F9 hotkey)
+cortex voice --single     # Single command
+
+# System
+cortex role               # Detect system role
+cortex dashboard          # TUI dashboard
+cortex daemon status      # Background service
+
+# Development
+cortex troubleshoot       # Interactive debug
+cortex sandbox test       # Test in isolation</code></pre>
+
+<hr>
+
+<h2>Document History</h2>
+
+<table>
+    <tr>
+        <th>Version</th>
+        <th>Date</th>
+        <th>Author</th>
+        <th>Changes</th>
+    </tr>
+    <tr>
+        <td>1.0</td>
+        <td>2025-01</td>
+        <td>Original</td>
+        <td>Initial plan</td>
+    </tr>
+    <tr>
+        <td>2.0</td>
+        <td>2025-01-23</td>
+        <td>Claude Code</td>
+        <td>Complete rewrite based on actual codebase analysis</td>
+    </tr>
+</table>
+
+<hr>
+
+<p><em>This document represents the current understanding of the Cortex Linux project based on comprehensive codebase analysis. It supersedes the original product plan where there are conflicts.</em></p>
+
+</body>
+</html>

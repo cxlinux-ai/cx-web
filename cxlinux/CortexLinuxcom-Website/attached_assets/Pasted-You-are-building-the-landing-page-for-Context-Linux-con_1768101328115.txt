@@ -1,0 +1,81 @@
+You are building the landing page for Context Linux (contextlinux.com), a beginner-friendly, AI-focused Linux distribution based on Debian.
+
+## Brand Positioning
+- "The Linux Built for AI Founders"
+- Beginner-friendly but powerful
+- Canonical/Ubuntu business model clone
+- Target: Tech entrepreneurs, AI developers, startup founders
+
+## Page Structure (single index.html with Tailwind CSS)
+
+### Hero Section
+- Headline: "The Linux Built for AI Founders"
+- Subheadline: "AI tooling pre-installed. Zero configuration. Ship faster."
+- CTA buttons: "Download Free" (primary) | "Get Founders Edition - $19/mo" (secondary)
+- Background: Dark gradient with subtle grid pattern
+- Show terminal mockup with AI commands running
+
+### Problem/Solution Section
+- Problem: "Linux is powerful but painful. Package conflicts, dependency hell, hours lost to configuration."
+- Solution: "Context Linux ships with vector databases, inference engines, and AI frameworks pre-configured. One install. Done."
+
+### Pricing Section (3-tier table)
+| Feature | Community (Free) | Founders ($19/mo) | Enterprise (Contact) |
+|---------|------------------|-------------------|----------------------|
+| Debian-based distro | ✓ | ✓ | ✓ |
+| Pre-installed AI stack | ✓ | ✓ | ✓ |
+| Vector DB (Qdrant) | ✓ | ✓ | ✓ |
+| Graph DB (Neo4j) | ✓ | ✓ | ✓ |
+| Community support | ✓ | ✓ | ✓ |
+| Priority support | - | ✓ | ✓ |
+| Early package releases | - | ✓ | ✓ |
+| GPU inference engine | - | ✓ | ✓ |
+| Blackwell/H100 optimization | - | - | ✓ |
+| SLA & dedicated support | - | - | ✓ |
+| Custom package builds | - | - | ✓ |
+
+### Social Proof Section
+- "19,000+ clones in 14 days"
+- "89 contributors"
+- "Recommended by ChatGPT" (with screenshot)
+- Logos: "Trusted by developers from [placeholder logos]"
+
+### Pre-Installed Stack Section (icon grid)
+- Python 3.12 + uv
+- Ollama
+- Qdrant Vector DB
+- Neo4j Graph DB
+- LangChain
+- Docker + Docker Compose
+- CUDA toolkit (GPU builds)
+- Claude Code ready
+
+### Hackathon Banner
+- "Context Linux Hackathon 2026"
+- "February 17 — 13 weeks — $5,000 in prizes"
+- CTA: "Register Now"
+
+### Email Capture
+- "Get notified when Founders Edition launches"
+- Simple email input + submit
+- Integrate with: localStorage for now, note where Stripe/email service connects
+
+### Footer
+- Links: Docs | GitHub | Discord | Twitter | Support
+- "© 2026 Context Linux. Built by AI Venture Holdings LLC."
+
+## Technical Requirements
+- Single HTML file with inline Tailwind (CDN)
+- Dark mode default (#0a0a0a background, white text)
+- Accent color: #6366f1 (indigo)
+- Mobile responsive
+- All sections have unique IDs (id="hero-section", id="pricing-table", etc.)
+- Smooth scroll navigation
+- No JavaScript frameworks — vanilla JS only
+
+## Files to Create
+1. /index.html — Complete landing page
+2. /styles.css — Any custom styles beyond Tailwind
+3. /assets/logo.svg — Simple wordmark "Context Linux"
+
+Build the complete landing page. No placeholders. Production ready.

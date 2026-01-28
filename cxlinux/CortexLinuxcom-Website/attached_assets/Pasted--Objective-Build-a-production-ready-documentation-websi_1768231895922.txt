@@ -1,0 +1,142 @@
+**Objective**
+Build a production-ready documentation website for **Cortex Linux**, an AI-native operating system, using **Docusaurus 3 (preferred)** or **Nextra (Next.js)**.
+
+The documentation must be **developer-first**, scalable, and structured to support onboarding, daily usage, advanced reference, and open-source contributions.
+
+---
+
+## 1. Information Architecture
+
+Implement the following documentation structure exactly:
+
+### Navigation
+
+```
+Getting Started
+├── Installation
+├── Quick Start (5-minute guide)
+├── Configuration
+└── First Commands
+
+User Guide
+├── Natural Language Commands
+├── Package Management
+├── System Configuration
+├── Dry-Run Mode
+└── Rollback & Recovery
+
+Reference
+├── CLI Commands
+├── Configuration Options
+├── Supported AI Backends
+└── Environment Variables
+
+Tutorials
+├── Setting Up Dev Environments
+├── Server Configuration
+├── Docker Integration
+└── CI/CD Usage
+
+Contributing
+├── Development Setup
+├── Bounty Program
+├── PR Guidelines
+└── Code Style
+
+FAQ
+```
+
+Each page should be scaffolded with realistic placeholder content and examples relevant to **Cortex Linux**.
+
+---
+
+## 2. Core Features (Must-Have)
+
+### 🔍 Search
+
+* Algolia DocSearch integration
+* Cmd / Ctrl + K keyboard shortcut
+* Live suggestions while typing
+* Result previews with highlighted context
+
+### 🤖 AI Documentation Assistant (MVP)
+
+* Floating chat bubble on all pages
+* Placeholder text: **“Ask about Cortex”**
+* Retrieval-only (answers strictly from docs)
+* Responds with:
+
+  * Direct answers when available
+  * Links to relevant documentation pages
+  * Fallback message: *“This isn’t documented yet — check our Discord.”*
+
+### 🔀 Versioning
+
+* Version switcher dropdown
+* Default: latest stable
+* Secondary option: **Canary (bleeding edge)**
+* Clear visual indicator of selected version
+
+### 💻 Code Blocks
+
+* Syntax highlighting
+* Copy-to-clipboard button
+* Language labels
+* Line numbers for long blocks
+
+### ⚡ Quick Start Widget
+
+* Persistent sidebar widget
+* Always displays the main install command
+* One-click copy with success feedback
+
+---
+
+## 3. Content Migration
+
+Import and organize existing Markdown files from the Cortex GitHub repository:
+
+* `Getting-Started.md`
+* `User-Guide.md`
+* `Developer-Guide.md`
+* `FAQ.md`
+* `CONFIGURATION.md`
+* `Contributing.md`
+
+Map each file to the correct section in the new structure.
+
+---
+
+## 4. SEO & Metadata
+
+* Automatic sitemap generation
+* OpenGraph images per page
+* Canonical URLs
+* Structured data for **HowTo** articles
+* Clean, indexable URLs
+
+---
+
+## 5. Tech & Implementation Constraints
+
+* Framework: **Docusaurus 3 (preferred)** or **Nextra**
+* Content format: **MDX**
+* GitHub “Edit this page” links enabled
+* Dark / light theme toggle
+* Fully responsive layout (desktop + mobile)
+* Clean, minimal developer-focused design
+
+---
+
+## 6. Output Expectations
+
+Generate:
+
+* Project file structure
+* Configuration files
+* Example MDX pages
+* Theme/layout setup
+* Search + versioning configuration
+* Clear comments explaining key decisions
+
+Focus on correctness, scalability, and maintainability over visual polish.

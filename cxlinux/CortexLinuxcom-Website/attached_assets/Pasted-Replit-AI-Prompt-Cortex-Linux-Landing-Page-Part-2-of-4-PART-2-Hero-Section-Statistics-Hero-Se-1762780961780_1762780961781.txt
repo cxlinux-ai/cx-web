@@ -1,0 +1,184 @@
+Replit AI Prompt - Cortex Linux Landing Page (Part 2 of 4)
+PART 2: Hero Section & Statistics
+Hero Section Requirements
+Container:
+
+Full viewport height: min-h-screen
+Centered content: flex items-center justify-center
+Top padding to account for fixed nav: pt-20
+Horizontal padding: px-4
+Max width: max-w-6xl mx-auto
+
+Main Headline (H1):
+
+Text: "THE AI-NATIVE OPERATING SYSTEM" (break into 2 lines for mobile)
+Font size: text-6xl on mobile, text-7xl on tablet, text-8xl on desktop
+Font weight: font-extrabold (800)
+Line height: leading-tight
+Gradient: bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400
+Text transparent: bg-clip-text text-transparent
+Margin bottom: mb-6
+
+Framer Motion Animation for H1:
+initial={{ opacity: 0, y: 20 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.6 }}
+Subheading (Paragraph):
+
+Text: "Linux that understands natural language. No documentation required. Just ask, and Cortex executes."
+Font size: text-xl on mobile, text-2xl on tablet/desktop
+Color: text-gray-400
+Max width: max-w-3xl mx-auto
+Margin bottom: mb-12
+Center aligned
+
+Animation for Subheading:
+initial={{ opacity: 0, y: 20 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ delay: 0.2, duration: 0.6 }}
+CTA Buttons Container:
+
+Flexbox: flex gap-4
+Direction: flex-col on mobile, flex-row on tablet+
+Justify: justify-center
+Margin bottom: mb-16
+
+Primary Button:
+
+Text: "Join the Revolution"
+Link: Smooth scroll to #join section
+Style: px-8 py-4, bg-blue-500, rounded-lg
+Font: text-lg font-semibold
+Hover: hover:shadow-[0_0_25px_rgba(59,130,246,0.5)]
+Hover scale: hover:scale-105
+Transition: transition-all duration-300
+
+Secondary Button:
+
+Text: "View on GitHub" with GitHub icon from lucide-react
+Link: Opens https://github.com/cortexlinux/cortex in new tab
+Style: px-8 py-4, border-2 border-blue-400, rounded-lg
+Font: text-lg font-semibold
+Hover: hover:bg-blue-400/10
+Hover scale: hover:scale-105
+Icon placement: flex items-center justify-center gap-2
+
+Animation for Buttons:
+initial={{ opacity: 0, y: 20 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ delay: 0.4, duration: 0.6 }}
+Stats Bar (Below Buttons)
+Container:
+
+Grid: grid-cols-3 gap-4
+Max width: max-w-2xl mx-auto
+Responsive: grid-cols-1 on mobile, grid-cols-3 on tablet+
+
+Stat Items:
+
+"Open Source"
+"Community Driven" (with left and right borders)
+"$50-100B Market"
+
+Styling:
+
+Text center: text-center
+Font: text-sm text-gray-400
+Middle item border: border-x border-white/10
+Subtle entrance animation (stagger effect)
+
+Animation for Stats:
+initial={{ opacity: 0 }}
+animate={{ opacity: 1 }}
+transition={{ delay: 0.6, duration: 0.8 }}
+Background Effects (Optional Enhancement)
+Grid Pattern Overlay:
+
+Subtle dotted grid pattern in background
+CSS: Use pseudo-element with background-image
+Pattern: background-image: radial-gradient(circle, rgba(59,130,246,0.1) 1px, transparent 1px)
+Size: background-size: 50px 50px
+Opacity: Low (0.2-0.3)
+
+Gradient Glow:
+
+Large radial gradient behind headline
+Position: absolute, centered
+Colors: from-blue-500/20 to-transparent
+Size: Large circle (500-800px diameter)
+Z-index: Behind text (-z-10)
+
+Statistics Section (Separate Section Below Hero)
+Container:
+
+Background: bg-gradient-to-b from-transparent to-black/50
+Padding: py-20
+Border top: border-t border-white/10
+
+Headline:
+
+Text: "Project Momentum"
+Font: text-3xl md:text-4xl font-bold text-center mb-12
+Color: White
+
+Stats Grid:
+
+Grid: grid-cols-2 md:grid-cols-4 gap-8
+Max width: max-w-5xl mx-auto
+
+Individual Stat Cards:
+Each card should have:
+
+Glass morphism background: bg-white/5 backdrop-blur-xl
+Border: border border-white/10
+Rounded: rounded-2xl
+Padding: p-8
+Text center: text-center
+Hover effect: Scale up and blue glow
+
+Stat Data:
+
+Number: "29" | Label: "Active Issues"
+Number: "$3,000+" | Label: "In Bounties"
+Number: "8-10" | Label: "Contributors"
+Number: "3" | Label: "PRs Merged"
+
+Stat Number Styling:
+
+Font: text-5xl md:text-6xl font-black
+Color: text-blue-400
+Margin bottom: mb-2
+
+Stat Label Styling:
+
+Font: text-sm md:text-base
+Color: text-gray-400
+Font weight: font-medium
+
+Hover Animation:
+whileHover={{ scale: 1.05, boxShadow: '0 0 25px rgba(59,130,246,0.3)' }}
+transition={{ duration: 0.3 }}
+Testing Checklist for Part 2:
+
+ Hero headline has silver-to-blue gradient
+ All animations trigger on page load with correct delays
+ Primary button glows blue on hover
+ Secondary button background fills slightly on hover
+ GitHub link opens in new tab
+ Stats bar shows 3 items with middle border
+ Statistics cards have glass effect
+ Stat cards scale and glow on hover
+ Everything is mobile responsive
+ Text is readable on all screen sizes
+
+
+Output Requirements:
+
+Add hero section to existing App.jsx
+Add statistics section below hero
+All animations use framer-motion
+All hover effects working smoothly
+Responsive breakpoints implemented
+Code is clean and commented
+
+DO NOT proceed to About section yet. Complete Part 2 first, then wait for Part 3.

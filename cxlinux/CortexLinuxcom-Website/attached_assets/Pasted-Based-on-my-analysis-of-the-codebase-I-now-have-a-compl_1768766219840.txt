@@ -1,0 +1,86 @@
+Based on my analysis of the codebase, I now have a complete understanding of the current animation patterns and enhancement opportunities. Let me create a comprehensive plan for elevating the website with world-class animations and interactive elements.
+
+Enhancement Plan: World-Class Animations & Interactions
+Current State Analysis:
+Framer Motion is used for basic fade-in/slide-in animations
+Hackathon page already has some advanced sections (PhaseCinematicDeck, BuilderPack with glass panels)
+Most sections use simple whileInView transitions
+Missing: parallax effects, magnetic interactions, scroll-linked animations, polished micro-interactions
+Phase 1: Global Animation System & Utilities
+Create reusable animation primitives that can be applied consistently across the site
+
+Create animation config file (client/src/lib/animations.ts)
+
+Standardized spring/easing presets for consistency
+Reusable animation variants (fadeUp, fadeIn, stagger, scaleIn)
+Scroll-linked animation hooks
+Enhanced CSS utilities (client/src/index.css)
+
+Smooth parallax utility classes
+Magnetic hover effects
+Glow/pulse animations
+Motion blur transitions
+Phase 2: Homepage Enhancements
+Hero Section Upgrade
+
+Add parallax depth layers to background elements
+Magnetic cursor effect on CTA buttons
+Staggered kinetic typography on headlines
+Floating particle/grid background animation
+Features Section Enhancement
+
+3D card tilt on hover (perspective transform)
+Icon micro-animations on hover
+Staggered reveal with scroll
+Stats Section Polish
+
+Smooth count-up with easing curves
+Subtle pulse on completion
+Parallax offset on scroll
+How It Works / Demo Section
+
+Step-by-step reveal animations
+Connection line animations between steps
+Interactive terminal with typing effect enhancements
+Phase 3: Hackathon Page Transformations
+Journey Rail Enhancement
+
+Horizontal scroll-linked progress indicator
+Smooth momentum scrolling
+Active section highlighting with smooth transitions
+Build Tracks Section (What Will You Build?)
+
+Isometric 3D card presentation
+Parallax depth on scroll
+Hover reveal with smooth morph animations
+Track icons with subtle floating animation
+Phase Cards Enhancement
+
+Smooth accordion-style expansions
+Prize reveal animations
+Progress bar animations with spring physics
+FAQ Section Polish
+
+Smooth height transitions (not just rotate icon)
+Staggered reveal on scroll
+Subtle background shift on expand
+Phase 4: Sitewide Micro-Interactions
+Button Enhancements
+
+Magnetic hover effect (subtle pull toward cursor)
+Ripple effect on click
+Loading state with smooth spinner
+Navigation Improvements
+
+Smooth scroll with easing
+Active section indicator animation
+Mobile menu with smooth slide transitions
+Footer & Secondary Pages
+
+Subtle link hover animations
+Social icons with bounce/pulse on hover
+Technical Approach:
+Performance-first: Use will-change, GPU-accelerated transforms, useReducedMotion checks
+Accessibility: Respect prefers-reduced-motion media query
+Consistency: All animations use shared timing/easing from config file
+Progressive enhancement: Core content works without animations

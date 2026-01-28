@@ -1,0 +1,26 @@
+FROM node:{{ node_version | default('20') }}-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy application
+COPY . .
+
+{% if build_command %}
+RUN {{ build_command }}
+{% endif %}
+
+EXPOSE {{ port | default(3000) }}
+
+ENV NODE_ENV=production
+ENV PORT={{ port | default(3000) }}
+
+{% if pm2 %}
+RUN npm install -g pm2
+CMD ["pm2-runtime", "ecosystem.config.js"]
+{% else %}
+CMD ["node", "{{ entrypoint | default('index.js') }}"]
+{% endif %}

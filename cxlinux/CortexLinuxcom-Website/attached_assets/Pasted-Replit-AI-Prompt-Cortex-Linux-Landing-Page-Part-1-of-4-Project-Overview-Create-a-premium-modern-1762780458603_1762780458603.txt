@@ -1,0 +1,116 @@
+Replit AI Prompt - Cortex Linux Landing Page (Part 1 of 4)
+Project Overview
+Create a premium, modern landing page for Cortex Linux - the world's first AI-Native Operating System. This is a multi-part build. Start with Part 1, then I'll provide Parts 2-4.
+
+PART 1: Foundation & Navigation
+Initial Setup
+
+Create a new React + Vite project
+Install dependencies: tailwindcss, framer-motion, lucide-react
+Configure Tailwind with dark mode enabled
+Set up the base HTML structure with proper meta tags and fonts
+
+Design System Configuration
+Tailwind Config - Add to tailwind.config.js:
+colors: {
+  primary: '#3B82F6',
+  'primary-dark': '#2563EB',
+  background: '#0A0A0A',
+  card: '#1A1A2E',
+  border: 'rgba(255,255,255,0.1)'
+}
+
+fontFamily: {
+  sans: ['system-ui', '-apple-system', 'sans-serif']
+}
+Navigation Bar Requirements
+Structure:
+
+Fixed position at top (z-index: 50)
+Full width with max-width container (max-w-7xl)
+Backdrop blur effect: backdrop-blur-xl bg-black/50
+Bottom border: border-b border-white/10
+Height: 64px (h-16)
+
+Left Side - Logo:
+
+Text: "CORTEX" in white, "LINUX" in blue (#3B82F6)
+Font: text-2xl, font-bold
+Hover effect: Blue glow on entire logo
+Glow CSS: hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]
+
+Center - Navigation Links (Desktop only, hidden on mobile):
+
+Links: Home, About, Join, Sponsor
+Style: Gray text, transitions to blue-400 on hover
+Spacing: space-x-8
+Font: text-base, font-medium
+Smooth scroll behavior when clicked
+Active link should have blue-400 color
+
+Right Side - CTA Button:
+
+Text: "Get Started"
+Style: px-6 py-2, bg-blue-500, rounded-lg
+Hover: Blue glow effect hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]
+Also scale slightly: hover:scale-105
+Transition: transition-all duration-300
+
+Mobile Menu (< 768px):
+
+Hamburger icon (lucide-react Menu icon) on right side
+Click toggles mobile menu
+Mobile menu slides down from top
+Full width dropdown with backdrop blur
+Vertical stack of links with padding
+Close icon (X) replaces hamburger when open
+Links close menu on click
+
+Implementation Notes:
+
+Use useState for mobile menu toggle
+Use useState for active section tracking
+Add smooth scroll: behavior: 'smooth' on anchor clicks
+Navigation should hide/show on scroll (optional enhancement)
+
+Global Styles
+Body/Root:
+
+Background: Solid black #0A0A0A
+Text color: White
+Smooth scrolling enabled
+Font smoothing: antialiased
+
+Section Spacing:
+
+All sections: py-20 (80px vertical padding)
+Container: max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+
+Responsive Breakpoints:
+
+Mobile: default (< 640px)
+Tablet: md: (768px+)
+Desktop: lg: (1024px+)
+Wide: xl: (1280px+)
+
+Testing Checklist for Part 1:
+
+ Navigation is fixed and stays at top while scrolling
+ Logo has blue glow on hover
+ All links change to blue on hover with smooth transition
+ Mobile menu opens/closes correctly
+ Mobile menu closes when link is clicked
+ "Get Started" button has glow effect on hover
+ Page has smooth scrolling between sections
+ Everything is responsive (test mobile, tablet, desktop)
+
+
+Output Requirements:
+
+Single App.jsx file with complete navigation component
+Proper imports for lucide-react icons and framer-motion
+Mobile-responsive with working hamburger menu
+All hover states and transitions working
+Clean, readable code with comments
+
+DO NOT proceed to hero section yet. Complete Part 1 first, then wait for Part 2.

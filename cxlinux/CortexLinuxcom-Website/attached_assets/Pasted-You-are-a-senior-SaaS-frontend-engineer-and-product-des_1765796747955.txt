@@ -1,0 +1,97 @@
+You are a senior SaaS frontend engineer and product designer with experience shipping enterprise-grade, globally trusted websites.
+
+Your task is to **upgrade the website footer to enterprise standards**. This is **non-negotiable** and must significantly increase perceived legitimacy, legal clarity, and institutional trust.
+
+### Objectives
+
+* Make the footer feel appropriate for a **global, enterprise-facing, open-source platform**
+* Add **legal, security, and institutional signals** without clutter
+* Match the existing **dark theme, gradients, typography, and premium aesthetic**
+* Ensure the footer looks credible to **developers, enterprises, investors, and legal teams**
+
+---
+
+### Required Footer Sections (Must Include)
+
+#### 1. Legal & Policy Links (Left or Center Column)
+
+Add clear, accessible links to:
+
+* **Privacy Policy**
+* **Terms of Service**
+* **Security**
+* **Status**
+* **Open Source License (MIT)**
+
+If these pages do not yet exist:
+
+* Create placeholder routes/pages
+* Clearly structure them so real content can be added later
+* Do NOT remove or hide the links
+
+---
+
+#### 2. Open Source & Transparency Signals
+
+Add a short but powerful transparency line such as:
+
+* “Built in public • Open source on GitHub”
+* Link directly to the official GitHub repository
+
+This should subtly reinforce trust, not look like marketing copy.
+
+---
+
+#### 3. Copyright & Legal Ownership
+
+Add a clearly visible but non-intrusive copyright line:
+
+* **© 2025 Cortex Linux. All rights reserved.**
+
+This must be present. This is critical for institutional legitimacy.
+
+---
+
+#### 4. MIT License Visibility
+
+Surface the MIT license properly:
+
+* The “Open Source License” link should clearly reference **MIT**
+* Do NOT imply the logo or brand is MIT licensed
+* If appropriate, add a small clarification note on the license page that code is MIT licensed while trademarks are excluded
+
+---
+
+### Visual & UX Requirements
+
+* Footer must feel **enterprise-grade**, not startup-casual
+* Use:
+
+  * Subtle separators or top border
+  * Muted text hierarchy
+  * Consistent spacing and alignment
+* No flashy animations
+* No excessive gradients (subtle is fine)
+* Responsive and clean on mobile
+* Maintain accessibility (contrast, readable font sizes)
+
+---
+
+### Things You Must NOT Do
+
+* Do NOT add fake claims, numbers, or endorsements
+* Do NOT imply partnerships or customers
+* Do NOT remove existing useful footer content
+* Do NOT break routing or navigation
+
+---
+
+### Final Check
+
+When finished, the footer should:
+
+* Feel appropriate for a **Fortune 500 developer tool**
+* Pass a basic legal and compliance sanity check
+* Instantly increase trust for first-time visitors
+
+Implement this cleanly and professionally.

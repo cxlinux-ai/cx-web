@@ -1,0 +1,49 @@
+Enhance the existing card component with a **subtle, premium 3D hover effect** that feels **metallic, realistic, and high-end**, without becoming flashy or overwhelming.
+
+### Core Visual Goal
+
+When the user hovers over the card, it should feel as if the card **lifts slightly from the surface**, revealing a **soft metallic glow along its edges**, similar to brushed metal catching light. The effect should communicate **precision, power, and technical sophistication**, not gaming or neon aesthetics.
+
+### Hover Interaction & 3D Behavior
+
+* On hover, apply a **very subtle 3D tilt** based on cursor position (X/Y axis rotation limited to a few degrees).
+* Add a **gentle elevation** (translateY + enhanced shadow) to suggest physical depth.
+* Motion must be **smooth, slow, and inertial** — no snapping or aggressive transitions.
+* Use easing that feels “weighty” and premium (ease-out cubic or spring-like damping).
+
+### Metallic Glow Effect
+
+* Introduce a **soft edge glow** that appears only on hover:
+
+  * Thin, diffused glow around the card border
+  * Low opacity, slightly blurred
+  * Color derived from the existing brand blue / cyan tones
+* The glow should feel like **reflected light**, not an outline.
+* Avoid neon saturation — think **polished metal under studio lighting**, not RGB.
+
+### Lighting & Depth Details
+
+* Add a faint **inner highlight** near the top edge to reinforce the illusion of thickness.
+* Shadows should remain soft and realistic, expanding slightly on hover.
+* Do NOT use hard borders; rely on gradients, glow, and shadow instead.
+
+### UX & Restraint Rules
+
+* The effect should activate **only on hover**, never idle.
+* No continuous animation — the card must rest calmly when untouched.
+* The effect should enhance discoverability, not distract from content.
+* Performance must remain smooth across devices.
+
+### Psychological Impact
+
+The user should subconsciously feel:
+
+* “This is engineered, not decorative.”
+* “This product is serious, premium, and thoughtfully designed.”
+* “Interacting with this feels precise and intentional.”
+
+### Final Validation
+
+If the effect draws attention away from the text, it is too strong.
+If the effect feels playful or flashy, reduce intensity.
+If the card feels like a real object with subtle light and depth — it’s correct.

@@ -1,0 +1,162 @@
+Redesign the Cortex Linux Hackathon to be **code-first, developer-centric, and growth-driven**, replacing the current monetization-heavy Phase 1 structure.
+
+This hackathon should **optimize for builders who become long-term contributors and advocates**, not idea-only participants or business consultants.
+
+---
+
+## 1️⃣ Core Problem to Fix (Context)
+
+The current Phase 1 structure:
+
+* Overweights **monetization (40%)**
+* Attracts **idea people instead of coders**
+* Produces **low GitHub activity**
+* Generates **no SEO, no PR, no lasting community value**
+
+This filters **out** your best developers.
+
+The most successful hackathons (including Sahil’s 300K win) are **BUILD competitions**, not pitch competitions.
+
+---
+
+## 2️⃣ New Hackathon Philosophy
+
+**Principle:**
+
+> *Code is the currency. Shipping is the signal.*
+
+The hackathon must:
+
+* Require installation and usage of Cortex
+* Produce real GitHub PRs
+* Generate demos, videos, and technical content
+* Turn participants into contributors, not spectators
+
+---
+
+## 3️⃣ Recommended Structure: Code-First Hackathon
+
+Replace the current structure with the following phases:
+
+### Phase 1 — Onboarding (Weeks 1–2)
+
+**Goal:** Eliminate non-builders early
+
+Requirements:
+
+* Install Cortex Linux
+* Complete a guided tutorial
+* Join Discord / GitHub discussions
+
+Rewards:
+
+* Digital certificates
+* Limited swag
+* Early contributor badge
+
+---
+
+### Phase 2 — Build Sprint (Weeks 3–8)
+
+**Goal:** Ship real things
+
+Participants must build:
+
+* A Cortex feature
+* A plugin / extension
+* An integration (CLI, infra, AI tool, etc.)
+
+Judging focuses on:
+
+* Code quality
+* Usefulness
+* Architectural thinking
+* Documentation clarity
+
+Prize Pool: **$4,000**
+
+---
+
+### Phase 3 — Demo Week (Weeks 9–10)
+
+**Goal:** Visibility + social proof
+
+Requirements:
+
+* Short demo video
+* Public GitHub repo or PR
+* Community voting + maintainer review
+
+Bonus Pool: **$1,000**
+
+---
+
+### Phase 4 — Merge & Ship (Weeks 11–13)
+
+**Goal:** Convert builders into maintainers
+
+Activities:
+
+* Code reviews
+* PR merges
+* Maintainer onboarding
+
+Rewards:
+
+* Maintainer roles
+* Public recognition
+* Long-term influence over Cortex roadmap
+
+---
+
+## 4️⃣ Traffic & Growth Strategy (Organic, High-Signal)
+
+Prioritize **developer ecosystems**, not paid ads:
+
+* DEV.to / Hashnode technical posts
+* r/linux, r/selfhosted, r/homelab
+* Product Hunt launch framed as a *build hackathon*
+* YouTube creators doing Cortex install + build walkthroughs
+
+Expected organic reach: **100K–200K** with <$1K spend.
+
+---
+
+## 5️⃣ Sahil (Suyash) as Champion Ambassador
+
+Position Sahil as the **face of the hackathon**, not just a judge.
+
+Leverage:
+
+* His **300K hackathon win**
+* His Smart India Hackathon credibility
+* His technical background
+* His India developer network
+
+Use messaging such as:
+
+> *“Judged and mentored by one of India’s top hackathon champions.”*
+
+Roles:
+
+* Champion Ambassador
+* Live coding streams during the hackathon
+* Social proof anchor for press and community trust
+
+His story is more compelling than prize money — use it.
+
+LinkedIn reference:
+Suyash Dongre — Smart India Hackathon Grand Final Winner
+
+---
+
+## 6️⃣ Desired Outcome
+
+This hackathon should:
+
+* Increase GitHub stars, forks, and PRs
+* Generate long-tail SEO through demos and blog posts
+* Build a real contributor pipeline
+* Establish Cortex Linux as a serious, builder-first platform
+
+Optimize for **long-term ecosystem value**, not short-term signups.

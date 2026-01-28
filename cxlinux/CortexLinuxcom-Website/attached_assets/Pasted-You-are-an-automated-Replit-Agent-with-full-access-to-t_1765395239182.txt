@@ -1,0 +1,168 @@
+You are an automated Replit Agent with full access to the current project. Your goal: build a production-ready Blog system and Homepage preview, and rewrite the existing 10 blog posts to be *deep, expert, SEO-optimized, and genuinely useful* for professional ML/infra developers. Work in TypeScript + React + Tailwind (existing codebase). Do not be salesy — write with the voice of OS/infra engineers.
+
+Follow these instructions exactly and produce the requested files, commits, preview, and a final summary.
+
+---
+
+1. HIGH-LEVEL OBJECTIVES
+
+* Create a maintainable **blog system**: blog data, blog index page (/blog), individual post pages (/blog/:slug), and a homepage preview section (“Latest from the Blog”).
+* **Rewrite** the 10 posts so each is 1200–2500 words, technical, actionable, and includes: SEO title, SEO description (150–160 chars), slug, H1, Table of Contents, 1–3 useful Unsplash images (only when they add value), code snippets, checklists, troubleshooting table, small ASCII/inline architecture diagrams, and internal links to at least 2 other posts.
+* Ensure the homepage preview shows the 2–3 latest posts and updates automatically.
+* Implement **performance and UX improvements**: lazy-loading, responsive images, fixed image heights, avoid layout shift, critical CSS, code-splitting, and no horizontal scrolling.
+* accessibility: semantic HTML, alt text for images, keyboard focus styles.
+* Keep style consistent with Cortex Linux: rounded cards, subtle blue glow accents, micro-interactions on hover (lift + soft glow). No heavy animations that hurt performance.
+
+---
+
+2. OUTPUT FORMAT & FILES TO CREATE
+   Create or update the following (use these exact paths/names):
+
+* `client/src/data/blogPosts.ts`
+
+  * Export a typed array of posts. Each post object must include:
+
+    * id, title, slug, seoTitle, seoDescription, date (ISO), author, readingTime, category, tags[], excerpt (120–180 chars), heroImage (url or null), imageAlt, contentMarkdown (full markdown), wordCount.
+  * Use frontmatter-style fields in the object; include `relatedPosts: string[]` with slugs to enable related links.
+
+* `client/src/pages/blog/index.tsx`
+
+  * Blog index page: responsive grid, search filter, category buttons, accessible.
+
+* `client/src/pages/blog/[slug].tsx`
+
+  * Post template: render markdown content, TOC sidebar (collapsible on mobile), author/date/reading time, related posts, canonical tag meta.
+
+* `client/src/components/BlogPreview.tsx`
+
+  * Homepage component that fetches `blogPosts` and shows the 2–3 latest posts as cards (image optional), excerpt 120–180 chars, Read more →, subtle hover micro-interaction.
+
+* `client/src/components/BlogCard.tsx`
+
+  * Reusable card for index and preview. Fixed image height & object-cover, accessible link, skeleton for image loading.
+
+* `client/src/components/MarkdownRenderer.tsx`
+
+  * Sanitize and render markdown, support code blocks, copy-to-clipboard for snippets, syntax highlighting, and anchors for headings.
+
+* `client/src/data/unsplashHelper.ts`
+
+  * Small util to suggest Unsplash images by keyword, returning optimized image URLs and sizes. But only use images when they add value (architecture, hardware, diagram). Provide fallback placeholder.
+
+* `client/src/styles/blog.css` or Tailwind config updates if needed for micro-glow variables and image classes.
+
+* Tests / QA:
+
+  * `client/tests/blog.spec.tsx` — smoke tests for BlogPreview, BlogIndex, one Post rendering.
+  * Add simple Lighthouse-like checklist in `replit.md` or `README.md` that describes performance and accessibility checks you performed.
+
+---
+
+3. POST WRITING SPEC (for each of the 10 posts)
+   For each post produce final `contentMarkdown` that meets all these specs:
+
+* Word count: 1200–2500 words.
+* SEO title (title tag), and SEO description (150–160 chars).
+* Slug: lowercase, hyphenated, short.
+* H1: main headline.
+* Table of Contents (auto-generated from H2/H3).
+* Intro with problem framing and a bold thesis/opinion (1–2 paragraphs).
+* At least two real, actionable code snippets, commands, or config examples (bash, systemd service, Dockerfile, quick Drizzle/TypeScript snippet, or Nvidia/CUDA commands where relevant).
+* Short case-study or before/after benchmark (can be synthetic but realistic). Include a tiny benchmark table.
+* A checklist / TL;DR actionable steps near the end.
+* Troubleshooting section: common errors and fixes (3–6 entries).
+* Internal links to at least 2 other posts by slug.
+* Optional: up to 3 Unsplash images if they help (architecture diagrams, hardware images). Each image must include `imageAlt` and be lazy-loaded & sized for responsive breakpoints.
+* All posts must avoid generic marketing language. Use concrete guidance, commands, and opinions.
+
+Rewrite the topics into authoritative, non-generic posts. Use these titles as seeds but improve for clarity and SEO if needed:
+
+1. What “AI-Native Linux” Actually Means: A Practical Guide
+2. How to Run ML Workloads Without Config Hell
+3. GPU Optimization: Real Techniques That Actually Matter
+4. Why Developers Are Moving Toward Declarative ML Environments
+5. How to Build a Reproducible ML Workflow in 2025
+6. Linux Performance Tuning for AI Engineers
+7. Containerization vs Bare-Metal for ML: Practical Tradeoffs
+8. AI/ML Developer Environment Setup: Best Practices in 2025
+9. Troubleshooting CUDA, Drivers & GPU Errors the Smart Way
+10. Where ML Deployment Is Heading: 2025–2030 Trends & Practical Next Steps
+
+---
+
+4. SEO / META / LINKING RULES
+
+* Each post: include meta tags (`description`, `og:title`, `og:description`, `canonical`).
+* Use semantic headings (H1 once, H2/H3 properly nested).
+* Create meaningful `alt` text for images.
+* Provide `readingTime` computed from word count (use 200 wpm baseline).
+* Ensure each post includes internal links to at least 2 other post slugs.
+* Add schema.org Article JSON-LD in the post template.
+
+---
+
+5. PERFORMANCE & UX IMPLEMENTATIONS (must be included)
+
+* Lazy-load images via `loading="lazy"` and use `srcset`/`sizes` for responsive images.
+* Use `object-fit: cover` with fixed CSS height to avoid layout shift.
+* Preload critical fonts and minimal critical CSS (inline a small critical CSS chunk in the head if permitted).
+* Ensure `overflow-x: hidden` and no element causes horizontal scrolling.
+* Use code-splitting/dynamic imports for heavy components (markdown renderer, syntax highlighter).
+* Avoid large client-side libraries unless necessary.
+* Provide an LCP-friendly hero image strategy (small size, optimized).
+* Add skeleton loaders for images and content where appropriate.
+
+---
+
+6. VISUAL & INTERACTION NOTES
+
+* Cards: rounded (2xl), soft shadow, subtle blue glow on hover. Micro-lift transform (translateY(-4px)) + box-shadow transition 160ms.
+* Excerpts: 120–180 chars (trim cleanly, avoid cutting mid-sentence).
+* Ensure dark mode compatibility if site supports it.
+* Provide keyboard & focus states for links and cards.
+
+---
+
+7. COMMIT & QA
+
+* Make incremental commits with clear messages for each major task (e.g., `feat(blog): add blogPosts.ts with 10 posts`, `feat(blog): add BlogPreview component and integrate into HomePage`, `perf(blog): lazy-load images and add srcset`).
+* After finishing, run `npm run dev` and take one full-page screenshot of:
+
+  * homepage with blog preview visible
+  * /blog index page
+  * one /blog/:slug page
+* Create a short QA checklist in the final summary listing what you tested (no need for external tools): rendering, LCP, no horizontal scroll, mobile/responsive, image lazy load, TOC links working, internal links.
+
+---
+
+8. FINAL SUMMARY (what to return in agent reply)
+   When complete, produce a JSON object (printed to stdout and saved to `replit_agent_output.json`) containing:
+
+* `createdFiles`: list of file paths you created/modified
+* `commits`: list of commit messages (with timestamps)
+* `postsSummary`: for each post include `slug`, `seoTitle`, `seoDescription`, `wordCount`, `hasImages` (true/false)
+* `previewScreenshots`: local paths to the three screenshots
+* `qaChecklist`: what you checked and results (pass/fail)
+* `notes`: any deviations, open issues, or suggestions (e.g., image licensing notes, future A/B changes)
+
+Also print a short human-readable report summarizing major changes and next recommended steps (deploy, run Lighthouse, add CMS for content edits).
+
+---
+
+ASSUMPTIONS & CONSTRAINTS
+
+* Use the existing project stack (React, TS, Tailwind). If a dependency must be added, add it only if minimal and justify in `notes`.
+* Use Unsplash for image suggestions only. If any image is used, store the remote URL in the post object (do not download).
+* Keep changes minimal outside blog-related files unless required for performance fixes.
+
+---
+
+PRIORITY & EDGE CASES
+
+* Priority order: content quality (posts) > blog infrastructure > homepage preview > performance tweaks.
+* If a post topic lacks realistic data for benchmarks, create a short synthetic benchmark but clearly label as "Representative synthetic benchmark for illustration."
+* If a requested file already exists, update it safely and keep backups with `.bak` appended to the filename before overwriting.
+
+---
+
+Start now. Work iteratively, commit often, and produce the final JSON output and screenshots when finished.

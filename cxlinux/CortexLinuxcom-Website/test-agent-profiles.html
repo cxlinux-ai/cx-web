@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Profile Generator Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        purple: {
+                            950: '#1a0b2e',
+                            900: '#2d1b4e',
+                            800: '#4c1d95',
+                            700: '#6b21a8',
+                            600: '#9333ea',
+                            500: '#a855f7',
+                            400: '#c084fc',
+                            300: '#d8b4fe',
+                            200: '#e9d5ff',
+                            100: '#f3e8ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-purple-300">🧪 Agent Profile Generator Test</h1>
+
+        <!-- Synchronized Width Container -->
+        <div class="max-w-4xl mx-auto">
+            <!-- Test Agent Service Record -->
+            <div class="bg-gradient-to-br from-purple-950 to-purple-900 border-2 border-purple-400/30 rounded-xl p-8 text-white relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><g fill=\"%23a855f7\" fill-opacity=\"0.1\"><circle cx=\"60\" cy=\"60\" r=\"50\"/></g></g></svg>')"></div>
+            </div>
+
+            <!-- Header -->
+            <div class="relative z-10">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-purple-100">CX Agent Service Record</h1>
+                            <p class="text-purple-300">Agent Classification: SYSTEM</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <button class="p-2 bg-purple-700/50 hover:bg-purple-600/50 rounded-lg border border-purple-400/30 transition-all hover:scale-105">
+                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                            </svg>
+                        </button>
+                        <button class="p-2 bg-purple-700/50 hover:bg-purple-600/50 rounded-lg border border-purple-400/30 transition-all hover:scale-105">
+                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Agent Status -->
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+                    <span class="text-purple-200 font-medium">Status: Active</span>
+                </div>
+
+                <!-- Core Information Grid -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-purple-200 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Agent Identification
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-purple-400">Unique Agent ID:</span>
+                                <span class="text-purple-100 font-mono">sys-4a2b...</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-400">Host System:</span>
+                                <span class="text-purple-100">linux (x86_64)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-400">Version:</span>
+                                <span class="text-purple-100">1.0.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-400">Hostname:</span>
+                                <span class="text-purple-100">cx-workstation-01</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-400">Activated:</span>
+                                <span class="text-purple-100">Jan 27, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-purple-200 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            BSL 1.1 Compliance Status
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="bg-purple-800/30 rounded-lg p-4 border border-purple-400/20">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-purple-300">Compliance Score</span>
+                                    <span class="text-2xl font-bold text-purple-100">97%</span>
+                                </div>
+                                <div class="w-full bg-purple-900/50 rounded-full h-2">
+                                    <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-300 rounded-full w-[97%] transition-all duration-1000"></div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-purple-200">License Key Validated</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-purple-200">Source Code Protection Active</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-purple-200">Commercial Use Monitoring</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="grid md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-purple-800/20 rounded-lg p-4 border border-purple-400/20 text-center">
+                        <svg class="w-6 h-6 text-purple-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <div class="text-2xl font-bold text-purple-100">98%</div>
+                        <div class="text-xs text-purple-400">Uptime</div>
+                    </div>
+                    <div class="bg-purple-800/20 rounded-lg p-4 border border-purple-400/20 text-center">
+                        <svg class="w-6 h-6 text-purple-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <div class="text-2xl font-bold text-purple-100">42</div>
+                        <div class="text-xs text-purple-400">Threats Blocked</div>
+                    </div>
+                    <div class="bg-purple-800/20 rounded-lg p-4 border border-purple-400/20 text-center">
+                        <svg class="w-6 h-6 text-purple-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <div class="text-2xl font-bold text-purple-100">1,247</div>
+                        <div class="text-xs text-purple-400">Commands Executed</div>
+                    </div>
+                    <div class="bg-purple-800/20 rounded-lg p-4 border border-purple-400/20 text-center">
+                        <svg class="w-6 h-6 text-purple-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div class="text-2xl font-bold text-purple-100">134ms</div>
+                        <div class="text-xs text-purple-400">Avg Response</div>
+                    </div>
+                </div>
+
+                <!-- Autonomous Wins -->
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-200 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Autonomous Wins (12)
+                    </h3>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-4 p-4 bg-purple-800/20 rounded-lg border border-purple-400/10 hover:border-purple-400/30 transition-all">
+                            <div class="p-2 rounded-lg text-purple-200 bg-purple-800/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-purple-100 font-medium">Blocked 12 unauthorized login attempts</span>
+                                    <span class="px-2 py-1 bg-purple-600/30 rounded-full text-xs text-purple-200">12x</span>
+                                </div>
+                                <div class="text-sm text-purple-400">Prevented potential privilege escalation attack</div>
+                            </div>
+                            <div class="text-xs text-purple-500">Jan 27</div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-purple-800/20 rounded-lg border border-purple-400/10 hover:border-purple-400/30 transition-all">
+                            <div class="p-2 rounded-lg text-purple-300 bg-purple-700/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-purple-100 font-medium">Optimized system resource allocation</span>
+                                    <span class="px-2 py-1 bg-purple-600/30 rounded-full text-xs text-purple-200">23x</span>
+                                </div>
+                                <div class="text-sm text-purple-400">Improved system performance by 23%</div>
+                            </div>
+                            <div class="text-xs text-purple-500">Jan 26</div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-purple-800/20 rounded-lg border border-purple-400/10 hover:border-purple-400/30 transition-all">
+                            <div class="p-2 rounded-lg text-purple-400 bg-purple-600/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-purple-100 font-medium">Automated disk cleanup procedures</span>
+                                    <span class="px-2 py-1 bg-purple-600/30 rounded-full text-xs text-purple-200">15x</span>
+                                </div>
+                                <div class="text-sm text-purple-400">Freed up 2.3GB of disk space automatically</div>
+                            </div>
+                            <div class="text-xs text-purple-500">Jan 25</div>
+                        </div>
+
+                        <div class="flex items-center gap-4 p-4 bg-purple-800/20 rounded-lg border border-purple-400/10 hover:border-purple-400/30 transition-all">
+                            <div class="p-2 rounded-lg text-purple-500 bg-purple-500/30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-purple-100 font-medium">Prevented system overload</span>
+                                    <span class="px-2 py-1 bg-purple-600/30 rounded-full text-xs text-purple-200">5x</span>
+                                </div>
+                                <div class="text-sm text-purple-400">Averted potential system crashes during peak usage</div>
+                            </div>
+                            <div class="text-xs text-purple-500">Jan 24</div>
+                        </div>
+
+                        <div class="text-center pt-2">
+                            <button class="text-purple-400 hover:text-purple-300 text-sm transition-colors">
+                                View all autonomous wins (+8 more)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Capabilities -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-purple-200 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Agent Capabilities
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-purple-700/30 text-purple-200 rounded-full text-sm border border-purple-400/20">disk_usage</span>
+                        <span class="px-3 py-1 bg-purple-700/30 text-purple-200 rounded-full text-sm border border-purple-400/20">memory_info</span>
+                        <span class="px-3 py-1 bg-purple-700/30 text-purple-200 rounded-full text-sm border border-purple-400/20">cpu_info</span>
+                        <span class="px-3 py-1 bg-purple-700/30 text-purple-200 rounded-full text-sm border border-purple-400/20">uptime</span>
+                        <span class="px-3 py-1 bg-purple-700/30 text-purple-200 rounded-full text-sm border border-purple-400/20">services</span>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="mt-8 pt-6 border-t border-purple-400/20">
+                    <div class="flex items-center justify-between text-sm text-purple-400">
+                        <div>Generated on Jan 28, 2026 • CX Linux BSL 1.1</div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span>Real-time monitoring active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results -->
+            <div class="mt-8 p-8 bg-green-950 border border-green-900 rounded-lg">
+            <h2 class="text-2xl font-bold text-green-300 mb-4">✅ Test Results</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-green-300 mb-3">Component Features Verified:</h3>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li>✅ Monochromatic purple design with gradients</li>
+                        <li>✅ BSL 1.1 compliance score display (97%)</li>
+                        <li>✅ Agent identification with unique ID</li>
+                        <li>✅ Performance metrics dashboard</li>
+                        <li>✅ Autonomous wins categorization</li>
+                        <li>✅ Interactive hover effects</li>
+                        <li>✅ Professional service record layout</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-green-300 mb-3">Autonomous Win Types:</h3>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li>🛡️ Security: "Blocked 12 unauthorized login attempts"</li>
+                        <li>⚡ Performance: "Optimized system resource allocation"</li>
+                        <li>🤖 Automation: "Automated disk cleanup procedures"</li>
+                        <li>👁️ Prevention: "Prevented system overload"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

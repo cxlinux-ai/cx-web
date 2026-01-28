@@ -1,0 +1,54 @@
+{
+  "program": {
+    "name": "CX Linux Contributor Referral Program",
+    "launch_date": "2025-01-25",
+    "commission_rate": 0.10,
+    "commission_type": "perpetual",
+    "min_payout": 50.00,
+    "payout_day": 15,
+    "founding_1000_program": {
+      "description": "First 1,000 members get permanent 10% lifetime referral fees",
+      "primary_tier": "team",
+      "primary_tier_value": 99.00,
+      "primary_commission": 9.90,
+      "benefits": [
+        "Permanent founding member badge",
+        "10% lifetime referral commission on all tiers",
+        "Exclusive access to Team tier features",
+        "Priority customer support"
+      ]
+    }
+  },
+  "pricing": {
+    "pro": {
+      "name": "Pro",
+      "monthly_price": 20.00,
+      "referrer_cut": 2.00,
+      "unit": "per system"
+    },
+    "team": {
+      "name": "Team (Growth)",
+      "monthly_price": 99.00,
+      "referrer_cut": 9.90,
+      "unit": "flat",
+      "max_systems": 25,
+      "target_market": "startups",
+      "founding_1000_tier": true
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "monthly_price": 199.00,
+      "referrer_cut": 19.90,
+      "unit": "flat"
+    },
+    "managed": {
+      "name": "Managed",
+      "monthly_price": 399.00,
+      "referrer_cut": 39.90,
+      "unit": "flat"
+    }
+  },
+  "referrers": [],
+  "referrals": [],
+  "payouts": []
+}

@@ -1,0 +1,517 @@
+---
+sidebar_position: 2
+title: Server Configuration
+description: Use Cortex to configure and secure production Linux servers. Web servers, databases, security hardening.
+keywords: [server, configuration, nginx, apache, security, production]
+---
+
+# Server Configuration
+
+This tutorial covers using Cortex to configure production-ready Linux servers. From initial setup to security hardening, Cortex simplifies server administration.
+
+## Time Required
+
+- Basic setup: 15-30 minutes
+- Full production configuration: 1-2 hours
+
+## Prerequisites
+
+- Fresh Linux server (Ubuntu/Debian or RHEL/Fedora)
+- Root or sudo access
+- Cortex installed
+
+## Initial Server Setup
+
+### First Steps
+
+```bash
+# Update system
+cortex "update all packages and apply security patches"
+
+# Set hostname
+cortex "set hostname to web-server-01"
+
+# Configure timezone
+cortex "set timezone to America/New_York"
+
+# Enable NTP
+cortex "enable time synchronization"
+```
+
+### Create Admin User
+
+```bash
+cortex "create admin user with sudo access and ssh key auth"
+```
+
+Cortex will:
+1. Create the user
+2. Add to sudo group
+3. Set up SSH directory
+4. Prompt for SSH public key
+
+### Disable Root SSH
+
+```bash
+cortex "disable root login via ssh for security"
+```
+
+---
+
+## Web Server Setup
+
+### Nginx
+
+```bash
+# Install Nginx
+cortex "install and configure nginx as a web server"
+
+# Configure virtual host
+cortex "create nginx site for example.com serving /var/www/example"
+
+# Enable HTTPS
+cortex "set up ssl for example.com with lets encrypt"
+```
+
+### Apache
+
+```bash
+# Install Apache
+cortex "install apache web server"
+
+# Configure virtual host
+cortex "create apache virtual host for example.com"
+
+# Enable modules
+cortex "enable apache modules for php and rewrite"
+```
+
+### Reverse Proxy
+
+```bash
+cortex "configure nginx as reverse proxy to localhost:3000"
+```
+
+Example configuration Cortex creates:
+
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+---
+
+## Database Server
+
+### PostgreSQL Production Setup
+
+```bash
+# Install PostgreSQL
+cortex "install postgresql for production use"
+
+# Create database and user
+cortex "create postgresql database myapp with user myapp_user"
+
+# Configure for performance
+cortex "tune postgresql for a server with 8GB RAM"
+
+# Enable remote access (if needed)
+cortex "allow postgresql connections from 10.0.0.0/24"
+```
+
+### MySQL/MariaDB Production Setup
+
+```bash
+# Install MySQL
+cortex "install mysql server with secure defaults"
+
+# Run security setup
+cortex "run mysql secure installation"
+
+# Create database
+cortex "create mysql database and user for wordpress"
+```
+
+### Redis
+
+```bash
+# Install Redis
+cortex "install redis as a caching server"
+
+# Configure for persistence
+cortex "configure redis with AOF persistence"
+
+# Set memory limit
+cortex "configure redis with 2GB memory limit"
+```
+
+---
+
+## Application Servers
+
+### Node.js with PM2
+
+```bash
+# Install Node.js and PM2
+cortex "install nodejs and pm2 for running node applications"
+
+# Configure PM2 startup
+cortex "configure pm2 to start on boot"
+
+# Set up application
+cortex "configure pm2 to run /var/www/app/server.js"
+```
+
+### Python with Gunicorn
+
+```bash
+# Install Gunicorn
+cortex "install gunicorn for python wsgi applications"
+
+# Create systemd service
+cortex "create systemd service for gunicorn running myapp"
+```
+
+### PHP-FPM
+
+```bash
+# Install PHP-FPM
+cortex "install php-fpm for nginx"
+
+# Configure pool
+cortex "configure php-fpm pool with 10 workers"
+```
+
+---
+
+## SSL/TLS Configuration
+
+### Let's Encrypt
+
+```bash
+# Install Certbot
+cortex "install certbot for lets encrypt certificates"
+
+# Get certificate
+cortex "obtain ssl certificate for example.com"
+
+# Auto-renewal
+cortex "set up automatic certificate renewal"
+```
+
+### Manual Certificate
+
+```bash
+# Configure with existing cert
+cortex "configure nginx ssl with certificate at /etc/ssl/example.com.crt"
+```
+
+### Security Headers
+
+```bash
+cortex "add security headers to nginx configuration"
+```
+
+Adds headers like:
+- Strict-Transport-Security
+- X-Frame-Options
+- X-Content-Type-Options
+- Content-Security-Policy
+
+---
+
+## Firewall Configuration
+
+### Basic Firewall
+
+```bash
+# Enable firewall with defaults
+cortex "set up firewall allowing only ssh, http, and https"
+
+# Check status
+cortex "show firewall rules"
+```
+
+### Detailed Rules
+
+```bash
+# Allow specific ports
+cortex "open port 3000 for internal network 10.0.0.0/8"
+
+# Rate limiting
+cortex "rate limit ssh connections to prevent brute force"
+
+# Block IP
+cortex "block ip address 1.2.3.4 in firewall"
+```
+
+---
+
+## Security Hardening
+
+### SSH Hardening
+
+```bash
+cortex "harden ssh configuration for production server"
+```
+
+Changes:
+- Disable password authentication
+- Disable root login
+- Use key-based auth only
+- Limit authentication attempts
+- Configure idle timeout
+
+### Fail2Ban
+
+```bash
+# Install and configure
+cortex "install fail2ban to protect against brute force attacks"
+
+# Add jail for nginx
+cortex "add fail2ban jail for nginx authentication failures"
+```
+
+### System Hardening
+
+```bash
+cortex "apply basic security hardening to this server"
+```
+
+Includes:
+- Kernel hardening via sysctl
+- Disable unused services
+- Configure secure permissions
+- Enable audit logging
+
+### Unattended Updates
+
+```bash
+cortex "configure automatic security updates"
+```
+
+---
+
+## Monitoring Setup
+
+### Basic Monitoring
+
+```bash
+# System monitoring
+cortex "install and configure basic server monitoring"
+
+# Log aggregation
+cortex "set up centralized logging with rsyslog"
+```
+
+### Prometheus + Grafana
+
+```bash
+# Install node exporter
+cortex "install prometheus node exporter for metrics"
+
+# Install Grafana
+cortex "install grafana for metrics visualization"
+```
+
+### Health Checks
+
+```bash
+# Configure health endpoint
+cortex "add nginx health check endpoint at /health"
+```
+
+---
+
+## Backup Configuration
+
+### Automated Backups
+
+```bash
+# Database backups
+cortex "configure daily postgresql backups to /var/backups"
+
+# File backups
+cortex "set up daily backup of /var/www to /var/backups"
+
+# Retention
+cortex "configure backup retention keeping 7 daily and 4 weekly"
+```
+
+### Remote Backups
+
+```bash
+cortex "configure backups to sync to s3 bucket my-backups"
+```
+
+---
+
+## Load Balancing
+
+### Nginx Load Balancer
+
+```bash
+cortex "configure nginx as load balancer for servers at 10.0.0.1, 10.0.0.2, 10.0.0.3"
+```
+
+Example configuration:
+
+```nginx
+upstream backend {
+    server 10.0.0.1:3000;
+    server 10.0.0.2:3000;
+    server 10.0.0.3:3000;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+```
+
+### HAProxy
+
+```bash
+cortex "install haproxy and configure load balancing for web servers"
+```
+
+---
+
+## Caching Layer
+
+### Varnish
+
+```bash
+# Install Varnish
+cortex "install varnish cache in front of nginx"
+
+# Configure for WordPress
+cortex "configure varnish caching for wordpress"
+```
+
+### Nginx Caching
+
+```bash
+cortex "enable nginx proxy caching for static assets"
+```
+
+---
+
+## Performance Tuning
+
+### System Tuning
+
+```bash
+# General optimization
+cortex "tune system for high-performance web server"
+
+# Specific adjustments
+cortex "increase max open files limit to 65535"
+cortex "tune network settings for high traffic"
+```
+
+### Database Tuning
+
+```bash
+cortex "tune postgresql for server with 16GB RAM and SSD storage"
+```
+
+### Web Server Tuning
+
+```bash
+cortex "optimize nginx for serving high traffic"
+```
+
+---
+
+## Troubleshooting
+
+### Diagnostics
+
+```bash
+# Check server health
+cortex "run full server diagnostics"
+
+# Check specific service
+cortex "diagnose why nginx isn't starting"
+
+# Performance issues
+cortex "identify performance bottlenecks on this server"
+```
+
+### Log Analysis
+
+```bash
+# Recent errors
+cortex "show recent errors from system logs"
+
+# Specific service
+cortex "show nginx error logs from the last hour"
+```
+
+### Recovery
+
+```bash
+# Restore service
+cortex "nginx is down, help me get it running again"
+
+# Rollback
+cortex "rollback the last nginx configuration change"
+```
+
+---
+
+## Complete Server Setup Example
+
+Full production server setup script:
+
+```bash
+# Initial setup
+cortex "update system and set hostname to prod-web-01"
+cortex "create admin user with ssh key access"
+cortex "disable root ssh login"
+
+# Web server
+cortex "install nginx"
+cortex "configure nginx site for example.com"
+cortex "set up ssl with lets encrypt"
+
+# Database
+cortex "install postgresql"
+cortex "create database myapp with user app_user"
+
+# Security
+cortex "configure firewall for web server"
+cortex "install and configure fail2ban"
+cortex "apply security hardening"
+cortex "enable automatic security updates"
+
+# Monitoring
+cortex "set up basic monitoring and alerting"
+
+# Backups
+cortex "configure daily backups with 7 day retention"
+```
+
+---
+
+## Next Steps
+
+- [Docker Integration](/docs/tutorials/docker-integration) - Containerized deployments
+- [CI/CD Usage](/docs/tutorials/cicd-usage) - Automated deployments
+- [Rollback & Recovery](/docs/user-guide/rollback-recovery) - Disaster recovery
