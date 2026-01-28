@@ -51,7 +51,7 @@ Using 'pg' driver for database querying
 psql $DATABASE_URL -c "\dt" | grep -E "licenses|activations"
 
 # Test license API
-curl -X POST https://cxlinux-ai.com/api/license/validate \
+curl -X POST https://cortexlinux.com/api/license/validate \
   -H "Content-Type: application/json" \
   -d '{"license_key":"00000000-0000-0000-0000-000000000000","machine_id":"test"}'
 <!DOCTYPE html>
@@ -69,14 +69,14 @@ curl -X POST https://cxlinux-ai.com/api/license/validate \
     
     <title>Cortex Linux - AI-Native Operating System</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="canonical" href="https://cxlinux-ai.com" />
+    <link rel="canonical" href="https://cortexlinux.com" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cxlinux-ai.com" />
+    <meta property="og:url" content="https://cortexlinux.com" />
     <meta property="og:title" content="Cortex Linux - AI-Native Operating System" />
     <meta property="og:description" content="Linux that understands natural language. No documentation required. Just ask, and Cortex executes. The world's first AI-native OS." />
-    <meta property="og:image" content="https://cxlinux-ai.com/og-image.png" />
+    <meta property="og:image" content="https://cortexlinux.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Cortex Linux" />
@@ -84,11 +84,11 @@ curl -X POST https://cxlinux-ai.com/api/license/validate \
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://cxlinux-ai.com" />
+    <meta name="twitter:url" content="https://cortexlinux.com" />
     <meta name="twitter:title" content="Cortex Linux - AI-Native Operating System" />
     <meta name="twitter:description" content="Linux that understands natural language. No documentation required. Just ask, and Cortex executes." />
-    <meta name="twitter:image" content="https://cxlinux-ai.com/og-image.png" />
-    <meta name="twitter:creator" content="@cxlinux-ai" />
+    <meta name="twitter:image" content="https://cortexlinux.com/og-image.png" />
+    <meta name="twitter:creator" content="@cortexlinux" />
     
     <!-- Font Preloading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,11 +127,11 @@ curl -X POST https://cxlinux-ai.com/api/license/validate \
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Cortex Linux",
-        "url": "https://cxlinux-ai.com",
-        "logo": "https://cxlinux-ai.com/favicon.png",
+        "url": "https://cortexlinux.com",
+        "logo": "https://cortexlinux.com/favicon.png",
         "sameAs": [
-          "https://github.com/cxlinux-ai/cortex",
-          "https://twitter.com/cxlinux-ai",
+          "https://github.com/cortexlinux/cortex",
+          "https://twitter.com/cortexlinux",
           "https://discord.gg/ASvzWcuTfk"
         ],
         "description": "The world's first AI-Native Operating System. Linux that understands natural language."
@@ -158,7 +158,7 @@ curl -X POST https://cxlinux-ai.com/api/license/validate \
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Cortex Linux",
-        "url": "https://cxlinux-ai.com"
+        "url": "https://cortexlinux.com"
       }
     ]
     </script>

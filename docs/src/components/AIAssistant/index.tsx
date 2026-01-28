@@ -26,7 +26,7 @@ interface Message {
 // In production, this would be replaced with actual RAG/vector search
 const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: string; url: string }> }> = {
   install: {
-    answer: 'To install Cortex Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cxlinux-ai.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
+    answer: 'To install Cortex Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cortexlinux.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
     links: [
       { title: 'Installation Guide', url: '/docs/getting-started/installation' },
       { title: 'Quick Start', url: '/docs/getting-started/quick-start' },

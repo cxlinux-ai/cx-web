@@ -278,8 +278,8 @@ client.on(Events.GuildMemberAdd, async (member) => {
           `• Use slash commands: \`/cortex help\`\n` +
           `• Reply to my messages to continue a conversation\n\n` +
           `**Quick Links:**\n` +
-          `• Website: https://cxlinux-ai.com\n` +
-          `• Hackathon: https://cxlinux-ai.com/hackathon`
+          `• Website: https://cortexlinux.com\n` +
+          `• Hackathon: https://cortexlinux.com/hackathon`
       );
     } catch {
       // Can't DM user at all

@@ -4,7 +4,7 @@
  */
 
 const GITHUB_API_BASE = "https://api.github.com";
-const CORTEX_REPO = "cxlinux-ai/cortex";
+const CORTEX_REPO = "cortexlinux/cortex";
 
 /**
  * Make authenticated GitHub API request

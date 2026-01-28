@@ -80,7 +80,7 @@ export default function InteractiveDemoHero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <a 
-              href="https://github.com/cxlinux-ai/cortex" 
+              href="https://github.com/cortexlinux/cortex" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="w-full sm:w-auto"
@@ -315,7 +315,7 @@ export default function InteractiveDemoHero() {
           className="text-center space-y-3 sm:space-y-4"
         >
           <motion.a 
-            href="https://github.com/cxlinux-ai/cortex" 
+            href="https://github.com/cortexlinux/cortex" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group/btn relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-transparent border-2 border-white text-white font-semibold text-[15px] cursor-pointer hover:bg-white/25 hover:backdrop-blur-md transition-all duration-300"

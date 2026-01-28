@@ -56,7 +56,7 @@ Transition: transition-all duration-300
 Secondary Button:
 
 Text: "View on GitHub" with GitHub icon from lucide-react
-Link: Opens https://github.com/cxlinux-ai/cortex in new tab
+Link: Opens https://github.com/cortexlinux/cortex in new tab
 Style: px-8 py-4, border-2 border-blue-400, rounded-lg
 Font: text-lg font-semibold
 Hover: hover:bg-blue-400/10

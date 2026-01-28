@@ -1,6 +1,6 @@
 services:
   - type: worker
-    name: cxlinux-ai-discord-bot
+    name: cortexlinux-discord-bot
     runtime: node
     buildCommand: npm install
     startCommand: node src/index.js

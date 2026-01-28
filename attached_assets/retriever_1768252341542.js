@@ -5,8 +5,8 @@
 import { knowledgeBase } from "./knowledgeBase.js";
 
 const GITHUB_API_BASE = "https://api.github.com";
-const GITHUB_ORG = "cxlinux-ai";
-const WEBSITE_URL = "https://cxlinux-ai.com";
+const GITHUB_ORG = "cortexlinux";
+const WEBSITE_URL = "https://cortexlinux.com";
 
 // Cache settings
 const CACHE_TTL = 30 * 60 * 1000; // 30 minutes

@@ -149,7 +149,7 @@ export default function FAQ() {
       questions: [
         {
           q: "How do I install Cortex?",
-          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux-ai.com | bash\n\nSTEP 2: Configure AI provider\ncortex config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncortex install --help\n\nFull documentation: https://docs.cxlinux-ai.com/getting-started"
+          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cortexlinux.com | bash\n\nSTEP 2: Configure AI provider\ncortex config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncortex install --help\n\nFull documentation: https://docs.cortexlinux.com/getting-started"
         },
         {
           q: "Is it ready to use now?",
@@ -161,7 +161,7 @@ export default function FAQ() {
         },
         {
           q: "How can I contribute?",
-          a: "We welcome contributors! Options:\n\n1. CODE CONTRIBUTIONS\n   • Browse issues: github.com/cxlinux-ai/cortex/issues\n   • Bounties: $25-500 per merged PR\n   • Filter by: \"priority: critical\" for MVP blockers\n\n2. TESTING & FEEDBACK\n   • Try beta, report bugs\n   • Test bounties: $50-75\n   • Help improve documentation\n\n3. COMMUNITY SUPPORT\n   • Answer questions on Discord\n   • Write tutorials and guides\n   • Share your success stories\n\nFirst PR merged? Get $50 bonus from Instagram recruitment."
+          a: "We welcome contributors! Options:\n\n1. CODE CONTRIBUTIONS\n   • Browse issues: github.com/cortexlinux/cortex/issues\n   • Bounties: $25-500 per merged PR\n   • Filter by: \"priority: critical\" for MVP blockers\n\n2. TESTING & FEEDBACK\n   • Try beta, report bugs\n   • Test bounties: $50-75\n   • Help improve documentation\n\n3. COMMUNITY SUPPORT\n   • Answer questions on Discord\n   • Write tutorials and guides\n   • Share your success stories\n\nFirst PR merged? Get $50 bonus from Instagram recruitment."
         }
       ]
     },
@@ -171,7 +171,7 @@ export default function FAQ() {
       questions: [
         {
           q: "What if something goes wrong?",
-          a: "Built-in recovery:\n\n1. INSTANT ROLLBACK\n   cortex rollback\n   → Undoes last change in seconds\n\n2. CHECK STATUS\n   cortex status\n   → Shows what Cortex did, current system state\n\n3. VIEW LOGS\n   cortex logs\n   → Full audit trail of all commands\n\n4. RESET TO CLEAN STATE\n   cortex reset\n   → Removes all Cortex changes, back to fresh Ubuntu\n\nSupport: Discord community or enterprise@cxlinux-ai.com"
+          a: "Built-in recovery:\n\n1. INSTANT ROLLBACK\n   cortex rollback\n   → Undoes last change in seconds\n\n2. CHECK STATUS\n   cortex status\n   → Shows what Cortex did, current system state\n\n3. VIEW LOGS\n   cortex logs\n   → Full audit trail of all commands\n\n4. RESET TO CLEAN STATE\n   cortex reset\n   → Removes all Cortex changes, back to fresh Ubuntu\n\nSupport: Discord community or enterprise@cortexlinux.com"
         },
         {
           q: "Can I uninstall Cortex?",
@@ -179,7 +179,7 @@ export default function FAQ() {
         },
         {
           q: "Where can I get help?",
-          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/ASvzWcuTfk\n• GitHub Issues: github.com/cxlinux-ai/cortex/issues\n• Documentation: docs.cxlinux-ai.com\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux-ai.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
+          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/ASvzWcuTfk\n• GitHub Issues: github.com/cortexlinux/cortex/issues\n• Documentation: docs.cortexlinux.com\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cortexlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
         },
         {
           q: "Is my data private?",
@@ -303,14 +303,14 @@ export default function FAQ() {
               Ask on Discord
             </a>
             <a
-              href="mailto:hello@cxlinux-ai.com"
+              href="mailto:hello@cortexlinux.com"
               className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-email"
             >
               Email Us
             </a>
             <a
-              href="https://github.com/cxlinux-ai/cortex/issues"
+              href="https://github.com/cortexlinux/cortex/issues"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"

@@ -330,7 +330,7 @@ router.get("/ip-dashboard", apiLimiter, async (req: Request, res: Response) => {
 
     res.json({
       referralCode: ipCode.referralCode,
-      referralLink: `https://cxlinux-ai.com/referrals?ref=${ipCode.referralCode}`,
+      referralLink: `https://cortexlinux.com/referrals?ref=${ipCode.referralCode}`,
       currentTier: tier,
       stats: {
         totalReferrals: totalReferrals,
@@ -867,7 +867,7 @@ router.get("/dashboard/:referralCode", apiLimiter, async (req: Request, res: Res
         total: totalWaitlist,
         estimatedAccessDate: null, // Could calculate based on position and launch date
       },
-      referralLink: `https://cxlinux-ai.com/join?ref=${user.referralCode}`,
+      referralLink: `https://cortexlinux.com/join?ref=${user.referralCode}`,
     });
   } catch (error) {
     console.error("Dashboard error:", error);
@@ -957,17 +957,17 @@ router.post("/share", apiLimiter, async (req: Request, res: Response) => {
     const shareContent = {
       twitter: {
         text: `Just joined the Cortex Linux early access.\nAI that actually understands Linux.\nJoin me 👇`,
-        url: `https://cxlinux-ai.com/join?ref=${referralCode}&utm_source=twitter`,
+        url: `https://cortexlinux.com/join?ref=${referralCode}&utm_source=twitter`,
         hashtags: "CortexLinux,AI,Linux",
       },
       linkedin: {
         title: "Get Early Access to Cortex Linux",
         text: "I just joined the waitlist for Cortex Linux - an AI-powered tool that lets you manage Linux with natural language commands. Check it out!",
-        url: `https://cxlinux-ai.com/join?ref=${referralCode}&utm_source=linkedin`,
+        url: `https://cortexlinux.com/join?ref=${referralCode}&utm_source=linkedin`,
       },
       email: {
         subject: "Check out Cortex Linux - AI for Linux",
-        body: `Hey!\n\nI thought you might be interested in Cortex Linux - it's an AI tool that lets you manage Linux with natural language.\n\nInstead of memorizing commands, you just describe what you want to do.\n\nJoin the waitlist here: https://cxlinux-ai.com/join?ref=${referralCode}&utm_source=email`,
+        body: `Hey!\n\nI thought you might be interested in Cortex Linux - it's an AI tool that lets you manage Linux with natural language.\n\nInstead of memorizing commands, you just describe what you want to do.\n\nJoin the waitlist here: https://cortexlinux.com/join?ref=${referralCode}&utm_source=email`,
       },
     };
 
@@ -1015,7 +1015,7 @@ router.get("/og-image/:referralCode", async (req: Request, res: Response) => {
         referrals: user.verifiedReferrals,
       },
       // Placeholder URL - in production, generate and host the image
-      imageUrl: `https://cxlinux-ai.com/og/${referralCode}.png`,
+      imageUrl: `https://cortexlinux.com/og/${referralCode}.png`,
     });
   } catch (error) {
     console.error("OG image error:", error);
@@ -1167,7 +1167,7 @@ router.get("/badge/:referralCode", async (req: Request, res: Response) => {
     });
 
     const badgeUrl = `https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=flat-square`;
-    const linkUrl = `https://cxlinux-ai.com/join?ref=${referralCode}&utm_source=github_badge`;
+    const linkUrl = `https://cortexlinux.com/join?ref=${referralCode}&utm_source=github_badge`;
 
     if (format === "svg") {
       // Return SVG badge

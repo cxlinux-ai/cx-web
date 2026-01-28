@@ -38,7 +38,7 @@ const supportOptions = [
     icon: Github,
     title: "GitHub Issues",
     description: "Report bugs, request features, or browse existing issues",
-    link: "https://github.com/cxlinux-ai/cortex/issues",
+    link: "https://github.com/cortexlinux/cortex/issues",
     linkText: "Open Issue",
     color: "from-gray-600 to-gray-800"
   },
@@ -46,7 +46,7 @@ const supportOptions = [
     icon: BookOpen,
     title: "Documentation",
     description: "Comprehensive guides, tutorials, and API reference",
-    link: "https://github.com/cxlinux-ai/cortex/wiki",
+    link: "https://github.com/cortexlinux/cortex/wiki",
     linkText: "View Docs",
     color: "from-blue-500 to-cyan-600"
   }
@@ -80,11 +80,11 @@ const faqs = [
   },
   {
     question: "How do I cancel my subscription?",
-    answer: "You can cancel anytime from your account dashboard or by emailing support@cxlinux-ai.com. Your access continues until the end of your billing period. We don't offer refunds for partial months, but you won't be charged again after cancellation."
+    answer: "You can cancel anytime from your account dashboard or by emailing support@cortexlinux.com. Your access continues until the end of your billing period. We don't offer refunds for partial months, but you won't be charged again after cancellation."
   },
   {
     question: "Can I transfer my license to another account?",
-    answer: "Yes, license transfers are supported for Enterprise and Managed plans. Contact your account manager or email support@cxlinux-ai.com with the details of the transfer request."
+    answer: "Yes, license transfers are supported for Enterprise and Managed plans. Contact your account manager or email support@cortexlinux.com with the details of the transfer request."
   },
   {
     question: "What happens if I exceed my server limit?",
@@ -176,11 +176,11 @@ export default function SupportPage() {
                     <div>
                       <h3 className="font-semibold">Email Support</h3>
                       <a 
-                        href="mailto:support@cxlinux-ai.com" 
+                        href="mailto:support@cortexlinux.com" 
                         className="text-blue-400 hover:underline"
                         data-testid="link-support-email"
                       >
-                        support@cxlinux-ai.com
+                        support@cortexlinux.com
                       </a>
                     </div>
                   </div>

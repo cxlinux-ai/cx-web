@@ -1,6 +1,6 @@
 [Unit]
 Description=Sapiens 0.27B Reasoning Engine
-Documentation=https://github.com/cxlinux-ai/cortex
+Documentation=https://github.com/cortexlinux/cortex
 After=network.target
 Wants=network-online.target
 

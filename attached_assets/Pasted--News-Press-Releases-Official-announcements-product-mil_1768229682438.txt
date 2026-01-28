@@ -60,11 +60,11 @@ Cortex Linux is an **AI-native Linux operating system** built for developers, AI
 
 The project is developed with an open-source core and a strong emphasis on long-term maintainability, performance, and trust.
 
-For official updates, announcements, and press materials, visit **cxlinux-ai.com**.
+For official updates, announcements, and press materials, visit **cortexlinux.com**.
 
 ---
 
 **Media Contact**
 Press Team
 Cortex Linux
-[press@cxlinux-ai.com](mailto:press@cxlinux-ai.com)
+[press@cortexlinux.com](mailto:press@cortexlinux.com)

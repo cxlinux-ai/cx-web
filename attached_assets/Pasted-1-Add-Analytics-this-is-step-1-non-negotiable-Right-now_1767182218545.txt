@@ -294,7 +294,7 @@ In your blog post SEO logic (likely in a Helmet or metadata component):
 
 Add:
 
-<link rel="canonical" href="https://cxlinux-ai.com/blog/POST_SLUG" />
+<link rel="canonical" href="https://cortexlinux.com/blog/POST_SLUG" />
 
 
 Why:
@@ -310,7 +310,7 @@ Required for “serious” SEO
 Add this once globally:
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@cxlinux-ai" />
+<meta name="twitter:site" content="@cortexlinux" />
 
 
 This massively improves:

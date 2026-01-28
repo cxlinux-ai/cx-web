@@ -11,7 +11,7 @@ WEEKS
 30+
 MERGED PRS
 A two-phase program designed to crowdsource monetization strategies and convert ideas into production code with measurable ROI.
-AI Venture Holdings LLC • cxlinux-ai.com • github.com/cxlinux-ai/cortex
+AI Venture Holdings LLC • cortexlinux.com • github.com/cortexlinux/cortex
 The Problem: Quantified Impact
 
 💥
@@ -634,5 +634,5 @@ Cost Efficiency
 cheaper than internal dev
 Cortex Linux
 AI-Powered Package Management
-cxlinux-ai.com
-github.com/cxlinux-ai/cortex
+cortexlinux.com
+github.com/cortexlinux/cortex

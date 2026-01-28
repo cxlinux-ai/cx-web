@@ -288,7 +288,7 @@ export default function PricingSuccessPage() {
           </a>
           <span className="text-gray-600">|</span>
           <a
-            href="https://github.com/cxlinux-ai/cortex"
+            href="https://github.com/cortexlinux/cortex"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"

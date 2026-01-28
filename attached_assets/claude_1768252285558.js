@@ -14,8 +14,8 @@ Rules:
 - If unsure, say "I think..." - don't make stuff up.
 
 Links (only when relevant):
-- GitHub: https://github.com/cxlinux-ai/cortex
-- Docs: https://cxlinux-ai.com`;
+- GitHub: https://github.com/cortexlinux/cortex
+- Docs: https://cortexlinux.com`;
 
 const client = new Anthropic();
 

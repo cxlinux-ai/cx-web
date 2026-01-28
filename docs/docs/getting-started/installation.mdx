@@ -28,7 +28,7 @@ Before installing, ensure your system meets these minimum requirements:
 The fastest way to install Cortex Linux is using our install script:
 
 ```bash title="Install Cortex Linux"
-curl -fsSL https://cxlinux-ai.com/install.sh | bash
+curl -fsSL https://cortexlinux.com/install.sh | bash
 ```
 
 This script automatically:
@@ -47,9 +47,9 @@ This script automatically:
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
 
-curl -fsSL https://cxlinux-ai.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cortex.gpg
+curl -fsSL https://cortexlinux.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cortex.gpg
 
-echo "deb [signed-by=/usr/share/keyrings/cortex.gpg] https://apt.cxlinux-ai.com stable main" | \
+echo "deb [signed-by=/usr/share/keyrings/cortex.gpg] https://apt.cortexlinux.com stable main" | \
   sudo tee /etc/apt/sources.list.d/cortex.list
 
 # Install Cortex
@@ -62,7 +62,7 @@ sudo apt-get install cortex
 
 ```bash
 # Add the Cortex repository
-sudo dnf config-manager --add-repo https://rpm.cxlinux-ai.com/cortex.repo
+sudo dnf config-manager --add-repo https://rpm.cortexlinux.com/cortex.repo
 
 # Install Cortex
 sudo dnf install cortex
@@ -99,7 +99,7 @@ For developers or those who want the latest features:
 
 ```bash
 # Clone the repository
-git clone https://github.com/cxlinux-ai/cortex.git
+git clone https://github.com/cortexlinux/cortex.git
 cd cortex
 
 # Create virtual environment

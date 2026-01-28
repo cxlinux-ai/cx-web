@@ -286,13 +286,13 @@ async function completeWelcomeFlow(
       message += "Feel free to explore and ask me anything about Cortex Linux!\n\n";
       break;
     case "install":
-      message += "Ready to install? Check out `/cortex how do I install?` or visit **cxlinux-ai.com/download**\n\n";
+      message += "Ready to install? Check out `/cortex how do I install?` or visit **cortexlinux.com/download**\n\n";
       break;
     case "hackathon":
-      message += "Awesome! Check out **cxlinux-ai.com/hackathon** for all the details. We have $13,800 cash + $4,900 worth of prizes! 🏆\n\n";
+      message += "Awesome! Check out **cortexlinux.com/hackathon** for all the details. We have $13,800 cash + $4,900 worth of prizes! 🏆\n\n";
       break;
     case "contribute":
-      message += "We love contributors! Check out our GitHub at **github.com/cxlinux-ai/cortex** and join the #dev channel.\n\n";
+      message += "We love contributors! Check out our GitHub at **github.com/cortexlinux/cortex** and join the #dev channel.\n\n";
       break;
   }
 

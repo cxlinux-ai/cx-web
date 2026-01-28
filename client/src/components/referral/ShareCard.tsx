@@ -33,7 +33,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const getShareUrl = () => `https://cxlinux-ai.com/join?ref=${data.referralCode}&utm_source=share_card`;
+  const getShareUrl = () => `https://cortexlinux.com/join?ref=${data.referralCode}&utm_source=share_card`;
 
   const renderWaitlistCard = () => (
     <div className="share-card waitlist-card">
@@ -60,7 +60,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
         <div className="card-badge">🧠 Powered by Cortex Linux</div>
       </div>
       <div className="card-cta">
-        Get AI-powered Linux at cxlinux-ai.com
+        Get AI-powered Linux at cortexlinux.com
       </div>
     </div>
   );

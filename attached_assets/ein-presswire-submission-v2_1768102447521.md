@@ -9,7 +9,7 @@ Cortex Linux Announces Global AI Hackathon for Developers — Registration Now O
 First hackathon for AI-native Linux operating system launches February 17
 
 ## SUMMARY (Max 400 characters)
-AI Venture Holdings announces the Cortex Linux Hackathon 2026, a global competition for developers to build features for Cortex Linux — an AI-native operating system that translates natural language into Linux commands. Two-phase competition with prizes announced at launch. Registration open at cxlinux-ai.com.
+AI Venture Holdings announces the Cortex Linux Hackathon 2026, a global competition for developers to build features for Cortex Linux — an AI-native operating system that translates natural language into Linux commands. Two-phase competition with prizes announced at launch. Registration open at cortexlinux.com.
 
 ---
 
@@ -41,11 +41,11 @@ HOW TO PARTICIPATE
 
 Registration is open now. Visit the official website for hackathon details and to join the developer community.
 
-Official Website: https://cxlinux-ai.com
-Hackathon Registration: https://cxlinux-ai.com/hackathon
-GitHub: https://github.com/cxlinux-ai/cortex
-YouTube: https://youtube.com/@cxlinux-ai
-Discord: https://discord.gg/cxlinux-ai
+Official Website: https://cortexlinux.com
+Hackathon Registration: https://cortexlinux.com/hackathon
+GitHub: https://github.com/cortexlinux/cortex
+YouTube: https://youtube.com/@cortexlinux
+Discord: https://discord.gg/cortexlinux
 
 ABOUT CORTEX LINUX
 
@@ -88,9 +88,9 @@ AI Venture Holdings LLC develops AI-powered infrastructure tools. Based in Utah,
 **Company:** AI Venture Holdings LLC
 **Contact Name:** Michael J. Morgan
 **Title:** CEO and Founder
-**Email:** press@cxlinux-ai.com
+**Email:** press@cortexlinux.com
 **Phone:** [YOUR PHONE]
-**Website:** https://cxlinux-ai.com
+**Website:** https://cortexlinux.com
 **City:** Salt Lake City
 **State:** Utah
 **Country:** United States
@@ -99,11 +99,11 @@ AI Venture Holdings LLC develops AI-powered infrastructure tools. Based in Utah,
 
 ## LINKS INCLUDED (5 backlinks)
 
-1. https://cxlinux-ai.com (homepage)
-2. https://cxlinux-ai.com/hackathon (registration)
-3. https://github.com/cxlinux-ai/cortex (GitHub)
-4. https://youtube.com/@cxlinux-ai (YouTube)
-5. https://discord.gg/cxlinux-ai (Discord)
+1. https://cortexlinux.com (homepage)
+2. https://cortexlinux.com/hackathon (registration)
+3. https://github.com/cortexlinux/cortex (GitHub)
+4. https://youtube.com/@cortexlinux (YouTube)
+5. https://discord.gg/cortexlinux (Discord)
 
 ---
 
@@ -116,14 +116,14 @@ AI Venture Holdings LLC develops AI-powered infrastructure tools. Based in Utah,
 - [ ] Contact info complete
 - [ ] Logo uploaded
 - [ ] Keywords added
-- [ ] Press release LIVE on cxlinux-ai.com/news FIRST
+- [ ] Press release LIVE on cortexlinux.com/news FIRST
 
 ---
 
 **Word Count:** ~480 words
 
 **Release Order:**
-1. ✅ Publish on cxlinux-ai.com/news FIRST (establishes canonical URL)
+1. ✅ Publish on cortexlinux.com/news FIRST (establishes canonical URL)
 2. Then submit to EIN Presswire
 3. Then NewswireJet (+4 hours)
 4. Then PRWeb (next day)

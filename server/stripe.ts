@@ -704,7 +704,7 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
       ? `https://${process.env.REPLIT_DEV_DOMAIN}`
       : process.env.REPLIT_DOMAINS 
         ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
-        : 'https://cxlinux-ai.com';
+        : 'https://cortexlinux.com';
 
     const session = await stripe!.checkout.sessions.create({
       mode: 'subscription',

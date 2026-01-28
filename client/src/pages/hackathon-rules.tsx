@@ -151,12 +151,12 @@ export default function HackathonRulesPage() {
               <p className="text-gray-400 mb-6">
                 Participants must star and fork the Cortex GitHub repository:{" "}
                 <a 
-                  href="https://github.com/cxlinux-ai/cortex" 
+                  href="https://github.com/cortexlinux/cortex" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-300 hover:text-blue-200 inline-flex items-center gap-1"
                 >
-                  github.com/cxlinux-ai/cortex
+                  github.com/cortexlinux/cortex
                   <ExternalLink size={14} />
                 </a>
               </p>
@@ -570,7 +570,7 @@ export default function HackathonRulesPage() {
               <h2 className="text-2xl font-bold text-white mb-6">Official Links & References</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 <a 
-                  href="https://github.com/cxlinux-ai/cortex" 
+                  href="https://github.com/cortexlinux/cortex" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-blue-500/50 transition-colors group"

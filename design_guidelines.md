@@ -72,7 +72,7 @@ Below tiers: Full-width enterprise partnership card with gradient from blue-500/
 
 ## Community Section
 
-Centered max-w-4xl layout. Large Discord card with white/5 background, blue gradient overlay. Discord/MessageCircle icon 80x80 with blue glow (drop-shadow). "Join Our Discord" headline, description, blue-500 CTA. Social links below in horizontal flex: GitHub, Email (mike@cxlinux-ai.com), Website - gray-400 that transition to blue-400 on hover.
+Centered max-w-4xl layout. Large Discord card with white/5 background, blue gradient overlay. Discord/MessageCircle icon 80x80 with blue glow (drop-shadow). "Join Our Discord" headline, description, blue-500 CTA. Social links below in horizontal flex: GitHub, Email (mike@cortexlinux.com), Website - gray-400 that transition to blue-400 on hover.
 
 ## Footer
 

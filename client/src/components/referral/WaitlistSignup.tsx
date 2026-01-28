@@ -61,7 +61,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
 
   const handleCopyLink = async () => {
     if (!signupData) return;
-    const link = `https://cxlinux-ai.com/referrals?ref=${signupData.referralCode}`;
+    const link = `https://cortexlinux.com/referrals?ref=${signupData.referralCode}`;
     await navigator.clipboard.writeText(link);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -72,13 +72,13 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
     const text = encodeURIComponent(
       "Just joined the Cortex Linux waitlist - AI that actually understands Linux.\nJoin me and get early access 👇"
     );
-    const url = encodeURIComponent(`https://cxlinux-ai.com/referrals?ref=${signupData.referralCode}`);
+    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${signupData.referralCode}`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
   };
 
   const shareOnLinkedIn = () => {
     if (!signupData) return;
-    const url = encodeURIComponent(`https://cxlinux-ai.com/referrals?ref=${signupData.referralCode}`);
+    const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${signupData.referralCode}`);
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, "_blank");
   };
 
@@ -144,7 +144,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
             <Input
               type="text"
               readOnly
-              value={`cxlinux-ai.com/referrals?ref=${signupData.referralCode}`}
+              value={`cortexlinux.com/referrals?ref=${signupData.referralCode}`}
               className="bg-black/40 border-white/10 text-gray-300 text-sm font-mono"
               data-testid="input-referral-link"
             />
@@ -196,7 +196,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
               onClick={() => {
                 const subject = encodeURIComponent("Check out Cortex Linux");
                 const body = encodeURIComponent(
-                  `Hey! I thought you might like Cortex Linux - AI that understands Linux.\n\nJoin here: https://cxlinux-ai.com/referrals?ref=${signupData.referralCode}`
+                  `Hey! I thought you might like Cortex Linux - AI that understands Linux.\n\nJoin here: https://cortexlinux.com/referrals?ref=${signupData.referralCode}`
                 );
                 window.location.href = `mailto:?subject=${subject}&body=${body}`;
               }}

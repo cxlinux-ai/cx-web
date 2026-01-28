@@ -66,11 +66,11 @@ The project targets a massive market opportunity: enterprise IT teams seeking to
 
 Developers of all skill levels can register now:
 
-- Official Website: https://cxlinux-ai.com
-- Hackathon Details: https://cxlinux-ai.com/hackathon
-- GitHub Repository: https://github.com/cxlinux-ai/cortex
-- YouTube Channel: https://youtube.com/@cxlinux-ai
-- Discord Community: https://discord.gg/cxlinux-ai
+- Official Website: https://cortexlinux.com
+- Hackathon Details: https://cortexlinux.com/hackathon
+- GitHub Repository: https://github.com/cortexlinux/cortex
+- YouTube Channel: https://youtube.com/@cortexlinux
+- Discord Community: https://discord.gg/cortexlinux
 
 ### About Cortex Linux
 
@@ -84,7 +84,7 @@ AI Venture Holdings LLC develops AI-powered tools for enterprise infrastructure.
 
 Michael J. Morgan
 CEO and Founder, AI Venture Holdings LLC
-press@cxlinux-ai.com
+press@cortexlinux.com
 
 ---
 
@@ -99,8 +99,8 @@ press@cxlinux-ai.com
 <meta property="og:title" content="Cortex Linux Announces Global AI Hackathon 2026">
 <meta property="og:description" content="Join the first hackathon for AI-native Linux. Build the future of intelligent system administration.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://cxlinux-ai.com/news/hackathon-announcement-2026">
-<meta property="og:image" content="https://cxlinux-ai.com/images/hackathon-og.png">
+<meta property="og:url" content="https://cortexlinux.com/news/hackathon-announcement-2026">
+<meta property="og:image" content="https://cortexlinux.com/images/hackathon-og.png">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -126,11 +126,11 @@ press@cxlinux-ai.com
     "name": "Cortex Linux",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://cxlinux-ai.com/logo.png"
+      "url": "https://cortexlinux.com/logo.png"
     }
   },
   "description": "AI Venture Holdings announces global hackathon for Cortex Linux, the AI-native operating system.",
-  "mainEntityOfPage": "https://cxlinux-ai.com/news/hackathon-announcement-2026"
+  "mainEntityOfPage": "https://cortexlinux.com/news/hackathon-announcement-2026"
 }
 ```
 

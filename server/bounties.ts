@@ -1,7 +1,7 @@
 /**
  * Bounties Board - Backend API
  *
- * Fetches and caches GitHub issues labeled "bounty" from the cxlinux-ai organization.
+ * Fetches and caches GitHub issues labeled "bounty" from the cortexlinux organization.
  *
  * =============================================================================
  * ARCHITECTURE OVERVIEW
@@ -266,7 +266,7 @@ function extractBountyAmount(
 
 /**
  * Extract repository name from GitHub API repository_url
- * e.g., "https://api.github.com/repos/cxlinux-ai/cortex" -> "cortex"
+ * e.g., "https://api.github.com/repos/cortexlinux/cortex" -> "cortex"
  */
 function extractRepositoryInfo(repositoryUrl: string): { name: string; url: string } {
   // repository_url format: https://api.github.com/repos/{owner}/{repo}
@@ -281,7 +281,7 @@ function extractRepositoryInfo(repositoryUrl: string): { name: string; url: stri
   // Fallback
   return {
     name: "cortex",
-    url: "https://github.com/cxlinux-ai/cortex",
+    url: "https://github.com/cortexlinux/cortex",
   };
 }
 
@@ -404,8 +404,8 @@ async function fetchBountiesFromGitHub(): Promise<{
   };
 
   // Fetch open bounties
-  const openUrl = "https://api.github.com/search/issues?q=org:cxlinux-ai+is:issue+is:open+label:bounty&sort=created&order=desc&per_page=100";
-  const closedUrl = "https://api.github.com/search/issues?q=org:cxlinux-ai+is:issue+is:closed+label:bounty&sort=updated&order=desc&per_page=100";
+  const openUrl = "https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:open+label:bounty&sort=created&order=desc&per_page=100";
+  const closedUrl = "https://api.github.com/search/issues?q=org:cortexlinux+is:issue+is:closed+label:bounty&sort=updated&order=desc&per_page=100";
 
   // Try with token first, fallback to without if auth fails
   let openResponse, closedResponse;

@@ -9,10 +9,10 @@ interface SEOConfig {
   jsonLd?: object | object[];
 }
 
-const BASE_URL = 'https://cxlinux-ai.com';
+const BASE_URL = 'https://cortexlinux.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'Cortex Linux';
-const TWITTER_HANDLE = '@cxlinux-ai';
+const TWITTER_HANDLE = '@cortexlinux';
 
 export function updateSEO(config: SEOConfig): () => void {
   const {
@@ -134,11 +134,11 @@ export const seoConfigs = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Cortex Linux',
-        url: 'https://cxlinux-ai.com',
+        url: 'https://cortexlinux.com',
         description: 'The AI Layer for Linux - Execute any task through natural language commands.',
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://cxlinux-ai.com/search?q={search_term_string}',
+          target: 'https://cortexlinux.com/search?q={search_term_string}',
           'query-input': 'required name=search_term_string'
         }
       },
@@ -157,23 +157,23 @@ export const seoConfigs = {
         author: {
           '@type': 'Organization',
           name: 'Cortex Linux',
-          url: 'https://cxlinux-ai.com'
+          url: 'https://cortexlinux.com'
         }
       },
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Cortex Linux',
-        url: 'https://cxlinux-ai.com',
-        logo: 'https://cxlinux-ai.com/og-image.png',
+        url: 'https://cortexlinux.com',
+        logo: 'https://cortexlinux.com/og-image.png',
         sameAs: [
-          'https://github.com/cxlinux-ai/cortex',
-          'https://twitter.com/cxlinux-ai',
+          'https://github.com/cortexlinux/cortex',
+          'https://twitter.com/cortexlinux',
           'https://discord.gg/ASvzWcuTfk'
         ],
         contactPoint: {
           '@type': 'ContactPoint',
-          email: 'hello@cxlinux-ai.com',
+          email: 'hello@cortexlinux.com',
           contactType: 'customer support'
         }
       },
@@ -222,24 +222,24 @@ export const seoConfigs = {
       description: 'The first-ever AI Linux Hackathon. A two-phase, 17-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas, followed by a 1-month prep period. Phase 2 (Hackathon, Weeks 9-17) builds real code via GitHub PRs. $18,800 in prizes. Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
       endDate: '2026-05-25',
-      url: 'https://cxlinux-ai.com/hackathon',
+      url: 'https://cortexlinux.com/hackathon',
       eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
       location: {
         '@type': 'VirtualLocation',
-        url: 'https://github.com/cxlinux-ai/cortex'
+        url: 'https://github.com/cortexlinux/cortex'
       },
       organizer: {
         '@type': 'Organization',
         name: 'Cortex Linux',
-        url: 'https://cxlinux-ai.com'
+        url: 'https://cortexlinux.com'
       },
-      image: 'https://cxlinux-ai.com/og-image.png',
+      image: 'https://cortexlinux.com/og-image.png',
       offers: {
         '@type': 'Offer',
         price: '0',
         priceCurrency: 'USD',
-        url: 'https://cxlinux-ai.com/hackathon',
+        url: 'https://cortexlinux.com/hackathon',
         availability: 'https://schema.org/InStock'
       }
     }
@@ -501,7 +501,7 @@ export const seoConfigs = {
       '@type': 'ItemList',
       name: 'Cortex Linux Bounty Board',
       description: 'Bounties for contributing to Cortex Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
-      url: 'https://cxlinux-ai.com/bounties',
+      url: 'https://cortexlinux.com/bounties',
       itemListElement: [
         {
           '@type': 'ListItem',
@@ -519,10 +519,10 @@ export const seoConfigs = {
       mainEntity: {
         '@type': 'Organization',
         name: 'Cortex Linux',
-        url: 'https://cxlinux-ai.com',
+        url: 'https://cortexlinux.com',
         sameAs: [
-          'https://github.com/cxlinux-ai',
-          'https://twitter.com/cxlinux-ai'
+          'https://github.com/cortexlinux',
+          'https://twitter.com/cortexlinux'
         ]
       }
     }

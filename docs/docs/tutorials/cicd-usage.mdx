@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Cortex
         run: |
-          curl -fsSL https://cxlinux-ai.com/install.sh | bash
+          curl -fsSL https://cortexlinux.com/install.sh | bash
           echo "$HOME/.cortex/bin" >> $GITHUB_PATH
 
       - name: Setup environment
@@ -74,7 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
         with:
           version: 'latest'
 
@@ -99,7 +99,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
 
       - name: Setup Node ${{ matrix.node }}
         run: cortex "install nodejs version ${{ matrix.node }}"
@@ -127,7 +127,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
 
       - name: Build
         run: cortex "build docker image for production"
@@ -165,7 +165,7 @@ variables:
   CORTEX_YES: "true"
 
 before_script:
-  - curl -fsSL https://cxlinux-ai.com/install.sh | bash
+  - curl -fsSL https://cortexlinux.com/install.sh | bash
   - export PATH="$HOME/.cortex/bin:$PATH"
 
 test:
@@ -199,7 +199,7 @@ deploy:
 
 ```yaml
 # .gitlab-ci.yml
-image: cxlinux-ai/cortex:latest
+image: cortexlinux/cortex:latest
 
 stages:
   - test
@@ -259,7 +259,7 @@ pipeline {
     stages {
         stage('Setup Cortex') {
             steps {
-                sh 'curl -fsSL https://cxlinux-ai.com/install.sh | bash'
+                sh 'curl -fsSL https://cortexlinux.com/install.sh | bash'
                 sh 'export PATH="$HOME/.cortex/bin:$PATH"'
             }
         }
@@ -311,7 +311,7 @@ pipeline {
 pipeline {
     agent {
         docker {
-            image 'cxlinux-ai/cortex:latest'
+            image 'cortexlinux/cortex:latest'
         }
     }
 
@@ -338,7 +338,7 @@ version: 2.1
 executors:
   cortex:
     docker:
-      - image: cxlinux-ai/cortex:latest
+      - image: cortexlinux/cortex:latest
 
 jobs:
   test:
@@ -398,7 +398,7 @@ stages:
       - job: BuildJob
         steps:
           - script: |
-              curl -fsSL https://cxlinux-ai.com/install.sh | bash
+              curl -fsSL https://cortexlinux.com/install.sh | bash
               export PATH="$HOME/.cortex/bin:$PATH"
             displayName: 'Install Cortex'
 
@@ -579,7 +579,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
       - run: cortex "run linter and format check"
 
   test:
@@ -590,7 +590,7 @@ jobs:
         node: [18, 20]
     steps:
       - uses: actions/checkout@v4
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
       - run: cortex "install nodejs ${{ matrix.node }}"
       - run: cortex "install dependencies"
       - run: cortex "run tests with coverage"
@@ -601,7 +601,7 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
       - run: cortex "build docker image"
       - run: cortex "push to ghcr.io"
         env:
@@ -614,7 +614,7 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
       - run: cortex "deploy to staging environment"
         env:
           KUBECONFIG: ${{ secrets.STAGING_KUBECONFIG }}
@@ -626,7 +626,7 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - uses: cxlinux-ai/setup-cortex@v1
+      - uses: cortexlinux/setup-cortex@v1
       - run: cortex "deploy to production with rolling update"
         env:
           KUBECONFIG: ${{ secrets.PROD_KUBECONFIG }}

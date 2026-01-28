@@ -76,17 +76,17 @@ export const pressReleases: PressRelease[] = [
       }
     ],
     links: [
-      { label: "Official Website", url: "https://cxlinux-ai.com" },
-      { label: "Hackathon Details", url: "https://cxlinux-ai.com/hackathon" },
-      { label: "GitHub Repository", url: "https://github.com/cxlinux-ai/cortex" }
+      { label: "Official Website", url: "https://cortexlinux.com" },
+      { label: "Hackathon Details", url: "https://cortexlinux.com/hackathon" },
+      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" }
     ],
     contactInfo: {
       name: "Press Team",
       title: "Cortex Linux",
-      email: "press@cxlinux-ai.com"
+      email: "press@cortexlinux.com"
     },
     boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
-    companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cxlinux-ai.com.",
+    companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cortexlinux.com.",
     tags: ["Hackathon", "AI", "Developer Community", "Linux", "Global Event"],
     keywords: [
       "AI Linux distribution",
@@ -151,14 +151,14 @@ export const pressReleases: PressRelease[] = [
       }
     ],
     links: [
-      { label: "Download v2.5", url: "https://cxlinux-ai.com/download" },
-      { label: "Release Notes", url: "https://cxlinux-ai.com/releases/v2.5" },
-      { label: "GitHub Repository", url: "https://github.com/cxlinux-ai/cortex" }
+      { label: "Download v2.5", url: "https://cortexlinux.com/download" },
+      { label: "Release Notes", url: "https://cortexlinux.com/releases/v2.5" },
+      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" }
     ],
     contactInfo: {
       name: "Press Team",
       title: "Cortex Linux",
-      email: "press@cxlinux-ai.com"
+      email: "press@cortexlinux.com"
     },
     boilerplate: "Cortex Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
     tags: ["Product Release", "v2.5", "AI Automation", "Natural Language", "Security", "Linux", "Update"],

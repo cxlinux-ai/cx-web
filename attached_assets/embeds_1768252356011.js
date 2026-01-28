@@ -76,7 +76,7 @@ export function createHelpEmbed() {
       },
       {
         name: "Links",
-        value: "[GitHub](https://github.com/cxlinux-ai/cortex) | [Website](https://cxlinux-ai.com) | [Docs](https://github.com/cxlinux-ai/cortex/tree/main/docs)",
+        value: "[GitHub](https://github.com/cortexlinux/cortex) | [Website](https://cortexlinux.com) | [Docs](https://github.com/cortexlinux/cortex/tree/main/docs)",
       }
     )
     .setTimestamp();
@@ -94,7 +94,7 @@ export function createInstallEmbed(step = 0) {
     },
     {
       title: "Step 2: Install Cortex",
-      description: "```bash\npip install cortex-linux\n```\nOr clone from source:\n```bash\ngit clone https://github.com/cxlinux-ai/cortex\ncd cortex && pip install -e .\n```",
+      description: "```bash\npip install cortex-linux\n```\nOr clone from source:\n```bash\ngit clone https://github.com/cortexlinux/cortex\ncd cortex && pip install -e .\n```",
       color: COLORS.info,
     },
     {

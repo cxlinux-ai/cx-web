@@ -1,4 +1,4 @@
-app = 'cxlinux-ai-discord-bot'
+app = 'cortexlinux-discord-bot'
 primary_region = 'sjc'
 
 [build]

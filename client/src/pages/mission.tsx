@@ -99,7 +99,7 @@ export default function MissionPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <a
-                href="https://github.com/cxlinux-ai/cortex"
+                href="https://github.com/cortexlinux/cortex"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 flex items-center justify-center gap-2"
@@ -549,7 +549,7 @@ export default function MissionPage() {
                   Join Our Community
                 </a>
                 <a
-                  href="https://github.com/cxlinux-ai/cortex"
+                  href="https://github.com/cortexlinux/cortex"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-medium transition-colors"
@@ -674,7 +674,7 @@ export default function MissionPage() {
                 Contribute code, report bugs, or build plugins. Every contribution helps shape the future of AI on Linux.
               </p>
               <a
-                href="https://github.com/cxlinux-ai/cortex"
+                href="https://github.com/cortexlinux/cortex"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 rounded-lg text-white font-medium hover:bg-blue-500 transition-colors"
@@ -700,7 +700,7 @@ export default function MissionPage() {
                 Interested in enterprise features, integrations, or partnership opportunities? Let's talk.
               </p>
               <a
-                href="mailto:partners@cxlinux-ai.com"
+                href="mailto:partners@cortexlinux.com"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 rounded-lg text-white font-medium hover:bg-purple-500 transition-colors"
                 data-testid="button-contact-partners"
               >

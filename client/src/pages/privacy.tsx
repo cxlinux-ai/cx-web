@@ -75,7 +75,7 @@ All third-party providers are contractually bound to protect your data and compl
 • Objection: Object to processing based on legitimate interests
 • Withdrawal: Withdraw consent at any time where processing is based on consent
 
-To exercise these rights, contact us at privacy@cxlinux-ai.com.`
+To exercise these rights, contact us at privacy@cortexlinux.com.`
     },
     {
       icon: Bell,
@@ -95,8 +95,8 @@ Last updated: December 2025`
       title: "Contact Us",
       content: `For privacy-related inquiries or concerns:
 
-Email: privacy@cxlinux-ai.com
-GitHub: github.com/cxlinux-ai/cortex/issues
+Email: privacy@cortexlinux.com
+GitHub: github.com/cortexlinux/cortex/issues
 Discord: discord.gg/ASvzWcuTfk
 
 We aim to respond to all privacy requests within 30 days.

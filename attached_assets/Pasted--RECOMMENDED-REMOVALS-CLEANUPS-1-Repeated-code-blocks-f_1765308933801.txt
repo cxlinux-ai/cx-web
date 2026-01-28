@@ -58,7 +58,7 @@ Duplicates will break scrolling and anchor links.
 The block:
 
 <motion.div className="flex flex-wrap justify-center gap-3 mb-8">
- <a href="https://github.com/cxlinux-ai/cortex" ...
+ <a href="https://github.com/cortexlinux/cortex" ...
 
 
 is repeated several times.

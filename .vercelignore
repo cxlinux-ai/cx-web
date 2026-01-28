@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development files
+.env*
+.DS_Store
+*.tsbuildinfo
+.next/
+
+# Server files (we only need frontend)
+server/
+*.log
+
+# Large build artifacts
+client/node_modules/
+client/.next/
+client/dist/
+client/build/
+
+# Documentation and configs
+docs/
+*.md
+!README.md
+
+# Git and IDE
+.git/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Only deploy the production build
+!dist/public/
+# Large archives
+*.tar.gz
+*.zip
+CX_GOLDEN_MASTER_*.tar.gz

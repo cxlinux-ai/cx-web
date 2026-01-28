@@ -44,11 +44,11 @@ The project targets a massive market opportunity: enterprise IT teams seeking to
 
 Developers of all skill levels can register now:
 
-**Official Website:** https://cxlinux-ai.com  
-**Hackathon Details:** https://cxlinux-ai.com/hackathon  
-**GitHub Repository:** https://github.com/cxlinux-ai/cortex  
-**YouTube Channel:** https://youtube.com/@cxlinux-ai  
-**Discord Community:** https://discord.gg/cxlinux-ai
+**Official Website:** https://cortexlinux.com  
+**Hackathon Details:** https://cortexlinux.com/hackathon  
+**GitHub Repository:** https://github.com/cortexlinux/cortex  
+**YouTube Channel:** https://youtube.com/@cortexlinux  
+**Discord Community:** https://discord.gg/cortexlinux
 
 ### About Cortex Linux
 
@@ -56,14 +56,14 @@ Cortex Linux is the AI layer for Linux — an open-source AI-native operating sy
 
 ### About AI Venture Holdings LLC
 
-AI Venture Holdings LLC develops AI-powered tools for enterprise infrastructure. The company's flagship project, Cortex Linux, targets the growing demand for intelligent system administration in cloud and on-premises environments. Learn more at https://cxlinux-ai.com.
+AI Venture Holdings LLC develops AI-powered tools for enterprise infrastructure. The company's flagship project, Cortex Linux, targets the growing demand for intelligent system administration in cloud and on-premises environments. Learn more at https://cortexlinux.com.
 
 ### Media Contact
 
 Michael J. Morgan  
 CEO and Founder, AI Venture Holdings LLC  
-press@cxlinux-ai.com  
-https://cxlinux-ai.com
+press@cortexlinux.com  
+https://cortexlinux.com
 
 ---
 
@@ -94,13 +94,13 @@ Secondary Keywords:
 
 ## BACKLINKS INCLUDED
 
-1. https://cxlinux-ai.com (homepage — 2 mentions)
-2. https://cxlinux-ai.com/hackathon (registration)
-3. https://github.com/cxlinux-ai/cortex (GitHub)
-4. https://youtube.com/@cxlinux-ai (YouTube)
-5. https://discord.gg/cxlinux-ai (Discord)
+1. https://cortexlinux.com (homepage — 2 mentions)
+2. https://cortexlinux.com/hackathon (registration)
+3. https://github.com/cortexlinux/cortex (GitHub)
+4. https://youtube.com/@cortexlinux (YouTube)
+5. https://discord.gg/cortexlinux (Discord)
 
-**Total backlinks to cxlinux-ai.com: 3**
+**Total backlinks to cortexlinux.com: 3**
 
 ---
 

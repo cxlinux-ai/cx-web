@@ -56,7 +56,7 @@ CTA Button (Below List):
 Margin top: mt-8
 Full width: w-full
 Text: "View Open Issues on GitHub"
-Link: https://github.com/cxlinux-ai/cortex/issues
+Link: https://github.com/cortexlinux/cortex/issues
 Style: px-8 py-4 bg-blue-500 rounded-lg font-semibold text-center
 Hover: Blue glow shadow + scale
 Icon: Github icon on left, ExternalLink icon on right
@@ -365,9 +365,9 @@ Icon size: 20px
 
 Links:
 
-GitHub: github.com/cxlinux-ai/cortex
-Email: mike@cxlinux-ai.com
-Website: cxlinux-ai.com
+GitHub: github.com/cortexlinux/cortex
+Email: mike@cortexlinux.com
+Website: cortexlinux.com
 
 
 Footer

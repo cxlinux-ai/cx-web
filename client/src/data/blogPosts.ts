@@ -191,7 +191,7 @@ We believe powerful tools should be accessible. The free tier includes full AI c
 
 ## Get Started
 
-**Star us on GitHub:** [github.com/cxlinux-ai/cortex](https://github.com/cxlinux-ai/cortex)
+**Star us on GitHub:** [github.com/cortexlinux/cortex](https://github.com/cortexlinux/cortex)
 
 **Join the community:** Discord (link in repo) for support, feedback, and early access.
 

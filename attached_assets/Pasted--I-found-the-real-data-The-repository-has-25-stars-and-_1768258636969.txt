@@ -3,7 +3,7 @@ I found the real data. The repository has 25 stars and 47 forks. Let me update t
 
 Now let me update the frontend hardcoded values as well:
 
-I've updated all the placeholder values with the real data from the GitHub repository (https://github.com/cxlinux-ai/Cortex):
+I've updated all the placeholder values with the real data from the GitHub repository (https://github.com/cortexlinux/Cortex):
 
 Changes made:
 

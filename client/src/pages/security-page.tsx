@@ -498,11 +498,11 @@ export default function SecurityPage() {
                 Report security issues responsibly. We acknowledge within 48 hours and aim to fix critical issues within 7 days.
               </p>
               <a
-                href="mailto:security@cxlinux-ai.com"
+                href="mailto:security@cortexlinux.com"
                 className="text-blue-300 hover:underline text-sm"
                 data-testid="link-security-email"
               >
-                security@cxlinux-ai.com
+                security@cortexlinux.com
               </a>
             </motion.div>
 

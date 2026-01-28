@@ -184,7 +184,7 @@ export default function Status() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://twitter.com/cxlinux-ai"
+              href="https://twitter.com/cortexlinux"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"

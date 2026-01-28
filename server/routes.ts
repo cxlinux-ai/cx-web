@@ -26,8 +26,6 @@ import discordBot from "./discord-bot";
 import licenseRoutes from "./license";
 import emailCaptureRoutes from "./email-capture";
 import PDFDocument from "pdfkit";
-import { generateAgentProfile, getAllAgentProfiles, createSampleAgent } from "./agent-profiles";
-import { createMockAgent, getAllMockAgents, getMockAgentProfile, clearMockAgents, getMockStats } from "./mock-agent-api";
 
 // Keep-alive: Self-ping to prevent sleep
 const SELF_PING_INTERVAL = 4 * 60 * 1000; // 4 minutes
@@ -60,7 +58,7 @@ const STATS_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let issuesCache: { data: any[]; timestamp: number } | null = null;
 const ISSUES_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
-// Fallback data for when GitHub is unavailable (Real data from https://github.com/cxlinux-ai/Cortex)
+// Fallback data for when GitHub is unavailable (Real data from https://github.com/cortexlinux/Cortex)
 const FALLBACK_STATS = {
   openIssues: 12,
   contributors: 5,
@@ -70,10 +68,10 @@ const FALLBACK_STATS = {
 };
 
 const FALLBACK_ISSUES = [
-  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cxlinux-ai/cortex/issues" },
-  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cortex/issues" },
-  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cxlinux-ai/cortex/issues" },
-  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cortex/issues" },
+  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cortexlinux/cortex/issues" },
+  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
+  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cortexlinux/cortex/issues" },
+  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
 ];
 
 const FALLBACK_CONTRIBUTORS: Contributor[] = [
@@ -107,18 +105,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       bot: process.env.DISCORD_BOT_TOKEN ? "configured" : "not configured",
     });
   });
-
-  // Agent Profile Generator API
-  app.get("/api/agents", getAllAgentProfiles);
-  app.get("/api/agents/:agentId/profile", generateAgentProfile);
-  app.post("/api/agents/sample", createSampleAgent);
-
-  // Mock Agent API (for testing without database)
-  app.post("/api/mock/agents", createMockAgent);
-  app.get("/api/mock/agents", getAllMockAgents);
-  app.get("/api/mock/agents/:agentId/profile", getMockAgentProfile);
-  app.delete("/api/mock/agents", clearMockAgents);
-  app.get("/api/mock/stats", getMockStats);
 
   // Discord server structure endpoint (for debugging)
   app.get("/api/discord/server-structure", async (req, res) => {
@@ -176,7 +162,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Start keep-alive self-ping (for Replit deployments)
-  const baseUrl = process.env.REPLIT_URL || process.env.BASE_URL || "https://cxlinux-ai.com";
+  const baseUrl = process.env.REPLIT_URL || process.env.BASE_URL || "https://cortexlinux.com";
   startKeepAlive(baseUrl);
 
   // GitHub API endpoint to fetch repository stats
@@ -193,7 +179,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_STATS);
       }
 
-      const owner = "cxlinux-ai";
+      const owner = "cortexlinux";
       const repo = "cortex";
       
       const headers = {
@@ -257,7 +243,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_ISSUES);
       }
 
-      const owner = "cxlinux-ai";
+      const owner = "cortexlinux";
       const repo = "cortex";
       
       const headers = {
@@ -337,7 +323,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_CONTRIBUTORS);
       }
 
-      const owner = "cxlinux-ai";
+      const owner = "cortexlinux";
       const repo = "cortex";
       
       const headers: Record<string, string> = {
@@ -824,10 +810,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Contact & Resources");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("• Website: https://cxlinux-ai.com/hackathon", { lineGap: 3 })
-         .text("• GitHub: https://github.com/cxlinux-ai/cortex", { lineGap: 3 })
+         .text("• Website: https://cortexlinux.com/hackathon", { lineGap: 3 })
+         .text("• GitHub: https://github.com/cortexlinux/cortex", { lineGap: 3 })
          .text("• Discord: https://discord.gg/ASvzWcuTfk", { lineGap: 3 })
-         .text("• Email: hackathon@cxlinux-ai.com", { lineGap: 3 });
+         .text("• Email: hackathon@cortexlinux.com", { lineGap: 3 });
       doc.moveDown(2);
       
       // Footer

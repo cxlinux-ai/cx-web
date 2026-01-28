@@ -13,7 +13,7 @@ interface QuickStartWidgetProps {
   variant?: 'sidebar' | 'inline';
 }
 
-const INSTALL_COMMAND = 'curl -fsSL https://cxlinux-ai.com/install.sh | bash';
+const INSTALL_COMMAND = 'curl -fsSL https://cortexlinux.com/install.sh | bash';
 
 export default function QuickStartWidget({
   variant = 'inline',

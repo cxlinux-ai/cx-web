@@ -138,7 +138,7 @@ OPEN SOURCE SECTION:
 - Headline: "Built in the Open"
 - Stats: [X] GitHub Stars | [X] Contributors | [X] Open Issues
 - Text: "Apache 2.0 License. Community edition free forever. Enterprise features for companies."
-- GitHub button linking to: https://github.com/cxlinux-ai/cortex
+- GitHub button linking to: https://github.com/cortexlinux/cortex
 
 BUSINESS MODEL SECTION:
 - Headline: "Free for Developers. Paid for Enterprises."
@@ -183,7 +183,7 @@ FOOTER:
 - Logo + tagline
 - Links: Home | FAQ | GitHub | Discord | Blog | Contact
 - Social: GitHub, Discord, Twitter/X
-- Email: mike@cxlinux-ai.com
+- Email: mike@cortexlinux.com
 - Copyright: © 2025 Cortex Linux. Apache 2.0 License.
 - Legal: Privacy Policy | Terms of Service
 
@@ -511,7 +511,7 @@ Q23: How do I install Cortex?
 A: Installation guide:
    
    STEP 1: Install on Ubuntu 24.04
-   curl -s https://install.cxlinux-ai.com | bash
+   curl -s https://install.cortexlinux.com | bash
    
    STEP 2: Configure AI provider
    cortex config set-api-key [your-claude-api-key]
@@ -520,7 +520,7 @@ A: Installation guide:
    STEP 3: Try your first command
    cortex install --help
    
-   Full documentation: https://docs.cxlinux-ai.com/getting-started
+   Full documentation: https://docs.cortexlinux.com/getting-started
 
 Q24: Is it ready to use now?
 A: Current status: Public Beta (November 2025)
@@ -563,7 +563,7 @@ Q26: How can I contribute?
 A: We welcome contributors! Options:
    
    1. CODE CONTRIBUTIONS
-      - Browse issues: github.com/cxlinux-ai/cortex/issues
+      - Browse issues: github.com/cortexlinux/cortex/issues
       - Bounties: $25-500 per merged PR
       - Filter by: "priority: critical" for MVP blockers
    
@@ -603,7 +603,7 @@ A: Built-in recovery:
       cortex reset
       → Removes all Cortex changes, back to fresh Ubuntu
    
-   Support: Discord community or enterprise@cxlinux-ai.com
+   Support: Discord community or enterprise@cortexlinux.com
 
 Q28: Can I uninstall Cortex?
 A: Yes, completely:
@@ -626,12 +626,12 @@ A: Multiple support channels:
    
    FREE (Community):
    - Discord: discord.gg/uCqHvxjU83
-   - GitHub Issues: github.com/cxlinux-ai/cortex/issues
-   - Documentation: docs.cxlinux-ai.com
+   - GitHub Issues: github.com/cortexlinux/cortex/issues
+   - Documentation: docs.cortexlinux.com
    - FAQ: This page!
    
    PAID (Enterprise):
-   - Email: enterprise@cxlinux-ai.com
+   - Email: enterprise@cortexlinux.com
    - 24/7 phone support
    - Dedicated Slack channel
    - Custom integration help
@@ -664,7 +664,7 @@ A: Privacy commitment:
 STILL HAVE QUESTIONS?
 Can't find your answer? We're here to help:
 - Ask on Discord: [Discord button]
-- Email us: hello@cxlinux-ai.com
+- Email us: hello@cortexlinux.com
 - Open GitHub issue: [GitHub button]
 
 ═══════════════════════════════════════════════════════════════
@@ -713,9 +713,9 @@ FONTS:
 - Terminal/Code: JetBrains Mono or Fira Code (monospace)
 
 LINKS TO INCLUDE:
-- GitHub: https://github.com/cxlinux-ai/cortex
+- GitHub: https://github.com/cortexlinux/cortex
 - Discord: https://discord.gg/uCqHvxjU83
-- Email: mike@cxlinux-ai.com
+- Email: mike@cortexlinux.com
 
 PLACEHOLDER CONTENT:
 - Use "[X]" for stats that will be filled in later (GitHub stars, contributors)
@@ -749,7 +749,7 @@ Make it look professional enough to show investors. This is a real startup seeki
 - Netlify
 - Vercel
 - GitHub Pages
-- Custom domain (cxlinux-ai.com)
+- Custom domain (cortexlinux.com)
 
 ---
 
@@ -759,7 +759,7 @@ Make it look professional enough to show investors. This is a real startup seeki
 1. Review the site
 2. Test on mobile
 3. Add real GitHub stats
-4. Deploy to cxlinux-ai.com
+4. Deploy to cortexlinux.com
 5. Share in Instagram comments
 6. Use for investor pitches
 

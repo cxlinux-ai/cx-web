@@ -47,7 +47,7 @@ Include image URL in JSON-LD schemas for blog posts, tutorials, press releases.
 Example for an article:
 
 "image": [
-  "https://cxlinux-ai.com/images/linux-docker-permissions-guide.png"
+  "https://cortexlinux.com/images/linux-docker-permissions-guide.png"
 ]
 
 f. Unique Featured Images
@@ -173,7 +173,7 @@ Add OpenGraph meta tags for sharing:
 
 <meta property="og:title" content="Fix Docker Permissions on Linux – Cortex Guide" />
 <meta property="og:description" content="Step-by-step guide to fix Docker permissions on Linux without errors." />
-<meta property="og:image" content="https://cxlinux-ai.com/images/docker-permissions-guide.png" />
+<meta property="og:image" content="https://cortexlinux.com/images/docker-permissions-guide.png" />
 <meta property="og:type" content="article" />
 
 
@@ -182,7 +182,7 @@ Twitter cards:
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Fix Docker Permissions on Linux – Cortex Guide" />
 <meta name="twitter:description" content="Step-by-step guide to fix Docker permissions on Linux without errors." />
-<meta name="twitter:image" content="https://cxlinux-ai.com/images/docker-permissions-guide.png" />
+<meta name="twitter:image" content="https://cortexlinux.com/images/docker-permissions-guide.png" />
 
 6️⃣ Advanced SEO Enhancements
 

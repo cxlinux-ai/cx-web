@@ -292,7 +292,7 @@ export const aptComparison: ComparisonData = {
       step: 1,
       title: 'Install Cortex Alongside APT',
       description: 'Cortex works with apt, not against it. Your existing apt workflows remain unchanged.',
-      command: 'curl -fsSL https://get.cxlinux-ai.com | sh',
+      command: 'curl -fsSL https://get.cortexlinux.com | sh',
       note: 'Cortex uses apt under the hood for package operations',
     },
     {
@@ -560,7 +560,7 @@ export const nixComparison: ComparisonData = {
       step: 2,
       title: 'Install Cortex on Your System',
       description: 'Cortex installs alongside Nix without conflicts.',
-      command: 'curl -fsSL https://get.cxlinux-ai.com | sh',
+      command: 'curl -fsSL https://get.cortexlinux.com | sh',
       note: 'On NixOS, you can also add Cortex to your configuration.nix',
     },
     {
@@ -840,7 +840,7 @@ export const manualCliComparison: ComparisonData = {
       step: 1,
       title: 'Install Cortex',
       description: 'One command to get started. Works alongside your existing tools.',
-      command: 'curl -fsSL https://get.cxlinux-ai.com | sh',
+      command: 'curl -fsSL https://get.cortexlinux.com | sh',
       note: 'No configuration required—Cortex detects your system automatically',
     },
     {

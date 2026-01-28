@@ -99,7 +99,7 @@ const tiers = [
       'Dedicated Customer Success Manager'
     ],
     cta: 'Schedule Demo',
-    ctaLink: 'https://calendly.com/cxlinux-ai/demo',
+    ctaLink: 'https://calendly.com/cortexlinux/demo',
     highlighted: false
   }
 ];

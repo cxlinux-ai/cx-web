@@ -51,7 +51,7 @@ const FAQ_ENTRIES = [
   },
   {
     triggers: ["github", "source code", "repo", "repository"],
-    answer: "GitHub: https://github.com/cxlinux-ai/cortex\nWebsite: https://cxlinux-ai.com",
+    answer: "GitHub: https://github.com/cortexlinux/cortex\nWebsite: https://cortexlinux.com",
   },
   {
     triggers: ["help", "commands", "how to use", "usage"],

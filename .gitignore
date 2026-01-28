@@ -23,3 +23,4 @@ ENV/
 
 # Model cache
 .cache/huggingface/
+.vercel

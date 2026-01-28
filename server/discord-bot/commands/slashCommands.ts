@@ -327,9 +327,9 @@ async function handleHelpCommand(
       {
         name: "Links",
         value: [
-          "[Website](https://cxlinux-ai.com)",
-          "[GitHub](https://github.com/cxlinux-ai/cortex)",
-          "[Hackathon](https://cxlinux-ai.com/hackathon)",
+          "[Website](https://cortexlinux.com)",
+          "[GitHub](https://github.com/cortexlinux/cortex)",
+          "[Hackathon](https://cortexlinux.com/hackathon)",
         ].join(" | "),
       }
     )
@@ -405,16 +405,16 @@ async function handleReferralCommand(
       {
         name: "How to Participate",
         value:
-          "1. Sign up at https://cxlinux-ai.com/referrals\n2. Get your unique referral link\n3. Share with friends\n4. Earn rewards when they join Discord AND contribute!",
+          "1. Sign up at https://cortexlinux.com/referrals\n2. Get your unique referral link\n3. Share with friends\n4. Earn rewards when they join Discord AND contribute!",
       }
     )
-    .setURL("https://cxlinux-ai.com/referrals");
+    .setURL("https://cortexlinux.com/referrals");
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setLabel("Get Your Referral Link")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux-ai.com/referrals")
+      .setURL("https://cortexlinux.com/referrals")
   );
 
   await interaction.reply({ embeds: [embed], components: [row] });
@@ -450,17 +450,17 @@ async function handleHackathonCommand(
         value: "1st: $5K | 2nd: $3K | 3rd: $2K | 4th-10th: $700 worth of goodies + 2mo managed service",
       }
     )
-    .setURL("https://cxlinux-ai.com/hackathon");
+    .setURL("https://cortexlinux.com/hackathon");
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setLabel("Register Now")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux-ai.com/hackathon"),
+      .setURL("https://cortexlinux.com/hackathon"),
     new ButtonBuilder()
       .setLabel("View Rules")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux-ai.com/downloads/cortex-hackathon-rules-2026.pdf")
+      .setURL("https://cortexlinux.com/downloads/cortex-hackathon-rules-2026.pdf")
   );
 
   await interaction.reply({ embeds: [embed], components: [row] });
@@ -642,12 +642,12 @@ async function handleLinksCommand(
     .setColor(COLORS.primary)
     .setTitle("Cortex Linux Links")
     .addFields(
-      { name: "Website", value: "[cxlinux-ai.com](https://cxlinux-ai.com)", inline: true },
-      { name: "GitHub", value: "[github.com/cxlinux-ai](https://github.com/cxlinux-ai)", inline: true },
-      { name: "Bounties", value: "[/bounties](https://cxlinux-ai.com/bounties)", inline: true },
-      { name: "Hackathon", value: "[/hackathon](https://cxlinux-ai.com/hackathon)", inline: true },
-      { name: "Referrals", value: "[/referrals](https://cxlinux-ai.com/referrals)", inline: true },
-      { name: "Blog", value: "[/blog](https://cxlinux-ai.com/blog)", inline: true }
+      { name: "Website", value: "[cortexlinux.com](https://cortexlinux.com)", inline: true },
+      { name: "GitHub", value: "[github.com/cortexlinux](https://github.com/cortexlinux)", inline: true },
+      { name: "Bounties", value: "[/bounties](https://cortexlinux.com/bounties)", inline: true },
+      { name: "Hackathon", value: "[/hackathon](https://cortexlinux.com/hackathon)", inline: true },
+      { name: "Referrals", value: "[/referrals](https://cortexlinux.com/referrals)", inline: true },
+      { name: "Blog", value: "[/blog](https://cortexlinux.com/blog)", inline: true }
     )
     .setFooter({ text: "The AI Layer for Linux" });
 
@@ -707,7 +707,7 @@ async function handleBountiesCommand(
       .setTitle("Open Bounties & PRs")
       .setDescription(
         `Found **${stats.totalOpen}** open bounties worth **$${stats.totalOpenAmount.toLocaleString()}** total!\n\n` +
-        `View all bounties at [cxlinux-ai.com/bounties](https://cxlinux-ai.com/bounties)`
+        `View all bounties at [cortexlinux.com/bounties](https://cortexlinux.com/bounties)`
       )
       .setTimestamp();
 
@@ -754,7 +754,7 @@ async function handleBountiesCommand(
       .setDescription(
         "Check out open bounties and contribute to Cortex Linux!\n\n" +
         "**Browse all bounties:**\n" +
-        "[cxlinux-ai.com/bounties](https://cxlinux-ai.com/bounties)\n\n" +
+        "[cortexlinux.com/bounties](https://cortexlinux.com/bounties)\n\n" +
         "**How it works:**\n" +
         "1. Find a bounty you want to work on\n" +
         "2. Comment on the GitHub issue to claim it\n" +
@@ -786,8 +786,8 @@ const SERVER_SETUP = {
             description: "The AI Layer for Linux. We're building the future of intelligent computing.",
             color: 0x6366f1,
             fields: [
-              { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cxlinux-ai-ai" },
-              { name: "Links", value: "[Website](https://cxlinux-ai.com) • [GitHub](https://github.com/cxlinux-ai) • [Hackathon](https://cxlinux-ai.com/hackathon)" },
+              { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cortexlinux-ai" },
+              { name: "Links", value: "[Website](https://cortexlinux.com) • [GitHub](https://github.com/cortexlinux) • [Hackathon](https://cortexlinux.com/hackathon)" },
             ]
           }
         },
@@ -823,7 +823,7 @@ const SERVER_SETUP = {
       emoji: "🤖",
       channels: [
         {
-          name: "cxlinux-ai-ai",
+          name: "cortexlinux-ai",
           topic: "Chat with the Cortex AI assistant! Mention @CortexLinuxAI or use /cortex",
           welcome: {
             title: "Cortex AI Assistant",
@@ -885,7 +885,7 @@ const SERVER_SETUP = {
             fields: [
               { name: "Cash Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000" },
               { name: "4th-10th Place", value: "$700 worth of goodies + 2 months Cortex managed service each" },
-              { name: "How to Join", value: "Register at [cxlinux-ai.com/hackathon](https://cxlinux-ai.com/hackathon)" },
+              { name: "How to Join", value: "Register at [cortexlinux.com/hackathon](https://cortexlinux.com/hackathon)" },
             ]
           }
         },

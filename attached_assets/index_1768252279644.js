@@ -148,8 +148,8 @@ client.on(Events.GuildMemberAdd, async (member) => {
       `• Reply to my messages to continue a conversation\n\n` +
       `I know the docs inside out, so ask away. You get 5 questions per day.\n\n` +
       `Quick links:\n` +
-      `• GitHub: https://github.com/cxlinux-ai/cortex\n` +
-      `• Website: https://cxlinux-ai.com`
+      `• GitHub: https://github.com/cortexlinux/cortex\n` +
+      `• Website: https://cortexlinux.com`
     );
     console.log(`[Welcome] Sent DM to new member: ${member.user.username}`);
   } catch (error) {

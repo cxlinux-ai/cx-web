@@ -24,15 +24,15 @@ const router = Router();
 // Environment variables (set these in your deployment)
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID || "";
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET || "";
-const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || "https://cxlinux-ai.com/api/oauth/discord/callback";
+const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || "https://cortexlinux.com/api/oauth/discord/callback";
 const DISCORD_SERVER_ID = process.env.DISCORD_SERVER_ID || ""; // Your Discord server ID
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN || "";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || "";
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || "";
-const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || "https://cxlinux-ai.com/api/oauth/github/callback";
+const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || "https://cortexlinux.com/api/oauth/github/callback";
 
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://cxlinux-ai.com";
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://cortexlinux.com";
 
 // Rate limiters
 const oauthLimiter = rateLimit({
@@ -587,8 +587,8 @@ router.post("/github/check-contributions", oauthLimiter, async (req: Request, re
       });
     }
 
-    // Search for PRs by user in cxlinux-ai repos
-    const searchUrl = `https://api.github.com/search/issues?q=author:${user.githubUsername}+org:cxlinux-ai+is:pr&sort=created&order=desc&per_page=20`;
+    // Search for PRs by user in cortexlinux repos
+    const searchUrl = `https://api.github.com/search/issues?q=author:${user.githubUsername}+org:cortexlinux+is:pr&sort=created&order=desc&per_page=20`;
 
     const searchResponse = await fetch(searchUrl, {
       headers: {

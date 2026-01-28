@@ -20,7 +20,7 @@ No prior application or payment is required; participation is 100% free.
 
 3. Registration and Participation
 
-Participants must star and fork the Cortex GitHub repository: https://github.com/cxlinux-ai/cortex
+Participants must star and fork the Cortex GitHub repository: https://github.com/cortexlinux/cortex
 .
 
 Phase 1: Ideation (Weeks 1–4)
@@ -73,7 +73,7 @@ The Organizer reserves the right to disqualify submissions that contain maliciou
 
 The Organizer may collect participant information (e.g., GitHub username, email, submission content) for hackathon administration and prize distribution.
 
-Participant data will be handled according to Cortex Linux’s Privacy Policy: https://cxlinux-ai.com/privacy
+Participant data will be handled according to Cortex Linux’s Privacy Policy: https://cortexlinux.com/privacy
 .
 
 By participating, contributors consent to the processing of personal data related to hackathon participation and judging.
@@ -130,12 +130,12 @@ They accept that their contributions may be used for open-source and commercial 
 
 Official Links & References:
 
-GitHub Repository: https://github.com/cxlinux-ai/cortex
+GitHub Repository: https://github.com/cortexlinux/cortex
 
-Privacy Policy: https://cxlinux-ai.com/privacy
+Privacy Policy: https://cortexlinux.com/privacy
 
-Terms of Service: https://cxlinux-ai.com/terms
+Terms of Service: https://cortexlinux.com/terms
 
-MIT License: https://cxlinux-ai.com/license
+MIT License: https://cortexlinux.com/license
 
-Security Policy: https://cxlinux-ai.com/security-policy
+Security Policy: https://cortexlinux.com/security-policy

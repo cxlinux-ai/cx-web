@@ -5,7 +5,7 @@
  * Uses GitHub's public API (no auth required for public repos).
  */
 
-const GITHUB_ORG = "cxlinux-ai";
+const GITHUB_ORG = "cortexlinux";
 const GITHUB_REPO = "cortex";
 const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
