@@ -36,6 +36,8 @@ import SuccessPage from "./pages/success";
 import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
 import AgentProfilesPage from "./pages/agent-profiles";
+import SolutionsPage from "./pages/solutions";
+import TrustPage from "./pages/trust";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -169,14 +171,44 @@ export default function App() {
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
                 <Link
-                  href="/getting-started"
+                  href="/solutions"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/getting-started" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
+                    location === "/solutions" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
-                  data-testid="link-getting-started"
-                  onClick={() => analytics.trackCTAClick('getting_started', 'main_nav')}
+                  data-testid="link-solutions"
+                  onClick={() => analytics.trackCTAClick('solutions', 'main_nav')}
                 >
-                  Get Started
+                  Solutions
+                </Link>
+                <Link
+                  href="/agent-profiles"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/agent-profiles" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
+                  }`}
+                  data-testid="link-agents"
+                  onClick={() => analytics.trackCTAClick('agents', 'main_nav')}
+                >
+                  Agents
+                </Link>
+                <Link
+                  href="/trust"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/trust" ? "text-green-400" : "text-gray-400 hover:text-green-400"
+                  }`}
+                  data-testid="link-trust-center"
+                  onClick={() => analytics.trackCTAClick('trust_center', 'main_nav')}
+                >
+                  Trust Center
+                </Link>
+                <Link
+                  href="/mission"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/mission" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
+                  }`}
+                  data-testid="link-company"
+                  onClick={() => analytics.trackCTAClick('company', 'main_nav')}
+                >
+                  Company
                 </Link>
                 <Link
                   href="/pricing"
@@ -189,44 +221,6 @@ export default function App() {
                   onClick={() => analytics.trackCTAClick('pricing', 'main_nav')}
                 >
                   Pricing
-                </Link>
-                <Link
-                  href="/news"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/news") ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-news"
-                  onClick={() => analytics.trackCTAClick('news', 'main_nav')}
-                >
-                  News
-                </Link>
-                <Link
-                  href="/startup"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/startup" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-startup"
-                  onClick={() => analytics.trackCTAClick('ai_agencies', 'main_nav')}
-                >AI Agencies</Link>
-                <Link
-                  href="/referrals"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/referrals" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-referrals"
-                  onClick={() => analytics.trackCTAClick('referrals', 'main_nav')}
-                >
-                  Referrals
-                </Link>
-                <Link
-                  href="/agent-profiles"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/agent-profiles" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
-                  }`}
-                  data-testid="link-agent-profiles"
-                  onClick={() => analytics.trackCTAClick('agent_profiles', 'main_nav')}
-                >
-                  Agent Fleet
                 </Link>
                 <Link
                   href="/hackathon"
@@ -300,15 +294,48 @@ export default function App() {
                   className="px-4 py-6 space-y-4"
                 >
                   <Link
-                    href="/getting-started"
+                    href="/solutions"
                     onClick={() => {
-                      analytics.trackCTAClick('getting_started', 'mobile_nav');
+                      analytics.trackCTAClick('solutions', 'mobile_nav');
                       setMobileMenuOpen(false);
                     }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-getting-started"
+                    data-testid="mobile-link-solutions"
                   >
-                    Get Started
+                    Solutions
+                  </Link>
+                  <Link
+                    href="/agent-profiles"
+                    onClick={() => {
+                      analytics.trackCTAClick('agents', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                    data-testid="mobile-link-agents"
+                  >
+                    Agents
+                  </Link>
+                  <Link
+                    href="/trust"
+                    onClick={() => {
+                      analytics.trackCTAClick('trust_center', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-green-400 transition-colors duration-300"
+                    data-testid="mobile-link-trust-center"
+                  >
+                    Trust Center
+                  </Link>
+                  <Link
+                    href="/mission"
+                    onClick={() => {
+                      analytics.trackCTAClick('company', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
+                    data-testid="mobile-link-company"
+                  >
+                    Company
                   </Link>
                   <Link
                     href="/pricing"
@@ -320,50 +347,6 @@ export default function App() {
                     data-testid="mobile-link-pricing"
                   >
                     Pricing
-                  </Link>
-                  <Link
-                    href="/news"
-                    onClick={() => {
-                      analytics.trackCTAClick('news', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-news"
-                  >
-                    News
-                  </Link>
-                  <Link
-                    href="/startup"
-                    onClick={() => {
-                      analytics.trackCTAClick('ai_agencies', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-startup"
-                  >
-                    AI Agencies
-                  </Link>
-                  <Link
-                    href="/referrals"
-                    onClick={() => {
-                      analytics.trackCTAClick('referrals', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-referrals"
-                  >
-                    Referrals
-                  </Link>
-                  <Link
-                    href="/agent-profiles"
-                    onClick={() => {
-                      analytics.trackCTAClick('agent_profiles', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-purple-400 transition-colors duration-300"
-                    data-testid="mobile-link-agent-profiles"
-                  >
-                    Agent Fleet
                   </Link>
                   <Link
                     href="/hackathon"
@@ -434,6 +417,8 @@ export default function App() {
             <Route path="/support" component={SupportPage} />
             <Route path="/architecture" component={ArchitecturePage} />
             <Route path="/agent-profiles" component={AgentProfilesPage} />
+            <Route path="/solutions" component={SolutionsPage} />
+            <Route path="/trust" component={TrustPage} />
           </Switch>
           </main>
 
