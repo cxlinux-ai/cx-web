@@ -14,7 +14,7 @@ export default function Footer() {
               data-testid="footer-logo"
             >
               <span className="text-white">CX</span>{" "}
-              <span className="text-blue-400">LINUX</span>
+              <span className="text-purple-400">LINUX</span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
               The AI Layer for Linux. Execute any task with natural language.

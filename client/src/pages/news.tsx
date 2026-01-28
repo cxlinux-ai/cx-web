@@ -26,7 +26,7 @@ export default function NewsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-6">
               <Newspaper size={16} />
               Press Room
             </div>
@@ -48,7 +48,7 @@ export default function NewsPage() {
                 className="group"
               >
                 <Link href={`/news/${release.slug}`}>
-                  <div className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all duration-300 cursor-pointer">
+                  <div className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/[0.07] transition-all duration-300 cursor-pointer">
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
                       <div className="flex items-center gap-1">
                         <Calendar size={14} />
@@ -62,7 +62,7 @@ export default function NewsPage() {
                       )}
                     </div>
 
-                    <h2 className="text-xl md:text-2xl font-semibold mb-3 group-hover:text-blue-400 transition-colors">
+                    <h2 className="text-xl md:text-2xl font-semibold mb-3 group-hover:text-purple-400 transition-colors">
                       {release.headline || release.title}
                     </h2>
 
@@ -84,7 +84,7 @@ export default function NewsPage() {
                       </div>
                     )}
 
-                    <div className="flex items-center gap-2 text-blue-400 font-medium">
+                    <div className="flex items-center gap-2 text-purple-400 font-medium">
                       Read Full Release
                       <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>

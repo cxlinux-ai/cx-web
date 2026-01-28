@@ -104,7 +104,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
         transition={{ duration: 0.2 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-blue-500 rounded-t-2xl" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-emerald-500 to-purple-500 rounded-t-2xl" />
         
         <div className="p-6 sm:p-8">
           <button
@@ -149,7 +149,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
                       placeholder="Enter your name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-purple-500 h-12"
                       data-testid="input-name"
                     />
                     {errors.name && (
@@ -167,7 +167,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
                       placeholder="you@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-purple-500 h-12"
                       data-testid="input-email"
                     />
                     {errors.email && (
@@ -183,7 +183,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
                         onCheckedChange={(checked) => 
                           setFormData({ ...formData, includePhone: checked === true })
                         }
-                        className="border-white/30 data-[state=checked]:bg-blue-500 data-[state=checked]:border-blue-500"
+                        className="border-white/30 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
                         data-testid="checkbox-include-phone"
                       />
                       <Label 
@@ -202,7 +202,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
                           placeholder="+1 (555) 123-4567"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-purple-500 h-12"
                           data-testid="input-phone"
                         />
                         {errors.phone && (

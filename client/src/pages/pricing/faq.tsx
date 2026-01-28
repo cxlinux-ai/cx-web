@@ -193,10 +193,10 @@ export default function PricingFAQ() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6"
           >
-            <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-purple-400 bg-clip-text text-transparent">
               Pricing
             </span>{" "}
-            <span className="text-blue-400">FAQ</span>
+            <span className="text-purple-400">FAQ</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -221,7 +221,7 @@ export default function PricingFAQ() {
               placeholder="Search questions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-blue-400"
+              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-purple-400"
             />
           </motion.div>
         </div>
@@ -238,8 +238,8 @@ export default function PricingFAQ() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                  <category.icon className="h-6 w-6 text-blue-400" />
+                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                  <category.icon className="h-6 w-6 text-purple-400" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   {category.category}
@@ -261,7 +261,7 @@ export default function PricingFAQ() {
                       id={`pricing-faq-question-${globalIndex}`}
                       className="border-white/10"
                     >
-                      <AccordionTrigger className="text-left hover:no-underline hover:text-blue-400 transition-colors">
+                      <AccordionTrigger className="text-left hover:no-underline hover:text-purple-400 transition-colors">
                         <span className="text-lg font-semibold pr-4">
                           {question.q}
                         </span>
@@ -297,9 +297,9 @@ export default function PricingFAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-16 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-2xl p-8 text-center"
+          className="mt-16 bg-gradient-to-r from-purple-500/10 to-purple-500/10 border border-purple-400/30 rounded-2xl p-8 text-center"
         >
-          <MessageSquare className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+          <MessageSquare className="w-12 h-12 text-purple-400 mx-auto mb-4" />
           <h3 className="text-2xl font-bold mb-4">Still Have Questions?</h3>
           <p className="text-gray-400 mb-6 max-w-xl mx-auto">
             Can't find what you're looking for? Our sales and support teams are here to help.
@@ -308,14 +308,14 @@ export default function PricingFAQ() {
             <a
               id="pricing-faq-sales-link"
               href="mailto:sales@cxlinux.com"
-              className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all"
+              className="px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
             >
               Contact Sales
             </a>
             <a
               id="pricing-faq-support-link"
               href="mailto:support@cxlinux.com"
-              className="px-6 py-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-400/10 transition-all"
+              className="px-6 py-3 border-2 border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition-all"
             >
               Email Support
             </a>
@@ -324,7 +324,7 @@ export default function PricingFAQ() {
               href="https://discord.gg/cxlinux"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-400/10 transition-all"
+              className="px-6 py-3 border-2 border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition-all"
             >
               Ask on Discord
             </a>

@@ -23,15 +23,15 @@ function formatContent(content: string): string {
       return `<pre class="bg-gray-900/50 border border-white/10 rounded-lg p-4 overflow-x-auto my-4"><code class="text-sm text-gray-300 language-${lang || 'text'}">${code.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
     })
     // Inline code
-    .replace(/`([^`]+)`/g, '<code class="bg-gray-800/50 px-1.5 py-0.5 rounded text-blue-300 text-sm">$1</code>')
+    .replace(/`([^`]+)`/g, '<code class="bg-gray-800/50 px-1.5 py-0.5 rounded text-purple-300 text-sm">$1</code>')
     // Bold
     .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
     // Italic
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     // Links - internal
-    .replace(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/g, '<a href="/blog/$2" class="text-blue-400 hover:text-blue-300 underline underline-offset-2">$1</a>')
+    .replace(/\[([^\]]+)\]\(\/blog\/([^)]+)\)/g, '<a href="/blog/$2" class="text-purple-400 hover:text-purple-300 underline underline-offset-2">$1</a>')
     // Links - external
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 underline underline-offset-2">$1</a>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 underline underline-offset-2">$1</a>')
     // Tables
     .replace(/^\|(.+)\|$/gm, (match) => {
       const cells = match.split('|').filter(c => c.trim());
@@ -230,7 +230,7 @@ export default function BlogPostPage() {
       <div className="min-h-screen pt-20 pb-16 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">Post not found</h1>
-          <Link href="/blog" className="text-blue-400 hover:underline">
+          <Link href="/blog" className="text-purple-400 hover:underline">
             Back to Blog
           </Link>
         </div>
@@ -244,7 +244,7 @@ export default function BlogPostPage() {
         {/* Main Content */}
         <article className="flex-1 max-w-4xl">
           {/* Back link */}
-          <Link href="/blog" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8">
             <ChevronLeft size={16} />
             Back to Blog
           </Link>
@@ -255,7 +255,7 @@ export default function BlogPostPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <span className="inline-block mb-4 px-3 py-1 text-sm font-medium bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400">
+            <span className="inline-block mb-4 px-3 py-1 text-sm font-medium bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400">
               {post.category}
             </span>
             
@@ -310,7 +310,7 @@ export default function BlogPostPage() {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-6xl text-blue-500/20">
+                  <div className="text-6xl text-purple-500/20">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
                       <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>

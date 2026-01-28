@@ -193,7 +193,7 @@ For Enterprise customers, contact your dedicated account manager for priority ha
         <Link
           id="privacy-back-link"
           href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
         >
           <ChevronLeft size={16} />
           Back to Home
@@ -220,9 +220,9 @@ For Enterprise customers, contact your dedicated account manager for priority ha
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-blue-500/10 border border-blue-400/30 rounded-xl p-4 mb-8"
+          className="bg-purple-500/10 border border-purple-400/30 rounded-xl p-4 mb-8"
         >
-          <p className="text-blue-300 text-sm">
+          <p className="text-purple-300 text-sm">
             <strong>TL;DR:</strong> We collect minimal data, never sell it, and you can opt out of
             telemetry entirely. Use local mode for complete privacy.
           </p>
@@ -239,8 +239,8 @@ For Enterprise customers, contact your dedicated account manager for priority ha
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-400" />
+                <div className="p-2 bg-purple-500/10 rounded-lg">
+                  <section.icon size={20} className="text-purple-400" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>

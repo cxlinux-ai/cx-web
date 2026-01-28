@@ -126,7 +126,7 @@ License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
             For trademark inquiries, contact:{" "}
             <a
               href="mailto:legal@cxlinux.com"
-              className="text-blue-400 hover:underline"
+              className="text-purple-400 hover:underline"
             >
               legal@cxlinux.com
             </a>
@@ -145,7 +145,7 @@ License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
             href="https://github.com/cxlinux-ai/cx"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors"
             data-testid="link-github"
           >
             <Github className="h-5 w-5" />

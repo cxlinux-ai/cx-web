@@ -213,7 +213,7 @@ const typeLabels = {
 
 const typeColors = {
   "full-time": "bg-green-500/20 text-green-400 border-green-500/30",
-  contract: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+  contract: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   bounty: "bg-amber-500/20 text-amber-400 border-amber-500/30",
   advisory: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   contributor: "bg-pink-500/20 text-pink-400 border-pink-500/30",
@@ -340,7 +340,7 @@ export default function CareersPage() {
               transition={{ delay: 0.2 }}
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
-              <Users className="w-10 h-10 text-blue-400 mb-4" />
+              <Users className="w-10 h-10 text-purple-400 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Flexible Arrangements</h3>
               <p className="text-gray-400 text-sm">
                 100% remote. Bounty-based, contract, advisory, or full-time once
@@ -576,7 +576,7 @@ export default function CareersPage() {
                 <div className="text-sm text-gray-400">Documentation</div>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-lg p-4">
-                <div className="text-2xl font-bold text-blue-400">$50</div>
+                <div className="text-2xl font-bold text-purple-400">$50</div>
                 <div className="text-sm text-gray-400">Bug Fixes</div>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-lg p-4">

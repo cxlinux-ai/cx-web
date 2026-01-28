@@ -116,8 +116,8 @@ export default function Status() {
               data-testid={`status-${service.name.toLowerCase().replace(/\s+/g, "-")}`}
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                  <service.icon className="h-6 w-6 text-blue-400" />
+                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                  <service.icon className="h-6 w-6 text-purple-400" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white">
@@ -180,7 +180,7 @@ export default function Status() {
               href="https://twitter.com/cxlinux"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-twitter"
             >
               Follow on Twitter
@@ -189,7 +189,7 @@ export default function Status() {
               href="https://discord.gg/uCqHvxjU83"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 border-2 border-purple-400 hover:bg-purple-400/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-discord"
             >
               Join Discord

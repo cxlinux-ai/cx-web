@@ -171,7 +171,7 @@ export default function NewsArticlePage() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Link href="/news">
-              <span className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mb-8 cursor-pointer" data-testid="link-back-to-news">
+              <span className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-8 cursor-pointer" data-testid="link-back-to-news">
                 <ArrowLeft size={16} />
                 Back to News
               </span>
@@ -204,7 +204,7 @@ export default function NewsArticlePage() {
                   {release.tags.map(tag => (
                     <span
                       key={tag}
-                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-sm text-blue-400"
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-sm text-purple-400"
                     >
                       <Tag size={12} />
                       {tag}
@@ -235,7 +235,7 @@ export default function NewsArticlePage() {
                   {release.quotes.map((quote, index) => (
                     <blockquote
                       key={index}
-                      className="border-l-4 border-blue-500 pl-6 py-2 my-8"
+                      className="border-l-4 border-purple-500 pl-6 py-2 my-8"
                     >
                       <p className="text-xl text-white italic mb-3">"{quote.text}"</p>
                       <footer className="text-gray-400">
@@ -259,7 +259,7 @@ export default function NewsArticlePage() {
                     <ul className="list-none space-y-3 my-6">
                       {release.bulletPoints.find(bp => bp.heading === section.title)?.items.map((item, iIndex) => (
                         <li key={iIndex} className="flex items-start gap-3 text-gray-300">
-                          <span className="text-blue-400 mt-1">•</span>
+                          <span className="text-purple-400 mt-1">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -274,7 +274,7 @@ export default function NewsArticlePage() {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-400 hover:text-blue-300 transition-colors"
+                            className="text-purple-400 hover:text-purple-300 transition-colors"
                           >
                             {link.url}
                           </a>
@@ -312,14 +312,14 @@ export default function NewsArticlePage() {
                     )}
                     <p className="flex items-center gap-2">
                       <Mail size={14} />
-                      <a href={`mailto:${release.contactInfo.email}`} className="text-blue-400 hover:text-blue-300">
+                      <a href={`mailto:${release.contactInfo.email}`} className="text-purple-400 hover:text-purple-300">
                         {release.contactInfo.email}
                       </a>
                     </p>
                     {release.contactInfo.phone && (
                       <p className="flex items-center gap-2">
                         <Phone size={14} />
-                        <a href={`tel:${release.contactInfo.phone}`} className="text-blue-400 hover:text-blue-300">
+                        <a href={`tel:${release.contactInfo.phone}`} className="text-purple-400 hover:text-purple-300">
                           {release.contactInfo.phone}
                         </a>
                       </p>
@@ -341,12 +341,12 @@ export default function NewsArticlePage() {
               <div className="space-y-4">
                 {recentReleases.map(pr => (
                   <Link key={pr.slug} href={`/news/${pr.slug}`}>
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all cursor-pointer group">
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/[0.07] transition-all cursor-pointer group">
                       <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
                         <Calendar size={12} />
                         <time dateTime={pr.date}>{formatDate(pr.date)}</time>
                       </div>
-                      <h3 className="font-semibold group-hover:text-blue-400 transition-colors">
+                      <h3 className="font-semibold group-hover:text-purple-400 transition-colors">
                         {pr.title}
                       </h3>
                     </div>

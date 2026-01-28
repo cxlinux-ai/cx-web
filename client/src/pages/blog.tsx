@@ -62,7 +62,7 @@ export default function Blog() {
     <div className="min-h-screen pt-20 pb-16">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-4 mb-12">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8">
           <ChevronLeft size={16} />
           Back to Home
         </Link>
@@ -155,7 +155,7 @@ export default function Blog() {
                             </span>
                           </div>
                           
-                          <h3 className="text-base sm:text-lg font-semibold mb-2 text-white group-hover:text-blue-300 transition-colors line-clamp-2">
+                          <h3 className="text-base sm:text-lg font-semibold mb-2 text-white group-hover:text-purple-300 transition-colors line-clamp-2">
                             {post.title}
                           </h3>
                           
@@ -195,7 +195,7 @@ export default function Blog() {
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white/5 border-white/10 focus:border-blue-500/50"
+              className="pl-10 bg-white/5 border-white/10 focus:border-purple-500/50"
               data-testid="input-blog-search"
             />
           </div>
@@ -205,7 +205,7 @@ export default function Blog() {
               onClick={() => setSelectedCategory(null)}
               className={`px-3 py-1.5 rounded-full text-sm transition-all ${
                 !selectedCategory 
-                  ? "bg-blue-500/20 border border-blue-500/50 text-blue-300" 
+                  ? "bg-purple-500/20 border border-purple-500/50 text-purple-300" 
                   : "bg-white/5 border border-white/10 text-gray-400 hover:border-white/20"
               }`}
               data-testid="filter-all"
@@ -218,7 +218,7 @@ export default function Blog() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-3 py-1.5 rounded-full text-sm transition-all ${
                   selectedCategory === category 
-                    ? "bg-blue-500/20 border border-blue-500/50 text-blue-300" 
+                    ? "bg-purple-500/20 border border-purple-500/50 text-purple-300" 
                     : "bg-white/5 border border-white/10 text-gray-400 hover:border-white/20"
                 }`}
                 data-testid={`filter-${category.toLowerCase().replace(' ', '-')}`}

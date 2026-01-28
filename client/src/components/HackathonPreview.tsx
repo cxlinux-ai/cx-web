@@ -148,22 +148,22 @@ export default function HackathonPreview() {
                   {/* Hackathon badge */}
                   <div className="flex justify-center mb-4">
                     <motion.div 
-                      className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20"
+                      className="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-purple-500/10 border border-purple-500/20"
                       whileHover={{ scale: 1.03, y: -2 }}
                       transition={{ duration: 0.2 }}
                       style={{ boxShadow: "0 4px 12px rgba(0,102,255,0.15)" }}
                     >
                       <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-blue" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500" />
                       </span>
-                      <span className="relative text-[13px] font-semibold text-brand-blue tracking-wide uppercase">
+                      <span className="relative text-[13px] font-semibold text-purple-500 tracking-wide uppercase">
                         Hackathon · Feb 17, 2026
                       </span>
                     </motion.div>
                   </div>
                   <p className="text-sm text-gray-500 mb-5 flex items-center justify-center gap-2">
-                    <Clock size={16} className="text-brand-blue" />
+                    <Clock size={16} className="text-purple-500" />
                     Hackathon starts in:
                   </p>
                   <div className="flex gap-3 sm:gap-4 justify-center">
@@ -175,10 +175,10 @@ export default function HackathonPreview() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                       >
                         <div 
-                          className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-brand-blue/20 group-hover/timer:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 flex flex-col items-center"
+                          className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-4 sm:p-5 min-w-[70px] sm:min-w-[90px] group-hover/timer:border-purple-500/20 group-hover/timer:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all duration-300 flex flex-col items-center"
                           style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
                         >
-                          <span className="font-bold text-brand-blue font-mono" style={{ fontSize: '70px' }}>
+                          <span className="font-bold text-purple-500 font-mono" style={{ fontSize: '70px' }}>
                             {String(value).padStart(2, "0")}
                           </span>
                           <span className="text-[10px] sm:text-xs text-gray-500 capitalize">{unit}</span>

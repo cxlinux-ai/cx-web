@@ -196,7 +196,7 @@ export default function CheckoutPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
                   required
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-400"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-400"
                 />
               </div>
 
@@ -211,7 +211,7 @@ export default function CheckoutPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="john@company.com"
                   required
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-400"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-400"
                 />
               </div>
 
@@ -225,7 +225,7 @@ export default function CheckoutPage() {
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   placeholder="Acme Corp"
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-400"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-400"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                     onClick={() => setIsAnnual(false)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
                       !isAnnual
-                        ? "bg-blue-500 text-white"
+                        ? "bg-purple-500 text-white"
                         : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
@@ -250,7 +250,7 @@ export default function CheckoutPage() {
                     onClick={() => setIsAnnual(true)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
                       isAnnual
-                        ? "bg-blue-500 text-white"
+                        ? "bg-purple-500 text-white"
                         : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
@@ -267,7 +267,7 @@ export default function CheckoutPage() {
                 id="checkout-submit-btn"
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -300,10 +300,10 @@ export default function CheckoutPage() {
               <h2 id="checkout-summary-title" className="text-xl font-bold mb-6">Order Summary</h2>
 
               {/* Plan Card */}
-              <div id="checkout-plan-card" className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-xl p-4 mb-6">
+              <div id="checkout-plan-card" className="bg-gradient-to-r from-purple-500/10 to-purple-500/10 border border-purple-400/30 rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <plan.icon className="w-5 h-5 text-blue-400" />
+                  <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <plan.icon className="w-5 h-5 text-purple-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold">{plan.name} Plan</h3>

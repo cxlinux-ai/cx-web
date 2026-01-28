@@ -203,7 +203,7 @@ export default function FAQ() {
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-purple-400 bg-clip-text text-transparent">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
@@ -218,7 +218,7 @@ export default function FAQ() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               data-testid="search-input"
-              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-blue-400"
+              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-purple-400"
             />
           </div>
         </div>
@@ -231,8 +231,8 @@ export default function FAQ() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
-                  <category.icon className="h-6 w-6 text-blue-400" />
+                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center">
+                  <category.icon className="h-6 w-6 text-purple-400" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   {category.category}
@@ -252,7 +252,7 @@ export default function FAQ() {
                       data-testid={`question-${globalQuestionIndex}`}
                       className="border-white/10"
                     >
-                      <AccordionTrigger className="text-left hover:no-underline hover:text-blue-400 transition-colors">
+                      <AccordionTrigger className="text-left hover:no-underline hover:text-purple-400 transition-colors">
                         <span className="text-lg font-semibold pr-4">
                           {question.q}
                         </span>
@@ -291,14 +291,14 @@ export default function FAQ() {
               href="https://discord.gg/uCqHvxjU83"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-discord"
             >
               Ask on Discord
             </a>
             <a
               href="mailto:hello@cxlinux.com"
-              className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 border-2 border-purple-400 hover:bg-purple-400/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-email"
             >
               Email Us
@@ -307,7 +307,7 @@ export default function FAQ() {
               href="https://github.com/cxlinux-ai/cx/issues"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 border-2 border-purple-400 hover:bg-purple-400/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-github"
             >
               Open GitHub Issue

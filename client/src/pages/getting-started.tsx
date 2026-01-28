@@ -46,7 +46,7 @@ export default function GettingStarted() {
       description: "Get CX Linux running on your system in minutes with our guided setup",
       icon: Download,
       link: "/blog/install-cortex-linux-beginner-guide",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-purple-500 to-cyan-500"
     },
     {
       title: "Your First Task",
@@ -163,7 +163,7 @@ export default function GettingStarted() {
       title: "Developer Path",
       icon: Code,
       description: "Developers building applications and managing environments.",
-      color: "from-blue-500 to-indigo-500",
+      color: "from-purple-500 to-indigo-500",
       resources: [
         { title: "Development Environment Setup", link: "/blog" },
         { title: "Docker and Container Integration", link: "/blog" },
@@ -191,8 +191,8 @@ export default function GettingStarted() {
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 via-transparent to-transparent" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
         
         <motion.div 
@@ -203,7 +203,7 @@ export default function GettingStarted() {
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             The{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
               AI Layer for Linux
             </span>
           </h1>
@@ -244,17 +244,17 @@ export default function GettingStarted() {
               >
                 <Link href={card.link}>
                   <div 
-                    className="group p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 cursor-pointer h-full"
+                    className="group p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer h-full"
                     data-testid={`card-quick-nav-${index}`}
                   >
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${card.color} flex items-center justify-center mb-4`}>
                       <card.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
                       {card.title}
                     </h3>
                     <p className="text-gray-400 mb-4">{card.description}</p>
-                    <div className="flex items-center text-blue-400 text-sm font-medium">
+                    <div className="flex items-center text-purple-400 text-sm font-medium">
                       Read Guide <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -275,8 +275,8 @@ export default function GettingStarted() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-purple-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Prerequisites</h2>
             </div>
@@ -294,16 +294,16 @@ export default function GettingStarted() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                      <req.icon className="w-4 h-4 text-blue-400" />
+                      <req.icon className="w-4 h-4 text-purple-400" />
                     </div>
                     <span className="text-gray-300">{req.text}</span>
                   </motion.div>
                 ))}
               </div>
               
-              <div className="mt-8 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+              <div className="mt-8 p-4 rounded-lg bg-purple-500/10 border border-purple-500/20">
                 <p className="text-sm text-gray-300">
-                  <strong className="text-blue-400">Note:</strong> CX Linux is built on Ubuntu 24.04 LTS. 
+                  <strong className="text-purple-400">Note:</strong> CX Linux is built on Ubuntu 24.04 LTS. 
                   If your hardware runs Ubuntu, it will run CX Linux. GPU support requires NVIDIA drivers 530+.
                 </p>
               </div>
@@ -321,8 +321,8 @@ export default function GettingStarted() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-12">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Rocket className="w-5 h-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <Rocket className="w-5 h-5 text-purple-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Step-by-Step Setup</h2>
             </div>
@@ -339,11 +339,11 @@ export default function GettingStarted() {
                 transition={{ delay: index * 0.1 }}
               >
                 {index < gettingStartedSteps.length - 1 && (
-                  <div className="absolute left-6 top-16 bottom-0 w-px bg-gradient-to-b from-blue-500/50 to-transparent" />
+                  <div className="absolute left-6 top-16 bottom-0 w-px bg-gradient-to-b from-purple-500/50 to-transparent" />
                 )}
                 
                 <div className="flex gap-6" data-testid={`step-${step.number}`}>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-xl font-bold text-white flex-shrink-0">
                     {step.number}
                   </div>
                   
@@ -376,17 +376,17 @@ export default function GettingStarted() {
             viewport={{ once: true }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Play className="w-5 h-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <Play className="w-5 h-5 text-purple-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Video Tutorial</h2>
             </div>
             
             <div 
-              className="aspect-video rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/50 transition-all duration-300 group"
+              className="aspect-video rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500/50 transition-all duration-300 group"
               data-testid="video-placeholder"
             >
-              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Play className="w-8 h-8 text-white ml-1" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Getting Started in 5 Minutes</h3>
@@ -408,8 +408,8 @@ export default function GettingStarted() {
             className="text-center mb-12"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Book className="w-5 h-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <Book className="w-5 h-5 text-purple-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Learning Paths</h2>
             </div>
@@ -440,10 +440,10 @@ export default function GettingStarted() {
                     <li key={resIndex}>
                       <Link 
                         href={resource.link}
-                        className="flex items-center gap-2 text-gray-300 hover:text-blue-400 transition-colors text-sm group"
+                        className="flex items-center gap-2 text-gray-300 hover:text-purple-400 transition-colors text-sm group"
                         data-testid={`resource-link-${index}-${resIndex}`}
                       >
-                        <ArrowRight className="w-3 h-3 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3 h-3 text-purple-400 group-hover:translate-x-1 transition-transform" />
                         {resource.title}
                       </Link>
                     </li>
@@ -465,8 +465,8 @@ export default function GettingStarted() {
             className="text-center mb-12"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                <Users className="w-5 h-5 text-blue-400" />
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <Users className="w-5 h-5 text-purple-400" />
               </div>
               <h2 className="text-3xl font-bold text-white">Community and Support</h2>
             </div>
@@ -485,7 +485,7 @@ export default function GettingStarted() {
               href="https://discord.gg/cxlinux" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-center group"
+              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all duration-300 text-center group"
               data-testid="link-discord"
             >
               <div className="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-indigo-500/30 transition-colors">
@@ -499,7 +499,7 @@ export default function GettingStarted() {
               href="https://github.com/cxlinux-ai/cx" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-center group"
+              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all duration-300 text-center group"
               data-testid="link-github"
             >
               <div className="w-12 h-12 rounded-lg bg-gray-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-500/30 transition-colors">
@@ -511,11 +511,11 @@ export default function GettingStarted() {
             
             <Link 
               href="/faq"
-              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-center group"
+              className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all duration-300 text-center group"
               data-testid="link-faq"
             >
-              <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500/30 transition-colors">
-                <HelpCircle className="w-6 h-6 text-blue-400" />
+              <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-colors">
+                <HelpCircle className="w-6 h-6 text-purple-400" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">FAQ</h3>
               <p className="text-gray-400 text-sm">Find answers to common questions</p>
@@ -530,7 +530,7 @@ export default function GettingStarted() {
           >
             <Link 
               href="/beta"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg text-white font-semibold hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] hover:scale-105 transition-all duration-300"
               data-testid="button-try-cx"
             >
               <Sparkles className="w-5 h-5" />

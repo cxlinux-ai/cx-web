@@ -106,7 +106,7 @@ export default function Support() {
         <Link
           id="support-back-link"
           href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
         >
           <ChevronLeft size={16} />
           Back to Home
@@ -136,8 +136,8 @@ export default function Support() {
           className="mb-12"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Terminal size={20} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <Terminal size={20} className="text-purple-400" />
             </div>
             <h2 className="text-2xl font-bold text-white">Getting Started</h2>
           </div>
@@ -148,7 +148,7 @@ export default function Support() {
                 id={`support-step-${index}`}
                 className="bg-white/5 border border-white/10 rounded-xl p-5"
               >
-                <div className="text-blue-400 text-sm font-medium mb-1">Step {index + 1}</div>
+                <div className="text-purple-400 text-sm font-medium mb-1">Step {index + 1}</div>
                 <h3 className="text-white font-semibold mb-1">{step.title}</h3>
                 <p className="text-gray-400 text-sm mb-3">{step.description}</p>
                 <code className="block bg-black/50 text-green-400 text-xs p-2 rounded font-mono overflow-x-auto">
@@ -168,8 +168,8 @@ export default function Support() {
           className="mb-12"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <MessageSquare size={20} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <MessageSquare size={20} className="text-purple-400" />
             </div>
             <h2 className="text-2xl font-bold text-white">Community Support</h2>
           </div>
@@ -181,19 +181,19 @@ export default function Support() {
                 href={channel.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white/5 border border-white/10 rounded-xl p-5 hover:border-blue-400/50 transition-all group"
+                className="bg-white/5 border border-white/10 rounded-xl p-5 hover:border-purple-400/50 transition-all group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-2 bg-blue-500/10 rounded-lg">
-                    <channel.icon size={20} className="text-blue-400" />
+                  <div className="p-2 bg-purple-500/10 rounded-lg">
+                    <channel.icon size={20} className="text-purple-400" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-white font-semibold mb-1 flex items-center gap-2">
                       {channel.title}
-                      <ExternalLink size={14} className="text-gray-500 group-hover:text-blue-400" />
+                      <ExternalLink size={14} className="text-gray-500 group-hover:text-purple-400" />
                     </h3>
                     <p className="text-gray-400 text-sm mb-2">{channel.description}</p>
-                    <span className="text-blue-400 text-sm font-medium">{channel.linkText} →</span>
+                    <span className="text-purple-400 text-sm font-medium">{channel.linkText} →</span>
                   </div>
                 </div>
               </a>
@@ -209,10 +209,10 @@ export default function Support() {
           transition={{ delay: 0.3 }}
           className="mb-12"
         >
-          <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-400/30 rounded-2xl p-6 md:p-8">
+          <div className="bg-gradient-to-r from-purple-500/10 to-purple-500/10 border border-purple-400/30 rounded-2xl p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-blue-500/20 rounded-lg">
-                <Building2 size={20} className="text-blue-400" />
+              <div className="p-2 bg-purple-500/20 rounded-lg">
+                <Building2 size={20} className="text-purple-400" />
               </div>
               <h2 className="text-2xl font-bold text-white">Enterprise Support</h2>
             </div>
@@ -223,7 +223,7 @@ export default function Support() {
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               {enterpriseFeatures.map((feature, index) => (
                 <div key={index} className="flex items-center gap-2 text-gray-300 text-sm">
-                  <feature.icon size={16} className="text-blue-400" />
+                  <feature.icon size={16} className="text-purple-400" />
                   {feature.text}
                 </div>
               ))}
@@ -232,14 +232,14 @@ export default function Support() {
               <a
                 id="support-enterprise-email"
                 href="mailto:support@cxlinux.com"
-                className="px-5 py-2.5 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
+                className="px-5 py-2.5 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all"
               >
                 Contact Enterprise Support
               </a>
               <Link
                 id="support-enterprise-pricing"
                 href="/pricing"
-                className="px-5 py-2.5 border border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-400/10 transition-all"
+                className="px-5 py-2.5 border border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition-all"
               >
                 View Plans
               </Link>
@@ -256,8 +256,8 @@ export default function Support() {
           className="mb-12"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <HelpCircle size={20} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <HelpCircle size={20} className="text-purple-400" />
             </div>
             <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
           </div>
@@ -277,7 +277,7 @@ export default function Support() {
             <Link
               id="support-full-faq-link"
               href="/faq"
-              className="text-blue-400 hover:text-blue-300 font-medium"
+              className="text-purple-400 hover:text-purple-300 font-medium"
             >
               View Full FAQ →
             </Link>

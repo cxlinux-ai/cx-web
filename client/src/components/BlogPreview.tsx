@@ -51,7 +51,7 @@ export default function BlogPreview() {
         >
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 text-gray-300 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/10 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 text-gray-300 hover:border-purple-500/50 hover:text-white hover:bg-purple-500/10 transition-all duration-300"
             data-testid="link-view-all-posts"
           >
             View all posts

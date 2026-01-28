@@ -209,15 +209,15 @@ html, body {
  */
 @layer utilities {
 
-  /* Brand Colors - CX Linux */
-  .text-brand-blue {
-    color: #0066FF;
+  /* Brand Colors - CX Linux Sovereign Purple */
+  .text-brand-purple {
+    color: #7C3AED;
   }
-  .bg-brand-blue {
-    background-color: #0066FF;
+  .bg-brand-purple {
+    background-color: #7C3AED;
   }
-  .border-brand-blue {
-    border-color: #0066FF;
+  .border-brand-purple {
+    border-color: #7C3AED;
   }
   .text-terminal-green {
     color: #00FF00;
@@ -228,32 +228,32 @@ html, body {
   .border-terminal-green {
     border-color: #00FF00;
   }
-  .text-brand-blue\/80 {
-    color: rgba(0, 102, 255, 0.8);
+  .text-brand-purple\/80 {
+    color: rgba(124, 58, 237, 0.8);
   }
-  .bg-brand-blue\/10 {
-    background-color: rgba(0, 102, 255, 0.1);
+  .bg-brand-purple\/10 {
+    background-color: rgba(124, 58, 237, 0.1);
   }
-  .bg-brand-blue\/20 {
-    background-color: rgba(0, 102, 255, 0.2);
+  .bg-brand-purple\/20 {
+    background-color: rgba(124, 58, 237, 0.2);
   }
-  .border-brand-blue\/20 {
-    border-color: rgba(0, 102, 255, 0.2);
+  .border-brand-purple\/20 {
+    border-color: rgba(124, 58, 237, 0.2);
   }
-  .border-brand-blue\/30 {
-    border-color: rgba(0, 102, 255, 0.3);
+  .border-brand-purple\/30 {
+    border-color: rgba(124, 58, 237, 0.3);
   }
-  .hover\:text-brand-blue:hover {
-    color: #0066FF;
+  .hover\:text-brand-purple:hover {
+    color: #7C3AED;
   }
-  .hover\:border-brand-blue\/30:hover {
-    border-color: rgba(0, 102, 255, 0.3);
+  .hover\:border-brand-purple\/30:hover {
+    border-color: rgba(124, 58, 237, 0.3);
   }
-  .hover\:bg-brand-blue\/10:hover {
-    background-color: rgba(0, 102, 255, 0.1);
+  .hover\:bg-brand-purple\/10:hover {
+    background-color: rgba(124, 58, 237, 0.1);
   }
-  .glow-brand-blue {
-    box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+  .glow-brand-purple {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
   }
   .glow-terminal-green {
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
@@ -363,9 +363,9 @@ html, body {
 
 .glass-card-hover:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(59, 130, 246, 0.4);
+  border-color: rgba(124, 58, 237, 0.4);
   box-shadow: 
-    0 0 40px rgba(59, 130, 246, 0.12),
+    0 0 40px rgba(124, 58, 237, 0.12),
     0 20px 40px -15px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transform: translateY(-3px);
@@ -522,7 +522,7 @@ section h2 + p {
   left: -10%;
   width: 40%;
   height: 60%;
-  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(124, 58, 237, 0.03) 0%, transparent 70%);
   transform: translateY(-50%);
   pointer-events: none;
   filter: blur(80px);
@@ -533,14 +533,14 @@ section h2 + p {
 /* Hero - dramatic gradient */
 #home {
   background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
     linear-gradient(180deg, #000 0%, #0a0a0a 100%);
 }
 
 /* Preview section - subtle side glow */
 #preview {
   background: 
-    radial-gradient(ellipse 40% 60% at 0% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 40% 60% at 0% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 60%);
 }
 
 /* Features section - right side accent */
@@ -558,7 +558,7 @@ section h2 + p {
 /* Join/CTA section - dramatic centered */
 #join {
   background: 
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
 }
 
 /* Diagonal section dividers */
@@ -622,7 +622,7 @@ section h2 + p {
 /* Large feature card */
 .card-featured {
   grid-column: span 2;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
 }
 
 @media (max-width: 768px) {
@@ -647,7 +647,7 @@ section h2 + p {
 .floating-shape {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
   animation: float 20s ease-in-out infinite;
@@ -688,7 +688,7 @@ nav button::after, nav a:not([class*="bg-"])::after {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  background: linear-gradient(90deg, transparent, #7C3AED, transparent);
   transition: width 0.3s ease, left 0.3s ease;
 }
 
@@ -715,8 +715,8 @@ footer a:hover {
 }
 
 .glass-card.rounded-full:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
   transform: translateY(-1px);
 }
 
@@ -775,7 +775,7 @@ table tbody tr:hover {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(124, 58, 237, 0.3);
   animation: pulse-ring 2s ease-out infinite;
 }
 
@@ -797,7 +797,7 @@ table tbody tr:hover {
 
 .glass-card img:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
   z-index: 10;
 }
 
@@ -814,7 +814,7 @@ table tbody tr:hover {
   left: 0;
   right: 0;
   height: 100%;
-  background: linear-gradient(to top, rgba(59, 130, 246, 0.05), transparent);
+  background: linear-gradient(to top, rgba(124, 58, 237, 0.05), transparent);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -833,7 +833,7 @@ table tbody tr:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -861,7 +861,7 @@ table tbody tr:hover {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -877,7 +877,7 @@ table tbody tr:hover {
 }
 
 .bg-blob-blue {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, rgba(59, 130, 246, 0.2) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.5) 0%, rgba(124, 58, 237, 0.2) 40%, transparent 70%);
 }
 
 .bg-blob-purple {
@@ -905,7 +905,7 @@ table tbody tr:hover {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #60a5fa 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, #fff 0%, #A78BFA 50%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -921,7 +921,7 @@ table tbody tr:hover {
   box-shadow: 
     0 0 0 1px rgba(255, 255, 255, 0.03),
     0 20px 40px -10px rgba(0, 0, 0, 0.5),
-    0 0 80px -20px rgba(59, 130, 246, 0.1);
+    0 0 80px -20px rgba(124, 58, 237, 0.1);
   transition: 
     transform 0.25s cubic-bezier(0.33, 1, 0.68, 1), 
     box-shadow 0.3s cubic-bezier(0.33, 1, 0.68, 1), 
@@ -935,7 +935,7 @@ table tbody tr:hover {
   box-shadow: 
     0 0 0 1px rgba(255, 255, 255, 0.06),
     0 30px 60px -15px rgba(0, 0, 0, 0.65),
-    0 0 120px -30px rgba(59, 130, 246, 0.3),
+    0 0 120px -30px rgba(124, 58, 237, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
@@ -951,7 +951,7 @@ table tbody tr:hover {
     rgba(255, 255, 255, 0.08) 0%,
     transparent 30%,
     transparent 70%,
-    rgba(59, 130, 246, 0.1) 100%
+    rgba(124, 58, 237, 0.1) 100%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -994,8 +994,8 @@ table tbody tr:hover {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(59, 130, 246, 0.12) 0%,
-    rgba(59, 130, 246, 0.06) 30%,
+    rgba(124, 58, 237, 0.12) 0%,
+    rgba(124, 58, 237, 0.06) 30%,
     transparent 70%
   );
   pointer-events: none;
@@ -1114,7 +1114,7 @@ table tbody tr:hover {
 }
 
 .syntax-info { 
-  color: #60a5fa;
+  color: #A78BFA;
   transition: color 0.2s ease, text-shadow 0.3s ease;
 }
 
@@ -1224,7 +1224,7 @@ table tbody tr:hover {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  background: linear-gradient(90deg, #7C3AED, #A78BFA);
 }
 
 /* Output section */
@@ -1387,62 +1387,47 @@ table tbody tr:hover {
   animation-play-state: paused;
 }
 
-/* Shimmer sparkler effect for headlines */
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
+/* Shimmer sparkler effect - slow wave radiating from center outward */
+/* Simple approach: text always visible, subtle glow animation */
+
+@keyframes shimmer-glow {
+  0%, 100% {
+    text-shadow: 0 0 0 transparent;
   }
-  100% {
-    background-position: 200% center;
+  40% {
+    text-shadow:
+      0 0 20px rgba(233, 213, 255, 0.5),
+      0 0 40px rgba(196, 181, 253, 0.3),
+      0 0 60px rgba(124, 58, 237, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255, 255, 255, 0.7),
+      0 0 60px rgba(233, 213, 255, 0.5),
+      0 0 100px rgba(124, 58, 237, 0.4);
+  }
+  60% {
+    text-shadow:
+      0 0 20px rgba(233, 213, 255, 0.5),
+      0 0 40px rgba(196, 181, 253, 0.3),
+      0 0 60px rgba(124, 58, 237, 0.2);
   }
 }
 
 .text-shimmer {
-  background: linear-gradient(
-    105deg,
-    #7C3AED 0%,
-    #7C3AED 35%,
-    #E9D5FF 47%,
-    #FFFFFF 50%,
-    #E9D5FF 53%,
-    #7C3AED 65%,
-    #7C3AED 100%
-  );
-  background-size: 250% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 5s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
-
-/* Desktop: more prominent shimmer */
-@media (min-width: 768px) {
-  .text-shimmer {
-    background: linear-gradient(
-      105deg,
-      #7C3AED 0%,
-      #7C3AED 32%,
-      #C4B5FD 42%,
-      #E9D5FF 47%,
-      #FFFFFF 50%,
-      #E9D5FF 53%,
-      #C4B5FD 58%,
-      #7C3AED 68%,
-      #7C3AED 100%
-    );
-    background-size: 300% auto;
-    animation: shimmer 4s ease-in-out infinite;
-    animation-delay: 2s;
-  }
+  color: #7C3AED !important;
+  -webkit-text-fill-color: #7C3AED !important;
+  background: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  animation: shimmer-glow 10s ease-in-out infinite;
+  animation-delay: 2s;
 }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .text-shimmer {
     animation: none;
-    background: #7C3AED;
-    -webkit-text-fill-color: currentColor;
   }
 }
 
@@ -1487,12 +1472,12 @@ table tbody tr:hover {
 
 /* Typewriter animation */
 @keyframes blink-cursor {
-  0%, 50% { border-color: #3b82f6; }
+  0%, 50% { border-color: #7C3AED; }
   51%, 100% { border-color: transparent; }
 }
 
 .terminal-cursor {
-  border-right: 2px solid #3b82f6;
+  border-right: 2px solid #7C3AED;
   animation: blink-cursor 1s step-end infinite;
 }
 
@@ -1533,12 +1518,12 @@ table tbody tr:hover {
 
 /* Roadmap timeline */
 .timeline-dot-completed {
-  background: #3b82f6;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  background: #7C3AED;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
 }
 
 .timeline-dot-current {
-  background: #3b82f6;
+  background: #7C3AED;
   animation: pulse 2s infinite;
 }
 
@@ -1548,8 +1533,8 @@ table tbody tr:hover {
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
-  50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
 }
 
 /* Staggered opacity fade for AI processing indicators */
@@ -1619,7 +1604,7 @@ body:not(.page-transition-blur) {
 }
 
 .hackathon-gradient-border {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
+  background: linear-gradient(135deg, #7C3AED, #A78BFA, #7C3AED);
   background-size: 200% 200%;
   animation: hackathon-gradient-pulse 3s ease-in-out infinite;
   opacity: 0.8;
@@ -1644,7 +1629,7 @@ body:not(.page-transition-blur) {
   content: '';
   position: absolute;
   inset: -2px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(139, 92, 246, 0.4), rgba(124, 58, 237, 0.4));
   background-size: 200% 200%;
   animation: hackathon-gradient-pulse 3s ease-in-out infinite;
   border-radius: inherit;

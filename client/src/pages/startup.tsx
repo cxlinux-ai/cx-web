@@ -163,9 +163,9 @@ export default function StartupPage() {
     { icon: FaPython, name: "Python 3.12 + uv", color: "text-yellow-400" },
     { icon: SiOllama, name: "Ollama", color: "text-white" },
     { icon: Database, name: "Qdrant Vector DB", color: "text-purple-400" },
-    { icon: SiNeo4J, name: "Neo4j Graph DB", color: "text-brand-blue" },
+    { icon: SiNeo4J, name: "Neo4j Graph DB", color: "text-purple-500" },
     { icon: Brain, name: "LangChain", color: "text-emerald-400" },
-    { icon: FaDocker, name: "Docker + Compose", color: "text-brand-blue" },
+    { icon: FaDocker, name: "Docker + Compose", color: "text-purple-500" },
     { icon: Cpu, name: "CUDA Toolkit", color: "text-green-400" },
     { icon: Code2, name: "Claude Code Ready", color: "text-orange-400" },
   ];
@@ -185,7 +185,7 @@ export default function StartupPage() {
             className="flex justify-center mb-6"
           >
             <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
-              <Rocket size={16} className="text-brand-blue" />
+              <Rocket size={16} className="text-purple-500" />
               <span className="text-gray-300">Built for AI Founders</span>
             </div>
           </motion.div>
@@ -223,7 +223,7 @@ export default function StartupPage() {
               href="https://github.com/cxlinux-ai/cx"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-lg glow-brand-blue hover:scale-105 transition-all duration-300"
+              className="flex items-center justify-center gap-2 px-8 py-4 bg-purple-500 rounded-xl text-white font-semibold text-lg glow-purple-500 hover:scale-105 transition-all duration-300"
               data-testid="button-download-free"
             >
               <Download size={20} />
@@ -233,7 +233,7 @@ export default function StartupPage() {
               href="https://github.com/cxlinux-ai/cx"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-8 py-4 border border-white/20 rounded-xl text-white font-semibold text-lg hover:bg-white/5 hover:border-brand-blue/50 transition-all duration-300"
+              className="flex items-center justify-center gap-2 px-8 py-4 border border-white/20 rounded-xl text-white font-semibold text-lg hover:bg-white/5 hover:border-purple-500/50 transition-all duration-300"
               data-testid="button-founders-edition"
             >
               Get Founders Edition - $19/mo
@@ -274,7 +274,7 @@ export default function StartupPage() {
                     <Check size={14} />
                     <span>Neo4j ready at localhost:7474...</span>
                   </div>
-                  <div className="flex items-center gap-2 mt-3 text-brand-blue">
+                  <div className="flex items-center gap-2 mt-3 text-purple-500">
                     <Zap size={14} />
                     <TypewriterText text="AI stack ready. Start building." speed={30} />
                   </div>
@@ -359,7 +359,7 @@ export default function StartupPage() {
               viewport={{ once: true }}
               className="text-center p-6 rounded-xl bg-white/5 border border-white/10"
             >
-              <div className="text-4xl md:text-5xl font-bold text-brand-blue mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-purple-500 mb-2">
                 {clones.toLocaleString()}+
               </div>
               <div className="text-gray-400">Clones in 14 days</div>
@@ -448,7 +448,7 @@ export default function StartupPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-brand-blue/30 hover:bg-white/[0.07] transition-all duration-300 text-center"
+                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/30 hover:bg-white/[0.07] transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
                   <tool.icon className={`w-8 h-8 ${tool.color}`} />
@@ -487,12 +487,12 @@ export default function StartupPage() {
                 transition={{ delay: index * 0.1 }}
                 className={`relative p-8 rounded-2xl ${
                   tier.highlighted
-                    ? "bg-gradient-to-b from-brand-blue/20 to-transparent border-2 border-brand-blue/50"
+                    ? "bg-gradient-to-b from-purple-500/20 to-transparent border-2 border-purple-500/50"
                     : "bg-white/5 border border-white/10"
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-blue rounded-full text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-purple-500 rounded-full text-sm font-semibold">
                     Most Popular
                   </div>
                 )}
@@ -526,7 +526,7 @@ export default function StartupPage() {
                   rel={tier.ctaLink.startsWith("http") ? "noopener noreferrer" : undefined}
                   className={`block w-full py-3 rounded-xl font-semibold text-center transition-all duration-300 ${
                     tier.highlighted
-                      ? "bg-brand-blue text-white glow-brand-blue"
+                      ? "bg-purple-500 text-white glow-purple-500"
                       : "bg-white/10 text-white hover:bg-white/20"
                   }`}
                   data-testid={`button-pricing-${tier.name.toLowerCase()}`}
@@ -548,13 +548,13 @@ export default function StartupPage() {
             viewport={{ once: true }}
             className="relative overflow-hidden rounded-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-emerald-600/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-purple-600/20 to-emerald-600/20" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgNDBIMHoiLz48cGF0aCBkPSJNMCAwaDFMMSA0MEgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjxwYXRoIGQ9Ik0wIDBoNDBMNDAgMUgweiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50" />
             
             <div className="relative p-8 md:p-12 text-center">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Rocket className="text-brand-blue" size={24} />
-                <span className="text-brand-blue font-semibold">Limited Time Event</span>
+                <Rocket className="text-purple-500" size={24} />
+                <span className="text-purple-500 font-semibold">Limited Time Event</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 CX Linux Hackathon 2026
@@ -583,8 +583,8 @@ export default function StartupPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-blue/20 flex items-center justify-center">
-              <Mail className="w-8 h-8 text-brand-blue" />
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <Mail className="w-8 h-8 text-purple-500" />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Get Notified When <span className="gradient-text">Founders Edition</span> Launches
@@ -611,12 +611,12 @@ export default function StartupPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="founder@startup.com"
                   required
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-brand-blue focus:outline-none transition-colors"
+                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-purple-500 focus:outline-none transition-colors"
                   data-testid="input-email-capture"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold glow-brand-blue transition-all duration-300"
+                  className="px-8 py-4 bg-purple-500 rounded-xl text-white font-semibold glow-purple-500 transition-all duration-300"
                   data-testid="button-email-submit"
                 >
                   Notify Me

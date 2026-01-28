@@ -129,7 +129,7 @@ export default function AccountPage() {
   const getPlanBadgeColor = (plan: string) => {
     switch (plan.toLowerCase()) {
       case "pro":
-        return "bg-blue-500/20 text-blue-400 border-blue-400/30";
+        return "bg-purple-500/20 text-purple-400 border-purple-400/30";
       case "enterprise":
         return "bg-purple-500/20 text-purple-400 border-purple-400/30";
       case "managed":
@@ -158,7 +158,7 @@ export default function AccountPage() {
         <Link
           id="account-back-link"
           href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
         >
           <ChevronLeft size={16} />
           Back to Home
@@ -188,8 +188,8 @@ export default function AccountPage() {
           className="bg-white/5 border border-white/10 rounded-xl p-6 mb-8"
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Key size={20} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <Key size={20} className="text-purple-400" />
             </div>
             <h2 className="text-xl font-semibold">Find Your Licenses</h2>
           </div>
@@ -203,14 +203,14 @@ export default function AccountPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-400/50"
+              className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-400/50"
               onKeyDown={(e) => e.key === "Enter" && fetchLicenses()}
             />
             <button
               id="account-lookup-button"
               onClick={fetchLicenses}
               disabled={loading}
-              className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
               {loading ? (
                 <Loader2 size={18} className="animate-spin" />
@@ -244,8 +244,8 @@ export default function AccountPage() {
                 <div className="p-6 border-b border-white/10">
                   <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-blue-500/10 rounded-lg">
-                        <Shield size={20} className="text-blue-400" />
+                      <div className="p-2 bg-purple-500/10 rounded-lg">
+                        <Shield size={20} className="text-purple-400" />
                       </div>
                       <div>
                         <span className={`px-2 py-1 rounded text-xs font-medium border ${getPlanBadgeColor(license.plan)}`}>
@@ -290,14 +290,14 @@ export default function AccountPage() {
                   {/* Usage Stats */}
                   <div className="mt-4 flex items-center gap-6 text-sm">
                     <div className="flex items-center gap-2">
-                      <Server size={16} className="text-blue-400" />
+                      <Server size={16} className="text-purple-400" />
                       <span className="text-gray-400">
                         {license.active_systems} / {license.max_systems} systems activated
                       </span>
                     </div>
                     <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-blue-500 rounded-full transition-all"
+                        className="h-full bg-purple-500 rounded-full transition-all"
                         style={{
                           width: `${Math.min(100, (license.active_systems / license.max_systems) * 100)}%`,
                         }}
@@ -374,7 +374,7 @@ export default function AccountPage() {
             </p>
             <Link
               href="/pricing"
-              className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
+              className="inline-block px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all"
             >
               View Pricing Plans
             </Link>
@@ -387,10 +387,10 @@ export default function AccountPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-8 bg-blue-500/10 border border-blue-400/30 rounded-xl p-6"
+          className="mt-8 bg-purple-500/10 border border-purple-400/30 rounded-xl p-6"
         >
           <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <Key size={18} className="text-blue-400" />
+            <Key size={18} className="text-purple-400" />
             How to Activate Your License
           </h3>
           <p className="text-gray-400 text-sm mb-4">
@@ -426,7 +426,7 @@ export default function AccountPage() {
             </a>
             <Link
               href="/support"
-              className="px-6 py-3 border border-blue-400 text-blue-400 font-medium rounded-lg hover:bg-blue-400/10 transition-all"
+              className="px-6 py-3 border border-purple-400 text-purple-400 font-medium rounded-lg hover:bg-purple-400/10 transition-all"
             >
               Help Center
             </Link>

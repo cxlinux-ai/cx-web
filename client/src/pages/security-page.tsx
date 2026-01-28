@@ -148,7 +148,7 @@ Enterprise customers with specific security requirements can contact us for cust
   return (
     <div className="min-h-screen pt-20 pb-16 bg-black text-white">
       <div className="max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
           Back to Home
         </Link>
@@ -175,8 +175,8 @@ Enterprise customers with specific security requirements can contact us for cust
           className="mb-12"
         >
           <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Shield size={24} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <Shield size={24} className="text-purple-400" />
             </div>
             Security-First Design
           </h2>
@@ -187,7 +187,7 @@ Enterprise customers with specific security requirements can contact us for cust
                 className="bg-white/5 border border-white/10 rounded-xl p-6"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
+                  <section.icon size={18} className="text-purple-400" />
                   <h3 className="text-lg font-semibold text-white">{section.title}</h3>
                 </div>
                 <p className="text-gray-400 leading-relaxed text-sm">
@@ -206,8 +206,8 @@ Enterprise customers with specific security requirements can contact us for cust
           className="mb-12"
         >
           <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Package size={24} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <Package size={24} className="text-purple-400" />
             </div>
             Supply Chain Protection
           </h2>
@@ -218,7 +218,7 @@ Enterprise customers with specific security requirements can contact us for cust
                 className="bg-white/5 border border-white/10 rounded-xl p-6"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
+                  <section.icon size={18} className="text-purple-400" />
                   <h3 className="text-lg font-semibold text-white">{section.title}</h3>
                 </div>
                 <p className="text-gray-400 leading-relaxed text-sm">
@@ -237,8 +237,8 @@ Enterprise customers with specific security requirements can contact us for cust
           className="mb-12"
         >
           <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg">
-              <Server size={24} className="text-blue-400" />
+            <div className="p-2 bg-purple-500/10 rounded-lg">
+              <Server size={24} className="text-purple-400" />
             </div>
             Operational Reliability
           </h2>
@@ -249,7 +249,7 @@ Enterprise customers with specific security requirements can contact us for cust
                 className="bg-white/5 border border-white/10 rounded-xl p-6"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <section.icon size={18} className="text-blue-400" />
+                  <section.icon size={18} className="text-purple-400" />
                   <h3 className="text-lg font-semibold text-white">{section.title}</h3>
                 </div>
                 <p className="text-gray-400 leading-relaxed text-sm">
@@ -271,8 +271,8 @@ Enterprise customers with specific security requirements can contact us for cust
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-400" />
+                <div className="p-2 bg-purple-500/10 rounded-lg">
+                  <section.icon size={20} className="text-purple-400" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>

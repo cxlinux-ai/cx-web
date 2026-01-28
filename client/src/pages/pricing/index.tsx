@@ -97,7 +97,7 @@ const tiers: PricingTier[] = [
     highlighted: true,
     badge: "Most Popular",
     icon: Zap,
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-purple-500 to-cyan-500",
   },
   {
     id: "team",
@@ -194,14 +194,14 @@ export default function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-blue-400 text-sm font-semibold tracking-wider uppercase mb-4 block">
+            <span className="text-purple-400 text-sm font-semibold tracking-wider uppercase mb-4 block">
               PRICING
             </span>
             <h1 id="pricing-hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
-              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-purple-400 bg-clip-text text-transparent">
                 Simple Transparent
               </span>{" "}
-              <span className="text-blue-400">Pricing</span>
+              <span className="text-purple-400">Pricing</span>
             </h1>
             <p id="pricing-hero-subtitle" className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
               Start free, scale as you grow. All plans include a 14-day free trial.
@@ -230,7 +230,7 @@ export default function PricingPage() {
                 id="pricing-toggle-switch"
                 checked={isAnnual}
                 onCheckedChange={setIsAnnual}
-                className="data-[state=checked]:bg-blue-500"
+                className="data-[state=checked]:bg-purple-500"
               />
               <span className={`text-lg ${isAnnual ? "text-white" : "text-gray-500"}`}>
                 Annual
@@ -254,7 +254,7 @@ export default function PricingPage() {
               {tiers.map((tier, index) => {
                 const tileBackgrounds: Record<string, string> = {
                   core: "bg-gradient-to-br from-violet-500/20 to-purple-600/30 border border-violet-400/30",
-                  pro: "bg-gradient-to-br from-blue-500/20 to-cyan-500/30 border border-blue-400/30",
+                  pro: "bg-gradient-to-br from-purple-500/20 to-cyan-500/30 border border-purple-400/30",
                   team: "bg-gradient-to-br from-emerald-500/20 to-teal-500/30 border border-emerald-400/30",
                   enterprise: "bg-gradient-to-br from-orange-500/20 to-amber-500/30 border border-orange-400/30",
                 };
@@ -425,7 +425,7 @@ export default function PricingPage() {
                 <tr className="border-b border-white/10">
                   <th className="text-left py-4 px-4 text-gray-400 font-medium">Feature</th>
                   <th className="text-center py-4 px-4 text-violet-400 font-semibold">CX Core</th>
-                  <th className="text-center py-4 px-4 text-blue-400 font-semibold">CX Pro</th>
+                  <th className="text-center py-4 px-4 text-purple-400 font-semibold">CX Pro</th>
                   <th className="text-center py-4 px-4 text-emerald-400 font-semibold">CX Team</th>
                   <th className="text-center py-4 px-4 text-orange-400 font-semibold">CX Enterprise</th>
                 </tr>

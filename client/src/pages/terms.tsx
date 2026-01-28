@@ -257,7 +257,7 @@ legal@cxlinux.com`
         <Link
           id="terms-back-link"
           href="/"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors mb-8"
         >
           <ChevronLeft size={16} />
           Back to Home
@@ -284,9 +284,9 @@ legal@cxlinux.com`
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-blue-500/10 border border-blue-400/30 rounded-xl p-4 mb-8"
+          className="bg-purple-500/10 border border-purple-400/30 rounded-xl p-4 mb-8"
         >
-          <p className="text-blue-300 text-sm">
+          <p className="text-purple-300 text-sm">
             <strong>Summary:</strong> CX Linux is provided under the Apache 2.0 license. Use
             at your own risk. AI-generated commands may contain errors—always review before
             executing. Paid plans include a 14-day trial and money-back guarantee.
@@ -304,8 +304,8 @@ legal@cxlinux.com`
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-400" />
+                <div className="p-2 bg-purple-500/10 rounded-lg">
+                  <section.icon size={20} className="text-purple-400" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>
