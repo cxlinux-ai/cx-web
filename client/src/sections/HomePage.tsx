@@ -451,7 +451,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-400 to-purple-500 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold">
+            <span className="text-shimmer text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold">
               The Agentic OS
             </span>
             <br />
