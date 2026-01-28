@@ -337,3 +337,38 @@ export const insertReferralRewardSchema = createInsertSchema(referralRewards).om
 
 export type InsertReferralReward = z.infer<typeof insertReferralRewardSchema>;
 export type ReferralReward = typeof referralRewards.$inferSelect;
+
+// =============================================================================
+// LEGACY TABLES (preserved for data integrity)
+// =============================================================================
+
+// Legacy referral events table
+export const referralEvents = pgTable("referral_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  eventType: text("event_type"),
+  data: text("data"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Legacy waitlist entries table
+export const waitlistEntries = pgTable("waitlist_entries", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Legacy IP referral codes table
+export const ipReferralCodes = pgTable("ip_referral_codes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  ip: text("ip"),
+  referralCode: text("referral_code"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Legacy bot analytics table
+export const botAnalytics = pgTable("bot_analytics", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  eventType: text("event_type"),
+  data: text("data"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
