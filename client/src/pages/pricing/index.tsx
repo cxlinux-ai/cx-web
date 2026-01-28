@@ -280,13 +280,16 @@ export default function PricingPage() {
                   )}
 
                   {/* Logo/Icon */}
-                  <div id={`pricing-icon-${tier.id}`} className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${
+                  <div id={`pricing-icon-${tier.id}`} className={`px-4 py-3 rounded-2xl flex items-center justify-center gap-1.5 mb-4 ${
                     tier.badge
                       ? "bg-gradient-to-br from-violet-500 to-purple-600"
                       : "bg-white/10"
                   }`}>
-                    <span className={`text-xl font-bold ${tier.badge ? "text-white" : "text-white"}`}>
+                    <span className={`text-lg font-bold ${tier.badge ? "text-white" : "text-white"}`}>
                       CX
+                    </span>
+                    <span className={`text-sm font-medium ${tier.badge ? "text-white/80" : "text-white/70"}`}>
+                      {tier.name.replace("CX ", "")}
                     </span>
                   </div>
 
