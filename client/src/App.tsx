@@ -28,6 +28,7 @@ import PricingFAQ from "./pages/pricing/faq";
 import Support from "./pages/support";
 import AccountPage from "./pages/account";
 import CareersPage from "./pages/careers";
+import AgentProfilesPage from "./pages/agent-profiles";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -310,6 +311,7 @@ export default function App() {
             <Route path="/support" component={Support} />
             <Route path="/account" component={AccountPage} />
             <Route path="/careers" component={CareersPage} />
+            <Route path="/agent-profiles" component={AgentProfilesPage} />
           </Switch>
 
           <Toaster />
