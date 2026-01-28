@@ -58,7 +58,7 @@ const tiers: PricingTier[] = [
       "Local LLM (Mistral 7B)",
       "Full CLI access",
       "Community Discord support",
-      "Open source MIT license",
+      "BSL 1.1 License",
     ],
     limits: {
       servers: "1 server",

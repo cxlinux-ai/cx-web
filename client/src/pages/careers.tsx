@@ -124,7 +124,7 @@ const jobPostings: JobPosting[] = [
       "Enterprise Linux (Red Hat, Canonical, SUSE alumni)",
       "Package management systems",
       "AI/ML infrastructure",
-      "Open source commercialization",
+      "Developer tools commercialization",
     ],
     icon: Lightbulb,
   },
@@ -165,7 +165,7 @@ const jobPostings: JobPosting[] = [
   },
   {
     id: "contributors",
-    title: "Open Source Contributors",
+    title: "Community Contributors",
     emoji: "⭐",
     category: "community",
     type: "contributor",
@@ -264,7 +264,7 @@ export default function CareersPage() {
                 <div className="text-sm text-gray-500">Stage</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white">MIT</div>
+                <div className="text-3xl font-bold text-white">BSL</div>
                 <div className="text-sm text-gray-500">Licensed</div>
               </div>
               <div className="text-center">
@@ -356,10 +356,10 @@ export default function CareersPage() {
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <Star className="w-10 h-10 text-amber-400 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Open Source First</h3>
+              <h3 className="text-xl font-semibold mb-2">Source Available</h3>
               <p className="text-gray-400 text-sm">
-                MIT licensed core. Your contributions are visible, credited, and
-                part of the open source ecosystem. Build your reputation.
+                BSL licensed with Apache 2.0 conversion. Your contributions are visible,
+                credited, and help shape the future of Linux tooling.
               </p>
             </motion.div>
           </div>
