@@ -34,12 +34,43 @@ export const hackathonRegistrations = pgTable("hackathon_registrations", {
   email: text("email").notNull().unique(),
   phone: text("phone"),
   registeredAt: text("registered_at").notNull().default(sql`now()`),
+  // Extended hackathon fields (existing in database)
+  fullName: text("full_name"),
+  country: text("country"),
+  currentRole: text("current_role"),
+  organization: text("organization"),
+  githubUrl: text("github_url"),
+  linkedinUrl: text("linkedin_url"),
+  linuxExperience: text("linux_experience"),
+  aiMlExperience: text("ai_ml_experience"),
+  programmingLanguages: text("programming_languages"),
+  teamOrSolo: text("team_or_solo"),
+  teamName: text("team_name"),
+  projectIdea: text("project_idea"),
+  usedCortexBefore: boolean("used_cortex_before"),
+  howHeardAboutUs: text("how_heard_about_us"),
+  phaseParticipation: text("phase_participation"),
 });
 
 export const insertHackathonRegistrationSchema = createInsertSchema(hackathonRegistrations).pick({
   name: true,
   email: true,
   phone: true,
+  fullName: true,
+  country: true,
+  currentRole: true,
+  organization: true,
+  githubUrl: true,
+  linkedinUrl: true,
+  linuxExperience: true,
+  aiMlExperience: true,
+  programmingLanguages: true,
+  teamOrSolo: true,
+  teamName: true,
+  projectIdea: true,
+  usedCortexBefore: true,
+  howHeardAboutUs: true,
+  phaseParticipation: true,
 });
 
 export type InsertHackathonRegistration = z.infer<typeof insertHackathonRegistrationSchema>;
