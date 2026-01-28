@@ -35,8 +35,6 @@ import PricingSuccessPage from "./pages/pricing-success";
 import SuccessPage from "./pages/success";
 import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
-import TrustCenter from "./pages/trust";
-import AgentProfilesPage from "./pages/agent-profiles";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -202,26 +200,6 @@ export default function App() {
                   News
                 </Link>
                 <Link
-                  href="/trust"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/trust" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-trust"
-                  onClick={() => analytics.trackCTAClick('trust_center', 'main_nav')}
-                >
-                  Trust Center
-                </Link>
-                <Link
-                  href="/agent-profiles"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/agent-profiles" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
-                  }`}
-                  data-testid="link-agents"
-                  onClick={() => analytics.trackCTAClick('agent_profiles', 'main_nav')}
-                >
-                  Agent Fleet
-                </Link>
-                <Link
                   href="/startup"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/startup" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
@@ -261,7 +239,7 @@ export default function App() {
               {/* GitHub Stars & Get Started Button (Desktop) */}
               <div className="hidden md:flex items-center gap-3">
                 <a
-                  href="https://github.com/cxlinux-ai/cortex"
+                  href="https://github.com/cortexlinux/cortex"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-300/50 hover:text-white transition-all"
@@ -272,7 +250,7 @@ export default function App() {
                   <span>25</span>
                 </a>
                 <a
-                  href="https://github.com/cxlinux-ai/cortex"
+                  href="https://github.com/cortexlinux/cortex"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
@@ -344,28 +322,6 @@ export default function App() {
                     News
                   </Link>
                   <Link
-                    href="/trust"
-                    onClick={() => {
-                      analytics.trackCTAClick('trust_center', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-trust"
-                  >
-                    Trust Center
-                  </Link>
-                  <Link
-                    href="/agent-profiles"
-                    onClick={() => {
-                      analytics.trackCTAClick('agent_profiles', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-agents"
-                  >
-                    Agent Fleet
-                  </Link>
-                  <Link
                     href="/startup"
                     onClick={() => {
                       analytics.trackCTAClick('ai_agencies', 'mobile_nav');
@@ -403,7 +359,7 @@ export default function App() {
                     Hackathon
                   </Link>
                   <a
-                    href="https://github.com/cxlinux-ai/cortex"
+                    href="https://github.com/cortexlinux/cortex"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
@@ -455,8 +411,6 @@ export default function App() {
             <Route path="/success" component={SuccessPage} />
             <Route path="/support" component={SupportPage} />
             <Route path="/architecture" component={ArchitecturePage} />
-            <Route path="/trust" component={TrustCenter} />
-            <Route path="/agent-profiles" component={AgentProfilesPage} />
           </Switch>
           </main>
 
