@@ -1,0 +1,510 @@
+---
+sidebar_position: 1
+title: Setting Up Dev Environments
+description: Use Cortex to set up complete development environments for any language or framework in minutes.
+keywords: [development, environment, setup, programming, languages]
+---
+
+# Setting Up Dev Environments
+
+This tutorial shows how to use Cortex to set up complete development environments. From basic language runtimes to full-stack frameworks, Cortex handles the complexity.
+
+## Time Required
+
+- Basic setup: 5 minutes
+- Full environment: 15-30 minutes
+
+## Prerequisites
+
+- Cortex installed and configured
+- Sudo access for package installation
+
+## Python Development
+
+### Basic Python Setup
+
+```bash
+cortex "set up python development environment"
+```
+
+Cortex will install:
+- Python 3.x (latest stable)
+- pip
+- venv
+- Common development tools
+
+### Data Science Setup
+
+```bash
+cortex "set up python for data science with jupyter"
+```
+
+Includes:
+- Python 3.x
+- Jupyter Lab/Notebook
+- NumPy, Pandas, Matplotlib
+- scikit-learn
+
+### Web Development (Django/Flask)
+
+```bash
+# Django
+cortex "set up django development environment"
+
+# Flask
+cortex "set up flask development environment with postgres"
+```
+
+### Verify Setup
+
+```bash
+cortex "verify my python environment is working"
+```
+
+---
+
+## Node.js Development
+
+### Basic Node.js Setup
+
+```bash
+cortex "install nodejs LTS version with npm"
+```
+
+### With Version Manager
+
+```bash
+cortex "set up node with nvm for managing versions"
+```
+
+Then you can:
+
+```bash
+nvm install 18
+nvm install 20
+nvm use 18
+```
+
+### Full-Stack JavaScript
+
+```bash
+cortex "set up a modern javascript development environment"
+```
+
+Includes:
+- Node.js LTS
+- npm
+- Yarn (optional)
+- Common global packages (nodemon, typescript, etc.)
+
+### Specific Frameworks
+
+```bash
+# React development
+cortex "set up environment for react development"
+
+# Vue.js development
+cortex "set up vue.js development environment"
+
+# Next.js development
+cortex "prepare environment for next.js development"
+```
+
+---
+
+## Rust Development
+
+### Basic Rust Setup
+
+```bash
+cortex "install rust development tools"
+```
+
+Installs via rustup:
+- rustc (compiler)
+- cargo (package manager)
+- rustfmt (formatter)
+- clippy (linter)
+
+### With IDE Support
+
+```bash
+cortex "set up rust development with IDE support for vscode"
+```
+
+Additional tools:
+- rust-analyzer
+- CodeLLDB (debugger)
+
+---
+
+## Go Development
+
+### Basic Go Setup
+
+```bash
+cortex "install go development environment"
+```
+
+Includes:
+- Go compiler
+- Go tools
+- Proper GOPATH configuration
+
+### With Common Tools
+
+```bash
+cortex "set up go with common development tools"
+```
+
+Additional tools:
+- gopls (language server)
+- golangci-lint
+- delve (debugger)
+
+---
+
+## Java/JVM Development
+
+### OpenJDK Setup
+
+```bash
+cortex "install java 17 development kit"
+```
+
+### With Build Tools
+
+```bash
+cortex "set up java development with maven and gradle"
+```
+
+### Multiple Versions
+
+```bash
+cortex "install java 11 and 17, let me switch between them"
+```
+
+### Kotlin
+
+```bash
+cortex "set up kotlin development environment"
+```
+
+---
+
+## C/C++ Development
+
+### Basic C/C++ Setup
+
+```bash
+cortex "install c and c++ development tools"
+```
+
+Installs:
+- gcc/g++
+- make
+- gdb
+- build-essential
+
+### Modern C++ Development
+
+```bash
+cortex "set up modern c++ development with cmake and clang"
+```
+
+Includes:
+- Clang/LLVM
+- CMake
+- Ninja build
+- clang-format
+- clang-tidy
+
+---
+
+## PHP Development
+
+### Basic PHP Setup
+
+```bash
+cortex "install php for web development"
+```
+
+### With Laravel
+
+```bash
+cortex "set up php environment for laravel development"
+```
+
+Includes:
+- PHP 8.x
+- Composer
+- Required PHP extensions
+- Laravel installer
+
+### With Database
+
+```bash
+cortex "set up php with mysql for wordpress development"
+```
+
+---
+
+## Ruby Development
+
+### Basic Ruby Setup
+
+```bash
+cortex "install ruby development environment"
+```
+
+### With Version Manager
+
+```bash
+cortex "set up ruby with rbenv for version management"
+```
+
+### Rails Development
+
+```bash
+cortex "set up ruby on rails development environment"
+```
+
+---
+
+## Database Environments
+
+### PostgreSQL
+
+```bash
+cortex "install postgresql for local development"
+```
+
+Setup includes:
+- PostgreSQL server
+- psql client
+- Development headers
+- Created user matching your username
+
+### MySQL/MariaDB
+
+```bash
+cortex "set up mysql for development"
+```
+
+### MongoDB
+
+```bash
+cortex "install mongodb for local development"
+```
+
+### Redis
+
+```bash
+cortex "install redis for caching and queues"
+```
+
+### Multiple Databases
+
+```bash
+cortex "set up postgres, redis, and mongodb for full-stack development"
+```
+
+---
+
+## Container Development
+
+### Docker Setup
+
+```bash
+cortex "install docker for container development"
+```
+
+Includes:
+- Docker Engine
+- Docker CLI
+- Docker Compose
+- User added to docker group
+
+### Kubernetes Local
+
+```bash
+cortex "set up kubernetes for local development with minikube"
+```
+
+Or with kind:
+
+```bash
+cortex "set up kubernetes with kind for local testing"
+```
+
+### Podman Alternative
+
+```bash
+cortex "install podman as a docker alternative"
+```
+
+---
+
+## Mobile Development
+
+### Android Development
+
+```bash
+cortex "set up android development environment"
+```
+
+Includes:
+- Android Studio or command-line tools
+- Android SDK
+- Platform tools
+- Emulator (optional)
+
+### React Native
+
+```bash
+cortex "set up react native development for android"
+```
+
+### Flutter
+
+```bash
+cortex "install flutter for cross-platform mobile development"
+```
+
+---
+
+## DevOps Tools
+
+### Terraform
+
+```bash
+cortex "install terraform for infrastructure as code"
+```
+
+### Ansible
+
+```bash
+cortex "set up ansible for configuration management"
+```
+
+### Complete DevOps Toolkit
+
+```bash
+cortex "install common devops tools - terraform, ansible, kubectl"
+```
+
+---
+
+## IDE and Editors
+
+### VS Code
+
+```bash
+cortex "install visual studio code with common extensions"
+```
+
+### Neovim
+
+```bash
+cortex "set up neovim for development with modern config"
+```
+
+### JetBrains Toolbox
+
+```bash
+cortex "install jetbrains toolbox for IDE management"
+```
+
+---
+
+## Project-Specific Setup
+
+### From README
+
+```bash
+# Clone project first
+git clone https://github.com/example/project
+
+# Let Cortex figure out what's needed
+cd project
+cortex "install all dependencies for this project"
+```
+
+Cortex analyzes:
+- `package.json` for Node.js
+- `requirements.txt` for Python
+- `Cargo.toml` for Rust
+- `go.mod` for Go
+- etc.
+
+### Development Containers
+
+```bash
+cortex "help me set up a devcontainer for this project"
+```
+
+---
+
+## Environment Isolation
+
+### Virtual Environments
+
+```bash
+# Python
+cortex "create a python virtual environment for this project"
+
+# Node (with nvm)
+cortex "set up node version 18 for this project with .nvmrc"
+```
+
+### direnv Integration
+
+```bash
+cortex "set up direnv for automatic environment switching"
+```
+
+---
+
+## Cleanup
+
+### Remove Environments
+
+```bash
+cortex "remove the python development environment"
+```
+
+### Clean Unused
+
+```bash
+cortex "clean up unused development tools and packages"
+```
+
+---
+
+## Troubleshooting
+
+### Version Conflicts
+
+```bash
+cortex "I have python version conflicts, help me fix them"
+```
+
+### Missing Dependencies
+
+```bash
+cortex "my build is failing due to missing library, help diagnose"
+```
+
+### Path Issues
+
+```bash
+cortex "the command is not found even though I installed it"
+```
+
+---
+
+## Next Steps
+
+- [Server Configuration](/docs/tutorials/server-configuration) - Production server setup
+- [Docker Integration](/docs/tutorials/docker-integration) - Containerized development
+- [CI/CD Usage](/docs/tutorials/cicd-usage) - Automated pipelines

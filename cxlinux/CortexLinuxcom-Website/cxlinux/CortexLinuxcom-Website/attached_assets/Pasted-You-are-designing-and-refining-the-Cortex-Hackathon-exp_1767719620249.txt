@@ -1,0 +1,162 @@
+You are designing and refining the **Cortex Hackathon experience** (hackathon page + homepage preview).
+Your objective is not decoration — it is **maximum participation through clarity, desire, and trust**.
+
+This hackathon must feel **important, exciting, and inevitable** to the right audience, without being loud or overwhelming.
+
+---
+
+## Core Goal
+
+Turn passive visitors into **motivated participants**.
+
+Anyone landing on:
+
+* the homepage hackathon preview
+* or the hackathon page itself
+
+should quickly think:
+
+> “This looks serious. This looks well designed. I want to be part of this.”
+
+---
+
+## Psychological & Marketing Foundation (Why This Must Work)
+
+Apply these principles intentionally:
+
+* **Attention Interruption (Without Aggression)**
+  The hackathon preview must break visual routine *just enough* to pull attention — without clashing with the site’s design language.
+
+* **Clarity Creates Trust**
+  Confusion kills conversion.
+  Users must immediately understand:
+
+  * What this is
+  * When it happens
+  * What they do
+  * Where they go next (GitHub)
+
+* **Low Cognitive Load**
+  Fewer words. Strong hierarchy. Clear actions.
+  Never overwhelm.
+
+* **Authority & Legitimacy**
+  This should feel like a real, serious hackathon — not a gimmick or experiment.
+
+* **Momentum Over Persuasion**
+  Don’t “convince.”
+  Make participation feel like the natural next step.
+
+---
+
+## Hackathon Preview Card (Homepage / Global Sections)
+
+Purpose: **Interrupt → Signal importance → Redirect**
+
+Design intent:
+
+* Premium, clean, confident
+* Visually distinct but still aligned with Cortex branding
+* Clearly more important than secondary sections on the page
+
+Must include:
+
+* A small but visible subheader indicating the hackathon + date
+* A strong, concise headline
+* One short value-oriented sentence (what builders gain)
+* **Two CTAs only**:
+
+  1. Participate on GitHub (primary)
+  2. Learn more (secondary → hackathon page)
+
+Interactions:
+
+* Smooth hover elevation
+* Subtle glow or focus effect
+* CTA interaction must feel rewarding and intentional
+
+When clicked:
+
+* The redirect to the hackathon page must feel **premium**
+* Smooth scroll, easing, optional motion blur
+* Always scroll to the top
+* Perfectly optimized for desktop, tablet, and mobile
+
+---
+
+## Hackathon Page (Main Experience)
+
+This page must feel like **an invitation to build something meaningful**, not a wall of information.
+
+Structure the experience so the user flows naturally:
+
+1. **Immediate Context**
+
+   * What the hackathon is
+   * Why it exists
+   * Why now
+
+2. **Participation Clarity**
+
+   * How it works (high-level, simple)
+   * Where it happens (GitHub)
+   * What participants actually do
+
+3. **Motivation Without Hype**
+
+   * Focus on learning, impact, contribution, visibility
+   * Avoid exaggerated claims or pressure tactics
+
+4. **Action**
+
+   * Clear, repeated CTAs leading to GitHub
+   * CTAs should feel like joining a movement, not filling a form
+
+---
+
+## Copywriting Rules (Non-Negotiable)
+
+* Human, confident, calm
+* Short sentences
+* Strong verbs
+* No buzzwords unless they add clarity
+* Never exaggerate
+* Never manipulate
+
+Bad:
+“Join the most revolutionary hackathon ever created”
+
+Good:
+“Build real AI tools for Linux. Ship code that matters.”
+
+---
+
+## UI & Responsiveness Expectations
+
+* Works perfectly on **desktop, tablet, and mobile**
+* No cramped text on mobile
+* No excessive animation
+* Motion is used to guide attention, not show off
+* Every element must justify its existence
+
+If something does not increase:
+
+* understanding
+* motivation
+* or action
+
+it should be removed.
+
+---
+
+## Final Success Criteria
+
+This hackathon experience is successful if:
+
+* Users instantly understand it
+* Users feel it’s serious and well designed
+* Users know exactly how to participate
+* Users are naturally guided to GitHub
+* Nothing feels forced, noisy, or confusing
+
+Design and write with restraint, intelligence, and intent.

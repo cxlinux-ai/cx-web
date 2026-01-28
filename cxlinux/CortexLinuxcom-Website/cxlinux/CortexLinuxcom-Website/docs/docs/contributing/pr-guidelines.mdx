@@ -1,0 +1,313 @@
+---
+sidebar_position: 3
+title: PR Guidelines
+description: How to submit pull requests to Cortex Linux. Review process, requirements, and best practices.
+keywords: [pull request, pr, contributing, review, guidelines]
+---
+
+# PR Guidelines
+
+This guide covers how to create and submit pull requests to Cortex Linux. Following these guidelines helps maintainers review your changes quickly.
+
+## Before You Start
+
+### Check Existing Work
+
+1. Search [existing PRs](https://github.com/cortexlinux/cortex-linux/pulls) - Is someone already working on this?
+2. Search [issues](https://github.com/cortexlinux/cortex-linux/issues) - Is there a related issue?
+3. Check [discussions](https://github.com/cortexlinux/cortex-linux/discussions) - Has this been discussed?
+
+### Create an Issue First
+
+For non-trivial changes:
+
+1. Open an issue describing your proposed change
+2. Wait for feedback from maintainers
+3. Get approval before starting significant work
+
+This prevents wasted effort on changes we can't accept.
+
+## Creating Your PR
+
+### Branch Naming
+
+Use descriptive branch names:
+
+```
+feature/add-snap-support
+fix/package-version-parsing
+docs/improve-installation-guide
+refactor/simplify-config-loading
+```
+
+### Commit Messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+Types:
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation
+- `refactor`: Code refactoring
+- `test`: Adding tests
+- `chore`: Maintenance
+
+Examples:
+
+```
+feat(packages): add flatpak support
+
+Add support for installing Flatpak packages through natural
+language commands.
+
+Closes #234
+```
+
+```
+fix(cli): handle spaces in package names
+
+Package names with spaces were causing parse errors.
+Now properly quoted when passed to package manager.
+
+Fixes #456
+```
+
+### Keeping Commits Clean
+
+```bash
+# Squash messy commits before PR
+git rebase -i main
+
+# Keep commits atomic and meaningful
+# Each commit should be a logical unit
+```
+
+## PR Template
+
+When creating a PR, fill out this template:
+
+```markdown
+## Description
+
+Brief description of what this PR does.
+
+## Related Issue
+
+Fixes #(issue number)
+
+## Type of Change
+
+- [ ] Bug fix (non-breaking change fixing an issue)
+- [ ] New feature (non-breaking change adding functionality)
+- [ ] Breaking change (fix or feature causing existing functionality to change)
+- [ ] Documentation update
+
+## How Has This Been Tested?
+
+Describe how you tested your changes:
+
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Manual testing
+
+**Test Configuration:**
+- OS: Ubuntu 22.04
+- Rust version: 1.70
+
+## Checklist
+
+- [ ] My code follows the code style of this project
+- [ ] I have added tests covering my changes
+- [ ] All new and existing tests pass
+- [ ] I have updated documentation accordingly
+- [ ] I have read the [CONTRIBUTING](CONTRIBUTING.md) document
+- [ ] My commits follow the conventional commit format
+
+## Screenshots (if applicable)
+
+Add screenshots for UI changes.
+
+## Additional Notes
+
+Any additional information for reviewers.
+```
+
+## PR Requirements
+
+### Code Quality
+
+- [ ] Passes `cargo clippy` with no warnings
+- [ ] Passes `cargo fmt --check`
+- [ ] No new compiler warnings
+- [ ] Follows [Code Style](/docs/contributing/code-style)
+
+### Testing
+
+- [ ] New code has tests
+- [ ] All tests pass locally
+- [ ] CI pipeline passes
+- [ ] Edge cases covered
+
+### Documentation
+
+- [ ] Public APIs documented
+- [ ] README updated if needed
+- [ ] User-facing changes documented
+- [ ] Migration guide for breaking changes
+
+### Size
+
+- Keep PRs focused and reasonably sized
+- Large changes should be split into smaller PRs
+- Maximum ~500 lines of changes preferred
+
+## Review Process
+
+### What to Expect
+
+1. **Automated checks** - CI runs tests, lints, security scans
+2. **Initial review** - Maintainer triages within 48 hours
+3. **Detailed review** - In-depth code review
+4. **Feedback** - Requests for changes if needed
+5. **Approval** - At least one maintainer approval required
+6. **Merge** - Maintainer merges when ready
+
+### Review Timeline
+
+| PR Type | Expected Review Time |
+|---------|---------------------|
+| Bug fix | 1-3 days |
+| Small feature | 3-5 days |
+| Large feature | 1-2 weeks |
+| Breaking change | 1-2 weeks |
+
+### Responding to Feedback
+
+- Address all comments
+- Explain your reasoning if you disagree
+- Mark conversations as resolved when addressed
+- Request re-review when ready
+
+## Common Issues
+
+### CI Failures
+
+```bash
+# Check formatting
+cargo fmt --check
+
+# Run clippy
+cargo clippy -- -D warnings
+
+# Run tests
+cargo test
+
+# Check documentation
+cargo doc
+```
+
+### Merge Conflicts
+
+```bash
+# Update your branch
+git fetch upstream
+git rebase upstream/main
+
+# Resolve conflicts
+# Then force push
+git push --force-with-lease
+```
+
+### Stale PRs
+
+PRs without activity for 14 days may be closed. To prevent:
+
+- Respond to review comments promptly
+- Ask for help if stuck
+- Update the PR description with status
+
+## Special Cases
+
+### Breaking Changes
+
+Breaking changes require:
+
+1. Discussion in an issue first
+2. Clear justification
+3. Migration guide
+4. Deprecation period (when possible)
+
+### Security Fixes
+
+For security issues:
+
+1. Do NOT open a public PR
+2. Report via [security policy](https://github.com/cortexlinux/cortex-linux/security/policy)
+3. Work with maintainers on fix
+4. PR may be expedited
+
+### Documentation-Only
+
+Documentation PRs have lighter requirements:
+
+- No tests needed
+- Faster review
+- Can be merged by any maintainer
+
+## After Merge
+
+### What Happens Next
+
+1. CI builds release artifacts
+2. Changes appear in next release
+3. You're credited in changelog
+4. Bounty payment processed (if applicable)
+
+### Getting Credit
+
+Contributors are credited in:
+
+- `CHANGELOG.md`
+- Release notes
+- Contributors page
+- Annual report
+
+## Tips for Success
+
+### Do
+
+- ✅ Start small - First PR should be simple
+- ✅ Communicate early - Ask before major work
+- ✅ Test thoroughly - On multiple distros if possible
+- ✅ Document your code - Others will maintain it
+- ✅ Be patient - Reviews take time
+
+### Don't
+
+- ❌ Submit huge PRs - Hard to review
+- ❌ Mix unrelated changes - Keep PRs focused
+- ❌ Ignore CI failures - Fix them
+- ❌ Get discouraged - Feedback improves code
+- ❌ Disappear - Respond to reviews
+
+## Getting Help
+
+Stuck on something?
+
+- Comment on the PR with questions
+- Ask in Discord #dev-help
+- Tag a maintainer if urgent
+
+## Next Steps
+
+- [Code Style](/docs/contributing/code-style) - Coding standards
+- [Development Setup](/docs/contributing/development-setup) - Local environment
+- [Bounty Program](/docs/contributing/bounty-program) - Get paid for PRs

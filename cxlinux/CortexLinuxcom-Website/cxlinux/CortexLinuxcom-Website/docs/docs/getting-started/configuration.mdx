@@ -1,0 +1,275 @@
+---
+sidebar_position: 3
+title: Configuration
+description: Configure Cortex Linux to match your workflow. Set up AI backends, customize behavior, and manage preferences.
+keywords: [configuration, config, settings, customization, preferences]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Configuration
+
+Cortex Linux can be configured via environment variables, configuration files, or command-line flags. This guide covers all configuration options.
+
+## Configuration Hierarchy
+
+Cortex loads configuration in this order (later sources override earlier):
+
+1. Default values
+2. System config (`/etc/cortex/config.toml`)
+3. User config (`~/.config/cortex/config.toml`)
+4. Environment variables
+5. Command-line flags
+
+## Configuration File
+
+Create a configuration file at `~/.config/cortex/config.toml`:
+
+```toml title="~/.config/cortex/config.toml"
+# AI Provider Configuration
+[ai]
+provider = "anthropic"           # Options: "anthropic", "openai", "local"
+model = "claude-sonnet-4-20250514"      # Default model to use
+temperature = 0.1                # Lower = more deterministic (0.0-1.0)
+max_tokens = 1024                # Maximum response length
+
+# Behavior Settings
+[behavior]
+confirm_before_execute = true    # Prompt before running commands
+dry_run_by_default = false       # Always show commands without executing
+verbose = false                  # Show detailed AI reasoning
+color_output = true              # Enable colored terminal output
+
+# Safety Settings
+[safety]
+warn_destructive = true          # Extra warnings for rm, dd, etc.
+require_sudo_confirm = true      # Confirm before sudo commands
+blocked_commands = ["rm -rf /"]  # Commands that are never executed
+max_command_length = 500         # Reject suspiciously long commands
+
+# History & Logging
+[history]
+enabled = true                   # Save command history
+max_entries = 1000               # Maximum history entries
+log_file = "~/.local/share/cortex/history.log"
+
+# Rollback Configuration
+[rollback]
+enabled = true                   # Enable rollback functionality
+snapshot_dir = "~/.local/share/cortex/snapshots"
+max_snapshots = 50               # Maximum snapshots to keep
+```
+
+## AI Provider Setup
+
+Configure your AI backend based on your provider:
+
+<Tabs>
+  <TabItem value="anthropic" label="Anthropic Claude" default>
+
+```bash
+# Required
+export ANTHROPIC_API_KEY="sk-ant-api03-xxxxx"
+
+# Optional
+export CORTEX_AI_PROVIDER="anthropic"
+export CORTEX_AI_MODEL="claude-sonnet-4-20250514"
+```
+
+**Configuration file:**
+
+```toml
+[ai]
+provider = "anthropic"
+model = "claude-sonnet-4-20250514"  # or "claude-opus-4-20250514" for complex tasks
+```
+
+  </TabItem>
+  <TabItem value="openai" label="OpenAI">
+
+```bash
+# Required
+export OPENAI_API_KEY="sk-xxxxx"
+
+# Optional
+export CORTEX_AI_PROVIDER="openai"
+export CORTEX_AI_MODEL="gpt-4-turbo"
+```
+
+**Configuration file:**
+
+```toml
+[ai]
+provider = "openai"
+model = "gpt-4-turbo"
+```
+
+  </TabItem>
+  <TabItem value="local" label="Local/Ollama">
+
+```bash
+# Required for local models
+export CORTEX_AI_PROVIDER="local"
+export CORTEX_LOCAL_MODEL="llama3:8b"
+export CORTEX_LOCAL_ENDPOINT="http://localhost:11434"
+```
+
+**Configuration file:**
+
+```toml
+[ai]
+provider = "local"
+model = "llama3:8b"
+endpoint = "http://localhost:11434"
+```
+
+:::note Performance Note
+Local models may be slower and less accurate than cloud providers. We recommend using at least a 7B parameter model.
+:::
+
+  </TabItem>
+</Tabs>
+
+## Environment Variables
+
+All configuration options can be set via environment variables:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `CORTEX_AI_PROVIDER` | AI provider (anthropic/openai/local) | `anthropic` |
+| `CORTEX_AI_MODEL` | Model to use | Provider default |
+| `CORTEX_CONFIRM` | Require confirmation | `true` |
+| `CORTEX_DRY_RUN` | Default to dry-run mode | `false` |
+| `CORTEX_VERBOSE` | Verbose output | `false` |
+| `CORTEX_COLOR` | Colored output | `true` |
+| `CORTEX_CONFIG` | Custom config file path | `~/.config/cortex/config.toml` |
+
+See the [Environment Variables Reference](/docs/reference/environment-variables) for the complete list.
+
+## Command-Line Flags
+
+Override any configuration with command-line flags:
+
+```bash
+# Basic flags
+cortex --dry-run "your command"           # Preview without executing
+cortex --yes "your command"               # Skip confirmation
+cortex --verbose "your command"           # Show detailed reasoning
+cortex --model claude-opus-4-20250514 "your command"  # Use specific model
+
+# Combined flags
+cortex -v --dry-run "complex operation"
+```
+
+### Global Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--dry-run` | `-n` | Show commands without executing |
+| `--yes` | `-y` | Auto-confirm all prompts |
+| `--verbose` | `-v` | Show detailed output |
+| `--quiet` | `-q` | Minimal output |
+| `--model` | `-m` | Specify AI model |
+| `--config` | `-c` | Use custom config file |
+| `--no-color` | | Disable colored output |
+
+## Shell Integration
+
+### Auto-Completion
+
+Enable shell completions for enhanced productivity:
+
+```bash
+# Bash
+cortex completion bash >> ~/.bashrc
+source ~/.bashrc
+
+# Zsh
+cortex completion zsh >> ~/.zshrc
+source ~/.zshrc
+
+# Fish
+cortex completion fish > ~/.config/fish/completions/cortex.fish
+```
+
+### Prompt Integration
+
+Add Cortex status to your shell prompt:
+
+```bash title="~/.bashrc"
+# Show last Cortex command status
+cortex_prompt() {
+  if [[ -n "$CORTEX_LAST_STATUS" ]]; then
+    echo " [cortex: $CORTEX_LAST_STATUS]"
+  fi
+}
+PS1='$PS1$(cortex_prompt)'
+```
+
+## Profile Configurations
+
+Create multiple configuration profiles for different use cases:
+
+```bash
+# Development profile (more verbose, always dry-run)
+mkdir -p ~/.config/cortex/profiles
+
+cat > ~/.config/cortex/profiles/dev.toml << 'EOF'
+[behavior]
+dry_run_by_default = true
+verbose = true
+EOF
+
+# Production profile (minimal output, strict safety)
+cat > ~/.config/cortex/profiles/prod.toml << 'EOF'
+[behavior]
+confirm_before_execute = true
+verbose = false
+
+[safety]
+warn_destructive = true
+require_sudo_confirm = true
+EOF
+```
+
+Use a profile:
+
+```bash
+cortex --config ~/.config/cortex/profiles/dev.toml "your command"
+
+# Or set as default
+export CORTEX_CONFIG=~/.config/cortex/profiles/prod.toml
+```
+
+## Validate Configuration
+
+Check your configuration is valid:
+
+```bash
+cortex config validate
+```
+
+View current effective configuration:
+
+```bash
+cortex config show
+```
+
+## Reset Configuration
+
+Reset to defaults:
+
+```bash
+# Remove user configuration
+rm ~/.config/cortex/config.toml
+
+# Or regenerate default config
+cortex config init --force
+```
+
+## Next Steps
+
+- [First Commands](/docs/getting-started/first-commands) - Start using Cortex
+- [Environment Variables](/docs/reference/environment-variables) - Complete variable reference
+- [Configuration Options](/docs/reference/configuration-options) - Detailed config documentation

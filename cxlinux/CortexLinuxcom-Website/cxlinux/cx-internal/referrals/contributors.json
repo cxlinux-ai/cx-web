@@ -1,0 +1,22 @@
+{
+  "contributors": [
+    {
+      "discord_handle": "TEMPLATE_USER",
+      "discord_id": "000000000000000000",
+      "referral_code": "CX-TEMPLATE-0000",
+      "referral_link": "https://cxlinux.ai/ref/CX-TEMPLATE-0000",
+      "created_at": "2025-01-25T00:00:00Z",
+      "status": "template",
+      "payout_method": null,
+      "payout_email": null,
+      "total_referrals": 0,
+      "active_referrals": 0,
+      "lifetime_earnings": 0.00,
+      "pending_payout": 0.00
+    }
+  ],
+  "code_generator": {
+    "prefix": "CX",
+    "next_sequence": 1000
+  }
+}

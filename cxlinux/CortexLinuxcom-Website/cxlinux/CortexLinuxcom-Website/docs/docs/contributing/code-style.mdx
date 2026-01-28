@@ -1,0 +1,478 @@
+---
+sidebar_position: 4
+title: Code Style
+description: Coding standards and style guide for Cortex Linux contributors.
+keywords: [code style, standards, formatting, rust, guidelines]
+---
+
+# Code Style
+
+This guide defines coding standards for Cortex Linux. Consistent style makes code easier to read, review, and maintain.
+
+## General Principles
+
+1. **Clarity over cleverness** - Write code others can understand
+2. **Explicit over implicit** - Be clear about intent
+3. **Consistency** - Follow existing patterns in the codebase
+4. **Documentation** - Explain why, not just what
+
+## Rust Style
+
+### Formatting
+
+We use `rustfmt` with default settings:
+
+```bash
+# Format all code
+cargo fmt
+
+# Check formatting
+cargo fmt --check
+```
+
+### Naming Conventions
+
+```rust
+// Types: PascalCase
+struct PackageManager;
+enum BackendType;
+trait CommandExecutor;
+
+// Functions and methods: snake_case
+fn install_package() {}
+fn get_config_value() {}
+
+// Constants: SCREAMING_SNAKE_CASE
+const MAX_RETRIES: u32 = 3;
+const DEFAULT_TIMEOUT: Duration = Duration::from_secs(30);
+
+// Variables: snake_case
+let package_name = "nginx";
+let is_installed = true;
+
+// Modules: snake_case
+mod package_manager;
+mod ai_backend;
+```
+
+### Imports
+
+```rust
+// Group imports: std, external crates, internal modules
+use std::collections::HashMap;
+use std::path::PathBuf;
+
+use anyhow::{Context, Result};
+use serde::{Deserialize, Serialize};
+
+use crate::config::Config;
+use crate::utils::execute_command;
+```
+
+### Error Handling
+
+```rust
+// Use anyhow for application errors
+use anyhow::{Context, Result};
+
+fn install_package(name: &str) -> Result<()> {
+    let output = execute_command(&format!("apt install {}", name))
+        .context("Failed to execute apt install")?;
+
+    if !output.status.success() {
+        anyhow::bail!("Package installation failed: {}", name);
+    }
+
+    Ok(())
+}
+
+// Use thiserror for library errors
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum PackageError {
+    #[error("Package not found: {0}")]
+    NotFound(String),
+
+    #[error("Installation failed: {0}")]
+    InstallFailed(String),
+
+    #[error("Permission denied")]
+    PermissionDenied,
+}
+```
+
+### Documentation
+
+```rust
+/// Installs a package using the appropriate package manager.
+///
+/// Automatically detects the system's package manager and uses it
+/// to install the specified package.
+///
+/// # Arguments
+///
+/// * `name` - The name of the package to install
+/// * `options` - Installation options
+///
+/// # Returns
+///
+/// Returns `Ok(())` on success, or an error if installation fails.
+///
+/// # Examples
+///
+/// ```
+/// use cortex::packages::install_package;
+///
+/// install_package("nginx", InstallOptions::default())?;
+/// ```
+///
+/// # Errors
+///
+/// Returns an error if:
+/// - Package is not found in repositories
+/// - User lacks permission to install
+/// - Network error occurs
+pub fn install_package(name: &str, options: InstallOptions) -> Result<()> {
+    // Implementation
+}
+```
+
+### Structs and Enums
+
+```rust
+/// Configuration for package installation.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct InstallOptions {
+    /// Skip confirmation prompts.
+    pub yes: bool,
+
+    /// Show verbose output.
+    pub verbose: bool,
+
+    /// Dry run mode (don't actually install).
+    pub dry_run: bool,
+}
+
+impl Default for InstallOptions {
+    fn default() -> Self {
+        Self {
+            yes: false,
+            verbose: false,
+            dry_run: false,
+        }
+    }
+}
+
+/// Supported package managers.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PackageManagerType {
+    /// APT (Debian/Ubuntu)
+    Apt,
+    /// DNF (Fedora/RHEL)
+    Dnf,
+    /// Pacman (Arch)
+    Pacman,
+    /// Zypper (openSUSE)
+    Zypper,
+}
+```
+
+### Functions
+
+```rust
+// Keep functions focused and short (< 50 lines ideal)
+fn detect_package_manager() -> Result<PackageManagerType> {
+    if command_exists("apt") {
+        return Ok(PackageManagerType::Apt);
+    }
+
+    if command_exists("dnf") {
+        return Ok(PackageManagerType::Dnf);
+    }
+
+    // ...
+
+    anyhow::bail!("No supported package manager found")
+}
+
+// Use early returns for validation
+fn process_command(input: &str) -> Result<Command> {
+    if input.is_empty() {
+        return Err(anyhow::anyhow!("Empty input"));
+    }
+
+    if input.len() > MAX_INPUT_LENGTH {
+        return Err(anyhow::anyhow!("Input too long"));
+    }
+
+    // Main logic here
+    parse_and_execute(input)
+}
+```
+
+### Testing
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Test names describe what they test
+    #[test]
+    fn install_package_succeeds_with_valid_name() {
+        let result = install_package("nginx", InstallOptions::default());
+        assert!(result.is_ok());
+    }
+
+    #[test]
+    fn install_package_fails_with_empty_name() {
+        let result = install_package("", InstallOptions::default());
+        assert!(result.is_err());
+    }
+
+    // Use test helpers for common setup
+    fn setup_test_environment() -> TestEnv {
+        TestEnv::new()
+            .with_mock_package_manager()
+            .build()
+    }
+}
+```
+
+## Linting
+
+We use `clippy` for additional linting:
+
+```bash
+# Run clippy
+cargo clippy
+
+# Treat warnings as errors
+cargo clippy -- -D warnings
+```
+
+### Clippy Configuration
+
+```toml
+# Cargo.toml
+[lints.clippy]
+# Deny
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+# Warn
+pedantic = "warn"
+nursery = "warn"
+
+# Allow (with justification in code)
+module_name_repetitions = "allow"
+```
+
+## File Organization
+
+### Module Structure
+
+```
+src/
+├── lib.rs              # Library root
+├── main.rs             # Binary entry point
+├── cli/
+│   ├── mod.rs         # Module root
+│   ├── args.rs        # Argument parsing
+│   └── commands.rs    # Command definitions
+├── ai/
+│   ├── mod.rs
+│   ├── backend.rs     # Backend trait
+│   ├── local.rs       # Local backend
+│   └── openai.rs      # OpenAI backend
+└── packages/
+    ├── mod.rs
+    ├── manager.rs     # Manager trait
+    ├── apt.rs         # APT implementation
+    └── dnf.rs         # DNF implementation
+```
+
+### Module Files
+
+```rust
+// mod.rs - Export public API
+mod backend;
+mod local;
+mod openai;
+
+pub use backend::{AiBackend, BackendConfig};
+pub use local::LocalBackend;
+pub use openai::OpenAiBackend;
+```
+
+## Comments
+
+### When to Comment
+
+```rust
+// GOOD: Explain why, not what
+// We retry 3 times because the API occasionally returns 503
+// during high load periods
+for _ in 0..3 {
+    if let Ok(result) = api.call() {
+        return Ok(result);
+    }
+}
+
+// BAD: Restating the code
+// Loop 3 times
+for _ in 0..3 {
+    // ...
+}
+```
+
+### TODO Comments
+
+```rust
+// TODO: Implement caching to reduce API calls
+// Issue: #234
+
+// FIXME: This doesn't handle Unicode properly
+// Issue: #567
+
+// HACK: Workaround for upstream bug in libfoo
+// Remove when libfoo 2.0 is released
+// Issue: #890
+```
+
+## Configuration Files
+
+### TOML Style
+
+```toml
+# Comments explain non-obvious settings
+[package]
+name = "cortex"
+version = "1.0.0"
+edition = "2021"
+
+# Keep dependencies sorted alphabetically
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.0", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+
+# Group dev dependencies separately
+[dev-dependencies]
+mockall = "0.11"
+tempfile = "3.0"
+```
+
+### YAML Style
+
+```yaml
+# Configuration file for Cortex
+# See docs for full reference
+
+# AI Backend settings
+backend:
+  provider: local          # Options: local, openai, anthropic
+  model: cortex-7b        # Model to use
+  timeout: 30             # Request timeout in seconds
+
+# Package management
+packages:
+  default_manager: auto   # Auto-detect package manager
+  update_cache: true      # Update before install
+```
+
+## Security
+
+### Input Validation
+
+```rust
+// Always validate external input
+fn execute_user_command(input: &str) -> Result<()> {
+    // Validate input
+    if !is_safe_input(input) {
+        return Err(anyhow::anyhow!("Invalid input"));
+    }
+
+    // Never interpolate user input directly into shell commands
+    // BAD: format!("apt install {}", user_input)
+    // GOOD: Use proper escaping or argument passing
+    Command::new("apt")
+        .arg("install")
+        .arg(sanitize_package_name(input))
+        .spawn()
+}
+```
+
+### Secrets
+
+```rust
+// Never log secrets
+fn authenticate(api_key: &str) -> Result<()> {
+    // BAD
+    log::debug!("Using API key: {}", api_key);
+
+    // GOOD
+    log::debug!("Authenticating with API");
+
+    // Use secrecy crate for sensitive data
+    let key = Secret::new(api_key.to_string());
+}
+```
+
+## Performance
+
+### Avoid Unnecessary Allocations
+
+```rust
+// BAD: Creates new String
+fn process(s: &str) -> String {
+    s.to_string().to_uppercase()
+}
+
+// GOOD: Returns Cow, avoiding allocation when possible
+fn process(s: &str) -> Cow<str> {
+    if s.chars().all(|c| c.is_uppercase()) {
+        Cow::Borrowed(s)
+    } else {
+        Cow::Owned(s.to_uppercase())
+    }
+}
+```
+
+### Use Iterators
+
+```rust
+// BAD: Multiple iterations
+let filtered: Vec<_> = items.iter().filter(|x| x.is_valid()).collect();
+let mapped: Vec<_> = filtered.iter().map(|x| x.name()).collect();
+
+// GOOD: Single iteration
+let result: Vec<_> = items
+    .iter()
+    .filter(|x| x.is_valid())
+    .map(|x| x.name())
+    .collect();
+```
+
+## Tools
+
+### Required
+
+- `rustfmt` - Code formatting
+- `clippy` - Linting
+
+### Recommended
+
+- `rust-analyzer` - IDE support
+- `cargo-watch` - Auto-rebuild
+- `cargo-audit` - Security audit
+- `cargo-tarpaulin` - Code coverage
+
+## Next Steps
+
+- [PR Guidelines](/docs/contributing/pr-guidelines) - Submitting changes
+- [Development Setup](/docs/contributing/development-setup) - Local environment
+- [Bounty Program](/docs/contributing/bounty-program) - Get paid for contributions

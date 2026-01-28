@@ -1,0 +1,352 @@
+---
+sidebar_position: 4
+title: First Commands
+description: Master your first Cortex Linux commands. Learn patterns for effective natural language system management.
+keywords: [commands, tutorial, beginner, examples, natural language]
+---
+
+# First Commands
+
+Now that Cortex is installed and configured, let's explore what you can do with it. This guide covers practical commands organized by category.
+
+## How Cortex Interprets Commands
+
+Cortex uses AI to understand your intent and translate it into shell commands. You don't need to use exact syntax - just describe what you want to accomplish.
+
+These commands all do the same thing:
+
+```bash
+cortex "install git"
+cortex "I need git installed"
+cortex "set up git on this machine"
+cortex "get me git"
+```
+
+## System Information Commands
+
+### Check System Status
+
+```bash
+# Get an overview of your system
+cortex "show me system information"
+```
+
+**Output:**
+
+```
+Suggested command:
+  uname -a && lsb_release -a && hostnamectl
+
+System Information:
+  Linux workstation 6.5.0-14-generic #14-Ubuntu SMP x86_64 GNU/Linux
+  Ubuntu 24.04 LTS (Noble Numbat)
+  Static hostname: workstation
+```
+
+### Resource Monitoring
+
+```bash
+# Check memory usage
+cortex "how much RAM is being used"
+
+# Check disk space
+cortex "show disk space on all drives"
+
+# Check CPU usage
+cortex "what's using the CPU right now"
+```
+
+### Process Management
+
+```bash
+# Find resource-heavy processes
+cortex "show top 10 processes by memory usage"
+
+# Find a specific process
+cortex "is nginx running"
+
+# Kill a process
+cortex "stop the process using port 3000"
+```
+
+## Package Management
+
+Cortex automatically detects your package manager and adapts commands accordingly.
+
+### Installing Packages
+
+```bash
+# Single package
+cortex "install neovim"
+
+# Multiple packages
+cortex "install nodejs npm and yarn"
+
+# With specific version
+cortex "install python 3.11"
+```
+
+### Updating Packages
+
+```bash
+# Update package lists
+cortex "check for available updates"
+
+# Update everything
+cortex "update all installed packages"
+
+# Update specific package
+cortex "update docker to the latest version"
+```
+
+### Searching and Querying
+
+```bash
+# Search for packages
+cortex "search for packages related to image editing"
+
+# Check if package is installed
+cortex "is vim installed"
+
+# Get package info
+cortex "show information about the nginx package"
+```
+
+### Removing Packages
+
+```bash
+# Remove package
+cortex "remove apache2"
+
+# Remove with dependencies
+cortex "completely remove mysql including config files"
+```
+
+:::warning
+Removal commands will ask for confirmation before executing. Use `--dry-run` to preview what would be removed.
+:::
+
+## File and Directory Operations
+
+### Finding Files
+
+```bash
+# Find by name
+cortex "find all .env files in this project"
+
+# Find by size
+cortex "find files larger than 1GB"
+
+# Find by date
+cortex "show files modified in the last hour"
+
+# Find by content
+cortex "search for TODO comments in all python files"
+```
+
+### Disk Usage
+
+```bash
+# Check directory sizes
+cortex "what's using space in my home directory"
+
+# Find largest files
+cortex "show the 10 largest files on this drive"
+
+# Clean up
+cortex "find and remove all node_modules directories"
+```
+
+### File Operations
+
+```bash
+# Bulk rename
+cortex "rename all .jpeg files to .jpg in this folder"
+
+# Organize files
+cortex "move all PDFs to a documents folder"
+
+# Archive
+cortex "create a compressed backup of /etc"
+```
+
+## Network Commands
+
+### Network Information
+
+```bash
+# Show network configuration
+cortex "display all network interfaces and IPs"
+
+# Check connectivity
+cortex "test connection to google.com"
+
+# DNS lookup
+cortex "what's the IP address of github.com"
+```
+
+### Port Management
+
+```bash
+# List open ports
+cortex "show all listening ports"
+
+# Check specific port
+cortex "what process is using port 8080"
+
+# Open firewall port
+cortex "allow incoming traffic on port 443"
+```
+
+### Network Diagnostics
+
+```bash
+# Trace route
+cortex "trace route to cloudflare.com"
+
+# Check bandwidth
+cortex "test internet speed"
+
+# Monitor connections
+cortex "show active network connections"
+```
+
+## Service Management
+
+### systemd Services
+
+```bash
+# Check service status
+cortex "is docker running"
+
+# Start/stop services
+cortex "restart nginx"
+cortex "stop postgresql"
+
+# Enable on boot
+cortex "make redis start automatically on boot"
+
+# View logs
+cortex "show last 50 lines of nginx logs"
+```
+
+### Multiple Services
+
+```bash
+# Start a stack
+cortex "start nginx, postgresql, and redis"
+
+# Check all failed services
+cortex "show all failed systemd services"
+```
+
+## User and Permission Commands
+
+### User Management
+
+```bash
+# Create user
+cortex "create a new user called deploy"
+
+# Add to group
+cortex "add user deploy to the docker group"
+
+# Check user info
+cortex "show groups for current user"
+```
+
+### Permissions
+
+```bash
+# Change ownership
+cortex "make www-data own the /var/www directory"
+
+# Fix permissions
+cortex "set standard web permissions on /var/www/html"
+
+# Find permission issues
+cortex "find files in /var/www that aren't owned by www-data"
+```
+
+## Development Environment
+
+### Git Operations
+
+```bash
+# Status and info
+cortex "show git status with branch info"
+
+# Clean up
+cortex "remove all merged branches except main"
+
+# History
+cortex "show commits from last week"
+```
+
+### Development Tools
+
+```bash
+# Set up environments
+cortex "install python development tools"
+
+# Configure tools
+cortex "set up docker for non-root usage"
+
+# Build tools
+cortex "install build essentials for compiling software"
+```
+
+## Combining Commands
+
+You can describe complex multi-step operations:
+
+```bash
+# Setup a web server
+cortex "install nginx, enable it to start on boot, and open port 80"
+
+# Development setup
+cortex "install nodejs, npm, and then globally install typescript and eslint"
+
+# Backup and rotate
+cortex "backup /etc/nginx to /backups and keep only the last 5 backups"
+```
+
+## Tips for Effective Commands
+
+### Be Specific When Needed
+
+```bash
+# Vague - might not get what you want
+cortex "clean up disk"
+
+# Specific - clearer intent
+cortex "remove apt cache and old kernel versions to free disk space"
+```
+
+### Use Context
+
+```bash
+# Cortex considers your current directory
+cd /var/www/myapp
+cortex "show recent error logs"  # Knows to look for app logs
+```
+
+### Ask for Explanations
+
+```bash
+# Get more context about what a command does
+cortex --verbose "set up fail2ban"
+```
+
+### Preview First
+
+```bash
+# Always preview complex operations
+cortex --dry-run "clean up docker and remove unused images"
+```
+
+## What's Next?
+
+- [Natural Language Commands](/docs/user-guide/natural-language-commands) - Advanced command patterns
+- [Dry-Run Mode](/docs/user-guide/dry-run-mode) - Safe command preview
+- [CLI Reference](/docs/reference/cli-commands) - Complete command documentation

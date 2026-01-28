@@ -1,0 +1,386 @@
+Cortex Landing Page — Design & Development Specification
+Overview
+Create a premium-tier landing page for Cortex, an open-source developer tool. The design standard should match or exceed production sites like cursor.com, replit.com, and bolt.new. The page must convey technical credibility, community strength, and immediate product value within the first 3 seconds of viewport.
+
+Design System
+Typography
+ElementFontWeightSize (Desktop)Hero HeadlineGeist Sans70064–80pxSection HeadersGeist Sans60036–48pxBodyInter40016–18pxCode/TerminalGeist Mono40014–15pxCaptions/LabelsInter50012–14px
+Color Palette (Dark Mode Primary)
+Background:       #09090B (rich black, not flat)
+Surface:          #18181B with subtle noise texture
+Border/Dividers:  #27272A
+Primary Accent:   Linear gradient → #8B5CF6 → #06B6D4 (purple to cyan)
+Secondary Accent: #3B82F6 (electric blue)
+Success:          #10B981
+Text Primary:     #FAFAFA
+Text Secondary:   #A1A1AA
+Glow Effects:     rgba(139, 92, 246, 0.15) blur(100px)
+Visual Effects
+
+Ambient Glow: Large, diffused gradient orbs behind key sections
+Grid Pattern: Subtle dot or line grid (opacity 3–5%) layered on background
+Noise Texture: 2–4% opacity film grain for depth
+Glass Morphism: Frosted glass cards with backdrop-blur(12px) and 1px border at 10% white
+Hover States: Scale(1.02) with box-shadow expansion, 200ms ease-out
+
+Animation Principles
+
+Entrance animations: fade-up with 20–40px travel, staggered 50–100ms
+Scroll-triggered reveals using Intersection Observer
+Micro-interactions: 150–250ms duration, ease-out or custom bezier
+No animation should exceed 600ms
+Respect prefers-reduced-motion
+
+
+Page Sections
+1. Navigation Bar (Sticky)
+┌─────────────────────────────────────────────────────────────────────┐
+│  [Logo]    Features  Docs  Pricing  Community  Blog    [GitHub ★]  │
+│                                                        [Get Started]│
+└─────────────────────────────────────────────────────────────────────┘
+
+Blur background on scroll (backdrop-filter)
+GitHub star count fetched live via API
+Mobile: Hamburger with slide-in drawer
+Command palette trigger (⌘K) badge optional
+
+
+2. Hero Section
+Layout: Split or centered, above-the-fold
+Content:
+
+Headline: Single impactful statement (6–10 words max)
+
+Example: "Build AI-Powered Apps in Minutes"
+
+
+Subheadline: One sentence expanding the value prop (under 20 words)
+CTA Group:
+
+Primary: Get Started Free → gradient background, prominent
+Secondary: View on GitHub → ghost/outline style with GitHub icon
+
+
+Trust Badges (floating or inline):
+
+Live GitHub stars (animated counter)
+Latest version tag (v2.4.0)
+Build status badge (passing)
+"Used by 10,000+ developers"
+
+
+
+Visual Element: Animated code terminal or product screenshot with glow border
+
+3. Interactive Product Preview (Cursor-Style)
+
+Critical Section — Primary conversion driver
+
+Implementation:
+┌─────────────────────────────────────────────────────────────────────┐
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │  [Browser Chrome / App Frame]                                │   │
+│  │  ┌─────────────────────────────────────────────────────────┐ │   │
+│  │  │                                                         │ │   │
+│  │  │           LIVE INTERACTIVE PREVIEW                      │ │   │
+│  │  │                                                         │ │   │
+│  │  │    • Clickable interface elements                       │ │   │
+│  │  │    • Real terminal responses                            │ │   │
+│  │  │    • Guided demo flow with hotspots                     │ │   │
+│  │  │                                                         │ │   │
+│  │  └─────────────────────────────────────────────────────────┘ │   │
+│  └─────────────────────────────────────────────────────────────┘   │
+│                                                                     │
+│    [Try it yourself →]                                             │
+└─────────────────────────────────────────────────────────────────────┘
+Features:
+
+Window Frame: macOS-style window chrome (traffic lights, title bar)
+Interactive Elements: Visitors can click buttons, type in fields, see real responses
+Guided Demo Mode: Pulsing hotspots guide users through key features
+Preset Scenarios: Tabbed options like "Generate API", "Debug Code", "Deploy App"
+State Persistence: Demo progress saves during session
+Fallback: Static annotated screenshot for JS-disabled or mobile
+
+Technical Notes:
+
+Sandboxed iframe or embedded React component
+WebSocket connection for live responses (or pre-cached for performance)
+Skeleton loading state while initializing
+Exit intent: "Want to try the full version?"
+
+
+4. Social Proof Bar
+Scrolling logo wall:
+"Trusted by teams at"
+[Vercel] [Stripe] [Linear] [Supabase] [Railway] [Planetscale] ...
+
+Grayscale logos, colorize on hover
+Infinite scroll animation (pausable)
+12–20 logos minimum
+
+
+5. Features Grid
+Layout: 2×2 or 3-column bento grid
+Each Feature Card:
+
+Icon (Lucide or custom, with gradient fill)
+Headline (4–6 words)
+Description (2 sentences max)
+Expandable code snippet or mini-demo
+"Learn more →" link
+
+Example Features:
+FeatureDescription⚡ Instant SetupOne command to scaffold. Zero config required.🔒 Secure by DefaultBuilt-in auth, rate limiting, and secrets management.🌐 Edge-ReadyDeploy globally in seconds. Auto-scaling included.🧩 Plugin EcosystemExtend with community modules or build your own.
+Interactions:
+
+Hover: Card lifts with shadow expansion
+Click/tap: Expands to reveal code sample or video
+
+
+6. Live Demo Playground
+Embedded terminal environment:
+┌─────────────────────────────────────────────────────────────────────┐
+│  $ cortex generate api --name users                                 │
+│                                                                     │
+│  ✓ Created /api/users/route.ts                                     │
+│  ✓ Generated CRUD operations                                        │
+│  ✓ Added TypeScript types                                          │
+│                                                                     │
+│  [Run Example]  [Clear]  [Copy]                                    │
+└─────────────────────────────────────────────────────────────────────┘
+
+Pre-filled prompts:
+[Generate REST API]  [Add Authentication]  [Deploy to Edge]
+Behavior:
+
+Typewriter effect for output (40–60ms per character)
+Syntax highlighting in responses
+Prompt suggestions as clickable pills
+"Fork this example" button linking to playground/sandbox
+
+
+7. Architecture Diagram
+Scroll-triggered animated diagram:
+                    ┌─────────────┐
+                    │   Your App  │
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │   Cortex    │ ← AI Layer
+                    │   Runtime   │
+                    └──────┬──────┘
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+   ┌────▼────┐       ┌─────▼─────┐      ┌────▼────┐
+   │ Storage │       │  Compute  │      │   CDN   │
+   └─────────┘       └───────────┘      └─────────┘
+Animation Sequence:
+
+Top node fades in
+Connection lines draw (SVG stroke animation)
+Child nodes appear with stagger
+Labels fade in last
+On hover: node highlights with connected paths
+
+
+8. Comparison Table
+Versus competitors (visual, not text-heavy):
+FeatureCortexTool ATool BOpen Source✓ (icon)✗✗Self-Hostable✓✗✓AI-Native✓Partial✗Edge Runtime✓✓✗Free TierUnlimitedLimitedNone
+Styling:
+
+Cortex column highlighted with accent background
+Use icons/emojis instead of plain checkmarks
+Competitor names can be anonymized ("Others") or named
+
+
+9. Open Source Dashboard
+Live GitHub statistics panel:
+┌──────────────────────────────────────────────────────────────────────┐
+│  OPEN SOURCE MOMENTUM                                                │
+│                                                                      │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────┐     │
+│  │   12.4k    │  │    847     │  │    234     │  │     89     │     │
+│  │   Stars    │  │   Forks    │  │ Contributors│  │  Releases  │     │
+│  └────────────┘  └────────────┘  └────────────┘  └────────────┘     │
+│                                                                      │
+│  TOP CONTRIBUTORS                                                    │
+│  [Avatar] [Avatar] [Avatar] [Avatar] [Avatar] +82 more              │
+│                                                                      │
+│  RECENT ACTIVITY                                                     │
+│  • feat: Add streaming responses - 2h ago                           │
+│  • fix: Memory leak in watcher - 5h ago                             │
+│  • docs: Update API reference - 1d ago                              │
+│                                                                      │
+│  [View on GitHub →]  [Become a Contributor →]                       │
+└──────────────────────────────────────────────────────────────────────┘
+Data Source: GitHub GraphQL API with 5-minute cache
+Animations: Counter roll-up on scroll into view
+
+10. Documentation Preview
+┌─────────────────────────────────────────────────────────────────────┐
+│  QUICKSTART                                            [Copy All]   │
+│                                                                     │
+│  # Install                                                          │
+│  npm install -g cortex-cli                                         │
+│                                                                     │
+│  # Initialize                                                       │
+│  cortex init my-app                                                │
+│                                                                     │
+│  # Start developing                                                 │
+│  cortex dev                                                        │
+│                                                                     │
+│  ──────────────────────────────────────────────                    │
+│  [Full Documentation]  [API Reference]  [Examples]                 │
+└─────────────────────────────────────────────────────────────────────┘
+Features:
+
+Copy button per block and full snippet
+Syntax highlighting (Shiki or Prism)
+Tab switcher: npm / yarn / pnpm / bun
+
+
+11. Testimonials
+Carousel or masonry grid:
+┌─────────────────────────────────────────┐
+│  "Cortex cut our dev time by 60%.       │
+│   It's the missing piece for AI apps."  │
+│                                         │
+│   [Avatar] Sarah Chen                   │
+│            Staff Engineer @ Vercel      │
+│            [Twitter Icon]               │
+└─────────────────────────────────────────┘
+Requirements:
+
+Real names, titles, companies
+Link to original tweet/post where possible
+Mix of recognizable companies and indie developers
+6–12 testimonials
+
+
+12. Community Section
+┌─────────────────────────────────────────────────────────────────────┐
+│  JOIN 8,000+ DEVELOPERS                                             │
+│                                                                     │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                 │
+│  │   Discord   │  │   Twitter   │  │   GitHub    │                 │
+│  │   5.2k      │  │   12.4k     │  │  Discussions│                 │
+│  │  [Join →]   │  │  [Follow →] │  │   [View →]  │                 │
+│  └─────────────┘  └─────────────┘  └─────────────┘                 │
+│                                                                     │
+│  RECENT DISCUSSIONS                                                 │
+│  • "Best practices for streaming?" - 24 replies                    │
+│  • "Cortex vs X for production" - 18 replies                       │
+│  • "Custom plugin tutorial" - 42 replies                           │
+└─────────────────────────────────────────────────────────────────────┘
+
+13. Roadmap Timeline
+Visual timeline:
+✓ Q1 2024          ● Q2 2024           ○ Q3 2024           ○ Q4 2024
+──────────────────────────────────────────────────────────────────────
+Core Release      Plugin System       Enterprise SSO       Mobile SDK
+AI Streaming      Edge Functions      Team Workspaces      v3.0 Launch
+Features:
+
+Completed items: Checkmark, full color
+In progress: Pulsing dot, accent color
+Planned: Hollow circle, muted
+"Suggest a feature" link → GitHub Discussions
+
+
+14. Final CTA Section
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│           READY TO BUILD SOMETHING AMAZING?                         │
+│                                                                     │
+│      Start shipping faster with Cortex. Free forever.              │
+│                                                                     │
+│      [Get Started]    [Talk to Us]                                 │
+│                                                                     │
+│           No credit card required • Deploy in 30 seconds           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+Background: Gradient mesh or animated aurora effect
+
+15. Footer
+┌─────────────────────────────────────────────────────────────────────┐
+│  [Logo]                                                             │
+│  Open-source AI infrastructure                                      │
+│  for the modern web.                                               │
+│                                                                     │
+│  PRODUCT          RESOURCES         COMMUNITY        COMPANY        │
+│  Features         Documentation     Discord          About          │
+│  Pricing          API Reference     Twitter          Blog           │
+│  Changelog        Tutorials         GitHub           Careers        │
+│  Status           Examples          YouTube          Contact        │
+│                                                                     │
+│  ────────────────────────────────────────────────────────────────  │
+│                                                                     │
+│  © 2024 Cortex. All rights reserved.                               │
+│  [Privacy] [Terms] [Security]           [Twitter] [GitHub] [Discord]│
+└─────────────────────────────────────────────────────────────────────┘
+
+Technical Requirements
+Performance
+MetricTargetLighthouse Performance≥95First Contentful Paint<1.2sLargest Contentful Paint<2.0sCumulative Layout Shift<0.05Time to Interactive<2.5s
+Implementation
+
+Framework: Next.js 14+ (App Router) or Astro
+Styling: Tailwind CSS with custom design tokens
+Animations: Framer Motion or CSS with reduced motion fallbacks
+Icons: Lucide React
+Fonts: Self-hosted via next/font
+Analytics: Plausible or PostHog (privacy-first)
+Deployment: Vercel or Cloudflare Pages
+
+Accessibility
+
+WCAG 2.1 AA compliance
+Semantic HTML structure
+Skip navigation link
+ARIA labels on interactive elements
+Focus-visible outlines
+Color contrast ≥4.5:1
+
+SEO
+
+Dynamic meta tags per route
+OpenGraph images (1200×630)
+Twitter card support
+JSON-LD structured data
+Sitemap.xml and robots.txt
+Canonical URLs
+
+
+Responsive Breakpoints
+BreakpointWidthLayout AdjustmentsMobile<640pxStack all grids, hide logo wall, simplified navTablet640–1024px2-column grids, collapsible sectionsDesktop1024–1440pxFull layoutLarge>1440pxMax-width container, increased whitespace
+
+Content Guidelines
+Voice & Tone
+
+Confident: We know what we've built is excellent
+Precise: Technical claims are specific and provable
+Inclusive: Welcoming to beginners and experts alike
+Active: "Build faster" not "Faster building is possible"
+
+Avoid
+
+Marketing fluff ("revolutionary", "game-changing")
+Jargon without explanation
+Passive voice
+Walls of text (max 3 sentences per paragraph)
+
+
+Deliverables Checklist
+
+ Figma/design file with component library
+ Responsive mockups (mobile, tablet, desktop)
+ Interactive prototype for product preview section
+ Animation specifications (timing, easing)
+ Production-ready code repository
+ Lighthouse audit report
+ Accessibility audit (axe-core)
+
+
+Reference sites for quality benchmark: cursor.com, linear.app, vercel.com, raycast.com, supabase.comRetryTo run code, enable code execution and file creation in Settings > Capabilities.Claude is AI and can make mistakes. Please double-check responses.

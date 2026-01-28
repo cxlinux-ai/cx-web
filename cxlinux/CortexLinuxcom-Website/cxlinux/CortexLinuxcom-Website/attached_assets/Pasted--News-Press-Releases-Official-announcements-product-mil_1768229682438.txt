@@ -1,0 +1,70 @@
+## News & Press Releases
+
+### Official announcements, product milestones, and ecosystem updates from Cortex Linux
+
+Cortex Linux publishes verified updates, technical announcements, and ecosystem news for developers, partners, and the broader AI and open-source community. This page serves as the **single source of truth** for major launches, initiatives, and public communications related to the Cortex Linux platform.
+
+Each announcement is written to provide **context, clarity, and long-term relevance** — not short-lived hype. Whether you are a developer evaluating the platform, a journalist researching AI-native infrastructure, or a partner following Cortex’s evolution, this is where important updates are documented and preserved.
+
+---
+
+## Cortex Linux Announces Global AI Hackathon for Developers Worldwide
+
+**January 11, 2026 · Salt Lake City, UT**
+
+Cortex Linux today announced its **first global AI Hackathon**, opening participation to developers, researchers, and system engineers worldwide. The event represents a key milestone in Cortex Linux’s mission to build an **AI-native operating system**, designed from the ground up for modern AI-driven workflows.
+
+The hackathon invites participants to explore how artificial intelligence can exist **natively at the operating system layer** — not as an external tool, but as an integrated system capability. Cortex Linux is built for developers who need intelligence, automation, and control to coexist seamlessly, without sacrificing transparency or performance.
+
+---
+
+### A Different Kind of Hackathon: System-Level, Not Surface-Level
+
+Most hackathons focus on applications. The Cortex Linux AI Hackathon deliberately goes deeper.
+
+Participants are encouraged to design and prototype **system-level innovations**, exploring how AI can enhance core operating system behaviors such as automation, observability, optimization, and developer tooling. This approach reflects Cortex Linux’s belief that the next major leap in AI software will happen **below the application layer**, closer to the system itself.
+
+Example focus areas include:
+
+* AI-assisted system administration and monitoring
+* Intelligent developer tooling embedded directly into the OS
+* Autonomous workflows for infrastructure and local environments
+* Secure AI-driven performance and resource optimization
+* New interaction models between developers and operating systems
+
+By anchoring innovation at the system level, the hackathon creates space for ideas that are **durable, extensible, and foundational** — not just demos.
+
+---
+
+### Designed for a Global, Technical Community
+
+The hackathon is fully online and open to participants worldwide. Cortex Linux welcomes independent developers, students, startup teams, and experienced engineers who are interested in shaping the future of AI-native infrastructure.
+
+As an open-source–driven project, Cortex Linux views this event not simply as a competition, but as a **collaborative entry point** into the ecosystem. Select projects may influence future roadmap decisions, inspire new core features, or evolve into long-term contributions to the platform.
+
+Prizes, recognition, and post-hackathon opportunities will be announced closer to launch, with evaluation criteria centered on **technical depth, originality, and real-world relevance**.
+
+---
+
+### Why This Matters
+
+As artificial intelligence becomes more deeply embedded in development workflows, traditional operating systems increasingly act as a constraint rather than an enabler. Cortex Linux was created to challenge this assumption — rethinking what an operating system should look like when AI is treated as a **first-class primitive**.
+
+This hackathon represents a practical step toward that vision, giving developers the tools and freedom to experiment where it matters most: at the system level.
+
+---
+
+### About Cortex Linux
+
+Cortex Linux is an **AI-native Linux operating system** built for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, Cortex Linux reduces friction, improves developer experience, and enables new classes of AI-driven workflows — while remaining transparent, secure, and open by design.
+
+The project is developed with an open-source core and a strong emphasis on long-term maintainability, performance, and trust.
+
+For official updates, announcements, and press materials, visit **cortexlinux.com**.
+
+---
+
+**Media Contact**
+Press Team
+Cortex Linux
+[press@cortexlinux.com](mailto:press@cortexlinux.com)

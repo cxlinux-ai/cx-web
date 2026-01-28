@@ -1,0 +1,83 @@
+You are a senior full-stack engineer working on the CortexLinux website.
+
+Your task is to  implement a production-ready Bounty Board page** that displays GitHub issues labeled **"bounty"** from the `cortexlinux` GitHub organization. NO DUMMY DATA
+
+### Core Requirements
+
+1. **Data Source**
+
+   * Use GitHub’s **public Search API** (no authentication required):
+
+     ```
+     https://api.github.com/search/issues?q=org:cortexlinux+label:bounty
+     ```
+   * Fetch **both open and closed issues**.
+   * Each issue represents a bounty.
+
+2. **Displayed Fields**
+   For each bounty, display:
+
+   * Title
+   * Status (Open / Completed)
+   * Author (GitHub username)
+   * Repository name
+   * Created date
+   * Closed date (if applicable)
+   * Reward amount (parse from issue body or title if present, e.g. `$200`, `💰 500`)
+   * Link to the GitHub issue
+
+4. **Caching Strategy (CRITICAL)**
+   GitHub limits unauthenticated requests to **60/hour**.
+
+   * Implement **server-side caching**
+   * Cache results for **5 minutes**
+   * All users should receive cached results during that window
+   * Only refresh data after cache expiration
+
+   Explain:
+
+   * Why server-side caching is preferred over client-side
+   * How the cache prevents API rate-limit issues
+   * How to safely invalidate and refresh cache
+
+5. **SEO & Performance**
+
+   * Server-side data fetching (for SEO)
+   * Page must be crawlable by search engines
+   * Use semantic HTML
+   * Fast initial load
+   * No client-only dependency for core content
+
+6. **Reliability**
+
+   * Graceful handling of:
+
+     * GitHub downtime
+     * Rate-limit responses
+     * Malformed API data
+   * Do not crash the page under any condition
+
+7. **Architecture Expectations**
+
+   * Clear separation between:
+
+     * Data fetching
+     * Caching logic
+     * UI rendering
+   * Code should be readable, maintainable, and scalable
+   * Add comments explaining key decisions
+
+### Deliverables
+
+* High-level architecture explanation
+* Pseudocode or real implementation (TypeScript preferred)
+* Explanation of caching logic
+* Explanation of rate-limit protection
+* Explanation of SEO benefits
+* Optional future improvements (auth, user claims, auto-payouts)
+
+Important:
+
+* Do NOT include marketing language
+* Focus on engineering correctness, scalability, and reliability
+* Assume real traffic and real contributors

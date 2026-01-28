@@ -1,0 +1,429 @@
+---
+sidebar_position: 5
+title: Rollback & Recovery
+description: Undo changes and recover from issues. Cortex tracks all modifications for easy rollback.
+keywords: [rollback, recovery, undo, backup, restore, snapshots]
+---
+
+# Rollback & Recovery
+
+Cortex automatically tracks changes, making it easy to undo modifications and recover from issues. Every operation creates a recovery point.
+
+## Understanding Snapshots
+
+### What Gets Tracked
+
+Cortex creates snapshots before:
+
+- Package installations and removals
+- System configuration changes
+- Service modifications
+- User and permission changes
+- File modifications
+
+### Snapshot Contents
+
+Each snapshot includes:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Snapshot: 2024-01-15_14:30:22_nginx-install                │
+├─────────────────────────────────────────────────────────────┤
+│ 📦 Packages: nginx (1.24.0) - installed                    │
+│ 📄 Files: /etc/nginx/nginx.conf - created                  │
+│ ⚙️  Services: nginx.service - enabled, started             │
+│ 🔥 Firewall: port 80 - opened                              │
+│ 💾 Size: 2.3 KB                                            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Quick Rollback
+
+### Undo Last Change
+
+```bash
+# Undo the most recent operation
+cortex rollback
+
+# Confirm before rollback
+cortex rollback --confirm
+```
+
+### Undo Specific Operation
+
+```bash
+# List recent operations
+cortex history
+
+# Output:
+# [1] 2024-01-15 14:30 - Installed nginx
+# [2] 2024-01-15 14:15 - Updated system packages
+# [3] 2024-01-15 13:45 - Added user deploy
+
+# Rollback specific operation
+cortex rollback 1
+
+# Or by description
+cortex rollback "nginx installation"
+```
+
+## Viewing History
+
+### Operation History
+
+```bash
+# Recent operations
+cortex history
+
+# Detailed view
+cortex history --verbose
+
+# Filter by type
+cortex history --type packages
+cortex history --type config
+cortex history --type services
+
+# Filter by date
+cortex history --since "2024-01-01"
+cortex history --today
+```
+
+### Snapshot Details
+
+```bash
+# View specific snapshot
+cortex snapshot show 1
+
+# Output:
+# ═══════════════════════════════════════════════════════════
+# Snapshot #1: nginx-install
+# Created: 2024-01-15 14:30:22
+# ═══════════════════════════════════════════════════════════
+#
+# Command: cortex "install nginx and enable it"
+#
+# Changes:
+# ├─ Package installed: nginx 1.24.0
+# ├─ Config created: /etc/nginx/nginx.conf
+# ├─ Config created: /etc/nginx/sites-enabled/default
+# ├─ Service enabled: nginx
+# ├─ Service started: nginx
+# └─ Firewall: allowed port 80/tcp
+#
+# Rollback command: cortex rollback 1
+# ═══════════════════════════════════════════════════════════
+```
+
+## Selective Rollback
+
+### Choose What to Undo
+
+```bash
+# Rollback only package changes
+cortex rollback 1 --only packages
+
+# Rollback only configuration
+cortex rollback 1 --only config
+
+# Rollback everything except firewall
+cortex rollback 1 --except firewall
+```
+
+### Partial Recovery
+
+```bash
+# Restore just one file
+cortex restore /etc/nginx/nginx.conf
+
+# Restore files from specific snapshot
+cortex restore /etc/nginx/ --from snapshot-1
+
+# Restore service state
+cortex restore service nginx --from snapshot-1
+```
+
+## Configuration File Recovery
+
+### View File History
+
+```bash
+# See all versions of a config
+cortex file-history /etc/nginx/nginx.conf
+
+# Output:
+# /etc/nginx/nginx.conf
+# ├─ Current (modified 2024-01-15 16:00)
+# ├─ Snapshot #3 (2024-01-15 15:30) - performance tuning
+# ├─ Snapshot #1 (2024-01-15 14:30) - initial install
+# └─ Package default
+```
+
+### Restore File Version
+
+```bash
+# Restore from snapshot
+cortex restore /etc/nginx/nginx.conf --from snapshot-1
+
+# Restore to package default
+cortex restore /etc/nginx/nginx.conf --default
+
+# View diff before restore
+cortex diff /etc/nginx/nginx.conf --from snapshot-1
+```
+
+### Compare Versions
+
+```bash
+# Diff current vs snapshot
+cortex diff /etc/nginx/nginx.conf snapshot-1
+
+# Diff two snapshots
+cortex diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
+```
+
+## Package Recovery
+
+### Undo Package Changes
+
+```bash
+# Remove recently installed package and deps
+cortex rollback "nginx installation"
+
+# Reinstall removed package
+cortex rollback "nginx removal"
+
+# Downgrade to previous version
+cortex rollback "nodejs upgrade"
+```
+
+### Package History
+
+```bash
+# View package history
+cortex package-history nginx
+
+# Output:
+# nginx version history:
+# ├─ 1.24.0 - current (installed 2024-01-15)
+# ├─ 1.22.1 - previous (2023-06-01 - 2024-01-15)
+# └─ 1.18.0 - earlier (2023-01-15 - 2023-06-01)
+
+# Restore specific version
+cortex restore nginx --version 1.22.1
+```
+
+## Service Recovery
+
+### Restore Service State
+
+```bash
+# View service history
+cortex service-history nginx
+
+# Restore previous state
+cortex restore service nginx --from snapshot-1
+
+# Reset to default configuration
+cortex service reset nginx
+```
+
+### Recover Failed Services
+
+```bash
+# Diagnose service failure
+cortex diagnose nginx
+
+# Auto-repair common issues
+cortex repair nginx
+
+# Rollback to last working state
+cortex rollback --to-working nginx
+```
+
+## System Recovery
+
+### Create Manual Snapshot
+
+```bash
+# Before major changes
+cortex snapshot create "before-kubernetes-install"
+
+# With description
+cortex snapshot create "pre-upgrade" --note "System state before dist-upgrade"
+```
+
+### List All Snapshots
+
+```bash
+# All snapshots
+cortex snapshot list
+
+# With details
+cortex snapshot list --verbose
+
+# Filter
+cortex snapshot list --since "1 week ago"
+```
+
+### Restore Full Snapshot
+
+```bash
+# Preview what would be restored
+cortex restore --from "before-kubernetes-install" --dry-run
+
+# Perform full restore
+cortex restore --from "before-kubernetes-install"
+```
+
+## Emergency Recovery
+
+### Recovery Mode
+
+If Cortex itself is affected:
+
+```bash
+# Direct command execution
+cortex-recover
+
+# This provides:
+# 1. List of all snapshots
+# 2. Direct restore commands
+# 3. Manual recovery instructions
+```
+
+### Without Cortex
+
+If Cortex isn't available:
+
+```bash
+# Snapshots are stored in plain text
+ls ~/.cortex/snapshots/
+
+# Each snapshot contains:
+# - manifest.json (what changed)
+# - files/ (backed up files)
+# - packages.txt (package states)
+
+# Manual restore example
+cp ~/.cortex/snapshots/snapshot-1/files/etc/nginx/nginx.conf /etc/nginx/
+```
+
+## Snapshot Management
+
+### Storage Usage
+
+```bash
+# View snapshot storage
+cortex snapshot storage
+
+# Output:
+# Snapshot storage: /home/user/.cortex/snapshots
+# Total size: 156 MB
+# Snapshots: 45
+# Oldest: 2023-12-01
+# Newest: 2024-01-15
+```
+
+### Cleanup Old Snapshots
+
+```bash
+# Remove old snapshots
+cortex snapshot cleanup --older-than "30 days"
+
+# Keep only last N snapshots
+cortex snapshot cleanup --keep-last 20
+
+# Interactive cleanup
+cortex snapshot cleanup --interactive
+```
+
+### Export/Import
+
+```bash
+# Export snapshot for backup
+cortex snapshot export snapshot-1 -o snapshot-backup.tar.gz
+
+# Import on another system
+cortex snapshot import snapshot-backup.tar.gz
+```
+
+## Rollback Best Practices
+
+### 1. Create Snapshots Before Major Changes
+
+```bash
+cortex snapshot create "pre-upgrade-2024-01"
+cortex "upgrade all packages"
+```
+
+### 2. Test Rollback Capability
+
+```bash
+# Verify you can rollback
+cortex rollback --dry-run "recent change"
+```
+
+### 3. Keep Critical Snapshots
+
+```bash
+# Mark important snapshots
+cortex snapshot keep "working-production-state"
+
+# Won't be auto-cleaned
+```
+
+### 4. Regular Snapshot Cleanup
+
+```bash
+# Add to cron or timer
+cortex snapshot cleanup --older-than "60 days" --keep-marked
+```
+
+## Troubleshooting
+
+### Rollback Failed
+
+```bash
+# Check what went wrong
+cortex rollback-status
+
+# Retry with force
+cortex rollback 1 --force
+
+# Manual intervention
+cortex rollback 1 --step-by-step
+```
+
+### Snapshot Corrupted
+
+```bash
+# Verify snapshot integrity
+cortex snapshot verify snapshot-1
+
+# Repair if possible
+cortex snapshot repair snapshot-1
+
+# Remove corrupted snapshot
+cortex snapshot remove snapshot-1 --force
+```
+
+### Partial Rollback
+
+If rollback partially completed:
+
+```bash
+# Check current state
+cortex status
+
+# Continue rollback
+cortex rollback --continue
+
+# Or abort and cleanup
+cortex rollback --abort
+```
+
+## Related Documentation
+
+- [Configuration](/docs/getting-started/configuration) - Snapshot settings
+- [CLI Commands](/docs/reference/cli-commands) - Full rollback command reference
+- [Dry-Run Mode](/docs/user-guide/dry-run-mode) - Preview before changes

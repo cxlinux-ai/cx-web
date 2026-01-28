@@ -1,0 +1,490 @@
+---
+sidebar_position: 3
+title: System Configuration
+description: Configure Linux system settings with natural language. Network, users, services, security, and more.
+keywords: [system, configuration, settings, network, services, users]
+---
+
+# System Configuration
+
+Cortex makes system administration accessible through natural language. Configure networking, manage users, control services, and tune system settings without memorizing complex commands.
+
+## Service Management
+
+### Starting and Stopping Services
+
+```bash
+# Start a service
+cortex "start nginx"
+
+# Stop a service
+cortex "stop the mysql service"
+
+# Restart
+cortex "restart apache"
+
+# Reload configuration
+cortex "reload nginx configuration without downtime"
+```
+
+### Service Status
+
+```bash
+# Check status
+cortex "is nginx running?"
+
+# Detailed status
+cortex "show detailed status of the postgresql service"
+
+# All services
+cortex "list all running services"
+
+# Failed services
+cortex "show services that failed to start"
+```
+
+### Boot Configuration
+
+```bash
+# Enable on boot
+cortex "enable nginx to start on boot"
+
+# Disable
+cortex "disable bluetooth from starting automatically"
+
+# Check boot status
+cortex "will docker start on boot?"
+```
+
+## User and Group Management
+
+### Creating Users
+
+```bash
+# Basic user
+cortex "create a new user called developer"
+
+# With specific settings
+cortex "create user deploy with home directory /opt/deploy and no login shell"
+
+# System user
+cortex "create a system user for running the app service"
+
+# With sudo access
+cortex "create user admin with sudo privileges"
+```
+
+### Managing Users
+
+```bash
+# Change password
+cortex "set a new password for user deploy"
+
+# Modify user
+cortex "add user developer to the docker group"
+
+# Lock/unlock
+cortex "lock the user account guest"
+
+# Delete user
+cortex "remove user testuser and their home directory"
+```
+
+### Groups
+
+```bash
+# Create group
+cortex "create a group called developers"
+
+# Add to group
+cortex "add users alice and bob to the developers group"
+
+# List groups
+cortex "show all groups user alice belongs to"
+
+# Remove from group
+cortex "remove user bob from the sudo group"
+```
+
+## Network Configuration
+
+### Viewing Network Status
+
+```bash
+# Network interfaces
+cortex "show all network interfaces"
+
+# IP addresses
+cortex "what's my IP address?"
+
+# Connections
+cortex "show active network connections"
+
+# Routes
+cortex "display the routing table"
+```
+
+### Configuring Networks
+
+```bash
+# Static IP
+cortex "set a static IP of 192.168.1.100 on eth0"
+
+# DHCP
+cortex "configure eth0 to use DHCP"
+
+# DNS
+cortex "set DNS servers to 1.1.1.1 and 8.8.8.8"
+
+# Hostname
+cortex "set the hostname to webserver-01"
+```
+
+### Firewall Management
+
+```bash
+# View rules
+cortex "show firewall rules"
+
+# Allow port
+cortex "allow incoming traffic on port 443"
+
+# Allow service
+cortex "allow ssh through the firewall"
+
+# Block
+cortex "block all incoming traffic from 10.0.0.0/8"
+
+# Application profiles
+cortex "allow the nginx full profile"
+```
+
+## Storage Management
+
+### Disk Information
+
+```bash
+# Disk usage
+cortex "show disk usage for all drives"
+
+# Partition info
+cortex "list all partitions"
+
+# Mount points
+cortex "show what's mounted where"
+
+# Disk health
+cortex "check the health of /dev/sda"
+```
+
+### Mounting and Unmounting
+
+```bash
+# Mount
+cortex "mount the USB drive"
+
+# Mount with options
+cortex "mount /dev/sdb1 to /mnt/data with read-only"
+
+# Unmount
+cortex "safely unmount /mnt/backup"
+
+# Auto-mount
+cortex "add /dev/sdb1 to fstab mounting at /data"
+```
+
+### Storage Operations
+
+```bash
+# Create filesystem
+cortex "format /dev/sdc1 as ext4"
+
+# Resize
+cortex "extend the root partition to use all available space"
+
+# LVM
+cortex "add 10GB to the data logical volume"
+```
+
+## Security Configuration
+
+### SSH Configuration
+
+```bash
+# SSH status
+cortex "is SSH enabled and what port is it on?"
+
+# Change port
+cortex "change SSH to port 2222"
+
+# Disable root login
+cortex "disable SSH root login"
+
+# Key-only auth
+cortex "configure SSH to only allow key-based authentication"
+```
+
+### Permissions and Ownership
+
+```bash
+# Change ownership
+cortex "make user www-data owner of /var/www"
+
+# Set permissions
+cortex "set permissions on /var/log/app to 755"
+
+# Recursive
+cortex "recursively set ownership of /opt/app to deploy:deploy"
+
+# ACLs
+cortex "give user backup read access to /var/data"
+```
+
+### Security Hardening
+
+```bash
+# Fail2ban
+cortex "install and configure fail2ban for SSH"
+
+# Audit
+cortex "enable system auditing"
+
+# Password policy
+cortex "configure password policy requiring 12 characters minimum"
+```
+
+## Time and Locale
+
+### Time Configuration
+
+```bash
+# Current time
+cortex "what time is it and what timezone am I in?"
+
+# Set timezone
+cortex "set timezone to America/New_York"
+
+# NTP
+cortex "enable time synchronization with NTP"
+
+# Set time manually
+cortex "set the system time to 2024-01-15 14:30:00"
+```
+
+### Locale Settings
+
+```bash
+# Current locale
+cortex "show current locale settings"
+
+# Change locale
+cortex "set system locale to en_US.UTF-8"
+
+# Keyboard layout
+cortex "configure keyboard layout for US English"
+```
+
+## Resource Management
+
+### Memory
+
+```bash
+# Memory usage
+cortex "show memory usage"
+
+# Swap
+cortex "create a 4GB swap file"
+
+# Memory info
+cortex "which processes are using the most memory?"
+```
+
+### CPU and Processes
+
+```bash
+# CPU usage
+cortex "show CPU usage"
+
+# Top processes
+cortex "what's using the most CPU?"
+
+# Nice/priority
+cortex "run backup script with low priority"
+
+# Process limits
+cortex "set max open files to 65535 for user app"
+```
+
+### System Limits
+
+```bash
+# View limits
+cortex "show system resource limits"
+
+# Set limits
+cortex "increase max open files system-wide"
+
+# Per-user limits
+cortex "set memory limit of 8GB for user jenkins"
+```
+
+## Scheduled Tasks
+
+### Cron Jobs
+
+```bash
+# List cron jobs
+cortex "show all scheduled tasks"
+
+# Add cron job
+cortex "run /opt/scripts/backup.sh every day at 3am"
+
+# Remove cron job
+cortex "remove the backup cron job"
+
+# Edit specific user's cron
+cortex "add a cron job for user deploy to run cleanup weekly"
+```
+
+### Systemd Timers
+
+```bash
+# List timers
+cortex "show all systemd timers"
+
+# Create timer
+cortex "create a timer to run maintenance.sh every Sunday at 2am"
+
+# Enable/disable
+cortex "disable the apt-daily timer"
+```
+
+## Logging Configuration
+
+### Viewing Logs
+
+```bash
+# System logs
+cortex "show recent system logs"
+
+# Service logs
+cortex "show nginx logs from the last hour"
+
+# Error logs
+cortex "show all errors from today"
+
+# Follow logs
+cortex "watch nginx logs in real time"
+```
+
+### Log Management
+
+```bash
+# Configure rotation
+cortex "set up log rotation for /var/log/app"
+
+# Clear old logs
+cortex "clear logs older than 30 days"
+
+# Disk usage
+cortex "how much space are logs using?"
+```
+
+## Environment Variables
+
+### System-wide
+
+```bash
+# View
+cortex "show all environment variables"
+
+# Set
+cortex "set JAVA_HOME system-wide to /usr/lib/jvm/java-17"
+
+# Remove
+cortex "remove the DEPRECATED_VAR environment variable"
+```
+
+### Per-user
+
+```bash
+# Set for user
+cortex "add NODE_ENV=production to user deploy's environment"
+
+# View user environment
+cortex "show environment variables for user app"
+```
+
+## Kernel and Boot
+
+### Kernel Parameters
+
+```bash
+# View parameters
+cortex "show current kernel parameters"
+
+# Set sysctl
+cortex "enable IP forwarding"
+
+# Persist settings
+cortex "make the swappiness of 10 permanent"
+```
+
+### Boot Configuration
+
+```bash
+# Boot entries
+cortex "show boot menu entries"
+
+# Default kernel
+cortex "set the default boot kernel to the previous version"
+
+# Boot parameters
+cortex "add quiet splash to boot parameters"
+```
+
+## Configuration Backup
+
+### Backup Settings
+
+```bash
+# Backup configs
+cortex "backup all system configuration files"
+
+# Specific service
+cortex "backup nginx configuration"
+
+# Restore
+cortex "restore system configuration from backup"
+```
+
+## Troubleshooting
+
+### Configuration Validation
+
+```bash
+# Test config
+cortex "validate the nginx configuration"
+
+# Check syntax
+cortex "check apache config for errors"
+
+# System check
+cortex "verify system configuration is consistent"
+```
+
+### Reset to Defaults
+
+```bash
+# Reset service config
+cortex "reset nginx configuration to defaults"
+
+# Reset network
+cortex "reset network configuration to defaults"
+```
+
+## Related Documentation
+
+- [CLI Commands](/docs/reference/cli-commands) - Full command reference
+- [Environment Variables](/docs/reference/environment-variables) - Cortex environment settings
+- [Rollback & Recovery](/docs/user-guide/rollback-recovery) - Undo configuration changes

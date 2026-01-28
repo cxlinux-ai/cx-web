@@ -1,0 +1,61 @@
+Animated Accents
+
+Gradient shift: Use a slow-moving gradient line on top or edges:
+
+background: linear-gradient(90deg, #6b5bff, #00cfff, #6b5bff);
+animation: gradientShift 10s infinite;
+
+
+This creates a premium tech feel without flashing or distraction.
+
+Micro-motion hover: Buttons, badges, or the title can have a gentle scale or glow animation on hover.
+
+3. Highlighting Key Info
+
+Hackathon badge pulse: Make the small “Hackathon · Feb 11, 2026” badge subtly pulse or glow to guide attention.
+
+Gradient for “Cortex”: You already use this, but ensure it matches other title gradients, creating continuity.
+
+4. Soft Background Layers
+
+Ambient blur / soft gradient behind content: A faint, blurred gradient or radial light behind the card draws attention subtly.
+
+Inner ambient glow: A very soft vertical glow from the top of the card gives a layered depth.
+
+5. Micro-Interactions
+
+Countdown timer: Already implemented, but you can add tiny hover effects on each number:
+
+Slight scale increase on hover.
+
+Glow behind numbers on hover.
+
+CTA buttons: Add hover ripple or shadow pop for subtle reward feeling.
+
+6. Visual Hierarchy & Spacing
+
+Increase padding & breathing room — don’t cram elements.
+
+Make the headline bigger than the badge and secondary text smaller, subtle contrast.
+
+Use rounded corners consistently, maybe slightly larger radius for a softer, premium look.
+
+7. Color & Subtle Motion
+
+Subtle motion blur / easing on scroll: As the card enters viewport, gently slide or fade in.
+
+Use low-saturation complementary gradients for borders or glow layers. Avoid overly bright neon.
+
+8. Typography Refinements
+
+Headline: Bold, slightly larger (you already have 50px)
+
+Body: Light gray, slightly increased line-height for readability
+
+CTA text: Bold, high contrast to stand out, use subtle gradient if aligned with branding
+
+9. Optional “Disruptive but Elegant” Touch
+
+Slight skew or rotation of the ambient gradient layer (not the text) gives a subtle modern tech edge.
+
+Animated “pulse” behind card to catch peripheral vision without screaming for attention.

@@ -1,0 +1,63 @@
+You are designing a **professional, premium card-based UI** for a modern AI-native technology platform. The goal is to create cards that feel **credible, refined, and psychologically compelling**, balancing **realism and elegance** without visual overload.
+
+### Overall Intent & Purpose
+
+Each card should communicate **clarity, trust, and value at a glance**. These cards are not decorative elements — they are **decision-driving surfaces**. They must subtly guide the user toward understanding benefits, taking action, and feeling confidence in the product. The experience should feel **enterprise-grade yet accessible**, avoiding gimmicks or exaggerated visuals.
+
+### Visual Psychology & Aesthetic Principles
+
+* Cards should feel **stable, grounded, and intentional**, using clean geometry and consistent spacing.
+* Use **subtle depth** (soft shadows, gentle elevation, slight perspective) to suggest hierarchy and interactivity — never harsh or cartoonish.
+* Visual hierarchy is critical:
+
+  * Headline → Benefit → Supporting detail → Action
+* The design should be **easy on the eyes**, reducing cognitive load and avoiding unnecessary decoration.
+
+### UI & UX Design Language
+
+* Prefer **soft gradients, glass-like surfaces, or muted lighting effects** rather than flat blocks or loud contrasts.
+* Rounded corners should be modern but restrained — professional, not playful.
+* Hover and interaction states should feel **responsive and alive**, but minimal:
+
+  * Micro-animations (scale 1–2%, glow fade, shadow lift)
+  * Smooth easing, never abrupt
+* Cards should clearly indicate interactivity without demanding attention.
+
+### Copywriting & Messaging Style
+
+* Copy must be **confident, concise, and benefit-oriented**.
+* Avoid hype, buzzwords, or exaggerated claims.
+* Use language that signals **technical authority and long-term reliability**.
+* Headlines should communicate *what this is* and *why it matters* in one line.
+* Supporting text should reinforce credibility, not repeat the headline.
+
+### Marketing & Conversion Psychology
+
+* Cards should subtly answer:
+
+  * *Who is this for?*
+  * *What problem does it solve?*
+  * *Why should I trust it?*
+* Visual cues (icons, highlights, accents) should guide attention naturally toward key actions.
+* CTAs should feel **inviting, not aggressive** — clarity over urgency.
+* Premium design implies value: the UI should feel like something users are **paying for**, even if it’s free.
+
+### Realism & Professional Restraint
+
+* Avoid overuse of neon glows, extreme gradients, or excessive animation.
+* Design should feel believable in a real SaaS, enterprise, or AI platform context.
+* Every visual element must justify its presence — **no filler**.
+* The final result should feel **timeless**, not trend-chasing.
+
+### Final Impression
+
+When done correctly, these cards should feel:
+
+* Trustworthy
+* Modern
+* Calm but powerful
+* Technically serious
+* Visually premium
+
+The user should instinctively think:
+**“This product is well-designed, well-thought-out, and worth my attention.”**
