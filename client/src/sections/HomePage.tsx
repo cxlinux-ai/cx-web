@@ -365,20 +365,20 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section with Parallax */}
       <section id="home" className="min-h-screen flex flex-col justify-start pt-24 sm:pt-28 px-4 relative overflow-hidden">
-        {/* Parallax Background Layers - #7C3AED Primary Purple */}
+        {/* Parallax Background - Static on mobile, fixed attachment on desktop */}
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 hero-parallax-bg"
           style={{
             backgroundImage: `
               radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.35), transparent),
               radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.2), transparent),
               radial-gradient(ellipse 50% 30% at 20% 80%, rgba(124, 58, 237, 0.25), transparent)
             `,
-            backgroundAttachment: 'fixed',
           }}
         />
+        {/* Floating purple orbs - Hidden on mobile for performance */}
         <motion.div
-          className="absolute inset-0 z-0 pointer-events-none"
+          className="absolute inset-0 z-0 pointer-events-none hidden md:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
@@ -469,15 +469,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             autonomous execution, fleet-wide orchestration — all from a single interface.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Min 44px touch targets */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 sm:mb-12 px-4"
           >
-            <Link href="/pricing">
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 rounded-xl text-white font-semibold text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all">
+            <Link href="/pricing" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto min-h-[48px] flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 rounded-xl text-white font-semibold text-base sm:text-lg shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 active:scale-95 sm:hover:scale-105 transition-all touch-manipulation">
                 <Rocket size={20} />
                 Get Started
               </button>
@@ -486,73 +486,82 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               href="https://github.com/cxlinux-ai/cx"
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-semibold text-lg hover:bg-white/10 hover:border-purple-500/30 transition-all">
+              <button className="w-full sm:w-auto min-h-[48px] flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-semibold text-base sm:text-lg hover:bg-white/10 hover:border-purple-500/30 active:scale-95 transition-all touch-manipulation">
                 <Github size={20} />
                 View on GitHub
               </button>
             </a>
           </motion.div>
 
-          {/* Product GIF Carousel */}
+          {/* Product Carousel - Touch-swipeable on mobile */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
             className="relative w-full max-w-5xl mx-auto"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-purple-500/20 bg-black/50 backdrop-blur-xl shadow-2xl shadow-purple-500/10">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden border border-purple-500/20 bg-black/50 backdrop-blur-xl shadow-2xl shadow-purple-500/10">
               {/* Terminal Header */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-gray-900/80 border-b border-white/5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-gray-900/80 border-b border-white/5">
+                <div className="flex gap-1 sm:gap-1.5">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="text-xs text-gray-500 ml-2 font-mono">cx-linux ~ fleet-manager</span>
+                <span className="text-[10px] sm:text-xs text-gray-500 ml-2 font-mono truncate">cx-linux ~ sovereignty</span>
               </div>
 
-              {/* Sovereignty Carousel - 4 Slides */}
-              <div className="relative overflow-hidden">
-                <div className="flex animate-scroll-x-4">
+              {/* Sovereignty Carousel - Touch-swipeable, auto-scrolls on desktop */}
+              <div className="relative overflow-x-auto overflow-y-hidden carousel-touch-scroll md:overflow-hidden">
+                <div className="flex md:animate-scroll-x-4 snap-x snap-mandatory md:snap-none">
                   {/* Slide 1: Digital Sovereignty */}
-                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 100%)' }}>
-                    <div className="text-center p-8 max-w-2xl">
-                      <Globe size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">The Agentic OS for Digital Sovereignty</h3>
-                      <p className="text-gray-400 text-base md:text-lg">Own your infrastructure. Control your data. Deploy AI agents that work for you, not vendors.</p>
+                  <div className="flex-shrink-0 w-full min-h-[280px] sm:min-h-[320px] md:aspect-video flex items-center justify-center snap-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 100%)' }}>
+                    <div className="text-center p-4 sm:p-8 max-w-2xl">
+                      <Globe size={40} className="mx-auto mb-4 sm:mb-6 sm:w-14 sm:h-14" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">The Agentic OS for Digital Sovereignty</h3>
+                      <p className="text-gray-400 text-sm sm:text-base md:text-lg">Own your infrastructure. Control your data. Deploy AI agents that work for you.</p>
                     </div>
                   </div>
                   {/* Slide 2: Atomic Rollbacks */}
-                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.2) 100%)' }}>
-                    <div className="text-center p-8 max-w-2xl">
-                      <Undo2 size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Zero-Risk Deployments via Atomic Rollbacks</h3>
-                      <p className="text-gray-400 text-base md:text-lg">Every change is reversible. Instant rollback to any previous state. Deploy with confidence.</p>
+                  <div className="flex-shrink-0 w-full min-h-[280px] sm:min-h-[320px] md:aspect-video flex items-center justify-center snap-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.2) 100%)' }}>
+                    <div className="text-center p-4 sm:p-8 max-w-2xl">
+                      <Undo2 size={40} className="mx-auto mb-4 sm:mb-6 sm:w-14 sm:h-14" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">Zero-Risk Deployments via Atomic Rollbacks</h3>
+                      <p className="text-gray-400 text-sm sm:text-base md:text-lg">Every change is reversible. Instant rollback to any previous state.</p>
                     </div>
                   </div>
                   {/* Slide 3: HRM AI */}
-                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(124, 58, 237, 0.08) 100%)' }}>
-                    <div className="text-center p-8 max-w-2xl">
-                      <Brain size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Agentic Fleet Automation (HRM AI)</h3>
-                      <p className="text-gray-400 text-base md:text-lg">Human Resource Management for machines. AI agents that understand, plan, and execute across your entire fleet.</p>
+                  <div className="flex-shrink-0 w-full min-h-[280px] sm:min-h-[320px] md:aspect-video flex items-center justify-center snap-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(124, 58, 237, 0.08) 100%)' }}>
+                    <div className="text-center p-4 sm:p-8 max-w-2xl">
+                      <Brain size={40} className="mx-auto mb-4 sm:mb-6 sm:w-14 sm:h-14" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">Agentic Fleet Automation (HRM AI)</h3>
+                      <p className="text-gray-400 text-sm sm:text-base md:text-lg">AI agents that understand, plan, and execute across your entire fleet.</p>
                     </div>
                   </div>
                   {/* Slide 4: Rust + BSL Moat */}
-                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.18) 100%)' }}>
-                    <div className="text-center p-8 max-w-2xl">
-                      <Zap size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Rust-Powered Performance & 6-Year BSL Moat</h3>
-                      <p className="text-gray-400 text-base md:text-lg">Memory-safe, blazing fast core. Protected by Business Source License — converts to Apache 2.0 after 6 years.</p>
+                  <div className="flex-shrink-0 w-full min-h-[280px] sm:min-h-[320px] md:aspect-video flex items-center justify-center snap-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.18) 100%)' }}>
+                    <div className="text-center p-4 sm:p-8 max-w-2xl">
+                      <Zap size={40} className="mx-auto mb-4 sm:mb-6 sm:w-14 sm:h-14" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">Rust-Powered Performance & 6-Year BSL Moat</h3>
+                      <p className="text-gray-400 text-sm sm:text-base md:text-lg">Memory-safe, blazing fast. Converts to Apache 2.0 after 6 years.</p>
                     </div>
                   </div>
                 </div>
               </div>
+
+              {/* Mobile swipe indicator */}
+              <div className="flex md:hidden justify-center gap-1.5 py-3 bg-black/30">
+                <div className="w-2 h-2 rounded-full bg-purple-500/60" />
+                <div className="w-2 h-2 rounded-full bg-white/20" />
+                <div className="w-2 h-2 rounded-full bg-white/20" />
+                <div className="w-2 h-2 rounded-full bg-white/20" />
+              </div>
             </div>
 
-            {/* Glow effect */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/10 via-violet-500/5 to-purple-500/10 rounded-3xl blur-xl -z-10" />
+            {/* Glow effect - reduced on mobile */}
+            <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-purple-500/10 via-violet-500/5 to-purple-500/10 rounded-2xl sm:rounded-3xl blur-xl -z-10" />
           </motion.div>
 
           {/* Demo - Hidden on small screens */}

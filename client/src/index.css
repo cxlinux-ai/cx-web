@@ -1423,6 +1423,45 @@ table tbody tr:hover {
   }
 }
 
+/* Hero parallax - static on mobile, fixed on desktop */
+.hero-parallax-bg {
+  background-attachment: scroll;
+}
+
+@media (min-width: 768px) {
+  .hero-parallax-bg {
+    background-attachment: fixed;
+  }
+}
+
+/* Carousel touch scroll for mobile */
+.carousel-touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-touch-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Touch manipulation for better mobile response */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Disable animations on mobile for performance */
+@media (max-width: 767px) {
+  .animate-scroll-x-4 {
+    animation: none;
+  }
+
+  .text-shimmer {
+    animation-duration: 6s;
+  }
+}
+
 /* Typewriter animation */
 @keyframes blink-cursor {
   0%, 50% { border-color: #3b82f6; }
