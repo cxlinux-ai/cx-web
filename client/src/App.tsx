@@ -35,6 +35,7 @@ import PricingSuccessPage from "./pages/pricing-success";
 import SuccessPage from "./pages/success";
 import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
+import AgentProfilesPage from "./pages/agent-profiles";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -218,6 +219,16 @@ export default function App() {
                   Referrals
                 </Link>
                 <Link
+                  href="/agent-profiles"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/agent-profiles" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
+                  }`}
+                  data-testid="link-agent-profiles"
+                  onClick={() => analytics.trackCTAClick('agent_profiles', 'main_nav')}
+                >
+                  Agent Fleet
+                </Link>
+                <Link
                   href="/hackathon"
                   className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 group ${
                     location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
@@ -344,6 +355,17 @@ export default function App() {
                     Referrals
                   </Link>
                   <Link
+                    href="/agent-profiles"
+                    onClick={() => {
+                      analytics.trackCTAClick('agent_profiles', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-purple-400 transition-colors duration-300"
+                    data-testid="mobile-link-agent-profiles"
+                  >
+                    Agent Fleet
+                  </Link>
+                  <Link
                     href="/hackathon"
                     onClick={() => {
                       analytics.trackCTAClick('hackathon', 'mobile_nav');
@@ -411,6 +433,7 @@ export default function App() {
             <Route path="/success" component={SuccessPage} />
             <Route path="/support" component={SupportPage} />
             <Route path="/architecture" component={ArchitecturePage} />
+            <Route path="/agent-profiles" component={AgentProfilesPage} />
           </Switch>
           </main>
 

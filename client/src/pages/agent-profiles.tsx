@@ -63,7 +63,7 @@ export default function AgentProfilesPage() {
   const fetchAgents = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/agents');
+      const response = await fetch('/api/mock/agents');
       if (!response.ok) throw new Error('Failed to fetch agents');
       const data = await response.json();
       setAgents(data);
@@ -88,8 +88,30 @@ export default function AgentProfilesPage() {
   const createSampleAgents = async () => {
     try {
       setCreating(true);
-      const response = await fetch('/api/agents/sample', { method: 'POST' });
-      if (!response.ok) throw new Error('Failed to create sample agents');
+
+      // Create 5 sample agents with different types
+      const sampleAgents = [
+        { name: 'system', description: 'System monitoring agent', capabilities: ['monitoring', 'security'] },
+        { name: 'file', description: 'File management agent', capabilities: ['file_ops', 'backup'] },
+        { name: 'docker', description: 'Container orchestration agent', capabilities: ['containers', 'deployment'] },
+        { name: 'git', description: 'Version control agent', capabilities: ['git_ops', 'code_analysis'] },
+        { name: 'package', description: 'Package management agent', capabilities: ['packages', 'updates'] }
+      ];
+
+      for (const agentData of sampleAgents) {
+        const response = await fetch('/api/mock/agents', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...agentData,
+            licenseKey: `BSL-SAMPLE-${Date.now()}`,
+            hostSystem: 'linux',
+            hostArch: 'x86_64'
+          })
+        });
+        if (!response.ok) throw new Error('Failed to create sample agent');
+      }
+
       await fetchAgents(); // Refresh the list
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create sample agents');
