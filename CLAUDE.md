@@ -1,7 +1,7 @@
 # CORTEXLINUXCOM-WEBSITE - Marketing Site
 
 ## Purpose
-Public marketing website for Cortex Linux at cxlinux-ai.com.
+Public marketing website for Cortex Linux at cortexlinux.com.
 
 ## Repo Role in Ecosystem
 - **Public face** - first impression for users
@@ -33,7 +33,7 @@ npm run dev
 /                   # Homepage
 /features           # Feature overview
 /download           # Download page
-/docs               # Redirects to docs.cxlinux-ai.com
+/docs               # Redirects to docs.cortexlinux.com
 /blog               # Blog/news
 /community          # Community links
 ```
@@ -54,7 +54,7 @@ npm run dev
 ## Deployment
 - Auto-deploy on push to main
 - Preview deployments for PRs
-- Custom domain: cxlinux-ai.com
+- Custom domain: cortexlinux.com
 
 ## Assets
 - Logo files in `/public/brand/`

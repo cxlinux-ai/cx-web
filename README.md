@@ -1,6 +1,6 @@
 # Cortex Linux Website
 
-The official website [Cortex Linux](https://cxlinux-ai.com/) - the AI-native operating system that simplifies software installation using natural language.
+The official website [Cortex Linux](https://cortexlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
 
 ## Tech Stack
 
@@ -46,7 +46,7 @@ The beta page allows users to experience Cortex Linux capabilities directly in t
 
 ```bash
 # Clone the repository
-git clone https://github.com/cxlinux-ai/website.git
+git clone https://github.com/cortexlinux/website.git
 cd website
 
 # Install dependencies
@@ -101,7 +101,7 @@ No environment variables required for local development. The beta page uses clie
 
 ## Related Projects
 
-- [Cortex Linux CLI](https://github.com/cxlinux-ai/cortex) - The main Cortex Linux project
+- [Cortex Linux CLI](https://github.com/cortexlinux/cortex) - The main Cortex Linux project
 
 ## License
 
@@ -109,4 +109,4 @@ This project is part of the Cortex Linux ecosystem. See the main repository for 
 
 ---
 
-Built by [AI Venture Holdings LLC](https://cxlinux-ai.com)
+Built by [AI Venture Holdings LLC](https://cortexlinux.com)
