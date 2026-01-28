@@ -245,23 +245,30 @@ export default function PricingPage() {
       <section id="pricing-cards-section" className="pb-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Purple gradient background container */}
-          <div className="relative rounded-3xl bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 p-8 md:p-12 overflow-hidden">
+          <div className="relative rounded-3xl bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-950 p-8 md:p-12 overflow-hidden">
             {/* Decorative gradient orbs */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-violet-400/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-400/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+            <div className="absolute top-0 left-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {tiers.map((tier, index) => (
+              {tiers.map((tier, index) => {
+                const tileBackgrounds: Record<string, string> = {
+                  core: "bg-gradient-to-br from-violet-500/20 to-purple-600/30 border border-violet-400/30",
+                  pro: "bg-gradient-to-br from-blue-500/20 to-cyan-500/30 border border-blue-400/30",
+                  team: "bg-gradient-to-br from-emerald-500/20 to-teal-500/30 border border-emerald-400/30",
+                  enterprise: "bg-gradient-to-br from-orange-500/20 to-amber-500/30 border border-orange-400/30",
+                };
+                return (
                 <motion.div
                   key={tier.id}
                   id={`pricing-card-${tier.id}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative rounded-2xl p-6 ${
+                  className={`relative rounded-2xl p-6 backdrop-blur-xl ${
                     tier.badge
                       ? "bg-white/95 text-gray-900 shadow-2xl scale-[1.02]"
-                      : "bg-white/10 backdrop-blur-xl border border-white/20"
+                      : tileBackgrounds[tier.id] || "bg-white/10 border border-white/20"
                   } hover:scale-[1.04] hover:-translate-y-2 transition-all duration-300`}
                 >
                   {tier.badge && (
@@ -367,7 +374,8 @@ export default function PricingPage() {
                     </Link>
                   )}
                 </motion.div>
-              ))}
+              );
+              })}
             </div>
           </div>
         </div>
