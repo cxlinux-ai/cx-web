@@ -44,22 +44,22 @@ const requireStripe = (req: Request, res: Response, next: Function) => {
 // =============================================================================
 
 // Stripe price IDs for each plan
+// Website tiers map to Stripe products:
+// - Pro ($19/mo on site) → CX Core+ ($20/mo in Stripe)
+// - Team ($99/mo on site) → CX Pro+ ($99/mo in Stripe)
+// - Enterprise ($199/mo on site) → CX Enterprise+ ($299/mo in Stripe)
 const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
-  corePlus: {
-    monthly: 'price_1SqYQjJ4X1wkC4EsLDB6ZbOk',
-    annual: 'price_1SqYQjJ4X1wkC4EslIkZEJFZ'
-  },
   pro: {
-    monthly: 'price_1SqYQkJ4X1wkC4Es8OMt79pZ',
-    annual: 'price_1SqYQkJ4X1wkC4EsWYwUgceu'
+    monthly: 'price_1SqYQjJ4X1wkC4EsLDB6ZbOk',  // CX Core+ $20/mo
+    annual: 'price_1SqYQjJ4X1wkC4EslIkZEJFZ'    // CX Core+ $200/year
   },
   team: {
-    monthly: 'price_team_monthly',  // $99/month - Update with real Stripe price ID
-    annual: 'price_team_annual'     // $79/month billed annually
+    monthly: 'price_1SqYQkJ4X1wkC4Es8OMt79pZ',  // CX Pro+ $99/mo
+    annual: 'price_1SqYQkJ4X1wkC4EsWYwUgceu'    // CX Pro+ $990/year
   },
   enterprise: {
-    monthly: 'price_1SqYQkJ4X1wkC4EsCFVBHYnT',
-    annual: 'price_1SqYQlJ4X1wkC4EsJcPW7Of2'
+    monthly: 'price_1SqYQkJ4X1wkC4EsCFVBHYnT',  // CX Enterprise+ $299/mo
+    annual: 'price_1SqYQlJ4X1wkC4EsJcPW7Of2'    // CX Enterprise+ $2990/year
   },
 };
 

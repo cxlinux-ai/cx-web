@@ -40,8 +40,8 @@ const plans: Record<string, PlanDetails> = {
       "Priority updates",
       "API access",
     ],
-    stripePriceIdMonthly: "price_pro_monthly",
-    stripePriceIdAnnual: "price_pro_annual",
+    stripePriceIdMonthly: "price_1SqYQjJ4X1wkC4EsLDB6ZbOk",  // CX Core+ $20/mo
+    stripePriceIdAnnual: "price_1SqYQjJ4X1wkC4EslIkZEJFZ",   // CX Core+ $200/year
     icon: Zap,
   },
   team: {
@@ -56,8 +56,8 @@ const plans: Record<string, PlanDetails> = {
       "Shared command history",
       "Priority support (4h)",
     ],
-    stripePriceIdMonthly: "price_team_monthly",
-    stripePriceIdAnnual: "price_team_annual",
+    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4Es8OMt79pZ",  // CX Pro+ $99/mo
+    stripePriceIdAnnual: "price_1SqYQkJ4X1wkC4EsWYwUgceu",   // CX Pro+ $990/year
     icon: Shield,
   },
   enterprise: {
@@ -72,8 +72,8 @@ const plans: Record<string, PlanDetails> = {
       "99.9% SLA guarantee",
       "Dedicated Slack channel",
     ],
-    stripePriceIdMonthly: "price_enterprise_monthly",
-    stripePriceIdAnnual: "price_enterprise_annual",
+    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4EsCFVBHYnT",  // CX Enterprise+ $299/mo
+    stripePriceIdAnnual: "price_1SqYQlJ4X1wkC4EsJcPW7Of2",   // CX Enterprise+ $2990/year
     icon: Server,
   },
 };
