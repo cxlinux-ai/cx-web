@@ -1,0 +1,46 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ domain }};
+    root {{ web_root }};
+    index index.php index.html;
+
+    client_max_body_size {{ client_max_body_size | default('64M') }};
+
+    # Security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # Logging
+    access_log /var/log/nginx/{{ domain }}_access.log;
+    error_log /var/log/nginx/{{ domain }}_error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php/{{ php_version | default('php8.3') }}-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+        fastcgi_read_timeout {{ fastcgi_timeout | default(300) }};
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # Static file caching
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Gzip
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml;
+}

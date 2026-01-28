@@ -1,0 +1,722 @@
+---
+sidebar_position: 2
+title: Configuration Options
+description: Complete reference for all Cortex Linux configuration options and settings.
+keywords: [configuration, config, settings, options, yaml]
+---
+
+# Configuration Options
+
+Complete reference for all Cortex configuration options. Configuration can be set in YAML files, environment variables, or command-line flags.
+
+## Configuration Files
+
+Cortex reads configuration from these locations (in order of priority):
+
+1. Command-line flags (highest priority)
+2. Environment variables
+3. `./.cortex.yaml` (project config)
+4. `~/.config/cortex/config.yaml` (user config)
+5. `/etc/cortex/config.yaml` (system config, lowest priority)
+
+## Core Settings
+
+### `default_mode`
+
+Default execution mode for commands.
+
+```yaml
+default_mode: execute  # or "dry-run"
+```
+
+| Value | Description |
+|-------|-------------|
+| `execute` | Execute commands immediately (default) |
+| `dry-run` | Preview commands without executing |
+
+---
+
+### `confirm_threshold`
+
+Risk level that triggers confirmation prompts.
+
+```yaml
+confirm_threshold: medium
+```
+
+| Value | Description |
+|-------|-------------|
+| `low` | Confirm almost everything |
+| `medium` | Confirm potentially risky operations (default) |
+| `high` | Only confirm dangerous operations |
+| `none` | Never confirm (not recommended) |
+
+---
+
+### `output_format`
+
+Default output format.
+
+```yaml
+output_format: text
+```
+
+| Value | Description |
+|-------|-------------|
+| `text` | Human-readable text (default) |
+| `json` | JSON output |
+| `yaml` | YAML output |
+
+---
+
+### `color`
+
+Enable colored output.
+
+```yaml
+color: auto
+```
+
+| Value | Description |
+|-------|-------------|
+| `auto` | Detect terminal capability (default) |
+| `always` | Always use colors |
+| `never` | Disable colors |
+
+---
+
+### `verbose`
+
+Default verbosity level.
+
+```yaml
+verbose: false
+```
+
+---
+
+### `quiet`
+
+Suppress non-essential output.
+
+```yaml
+quiet: false
+```
+
+## AI Backend Settings
+
+### `backend`
+
+AI backend configuration section.
+
+```yaml
+backend:
+  provider: local
+  model: cortex-7b
+  api_key: ""
+  api_url: ""
+  timeout: 30
+  retry_count: 3
+```
+
+---
+
+### `backend.provider`
+
+Which AI backend to use.
+
+```yaml
+backend:
+  provider: local
+```
+
+| Value | Description |
+|-------|-------------|
+| `local` | Local Cortex model (default) |
+| `openai` | OpenAI API |
+| `anthropic` | Anthropic Claude API |
+| `ollama` | Local Ollama instance |
+| `custom` | Custom API endpoint |
+
+---
+
+### `backend.model`
+
+Specific model to use.
+
+```yaml
+backend:
+  model: cortex-7b
+```
+
+Models vary by provider. See [Supported AI Backends](/docs/reference/ai-backends).
+
+---
+
+### `backend.api_key`
+
+API key for cloud backends.
+
+```yaml
+backend:
+  api_key: ${CORTEX_API_KEY}  # Reference environment variable
+```
+
+**Security Note:** Never commit API keys to version control. Use environment variables.
+
+---
+
+### `backend.api_url`
+
+Custom API endpoint URL.
+
+```yaml
+backend:
+  api_url: http://localhost:11434/api  # For Ollama
+```
+
+---
+
+### `backend.timeout`
+
+Request timeout in seconds.
+
+```yaml
+backend:
+  timeout: 30
+```
+
+---
+
+### `backend.retry_count`
+
+Number of retries on failure.
+
+```yaml
+backend:
+  retry_count: 3
+```
+
+## Package Management Settings
+
+### `packages`
+
+Package management configuration.
+
+```yaml
+packages:
+  default_manager: auto
+  update_cache_before_install: true
+  clean_cache_after: false
+  prefer_native: true
+```
+
+---
+
+### `packages.default_manager`
+
+Preferred package manager.
+
+```yaml
+packages:
+  default_manager: auto
+```
+
+| Value | Description |
+|-------|-------------|
+| `auto` | Auto-detect based on distro (default) |
+| `apt` | Force APT |
+| `dnf` | Force DNF |
+| `pacman` | Force Pacman |
+| `zypper` | Force Zypper |
+
+---
+
+### `packages.update_cache_before_install`
+
+Update package lists before installations.
+
+```yaml
+packages:
+  update_cache_before_install: true
+```
+
+---
+
+### `packages.clean_cache_after`
+
+Clean package cache after operations.
+
+```yaml
+packages:
+  clean_cache_after: false
+```
+
+---
+
+### `packages.prefer_native`
+
+Prefer native packages over universal formats.
+
+```yaml
+packages:
+  prefer_native: true
+```
+
+When true, prefers apt/dnf/pacman packages over Snap/Flatpak.
+
+## Snapshot Settings
+
+### `snapshots`
+
+Snapshot and rollback configuration.
+
+```yaml
+snapshots:
+  enabled: true
+  directory: ~/.cortex/snapshots
+  max_count: 100
+  max_age_days: 90
+  auto_cleanup: true
+  compression: gzip
+```
+
+---
+
+### `snapshots.enabled`
+
+Enable automatic snapshot creation.
+
+```yaml
+snapshots:
+  enabled: true
+```
+
+---
+
+### `snapshots.directory`
+
+Where to store snapshots.
+
+```yaml
+snapshots:
+  directory: ~/.cortex/snapshots
+```
+
+---
+
+### `snapshots.max_count`
+
+Maximum number of snapshots to keep.
+
+```yaml
+snapshots:
+  max_count: 100
+```
+
+---
+
+### `snapshots.max_age_days`
+
+Delete snapshots older than this.
+
+```yaml
+snapshots:
+  max_age_days: 90
+```
+
+---
+
+### `snapshots.auto_cleanup`
+
+Automatically clean old snapshots.
+
+```yaml
+snapshots:
+  auto_cleanup: true
+```
+
+---
+
+### `snapshots.compression`
+
+Compression for snapshot storage.
+
+```yaml
+snapshots:
+  compression: gzip
+```
+
+| Value | Description |
+|-------|-------------|
+| `none` | No compression |
+| `gzip` | Gzip compression (default) |
+| `zstd` | Zstandard compression |
+
+## Logging Settings
+
+### `logging`
+
+Logging configuration.
+
+```yaml
+logging:
+  level: info
+  file: ~/.cortex/logs/cortex.log
+  max_size_mb: 50
+  max_files: 5
+  format: text
+```
+
+---
+
+### `logging.level`
+
+Log verbosity level.
+
+```yaml
+logging:
+  level: info
+```
+
+| Value | Description |
+|-------|-------------|
+| `debug` | Everything |
+| `info` | Normal operation (default) |
+| `warn` | Warnings and errors |
+| `error` | Errors only |
+
+---
+
+### `logging.file`
+
+Log file location.
+
+```yaml
+logging:
+  file: ~/.cortex/logs/cortex.log
+```
+
+---
+
+### `logging.max_size_mb`
+
+Maximum log file size before rotation.
+
+```yaml
+logging:
+  max_size_mb: 50
+```
+
+---
+
+### `logging.max_files`
+
+Number of rotated log files to keep.
+
+```yaml
+logging:
+  max_files: 5
+```
+
+## Security Settings
+
+### `security`
+
+Security-related configuration.
+
+```yaml
+security:
+  require_sudo_confirm: true
+  dangerous_commands: strict
+  allowed_paths: []
+  blocked_paths:
+    - /boot
+    - /proc
+    - /sys
+```
+
+---
+
+### `security.require_sudo_confirm`
+
+Always confirm commands requiring sudo.
+
+```yaml
+security:
+  require_sudo_confirm: true
+```
+
+---
+
+### `security.dangerous_commands`
+
+How to handle potentially dangerous operations.
+
+```yaml
+security:
+  dangerous_commands: strict
+```
+
+| Value | Description |
+|-------|-------------|
+| `strict` | Require confirmation, detailed warnings (default) |
+| `warn` | Show warning, proceed after confirmation |
+| `allow` | Allow without extra confirmation |
+| `block` | Block dangerous operations entirely |
+
+---
+
+### `security.allowed_paths`
+
+Restrict operations to these paths (empty = no restriction).
+
+```yaml
+security:
+  allowed_paths:
+    - /home/user
+    - /opt/app
+```
+
+---
+
+### `security.blocked_paths`
+
+Never modify these paths.
+
+```yaml
+security:
+  blocked_paths:
+    - /boot
+    - /proc
+    - /sys
+```
+
+## Network Settings
+
+### `network`
+
+Network-related configuration.
+
+```yaml
+network:
+  proxy: ""
+  timeout: 30
+  offline_mode: false
+```
+
+---
+
+### `network.proxy`
+
+HTTP proxy for network requests.
+
+```yaml
+network:
+  proxy: http://proxy.company.com:8080
+```
+
+---
+
+### `network.timeout`
+
+Network request timeout in seconds.
+
+```yaml
+network:
+  timeout: 30
+```
+
+---
+
+### `network.offline_mode`
+
+Disable network features (use local model only).
+
+```yaml
+network:
+  offline_mode: false
+```
+
+## UI Settings
+
+### `ui`
+
+User interface configuration.
+
+```yaml
+ui:
+  spinner: dots
+  progress_bar: true
+  emoji: auto
+  width: auto
+```
+
+---
+
+### `ui.spinner`
+
+Loading spinner style.
+
+```yaml
+ui:
+  spinner: dots
+```
+
+Options: `dots`, `line`, `simple`, `none`
+
+---
+
+### `ui.progress_bar`
+
+Show progress bars for long operations.
+
+```yaml
+ui:
+  progress_bar: true
+```
+
+---
+
+### `ui.emoji`
+
+Use emoji in output.
+
+```yaml
+ui:
+  emoji: auto
+```
+
+| Value | Description |
+|-------|-------------|
+| `auto` | Detect terminal support (default) |
+| `always` | Always use emoji |
+| `never` | Never use emoji |
+
+---
+
+### `ui.width`
+
+Terminal width for formatting.
+
+```yaml
+ui:
+  width: auto
+```
+
+Use `auto` to detect or specify a number.
+
+## Alias Settings
+
+### `aliases`
+
+Define command shortcuts.
+
+```yaml
+aliases:
+  up: "update all packages"
+  clean: "remove unused packages and clean cache"
+  status: "show system status"
+```
+
+Usage:
+
+```bash
+cortex up  # Expands to "update all packages"
+```
+
+## Plugin Settings
+
+### `plugins`
+
+Plugin configuration.
+
+```yaml
+plugins:
+  enabled: true
+  directory: ~/.cortex/plugins
+  auto_update: true
+```
+
+---
+
+## Complete Example
+
+Full configuration file example:
+
+```yaml
+# ~/.config/cortex/config.yaml
+
+# Core settings
+default_mode: execute
+confirm_threshold: medium
+output_format: text
+color: auto
+verbose: false
+quiet: false
+
+# AI Backend
+backend:
+  provider: local
+  model: cortex-7b
+  api_key: ${CORTEX_API_KEY}
+  timeout: 30
+  retry_count: 3
+
+# Package Management
+packages:
+  default_manager: auto
+  update_cache_before_install: true
+  clean_cache_after: false
+  prefer_native: true
+
+# Snapshots
+snapshots:
+  enabled: true
+  directory: ~/.cortex/snapshots
+  max_count: 100
+  max_age_days: 90
+  auto_cleanup: true
+  compression: gzip
+
+# Logging
+logging:
+  level: info
+  file: ~/.cortex/logs/cortex.log
+  max_size_mb: 50
+  max_files: 5
+
+# Security
+security:
+  require_sudo_confirm: true
+  dangerous_commands: strict
+  blocked_paths:
+    - /boot
+    - /proc
+    - /sys
+
+# Network
+network:
+  proxy: ""
+  timeout: 30
+  offline_mode: false
+
+# UI
+ui:
+  spinner: dots
+  progress_bar: true
+  emoji: auto
+  width: auto
+
+# Aliases
+aliases:
+  up: "update all packages"
+  clean: "remove unused packages and clean cache"
+  fix: "repair packages and fix broken dependencies"
+```
+
+## Related Documentation
+
+- [CLI Commands](/docs/reference/cli-commands) - Command reference
+- [Environment Variables](/docs/reference/environment-variables) - Environment configuration
+- [Configuration](/docs/getting-started/configuration) - Configuration guide

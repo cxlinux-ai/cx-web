@@ -1,0 +1,212 @@
+---
+sidebar_position: 0
+slug: /
+title: Welcome to Cortex Linux
+description: The AI-native operating system that simplifies Linux with natural language. Install packages, configure services, and manage your system just by describing what you want.
+keywords: [cortex, linux, ai, natural language, documentation]
+---
+
+# Welcome to Cortex Linux
+
+**Cortex Linux** is an AI-powered command-line tool that transforms how you interact with Linux. Instead of memorizing commands, just describe what you want in plain English.
+
+```bash
+# Traditional way
+sudo apt update && sudo apt install nginx && sudo systemctl enable nginx && sudo systemctl start nginx
+
+# Cortex way
+cortex "install nginx and set it up to start on boot"
+```
+
+## Why Cortex?
+
+### 🧠 Natural Language Interface
+
+Forget command syntax. Describe your intent:
+
+```bash
+cortex "set up python for data science"
+cortex "make the firewall allow only SSH and HTTPS"
+cortex "find what's using port 8080 and stop it"
+```
+
+### 🛡️ Safe by Design
+
+- **Dry-run mode** - Preview commands before running
+- **Snapshots** - Automatic backups before changes
+- **Rollback** - One command to undo mistakes
+- **Confirmations** - Verify dangerous operations
+
+### 🔒 Privacy First
+
+- **Local AI** - Default model runs on your machine
+- **No data collection** - Your commands stay private
+- **Offline capable** - Works without internet
+
+### 🐧 Universal Compatibility
+
+Works across all major distributions:
+
+- Ubuntu, Debian, Mint
+- Fedora, RHEL, CentOS
+- Arch, Manjaro
+- openSUSE, Alpine
+
+## Quick Install
+
+```bash
+curl -fsSL https://cortexlinux.com/install.sh | bash
+```
+
+<details>
+<summary>Other installation methods</summary>
+
+### Package Managers
+
+```bash
+# Ubuntu/Debian
+sudo apt install cortex
+
+# Fedora
+sudo dnf install cortex
+
+# Arch
+yay -S cortex
+```
+
+### From Source
+
+```bash
+git clone https://github.com/cortexlinux/cortex-linux.git
+cd cortex-linux
+cargo install --path .
+```
+
+</details>
+
+## Your First Command
+
+```bash
+# Try it out
+cortex "show system information"
+
+# Install something
+cortex "install htop"
+
+# Preview first (dry-run)
+cortex --dry-run "update all packages"
+```
+
+## What Can You Do?
+
+### Package Management
+
+```bash
+cortex "install docker and docker-compose"
+cortex "update nodejs to version 20"
+cortex "remove unused packages"
+```
+
+### System Configuration
+
+```bash
+cortex "create user deploy with ssh access"
+cortex "enable the firewall and allow port 443"
+cortex "set up automatic security updates"
+```
+
+### Service Management
+
+```bash
+cortex "restart nginx and check its status"
+cortex "disable bluetooth service"
+cortex "show what services failed to start"
+```
+
+### Development Setup
+
+```bash
+cortex "set up python 3.11 with pip and virtualenv"
+cortex "install rust development tools"
+cortex "configure git with my name and email"
+```
+
+## Getting Started
+
+<div className="row">
+  <div className="col col--6 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header">
+        <h3>📦 Installation</h3>
+      </div>
+      <div className="card__body">
+        <p>Get Cortex installed on your system in under 5 minutes.</p>
+      </div>
+      <div className="card__footer">
+        <a className="button button--primary button--block" href="/docs/getting-started/installation">
+          Install Now
+        </a>
+      </div>
+    </div>
+  </div>
+  <div className="col col--6 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header">
+        <h3>🚀 Quick Start</h3>
+      </div>
+      <div className="card__body">
+        <p>Learn the basics and run your first commands.</p>
+      </div>
+      <div className="card__footer">
+        <a className="button button--secondary button--block" href="/docs/getting-started/quick-start">
+          5-Minute Guide
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+## How It Works
+
+1. **You describe** what you want in natural language
+2. **Cortex understands** your intent using AI
+3. **Preview** the commands that will run
+4. **Execute** with confidence (or rollback if needed)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ $ cortex "install nginx and configure for static site"     │
+├─────────────────────────────────────────────────────────────┤
+│ Cortex will execute:                                        │
+│                                                             │
+│ 1. apt install nginx                                        │
+│ 2. systemctl enable nginx                                   │
+│ 3. Configure /etc/nginx/sites-available/default            │
+│ 4. systemctl restart nginx                                  │
+├─────────────────────────────────────────────────────────────┤
+│ Proceed? [Y/n/explain]                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Community
+
+- **Discord**: [Join our community](https://discord.gg/ASvzWcuTfk)
+- **GitHub**: [Star us on GitHub](https://github.com/cortexlinux/cortex-linux)
+- **Twitter**: [@cortexlinux](https://twitter.com/cortexlinux)
+
+## Contributing
+
+Cortex is open source! We welcome contributions:
+
+- 🐛 [Report bugs](https://github.com/cortexlinux/cortex-linux/issues)
+- 💡 [Suggest features](https://github.com/cortexlinux/cortex-linux/discussions)
+- 🔧 [Submit PRs](/docs/contributing/pr-guidelines)
+- 💰 [Earn bounties](/docs/contributing/bounty-program)
+
+## Ready to Start?
+
+<div className="text--center margin-top--lg">
+  <a className="button button--primary button--lg" href="/docs/getting-started/installation">
+    Get Started →
+  </a>
+</div>

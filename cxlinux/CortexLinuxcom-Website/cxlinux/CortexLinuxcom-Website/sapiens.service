@@ -1,0 +1,45 @@
+[Unit]
+Description=Sapiens 0.27B Reasoning Engine
+Documentation=https://github.com/cortexlinux/cortex
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cortex
+Group=cortex
+WorkingDirectory=/opt/sapiens
+ExecStart=/usr/bin/python3 /opt/sapiens/run_sapiens.py --host 0.0.0.0 --port 8100
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=sapiens
+
+# Environment
+Environment=PYTHONUNBUFFERED=1
+Environment=SAPIENS_LOG_LEVEL=INFO
+Environment=SAPIENS_DEVICE=cpu
+Environment=SAPIENS_MAX_ITERATIONS=5
+Environment=SAPIENS_CONFIDENCE_THRESHOLD=0.85
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+
+# Resource limits
+MemoryMax=512M
+CPUQuota=80%
+
+[Install]
+WantedBy=multi-user.target

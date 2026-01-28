@@ -1,0 +1,369 @@
+---
+sidebar_position: 1
+title: Natural Language Commands
+description: Master Cortex Linux's AI-powered natural language interface. Learn patterns, best practices, and advanced techniques.
+keywords: [natural language, NLP, AI commands, prompts, patterns]
+---
+
+# Natural Language Commands
+
+Cortex Linux understands your intent, not just syntax. This guide covers how to communicate effectively with the AI to accomplish system tasks.
+
+## How It Works
+
+When you type a command, Cortex:
+
+1. **Parses your intent** - Understanding what you want to accomplish
+2. **Maps to actions** - Translating to specific system operations
+3. **Validates safety** - Checking for potential issues
+4. **Executes or previews** - Running or showing what would happen
+
+```bash
+# Your input
+cortex "install a web server for development"
+
+# Cortex understands:
+# Intent: Install web server
+# Context: Development (not production)
+# Action: Install appropriate package (nginx/apache)
+# Mode: User's default (execute or dry-run)
+```
+
+## Writing Effective Commands
+
+### Be Specific About Your Goal
+
+The more context you provide, the better Cortex can help.
+
+```bash
+# ❌ Vague
+cortex "set up python"
+
+# ✅ Specific
+cortex "install python 3.11 with pip and virtualenv for web development"
+```
+
+### Include Context When Helpful
+
+```bash
+# Context helps Cortex make better choices
+cortex "I'm setting up a Django project, install what I need"
+
+# Cortex will install:
+# - Python 3.x
+# - pip
+# - virtualenv
+# - Common Django dependencies
+```
+
+### Use Natural Phrasing
+
+You don't need to sound like a robot. These all work:
+
+```bash
+cortex "give me nodejs"
+cortex "I need nodejs installed"
+cortex "install nodejs please"
+cortex "set up nodejs on this machine"
+```
+
+## Command Patterns
+
+### Installation Requests
+
+```bash
+# Basic installation
+cortex "install docker"
+
+# Specific versions
+cortex "install nodejs version 18"
+
+# Multiple packages
+cortex "install git, vim, and tmux"
+
+# With dependencies
+cortex "install postgresql with all client tools"
+
+# Development setups
+cortex "set up a complete rust development environment"
+```
+
+### System Configuration
+
+```bash
+# Service management
+cortex "start the nginx service and enable it on boot"
+
+# User management
+cortex "create a new user called deploy with sudo access"
+
+# Network configuration
+cortex "configure the firewall to allow HTTP and HTTPS traffic"
+
+# File permissions
+cortex "make the /var/www directory writable by the web server"
+```
+
+### Information Queries
+
+```bash
+# Package information
+cortex "what version of python is installed?"
+
+# System status
+cortex "show me disk usage for all mounted drives"
+
+# Service status
+cortex "is nginx running? show me its status"
+
+# Finding things
+cortex "where is the nginx configuration file?"
+```
+
+### Updates and Maintenance
+
+```bash
+# System updates
+cortex "update all packages to their latest versions"
+
+# Specific updates
+cortex "update nodejs to the latest LTS version"
+
+# Security updates
+cortex "apply all security updates only"
+
+# Cleanup
+cortex "remove unused packages and clear the package cache"
+```
+
+## Advanced Techniques
+
+### Chaining Actions
+
+Describe multi-step workflows naturally:
+
+```bash
+cortex "install nginx, enable it, and open port 80 in the firewall"
+
+# Cortex will:
+# 1. Install nginx package
+# 2. Start and enable nginx service
+# 3. Configure firewall rules
+```
+
+### Conditional Logic
+
+Express conditions in plain language:
+
+```bash
+cortex "install docker if it's not already installed"
+
+cortex "update nodejs only if the current version is below 18"
+```
+
+### Environment-Aware Commands
+
+Cortex adapts to your system:
+
+```bash
+# Works on any distro
+cortex "install the C compiler"
+
+# Ubuntu/Debian: apt install build-essential
+# Fedora: dnf install gcc
+# Arch: pacman -S gcc
+```
+
+### Referencing Previous Context
+
+Within a session, Cortex remembers context:
+
+```bash
+cortex "install postgresql"
+# ... later in the session ...
+cortex "now create a database called myapp"
+# Cortex knows you're working with PostgreSQL
+```
+
+## Understanding Cortex Responses
+
+### Action Preview
+
+Before execution, Cortex shows what it will do:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Cortex will execute:                                        │
+├─────────────────────────────────────────────────────────────┤
+│ 1. apt update                                               │
+│ 2. apt install -y nginx                                     │
+│ 3. systemctl start nginx                                    │
+│ 4. systemctl enable nginx                                   │
+├─────────────────────────────────────────────────────────────┤
+│ Proceed? [Y/n/explain]                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Explanation Mode
+
+Type `explain` to understand why Cortex chose specific actions:
+
+```
+Why these commands?
+
+1. `apt update` - Refreshes package lists to ensure we install
+   the latest available version
+
+2. `apt install -y nginx` - Installs nginx web server. The -y
+   flag auto-confirms to avoid interactive prompts.
+
+3. `systemctl start nginx` - Starts the nginx service immediately
+
+4. `systemctl enable nginx` - Configures nginx to start on boot
+```
+
+### Error Handling
+
+When something goes wrong, Cortex explains and suggests fixes:
+
+```
+❌ Installation failed: nginx
+
+Reason: Port 80 is already in use by apache2
+
+Suggestions:
+1. Stop apache2: cortex "stop and disable apache2"
+2. Use different port: cortex "install nginx on port 8080"
+3. Remove apache2: cortex "remove apache2 completely"
+```
+
+## Command Modifiers
+
+Add modifiers to change how commands execute:
+
+### Dry Run
+
+Preview without executing:
+
+```bash
+cortex --dry-run "install docker and kubernetes"
+cortex -n "remove all unused packages"
+```
+
+### Verbose Mode
+
+See detailed output:
+
+```bash
+cortex --verbose "update the system"
+cortex -v "install development tools"
+```
+
+### Force Mode
+
+Skip confirmations (use carefully):
+
+```bash
+cortex --yes "install recommended packages"
+cortex -y "apply all updates"
+```
+
+### Quiet Mode
+
+Minimal output:
+
+```bash
+cortex --quiet "install git"
+cortex -q "update packages"
+```
+
+## Best Practices
+
+### 1. Start with Dry Run
+
+For unfamiliar operations, preview first:
+
+```bash
+cortex --dry-run "configure the system for production deployment"
+```
+
+### 2. Be Explicit About Versions
+
+When versions matter, say so:
+
+```bash
+# Could install any version
+cortex "install python"
+
+# Gets exactly what you need
+cortex "install python 3.11, not 3.12"
+```
+
+### 3. Describe the Goal, Not Just the Steps
+
+Let Cortex figure out the implementation:
+
+```bash
+# ❌ Micromanaging
+cortex "run apt update then apt install nginx then systemctl start nginx"
+
+# ✅ Goal-oriented
+cortex "set up nginx as a web server"
+```
+
+### 4. Use Sessions for Related Tasks
+
+Group related work in one session for better context:
+
+```bash
+cortex "I'm setting up a LAMP stack"
+cortex "install apache"
+cortex "install mysql"
+cortex "install php with mysql support"
+cortex "verify everything is working"
+```
+
+## Troubleshooting
+
+### Command Not Understood
+
+If Cortex doesn't understand:
+
+```bash
+# Try rephrasing
+cortex "install the thing for containers"  # Unclear
+cortex "install docker for container management"  # Clear
+
+# Or be more explicit
+cortex "install docker-ce from the official docker repository"
+```
+
+### Unexpected Actions
+
+If Cortex suggests something unexpected:
+
+1. Don't proceed - type `n` to cancel
+2. Ask for explanation - type `explain`
+3. Rephrase with more context
+4. Use `--dry-run` to preview alternatives
+
+### Conflicting Interpretations
+
+When multiple interpretations exist:
+
+```bash
+cortex "install java"
+
+# Cortex asks:
+# Which Java distribution?
+# 1. OpenJDK 17 (recommended)
+# 2. OpenJDK 11 (LTS)
+# 3. OpenJDK 21 (latest)
+# 4. Other (specify)
+```
+
+## Related Documentation
+
+- [Package Management](/docs/user-guide/package-management) - Deep dive into package operations
+- [CLI Commands](/docs/reference/cli-commands) - Complete command reference
+- [Configuration](/docs/getting-started/configuration) - Customize Cortex behavior

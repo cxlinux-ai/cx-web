@@ -1,0 +1,31 @@
+[Unit]
+Description=Uvicorn daemon for {{ name }}
+After=network.target{% if database %} {{ database }}.service{% endif %}
+
+[Service]
+Type=simple
+User={{ user | default('www-data') }}
+Group={{ group | default('www-data') }}
+WorkingDirectory={{ working_dir }}
+{% if env_file %}
+EnvironmentFile={{ env_file }}
+{% endif %}
+Environment="PATH={{ venv_path }}/bin"
+{% for key, value in environment.items() %}
+Environment="{{ key }}={{ value }}"
+{% endfor %}
+ExecStart={{ venv_path }}/bin/uvicorn \
+    {{ asgi_app }} \
+    --host {{ host | default('127.0.0.1') }} \
+    --port {{ port | default(8000) }} \
+    --workers {{ workers | default(4) }} \
+    --access-log \
+    --log-level {{ log_level | default('info') }}
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,267 @@
+1️⃣ Technical Foundations (Non-Negotiable)
+
+Why: Search engines can’t rank a site they can’t crawl or understand.
+
+Clean HTML structure
+
+One <h1> per page, hierarchically use <h2> and <h3>
+
+Semantic tags (<article>, <section>, <nav>, <footer>)
+
+Mobile-first design
+
+Google uses mobile-first indexing
+
+Pages must be responsive with readable text and tappable buttons
+
+Fast page speed
+
+Optimize images and assets (e.g., WebP, lazy-loading)
+
+Minimize JS/CSS bundle size
+
+Use caching and CDN
+
+HTTPS everywhere
+
+Secure your site — Google and users expect it
+
+Clean URLs
+
+/hackathon instead of /page?id=123
+
+Keywords in URLs if meaningful
+
+Sitemap & robots.txt
+
+Submit XML sitemap to Google Search Console
+
+Block private/duplicate pages in robots.txt
+
+2️⃣ Metadata & Page Titles
+
+Why: Titles and meta descriptions are the first thing users see in search results.
+
+Title tag
+
+One per page, unique, < 60 characters
+
+Include primary keyword naturally
+
+Match page intent (e.g., /hackathon → “Cortex Linux AI Hackathon | Build System-Level AI”)
+
+Meta description
+
+140–160 characters
+
+Persuasive + descriptive + keyword included
+
+Use marketing psychology: hint at benefit, urgency, exclusivity
+
+Open Graph & Twitter Cards
+
+Social-friendly preview (image, title, description)
+
+Ensures shares look professional
+
+3️⃣ Headings & Content Hierarchy
+
+Why: Search engines read headings to understand page structure; humans scan headings first.
+
+H1 → H2 → H3 structure
+
+One H1 per page describing the main topic
+
+H2 for sections, H3 for subsections
+
+Include semantic keywords in headings
+
+Use variations of primary keywords naturally
+
+Avoid stuffing: it should read like a human copywriting guide
+
+Hero section H1
+
+Must immediately communicate value & uniqueness
+
+Include the main keyword + benefit
+
+4️⃣ Content Optimization
+
+Why: SEO is not just technical — content determines rankings and conversions.
+
+Keyword research & mapping
+
+Primary keyword for each page
+
+Secondary/semantic keywords naturally scattered
+
+Focus on intent (informational, transactional, navigational)
+
+Copywriting & psychology
+
+Use clarity, not jargon
+
+Answer the user’s question within first 100–150 words
+
+Include social proof and trust signals (open-source, contributor count)
+
+Unique content
+
+No duplicated text across pages
+
+Each page must target a unique concept
+
+Internal linking
+
+Link to related pages contextually
+
+Use descriptive anchor text
+
+Helps Google understand site hierarchy
+
+Media optimization
+
+Alt text for images: describe image + include relevant keyword naturally
+
+Compress images without losing quality
+
+5️⃣ UX & Engagement Signals
+
+Why: Google’s algorithm increasingly considers user behavior.
+
+Page speed & smooth interaction
+
+Fast load, smooth hover, intuitive animations (like your 3D card effects)
+
+Easy navigation
+
+Logical nav menu: “Get Started, Security, News, AI Agencies, Hackathon”
+
+Breadcrumbs for hierarchy
+
+Readable layout
+
+Short paragraphs, headings, bullet points
+
+High contrast, good spacing
+
+Actionable CTAs
+
+Encourage clicks but avoid spammy wording
+
+Each page should have one clear primary goal
+
+6️⃣ Structured Data & Schema
+
+Why: Helps search engines understand your pages and improves SERP appearance.
+
+FAQ schema
+
+If you have FAQ pages, wrap Q&A in FAQPage schema
+
+Article / News schema
+
+For press releases, blog posts, hackathon announcements
+
+Organization schema
+
+Logo, social links, founder, address (optional for credibility)
+
+Breadcrumb schema
+
+Helps Google show navigation path
+
+7️⃣ Backlinks & Social Proof
+
+Why: Off-page signals are critical for ranking and trust.
+
+Earn real backlinks
+
+Open-source projects: GitHub, developer blogs, technical communities
+
+Press mentions from relevant AI/tech media
+
+Social signals
+
+Open Graph + Twitter cards
+
+Share buttons with clean images and headlines
+
+Show numbers credibly
+
+GitHub stars, forks, contributors
+
+Hackathon participants
+
+8️⃣ Analytics, Monitoring & Iteration
+
+Why: SEO is never “done”.
+
+Google Search Console
+
+Track impressions, clicks, index coverage
+
+Google Analytics / GA4
+
+Monitor engagement, bounce rate, conversions
+
+Heatmaps (Hotjar / Microsoft Clarity)
+
+Check if people are scrolling or missing important info
+
+A/B test headlines & hero copy
+
+Optimized copy converts better + may improve dwell time
+
+9️⃣ Continuous Content Strategy
+
+Why: Fresh content keeps the site relevant.
+
+Blog posts
+
+Topic clusters around Linux, AI tooling, system-level innovation
+
+Press releases & hackathons
+
+Each event is a fresh indexed page
+
+Update existing content
+
+Keep stats current (stars, contributors, events, releases)
+
+Internal linking to new content
+
+Push users deeper into your ecosystem
+
+🔟 Red Flags to Avoid
+
+Duplicate content across pages
+
+Hidden text or invisible SEO tricks
+
+Keyword stuffing
+
+Auto-generated or low-quality blog posts
+
+Overloading pages with images or heavy scripts that slow loading
+
+✅ TL;DR – Must-Do SEO Checklist for CortexLinux.com
+
+Technical: fast, mobile-first, HTTPS, semantic HTML
+
+Metadata: unique title + meta description + OG tags
+
+Headings: one H1 per page, hierarchy H2/H3, semantic keywords
+
+Content: clear copy, answer intent, unique, internal links
+
+UX signals: readable layout, smooth animations, fast, clear CTAs
+
+Schema: FAQ, Article, Organization, Breadcrumb
+
+Backlinks & proof: real GitHub stats, media mentions
+
+Analytics: track, iterate, A/B test
+
+Fresh content: blog, press, hackathon updates

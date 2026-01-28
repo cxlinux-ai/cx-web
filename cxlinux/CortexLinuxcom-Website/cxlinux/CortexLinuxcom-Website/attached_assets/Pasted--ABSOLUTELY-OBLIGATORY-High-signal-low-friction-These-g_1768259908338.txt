@@ -1,0 +1,167 @@
+✅ ABSOLUTELY OBLIGATORY (High signal, low friction)
+
+These give you identity, intent, and filtering power without exhausting users.
+
+1️⃣ Discord Username (REQUIRED)
+
+Why
+
+Core anti-bot + community linkage
+
+Lets you:
+
+Verify participation
+
+Assign roles
+
+DM post-hackathon
+
+Low effort for users, high operational value
+
+👉 Must be required
+
+2️⃣ Primary Technical Role (REQUIRED)
+
+Options:
+
+Backend / Systems
+
+Frontend
+
+ML / AI
+
+DevOps / Infra
+
+Security
+
+Research
+
+Student / Learning
+
+Other (free text)
+
+Why
+
+Essential for:
+
+Team formation
+
+Mentor routing
+
+Future hiring / contributor pipelines
+
+Multiple choice, very fast to answer
+
+👉 Must be required
+
+3️⃣ Why did you join this hackathon? (multi-select) (REQUIRED)
+
+Options you listed are perfect.
+
+Why
+
+This is core motivation data
+
+Helps you segment:
+
+Builders vs learners vs competitors
+
+Multi-select keeps it easy
+
+👉 Must be required
+
+4️⃣ Which Cortex Linux area are you most interested in? (REQUIRED)
+
+Options you listed are excellent.
+
+Why
+
+This is product roadmap gold
+
+Directly informs:
+
+What to build next
+
+What features deserve investment
+
+Easy single-select
+
+👉 Must be required
+
+⚠️ STRATEGICALLY OPTIONAL (Strong signal, but higher effort)
+
+These are extremely valuable, but forcing them reduces completion rate.
+
+5️⃣ What do you plan to build or contribute to? (short paragraph)
+
+Status: Optional (but encouraged)
+
+Why
+
+High cognitive load
+
+Some participants don’t have ideas yet
+
+Still very useful for:
+
+Early talent spotting
+
+Idea clustering
+
+👉 Add helper text like:
+
+“It’s okay if this is rough or exploratory.”
+
+6️⃣ What excites you most about Cortex Linux?
+
+Status: Optional
+
+Why
+
+Emotional signal > operational signal
+
+Great for:
+
+Marketing language
+
+Community storytelling
+
+But not essential for execution
+
+🧠 POST-HACKATHON ENGINE (VERY IMPORTANT, BUT OPTIONAL)
+
+These should not be required, but you definitely want them.
+
+7️⃣ How would you like to stay involved after the hackathon?
+
+Options you listed are perfect.
+
+Status: Optional (but highlighted)
+
+Why
+
+Some users don’t want to commit upfront
+
+Still crucial for:
+
+Long-term contributor funnel
+
+Hiring radar
+
+Ambassador programs
+
+👉 Visually mark as:
+
+“Help us shape the future of Cortex Linux (optional)”
+
+8️⃣ “If Cortex Linux succeeds in 3 years, what do you hope it becomes?”
+
+Status: Optional
+
+Why
+
+High-effort, philosophical
+
+Amazing insights, but not for everyone
+
+Best answered by your top 20–30%

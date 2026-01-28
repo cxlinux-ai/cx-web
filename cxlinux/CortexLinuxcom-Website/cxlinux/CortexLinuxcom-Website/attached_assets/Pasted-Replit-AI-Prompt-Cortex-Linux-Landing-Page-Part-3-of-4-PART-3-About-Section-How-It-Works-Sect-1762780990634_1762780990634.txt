@@ -1,0 +1,256 @@
+Replit AI Prompt - Cortex Linux Landing Page (Part 3 of 4)
+PART 3: About Section & How It Works Section
+About Section
+Section Container:
+
+ID: "about" (for navigation anchor)
+Padding: py-20 px-4
+Background: bg-black (solid)
+Max width: max-w-7xl mx-auto
+
+Section Headline:
+
+Text: "What Makes Cortex Different?"
+Font: text-4xl md:text-5xl font-bold text-center
+Margin bottom: mb-16
+Color: White with subtle blue glow on hover
+Animation: Fade in from bottom on scroll into view
+
+Feature Cards Grid:
+
+Grid: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+Gap: gap-8
+6 cards total (2 rows of 3 on desktop)
+
+Individual Feature Card Structure:
+
+Background: bg-white/5 (glass morphism)
+Backdrop blur: backdrop-blur-xl
+Border: border border-white/10
+Rounded: rounded-2xl
+Padding: p-8
+Transition: transition-all duration-300
+Hover: scale-[1.02], -translate-y-2, border-blue-400
+Hover shadow: shadow-[0_0_20px_rgba(59,130,246,0.3)]
+
+Card Content Layout:
+
+Icon container (top)
+Title (h3)
+Description (paragraph)
+
+Icon Container:
+
+Size: w-16 h-16
+Background: bg-blue-500/20
+Rounded: rounded-xl
+Flex center: flex items-center justify-center
+Margin bottom: mb-6
+Icon color: text-blue-400
+Icon size: 32px (size={32})
+Hover: Icon rotates 10 degrees
+
+Card Title:
+
+Font: text-xl md:text-2xl font-bold
+Margin bottom: mb-4
+Color: White
+
+Card Description:
+
+Font: text-base
+Color: text-gray-400
+Line height: leading-relaxed
+
+Feature Card Content:
+Card 1:
+
+Icon: Brain (from lucide-react)
+Title: "Natural Language Control"
+Description: "Tell Cortex what you want in plain English. 'Install Docker for development' - and it handles dependencies, configuration, and security automatically."
+
+Card 2:
+
+Icon: Shield
+Title: "Enterprise-Grade Security"
+Description: "Every command runs in isolated environments with AppArmor and Firejail. AI-validated actions prevent mistakes before they happen."
+
+Card 3:
+
+Icon: TrendingUp
+Title: "Learns Your Workflow"
+Description: "Cortex remembers your patterns, detects repetitive tasks, and suggests automation. It gets smarter with every interaction."
+
+Card 4:
+
+Icon: Package
+Title: "Smart Package Management"
+Description: "AI wrapper over apt that understands package relationships, resolves conflicts, and suggests optimal installation strategies."
+
+Card 5:
+
+Icon: RotateCcw
+Title: "Time-Travel System Recovery"
+Description: "Complete installation history with one-click rollback. Made a mistake? Revert to any previous system state instantly."
+
+Card 6:
+
+Icon: Github
+Title: "Open Source"
+Description: "Open source from day one. Built by developers, for developers. Contribute features and earn bounties."
+
+Animation Pattern:
+Use Framer Motion stagger for cards:
+Container: staggerChildren: 0.1
+Each card: initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+Viewport settings: once: true, margin: "-100px"
+
+How It Works Section
+Section Container:
+
+Padding: py-20 px-4
+Background: bg-gradient-to-b from-black to-blue-950/10
+Border top: border-t border-white/10
+
+Section Headline:
+
+Text: "From Natural Language to Execution"
+Font: text-4xl md:text-5xl font-bold text-center
+Margin bottom: mb-20
+Color: White
+
+Flow Container:
+
+Flexbox: flex flex-col lg:flex-row
+Gap: gap-8 lg:gap-4
+Items: items-center
+Justify: justify-center
+Max width: max-w-6xl mx-auto
+
+Step Card Structure:
+Each of 4 steps has:
+
+Background: bg-white/5 backdrop-blur-xl
+Border: border border-white/10
+Rounded: rounded-2xl
+Padding: p-6
+Width: Full on mobile, flex-1 on desktop
+Text center: text-center
+Position: relative (for arrow placement)
+
+Step Content:
+
+Step number badge (top)
+Icon
+Title
+Description
+Arrow connector (between steps, desktop only)
+
+Step Number Badge:
+
+Position: Absolute top right (or centered above on mobile)
+Background: bg-blue-500
+Rounded: rounded-full
+Size: w-8 h-8
+Text: text-sm font-bold
+Flex center: flex items-center justify-center
+
+Icon:
+
+Size: w-16 h-16
+Background: bg-blue-500/20
+Rounded: rounded-xl
+Margin: mx-auto mb-4
+Color: text-blue-400
+Icon size: 32px
+
+Title:
+
+Font: text-xl md:text-2xl font-bold mb-3
+Color: White
+
+Description:
+
+Font: text-sm md:text-base
+Color: text-gray-400
+Line height: leading-relaxed
+
+Arrow Between Steps (Desktop Only):
+
+Lucide React ChevronRight icon
+Color: text-blue-400
+Size: 32px
+Opacity: 0.5
+Hidden on mobile (hidden lg:block)
+Self aligned: self-center
+
+Step Content Details:
+Step 1: You Ask
+
+Icon: MessageSquare
+Title: "You Ask"
+Description: "I need a Python development environment with Docker"
+
+Step 2: AI Understands
+
+Icon: Brain
+Title: "AI Understands"
+Description: "LangChain + Claude analyze intent, dependencies, and context"
+
+Step 3: Safe Execution
+
+Icon: Shield
+Title: "Safe Execution"
+Description: "Commands run in sandboxed environment with validation"
+
+Step 4: Verification
+
+Icon: CheckCircle
+Title: "Verification"
+Description: "Automatic testing confirms everything works"
+
+Result Display (Below Steps):
+
+Card with green border: border-green-500
+Background: bg-green-500/10
+Padding: p-6
+Rounded: rounded-xl
+Max width: max-w-2xl mx-auto
+Margin top: mt-12
+
+Result Text:
+
+Icon: CheckCircle (green-400)
+Font: text-lg font-semibold
+Text: "Python 3.11, Docker 24.0.5, and VS Code configured and ready"
+Color: text-green-400
+
+Animation:
+Entire flow: Fade in from bottom on scroll
+Each step: Stagger animation (0.2s delay between each)
+Result: Fade in with scale after steps complete (delay: 0.8s)
+Testing Checklist for Part 3:
+
+ Feature cards appear in 3-column grid on desktop
+ Feature cards stack on mobile
+ All cards have glass morphism effect
+ Cards scale and lift on hover with blue glow
+ Icons rotate slightly on hover
+ Stagger animation works when scrolling to section
+ Flow steps appear horizontally on desktop
+ Arrows between steps show on desktop, hidden on mobile
+ Steps stack vertically on mobile
+ Result box appears with green styling
+ All animations trigger on scroll into view
+
+
+Output Requirements:
+
+Add About section with 6 feature cards to App.jsx
+Add How It Works section with 4-step flow
+Implement all hover states and animations
+Use Framer Motion for scroll-triggered animations
+Ensure proper responsive breakpoints
+Clean, commented code
+
+DO NOT proceed to Join/Sponsor sections yet. Complete Part 3 first, then wait for Part 4.

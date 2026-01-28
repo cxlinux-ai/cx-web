@@ -34,3 +34,7 @@ docs/
 
 # Only deploy the production build
 !dist/public/
+# Large archives
+*.tar.gz
+*.zip
+CX_GOLDEN_MASTER_*.tar.gz

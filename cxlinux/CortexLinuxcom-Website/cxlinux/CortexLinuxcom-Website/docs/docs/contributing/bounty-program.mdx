@@ -1,0 +1,266 @@
+---
+sidebar_position: 2
+title: Bounty Program
+description: Get paid for contributing to Cortex Linux. Bug fixes, features, and documentation bounties.
+keywords: [bounty, rewards, contributing, payment, open source]
+---
+
+# Bounty Program
+
+Get paid for your contributions to Cortex Linux. We offer bounties for bug fixes, new features, documentation improvements, and security findings.
+
+## How It Works
+
+1. **Find a bounty** - Browse issues labeled with bounty amounts
+2. **Claim it** - Comment on the issue to claim
+3. **Submit PR** - Complete the work and submit a pull request
+4. **Get paid** - Receive payment after PR is merged
+
+## Bounty Tiers
+
+### 🐛 Bug Fixes
+
+| Severity | Bounty | Examples |
+|----------|--------|----------|
+| Critical | $500-2000 | Data loss, security vulnerabilities |
+| High | $200-500 | Major functionality broken |
+| Medium | $50-200 | Feature not working as expected |
+| Low | $25-50 | Minor issues, edge cases |
+
+### ✨ Features
+
+| Complexity | Bounty | Examples |
+|------------|--------|----------|
+| Large | $1000-5000 | New AI backend, major subsystem |
+| Medium | $200-1000 | New command category, integration |
+| Small | $50-200 | Command enhancement, option addition |
+
+### 📚 Documentation
+
+| Type | Bounty | Examples |
+|------|--------|----------|
+| Tutorial | $100-300 | Complete guide with examples |
+| Reference | $50-100 | API documentation |
+| Translation | $200-500 | Full documentation translation |
+| Fix | $10-25 | Typos, clarifications |
+
+### 🔒 Security
+
+| Severity | Bounty |
+|----------|--------|
+| Critical | $2000-10000 |
+| High | $500-2000 |
+| Medium | $100-500 |
+| Low | $50-100 |
+
+See our [Security Policy](https://github.com/cortexlinux/cortex-linux/security/policy) for responsible disclosure.
+
+## Finding Bounties
+
+### GitHub Labels
+
+Look for these labels:
+
+- `bounty:$500` - Bounty amount
+- `good-first-issue` - Great for newcomers
+- `help-wanted` - Community help welcome
+- `security` - Security-related (higher payouts)
+
+### Bounty Board
+
+Visit our [Bounty Board](https://cortexlinux.com/bounties) for:
+
+- All active bounties
+- Your claimed bounties
+- Payment history
+- Leaderboard
+
+## Claiming a Bounty
+
+### 1. Comment to Claim
+
+```markdown
+I'd like to work on this bounty.
+
+**Estimated completion:** 3-5 days
+**Approach:** Brief description of how you'll solve it
+```
+
+### 2. Wait for Assignment
+
+A maintainer will:
+- Assign the issue to you
+- Confirm the bounty amount
+- Set a deadline (typically 2 weeks)
+
+### 3. Start Working
+
+- Create a branch from `main`
+- Follow [PR Guidelines](/docs/contributing/pr-guidelines)
+- Ask questions in the issue if blocked
+
+## Submitting Your Work
+
+### Pull Request Requirements
+
+Your PR must:
+
+1. **Solve the issue** - Fully address what's described
+2. **Include tests** - Coverage for new/changed code
+3. **Pass CI** - All checks must pass
+4. **Follow style** - Match our [Code Style](/docs/contributing/code-style)
+5. **Update docs** - If the change affects documentation
+
+### PR Description Template
+
+```markdown
+## Bounty Issue
+Closes #123
+
+## Changes
+- What you changed
+- Why you made these choices
+
+## Testing
+- How you tested
+- Any edge cases covered
+
+## Checklist
+- [ ] Tests added/updated
+- [ ] Documentation updated
+- [ ] CI passing
+- [ ] Code formatted
+```
+
+## Payment Process
+
+### After Merge
+
+1. **Verification** - We verify the PR meets requirements
+2. **Invoice Request** - We request your payment details
+3. **Payment** - Sent within 5 business days
+
+### Payment Methods
+
+- **PayPal** - Most regions
+- **Wise** - International transfers
+- **Crypto** - BTC, ETH (on request)
+- **GitHub Sponsors** - One-time payments
+
+### Tax Information
+
+- Bounties are taxable income in most jurisdictions
+- We may require W-9 (US) or W-8BEN (non-US) for payments over $600
+- Consult a tax professional for your specific situation
+
+## Rules and Guidelines
+
+### Eligibility
+
+- Anyone can participate (except sanctioned regions)
+- One bounty claim per person per issue
+- Multiple bounties can be worked simultaneously
+
+### Deadlines
+
+- Default deadline: 2 weeks from assignment
+- Extensions available if you communicate
+- Uncompleted bounties return to the pool
+
+### Quality Standards
+
+Your work must:
+- Be original (no plagiarism)
+- Not introduce security vulnerabilities
+- Not break existing functionality
+- Meet our coding standards
+
+### Disputes
+
+If you disagree with a bounty decision:
+
+1. Comment on the PR with your concern
+2. A senior maintainer will review
+3. Decision is final after review
+
+## Bonus Multipliers
+
+### Speed Bonus
+
+| Completion | Multiplier |
+|------------|------------|
+| < 24 hours | 1.5x |
+| < 48 hours | 1.25x |
+| < 1 week | 1.1x |
+
+### Quality Bonus
+
+Exceptional work may receive up to 2x multiplier for:
+- Outstanding code quality
+- Exceptional documentation
+- Creative problem solving
+- Going above and beyond
+
+### First Contribution Bonus
+
+First-time contributors receive a **$25 bonus** on their first merged PR!
+
+## Leaderboard
+
+Top contributors get:
+
+| Rank | Rewards |
+|------|---------|
+| #1 Monthly | $500 bonus + featured profile |
+| #2-3 Monthly | $200 bonus |
+| #4-10 Monthly | $50 bonus |
+| Top 10 All-time | Cortex Core Team invitation |
+
+## Current High-Value Bounties
+
+Check [GitHub Issues](https://github.com/cortexlinux/cortex-linux/issues?q=is%3Aopen+label%3Abounty) for current bounties.
+
+Example active bounties:
+
+| Issue | Bounty | Description |
+|-------|--------|-------------|
+| #234 | $2000 | Windows Subsystem for Linux support |
+| #156 | $1000 | Nix package manager integration |
+| #189 | $500 | Improved error messages |
+| #201 | $300 | Shell completion improvements |
+
+## FAQ
+
+### Can I work on multiple bounties?
+
+Yes! But complete claimed bounties before claiming new ones.
+
+### What if someone else is working on the same issue?
+
+First to claim gets priority. If they don't deliver, the bounty reopens.
+
+### Can I suggest a bounty for an issue?
+
+Yes! Comment on the issue requesting a bounty, and we'll evaluate.
+
+### Do partial solutions get partial payment?
+
+Sometimes. If your work is useful but incomplete, we may offer partial payment at our discretion.
+
+### Can teams work on bounties?
+
+Yes, but payment goes to one person who can split it with their team.
+
+## Getting Started
+
+Ready to start earning?
+
+1. [Browse open bounties](https://github.com/cortexlinux/cortex-linux/issues?q=is%3Aopen+label%3Abounty)
+2. [Set up your dev environment](/docs/contributing/development-setup)
+3. Claim your first bounty!
+
+## Contact
+
+Questions about bounties?
+- Discord: #bounties channel
+- Email: bounties@cortexlinux.com

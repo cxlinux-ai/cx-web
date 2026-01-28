@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cx-stacks"
+version = "0.1.0"
+description = "Application stack provisioning for Cortex Linux"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AI Venture Holdings LLC", email = "dev@cortexlinux.com"}
+]
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "jinja2>=3.1.0",
+    "pyyaml>=6.0.0",
+    "httpx>=0.25.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+cx-stacks = "cx_stacks.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/cortexlinux/cx-stacks"
+Repository = "https://github.com/cortexlinux/cx-stacks"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cx_stacks*"]
+
+[tool.setuptools.package-data]
+cx_stacks = ["templates/**/*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
