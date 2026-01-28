@@ -293,10 +293,6 @@ export default function PricingPage() {
                     </span>
                   </div>
 
-                  <h3 id={`pricing-name-${tier.id}`} className={`text-xl font-bold mb-1 ${
-                    tier.badge ? "text-violet-600" : "text-white"
-                  }`}>{tier.name}</h3>
-
                   <p className={`text-xs mb-4 ${tier.badge ? "text-gray-500" : "text-white/60"}`}>
                     {tier.description}
                   </p>
