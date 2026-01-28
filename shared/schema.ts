@@ -337,3 +337,102 @@ export const insertReferralRewardSchema = createInsertSchema(referralRewards).om
 
 export type InsertReferralReward = z.infer<typeof insertReferralRewardSchema>;
 export type ReferralReward = typeof referralRewards.$inferSelect;
+
+// =============================================================================
+// HRM AI - AGENT MANAGEMENT SYSTEM
+// =============================================================================
+
+// Agent roles - predefined AI employee types
+export const AGENT_ROLES = {
+  devops: {
+    name: "DevOps Engineer",
+    description: "Handles deployments, CI/CD, and infrastructure automation",
+    capabilities: ["deploy", "rollback", "scale", "monitor"],
+  },
+  security: {
+    name: "Security Analyst",
+    description: "Monitors threats, manages patches, and enforces compliance",
+    capabilities: ["audit", "patch", "firewall", "scan"],
+  },
+  database: {
+    name: "Database Administrator",
+    description: "Manages backups, optimization, and database migrations",
+    capabilities: ["backup", "restore", "optimize", "migrate"],
+  },
+  network: {
+    name: "Network Engineer",
+    description: "Configures networking, load balancing, and DNS",
+    capabilities: ["configure", "route", "dns", "loadbalance"],
+  },
+  support: {
+    name: "Support Agent",
+    description: "Handles monitoring alerts and first-response troubleshooting",
+    capabilities: ["respond", "escalate", "diagnose", "report"],
+  },
+} as const;
+
+export type AgentRole = keyof typeof AGENT_ROLES;
+
+// Agent statuses
+export type AgentStatus = "idle" | "working" | "paused" | "error" | "terminated";
+
+// Agents table - AI employees in your fleet
+export const agents = pgTable("agents", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  licenseId: varchar("license_id").notNull().references(() => licenses.id, { onDelete: "cascade" }),
+  name: text("name").notNull(), // Human-readable name like "DeployBot-1"
+  role: text("role").notNull(), // devops, security, database, network, support
+  status: text("status").notNull().default("idle"), // idle, working, paused, error, terminated
+  assignedServerId: varchar("assigned_server_id"), // Which server/activation this agent manages
+  lastTaskId: varchar("last_task_id"), // Reference to last executed task
+  lastTaskStatus: text("last_task_status"), // success, failed, running
+  lastActiveAt: timestamp("last_active_at"),
+  config: text("config"), // JSON string for agent-specific configuration
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const insertAgentSchema = createInsertSchema(agents).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertAgent = z.infer<typeof insertAgentSchema>;
+export type Agent = typeof agents.$inferSelect;
+
+// Agent tasks - work history for agents
+export const agentTasks = pgTable("agent_tasks", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  agentId: varchar("agent_id").notNull().references(() => agents.id, { onDelete: "cascade" }),
+  command: text("command").notNull(), // Natural language command
+  resolvedCommand: text("resolved_command"), // Actual shell/API command executed
+  status: text("status").notNull().default("pending"), // pending, running, success, failed, cancelled
+  output: text("output"), // Command output or error message
+  startedAt: timestamp("started_at"),
+  completedAt: timestamp("completed_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertAgentTaskSchema = createInsertSchema(agentTasks).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAgentTask = z.infer<typeof insertAgentTaskSchema>;
+export type AgentTask = typeof agentTasks.$inferSelect;
+
+// Plan feature flags for HRM AI
+export const HRM_PLAN_ACCESS: Record<string, boolean> = {
+  core: false,      // No HRM access
+  pro: false,       // No HRM access
+  team: true,       // HRM enabled - up to 10 agents
+  enterprise: true, // HRM enabled - unlimited agents
+};
+
+export const HRM_AGENT_LIMITS: Record<string, number> = {
+  core: 0,
+  pro: 0,
+  team: 10,
+  enterprise: 9999,
+};

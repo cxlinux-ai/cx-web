@@ -1401,17 +1401,40 @@ table tbody tr:hover {
   background: linear-gradient(
     105deg,
     #7C3AED 0%,
-    #7C3AED 40%,
-    #E9D5FF 50%,
-    #7C3AED 60%,
+    #7C3AED 35%,
+    #E9D5FF 47%,
+    #FFFFFF 50%,
+    #E9D5FF 53%,
+    #7C3AED 65%,
     #7C3AED 100%
   );
-  background-size: 200% auto;
+  background-size: 250% auto;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 4s ease-in-out infinite;
-  animation-delay: 2s;
+  animation: shimmer 5s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Desktop: more prominent shimmer */
+@media (min-width: 768px) {
+  .text-shimmer {
+    background: linear-gradient(
+      105deg,
+      #7C3AED 0%,
+      #7C3AED 32%,
+      #C4B5FD 42%,
+      #E9D5FF 47%,
+      #FFFFFF 50%,
+      #E9D5FF 53%,
+      #C4B5FD 58%,
+      #7C3AED 68%,
+      #7C3AED 100%
+    );
+    background-size: 300% auto;
+    animation: shimmer 4s ease-in-out infinite;
+    animation-delay: 2s;
+  }
 }
 
 /* Reduced motion preference */

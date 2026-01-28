@@ -132,97 +132,71 @@ export default function App() {
                 <span className="gradient-text">LINUX</span>
               </button>
 
-              {/* Desktop Navigation Links */}
+              {/* Desktop Navigation Links - Enterprise Menu */}
               <div className="hidden md:flex items-center space-x-6">
                 <button
-                  onClick={() => scrollToSection("security")}
+                  onClick={() => scrollToSection("about")}
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/" && activeSection === "security"
-                      ? "text-brand-blue"
-                      : "text-gray-400 hover:text-brand-blue"
+                    location === "/" && activeSection === "about"
+                      ? "text-purple-400"
+                      : "text-gray-400 hover:text-purple-400"
                   }`}
-                  data-testid="link-security"
+                  data-testid="link-platform"
                 >
-                  Security
+                  Platform
                 </button>
                 <Link
-                  href="/getting-started"
+                  href="/solutions"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/getting-started" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location === "/solutions" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
                   }`}
-                  data-testid="link-getting-started"
+                  data-testid="link-solutions"
                 >
-                  Get Started
+                  Solutions
                 </Link>
                 <Link
-                  href="/news"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/news") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                  href="/agents"
+                  className={`text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
+                    location === "/agents" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
                   }`}
-                  data-testid="link-news"
+                  data-testid="link-agents"
                 >
-                  News
+                  Agents
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold">HRM</span>
                 </Link>
                 <Link
-                  href="/pricing"
+                  href="/trust"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location.startsWith("/pricing") ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location === "/trust" ? "text-purple-400" : "text-gray-400 hover:text-purple-400"
                   }`}
-                  data-testid="link-pricing"
+                  data-testid="link-trust"
                 >
-                  Pricing
+                  Trust Center
                 </Link>
                 <Link
-                  href="/startup"
+                  href="/company"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/startup" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
+                    location.startsWith("/company") || location === "/careers" || location === "/news"
+                      ? "text-purple-400"
+                      : "text-gray-400 hover:text-purple-400"
                   }`}
-                  data-testid="link-startup"
-                >AI Agencys</Link>
-                <Link
-                  href="/careers"
-                  className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/careers" ? "text-brand-blue" : "text-gray-400 hover:text-brand-blue"
-                  }`}
-                  data-testid="link-careers"
+                  data-testid="link-company"
                 >
-                  Careers
-                </Link>
-                <Link
-                  href="/hackathon"
-                  className={`relative text-base font-medium transition-colors duration-300 flex items-center gap-1.5 ${
-                    location === "/hackathon" ? "text-terminal-green" : "text-terminal-green hover:text-white"
-                  }`}
-                  data-testid="link-hackathon"
-                >
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
-                  </span>
-                  Hackathon
+                  Company
                 </Link>
               </div>
 
-              {/* GitHub Stars & Get Started Button (Desktop) */}
+              {/* GitHub Stars (Desktop) */}
               <div className="hidden md:flex items-center gap-3">
                 <a
                   href="https://github.com/cxlinux-ai/cx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-400/50 hover:text-white transition-all"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-purple-400/50 hover:text-white transition-all"
                 >
                   <Github size={16} />
                   <Star size={14} className="text-yellow-400" />
                   <span>1.2k</span>
-                </a>
-                <a
-                  href="https://github.com/cxlinux-ai/cx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
-                  data-testid="button-try-beta"
-                >
-                  Get Started
                 </a>
               </div>
 
@@ -246,7 +220,7 @@ export default function App() {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="md:hidden backdrop-blur-xl bg-black/95 border-b border-white/10 overflow-hidden"
               >
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -254,74 +228,58 @@ export default function App() {
                   className="px-4 py-6 space-y-4"
                 >
                   <button
-                    onClick={() => scrollToSection("security")}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-security"
+                    onClick={() => scrollToSection("about")}
+                    className="block w-full text-left py-3 text-gray-400 hover:text-purple-400 transition-colors duration-300 touch-manipulation"
+                    data-testid="mobile-link-platform"
                   >
-                    Security
+                    Platform
                   </button>
                   <Link
-                    href="/getting-started"
+                    href="/solutions"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-getting-started"
+                    className="block w-full text-left py-3 text-gray-400 hover:text-purple-400 transition-colors duration-300 touch-manipulation"
+                    data-testid="mobile-link-solutions"
                   >
-                    Get Started
+                    Solutions
                   </Link>
                   <Link
-                    href="/news"
+                    href="/agents"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-news"
+                    className="flex items-center gap-2 w-full text-left py-3 text-gray-400 hover:text-purple-400 transition-colors duration-300 touch-manipulation"
+                    data-testid="mobile-link-agents"
                   >
-                    News
+                    Agents
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold">HRM</span>
                   </Link>
                   <Link
-                    href="/pricing"
+                    href="/trust"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-pricing"
+                    className="block w-full text-left py-3 text-gray-400 hover:text-purple-400 transition-colors duration-300 touch-manipulation"
+                    data-testid="mobile-link-trust"
                   >
-                    Pricing
+                    Trust Center
                   </Link>
                   <Link
-                    href="/startup"
+                    href="/company"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-startup"
+                    className="block w-full text-left py-3 text-gray-400 hover:text-purple-400 transition-colors duration-300 touch-manipulation"
+                    data-testid="mobile-link-company"
                   >
-                    Startups
+                    Company
                   </Link>
-                  <Link
-                    href="/careers"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-brand-blue transition-colors duration-300"
-                    data-testid="mobile-link-careers"
-                  >
-                    Careers
-                  </Link>
-                  <Link
-                    href="/hackathon"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-2 w-full text-left py-2 text-terminal-green hover:text-white transition-colors duration-300"
-                    data-testid="mobile-link-hackathon"
-                  >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
-                    </span>
-                    Hackathon
-                  </Link>
-                  <a
-                    href="https://github.com/cxlinux-ai/cx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-6 py-2 bg-brand-blue rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300"
-                    data-testid="mobile-button-try-beta"
-                  >
-                    Get Started
-                  </a>
+                  <div className="border-t border-white/10 pt-4 mt-4">
+                    <a
+                      href="https://github.com/cxlinux-ai/cx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-center gap-2 w-full px-6 py-3 border border-white/10 rounded-lg text-gray-300 font-semibold hover:border-purple-400/50 transition-all duration-300 touch-manipulation"
+                      data-testid="mobile-button-github"
+                    >
+                      <Github size={18} />
+                      View on GitHub
+                    </a>
+                  </div>
                 </motion.div>
               </motion.div>
             )}

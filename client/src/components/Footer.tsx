@@ -28,7 +28,8 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Product</h4>
             <ul className="space-y-1 text-sm text-gray-400">
               <li><Link href="/#about" className="block py-2 hover:text-white transition-colors touch-manipulation" data-testid="footer-link-features">Features</Link></li>
-              <li><Link href="/#pricing" className="block py-2 hover:text-white transition-colors touch-manipulation" data-testid="footer-link-pricing">Pricing</Link></li>
+              <li><Link href="/pricing" className="block py-2 hover:text-purple-400 transition-colors touch-manipulation font-semibold text-purple-300" data-testid="footer-link-pricing">Pricing</Link></li>
+              <li><a href="https://github.com/cxlinux-ai/cx" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-purple-400 transition-colors touch-manipulation font-semibold text-purple-300" data-testid="footer-link-install">Install CX Linux</a></li>
               <li><Link href="/account" className="block py-2 hover:text-white transition-colors touch-manipulation" data-testid="footer-link-account">My Licenses</Link></li>
               <li><Link href="/faq" className="block py-2 hover:text-white transition-colors touch-manipulation" data-testid="footer-link-faq">FAQ</Link></li>
             </ul>
