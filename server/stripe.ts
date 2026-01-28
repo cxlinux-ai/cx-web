@@ -20,6 +20,7 @@ import {
   updateLicenseExpiry,
 } from "./license";
 import { sendLicenseEmail, sendLicenseSuspendedEmail } from "./email";
+import { processReferralReward, convertReferral } from "./referral";
 import { z } from "zod";
 
 let stripe: Stripe | null = null;
@@ -679,6 +680,9 @@ router.post("/webhooks", requireStripe, async (req: Request, res: Response) => {
               } else {
                 console.warn(`Webhook: Failed to send license email to ${email}`);
               }
+
+              // Convert referral if this customer was referred
+              await convertReferral(email, customerId, subscriptionId);
             }
           }
         }
@@ -815,6 +819,16 @@ router.post("/webhooks", requireStripe, async (req: Request, res: Response) => {
               paidAt: new Date(),
             });
             console.log(`Webhook: Invoice paid ${invoice.id}`);
+
+            // Process referral reward (10% to referrer, 36-month limit)
+            if (customer.email && invoice.amount_paid && invoice.amount_paid > 0) {
+              await processReferralReward(
+                customer.email,
+                invoiceCustomerId,
+                invoice.id,
+                invoice.amount_paid
+              );
+            }
           }
         }
         break;

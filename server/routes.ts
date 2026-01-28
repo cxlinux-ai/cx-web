@@ -6,6 +6,7 @@ import type { Contributor } from "@shared/schema";
 import { insertHackathonRegistrationSchema } from "@shared/schema";
 import stripeRoutes from "./stripe";
 import licenseRoutes from "./license";
+import referralRoutes from "./referral";
 
 // Simple in-memory cache for contributors
 let contributorsCache: { data: Contributor[]; timestamp: number } | null = null;
@@ -264,6 +265,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Mount License routes
   app.use("/api/license", licenseRoutes);
+
+  // Mount Referral routes
+  app.use("/api/referral", referralRoutes);
 
   // Hackathon registration endpoint
   app.post("/api/hackathon/register", async (req, res) => {

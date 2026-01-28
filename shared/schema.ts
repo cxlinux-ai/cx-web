@@ -230,3 +230,79 @@ export const insertActivationSchema = createInsertSchema(activations).omit({
 
 export type InsertActivation = z.infer<typeof insertActivationSchema>;
 export type Activation = typeof activations.$inferSelect;
+
+// =============================================================================
+// REFERRAL SYSTEM
+// =============================================================================
+
+// Referral program configuration
+export const REFERRAL_CONFIG = {
+  rewardPercentage: 10,       // 10% of referred customer's payments
+  expirationMonths: 36,       // Referral rewards expire after 36 months (NOT lifetime)
+  minPayoutAmount: 50,        // Minimum $50 to request payout
+};
+
+// Referrers table (users who refer others)
+export const referrers = pgTable("referrers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  referralCode: varchar("referral_code").notNull().unique().default(sql`'REF-' || upper(substr(md5(random()::text), 1, 8))`),
+  stripeConnectAccountId: text("stripe_connect_account_id"), // For payouts via Stripe Connect
+  totalEarnings: integer("total_earnings").notNull().default(0), // In cents
+  pendingPayout: integer("pending_payout").notNull().default(0), // In cents
+  status: text("status").notNull().default("active"), // active, suspended, banned
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertReferrerSchema = createInsertSchema(referrers).omit({
+  id: true,
+  referralCode: true,
+  totalEarnings: true,
+  pendingPayout: true,
+  createdAt: true,
+});
+
+export type InsertReferrer = z.infer<typeof insertReferrerSchema>;
+export type Referrer = typeof referrers.$inferSelect;
+
+// Referrals table (tracking referred customers)
+export const referrals = pgTable("referrals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referrerId: varchar("referrer_id").notNull().references(() => referrers.id),
+  referredEmail: text("referred_email").notNull(),
+  referredCustomerId: text("referred_customer_id"), // Stripe customer ID
+  stripeSubscriptionId: text("stripe_subscription_id"),
+  status: text("status").notNull().default("pending"), // pending, active, cancelled, expired
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at").notNull(), // 36 months from creation - HARD LIMIT
+  convertedAt: timestamp("converted_at"), // When they became a paying customer
+});
+
+export const insertReferralSchema = createInsertSchema(referrals).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertReferral = z.infer<typeof insertReferralSchema>;
+export type Referral = typeof referrals.$inferSelect;
+
+// Referral rewards table (tracking individual reward payments)
+export const referralRewards = pgTable("referral_rewards", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referralId: varchar("referral_id").notNull().references(() => referrals.id),
+  referrerId: varchar("referrer_id").notNull().references(() => referrers.id),
+  stripeInvoiceId: text("stripe_invoice_id").notNull(),
+  invoiceAmount: integer("invoice_amount").notNull(), // Original invoice amount in cents
+  rewardAmount: integer("reward_amount").notNull(), // 10% reward in cents
+  status: text("status").notNull().default("pending"), // pending, paid, expired
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  paidAt: timestamp("paid_at"),
+});
+
+export const insertReferralRewardSchema = createInsertSchema(referralRewards).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertReferralReward = z.infer<typeof insertReferralRewardSchema>;
+export type ReferralReward = typeof referralRewards.$inferSelect;
