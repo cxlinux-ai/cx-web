@@ -180,11 +180,13 @@ export type StripeInvoicePayment = typeof stripeInvoicePayments.$inferSelect;
 // LICENSE KEY SYSTEM
 // =============================================================================
 
-// Plan limits configuration
+// Plan limits configuration (max servers per plan)
+// Matches pricing page tiers
 export const PLAN_LIMITS: Record<string, number> = {
-  pro: 5,
-  enterprise: 100,
-  managed: 9999,
+  core: 1,        // CX Core (Free) - 1 server
+  pro: 5,         // CX Pro ($19/mo) - Up to 5 servers
+  team: 25,       // CX Team ($99/mo) - Up to 25 servers
+  enterprise: 9999, // CX Enterprise ($199/mo) - Unlimited
 };
 
 // Licenses table
