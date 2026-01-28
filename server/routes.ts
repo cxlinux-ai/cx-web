@@ -26,6 +26,8 @@ import discordBot from "./discord-bot";
 import licenseRoutes from "./license";
 import emailCaptureRoutes from "./email-capture";
 import PDFDocument from "pdfkit";
+import { generateAgentProfile, getAllAgentProfiles, createSampleAgent } from "./agent-profiles";
+import { createMockAgent, getAllMockAgents, getMockAgentProfile, clearMockAgents, getMockStats } from "./mock-agent-api";
 
 // Keep-alive: Self-ping to prevent sleep
 const SELF_PING_INTERVAL = 4 * 60 * 1000; // 4 minutes
@@ -105,6 +107,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       bot: process.env.DISCORD_BOT_TOKEN ? "configured" : "not configured",
     });
   });
+
+  // Agent Profile Generator API
+  app.get("/api/agents", getAllAgentProfiles);
+  app.get("/api/agents/:agentId/profile", generateAgentProfile);
+  app.post("/api/agents/sample", createSampleAgent);
+
+  // Mock Agent API (for testing without database)
+  app.post("/api/mock/agents", createMockAgent);
+  app.get("/api/mock/agents", getAllMockAgents);
+  app.get("/api/mock/agents/:agentId/profile", getMockAgentProfile);
+  app.delete("/api/mock/agents", clearMockAgents);
+  app.get("/api/mock/stats", getMockStats);
 
   // Discord server structure endpoint (for debugging)
   app.get("/api/discord/server-structure", async (req, res) => {

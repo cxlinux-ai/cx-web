@@ -787,3 +787,23 @@ export const botAnalytics = pgTable("bot_analytics", {
 });
 
 export type BotAnalytics = typeof botAnalytics.$inferSelect;
+
+// Export agent-related tables from agents-schema for database operations
+export {
+  agents,
+  fleetStatus,
+  agentRequests,
+  systemHealth,
+  agentCapabilities,
+  type Agent,
+  type InsertAgent,
+  type FleetStatus,
+  type InsertFleetStatus,
+  type AgentRequest,
+  type SystemHealth,
+  type AgentCapability,
+  agentRegistrationSchema,
+  fleetHealthUpdateSchema,
+  type AgentRegistration,
+  type FleetHealthUpdate
+} from "./agents-schema";
