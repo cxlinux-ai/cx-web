@@ -128,7 +128,8 @@ router.post("/checkout-session", requireStripe, async (req: Request, res: Respon
         },
       ],
       subscription_data: {
-        trial_period_days: 14,
+        // Trial period: set to 0 for immediate payment, or remove for no trial
+        // trial_period_days: 14,
         metadata: {
           planId,
           billingCycle,
@@ -150,6 +151,41 @@ router.post("/checkout-session", requireStripe, async (req: Request, res: Respon
   } catch (error) {
     console.error("Checkout session error:", error);
     res.status(500).json({ error: "Failed to create checkout session" });
+  }
+});
+
+// =============================================================================
+// CUSTOMER PORTAL - Self-service subscription management
+// =============================================================================
+
+router.post("/create-portal-session", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const { email, returnUrl } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    // Find customer by email
+    const customers = await stripe!.customers.list({ email, limit: 1 });
+
+    if (customers.data.length === 0) {
+      return res.status(404).json({ error: "No subscription found for this email" });
+    }
+
+    const customer = customers.data[0];
+
+    // Create portal session
+    const session = await stripe!.billingPortal.sessions.create({
+      customer: customer.id,
+      return_url: returnUrl || `${req.headers.origin || "https://cxlinux.com"}/account`,
+    });
+
+    console.log(`Created portal session for ${email}`);
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error("Create portal session error:", error);
+    res.status(500).json({ error: "Failed to create portal session" });
   }
 });
 
