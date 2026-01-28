@@ -1366,6 +1366,27 @@ table tbody tr:hover {
   animation-play-state: paused;
 }
 
+/* Sovereignty carousel - 4 slides */
+@keyframes scroll-x-4 {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); }
+  25% { transform: translateX(-100%); }
+  45% { transform: translateX(-100%); }
+  50% { transform: translateX(-200%); }
+  70% { transform: translateX(-200%); }
+  75% { transform: translateX(-300%); }
+  95% { transform: translateX(-300%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-scroll-x-4 {
+  animation: scroll-x-4 24s ease-in-out infinite;
+}
+
+.animate-scroll-x-4:hover {
+  animation-play-state: paused;
+}
+
 /* Typewriter animation */
 @keyframes blink-cursor {
   0%, 50% { border-color: #3b82f6; }

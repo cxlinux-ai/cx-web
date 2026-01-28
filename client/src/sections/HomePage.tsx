@@ -365,14 +365,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     <div className="min-h-screen bg-black text-white noise-texture">
       {/* Hero Section with Parallax */}
       <section id="home" className="min-h-screen flex flex-col justify-start pt-24 sm:pt-28 px-4 relative overflow-hidden">
-        {/* Parallax Background Layers */}
+        {/* Parallax Background Layers - #7C3AED Primary Purple */}
         <div
           className="absolute inset-0 z-0"
           style={{
             backgroundImage: `
-              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.3), transparent),
-              radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.15), transparent),
-              radial-gradient(ellipse 50% 30% at 20% 80%, rgba(124, 58, 237, 0.2), transparent)
+              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.35), transparent),
+              radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124, 58, 237, 0.2), transparent),
+              radial-gradient(ellipse 50% 30% at 20% 80%, rgba(124, 58, 237, 0.25), transparent)
             `,
             backgroundAttachment: 'fixed',
           }}
@@ -383,10 +383,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
-          {/* Floating purple orbs with parallax effect */}
+          {/* Floating purple orbs with parallax effect - #7C3AED */}
           <motion.div
-            className="absolute w-96 h-96 rounded-full bg-purple-600/20 blur-3xl"
-            style={{ top: '10%', left: '15%' }}
+            className="absolute w-96 h-96 rounded-full blur-3xl"
+            style={{ top: '10%', left: '15%', backgroundColor: 'rgba(124, 58, 237, 0.2)' }}
             animate={{
               y: [0, -30, 0],
               x: [0, 20, 0],
@@ -394,8 +394,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute w-80 h-80 rounded-full bg-violet-500/15 blur-3xl"
-            style={{ top: '50%', right: '10%' }}
+            className="absolute w-80 h-80 rounded-full blur-3xl"
+            style={{ top: '50%', right: '10%', backgroundColor: 'rgba(124, 58, 237, 0.15)' }}
             animate={{
               y: [0, 40, 0],
               x: [0, -30, 0],
@@ -403,8 +403,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute w-64 h-64 rounded-full bg-purple-400/10 blur-2xl"
-            style={{ bottom: '20%', left: '30%' }}
+            className="absolute w-64 h-64 rounded-full blur-2xl"
+            style={{ bottom: '20%', left: '30%', backgroundColor: 'rgba(124, 58, 237, 0.12)' }}
             animate={{
               y: [0, 25, 0],
               scale: [1, 1.1, 1],
@@ -512,50 +512,39 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <span className="text-xs text-gray-500 ml-2 font-mono">cx-linux ~ fleet-manager</span>
               </div>
 
-              {/* GIF Carousel Container */}
+              {/* Sovereignty Carousel - 4 Slides */}
               <div className="relative overflow-hidden">
-                <div className="flex animate-scroll-x">
-                  {/* Placeholder for product GIFs - replace with actual GIF URLs */}
-                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-purple-900/20 to-violet-900/20 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <Terminal size={48} className="text-purple-400 mx-auto mb-4" />
-                      <p className="text-gray-400 font-mono text-sm">$ cx "deploy nginx across all production servers"</p>
-                      <motion.p
-                        className="text-purple-400 font-mono text-sm mt-2"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 0.5 }}
-                      >
-                        Deploying to 47 servers... Done in 12s
-                      </motion.p>
+                <div className="flex animate-scroll-x-4">
+                  {/* Slide 1: Digital Sovereignty */}
+                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 100%)' }}>
+                    <div className="text-center p-8 max-w-2xl">
+                      <Globe size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">The Agentic OS for Digital Sovereignty</h3>
+                      <p className="text-gray-400 text-base md:text-lg">Own your infrastructure. Control your data. Deploy AI agents that work for you, not vendors.</p>
                     </div>
                   </div>
-                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-violet-900/20 to-purple-900/20 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <Server size={48} className="text-violet-400 mx-auto mb-4" />
-                      <p className="text-gray-400 font-mono text-sm">$ cx "check disk usage and alert if &gt; 80%"</p>
-                      <motion.p
-                        className="text-violet-400 font-mono text-sm mt-2"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5, duration: 0.5 }}
-                      >
-                        Monitoring 156 volumes... 3 alerts triggered
-                      </motion.p>
+                  {/* Slide 2: Atomic Rollbacks */}
+                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.2) 100%)' }}>
+                    <div className="text-center p-8 max-w-2xl">
+                      <Undo2 size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Zero-Risk Deployments via Atomic Rollbacks</h3>
+                      <p className="text-gray-400 text-base md:text-lg">Every change is reversible. Instant rollback to any previous state. Deploy with confidence.</p>
                     </div>
                   </div>
-                  <div className="flex-shrink-0 w-full aspect-video bg-gradient-to-br from-purple-900/20 to-violet-900/20 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <Shield size={48} className="text-purple-400 mx-auto mb-4" />
-                      <p className="text-gray-400 font-mono text-sm">$ cx "apply security patches to all Ubuntu hosts"</p>
-                      <motion.p
-                        className="text-purple-400 font-mono text-sm mt-2"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2, duration: 0.5 }}
-                      >
-                        Patching 89 hosts... All secure
-                      </motion.p>
+                  {/* Slide 3: HRM AI */}
+                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(124, 58, 237, 0.08) 100%)' }}>
+                    <div className="text-center p-8 max-w-2xl">
+                      <Brain size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Agentic Fleet Automation (HRM AI)</h3>
+                      <p className="text-gray-400 text-base md:text-lg">Human Resource Management for machines. AI agents that understand, plan, and execute across your entire fleet.</p>
+                    </div>
+                  </div>
+                  {/* Slide 4: Rust + BSL Moat */}
+                  <div className="flex-shrink-0 w-full aspect-video flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.18) 100%)' }}>
+                    <div className="text-center p-8 max-w-2xl">
+                      <Zap size={56} className="mx-auto mb-6" style={{ color: '#7C3AED' }} />
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">Rust-Powered Performance & 6-Year BSL Moat</h3>
+                      <p className="text-gray-400 text-base md:text-lg">Memory-safe, blazing fast core. Protected by Business Source License — converts to Apache 2.0 after 6 years.</p>
                     </div>
                   </div>
                 </div>

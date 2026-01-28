@@ -52,6 +52,7 @@ export default function Footer() {
               <li><a href="https://github.com/cxlinux-ai/cx" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">GitHub</a></li>
               <li><Link href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">Hackathon</Link></li>
               <li><Link href="/careers" className="hover:text-white transition-colors" data-testid="footer-link-careers">Careers</Link></li>
+              <li><Link href="/partners" className="hover:text-white transition-colors" data-testid="footer-link-partners">Partner Program <span className="text-purple-400 text-xs">(10% for 36mo)</span></Link></li>
             </ul>
           </div>
 

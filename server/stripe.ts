@@ -707,6 +707,7 @@ router.post("/webhooks", requireStripe, async (req: Request, res: Response) => {
                 licenseKey: license.licenseKey,
                 planName,
                 planId,
+                maxServers: license.maxServers,
                 trialDays,
                 expiresAt,
               });
