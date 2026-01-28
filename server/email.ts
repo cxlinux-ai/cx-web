@@ -17,8 +17,8 @@ if (process.env.RESEND_API_KEY) {
   console.warn("RESEND_API_KEY not configured - License emails will be disabled");
 }
 
-// Use onboarding@resend.dev for testing, or licenses@cxlinux.com for production
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+// Production email address
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "support@cxlinux.com";
 const FROM_NAME = "CX Linux";
 
 interface LicenseEmailParams {
@@ -116,7 +116,7 @@ export async function sendLicenseEmail(params: LicenseEmailParams): Promise<bool
   </table>
 
   <div style="margin-top:40px;padding-top:24px;border-top:1px solid #e2e8f0;text-align:center;color:#9ca3af;font-size:14px;">
-    <p style="margin:0 0 8px 0;">Need help? Reply to this email or visit our <a href="https://docs.cxlinux.com" style="color:#7c3aed;">documentation</a>.</p>
+    <p style="margin:0 0 8px 0;">Need help? Email us at <a href="mailto:support@cxlinux.com" style="color:#7c3aed;">support@cxlinux.com</a> or visit our <a href="https://docs.cxlinux.com" style="color:#7c3aed;">documentation</a>.</p>
     <p style="margin:0;">© ${new Date().getFullYear()} CX Linux. All rights reserved.</p>
   </div>
 
