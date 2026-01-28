@@ -181,7 +181,7 @@ export default function CheckoutPage() {
               Complete Your Subscription
             </h1>
             <p id="checkout-subtitle" className="text-gray-400 mb-8">
-              Start your 14-day free trial. No credit card required upfront.
+              Secure checkout powered by Stripe.
             </p>
 
             <form id="checkout-form" onSubmit={handleCheckout} className="space-y-6">
@@ -277,7 +277,7 @@ export default function CheckoutPage() {
                 ) : (
                   <>
                     <CreditCard className="w-5 h-5" />
-                    Start Free Trial
+                    Subscribe Now
                   </>
                 )}
               </button>
@@ -334,18 +334,11 @@ export default function CheckoutPage() {
                     <span>-${(plan.price - plan.annualPrice) * 12}/yr</span>
                   </div>
                 )}
-                <div className="flex justify-between text-gray-400">
-                  <span>14-day free trial</span>
-                  <span className="text-green-400">$0.00</span>
-                </div>
                 <div className="border-t border-white/10 pt-3">
                   <div className="flex justify-between text-lg font-bold">
                     <span>Due today</span>
-                    <span className="text-green-400">$0.00</span>
+                    <span className="text-green-400">${isAnnual ? plan.annualPrice * 12 : currentPrice}{isAnnual ? "/yr" : "/mo"}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    First charge: ${isAnnual ? plan.annualPrice * 12 : currentPrice} after 14 days
-                  </p>
                 </div>
               </div>
 
