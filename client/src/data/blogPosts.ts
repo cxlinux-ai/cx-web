@@ -6697,7 +6697,7 @@ Even with CX Linux's simplified approach, you may encounter occasional issues. H
 
 ### Issue 1: "Command not found" Error
 
-**Symptoms:** Running \`cortex\` shows "command not found" or similar error.
+**Symptoms:** Running \`cx\` shows "command not found" or similar error.
 
 **Cause:** Your shell configuration has not loaded the CX Linux command path, or the installation did not complete successfully.
 

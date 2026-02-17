@@ -127,7 +127,7 @@ export default function App() {
               <button
                 onClick={handleHomeClick}
                 className="text-2xl font-bold cursor-pointer hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300"
-                data-testid="logo-cortex"
+                data-testid="logo-cx"
               >
                 <span className="text-white">CX</span>{" "}
                 <span className="gradient-text">LINUX</span>

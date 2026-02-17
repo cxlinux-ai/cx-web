@@ -327,13 +327,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const comparisonData = [
-    { feature: "Open Source", icon: Github, cortex: true, toolA: false, toolB: false },
-    { feature: "Self-Hostable", icon: Server, cortex: true, toolA: false, toolB: true },
-    { feature: "Natural Language Interface", icon: MessageCircle, cortex: true, toolA: "partial", toolB: false },
-    { feature: "Unlimited Task Scope", icon: Infinity, cortex: true, toolA: false, toolB: false },
-    { feature: "Context-Aware Execution", icon: Brain, cortex: true, toolA: false, toolB: false },
-    { feature: "System-Level Access", icon: Terminal, cortex: true, toolA: false, toolB: "partial" },
-    { feature: "Safety & Rollback", icon: Shield, cortex: true, toolA: false, toolB: false },
+    { feature: "Open Source", icon: Github, cx: true, toolA: false, toolB: false },
+    { feature: "Self-Hostable", icon: Server, cx: true, toolA: false, toolB: true },
+    { feature: "Natural Language Interface", icon: MessageCircle, cx: true, toolA: "partial", toolB: false },
+    { feature: "Unlimited Task Scope", icon: Infinity, cx: true, toolA: false, toolB: false },
+    { feature: "Context-Aware Execution", icon: Brain, cx: true, toolA: false, toolB: false },
+    { feature: "System-Level Access", icon: Terminal, cx: true, toolA: false, toolB: "partial" },
+    { feature: "Safety & Rollback", icon: Shield, cx: true, toolA: false, toolB: false },
   ];
 
   const roadmapItems = [
@@ -1118,7 +1118,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="relative">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 mb-2">
                       <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-                      <span className="text-purple-500 font-bold text-sm">CORTEX</span>
+                      <span className="text-purple-500 font-bold text-sm">CX</span>
                     </div>
                     <p className="text-xs text-purple-300/60">Recommended</p>
                   </div>
@@ -1152,13 +1152,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     <div className="p-5 flex items-center justify-center relative">
                       <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent" />
                       <div className="relative">
-                        {row.cortex === true ? (
+                        {row.cx === true ? (
                           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/25">
                             <Check size={16} className="text-white" strokeWidth={3} />
                           </div>
-                        ) : typeof row.cortex === "string" ? (
+                        ) : typeof row.cx === "string" ? (
                           <span className="px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 text-green-400 font-semibold text-sm">
-                            {row.cortex}
+                            {row.cx}
                           </span>
                         ) : null}
                       </div>
@@ -1253,12 +1253,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   {/* CX Linux */}
                   <div className="text-center p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
                     <div className="text-xs text-purple-500 font-semibold mb-2">CX Linux</div>
-                    {row.cortex === true ? (
+                    {row.cx === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
                       </div>
-                    ) : typeof row.cortex === "string" ? (
-                      <span className="text-green-400 font-semibold text-sm">{row.cortex}</span>
+                    ) : typeof row.cx === "string" ? (
+                      <span className="text-green-400 font-semibold text-sm">{row.cx}</span>
                     ) : null}
                   </div>
 
@@ -1836,7 +1836,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 
                 {/* Core text */}
                 <text x="460" y="170" textAnchor="middle" fill="#e0e7ff" fontSize="12" fontWeight="bold">AI</text>
-                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CORTEX</text>
+                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CX</text>
               </g>
               
               {/* Connection 2: AI to Commands */}
