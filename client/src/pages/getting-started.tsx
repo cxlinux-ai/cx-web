@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
@@ -20,10 +21,43 @@ import {
   MessageCircle,
   GraduationCap,
   FlaskConical,
-  Monitor
+  Monitor,
+  Copy,
+  Check,
+  Package
 } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 transition-colors text-sm"
+      aria-label="Copy to clipboard"
+    >
+      {copied ? (
+        <>
+          <Check size={14} className="text-emerald-400" />
+          <span className="text-emerald-400">Copied!</span>
+        </>
+      ) : (
+        <>
+          <Copy size={14} />
+          <span>Copy</span>
+        </>
+      )}
+    </button>
+  );
+}
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -306,6 +340,96 @@ export default function GettingStarted() {
                   <strong className="text-purple-400">Note:</strong> CX Linux is built on Ubuntu 24.04 LTS. 
                   If your hardware runs Ubuntu, it will run CX Linux. GPU support requires NVIDIA drivers 530+.
                 </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Quick Install (APT) Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center">
+                <Package className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-white">Quick Install (Recommended)</h2>
+            </div>
+            
+            <div className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10">
+              <p className="text-gray-300 mb-6">
+                The fastest way to get started on <strong className="text-white">Ubuntu</strong> or <strong className="text-white">Debian</strong>. 
+                Just run these commands in your terminal:
+              </p>
+              
+              {/* Step 1 */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-purple-400 font-medium">Step 1: Add GPG key</span>
+                  <CopyButton text="curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg" />
+                </div>
+                <div className="bg-black/50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-white/5">
+                  <code className="text-gray-300">
+                    <span className="text-cyan-400">curl</span> -fsSL https://repo.cxlinux.com/key.gpg | <span className="text-cyan-400">sudo</span> gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg
+                  </code>
+                </div>
+              </div>
+              
+              {/* Step 2 */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-purple-400 font-medium">Step 2: Add repository</span>
+                  <CopyButton text='echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list' />
+                </div>
+                <div className="bg-black/50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-white/5">
+                  <code className="text-gray-300">
+                    <span className="text-cyan-400">echo</span> <span className="text-green-400">"deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main"</span> | <span className="text-cyan-400">sudo</span> tee /etc/apt/sources.list.d/cxlinux.list
+                  </code>
+                </div>
+              </div>
+              
+              {/* Step 3 */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-purple-400 font-medium">Step 3: Install CX Terminal</span>
+                  <CopyButton text="sudo apt update && sudo apt install cx-terminal" />
+                </div>
+                <div className="bg-black/50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-white/5">
+                  <code className="text-gray-300">
+                    <span className="text-cyan-400">sudo</span> apt update && <span className="text-cyan-400">sudo</span> apt install cx-terminal
+                  </code>
+                </div>
+              </div>
+              
+              {/* Verify */}
+              <div className="mb-6">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-purple-400 font-medium">Verify installation</span>
+                  <CopyButton text="cx-terminal --version" />
+                </div>
+                <div className="bg-black/50 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-white/5">
+                  <code className="text-gray-300">
+                    <span className="text-cyan-400">cx-terminal</span> --version
+                  </code>
+                </div>
+              </div>
+              
+              {/* Supported Distros */}
+              <div className="mt-8 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-sm text-gray-300">
+                      <strong className="text-emerald-400">Supported distributions:</strong> Ubuntu 20.04, 22.04, 24.04 • Debian 11, 12 • Linux Mint 20+ • Pop!_OS 22.04+
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
