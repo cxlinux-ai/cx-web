@@ -1,28 +1,28 @@
 # Quick Start
 
-Get up and running with Cortex Linux in under 10 minutes.
+Get up and running with CX Linux in under 10 minutes.
 
 ## First Steps
 
-After installing Cortex Linux, open a terminal and verify your installation:
+After installing CX Linux, open a terminal and verify your installation:
 
 ```bash
-# Check Cortex CLI version
-cortex --version
-# Cortex CLI 1.0.0
+# Check CX CLI version
+cx --version
+# CX CLI 1.0.0
 
 # View system status
-cortex status
+cx status
 ```
 
 Expected output:
 
 ```
 ╭─────────────────────────────────────────────────────────╮
-│                    Cortex Linux Status                   │
+│                    CX Linux Status                   │
 ├─────────────────────────────────────────────────────────┤
 │ Version:     2024.1.0                                   │
-│ Kernel:      6.5.0-cortex                               │
+│ Kernel:      6.5.0-cx                               │
 │ Uptime:      0 days, 0:05:32                            │
 │ Components:  CLI ✓  Ops ✓  Security ✓  LLM ✗           │
 ╰─────────────────────────────────────────────────────────╯
@@ -33,7 +33,7 @@ Expected output:
 The first thing you should do is run a health check:
 
 ```bash
-cortex-ops doctor
+cx-ops doctor
 ```
 
 This checks:
@@ -49,8 +49,8 @@ This checks:
 Example output:
 
 ```
-Cortex Doctor - System Health Check
-Cortex Linux 2024.1 (6.5.0-cortex)
+CX Doctor - System Health Check
+CX Linux 2024.1 (6.5.0-cx)
 
 [PASS] Disk Space - Disk usage at 23.4%
 [PASS] Memory Usage - Memory usage at 34.2%
@@ -72,7 +72,7 @@ Cortex Linux 2024.1 (6.5.0-cortex)
 │ Duration        1,234ms                 │
 ╰─────────────────────────────────────────╯
 
-Tip: Run cortex-ops doctor --fix to auto-fix some issues
+Tip: Run cx-ops doctor --fix to auto-fix some issues
 ```
 
 ## Configure Your Environment
@@ -119,7 +119,7 @@ sudo usermod -aG docker developer
 
 ## Install Packages
 
-Cortex Linux uses APT for package management:
+CX Linux uses APT for package management:
 
 ```bash
 # Update package lists
@@ -149,7 +149,7 @@ echo 'export OPENAI_API_KEY="sk-your-key"' >> ~/.bashrc
 echo 'export ANTHROPIC_API_KEY="sk-ant-your-key"' >> ~/.bashrc
 
 # Test the connection
-cortex-ops connectors test
+cx-ops connectors test
 ```
 
 ## Common Tasks
@@ -158,13 +158,13 @@ cortex-ops connectors test
 
 ```bash
 # Check for updates
-cortex-ops update check
+cx-ops update check
 
 # Apply all updates
-cortex-ops update apply --packages
+cx-ops update apply --packages
 
 # Apply security updates only
-cortex-ops update apply --packages --security
+cx-ops update apply --packages --security
 ```
 
 ### Monitor System Resources
@@ -284,7 +284,7 @@ rustc --version
 
 ## What's Next?
 
-Now that you have Cortex Linux running:
+Now that you have CX Linux running:
 
 1. **[Configuration](configuration.md)**: Deep dive into system configuration
 2. **[Architecture](../architecture/overview.md)**: Understand Cortex components
@@ -300,10 +300,10 @@ If you run into issues:
 journalctl -xe
 
 # Run diagnostics with verbose output
-cortex-ops doctor --verbose
+cx-ops doctor --verbose
 
 # Generate support bundle
-cortex support-bundle
+cx support-bundle
 ```
 
 Visit our [Discord community](https://discord.gg/cortexlinux) for real-time help.

@@ -1,6 +1,6 @@
-# Cortex Security
+# CX Security
 
-Cortex Security provides comprehensive security hardening, auditing, and compliance automation for Cortex Linux systems.
+CX Security provides comprehensive security hardening, auditing, and compliance automation for CX Linux systems.
 
 ## Overview
 
@@ -73,39 +73,39 @@ graph TB
 aa-status
 
 # Load profile
-apparmor_parser -r /etc/apparmor.d/cortex-service
+apparmor_parser -r /etc/apparmor.d/cx-service
 
 # Set profile mode
-aa-enforce /etc/apparmor.d/cortex-service
-aa-complain /etc/apparmor.d/cortex-service
+aa-enforce /etc/apparmor.d/cx-service
+aa-complain /etc/apparmor.d/cx-service
 ```
 
 ### Example Profile
 
 ```
-# /etc/apparmor.d/cortex-service
+# /etc/apparmor.d/cx-service
 #include <tunables/global>
 
-profile cortex-service /usr/bin/cortex-service {
+profile cx-service /usr/bin/cx-service {
     #include <abstractions/base>
     #include <abstractions/nameservice>
 
     # Binary
-    /usr/bin/cortex-service mr,
+    /usr/bin/cx-service mr,
 
     # Configuration
-    /etc/cortex/** r,
+    /etc/cx/** r,
 
     # Data directories
-    /var/lib/cortex/ rw,
-    /var/lib/cortex/** rwk,
+    /var/lib/cx/ rw,
+    /var/lib/cx/** rwk,
 
     # Logs
-    /var/log/cortex/** w,
+    /var/log/cx/** w,
 
     # Runtime
-    /run/cortex/ rw,
-    /run/cortex/** rwk,
+    /run/cx/ rw,
+    /run/cx/** rwk,
 
     # Network
     network inet stream,
@@ -137,26 +137,26 @@ sudo sed -i 's/SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config
 
 ```bash
 # Generate policy from audit log
-audit2allow -a -M cortex-custom
+audit2allow -a -M cx-custom
 
 # Install module
-semodule -i cortex-custom.pp
+semodule -i cx-custom.pp
 
 # List modules
-semodule -l | grep cortex
+semodule -l | grep cx
 ```
 
 ### File Contexts
 
 ```bash
 # Set context
-chcon -t cortex_data_t /var/lib/cortex
+chcon -t cx_data_t /var/lib/cx
 
 # Restore default context
-restorecon -Rv /var/lib/cortex
+restorecon -Rv /var/lib/cx
 
 # Add permanent rule
-semanage fcontext -a -t cortex_data_t '/var/lib/cortex(/.*)?'
+semanage fcontext -a -t cx_data_t '/var/lib/cx(/.*)?'
 ```
 
 ## Firewall
@@ -223,7 +223,7 @@ table inet filter {
 ### Auditd Configuration
 
 ```bash
-# /etc/audit/rules.d/cortex.rules
+# /etc/audit/rules.d/cx.rules
 
 # Log all commands by root
 -a always,exit -F arch=b64 -F euid=0 -S execve -k root_commands
@@ -234,8 +234,8 @@ table inet filter {
 -w /etc/sudoers -p wa -k identity
 
 # Monitor Cortex directories
--w /etc/cortex/ -p wa -k cortex_config
--w /var/lib/cortex/ -p wa -k cortex_data
+-w /etc/cx/ -p wa -k cx_config
+-w /var/lib/cx/ -p wa -k cx_data
 
 # Monitor network configuration
 -w /etc/hosts -p wa -k network_config
@@ -250,7 +250,7 @@ table inet filter {
 
 ```bash
 # Search audit logs
-ausearch -k cortex_config
+ausearch -k cx_config
 
 # Generate report
 aureport -au  # Authentication
@@ -274,7 +274,7 @@ tail -f /var/log/audit/audit.log | aureport -i
 /sbin CONTENT_EX
 /usr/bin CONTENT_EX
 /usr/sbin CONTENT_EX
-/var/lib/cortex CONTENT_EX
+/var/lib/cx CONTENT_EX
 
 # Exclusions
 !/var/log
@@ -304,11 +304,11 @@ port = ssh
 filter = sshd
 logpath = /var/log/auth.log
 
-[cortex-api]
+[cx-api]
 enabled = true
 port = 8080
-filter = cortex-api
-logpath = /var/log/cortex/access.log
+filter = cx-api
+logpath = /var/log/cx/access.log
 maxretry = 10
 ```
 
@@ -318,7 +318,7 @@ maxretry = 10
 
 ```bash
 # Secure method - use keyring
-export CORTEX_API_KEY=$(keyring get cortex api_key)
+export CX_API_KEY=$(keyring get cx api_key)
 
 # Or systemd credentials
 systemd-creds encrypt --name=api-key plaintext.txt encrypted.cred
@@ -334,7 +334,7 @@ client.token = os.environ['VAULT_TOKEN']
 
 # Read secret
 secret = client.secrets.kv.v2.read_secret_version(
-    path='cortex/api-keys'
+    path='cx/api-keys'
 )
 api_key = secret['data']['data']['openai']
 ```
@@ -386,7 +386,7 @@ sudo update-grub
 
 ```bash
 # Run CIS scan
-cortex-security scan --benchmark cis-ubuntu-22.04
+cx-security scan --benchmark cis-ubuntu-22.04
 
 # Example output
 CIS Ubuntu 22.04 Benchmark Scan
@@ -409,10 +409,10 @@ Summary: 156 checks, 142 passed, 8 failed, 6 warnings
 
 ```bash
 # Auto-fix safe issues
-cortex-security harden --auto-fix --safe-only
+cx-security harden --auto-fix --safe-only
 
 # Generate remediation script
-cortex-security scan --output remediate.sh
+cx-security scan --output remediate.sh
 chmod +x remediate.sh
 ./remediate.sh
 ```
@@ -432,7 +432,7 @@ chmod +x remediate.sh
 ### Alert Configuration
 
 ```yaml
-# /etc/cortex/security/alerts.yaml
+# /etc/cx/security/alerts.yaml
 alerts:
   - name: auth-failures
     event: AUTH_FAILURE
@@ -459,7 +459,7 @@ alerts:
 
 ```bash
 # Run comprehensive hardening
-cortex-security harden
+cx-security harden
 
 # Checklist applied:
 ✓ Disable root SSH login

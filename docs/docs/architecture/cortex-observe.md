@@ -1,6 +1,6 @@
-# Cortex Observe
+# CX Observe
 
-Cortex Observe provides comprehensive monitoring, logging, and observability for Cortex Linux systems.
+CX Observe provides comprehensive monitoring, logging, and observability for CX Linux systems.
 
 ## Overview
 
@@ -58,7 +58,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'cortex'
+  - job_name: 'cx'
     static_configs:
       - targets: ['localhost:8080']
     metrics_path: /metrics
@@ -97,20 +97,20 @@ from prometheus_client import Counter, Histogram, Gauge, start_http_server
 
 # Define metrics
 requests_total = Counter(
-    'cortex_requests_total',
+    'cx_requests_total',
     'Total requests',
     ['method', 'endpoint', 'status']
 )
 
 request_duration = Histogram(
-    'cortex_request_duration_seconds',
+    'cx_request_duration_seconds',
     'Request duration',
     ['method', 'endpoint'],
     buckets=[0.01, 0.05, 0.1, 0.5, 1.0, 5.0]
 )
 
 active_connections = Gauge(
-    'cortex_active_connections',
+    'cx_active_connections',
     'Active connections'
 )
 
@@ -136,13 +136,13 @@ active_connections.set(42)
 (1 - (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"})) * 100
 
 # Request rate
-rate(cortex_requests_total[5m])
+rate(cx_requests_total[5m])
 
 # 95th percentile latency
-histogram_quantile(0.95, rate(cortex_request_duration_seconds_bucket[5m]))
+histogram_quantile(0.95, rate(cx_request_duration_seconds_bucket[5m]))
 
 # Error rate
-sum(rate(cortex_requests_total{status=~"5.."}[5m])) / sum(rate(cortex_requests_total[5m]))
+sum(rate(cx_requests_total{status=~"5.."}[5m])) / sum(rate(cx_requests_total[5m]))
 ```
 
 ## Logging
@@ -210,13 +210,13 @@ scrape_configs:
           job: varlogs
           __path__: /var/log/*.log
 
-  - job_name: cortex
+  - job_name: cx
     static_configs:
       - targets:
           - localhost
         labels:
-          job: cortex
-          __path__: /var/log/cortex/*.log
+          job: cx
+          __path__: /var/log/cx/*.log
     pipeline_stages:
       - json:
           expressions:
@@ -243,22 +243,22 @@ scrape_configs:
 
 ```logql
 # All error logs
-{job="cortex"} |= "error"
+{job="cx"} |= "error"
 
 # JSON log parsing
-{job="cortex"} | json | level="error"
+{job="cx"} | json | level="error"
 
 # Rate of errors
-rate({job="cortex"} |= "error" [5m])
+rate({job="cx"} |= "error" [5m])
 
 # Top error messages
-{job="cortex"} | json | level="error" | line_format "{{.message}}"
+{job="cx"} | json | level="error" | line_format "{{.message}}"
 
 # Logs with specific field
-{job="cortex"} | json | request_id="abc123"
+{job="cx"} | json | request_id="abc123"
 
 # Pattern matching
-{job="cortex"} |~ "failed to connect.*timeout"
+{job="cx"} |~ "failed to connect.*timeout"
 ```
 
 ## Tracing
@@ -361,7 +361,7 @@ with tracer.start_as_current_span("process_request") as span:
         "type": "graph",
         "targets": [
           {
-            "expr": "rate(cortex_requests_total[5m])",
+            "expr": "rate(cx_requests_total[5m])",
             "legendFormat": "{{method}} {{endpoint}}"
           }
         ]
@@ -400,9 +400,9 @@ datasources:
 ### Alert Rules
 
 ```yaml
-# /etc/prometheus/rules/cortex-alerts.yml
+# /etc/prometheus/rules/cx-alerts.yml
 groups:
-  - name: cortex
+  - name: cx
     rules:
       - alert: HighCPUUsage
         expr: 100 - (avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
@@ -430,7 +430,7 @@ groups:
           summary: Disk space critically low
 
       - alert: ServiceDown
-        expr: up{job="cortex"} == 0
+        expr: up{job="cx"} == 0
         for: 1m
         labels:
           severity: critical
@@ -476,19 +476,19 @@ receivers:
 
 ```bash
 # View metrics
-cortex observe metrics --query 'up{job="cortex"}'
+cx observe metrics --query 'up{job="cx"}'
 
 # Search logs
-cortex observe logs --query '{job="cortex"} |= "error"' --since 1h
+cx observe logs --query '{job="cx"} |= "error"' --since 1h
 
 # View traces
-cortex observe traces --service cortex-api --since 1h
+cx observe traces --service cx-api --since 1h
 
 # Dashboard
-cortex observe dashboard
+cx observe dashboard
 
 # Alert status
-cortex observe alerts
+cx observe alerts
 ```
 
 ## Health Checks

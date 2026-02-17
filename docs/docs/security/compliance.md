@@ -1,6 +1,6 @@
 # Compliance Guide
 
-Compliance frameworks and controls for Cortex Linux deployments.
+Compliance frameworks and controls for CX Linux deployments.
 
 ## Supported Frameworks
 
@@ -21,13 +21,13 @@ Compliance frameworks and controls for Cortex Linux deployments.
 
 ```bash
 # Full CIS scan
-cortex-security scan --benchmark cis-ubuntu-22.04
+cx-security scan --benchmark cis-ubuntu-22.04
 
 # Specific section
-cortex-security scan --benchmark cis-ubuntu-22.04 --section 5
+cx-security scan --benchmark cis-ubuntu-22.04 --section 5
 
 # Generate report
-cortex-security scan --benchmark cis-ubuntu-22.04 --output report.html
+cx-security scan --benchmark cis-ubuntu-22.04 --output report.html
 ```
 
 ### CIS Control Categories
@@ -101,10 +101,10 @@ sudo systemctl start chronyd
 
 ```bash
 # Fix all safe controls
-cortex-security harden --benchmark cis --auto-fix --safe-only
+cx-security harden --benchmark cis --auto-fix --safe-only
 
 # Generate remediation script
-cortex-security scan --benchmark cis --output-remediation remediate.sh
+cx-security scan --benchmark cis --output-remediation remediate.sh
 
 # Review and apply
 cat remediate.sh
@@ -123,12 +123,12 @@ sudo ./remediate.sh
 | Criteria | Control | Cortex Implementation |
 |----------|---------|----------------------|
 | CC1.1 | COSO Principle 1 | Organization policies |
-| CC2.1 | Board/Management | Cortex Security config |
-| CC3.1 | Risk Assessment | `cortex-security scan` |
-| CC4.1 | Monitoring | Cortex Observe |
+| CC2.1 | Board/Management | CX Security config |
+| CC3.1 | Risk Assessment | `cx-security scan` |
+| CC4.1 | Monitoring | CX Observe |
 | CC5.1 | Control Activities | AppArmor, audit |
 | CC6.1-6.8 | Logical/Physical Access | SSH, firewall, logs |
-| CC7.1-7.5 | System Operations | `cortex-ops doctor` |
+| CC7.1-7.5 | System Operations | `cx-ops doctor` |
 | CC8.1 | Change Management | Update rollback |
 | CC9.1-9.2 | Risk Mitigation | Backup, DR |
 
@@ -136,7 +136,7 @@ sudo ./remediate.sh
 
 | Criteria | Control | Cortex Implementation |
 |----------|---------|----------------------|
-| A1.1 | Capacity Management | Cortex Observe metrics |
+| A1.1 | Capacity Management | CX Observe metrics |
 | A1.2 | Environmental Protection | Hardware monitoring |
 | A1.3 | Recovery | Backup/restore, rollback |
 
@@ -144,7 +144,7 @@ sudo ./remediate.sh
 
 ```bash
 # Generate SOC 2 evidence bundle
-cortex-security evidence --framework soc2 --output evidence/
+cx-security evidence --framework soc2 --output evidence/
 
 # Includes:
 # - System configuration snapshots
@@ -166,7 +166,7 @@ cortex-security evidence --framework soc2 --output evidence/
 | Access Control | Emergency access procedure | Break-glass accounts |
 | Access Control | Automatic logoff | SSH timeout |
 | Access Control | Encryption | TLS, disk encryption |
-| Audit Controls | Record examination | auditd, Cortex Observe |
+| Audit Controls | Record examination | auditd, CX Observe |
 | Integrity | Mechanism to authenticate ePHI | Checksums, AIDE |
 | Transmission Security | Integrity controls | TLS 1.2+ |
 | Transmission Security | Encryption | TLS, VPN |
@@ -174,7 +174,7 @@ cortex-security evidence --framework soc2 --output evidence/
 ### Configuration
 
 ```yaml
-# /etc/cortex/compliance/hipaa.yaml
+# /etc/cx/compliance/hipaa.yaml
 framework: hipaa
 
 controls:
@@ -202,10 +202,10 @@ controls:
 
 ```bash
 # Run HIPAA compliance check
-cortex-security scan --framework hipaa
+cx-security scan --framework hipaa
 
 # Generate HIPAA report
-cortex-security report --framework hipaa --output hipaa-report.pdf
+cx-security report --framework hipaa --output hipaa-report.pdf
 ```
 
 ---
@@ -226,17 +226,17 @@ cortex-security report --framework hipaa --output hipaa-report.pdf
 | 8 | Identify and authenticate | PAM, MFA |
 | 9 | Restrict physical access | Physical security |
 | 10 | Track and monitor | auditd, logging |
-| 11 | Test security | `cortex-security scan` |
+| 11 | Test security | `cx-security scan` |
 | 12 | Information security policy | Documentation |
 
 ### PCI Scan
 
 ```bash
 # Run PCI DSS scan
-cortex-security scan --framework pci-dss
+cx-security scan --framework pci-dss
 
 # Requirements 10 - Logging
-cortex-security scan --framework pci-dss --requirement 10
+cx-security scan --framework pci-dss --requirement 10
 ```
 
 ---
@@ -258,13 +258,13 @@ cortex-security scan --framework pci-dss --requirement 10
 
 ```bash
 # Export user data
-cortex-gdpr export --user user@example.com --output export.zip
+cx-gdpr export --user user@example.com --output export.zip
 
 # Delete user data (right to erasure)
-cortex-gdpr delete --user user@example.com --confirm
+cx-gdpr delete --user user@example.com --confirm
 
 # Generate processing records
-cortex-gdpr records --output processing-records.csv
+cx-gdpr records --output processing-records.csv
 ```
 
 ---
@@ -274,7 +274,7 @@ cortex-gdpr records --output processing-records.csv
 ### Configuration
 
 ```yaml
-# /etc/cortex/compliance/config.yaml
+# /etc/cx/compliance/config.yaml
 compliance:
   frameworks:
     - cis
@@ -290,7 +290,7 @@ compliance:
     webhook:
       url: https://api.example.com/compliance
     storage:
-      path: /var/lib/cortex/compliance/
+      path: /var/lib/cx/compliance/
       retention_days: 365
 
   alerting:
@@ -305,7 +305,7 @@ compliance:
 
 ```bash
 # Start compliance dashboard
-cortex-security dashboard --port 8443
+cx-security dashboard --port 8443
 
 # Access at https://localhost:8443
 ```
@@ -319,10 +319,10 @@ cortex-security dashboard --port 8443
 ```bash
 # /etc/cron.d/compliance
 # Daily CIS scan
-0 2 * * * root cortex-security scan --benchmark cis --output /var/lib/cortex/compliance/daily/
+0 2 * * * root cx-security scan --benchmark cis --output /var/lib/cx/compliance/daily/
 
 # Weekly comprehensive scan
-0 3 * * 0 root cortex-security scan --all-frameworks --output /var/lib/cortex/compliance/weekly/
+0 3 * * 0 root cx-security scan --all-frameworks --output /var/lib/cx/compliance/weekly/
 ```
 
 ### Integration with CI/CD
@@ -342,7 +342,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Run CIS Benchmark
-        run: cortex-security scan --benchmark cis --json > cis-results.json
+        run: cx-security scan --benchmark cis --json > cis-results.json
 
       - name: Check for failures
         run: |
@@ -378,7 +378,7 @@ jobs:
 
 ```bash
 # Generate complete evidence package
-cortex-security evidence --all-frameworks --output /evidence/
+cx-security evidence --all-frameworks --output /evidence/
 
 # Package contents:
 # /evidence/

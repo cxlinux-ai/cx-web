@@ -1,21 +1,21 @@
-# Cortex Linux
+# CX Linux
 
 **The AI-Native Operating System**
 
-Cortex Linux is a purpose-built operating system designed for AI workloads, providing integrated tooling for machine learning, LLM orchestration, and intelligent system management.
+CX Linux is a purpose-built operating system designed for AI workloads, providing integrated tooling for machine learning, LLM orchestration, and intelligent system management.
 
 ```mermaid
 graph LR
-    A[Developer] --> B[Cortex CLI]
-    B --> C[Cortex LLM]
-    B --> D[Cortex Ops]
-    B --> E[Cortex Security]
+    A[Developer] --> B[CX CLI]
+    B --> C[CX LLM]
+    B --> D[CX Ops]
+    B --> E[CX Security]
     C --> F[Cloud LLMs]
     D --> G[System Health]
     E --> H[Hardened Kernel]
 ```
 
-## Why Cortex Linux?
+## Why CX Linux?
 
 | Feature | Description |
 |---------|-------------|
@@ -30,24 +30,24 @@ graph LR
 
     ```bash
     # Download the latest ISO
-    curl -LO https://releases.cortexlinux.com/stable/cortex-latest.iso
+    curl -LO https://releases.cortexlinux.com/stable/cx-latest.iso
 
     # Verify checksum
-    sha256sum -c cortex-latest.iso.sha256
+    sha256sum -c cx-latest.iso.sha256
 
     # Flash to USB (replace /dev/sdX)
-    sudo dd if=cortex-latest.iso of=/dev/sdX bs=4M status=progress
+    sudo dd if=cx-latest.iso of=/dev/sdX bs=4M status=progress
     ```
 
 === "Cloud Image"
 
     ```bash
     # AWS
-    aws ec2 run-instances --image-id ami-cortex-latest
+    aws ec2 run-instances --image-id ami-cx-latest
 
     # GCP
-    gcloud compute instances create cortex-vm \
-      --image-family=cortex-stable
+    gcloud compute instances create cx-vm \
+      --image-family=cx-stable
 
     # Azure
     az vm create --image cortexlinux:cortex:stable:latest
@@ -64,37 +64,37 @@ graph LR
 
 <div class="grid cards" markdown>
 
--   :material-console:{ .lg .middle } **Cortex CLI**
+-   :material-console:{ .lg .middle } **CX CLI**
 
     ---
 
     Unified command-line interface for all Cortex operations
 
-    [:octicons-arrow-right-24: Learn more](architecture/cortex-cli.md)
+    [:octicons-arrow-right-24: Learn more](architecture/cx-cli.md)
 
--   :material-brain:{ .lg .middle } **Cortex LLM**
+-   :material-brain:{ .lg .middle } **CX LLM**
 
     ---
 
     Local and cloud LLM orchestration with intelligent routing
 
-    [:octicons-arrow-right-24: Learn more](architecture/cortex-llm.md)
+    [:octicons-arrow-right-24: Learn more](architecture/cx-llm.md)
 
--   :material-shield-check:{ .lg .middle } **Cortex Security**
+-   :material-shield-check:{ .lg .middle } **CX Security**
 
     ---
 
     Hardened security posture with automated compliance
 
-    [:octicons-arrow-right-24: Learn more](architecture/cortex-security.md)
+    [:octicons-arrow-right-24: Learn more](architecture/cx-security.md)
 
--   :material-tools:{ .lg .middle } **Cortex Ops**
+-   :material-tools:{ .lg .middle } **CX Ops**
 
     ---
 
     System diagnostics, repair tools, and update management
 
-    [:octicons-arrow-right-24: Learn more](architecture/cortex-ops.md)
+    [:octicons-arrow-right-24: Learn more](architecture/cx-ops.md)
 
 </div>
 
@@ -128,4 +128,4 @@ graph LR
 
 ## License
 
-Cortex Linux is open source software released under the Apache 2.0 license.
+CX Linux is open source software released under the Apache 2.0 license.

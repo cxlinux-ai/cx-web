@@ -1,6 +1,6 @@
-# Cortex LLM
+# CX LLM
 
-Cortex LLM provides unified access to cloud and local LLM providers with intelligent routing, caching, and orchestration.
+CX LLM provides unified access to cloud and local LLM providers with intelligent routing, caching, and orchestration.
 
 ## Overview
 
@@ -12,7 +12,7 @@ graph TB
         C[Plugins]
     end
 
-    subgraph Cortex LLM
+    subgraph CX LLM
         D[Router]
         E[Cache]
         F[Rate Limiter]
@@ -91,7 +91,7 @@ class Connector(ABC):
 ### OpenAI
 
 ```python
-from cortex_llm.connectors import OpenAIConnector, ConnectorConfig
+from cx_llm.connectors import OpenAIConnector, ConnectorConfig
 
 config = ConnectorConfig(
     api_key="sk-...",
@@ -118,7 +118,7 @@ Supported models:
 ### Anthropic
 
 ```python
-from cortex_llm.connectors import AnthropicConnector, ConnectorConfig
+from cx_llm.connectors import AnthropicConnector, ConnectorConfig
 
 config = ConnectorConfig(
     api_key="sk-ant-...",
@@ -142,7 +142,7 @@ Supported models:
 ### Google Gemini
 
 ```python
-from cortex_llm.connectors import GoogleConnector, ConnectorConfig
+from cx_llm.connectors import GoogleConnector, ConnectorConfig
 
 config = ConnectorConfig(
     api_key="AIza...",
@@ -160,7 +160,7 @@ Supported models:
 ### Local Models
 
 ```python
-from cortex_llm.connectors import LocalConnector, ConnectorConfig
+from cx_llm.connectors import LocalConnector, ConnectorConfig
 
 config = ConnectorConfig(
     base_url="http://localhost:11434",  # Ollama
@@ -182,7 +182,7 @@ Supported backends:
 ### YAML Configuration
 
 ```yaml
-# /etc/cortex/config.yaml
+# /etc/cx/config.yaml
 connectors:
   default: anthropic
 
@@ -214,7 +214,7 @@ connectors:
 export OPENAI_API_KEY="sk-..."
 export ANTHROPIC_API_KEY="sk-ant-..."
 export GOOGLE_API_KEY="AIza..."
-export CORTEX_CONNECTORS__DEFAULT="anthropic"
+export CX_CONNECTORS__DEFAULT="anthropic"
 ```
 
 ## Intelligent Routing
@@ -363,7 +363,7 @@ alerts:
 ### Stream Responses
 
 ```python
-from cortex_llm import get_manager
+from cx_llm import get_manager
 
 manager = get_manager()
 
@@ -435,7 +435,7 @@ if response.tool_calls:
 ### Generate Embeddings
 
 ```python
-from cortex_llm import EmbeddingConnector
+from cx_llm import EmbeddingConnector
 
 embedder = EmbeddingConnector(model="text-embedding-3-small")
 
@@ -473,7 +473,7 @@ top_indices = np.argsort(similarities)[-5:][::-1]
 ### Retry Logic
 
 ```python
-from cortex_llm.retry import RetryConfig
+from cx_llm.retry import RetryConfig
 
 config = RetryConfig(
     max_retries=3,
@@ -493,7 +493,7 @@ response = await connector.chat(messages, retry_config=config)
 ### Fallback Chain
 
 ```python
-from cortex_llm import FallbackChain
+from cx_llm import FallbackChain
 
 chain = FallbackChain([
     AnthropicConnector(config_anthropic),
@@ -514,19 +514,19 @@ response = await chain.chat(messages)
 from prometheus_client import Counter, Histogram
 
 llm_requests = Counter(
-    "cortex_llm_requests_total",
+    "cx_llm_requests_total",
     "Total LLM requests",
     ["provider", "model", "status"],
 )
 
 llm_latency = Histogram(
-    "cortex_llm_request_duration_seconds",
+    "cx_llm_request_duration_seconds",
     "LLM request latency",
     ["provider", "model"],
 )
 
 llm_tokens = Counter(
-    "cortex_llm_tokens_total",
+    "cx_llm_tokens_total",
     "Total tokens used",
     ["provider", "model", "type"],
 )
@@ -539,7 +539,7 @@ cost_tracking:
   enabled: true
   export:
     - type: csv
-      path: /var/log/cortex/llm-costs.csv
+      path: /var/log/cx/llm-costs.csv
     - type: prometheus
       endpoint: /metrics
 ```

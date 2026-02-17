@@ -1,4 +1,4 @@
-# Cortex Linux Landing Page - Design Guidelines
+# CX Linux Landing Page - Design Guidelines
 
 ## Design System Foundation
 
@@ -25,7 +25,7 @@
 
 ## Navigation Bar
 
-Fixed position at top with backdrop-blur-xl and bg-black/50, height 64px. Logo displays "CORTEX" in white + "LINUX" in blue with hover glow effect. Center navigation links (Home, About, Join, Sponsor) transition from gray to blue-400 on hover. "Get Started" CTA button with blue-500 background, glow on hover with scale-105 transform. Mobile: hamburger menu with full-width dropdown, backdrop blur, vertical link stack.
+Fixed position at top with backdrop-blur-xl and bg-black/50, height 64px. Logo displays "CX" in white + "LINUX" in blue with hover glow effect. Center navigation links (Home, About, Join, Sponsor) transition from gray to blue-400 on hover. "Get Started" CTA button with blue-500 background, glow on hover with scale-105 transform. Mobile: hamburger menu with full-width dropdown, backdrop blur, vertical link stack.
 
 ## Hero Section (Full Viewport)
 
@@ -37,7 +37,7 @@ Gradient background from transparent to black/50 with border-top. "Project Momen
 
 ## About Section
 
-"What Makes Cortex Different?" headline. 3-column grid (responsive to 1 column mobile) with 6 feature cards:
+"What Makes CX Different?" headline. 3-column grid (responsive to 1 column mobile) with 6 feature cards:
 1. Natural Language Control (Brain icon)
 2. Enterprise-Grade Security (Shield icon)
 3. Learns Your Workflow (TrendingUp icon)
@@ -76,7 +76,7 @@ Centered max-w-4xl layout. Large Discord card with white/5 background, blue grad
 
 ## Footer
 
-3-column grid (stacks mobile) with border-top white/10. Left: "CORTEX LINUX" logo with tagline, "Built by AI Venture Holdings LLC". Middle: "Resources" with links (Documentation, GitHub, Discord, Blog). Right: Funding info ("Seeking $2-3M seed funding", "Launching February 2025"), copyright. All text-sm gray-400, links hover to blue-400.
+3-column grid (stacks mobile) with border-top white/10. Left: "CX LINUX" logo with tagline, "Built by AI Venture Holdings LLC". Middle: "Resources" with links (Documentation, GitHub, Discord, Blog). Right: Funding info ("Seeking $2-3M seed funding", "Launching February 2025"), copyright. All text-sm gray-400, links hover to blue-400.
 
 ## Animation System
 

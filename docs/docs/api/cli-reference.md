@@ -1,15 +1,15 @@
 # CLI Reference
 
-Complete reference for all Cortex CLI commands and options.
+Complete reference for all CX CLI commands and options.
 
 ## Global Commands
 
-### cortex
+### cx
 
-Main entry point for Cortex CLI.
+Main entry point for CX CLI.
 
 ```bash
-cortex [OPTIONS] COMMAND [ARGS]
+cx [OPTIONS] COMMAND [ARGS]
 ```
 
 **Options:**
@@ -23,12 +23,12 @@ cortex [OPTIONS] COMMAND [ARGS]
 | `--quiet`, `-q` | Suppress non-essential output |
 | `--help` | Show help message |
 
-### cortex status
+### cx status
 
 Display system status overview.
 
 ```bash
-cortex status [OPTIONS]
+cx status [OPTIONS]
 ```
 
 **Options:**
@@ -41,23 +41,23 @@ cortex status [OPTIONS]
 **Example:**
 
 ```bash
-$ cortex status
+$ cx status
 ╭─────────────────────────────────────────────────────────╮
-│                    Cortex Linux Status                   │
+│                    CX Linux Status                   │
 ├─────────────────────────────────────────────────────────┤
 │ Version:     2024.1.0                                   │
-│ Kernel:      6.5.0-cortex                               │
+│ Kernel:      6.5.0-cx                               │
 │ Uptime:      5 days, 3:21:45                            │
 │ Components:  CLI ✓  Ops ✓  Security ✓  LLM ✓           │
 ╰─────────────────────────────────────────────────────────╯
 ```
 
-### cortex config
+### cx config
 
 Configuration management commands.
 
 ```bash
-cortex config COMMAND [OPTIONS]
+cx config COMMAND [OPTIONS]
 ```
 
 **Subcommands:**
@@ -74,28 +74,28 @@ cortex config COMMAND [OPTIONS]
 
 ```bash
 # Show all config
-cortex config show
+cx config show
 
 # Set value
-cortex config set connectors.default anthropic
+cx config set connectors.default anthropic
 
 # Get value
-cortex config get connectors.default
+cx config get connectors.default
 
 # Validate config
-cortex config validate
+cx config validate
 ```
 
 ---
 
-## Cortex Ops Commands
+## CX Ops Commands
 
-### cortex-ops doctor
+### cx-ops doctor
 
 Run system health diagnostics.
 
 ```bash
-cortex-ops doctor [OPTIONS]
+cx-ops doctor [OPTIONS]
 ```
 
 **Options:**
@@ -124,19 +124,19 @@ cortex-ops doctor [OPTIONS]
 
 ```bash
 # Run all checks
-cortex-ops doctor
+cx-ops doctor
 
 # Run with auto-fix
-cortex-ops doctor --fix
+cx-ops doctor --fix
 
 # Run specific check
-cortex-ops doctor --check disk_space
+cx-ops doctor --check disk_space
 
 # Filter by category
-cortex-ops doctor --category network
+cx-ops doctor --category network
 
 # JSON output for scripting
-cortex-ops doctor --json | jq '.summary'
+cx-ops doctor --json | jq '.summary'
 ```
 
 **Exit Codes:**
@@ -147,12 +147,12 @@ cortex-ops doctor --json | jq '.summary'
 | 1 | One or more checks failed |
 | 2 | Error during execution |
 
-### cortex-ops doctor list
+### cx-ops doctor list
 
 List all available health checks.
 
 ```bash
-cortex-ops doctor list [OPTIONS]
+cx-ops doctor list [OPTIONS]
 ```
 
 **Options:**
@@ -162,12 +162,12 @@ cortex-ops doctor list [OPTIONS]
 | `--category` | Filter by category |
 | `--json` | JSON output |
 
-### cortex-ops repair apt
+### cx-ops repair apt
 
 Repair APT package manager issues.
 
 ```bash
-cortex-ops repair apt [OPTIONS]
+cx-ops repair apt [OPTIONS]
 ```
 
 **Options:**
@@ -182,21 +182,21 @@ cortex-ops repair apt [OPTIONS]
 
 ```bash
 # Diagnose and repair
-cortex-ops repair apt
+cx-ops repair apt
 
 # Clear locks only
-cortex-ops repair apt --locks
+cx-ops repair apt --locks
 
 # Preview changes
-cortex-ops repair apt --dry-run
+cx-ops repair apt --dry-run
 ```
 
-### cortex-ops repair permissions
+### cx-ops repair permissions
 
 Fix file permission issues.
 
 ```bash
-cortex-ops repair permissions [OPTIONS]
+cx-ops repair permissions [OPTIONS]
 ```
 
 **Options:**
@@ -204,15 +204,15 @@ cortex-ops repair permissions [OPTIONS]
 | Option | Description |
 |--------|-------------|
 | `--dry-run`, `-n` | Show what would be done |
-| `--cortex` | Only fix Cortex directories |
+| `--cx` | Only fix Cortex directories |
 | `--user`, `-u` | Fix user home directory |
 
-### cortex-ops repair services
+### cx-ops repair services
 
 Fix systemd service issues.
 
 ```bash
-cortex-ops repair services [OPTIONS]
+cx-ops repair services [OPTIONS]
 ```
 
 **Options:**
@@ -223,12 +223,12 @@ cortex-ops repair services [OPTIONS]
 | `--restart-failed` | Only restart failed services |
 | `--service`, `-s` | Fix specific service |
 
-### cortex-ops update check
+### cx-ops update check
 
 Check for available updates.
 
 ```bash
-cortex-ops update check [OPTIONS]
+cx-ops update check [OPTIONS]
 ```
 
 **Options:**
@@ -238,12 +238,12 @@ cortex-ops update check [OPTIONS]
 | `--force`, `-f` | Bypass cache |
 | `--json` | JSON output |
 
-### cortex-ops update apply
+### cx-ops update apply
 
 Apply available updates.
 
 ```bash
-cortex-ops update apply [OPTIONS]
+cx-ops update apply [OPTIONS]
 ```
 
 **Options:**
@@ -255,12 +255,12 @@ cortex-ops update apply [OPTIONS]
 | `--security` | Security updates only |
 | `--yes`, `-y` | Skip confirmation |
 
-### cortex-ops update rollback
+### cx-ops update rollback
 
 Rollback to previous snapshot.
 
 ```bash
-cortex-ops update rollback [SNAPSHOT_ID] [OPTIONS]
+cx-ops update rollback [SNAPSHOT_ID] [OPTIONS]
 ```
 
 **Options:**
@@ -270,12 +270,12 @@ cortex-ops update rollback [SNAPSHOT_ID] [OPTIONS]
 | `--list`, `-l` | List available snapshots |
 | `--force` | Force rollback |
 
-### cortex-ops plugins list
+### cx-ops plugins list
 
 List plugins.
 
 ```bash
-cortex-ops plugins list [OPTIONS]
+cx-ops plugins list [OPTIONS]
 ```
 
 **Options:**
@@ -285,20 +285,20 @@ cortex-ops plugins list [OPTIONS]
 | `--available`, `-a` | Show available plugins |
 | `--json` | JSON output |
 
-### cortex-ops plugins install
+### cx-ops plugins install
 
 Install a plugin.
 
 ```bash
-cortex-ops plugins install NAME|PATH [OPTIONS]
+cx-ops plugins install NAME|PATH [OPTIONS]
 ```
 
-### cortex-ops plugins create
+### cx-ops plugins create
 
 Create a new plugin scaffold.
 
 ```bash
-cortex-ops plugins create NAME [OPTIONS]
+cx-ops plugins create NAME [OPTIONS]
 ```
 
 **Options:**
@@ -308,37 +308,37 @@ cortex-ops plugins create NAME [OPTIONS]
 | `--type`, `-t` | Plugin type | command |
 | `--output`, `-o` | Output directory | current |
 
-### cortex-ops plugins enable/disable
+### cx-ops plugins enable/disable
 
 Enable or disable a plugin.
 
 ```bash
-cortex-ops plugins enable NAME
-cortex-ops plugins disable NAME
+cx-ops plugins enable NAME
+cx-ops plugins disable NAME
 ```
 
-### cortex-ops connectors list
+### cx-ops connectors list
 
 List LLM connectors.
 
 ```bash
-cortex-ops connectors list [OPTIONS]
+cx-ops connectors list [OPTIONS]
 ```
 
-### cortex-ops connectors test
+### cx-ops connectors test
 
 Test LLM connector.
 
 ```bash
-cortex-ops connectors test [NAME] [OPTIONS]
+cx-ops connectors test [NAME] [OPTIONS]
 ```
 
-### cortex-ops connectors set-default
+### cx-ops connectors set-default
 
 Set default LLM connector.
 
 ```bash
-cortex-ops connectors set-default NAME
+cx-ops connectors set-default NAME
 ```
 
 ---
@@ -347,11 +347,11 @@ cortex-ops connectors set-default NAME
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `CORTEX_DEBUG` | Enable debug mode | `false` |
-| `CORTEX_LOG_LEVEL` | Log level | `INFO` |
-| `CORTEX_CONFIG_DIR` | Config directory | `/etc/cortex` |
-| `CORTEX_DATA_DIR` | Data directory | `/var/lib/cortex` |
-| `CORTEX_CACHE_DIR` | Cache directory | `/var/cache/cortex` |
+| `CX_DEBUG` | Enable debug mode | `false` |
+| `CX_LOG_LEVEL` | Log level | `INFO` |
+| `CX_CONFIG_DIR` | Config directory | `/etc/cx` |
+| `CX_DATA_DIR` | Data directory | `/var/lib/cx` |
+| `CX_CACHE_DIR` | Cache directory | `/var/cache/cx` |
 | `OPENAI_API_KEY` | OpenAI API key | - |
 | `ANTHROPIC_API_KEY` | Anthropic API key | - |
 | `GOOGLE_API_KEY` | Google AI API key | - |
@@ -363,7 +363,7 @@ cortex-ops connectors set-default NAME
 ### Human-Readable (Default)
 
 ```bash
-$ cortex-ops doctor
+$ cx-ops doctor
 [PASS] Disk Space - Disk usage at 23.4%
 [PASS] Memory Usage - Memory usage at 34.2%
 [WARN] Security Updates - 3 security update(s) available
@@ -372,7 +372,7 @@ $ cortex-ops doctor
 ### JSON
 
 ```bash
-$ cortex-ops doctor --json
+$ cx-ops doctor --json
 {
   "summary": {
     "total": 12,
@@ -404,19 +404,19 @@ $ cortex-ops doctor --json
 
 ```bash
 # Add to ~/.bashrc
-eval "$(_CORTEX_OPS_COMPLETE=bash_source cortex-ops)"
+eval "$(_CX_OPS_COMPLETE=bash_source cx-ops)"
 ```
 
 ### Zsh
 
 ```bash
 # Add to ~/.zshrc
-eval "$(_CORTEX_OPS_COMPLETE=zsh_source cortex-ops)"
+eval "$(_CX_OPS_COMPLETE=zsh_source cx-ops)"
 ```
 
 ### Fish
 
 ```bash
-# Add to ~/.config/fish/completions/cortex-ops.fish
-eval (env _CORTEX_OPS_COMPLETE=fish_source cortex-ops)
+# Add to ~/.config/fish/completions/cx-ops.fish
+eval (env _CX_OPS_COMPLETE=fish_source cx-ops)
 ```

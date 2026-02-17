@@ -95,7 +95,7 @@ Professional marketing landing page and FAQ for CX Linux - **The AI Layer for Li
   - "News" navigation tab in main navigation (desktop and mobile)
 - **NEW: Startup Landing Page at /startup** - Dedicated page for AI founders and startups:
   - Hero section with "The Linux Built for AI Founders" headline and terminal mockup
-  - Problem/Solution section highlighting pain points and Cortex solution
+  - Problem/Solution section highlighting pain points and CX Linux solution
   - Social proof: 19,000+ clones, 89 contributors, "Recommended by ChatGPT"
   - Pre-installed AI Stack grid (Python 3.12, Ollama, Qdrant, Neo4j, LangChain, Docker, CUDA, Claude Code)
   - 3-tier Pricing table (Community Free, Founders $19/mo, Enterprise Contact)

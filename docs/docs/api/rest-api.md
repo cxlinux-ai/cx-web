@@ -1,6 +1,6 @@
 # REST API Reference
 
-Cortex Linux provides REST APIs for programmatic access to system management functions.
+CX Linux provides REST APIs for programmatic access to system management functions.
 
 ## Base URL
 
@@ -132,11 +132,11 @@ Get system information.
 
 ```json
 {
-  "hostname": "cortex-server",
+  "hostname": "cx-server",
   "os": {
-    "name": "Cortex Linux",
+    "name": "CX Linux",
     "version": "2024.1",
-    "kernel": "6.5.0-cortex"
+    "kernel": "6.5.0-cx"
   },
   "cpu": {
     "model": "AMD EPYC 7763",
@@ -217,7 +217,7 @@ Query system logs.
   "logs": [
     {
       "timestamp": "2024-01-15T12:00:00Z",
-      "unit": "cortex.service",
+      "unit": "cx.service",
       "priority": 6,
       "message": "Health check completed"
     }
@@ -489,7 +489,7 @@ ws.onmessage = (event) => {
 // Filter logs
 ws.send(JSON.stringify({
   type: 'filter',
-  unit: 'cortex.service',
+  unit: 'cx.service',
   priority: 'error'
 }));
 ```
@@ -537,18 +537,18 @@ for result in checks['results']:
 ### JavaScript
 
 ```javascript
-const CORTEX_API = 'http://localhost:8080/api/v1';
+const CX_API = 'http://localhost:8080/api/v1';
 const API_KEY = 'your-api-key';
 
 async function getHealth() {
-  const response = await fetch(`${CORTEX_API}/health`, {
+  const response = await fetch(`${CX_API}/health`, {
     headers: { 'X-API-Key': API_KEY }
   });
   return response.json();
 }
 
 async function applyUpdates() {
-  const response = await fetch(`${CORTEX_API}/updates/apply`, {
+  const response = await fetch(`${CX_API}/updates/apply`, {
     method: 'POST',
     headers: {
       'X-API-Key': API_KEY,

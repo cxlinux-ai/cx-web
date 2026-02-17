@@ -1,12 +1,12 @@
-# Cortex Stacks
+# CX Stacks
 
-Cortex Stacks provides container orchestration and Kubernetes management for deploying applications on Cortex Linux.
+CX Stacks provides container orchestration and Kubernetes management for deploying applications on CX Linux.
 
 ## Overview
 
 ```mermaid
 graph TB
-    subgraph Cortex Stacks
+    subgraph CX Stacks
         A[Stack CLI]
         B[Container Runtime]
         C[Kubernetes]
@@ -128,18 +128,18 @@ graph TB
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cortex-app
+  name: cx-app
   labels:
-    app: cortex-app
+    app: cx-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cortex-app
+      app: cx-app
   template:
     metadata:
       labels:
-        app: cortex-app
+        app: cx-app
     spec:
       containers:
       - name: app
@@ -169,10 +169,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cortex-app
+  name: cx-app
 spec:
   selector:
-    app: cortex-app
+    app: cx-app
   ports:
   - port: 80
     targetPort: 8080
@@ -187,16 +187,16 @@ helm repo add cortex https://charts.cortexlinux.com
 helm repo update
 
 # Search charts
-helm search repo cortex
+helm search repo cx
 
 # Install chart
-helm install my-app cortex/app \
+helm install my-app cx/app \
   --namespace production \
   --create-namespace \
   --values values.yaml
 
 # Upgrade
-helm upgrade my-app cortex/app -f values.yaml
+helm upgrade my-app cx/app -f values.yaml
 
 # Rollback
 helm rollback my-app 1
@@ -393,7 +393,7 @@ helm install ingress-nginx ingress-nginx/ingress-nginx \
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cortex-ingress
+  name: cx-ingress
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -411,7 +411,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: cortex-app
+            name: cx-app
             port:
               number: 80
 ```
@@ -438,7 +438,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: cortex-app
+      app: cx-app
   policyTypes:
   - Ingress
   ingress:
@@ -498,11 +498,11 @@ helm install prometheus prometheus-community/kube-prometheus-stack \
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: cortex-app
+  name: cx-app
 spec:
   selector:
     matchLabels:
-      app: cortex-app
+      app: cx-app
   endpoints:
   - port: metrics
     interval: 15s
@@ -512,20 +512,20 @@ spec:
 
 ```bash
 # Deploy stack
-cortex stacks deploy my-stack -f stack.yaml
+cx stacks deploy my-stack -f stack.yaml
 
 # Scale deployment
-cortex stacks scale my-stack --replicas 5
+cx stacks scale my-stack --replicas 5
 
 # View logs
-cortex stacks logs my-stack -f
+cx stacks logs my-stack -f
 
 # Get status
-cortex stacks status my-stack
+cx stacks status my-stack
 
 # Rollback
-cortex stacks rollback my-stack --revision 2
+cx stacks rollback my-stack --revision 2
 
 # Delete stack
-cortex stacks delete my-stack
+cx stacks delete my-stack
 ```

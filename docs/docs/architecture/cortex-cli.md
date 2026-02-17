@@ -1,15 +1,15 @@
-# Cortex CLI
+# CX CLI
 
-The Cortex CLI is the primary interface for interacting with Cortex Linux systems.
+The CX CLI is the primary interface for interacting with CX Linux systems.
 
 ## Overview
 
 ```mermaid
 graph TD
-    A[cortex] --> B[cortex-ops]
-    A --> C[cortex-llm]
-    A --> D[cortex-security]
-    A --> E[cortex-stacks]
+    A[cx] --> B[cx-ops]
+    A --> C[cx-llm]
+    A --> D[cx-security]
+    A --> E[cx-stacks]
 
     B --> B1[doctor]
     B --> B2[repair]
@@ -36,8 +36,8 @@ graph TD
 The CLI is built using a modular architecture:
 
 ```
-cortex-cli/
-├── cortex_cli/
+cx-cli/
+├── cx_cli/
 │   ├── __init__.py
 │   ├── main.py          # Entry point
 │   ├── commands/        # Command modules
@@ -72,7 +72,7 @@ cortex-cli/
 All commands support these global options:
 
 ```bash
-cortex [OPTIONS] COMMAND [ARGS]
+cx [OPTIONS] COMMAND [ARGS]
 
 Options:
   --config PATH    Path to config file
@@ -86,7 +86,7 @@ Options:
 ### Command Hierarchy
 
 ```
-cortex
+cx
 ├── status              # System status overview
 ├── config              # Configuration management
 │   ├── show            # Show current config
@@ -95,7 +95,7 @@ cortex
 ├── support-bundle      # Generate support bundle
 └── version             # Show version info
 
-cortex-ops
+cx-ops
 ├── doctor              # Health diagnostics
 │   ├── (default)       # Run all checks
 │   └── list            # List available checks
@@ -154,13 +154,13 @@ All commands support JSON output for scripting:
 
 ```bash
 # Get JSON output
-cortex-ops doctor --json
+cx-ops doctor --json
 
 # Parse with jq
-cortex-ops doctor --json | jq '.summary.failed'
+cx-ops doctor --json | jq '.summary.failed'
 
 # Use in scripts
-if cortex-ops doctor --json | jq -e '.summary.success' > /dev/null; then
+if cx-ops doctor --json | jq -e '.summary.success' > /dev/null; then
     echo "System healthy"
 fi
 ```
@@ -193,7 +193,7 @@ Details:
 Suggestions:
   1. Check network connectivity
   2. Verify the API URL in config
-  3. Run: cortex-ops doctor --check network_connectivity
+  3. Run: cx-ops doctor --check network_connectivity
 ```
 
 ## Configuration
@@ -203,9 +203,9 @@ Suggestions:
 ```python
 # Search order (first found wins)
 CONFIG_PATHS = [
-    Path("./cortex.yaml"),                    # Local
-    Path.home() / ".config/cortex/config.yaml", # User
-    Path("/etc/cortex/config.yaml"),          # System
+    Path("./cx.yaml"),                    # Local
+    Path.home() / ".config/cx/config.yaml", # User
+    Path("/etc/cx/config.yaml"),          # System
 ]
 ```
 
@@ -213,9 +213,9 @@ CONFIG_PATHS = [
 
 ```bash
 # All config options can be set via env vars
-export CORTEX_DEBUG=true
-export CORTEX_LOG_LEVEL=DEBUG
-export CORTEX_CONNECTORS__DEFAULT=anthropic
+export CX_DEBUG=true
+export CX_LOG_LEVEL=DEBUG
+export CX_CONNECTORS__DEFAULT=anthropic
 ```
 
 ## Authentication
@@ -224,10 +224,10 @@ export CORTEX_CONNECTORS__DEFAULT=anthropic
 
 ```bash
 # Set API key
-export CORTEX_API_KEY="ctx-your-key"
+export CX_API_KEY="ctx-your-key"
 
 # Or in config
-echo "api_key: ctx-your-key" >> ~/.config/cortex/config.yaml
+echo "api_key: ctx-your-key" >> ~/.config/cx/config.yaml
 ```
 
 ### Keyring Integration
@@ -238,10 +238,10 @@ For secure credential storage:
 import keyring
 
 # Store credential
-keyring.set_password("cortex", "api_key", "ctx-secret")
+keyring.set_password("cx", "api_key", "ctx-secret")
 
 # Retrieve credential
-api_key = keyring.get_password("cortex", "api_key")
+api_key = keyring.get_password("cx", "api_key")
 ```
 
 ## Plugin System
@@ -251,7 +251,7 @@ api_key = keyring.get_password("cortex", "api_key")
 Plugins extend CLI functionality:
 
 ```python
-from cortex_cli.plugins import CommandPlugin, PluginInfo
+from cx_cli.plugins import CommandPlugin, PluginInfo
 
 class MyPlugin(CommandPlugin):
     @property
@@ -274,8 +274,8 @@ class MyPlugin(CommandPlugin):
 
 Plugins are loaded from:
 
-1. `/etc/cortex/plugins/`
-2. `~/.config/cortex/plugins/`
+1. `/etc/cx/plugins/`
+2. `~/.config/cx/plugins/`
 3. Explicitly via `--plugin` flag
 
 ## Async Operations
@@ -284,7 +284,7 @@ The CLI supports async operations for better performance:
 
 ```python
 import asyncio
-from cortex_cli.core import async_command
+from cx_cli.core import async_command
 
 @async_command
 async def check_all():
@@ -305,21 +305,21 @@ async def check_all():
 === "Bash"
 
     ```bash
-    cortex --install-completion bash
+    cx --install-completion bash
     source ~/.bashrc
     ```
 
 === "Zsh"
 
     ```bash
-    cortex --install-completion zsh
+    cx --install-completion zsh
     source ~/.zshrc
     ```
 
 === "Fish"
 
     ```bash
-    cortex --install-completion fish
+    cx --install-completion fish
     ```
 
 ### Usage
@@ -327,8 +327,8 @@ async def check_all():
 After installation:
 
 ```bash
-cortex-ops doc<TAB>    # Completes to "doctor"
-cortex-ops doctor --<TAB>  # Shows available flags
+cx-ops doc<TAB>    # Completes to "doctor"
+cx-ops doctor --<TAB>  # Shows available flags
 ```
 
 ## Scripting
@@ -340,17 +340,17 @@ cortex-ops doctor --<TAB>  # Shows available flags
 set -e
 
 # Run doctor and capture result
-if ! cortex-ops doctor --quiet; then
+if ! cx-ops doctor --quiet; then
     echo "Health check failed!"
-    cortex-ops doctor --json > /tmp/health-report.json
+    cx-ops doctor --json > /tmp/health-report.json
     exit 1
 fi
 
 # Check specific condition
-disk_usage=$(cortex-ops doctor --json | jq -r '.results[] | select(.check_id=="disk_space") | .details.percent_used')
+disk_usage=$(cx-ops doctor --json | jq -r '.results[] | select(.check_id=="disk_space") | .details.percent_used')
 if (( $(echo "$disk_usage > 90" | bc -l) )); then
     echo "Disk usage critical: ${disk_usage}%"
-    cortex-ops repair apt --clean-cache
+    cx-ops repair apt --clean-cache
 fi
 ```
 
@@ -360,7 +360,7 @@ fi
 # GitHub Actions example
 - name: Health Check
   run: |
-    cortex-ops doctor --json > health.json
+    cx-ops doctor --json > health.json
     if ! jq -e '.summary.success' health.json; then
       echo "::error::Health check failed"
       exit 1
@@ -378,7 +378,7 @@ Commands are lazy-loaded for fast startup:
 @app.command()
 def expensive_command():
     # Heavy imports here, not at module level
-    from cortex_cli.heavy import process
+    from cx_cli.heavy import process
     process()
 ```
 
@@ -388,10 +388,10 @@ Results are cached where appropriate:
 
 ```bash
 # Force fresh check (bypass cache)
-cortex-ops update check --force
+cx-ops update check --force
 
 # Use cached result (default)
-cortex-ops update check
+cx-ops update check
 ```
 
 ## Development
@@ -403,7 +403,7 @@ cortex-ops update check
 pip install -e ".[dev]"
 
 # Run CLI
-python -m cortex_cli
+python -m cx_cli
 
 # Run tests
 pytest tests/ -v
@@ -412,7 +412,7 @@ pytest tests/ -v
 ### Adding Commands
 
 ```python
-# cortex_cli/commands/new_command.py
+# cx_cli/commands/new_command.py
 import typer
 
 app = typer.Typer()
@@ -428,6 +428,6 @@ def new_feature(
 Register in main:
 
 ```python
-from cortex_cli.commands import new_command
+from cx_cli.commands import new_command
 app.add_typer(new_command.app, name="new")
 ```

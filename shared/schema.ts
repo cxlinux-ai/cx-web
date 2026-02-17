@@ -47,7 +47,7 @@ export const hackathonRegistrations = pgTable("hackathon_registrations", {
   teamOrSolo: text("team_or_solo"),
   teamName: text("team_name"),
   projectIdea: text("project_idea"),
-  usedCortexBefore: text("used_cortex_before"),
+  usedCxBefore: text("used_cx_before"),
   howHeardAboutUs: text("how_heard_about_us"),
   phaseParticipation: text("phase_participation"),
 });
@@ -68,7 +68,7 @@ export const insertHackathonRegistrationSchema = createInsertSchema(hackathonReg
   teamOrSolo: true,
   teamName: true,
   projectIdea: true,
-  usedCortexBefore: true,
+  usedCxBefore: true,
   howHeardAboutUs: true,
   phaseParticipation: true,
 });

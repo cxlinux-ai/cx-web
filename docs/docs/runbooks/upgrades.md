@@ -1,6 +1,6 @@
 # Upgrade Guide
 
-Procedures for upgrading Cortex Linux systems safely.
+Procedures for upgrading CX Linux systems safely.
 
 ## Upgrade Overview
 
@@ -38,10 +38,10 @@ Apply security updates promptly:
 
 ```bash
 # Check for security updates
-cortex-ops update check
+cx-ops update check
 
 # Apply security updates only
-cortex-ops update apply --packages --security -y
+cx-ops update apply --packages --security -y
 
 # Or manually
 sudo apt update
@@ -58,7 +58,7 @@ For regular package updates:
 apt list --upgradable
 
 # Apply all updates
-cortex-ops update apply --packages
+cx-ops update apply --packages
 
 # Or manually
 sudo apt update
@@ -87,17 +87,17 @@ sudo reboot
 
 ## Major Version Upgrades
 
-### Cortex Linux Release Upgrade
+### CX Linux Release Upgrade
 
 ```bash
 # 1. Update current system fully
 sudo apt update && sudo apt full-upgrade
 
 # 2. Check upgrade availability
-cortex-ops update check
+cx-ops update check
 
 # 3. Create backup
-cortex-ops update apply --system  # Creates automatic snapshot
+cx-ops update apply --system  # Creates automatic snapshot
 
 # Or use do-release-upgrade
 sudo do-release-upgrade
@@ -109,7 +109,7 @@ sudo do-release-upgrade
 
 ```bash
 # Check current version
-cat /etc/cortex/version
+cat /etc/cx/version
 
 # Review release notes
 curl https://releases.cortexlinux.com/2024.2/notes.md
@@ -128,12 +128,12 @@ apt-mark unhold package-name
 
 ```bash
 # Create snapshot
-cortex-ops update rollback --list  # Note current snapshots
+cx-ops update rollback --list  # Note current snapshots
 
 # Manual backup of critical data
 tar -czvf /backup/pre-upgrade-$(date +%Y%m%d).tar.gz \
-    /etc/cortex \
-    /var/lib/cortex
+    /etc/cx \
+    /var/lib/cx
 
 # Export database if applicable
 pg_dumpall > /backup/databases-pre-upgrade.sql
@@ -143,7 +143,7 @@ pg_dumpall > /backup/databases-pre-upgrade.sql
 
 ```bash
 # Run the upgrade
-cortex-ops update apply --system
+cx-ops update apply --system
 
 # Or manually:
 sudo apt update
@@ -159,16 +159,16 @@ sudo do-release-upgrade
 
 ```bash
 # Verify version
-cat /etc/cortex/version
+cat /etc/cx/version
 
 # Check for issues
-cortex-ops doctor
+cx-ops doctor
 
 # Restart critical services
-sudo systemctl restart cortex
+sudo systemctl restart cx
 
 # Verify services
-systemctl status cortex
+systemctl status cx
 
 # Check logs for errors
 journalctl -p err -n 50
@@ -178,25 +178,25 @@ journalctl -p err -n 50
 
 ## Component Upgrades
 
-### Cortex CLI Upgrade
+### CX CLI Upgrade
 
 ```bash
 # Via pip
-pip install --upgrade cortex-ops
+pip install --upgrade cx-ops
 
 # Via apt
 sudo apt update
-sudo apt install cortex-ops
+sudo apt install cx-ops
 ```
 
-### Cortex LLM Upgrade
+### CX LLM Upgrade
 
 ```bash
 # Upgrade connector libraries
 pip install --upgrade openai anthropic google-generativeai
 
 # Update configuration if needed
-nano /etc/cortex/config.yaml
+nano /etc/cx/config.yaml
 ```
 
 ### Container Runtime Upgrade
@@ -241,7 +241,7 @@ kubectl drain node-1 --ignore-daemonsets --delete-emptydir-data
 
 # 3. SSH to node and upgrade
 ssh node-1
-cortex-ops update apply --packages -y
+cx-ops update apply --packages -y
 sudo reboot
 
 # 4. Verify node
@@ -280,13 +280,13 @@ kubectl delete deployment app-v1
 
 ```bash
 # List snapshots
-cortex-ops update rollback --list
+cx-ops update rollback --list
 
 # Rollback to latest
-cortex-ops update rollback
+cx-ops update rollback
 
 # Rollback to specific snapshot
-cortex-ops update rollback 20240115-120000
+cx-ops update rollback 20240115-120000
 ```
 
 ### Manual Rollback
@@ -302,7 +302,7 @@ tar -xzf /backup/pre-upgrade.tar.gz -C /
 psql < /backup/databases-pre-upgrade.sql
 
 # Restart services
-sudo systemctl restart cortex
+sudo systemctl restart cx
 ```
 
 ### Kernel Rollback
@@ -350,9 +350,9 @@ Unattended-Upgrade::Automatic-Reboot "false";
 ### Scheduled Upgrades
 
 ```bash
-# /etc/cron.d/cortex-upgrade
+# /etc/cron.d/cx-upgrade
 # Weekly package updates on Sunday at 3 AM
-0 3 * * 0 root cortex-ops update apply --packages --security -y >> /var/log/cortex/upgrade.log 2>&1
+0 3 * * 0 root cx-ops update apply --packages --security -y >> /var/log/cx/upgrade.log 2>&1
 ```
 
 ---
@@ -426,13 +426,13 @@ sudo apt full-upgrade
 # /usr/local/bin/verify-upgrade.sh
 
 echo "=== System Version ==="
-cat /etc/cortex/version
+cat /etc/cx/version
 
 echo "=== Kernel ==="
 uname -r
 
 echo "=== Health Check ==="
-cortex-ops doctor --json | jq '.summary'
+cx-ops doctor --json | jq '.summary'
 
 echo "=== Failed Services ==="
 systemctl --failed
@@ -444,7 +444,7 @@ echo "=== Disk Space ==="
 df -h /
 
 echo "=== Critical Services ==="
-for service in sshd cortex docker; do
+for service in sshd cx docker; do
     systemctl is-active $service
 done
 ```
@@ -456,7 +456,7 @@ done
 curl -s http://localhost:8080/health | jq
 
 # Test critical workflows
-cortex-ops connectors test
+cx-ops connectors test
 
 # Run integration tests if available
 ./run-tests.sh

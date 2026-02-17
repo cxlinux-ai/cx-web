@@ -1,6 +1,6 @@
 # Configuration
 
-Comprehensive guide to configuring Cortex Linux for your environment.
+Comprehensive guide to configuring CX Linux for your environment.
 
 ## Configuration Overview
 
@@ -10,11 +10,11 @@ graph TD
     A --> C[Config Files]
     A --> D[CLI Arguments]
 
-    C --> E[/etc/cortex/config.yaml]
-    C --> F[~/.config/cortex/config.yaml]
-    C --> G[./cortex.yaml]
+    C --> E[/etc/cx/config.yaml]
+    C --> F[~/.config/cx/config.yaml]
+    C --> G[./cx.yaml]
 
-    B --> H[CORTEX_* variables]
+    B --> H[CX_* variables]
 
     D --> I[--config flag]
 ```
@@ -23,27 +23,27 @@ Configuration is loaded in order of precedence (highest to lowest):
 
 1. CLI arguments
 2. Environment variables
-3. Local config (`./cortex.yaml`)
-4. User config (`~/.config/cortex/config.yaml`)
-5. System config (`/etc/cortex/config.yaml`)
+3. Local config (`./cx.yaml`)
+4. User config (`~/.config/cx/config.yaml`)
+5. System config (`/etc/cx/config.yaml`)
 
 ## Main Configuration File
 
-The primary configuration file is `/etc/cortex/config.yaml`:
+The primary configuration file is `/etc/cx/config.yaml`:
 
 ```yaml
-# /etc/cortex/config.yaml
-# Cortex Linux System Configuration
+# /etc/cx/config.yaml
+# CX Linux System Configuration
 
 # General Settings
 debug: false
 log_level: INFO  # DEBUG, INFO, WARNING, ERROR
 
 # Directory paths
-config_dir: /etc/cortex
-data_dir: /var/lib/cortex
-cache_dir: /var/cache/cortex
-log_dir: /var/log/cortex
+config_dir: /etc/cx
+data_dir: /var/lib/cx
+cache_dir: /var/cache/cx
+log_dir: /var/log/cx
 
 # LLM Connector Configuration
 connectors:
@@ -68,7 +68,7 @@ connectors:
 # Plugin Configuration
 plugins:
   enabled: true
-  directory: /etc/cortex/plugins
+  directory: /etc/cx/plugins
   auto_load: true
   trusted_sources:
     - cortexlinux
@@ -103,10 +103,10 @@ All configuration options can be set via environment variables:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `CORTEX_DEBUG` | Enable debug mode | `false` |
-| `CORTEX_LOG_LEVEL` | Logging level | `INFO` |
-| `CORTEX_CONFIG_DIR` | Configuration directory | `/etc/cortex` |
-| `CORTEX_DATA_DIR` | Data directory | `/var/lib/cortex` |
+| `CX_DEBUG` | Enable debug mode | `false` |
+| `CX_LOG_LEVEL` | Logging level | `INFO` |
+| `CX_CONFIG_DIR` | Configuration directory | `/etc/cx` |
+| `CX_DATA_DIR` | Data directory | `/var/lib/cx` |
 | `OPENAI_API_KEY` | OpenAI API key | - |
 | `ANTHROPIC_API_KEY` | Anthropic API key | - |
 | `GOOGLE_API_KEY` | Google AI API key | - |
@@ -115,7 +115,7 @@ Set variables in your shell profile:
 
 ```bash
 # ~/.bashrc or ~/.zshrc
-export CORTEX_LOG_LEVEL=DEBUG
+export CX_LOG_LEVEL=DEBUG
 export OPENAI_API_KEY="sk-your-key-here"
 export ANTHROPIC_API_KEY="sk-ant-your-key-here"
 ```
@@ -123,9 +123,9 @@ export ANTHROPIC_API_KEY="sk-ant-your-key-here"
 Or in a systemd service:
 
 ```ini
-# /etc/systemd/system/cortex.service.d/override.conf
+# /etc/systemd/system/cx.service.d/override.conf
 [Service]
-Environment="CORTEX_LOG_LEVEL=DEBUG"
+Environment="CX_LOG_LEVEL=DEBUG"
 Environment="OPENAI_API_KEY=sk-your-key"
 ```
 
@@ -229,30 +229,30 @@ echo '/dev/sdb1 /data ext4 defaults 0 2' | sudo tee -a /etc/fstab
 sudo pvcreate /dev/sdb
 
 # Create volume group
-sudo vgcreate cortex-vg /dev/sdb
+sudo vgcreate cx-vg /dev/sdb
 
 # Create logical volume
-sudo lvcreate -L 100G -n data cortex-vg
+sudo lvcreate -L 100G -n data cx-vg
 
 # Create filesystem
-sudo mkfs.ext4 /dev/cortex-vg/data
+sudo mkfs.ext4 /dev/cx-vg/data
 
 # Mount
-sudo mount /dev/cortex-vg/data /data
+sudo mount /dev/cx-vg/data /data
 ```
 
 ### Configure ZFS
 
 ```bash
 # Create pool
-sudo zpool create cortex-pool /dev/sdb
+sudo zpool create cx-pool /dev/sdb
 
 # Create dataset
-sudo zfs create cortex-pool/data
+sudo zfs create cx-pool/data
 
 # Set properties
-sudo zfs set compression=lz4 cortex-pool/data
-sudo zfs set atime=off cortex-pool/data
+sudo zfs set compression=lz4 cx-pool/data
+sudo zfs set atime=off cx-pool/data
 
 # View status
 zpool status
@@ -262,15 +262,15 @@ zpool status
 
 ### Configure sudo
 
-Edit `/etc/sudoers.d/cortex`:
+Edit `/etc/sudoers.d/cx`:
 
 ```sudoers
-# Allow cortex group full sudo
-%cortex ALL=(ALL:ALL) ALL
+# Allow cx group full sudo
+%cx ALL=(ALL:ALL) ALL
 
 # Allow specific commands without password
 %operators ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
-%operators ALL=(ALL) NOPASSWD: /usr/bin/cortex-ops doctor
+%operators ALL=(ALL) NOPASSWD: /usr/bin/cx-ops doctor
 ```
 
 ### Configure PAM
@@ -355,7 +355,7 @@ Example entries:
 
 ```cron
 # Run health check every hour
-0 * * * * /usr/bin/cortex-ops doctor --json > /var/log/cortex/health.json
+0 * * * * /usr/bin/cx-ops doctor --json > /var/log/cx/health.json
 
 # Backup daily at 2 AM
 0 2 * * * /usr/local/bin/backup.sh
@@ -387,11 +387,11 @@ sudo systemctl restart systemd-journald
 
 ### Rsyslog
 
-Edit `/etc/rsyslog.d/50-cortex.conf`:
+Edit `/etc/rsyslog.d/50-cx.conf`:
 
 ```
-# Log cortex messages to dedicated file
-:programname, isequal, "cortex" /var/log/cortex/cortex.log
+# Log cx messages to dedicated file
+:programname, isequal, "cx" /var/log/cx/cx.log
 & stop
 
 # Forward to remote syslog
@@ -400,10 +400,10 @@ Edit `/etc/rsyslog.d/50-cortex.conf`:
 
 ### Log Rotation
 
-Create `/etc/logrotate.d/cortex`:
+Create `/etc/logrotate.d/cx`:
 
 ```
-/var/log/cortex/*.log {
+/var/log/cx/*.log {
     daily
     rotate 14
     compress
@@ -422,7 +422,7 @@ Create `/etc/logrotate.d/cortex`:
 
 ### Kernel Parameters
 
-Edit `/etc/sysctl.d/99-cortex.conf`:
+Edit `/etc/sysctl.d/99-cx.conf`:
 
 ```ini
 # Network performance
@@ -452,14 +452,14 @@ sudo sysctl --system
 
 ### Resource Limits
 
-Edit `/etc/security/limits.d/cortex.conf`:
+Edit `/etc/security/limits.d/cx.conf`:
 
 ```
-# Increase limits for cortex user
-cortex soft nofile 65535
-cortex hard nofile 65535
-cortex soft nproc 32768
-cortex hard nproc 32768
+# Increase limits for cx user
+cx soft nofile 65535
+cx hard nofile 65535
+cx soft nproc 32768
+cx hard nproc 32768
 ```
 
 ## Validation
@@ -468,14 +468,14 @@ After making configuration changes, validate:
 
 ```bash
 # Test configuration syntax
-cortex config validate
+cx config validate
 
 # Run diagnostics
-cortex-ops doctor
+cx-ops doctor
 
 # Check service status
-systemctl status cortex
+systemctl status cx
 
 # View logs for errors
-journalctl -u cortex -p err
+journalctl -u cx -p err
 ```

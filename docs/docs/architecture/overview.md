@@ -1,6 +1,6 @@
 # Architecture Overview
 
-Cortex Linux is built as a modular, layered system designed for AI workloads and modern infrastructure management.
+CX Linux is built as a modular, layered system designed for AI workloads and modern infrastructure management.
 
 ## System Architecture
 
@@ -13,15 +13,15 @@ graph TB
     end
 
     subgraph Application Layer
-        D[Cortex CLI]
-        E[Cortex Ops]
-        F[Cortex LLM]
-        G[Cortex Security]
+        D[CX CLI]
+        E[CX Ops]
+        F[CX LLM]
+        G[CX Security]
     end
 
     subgraph Platform Layer
-        H[Cortex Stacks]
-        I[Cortex Observe]
+        H[CX Stacks]
+        I[CX Observe]
         J[Plugin System]
     end
 
@@ -62,18 +62,18 @@ graph TB
 
 ## Core Components
 
-### Cortex CLI
+### CX CLI
 
 The unified command-line interface that serves as the primary interaction point:
 
 | Component | Purpose |
 |-----------|---------|
-| `cortex` | Main CLI entrypoint |
-| `cortex-ops` | Operations and diagnostics |
-| `cortex-llm` | LLM orchestration |
-| `cortex-security` | Security management |
+| `cx` | Main CLI entrypoint |
+| `cx-ops` | Operations and diagnostics |
+| `cx-llm` | LLM orchestration |
+| `cx-security` | Security management |
 
-### Cortex Ops
+### CX Ops
 
 System operations toolkit providing:
 
@@ -82,7 +82,7 @@ System operations toolkit providing:
 - **Updates**: Orchestrated update management with rollback
 - **Plugins**: Extensibility SDK
 
-### Cortex LLM
+### CX LLM
 
 LLM orchestration layer for AI workloads:
 
@@ -91,7 +91,7 @@ LLM orchestration layer for AI workloads:
 - **Caching**: Response caching for cost optimization
 - **Local Models**: Support for local LLM deployment
 
-### Cortex Security
+### CX Security
 
 Security hardening and compliance:
 
@@ -100,7 +100,7 @@ Security hardening and compliance:
 - **Compliance**: CIS benchmark automation
 - **Secrets**: Secure credential management
 
-### Cortex Stacks
+### CX Stacks
 
 Container and Kubernetes orchestration:
 
@@ -109,7 +109,7 @@ Container and Kubernetes orchestration:
 - **Helm**: Chart management
 - **Registry**: Private container registry
 
-### Cortex Observe
+### CX Observe
 
 Monitoring and observability:
 
@@ -128,7 +128,7 @@ sequenceDiagram
     participant LLM
     participant System
 
-    User->>CLI: cortex-ops doctor
+    User->>CLI: cx-ops doctor
     CLI->>Ops: Execute health checks
     Ops->>System: Collect metrics
     System-->>Ops: System data
@@ -143,21 +143,21 @@ sequenceDiagram
 ```
 /
 ├── etc/
-│   └── cortex/
+│   └── cx/
 │       ├── config.yaml       # Main configuration
 │       ├── plugins/          # Plugin directory
 │       └── hooks/            # Lifecycle hooks
 ├── var/
-│   ├── lib/cortex/          # Application data
-│   ├── cache/cortex/        # Cache files
-│   └── log/cortex/          # Log files
+│   ├── lib/cx/          # Application data
+│   ├── cache/cx/        # Cache files
+│   └── log/cx/          # Log files
 ├── opt/
-│   └── cortex/              # Optional packages
+│   └── cx/              # Optional packages
 └── usr/
     ├── bin/
-    │   ├── cortex           # Main CLI
-    │   └── cortex-ops       # Ops CLI
-    └── lib/cortex/          # Libraries
+    │   ├── cx           # Main CLI
+    │   └── cx-ops       # Ops CLI
+    └── lib/cx/          # Libraries
 ```
 
 ## Communication Patterns
@@ -219,7 +219,7 @@ All components on one machine:
 
 ```
 ┌─────────────────────────────────┐
-│         Cortex Linux            │
+│         CX Linux            │
 ├─────────────────────────────────┤
 │  CLI │ Ops │ LLM │ Security    │
 ├─────────────────────────────────┤
@@ -250,7 +250,7 @@ Distributed across multiple nodes:
 
 ## Extension Points
 
-Cortex Linux can be extended at multiple levels:
+CX Linux can be extended at multiple levels:
 
 | Level | Mechanism | Use Case |
 |-------|-----------|----------|

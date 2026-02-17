@@ -1,12 +1,12 @@
-# Cortex Ops
+# CX Ops
 
-Cortex Ops provides system diagnostics, repair tools, update management, and extensibility through plugins.
+CX Ops provides system diagnostics, repair tools, update management, and extensibility through plugins.
 
 ## Overview
 
 ```mermaid
 graph LR
-    subgraph Cortex Ops
+    subgraph CX Ops
         A[Doctor]
         B[Repair]
         C[Updates]
@@ -55,22 +55,22 @@ The doctor module includes 12+ built-in health checks:
 
 ```bash
 # Run all checks
-cortex-ops doctor
+cx-ops doctor
 
 # Run with auto-fix
-cortex-ops doctor --fix
+cx-ops doctor --fix
 
 # Run specific check
-cortex-ops doctor --check disk_space
+cx-ops doctor --check disk_space
 
 # Filter by category
-cortex-ops doctor --category network
+cx-ops doctor --category network
 
 # JSON output
-cortex-ops doctor --json
+cx-ops doctor --json
 
 # Verbose mode
-cortex-ops doctor --verbose
+cx-ops doctor --verbose
 ```
 
 ### Check Result Structure
@@ -90,7 +90,7 @@ class CheckResult:
 ### Creating Custom Checks
 
 ```python
-from cortex_ops.doctor import Check, CheckCategory, CheckSeverity, CheckResult, CheckStatus
+from cx_ops.doctor import Check, CheckCategory, CheckSeverity, CheckResult, CheckStatus
 
 def check_custom_service() -> CheckResult:
     """Check if custom service is running."""
@@ -130,13 +130,13 @@ custom_check = Check(
 
 ```bash
 # Diagnose APT issues
-cortex-ops repair apt --dry-run
+cx-ops repair apt --dry-run
 
 # Fix all APT issues
-cortex-ops repair apt
+cx-ops repair apt
 
 # Clear locks only
-cortex-ops repair apt --locks
+cx-ops repair apt --locks
 ```
 
 Handles:
@@ -151,13 +151,13 @@ Handles:
 
 ```bash
 # Check permissions
-cortex-ops repair permissions --dry-run
+cx-ops repair permissions --dry-run
 
 # Fix Cortex directories only
-cortex-ops repair permissions --cortex
+cx-ops repair permissions --cx
 
 # Fix user home directory
-cortex-ops repair permissions --user developer
+cx-ops repair permissions --user developer
 ```
 
 Fixes:
@@ -170,13 +170,13 @@ Fixes:
 
 ```bash
 # Fix all service issues
-cortex-ops repair services
+cx-ops repair services
 
 # Restart failed services only
-cortex-ops repair services --restart-failed
+cx-ops repair services --restart-failed
 
 # Fix specific service
-cortex-ops repair services --service nginx
+cx-ops repair services --service nginx
 ```
 
 ## Update Module
@@ -191,18 +191,18 @@ sequenceDiagram
     participant Installer
     participant Rollback
 
-    User->>CLI: cortex-ops update check
+    User->>CLI: cx-ops update check
     CLI->>Checker: Check for updates
     Checker-->>CLI: Update info
 
-    User->>CLI: cortex-ops update apply
+    User->>CLI: cx-ops update apply
     CLI->>Rollback: Create snapshot
     Rollback-->>CLI: Snapshot ID
     CLI->>Installer: Install update
     Installer-->>CLI: Result
 
     alt Update Failed
-        User->>CLI: cortex-ops update rollback
+        User->>CLI: cx-ops update rollback
         CLI->>Rollback: Restore snapshot
     end
 ```
@@ -211,10 +211,10 @@ sequenceDiagram
 
 ```bash
 # Check all updates
-cortex-ops update check
+cx-ops update check
 
 # Force check (bypass cache)
-cortex-ops update check --force
+cx-ops update check --force
 ```
 
 Output:
@@ -237,37 +237,37 @@ Output:
 
 ```bash
 # Apply system update
-cortex-ops update apply --system
+cx-ops update apply --system
 
 # Apply package updates
-cortex-ops update apply --packages
+cx-ops update apply --packages
 
 # Security updates only
-cortex-ops update apply --packages --security
+cx-ops update apply --packages --security
 
 # Skip confirmation
-cortex-ops update apply --packages -y
+cx-ops update apply --packages -y
 ```
 
 ### Rollback
 
 ```bash
 # List available snapshots
-cortex-ops update rollback --list
+cx-ops update rollback --list
 
 # Rollback to latest snapshot
-cortex-ops update rollback
+cx-ops update rollback
 
 # Rollback to specific snapshot
-cortex-ops update rollback 20240115-120000
+cx-ops update rollback 20240115-120000
 ```
 
 Snapshot data:
 
 | Data | Backed Up |
 |------|-----------|
-| `/etc/cortex/` | Configuration |
-| `/var/lib/cortex/` | Application data |
+| `/etc/cx/` | Configuration |
+| `/var/lib/cx/` | Application data |
 | Package list | For restoration |
 
 ## Plugin System
@@ -297,14 +297,14 @@ graph TB
 1. Create plugin directory:
 
 ```bash
-cortex-ops plugins create my-plugin --type command
+cx-ops plugins create my-plugin --type command
 ```
 
 2. Edit the generated files:
 
 ```python
-# /etc/cortex/plugins/my-plugin/__init__.py
-from cortex_ops.plugins import CommandPlugin, PluginInfo, PluginType
+# /etc/cx/plugins/my-plugin/__init__.py
+from cx_ops.plugins import CommandPlugin, PluginInfo, PluginType
 
 class MyPlugin(CommandPlugin):
     @property
@@ -336,30 +336,30 @@ class MyPlugin(CommandPlugin):
 3. Create plugin.yaml:
 
 ```yaml
-# /etc/cortex/plugins/my-plugin/plugin.yaml
+# /etc/cx/plugins/my-plugin/plugin.yaml
 name: my-plugin
 version: 1.0.0
 description: My custom plugin
 author: Your Name
 plugin_type: command
 main: __init__.py
-cortex_version: ">=0.1.0"
+cx_version: ">=0.1.0"
 ```
 
 ### Plugin Management
 
 ```bash
 # List installed plugins
-cortex-ops plugins list
+cx-ops plugins list
 
 # List available plugins
-cortex-ops plugins list --available
+cx-ops plugins list --available
 
 # Enable plugin
-cortex-ops plugins enable my-plugin
+cx-ops plugins enable my-plugin
 
 # Disable plugin
-cortex-ops plugins disable my-plugin
+cx-ops plugins disable my-plugin
 ```
 
 ### Hook System
@@ -367,7 +367,7 @@ cortex-ops plugins disable my-plugin
 Plugins can hook into Cortex events:
 
 ```python
-from cortex_ops.plugins.hooks import hooks, HookPriority
+from cx_ops.plugins.hooks import hooks, HookPriority
 
 @hooks.on("post_check", priority=HookPriority.HIGH)
 def log_check_result(result):
@@ -389,14 +389,14 @@ Available hooks:
 | `post_check` | After running a check |
 | `pre_fix` | Before applying a fix |
 | `post_fix` | After applying a fix |
-| `startup` | When cortex-ops starts |
-| `shutdown` | When cortex-ops exits |
+| `startup` | When cx-ops starts |
+| `shutdown` | When cx-ops exits |
 | `plugin_loaded` | After a plugin loads |
 
 ## Configuration
 
 ```yaml
-# /etc/cortex/config.yaml
+# /etc/cx/config.yaml
 
 # Doctor settings
 doctor:
@@ -416,7 +416,7 @@ updates:
 # Plugin settings
 plugins:
   enabled: true
-  directory: /etc/cortex/plugins
+  directory: /etc/cx/plugins
   auto_load: true
   trusted_sources:
     - cortexlinux
@@ -428,11 +428,11 @@ plugins:
 
 ```python
 # Exposed at /metrics
-cortex_ops_checks_total{check="disk_space", status="pass"} 42
-cortex_ops_checks_total{check="disk_space", status="fail"} 3
-cortex_ops_check_duration_seconds{check="disk_space"} 0.234
-cortex_ops_repairs_total{type="apt"} 5
-cortex_ops_updates_applied_total{type="package"} 127
+cx_ops_checks_total{check="disk_space", status="pass"} 42
+cx_ops_checks_total{check="disk_space", status="fail"} 3
+cx_ops_check_duration_seconds{check="disk_space"} 0.234
+cx_ops_repairs_total{type="apt"} 5
+cx_ops_updates_applied_total{type="package"} 127
 ```
 
 ### Health Endpoint

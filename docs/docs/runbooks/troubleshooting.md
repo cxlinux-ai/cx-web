@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-Common issues and their solutions for Cortex Linux systems.
+Common issues and their solutions for CX Linux systems.
 
 ## Quick Diagnostics
 
@@ -8,7 +8,7 @@ Before diving into specific issues, run these diagnostic commands:
 
 ```bash
 # System health check
-cortex-ops doctor --verbose
+cx-ops doctor --verbose
 
 # View recent system logs
 journalctl -p err -n 50
@@ -88,7 +88,7 @@ cat /boot/grub/grub.cfg
 dpkg --list | grep linux-image
 
 # Remove problematic kernel
-apt remove linux-image-x.x.x-cortex
+apt remove linux-image-x.x.x-cx
 ```
 
 ---
@@ -205,8 +205,8 @@ sudo journalctl --vacuum-time=7d
 # Find and remove large files
 sudo find /tmp -type f -atime +7 -delete
 
-# Use cortex-ops
-cortex-ops repair apt --clean-cache
+# Use cx-ops
+cx-ops repair apt --clean-cache
 ```
 
 ### Filesystem Errors
@@ -344,7 +344,7 @@ systemctl --failed
 sudo systemctl reset-failed
 
 # Restart failed units
-cortex-ops repair services --restart-failed
+cx-ops repair services --restart-failed
 ```
 
 ---
@@ -366,8 +366,8 @@ sudo dpkg --audit
 **Solutions:**
 
 ```bash
-# Use cortex-ops (recommended)
-cortex-ops repair apt
+# Use cx-ops (recommended)
+cx-ops repair apt
 
 # Or manually:
 # Clear locks
@@ -440,7 +440,7 @@ iostat -x 1 5
 ss -s
 
 # Run full diagnostics
-cortex-ops doctor --verbose
+cx-ops doctor --verbose
 ```
 
 ---
@@ -453,7 +453,7 @@ cortex-ops doctor --verbose
 
 ```bash
 # Test connector
-cortex-ops connectors test openai
+cx-ops connectors test openai
 
 # Check API key
 echo $OPENAI_API_KEY | head -c 10
@@ -474,11 +474,11 @@ curl https://api.openai.com/v1/models \
 
 ```bash
 # Increase timeout
-export CORTEX_CONNECTORS__TIMEOUT=120
+export CX_CONNECTORS__TIMEOUT=120
 
 # Or in config
-echo "connectors:" >> /etc/cortex/config.yaml
-echo "  timeout: 120" >> /etc/cortex/config.yaml
+echo "connectors:" >> /etc/cx/config.yaml
+echo "  timeout: 120" >> /etc/cx/config.yaml
 ```
 
 ---
@@ -488,7 +488,7 @@ echo "  timeout: 120" >> /etc/cortex/config.yaml
 ### Generate Support Bundle
 
 ```bash
-cortex support-bundle
+cx support-bundle
 
 # This creates a tarball with:
 # - System info
@@ -504,7 +504,7 @@ cortex support-bundle
 | System | `/var/log/syslog` |
 | Kernel | `/var/log/kern.log` |
 | Auth | `/var/log/auth.log` |
-| Cortex | `/var/log/cortex/` |
+| Cortex | `/var/log/cx/` |
 | Journal | `journalctl` |
 
 ### Community Support

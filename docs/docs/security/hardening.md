@@ -1,6 +1,6 @@
 # Security Hardening Guide
 
-Comprehensive security hardening procedures for Cortex Linux systems.
+Comprehensive security hardening procedures for CX Linux systems.
 
 ## Hardening Overview
 
@@ -33,7 +33,7 @@ graph TB
 Run the automated hardening script:
 
 ```bash
-cortex-security harden
+cx-security harden
 
 # This applies:
 # ✓ Disable root SSH login
@@ -305,7 +305,7 @@ Defaults logfile=/var/log/sudo.log
 Defaults log_input, log_output
 
 # Restrict sudo to specific commands
-%operators ALL=(ALL) /usr/bin/systemctl restart nginx, /usr/bin/cortex-ops doctor
+%operators ALL=(ALL) /usr/bin/systemctl restart nginx, /usr/bin/cx-ops doctor
 
 # Require re-authentication for sensitive commands
 Defaults!/usr/bin/su requiretty
@@ -355,7 +355,7 @@ profile myapp /usr/local/bin/myapp {
 sudo apt install auditd
 
 # Configure rules
-# /etc/audit/rules.d/cortex.rules
+# /etc/audit/rules.d/cx.rules
 
 # Monitor authentication
 -w /etc/passwd -p wa -k identity
@@ -420,11 +420,11 @@ port = http,https
 filter = nginx-http-auth
 logpath = /var/log/nginx/error.log
 
-[cortex-api]
+[cx-api]
 enabled = true
 port = 8080
-filter = cortex-api
-logpath = /var/log/cortex/access.log
+filter = cx-api
+logpath = /var/log/cx/access.log
 maxretry = 10
 ```
 
@@ -452,8 +452,8 @@ Instead use:
 systemd-creds encrypt --name=api-key secret.txt api-key.cred
 
 # Environment file (restricted permissions)
-chmod 600 /etc/cortex/env
-chown root:root /etc/cortex/env
+chmod 600 /etc/cx/env
+chown root:root /etc/cx/env
 ```
 
 ### HashiCorp Vault
@@ -468,10 +468,10 @@ sudo apt update && sudo apt install vault
 vault server -dev
 
 # Store secret
-vault kv put secret/cortex/api-keys openai=sk-xxx anthropic=sk-ant-xxx
+vault kv put secret/cx/api-keys openai=sk-xxx anthropic=sk-ant-xxx
 
 # Read secret
-vault kv get secret/cortex/api-keys
+vault kv get secret/cx/api-keys
 ```
 
 ---
@@ -514,7 +514,7 @@ vault kv get secret/cortex/api-keys
 
 ```bash
 # Run security scan
-cortex-security scan --benchmark cis
+cx-security scan --benchmark cis
 
 # Check open ports
 ss -tlnp

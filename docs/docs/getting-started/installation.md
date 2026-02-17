@@ -1,6 +1,6 @@
 # Installation
 
-This guide covers installing Cortex Linux on physical hardware, virtual machines, and cloud platforms.
+This guide covers installing CX Linux on physical hardware, virtual machines, and cloud platforms.
 
 ## Installation Methods
 
@@ -26,13 +26,13 @@ Download the latest stable ISO from the official releases page:
 
 ```bash
 # Download ISO
-curl -LO https://releases.cortexlinux.com/stable/cortex-2024.1.iso
+curl -LO https://releases.cortexlinux.com/stable/cx-2024.1.iso
 
 # Download checksum
-curl -LO https://releases.cortexlinux.com/stable/cortex-2024.1.iso.sha256
+curl -LO https://releases.cortexlinux.com/stable/cx-2024.1.iso.sha256
 
 # Verify integrity
-sha256sum -c cortex-2024.1.iso.sha256
+sha256sum -c cx-2024.1.iso.sha256
 ```
 
 ### Create Bootable USB
@@ -44,7 +44,7 @@ sha256sum -c cortex-2024.1.iso.sha256
     lsblk
 
     # Write ISO to USB (replace /dev/sdX with your device)
-    sudo dd if=cortex-2024.1.iso of=/dev/sdX bs=4M status=progress oflag=sync
+    sudo dd if=cx-2024.1.iso of=/dev/sdX bs=4M status=progress oflag=sync
 
     # Sync and safely eject
     sync
@@ -61,7 +61,7 @@ sha256sum -c cortex-2024.1.iso.sha256
     diskutil unmountDisk /dev/diskN
 
     # Write ISO
-    sudo dd if=cortex-2024.1.iso of=/dev/rdiskN bs=4m
+    sudo dd if=cx-2024.1.iso of=/dev/rdiskN bs=4m
 
     # Eject
     diskutil eject /dev/diskN
@@ -104,12 +104,12 @@ sha256sum -c cortex-2024.1.iso.sha256
 
 5. **Select Components**:
     ```
-    [x] Cortex CLI (required)
-    [x] Cortex Ops
-    [ ] Cortex LLM (requires GPU)
-    [x] Cortex Security
-    [ ] Cortex Stacks (Kubernetes)
-    [ ] Cortex Observe (monitoring)
+    [x] CX CLI (required)
+    [x] CX Ops
+    [ ] CX LLM (requires GPU)
+    [x] CX Security
+    [ ] CX Stacks (Kubernetes)
+    [ ] CX Observe (monitoring)
     ```
 
 6. **Complete Installation**: The installer will partition disks, install packages, and configure the bootloader. This typically takes 5-15 minutes.
@@ -121,7 +121,7 @@ sha256sum -c cortex-2024.1.iso.sha256
 Download the OVA image:
 
 ```bash
-curl -LO https://releases.cortexlinux.com/stable/cortex-2024.1.ova
+curl -LO https://releases.cortexlinux.com/stable/cx-2024.1.ova
 ```
 
 Import into your hypervisor:
@@ -129,7 +129,7 @@ Import into your hypervisor:
 === "VMware"
 
     ```
-    File → Open → Select cortex-2024.1.ova
+    File → Open → Select cx-2024.1.ova
     ```
 
     Recommended settings:
@@ -144,7 +144,7 @@ Import into your hypervisor:
 === "VirtualBox"
 
     ```
-    File → Import Appliance → Select cortex-2024.1.ova
+    File → Import Appliance → Select cx-2024.1.ova
     ```
 
 ### QEMU / KVM
@@ -152,7 +152,7 @@ Import into your hypervisor:
 Download the QCOW2 image:
 
 ```bash
-curl -LO https://releases.cortexlinux.com/stable/cortex-2024.1.qcow2
+curl -LO https://releases.cortexlinux.com/stable/cx-2024.1.qcow2
 ```
 
 Create and start VM:
@@ -160,10 +160,10 @@ Create and start VM:
 ```bash
 # Create VM with virt-install
 virt-install \
-  --name cortex \
+  --name cx \
   --memory 8192 \
   --vcpus 4 \
-  --disk path=cortex-2024.1.qcow2,format=qcow2 \
+  --disk path=cx-2024.1.qcow2,format=qcow2 \
   --import \
   --os-variant ubuntu22.04 \
   --network bridge=virbr0
@@ -173,7 +173,7 @@ qemu-system-x86_64 \
   -enable-kvm \
   -m 8G \
   -smp 4 \
-  -drive file=cortex-2024.1.qcow2,format=qcow2 \
+  -drive file=cx-2024.1.qcow2,format=qcow2 \
   -net nic -net user,hostfwd=tcp::2222-:22
 ```
 
@@ -185,7 +185,7 @@ qemu-system-x86_64 \
 # Find the latest Cortex AMI
 aws ec2 describe-images \
   --owners 123456789012 \
-  --filters "Name=name,Values=cortex-*" \
+  --filters "Name=name,Values=cx-*" \
   --query 'Images | sort_by(@, &CreationDate) | [-1]'
 
 # Launch instance
@@ -207,16 +207,16 @@ aws ec2 run-instances \
 
 ```bash
 # Create instance
-gcloud compute instances create cortex-vm \
-  --image-family=cortex-stable \
+gcloud compute instances create cx-vm \
+  --image-family=cx-stable \
   --image-project=cortexlinux \
   --machine-type=n2-standard-4 \
   --boot-disk-size=100GB \
   --zone=us-central1-a
 
 # For GPU workloads
-gcloud compute instances create cortex-gpu \
-  --image-family=cortex-stable \
+gcloud compute instances create cx-gpu \
+  --image-family=cx-stable \
   --image-project=cortexlinux \
   --machine-type=n1-standard-8 \
   --accelerator=type=nvidia-tesla-t4,count=1 \
@@ -228,24 +228,24 @@ gcloud compute instances create cortex-gpu \
 
 ```bash
 # Create resource group
-az group create --name cortex-rg --location eastus
+az group create --name cx-rg --location eastus
 
 # Create VM
 az vm create \
-  --resource-group cortex-rg \
-  --name cortex-vm \
+  --resource-group cx-rg \
+  --name cx-vm \
   --image cortexlinux:cortex:stable:latest \
   --size Standard_D4s_v3 \
-  --admin-username cortex \
+  --admin-username cx \
   --generate-ssh-keys
 
 # For GPU workloads
 az vm create \
-  --resource-group cortex-rg \
-  --name cortex-gpu \
+  --resource-group cx-rg \
+  --name cx-gpu \
   --image cortexlinux:cortex:stable:latest \
   --size Standard_NC6s_v3 \
-  --admin-username cortex \
+  --admin-username cx \
   --generate-ssh-keys
 ```
 
@@ -265,8 +265,8 @@ docker run --gpus all -it cortexlinux/cortex
 
 # Run with persistent storage
 docker run -it \
-  -v cortex-data:/var/lib/cortex \
-  -v cortex-config:/etc/cortex \
+  -v cx-data:/var/lib/cx \
+  -v cx-config:/etc/cx \
   cortexlinux/cortex
 ```
 
@@ -284,23 +284,23 @@ After installation, verify your system:
 
 ```bash
 # Check Cortex version
-cortex --version
+cx --version
 
 # Run system diagnostics
-cortex-ops doctor
+cx-ops doctor
 
 # View system status
-cortex status
+cx status
 ```
 
-Continue to [Quick Start](quickstart.md) to begin using Cortex Linux.
+Continue to [Quick Start](quickstart.md) to begin using CX Linux.
 
 ## Troubleshooting Installation
 
 ### Boot Issues
 
 !!! warning "UEFI Secure Boot"
-    Cortex Linux supports Secure Boot, but you may need to enroll the Cortex signing key in your UEFI firmware.
+    CX Linux supports Secure Boot, but you may need to enroll the Cortex signing key in your UEFI firmware.
 
 ```bash
 # Check if booted in UEFI mode
