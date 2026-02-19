@@ -178,7 +178,7 @@ const trustBadges = [
   { label: "SOC2 Type II", description: "Compliant", icon: Shield },
   { label: "HIPAA", description: "Ready", icon: Lock },
   { label: "GDPR", description: "Compliant", icon: BadgeCheck },
-  { label: "MIT License", description: "Open Source", icon: RefreshCw },
+  { label: "BSL 1.1", description: "Source Available", icon: RefreshCw },
 ];
 
 export default function PricingPage() {
