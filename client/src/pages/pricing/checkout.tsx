@@ -20,8 +20,8 @@ import { useToast } from "@/hooks/use-toast";
 interface PlanDetails {
   id: string;
   name: string;
-  price: number;
-  annualPrice: number;
+  monthlyPrice: number;
+  annualPrice: number;  // Actual annual price (not monthly equivalent)
   features: string[];
   stripePriceIdMonthly: string;
   stripePriceIdAnnual: string;
@@ -32,8 +32,8 @@ const plans: Record<string, PlanDetails> = {
   pro: {
     id: "pro",
     name: "Pro",
-    price: 20,
-    annualPrice: 15,
+    monthlyPrice: 20,
+    annualPrice: 200,  // $200/year (actual Stripe price)
     features: [
       "Cloud LLMs (GPT-4, Claude)",
       "Web console dashboard",
@@ -41,15 +41,15 @@ const plans: Record<string, PlanDetails> = {
       "Priority updates",
       "API access",
     ],
-    stripePriceIdMonthly: "price_1SqYQjJ4X1wkC4EsLDB6ZbOk",  // CX Core+ $20/mo
-    stripePriceIdAnnual: "price_1SqYQjJ4X1wkC4EslIkZEJFZ",   // CX Core+ $200/year
+    stripePriceIdMonthly: "price_1SqYQjJ4X1wkC4EsLDB6ZbOk",
+    stripePriceIdAnnual: "price_1SqYQjJ4X1wkC4EslIkZEJFZ",
     icon: Zap,
   },
   team: {
     id: "team",
     name: "Team",
-    price: 99,
-    annualPrice: 79,
+    monthlyPrice: 99,
+    annualPrice: 990,  // $990/year
     features: [
       "Everything in Pro",
       "Team workspaces",
@@ -57,15 +57,15 @@ const plans: Record<string, PlanDetails> = {
       "Shared command history",
       "Priority support (4h)",
     ],
-    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4Es8OMt79pZ",  // CX Pro+ $99/mo
-    stripePriceIdAnnual: "price_1SqYQkJ4X1wkC4EsWYwUgceu",   // CX Pro+ $990/year
+    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4Es8OMt79pZ",
+    stripePriceIdAnnual: "price_1SqYQkJ4X1wkC4EsWYwUgceu",
     icon: Shield,
   },
   enterprise: {
     id: "enterprise",
     name: "Enterprise",
-    price: 299,
-    annualPrice: 239,
+    monthlyPrice: 299,
+    annualPrice: 2990,  // $2990/year
     features: [
       "SSO/LDAP integration",
       "Audit logs & compliance",
@@ -73,8 +73,8 @@ const plans: Record<string, PlanDetails> = {
       "99.9% SLA guarantee",
       "Dedicated Slack channel",
     ],
-    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4EsCFVBHYnT",  // CX Enterprise+ $299/mo
-    stripePriceIdAnnual: "price_1SqYQlJ4X1wkC4EsJcPW7Of2",   // CX Enterprise+ $2990/year
+    stripePriceIdMonthly: "price_1SqYQkJ4X1wkC4EsCFVBHYnT",
+    stripePriceIdAnnual: "price_1SqYQlJ4X1wkC4EsJcPW7Of2",
     icon: Server,
   },
 };
@@ -96,8 +96,12 @@ export default function CheckoutPage() {
   const [isAnnual, setIsAnnual] = useState(billingCycle === "annual");
 
   const plan = plans[planId] || plans.pro;
-  const currentPrice = isAnnual ? plan.annualPrice : plan.price;
   const priceId = isAnnual ? plan.stripePriceIdAnnual : plan.stripePriceIdMonthly;
+  
+  // Calculate savings for annual
+  const monthlyCostIfAnnual = plan.annualPrice / 12;
+  const annualSavings = (plan.monthlyPrice * 12) - plan.annualPrice;
+  const savingsPercent = Math.round((annualSavings / (plan.monthlyPrice * 12)) * 100);
 
   // Store referral code in localStorage for persistence
   useEffect(() => {
@@ -126,10 +130,8 @@ export default function CheckoutPage() {
     setIsLoading(true);
 
     try {
-      // Get referral code from localStorage (in case URL param was cleared)
       const ref = referralCode || localStorage.getItem("cx_referral") || "";
       
-      // Create checkout session with referral code
       const response = await fetch("/api/stripe/checkout-session", {
         method: "POST",
         headers: {
@@ -142,7 +144,7 @@ export default function CheckoutPage() {
           priceId,
           planId: plan.id,
           billingCycle: isAnnual ? "annual" : "monthly",
-          referralCode: ref,  // Pass referral code to backend
+          referralCode: ref,
           successUrl: `${window.location.origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
           cancelUrl: `${window.location.origin}/pricing/checkout?plan=${planId}&billing=${isAnnual ? "annual" : "monthly"}${ref ? `&ref=${ref}` : ""}`,
         }),
@@ -154,10 +156,6 @@ export default function CheckoutPage() {
         throw new Error(data.error || "Failed to create checkout session");
       }
 
-      // Clear referral code on successful checkout start
-      // (it will be recorded by the webhook)
-      
-      // Redirect to Stripe Checkout
       if (data.url) {
         window.location.href = data.url;
       } else {
@@ -277,7 +275,7 @@ export default function CheckoutPage() {
                     }`}
                   >
                     Monthly
-                    <span className="block text-xs mt-1 opacity-75">${plan.price}/mo</span>
+                    <span className="block text-xs mt-1 opacity-75">${plan.monthlyPrice}/mo</span>
                   </button>
                   <button
                     type="button"
@@ -290,8 +288,8 @@ export default function CheckoutPage() {
                   >
                     Annual
                     <span className="block text-xs mt-1 opacity-75">
-                      ${plan.annualPrice}/mo{" "}
-                      <span className="text-green-400">Save 20%</span>
+                      ${plan.annualPrice}/yr{" "}
+                      <span className="text-green-400">Save {savingsPercent}%</span>
                     </span>
                   </button>
                 </div>
@@ -360,19 +358,34 @@ export default function CheckoutPage() {
               <div id="checkout-price-breakdown" className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-400">
                   <span>{plan.name} ({isAnnual ? "Annual" : "Monthly"})</span>
-                  <span>${currentPrice}/mo</span>
+                  <span>
+                    {isAnnual 
+                      ? `$${plan.annualPrice}/yr`
+                      : `$${plan.monthlyPrice}/mo`
+                    }
+                  </span>
                 </div>
                 {isAnnual && (
                   <div className="flex justify-between text-green-400 text-sm">
-                    <span>Annual discount (20%)</span>
-                    <span>-${(plan.price - plan.annualPrice) * 12}/yr</span>
+                    <span>You save vs monthly</span>
+                    <span>-${annualSavings}/yr</span>
                   </div>
                 )}
                 <div className="border-t border-white/10 pt-3">
                   <div className="flex justify-between text-lg font-bold">
                     <span>Due today</span>
-                    <span className="text-green-400">${isAnnual ? plan.annualPrice * 12 : currentPrice}{isAnnual ? "/yr" : "/mo"}</span>
+                    <span className="text-green-400">
+                      {isAnnual 
+                        ? `$${plan.annualPrice}`
+                        : `$${plan.monthlyPrice}`
+                      }
+                    </span>
                   </div>
+                  {isAnnual && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      That's ~${monthlyCostIfAnnual.toFixed(2)}/mo
+                    </p>
+                  )}
                 </div>
               </div>
 
