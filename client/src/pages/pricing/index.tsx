@@ -74,7 +74,7 @@ const tiers: PricingTier[] = [
     id: "pro",
     name: "CX Pro",
     subtitle: "For Power Users",
-    price: 19,
+    price: 20,
     annualPrice: 15,
     description: "Unlock cloud AI models, web console, and priority support. Perfect for developers managing multiple servers.",
     features: [

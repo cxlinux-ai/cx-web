@@ -1,9 +1,9 @@
-site_name: Cortex Linux Documentation
-site_url: https://docs.cortexlinux.com
-site_description: Official documentation for Cortex Linux - AI-native operating system
-site_author: Cortex Linux Team
-repo_url: https://github.com/cortexlinux/cortex-docs
-repo_name: cortexlinux/cortex-docs
+site_name: CX Linux Documentation
+site_url: https://docs.cxlinux.com
+site_description: Official documentation for CX Linux - AI-native operating system
+site_author: CX Linux Team
+repo_url: https://github.com/cxlinux-ai/cx-docs
+repo_name: cxlinux-ai/cx-docs
 
 theme:
   name: material
@@ -94,9 +94,9 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/cortexlinux
+      link: https://github.com/cxlinux-ai
     - icon: fontawesome/brands/discord
-      link: https://discord.gg/cortexlinux
+      link: https://discord.gg/cxlinux
   analytics:
     provider: google
     property: G-XXXXXXXXXX
@@ -114,12 +114,12 @@ nav:
     - Configuration: getting-started/configuration.md
   - Architecture:
     - Overview: architecture/overview.md
-    - Cortex CLI: architecture/cortex-cli.md
-    - Cortex LLM: architecture/cortex-llm.md
-    - Cortex Security: architecture/cortex-security.md
-    - Cortex Ops: architecture/cortex-ops.md
-    - Cortex Stacks: architecture/cortex-stacks.md
-    - Cortex Observe: architecture/cortex-observe.md
+    - CX CLI: architecture/cortex-cli.md
+    - CX LLM: architecture/cortex-llm.md
+    - CX Security: architecture/cortex-security.md
+    - CX Ops: architecture/cortex-ops.md
+    - CX Stacks: architecture/cortex-stacks.md
+    - CX Observe: architecture/cortex-observe.md
   - API Reference:
     - CLI Reference: api/cli-reference.md
     - REST API: api/rest-api.md
@@ -131,4 +131,4 @@ nav:
     - Hardening Guide: security/hardening.md
     - Compliance: security/compliance.md
 
-copyright: Copyright &copy; 2024 Cortex Linux Team
+copyright: Copyright &copy; 2024 CX Linux Team

@@ -10,6 +10,7 @@ import {
   Lock,
   Zap,
   Server,
+  Gift,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ const plans: Record<string, PlanDetails> = {
   pro: {
     id: "pro",
     name: "Pro",
-    price: 19,
+    price: 20,
     annualPrice: 15,
     features: [
       "Cloud LLMs (GPT-4, Claude)",
@@ -86,6 +87,7 @@ export default function CheckoutPage() {
   const params = new URLSearchParams(window.location.search);
   const planId = params.get("plan") || "pro";
   const billingCycle = params.get("billing") || "monthly";
+  const referralCode = params.get("ref") || localStorage.getItem("cx_referral") || "";
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -96,6 +98,14 @@ export default function CheckoutPage() {
   const plan = plans[planId] || plans.pro;
   const currentPrice = isAnnual ? plan.annualPrice : plan.price;
   const priceId = isAnnual ? plan.stripePriceIdAnnual : plan.stripePriceIdMonthly;
+
+  // Store referral code in localStorage for persistence
+  useEffect(() => {
+    const urlRef = params.get("ref");
+    if (urlRef) {
+      localStorage.setItem("cx_referral", urlRef);
+    }
+  }, []);
 
   useEffect(() => {
     setIsAnnual(billingCycle === "annual");
@@ -116,7 +126,10 @@ export default function CheckoutPage() {
     setIsLoading(true);
 
     try {
-      // Create checkout session
+      // Get referral code from localStorage (in case URL param was cleared)
+      const ref = referralCode || localStorage.getItem("cx_referral") || "";
+      
+      // Create checkout session with referral code
       const response = await fetch("/api/stripe/checkout-session", {
         method: "POST",
         headers: {
@@ -129,8 +142,9 @@ export default function CheckoutPage() {
           priceId,
           planId: plan.id,
           billingCycle: isAnnual ? "annual" : "monthly",
+          referralCode: ref,  // Pass referral code to backend
           successUrl: `${window.location.origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${window.location.origin}/pricing/checkout?plan=${planId}&billing=${isAnnual ? "annual" : "monthly"}`,
+          cancelUrl: `${window.location.origin}/pricing/checkout?plan=${planId}&billing=${isAnnual ? "annual" : "monthly"}${ref ? `&ref=${ref}` : ""}`,
         }),
       });
 
@@ -140,6 +154,9 @@ export default function CheckoutPage() {
         throw new Error(data.error || "Failed to create checkout session");
       }
 
+      // Clear referral code on successful checkout start
+      // (it will be recorded by the webhook)
+      
       // Redirect to Stripe Checkout
       if (data.url) {
         window.location.href = data.url;
@@ -183,6 +200,23 @@ export default function CheckoutPage() {
             <p id="checkout-subtitle" className="text-gray-400 mb-8">
               Secure checkout powered by Stripe.
             </p>
+
+            {/* Referral Badge */}
+            {referralCode && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl p-4 mb-6 flex items-center gap-3"
+              >
+                <Gift className="w-5 h-5 text-green-400" />
+                <div>
+                  <p className="font-semibold text-green-400">Referred by a friend</p>
+                  <p className="text-sm text-gray-400">
+                    Code: <span className="font-mono text-green-300">{referralCode}</span>
+                  </p>
+                </div>
+              </motion.div>
+            )}
 
             <form id="checkout-form" onSubmit={handleCheckout} className="space-y-6">
               <div id="checkout-field-name">
