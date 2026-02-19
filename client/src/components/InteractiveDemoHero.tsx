@@ -468,8 +468,8 @@ export default function InteractiveDemoHero() {
                 </div>
               </div>
 
-              {/* Error Display */}
-              {error && (
+              {/* Error Display - Only in live mode */}
+              {isLiveMode && error && (
                 <motion.div 
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
