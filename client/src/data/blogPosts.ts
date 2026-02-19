@@ -6314,7 +6314,7 @@ Do not worry if you do not have a powerful GPU. Many AI tasks can run on CPU, an
 
 ## Installing CX Linux
 
-This section provides a brief overview of installation. For detailed instructions, see our complete [installation guide](/blog/install-cortex-linux-beginner-guide).
+This section provides a brief overview of installation. For detailed instructions, see our complete [installation guide](/blog/install-cx-linux-beginner-guide).
 
 ### Quick Installation Steps
 
@@ -6889,9 +6889,9 @@ Now that you have completed your first workflow, here are recommended next steps
 
 ### Immediate Next Steps
 
-1. **Complete the Installation Guide**: Read our detailed [installation guide](/blog/install-cortex-linux-beginner-guide) to understand all configuration options.
+1. **Complete the Installation Guide**: Read our detailed [installation guide](/blog/install-cx-linux-beginner-guide) to understand all configuration options.
 
-2. **Run Your First AI Task**: Follow our tutorial on [running your first AI task](/blog/first-ai-task-cortex-linux) to experience AI-powered features.
+2. **Run Your First AI Task**: Follow our tutorial on [running your first AI task](/blog/first-ai-task-cx-linux) to experience AI-powered features.
 
 3. **Explore the Documentation**: Use \`cx docs\` to browse built-in tutorials and reference materials.
 
@@ -6903,7 +6903,7 @@ Now that you have completed your first workflow, here are recommended next steps
 
 ### Additional Resources
 
-- [CX Linux for Students](/blog/cortex-linux-for-students): Special guide for academic users
+- [CX Linux for Students](/blog/cx-linux-for-students): Special guide for academic users
 - Community Discord for real-time help
 - Video tutorials on the official CX Linux YouTube channel
 
@@ -6917,7 +6917,7 @@ Now that you have completed your first workflow, here are recommended next steps
 - **Built-in validation catches issues early** - \`cx validate\` and \`cx status\` keep you productive
 - **CX Linux is designed for beginners** - Clear commands, helpful error messages, and built-in documentation
 
-> **Related Reading:** [How to Install CX Linux](/blog/install-cortex-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cortex-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
+> **Related Reading:** [How to Install CX Linux](/blog/install-cx-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cx-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
 
 Remember, everyone starts as a beginner. The CX Linux community is welcoming and supportive. Do not hesitate to ask questions and experiment. The best way to learn is by doing.
 
@@ -6931,11 +6931,11 @@ Welcome to CX Linux. Your AI development journey starts here.
     image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=1200&h=600&fit=crop",
     imageAlt: "Computer terminal with code on screen representing first steps in programming",
     tags: ["Getting Started", "Beginner", "Workflow", "Tutorial"],
-    relatedPosts: ["install-cortex-linux-beginner-guide", "first-ai-task-cortex-linux"]
+    relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "12",
-    slug: "install-cortex-linux-beginner-guide",
+    slug: "install-cx-linux-beginner-guide",
     title: "Install CX Linux: Complete Beginner Guide",
     seoTitle: "Install CX Linux: Complete Beginner Guide | CX Linux",
     seoDescription: "Step-by-step guide to installing CX Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
@@ -7456,9 +7456,9 @@ Join the CX Linux community for assistance:
 ### Additional Guides
 
 Continue your CX Linux journey with these related guides:
-- [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow)
-- [CX Linux for Students](/blog/cortex-linux-for-students)
-- [Run Your First AI Task](/blog/first-ai-task-cortex-linux)
+- [Getting Started with Your First Workflow](/blog/getting-started-cx-first-workflow)
+- [CX Linux for Students](/blog/cx-linux-for-students)
+- [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 ---
 
@@ -7500,7 +7500,7 @@ You now have a fully functional CX Linux system ready for AI development. These 
 - **Post-installation updates are critical** - Run \`cx update\` immediately after first boot
 - **CX Linux eliminates setup complexity** - Automatic hardware detection and driver configuration save hours
 
-> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [CX Linux for Students](/blog/cortex-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cortex-linux)
+> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cx-first-workflow) | [CX Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 You have successfully installed CX Linux. Welcome to the community, and enjoy your AI development journey.
 `,
@@ -7512,11 +7512,11 @@ You have successfully installed CX Linux. Welcome to the community, and enjoy yo
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=600&fit=crop",
     imageAlt: "Computer hardware and circuit board representing system installation",
     tags: ["Getting Started", "Installation", "Beginner", "Setup"],
-    relatedPosts: ["getting-started-cortex-first-workflow", "cortex-linux-for-students"]
+    relatedPosts: ["getting-started-cx-first-workflow", "cx-linux-for-students"]
   },
   {
     id: "13",
-    slug: "cortex-linux-for-students",
+    slug: "cx-linux-for-students",
     title: "CX Linux for Students: AI Development Guide",
     seoTitle: "CX Linux for Students: AI Development Guide | CX Linux",
     seoDescription: "Discover how CX Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
@@ -7539,7 +7539,7 @@ Before you begin, review these requirements:
 |-------------|---------|
 | **Skill Level** | Complete beginner to intermediate |
 | **Time to Complete** | 20-30 minutes to set up your first course environment |
-| **CX Linux** | Installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide)) |
+| **CX Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **Internet** | Connection for downloading course packages |
 | **Course Materials** | Syllabus or project requirements for your specific course |
 
@@ -7742,7 +7742,7 @@ Depending on your background and goals, here are recommended learning progressio
 If you are new to programming and AI:
 
 **Weeks 1-2: Foundations**
-- Complete the [first workflow tutorial](/blog/getting-started-cortex-first-workflow)
+- Complete the [first workflow tutorial](/blog/getting-started-cx-first-workflow)
 - Learn basic terminal commands
 - Understand what environments are and why they matter
 
@@ -7766,8 +7766,8 @@ If you are new to programming and AI:
 If you can already code but are new to AI:
 
 **Weeks 1-2: Environment Setup**
-- [Install CX Linux](/blog/install-cortex-linux-beginner-guide)
-- [Run your first AI task](/blog/first-ai-task-cortex-linux)
+- [Install CX Linux](/blog/install-cx-linux-beginner-guide)
+- [Run your first AI task](/blog/first-ai-task-cx-linux)
 - Understand the ML development workflow
 
 **Weeks 3-4: Machine Learning Fundamentals**
@@ -8224,11 +8224,11 @@ Welcome to the future of AI development. Your journey as an AI practitioner star
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=600&fit=crop",
     imageAlt: "Students collaborating on laptops representing learning and education",
     tags: ["Getting Started", "Students", "Education", "Learning"],
-    relatedPosts: ["install-cortex-linux-beginner-guide", "first-ai-task-cortex-linux"]
+    relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "14",
-    slug: "first-ai-task-cortex-linux",
+    slug: "first-ai-task-cx-linux",
     title: "Run Your First AI Task with CX Linux",
     seoTitle: "Run Your First AI Task with CX Linux | CX Linux",
     seoDescription: "Step-by-step tutorial to run your first AI task with CX Linux. Learn image classification and text generation with easy-to-follow instructions.",
@@ -8257,7 +8257,7 @@ Before starting, ensure you have completed these requirements:
 |-------------|---------|
 | **Skill Level** | Beginner - basic terminal familiarity required |
 | **Time to Complete** | 25-35 minutes (includes model download time) |
-| **CX Linux** | Installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide)) |
+| **CX Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **RAM** | 8GB minimum, 16GB recommended |
 | **Disk Space** | 10GB free for models and datasets |
 | **Internet** | Connection for downloading AI models |
@@ -8289,7 +8289,7 @@ Before starting, ensure you have the following ready:
 
 ### System Requirements
 
-- CX Linux installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide))
+- CX Linux installed and running ([installation guide](/blog/install-cx-linux-beginner-guide))
 - Internet connection for downloading models
 - At least 8GB of RAM (16GB recommended for larger models)
 - 10GB of free disk space for models and datasets
@@ -8297,7 +8297,7 @@ Before starting, ensure you have the following ready:
 ### Optional but Recommended
 
 - NVIDIA GPU for faster processing
-- Completed the [first workflow tutorial](/blog/getting-started-cortex-first-workflow)
+- Completed the [first workflow tutorial](/blog/getting-started-cx-first-workflow)
 
 ### Knowledge Requirements
 
@@ -8305,7 +8305,7 @@ Before starting, ensure you have the following ready:
 - Understanding of how to create and use environments
 - No prior AI or machine learning experience required
 
-If you have not installed CX Linux yet, start with our [installation guide](/blog/install-cortex-linux-beginner-guide) before continuing.
+If you have not installed CX Linux yet, start with our [installation guide](/blog/install-cx-linux-beginner-guide) before continuing.
 
 ---
 
@@ -8892,7 +8892,7 @@ You have successfully run your first AI tasks with CX Linux. You have classified
 Continue your journey by exploring different models, experimenting with various tasks, and building projects that interest you. The Hugging Face model hub contains thousands of models for different purposes, all accessible through the pipelines you have learned to use.
 
 For more guidance, check out:
-- [Getting Started with CX Linux](/blog/getting-started-cortex-first-workflow)
+- [Getting Started with CX Linux](/blog/getting-started-cx-first-workflow)
 - [What AI-Native Linux Actually Means](/blog/what-ai-native-linux-means)
 
 Welcome to the world of AI development. The possibilities are endless.
@@ -8905,7 +8905,7 @@ Welcome to the world of AI development. The possibilities are endless.
     image: "/images/ai_neural_network_visualization.png",
     imageAlt: "AI neural network visualization with glowing nodes",
     tags: ["Getting Started", "AI", "Machine Learning", "Tutorial"],
-    relatedPosts: ["getting-started-cortex-first-workflow", "what-ai-native-linux-means"]
+    relatedPosts: ["getting-started-cx-first-workflow", "what-ai-native-linux-means"]
   }
 ];
 
