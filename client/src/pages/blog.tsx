@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 
 const FEATURED_POSTS = [
   {
-    slug: "getting-started-cortex-first-workflow",
+    slug: "getting-started-cx-first-workflow",
     level: "Beginner",
     step: 1,
     badge: "Start Here",
