@@ -2316,7 +2316,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </div>
               <div className="flex items-center gap-2 text-gray-400 text-sm" data-testid="badge-cta-mit-licensed">
                 <BadgeCheck size={16} className="text-purple-400" />
-                <span>MIT Licensed</span>
+                <span>BSL 1.1 Licensed</span>
               </div>
             </div>
 
@@ -2402,7 +2402,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <li><a href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">Privacy Policy</a></li>
                 <li><a href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">Terms of Service</a></li>
                 <li><a href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">Security</a></li>
-                <li><a href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (MIT)</a></li>
+                <li><a href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">License (BSL 1.1)</a></li>
               </ul>
             </div>
           </div>
