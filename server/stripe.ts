@@ -78,6 +78,7 @@ const createCheckoutSessionSchema = z.object({
   billingCycle: z.enum(["monthly", "annual"]),
   successUrl: z.string().url(),
   cancelUrl: z.string().url(),
+  referralCode: z.string().optional(),
 });
 
 router.post("/checkout-session", requireStripe, async (req: Request, res: Response) => {
@@ -87,7 +88,7 @@ router.post("/checkout-session", requireStripe, async (req: Request, res: Respon
       return res.status(400).json({ error: "Invalid request", details: result.error.flatten() });
     }
 
-    const { email, name, company, planId, billingCycle, successUrl, cancelUrl } = result.data;
+    const { email, name, company, planId, billingCycle, successUrl, cancelUrl, referralCode } = result.data;
 
     // Get the correct price ID
     const priceConfig = PRICE_IDS[planId];
@@ -133,6 +134,7 @@ router.post("/checkout-session", requireStripe, async (req: Request, res: Respon
         metadata: {
           planId,
           billingCycle,
+          ref: referralCode || "",
         },
       },
       success_url: successUrl,
@@ -143,6 +145,7 @@ router.post("/checkout-session", requireStripe, async (req: Request, res: Respon
         planId,
         billingCycle,
         company: company || "",
+        ref: referralCode || "",
       },
     });
 
