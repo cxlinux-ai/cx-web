@@ -305,9 +305,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true });
   
-  const stars = useCountUp(githubStats?.stars || 1250, 2000, statsInView);
-  const forks = useCountUp(githubStats?.forks || 340, 2000, statsInView);
-  const contributorCount = useCountUp(githubStats?.contributors || 89, 2000, statsInView);
+  const stars = useCountUp(githubStats?.stars || 33, 2000, statsInView);
+  const forks = useCountUp(githubStats?.forks || 54, 2000, statsInView);
+  const contributorCount = useCountUp(githubStats?.contributors || 15, 2000, statsInView);
 
   const [activeTab, setActiveTab] = useState<"npm" | "yarn" | "pnpm" | "bun">("npm");
   const [activeDemo, setActiveDemo] = useState(0);
@@ -428,7 +428,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               data-testid="link-github-stars"
             >
               <Star size={12} className="text-yellow-400 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "1,250"} stars</span>
+              <span className="text-gray-300">{githubStats?.stars ? githubStats.stars.toLocaleString() : "33"} stars</span>
             </a>
             <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm" data-testid="badge-source-available">
               <Github size={12} className="text-gray-400 sm:w-3.5 sm:h-3.5" />
@@ -1439,7 +1439,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {[
               { icon: Star, value: stars, label: "GitHub Stars", suffix: "" },
-              { icon: Download, value: 50000, label: "Downloads", suffix: "+" },
+              { icon: GitFork, value: forks, label: "Forks", suffix: "" },
               { icon: Users, value: contributorCount, label: "Contributors", suffix: "" },
               { icon: Globe, value: 12, label: "Edge Regions", suffix: "" },
             ].map((stat, i) => (
@@ -2038,7 +2038,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Join <span className="gradient-text">8,000+</span> Developers</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our <span className="gradient-text">Growing</span> Community</h2>
             <p className="text-gray-400">Connect with the community.</p>
           </motion.div>
 
