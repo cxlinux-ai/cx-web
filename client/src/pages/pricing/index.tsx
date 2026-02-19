@@ -130,8 +130,8 @@ const tiers: PricingTier[] = [
     id: "enterprise",
     name: "CX Enterprise",
     subtitle: "For Organizations",
-    price: 199,
-    annualPrice: 159,
+    price: 299,
+    annualPrice: 239,
     description: "Enterprise-grade security, compliance, and dedicated support. SSO, audit logs, and custom SLAs for large organizations.",
     features: [
       "Everything in CX Team",
