@@ -33,6 +33,9 @@ import AgentProfilesPage from "./pages/agent-profiles";
 export default function App() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Hide navigation on checkout pages for cleaner conversion flow
+  const isCheckoutPage = location.startsWith("/pricing/checkout") || location.startsWith("/pricing/success");
   const [activeSection, setActiveSection] = useState("home");
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
@@ -120,6 +123,8 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-black text-white">
+          {!isCheckoutPage && (
+          <>
           {/* Navigation */}
           <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/50 border-b border-white/10 h-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -286,6 +291,8 @@ export default function App() {
             )}
             </AnimatePresence>
           </nav>
+          </>
+          )}
 
           {/* Routes */}
           <Switch>
