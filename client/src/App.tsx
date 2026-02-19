@@ -304,6 +304,8 @@ export default function App() {
             <Route path="/privacy" component={Privacy} />
             <Route path="/terms" component={Terms} />
             <Route path="/security-policy" component={SecurityPage} />
+            <Route path="/security" component={SecurityPage} />
+            <Route path="/trust" component={SecurityPage} />
             <Route path="/status" component={Status} />
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
