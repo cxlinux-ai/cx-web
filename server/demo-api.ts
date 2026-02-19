@@ -12,6 +12,53 @@ interface RateLimitRecord {
 
 const requestTracker = new Map<string, RateLimitRecord>();
 
+// Fallback responses for when API is unavailable
+const FALLBACK_RESPONSES: Record<string, string> = {
+  'default': `\`\`\`bash
+# CX Linux Demo - AI Service Temporarily Unavailable
+# Try these commands locally after installing CX Linux:
+
+cx "your task description here"
+
+# Or explore with:
+cx --help
+cx examples
+\`\`\`
+
+**Note:** The demo AI service is temporarily unavailable. Install CX Linux to get the full experience with your own API key.`,
+  'backup': `\`\`\`bash
+# Automated backup setup
+#!/bin/bash
+BACKUP_DIR="/var/backups/$(date +%Y%m%d)"
+mkdir -p "$BACKUP_DIR"
+tar -czf "$BACKUP_DIR/backup.tar.gz" /var/www
+find /var/backups -mtime +7 -delete
+\`\`\`
+
+Configure with: \`crontab -e\` and add: \`0 2 * * * /usr/local/bin/backup.sh\``,
+  'nginx': `\`\`\`bash
+# Nginx reverse proxy configuration
+sudo apt update && sudo apt install nginx certbot python3-certbot-nginx -y
+sudo certbot --nginx -d yourdomain.com
+# Config at /etc/nginx/sites-available/nodeapp
+\`\`\``,
+  'monitoring': `\`\`\`bash
+# System monitoring setup
+sudo apt install prometheus grafana -y
+sudo systemctl enable prometheus grafana-server
+sudo systemctl start prometheus grafana-server
+# Dashboard: http://localhost:3000
+\`\`\``
+};
+
+function getFallbackResponse(input: string): string {
+  const lowerInput = input.toLowerCase();
+  if (lowerInput.includes('backup')) return FALLBACK_RESPONSES['backup'];
+  if (lowerInput.includes('nginx') || lowerInput.includes('proxy')) return FALLBACK_RESPONSES['nginx'];
+  if (lowerInput.includes('monitor') || lowerInput.includes('alert')) return FALLBACK_RESPONSES['monitoring'];
+  return FALLBACK_RESPONSES['default'];
+}
+
 function getClientId(req: Request): string {
   const ip = req.headers['x-forwarded-for'] as string || req.ip || 'unknown';
   const cleanIp = ip.split(',')[0].trim();
@@ -48,9 +95,16 @@ router.post('/api/demo/chat', async (req: Request, res: Response) => {
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
+  
+  // If no API key, return fallback response
   if (!apiKey) {
-    console.error('ANTHROPIC_API_KEY not found in environment');
-    return res.status(500).json({ error: 'Server configuration error' });
+    console.warn('ANTHROPIC_API_KEY not configured - using fallback response');
+    const userMessage = req.body.messages?.find((m: any) => m.role === 'user')?.content || '';
+    const fallback = getFallbackResponse(userMessage);
+    return res.json({
+      content: [{ type: 'text', text: fallback }],
+      _demo: { remaining: rateCheck.remaining, limit: REQUEST_LIMIT, fallback: true }
+    });
   }
 
   try {
@@ -74,9 +128,12 @@ router.post('/api/demo/chat', async (req: Request, res: Response) => {
 
     if (!response.ok) {
       console.error('Anthropic API error:', data);
-      return res.status(response.status).json({
-        error: 'AI service error',
-        details: data.error?.message || 'Unknown error'
+      // Return fallback on API error
+      const userMessage = messages.find((m: any) => m.role === 'user')?.content || '';
+      const fallback = getFallbackResponse(userMessage);
+      return res.json({
+        content: [{ type: 'text', text: fallback }],
+        _demo: { remaining: rateCheck.remaining, limit: REQUEST_LIMIT, fallback: true }
       });
     }
 
@@ -87,7 +144,13 @@ router.post('/api/demo/chat', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Proxy error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    // Return fallback on network error
+    const userMessage = req.body.messages?.find((m: any) => m.role === 'user')?.content || '';
+    const fallback = getFallbackResponse(userMessage);
+    return res.json({
+      content: [{ type: 'text', text: fallback }],
+      _demo: { remaining: rateCheck.remaining, limit: REQUEST_LIMIT, fallback: true }
+    });
   }
 });
 
