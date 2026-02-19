@@ -64,8 +64,8 @@ const plans: Record<string, PlanDetails> = {
   enterprise: {
     id: "enterprise",
     name: "Enterprise",
-    price: 199,
-    annualPrice: 159,
+    price: 299,
+    annualPrice: 239,
     features: [
       "SSO/LDAP integration",
       "Audit logs & compliance",
