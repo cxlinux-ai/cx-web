@@ -31,6 +31,176 @@ const requireStripe = (req: Request, res: Response, next: Function) => {
 };
 
 // =============================================================================
+// CHECKOUT SESSION ENDPOINTS
+// =============================================================================
+
+// Stripe price IDs for each plan
+const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
+  pro: {
+    monthly: 'price_1SqYQjJ4X1wkC4EsLDB6ZbOk',
+    annual: 'price_1SqYQjJ4X1wkC4EslIkZEJFZ'
+  },
+  team: {
+    monthly: 'price_1SqYQkJ4X1wkC4Es8OMt79pZ',
+    annual: 'price_1SqYQkJ4X1wkC4EsWYwUgceu'
+  },
+  enterprise: {
+    monthly: 'price_1SqYQkJ4X1wkC4EsCFVBHYnT',
+    annual: 'price_1SqYQlJ4X1wkC4EsJcPW7Of2'
+  },
+};
+
+const PLAN_NAMES: Record<string, string> = {
+  pro: "Pro",
+  team: "Team",
+  enterprise: "Enterprise",
+};
+
+const checkoutSessionSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(1),
+  company: z.string().optional(),
+  planId: z.enum(["pro", "team", "enterprise"]),
+  billingCycle: z.enum(["monthly", "annual"]),
+  successUrl: z.string().url(),
+  cancelUrl: z.string().url(),
+  referralCode: z.string().optional(),
+});
+
+router.post("/checkout-session", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const result = checkoutSessionSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: "Invalid request", details: result.error.flatten() });
+    }
+
+    const { email, name, company, planId, billingCycle, successUrl, cancelUrl, referralCode } = result.data;
+
+    const priceConfig = PRICE_IDS[planId];
+    if (!priceConfig) {
+      return res.status(400).json({ error: "Invalid plan ID" });
+    }
+
+    const priceId = billingCycle === "annual" ? priceConfig.annual : priceConfig.monthly;
+
+    // Create or get customer
+    let customer: Stripe.Customer | undefined;
+    const existingCustomers = await stripe!.customers.list({ email, limit: 1 });
+
+    if (existingCustomers.data.length > 0) {
+      customer = existingCustomers.data[0];
+      await stripe!.customers.update(customer.id, {
+        name,
+        metadata: { company: company || "", planId, billingCycle },
+      });
+    } else {
+      customer = await stripe!.customers.create({
+        email,
+        name,
+        metadata: { company: company || "", planId, billingCycle },
+      });
+    }
+
+    const session = await stripe!.checkout.sessions.create({
+      customer: customer.id,
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [{ price: priceId, quantity: 1 }],
+      subscription_data: {
+        metadata: { planId, billingCycle, ref: referralCode || "" },
+      },
+      success_url: successUrl,
+      cancel_url: cancelUrl,
+      allow_promotion_codes: true,
+      billing_address_collection: "auto",
+      metadata: {
+        planId,
+        billingCycle,
+        company: company || "",
+        ref: referralCode || "",
+      },
+    });
+
+    console.log(`Created checkout session: ${session.id} for ${email}`);
+    res.json({ url: session.url, sessionId: session.id });
+  } catch (error) {
+    console.error("Checkout session error:", error);
+    res.status(500).json({ error: "Failed to create checkout session" });
+  }
+});
+
+router.post("/create-portal-session", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const { email, returnUrl } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    const customers = await stripe!.customers.list({ email, limit: 1 });
+
+    if (customers.data.length === 0) {
+      return res.status(404).json({ error: "No subscription found for this email" });
+    }
+
+    const customer = customers.data[0];
+
+    const session = await stripe!.billingPortal.sessions.create({
+      customer: customer.id,
+      return_url: returnUrl || `${req.headers.origin || "https://cxlinux.com"}/account`,
+    });
+
+    console.log(`Created portal session for ${email}`);
+    res.json({ url: session.url });
+  } catch (error) {
+    console.error("Create portal session error:", error);
+    res.status(500).json({ error: "Failed to create portal session" });
+  }
+});
+
+router.get("/checkout-session/:sessionId", requireStripe, async (req: Request, res: Response) => {
+  try {
+    const { sessionId } = req.params;
+
+    const session = await stripe!.checkout.sessions.retrieve(sessionId, {
+      expand: ["subscription", "customer"],
+    });
+
+    if (!session) {
+      return res.status(404).json({ error: "Session not found" });
+    }
+
+    const customer = session.customer as Stripe.Customer;
+    const subscription = session.subscription as Stripe.Subscription;
+
+    let trialEnds = "N/A";
+    if (subscription && subscription.trial_end) {
+      const trialEndDate = new Date(subscription.trial_end * 1000);
+      trialEnds = trialEndDate.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+    }
+
+    const planId = session.metadata?.planId || "pro";
+    const billingCycle = session.metadata?.billingCycle || "monthly";
+
+    res.json({
+      email: customer?.email || session.customer_email || "",
+      planName: PLAN_NAMES[planId] || "Pro",
+      billingCycle,
+      trialEnds,
+      status: session.status,
+      subscriptionId: subscription?.id,
+    });
+  } catch (error) {
+    console.error("Get checkout session error:", error);
+    res.status(500).json({ error: "Failed to retrieve checkout session" });
+  }
+});
+
+// =============================================================================
 // CUSTOMER ENDPOINTS
 // =============================================================================
 

@@ -31,7 +31,9 @@ import CompareAnalyticsPage from "./pages/compare-analytics";
 import HackathonRulesPage from "./pages/hackathon-rules";
 import Register from "./pages/register";
 import PricingPage from "./pages/pricing";
+import PricingCheckout from "./pages/pricing/checkout";
 import PricingSuccessPage from "./pages/pricing-success";
+import PricingFAQ from "./pages/pricing/faq";
 import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
 
@@ -40,6 +42,9 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+
+  // Hide navigation on checkout pages for cleaner conversion flow
+  const isCheckoutPage = location.startsWith("/pricing/checkout") || location.startsWith("/pricing/success");
 
   // Track visitor referral on page load (if ?ref=CODE is present)
   useEffect(() => {
@@ -150,7 +155,8 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-black text-white">
-          {/* Navigation */}
+          {/* Navigation - hidden on checkout pages for cleaner conversion flow */}
+          {!isCheckoutPage && (
           <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/50 border-b border-white/10 h-16">
             <nav className="h-full" aria-label="Main navigation">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -376,6 +382,7 @@ export default function App() {
             </AnimatePresence>
             </nav>
           </header>
+          )}
 
           {/* Routes */}
           <main>
@@ -406,7 +413,9 @@ export default function App() {
             <Route path="/compare-analytics" component={CompareAnalyticsPage} />
             <Route path="/admin/registrations" component={AdminRegistrations} />
             <Route path="/pricing" component={PricingPage} />
+            <Route path="/pricing/checkout" component={PricingCheckout} />
             <Route path="/pricing/success" component={PricingSuccessPage} />
+            <Route path="/pricing/faq" component={PricingFAQ} />
             <Route path="/support" component={SupportPage} />
             <Route path="/architecture" component={ArchitecturePage} />
           </Switch>

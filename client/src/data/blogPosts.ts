@@ -6314,7 +6314,7 @@ Do not worry if you do not have a powerful GPU. Many AI tasks can run on CPU, an
 
 ## Installing Cortex Linux
 
-This section provides a brief overview of installation. For detailed instructions, see our complete [installation guide](/blog/install-cortex-linux-beginner-guide).
+This section provides a brief overview of installation. For detailed instructions, see our complete [installation guide](/blog/install-cx-linux-beginner-guide).
 
 ### Quick Installation Steps
 
@@ -6889,9 +6889,9 @@ Now that you have completed your first workflow, here are recommended next steps
 
 ### Immediate Next Steps
 
-1. **Complete the Installation Guide**: Read our detailed [installation guide](/blog/install-cortex-linux-beginner-guide) to understand all configuration options.
+1. **Complete the Installation Guide**: Read our detailed [installation guide](/blog/install-cx-linux-beginner-guide) to understand all configuration options.
 
-2. **Run Your First AI Task**: Follow our tutorial on [running your first AI task](/blog/first-ai-task-cortex-linux) to experience AI-powered features.
+2. **Run Your First AI Task**: Follow our tutorial on [running your first AI task](/blog/first-ai-task-cx-linux) to experience AI-powered features.
 
 3. **Explore the Documentation**: Use \`cortex docs\` to browse built-in tutorials and reference materials.
 
@@ -6903,7 +6903,7 @@ Now that you have completed your first workflow, here are recommended next steps
 
 ### Additional Resources
 
-- [Cortex Linux for Students](/blog/cortex-linux-for-students): Special guide for academic users
+- [Cortex Linux for Students](/blog/cx-linux-for-students): Special guide for academic users
 - Community Discord for real-time help
 - Video tutorials on the official Cortex YouTube channel
 
@@ -6917,7 +6917,7 @@ Now that you have completed your first workflow, here are recommended next steps
 - **Built-in validation catches issues early** - \`cortex validate\` and \`cortex status\` keep you productive
 - **Cortex Linux is designed for beginners** - Clear commands, helpful error messages, and built-in documentation
 
-> **Related Reading:** [How to Install Cortex Linux](/blog/install-cortex-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cortex-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
+> **Related Reading:** [How to Install Cortex Linux](/blog/install-cx-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cx-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
 
 Remember, everyone starts as a beginner. The Cortex community is welcoming and supportive. Do not hesitate to ask questions and experiment. The best way to learn is by doing.
 
@@ -6931,11 +6931,11 @@ Welcome to Cortex Linux. Your AI development journey starts here.
     image: "/stock_images/person_laptop_progra_f5b9ce6c.jpg",
     imageAlt: "Person working on laptop with programming code representing getting started with Cortex Linux workflow",
     tags: ["Getting Started", "Beginner", "Workflow", "Tutorial"],
-    relatedPosts: ["install-cortex-linux-beginner-guide", "first-ai-task-cortex-linux"]
+    relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "12",
-    slug: "install-cortex-linux-beginner-guide",
+    slug: "install-cx-linux-beginner-guide",
     title: "Install Cortex Linux: Complete Beginner Guide",
     seoTitle: "Install Cortex Linux: Complete Beginner Guide | Cortex Linux",
     seoDescription: "Step-by-step guide to installing Cortex Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
@@ -7087,7 +7087,7 @@ You need a USB drive with at least 8 GB capacity. The drive will be erased, so b
 **On Linux**:
 1. Open a terminal
 2. Identify your USB drive with \`lsblk\`
-3. Run: \`sudo dd if=cortex-linux.iso of=/dev/sdX bs=4M status=progress\`
+3. Run: \`sudo dd if=cx-linux.iso of=/dev/sdX bs=4M status=progress\`
    (Replace sdX with your actual drive letter)
 
 ### Step 4: Configure BIOS/UEFI Settings
@@ -7343,10 +7343,10 @@ Access your BIOS/UEFI (usually F2, F12, or Delete during startup), disable Secur
 
 \`\`\`bash
 # Verify ISO integrity before creating bootable USB
-sha256sum cortex-linux.iso
+sha256sum cx-linux.iso
 
 # Expected output:
-# a1b2c3d4e5f6... cortex-linux.iso
+# a1b2c3d4e5f6... cx-linux.iso
 # Compare this hash with the one on the download page
 \`\`\`
 
@@ -7457,8 +7457,8 @@ Join the Cortex community for assistance:
 
 Continue your Cortex journey with these related guides:
 - [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow)
-- [Cortex Linux for Students](/blog/cortex-linux-for-students)
-- [Run Your First AI Task](/blog/first-ai-task-cortex-linux)
+- [Cortex Linux for Students](/blog/cx-linux-for-students)
+- [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 ---
 
@@ -7500,7 +7500,7 @@ You now have a fully functional Cortex Linux system ready for AI development. Th
 - **Post-installation updates are critical** - Run \`cortex update\` immediately after first boot
 - **Cortex Linux eliminates setup complexity** - Automatic hardware detection and driver configuration save hours
 
-> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [Cortex Linux for Students](/blog/cortex-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cortex-linux)
+> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [Cortex Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 You have successfully installed Cortex Linux. Welcome to the community, and enjoy your AI development journey.
 `,
@@ -7512,11 +7512,11 @@ You have successfully installed Cortex Linux. Welcome to the community, and enjo
     image: "/stock_images/software_installatio_76449a37.jpg",
     imageAlt: "Software installation process showing complete beginner guide for Cortex Linux",
     tags: ["Getting Started", "Installation", "Beginner", "Setup"],
-    relatedPosts: ["getting-started-cortex-first-workflow", "cortex-linux-for-students"]
+    relatedPosts: ["getting-started-cortex-first-workflow", "cx-linux-for-students"]
   },
   {
     id: "13",
-    slug: "cortex-linux-for-students",
+    slug: "cx-linux-for-students",
     title: "Cortex Linux for Students: AI Development Guide",
     seoTitle: "Cortex Linux for Students: AI Development Guide | Cortex Linux",
     seoDescription: "Discover how Cortex Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
@@ -7539,7 +7539,7 @@ Before you begin, review these requirements:
 |-------------|---------|
 | **Skill Level** | Complete beginner to intermediate |
 | **Time to Complete** | 20-30 minutes to set up your first course environment |
-| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide)) |
+| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **Internet** | Connection for downloading course packages |
 | **Course Materials** | Syllabus or project requirements for your specific course |
 
@@ -7766,8 +7766,8 @@ If you are new to programming and AI:
 If you can already code but are new to AI:
 
 **Weeks 1-2: Environment Setup**
-- [Install Cortex Linux](/blog/install-cortex-linux-beginner-guide)
-- [Run your first AI task](/blog/first-ai-task-cortex-linux)
+- [Install Cortex Linux](/blog/install-cx-linux-beginner-guide)
+- [Run your first AI task](/blog/first-ai-task-cx-linux)
 - Understand the ML development workflow
 
 **Weeks 3-4: Machine Learning Fundamentals**
@@ -8224,11 +8224,11 @@ Welcome to the future of AI development. Your journey as an AI practitioner star
     image: "/stock_images/student_studying_lap_3e4c316a.jpg",
     imageAlt: "Student studying on laptop representing AI development guide for students using Cortex Linux",
     tags: ["Getting Started", "Students", "Education", "Learning"],
-    relatedPosts: ["install-cortex-linux-beginner-guide", "first-ai-task-cortex-linux"]
+    relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "14",
-    slug: "first-ai-task-cortex-linux",
+    slug: "first-ai-task-cx-linux",
     title: "Run Your First AI Task with Cortex Linux",
     seoTitle: "Run Your First AI Task with Cortex Linux | Cortex Linux",
     seoDescription: "Step-by-step tutorial to run your first AI task with Cortex Linux. Learn image classification and text generation with easy-to-follow instructions.",
@@ -8257,7 +8257,7 @@ Before starting, ensure you have completed these requirements:
 |-------------|---------|
 | **Skill Level** | Beginner - basic terminal familiarity required |
 | **Time to Complete** | 25-35 minutes (includes model download time) |
-| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide)) |
+| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **RAM** | 8GB minimum, 16GB recommended |
 | **Disk Space** | 10GB free for models and datasets |
 | **Internet** | Connection for downloading AI models |
@@ -8289,7 +8289,7 @@ Before starting, ensure you have the following ready:
 
 ### System Requirements
 
-- Cortex Linux installed and running ([installation guide](/blog/install-cortex-linux-beginner-guide))
+- Cortex Linux installed and running ([installation guide](/blog/install-cx-linux-beginner-guide))
 - Internet connection for downloading models
 - At least 8GB of RAM (16GB recommended for larger models)
 - 10GB of free disk space for models and datasets
@@ -8305,7 +8305,7 @@ Before starting, ensure you have the following ready:
 - Understanding of how to create and use environments
 - No prior AI or machine learning experience required
 
-If you have not installed Cortex yet, start with our [installation guide](/blog/install-cortex-linux-beginner-guide) before continuing.
+If you have not installed Cortex yet, start with our [installation guide](/blog/install-cx-linux-beginner-guide) before continuing.
 
 ---
 
