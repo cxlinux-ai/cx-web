@@ -484,8 +484,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="block text-white text-[32px] sm:text-[48px] md:text-[64px] lg:text-[82px] font-extrabold">The First Native</span>
-            <span className="block gradient-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[82px] font-extrabold">AI Linux Layer</span>
+            <span className="block gradient-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[82px] font-extrabold">The Agentic OS</span>
+            <span className="block text-white text-[24px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold">for Linux Fleet Management</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -493,10 +493,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-2"
+            className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 px-2"
           >
-            Describe what you want. CX handles the rest. From automation scripts to system configuration,
-            data analysis to coding workflows — unlimited possibilities with natural language.
+            Deploy AI agents across your entire Linux infrastructure. Natural language commands,
+            autonomous execution, fleet-wide orchestration — all from a single interface.
           </motion.p>
 
           {/* Demo - Hidden on small screens, show simple CTA instead */}
