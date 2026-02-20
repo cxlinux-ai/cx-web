@@ -96,7 +96,7 @@ export default function Footer() {
               className="text-2xl font-bold mb-4 block text-left"
               data-testid="footer-logo"
             >
-              <span className="text-white">CORTEX</span>{" "}
+              <span className="text-white">CX</span>{" "}
               <span className="text-blue-300">LINUX</span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
@@ -188,12 +188,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">
+                <a href="https://x.com/cxlinuxai" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">
                   Twitter
                 </a>
               </li>
               <li>
-                <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">
+                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">
                   GitHub
                 </a>
               </li>
@@ -259,10 +259,10 @@ export default function Footer() {
             </SmoothLink>
           </div>
           <div className="flex gap-4">
-            <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
+            <a href="https://x.com/cxlinuxai" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
               <FaTwitter size={20} />
             </a>
-            <a href="https://github.com/cortexlinux/cortex" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
+            <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
               <Github size={20} />
             </a>
             <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
