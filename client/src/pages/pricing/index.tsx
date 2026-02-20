@@ -75,7 +75,7 @@ const tiers: PricingTier[] = [
     name: "CX Pro",
     subtitle: "For Power Users",
     price: 20,
-    annualPrice: 15,
+    annualPrice: 200,
     description: "Unlock cloud AI models, web console, and priority support. Perfect for developers managing multiple servers.",
     features: [
       "Everything in CX Core",
@@ -104,7 +104,7 @@ const tiers: PricingTier[] = [
     name: "CX Team",
     subtitle: "For Growing Teams",
     price: 99,
-    annualPrice: 79,
+    annualPrice: 990,
     description: "Collaborate with your team. Shared configurations, role-based access, and centralized management for dev teams.",
     features: [
       "Everything in CX Pro",
@@ -131,7 +131,7 @@ const tiers: PricingTier[] = [
     name: "CX Enterprise",
     subtitle: "For Organizations",
     price: 299,
-    annualPrice: 239,
+    annualPrice: 2990,
     description: "Enterprise-grade security, compliance, and dedicated support. SSO, audit logs, and custom SLAs for large organizations.",
     features: [
       "Everything in CX Team",
@@ -299,14 +299,14 @@ export default function PricingPage() {
 
                   <div id={`pricing-price-${tier.id}`} className="mb-6">
                     <span className={`text-4xl font-extrabold ${tier.badge ? "text-gray-900" : "text-white"}`}>
-                      ${isAnnual ? tier.annualPrice : tier.price}
+                      ${isAnnual ? Math.round(tier.annualPrice / 12) : tier.price}
                     </span>
                     <span className={`text-sm ${tier.badge ? "text-gray-500" : "text-white/60"}`}>
                       {tier.price > 0 ? "/month" : ""}
                     </span>
                     {isAnnual && tier.price > 0 && (
                       <p className={`text-xs mt-1 ${tier.badge ? "text-gray-400" : "text-white/50"}`}>
-                        Billed annually (${tier.annualPrice * 12}/year)
+                        Billed annually (${tier.annualPrice}/year)
                       </p>
                     )}
                   </div>
