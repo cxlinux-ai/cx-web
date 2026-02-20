@@ -246,9 +246,9 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto">
           {/* Purple gradient background container */}
           <div className="relative rounded-3xl bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-950 p-8 md:p-12 overflow-hidden">
-            {/* Decorative gradient orbs */}
-            <div className="absolute top-0 left-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+            {/* Decorative gradient orbs - hidden on mobile */}
+            <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {tiers.map((tier, index) => {

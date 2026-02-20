@@ -1074,9 +1074,9 @@ function BuildTracksShowcase() {
           {/* Gradient overlay */}
           <div className={`absolute inset-0 bg-gradient-to-br ${visual.gradient} pointer-events-none`} />
           
-          {/* Animated orbs with deeper parallax */}
+          {/* Animated orbs with deeper parallax - hidden on mobile */}
           <motion.div 
-            className="absolute top-10 right-10 w-32 h-32 bg-current opacity-10 rounded-full blur-3xl" 
+            className="hidden md:block absolute top-10 right-10 w-32 h-32 bg-current opacity-10 rounded-full blur-3xl" 
             style={{ 
               color: getTrackColor(),
               x: deepParallaxX,
@@ -1085,7 +1085,7 @@ function BuildTracksShowcase() {
             aria-hidden="true"
           />
           <motion.div 
-            className="absolute bottom-10 left-10 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl"
+            className="hidden md:block absolute bottom-10 left-10 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl"
             style={{ 
               color: getTrackColor(),
               x: deepParallaxX,
