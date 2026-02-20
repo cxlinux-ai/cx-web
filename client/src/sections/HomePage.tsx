@@ -536,9 +536,15 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.6 }}
-            className="hidden sm:block mb-8"
+            className="hidden sm:block mb-8 relative"
           >
-            <FeatureCarousel />
+            {/* Purple glow effects on page background - illuminates window edges */}
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-500/15 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 -left-20 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-1/2 -right-20 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className="relative z-10">
+              <FeatureCarousel />
+            </div>
           </motion.div>
 
           {/* Demo - Hidden on small screens */}
