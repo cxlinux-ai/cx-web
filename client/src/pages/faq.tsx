@@ -153,11 +153,11 @@ export default function FAQ() {
         },
         {
           q: "Is it ready to use now?",
-          a: "Current status: Public Beta (November 2025)\n\nWhat works:\n✅ Core AI capabilities\n✅ Package installation\n✅ Hardware detection\n✅ Basic dependency resolution\n\nWhat's coming:\n🟡 Advanced error recovery\n🟡 Multi-step orchestration\n🟡 Configuration file generation\n\nReady for: Testing, non-critical environments, learning\nNot yet for: Production servers (use Enterprise beta)"
+          a: "Current status: Public Beta (February 2026)\n\nWhat works:\n✅ Core AI capabilities\n✅ Package installation\n✅ Hardware detection\n✅ Basic dependency resolution\n\nWhat's coming:\n🟡 Advanced error recovery\n🟡 Multi-step orchestration\n🟡 Configuration file generation\n\nReady for: Testing, non-critical environments, learning\nNot yet for: Production servers (use Enterprise beta)"
         },
         {
           q: "When will it be production-ready?",
-          a: "Roadmap:\n\nQ4 2025 (Now): Public Beta\n• Core features working\n• Community testing\n• Bug fixes and polish\n\nQ1 2026: Production v1.0\n• Enterprise features complete\n• Security audit completed\n• SLA-backed support available\n\nQ2 2026: Expansion\n• Debian, Fedora support\n• Additional AI models\n• Plugin ecosystem\n\nJoin beta now to influence features!"
+          a: "Roadmap:\n\nQ1 2026 (Now): Public Beta\n• Core features working\n• Community testing\n• Bug fixes and polish\n\nQ2 2026: Production v1.0\n• Enterprise features complete\n• Security audit completed\n• SLA-backed support available\n\nQ3 2026: Expansion\n• Debian, Fedora support\n• Additional AI models\n• Plugin ecosystem\n\nJoin beta now to influence features!"
         },
         {
           q: "How can I contribute?",

@@ -122,7 +122,7 @@ For users outside the United States, you agree to comply with all local laws reg
           <p className="text-gray-400 text-lg">
             Legal terms governing your use of CX Linux
           </p>
-          <p className="text-gray-500 text-sm mt-2">Effective Date: December 15, 2025</p>
+          <p className="text-gray-500 text-sm mt-2">Effective Date: February 20, 2026</p>
         </motion.div>
 
         <div className="space-y-8">

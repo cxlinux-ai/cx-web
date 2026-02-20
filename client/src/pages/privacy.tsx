@@ -88,7 +88,7 @@ To exercise these rights, contact us at privacy@cxlinux.com.`
 
 We will notify you of significant changes via email or prominent notice on our website. Continued use of our services after changes constitutes acceptance of the updated policy.
 
-Last updated: December 2025`
+Last updated: February 2026`
     },
     {
       icon: Mail,
@@ -125,7 +125,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
           <p className="text-gray-400 text-lg">
             How CX Linux collects, uses, and protects your data
           </p>
-          <p className="text-gray-500 text-sm mt-2">Effective Date: December 15, 2025</p>
+          <p className="text-gray-500 text-sm mt-2">Effective Date: February 20, 2026</p>
         </motion.div>
 
         <div className="space-y-8">

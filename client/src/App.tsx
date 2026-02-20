@@ -18,17 +18,14 @@ import SecurityPage from "./pages/security-page";
 import Status from "./pages/status";
 import License from "./pages/license";
 import GettingStarted from "./pages/getting-started";
-import Hackathon from "./pages/hackathon";
 import StartupPage from "./pages/startup";
 import NewsPage from "./pages/news";
 import NewsArticlePage from "./pages/news-article";
 import AdminRegistrations from "./pages/admin-registrations";
 import BountiesPage from "./pages/bounties";
-import ReferralsPage from "./pages/referrals";
 import MissionPage from "./pages/mission";
 import ComparePage from "./pages/compare";
 import CompareAnalyticsPage from "./pages/compare-analytics";
-import HackathonRulesPage from "./pages/hackathon-rules";
 import Register from "./pages/register";
 import PricingPage from "./pages/pricing";
 import PricingCheckout from "./pages/pricing/checkout";
@@ -58,31 +55,6 @@ export default function App() {
 
   // Hide navigation on checkout pages for cleaner conversion flow
   const isCheckoutPage = location.startsWith("/pricing/checkout") || location.startsWith("/pricing/success");
-
-  // Track visitor referral on page load (if ?ref=CODE is present)
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const refCode = urlParams.get("ref");
-    
-    if (refCode) {
-      // Track this visitor's referral for attribution
-      fetch("/api/referral/track-visitor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          referralCode: refCode,
-          source: urlParams.get("utm_source") || "referral",
-          landingPage: window.location.pathname,
-        }),
-      }).catch(() => {
-        // Silently fail - don't interrupt user experience
-      });
-      
-      // Also store in localStorage as backup
-      localStorage.setItem("cx_referral_code", refCode);
-      localStorage.setItem("cx_referral_time", Date.now().toString());
-    }
-  }, []);
 
   // Handle pending scroll after navigation
   useEffect(() => {
@@ -401,15 +373,11 @@ export default function App() {
             <Route path="/status" component={Status} />
             <Route path="/license" component={License} />
             <Route path="/getting-started" component={GettingStarted} />
-            <Route path="/hackathon" component={Hackathon} />
-            <Route path="/hackathon-rules" component={HackathonRulesPage} />
             <Route path="/register" component={Register} />
             <Route path="/startup" component={StartupPage} />
             <Route path="/news" component={NewsPage} />
             <Route path="/news/:slug" component={NewsArticlePage} />
             <Route path="/bounties" component={BountiesPage} />
-            <Route path="/referrals" component={ReferralsPage} />
-            <Route path="/waitlist" component={ReferralsPage} />
             <Route path="/mission" component={MissionPage} />
             <Route path="/compare/:competitor" component={ComparePage} />
             <Route path="/compare-analytics" component={CompareAnalyticsPage} />

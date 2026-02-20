@@ -123,9 +123,9 @@ export default function Footer() {
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#preview" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-docs">
+                <a href="https://docs.cxlinux.com" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-docs">
                   Documentation
-                </SmoothLink>
+                </a>
               </li>
               <li>
                 <SmoothLink href="/faq" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-faq">
@@ -144,9 +144,9 @@ export default function Footer() {
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#preview" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-api">
+                <a href="https://docs.cxlinux.com/api" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-api">
                   API Reference
-                </SmoothLink>
+                </a>
               </li>
               <li>
                 <SmoothLink href="/getting-started" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-get-started">
@@ -181,7 +181,7 @@ export default function Footer() {
               </li>
               <li>
                 <SmoothLink href="/careers" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-careers">
-                  Join Community
+                  Careers
                 </SmoothLink>
               </li>
             </ul>
@@ -215,7 +215,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">&copy; 2025 CX Linux. All rights reserved.</p>
+          <p className="text-sm text-gray-500">&copy; 2026 CX Linux. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
               <Github size={20} />
