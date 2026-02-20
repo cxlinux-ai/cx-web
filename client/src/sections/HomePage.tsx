@@ -1080,7 +1080,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span>Feature Comparison</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-              How Is <span className="gradient-text">CX Different?</span>
+              How Is <span className="gradient-text">CX Linux Different?</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-xl mx-auto">
               See why developers choose CX over traditional alternatives.
