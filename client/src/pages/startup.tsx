@@ -123,8 +123,8 @@ export default function StartupPage() {
         'Rollback support',
         '1 system'
       ],
-      cta: 'Download Free',
-      ctaLink: 'https://github.com/cxlinux-ai/cx-core',
+      cta: 'Get Started Free',
+      ctaLink: '/pricing/checkout?plan=core',
       highlighted: false
     },
     {
@@ -625,8 +625,8 @@ export default function StartupPage() {
 
                   <a
                     href={tier.ctaLink || '#'}
-                    target={tier.ctaLink ? "_blank" : undefined}
-                    rel={tier.ctaLink ? "noopener noreferrer" : undefined}
+                    target={tier.ctaLink && !tier.ctaLink.startsWith('/') ? "_blank" : undefined}
+                    rel={tier.ctaLink && !tier.ctaLink.startsWith('/') ? "noopener noreferrer" : undefined}
                     className={`block w-full py-2.5 text-center rounded-lg text-sm font-medium transition-colors duration-150 ${
                       tier.highlighted
                         ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-500 hover:to-purple-500'
@@ -637,7 +637,7 @@ export default function StartupPage() {
                     data-testid={`button-checkout-${tier.name.toLowerCase()}-startup`}
                   >
                     {tier.cta}
-                    {tier.ctaLink && <ExternalLink size={14} className="inline ml-1" />}
+                    {tier.ctaLink && !tier.ctaLink.startsWith('/') && <ExternalLink size={14} className="inline ml-1" />}
                   </a>
 
                   <ul className="mt-6 space-y-3">
