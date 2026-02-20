@@ -230,7 +230,7 @@ export default function Footer() {
               </li>
               <li>
                 <SmoothLink href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">
-                  License (MIT)
+                  License (BSL 1.1)
                 </SmoothLink>
               </li>
               <li>
