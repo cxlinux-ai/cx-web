@@ -57,11 +57,9 @@ import {
   Info,
   Building,
   Building2,
-  Mail,
   Gift,
   Trophy,
   Crown,
-  Loader2,
 } from "lucide-react";
 import { FaDiscord, FaTwitter } from "react-icons/fa";
 import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiClerk, SiResend } from "react-icons/si";
@@ -346,52 +344,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [activeTab, setActiveTab] = useState<"npm" | "yarn" | "pnpm" | "bun">("npm");
   const [activeDemo, setActiveDemo] = useState(0);
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
-  const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-
   // A/B Testing for hero headline
   const { variant: headlineVariant } = useABVariant(homeHeroTest);
   const headlines: Record<string, string> = {
     control: 'Linux, But Smarter',
     variant_b: 'AI-Native Linux for Developers',
-  };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || isSubmitting) return;
-
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      const response = await fetch("/api/email-capture", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          source: "founders_waitlist",
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        localStorage.setItem("founders_waitlist_email", email);
-        setEmailSubmitted(true);
-      } else {
-        setSubmitError(result.error || "Failed to submit. Please try again.");
-      }
-    } catch (error) {
-      console.error("Email submission error:", error);
-      setSubmitError("Network error. Please check your connection and try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   const demoCommands = [
@@ -2198,78 +2155,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
 
             <p className="text-sm text-gray-500 mt-4">No credit card required · Deploy in 30 seconds · Free forever</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Email Capture Section */}
-      <section id="email-capture" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 bg-white/[0.02]`}>
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-blue/20 flex items-center justify-center">
-              <Mail className="w-8 h-8 text-blue-300" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get Notified When <span className="gradient-text">Founders Edition</span> Launches
-            </h2>
-            <p className="text-gray-400 mb-8">
-              Be the first to know. Early subscribers get 20% off the first year.
-            </p>
-
-            {emailSubmitted ? (
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="p-6 rounded-xl bg-emerald-500/20 border border-emerald-500/50"
-              >
-                <Check className="w-12 h-12 mx-auto mb-4 text-emerald-400" />
-                <h3 className="text-xl font-semibold text-emerald-400 mb-2">You're on the list!</h3>
-                <p className="text-gray-400">We'll notify you when Founders Edition is available.</p>
-              </motion.div>
-            ) : (
-              <div className="max-w-md mx-auto">
-                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="founder@startup.com"
-                    required
-                    disabled={isSubmitting}
-                    className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-brand-blue focus:outline-none transition-colors disabled:opacity-50"
-                    data-testid="input-email-capture"
-                  />
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold glow-brand-blue transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                    data-testid="button-email-submit"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      "Notify Me"
-                    )}
-                  </button>
-                </form>
-                {submitError && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-4 text-red-400 text-sm text-center"
-                  >
-                    {submitError}
-                  </motion.p>
-                )}
-              </div>
-            )}
           </motion.div>
         </div>
       </section>

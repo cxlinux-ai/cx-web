@@ -21,7 +21,6 @@ import {
   Rocket,
   Shield,
   Clock,
-  Mail,
   ExternalLink,
   Building,
   Building2,
@@ -106,7 +105,6 @@ export default function StartupPage() {
     { icon: SiResend, name: "Resend" },
   ];
   
-  const [email, setEmail] = useState("");
   const [annual, setAnnual] = useState(false);
 
   // 4-Tier Pricing matching HomePage
@@ -175,22 +173,6 @@ export default function StartupPage() {
       highlighted: false
     }
   ];
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      try {
-        localStorage.setItem("startup_waitlist_email", email);
-        setEmailSubmitted(true);
-        analytics.trackFormSubmit('founders_waitlist', true);
-        analytics.trackConversion('waitlist_signup');
-      } catch (error) {
-        analytics.trackFormSubmit('founders_waitlist', false);
-      }
-    }
-  };
-
   const preInstalledStack = [
     { icon: FaPython, name: "Python 3.12 + uv", color: "text-yellow-400" },
     { icon: SiOllama, name: "Ollama", color: "text-white" },
@@ -727,58 +709,6 @@ export default function StartupPage() {
                 <ArrowRight size={20} />
               </Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Email Capture Section */}
-      <section id="email-capture" className="py-24 px-4 border-t border-white/5 bg-white/[0.02]">
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-brand-blue/20 flex items-center justify-center">
-              <Mail className="w-8 h-8 text-blue-300" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get Notified When <span className="gradient-text">Founders Edition</span> Launches
-            </h2>
-            <p className="text-gray-400 mb-8">
-              Be the first to know. Early subscribers get 20% off the first year.
-            </p>
-
-            {emailSubmitted ? (
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="p-6 rounded-xl bg-emerald-500/20 border border-emerald-500/50"
-              >
-                <Check className="w-12 h-12 mx-auto mb-4 text-emerald-400" />
-                <h3 className="text-xl font-semibold text-emerald-400 mb-2">You're on the list!</h3>
-                <p className="text-gray-400">We'll notify you when Founders Edition is available.</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="founder@startup.com"
-                  required
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder:text-gray-500 focus:border-brand-blue focus:outline-none transition-colors"
-                  data-testid="input-email-capture"
-                />
-                <button
-                  type="submit"
-                  className="px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold glow-brand-blue transition-all duration-300"
-                  data-testid="button-email-submit"
-                >
-                  Notify Me
-                </button>
-              </form>
-            )}
           </motion.div>
         </div>
       </section>
