@@ -2202,66 +2202,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* Referral Program Snippet */}
-      <section id="referral-program" className={`${SECTION_PADDING.standard} px-4 border-t border-white/5`}>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="glass-card rounded-2xl p-8 md:p-10 relative overflow-hidden"
-          >
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 pointer-events-none" />
-            
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-              {/* Icon */}
-              <div className="flex-shrink-0">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center">
-                  <Gift className="w-10 h-10 text-purple-400" />
-                </div>
-              </div>
-              
-              {/* Content */}
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-2xl md:text-3xl font-bold mb-3">
-                  <span className="gradient-text">Invite Friends, Earn Rewards</span>
-                </h3>
-                <p className="text-gray-400 mb-4 max-w-xl">
-                  Join our referral program. Invite friends to move up the waitlist and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-track entry.
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                  <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Trophy size={16} className="text-yellow-400" />
-                    <span>Top referrers get prizes</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Users size={16} className="text-blue-400" />
-                    <span>Skip the waitlist</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Sparkles size={16} className="text-purple-400" />
-                    <span>Exclusive Discord access</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* CTA */}
-              <div className="flex-shrink-0">
-                <Link
-                  href="/referrals"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-xl text-white font-semibold transition-all shadow-lg shadow-purple-500/25"
-                  data-testid="button-referral-cta"
-                >
-                  Start Earning
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Email Capture Section */}
       <section id="email-capture" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 bg-white/[0.02]`}>
         <div className="max-w-2xl mx-auto text-center">
