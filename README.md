@@ -1,6 +1,6 @@
 # CX Linux Website
 
-The official website [CX Linux](https://cortexlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
+The official website [CX Linux](https://cxlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
 
 ## Tech Stack
 
@@ -46,7 +46,7 @@ The beta page allows users to experience CX Linux capabilities directly in the b
 
 ```bash
 # Clone the repository
-git clone https://github.com/cortexlinux/website.git
+git clone https://github.com/cxlinux-ai/cx-web.git
 cd website
 
 # Install dependencies
@@ -101,7 +101,7 @@ No environment variables required for local development. The beta page uses clie
 
 ## Related Projects
 
-- [CX Linux CLI](https://github.com/cortexlinux/cortex) - The main CX Linux project
+- [CX Linux CLI](https://github.com/cxlinux-ai/cx-core) - The main CX Linux project
 
 ## License
 
@@ -109,4 +109,4 @@ This project is part of the CX Linux ecosystem. See the main repository for lice
 
 ---
 
-Built by [AI Venture Holdings LLC](https://cortexlinux.com)
+Built by [AI Venture Holdings LLC](https://cxlinux.com)
