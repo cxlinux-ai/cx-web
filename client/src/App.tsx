@@ -226,31 +226,14 @@ export default function App() {
                   onClick={() => analytics.trackCTAClick('ai_agencies', 'main_nav')}
                 >AI Agencies</Link>
                 <Link
-                  href="/referrals"
+                  href="/careers"
                   className={`text-base font-medium transition-colors duration-300 ${
-                    location === "/referrals" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
+                    location === "/careers" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
                   }`}
-                  data-testid="link-referrals"
-                  onClick={() => analytics.trackCTAClick('referrals', 'main_nav')}
+                  data-testid="link-careers"
+                  onClick={() => analytics.trackCTAClick('careers', 'main_nav')}
                 >
-                  Referrals
-                </Link>
-                <Link
-                  href="/hackathon"
-                  className={`relative text-base font-medium transition-all duration-300 flex items-center gap-1.5 group ${
-                    location === "/hackathon" ? "text-terminal-green drop-shadow-[0_0_8px_rgba(0,255,0,0.6)]" : "text-terminal-green hover:drop-shadow-[0_0_10px_rgba(0,255,0,0.7)]"
-                  }`}
-                  data-testid="link-hackathon"
-                  onClick={() => analytics.trackCTAClick('hackathon', 'main_nav')}
-                >
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
-                  </span>
-                  <span className="relative">
-                    Hackathon
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-terminal-green transition-all duration-300 ${location === "/hackathon" ? "w-full" : "w-0 group-hover:w-full"}`} />
-                  </span>
+                  Careers
                 </Link>
               </div>
 
@@ -267,6 +250,13 @@ export default function App() {
                   <Star size={14} className="text-yellow-400" />
                   <span>{githubStats?.stars || 25}</span>
                 </a>
+                <Link
+                  href="/security"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-300 font-medium hover:text-white transition-all"
+                  onClick={() => analytics.trackCTAClick('security', 'header')}
+                >
+                  Security
+                </Link>
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank"
@@ -351,30 +341,26 @@ export default function App() {
                     AI Agencies
                   </Link>
                   <Link
-                    href="/referrals"
+                    href="/careers"
                     onClick={() => {
-                      analytics.trackCTAClick('referrals', 'mobile_nav');
+                      analytics.trackCTAClick('careers', 'mobile_nav');
                       setMobileMenuOpen(false);
                     }}
                     className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-referrals"
+                    data-testid="mobile-link-careers"
                   >
-                    Referrals
+                    Careers
                   </Link>
                   <Link
-                    href="/hackathon"
+                    href="/security"
                     onClick={() => {
-                      analytics.trackCTAClick('hackathon', 'mobile_nav');
+                      analytics.trackCTAClick('security', 'mobile_nav');
                       setMobileMenuOpen(false);
                     }}
-                    className="flex items-center gap-2 w-full text-left py-2 text-terminal-green hover:text-white transition-colors duration-300"
-                    data-testid="mobile-link-hackathon"
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
+                    data-testid="mobile-link-security"
                   >
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-terminal-green opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-terminal-green" />
-                    </span>
-                    Hackathon
+                    Security
                   </Link>
                   <a
                     href="https://github.com/cxlinux-ai/cx-core"
