@@ -27,8 +27,8 @@ export const solutionFeatures = [
   {
     title: "Natural Language Commands",
     icon: "MessageSquare",
-    description: "Tell Cortex what you need in plain English. It understands intent, not just keywords.",
-    example: "cortex install tensorflow --optimize-gpu",
+    description: "Tell CX what you need in plain English. It understands intent, not just keywords.",
+    example: "cx install tensorflow --optimize-gpu",
     testid: "feature-natural-language"
   },
   {
@@ -42,7 +42,7 @@ export const solutionFeatures = [
     title: "Self-Healing Configuration",
     icon: "RotateCcw",
     description: "Fixes broken dependencies automatically. Rollback if anything goes wrong. Never repeat errors.",
-    example: "Dependency conflict? Cortex resolves it.",
+    example: "Dependency conflict? CX resolves it.",
     testid: "feature-self-healing"
   }
 ];
@@ -75,7 +75,7 @@ export const securityFeatures = [
 ];
 
 export const comparisonData = {
-  tools: ["Feature", "Warp/Gemini CLI", "Claude Code", "Cortex Linux"],
+  tools: ["Feature", "Warp/Gemini CLI", "Claude Code", "CX Linux"],
   features: [
     { name: "AI-assisted commands", warp: true, claude: true, cortex: true },
     { name: "Hardware detection", warp: false, claude: false, cortex: true },
@@ -92,21 +92,21 @@ export const useCases = [
   {
     title: "Data Scientists",
     before: "6 hours installing CUDA + TensorFlow + dependencies across 47 Stack Overflow tabs",
-    after: "cortex install tensorflow --optimize-gpu (5 minutes)",
+    after: "cx install tensorflow --optimize-gpu (5 minutes)",
     timeSaved: "5h 55m",
     testid: "usecase-data-scientists"
   },
   {
     title: "DevOps Engineers",
     before: "4 hours configuring Oracle DB with manual dependency resolution",
-    after: "cortex setup oracle-23-ai production-ready (4 minutes)",
+    after: "cx setup oracle-23-ai production-ready (4 minutes)",
     timeSaved: "3h 56m",
     testid: "usecase-devops"
   },
   {
     title: "ML Engineers",
     before: "Version conflicts between PyTorch and CUDA, 3 hours debugging",
-    after: "cortex install pytorch stable --compatible-cuda (automatic resolution)",
+    after: "cx install pytorch stable --compatible-cuda (automatic resolution)",
     timeSaved: "3h",
     testid: "usecase-ml-engineers"
   },
