@@ -924,7 +924,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span>System Architecture</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-              How <span className="gradient-text"> CX </span> Works
+              How <span className="gradient-text">CX Linux</span> Works
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               A powerful layered architecture that transforms your natural language into optimized system operations.
