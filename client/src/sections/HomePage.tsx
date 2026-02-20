@@ -484,7 +484,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
-            <span className="block gradient-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[82px] font-extrabold">The Agentic OS</span>
+            <span className="block shimmer-text text-[32px] sm:text-[48px] md:text-[64px] lg:text-[82px] font-extrabold">The Agentic OS</span>
             <span className="block text-white text-[24px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold">for Linux Fleet Management</span>
           </motion.h1>
 
@@ -499,7 +499,36 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             autonomous execution, fleet-wide orchestration — all from a single interface.
           </motion.p>
 
-          {/* Demo - Hidden on small screens, show simple CTA instead */}
+          {/* CTA Buttons - Desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="hidden sm:flex items-center justify-center gap-4 mb-10"
+          >
+            <Link href="/getting-started">
+              <button 
+                className="flex items-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:scale-105 transition-all duration-200"
+                onClick={() => analytics.trackCTAClick('get_started', 'hero_desktop')}
+              >
+                <Rocket size={20} />
+                Get Started
+              </button>
+            </Link>
+            <a 
+              href="https://github.com/cxlinux-ai/cx-core" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => analytics.trackCTAClick('view_github', 'hero_desktop')}
+            >
+              <button className="flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-semibold text-base hover:bg-white/10 hover:border-white/20 transition-all duration-200">
+                <Github size={20} />
+                View on GitHub
+              </button>
+            </a>
+          </motion.div>
+
+          {/* Demo - Hidden on small screens */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
