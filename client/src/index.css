@@ -918,29 +918,29 @@ table tbody tr:hover {
   background-clip: text;
 }
 
-/* Shimmer text effect - subtle light sweep from right to left */
+/* Shimmer text effect - very subtle, slow light sweep from right to left */
 .shimmer-text {
   background: linear-gradient(
     90deg,
     #a855f7 0%,
-    #a855f7 40%,
-    rgba(255, 255, 255, 0.7) 50%,
-    #a855f7 60%,
+    #a855f7 42%,
+    rgba(200, 180, 255, 0.5) 50%,
+    #a855f7 58%,
     #a855f7 100%
   );
-  background-size: 300% 100%;
+  background-size: 400% 100%;
   background-position: 100% 50%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 6s ease-in-out infinite;
+  animation: shimmer 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes shimmer {
-  0%, 100% {
+  0% {
     background-position: 100% 50%;
   }
-  50% {
+  100% {
     background-position: -100% 50%;
   }
 }

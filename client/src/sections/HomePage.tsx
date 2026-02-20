@@ -444,9 +444,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       {/* Hero Section */}
       <section id="home" className={`min-h-screen flex flex-col justify-center items-center ${SECTION_PADDING.hero} px-2 sm:px-4 relative overflow-hidden`}>
         {/* Purple ambient glow effects */}
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 hidden sm:block" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/8 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3 hidden sm:block" />
-        <div className="absolute top-1/3 left-1/2 w-[800px] h-[400px] bg-purple-500/5 rounded-full blur-[150px] -translate-x-1/2 hidden sm:block" />
+        <div className="absolute top-0 left-0 w-[700px] h-[700px] bg-purple-500/20 rounded-full blur-[120px] -translate-x-1/3 -translate-y-1/3 hidden sm:block" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[100px] translate-x-1/4 -translate-y-1/4 hidden sm:block" />
+        <div className="absolute top-1/4 left-1/2 w-[900px] h-[500px] bg-purple-500/10 rounded-full blur-[150px] -translate-x-1/2 hidden sm:block" />
         
         <div className="w-full max-w-6xl mx-auto text-center relative z-10">
           {/* Trust Badges */}
