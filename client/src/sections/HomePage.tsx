@@ -2160,7 +2160,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 data-testid="link-talk-to-us"
               >
                 <MessageCircle size={20} />
-                Join Discord
+                Talk to Us
               </a>
             </div>
 
