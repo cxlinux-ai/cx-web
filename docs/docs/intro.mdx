@@ -1,33 +1,33 @@
 ---
 sidebar_position: 0
 slug: /
-title: Welcome to Cortex Linux
+title: Welcome to CX Linux
 description: The AI-native operating system that simplifies Linux with natural language. Install packages, configure services, and manage your system just by describing what you want.
-keywords: [cortex, linux, ai, natural language, documentation]
+keywords: [cx, linux, ai, natural language, documentation]
 ---
 
-# Welcome to Cortex Linux
+# Welcome to CX Linux
 
-**Cortex Linux** is an AI-powered command-line tool that transforms how you interact with Linux. Instead of memorizing commands, just describe what you want in plain English.
+**CX Linux** is an AI-powered command-line tool that transforms how you interact with Linux. Instead of memorizing commands, just describe what you want in plain English.
 
 ```bash
 # Traditional way
 sudo apt update && sudo apt install nginx && sudo systemctl enable nginx && sudo systemctl start nginx
 
-# Cortex way
-cortex "install nginx and set it up to start on boot"
+# CX way
+cx "install nginx and set it up to start on boot"
 ```
 
-## Why Cortex?
+## Why CX?
 
 ### 🧠 Natural Language Interface
 
 Forget command syntax. Describe your intent:
 
 ```bash
-cortex "set up python for data science"
-cortex "make the firewall allow only SSH and HTTPS"
-cortex "find what's using port 8080 and stop it"
+cx "set up python for data science"
+cx "make the firewall allow only SSH and HTTPS"
+cx "find what's using port 8080 and stop it"
 ```
 
 ### 🛡️ Safe by Design
@@ -55,7 +55,7 @@ Works across all major distributions:
 ## Quick Install
 
 ```bash
-curl -fsSL https://cortexlinux.com/install.sh | bash
+curl -fsSL https://cxlinux.com/install.sh | bash
 ```
 
 <details>
@@ -65,20 +65,20 @@ curl -fsSL https://cortexlinux.com/install.sh | bash
 
 ```bash
 # Ubuntu/Debian
-sudo apt install cortex
+sudo apt install cx
 
 # Fedora
-sudo dnf install cortex
+sudo dnf install cx
 
 # Arch
-yay -S cortex
+yay -S cx
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/cortexlinux/cortex-linux.git
-cd cortex-linux
+git clone https://github.com/cxlinux/cx-linux.git
+cd cx-linux
 cargo install --path .
 ```
 
@@ -88,13 +88,13 @@ cargo install --path .
 
 ```bash
 # Try it out
-cortex "show system information"
+cx "show system information"
 
 # Install something
-cortex "install htop"
+cx "install htop"
 
 # Preview first (dry-run)
-cortex --dry-run "update all packages"
+cx --dry-run "update all packages"
 ```
 
 ## What Can You Do?
@@ -102,33 +102,33 @@ cortex --dry-run "update all packages"
 ### Package Management
 
 ```bash
-cortex "install docker and docker-compose"
-cortex "update nodejs to version 20"
-cortex "remove unused packages"
+cx "install docker and docker-compose"
+cx "update nodejs to version 20"
+cx "remove unused packages"
 ```
 
 ### System Configuration
 
 ```bash
-cortex "create user deploy with ssh access"
-cortex "enable the firewall and allow port 443"
-cortex "set up automatic security updates"
+cx "create user deploy with ssh access"
+cx "enable the firewall and allow port 443"
+cx "set up automatic security updates"
 ```
 
 ### Service Management
 
 ```bash
-cortex "restart nginx and check its status"
-cortex "disable bluetooth service"
-cortex "show what services failed to start"
+cx "restart nginx and check its status"
+cx "disable bluetooth service"
+cx "show what services failed to start"
 ```
 
 ### Development Setup
 
 ```bash
-cortex "set up python 3.11 with pip and virtualenv"
-cortex "install rust development tools"
-cortex "configure git with my name and email"
+cx "set up python 3.11 with pip and virtualenv"
+cx "install rust development tools"
+cx "configure git with my name and email"
 ```
 
 ## Getting Started
@@ -140,7 +140,7 @@ cortex "configure git with my name and email"
         <h3>📦 Installation</h3>
       </div>
       <div className="card__body">
-        <p>Get Cortex installed on your system in under 5 minutes.</p>
+        <p>Get CX installed on your system in under 5 minutes.</p>
       </div>
       <div className="card__footer">
         <a className="button button--primary button--block" href="/docs/getting-started/installation">
@@ -169,15 +169,15 @@ cortex "configure git with my name and email"
 ## How It Works
 
 1. **You describe** what you want in natural language
-2. **Cortex understands** your intent using AI
+2. **CX understands** your intent using AI
 3. **Preview** the commands that will run
 4. **Execute** with confidence (or rollback if needed)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ $ cortex "install nginx and configure for static site"     │
+│ $ cx "install nginx and configure for static site"     │
 ├─────────────────────────────────────────────────────────────┤
-│ Cortex will execute:                                        │
+│ CX will execute:                                        │
 │                                                             │
 │ 1. apt install nginx                                        │
 │ 2. systemctl enable nginx                                   │
@@ -191,15 +191,15 @@ cortex "configure git with my name and email"
 ## Community
 
 - **Discord**: [Join our community](https://discord.gg/ASvzWcuTfk)
-- **GitHub**: [Star us on GitHub](https://github.com/cortexlinux/cortex-linux)
-- **Twitter**: [@cortexlinux](https://twitter.com/cortexlinux)
+- **GitHub**: [Star us on GitHub](https://github.com/cxlinux/cx-linux)
+- **Twitter**: [@cxlinux](https://twitter.com/cxlinux)
 
 ## Contributing
 
-Cortex is open source! We welcome contributions:
+CX is open source! We welcome contributions:
 
-- 🐛 [Report bugs](https://github.com/cortexlinux/cortex-linux/issues)
-- 💡 [Suggest features](https://github.com/cortexlinux/cortex-linux/discussions)
+- 🐛 [Report bugs](https://github.com/cxlinux/cx-linux/issues)
+- 💡 [Suggest features](https://github.com/cxlinux/cx-linux/discussions)
 - 🔧 [Submit PRs](/docs/contributing/pr-guidelines)
 - 💰 [Earn bounties](/docs/contributing/bounty-program)
 

@@ -1,5 +1,5 @@
 /**
- * Cortex Linux Documentation Homepage
+ * CX Linux Documentation Homepage
  *
  * Landing page with hero section, feature highlights, and quick start.
  */
@@ -20,7 +20,7 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.heroCode}>
-          <code>cortex "install nginx and configure for production"</code>
+          <code>cx "install nginx and configure for production"</code>
         </div>
         <div className={styles.buttons}>
           <Link
@@ -54,7 +54,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Forget memorizing command syntax. Just describe what you want in plain
-        English, and Cortex figures out the rest.
+        English, and CX figures out the rest.
       </>
     ),
   },
@@ -83,7 +83,7 @@ const FeatureList: FeatureItem[] = [
     icon: '🐧',
     description: (
       <>
-        Works on Ubuntu, Debian, Fedora, Arch, and more. Cortex adapts to your
+        Works on Ubuntu, Debian, Fedora, Arch, and more. CX adapts to your
         distribution's package manager automatically.
       </>
     ),
@@ -145,19 +145,19 @@ function HomepageQuickStart(): JSX.Element {
         <div className={styles.examplesGrid}>
           <div className={styles.exampleCard}>
             <h4>Package Management</h4>
-            <code>cortex "install docker and docker-compose"</code>
+            <code>cx "install docker and docker-compose"</code>
           </div>
           <div className={styles.exampleCard}>
             <h4>System Configuration</h4>
-            <code>cortex "enable firewall and allow SSH"</code>
+            <code>cx "enable firewall and allow SSH"</code>
           </div>
           <div className={styles.exampleCard}>
             <h4>Service Management</h4>
-            <code>cortex "restart nginx and show status"</code>
+            <code>cx "restart nginx and show status"</code>
           </div>
           <div className={styles.exampleCard}>
             <h4>Development Setup</h4>
-            <code>cortex "set up python for data science"</code>
+            <code>cx "set up python for data science"</code>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ function HomepageComparison(): JSX.Element {
   return (
     <section className={styles.comparisonSection}>
       <div className="container">
-        <h2 className={styles.sectionTitle}>Why Cortex?</h2>
+        <h2 className={styles.sectionTitle}>Why CX?</h2>
         <div className={styles.comparisonGrid}>
           <div className={styles.comparisonCard}>
             <h4>Traditional Way</h4>
@@ -182,9 +182,9 @@ sudo ufw allow 'Nginx Full'`}
             </pre>
           </div>
           <div className={styles.comparisonCard}>
-            <h4>Cortex Way</h4>
+            <h4>CX Way</h4>
             <pre className={styles.codeBlockHighlight}>
-              {`cortex "install nginx, enable it, and allow through firewall"`}
+              {`cx "install nginx, enable it, and allow through firewall"`}
             </pre>
           </div>
         </div>
@@ -204,11 +204,11 @@ function HomepageCTA(): JSX.Element {
             className="button button--primary button--lg"
             to="/docs/getting-started/installation"
           >
-            Install Cortex
+            Install CX
           </Link>
           <Link
             className="button button--outline button--lg"
-            to="https://github.com/cortexlinux/cortex-linux"
+            to="https://github.com/cxlinux/cx-linux"
           >
             Star on GitHub
           </Link>
