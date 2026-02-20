@@ -4,8 +4,6 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "wouter";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import analytics from "@/lib/analytics";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -363,26 +361,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   
   // Pricing state
   const [annual, setAnnual] = useState(false);
-  const [pricingLoading, setPricingLoading] = useState<string | null>(null);
-  const { toast } = useToast();
-
-  // Stripe price IDs
-  const STRIPE_PRICES = {
-    pro: {
-      monthly: 'price_1SpotMJ4X1wkC4EspVzV5tT6',
-      annual: 'price_1SpotMJ4X1wkC4Es3tuZGVHY'
-    },
-    enterprise: {
-      monthly: 'price_1SpotNJ4X1wkC4EsN13pV2dA',
-      annual: 'price_1SpotNJ4X1wkC4Esw5ienNNQ'
-    },
-    managed: {
-      monthly: 'price_1SpotOJ4X1wkC4Es7ZqOzh1H',
-      annual: 'price_1SpotOJ4X1wkC4EslmMmWWZI'
-    }
-  };
-
-  type TierKey = 'pro' | 'enterprise' | 'managed';
 
   interface PricingTier {
     name: string;
@@ -391,8 +369,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     description: string;
     features: string[];
     cta: string;
-    ctaLink?: string;
-    stripeKey?: TierKey;
+    ctaLink: string;
     highlighted: boolean;
     badge?: string;
   }
@@ -426,7 +403,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         'Email support (48hr)'
       ],
       cta: 'Start Free Trial',
-      stripeKey: 'pro',
+      ctaLink: '/pricing/checkout?plan=pro',
       highlighted: false,
       badge: 'PER SYSTEM'
     },
@@ -443,7 +420,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         '25 systems included'
       ],
       cta: 'Start Free Trial',
-      stripeKey: 'enterprise',
+      ctaLink: '/pricing/checkout?plan=team',
       highlighted: true,
       badge: 'MOST POPULAR'
     },
@@ -465,59 +442,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     }
   ];
 
-  const handlePricingCheckout = async (tier: PricingTier) => {
-    if (!tier.stripeKey) {
-      if (tier.ctaLink) {
-        // Internal links navigate directly, external links open in new tab
-        if (tier.ctaLink.startsWith('/')) {
-          window.location.href = tier.ctaLink;
-        } else {
-          window.open(tier.ctaLink, '_blank', 'noopener,noreferrer');
-        }
-      }
-      return;
-    }
-
-    const priceId = annual 
-      ? STRIPE_PRICES[tier.stripeKey].annual
-      : STRIPE_PRICES[tier.stripeKey].monthly;
-
-    if (!priceId) {
-      toast({
-        title: "Coming Soon",
-        description: `${tier.name} ${annual ? 'annual' : 'monthly'} pricing is not yet available.`,
-        variant: "default"
-      });
-      return;
-    }
-
-    setPricingLoading(tier.name);
-
-    try {
-      const response = await apiRequest('POST', '/api/stripe/create-checkout-session', { 
-        priceId,
-        annual 
-      });
-      
-      const data = await response.json();
-      
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'Failed to create checkout session');
-      }
-    } catch (error: any) {
-      console.error('Checkout error:', error);
-      const errorMessage = error.message || "Unable to start checkout. Please try again.";
-      toast({
-        title: "Checkout Unavailable",
-        description: errorMessage.includes("being set up") 
-          ? "This plan is currently being configured. Please try again later or contact support@cxlinux.com"
-          : errorMessage,
-        variant: "destructive"
-      });
-    } finally {
-      setPricingLoading(null);
+  const handlePricingCheckout = (tier: PricingTier) => {
+    // Append billing period to checkout URL for internal links
+    const billingParam = annual ? '&billing=annual' : '&billing=monthly';
+    
+    if (tier.ctaLink.startsWith('/')) {
+      // Internal link - navigate with billing period
+      window.location.href = tier.ctaLink + billingParam;
+    } else {
+      // External link (e.g., Calendly) - open in new tab
+      window.open(tier.ctaLink, '_blank', 'noopener,noreferrer');
     }
   };
 

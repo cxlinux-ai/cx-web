@@ -29,6 +29,23 @@ interface PlanDetails {
 }
 
 const plans: Record<string, PlanDetails> = {
+  core: {
+    id: "core",
+    name: "Core",
+    monthlyPrice: 0,
+    annualPrice: 0,
+    features: [
+      "Full CLI commands",
+      "Local LLM (Ollama)",
+      "Dry-run safety mode",
+      "Rollback support",
+      "1 system",
+      "Community support",
+    ],
+    stripePriceIdMonthly: "",
+    stripePriceIdAnnual: "",
+    icon: Server,
+  },
   pro: {
     id: "pro",
     name: "Pro",
@@ -132,6 +149,32 @@ export default function CheckoutPage() {
     try {
       const ref = referralCode || localStorage.getItem("cx_referral") || "";
       
+      // Handle free tier (Core) - just register and redirect to success
+      if (plan.id === "core") {
+        const response = await fetch("/api/register-free-tier", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            name,
+            company,
+            referralCode: ref,
+          }),
+        });
+
+        // Even if registration fails, proceed to success page (best effort)
+        if (!response.ok) {
+          console.warn("Free tier registration failed, proceeding anyway");
+        }
+
+        // Redirect to success page for free tier
+        navigate(`/pricing/success?plan=core&email=${encodeURIComponent(email)}`);
+        return;
+      }
+      
+      // Paid tiers - Stripe checkout
       const response = await fetch("/api/stripe/checkout-session", {
         method: "POST",
         headers: {
@@ -306,6 +349,11 @@ export default function CheckoutPage() {
                     <Loader2 className="w-5 h-5 animate-spin" />
                     Processing...
                   </>
+                ) : plan.monthlyPrice === 0 ? (
+                  <>
+                    <Check className="w-5 h-5" />
+                    Get Started Free
+                  </>
                 ) : (
                   <>
                     <CreditCard className="w-5 h-5" />
@@ -357,15 +405,17 @@ export default function CheckoutPage() {
               {/* Price Breakdown */}
               <div id="checkout-price-breakdown" className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-400">
-                  <span>{plan.name} ({isAnnual ? "Annual" : "Monthly"})</span>
+                  <span>{plan.name} {plan.monthlyPrice > 0 ? `(${isAnnual ? "Annual" : "Monthly"})` : ""}</span>
                   <span>
-                    {isAnnual 
-                      ? `$${plan.annualPrice}/yr`
-                      : `$${plan.monthlyPrice}/mo`
+                    {plan.monthlyPrice === 0 
+                      ? "Free"
+                      : isAnnual 
+                        ? `$${plan.annualPrice}/yr`
+                        : `$${plan.monthlyPrice}/mo`
                     }
                   </span>
                 </div>
-                {isAnnual && (
+                {isAnnual && plan.monthlyPrice > 0 && (
                   <div className="flex justify-between text-green-400 text-sm">
                     <span>You save vs monthly</span>
                     <span>-${annualSavings}/yr</span>
@@ -373,15 +423,17 @@ export default function CheckoutPage() {
                 )}
                 <div className="border-t border-white/10 pt-3">
                   <div className="flex justify-between text-lg font-bold">
-                    <span>Due today</span>
+                    <span>{plan.monthlyPrice === 0 ? "Price" : "Due today"}</span>
                     <span className="text-green-400">
-                      {isAnnual 
-                        ? `$${plan.annualPrice}`
-                        : `$${plan.monthlyPrice}`
+                      {plan.monthlyPrice === 0 
+                        ? "Free forever"
+                        : isAnnual 
+                          ? `$${plan.annualPrice}`
+                          : `$${plan.monthlyPrice}`
                       }
                     </span>
                   </div>
-                  {isAnnual && (
+                  {isAnnual && plan.monthlyPrice > 0 && (
                     <p className="text-xs text-gray-500 mt-1">
                       That's ~${monthlyCostIfAnnual.toFixed(2)}/mo
                     </p>
