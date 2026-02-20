@@ -573,7 +573,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             >
               <button className="w-full flex items-center justify-center gap-2 px-6 py-4 min-h-[48px] bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
-                Try CX CLI
+                Try CX Linux CLI
               </button>
             </a>
             <p className="text-xs text-gray-500 text-center">
@@ -1213,7 +1213,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     onClick={() => onNavigate("join")}
                     className="group flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-blue text-white font-semibold text-sm hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
                   >
-                    Try CX Free
+                    Try CX Linux Free
                     <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </div>
