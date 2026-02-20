@@ -116,10 +116,10 @@ SOFTWARE.`}
           <p className="text-gray-400 mt-4 text-sm">
             For trademark inquiries, contact:{" "}
             <a
-              href="mailto:legal@cortexlinux.com"
+              href="mailto:legal@cxlinux.com"
               className="text-blue-300 hover:underline"
             >
-              legal@cortexlinux.com
+              legal@cxlinux.com
             </a>
           </p>
         </div>
@@ -133,7 +133,7 @@ SOFTWARE.`}
             Linux.
           </p>
           <a
-            href="https://github.com/cortexlinux/cx"
+            href="https://github.com/cxlinux-ai/cx-core"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
