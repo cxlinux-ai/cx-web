@@ -96,14 +96,14 @@ export default function Footer() {
               className="text-2xl font-bold mb-4 block text-left"
               data-testid="footer-logo"
             >
-              <span className="text-white">CORTEX</span>{" "}
+              <span className="text-white">CX</span>{" "}
               <span className="text-blue-300">LINUX</span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
               The AI Layer for Linux. Execute any task with natural language.
             </p>
             <p className="text-gray-500 text-xs">
-              Built for developers. Available on GitHub.
+              Built for developers. Source available on GitHub.
             </p>
           </div>
 
@@ -138,6 +138,11 @@ export default function Footer() {
               <li>
                 <SmoothLink href="/architecture" className="hover:text-white transition-colors" data-testid="footer-link-architecture">
                   Architecture
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/getting-started" className="hover:text-white transition-colors" data-testid="footer-link-install">
+                  Install CX Linux
                 </SmoothLink>
               </li>
             </ul>
@@ -207,6 +212,16 @@ export default function Footer() {
                   Referrals
                 </SmoothLink>
               </li>
+              <li>
+                <SmoothLink href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-partner-program">
+                  Partner Program <span className="text-green-400 text-xs ml-1">10% for 36mo</span>
+                </SmoothLink>
+              </li>
+              <li>
+                <SmoothLink href="/careers" className="hover:text-white transition-colors" data-testid="footer-link-careers">
+                  Careers
+                </SmoothLink>
+              </li>
             </ul>
           </div>
 
@@ -243,7 +258,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">&copy; 2026 Cortex Linux. All rights reserved.</p>
+          <p className="text-sm text-gray-500">&copy; 2026 CX Linux. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-gray-500">
             <SmoothLink href="/privacy" className="hover:text-white transition-colors" data-testid="footer-bottom-privacy">
               Privacy

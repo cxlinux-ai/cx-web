@@ -36,6 +36,7 @@ import PricingSuccessPage from "./pages/pricing-success";
 import PricingFAQ from "./pages/pricing/faq";
 import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
+import CareersPage from "./pages/careers";
 
 export default function App() {
   const [location, navigate] = useLocation();
@@ -166,7 +167,7 @@ export default function App() {
                 className="text-2xl font-bold cursor-pointer hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300"
                 data-testid="logo-cortex"
               >
-                <span className="text-white">CORTEX</span>{" "}
+                <span className="text-white">CX</span>{" "}
                 <span className="gradient-text">LINUX</span>
               </button>
 
@@ -418,6 +419,7 @@ export default function App() {
             <Route path="/pricing/faq" component={PricingFAQ} />
             <Route path="/support" component={SupportPage} />
             <Route path="/architecture" component={ArchitecturePage} />
+            <Route path="/careers" component={CareersPage} />
           </Switch>
           </main>
 
