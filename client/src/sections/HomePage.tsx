@@ -77,10 +77,6 @@ import { homeHeroTest } from "@/data/ab-tests";
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'stripe-pricing-table': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-        'pricing-table-id': string;
-        'publishable-key': string;
-      }, HTMLElement>;
     }
   }
 }
@@ -357,15 +353,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [activeDemo, setActiveDemo] = useState(0);
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
   const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  
-  // Pricing state
-  const [annual, setAnnual] = useState(false);
-
-  interface PricingTier {
-    name: string;
-    icon: typeof Sparkles;
-    price: { monthly: number; annual: number };
+  const [emailSubmitted, setEmailSubmitted] = useState(false);;
     description: string;
     features: string[];
     cta: string;
@@ -373,87 +361,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     highlighted: boolean;
     badge?: string;
   }
-
-  const pricingTiers: PricingTier[] = [
-    {
-      name: 'Core',
-      icon: Rocket,
-      price: { monthly: 0, annual: 0 },
-      description: 'Everything you need to get started',
-      features: [
-        'Full CLI commands',
-        'Local LLM (Ollama)',
-        'Dry-run safety mode',
-        'Rollback support',
-        '1 system'
-      ],
-      cta: 'Get Started Free',
-      ctaLink: '/pricing/checkout?plan=core',
-      highlighted: false
-    },
-    {
-      name: 'Core+',
-      icon: Sparkles,
-      price: { monthly: 20, annual: 192 },
-      description: 'Unlimited systems for commercial use',
-      features: [
-        'Everything in Core',
-        'Unlimited systems',
-        'Commercial license',
-        'Email support (48hr)'
-      ],
-      cta: 'Start Free Trial',
-      ctaLink: '/pricing/checkout?plan=pro',
-      highlighted: false,
-      badge: 'PER SYSTEM'
-    },
-    {
-      name: 'Pro',
-      icon: Building2,
-      price: { monthly: 99, annual: 948 },
-      description: 'Cloud AI power for teams',
-      features: [
-        'Everything in Core+',
-        'Cloud LLM fallback',
-        'Team dashboard',
-        'Audit logging',
-        '25 systems included'
-      ],
-      cta: 'Start Free Trial',
-      ctaLink: '/pricing/checkout?plan=team',
-      highlighted: true,
-      badge: 'MOST POPULAR'
-    },
-    {
-      name: 'Enterprise',
-      icon: Crown,
-      price: { monthly: 299, annual: 2868 },
-      description: 'Full compliance & dedicated support',
-      features: [
-        'Everything in Pro',
-        'SSO/SAML integration',
-        'Compliance reports',
-        '99.9% SLA',
-        '100 systems included'
-      ],
-      cta: 'Schedule Demo',
-      ctaLink: 'https://calendly.com/ai-consultant/vip',
-      highlighted: false
-    }
-  ];
-
-  const handlePricingCheckout = (tier: PricingTier) => {
-    // Append billing period to checkout URL for internal links
-    const billingParam = annual ? '&billing=annual' : '&billing=monthly';
-    
-    if (tier.ctaLink.startsWith('/')) {
-      // Internal link - navigate with billing period
-      window.location.href = tier.ctaLink + billingParam;
-    } else {
-      // External link (e.g., Calendly) - open in new tab
-      window.open(tier.ctaLink, '_blank', 'noopener,noreferrer');
-    }
-  };
 
   // A/B Testing for hero headline
   const { variant: headlineVariant } = useABVariant(homeHeroTest);
@@ -1327,61 +1234,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-      {/* Pricing Section - Stripe Pricing Table */}
-      <section id="pricing" className={`${SECTION_PADDING.large} px-4 relative overflow-hidden`}>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent" />
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <p className="text-blue-300 text-sm font-medium tracking-wide uppercase mb-3">Pricing</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
-              Simple <span className="gradient-text">Transparent Pricing</span>
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Start free, scale as you grow. All plans include a 14-day free trial.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <stripe-pricing-table 
-              pricing-table-id="prctbl_1SrakHJ4X1wkC4EsY9tE8FA1"
-              publishable-key="pk_live_51SplqUJ4X1wkC4Es4QV9JMmATE8vnJVloUTSC0pW1nNjr1soLEjB4shXfEfnoYRVm8K3vSzgCO6f2XrtTERLkWoH00u2jgUrQM"
-            />
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500"
-          >
-            <div className="flex items-center gap-2">
-              <Shield size={14} className="text-emerald-400" />
-              <span>30-day money back</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Lock size={14} className="text-gray-400" />
-              <span>Secure payment via Stripe</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Sparkles size={14} className="text-gray-400" />
-              <span>Cancel anytime</span>
-            </div>
-          </motion.div>
         </div>
       </section>
       {/* Community Dashboard */}
