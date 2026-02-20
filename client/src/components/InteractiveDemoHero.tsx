@@ -52,10 +52,10 @@ export default function InteractiveDemoHero() {
     scenarios,
   } = useDemoAnimation();
 
-  // Auto-scroll to bottom when new content appears
+  // Auto-scroll terminal content only (not the whole page)
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [messages, displayedLines]);
 
