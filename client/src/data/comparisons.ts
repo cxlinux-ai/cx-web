@@ -3,8 +3,8 @@
 
 export interface ComparisonFeature {
   name: string;
-  cortex: 'yes' | 'no' | 'partial';
-  cortexNote?: string;
+  cx: 'yes' | 'no' | 'partial';
+  cxNote?: string;
   competitor: 'yes' | 'no' | 'partial';
   competitorNote?: string;
   tooltip?: string;
@@ -13,9 +13,9 @@ export interface ComparisonFeature {
 export interface UseCase {
   title: string;
   description: string;
-  cortexCommand: string;
-  cortexTime: string;
-  cortexSteps: number;
+  cxCommand: string;
+  cxTime: string;
+  cxSteps: number;
   competitorCommands: string[];
   competitorTime: string;
   competitorSteps: number;
@@ -24,7 +24,7 @@ export interface UseCase {
 }
 
 export interface WhenToUse {
-  cortexBetter: string[];
+  cxBetter: string[];
   competitorBetter: string[];
   whoShouldNotSwitch: string[];
 }
@@ -143,64 +143,64 @@ export const aptComparison: ComparisonData = {
   features: [
     {
       name: 'Natural Language Commands',
-      cortex: 'yes',
-      cortexNote: 'Describe intent in plain English',
+      cx: 'yes',
+      cxNote: 'Describe intent in plain English',
       competitor: 'no',
       competitorNote: 'Requires exact syntax',
       tooltip: 'CX translates natural language to precise apt commands',
     },
     {
       name: 'Package Installation',
-      cortex: 'yes',
-      cortexNote: 'Wraps apt install',
+      cx: 'yes',
+      cxNote: 'Wraps apt install',
       competitor: 'yes',
       competitorNote: 'Native apt install',
       tooltip: 'Both can install packages; CX uses apt under the hood',
     },
     {
       name: 'Dependency Resolution',
-      cortex: 'yes',
-      cortexNote: 'AI-assisted optimization',
+      cx: 'yes',
+      cxNote: 'AI-assisted optimization',
       competitor: 'yes',
       competitorNote: 'Automatic but basic',
       tooltip: 'CX can suggest optimal dependency configurations',
     },
     {
       name: 'Preview Commands',
-      cortex: 'yes',
-      cortexNote: 'Dry-run by default',
+      cx: 'yes',
+      cxNote: 'Dry-run by default',
       competitor: 'partial',
       competitorNote: 'Requires -s flag',
       tooltip: 'CX shows what will happen before executing',
     },
     {
       name: 'Instant Rollback',
-      cortex: 'yes',
-      cortexNote: 'Built-in state management',
+      cx: 'yes',
+      cxNote: 'Built-in state management',
       competitor: 'no',
       competitorNote: 'Requires manual snapshots',
       tooltip: 'Undo any operation instantly with CX',
     },
     {
       name: 'Hardware-Aware Installation',
-      cortex: 'yes',
-      cortexNote: 'Detects and optimizes',
+      cx: 'yes',
+      cxNote: 'Detects and optimizes',
       competitor: 'no',
       competitorNote: 'Manual configuration',
       tooltip: 'CX optimizes installations for your specific hardware',
     },
     {
       name: 'Multi-Package Operations',
-      cortex: 'yes',
-      cortexNote: '"Install a LAMP stack"',
+      cx: 'yes',
+      cxNote: '"Install a LAMP stack"',
       competitor: 'partial',
       competitorNote: 'apt install pkg1 pkg2...',
       tooltip: 'CX understands composite requests like "LAMP stack"',
     },
     {
       name: 'Offline Mode',
-      cortex: 'yes',
-      cortexNote: 'Local AI available',
+      cx: 'yes',
+      cxNote: 'Local AI available',
       competitor: 'yes',
       competitorNote: 'With cached packages',
       tooltip: 'Both work offline with proper setup',
@@ -210,9 +210,9 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Install Nginx Optimized for Your Hardware',
       description: 'Set up Nginx with performance tuning based on your CPU cores and available memory.',
-      cortexCommand: 'cx "Install nginx optimized for my 8-core server with 32GB RAM"',
-      cortexTime: '2 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Install nginx optimized for my 8-core server with 32GB RAM"',
+      cxTime: '2 minutes',
+      cxSteps: 1,
       competitorCommands: [
         'apt update',
         'apt install nginx',
@@ -231,9 +231,9 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Set Up a Complete Development Environment',
       description: 'Install Node.js, Python, Docker, and development tools for a new project.',
-      cortexCommand: 'cx "Set up a full-stack dev environment with Node 20, Python 3.11, Docker, and VS Code"',
-      cortexTime: '5 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Set up a full-stack dev environment with Node 20, Python 3.11, Docker, and VS Code"',
+      cxTime: '5 minutes',
+      cxSteps: 1,
       competitorCommands: [
         'curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -',
         'apt install nodejs',
@@ -251,9 +251,9 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Clean Up Unused Packages',
       description: 'Remove orphaned dependencies and free up disk space safely.',
-      cortexCommand: 'cx "Clean up unused packages and free disk space, show me what will be removed first"',
-      cortexTime: '1 minute',
-      cortexSteps: 1,
+      cxCommand: 'cx "Clean up unused packages and free disk space, show me what will be removed first"',
+      cxTime: '1 minute',
+      cxSteps: 1,
       competitorCommands: [
         'apt autoremove --dry-run',
         'apt autoremove',
@@ -267,7 +267,7 @@ export const aptComparison: ComparisonData = {
     },
   ],
   whenToUse: {
-    cortexBetter: [
+    cxBetter: [
       'You want to describe what you need instead of memorizing commands',
       'You need hardware-optimized configurations automatically',
       'You value preview-before-execute and instant rollback',
@@ -292,7 +292,7 @@ export const aptComparison: ComparisonData = {
       step: 1,
       title: 'Install CX Alongside APT',
       description: 'CX works with apt, not against it. Your existing apt workflows remain unchanged.',
-      command: 'curl -fsSL https://get.cortexlinux.com | sh',
+      command: 'curl -fsSL https://get.cxlinux.com | sh',
       note: 'CX uses apt under the hood for package operations',
     },
     {
@@ -412,64 +412,64 @@ export const nixComparison: ComparisonData = {
   features: [
     {
       name: 'Reproducible Builds',
-      cortex: 'partial',
-      cortexNote: 'Intent-based reproducibility',
+      cx: 'partial',
+      cxNote: 'Intent-based reproducibility',
       competitor: 'yes',
       competitorNote: 'Deterministic by design',
       tooltip: 'Nix offers stronger guarantees; CX offers easier adoption',
     },
     {
       name: 'Natural Language Input',
-      cortex: 'yes',
-      cortexNote: 'Primary interface',
+      cx: 'yes',
+      cxNote: 'Primary interface',
       competitor: 'no',
       competitorNote: 'Requires Nix expression language',
       tooltip: 'CX translates intent; Nix requires declarative expressions',
     },
     {
       name: 'Rollback Capability',
-      cortex: 'yes',
-      cortexNote: 'Instant, any point',
+      cx: 'yes',
+      cxNote: 'Instant, any point',
       competitor: 'yes',
       competitorNote: 'Generation-based',
       tooltip: 'Both support rollback with different mechanisms',
     },
     {
       name: 'Isolation/Sandboxing',
-      cortex: 'yes',
-      cortexNote: 'Firejail-based',
+      cx: 'yes',
+      cxNote: 'Firejail-based',
       competitor: 'yes',
       competitorNote: 'Build-time isolation',
       tooltip: 'Different isolation approaches for different use cases',
     },
     {
       name: 'Development Shells',
-      cortex: 'yes',
-      cortexNote: '"Create a Python 3.11 env"',
+      cx: 'yes',
+      cxNote: '"Create a Python 3.11 env"',
       competitor: 'yes',
       competitorNote: 'nix-shell, devShells',
       tooltip: 'Both create isolated development environments',
     },
     {
       name: 'Declarative Configuration',
-      cortex: 'partial',
-      cortexNote: 'Can generate configs',
+      cx: 'partial',
+      cxNote: 'Can generate configs',
       competitor: 'yes',
       competitorNote: 'Core design principle',
       tooltip: 'Nix is declarative-first; CX is intent-first',
     },
     {
       name: 'Cross-Platform',
-      cortex: 'partial',
-      cortexNote: 'Linux-focused',
+      cx: 'partial',
+      cxNote: 'Linux-focused',
       competitor: 'yes',
       competitorNote: 'Linux, macOS, WSL',
       tooltip: 'Nix has broader platform support currently',
     },
     {
       name: 'Offline AI Processing',
-      cortex: 'yes',
-      cortexNote: 'Local models supported',
+      cx: 'yes',
+      cxNote: 'Local models supported',
       competitor: 'no',
       competitorNote: 'N/A',
       tooltip: 'CX can work fully offline with local AI',
@@ -479,9 +479,9 @@ export const nixComparison: ComparisonData = {
     {
       title: 'Create a Reproducible Development Environment',
       description: 'Set up a consistent dev environment for a team working on a Python ML project.',
-      cortexCommand: 'cx "Create a dev environment with Python 3.11, PyTorch, CUDA support, and Jupyter"',
-      cortexTime: '3 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Create a dev environment with Python 3.11, PyTorch, CUDA support, and Jupyter"',
+      cxTime: '3 minutes',
+      cxSteps: 1,
       competitorCommands: [
         '# Create flake.nix with python, pytorch, cuda overlays',
         '# Configure devShell with proper dependencies',
@@ -497,9 +497,9 @@ export const nixComparison: ComparisonData = {
     {
       title: 'Quick Package Testing',
       description: 'Try a new tool without affecting your system.',
-      cortexCommand: 'cx "Let me try ripgrep without installing it permanently"',
-      cortexTime: '30 seconds',
-      cortexSteps: 1,
+      cxCommand: 'cx "Let me try ripgrep without installing it permanently"',
+      cxTime: '30 seconds',
+      cxSteps: 1,
       competitorCommands: [
         'nix-shell -p ripgrep',
         '# or nix run nixpkgs#ripgrep',
@@ -512,9 +512,9 @@ export const nixComparison: ComparisonData = {
     {
       title: 'System Configuration Changes',
       description: 'Add a new service and configure system settings.',
-      cortexCommand: 'cx "Set up PostgreSQL with automatic backups to /backup and 8GB shared buffers"',
-      cortexTime: '5 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Set up PostgreSQL with automatic backups to /backup and 8GB shared buffers"',
+      cxTime: '5 minutes',
+      cxSteps: 1,
       competitorCommands: [
         '# Edit configuration.nix',
         '# Add services.postgresql configuration',
@@ -529,7 +529,7 @@ export const nixComparison: ComparisonData = {
     },
   ],
   whenToUse: {
-    cortexBetter: [
+    cxBetter: [
       'You need to be productive immediately without learning a new language',
       'You want AI-assisted exploration and configuration',
       'Your team has mixed experience levels',
@@ -560,7 +560,7 @@ export const nixComparison: ComparisonData = {
       step: 2,
       title: 'Install CX on Your System',
       description: 'CX installs alongside Nix without conflicts.',
-      command: 'curl -fsSL https://get.cortexlinux.com | sh',
+      command: 'curl -fsSL https://get.cxlinux.com | sh',
       note: 'On NixOS, you can also add CX to your configuration.nix',
     },
     {
@@ -666,64 +666,64 @@ export const manualCliComparison: ComparisonData = {
   features: [
     {
       name: 'Natural Language Input',
-      cortex: 'yes',
-      cortexNote: 'Describe what you want',
+      cx: 'yes',
+      cxNote: 'Describe what you want',
       competitor: 'no',
       competitorNote: 'Exact syntax required',
       tooltip: 'Skip the documentation—just say what you need',
     },
     {
       name: 'Command Validation',
-      cortex: 'yes',
-      cortexNote: 'AI checks before execution',
+      cx: 'yes',
+      cxNote: 'AI checks before execution',
       competitor: 'no',
       competitorNote: 'Trial and error',
       tooltip: 'CX validates commands before running them',
     },
     {
       name: 'Context Awareness',
-      cortex: 'yes',
-      cortexNote: 'Understands your system',
+      cx: 'yes',
+      cxNote: 'Understands your system',
       competitor: 'no',
       competitorNote: 'Generic docs',
       tooltip: 'CX knows your distro, installed packages, and hardware',
     },
     {
       name: 'Multi-Step Automation',
-      cortex: 'yes',
-      cortexNote: 'Chains commands intelligently',
+      cx: 'yes',
+      cxNote: 'Chains commands intelligently',
       competitor: 'partial',
       competitorNote: 'Manual scripting',
       tooltip: 'CX handles complex multi-step operations',
     },
     {
       name: 'Instant Rollback',
-      cortex: 'yes',
-      cortexNote: 'Built-in recovery',
+      cx: 'yes',
+      cxNote: 'Built-in recovery',
       competitor: 'no',
       competitorNote: 'Manual backups required',
       tooltip: 'Undo any operation with a single command',
     },
     {
       name: 'Offline Documentation',
-      cortex: 'yes',
-      cortexNote: 'Embedded knowledge + local AI',
+      cx: 'yes',
+      cxNote: 'Embedded knowledge + local AI',
       competitor: 'partial',
       competitorNote: 'man pages, --help',
       tooltip: 'CX works offline with local models',
     },
     {
       name: 'Error Explanation',
-      cortex: 'yes',
-      cortexNote: 'Plain English explanations',
+      cx: 'yes',
+      cxNote: 'Plain English explanations',
       competitor: 'no',
       competitorNote: 'Cryptic error codes',
       tooltip: 'When things fail, CX explains why and how to fix it',
     },
     {
       name: 'Learning Path',
-      cortex: 'yes',
-      cortexNote: 'Shows commands it runs',
+      cx: 'yes',
+      cxNote: 'Shows commands it runs',
       competitor: 'yes',
       competitorNote: 'Deep learning required',
       tooltip: 'CX teaches you by showing what it does',
@@ -733,9 +733,9 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'Set Up PostgreSQL Replication',
       description: 'Configure primary-replica PostgreSQL replication with automatic failover.',
-      cortexCommand: 'cx "Set up PostgreSQL streaming replication with a primary on this server and configure it for a replica at 192.168.1.50"',
-      cortexTime: '10 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Set up PostgreSQL streaming replication with a primary on this server and configure it for a replica at 192.168.1.50"',
+      cxTime: '10 minutes',
+      cxSteps: 1,
       competitorCommands: [
         '# Research PostgreSQL replication methods (30 min)',
         '# Edit postgresql.conf for wal_level, max_wal_senders',
@@ -755,9 +755,9 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'Debug Disk Space Issues',
       description: 'Find what is consuming disk space and safely clean it up.',
-      cortexCommand: 'cx "Find what is using the most disk space in /var and suggest what I can safely delete"',
-      cortexTime: '1 minute',
-      cortexSteps: 1,
+      cxCommand: 'cx "Find what is using the most disk space in /var and suggest what I can safely delete"',
+      cxTime: '1 minute',
+      cxSteps: 1,
       competitorCommands: [
         'du -sh /var/*',
         'find /var -type f -size +100M',
@@ -774,9 +774,9 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'Configure Firewall Rules',
       description: 'Set up iptables rules to allow web traffic and SSH while blocking everything else.',
-      cortexCommand: 'cx "Configure firewall to allow HTTP, HTTPS, and SSH from my office IP 203.0.113.50, block everything else"',
-      cortexTime: '2 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Configure firewall to allow HTTP, HTTPS, and SSH from my office IP 203.0.113.50, block everything else"',
+      cxTime: '2 minutes',
+      cxSteps: 1,
       competitorCommands: [
         '# Research iptables vs nftables vs ufw',
         'iptables -F',
@@ -797,9 +797,9 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'SSL Certificate Setup',
       description: 'Install and configure Let\'s Encrypt SSL for a domain.',
-      cortexCommand: 'cx "Set up free SSL certificate for example.com with automatic renewal"',
-      cortexTime: '3 minutes',
-      cortexSteps: 1,
+      cxCommand: 'cx "Set up free SSL certificate for example.com with automatic renewal"',
+      cxTime: '3 minutes',
+      cxSteps: 1,
       competitorCommands: [
         'apt install certbot python3-certbot-nginx',
         'certbot --nginx -d example.com -d www.example.com',
@@ -815,7 +815,7 @@ export const manualCliComparison: ComparisonData = {
     },
   ],
   whenToUse: {
-    cortexBetter: [
+    cxBetter: [
       'You frequently perform unfamiliar system administration tasks',
       'You want to reduce time spent searching documentation',
       'You value safety features like preview and rollback',
@@ -840,7 +840,7 @@ export const manualCliComparison: ComparisonData = {
       step: 1,
       title: 'Install CX',
       description: 'One command to get started. Works alongside your existing tools.',
-      command: 'curl -fsSL https://get.cortexlinux.com | sh',
+      command: 'curl -fsSL https://get.cxlinux.com | sh',
       note: 'No configuration required—CX detects your system automatically',
     },
     {

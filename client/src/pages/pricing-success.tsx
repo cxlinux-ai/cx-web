@@ -131,8 +131,8 @@ export default function PricingSuccessPage() {
     );
   }
 
-  const installCommand = `pip install cortex-pro\ncortex-pro activate ${sessionData?.licenseKey}`;
-  const onelinerCommand = `pip install cortex-pro && cortex-pro activate ${sessionData?.licenseKey}`;
+  const installCommand = `pip install CX-pro\nCX-pro activate ${sessionData?.licenseKey}`;
+  const onelinerCommand = `pip install CX-pro && CX-pro activate ${sessionData?.licenseKey}`;
 
   return (
     <div className="min-h-screen pt-20 pb-16 bg-black">
@@ -215,8 +215,8 @@ export default function PricingSuccessPage() {
               </div>
               <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm text-gray-300">
-                  <span className="text-gray-500">$</span> pip install cortex-pro{'\n'}
-                  <span className="text-gray-500">$</span> cortex-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                  <span className="text-gray-500">$</span> pip install CX-pro{'\n'}
+                  <span className="text-gray-500">$</span> CX-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
                 </code>
               </pre>
             </div>
@@ -237,7 +237,7 @@ export default function PricingSuccessPage() {
               </div>
               <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm text-gray-300">
-                  <span className="text-gray-500">$</span> pip install cortex-pro && cortex-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                  <span className="text-gray-500">$</span> pip install CX-pro && CX-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
                 </code>
               </pre>
             </div>
@@ -288,7 +288,7 @@ export default function PricingSuccessPage() {
           </a>
           <span className="text-gray-600">|</span>
           <a
-            href="https://github.com/cortexlinux/cx"
+            href="https://github.com/cxlinux-ai/cx-core"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"

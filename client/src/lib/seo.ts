@@ -12,7 +12,7 @@ interface SEOConfig {
 const BASE_URL = 'https://cxlinux.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'CX Linux';
-const TWITTER_HANDLE = '@cortexlinux';
+const TWITTER_HANDLE = '@cxlinux';
 
 export function updateSEO(config: SEOConfig): () => void {
   const {
@@ -168,7 +168,6 @@ export const seoConfigs = {
         logo: 'https://cxlinux.com/og-image.png',
         sameAs: [
           'https://github.com/cxlinux-ai/cx-core',
-          'https://twitter.com/cortexlinux',
           'https://discord.gg/ASvzWcuTfk'
         ],
         contactPoint: {
@@ -521,8 +520,7 @@ export const seoConfigs = {
         name: 'CX Linux',
         url: 'https://cxlinux.com',
         sameAs: [
-          'https://github.com/cxlinux-ai',
-          'https://twitter.com/cortexlinux'
+          'https://github.com/cxlinux-ai'
         ]
       }
     }

@@ -327,7 +327,7 @@ export default function CareersPage() {
                       <span>{role.type}</span>
                     </div>
                   </div>
-                  <a href="mailto:careers@cortexlinux.com">
+                  <a href="mailto:careers@cxlinux.com">
                     <Button
                       variant="outline"
                       className="border-blue-500/30 text-blue-300 shrink-0"
@@ -434,7 +434,7 @@ export default function CareersPage() {
               We're always looking for talented people who share our vision.
               Send us your resume and tell us how you'd like to contribute.
             </p>
-            <a href="mailto:careers@cortexlinux.com">
+            <a href="mailto:careers@cxlinux.com">
               <Button
                 size="lg"
                 className="bg-blue-600 text-white"

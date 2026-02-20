@@ -28,7 +28,7 @@ export function CompareCTA({ comparison, variant, context, placement }: CompareC
 
   const handleGitHub = () => {
     trackComparisonGitHubClick(context);
-    window.open('https://github.com/cortexlinux/cortex', '_blank');
+    window.open('https://github.com/cxlinux-ai/cx-core', '_blank');
   };
 
   if (placement === 'inline') {

@@ -150,7 +150,7 @@ const tiers: PricingTier[] = [
       support: "Dedicated (1h)",
     },
     cta: "Contact Sales",
-    ctaLink: "mailto:sales@cxlinux.ai?subject=CX%20Enterprise%20Inquiry",
+    ctaLink: "/support",
     icon: Building2,
     gradient: "from-orange-500 to-amber-500",
   },

@@ -11,7 +11,7 @@ import { updateSEO, seoConfigs } from "@/lib/seo";
 
 const FEATURED_POSTS = [
   {
-    slug: "getting-started-cortex-first-workflow",
+    slug: "getting-started-CX-first-workflow",
     level: "Beginner",
     step: 1,
     badge: "Start Here",

@@ -69,11 +69,11 @@ function ComparePageContent({ comparison }: ComparePageContentProps) {
     
     let canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      canonical.setAttribute('href', `https://cortexlinux.com${comparison.seo.canonicalPath}`);
+      canonical.setAttribute('href', `https://cxlinux.com${comparison.seo.canonicalPath}`);
     } else {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
-      canonical.setAttribute('href', `https://cortexlinux.com${comparison.seo.canonicalPath}`);
+      canonical.setAttribute('href', `https://cxlinux.com${comparison.seo.canonicalPath}`);
       document.head.appendChild(canonical);
     }
     

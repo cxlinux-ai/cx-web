@@ -93,7 +93,7 @@ export function CompareHero({ comparison, variant, context }: CompareHeroProps) 
                 {comparison.summaryTable.map((row, index) => (
                   <tr key={index} className="border-b border-gray-800/50">
                     <td className="py-3 px-4 text-gray-300">{row.label}</td>
-                    <td className="py-3 px-4 text-white font-medium">{row.cortex}</td>
+                    <td className="py-3 px-4 text-white font-medium">{row.cx}</td>
                     <td className="py-3 px-4 text-gray-400">{row.competitor}</td>
                   </tr>
                 ))}

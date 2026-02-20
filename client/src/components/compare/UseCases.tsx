@@ -74,17 +74,17 @@ function UseCaseCard({ useCase, competitorName, onView }: UseCaseCardProps) {
           </div>
 
           <div className="bg-black/50 rounded-lg p-4 mb-4 font-mono text-sm text-green-400 overflow-x-auto">
-            <code>{useCase.cortexCommand}</code>
+            <code>{useCase.cxCommand}</code>
           </div>
 
           <div className="flex flex-wrap gap-4 text-sm">
             <div className="flex items-center gap-2 text-gray-300">
               <Clock className="h-4 w-4 text-blue-300" />
-              <span>{useCase.cortexTime}</span>
+              <span>{useCase.cxTime}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-300">
               <Terminal className="h-4 w-4 text-blue-300" />
-              <span>{useCase.cortexSteps} step{useCase.cortexSteps > 1 ? 's' : ''}</span>
+              <span>{useCase.cxSteps} step{useCase.cxSteps > 1 ? 's' : ''}</span>
             </div>
           </div>
         </div>

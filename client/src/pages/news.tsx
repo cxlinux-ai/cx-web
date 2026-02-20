@@ -63,24 +63,24 @@ export default function NewsPage() {
         "datePublished": release.date,
         "dateModified": release.date,
         "description": release.summary,
-        "url": `https://cortexlinux.com/news/${release.slug}`,
-        "image": release.image ? `https://cortexlinux.com${release.image}` : "https://cortexlinux.com/og-image.png",
+        "url": `https://cxlinux.com/news/${release.slug}`,
+        "image": release.image ? `https://cxlinux.com${release.image}` : "https://cxlinux.com/og-image.png",
         "author": {
           "@type": "Organization",
           "name": "CX Linux",
-          "url": "https://cortexlinux.com"
+          "url": "https://cxlinux.com"
         },
         "publisher": {
           "@type": "Organization",
           "name": "CX Linux",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://cortexlinux.com/favicon.png"
+            "url": "https://cxlinux.com/favicon.png"
           }
         },
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": `https://cortexlinux.com/news/${release.slug}`
+          "@id": `https://cxlinux.com/news/${release.slug}`
         }
       }
     }))
@@ -336,7 +336,7 @@ export default function NewsPage() {
                       "datePublished": release.date,
                       "dateModified": release.date,
                       "description": release.summary,
-                      "image": release.image ? `https://cortexlinux.com${release.image}` : "https://cortexlinux.com/og-image.png",
+                      "image": release.image ? `https://cxlinux.com${release.image}` : "https://cxlinux.com/og-image.png",
                       "author": {
                         "@type": "Organization",
                         "name": "CX Linux"
@@ -346,12 +346,12 @@ export default function NewsPage() {
                         "name": "CX Linux",
                         "logo": {
                           "@type": "ImageObject",
-                          "url": "https://cortexlinux.com/favicon.png"
+                          "url": "https://cxlinux.com/favicon.png"
                         }
                       },
                       "mainEntityOfPage": {
                         "@type": "WebPage",
-                        "@id": `https://cortexlinux.com/news/${release.slug}`
+                        "@id": `https://cxlinux.com/news/${release.slug}`
                       }
                     })
                   }}
@@ -384,11 +384,11 @@ export default function NewsPage() {
               For press inquiries, interviews, and media requests
             </p>
             <a 
-              href="mailto:press@cortexlinux.com"
+              href="mailto:press@cxlinux.com"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
               data-testid="link-media-contact-email"
             >
-              press@cortexlinux.com
+              press@cxlinux.com
               <ExternalLink size={16} />
             </a>
           </motion.div>
@@ -405,7 +405,7 @@ export default function NewsPage() {
               <span className="text-gray-300 font-medium">Follow CX Linux on GitHub</span>
             </div>
             <a
-              href="https://github.com/cortexlinux/cx"
+              href="https://github.com/cxlinux-ai/cx-core"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 border border-white/20 hover:bg-white/15 transition-colors"

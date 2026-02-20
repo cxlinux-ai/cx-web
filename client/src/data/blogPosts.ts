@@ -775,7 +775,7 @@ logging:
 Each environment can have a declarative manifest:
 
 \`\`\`yaml
-# cortex-env.yaml
+# CX-env.yaml
 apiVersion: cx/v1
 kind: Environment
 metadata:
@@ -836,10 +836,10 @@ spec:
 Apply with:
 
 \`\`\`bash
-cx env apply cortex-env.yaml
+cx env apply CX-env.yaml
 
 # Or create from manifest
-cx env create --from cortex-env.yaml
+cx env create --from CX-env.yaml
 \`\`\`
 
 ---
@@ -6248,7 +6248,7 @@ The future of computing is AI-native. The infrastructure we build today determin
   },
   {
     id: "11",
-    slug: "getting-started-cortex-first-workflow",
+    slug: "getting-started-cx-first-workflow",
     title: "Getting Started with CX Linux: Your First Workflow",
     seoTitle: "CX Linux Getting Started Guide: Your First Workflow",
     seoDescription: "Learn how to get started with CX Linux. This beginner-friendly guide walks you through your first workflow with step-by-step instructions.",
@@ -6351,7 +6351,7 @@ The terminal is where you will interact with CX. You can open it by:
 You will see a command prompt that looks something like this:
 
 \`\`\`bash
-user@cortex:~$
+user@cx:~$
 \`\`\`
 
 This indicates CX is ready to receive commands.
@@ -6404,7 +6404,7 @@ cx env use my-first-project
 Your prompt changes to indicate the active environment:
 
 \`\`\`bash
-(my-first-project) user@cortex:~$
+(my-first-project) user@cx:~$
 \`\`\`
 
 Now any packages you install will be contained within this environment.
@@ -7456,7 +7456,7 @@ Join the CX community for assistance:
 ### Additional Guides
 
 Continue your CX journey with these related guides:
-- [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow)
+- [Getting Started with Your First Workflow](/blog/getting-started-cx-first-workflow)
 - [CX Linux for Students](/blog/cx-linux-for-students)
 - [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
@@ -7500,7 +7500,7 @@ You now have a fully functional CX Linux system ready for AI development. These 
 - **Post-installation updates are critical** - Run \`cx update\` immediately after first boot
 - **CX Linux eliminates setup complexity** - Automatic hardware detection and driver configuration save hours
 
-> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [CX Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
+> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cx-first-workflow) | [CX Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 You have successfully installed CX Linux. Welcome to the community, and enjoy your AI development journey.
 `,
@@ -7512,7 +7512,7 @@ You have successfully installed CX Linux. Welcome to the community, and enjoy yo
     image: "/stock_images/software_installatio_76449a37.jpg",
     imageAlt: "Software installation process showing complete beginner guide for CX Linux",
     tags: ["Getting Started", "Installation", "Beginner", "Setup"],
-    relatedPosts: ["getting-started-cortex-first-workflow", "cx-linux-for-students"]
+    relatedPosts: ["getting-started-cx-first-workflow", "cx-linux-for-students"]
   },
   {
     id: "13",
@@ -7742,7 +7742,7 @@ Depending on your background and goals, here are recommended learning progressio
 If you are new to programming and AI:
 
 **Weeks 1-2: Foundations**
-- Complete the [first workflow tutorial](/blog/getting-started-cortex-first-workflow)
+- Complete the [first workflow tutorial](/blog/getting-started-cx-first-workflow)
 - Learn basic terminal commands
 - Understand what environments are and why they matter
 
@@ -8297,7 +8297,7 @@ Before starting, ensure you have the following ready:
 ### Optional but Recommended
 
 - NVIDIA GPU for faster processing
-- Completed the [first workflow tutorial](/blog/getting-started-cortex-first-workflow)
+- Completed the [first workflow tutorial](/blog/getting-started-cx-first-workflow)
 
 ### Knowledge Requirements
 
@@ -8892,7 +8892,7 @@ You have successfully run your first AI tasks with CX Linux. You have classified
 Continue your journey by exploring different models, experimenting with various tasks, and building projects that interest you. The Hugging Face model hub contains thousands of models for different purposes, all accessible through the pipelines you have learned to use.
 
 For more guidance, check out:
-- [Getting Started with CX Linux](/blog/getting-started-cortex-first-workflow)
+- [Getting Started with CX Linux](/blog/getting-started-cx-first-workflow)
 - [What AI-Native Linux Actually Means](/blog/what-ai-native-linux-means)
 
 Welcome to the world of AI development. The possibilities are endless.
@@ -8905,7 +8905,7 @@ Welcome to the world of AI development. The possibilities are endless.
     image: "/stock_images/rocket_launch_startu_42e0ce04.jpg",
     imageAlt: "Rocket launch representing running your first AI task with CX Linux",
     tags: ["Getting Started", "AI", "Machine Learning", "Tutorial"],
-    relatedPosts: ["getting-started-cortex-first-workflow", "what-ai-native-linux-means"]
+    relatedPosts: ["getting-started-cx-first-workflow", "what-ai-native-linux-means"]
   },
   {
     id: "15",
@@ -9776,7 +9776,7 @@ For more Linux security topics, check out our guide on [Linux File Permissions E
     image: "/stock_images/terminal_command_lin_a5efdb77.jpg",
     imageAlt: "Terminal command line interface showing essential Linux commands cheat sheet for 2026",
     tags: ["Linux", "Commands", "Cheat Sheet", "Terminal", "Tutorial"],
-    relatedPosts: ["linux-file-permissions-guide", "getting-started-cortex-first-workflow"]
+    relatedPosts: ["linux-file-permissions-guide", "getting-started-cx-first-workflow"]
   },
   {
     id: "16",

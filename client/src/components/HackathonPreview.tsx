@@ -3,7 +3,7 @@ import { ArrowRight, Github, Clock } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 
-const GITHUB_URL = "https://github.com/cortexlinux/cortex";
+const GITHUB_URL = "https://github.com/cxlinux-ai/cx-core";
 const HACKATHON_DATE = new Date("2026-02-17T00:00:00");
 
 function useCountdown(targetDate: Date) {

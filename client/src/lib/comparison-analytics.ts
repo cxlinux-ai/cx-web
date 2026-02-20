@@ -111,7 +111,7 @@ export function trackComparisonUseCaseView(
 // "When to use" section engagement (trust signal)
 export function trackComparisonTrustSectionView(
   context: ComparisonEventContext,
-  sectionType: 'cortex_better' | 'competitor_better' | 'who_should_not_switch'
+  sectionType: 'cx_better' | 'competitor_better' | 'who_should_not_switch'
 ): void {
   trackComparisonEvent('comparison_trust_section_view', context, {
     section_type: sectionType,

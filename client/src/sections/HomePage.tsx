@@ -411,7 +411,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         '1 system'
       ],
       cta: 'Download Free',
-      ctaLink: 'https://github.com/cortexlinux/cortex',
+      ctaLink: 'https://github.com/cxlinux-ai/cx-core',
       highlighted: false
     },
     {
@@ -459,8 +459,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         '99.9% SLA',
         '100 systems included'
       ],
-      cta: 'Schedule Demo',
-      ctaLink: 'https://calendly.com/cortexlinux/demo',
+      cta: 'Contact Sales',
+      ctaLink: '/support',
       highlighted: false
     }
   ];
@@ -507,7 +507,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       toast({
         title: "Checkout Unavailable",
         description: errorMessage.includes("being set up") 
-          ? "This plan is currently being configured. Please try again later or contact support@cortexlinux.com"
+          ? "This plan is currently being configured. Please try again later or contact support@cxlinux.com"
           : errorMessage,
         variant: "destructive"
       });
@@ -575,12 +575,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const comparisonData = [
-    { feature: "Self-Hostable", icon: Server, cortex: true, toolA: false, toolB: true },
-    { feature: "Natural Language Interface", icon: MessageCircle, cortex: true, toolA: "partial", toolB: false },
-    { feature: "Unlimited Task Scope", icon: Infinity, cortex: true, toolA: false, toolB: false },
-    { feature: "Context-Aware Execution", icon: Brain, cortex: true, toolA: false, toolB: false },
-    { feature: "System-Level Access", icon: Terminal, cortex: true, toolA: false, toolB: "partial" },
-    { feature: "Safety & Rollback", icon: Shield, cortex: true, toolA: false, toolB: false },
+    { feature: "Self-Hostable", icon: Server, cx: true, toolA: false, toolB: true },
+    { feature: "Natural Language Interface", icon: MessageCircle, cx: true, toolA: "partial", toolB: false },
+    { feature: "Unlimited Task Scope", icon: Infinity, cx: true, toolA: false, toolB: false },
+    { feature: "Context-Aware Execution", icon: Brain, cx: true, toolA: false, toolB: false },
+    { feature: "System-Level Access", icon: Terminal, cx: true, toolA: false, toolB: "partial" },
+    { feature: "Safety & Rollback", icon: Shield, cx: true, toolA: false, toolB: false },
   ];
 
   const roadmapItems = [
@@ -623,7 +623,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-2 sm:mb-2"
           >
             <a
-              href="https://github.com/cortexlinux/cortex"
+              href="https://github.com/cxlinux-ai/cx-core"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm hover:border-brand-blue/50 transition-all"
@@ -696,11 +696,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             className="sm:hidden space-y-4"
           >
             <a 
-              href="https://github.com/cortexlinux/cortex" 
+              href="https://github.com/cxlinux-ai/cx-core" 
               target="_blank" 
               rel="noopener noreferrer"
               className="block"
-              onClick={() => analytics.trackCTAClick('try_cortex_cli', 'hero_mobile')}
+              onClick={() => analytics.trackCTAClick('try_cx_cli', 'hero_mobile')}
             >
               <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
@@ -1226,17 +1226,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                       </span>
                     </div>
 
-                    {/* Cortex Column - Highlighted */}
+                    {/* CX Column - Highlighted */}
                     <div className="p-5 flex items-center justify-center relative">
                       <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent" />
                       <div className="relative">
-                        {row.cortex === true ? (
+                        {row.cx === true ? (
                           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-green-500/25">
                             <Check size={16} className="text-white" strokeWidth={3} />
                           </div>
-                        ) : typeof row.cortex === "string" ? (
+                        ) : typeof row.cx === "string" ? (
                           <span className="px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 text-green-400 font-semibold text-sm">
-                            {row.cortex}
+                            {row.cx}
                           </span>
                         ) : null}
                       </div>
@@ -1331,12 +1331,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   {/* CX */}
                   <div className="text-center p-3 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
                     <div className="text-xs text-blue-300 font-semibold mb-2">CX</div>
-                    {row.cortex === true ? (
+                    {row.cx === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
                       </div>
-                    ) : typeof row.cortex === "string" ? (
-                      <span className="text-green-400 font-semibold text-sm">{row.cortex}</span>
+                    ) : typeof row.cx === "string" ? (
+                      <span className="text-green-400 font-semibold text-sm">{row.cx}</span>
                     ) : null}
                   </div>
 
@@ -1507,7 +1507,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             
             <div className="flex gap-4">
               <a
-                href="https://github.com/cortexlinux/cortex"
+                href="https://github.com/cxlinux-ai/cx-core"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-blue-300 hover:underline"
@@ -1516,7 +1516,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 View on GitHub
               </a>
               <a
-                href="https://github.com/cortexlinux/cortex/blob/main/CONTRIBUTING.md"
+                href="https://github.com/cxlinux-ai/cx-core/blob/main/CONTRIBUTING.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-white"
@@ -1623,9 +1623,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
               {/* Doc Links */}
               <div className="border-t border-white/5 px-6 py-4 flex gap-6 flex-wrap bg-black/20">
-                <a href="https://github.com/cortexlinux/cortex#readme" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 hover:text-blue-300 transition-colors">Full Documentation</a>
-                <a href="https://github.com/cortexlinux/cortex/wiki" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
-                <a href="https://github.com/cortexlinux/cortex/tree/main/examples" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
+                <a href="https://github.com/cxlinux-ai/cx-core#readme" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-300 hover:text-blue-300 transition-colors">Full Documentation</a>
+                <a href="https://github.com/cxlinux-ai/cx-core/wiki" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">API Reference</a>
+                <a href="https://github.com/cxlinux-ai/cx-core/tree/main/examples" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Examples</a>
               </div>
             </InteractiveCodeEditor>
           </motion.div>
@@ -2067,8 +2067,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: FaDiscord, name: "Discord", color: "hover:border-indigo-500", link: "https://discord.gg/ASvzWcuTfk" },
-              { icon: FaTwitter, name: "Twitter", color: "hover:border-sky-500", link: "https://twitter.com/cortexlinux" },
-              { icon: Github, name: "GitHub", color: "hover:border-gray-500", link: "https://github.com/cortexlinux/cortex/discussions" },
+              { icon: Github, name: "GitHub", color: "hover:border-gray-500", link: "https://github.com/cxlinux-ai/cx-core/discussions" },
             ].map((platform, i) => (
               <a
                 key={i}
@@ -2288,7 +2287,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a
-                href="https://github.com/cortexlinux/cortex"
+                href="https://github.com/cxlinux-ai/cx-core"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl text-lg font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"

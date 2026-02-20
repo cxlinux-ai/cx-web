@@ -124,7 +124,7 @@ export default function StartupPage() {
         '1 system'
       ],
       cta: 'Download Free',
-      ctaLink: 'https://github.com/cortexlinux/cx',
+      ctaLink: 'https://github.com/cxlinux-ai/cx-core',
       highlighted: false
     },
     {
@@ -170,8 +170,8 @@ export default function StartupPage() {
         '99.9% SLA',
         '100 systems included'
       ],
-      cta: 'Schedule Demo',
-      ctaLink: 'https://calendly.com/cortexlinux/demo',
+      cta: 'Contact Sales',
+      ctaLink: '/support',
       highlighted: false
     }
   ];
@@ -278,7 +278,7 @@ export default function StartupPage() {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-4"
           >
             <a
-              href="https://github.com/cortexlinux/cx"
+              href="https://github.com/cxlinux-ai/cx-core"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-lg shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:scale-[1.02] transition-all duration-300"

@@ -33,7 +33,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const getShareUrl = () => `https://cortexlinux.com/join?ref=${data.referralCode}&utm_source=share_card`;
+  const getShareUrl = () => `https://cxlinux.com/join?ref=${data.referralCode}&utm_source=share_card`;
 
   const renderWaitlistCard = () => (
     <div className="share-card waitlist-card">
@@ -60,7 +60,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
         <div className="card-badge">🧠 Powered by CX Linux</div>
       </div>
       <div className="card-cta">
-        Get AI-powered Linux at cortexlinux.com
+        Get AI-powered Linux at cxlinux.com
       </div>
     </div>
   );
@@ -95,19 +95,19 @@ export function ShareCard({ type, data }: ShareCardProps) {
     <div className="share-card badge-card">
       <div className="badge-preview">
         <img
-          src={`https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge`}
+          src={`https://img.shields.io/badge/Powered%20by-CX%20Linux-blue?style=for-the-badge`}
           alt="Powered by CX Linux"
         />
       </div>
       <div className="badge-code">
         <h4>Markdown</h4>
         <code>
-          {`[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`}
+          {`[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-CX%20Linux-blue?style=for-the-badge)](${getShareUrl()})`}
         </code>
         <button
           onClick={() =>
             handleCopy(
-              `[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`
+              `[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-CX%20Linux-blue?style=for-the-badge)](${getShareUrl()})`
             )
           }
           className="copy-btn"
@@ -118,12 +118,12 @@ export function ShareCard({ type, data }: ShareCardProps) {
       <div className="badge-code">
         <h4>HTML</h4>
         <code>
-          {`<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`}
+          {`<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-CX%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`}
         </code>
         <button
           onClick={() =>
             handleCopy(
-              `<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`
+              `<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-CX%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`
             )
           }
           className="copy-btn"
