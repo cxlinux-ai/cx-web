@@ -67,8 +67,8 @@ export default function App() {
       });
       
       // Also store in localStorage as backup
-      localStorage.setItem("cortex_referral_code", refCode);
-      localStorage.setItem("cortex_referral_time", Date.now().toString());
+      localStorage.setItem("cx_referral_code", refCode);
+      localStorage.setItem("cx_referral_time", Date.now().toString());
     }
   }, []);
 
@@ -165,7 +165,7 @@ export default function App() {
               <button
                 onClick={handleHomeClick}
                 className="text-2xl font-bold cursor-pointer hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300"
-                data-testid="logo-cortex"
+                data-testid="logo-cx"
               >
                 <span className="text-white">CX</span>{" "}
                 <span className="gradient-text">LINUX</span>
@@ -245,7 +245,7 @@ export default function App() {
               {/* GitHub Stars & Get Started Button (Desktop) */}
               <div className="hidden md:flex items-center gap-3">
                 <a
-                  href="https://github.com/cortexlinux/cortex"
+                  href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 text-sm text-gray-300 hover:border-blue-300/50 hover:text-white transition-all"
@@ -256,7 +256,7 @@ export default function App() {
                   <span>25</span>
                 </a>
                 <a
-                  href="https://github.com/cortexlinux/cortex"
+                  href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-5 py-2 bg-blue-500 rounded-lg text-white font-semibold hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
@@ -365,7 +365,7 @@ export default function App() {
                     Hackathon
                   </Link>
                   <a
-                    href="https://github.com/cortexlinux/cortex"
+                    href="https://github.com/cxlinux-ai/cx-core"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
