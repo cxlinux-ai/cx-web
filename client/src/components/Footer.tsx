@@ -100,11 +100,13 @@ export default function Footer() {
               <span className="text-blue-300">LINUX</span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs mb-4">
-              The AI Layer for Linux. Execute any task with natural language.
+              Open-source AI infrastructure for the modern developer.
             </p>
-            <p className="text-gray-500 text-xs">
-              Built for developers. Source available on GitHub.
-            </p>
+            <div className="text-gray-500 text-xs space-y-1">
+              <p>A75 Towne Ridge Parkway, Suite 125</p>
+              <p>Sandy UT, 84070</p>
+              <p className="mt-2">(385) 608-4343</p>
+            </div>
           </div>
 
           <div>
@@ -116,7 +118,7 @@ export default function Footer() {
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#pricing" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-pricing">
+                <SmoothLink href="/pricing" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-pricing">
                   Pricing
                 </SmoothLink>
               </li>
@@ -128,21 +130,6 @@ export default function Footer() {
               <li>
                 <SmoothLink href="/faq" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-faq">
                   FAQ
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/hackathon" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-hackathon">
-                  Hackathon
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/architecture" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-architecture">
-                  Architecture
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/getting-started" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-install">
-                  Install CX Linux
                 </SmoothLink>
               </li>
             </ul>
@@ -171,16 +158,6 @@ export default function Footer() {
                   Status
                 </SmoothLink>
               </li>
-              <li>
-                <SmoothLink href="/mission" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-mission">
-                  Mission
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/support" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-support">
-                  Support
-                </SmoothLink>
-              </li>
             </ul>
           </div>
 
@@ -193,28 +170,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="https://twitter.com/cxlinux" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-twitter">
+                  Twitter
+                </a>
+              </li>
+              <li>
                 <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-github">
                   GitHub
                 </a>
               </li>
               <li>
-                <SmoothLink href="/bounties" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-bounties">
-                  Bounties
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/referrals" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-referrals">
-                  Referrals
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/referrals" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-partner-program">
-                  Partner Program <span className="text-green-400 text-xs ml-1">10% for 36mo</span>
-                </SmoothLink>
-              </li>
-              <li>
                 <SmoothLink href="/careers" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-careers">
-                  Careers
+                  Join Community
                 </SmoothLink>
               </li>
             </ul>
@@ -243,31 +210,12 @@ export default function Footer() {
                   License (BSL 1.1)
                 </SmoothLink>
               </li>
-              <li>
-                <SmoothLink href="/hackathon-rules" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">
-                  Hackathon Rules
-                </SmoothLink>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">&copy; 2026 CX Linux. All rights reserved.</p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <SmoothLink href="/privacy" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-privacy">
-              Privacy
-            </SmoothLink>
-            <SmoothLink href="/terms" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-terms">
-              Terms
-            </SmoothLink>
-            <SmoothLink href="/security-policy" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-security">
-              Security
-            </SmoothLink>
-            <SmoothLink href="/status" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-status">
-              Status
-            </SmoothLink>
-          </div>
+          <p className="text-sm text-gray-500">&copy; 2025 CX Linux. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
               <Github size={20} />
