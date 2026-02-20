@@ -933,7 +933,7 @@ table tbody tr:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation: shimmer 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 @keyframes shimmer {
