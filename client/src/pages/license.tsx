@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Scale, Github, ExternalLink } from "lucide-react";
+import { Scale, Github, ExternalLink, Shield, Users, Building, GraduationCap } from "lucide-react";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 
@@ -8,8 +8,6 @@ export default function License() {
     const cleanup = updateSEO(seoConfigs.license);
     return cleanup;
   }, []);
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -22,8 +20,8 @@ export default function License() {
             </span>
           </div>
           <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-            <span className="text-white">MIT</span>{" "}
-            <span className="gradient-text">License</span>
+            <span className="text-white">Business Source</span>{" "}
+            <span className="gradient-text">License 1.1</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             CX Linux software licensing terms
@@ -31,72 +29,67 @@ export default function License() {
         </div>
 
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
-          <pre className="text-gray-300 whitespace-pre-wrap font-mono text-sm leading-relaxed">
-{`MIT License
-
-Copyright (c) ${currentYear} CX Linux
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.`}
-          </pre>
+          <h2 className="text-xl font-bold mb-4 text-white">License Parameters</h2>
+          <div className="space-y-3 text-gray-300 text-sm">
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-gray-400">Licensor</span>
+              <span>AI Venture Holdings LLC</span>
+            </div>
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-gray-400">Licensed Work</span>
+              <span>CX AI Terminal and associated components</span>
+            </div>
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-gray-400">Change Date</span>
+              <span>6 years from each version release</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Change License</span>
+              <span>Apache License, Version 2.0</span>
+            </div>
+          </div>
         </div>
 
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-white">
-            What This Means
+          <h2 className="text-2xl font-bold mb-6 text-white">
+            Additional Use Grant
           </h2>
-          <div className="space-y-4 text-gray-300">
-            <div className="flex gap-3">
-              <div className="w-6 h-6 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-emerald-400 text-sm">1</span>
+          <p className="text-gray-400 mb-6">You may use the Licensed Work for:</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex gap-3 p-4 bg-white/5 rounded-xl">
+              <div className="w-10 h-10 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0">
+                <Users className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">Free to Use</h3>
-                <p className="text-gray-400">
-                  You can use CX Linux for personal, educational, or
-                  commercial purposes without any licensing fees.
-                </p>
+                <h3 className="font-semibold text-white">Personal Use</h3>
+                <p className="text-gray-400 text-sm">Non-commercial use on 1 system</p>
               </div>
             </div>
-            <div className="flex gap-3">
-              <div className="w-6 h-6 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-emerald-400 text-sm">2</span>
+            <div className="flex gap-3 p-4 bg-white/5 rounded-xl">
+              <div className="w-10 h-10 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0">
+                <Building className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">
-                  Modify and Distribute
-                </h3>
-                <p className="text-gray-400">
-                  You can modify the source code and distribute your own
-                  versions, as long as you include the original license.
-                </p>
+                <h3 className="font-semibold text-white">Internal Business</h3>
+                <p className="text-gray-400 text-sm">Operations (not as a service)</p>
               </div>
             </div>
-            <div className="flex gap-3">
-              <div className="w-6 h-6 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-emerald-400 text-sm">3</span>
+            <div className="flex gap-3 p-4 bg-white/5 rounded-xl">
+              <div className="w-10 h-10 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0">
+                <GraduationCap className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-white">No Warranty</h3>
-                <p className="text-gray-400">
-                  The software is provided as-is without warranty. Use at your
-                  own discretion.
-                </p>
+                <h3 className="font-semibold text-white">Education & Research</h3>
+                <p className="text-gray-400 text-sm">Academic and research purposes</p>
+              </div>
+            </div>
+            <div className="flex gap-3 p-4 bg-white/5 rounded-xl">
+              <div className="w-10 h-10 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0">
+                <Github className="h-5 w-5 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">Contributing</h3>
+                <p className="text-gray-400 text-sm">Contributing to the Licensed Work</p>
               </div>
             </div>
           </div>
@@ -104,14 +97,115 @@ SOFTWARE.`}
 
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
           <h2 className="text-2xl font-bold mb-4 text-white">
+            Terms
+          </h2>
+          <div className="space-y-4 text-gray-300 leading-relaxed">
+            <p>
+              The Licensor hereby grants you the right to copy, modify, create derivative works, 
+              redistribute, and make non-production use of the Licensed Work.
+            </p>
+            <p>
+              <strong className="text-white">Effective on the Change Date</strong>, the Licensor grants you rights 
+              under the terms of the Change License, and the rights granted above terminate.
+            </p>
+            <p>
+              If your use of the Licensed Work does not comply with the requirements currently 
+              in effect as described in this License, you must purchase a commercial license from 
+              the Licensor, its affiliated entities, or authorized resellers.
+            </p>
+            <p>
+              <strong className="text-white">All copies</strong> of the original and modified Licensed Work must include 
+              this License, the copyright notice, and the Change Date and Change License.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">
+            Commercial Use
+          </h2>
+          <p className="text-gray-300 mb-4">
+            <strong className="text-white">"Commercial Use"</strong> means using the Licensed Work to:
+          </p>
+          <ul className="space-y-2 text-gray-400">
+            <li className="flex gap-2">
+              <span className="text-emerald-400">•</span>
+              Run on more than one (1) system
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-400">•</span>
+              Offer a competing product or service
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-400">•</span>
+              Provide managed services based on the Licensed Work
+            </li>
+            <li className="flex gap-2">
+              <span className="text-emerald-400">•</span>
+              Sell, resell, or sublicense the Licensed Work
+            </li>
+          </ul>
+          <p className="text-gray-400 mt-6 text-sm">
+            For Commercial Use licensing, contact:{" "}
+            <a
+              href="mailto:licensing@cxlinux.com"
+              className="text-blue-300 hover:underline"
+            >
+              licensing@cxlinux.com
+            </a>
+          </p>
+        </div>
+
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">
+            Pricing
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">Free</div>
+              <div className="text-gray-400 text-sm">Personal (1 system)</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">$20<span className="text-base font-normal text-gray-400">/system/mo</span></div>
+              <div className="text-gray-400 text-sm">Additional systems</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">$99<span className="text-base font-normal text-gray-400">/mo</span></div>
+              <div className="text-gray-400 text-sm">Pro (up to 25 systems)</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">$299<span className="text-base font-normal text-gray-400">/mo</span></div>
+              <div className="text-gray-400 text-sm">Enterprise (up to 100 systems)</div>
+            </div>
+          </div>
+          <p className="text-gray-500 text-sm mt-4 text-center">
+            See <a href="/pricing" className="text-blue-300 hover:underline">pricing page</a> for current rates
+          </p>
+        </div>
+
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">
+            Disclaimer
+          </h2>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+            INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+            PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE 
+            FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+            OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+            DEALINGS IN THE SOFTWARE.
+          </p>
+        </div>
+
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">
             Trademark Notice
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            "CX Linux" and the CX logo are trademarks of the CX
-            Linux project. While the software is licensed under the
-            MIT license, use of the CX name and branding for derivative
-            works requires written permission. This ensures users can
-            distinguish official releases from community modifications.
+            "CX Linux" and the CX logo are trademarks of AI Venture Holdings LLC. While the software 
+            is licensed under the Business Source License 1.1, use of the CX name and branding for 
+            derivative works requires written permission. This ensures users can distinguish official 
+            releases from community modifications.
           </p>
           <p className="text-gray-400 mt-4 text-sm">
             For trademark inquiries, contact:{" "}
@@ -129,8 +223,7 @@ SOFTWARE.`}
             View on GitHub
           </h3>
           <p className="text-gray-400 mb-6">
-            Explore the source code, report issues, and contribute to CX
-            Linux.
+            Explore the source code, report issues, and contribute to CX Linux.
           </p>
           <a
             href="https://github.com/cxlinux-ai/cx-core"
@@ -144,6 +237,14 @@ SOFTWARE.`}
             <ExternalLink className="h-4 w-4" />
           </a>
         </div>
+
+        <p className="text-center text-gray-500 text-sm mt-8">
+          This license is based on the Business Source License 1.1, created by MariaDB Corporation.
+          For more information, see{" "}
+          <a href="https://mariadb.com/bsl11/" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">
+            mariadb.com/bsl11
+          </a>
+        </p>
       </div>
 
       <Footer />
