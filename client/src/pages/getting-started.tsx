@@ -349,9 +349,9 @@ export default function GettingStarted() {
                   <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                     <code className="text-sm text-gray-300">
                       <span className="text-gray-500"># Add GPG key</span>{'\n'}
-                      curl -fsSL https://apt.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n\n'}
+                      curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n\n'}
                       <span className="text-gray-500"># Add repository</span>{'\n'}
-                      echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://apt.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
+                      echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
                     </code>
                   </pre>
                 </div>
