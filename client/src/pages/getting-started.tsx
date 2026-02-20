@@ -52,21 +52,21 @@ export default function GettingStarted() {
       title: "Installation Guide",
       description: "Get CX running on your system in minutes with our guided setup",
       icon: Download,
-      link: "/blog/install-CX-linux-beginner-guide",
+      link: "/blog/install-cx-linux-beginner-guide",
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Your First Task",
       description: "Tell CX what you need—from server config to automation to anything in between",
       icon: Terminal,
-      link: "/blog/getting-started-CX-first-workflow",
+      link: "/blog/getting-started-cx-first-workflow",
       color: "from-purple-500 to-pink-500"
     },
     {
       title: "Unlimited Possibilities",
       description: "See how CX handles any Linux operation through natural language",
       icon: Sparkles,
-      link: "/blog/first-ai-task-CX-linux",
+      link: "/blog/first-ai-task-cx-linux",
       color: "from-orange-500 to-red-500"
     }
   ];
@@ -146,10 +146,10 @@ export default function GettingStarted() {
       description: "New to Linux? Let CX be your guide.",
       color: "from-green-500 to-emerald-500",
       resources: [
-        { title: "Getting Started with CX", link: "/blog/getting-started-CX-first-workflow" },
-        { title: "How to Install CX Linux", link: "/blog/install-CX-linux-beginner-guide" },
-        { title: "Your First Linux Tasks", link: "/blog/first-ai-task-CX-linux" },
-        { title: "CX for Students", link: "/blog/CX-linux-for-students" },
+        { title: "Getting Started with CX", link: "/blog/getting-started-cx-first-workflow" },
+        { title: "How to Install CX Linux", link: "/blog/install-cx-linux-beginner-guide" },
+        { title: "Your First Linux Tasks", link: "/blog/first-ai-task-cx-linux" },
+        { title: "CX for Students", link: "/blog/cx-linux-for-students" },
         { title: "FAQ for New Users", link: "/faq" }
       ]
     },
