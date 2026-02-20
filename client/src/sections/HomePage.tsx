@@ -1105,7 +1105,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="relative">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/20 border border-brand-blue/30 mb-2">
                       <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
-                      <span className="text-blue-300 font-bold text-sm">CX</span>
+                      <span className="text-blue-300 font-bold text-sm">CX Linux</span>
                     </div>
                     <p className="text-xs text-blue-300/60">Recommended</p>
                   </div>
@@ -1239,7 +1239,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 <div className="grid grid-cols-3 gap-3">
                   {/* CX */}
                   <div className="text-center p-3 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
-                    <div className="text-xs text-blue-300 font-semibold mb-2">CX</div>
+                    <div className="text-xs text-blue-300 font-semibold mb-2">CX Linux</div>
                     {row.cx === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
@@ -1712,7 +1712,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 
                 {/* Core text */}
                 <text x="460" y="170" textAnchor="middle" fill="#e0e7ff" fontSize="12" fontWeight="bold">AI</text>
-                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CX</text>
+                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CX Linux</text>
               </g>
               
               {/* Connection 2: AI to Commands */}
