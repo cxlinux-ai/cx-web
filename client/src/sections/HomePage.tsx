@@ -68,6 +68,7 @@ import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiC
 import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
+import FeatureCarousel from "@/components/FeatureCarousel";
 import Footer from "@/components/Footer";
 import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
@@ -528,6 +529,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 View on GitHub
               </button>
             </a>
+          </motion.div>
+
+          {/* Feature Carousel - Desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            className="hidden sm:block mb-8"
+          >
+            <FeatureCarousel />
           </motion.div>
 
           {/* Demo - Hidden on small screens */}
