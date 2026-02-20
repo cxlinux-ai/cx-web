@@ -475,7 +475,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </div>
             <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
               <Tag size={12} className="text-blue-300 sm:w-3.5 sm:h-3.5" />
-              <span className="text-gray-300">v2.4.0</span>
+              <span className="text-gray-300">v0.2.0</span>
             </div>
             <div className="hidden md:flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full glass-card text-xs sm:text-sm">
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400" />

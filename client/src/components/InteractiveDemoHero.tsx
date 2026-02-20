@@ -160,7 +160,7 @@ export default function InteractiveDemoHero() {
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/10 border border-purple-500/20">
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
             <span className="text-xs sm:text-sm font-medium text-purple-300">
-              {isLiveMode ? 'Live AI Demo — Real API Calls' : 'Interactive Demo — Click to Explore'}
+              {isLiveMode ? 'Live AI Demo — Real API Calls' : 'Try Before Install — No Signup Required'}
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold px-2">
@@ -463,7 +463,7 @@ export default function InteractiveDemoHero() {
                         <span className="hidden sm:inline">Try Live API</span>
                       </a>
                     )}
-                    <span className="text-gray-600">v2.4.0</span>
+                    <span className="text-gray-600">v0.2.0</span>
                   </div>
                 </div>
               </div>
