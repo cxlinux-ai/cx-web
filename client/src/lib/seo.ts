@@ -400,14 +400,14 @@ export const seoConfigs = {
   
   terms: {
     title: 'Terms of Service | CX Linux',
-    description: 'CX Linux terms of service. MIT license, user conduct, disclaimers, and liability limitations.',
+    description: 'CX Linux terms of service. BSL 1.1 license, user conduct, disclaimers, and liability limitations.',
     canonicalPath: '/terms',
     noIndex: false
   },
   
   license: {
-    title: 'MIT License | CX Linux',
-    description: 'CX Linux software is licensed under the MIT License. Free to use, modify, and distribute.',
+    title: 'Business Source License 1.1 | CX Linux',
+    description: 'CX Linux software is licensed under the Business Source License 1.1. Free for personal use, converts to Apache 2.0 after 6 years.',
     canonicalPath: '/license',
     noIndex: false
   },

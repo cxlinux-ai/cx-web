@@ -26,16 +26,19 @@ If you are using the Software on behalf of an organization, you represent that y
     {
       icon: Scale,
       title: "License Grant",
-      content: `CX Linux software is licensed under the MIT License, which grants you the right to:
+      content: `CX Linux software is licensed under the Business Source License 1.1 (BSL 1.1), which grants you the right to:
 
-• Use the Software for any purpose, including commercial applications
-• Copy, modify, and distribute the Software
-• Sublicense the Software
-• Merge the Software with other software
+• Use the Software for personal, non-commercial purposes (1 system)
+• Use the Software for internal business operations (not as a service)
+• Use the Software for educational and research purposes
+• Copy, modify, and create derivative works
+• Contribute to the Licensed Work
 
-The above rights are granted free of charge, subject to the conditions of the MIT License.
+For commercial use (more than 1 system, managed services, or resale), a commercial license is required. See our pricing page for details.
 
-TRADEMARK NOTICE: While the code is MIT licensed, the CX Linux name, logo, and branding are protected trademarks. You may not use these marks without prior written permission, except as required for reasonable attribution.`
+CHANGE LICENSE: After 6 years from each version release, the software converts to Apache License 2.0.
+
+TRADEMARK NOTICE: The CX Linux name, logo, and branding are protected trademarks of AI Venture Holdings LLC. You may not use these marks without prior written permission, except as required for reasonable attribution.`
     },
     {
       icon: UserCheck,
