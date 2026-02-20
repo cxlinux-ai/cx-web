@@ -923,17 +923,17 @@ table tbody tr:hover {
   background: linear-gradient(
     90deg,
     #a855f7 0%,
-    #a855f7 35%,
-    rgba(255, 255, 255, 0.9) 50%,
-    #a855f7 65%,
+    #a855f7 40%,
+    rgba(255, 255, 255, 0.7) 50%,
+    #a855f7 60%,
     #a855f7 100%
   );
-  background-size: 250% 100%;
+  background-size: 300% 100%;
   background-position: 100% 50%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
+  animation: shimmer 6s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -941,7 +941,7 @@ table tbody tr:hover {
     background-position: 100% 50%;
   }
   50% {
-    background-position: -50% 50%;
+    background-position: -100% 50%;
   }
 }
 
