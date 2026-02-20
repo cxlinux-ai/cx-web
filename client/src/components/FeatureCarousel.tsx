@@ -59,7 +59,8 @@ export default function FeatureCarousel() {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 relative">
       {/* Terminal-style container - clean dark background, glow comes from outside */}
-      <div className="relative rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_60px_-15px_rgba(168,85,247,0.4)]">
+      {/* Color: slightly blue-ish purple (#8b5cf6 → violet-500) */}
+      <div className="relative rounded-xl overflow-hidden border border-violet-500/30 shadow-[0_0_80px_-20px_rgba(139,92,246,0.5),0_0_30px_-10px_rgba(139,92,246,0.3)]">
         {/* Terminal Header */}
         <div className="flex items-center gap-2 px-4 py-3 bg-gray-900/90 border-b border-gray-800/50">
           <div className="flex gap-1.5">
@@ -75,7 +76,7 @@ export default function FeatureCarousel() {
         {/* Content area - clean dark background */}
         <div className="relative h-[320px] sm:h-[360px] md:h-[400px] bg-gradient-to-b from-gray-900/95 via-gray-950/95 to-gray-950 overflow-hidden">
           {/* Subtle inner glow from edges */}
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 via-transparent to-transparent pointer-events-none" />
           
           {/* Feature Carousel - Left/Right animation */}
           <AnimatePresence mode="wait" custom={direction}>
@@ -91,12 +92,12 @@ export default function FeatureCarousel() {
             >
               {/* Icon */}
               <div className="relative mb-6">
-                <div className="absolute inset-0 bg-purple-500/20 blur-2xl rounded-full scale-[2]" />
+                <div className="absolute inset-0 bg-violet-500/20 blur-2xl rounded-full scale-[2]" />
                 {(() => {
                   const IconComponent = FEATURE_SLIDES[currentSlide].icon;
                   return (
                     <IconComponent 
-                      className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-purple-400" 
+                      className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-violet-400" 
                       strokeWidth={1.5} 
                     />
                   );
