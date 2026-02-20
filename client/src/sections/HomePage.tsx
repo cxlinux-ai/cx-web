@@ -68,7 +68,6 @@ import { SiVercel, SiStripe, SiLinear, SiSupabase, SiRailway, SiPlanetscale, SiC
 import type { Contributor } from "@shared/schema";
 import BlogPreview from "@/components/BlogPreview";
 import InteractiveDemoHero from "@/components/InteractiveDemoHero";
-import HackathonPreview from "@/components/HackathonPreview";
 import Footer from "@/components/Footer";
 import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
@@ -513,16 +512,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             Describe what you want. CX handles the rest. From automation scripts to system configuration,
             data analysis to coding workflows — unlimited possibilities with natural language.
           </motion.p>
-
-          {/* Hackathon Preview - Prominent placement */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mb-8"
-          >
-            <HackathonPreview />
-          </motion.div>
 
           {/* Demo - Hidden on small screens, show simple CTA instead */}
           <motion.div
