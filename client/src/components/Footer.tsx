@@ -111,37 +111,37 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Product</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/#about" className="hover:text-white transition-colors" data-testid="footer-link-features">
+                <SmoothLink href="/#about" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-features">
                   Features
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#pricing" className="hover:text-white transition-colors" data-testid="footer-link-pricing">
+                <SmoothLink href="/#pricing" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-pricing">
                   Pricing
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-docs">
+                <SmoothLink href="/#preview" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-docs">
                   Documentation
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/faq" className="hover:text-white transition-colors" data-testid="footer-link-faq">
+                <SmoothLink href="/faq" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-faq">
                   FAQ
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/hackathon" className="hover:text-white transition-colors" data-testid="footer-link-hackathon">
+                <SmoothLink href="/hackathon" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-hackathon">
                   Hackathon
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/architecture" className="hover:text-white transition-colors" data-testid="footer-link-architecture">
+                <SmoothLink href="/architecture" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-architecture">
                   Architecture
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/getting-started" className="hover:text-white transition-colors" data-testid="footer-link-install">
+                <SmoothLink href="/getting-started" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-install">
                   Install CX Linux
                 </SmoothLink>
               </li>
@@ -152,32 +152,32 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/blog" className="hover:text-white transition-colors" data-testid="footer-link-blog">
+                <SmoothLink href="/blog" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-blog">
                   Blog
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/#preview" className="hover:text-white transition-colors" data-testid="footer-link-api">
+                <SmoothLink href="/#preview" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-api">
                   API Reference
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/getting-started" className="hover:text-white transition-colors" data-testid="footer-link-get-started">
+                <SmoothLink href="/getting-started" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-get-started">
                   Get Started
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/status" className="hover:text-white transition-colors" data-testid="footer-link-status">
+                <SmoothLink href="/status" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-status">
                   Status
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/mission" className="hover:text-white transition-colors" data-testid="footer-link-mission">
+                <SmoothLink href="/mission" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-mission">
                   Mission
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/support" className="hover:text-white transition-colors" data-testid="footer-link-support">
+                <SmoothLink href="/support" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-support">
                   Support
                 </SmoothLink>
               </li>
@@ -188,32 +188,32 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Community</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-discord">
+                <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-discord">
                   Discord
                 </a>
               </li>
               <li>
-                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">
+                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-github">
                   GitHub
                 </a>
               </li>
               <li>
-                <SmoothLink href="/bounties" className="hover:text-white transition-colors" data-testid="footer-link-bounties">
+                <SmoothLink href="/bounties" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-bounties">
                   Bounties
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-referrals">
+                <SmoothLink href="/referrals" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-referrals">
                   Referrals
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/referrals" className="hover:text-white transition-colors" data-testid="footer-link-partner-program">
+                <SmoothLink href="/referrals" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-partner-program">
                   Partner Program <span className="text-green-400 text-xs ml-1">10% for 36mo</span>
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/careers" className="hover:text-white transition-colors" data-testid="footer-link-careers">
+                <SmoothLink href="/careers" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-careers">
                   Careers
                 </SmoothLink>
               </li>
@@ -224,27 +224,27 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/privacy" className="hover:text-white transition-colors" data-testid="footer-link-privacy">
+                <SmoothLink href="/privacy" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-privacy">
                   Privacy Policy
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/terms" className="hover:text-white transition-colors" data-testid="footer-link-terms">
+                <SmoothLink href="/terms" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-terms">
                   Terms of Service
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-link-security">
+                <SmoothLink href="/security-policy" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-security">
                   Security
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/license" className="hover:text-white transition-colors" data-testid="footer-link-license">
+                <SmoothLink href="/license" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-license">
                   License (BSL 1.1)
                 </SmoothLink>
               </li>
               <li>
-                <SmoothLink href="/hackathon-rules" className="hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">
+                <SmoothLink href="/hackathon-rules" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-hackathon-rules">
                   Hackathon Rules
                 </SmoothLink>
               </li>
@@ -255,16 +255,16 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-500">&copy; 2026 CX Linux. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-gray-500">
-            <SmoothLink href="/privacy" className="hover:text-white transition-colors" data-testid="footer-bottom-privacy">
+            <SmoothLink href="/privacy" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-privacy">
               Privacy
             </SmoothLink>
-            <SmoothLink href="/terms" className="hover:text-white transition-colors" data-testid="footer-bottom-terms">
+            <SmoothLink href="/terms" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-terms">
               Terms
             </SmoothLink>
-            <SmoothLink href="/security-policy" className="hover:text-white transition-colors" data-testid="footer-bottom-security">
+            <SmoothLink href="/security-policy" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-security">
               Security
             </SmoothLink>
-            <SmoothLink href="/status" className="hover:text-white transition-colors" data-testid="footer-bottom-status">
+            <SmoothLink href="/status" className="block py-2 hover:text-white transition-colors" data-testid="footer-bottom-status">
               Status
             </SmoothLink>
           </div>

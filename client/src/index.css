@@ -643,7 +643,7 @@ section h2 + p {
   margin-right: auto;
 }
 
-/* Floating accent shapes */
+/* Floating accent shapes - hidden on mobile for performance */
 .floating-shape {
   position: absolute;
   border-radius: 50%;
@@ -651,6 +651,13 @@ section h2 + p {
   filter: blur(60px);
   pointer-events: none;
   animation: float 20s ease-in-out infinite;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .floating-shape {
+    display: block;
+  }
 }
 
 @keyframes float {

@@ -702,7 +702,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               className="block"
               onClick={() => analytics.trackCTAClick('try_cx_cli', 'hero_mobile')}
             >
-              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
+              <button className="w-full flex items-center justify-center gap-2 px-6 py-4 min-h-[48px] bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
                 Try CX CLI
               </button>
@@ -997,8 +997,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
       {/* Architecture Diagram - Enhanced 3D Layered Visualization */}
       <section id="architecture" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative overflow-hidden`}>
-        {/* Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Background Effects - hidden on mobile */}
+        <div className="hidden md:block absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-3xl" />
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
@@ -1153,8 +1153,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
       {/* Comparison Table - Enhanced Design */}
       <section className={`${SECTION_PADDING.large} px-4 border-t border-white/5 relative overflow-hidden`}>
-        {/* Background gradient accents */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Background gradient accents - hidden on mobile */}
+        <div className="hidden md:block absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl" />
           <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
@@ -1381,7 +1381,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div className="pt-4">
               <Link
                 href="/register"
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-brand-blue text-white font-semibold hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 min-h-[48px] rounded-xl bg-brand-blue text-white font-semibold hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
               >
                 Sign Up Now
                 <ArrowRight size={16} />
@@ -1633,8 +1633,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
       {/* AI Processing Visualization - Premium Enhanced Version */}
       <section id="ai-processing" className={`${SECTION_PADDING.large} px-4 border-t border-white/5 overflow-hidden relative`}>
-        {/* Background Effects */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Background Effects - hidden on mobile */}
+        <div className="hidden md:block absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl" />
         </div>
