@@ -6,7 +6,7 @@ import { updateSEO, seoConfigs } from "@/lib/seo";
 /**
  * Bounties Page
  *
- * Displays GitHub issues labeled "bounty" from the cortexlinux organization.
+ * Displays GitHub issues labeled "bounty" from the cxlinux-ai organization.
  *
  * SEO Optimized:
  * - Server-side data fetching via API (data cached for 5 minutes)

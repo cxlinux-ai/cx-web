@@ -29,7 +29,7 @@ export interface PressRelease {
 
 export const pressReleases: PressRelease[] = [
   {
-    slug: "cortex-linux-announces-global-ai-hackathon",
+    slug: "cx-linux-announces-global-ai-hackathon",
     title: "CX Linux Announces Global AI Hackathon for Developers Worldwide",
     headline: "CX Linux Announces Global AI Hackathon for Developers Worldwide",
     date: "2026-01-11",
@@ -76,17 +76,17 @@ export const pressReleases: PressRelease[] = [
       }
     ],
     links: [
-      { label: "Official Website", url: "https://cortexlinux.com" },
-      { label: "Hackathon Details", url: "https://cortexlinux.com/hackathon" },
-      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" }
+      { label: "Official Website", url: "https://cxlinux.com" },
+      { label: "Hackathon Details", url: "https://cxlinux.com/hackathon" },
+      { label: "GitHub Repository", url: "https://github.com/cxlinux-ai/cx-core" }
     ],
     contactInfo: {
       name: "Press Team",
       title: "CX Linux",
-      email: "press@cortexlinux.com"
+      email: "press@cxlinux.com"
     },
     boilerplate: "CX Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, CX Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
-    companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cortexlinux.com.",
+    companyBoilerplate: "For more information about the hackathon, participation details, and upcoming announcements, visit cxlinux.com.",
     tags: ["Hackathon", "AI", "Developer Community", "Linux", "Global Event"],
     keywords: [
       "AI Linux distribution",
@@ -102,7 +102,7 @@ export const pressReleases: PressRelease[] = [
     image: "/images/coding_hackathon_dev_1f49254e.jpg"
   },
   {
-    slug: "cortex-linux-v25-released-enhanced-ai-automation",
+    slug: "cx-linux-v25-released-enhanced-ai-automation",
     title: "CX Linux v2.5 Released with Enhanced AI Automation and Developer Productivity Features",
     headline: "CX Linux v2.5 Released with Enhanced AI Automation and Developer Productivity Features",
     date: "2025-12-15",
@@ -151,14 +151,14 @@ export const pressReleases: PressRelease[] = [
       }
     ],
     links: [
-      { label: "Download v2.5", url: "https://cortexlinux.com/download" },
-      { label: "Release Notes", url: "https://cortexlinux.com/releases/v2.5" },
-      { label: "GitHub Repository", url: "https://github.com/cortexlinux/cortex" }
+      { label: "Download v2.5", url: "https://cxlinux.com/download" },
+      { label: "Release Notes", url: "https://cxlinux.com/releases/v2.5" },
+      { label: "GitHub Repository", url: "https://github.com/cxlinux-ai/cx-core" }
     ],
     contactInfo: {
       name: "Press Team",
       title: "CX Linux",
-      email: "press@cortexlinux.com"
+      email: "press@cxlinux.com"
     },
     boilerplate: "CX Linux is an AI-native Linux operating system designed for developers, AI founders, and modern engineering teams. By integrating intelligence directly into the OS, CX Linux aims to reduce friction, accelerate development, and enable new classes of AI-driven workflows — without sacrificing transparency, performance, or control. The project is built with a strong emphasis on developer experience, security, and long-term maintainability.",
     tags: ["Product Release", "v2.5", "AI Automation", "Natural Language", "Security", "Linux", "Update"],

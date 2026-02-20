@@ -35,7 +35,7 @@ export interface ABTestContextValue {
   isInitialized: boolean;
 }
 
-const STORAGE_PREFIX = 'cortex_ab_';
+const STORAGE_PREFIX = 'cx_ab_';
 
 export function isAnalyticsAvailable(): boolean {
   return typeof window !== 'undefined' && typeof window.gtag === 'function';

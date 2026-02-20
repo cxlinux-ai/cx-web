@@ -18,7 +18,7 @@ export default function NewsArticlePage() {
       return;
     }
 
-    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://cortexlinux.com";
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://cxlinux.com";
     const articleUrl = `${siteUrl}/news/${release.slug}`;
 
     const keywords = [

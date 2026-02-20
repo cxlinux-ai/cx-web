@@ -306,7 +306,7 @@ export const ideathonPhase: IdeathonPhase = {
   prizeExplanation: "To encourage innovation and recognize a wide range of outstanding ideas, the Ideathon awards prizes across three tiers. This inclusive structure ensures fair recognition for multiple high-quality submissions while rewarding exceptional ideas at the top.",
   cta: {
     text: "Submit Your Idea",
-    href: "https://forms.cortexlinux.com/ideathon",
+    href: "https://forms.cxlinux.com/ideathon",
     external: true
   }
 };
@@ -349,7 +349,7 @@ export const hackathonPhases: HackathonPhase[] = [
     ],
     cta: {
       text: "View Open Issues",
-      href: "https://github.com/cortexlinux/cortex/issues",
+      href: "https://github.com/cxlinux-ai/cx-core/issues",
       external: true
     }
   },
@@ -372,7 +372,7 @@ export const hackathonPhases: HackathonPhase[] = [
     ],
     cta: {
       text: "View Pull Requests",
-      href: "https://github.com/cortexlinux/cortex/pulls",
+      href: "https://github.com/cxlinux-ai/cx-core/pulls",
       external: true
     }
   }
@@ -453,8 +453,8 @@ export const growthStrategy: GrowthChannel[] = [
     strategy: "Publish build tutorials, hackathon updates, and winner spotlights",
     expectedReach: "50K+ developers",
     links: [
-      { text: "Read our DEV.to", href: "https://dev.to/cortexlinux" },
-      { text: "Hashnode Blog", href: "https://cortexlinux.hashnode.dev" }
+      { text: "Read our DEV.to", href: "https://dev.to/cxlinux" },
+      { text: "Hashnode Blog", href: "https://cxlinux.hashnode.dev" }
     ]
   },
   {
@@ -473,7 +473,7 @@ export const growthStrategy: GrowthChannel[] = [
     strategy: "Frame as 'AI Linux Hackathon' with community voting",
     expectedReach: "25K+ makers",
     links: [
-      { text: "Follow on PH", href: "https://producthunt.com/products/cortex-linux" }
+      { text: "Follow on PH", href: "https://producthunt.com/products/CX-linux" }
     ]
   },
   {
@@ -482,7 +482,7 @@ export const growthStrategy: GrowthChannel[] = [
     strategy: "Partner with Linux YouTubers for install + build walkthroughs",
     expectedReach: "50K+ viewers",
     links: [
-      { text: "Watch Demos", href: "https://youtube.com/@cortexlinux" }
+      { text: "Watch Demos", href: "https://youtube.com/@cxlinux" }
     ]
   }
 ];
@@ -498,7 +498,7 @@ export const hackathonConfig = {
   expectedParticipants: "5,000+",
   expectedIdeas: "4000+",
   expectedPRs: "100+",
-  githubUrl: "https://github.com/cortexlinux/cortex",
+  githubUrl: "https://github.com/cxlinux-ai/cx-core",
   discordUrl: "https://discord.gg/ASvzWcuTfk",
   rulesDocUrl: "/hackathon-rules",
   philosophy: {

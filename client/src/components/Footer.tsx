@@ -193,11 +193,6 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-twitter">
-                  Twitter
-                </a>
-              </li>
-              <li>
                 <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" data-testid="footer-link-github">
                   GitHub
                 </a>
@@ -274,9 +269,6 @@ export default function Footer() {
             </SmoothLink>
           </div>
           <div className="flex gap-4">
-            <a href="https://twitter.com/cortexlinux" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-twitter">
-              <FaTwitter size={20} />
-            </a>
             <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
               <Github size={20} />
             </a>

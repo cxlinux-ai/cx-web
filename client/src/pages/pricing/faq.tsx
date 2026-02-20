@@ -307,7 +307,7 @@ export default function PricingFAQ() {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               id="pricing-faq-sales-link"
-              href="mailto:sales@cxlinux.com"
+              href="/support"
               className="px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
             >
               Contact Sales

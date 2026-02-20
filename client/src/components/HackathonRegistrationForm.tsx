@@ -50,7 +50,7 @@ const formSchema = z.object({
   programmingLanguages: z.array(z.string()).min(1, "Select at least one programming language"),
   whyJoinHackathon: z.array(z.string()).min(1, "Please select at least one reason"),
   whyJoinOther: z.string().optional(),
-  cortexAreaInterest: z.string().min(1, "Please select an area of interest"),
+  cxAreaInterest: z.string().min(1, "Please select an area of interest"),
   whatExcitesYou: z.string().optional(),
   contributionPlan: z.string().optional(),
   postHackathonInvolvement: z.array(z.string()).optional(),
@@ -163,7 +163,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
       programmingLanguages: [],
       whyJoinHackathon: [],
       whyJoinOther: "",
-      cortexAreaInterest: "",
+      cxAreaInterest: "",
       whatExcitesYou: "",
       contributionPlan: "",
       postHackathonInvolvement: [],
@@ -800,7 +800,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
 
           <FormField
             control={form.control}
-            name="cortexAreaInterest"
+            name="cxAreaInterest"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-300">Which CX Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
@@ -809,7 +809,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
                     {...field}
                     className="flex h-11 sm:h-9 w-full items-center justify-between rounded-md border border-white/20 bg-white/5 px-3 py-2 text-base sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.75rem center', backgroundSize: '1.25rem' }}
-                    data-testid="select-cortex-area"
+                    data-testid="select-cx-area"
                   >
                     <option value="" className="bg-[#1a1a2e] text-gray-400">Select an area</option>
                     {CORTEX_AREAS.map((area) => (

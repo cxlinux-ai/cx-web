@@ -9,7 +9,7 @@ interface WhenToUseProps {
 }
 
 export function WhenToUse({ comparison, context }: WhenToUseProps) {
-  const handleSectionView = (sectionType: 'cortex_better' | 'competitor_better' | 'who_should_not_switch') => {
+  const handleSectionView = (sectionType: 'cx_better' | 'competitor_better' | 'who_should_not_switch') => {
     trackComparisonTrustSectionView(context, sectionType);
   };
 
@@ -36,7 +36,7 @@ export function WhenToUse({ comparison, context }: WhenToUseProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="bg-blue-500/5 border border-blue-500/20 rounded-xl p-6"
-              onMouseEnter={() => handleSectionView('cortex_better')}
+              onMouseEnter={() => handleSectionView('cx_better')}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
@@ -45,7 +45,7 @@ export function WhenToUse({ comparison, context }: WhenToUseProps) {
                 <h3 className="text-lg font-semibold text-white">Choose CX When...</h3>
               </div>
               <ul className="space-y-3">
-                {comparison.whenToUse.cortexBetter.map((item, index) => (
+                {comparison.whenToUse.cxBetter.map((item, index) => (
                   <li key={index} className="flex items-start gap-3 text-gray-300">
                     <CheckCircle className="h-4 w-4 text-blue-300 mt-1 flex-shrink-0" />
                     <span>{item}</span>

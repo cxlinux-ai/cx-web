@@ -14,8 +14,8 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
     trackComparisonFeatureView(context, featureName);
   };
 
-  const cortexWins = comparison.features.filter(
-    f => f.cortex === 'yes' && f.competitor !== 'yes'
+  const cxWins = comparison.features.filter(
+    f => f.cx === 'yes' && f.competitor !== 'yes'
   ).length;
 
   return (
@@ -32,10 +32,10 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
           <div className="text-center mb-12">
             <span 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm font-medium mb-4"
-              data-testid="badge-cortex-leads-count"
+              data-testid="badge-cx-leads-count"
             >
               <Sparkles className="h-4 w-4" />
-              {cortexWins} features where CX leads
+              {cxWins} features where CX leads
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Feature Comparison
@@ -69,7 +69,7 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                 </thead>
                 <tbody>
                   {comparison.features.map((feature, index) => {
-                    const cortexAdvantage = feature.cortex === 'yes' && feature.competitor !== 'yes';
+                    const cxAdvantage = feature.cx === 'yes' && feature.competitor !== 'yes';
                     
                     return (
                       <motion.tr
@@ -81,7 +81,7 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                         data-testid={`row-feature-${index}`}
                         className={`
                           border-t border-gray-800/50 transition-all duration-200
-                          ${cortexAdvantage 
+                          ${cxAdvantage 
                             ? 'bg-blue-500/5 hover:bg-blue-500/10' 
                             : 'hover:bg-gray-800/30'
                           }
@@ -90,10 +90,10 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                       >
                         <td className="py-5 px-6">
                           <div className="flex items-center gap-3">
-                            {cortexAdvantage && (
+                            {cxAdvantage && (
                               <span className="flex-shrink-0 w-1.5 h-8 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full" />
                             )}
-                            <span className={`font-medium ${cortexAdvantage ? 'text-white' : 'text-gray-200'}`}>
+                            <span className={`font-medium ${cxAdvantage ? 'text-white' : 'text-gray-200'}`}>
                               {feature.name}
                             </span>
                             {feature.tooltip && (
@@ -110,10 +110,10 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                         </td>
                         <td className="py-5 px-6">
                           <div className="flex flex-col items-center gap-1.5">
-                            <StatusIcon status={feature.cortex} enhanced={cortexAdvantage} />
-                            {feature.cortexNote && (
+                            <StatusIcon status={feature.cx} enhanced={cxAdvantage} />
+                            {feature.cxNote && (
                               <span className="text-xs text-blue-300/80 text-center max-w-[140px]">
-                                {feature.cortexNote}
+                                {feature.cxNote}
                               </span>
                             )}
                           </div>
