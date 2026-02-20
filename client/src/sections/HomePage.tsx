@@ -408,6 +408,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const comparisonData = [
+    { feature: "Open Source", icon: Github, cx: true, toolA: false, toolB: false },
     { feature: "Self-Hostable", icon: Server, cx: true, toolA: false, toolB: true },
     { feature: "Natural Language Interface", icon: MessageCircle, cx: true, toolA: "partial", toolB: false },
     { feature: "Unlimited Task Scope", icon: Infinity, cx: true, toolA: false, toolB: false },
