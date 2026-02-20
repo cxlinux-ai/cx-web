@@ -299,16 +299,11 @@ export default function PricingPage() {
 
                   <div id={`pricing-price-${tier.id}`} className="mb-6">
                     <span className={`text-4xl font-extrabold ${tier.badge ? "text-gray-900" : "text-white"}`}>
-                      ${isAnnual ? Math.round(tier.annualPrice / 12) : tier.price}
+                      ${isAnnual ? tier.annualPrice : tier.price}
                     </span>
                     <span className={`text-sm ${tier.badge ? "text-gray-500" : "text-white/60"}`}>
-                      {tier.price > 0 ? "/month" : ""}
+                      {tier.price > 0 ? (isAnnual ? "/year" : "/month") : ""}
                     </span>
-                    {isAnnual && tier.price > 0 && (
-                      <p className={`text-xs mt-1 ${tier.badge ? "text-gray-400" : "text-white/50"}`}>
-                        Billed annually (${tier.annualPrice}/year)
-                      </p>
-                    )}
                   </div>
 
                   {/* Key Limits */}
