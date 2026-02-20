@@ -666,7 +666,48 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </div>
       </section>
-            {/* Interactive Product Preview */}
+
+      {/* Start Your Journey Section */}
+      <section className={`${SECTION_PADDING.standard} px-4`}>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 p-8 md:p-12"
+          >
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-brand-blue/20 flex items-center justify-center">
+                    <Rocket size={20} className="text-brand-blue" />
+                  </div>
+                  <span className="text-brand-blue font-medium text-sm uppercase tracking-wider">New to CX Linux?</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white">Start Your Journey Today</h3>
+                <p className="text-gray-400 max-w-md">
+                  Our step-by-step guide will take you from installation to running your first AI-powered workflow in minutes.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/getting-started">
+                  <button className="flex items-center justify-center gap-2 px-6 py-3 bg-brand-blue rounded-xl text-white font-semibold hover:bg-brand-blue/90 transition-all">
+                    Getting Started Guide
+                    <ArrowRight size={18} />
+                  </button>
+                </Link>
+                <Link href="/getting-started#installation">
+                  <button className="flex items-center justify-center gap-2 px-6 py-3 bg-transparent border border-gray-700 rounded-xl text-white font-semibold hover:bg-white/5 transition-all">
+                    Installation Guide
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Interactive Product Preview */}
       <section id="preview" className={`${SECTION_PADDING.large} px-4 relative`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -675,7 +716,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See <span className="gradient-text">CX</span> in Action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See <span className="gradient-text">CX Linux</span> in Action</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Real commands, real results. See what takes others hours happen in seconds — no signup required.</p>
           </motion.div>
 
