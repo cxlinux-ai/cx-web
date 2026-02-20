@@ -9,7 +9,7 @@ interface SEOConfig {
   jsonLd?: object | object[];
 }
 
-const BASE_URL = 'https://cortexlinux.com';
+const BASE_URL = 'https://cxlinux.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'CX Linux';
 const TWITTER_HANDLE = '@cortexlinux';
@@ -134,11 +134,11 @@ export const seoConfigs = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'CX Linux',
-        url: 'https://cortexlinux.com',
+        url: 'https://cxlinux.com',
         description: 'The AI Layer for Linux - Execute any task through natural language commands.',
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://cortexlinux.com/search?q={search_term_string}',
+          target: 'https://cxlinux.com/search?q={search_term_string}',
           'query-input': 'required name=search_term_string'
         }
       },
@@ -157,23 +157,23 @@ export const seoConfigs = {
         author: {
           '@type': 'Organization',
           name: 'CX Linux',
-          url: 'https://cortexlinux.com'
+          url: 'https://cxlinux.com'
         }
       },
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'CX Linux',
-        url: 'https://cortexlinux.com',
-        logo: 'https://cortexlinux.com/og-image.png',
+        url: 'https://cxlinux.com',
+        logo: 'https://cxlinux.com/og-image.png',
         sameAs: [
-          'https://github.com/cortexlinux/cortex',
+          'https://github.com/cxlinux-ai/cx-core',
           'https://twitter.com/cortexlinux',
           'https://discord.gg/ASvzWcuTfk'
         ],
         contactPoint: {
           '@type': 'ContactPoint',
-          email: 'hello@cortexlinux.com',
+          email: 'hello@cxlinux.com',
           contactType: 'customer support'
         }
       },
@@ -222,24 +222,24 @@ export const seoConfigs = {
       description: 'The first-ever AI Linux Hackathon. A two-phase, 17-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas, followed by a 1-month prep period. Phase 2 (Hackathon, Weeks 9-17) builds real code via GitHub PRs. $18,800 in prizes. Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
       endDate: '2026-05-25',
-      url: 'https://cortexlinux.com/hackathon',
+      url: 'https://cxlinux.com/hackathon',
       eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
       eventStatus: 'https://schema.org/EventScheduled',
       location: {
         '@type': 'VirtualLocation',
-        url: 'https://github.com/cortexlinux/cortex'
+        url: 'https://github.com/cxlinux-ai/cx-core'
       },
       organizer: {
         '@type': 'Organization',
         name: 'CX Linux',
-        url: 'https://cortexlinux.com'
+        url: 'https://cxlinux.com'
       },
-      image: 'https://cortexlinux.com/og-image.png',
+      image: 'https://cxlinux.com/og-image.png',
       offers: {
         '@type': 'Offer',
         price: '0',
         priceCurrency: 'USD',
-        url: 'https://cortexlinux.com/hackathon',
+        url: 'https://cxlinux.com/hackathon',
         availability: 'https://schema.org/InStock'
       }
     }
@@ -501,7 +501,7 @@ export const seoConfigs = {
       '@type': 'ItemList',
       name: 'CX Linux Bounty Board',
       description: 'Bounties for contributing to CX Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
-      url: 'https://cortexlinux.com/bounties',
+      url: 'https://cxlinux.com/bounties',
       itemListElement: [
         {
           '@type': 'ListItem',
@@ -519,9 +519,9 @@ export const seoConfigs = {
       mainEntity: {
         '@type': 'Organization',
         name: 'CX Linux',
-        url: 'https://cortexlinux.com',
+        url: 'https://cxlinux.com',
         sameAs: [
-          'https://github.com/cortexlinux',
+          'https://github.com/cxlinux-ai',
           'https://twitter.com/cortexlinux'
         ]
       }
