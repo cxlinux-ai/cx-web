@@ -169,7 +169,7 @@ export default function InteractiveDemoHero() {
           <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
             {isLiveMode 
               ? 'Describe any task in plain English. CX Linux handles automation, configuration, scripts, and more.'
-              : 'Click a scenario below to see CX Linux in action with beautiful terminal animations.'}
+              : 'Describe any task in plain English. CX Linux handles automation, configuration, scripts, and more.'}
           </p>
           {isLiveMode && remaining !== null && (
             <p className="text-xs sm:text-sm text-gray-500">
@@ -323,8 +323,8 @@ export default function InteractiveDemoHero() {
                             <Play className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-gray-600" />
                           </div>
                           <div className="text-center space-y-0.5 sm:space-y-1 px-4">
-                            <p className="text-sm sm:text-base text-gray-400">Click a scenario above to see CX Linux in action</p>
-                            <p className="text-xs sm:text-sm text-gray-600">Watch beautiful terminal animations with real commands</p>
+                            <p className="text-sm sm:text-base text-gray-400">Describe any task in plain English</p>
+                            <p className="text-xs sm:text-sm text-gray-600">CX Linux handles automation, configuration, scripts, and more</p>
                           </div>
                         </div>
                       ) : (
@@ -454,15 +454,6 @@ export default function InteractiveDemoHero() {
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    {!isLiveMode && (
-                      <a 
-                        href="?mode=live" 
-                        className="text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
-                      >
-                        <Zap className="w-3 h-3" />
-                        <span className="hidden sm:inline">Try Live API</span>
-                      </a>
-                    )}
                     <span className="text-gray-600">v0.2.0</span>
                   </div>
                 </div>
