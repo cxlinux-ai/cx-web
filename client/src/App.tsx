@@ -186,6 +186,16 @@ export default function App() {
               {/* Desktop Navigation Links */}
               <div className="hidden md:flex items-center space-x-6">
                 <Link
+                  href="/security"
+                  className={`text-base font-medium transition-colors duration-300 ${
+                    location === "/security" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
+                  }`}
+                  data-testid="link-security"
+                  onClick={() => analytics.trackCTAClick('security', 'main_nav')}
+                >
+                  Security
+                </Link>
+                <Link
                   href="/getting-started"
                   className={`text-base font-medium transition-colors duration-300 ${
                     location === "/getting-started" ? "text-[#93c5fd]" : "text-gray-400 hover:text-[#93c5fd]"
@@ -250,13 +260,6 @@ export default function App() {
                   <Star size={14} className="text-yellow-400" />
                   <span>{githubStats?.stars || 25}</span>
                 </a>
-                <Link
-                  href="/security"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-300 font-medium hover:text-white transition-all"
-                  onClick={() => analytics.trackCTAClick('security', 'header')}
-                >
-                  Security
-                </Link>
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank"
@@ -296,6 +299,17 @@ export default function App() {
                   transition={{ duration: 0.2, delay: 0.1 }}
                   className="px-4 py-6 space-y-4"
                 >
+                  <Link
+                    href="/security"
+                    onClick={() => {
+                      analytics.trackCTAClick('security', 'mobile_nav');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
+                    data-testid="mobile-link-security"
+                  >
+                    Security
+                  </Link>
                   <Link
                     href="/getting-started"
                     onClick={() => {
@@ -350,17 +364,6 @@ export default function App() {
                     data-testid="mobile-link-careers"
                   >
                     Careers
-                  </Link>
-                  <Link
-                    href="/security"
-                    onClick={() => {
-                      analytics.trackCTAClick('security', 'mobile_nav');
-                      setMobileMenuOpen(false);
-                    }}
-                    className="block w-full text-left py-2 text-gray-400 hover:text-[#93c5fd] transition-colors duration-300"
-                    data-testid="mobile-link-security"
-                  >
-                    Security
                   </Link>
                   <a
                     href="https://github.com/cxlinux-ai/cx-core"
