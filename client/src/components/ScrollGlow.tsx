@@ -20,20 +20,20 @@ export default function ScrollGlow() {
     <>
       {/* Horizontal glow bar that moves with scroll */}
       <div
-        className="fixed left-0 right-0 h-[400px] pointer-events-none z-0 hidden sm:block"
+        className="fixed left-0 right-0 h-[500px] pointer-events-none z-[1] hidden sm:block"
         style={{
-          top: `${100 + glowPosition}px`,
-          background: `radial-gradient(ellipse 100% 100% at 50% 50%, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.08) 40%, transparent 70%)`,
-          filter: "blur(60px)",
+          top: `${80 + glowPosition}px`,
+          background: `radial-gradient(ellipse 100% 100% at 50% 50%, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.12) 40%, transparent 70%)`,
+          filter: "blur(80px)",
         }}
       />
       {/* Secondary wider glow for ambient effect */}
       <div
-        className="fixed left-0 right-0 h-[600px] pointer-events-none z-0 hidden sm:block"
+        className="fixed left-0 right-0 h-[700px] pointer-events-none z-[1] hidden sm:block"
         style={{
-          top: `${50 + glowPosition * 0.8}px`,
-          background: `radial-gradient(ellipse 120% 80% at 50% 50%, rgba(124, 88, 246, 0.08) 0%, transparent 60%)`,
-          filter: "blur(80px)",
+          top: `${30 + glowPosition * 0.7}px`,
+          background: `radial-gradient(ellipse 130% 90% at 50% 50%, rgba(124, 88, 246, 0.12) 0%, transparent 60%)`,
+          filter: "blur(100px)",
         }}
       />
     </>

@@ -923,9 +923,9 @@ table tbody tr:hover {
   background: linear-gradient(
     90deg,
     #a855f7 0%,
-    #a855f7 42%,
-    rgba(200, 180, 255, 0.5) 50%,
-    #a855f7 58%,
+    #a855f7 40%,
+    rgba(255, 255, 255, 0.7) 50%,
+    #a855f7 60%,
     #a855f7 100%
   );
   background-size: 400% 100%;
