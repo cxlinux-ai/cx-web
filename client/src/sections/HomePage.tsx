@@ -73,13 +73,6 @@ import { championAmbassador } from "@/data/hackathon";
 import { useABVariant } from "@/hooks/useABVariant";
 import { homeHeroTest } from "@/data/ab-tests";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-    }
-  }
-}
-
 // ============================================
 // SECTION PADDING CONFIGURATION
 // Change this single value to adjust all section padding across the homepage
@@ -352,14 +345,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const [activeDemo, setActiveDemo] = useState(0);
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
   const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);;
-    description: string;
-    features: string[];
-    cta: string;
-    ctaLink: string;
-    highlighted: boolean;
-    badge?: string;
-  }
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   // A/B Testing for hero headline
   const { variant: headlineVariant } = useABVariant(homeHeroTest);
