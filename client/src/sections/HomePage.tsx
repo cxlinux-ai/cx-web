@@ -410,8 +410,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         'Rollback support',
         '1 system'
       ],
-      cta: 'Download Free',
-      ctaLink: 'https://github.com/cxlinux-ai/cx-core',
+      cta: 'Get Started Free',
+      ctaLink: '/pricing/checkout?plan=core',
       highlighted: false
     },
     {
@@ -468,7 +468,12 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   const handlePricingCheckout = async (tier: PricingTier) => {
     if (!tier.stripeKey) {
       if (tier.ctaLink) {
-        window.open(tier.ctaLink, '_blank', 'noopener,noreferrer');
+        // Internal links navigate directly, external links open in new tab
+        if (tier.ctaLink.startsWith('/')) {
+          window.location.href = tier.ctaLink;
+        } else {
+          window.open(tier.ctaLink, '_blank', 'noopener,noreferrer');
+        }
       }
       return;
     }
