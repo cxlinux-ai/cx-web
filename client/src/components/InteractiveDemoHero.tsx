@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCxDemo } from "@/hooks/useCxDemo";
 import { useDemoAnimation, DEMO_SCENARIOS } from "@/hooks/useDemoAnimation";
-import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight, ArrowRight, Play, Zap, RotateCcw, Brain, Globe } from "lucide-react";
+import { Send, Terminal, Loader2, Copy, Check, Download, Sparkles, ChevronRight, ArrowRight, Play, Zap } from "lucide-react";
 
 const EXAMPLE_PROMPTS = [
   "Automate my backup script",
@@ -15,34 +15,9 @@ const EXAMPLE_PROMPTS = [
   "Install Docker on Ubuntu",
 ];
 
-// Feature slides for hero carousel
-const FEATURE_SLIDES = [
-  {
-    icon: RotateCcw,
-    title: "Zero-Risk Deployments via Atomic Rollbacks",
-    description: "Every change is reversible. Instant rollback to any previous state. Deploy with confidence.",
-  },
-  {
-    icon: Brain,
-    title: "Agentic Fleet Automation (HRM AI)",
-    description: "Human Resource Management for machines. AI agents that understand, plan, and execute across your entire fleet.",
-  },
-  {
-    icon: Zap,
-    title: "Rust-Powered Performance & 6-Year BSL Moat",
-    description: "Memory-safe, blazing fast core. Protected by Business Source License — converts to Apache 2.0 after 6 years.",
-  },
-  {
-    icon: Globe,
-    title: "The Agentic OS for Digital Sovereignty",
-    description: "Own your infrastructure. Control your data. Deploy AI agents that work for you, not vendors.",
-  },
-];
-
 export default function InteractiveDemoHero() {
   const [input, setInput] = useState("");
   const [copied, setCopied] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -83,17 +58,6 @@ export default function InteractiveDemoHero() {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [messages, displayedLines]);
-
-  // Auto-rotate feature slides when no scenario is active
-  useEffect(() => {
-    if (isAnimating || currentScenario || isLiveMode) return;
-    
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % FEATURE_SLIDES.length);
-    }, 5000); // 5 seconds per slide
-    
-    return () => clearInterval(interval);
-  }, [isAnimating, currentScenario, isLiveMode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -353,54 +317,14 @@ export default function InteractiveDemoHero() {
                   {!isLiveMode && (
                     <>
                       {!currentScenario && displayedLines.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center relative overflow-hidden">
-                          {/* Purple gradient background */}
-                          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/40 via-purple-800/20 to-transparent" />
-                          
-                          {/* Feature Carousel */}
-                          <AnimatePresence mode="wait">
-                            <motion.div
-                              key={currentSlide}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -20 }}
-                              transition={{ duration: 0.5, ease: "easeInOut" }}
-                              className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-4 space-y-4"
-                            >
-                              {/* Icon */}
-                              <div className="relative">
-                                <div className="absolute inset-0 bg-purple-500/30 blur-2xl rounded-full scale-150" />
-                                {(() => {
-                                  const IconComponent = FEATURE_SLIDES[currentSlide].icon;
-                                  return <IconComponent className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-purple-400" strokeWidth={1.5} />;
-                                })()}
-                              </div>
-                              
-                              {/* Title */}
-                              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-lg">
-                                {FEATURE_SLIDES[currentSlide].title}
-                              </h3>
-                              
-                              {/* Description */}
-                              <p className="text-sm sm:text-base text-gray-400 max-w-md">
-                                {FEATURE_SLIDES[currentSlide].description}
-                              </p>
-                            </motion.div>
-                          </AnimatePresence>
-                          
-                          {/* Slide indicators */}
-                          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                            {FEATURE_SLIDES.map((_, idx) => (
-                              <button
-                                key={idx}
-                                onClick={() => setCurrentSlide(idx)}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                  idx === currentSlide 
-                                    ? 'bg-purple-400 w-6' 
-                                    : 'bg-gray-600 hover:bg-gray-500'
-                                }`}
-                              />
-                            ))}
+                        <div className="h-full flex flex-col items-center justify-center text-gray-500 space-y-2 sm:space-y-3">
+                          <div className="relative">
+                            <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
+                            <Play className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-gray-600" />
+                          </div>
+                          <div className="text-center space-y-0.5 sm:space-y-1 px-4">
+                            <p className="text-sm sm:text-base text-gray-400">Click a scenario above to see CX Linux in action</p>
+                            <p className="text-xs sm:text-sm text-gray-600">Watch beautiful terminal animations with real commands</p>
                           </div>
                         </div>
                       ) : (
