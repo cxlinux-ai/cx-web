@@ -201,7 +201,7 @@ export default function HackathonRulesPage() {
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                  <span>All contributions (ideas, code, documentation) are submitted under the MIT License unless otherwise specified.</span>
+                  <span>All contributions (ideas, code, documentation) are submitted under the project's BSL 1.1 License unless otherwise specified.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
@@ -598,7 +598,7 @@ export default function HackathonRulesPage() {
                   className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-blue-500/50 transition-colors group"
                 >
                   <Scale size={20} className="text-gray-400 group-hover:text-blue-300" />
-                  <span className="text-gray-300 group-hover:text-white">MIT License</span>
+                  <span className="text-gray-300 group-hover:text-white">BSL 1.1 License</span>
                 </Link>
                 <Link 
                   href="/security-policy"
