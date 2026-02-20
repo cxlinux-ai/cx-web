@@ -125,7 +125,7 @@ If it's a screenshot of UI:
 - Point out any issues or suggestions
 
 If it's a general image:
-- Describe it helpfully in context of Cortex Linux if relevant
+- Describe it helpfully in context of CX Linux if relevant
 
 Keep responses concise but thorough.`,
     });

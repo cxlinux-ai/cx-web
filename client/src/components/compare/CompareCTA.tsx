@@ -12,7 +12,7 @@ interface CompareCTAProps {
 }
 
 export function CompareCTA({ comparison, variant, context, placement }: CompareCTAProps) {
-  const ctaText = variant.ctaText || 'Try Cortex Free';
+  const ctaText = variant.ctaText || 'Try CX Free';
   const isStrong = variant.ctaStyle === 'strong';
 
   const handleInstall = () => {
@@ -46,7 +46,7 @@ export function CompareCTA({ comparison, variant, context, placement }: CompareC
               Ready to try a smarter approach?
             </h3>
             <p className="text-gray-400 mb-6">
-              Install Cortex alongside your existing tools. No commitment, no migration required.
+              Install CX alongside your existing tools. No commitment, no migration required.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -88,7 +88,7 @@ export function CompareCTA({ comparison, variant, context, placement }: CompareC
             Start Building Smarter Today
           </h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of developers who have simplified their Linux workflows with Cortex.
+            Join thousands of developers who have simplified their Linux workflows with CX.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

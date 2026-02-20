@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCortexDemo } from "@/hooks/useCortexDemo";
+import { useCxDemo } from "@/hooks/useCxDemo";
 import { ArrowLeft, Send, Terminal, Loader2, Copy, Check, Download, Sparkles } from "lucide-react";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 
@@ -26,7 +26,7 @@ export default function BetaPage() {
     limitReached,
     sendMessage,
     clearMessages,
-  } = useCortexDemo();
+  } = useCxDemo();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -68,14 +68,14 @@ export default function BetaPage() {
           <Card className="max-w-md w-full bg-gray-900 border-gray-800">
             <CardContent className="pt-8 text-center">
               <div className="text-6xl mb-4">🎉</div>
-              <h2 className="text-2xl font-bold mb-2">Thanks for trying Cortex!</h2>
+              <h2 className="text-2xl font-bold mb-2">Thanks for trying CX!</h2>
               <p className="text-gray-400 mb-6">
                 You've used all 5 demo requests. Ready for the full experience?
               </p>
               <Link href="/#install">
                 <Button className="w-full bg-gradient-to-r from-purple-600 to-cyan-500 hover:opacity-90">
                   <Download className="w-4 h-4 mr-2" />
-                  Install Cortex
+                  Install CX
                 </Button>
               </Link>
               <Link href="/">
@@ -120,10 +120,10 @@ export default function BetaPage() {
         >
           <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
             <Sparkles className="w-8 h-8 text-purple-400" />
-            Try Cortex
+            Try CX
           </h1>
           <p className="text-gray-400">
-            Natural language package management. Ask Cortex to install, configure, or fix anything.
+            Natural language package management. Ask CX to install, configure, or fix anything.
           </p>
         </motion.div>
 
@@ -148,7 +148,7 @@ export default function BetaPage() {
           <CardHeader className="border-b border-gray-800 py-3">
             <CardTitle className="text-sm font-medium flex items-center gap-2 text-gray-300">
               <Terminal className="w-4 h-4" />
-              Cortex Terminal
+              CX Terminal
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
@@ -166,7 +166,7 @@ export default function BetaPage() {
                     className={`mb-4 ${message.role === "user" ? "text-cyan-400" : "text-gray-300"}`}
                   >
                     <span className="text-gray-500">
-                      {message.role === "user" ? "$ cortex " : ""}
+                      {message.role === "user" ? "$ cx " : ""}
                     </span>
                     <span className="whitespace-pre-wrap">
                       {message.role === "user" ? message.content : formatOutput(message.content)}

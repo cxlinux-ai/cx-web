@@ -124,7 +124,7 @@ export default function StartupPage() {
         '1 system'
       ],
       cta: 'Download Free',
-      ctaLink: 'https://github.com/cortexlinux/cortex',
+      ctaLink: 'https://github.com/cortexlinux/cx',
       highlighted: false
     },
     {
@@ -267,7 +267,7 @@ export default function StartupPage() {
             className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 px-2"
           >
             Stop wrestling with dependencies. Start shipping your AI product. 
-            Cortex comes with everything you need — configured and ready.
+            CX comes with everything you need — configured and ready.
           </motion.p>
 
           {/* CTA Buttons - Differentiated by psychological intent */}
@@ -278,14 +278,14 @@ export default function StartupPage() {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-4"
           >
             <a
-              href="https://github.com/cortexlinux/cortex"
+              href="https://github.com/cortexlinux/cx"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue rounded-xl text-white font-semibold text-lg shadow-lg shadow-brand-blue/25 hover:shadow-brand-blue/40 hover:scale-[1.02] transition-all duration-300"
-              data-testid="button-install-cortex"
+              data-testid="button-install-cx"
             >
               <Download size={20} />
-              Install Cortex Linux
+              Install CX Linux
             </a>
             <Link
               href="/getting-started"
@@ -319,10 +319,10 @@ export default function StartupPage() {
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                 <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-sm text-gray-500">cortex@ai-founder ~ </span>
+                <span className="ml-2 text-sm text-gray-500">cx@ai-founder ~ </span>
               </div>
               <div className="p-6 font-mono text-sm sm:text-base">
-                <div className="text-gray-400 mb-2">$ cortex "set up my AI development environment"</div>
+                <div className="text-gray-400 mb-2">$ cx "set up my AI development environment"</div>
                 <div className="space-y-1 text-emerald-400">
                   <div className="flex items-center gap-2">
                     <Check size={14} />
@@ -395,7 +395,7 @@ export default function StartupPage() {
                   One install. Done.
                 </h2>
                 <p className="text-gray-400 text-lg">
-                  Cortex Linux ships with vector databases, inference engines, and AI frameworks 
+                  CX Linux ships with vector databases, inference engines, and AI frameworks 
                   pre-configured. Boot up and start building your AI product immediately.
                 </p>
               </div>
@@ -713,7 +713,7 @@ export default function StartupPage() {
                 <span className="text-blue-300 font-semibold">Limited Time Event</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Cortex Linux Hackathon 2026
+                CX Linux Hackathon 2026
               </h2>
               <p className="text-xl text-gray-300 mb-6">
                 February 17 — 14 weeks — <span className="text-emerald-400 font-semibold">$18,700 in prizes</span>

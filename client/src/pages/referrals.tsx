@@ -106,7 +106,7 @@ export default function ReferralsPage() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-400 max-w-2xl mx-auto mb-8"
           >
-            Join the Cortex Linux community. Refer friends to move up the list and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-tracks.
+            Join the CX Linux community. Refer friends to move up the list and unlock exclusive perks like Discord roles, Pro subscriptions, and Hackathon fast-tracks.
           </motion.p>
           
           <motion.div
@@ -207,7 +207,7 @@ export default function ReferralsPage() {
               </div>
               <div className="mb-4">
                 <div className="text-3xl font-bold text-terminal-green mb-1">$20</div>
-                <div className="text-sm text-gray-400">Worth of Cortex Linux Credit</div>
+                <div className="text-sm text-gray-400">Worth of CX Linux Credit</div>
               </div>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex items-center gap-2">
@@ -249,11 +249,11 @@ export default function ReferralsPage() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex items-center gap-2">
                   <Zap size={14} className="text-purple-400" />
-                  $50 Cortex Linux Credit
+                  $50 CX Linux Credit
                 </li>
                 <li className="flex items-center gap-2">
                   <Gift size={14} className="text-purple-400" />
-                  Cortex Linux T-Shirt
+                  CX Linux T-Shirt
                 </li>
                 <li className="flex items-center gap-2">
                   <Gift size={14} className="text-purple-400" />
@@ -291,11 +291,11 @@ export default function ReferralsPage() {
               <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex items-center gap-2">
                   <Zap size={14} className="text-yellow-400" />
-                  $200 Cortex Linux Credit
+                  $200 CX Linux Credit
                 </li>
                 <li className="flex items-center gap-2">
                   <Trophy size={14} className="text-yellow-400" />
-                  Cortex Linux Premium (3 months)
+                  CX Linux Premium (3 months)
                 </li>
                 <li className="flex items-center gap-2">
                   <Gift size={14} className="text-yellow-400" />
@@ -512,7 +512,7 @@ export default function ReferralsPage() {
                     <div>
                       <h3 className="font-semibold text-white mb-1">Ambassador Status</h3>
                       <p className="text-gray-400 text-sm">
-                        Top recruiters get special recognition and direct access to the Cortex team.
+                        Top recruiters get special recognition and direct access to the CX team.
                       </p>
                     </div>
                   </div>

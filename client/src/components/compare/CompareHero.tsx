@@ -11,9 +11,9 @@ interface CompareHeroProps {
 }
 
 export function CompareHero({ comparison, variant, context }: CompareHeroProps) {
-  const headline = variant.headline || `Cortex Linux vs ${comparison.competitorDisplayName}`;
+  const headline = variant.headline || `CX Linux vs ${comparison.competitorDisplayName}`;
   const subheadline = variant.subheadline || comparison.tagline;
-  const ctaText = variant.ctaText || 'Try Cortex Free';
+  const ctaText = variant.ctaText || 'Try CX Free';
   const ctaSecondary = variant.ctaSecondary || 'View Documentation';
 
   const handlePrimaryCTA = () => {
@@ -85,7 +85,7 @@ export function CompareHero({ comparison, variant, context }: CompareHeroProps) 
               <thead>
                 <tr className="border-b border-gray-800">
                   <th className="py-2 px-4 text-gray-400 font-medium">Feature</th>
-                  <th className="py-2 px-4 text-blue-300 font-medium">Cortex Linux</th>
+                  <th className="py-2 px-4 text-blue-300 font-medium">CX Linux</th>
                   <th className="py-2 px-4 text-gray-400 font-medium">{comparison.competitorDisplayName}</th>
                 </tr>
               </thead>

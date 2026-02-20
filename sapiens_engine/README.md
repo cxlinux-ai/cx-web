@@ -130,4 +130,4 @@ All endpoints return a consistent JSON structure:
 
 ## License
 
-MIT License - Part of Cortex Linux
+MIT License - Part of CX Linux

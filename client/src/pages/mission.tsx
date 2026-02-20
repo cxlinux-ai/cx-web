@@ -60,10 +60,10 @@ const roadmapItems = [
 export default function MissionPage() {
   useEffect(() => {
     const cleanup = updateSEO({
-      title: 'Our Mission & Roadmap | Cortex Linux',
-      description: 'Cortex Linux exists to make AI a first-class system capability. Explore our mission, development roadmap, current priorities, and how you can contribute.',
+      title: 'Our Mission & Roadmap | CX Linux',
+      description: 'CX Linux exists to make AI a first-class system capability. Explore our mission, development roadmap, current priorities, and how you can contribute.',
       canonicalPath: '/mission',
-      keywords: ['Cortex Linux mission', 'AI operating system', 'AI-native Linux', 'AI infrastructure', 'Cortex roadmap', 'development roadmap']
+      keywords: ['CX Linux mission', 'AI operating system', 'AI-native Linux', 'AI infrastructure', 'CX roadmap', 'development roadmap']
     });
     return cleanup;
   }, []);
@@ -93,13 +93,13 @@ export default function MissionPage() {
             </h1>
 
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-10">
-              Cortex Linux exists to make AI a first-class system capability — not a plugin, not a workaround. 
+              CX Linux exists to make AI a first-class system capability — not a plugin, not a workaround. 
               Intelligence embedded directly into the operating system.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <a
-                href="https://github.com/cortexlinux/cortex"
+                href="https://github.com/cortexlinux/cx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 flex items-center justify-center gap-2"
@@ -386,7 +386,7 @@ export default function MissionPage() {
               <span>Our Story</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              The <span className="gradient-text">People</span> Behind Cortex
+              The <span className="gradient-text">People</span> Behind CX
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
               Every great project starts with a simple question. Ours was: 
@@ -411,7 +411,7 @@ export default function MissionPage() {
                     <div className="relative">
                       <img
                         src="/images/mike.png"
-                        alt="Mike Morgan, CEO and Founder of Cortex Linux"
+                        alt="Mike Morgan, CEO and Founder of CX Linux"
                         className="w-20 h-20 rounded-full object-cover ring-2 ring-blue-500/30 group-hover:ring-blue-400/50 transition-all duration-300"
                         loading="lazy"
                       />
@@ -477,7 +477,7 @@ export default function MissionPage() {
                     <div className="relative">
                       <img
                       src="/images/jorg-profile.png"
-                      alt="Santiago (Jorg), Co-Founder and Marketing Lead of Cortex Linux"
+                      alt="Santiago (Jorg), Co-Founder and Marketing Lead of CX Linux"
                       className="w-20 h-20 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300"
                       style={{
                         // === CROPPING CONTROLS ===
@@ -506,7 +506,7 @@ export default function MissionPage() {
                         When Mike shared his vision, Jorg didn't just see a project—he saw 
                         <span className="text-white"> a movement</span>. 
                         For the past three years, he's worked closely with Mike to learn the ins and outs of AI, 
-                        while taking on the mission of keeping Cortex aligned and thriving.
+                        while taking on the mission of keeping CX aligned and thriving.
                       </p>
                       <p>
                         Jorg built the website from the ground up, manages incoming developers and contributors, 
@@ -549,7 +549,7 @@ export default function MissionPage() {
                   Join Our Community
                 </a>
                 <a
-                  href="https://github.com/cortexlinux/cortex"
+                  href="https://github.com/cortexlinux/cx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-medium transition-colors"
@@ -674,7 +674,7 @@ export default function MissionPage() {
                 Contribute code, report bugs, or build plugins. Every contribution helps shape the future of AI on Linux.
               </p>
               <a
-                href="https://github.com/cortexlinux/cortex"
+                href="https://github.com/cortexlinux/cx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 rounded-lg text-white font-medium hover:bg-blue-500 transition-colors"

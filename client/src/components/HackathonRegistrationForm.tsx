@@ -210,7 +210,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
       setIsSuccess(true);
       toast({
         title: "Registration Successful!",
-        description: "Welcome to the Cortex Linux Hackathon. Check your email for next steps.",
+        description: "Welcome to the CX Linux Hackathon. Check your email for next steps.",
       });
       
       if (onSuccess) {
@@ -270,7 +270,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
           <CheckCircle className="w-10 h-10 text-emerald-400" />
         </div>
         <h3 className="text-2xl font-bold text-white mb-3">You're Registered!</h3>
-        <p className="text-gray-400 mb-4">Welcome to the Cortex Linux Hackathon 2026</p>
+        <p className="text-gray-400 mb-4">Welcome to the CX Linux Hackathon 2026</p>
         
         <div className="bg-gradient-to-r from-[#5865F2]/20 to-[#5865F2]/10 border border-[#5865F2]/30 rounded-xl p-6 mt-8 max-w-md mx-auto">
           <div className="flex items-center justify-center gap-2 mb-3">
@@ -803,7 +803,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             name="cortexAreaInterest"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">Which Cortex Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
+                <FormLabel className="text-gray-300">Which CX Linux area interests you most? <span className="text-red-400">*</span></FormLabel>
                 <FormControl>
                   <select
                     {...field}
@@ -841,7 +841,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             name="whatExcitesYou"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">What excites you most about Cortex Linux?</FormLabel>
+                <FormLabel className="text-gray-300">What excites you most about CX Linux?</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -881,7 +881,7 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
         <SectionHeader 
           number={6} 
           title="Beyond the Hackathon" 
-          subtitle="Help us shape the future of Cortex Linux"
+          subtitle="Help us shape the future of CX Linux"
           optional
         />
 
@@ -919,11 +919,11 @@ export default function HackathonRegistrationForm({ onSuccess, onClose }: Hackat
             name="threeYearVision"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-300">If Cortex Linux succeeds in 3 years, what do you hope it becomes?</FormLabel>
+                <FormLabel className="text-gray-300">If CX Linux succeeds in 3 years, what do you hope it becomes?</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
-                    placeholder="Share your vision for the future of Cortex Linux..."
+                    placeholder="Share your vision for the future of CX Linux..."
                     className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-blue-500 min-h-[80px] resize-none"
                     data-testid="textarea-vision"
                   />

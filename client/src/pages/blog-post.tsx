@@ -136,12 +136,12 @@ export default function BlogPostPage() {
     if (!post) return;
 
     return updateSEO({
-      title: `${post.title} | Cortex Linux Blog`,
+      title: `${post.title} | CX Linux Blog`,
       description: post.seoDescription || post.excerpt,
       canonicalPath: `/blog/${post.slug}`,
       ogType: 'article',
       ...(post.image && { ogImage: post.image }),
-      keywords: [post.category, 'cortex linux', 'AI Linux'],
+      keywords: [post.category, 'cx linux', 'AI Linux'],
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -235,7 +235,7 @@ export default function BlogPostPage() {
               {!imageError ? (
                 <img
                   src={post.image}
-                  alt={post.imageAlt || `${post.title} - Cortex Linux blog`}
+                  alt={post.imageAlt || `${post.title} - CX Linux blog`}
                   className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                   loading="eager"
                   decoding="async"

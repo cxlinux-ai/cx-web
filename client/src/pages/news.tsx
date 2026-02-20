@@ -52,8 +52,8 @@ export default function NewsPage() {
   const newsJsonLd = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Cortex Linux News & Press Releases",
-    "description": "Latest announcements and press releases from Cortex Linux",
+    "name": "CX Linux News & Press Releases",
+    "description": "Latest announcements and press releases from CX Linux",
     "itemListElement": sortedReleases.map((release, index) => ({
       "@type": "ListItem",
       "position": index + 1,
@@ -67,12 +67,12 @@ export default function NewsPage() {
         "image": release.image ? `https://cortexlinux.com${release.image}` : "https://cortexlinux.com/og-image.png",
         "author": {
           "@type": "Organization",
-          "name": "Cortex Linux",
+          "name": "CX Linux",
           "url": "https://cortexlinux.com"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Cortex Linux",
+          "name": "CX Linux",
           "logo": {
             "@type": "ImageObject",
             "url": "https://cortexlinux.com/favicon.png"
@@ -88,10 +88,10 @@ export default function NewsPage() {
 
   useEffect(() => {
     const cleanup = updateSEO({
-      title: 'Cortex Linux News & Press | Official Announcements',
-      description: 'Official press releases, company announcements, and news from Cortex Linux. Stay updated on product launches, funding rounds, partnerships, and the future of AI-native operating systems.',
+      title: 'CX Linux News & Press | Official Announcements',
+      description: 'Official press releases, company announcements, and news from CX Linux. Stay updated on product launches, funding rounds, partnerships, and the future of AI-native operating systems.',
       canonicalPath: '/news',
-      keywords: ['Cortex Linux news', 'AI Linux press releases', 'Cortex announcements', 'AI operating system news', 'Linux company updates'],
+      keywords: ['CX Linux news', 'AI Linux press releases', 'CX announcements', 'AI operating system news', 'Linux company updates'],
       jsonLd: newsJsonLd
     });
 
@@ -132,7 +132,7 @@ export default function NewsPage() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
               <span className="bg-gradient-to-r from-white via-gray-200 to-blue-400 bg-clip-text text-transparent">
-                Cortex Linux News & Press
+                CX Linux News & Press
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
@@ -339,11 +339,11 @@ export default function NewsPage() {
                       "image": release.image ? `https://cortexlinux.com${release.image}` : "https://cortexlinux.com/og-image.png",
                       "author": {
                         "@type": "Organization",
-                        "name": "Cortex Linux"
+                        "name": "CX Linux"
                       },
                       "publisher": {
                         "@type": "Organization",
-                        "name": "Cortex Linux",
+                        "name": "CX Linux",
                         "logo": {
                           "@type": "ImageObject",
                           "url": "https://cortexlinux.com/favicon.png"
@@ -402,10 +402,10 @@ export default function NewsPage() {
           >
             <div className="flex items-center gap-3">
               <SiGithub size={24} className="text-white" />
-              <span className="text-gray-300 font-medium">Follow Cortex Linux on GitHub</span>
+              <span className="text-gray-300 font-medium">Follow CX Linux on GitHub</span>
             </div>
             <a
-              href="https://github.com/cortexlinux/cortex"
+              href="https://github.com/cortexlinux/cx"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 border border-white/20 hover:bg-white/15 transition-colors"

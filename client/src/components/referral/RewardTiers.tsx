@@ -114,7 +114,7 @@ const TIERS: RewardTier[] = [
     glowColor: "shadow-[0_0_25px_rgba(34,211,238,0.3)]",
     rewards: [
       "Featured on our contributors page",
-      "Official 'Cortex Ambassador' title",
+      "Official 'CX Ambassador' title",
       "Direct input on product features",
       "Diamond Discord role",
     ],

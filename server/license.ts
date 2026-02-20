@@ -16,15 +16,15 @@ interface LicenseValidationResponse {
 }
 
 const VALID_LICENSE_PREFIXES: Record<string, { tier: string; features: string[] }> = {
-  'CORTEX-PRO-': {
+  'CX-PRO-': {
     tier: 'pro',
     features: ['cloud_llms', 'web_console', 'email_support', 'priority_updates']
   },
-  'CORTEX-ENT-': {
+  'CX-ENT-': {
     tier: 'enterprise',
     features: ['cloud_llms', 'web_console', 'sso_ldap', 'audit_logs', 'compliance_reports', 'priority_support']
   },
-  'CORTEX-MNG-': {
+  'CX-MNG-': {
     tier: 'managed',
     features: ['cloud_llms', 'web_console', 'sso_ldap', 'audit_logs', 'compliance_reports', 'dedicated_support', 'custom_integrations', 'sla_guarantee']
   }

@@ -87,7 +87,7 @@ export default function Status() {
             <span className="gradient-text">Status</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            Real-time operational status of Cortex Linux services
+            Real-time operational status of CX Linux services
           </p>
 
           <div

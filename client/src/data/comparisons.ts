@@ -75,7 +75,7 @@ export interface ComparisonData {
   tagline: string;
   seo: SEOMetadata;
   experiment: ComparisonExperiment;
-  summaryTable: { label: string; cortex: string; competitor: string }[];
+  summaryTable: { label: string; cx: string; competitor: string }[];
   features: ComparisonFeature[];
   useCases: UseCase[];
   whenToUse: WhenToUse;
@@ -93,9 +93,9 @@ export const aptComparison: ComparisonData = {
   competitorDisplayName: 'APT Package Manager',
   tagline: 'Natural language meets package management',
   seo: {
-    title: 'Cortex Linux vs APT: The Intelligent Alternative | Cortex Linux',
-    description: 'Compare Cortex Linux with APT package manager. Discover how natural language commands can simplify package management while Cortex wraps APT under the hood.',
-    keywords: ['apt alternative', 'apt package manager', 'linux package management', 'natural language linux', 'cortex vs apt'],
+    title: 'CX Linux vs APT: The Intelligent Alternative | CX Linux',
+    description: 'Compare CX Linux with APT package manager. Discover how natural language commands can simplify package management while CX wraps APT under the hood.',
+    keywords: ['apt alternative', 'apt package manager', 'linux package management', 'natural language linux', 'cx vs apt'],
     canonicalPath: '/compare/apt',
   },
   experiment: {
@@ -104,9 +104,9 @@ export const aptComparison: ComparisonData = {
       {
         id: 'control',
         weight: 50,
-        headline: 'Cortex Linux vs APT',
+        headline: 'CX Linux vs APT',
         subheadline: 'Natural language package management that wraps APT under the hood',
-        ctaText: 'Try Cortex Free',
+        ctaText: 'Try CX Free',
         ctaSecondary: 'View Documentation',
         ctaPlacement: 'above-fold',
         ctaStyle: 'strong',
@@ -125,7 +125,7 @@ export const aptComparison: ComparisonData = {
         id: 'variant_speed',
         weight: 25,
         headline: 'Stop Googling APT Commands',
-        subheadline: 'Describe what you want in plain English. Cortex handles the apt commands for you.',
+        subheadline: 'Describe what you want in plain English. CX handles the apt commands for you.',
         ctaText: 'Start Building',
         ctaSecondary: 'Explore Features',
         ctaPlacement: 'both',
@@ -134,11 +134,11 @@ export const aptComparison: ComparisonData = {
     ],
   },
   summaryTable: [
-    { label: 'Learning Curve', cortex: 'Speak naturally', competitor: 'Memorize syntax' },
-    { label: 'Dependency Resolution', cortex: 'AI-optimized', competitor: 'Manual research' },
-    { label: 'Preview Before Execute', cortex: 'Always', competitor: 'Sometimes (-s flag)' },
-    { label: 'Rollback', cortex: 'Instant', competitor: 'Manual snapshots' },
-    { label: 'Hardware Optimization', cortex: 'Automatic', competitor: 'Manual flags' },
+    { label: 'Learning Curve', cx: 'Speak naturally', competitor: 'Memorize syntax' },
+    { label: 'Dependency Resolution', cx: 'AI-optimized', competitor: 'Manual research' },
+    { label: 'Preview Before Execute', cx: 'Always', competitor: 'Sometimes (-s flag)' },
+    { label: 'Rollback', cx: 'Instant', competitor: 'Manual snapshots' },
+    { label: 'Hardware Optimization', cx: 'Automatic', competitor: 'Manual flags' },
   ],
   features: [
     {
@@ -147,7 +147,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'Describe intent in plain English',
       competitor: 'no',
       competitorNote: 'Requires exact syntax',
-      tooltip: 'Cortex translates natural language to precise apt commands',
+      tooltip: 'CX translates natural language to precise apt commands',
     },
     {
       name: 'Package Installation',
@@ -155,7 +155,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'Wraps apt install',
       competitor: 'yes',
       competitorNote: 'Native apt install',
-      tooltip: 'Both can install packages; Cortex uses apt under the hood',
+      tooltip: 'Both can install packages; CX uses apt under the hood',
     },
     {
       name: 'Dependency Resolution',
@@ -163,7 +163,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'AI-assisted optimization',
       competitor: 'yes',
       competitorNote: 'Automatic but basic',
-      tooltip: 'Cortex can suggest optimal dependency configurations',
+      tooltip: 'CX can suggest optimal dependency configurations',
     },
     {
       name: 'Preview Commands',
@@ -171,7 +171,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'Dry-run by default',
       competitor: 'partial',
       competitorNote: 'Requires -s flag',
-      tooltip: 'Cortex shows what will happen before executing',
+      tooltip: 'CX shows what will happen before executing',
     },
     {
       name: 'Instant Rollback',
@@ -179,7 +179,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'Built-in state management',
       competitor: 'no',
       competitorNote: 'Requires manual snapshots',
-      tooltip: 'Undo any operation instantly with Cortex',
+      tooltip: 'Undo any operation instantly with CX',
     },
     {
       name: 'Hardware-Aware Installation',
@@ -187,7 +187,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: 'Detects and optimizes',
       competitor: 'no',
       competitorNote: 'Manual configuration',
-      tooltip: 'Cortex optimizes installations for your specific hardware',
+      tooltip: 'CX optimizes installations for your specific hardware',
     },
     {
       name: 'Multi-Package Operations',
@@ -195,7 +195,7 @@ export const aptComparison: ComparisonData = {
       cortexNote: '"Install a LAMP stack"',
       competitor: 'partial',
       competitorNote: 'apt install pkg1 pkg2...',
-      tooltip: 'Cortex understands composite requests like "LAMP stack"',
+      tooltip: 'CX understands composite requests like "LAMP stack"',
     },
     {
       name: 'Offline Mode',
@@ -210,7 +210,7 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Install Nginx Optimized for Your Hardware',
       description: 'Set up Nginx with performance tuning based on your CPU cores and available memory.',
-      cortexCommand: 'cortex "Install nginx optimized for my 8-core server with 32GB RAM"',
+      cortexCommand: 'cx "Install nginx optimized for my 8-core server with 32GB RAM"',
       cortexTime: '2 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -231,7 +231,7 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Set Up a Complete Development Environment',
       description: 'Install Node.js, Python, Docker, and development tools for a new project.',
-      cortexCommand: 'cortex "Set up a full-stack dev environment with Node 20, Python 3.11, Docker, and VS Code"',
+      cortexCommand: 'cx "Set up a full-stack dev environment with Node 20, Python 3.11, Docker, and VS Code"',
       cortexTime: '5 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -251,7 +251,7 @@ export const aptComparison: ComparisonData = {
     {
       title: 'Clean Up Unused Packages',
       description: 'Remove orphaned dependencies and free up disk space safely.',
-      cortexCommand: 'cortex "Clean up unused packages and free disk space, show me what will be removed first"',
+      cortexCommand: 'cx "Clean up unused packages and free disk space, show me what will be removed first"',
       cortexTime: '1 minute',
       cortexSteps: 1,
       competitorCommands: [
@@ -290,59 +290,59 @@ export const aptComparison: ComparisonData = {
   migrationSteps: [
     {
       step: 1,
-      title: 'Install Cortex Alongside APT',
-      description: 'Cortex works with apt, not against it. Your existing apt workflows remain unchanged.',
+      title: 'Install CX Alongside APT',
+      description: 'CX works with apt, not against it. Your existing apt workflows remain unchanged.',
       command: 'curl -fsSL https://get.cortexlinux.com | sh',
-      note: 'Cortex uses apt under the hood for package operations',
+      note: 'CX uses apt under the hood for package operations',
     },
     {
       step: 2,
       title: 'Try a Simple Command',
-      description: 'Start with something low-risk to see how Cortex works.',
-      command: 'cortex "Show me what packages are installed"',
+      description: 'Start with something low-risk to see how CX works.',
+      command: 'cx "Show me what packages are installed"',
       note: 'This runs apt list --installed with additional context',
     },
     {
       step: 3,
       title: 'Use Preview Mode',
-      description: 'Before making changes, use dry-run to see what Cortex will do.',
-      command: 'cortex --dry-run "Install the latest stable nginx"',
+      description: 'Before making changes, use dry-run to see what CX will do.',
+      command: 'cx --dry-run "Install the latest stable nginx"',
       note: 'Preview mode is on by default for new users',
     },
     {
       step: 4,
       title: 'Enable Rollback Points',
       description: 'Configure automatic snapshots before system changes.',
-      command: 'cortex config set rollback.auto true',
+      command: 'cx config set rollback.auto true',
       note: 'Rollback points use minimal disk space with deduplication',
     },
     {
       step: 5,
       title: 'Gradually Adopt',
-      description: 'Use Cortex for new tasks while keeping apt for existing scripts.',
+      description: 'Use CX for new tasks while keeping apt for existing scripts.',
       note: 'There is no migration deadline—use both as long as you want',
     },
   ],
   faqs: [
     {
-      question: 'Does Cortex replace APT?',
-      answer: 'No. Cortex wraps APT and uses it under the hood for package operations. Your existing apt knowledge and scripts continue to work. Cortex adds a natural language interface and safety features on top of the tools you already trust.',
+      question: 'Does CX replace APT?',
+      answer: 'No. CX wraps APT and uses it under the hood for package operations. Your existing apt knowledge and scripts continue to work. CX adds a natural language interface and safety features on top of the tools you already trust.',
     },
     {
-      question: 'Will Cortex break my existing apt configurations?',
-      answer: 'Cortex does not modify your apt sources, preferences, or configurations. It reads your existing setup and uses it for package operations. You can uninstall Cortex at any time with no impact on apt.',
+      question: 'Will CX break my existing apt configurations?',
+      answer: 'CX does not modify your apt sources, preferences, or configurations. It reads your existing setup and uses it for package operations. You can uninstall CX at any time with no impact on apt.',
     },
     {
-      question: 'How does Cortex handle sudo and permissions?',
-      answer: 'Cortex respects your existing sudo configuration. For privileged operations, it shows you the exact commands before executing and prompts for confirmation. You maintain full control over what runs with elevated privileges.',
+      question: 'How does CX handle sudo and permissions?',
+      answer: 'CX respects your existing sudo configuration. For privileged operations, it shows you the exact commands before executing and prompts for confirmation. You maintain full control over what runs with elevated privileges.',
     },
     {
-      question: 'Can I use Cortex offline?',
-      answer: 'Yes. Cortex supports local AI models like Ollama for offline operation. Package installation still requires network access to apt repositories, but intent processing and command generation work fully offline.',
+      question: 'Can I use CX offline?',
+      answer: 'Yes. CX supports local AI models like Ollama for offline operation. Package installation still requires network access to apt repositories, but intent processing and command generation work fully offline.',
     },
     {
-      question: 'Is Cortex safe for production servers?',
-      answer: 'Cortex is designed with production safety in mind. Dry-run mode previews all changes, rollback provides instant recovery, and the sandbox prevents unintended side effects. Many teams use Cortex in production alongside their existing tools.',
+      question: 'Is CX safe for production servers?',
+      answer: 'CX is designed with production safety in mind. Dry-run mode previews all changes, rollback provides instant recovery, and the sandbox prevents unintended side effects. Many teams use CX in production alongside their existing tools.',
     },
   ],
   internalLinks: [
@@ -362,9 +362,9 @@ export const nixComparison: ComparisonData = {
   competitorDisplayName: 'Nix / NixOS',
   tagline: 'AI intent meets declarative configuration',
   seo: {
-    title: 'Cortex Linux vs Nix: Intent-Driven Alternative | Cortex Linux',
-    description: 'Compare Cortex Linux with Nix and NixOS. See how AI-powered intent processing offers a different approach to reproducible environments.',
-    keywords: ['nix alternative', 'nixos alternative', 'declarative linux', 'reproducible environments', 'cortex vs nix'],
+    title: 'CX Linux vs Nix: Intent-Driven Alternative | CX Linux',
+    description: 'Compare CX Linux with Nix and NixOS. See how AI-powered intent processing offers a different approach to reproducible environments.',
+    keywords: ['nix alternative', 'nixos alternative', 'declarative linux', 'reproducible environments', 'cx vs nix'],
     canonicalPath: '/compare/nix',
   },
   experiment: {
@@ -373,9 +373,9 @@ export const nixComparison: ComparisonData = {
       {
         id: 'control',
         weight: 50,
-        headline: 'Cortex Linux vs Nix',
+        headline: 'CX Linux vs Nix',
         subheadline: 'Intent-driven automation alongside declarative configuration',
-        ctaText: 'Try Cortex Free',
+        ctaText: 'Try CX Free',
         ctaSecondary: 'View Documentation',
         ctaPlacement: 'above-fold',
         ctaStyle: 'strong',
@@ -383,7 +383,7 @@ export const nixComparison: ComparisonData = {
       {
         id: 'variant_coexist',
         weight: 25,
-        headline: 'Nix + Cortex: Better Together',
+        headline: 'Nix + CX: Better Together',
         subheadline: 'Use AI to write Nix expressions. Get declarative guarantees with natural language input.',
         ctaText: 'See the Integration',
         ctaSecondary: 'Read the Docs',
@@ -403,11 +403,11 @@ export const nixComparison: ComparisonData = {
     ],
   },
   summaryTable: [
-    { label: 'Learning Curve', cortex: 'Minutes', competitor: 'Weeks to months' },
-    { label: 'Reproducibility', cortex: 'Intent-based', competitor: 'Deterministic' },
-    { label: 'Rollback', cortex: 'Instant', competitor: 'Generation-based' },
-    { label: 'Expression Syntax', cortex: 'Natural language', competitor: 'Nix language' },
-    { label: 'Ecosystem Size', cortex: 'All Linux packages', competitor: 'Nixpkgs (80k+)' },
+    { label: 'Learning Curve', cx: 'Minutes', competitor: 'Weeks to months' },
+    { label: 'Reproducibility', cx: 'Intent-based', competitor: 'Deterministic' },
+    { label: 'Rollback', cx: 'Instant', competitor: 'Generation-based' },
+    { label: 'Expression Syntax', cx: 'Natural language', competitor: 'Nix language' },
+    { label: 'Ecosystem Size', cx: 'All Linux packages', competitor: 'Nixpkgs (80k+)' },
   ],
   features: [
     {
@@ -416,7 +416,7 @@ export const nixComparison: ComparisonData = {
       cortexNote: 'Intent-based reproducibility',
       competitor: 'yes',
       competitorNote: 'Deterministic by design',
-      tooltip: 'Nix offers stronger guarantees; Cortex offers easier adoption',
+      tooltip: 'Nix offers stronger guarantees; CX offers easier adoption',
     },
     {
       name: 'Natural Language Input',
@@ -424,7 +424,7 @@ export const nixComparison: ComparisonData = {
       cortexNote: 'Primary interface',
       competitor: 'no',
       competitorNote: 'Requires Nix expression language',
-      tooltip: 'Cortex translates intent; Nix requires declarative expressions',
+      tooltip: 'CX translates intent; Nix requires declarative expressions',
     },
     {
       name: 'Rollback Capability',
@@ -456,7 +456,7 @@ export const nixComparison: ComparisonData = {
       cortexNote: 'Can generate configs',
       competitor: 'yes',
       competitorNote: 'Core design principle',
-      tooltip: 'Nix is declarative-first; Cortex is intent-first',
+      tooltip: 'Nix is declarative-first; CX is intent-first',
     },
     {
       name: 'Cross-Platform',
@@ -472,14 +472,14 @@ export const nixComparison: ComparisonData = {
       cortexNote: 'Local models supported',
       competitor: 'no',
       competitorNote: 'N/A',
-      tooltip: 'Cortex can work fully offline with local AI',
+      tooltip: 'CX can work fully offline with local AI',
     },
   ],
   useCases: [
     {
       title: 'Create a Reproducible Development Environment',
       description: 'Set up a consistent dev environment for a team working on a Python ML project.',
-      cortexCommand: 'cortex "Create a dev environment with Python 3.11, PyTorch, CUDA support, and Jupyter"',
+      cortexCommand: 'cx "Create a dev environment with Python 3.11, PyTorch, CUDA support, and Jupyter"',
       cortexTime: '3 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -497,7 +497,7 @@ export const nixComparison: ComparisonData = {
     {
       title: 'Quick Package Testing',
       description: 'Try a new tool without affecting your system.',
-      cortexCommand: 'cortex "Let me try ripgrep without installing it permanently"',
+      cortexCommand: 'cx "Let me try ripgrep without installing it permanently"',
       cortexTime: '30 seconds',
       cortexSteps: 1,
       competitorCommands: [
@@ -512,7 +512,7 @@ export const nixComparison: ComparisonData = {
     {
       title: 'System Configuration Changes',
       description: 'Add a new service and configure system settings.',
-      cortexCommand: 'cortex "Set up PostgreSQL with automatic backups to /backup and 8GB shared buffers"',
+      cortexCommand: 'cx "Set up PostgreSQL with automatic backups to /backup and 8GB shared buffers"',
       cortexTime: '5 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -553,50 +553,50 @@ export const nixComparison: ComparisonData = {
     {
       step: 1,
       title: 'Understand the Difference',
-      description: 'Cortex and Nix solve different problems. Nix offers deterministic builds; Cortex offers intent-driven automation. They can coexist.',
-      note: 'Many users run Cortex on NixOS for the best of both worlds',
+      description: 'CX and Nix solve different problems. Nix offers deterministic builds; CX offers intent-driven automation. They can coexist.',
+      note: 'Many users run CX on NixOS for the best of both worlds',
     },
     {
       step: 2,
-      title: 'Install Cortex on Your System',
-      description: 'Cortex installs alongside Nix without conflicts.',
+      title: 'Install CX on Your System',
+      description: 'CX installs alongside Nix without conflicts.',
       command: 'curl -fsSL https://get.cortexlinux.com | sh',
-      note: 'On NixOS, you can also add Cortex to your configuration.nix',
+      note: 'On NixOS, you can also add CX to your configuration.nix',
     },
     {
       step: 3,
-      title: 'Use Cortex for Quick Tasks',
+      title: 'Use CX for Quick Tasks',
       description: 'Start with ad-hoc tasks while keeping Nix for reproducible configurations.',
-      command: 'cortex "Help me write a Nix expression for a Python dev environment"',
-      note: 'Cortex can help you learn and write Nix expressions',
+      command: 'cx "Help me write a Nix expression for a Python dev environment"',
+      note: 'CX can help you learn and write Nix expressions',
     },
     {
       step: 4,
       title: 'Hybrid Workflow',
-      description: 'Use Cortex for exploration and prototyping, then codify in Nix for production.',
+      description: 'Use CX for exploration and prototyping, then codify in Nix for production.',
       note: 'This gives you speed and reproducibility where each matters most',
     },
   ],
   faqs: [
     {
-      question: 'Is Cortex a replacement for Nix?',
-      answer: 'No. Cortex and Nix have different design goals. Nix provides deterministic, reproducible builds through declarative configuration. Cortex provides intent-driven automation through natural language. Many users find value in using both together.',
+      question: 'Is CX a replacement for Nix?',
+      answer: 'No. CX and Nix have different design goals. Nix provides deterministic, reproducible builds through declarative configuration. CX provides intent-driven automation through natural language. Many users find value in using both together.',
     },
     {
-      question: 'Can Cortex generate Nix expressions?',
-      answer: 'Yes. You can ask Cortex to help write Nix expressions, flakes, or NixOS configurations. This makes Cortex useful as a learning tool and productivity aid even for experienced Nix users.',
+      question: 'Can CX generate Nix expressions?',
+      answer: 'Yes. You can ask CX to help write Nix expressions, flakes, or NixOS configurations. This makes CX useful as a learning tool and productivity aid even for experienced Nix users.',
     },
     {
-      question: 'Does Cortex work on NixOS?',
-      answer: 'Yes. Cortex runs on any Linux distribution, including NixOS. You can install it via the standard installer or add it to your NixOS configuration.',
+      question: 'Does CX work on NixOS?',
+      answer: 'Yes. CX runs on any Linux distribution, including NixOS. You can install it via the standard installer or add it to your NixOS configuration.',
     },
     {
       question: 'Which offers better reproducibility?',
-      answer: 'Nix offers stronger reproducibility guarantees through its deterministic build system. Cortex focuses on intent reproducibility—given the same request, it aims to produce consistent results. For compliance requirements demanding bit-for-bit reproducibility, Nix is the better choice.',
+      answer: 'Nix offers stronger reproducibility guarantees through its deterministic build system. CX focuses on intent reproducibility—given the same request, it aims to produce consistent results. For compliance requirements demanding bit-for-bit reproducibility, Nix is the better choice.',
     },
     {
-      question: 'Can I use Cortex to manage Nix packages?',
-      answer: 'Cortex can interact with Nix commands and help you work with the Nix ecosystem. It treats Nix as one of the tools it can leverage, similar to how it uses apt, dnf, or pacman.',
+      question: 'Can I use CX to manage Nix packages?',
+      answer: 'CX can interact with Nix commands and help you work with the Nix ecosystem. It treats Nix as one of the tools it can leverage, similar to how it uses apt, dnf, or pacman.',
     },
   ],
   internalLinks: [
@@ -616,9 +616,9 @@ export const manualCliComparison: ComparisonData = {
   competitorDisplayName: 'Manual CLI / Docs',
   tagline: 'From docs and Stack Overflow to instant execution',
   seo: {
-    title: 'Cortex Linux vs Manual CLI: Stop Googling Commands | Cortex Linux',
-    description: 'Compare Cortex Linux with manual CLI workflows. See how much time you can save by replacing docs searches with natural language commands.',
-    keywords: ['linux cli', 'command line alternative', 'linux automation', 'stop googling linux commands', 'cortex linux'],
+    title: 'CX Linux vs Manual CLI: Stop Googling Commands | CX Linux',
+    description: 'Compare CX Linux with manual CLI workflows. See how much time you can save by replacing docs searches with natural language commands.',
+    keywords: ['linux cli', 'command line alternative', 'linux automation', 'stop googling linux commands', 'cx linux'],
     canonicalPath: '/compare/manual-cli',
   },
   experiment: {
@@ -627,9 +627,9 @@ export const manualCliComparison: ComparisonData = {
       {
         id: 'control',
         weight: 50,
-        headline: 'Cortex Linux vs Manual CLI',
+        headline: 'CX Linux vs Manual CLI',
         subheadline: 'Stop context-switching between terminals and documentation',
-        ctaText: 'Try Cortex Free',
+        ctaText: 'Try CX Free',
         ctaSecondary: 'View Documentation',
         ctaPlacement: 'above-fold',
         ctaStyle: 'strong',
@@ -638,7 +638,7 @@ export const manualCliComparison: ComparisonData = {
         id: 'variant_time',
         weight: 25,
         headline: 'Save Hours Every Week',
-        subheadline: 'The average developer spends 30% of CLI time reading docs. Cortex gives that time back.',
+        subheadline: 'The average developer spends 30% of CLI time reading docs. CX gives that time back.',
         ctaText: 'Reclaim Your Time',
         ctaSecondary: 'See Examples',
         ctaPlacement: 'both',
@@ -657,11 +657,11 @@ export const manualCliComparison: ComparisonData = {
     ],
   },
   summaryTable: [
-    { label: 'Time to Execute', cortex: 'Seconds', competitor: 'Minutes to hours' },
-    { label: 'Error Rate', cortex: 'AI-validated', competitor: 'Human-dependent' },
-    { label: 'Context Switching', cortex: 'None', competitor: 'Constant (docs, SO, forums)' },
-    { label: 'Learning Required', cortex: 'Describe intent', competitor: 'Memorize syntax' },
-    { label: 'Preview Before Execute', cortex: 'Always', competitor: 'Manual effort' },
+    { label: 'Time to Execute', cx: 'Seconds', competitor: 'Minutes to hours' },
+    { label: 'Error Rate', cx: 'AI-validated', competitor: 'Human-dependent' },
+    { label: 'Context Switching', cx: 'None', competitor: 'Constant (docs, SO, forums)' },
+    { label: 'Learning Required', cx: 'Describe intent', competitor: 'Memorize syntax' },
+    { label: 'Preview Before Execute', cx: 'Always', competitor: 'Manual effort' },
   ],
   features: [
     {
@@ -678,7 +678,7 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'AI checks before execution',
       competitor: 'no',
       competitorNote: 'Trial and error',
-      tooltip: 'Cortex validates commands before running them',
+      tooltip: 'CX validates commands before running them',
     },
     {
       name: 'Context Awareness',
@@ -686,7 +686,7 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'Understands your system',
       competitor: 'no',
       competitorNote: 'Generic docs',
-      tooltip: 'Cortex knows your distro, installed packages, and hardware',
+      tooltip: 'CX knows your distro, installed packages, and hardware',
     },
     {
       name: 'Multi-Step Automation',
@@ -694,7 +694,7 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'Chains commands intelligently',
       competitor: 'partial',
       competitorNote: 'Manual scripting',
-      tooltip: 'Cortex handles complex multi-step operations',
+      tooltip: 'CX handles complex multi-step operations',
     },
     {
       name: 'Instant Rollback',
@@ -710,7 +710,7 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'Embedded knowledge + local AI',
       competitor: 'partial',
       competitorNote: 'man pages, --help',
-      tooltip: 'Cortex works offline with local models',
+      tooltip: 'CX works offline with local models',
     },
     {
       name: 'Error Explanation',
@@ -718,7 +718,7 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'Plain English explanations',
       competitor: 'no',
       competitorNote: 'Cryptic error codes',
-      tooltip: 'When things fail, Cortex explains why and how to fix it',
+      tooltip: 'When things fail, CX explains why and how to fix it',
     },
     {
       name: 'Learning Path',
@@ -726,14 +726,14 @@ export const manualCliComparison: ComparisonData = {
       cortexNote: 'Shows commands it runs',
       competitor: 'yes',
       competitorNote: 'Deep learning required',
-      tooltip: 'Cortex teaches you by showing what it does',
+      tooltip: 'CX teaches you by showing what it does',
     },
   ],
   useCases: [
     {
       title: 'Set Up PostgreSQL Replication',
       description: 'Configure primary-replica PostgreSQL replication with automatic failover.',
-      cortexCommand: 'cortex "Set up PostgreSQL streaming replication with a primary on this server and configure it for a replica at 192.168.1.50"',
+      cortexCommand: 'cx "Set up PostgreSQL streaming replication with a primary on this server and configure it for a replica at 192.168.1.50"',
       cortexTime: '10 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -755,7 +755,7 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'Debug Disk Space Issues',
       description: 'Find what is consuming disk space and safely clean it up.',
-      cortexCommand: 'cortex "Find what is using the most disk space in /var and suggest what I can safely delete"',
+      cortexCommand: 'cx "Find what is using the most disk space in /var and suggest what I can safely delete"',
       cortexTime: '1 minute',
       cortexSteps: 1,
       competitorCommands: [
@@ -774,7 +774,7 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'Configure Firewall Rules',
       description: 'Set up iptables rules to allow web traffic and SSH while blocking everything else.',
-      cortexCommand: 'cortex "Configure firewall to allow HTTP, HTTPS, and SSH from my office IP 203.0.113.50, block everything else"',
+      cortexCommand: 'cx "Configure firewall to allow HTTP, HTTPS, and SSH from my office IP 203.0.113.50, block everything else"',
       cortexTime: '2 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -797,7 +797,7 @@ export const manualCliComparison: ComparisonData = {
     {
       title: 'SSL Certificate Setup',
       description: 'Install and configure Let\'s Encrypt SSL for a domain.',
-      cortexCommand: 'cortex "Set up free SSL certificate for example.com with automatic renewal"',
+      cortexCommand: 'cx "Set up free SSL certificate for example.com with automatic renewal"',
       cortexTime: '3 minutes',
       cortexSteps: 1,
       competitorCommands: [
@@ -838,58 +838,58 @@ export const manualCliComparison: ComparisonData = {
   migrationSteps: [
     {
       step: 1,
-      title: 'Install Cortex',
+      title: 'Install CX',
       description: 'One command to get started. Works alongside your existing tools.',
       command: 'curl -fsSL https://get.cortexlinux.com | sh',
-      note: 'No configuration required—Cortex detects your system automatically',
+      note: 'No configuration required—CX detects your system automatically',
     },
     {
       step: 2,
       title: 'Start with Preview Mode',
       description: 'Every command shows what will run before execution.',
-      command: 'cortex "What would happen if I ran apt upgrade?"',
+      command: 'cx "What would happen if I ran apt upgrade?"',
       note: 'Dry-run by default for new users',
     },
     {
       step: 3,
       title: 'Use for Complex Tasks First',
       description: 'Start with tasks that would normally require documentation searches.',
-      command: 'cortex "Help me set up a cron job to backup /home every night at 2am"',
-      note: 'Cortex shines brightest on multi-step tasks',
+      command: 'cx "Help me set up a cron job to backup /home every night at 2am"',
+      note: 'CX shines brightest on multi-step tasks',
     },
     {
       step: 4,
       title: 'Learn as You Go',
-      description: 'Cortex shows the commands it runs, so you learn real Linux skills.',
+      description: 'CX shows the commands it runs, so you learn real Linux skills.',
       note: 'Use "explain" mode to understand each step',
     },
     {
       step: 5,
       title: 'Keep Your Terminal Skills',
-      description: 'Cortex supplements your knowledge—it does not replace it.',
-      note: 'Many power users mix Cortex with direct CLI for different tasks',
+      description: 'CX supplements your knowledge—it does not replace it.',
+      note: 'Many power users mix CX with direct CLI for different tasks',
     },
   ],
   faqs: [
     {
-      question: 'Will using Cortex prevent me from learning Linux?',
-      answer: 'No. Cortex shows every command it runs, explaining what each does and why. Many users report that Cortex accelerated their Linux learning because they see real commands in context rather than isolated examples from documentation.',
+      question: 'Will using CX prevent me from learning Linux?',
+      answer: 'No. CX shows every command it runs, explaining what each does and why. Many users report that CX accelerated their Linux learning because they see real commands in context rather than isolated examples from documentation.',
     },
     {
-      question: 'How accurate are the commands Cortex generates?',
-      answer: 'Cortex validates commands before execution and understands your specific system context. It knows your distribution, installed packages, and configuration. This context-awareness typically produces more accurate commands than generic documentation.',
+      question: 'How accurate are the commands CX generates?',
+      answer: 'CX validates commands before execution and understands your specific system context. It knows your distribution, installed packages, and configuration. This context-awareness typically produces more accurate commands than generic documentation.',
     },
     {
-      question: 'What if Cortex generates a wrong or dangerous command?',
-      answer: 'Cortex shows all commands before execution in dry-run mode. You can review, modify, or reject any suggestion. For critical operations, Cortex creates automatic rollback points. You always maintain final approval over what runs.',
+      question: 'What if CX generates a wrong or dangerous command?',
+      answer: 'CX shows all commands before execution in dry-run mode. You can review, modify, or reject any suggestion. For critical operations, CX creates automatic rollback points. You always maintain final approval over what runs.',
     },
     {
-      question: 'Does Cortex work offline?',
-      answer: 'Yes. Cortex supports local AI models like Ollama for fully offline operation. Your system data never leaves your machine when using local models. This makes Cortex suitable for air-gapped or security-sensitive environments.',
+      question: 'Does CX work offline?',
+      answer: 'Yes. CX supports local AI models like Ollama for fully offline operation. Your system data never leaves your machine when using local models. This makes CX suitable for air-gapped or security-sensitive environments.',
     },
     {
       question: 'How is this different from ChatGPT for Linux commands?',
-      answer: 'Cortex is purpose-built for Linux system operations. It understands your specific system state, can execute commands directly, provides instant rollback, and works offline. It is not a general chatbot—it is a specialized system automation tool with built-in safety features.',
+      answer: 'CX is purpose-built for Linux system operations. It understands your specific system state, can execute commands directly, provides instant rollback, and works offline. It is not a general chatbot—it is a specialized system automation tool with built-in safety features.',
     },
   ],
   internalLinks: [

@@ -188,7 +188,7 @@ function AgentGridFlow() {
       >
         <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-blue/20 to-purple-500/20 border border-brand-blue/30">
           <Brain className="w-6 h-6 text-blue-400" />
-          <span className="text-white font-semibold">Cortex Orchestrator</span>
+          <span className="text-white font-semibold">CX Orchestrator</span>
           <Zap className="w-5 h-5 text-yellow-400" />
         </div>
         <div className="mt-4 text-gray-500 text-sm">Routes tasks to specialist agents</div>
@@ -286,8 +286,8 @@ function SafetyPipelineFlow() {
 export default function ArchitecturePage() {
   useEffect(() => {
     updateSEO({
-      title: "Architecture - How Cortex Works | Cortex Linux",
-      description: "Discover how Cortex Linux uses a multi-agent AI system to execute Linux commands safely. Specialized agents for packages, config, services, security, and more.",
+      title: "Architecture - How CX Works | CX Linux",
+      description: "Discover how CX Linux uses a multi-agent AI system to execute Linux commands safely. Specialized agents for packages, config, services, security, and more.",
     });
   }, []);
 
@@ -305,7 +305,7 @@ export default function ArchitecturePage() {
               <span>Multi-Agent Architecture</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              How <span className="gradient-text">Cortex</span> Works
+              How <span className="gradient-text">CX</span> Works
             </h1>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               A purpose-built AI system with specialized agents that collaborate 

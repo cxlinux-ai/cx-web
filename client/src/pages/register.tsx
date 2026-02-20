@@ -9,7 +9,7 @@ export default function Register() {
     const cleanup = updateSEO({
       title: "Register - The First AI Linux Hackathon Worldwide",
       description: "Join the first AI Linux Hackathon. $18,800 in prizes. Register now to participate.",
-      keywords: ["hackathon", "registration", "cortex linux", "AI", "linux", "worldwide"],
+      keywords: ["hackathon", "registration", "cx linux", "AI", "linux", "worldwide"],
     });
     return cleanup;
   }, []);
@@ -32,7 +32,7 @@ export default function Register() {
             Join the <span className="gradient-text">Hackathon</span>
           </h1>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Cortex Linux Hackathon 2026 · February 17, 2026
+            CX Linux Hackathon 2026 · February 17, 2026
           </p>
         </motion.div>
 

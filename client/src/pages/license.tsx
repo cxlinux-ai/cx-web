@@ -26,7 +26,7 @@ export default function License() {
             <span className="gradient-text">License</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            Cortex Linux software licensing terms
+            CX Linux software licensing terms
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function License() {
           <pre className="text-gray-300 whitespace-pre-wrap font-mono text-sm leading-relaxed">
 {`MIT License
 
-Copyright (c) ${currentYear} Cortex Linux
+Copyright (c) ${currentYear} CX Linux
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ SOFTWARE.`}
               <div>
                 <h3 className="font-semibold text-white">Free to Use</h3>
                 <p className="text-gray-400">
-                  You can use Cortex Linux for personal, educational, or
+                  You can use CX Linux for personal, educational, or
                   commercial purposes without any licensing fees.
                 </p>
               </div>
@@ -107,9 +107,9 @@ SOFTWARE.`}
             Trademark Notice
           </h2>
           <p className="text-gray-300 leading-relaxed">
-            "Cortex Linux" and the Cortex logo are trademarks of the Cortex
+            "CX Linux" and the CX logo are trademarks of the CX
             Linux project. While the software is licensed under the
-            MIT license, use of the Cortex name and branding for derivative
+            MIT license, use of the CX name and branding for derivative
             works requires written permission. This ensures users can
             distinguish official releases from community modifications.
           </p>
@@ -129,11 +129,11 @@ SOFTWARE.`}
             View on GitHub
           </h3>
           <p className="text-gray-400 mb-6">
-            Explore the source code, report issues, and contribute to Cortex
+            Explore the source code, report issues, and contribute to CX
             Linux.
           </p>
           <a
-            href="https://github.com/cortexlinux/cortex"
+            href="https://github.com/cortexlinux/cx"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"

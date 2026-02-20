@@ -65,7 +65,7 @@ export function CompareFAQ({ comparison, context }: CompareFAQProps) {
             Frequently Asked Questions
           </h2>
           <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-            Common questions about using Cortex Linux alongside or instead of {comparison.competitorDisplayName}.
+            Common questions about using CX Linux alongside or instead of {comparison.competitorDisplayName}.
           </p>
 
           <div className="space-y-4">

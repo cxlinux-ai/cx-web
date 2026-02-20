@@ -15,7 +15,7 @@ export default function Terms() {
     {
       icon: FileCheck,
       title: "Acceptance of Terms",
-      content: `By accessing or using Cortex Linux ("the Software"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Software.
+      content: `By accessing or using CX Linux ("the Software"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Software.
 
 These Terms apply to all users, including visitors, registered users, and contributors.
 
@@ -26,7 +26,7 @@ If you are using the Software on behalf of an organization, you represent that y
     {
       icon: Scale,
       title: "License Grant",
-      content: `Cortex Linux software is licensed under the MIT License, which grants you the right to:
+      content: `CX Linux software is licensed under the MIT License, which grants you the right to:
 
 • Use the Software for any purpose, including commercial applications
 • Copy, modify, and distribute the Software
@@ -35,18 +35,18 @@ If you are using the Software on behalf of an organization, you represent that y
 
 The above rights are granted free of charge, subject to the conditions of the MIT License.
 
-TRADEMARK NOTICE: While the code is MIT licensed, the Cortex Linux name, logo, and branding are protected trademarks. You may not use these marks without prior written permission, except as required for reasonable attribution.`
+TRADEMARK NOTICE: While the code is MIT licensed, the CX Linux name, logo, and branding are protected trademarks. You may not use these marks without prior written permission, except as required for reasonable attribution.`
     },
     {
       icon: UserCheck,
       title: "User Conduct",
-      content: `When using Cortex Linux, you agree to:
+      content: `When using CX Linux, you agree to:
 
 • Use the Software in compliance with all applicable laws and regulations
 • Not attempt to circumvent security features or access restrictions
 • Not use the Software to distribute malware, viruses, or harmful code
 • Not use the Software for unauthorized access to other systems
-• Not misrepresent your affiliation with Cortex Linux or its maintainers
+• Not misrepresent your affiliation with CX Linux or its maintainers
 • Respect the intellectual property rights of others
 
 Violation of these terms may result in termination of access to community resources and reporting to appropriate authorities.`
@@ -70,7 +70,7 @@ You understand that using the Software involves inherent risks, including but no
     {
       icon: ShieldOff,
       title: "Limitation of Liability",
-      content: `TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL CORTEX LINUX, ITS MAINTAINERS, CONTRIBUTORS, OR AFFILIATES BE LIABLE FOR:
+      content: `TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL CX LINUX, ITS MAINTAINERS, CONTRIBUTORS, OR AFFILIATES BE LIABLE FOR:
 
 • Any indirect, incidental, special, consequential, or punitive damages
 • Loss of profits, data, use, goodwill, or other intangible losses
@@ -117,7 +117,7 @@ For users outside the United States, you agree to comply with all local laws reg
             <span className="gradient-text">Service</span>
           </h1>
           <p className="text-gray-400 text-lg">
-            Legal terms governing your use of Cortex Linux
+            Legal terms governing your use of CX Linux
           </p>
           <p className="text-gray-500 text-sm mt-2">Effective Date: December 15, 2025</p>
         </motion.div>

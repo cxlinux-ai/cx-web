@@ -1,8 +1,8 @@
-# Replit UI Design Prompt - Cortex Linux Platform
+# Replit UI Design Prompt - CX Linux Platform
 
 ## Overview
 
-This prompt covers **all UI components** that need polished, production-ready styling for the Cortex Linux platform. The backend logic, API endpoints, and component structure are already implemented. **Your task is to make these components visually stunning with a cohesive dark-themed design.**
+This prompt covers **all UI components** that need polished, production-ready styling for the CX Linux platform. The backend logic, API endpoints, and component structure are already implemented. **Your task is to make these components visually stunning with a cohesive dark-themed design.**
 
 ---
 
@@ -69,7 +69,7 @@ This prompt covers **all UI components** that need polished, production-ready st
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│     🧠  Get Early Access to Cortex Linux                    │
+│     🧠  Get Early Access to CX Linux                    │
 │         The AI-native operating system                      │
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
@@ -251,7 +251,7 @@ Create visually stunning, social-media-ready cards for:
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  💰 BOUNTY BOARD                                    [Auto-refresh ⟳]│
-│  Earn rewards by contributing to Cortex Linux                       │
+│  Earn rewards by contributing to CX Linux                       │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  🔍 ┌──────────────────────────────┐  [All ▼] [Newest ▼]           │
@@ -268,7 +268,7 @@ Create visually stunning, social-media-ready cards for:
 │  │  ──────────────────────────────────────────────────────────│   │
 │  │  Windows Subsystem for Linux Support                        │   │
 │  │                                                              │   │
-│  │  Add WSL2 support for running Cortex on Windows...          │   │
+│  │  Add WSL2 support for running CX on Windows...          │   │
 │  │                                                              │   │
 │  │  👤 mikelinke  •  💬 23 comments  •  📅 3 days ago          │   │
 │  │                                                              │   │
@@ -369,7 +369,7 @@ Create visually stunning, social-media-ready cards for:
 
 ```
                                     ┌─────────────────────────┐
-                                    │ 🧠 Ask about Cortex    ×│
+                                    │ 🧠 Ask about CX    ×│
                                     ├─────────────────────────┤
                                     │                         │
                                     │  Hi! I can help you     │
@@ -398,7 +398,7 @@ Create visually stunning, social-media-ready cards for:
                                     │                         │
                                     ├─────────────────────────┤
                                     │ ┌───────────────────┐   │
-                                    │ │ Ask about Cortex  │ → │
+                                    │ │ Ask about CX  │ → │
                                     │ └───────────────────┘   │
                                     └─────────────────────────┘
 

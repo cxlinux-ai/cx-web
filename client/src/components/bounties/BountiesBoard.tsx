@@ -621,7 +621,7 @@ export function BountiesBoard() {
             <span className="gradient-text">Bounty Board</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-4">
-            Earn rewards by contributing to Cortex Linux projects.
+            Earn rewards by contributing to CX Linux projects.
           </p>
           
           {/* How It Works Section */}

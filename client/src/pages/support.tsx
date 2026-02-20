@@ -38,7 +38,7 @@ const supportOptions = [
     icon: Github,
     title: "GitHub Issues",
     description: "Report bugs, request features, or browse existing issues",
-    link: "https://github.com/cortexlinux/cortex/issues",
+    link: "https://github.com/cortexlinux/cx/issues",
     linkText: "Open Issue",
     color: "from-gray-600 to-gray-800"
   },
@@ -46,7 +46,7 @@ const supportOptions = [
     icon: BookOpen,
     title: "Documentation",
     description: "Comprehensive guides, tutorials, and API reference",
-    link: "https://github.com/cortexlinux/cortex/wiki",
+    link: "https://github.com/cortexlinux/cx/wiki",
     linkText: "View Docs",
     color: "from-blue-500 to-cyan-600"
   }
@@ -72,11 +72,11 @@ const supportTiers = [
 const faqs = [
   {
     question: "How do I activate my license?",
-    answer: "After purchasing a Pro, Enterprise, or Managed plan, you'll receive a license key via email. Run `cortex license activate YOUR-LICENSE-KEY` in your terminal to activate. The license is automatically tied to your machine ID for security."
+    answer: "After purchasing a Pro, Enterprise, or Managed plan, you'll receive a license key via email. Run `cx license activate YOUR-LICENSE-KEY` in your terminal to activate. The license is automatically tied to your machine ID for security."
   },
   {
     question: "How do I add more systems to my license?",
-    answer: "Pro licenses support up to 3 systems, Enterprise up to 50, and Managed includes unlimited systems. To add a new system, simply run the activation command on that machine. If you've reached your limit, you can deactivate a system using `cortex license deactivate MACHINE-ID` or upgrade your plan."
+    answer: "Pro licenses support up to 3 systems, Enterprise up to 50, and Managed includes unlimited systems. To add a new system, simply run the activation command on that machine. If you've reached your limit, you can deactivate a system using `cx license deactivate MACHINE-ID` or upgrade your plan."
   },
   {
     question: "How do I cancel my subscription?",
@@ -95,8 +95,8 @@ const faqs = [
 export default function SupportPage() {
   useEffect(() => {
     updateSEO({
-      title: "Support & Help - Cortex Linux",
-      description: "Get help with Cortex Linux. Access community Discord, GitHub issues, documentation, and email support for Pro, Enterprise, and Managed plans.",
+      title: "Support & Help - CX Linux",
+      description: "Get help with CX Linux. Access community Discord, GitHub issues, documentation, and email support for Pro, Enterprise, and Managed plans.",
       canonicalPath: "/support",
       ogType: "website"
     });
@@ -122,7 +122,7 @@ export default function SupportPage() {
               Support & <span className="text-blue-400">Help</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto" data-testid="text-support-subtitle">
-              We're here to help you get the most out of Cortex Linux
+              We're here to help you get the most out of CX Linux
             </p>
           </motion.div>
 

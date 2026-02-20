@@ -47,7 +47,7 @@ export const ideathonSubmissionTemplate: IdeathonSubmissionField[] = [
   {
     id: "monetization_impact",
     label: "Expected Monetization Impact",
-    description: "How could this feature generate revenue for Cortex Linux?",
+    description: "How could this feature generate revenue for CX Linux?",
     required: true,
     type: "textarea",
     placeholder: "e.g., Premium tier feature, usage-based pricing, enterprise licensing..."
@@ -272,7 +272,7 @@ export const ideathonPrizeCategories: IdeathonPrizeCategory[] = [
   },
   {
     heading: "Top 30 Ideathon Winners",
-    description: "Ranks 11-30: Exclusive goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium",
+    description: "Ranks 11-30: Exclusive goodie package (shirt, water bottle, notebook) + 1 month CX Linux AI Premium",
     prizes: [
       { place: "11th-30th Place", amount: "$100 each" }
     ]
@@ -281,19 +281,19 @@ export const ideathonPrizeCategories: IdeathonPrizeCategory[] = [
 
 export const ideathonPhase: IdeathonPhase = {
   id: "ideathon",
-  title: "Cortex Ideathon",
+  title: "CX Ideathon",
   subtitle: "Idea-to-Feature",
   weeks: "Weeks 1-4",
   duration: "4 weeks",
   goal: "Generate monetizable feature ideas",
   intermission: "Weeks 5-8: 1-Month Prep Period (Team Formation, Repository Setup, Mentor Briefings)",
-  description: "Submit structured product ideas for monetizable features in Cortex Linux. Focus on enterprise services, premium integrations, and revenue-generating capabilities. No marketing or sales strategies—just actionable product ideas.",
+  description: "Submit structured product ideas for monetizable features in CX Linux. Focus on enterprise services, premium integrations, and revenue-generating capabilities. No marketing or sales strategies—just actionable product ideas.",
   color: "text-amber-400",
   bgGradient: "from-amber-500/10 to-transparent",
   borderColor: "border-amber-500/20",
   judgingCriteria: [
     { name: "Innovation & Originality", weight: "30%", description: "Novel approach to the problem" },
-    { name: "Feasibility", weight: "25%", description: "Realistic for Cortex Linux implementation" },
+    { name: "Feasibility", weight: "25%", description: "Realistic for CX Linux implementation" },
     { name: "Monetization Potential", weight: "25%", description: "Clear revenue generation path" },
     { name: "Completeness", weight: "20%", description: "Full use of submission template" }
   ],
@@ -322,12 +322,12 @@ export const hackathonPhases: HackathonPhase[] = [
     weeks: "Weeks 9-13",
     duration: "5 weeks",
     goal: "Ship real things",
-    description: "The main event. Build a Cortex feature, plugin, extension, or integration based on Ideathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
+    description: "The main event. Build a CX feature, plugin, extension, or integration based on Ideathon ideas or your own. Solo or team. What matters is what you ship. Code quality, usefulness, and documentation are what get judged.",
     color: "text-blue-300",
     bgGradient: "from-blue-500/10 to-transparent",
     borderColor: "border-blue-500/20",
     requirements: [
-      "Build a Cortex feature, plugin, or extension",
+      "Build a CX feature, plugin, or extension",
       "Create an integration (CLI, infra, AI tool, etc.)",
       "Submit via GitHub Pull Request",
       "Include comprehensive documentation",
@@ -360,7 +360,7 @@ export const hackathonPhases: HackathonPhase[] = [
     weeks: "Weeks 14-17",
     duration: "4 weeks",
     goal: "Code review & judging",
-    description: "Submissions are reviewed by the Cortex maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 17.",
+    description: "Submissions are reviewed by the CX maintainer team. We evaluate code quality, usefulness, architecture, and documentation. Winners are announced at the end of Week 17.",
     color: "text-purple-400",
     bgGradient: "from-purple-500/10 to-transparent",
     borderColor: "border-purple-500/20",
@@ -391,7 +391,7 @@ export const buildTracks: BuildTrack[] = [
   {
     id: "cli-commands",
     title: "CLI Commands",
-    description: "Build new natural language commands that extend Cortex capabilities",
+    description: "Build new natural language commands that extend CX capabilities",
     difficulty: "Beginner",
     examples: [
       "Custom file organization commands",
@@ -403,7 +403,7 @@ export const buildTracks: BuildTrack[] = [
   {
     id: "plugins",
     title: "Plugins & Extensions",
-    description: "Create modular extensions that add new functionality to Cortex",
+    description: "Create modular extensions that add new functionality to CX",
     difficulty: "Intermediate",
     examples: [
       "IDE integrations (VS Code, Neovim)",
@@ -503,7 +503,7 @@ export const hackathonConfig = {
   rulesDocUrl: "/hackathon-rules",
   philosophy: {
     principle: "Ideas become features. Features become revenue.",
-    description: "Phase 1 (Ideathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for Cortex Linux.",
+    description: "Phase 1 (Ideathon) generates monetizable product ideas. Phase 2 (Hackathon) turns those ideas into real code. Every submission creates value for CX Linux.",
     values: [
       "Actionable ideas over vague concepts",
       "Monetizable features over marketing strategies",
@@ -520,7 +520,7 @@ export const hackathonFaqs = [
   },
   {
     question: "Do I need technical skills for the Ideathon?",
-    answer: "Not necessarily! Ideathon focuses on product thinking—identifying pain points and proposing features. However, understanding technical feasibility helps. Your idea should be something that could realistically be built into Cortex Linux."
+    answer: "Not necessarily! Ideathon focuses on product thinking—identifying pain points and proposing features. However, understanding technical feasibility helps. Your idea should be something that could realistically be built into CX Linux."
   },
   {
     question: "Can I build my own idea in Phase 2?",
@@ -536,7 +536,7 @@ export const hackathonFaqs = [
   },
   {
     question: "What do I need to participate?",
-    answer: "For Ideathon: Just a web browser and good ideas. For Hackathon: A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. Cortex works with Python 3.8+ and most Linux distributions."
+    answer: "For Ideathon: Just a web browser and good ideas. For Hackathon: A Linux system (native, VM, or WSL), basic programming skills, and Git knowledge. CX works with Python 3.8+ and most Linux distributions."
   },
   {
     question: "How are submissions judged?",
@@ -571,7 +571,7 @@ export const builderPack: BuilderPackData = {
   title: "Builder Pack",
   description: "Every registered participant gets free credits and resources",
   perks: [
-    { icon: "Zap", title: "$5 Cortex Credit", description: "Free credits to explore Cortex Linux AI features" },
+    { icon: "Zap", title: "$5 CX Credit", description: "Free credits to explore CX Linux AI features" },
     { icon: "MessageSquare", title: "Discord Access", description: "Private channels with mentors and other builders" },
     { icon: "BookOpen", title: "Documentation Pack", description: "Early access to API docs and tutorials" },
     { icon: "Users", title: "Team Matching", description: "Find teammates in our Discord community" }
@@ -596,7 +596,7 @@ export const categoryPrizes: CategoryPrize[] = [
     id: "best-plugin",
     title: "Best Plugin/Extension",
     description: "Most innovative and well-crafted plugin or extension",
-    prize: "6 months Cortex Linux Premium",
+    prize: "6 months CX Linux Premium",
     icon: "Puzzle",
     color: "text-blue-400",
     borderColor: "border-blue-500/30"
@@ -605,7 +605,7 @@ export const categoryPrizes: CategoryPrize[] = [
     id: "best-automation",
     title: "Best Automation Workflow",
     description: "Most useful automation that saves real developer time",
-    prize: "6 months Cortex Linux Premium",
+    prize: "6 months CX Linux Premium",
     icon: "Workflow",
     color: "text-emerald-400",
     borderColor: "border-emerald-500/30"
@@ -614,7 +614,7 @@ export const categoryPrizes: CategoryPrize[] = [
     id: "best-enterprise",
     title: "Best Enterprise Feature",
     description: "Feature with highest enterprise/business value",
-    prize: "6 months Cortex Linux Premium",
+    prize: "6 months CX Linux Premium",
     icon: "Building2",
     color: "text-purple-400",
     borderColor: "border-purple-500/30"
@@ -628,7 +628,7 @@ export const hackathonBenefits = [
   },
   {
     title: "Mentorship from Champions",
-    description: "Learn directly from Suyash Dongre (winner against 300K+ contestants) and the Cortex core team through live coding sessions and code reviews."
+    description: "Learn directly from Suyash Dongre (winner against 300K+ contestants) and the CX core team through live coding sessions and code reviews."
   },
   {
     title: "Build Your Portfolio",
@@ -643,7 +643,7 @@ export const hackathonBenefits = [
     description: "Real rewards for real contributions. $3,800 for Ideathon, $15,000 for Build Sprint. Plus maintainer roles and swag."
   },
   {
-    title: "Shape the Future of Cortex",
-    description: "Top contributors get long-term influence over the Cortex roadmap. Your ideas and code can define where this project goes."
+    title: "Shape the Future of CX",
+    description: "Top contributors get long-term influence over the CX roadmap. Your ideas and code can define where this project goes."
   }
 ];

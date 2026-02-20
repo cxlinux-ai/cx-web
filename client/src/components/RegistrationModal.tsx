@@ -60,7 +60,7 @@ export default function RegistrationModal({ isOpen, onClose, redirectUrl }: Regi
           <div className="sticky top-0 z-10 bg-[#0a0a0f] border-b border-white/10 px-6 py-4 flex items-center justify-between rounded-t-2xl">
             <div>
               <h2 className="text-xl font-bold text-white">Join the Hackathon</h2>
-              <p className="text-sm text-gray-400">Cortex Linux Hackathon 2026</p>
+              <p className="text-sm text-gray-400">CX Linux Hackathon 2026</p>
             </div>
             <button
               onClick={onClose}

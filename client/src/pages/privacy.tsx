@@ -30,7 +30,7 @@ We do not collect sensitive personal information unless explicitly provided by y
       content: `Your data is used to:
 
 • Provide and maintain our services
-• Improve and optimize Cortex Linux performance for your hardware
+• Improve and optimize CX Linux performance for your hardware
 • Send you technical notices, updates, and security alerts
 • Respond to your comments, questions, and support requests
 • Analyze usage patterns to improve our products
@@ -96,7 +96,7 @@ Last updated: December 2025`
       content: `For privacy-related inquiries or concerns:
 
 Email: privacy@cortexlinux.com
-GitHub: github.com/cortexlinux/cortex/issues
+GitHub: github.com/cortexlinux/cx/issues
 Discord: discord.gg/ASvzWcuTfk
 
 We aim to respond to all privacy requests within 30 days.
@@ -123,7 +123,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
             <span className="gradient-text">Policy</span>
           </h1>
           <p className="text-gray-400 text-lg">
-            How Cortex Linux collects, uses, and protects your data
+            How CX Linux collects, uses, and protects your data
           </p>
           <p className="text-gray-500 text-sm mt-2">Effective Date: December 15, 2025</p>
         </motion.div>

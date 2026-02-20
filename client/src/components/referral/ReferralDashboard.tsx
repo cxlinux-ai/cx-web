@@ -179,7 +179,7 @@ export function ReferralDashboard({ referralCode }: ReferralDashboardProps) {
             <div className="share-buttons-row">
               <button
                 onClick={() => {
-                  const text = encodeURIComponent("Join me on the Cortex Linux waitlist! AI that understands Linux.");
+                  const text = encodeURIComponent("Join me on the CX Linux waitlist! AI that understands Linux.");
                   const url = encodeURIComponent(data.referralLink);
                   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
                 }}
@@ -198,8 +198,8 @@ export function ReferralDashboard({ referralCode }: ReferralDashboardProps) {
               </button>
               <button
                 onClick={() => {
-                  const subject = encodeURIComponent("Check out Cortex Linux");
-                  const body = encodeURIComponent(`Hey! I thought you'd like Cortex Linux.\n\nJoin here: ${data.referralLink}`);
+                  const subject = encodeURIComponent("Check out CX Linux");
+                  const body = encodeURIComponent(`Hey! I thought you'd like CX Linux.\n\nJoin here: ${data.referralLink}`);
                   window.location.href = `mailto:?subject=${subject}&body=${body}`;
                 }}
                 className="share-btn email"

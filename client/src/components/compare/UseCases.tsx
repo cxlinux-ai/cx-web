@@ -26,7 +26,7 @@ export function UseCases({ comparison, context }: UseCasesProps) {
             Real-World Use Cases
           </h2>
           <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-            See how Cortex Linux compares to {comparison.competitorDisplayName} in common scenarios developers face every day.
+            See how CX Linux compares to {comparison.competitorDisplayName} in common scenarios developers face every day.
           </p>
 
           <div className="space-y-8">
@@ -70,7 +70,7 @@ function UseCaseCard({ useCase, competitorName, onView }: UseCaseCardProps) {
         <div className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-2 h-2 rounded-full bg-blue-500" />
-            <h4 className="font-semibold text-blue-300">With Cortex Linux</h4>
+            <h4 className="font-semibold text-blue-300">With CX Linux</h4>
           </div>
 
           <div className="bg-black/50 rounded-lg p-4 mb-4 font-mono text-sm text-green-400 overflow-x-auto">

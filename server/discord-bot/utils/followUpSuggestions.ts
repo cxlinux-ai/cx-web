@@ -2,7 +2,7 @@
  * Follow-up Question Suggestions
  *
  * Suggests relevant follow-up questions based on the topic discussed.
- * Helps users discover more about Cortex Linux.
+ * Helps users discover more about CX Linux.
  */
 
 interface FollowUpSet {

@@ -42,7 +42,7 @@ export function WhenToUse({ comparison, context }: WhenToUseProps) {
                 <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                   <CheckCircle className="h-5 w-5 text-blue-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Choose Cortex When...</h3>
+                <h3 className="text-lg font-semibold text-white">Choose CX When...</h3>
               </div>
               <ul className="space-y-3">
                 {comparison.whenToUse.cortexBetter.map((item, index) => (

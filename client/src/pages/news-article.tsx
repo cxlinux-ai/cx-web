@@ -23,7 +23,7 @@ export default function NewsArticlePage() {
 
     const keywords = [
       "press release",
-      "cortex linux",
+      "cx linux",
       "AI Linux",
       ...(release.tags || [])
     ];
@@ -45,12 +45,12 @@ export default function NewsArticlePage() {
       "wordCount": wordCount,
       "author": {
         "@type": "Organization",
-        "name": "Cortex Linux",
+        "name": "CX Linux",
         "url": siteUrl
       },
       "publisher": {
         "@type": "Organization",
-        "name": "Cortex Linux",
+        "name": "CX Linux",
         "url": siteUrl,
         "logo": {
           "@type": "ImageObject",
@@ -61,11 +61,11 @@ export default function NewsArticlePage() {
         "@type": "WebPage",
         "@id": articleUrl
       },
-      "keywords": release.tags?.join(", ") || "Cortex Linux, AI, Linux"
+      "keywords": release.tags?.join(", ") || "CX Linux, AI, Linux"
     };
 
     const seoCleanup = updateSEO({
-      title: `${release.headline || release.title} | Cortex Linux News`,
+      title: `${release.headline || release.title} | CX Linux News`,
       description: release.summary,
       canonicalPath: `/news/${release.slug}`,
       ogType: "article",
@@ -85,7 +85,7 @@ export default function NewsArticlePage() {
     };
 
     createArticleMeta('article:published_time', release.date);
-    createArticleMeta('article:author', 'Cortex Linux');
+    createArticleMeta('article:author', 'CX Linux');
     
     if (release.tags && release.tags.length > 0) {
       release.tags.forEach(tag => {
@@ -264,7 +264,7 @@ export default function NewsArticlePage() {
 
               {release.boilerplate && (
                 <div className="mt-12 pt-8 border-t border-white/10" data-testid="section-boilerplate">
-                  <h3 className="text-lg font-semibold mb-4 text-white">About Cortex Linux</h3>
+                  <h3 className="text-lg font-semibold mb-4 text-white">About CX Linux</h3>
                   <p className="text-gray-400">{release.boilerplate}</p>
                 </div>
               )}

@@ -70,7 +70,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
   const shareOnTwitter = () => {
     if (!signupData) return;
     const text = encodeURIComponent(
-      "Just joined the Cortex Linux waitlist - AI that actually understands Linux.\nJoin me and get early access 👇"
+      "Just joined the CX Linux waitlist - AI that actually understands Linux.\nJoin me and get early access 👇"
     );
     const url = encodeURIComponent(`https://cortexlinux.com/referrals?ref=${signupData.referralCode}`);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
@@ -173,7 +173,7 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
             <Share2 className="w-5 h-5 text-blue-400" />
             Share Your Link
           </h3>
-          <p className="text-sm text-gray-400 mb-4">Each referral helps grow the Cortex community!</p>
+          <p className="text-sm text-gray-400 mb-4">Each referral helps grow the CX community!</p>
 
           <div className="grid grid-cols-3 gap-3">
             <Button
@@ -194,9 +194,9 @@ export function WaitlistSignup({ referralCode: initialReferralCode, onSuccess }:
             </Button>
             <Button
               onClick={() => {
-                const subject = encodeURIComponent("Check out Cortex Linux");
+                const subject = encodeURIComponent("Check out CX Linux");
                 const body = encodeURIComponent(
-                  `Hey! I thought you might like Cortex Linux - AI that understands Linux.\n\nJoin here: https://cortexlinux.com/referrals?ref=${signupData.referralCode}`
+                  `Hey! I thought you might like CX Linux - AI that understands Linux.\n\nJoin here: https://cortexlinux.com/referrals?ref=${signupData.referralCode}`
                 );
                 window.location.href = `mailto:?subject=${subject}&body=${body}`;
               }}

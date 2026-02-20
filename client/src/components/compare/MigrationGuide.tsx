@@ -20,7 +20,7 @@ export function MigrationGuide({ comparison }: MigrationGuideProps) {
             Getting Started
           </h2>
           <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-            Ready to try Cortex? Here is how to get started alongside your existing {comparison.competitorDisplayName} workflow.
+            Ready to try CX? Here is how to get started alongside your existing {comparison.competitorDisplayName} workflow.
           </p>
 
           <div className="space-y-6">

@@ -59,7 +59,7 @@ export default function HackathonRulesPage() {
             transition={{ delay: 0.2 }}
             className="text-lg text-gray-400 mb-4"
           >
-            Cortex Linux Hackathon 2026 — Legal Issues, Participant Commitments, and Rules
+            CX Linux Hackathon 2026 — Legal Issues, Participant Commitments, and Rules
           </motion.p>
 
           <motion.p
@@ -93,7 +93,7 @@ export default function HackathonRulesPage() {
                 <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
               </div>
               <p className="text-gray-400 leading-relaxed">
-                Cortex Linux ("Organizer") is hosting the Cortex Hackathon 2026, a global, 13-week program designed to crowdsource monetization strategies and transform the best ideas into production-ready code. Participation in the hackathon implies agreement with the following rules, terms, and conditions.
+                CX Linux ("Organizer") is hosting the CX Hackathon 2026, a global, 13-week program designed to crowdsource monetization strategies and transform the best ideas into production-ready code. Participation in the hackathon implies agreement with the following rules, terms, and conditions.
               </p>
               <p className="text-gray-400 leading-relaxed mt-4">
                 This document outlines legal responsibilities, participant commitments, intellectual property considerations, code of conduct, judging criteria, and other essential rules.
@@ -149,14 +149,14 @@ export default function HackathonRulesPage() {
                 <h2 className="text-2xl font-bold text-white">3. Registration and Participation</h2>
               </div>
               <p className="text-gray-400 mb-6">
-                Participants must star and fork the Cortex GitHub repository:{" "}
+                Participants must star and fork the CX GitHub repository:{" "}
                 <a 
-                  href="https://github.com/cortexlinux/cortex" 
+                  href="https://github.com/cortexlinux/cx" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-300 hover:text-blue-200 inline-flex items-center gap-1"
                 >
-                  github.com/cortexlinux/cortex
+                  github.com/cortexlinux/cx
                   <ExternalLink size={14} />
                 </a>
               </p>
@@ -205,7 +205,7 @@ export default function HackathonRulesPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                  <span>Cortex Linux retains full access and ownership of all submitted code, ideas, and documentation for use in the Cortex Linux project.</span>
+                  <span>CX Linux retains full access and ownership of all submitted code, ideas, and documentation for use in the CX Linux project.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
@@ -314,7 +314,7 @@ export default function HackathonRulesPage() {
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-indigo-400 mt-1 flex-shrink-0" />
                   <span>
-                    Participant data will be handled according to Cortex Linux's{" "}
+                    Participant data will be handled according to CX Linux's{" "}
                     <Link href="/privacy" className="text-blue-300 hover:text-blue-200">Privacy Policy</Link>.
                   </span>
                 </li>
@@ -371,7 +371,7 @@ export default function HackathonRulesPage() {
                       <span className="text-emerald-400 font-semibold">$100 each</span>
                     </li>
                   </ul>
-                  <p className="text-xs text-gray-500 mt-3">11th-30th: Goodie package (shirt, water bottle, notebook) + 1 month Cortex Linux AI Premium</p>
+                  <p className="text-xs text-gray-500 mt-3">11th-30th: Goodie package (shirt, water bottle, notebook) + 1 month CX Linux AI Premium</p>
                 </div>
 
                 <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
@@ -395,7 +395,7 @@ export default function HackathonRulesPage() {
                       <span className="text-blue-300 font-semibold">$700 worth of goodies each</span>
                     </li>
                   </ul>
-                  <p className="text-xs text-gray-500 mt-3">4th-10th: $700 worth of goodies + 2 months Cortex Linux managed service (not cash)</p>
+                  <p className="text-xs text-gray-500 mt-3">4th-10th: $700 worth of goodies + 2 months CX Linux managed service (not cash)</p>
                 </div>
               </div>
 
@@ -422,7 +422,7 @@ export default function HackathonRulesPage() {
 
               {/* Builder Pack */}
               <div className="p-4 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/30 rounded-xl mb-6">
-                <p className="text-sm text-emerald-300"><strong>Builder Pack:</strong> All participants who submit a valid entry receive a <span className="text-white font-semibold">$5 Cortex Linux credit</span> as a thank you for participating.</p>
+                <p className="text-sm text-emerald-300"><strong>Builder Pack:</strong> All participants who submit a valid entry receive a <span className="text-white font-semibold">$5 CX Linux credit</span> as a thank you for participating.</p>
               </div>
 
               <ul className="space-y-3 text-gray-400">
@@ -542,7 +542,7 @@ export default function HackathonRulesPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-white">12. Acknowledgment and Agreement</h2>
               </div>
-              <p className="text-gray-400 mb-4">By participating in the Cortex Hackathon 2026, participants confirm that:</p>
+              <p className="text-gray-400 mb-4">By participating in the CX Hackathon 2026, participants confirm that:</p>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={18} className="text-blue-400 mt-1 flex-shrink-0" />
@@ -570,7 +570,7 @@ export default function HackathonRulesPage() {
               <h2 className="text-2xl font-bold text-white mb-6">Official Links & References</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 <a 
-                  href="https://github.com/cortexlinux/cortex" 
+                  href="https://github.com/cortexlinux/cx" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-blue-500/50 transition-colors group"

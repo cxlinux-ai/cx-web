@@ -35,13 +35,13 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
               data-testid="badge-cortex-leads-count"
             >
               <Sparkles className="h-4 w-4" />
-              {cortexWins} features where Cortex leads
+              {cortexWins} features where CX leads
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Feature Comparison
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              See exactly how Cortex Linux compares to {comparison.competitorDisplayName} across every important feature.
+              See exactly how CX Linux compares to {comparison.competitorDisplayName} across every important feature.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export function FeatureTable({ comparison, context }: FeatureTableProps) {
                     </th>
                     <th className="py-5 px-6 text-center">
                       <div className="flex flex-col items-center gap-1">
-                        <span className="text-blue-300 font-bold text-lg">Cortex Linux</span>
+                        <span className="text-blue-300 font-bold text-lg">CX Linux</span>
                         <span className="text-xs text-blue-300/60">Our solution</span>
                       </div>
                     </th>

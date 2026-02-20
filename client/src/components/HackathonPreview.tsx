@@ -158,7 +158,7 @@ export default function HackathonPreview() {
               <div className="relative px-4 py-6 sm:px-8 sm:py-10 md:px-12 md:py-14">
                 {/* Headline - Bold */}
                 <h3 className="text-white font-bold text-center mb-2 sm:mb-3 leading-tight text-xl sm:text-3xl md:text-4xl lg:text-[46px]">
-                  Shape the <span className="gradient-text">future of Cortex Linux</span>
+                  Shape the <span className="gradient-text">future of CX Linux</span>
                 </h3>
                 <p className="text-center text-sm sm:text-xl md:text-2xl font-semibold text-gray-300 mb-4 sm:mb-6">
                   <span className="text-terminal-green">$18,700 in Prizes</span> · First AI Linux Hackathon Worldwide
@@ -166,7 +166,7 @@ export default function HackathonPreview() {
                 
                 {/* Value proposition */}
                 <p className="text-gray-400 text-center text-sm sm:text-base md:text-lg max-w-lg mx-auto mb-6 sm:mb-10 leading-relaxed sm:leading-[1.8]">
-                  Build monetization strategies & production features for Cortex. Two phases. Real impact. Real rewards.
+                  Build monetization strategies & production features for CX. Two phases. Real impact. Real rewards.
                 </p>
                 
                 {/* Countdown timer */}

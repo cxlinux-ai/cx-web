@@ -11,7 +11,7 @@ interface SEOConfig {
 
 const BASE_URL = 'https://cortexlinux.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
-const SITE_NAME = 'Cortex Linux';
+const SITE_NAME = 'CX Linux';
 const TWITTER_HANDLE = '@cortexlinux';
 
 export function updateSEO(config: SEOConfig): () => void {
@@ -26,7 +26,7 @@ export function updateSEO(config: SEOConfig): () => void {
     jsonLd
   } = config;
 
-  const fullTitle = title.includes('Cortex') ? title : `${title} | ${SITE_NAME}`;
+  const fullTitle = title.includes('CX') ? title : `${title} | ${SITE_NAME}`;
   const canonicalUrl = `${BASE_URL}${canonicalPath}`;
   
   const originalTitle = document.title;
@@ -125,15 +125,15 @@ export function useSEO(config: SEOConfig) {
 
 export const seoConfigs = {
   home: {
-    title: 'Cortex Linux - The AI Layer for Linux | Execute Any Task with Natural Language',
-    description: 'Transform how you use Linux with Cortex. Execute any task through natural language - automation, security, DevOps, system administration. Sandboxed execution, instant rollback.',
+    title: 'CX Linux - The AI Layer for Linux | Execute Any Task with Natural Language',
+    description: 'Transform how you use Linux with CX. Execute any task through natural language - automation, security, DevOps, system administration. Sandboxed execution, instant rollback.',
     canonicalPath: '/',
-    keywords: ['AI Linux', 'natural language Linux', 'Linux automation', 'AI operating system', 'Cortex Linux', 'intelligent Linux'],
+    keywords: ['AI Linux', 'natural language Linux', 'Linux automation', 'AI operating system', 'CX Linux', 'intelligent Linux'],
     jsonLd: [
       {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         url: 'https://cortexlinux.com',
         description: 'The AI Layer for Linux - Execute any task through natural language commands.',
         potentialAction: {
@@ -145,7 +145,7 @@ export const seoConfigs = {
       {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         applicationCategory: 'OperatingSystem',
         operatingSystem: 'Linux',
         description: 'The AI Layer for Linux. Execute any task through natural language commands.',
@@ -156,14 +156,14 @@ export const seoConfigs = {
         },
         author: {
           '@type': 'Organization',
-          name: 'Cortex Linux',
+          name: 'CX Linux',
           url: 'https://cortexlinux.com'
         }
       },
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         url: 'https://cortexlinux.com',
         logo: 'https://cortexlinux.com/og-image.png',
         sameAs: [
@@ -183,26 +183,26 @@ export const seoConfigs = {
         mainEntity: [
           {
             '@type': 'Question',
-            name: 'What is Cortex Linux?',
+            name: 'What is CX Linux?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Cortex Linux is an AI-powered layer for Linux that lets you execute any task through natural language commands. It supports automation, security, DevOps, and system administration with sandboxed execution and instant rollback.'
+              text: 'CX Linux is an AI-powered layer for Linux that lets you execute any task through natural language commands. It supports automation, security, DevOps, and system administration with sandboxed execution and instant rollback.'
             }
           },
           {
             '@type': 'Question',
-            name: 'Is Cortex Linux free?',
+            name: 'Is CX Linux free?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Cortex Linux offers a free tier to get started. Paid tiers (Core+, Pro, Enterprise) unlock advanced features and priority support.'
+              text: 'CX Linux offers a free tier to get started. Paid tiers (Core+, Pro, Enterprise) unlock advanced features and priority support.'
             }
           },
           {
             '@type': 'Question',
-            name: 'How does Cortex Linux ensure safety?',
+            name: 'How does CX Linux ensure safety?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Cortex Linux uses sandboxed execution to preview commands before running them. Every action has instant rollback capability, and nothing runs without your explicit approval.'
+              text: 'CX Linux uses sandboxed execution to preview commands before running them. Every action has instant rollback capability, and nothing runs without your explicit approval.'
             }
           }
         ]
@@ -211,10 +211,10 @@ export const seoConfigs = {
   },
 
   hackathon: {
-    title: 'The First AI Linux Hackathon Worldwide - $18,800 in Prizes | Cortex Linux',
+    title: 'The First AI Linux Hackathon Worldwide - $18,800 in Prizes | CX Linux',
     description: 'Join the first-ever AI Linux Hackathon. Phase 1: Submit monetizable feature ideas. Phase 2: Build real code. $18,800 in prizes. February 17, 2026. Open worldwide.',
     canonicalPath: '/hackathon',
-    keywords: ['first AI Linux hackathon', 'AI hackathon worldwide', 'Linux hackathon', 'developer hackathon 2026', 'Cortex Linux', 'AI competition', 'Ideathon'],
+    keywords: ['first AI Linux hackathon', 'AI hackathon worldwide', 'Linux hackathon', 'developer hackathon 2026', 'CX Linux', 'AI competition', 'Ideathon'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
@@ -231,7 +231,7 @@ export const seoConfigs = {
       },
       organizer: {
         '@type': 'Organization',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         url: 'https://cortexlinux.com'
       },
       image: 'https://cortexlinux.com/og-image.png',
@@ -246,36 +246,36 @@ export const seoConfigs = {
   },
   
   startup: {
-    title: 'Cortex Linux for AI Startups & Agencies | Pre-Configured AI Stack',
-    description: 'The Linux built for AI founders. Pre-installed Python, Ollama, LangChain, Docker, CUDA. Ship AI products faster with Cortex Linux.',
+    title: 'CX Linux for AI Startups & Agencies | Pre-Configured AI Stack',
+    description: 'The Linux built for AI founders. Pre-installed Python, Ollama, LangChain, Docker, CUDA. Ship AI products faster with CX Linux.',
     canonicalPath: '/startup',
     keywords: ['AI startup', 'AI agency', 'AI Linux', 'machine learning', 'pre-configured AI stack', 'Ollama', 'LangChain']
   },
   
   blog: {
-    title: 'Cortex Linux Blog - AI Linux Tutorials & Best Practices',
-    description: 'Technical insights, tutorials, and best practices for AI-powered Linux automation. Learn to use Cortex for system administration, DevOps, and development.',
+    title: 'CX Linux Blog - AI Linux Tutorials & Best Practices',
+    description: 'Technical insights, tutorials, and best practices for AI-powered Linux automation. Learn to use CX for system administration, DevOps, and development.',
     canonicalPath: '/blog',
-    keywords: ['Linux tutorials', 'AI automation', 'Cortex Linux guides', 'system administration', 'DevOps']
+    keywords: ['Linux tutorials', 'AI automation', 'CX Linux guides', 'system administration', 'DevOps']
   },
   
   news: {
-    title: 'Cortex Linux News & Press Releases',
-    description: 'Latest announcements, updates, and press releases from Cortex Linux. Stay informed about the AI Layer for Linux.',
+    title: 'CX Linux News & Press Releases',
+    description: 'Latest announcements, updates, and press releases from CX Linux. Stay informed about the AI Layer for Linux.',
     canonicalPath: '/news',
-    keywords: ['Cortex Linux news', 'AI Linux updates', 'press releases']
+    keywords: ['CX Linux news', 'AI Linux updates', 'press releases']
   },
   
   gettingStarted: {
-    title: 'Getting Started with Cortex Linux - Installation & Setup Guide',
-    description: 'Learn how to install and configure Cortex Linux. Step-by-step guide for beginners covering installation, first commands, and learning paths.',
+    title: 'Getting Started with CX Linux - Installation & Setup Guide',
+    description: 'Learn how to install and configure CX Linux. Step-by-step guide for beginners covering installation, first commands, and learning paths.',
     canonicalPath: '/getting-started',
-    keywords: ['Cortex Linux installation', 'AI Linux setup', 'getting started guide', 'Linux tutorial'],
+    keywords: ['CX Linux installation', 'AI Linux setup', 'getting started guide', 'Linux tutorial'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'HowTo',
-      name: 'Getting Started with Cortex Linux',
-      description: 'Complete guide to installing and using Cortex Linux, the AI Layer for Linux. Learn how to choose an installation method, install Cortex, verify the setup, run your first command, and unlock unlimited possibilities on Linux.',
+      name: 'Getting Started with CX Linux',
+      description: 'Complete guide to installing and using CX Linux, the AI Layer for Linux. Learn how to choose an installation method, install CX, verify the setup, run your first command, and unlock unlimited possibilities on Linux.',
       totalTime: 'PT15M',
       estimatedCost: {
         '@type': 'PriceSpecification',
@@ -285,7 +285,7 @@ export const seoConfigs = {
       tool: [
         {
           '@type': 'HowToTool',
-          'name': 'Cortex Linux'
+          'name': 'CX Linux'
         },
         {
           '@type': 'HowToTool',
@@ -301,64 +301,64 @@ export const seoConfigs = {
           '@type': 'HowToStep',
           'position': '1',
           'name': 'Choose Your Installation Method',
-          'text': 'Cortex Linux supports multiple installation methods: fresh install, dual-boot, virtual machine, or WSL2. Choose the method that best fits your workflow and system setup.'
+          'text': 'CX Linux supports multiple installation methods: fresh install, dual-boot, virtual machine, or WSL2. Choose the method that best fits your workflow and system setup.'
         },
         {
           '@type': 'HowToStep',
           'position': '2',
-          'name': 'Install Cortex Linux',
+          'name': 'Install CX Linux',
           'text': 'Download the ISO from the official website or clone from GitHub. Create a bootable USB or mount in a virtual machine. Follow the interactive installer wizard which will handle all dependencies automatically in approximately 15 minutes.'
         },
         {
           '@type': 'HowToStep',
           'position': '3',
           'name': 'Verify Installation',
-          'text': 'Confirm that Cortex is properly installed by running diagnostic commands. Check your installation with cortex --version, verify hardware detection with cortex hw detect, and review system health with cortex diagnose.'
+          'text': 'Confirm that CX is properly installed by running diagnostic commands. Check your installation with cx --version, verify hardware detection with cx hw detect, and review system health with cx diagnose.'
         },
         {
           '@type': 'HowToStep',
           'position': '4',
           'name': 'Run Your First Command',
-          'text': 'Experience the power of intent-based computing by describing what you want to accomplish in natural language. For example: "cortex configure my nginx web server with SSL" or "cortex set up automated daily backups to S3". Preview commands before execution.'
+          'text': 'Experience the power of intent-based computing by describing what you want to accomplish in natural language. For example: "cx configure my nginx web server with SSL" or "cx set up automated daily backups to S3". Preview commands before execution.'
         },
         {
           '@type': 'HowToStep',
           'position': '5',
           'name': 'Do Anything on Linux',
-          'text': 'Cortex is your intelligent Linux assistant for unlimited tasks. Use it for system administration, DevOps, development environments, security hardening, and literally anything else you can do on Linux. Simply ask Cortex to do what you need.'
+          'text': 'CX is your intelligent Linux assistant for unlimited tasks. Use it for system administration, DevOps, development environments, security hardening, and literally anything else you can do on Linux. Simply ask CX to do what you need.'
         }
       ]
     }
   },
   
   faq: {
-    title: 'Cortex Linux FAQ - Security, Pricing & How It Works',
-    description: 'Answers to common questions about Cortex Linux: Is it safe? How does it work? What hardware do I need? Free vs paid tiers explained.',
+    title: 'CX Linux FAQ - Security, Pricing & How It Works',
+    description: 'Answers to common questions about CX Linux: Is it safe? How does it work? What hardware do I need? Free vs paid tiers explained.',
     canonicalPath: '/faq',
-    keywords: ['Cortex Linux FAQ', 'AI Linux questions', 'is Cortex safe', 'Cortex pricing', 'AI Linux requirements'],
+    keywords: ['CX Linux FAQ', 'AI Linux questions', 'is CX safe', 'CX pricing', 'AI Linux requirements'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Is Cortex safe? Won\'t it break my system?',
+          name: 'Is CX safe? Won\'t it break my system?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Cortex is designed with security as the #1 priority. Every command runs in an isolated Firejail container. You see and approve every command before it runs. We create snapshots before major changes for instant rollback. Dangerous commands are blocked automatically.'
+            text: 'CX is designed with security as the #1 priority. Every command runs in an isolated Firejail container. You see and approve every command before it runs. We create snapshots before major changes for instant rollback. Dangerous commands are blocked automatically.'
           }
         },
         {
           '@type': 'Question',
-          name: 'How is Cortex different from Warp, Gemini CLI, or Claude Code?',
+          name: 'How is CX different from Warp, Gemini CLI, or Claude Code?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Cortex is an OS-level AI layer, not a terminal wrapper or code editor. It executes ANY task on Linux with multi-step workflow orchestration, system-wide awareness, and hardware-aware optimization. Package management is just one of unlimited capabilities.'
+            text: 'CX is an OS-level AI layer, not a terminal wrapper or code editor. It executes ANY task on Linux with multi-step workflow orchestration, system-wide awareness, and hardware-aware optimization. Package management is just one of unlimited capabilities.'
           }
         },
         {
           '@type': 'Question',
-          name: 'Is Cortex free or paid?',
+          name: 'Is CX free or paid?',
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'Both! Core Edition is free to get started. Paid tiers (Core+, Pro, Enterprise) add advanced features, priority support, compliance features, and SLA guarantees.'
@@ -366,7 +366,7 @@ export const seoConfigs = {
         },
         {
           '@type': 'Question',
-          name: 'What hardware do I need to run Cortex?',
+          name: 'What hardware do I need to run CX?',
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'Cloud mode works on any Linux machine with 4GB+ RAM and internet. Local mode (optional) requires NVIDIA RTX 3060+ or equivalent with 8GB+ VRAM. Most users run cloud mode.'
@@ -374,7 +374,7 @@ export const seoConfigs = {
         },
         {
           '@type': 'Question',
-          name: 'Does Cortex work offline?',
+          name: 'Does CX work offline?',
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'Hybrid approach: Cloud mode (default) uses Claude API, Local mode runs LLM locally requiring GPU, or Hybrid mode uses local for simple tasks and cloud for complex ones.'
@@ -385,60 +385,60 @@ export const seoConfigs = {
   },
   
   security: {
-    title: 'Cortex Linux Security - How We Protect Your System',
-    description: 'Learn about Cortex Linux security architecture. Sandboxed execution, command validation, rollback protection, and vulnerability disclosure.',
+    title: 'CX Linux Security - How We Protect Your System',
+    description: 'Learn about CX Linux security architecture. Sandboxed execution, command validation, rollback protection, and vulnerability disclosure.',
     canonicalPath: '/security',
     keywords: ['Linux security', 'AI security', 'sandboxed execution', 'vulnerability disclosure']
   },
   
   privacy: {
-    title: 'Privacy Policy | Cortex Linux',
-    description: 'Cortex Linux privacy policy. Learn how we collect, use, and protect your personal data.',
+    title: 'Privacy Policy | CX Linux',
+    description: 'CX Linux privacy policy. Learn how we collect, use, and protect your personal data.',
     canonicalPath: '/privacy',
     noIndex: false
   },
   
   terms: {
-    title: 'Terms of Service | Cortex Linux',
-    description: 'Cortex Linux terms of service. MIT license, user conduct, disclaimers, and liability limitations.',
+    title: 'Terms of Service | CX Linux',
+    description: 'CX Linux terms of service. MIT license, user conduct, disclaimers, and liability limitations.',
     canonicalPath: '/terms',
     noIndex: false
   },
   
   license: {
-    title: 'MIT License | Cortex Linux',
-    description: 'Cortex Linux software is licensed under the MIT License. Free to use, modify, and distribute.',
+    title: 'MIT License | CX Linux',
+    description: 'CX Linux software is licensed under the MIT License. Free to use, modify, and distribute.',
     canonicalPath: '/license',
     noIndex: false
   },
   
   status: {
-    title: 'System Status | Cortex Linux',
-    description: 'Check the operational status of Cortex Linux services and infrastructure.',
+    title: 'System Status | CX Linux',
+    description: 'Check the operational status of CX Linux services and infrastructure.',
     canonicalPath: '/status',
     noIndex: true
   },
   
   beta: {
-    title: 'Beta Preview | Cortex Linux',
-    description: 'Try the interactive Cortex Linux beta preview. Experience AI-powered Linux commands in your browser.',
+    title: 'Beta Preview | CX Linux',
+    description: 'Try the interactive CX Linux beta preview. Experience AI-powered Linux commands in your browser.',
     canonicalPath: '/beta',
     noIndex: true
   },
 
   pricing: {
-    title: 'Pricing - Simple, Transparent Plans | Cortex Linux',
-    description: 'Choose the right Cortex Linux plan for you. From free Community edition to Enterprise with SSO, audit logs, and 24/7 support. 14-day free trial on all paid plans.',
+    title: 'Pricing - Simple, Transparent Plans | CX Linux',
+    description: 'Choose the right CX Linux plan for you. From free Community edition to Enterprise with SSO, audit logs, and 24/7 support. 14-day free trial on all paid plans.',
     canonicalPath: '/pricing',
-    keywords: ['Cortex Linux pricing', 'AI Linux subscription', 'Linux automation pricing', 'enterprise Linux plans'],
+    keywords: ['CX Linux pricing', 'AI Linux subscription', 'Linux automation pricing', 'enterprise Linux plans'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      name: 'Cortex Linux',
+      name: 'CX Linux',
       description: 'The AI Layer for Linux - Execute any task through natural language commands.',
       brand: {
         '@type': 'Brand',
-        name: 'Cortex Linux'
+        name: 'CX Linux'
       },
       offers: [
         {
@@ -492,15 +492,15 @@ export const seoConfigs = {
   },
 
   bounties: {
-    title: 'Bounty Board - Earn Rewards Contributing to Cortex Linux',
-    description: 'Browse open bounties and earn rewards for contributing to Cortex Linux projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
+    title: 'Bounty Board - Earn Rewards Contributing to CX Linux',
+    description: 'Browse open bounties and earn rewards for contributing to CX Linux projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
     canonicalPath: '/bounties',
-    keywords: ['developer bounties', 'GitHub bounties', 'Cortex Linux contributions', 'developer rewards', 'bug bounty', 'feature bounty'],
+    keywords: ['developer bounties', 'GitHub bounties', 'CX Linux contributions', 'developer rewards', 'bug bounty', 'feature bounty'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'Cortex Linux Bounty Board',
-      description: 'Bounties for contributing to Cortex Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
+      name: 'CX Linux Bounty Board',
+      description: 'Bounties for contributing to CX Linux. Earn rewards by fixing bugs, building features, and improving documentation.',
       url: 'https://cortexlinux.com/bounties',
       itemListElement: [
         {
@@ -518,7 +518,7 @@ export const seoConfigs = {
       ],
       mainEntity: {
         '@type': 'Organization',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         url: 'https://cortexlinux.com',
         sameAs: [
           'https://github.com/cortexlinux',

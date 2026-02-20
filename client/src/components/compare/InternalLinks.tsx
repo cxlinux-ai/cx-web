@@ -25,7 +25,7 @@ export function InternalLinks({ comparison }: InternalLinksProps) {
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-lg font-semibold text-white mb-6 text-center">
-            Learn More About Cortex Linux
+            Learn More About CX Linux
           </h3>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">

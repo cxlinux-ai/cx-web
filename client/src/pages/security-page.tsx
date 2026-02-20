@@ -64,10 +64,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function SecurityPage() {
   useEffect(() => {
     const cleanup = updateSEO({
-      title: 'Security | Cortex Linux - Your System, Your Control',
-      description: 'Cortex Linux is designed with security-first principles. Learn about our sandboxed execution, dry-run defaults, rollback support, and privacy commitments for production Linux environments.',
+      title: 'Security | CX Linux - Your System, Your Control',
+      description: 'CX Linux is designed with security-first principles. Learn about our sandboxed execution, dry-run defaults, rollback support, and privacy commitments for production Linux environments.',
       canonicalPath: '/security',
-      keywords: ['Cortex Linux security', 'CLI security', 'sandboxed execution', 'Firejail', 'AI privacy', 'local LLM', 'command safety']
+      keywords: ['CX Linux security', 'CLI security', 'sandboxed execution', 'Firejail', 'AI privacy', 'local LLM', 'command safety']
     });
     return cleanup;
   }, []);
@@ -141,15 +141,15 @@ export default function SecurityPage() {
   const faqItems = [
     {
       question: "What if the AI suggests a dangerous command?",
-      answer: "Cortex operates in dry-run mode by default. Before any command executes, you see exactly what will happen — files modified, packages installed, services affected. Commands flagged as potentially destructive (rm -rf, chmod 777, etc.) trigger additional warnings. You can also enable safe mode which requires explicit confirmation for all system-modifying operations."
+      answer: "CX operates in dry-run mode by default. Before any command executes, you see exactly what will happen — files modified, packages installed, services affected. Commands flagged as potentially destructive (rm -rf, chmod 777, etc.) trigger additional warnings. You can also enable safe mode which requires explicit confirmation for all system-modifying operations."
     },
     {
-      question: "Can Cortex access my SSH keys or secrets?",
-      answer: "Cortex cannot read files unless you explicitly include them in a command context. SSH keys, API tokens, and other secrets in standard locations (~/.ssh, ~/.config) are never accessed or transmitted. The AI only sees command text you provide, not your filesystem contents. Environment variables containing secrets are filtered before any external transmission."
+      question: "Can CX access my SSH keys or secrets?",
+      answer: "CX cannot read files unless you explicitly include them in a command context. SSH keys, API tokens, and other secrets in standard locations (~/.ssh, ~/.config) are never accessed or transmitted. The AI only sees command text you provide, not your filesystem contents. Environment variables containing secrets are filtered before any external transmission."
     },
     {
-      question: "How do I audit what Cortex has executed?",
-      answer: "Every command Cortex executes is logged to ~/.cortex/history.log with timestamps, the original request, the generated command, and execution results. Use 'cortex history' to view recent commands or 'cortex history --export' to generate a full audit report. In enterprise environments, logs can be forwarded to your SIEM system."
+      question: "How do I audit what CX has executed?",
+      answer: "Every command CX executes is logged to ~/.cx/history.log with timestamps, the original request, the generated command, and execution results. Use 'cx history' to view recent commands or 'cx history --export' to generate a full audit report. In enterprise environments, logs can be forwarded to your SIEM system."
     },
     {
       question: "Is my data sent to AI providers?",
@@ -203,7 +203,7 @@ export default function SecurityPage() {
               Your system, <span className="text-blue-300">your control</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Cortex is designed with security-first principles for production Linux environments. 
+              CX is designed with security-first principles for production Linux environments. 
               Preview before execute. Sandbox by default. Rollback anytime.
             </p>
           </motion.div>
@@ -221,7 +221,7 @@ export default function SecurityPage() {
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Security Architecture</h2>
             <p className="text-gray-400 max-w-xl mx-auto">
-              Understanding exactly what happens when you use Cortex
+              Understanding exactly what happens when you use CX
             </p>
           </motion.div>
 
@@ -339,7 +339,7 @@ export default function SecurityPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <Database size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
-                  <span>One-command recovery: cortex rollback</span>
+                  <span>One-command recovery: cx rollback</span>
                 </li>
               </ul>
             </div>

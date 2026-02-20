@@ -76,7 +76,7 @@ export function BuilderInvite({ referralCode }: BuilderInviteProps) {
     <div className="builder-invite-section">
       <header className="builder-header">
         <h2>🚀 Hackathon Builder Referrals</h2>
-        <p>Invite developers to the Cortex Hackathon and unlock exclusive rewards!</p>
+        <p>Invite developers to the CX Hackathon and unlock exclusive rewards!</p>
       </header>
 
       {/* Stats */}

@@ -562,16 +562,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   };
 
   const demoCommands = [
-    { label: "Automate Backups", command: "cortex \"set up automated daily backups for /var/www\"", output: "✓ Created backup script at /usr/local/bin/backup-www.sh\n✓ Configured cron job for 2:00 AM daily\n✓ Added rotation to keep last 7 backups\n✓ Backups will be stored at /var/backups/www/" },
-    { label: "Configure Nginx", command: "cortex \"configure nginx as reverse proxy for my Node app on port 3000\"", output: "✓ Created nginx config at /etc/nginx/sites-available/nodeapp\n✓ Enabled site with symlink to sites-enabled\n✓ Added SSL with Let's Encrypt\n✓ Reloaded nginx - proxy active at port 443" },
-    { label: "Setup Monitoring", command: "cortex \"set up system monitoring with alerts for high CPU\"", output: "✓ Installed monitoring stack (Prometheus + Grafana)\n✓ Configured CPU/memory/disk collectors\n✓ Created alert rules for >80% CPU usage\n✓ Dashboard available at localhost:3000" },
+    { label: "Automate Backups", command: "cx \"set up automated daily backups for /var/www\"", output: "✓ Created backup script at /usr/local/bin/backup-www.sh\n✓ Configured cron job for 2:00 AM daily\n✓ Added rotation to keep last 7 backups\n✓ Backups will be stored at /var/backups/www/" },
+    { label: "Configure Nginx", command: "cx \"configure nginx as reverse proxy for my Node app on port 3000\"", output: "✓ Created nginx config at /etc/nginx/sites-available/nodeapp\n✓ Enabled site with symlink to sites-enabled\n✓ Added SSL with Let's Encrypt\n✓ Reloaded nginx - proxy active at port 443" },
+    { label: "Setup Monitoring", command: "cx \"set up system monitoring with alerts for high CPU\"", output: "✓ Installed monitoring stack (Prometheus + Grafana)\n✓ Configured CPU/memory/disk collectors\n✓ Created alert rules for >80% CPU usage\n✓ Dashboard available at localhost:3000" },
   ];
 
   const features = [
-    { icon: Zap, title: "Execute Any Task", description: "From shell scripts to system configuration to data analysis — describe what you need and Cortex translates it into precise Linux commands.", code: "cortex \"find all files larger than 100MB modified in the last week\"\ncortex \"analyze nginx logs for top 10 error sources\"" },
-    { icon: Wand2, title: "Intelligent Automation", description: "Transform complex multi-step workflows into simple natural language descriptions. Cortex chains commands intelligently with error handling.", code: "cortex \"deploy my app: build, run tests, backup db, then restart services\"\ncortex \"set up a Python dev environment with virtualenv and requirements\"" },
-    { icon: Server, title: "Full System Control", description: "Configure, optimize, and monitor your Linux system naturally. From package management to service orchestration — all through conversation.", code: "cortex \"optimize my system for running Docker containers\"\ncortex \"configure firewall to only allow SSH and HTTPS\"" },
-    { icon: Puzzle, title: "Endless Extensibility", description: "Access the full Linux ecosystem — every tool, library, and package available through natural language. The only limit is what Linux can do.", code: "cortex \"install TensorFlow with GPU support\"\ncortex \"set up a complete LAMP stack with security hardening\"" },
+    { icon: Zap, title: "Execute Any Task", description: "From shell scripts to system configuration to data analysis — describe what you need and CX translates it into precise Linux commands.", code: "cx \"find all files larger than 100MB modified in the last week\"\ncx \"analyze nginx logs for top 10 error sources\"" },
+    { icon: Wand2, title: "Intelligent Automation", description: "Transform complex multi-step workflows into simple natural language descriptions. CX chains commands intelligently with error handling.", code: "cx \"deploy my app: build, run tests, backup db, then restart services\"\ncx \"set up a Python dev environment with virtualenv and requirements\"" },
+    { icon: Server, title: "Full System Control", description: "Configure, optimize, and monitor your Linux system naturally. From package management to service orchestration — all through conversation.", code: "cx \"optimize my system for running Docker containers\"\ncx \"configure firewall to only allow SSH and HTTPS\"" },
+    { icon: Puzzle, title: "Endless Extensibility", description: "Access the full Linux ecosystem — every tool, library, and package available through natural language. The only limit is what Linux can do.", code: "cx \"install TensorFlow with GPU support\"\ncx \"set up a complete LAMP stack with security hardening\"" },
   ];
 
   const comparisonData = [
@@ -602,10 +602,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   ];
 
   const installCommands = {
-    npm: "npm install -g cortex-cli",
-    yarn: "yarn global add cortex-cli",
-    pnpm: "pnpm add -g cortex-cli",
-    bun: "bun add -g cortex-cli",
+    npm: "npm install -g cx-cli",
+    yarn: "yarn global add cx-cli",
+    pnpm: "pnpm add -g cx-cli",
+    bun: "bun add -g cx-cli",
   };
 
   return (
@@ -664,7 +664,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-2"
           >
-            Describe what you want. Cortex handles the rest. From automation scripts to system configuration,
+            Describe what you want. CX handles the rest. From automation scripts to system configuration,
             data analysis to coding workflows — unlimited possibilities with natural language.
           </motion.p>
 
@@ -704,7 +704,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             >
               <button className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-brand-blue rounded-xl text-white font-semibold text-base shadow-lg hover:shadow-brand-blue/30 transition-all">
                 <Terminal size={20} />
-                Try Cortex CLI
+                Try CX CLI
               </button>
             </a>
             <p className="text-xs text-gray-500 text-center">
@@ -747,7 +747,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               Built for <span className="gradient-text">Everyone</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto">
-              From automation to analysis, configuration to deployment — Cortex adapts to your workflow
+              From automation to analysis, configuration to deployment — CX adapts to your workflow
             </p>
           </motion.div>
 
@@ -775,7 +775,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 icon: Zap,
                 title: "Power Users",
                 description: "Unlimited possibilities",
-                detail: "If Linux can do it, Cortex can execute it."
+                detail: "If Linux can do it, CX can execute it."
               }
             ].map((item, index) => (
               <motion.div
@@ -807,7 +807,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">See <span className="gradient-text">Cortex</span> in Action</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">See <span className="gradient-text">CX</span> in Action</h2>
             <p className="text-gray-400 max-w-2xl mx-auto">Real commands, real results. See what takes others hours happen in seconds — no signup required.</p>
           </motion.div>
 
@@ -835,7 +835,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <div className="code-editor-body min-h-[180px]">
                 <CodeLine lineNumber={1}>
                   <span className="syntax-prompt">$</span>{" "}
-                  <span className="syntax-command">cortex</span>{" "}
+                  <span className="syntax-command">cx</span>{" "}
                   {activeDemo === 0 && (
                     <span className="syntax-string">"set up automated daily backups for /var/www"</span>
                   )}
@@ -921,7 +921,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                           <CodeLine key={lineIdx} lineNumber={lineIdx + 1}>
                             <span className="syntax-prompt">$</span>{" "}
                             {line.split(' ').map((word, wordIdx) => {
-                              if (word === 'cortex') return <span key={wordIdx} className="syntax-command">{word} </span>;
+                              if (word === 'cx') return <span key={wordIdx} className="syntax-command">{word} </span>;
                               if (word.startsWith('--')) return <span key={wordIdx} className="syntax-flag">{word} </span>;
                               if (word.startsWith('@')) return <span key={wordIdx} className="syntax-accent">{word} </span>;
                               if (['init', 'add', 'deploy', 'plugin', 'install'].includes(word)) return <span key={wordIdx} className="syntax-keyword">{word} </span>;
@@ -965,11 +965,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <InteractiveCodeEditor title="cortex-playground" actions={<CopyButton text='cortex "show disk usage and find large files"' size="sm" />}>
+            <InteractiveCodeEditor title="cx-playground" actions={<CopyButton text='cx "show disk usage and find large files"' size="sm" />}>
               <div className="code-editor-body">
                 <CodeLine lineNumber={1}>
                   <span className="syntax-prompt">$</span>{" "}
-                  <span className="syntax-command">cortex</span>{" "}
+                  <span className="syntax-command">cx</span>{" "}
                   <span className="syntax-string">"show disk usage and find large files"</span>
                 </CodeLine>
                 <div className="code-output">
@@ -1015,7 +1015,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span>System Architecture</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-              How <span className="gradient-text"> Cortex </span> Works
+              How <span className="gradient-text"> CX </span> Works
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               A powerful layered architecture that transforms your natural language into optimized system operations.
@@ -1171,10 +1171,10 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <span>Feature Comparison</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent">
-              How Is <span className="gradient-text">Cortex Different?</span>
+              How Is <span className="gradient-text">CX Different?</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-xl mx-auto">
-              See why developers choose Cortex over traditional alternatives.
+              See why developers choose CX over traditional alternatives.
             </p>
           </motion.div>
 
@@ -1196,7 +1196,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="relative">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/20 border border-brand-blue/30 mb-2">
                       <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
-                      <span className="text-blue-300 font-bold text-sm">CORTEX</span>
+                      <span className="text-blue-300 font-bold text-sm">CX</span>
                     </div>
                     <p className="text-xs text-blue-300/60">Recommended</p>
                   </div>
@@ -1303,7 +1303,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                     onClick={() => onNavigate("join")}
                     className="group flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-blue text-white font-semibold text-sm hover:shadow-lg hover:shadow-brand-blue/25 transition-all duration-300"
                   >
-                    Try Cortex Free
+                    Try CX Free
                     <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
                   </button>
                 </div>
@@ -1328,9 +1328,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
                 {/* Comparison Grid */}
                 <div className="grid grid-cols-3 gap-3">
-                  {/* Cortex */}
+                  {/* CX */}
                   <div className="text-center p-3 rounded-lg bg-brand-blue/10 border border-brand-blue/20">
-                    <div className="text-xs text-blue-300 font-semibold mb-2">Cortex</div>
+                    <div className="text-xs text-blue-300 font-semibold mb-2">CX</div>
                     {row.cortex === true ? (
                       <div className="w-7 h-7 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <Check size={14} className="text-white" strokeWidth={3} />
@@ -1491,7 +1491,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 >
                   <img
                     src={contributor.avatar_url}
-                    alt={`${contributor.login} - Cortex Linux contributor`}
+                    alt={`${contributor.login} - CX Linux contributor`}
                     loading="lazy"
                     decoding="async"
                     className="w-10 h-10 rounded-full border-2 border-transparent hover:border-blue-300 transition-all"
@@ -1546,7 +1546,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <InteractiveCodeEditor title="quickstart.sh" actions={<CopyButton text={`${installCommands[activeTab]}\ncortex init my-app\ncortex dev`} size="sm" />}>
+            <InteractiveCodeEditor title="quickstart.sh" actions={<CopyButton text={`${installCommands[activeTab]}\ncx init my-app\ncx dev`} size="sm" />}>
               {/* Package Manager Tabs */}
               <div className="code-tabs">
                 {(["npm", "yarn", "pnpm", "bun"] as const).map((pm) => (
@@ -1571,7 +1571,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         <span className="syntax-command">npm</span>{" "}
                         <span className="syntax-keyword">install</span>{" "}
                         <span className="syntax-flag">-g</span>{" "}
-                        <span className="syntax-string">cortex-cli</span>
+                        <span className="syntax-string">cx-cli</span>
                       </>
                     )}
                     {activeTab === "yarn" && (
@@ -1579,7 +1579,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         <span className="syntax-command">yarn</span>{" "}
                         <span className="syntax-keyword">global</span>{" "}
                         <span className="syntax-keyword">add</span>{" "}
-                        <span className="syntax-string">cortex-cli</span>
+                        <span className="syntax-string">cx-cli</span>
                       </>
                     )}
                     {activeTab === "pnpm" && (
@@ -1587,7 +1587,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         <span className="syntax-command">pnpm</span>{" "}
                         <span className="syntax-keyword">add</span>{" "}
                         <span className="syntax-flag">-g</span>{" "}
-                        <span className="syntax-string">cortex-cli</span>
+                        <span className="syntax-string">cx-cli</span>
                       </>
                     )}
                     {activeTab === "bun" && (
@@ -1595,7 +1595,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                         <span className="syntax-command">bun</span>{" "}
                         <span className="syntax-keyword">add</span>{" "}
                         <span className="syntax-flag">-g</span>{" "}
-                        <span className="syntax-string">cortex-cli</span>
+                        <span className="syntax-string">cx-cli</span>
                       </>
                     )}
                   </CodeLine>
@@ -1605,7 +1605,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="quickstart-label">Step 2 — Initialize</div>
                   <CodeLine lineNumber={2}>
                     <span className="syntax-prompt">$</span>{" "}
-                    <span className="syntax-command">cortex</span>{" "}
+                    <span className="syntax-command">cx</span>{" "}
                     <span className="syntax-keyword">init</span>{" "}
                     <span className="syntax-variable">my-app</span>
                   </CodeLine>
@@ -1615,7 +1615,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                   <div className="quickstart-label">Step 3 — Start developing</div>
                   <CodeLine lineNumber={3}>
                     <span className="syntax-prompt">$</span>{" "}
-                    <span className="syntax-command">cortex</span>{" "}
+                    <span className="syntax-command">cx</span>{" "}
                     <span className="syntax-keyword">dev</span>
                   </CodeLine>
                 </div>
@@ -1654,7 +1654,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               The AI That <span className="gradient-text"> Understands You </span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Describe what you need in plain English. Cortex translates your intent into perfectly optimized system commands — instantly and safely.
+              Describe what you need in plain English. CX translates your intent into perfectly optimized system commands — instantly and safely.
             </p>
           </motion.div>
 
@@ -1858,7 +1858,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
                 
                 {/* Core text */}
                 <text x="460" y="170" textAnchor="middle" fill="#e0e7ff" fontSize="12" fontWeight="bold">AI</text>
-                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CORTEX</text>
+                <text x="460" y="185" textAnchor="middle" fill="#c4b5fd" fontSize="9">CX</text>
               </g>
               
               {/* Connection 2: AI to Commands */}
@@ -2284,7 +2284,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Build Something <span className="gradient-text">Amazing</span>?</h2>
-            <p className="text-xl text-gray-400 mb-10">Start shipping faster with Cortex. Free forever.</p>
+            <p className="text-xl text-gray-400 mb-10">Start shipping faster with CX. Free forever.</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a

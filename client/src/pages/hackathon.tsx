@@ -858,8 +858,8 @@ const teamMembers: TeamMember[] = [
     name: "Mike Morgan",
     aka: "AI Data God",
     role: "CEO & Founder",
-    shortDescription: "Visionary leader driving Cortex Linux's mission forward.",
-    fullDescription: "Visionary leader driving Cortex Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for Cortex is to make Linux accessible to everyone through natural language.",
+    shortDescription: "Visionary leader driving CX Linux's mission forward.",
+    fullDescription: "Visionary leader driving CX Linux's mission to revolutionize how developers interact with Linux systems through AI. Mike brings years of experience in AI and data science, having worked on cutting-edge projects that bridge the gap between human intent and machine execution. His vision for CX is to make Linux accessible to everyone through natural language.",
     avatar: "/images/mike.png",
     github: "mikejmorgan-ai",
     highlight: true,
@@ -870,7 +870,7 @@ const teamMembers: TeamMember[] = [
     aka: "Jorg",
     role: "Co-Founder & Marketing Manager",
     shortDescription: "Co-founded the hackathon and manages all logistics.",
-    fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the Cortex ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
+    fullDescription: "Co-founded the hackathon concept with Suyash and built the entire workflow and structure. Manages the website, contestants, and all logistics. Jorg's dedication to community building has been instrumental in growing the CX ecosystem. He handles everything from participant onboarding to prize distribution, ensuring a smooth experience for all hackathon participants.",
     avatar: "/images/santiago.png",
     github: "jorg-4",
     highlight: true,
@@ -891,8 +891,8 @@ const teamMembers: TeamMember[] = [
     name: "Sahil",
     aka: "The Pioneer",
     role: "Developer & Judge",
-    shortDescription: "Cortex's first contributor and core developer.",
-    fullDescription: "Cortex's first contributor who has been part of the team since day one as a core developer. Beyond his development work, Sahil has helped gather partners and sponsors for the hackathon. His early belief in the project helped shape its technical direction, and he continues to contribute code while supporting the hackathon's growth.",
+    shortDescription: "CX's first contributor and core developer.",
+    fullDescription: "CX's first contributor who has been part of the team since day one as a core developer. Beyond his development work, Sahil has helped gather partners and sponsors for the hackathon. His early belief in the project helped shape its technical direction, and he continues to contribute code while supporting the hackathon's growth.",
     avatar: "/images/sahil.png",
     github: "sahil",
     highlight: false,
@@ -914,7 +914,7 @@ const teamMembers: TeamMember[] = [
     aka: "The Gatekeeper",
     role: "Main Reviewer & PR Merger",
     shortDescription: "Ensures code quality across all submissions.",
-    fullDescription: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging. As the main PR merger, Ansh is the final checkpoint before code becomes part of Cortex. His standards ensure that all contributions meet the project's quality bar.",
+    fullDescription: "Ensures code quality and consistency across all submissions. Reviews every pull request with meticulous attention to detail before merging. As the main PR merger, Ansh is the final checkpoint before code becomes part of CX. His standards ensure that all contributions meet the project's quality bar.",
     avatar: "https://github.com/Anshgrover23.png",
     github: "Anshgrover23",
     highlight: false,
@@ -925,7 +925,7 @@ const teamMembers: TeamMember[] = [
 const trackVisuals: Record<string, { gradient: string; snippet: string; icon: string; skills: { name: string; level: number; color: string }[]; stats: { submissions: number; avgScore: number; participants: number } }> = {
   "cli-commands": {
     gradient: "from-emerald-500/20 via-emerald-500/10 to-transparent",
-    snippet: `$ cortex organize ~/Downloads
+    snippet: `$ cx organize ~/Downloads
 Analyzing 247 files...
 Created: Documents/PDFs (42 files)
 Created: Images/Screenshots (89 files)
@@ -942,10 +942,10 @@ Done in 2.3s`,
   },
   "plugins": {
     gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
-    snippet: `// vscode-cortex-extension/index.ts
-import { CortexPlugin } from '@cortex/sdk';
+    snippet: `// vscode-cx-extension/index.ts
+import { CXPlugin } from '@cx/sdk';
 
-export class VSCodeBridge extends CortexPlugin {
+export class VSCodeBridge extends CXPlugin {
   async onCommand(cmd: string) {
     const result = await this.execute(cmd);
     vscode.window.showInformation(result);
@@ -961,7 +961,7 @@ export class VSCodeBridge extends CortexPlugin {
   },
   "ai-integrations": {
     gradient: "from-purple-500/20 via-purple-500/10 to-transparent",
-    snippet: `$ cortex "analyze my nginx logs for errors"
+    snippet: `$ cx "analyze my nginx logs for errors"
 Loading local LLM (Llama 3.1 8B)...
 Scanning /var/log/nginx/error.log
 
@@ -979,9 +979,9 @@ Found 3 critical issues:
   },
   "infra-tools": {
     gradient: "from-yellow-500/20 via-amber-500/10 to-transparent",
-    snippet: `$ cortex deploy --staging
+    snippet: `$ cx deploy --staging
 Building container image...
-Pushing to registry: cortex.io/myapp:v2.1
+Pushing to registry: cx.io/myapp:v2.1
 Updating Kubernetes deployment...
 Rolling update: 3/3 pods ready
 Health check passed
@@ -1101,7 +1101,7 @@ function BuildTracksShowcase() {
               <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="text-xs text-gray-500 font-mono ml-2">cortex-terminal</span>
+            <span className="text-xs text-gray-500 font-mono ml-2">cx-terminal</span>
           </div>
           
           {/* Code content */}
@@ -1216,7 +1216,7 @@ function BuildTracksShowcase() {
             <motion.div 
               className="relative bg-white/5 border border-white/10 rounded-xl p-5"
               role="img"
-              aria-label="Plugins illustration showing modular blocks connecting to Cortex Core"
+              aria-label="Plugins illustration showing modular blocks connecting to CX Core"
             >
               <div className="flex items-center gap-2 mb-4">
                 <Puzzle size={16} className="text-blue-400" aria-hidden="true" />
@@ -1236,7 +1236,7 @@ function BuildTracksShowcase() {
                     <Terminal size={32} className="text-white" aria-hidden="true" />
                   </motion.div>
                 </div>
-                <div className="text-center text-xs text-gray-400 mb-4">Cortex Core</div>
+                <div className="text-center text-xs text-gray-400 mb-4">CX Core</div>
                 
                 {/* Plugin Blocks */}
                 <div className="grid grid-cols-3 gap-3">
@@ -1752,7 +1752,7 @@ const journeyMilestones = [
     id: "contracts",
     icon: GitPullRequest,
     headline: "Long-term Contracts",
-    description: "Outstanding contributors may be considered for ongoing development contracts with Cortex Linux",
+    description: "Outstanding contributors may be considered for ongoing development contracts with CX Linux",
     tag: "Career Opportunity",
     gradient: "from-terminal-green/20 to-emerald-900/10",
     borderColor: "border-terminal-green/30",
@@ -1840,7 +1840,7 @@ function RelationshipJourneyRail() {
               Build a <span className="gradient-text">Lasting Relationship</span>
             </h2>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Top performers aren&apos;t just winning prizes — they&apos;re opening doors to ongoing opportunities with Cortex Linux. Your journey doesn&apos;t end when the hackathon does.
+              Top performers aren&apos;t just winning prizes — they&apos;re opening doors to ongoing opportunities with CX Linux. Your journey doesn&apos;t end when the hackathon does.
             </p>
             
             <div className="hidden lg:block">
@@ -1880,7 +1880,7 @@ function RelationshipJourneyRail() {
               className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10"
             >
               <p className="text-sm text-gray-400">
-                <span className="text-terminal-green font-medium">Note:</span> Specific opportunities are discussed individually based on hackathon performance and project alignment with Cortex Linux goals.
+                <span className="text-terminal-green font-medium">Note:</span> Specific opportunities are discussed individually based on hackathon performance and project alignment with CX Linux goals.
               </p>
             </motion.div>
           </motion.div>
@@ -2073,7 +2073,7 @@ export default function Hackathon() {
             className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8"
           >
             A two-phase program designed to crowdsource monetization strategies and convert the best ideas into production code with measurable ROI. Contribute to{" "}
-            <span className="text-blue-300 font-medium">Cortex Linux</span> — the AI layer for Linux.
+            <span className="text-blue-300 font-medium">CX Linux</span> — the AI layer for Linux.
           </motion.p>
 
           {/* Urgency: Countdown */}
@@ -2168,7 +2168,7 @@ export default function Hackathon() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
               <Gift size={18} className="text-cyan-400" />
-              <span className="text-cyan-300 font-semibold text-sm">$5 Cortex Credit</span>
+              <span className="text-cyan-300 font-semibold text-sm">$5 CX Credit</span>
               <span className="text-gray-400 text-sm">for all participants</span>
             </div>
           </motion.div>
@@ -2394,13 +2394,13 @@ export default function Hackathon() {
                   Phase 1 · Weeks 1-4
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                  Cortex Ideathon
+                  CX Ideathon
                 </h3>
                 <p className="text-lg text-amber-300 font-medium mb-4">
                   Build the Features of Tomorrow
                 </p>
                 <p className="text-gray-400 mb-6">
-                  Submit structured product ideas for monetizable features. No coding required — just clear thinking about what Cortex Linux needs.
+                  Submit structured product ideas for monetizable features. No coding required — just clear thinking about what CX Linux needs.
                 </p>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
@@ -2440,13 +2440,13 @@ export default function Hackathon() {
                   Phase 2 · Weeks 9-17
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                  Cortex Hackathon
+                  CX Hackathon
                 </h3>
                 <p className="text-lg text-blue-300 font-medium mb-4">
                   Ship Real Code Today
                 </p>
                 <p className="text-gray-400 mb-6">
-                  Build features, plugins, and integrations. Submit via GitHub PRs. Get code reviewed and merged into Cortex Linux.
+                  Build features, plugins, and integrations. Submit via GitHub PRs. Get code reviewed and merged into CX Linux.
                 </p>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="flex items-center gap-2">
@@ -2658,7 +2658,7 @@ export default function Hackathon() {
             >
               <h3 className="text-lg font-bold text-terminal-green mb-4 flex items-center gap-2">
                 <Rocket size={18} />
-                Cortex Hackathon
+                CX Hackathon
               </h3>
               <ul className="space-y-3 text-gray-300">
                 {hackathonConfig.philosophy.values.map((value, i) => (
@@ -2857,7 +2857,7 @@ export default function Hackathon() {
               Phase 2
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              <span className="gradient-text">Cortex Hackathon</span>
+              <span className="gradient-text">CX Hackathon</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Build and Ship. Two stages to turn your code into production-ready contributions.
@@ -2910,7 +2910,7 @@ export default function Hackathon() {
               More Ways to <span className="gradient-text">Win</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Separate from main prizes — win in your specialty and get Cortex Linux Premium
+              Separate from main prizes — win in your specialty and get CX Linux Premium
             </p>
           </motion.div>
 
@@ -3275,7 +3275,7 @@ export default function Hackathon() {
               Partnership Opportunities
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              Partner With <span className="gradient-text">Cortex Linux</span>
+              Partner With <span className="gradient-text">CX Linux</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Join our hackathon as a partner and connect with {hackathonConfig.expectedParticipants} talented developers, designers, and innovators
@@ -3355,7 +3355,7 @@ export default function Hackathon() {
               </div>
               <h3 className="text-lg font-bold text-white mb-2">Influencers</h3>
               <p className="text-sm text-gray-400 mb-4">
-                Tech content creators can partner with us to promote the hackathon and Cortex Linux.
+                Tech content creators can partner with us to promote the hackathon and CX Linux.
               </p>
               <ul className="space-y-2 text-sm text-gray-500">
                 <li className="flex items-center gap-2">
@@ -3450,7 +3450,7 @@ export default function Hackathon() {
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">
               Join {hackathonConfig.expectedParticipants} builders competing for {hackathonConfig.totalPrizePool} in prizes.
-              Your contributions become part of Cortex Linux — forever.
+              Your contributions become part of CX Linux — forever.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

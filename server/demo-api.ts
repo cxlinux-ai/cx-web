@@ -42,7 +42,7 @@ router.post('/api/demo/chat', async (req: Request, res: Response) => {
   if (!rateCheck.allowed) {
     return res.status(429).json({
       error: 'Demo limit reached',
-      message: 'You have used all 5 demo requests. Install Cortex to continue!',
+      message: 'You have used all 5 demo requests. Install CX to continue!',
       redirect: '/install'
     });
   }

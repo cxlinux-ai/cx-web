@@ -64,11 +64,11 @@ function hasAdminPermission(interaction: ChatInputCommandInteraction): boolean {
 export const commands = [
   new SlashCommandBuilder()
     .setName("cortex")
-    .setDescription("Ask Cortex AI a question")
+    .setDescription("Ask CX AI a question")
     .addStringOption((option) =>
       option
         .setName("question")
-        .setDescription("Your question about Cortex Linux")
+        .setDescription("Your question about CX Linux")
         .setRequired(true)
     ),
 
@@ -86,7 +86,7 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("hackathon")
-    .setDescription("Get information about the Cortex Hackathon"),
+    .setDescription("Get information about the CX Hackathon"),
 
   new SlashCommandBuilder()
     .setName("clear")
@@ -106,7 +106,7 @@ export const commands = [
 
   new SlashCommandBuilder()
     .setName("links")
-    .setDescription("Get important Cortex Linux links"),
+    .setDescription("Get important CX Linux links"),
 
   new SlashCommandBuilder()
     .setName("ping")
@@ -281,13 +281,13 @@ async function handleHelpCommand(
 ): Promise<void> {
   const embed = new EmbedBuilder()
     .setColor(COLORS.primary)
-    .setTitle("Cortex Linux AI - Help")
-    .setDescription("I'm the official AI assistant for Cortex Linux!")
+    .setTitle("CX Linux AI - Help")
+    .setDescription("I'm the official AI assistant for CX Linux!")
     .addFields(
       {
         name: "Everyone",
         value: [
-          "`/cortex <question>` - Ask me anything about Cortex Linux",
+          "`/cortex <question>` - Ask me anything about CX Linux",
           "`/help` - Show this help message",
           "`/apply` - Apply to become a contributor",
           "`/referral` - Learn about our referral program",
@@ -388,7 +388,7 @@ async function handleReferralCommand(
 ): Promise<void> {
   const embed = new EmbedBuilder()
     .setColor(COLORS.success)
-    .setTitle("Cortex Linux Referral Program")
+    .setTitle("CX Linux Referral Program")
     .setDescription("Invite friends and earn exclusive rewards!")
     .addFields(
       {
@@ -640,7 +640,7 @@ async function handleLinksCommand(
 ): Promise<void> {
   const embed = new EmbedBuilder()
     .setColor(COLORS.primary)
-    .setTitle("Cortex Linux Links")
+    .setTitle("CX Linux Links")
     .addFields(
       { name: "Website", value: "[cortexlinux.com](https://cortexlinux.com)", inline: true },
       { name: "GitHub", value: "[github.com/cortexlinux](https://github.com/cortexlinux)", inline: true },
@@ -1493,7 +1493,7 @@ async function handleApproveCommand(
     // DM the user
     try {
       await targetUser.send(
-        `**Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
+        `**Congratulations!** Your application to CX Linux has been approved!\n\n` +
         `You now have access to:\n` +
         `- Community channels\n` +
         `- Hackathon discussions\n` +
@@ -1579,7 +1579,7 @@ async function handleRejectCommand(
     // DM the user
     try {
       await targetUser.send(
-        `Thank you for your interest in contributing to Cortex Linux.\n\n` +
+        `Thank you for your interest in contributing to CX Linux.\n\n` +
         `Unfortunately, your application was not approved at this time.\n\n` +
         `**Reason:** ${reason}\n\n` +
         `You're welcome to reapply in the future if circumstances change. ` +
@@ -1668,7 +1668,7 @@ export async function handleApplicationButton(
       // DM user
       try {
         await targetMember.send(
-          `**Congratulations!** Your application to Cortex Linux has been approved!\n\n` +
+          `**Congratulations!** Your application to CX Linux has been approved!\n\n` +
           `You now have access to:\n` +
           `- Community channels\n` +
           `- Hackathon discussions\n` +

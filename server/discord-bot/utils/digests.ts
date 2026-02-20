@@ -144,7 +144,7 @@ export function createDailyDigestEmbed(stats: DigestStats): EmbedBuilder {
       }
     )
     .setTimestamp()
-    .setFooter({ text: "Cortex Linux Community" });
+    .setFooter({ text: "CX Linux Community" });
 
   if (stats.hackathonUpdates.length > 0) {
     embed.addFields({

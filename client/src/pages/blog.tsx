@@ -79,7 +79,7 @@ export default function Blog() {
           className="text-center"
         >
           <h1 id="blog-heading" className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-white">Cortex</span>{" "}
+            <span className="text-white">CX</span>{" "}
             <span className="gradient-text">Blog</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -97,7 +97,7 @@ export default function Blog() {
           className="max-w-6xl mx-auto px-4 mb-12"
         >
           <div className="mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">New to Cortex?</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">New to CX?</h2>
             <p className="text-sm sm:text-base text-gray-400">Start your journey with this curated reading path.</p>
           </div>
           

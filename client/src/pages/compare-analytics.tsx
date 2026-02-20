@@ -225,7 +225,7 @@ export default function CompareAnalyticsPage() {
                 <Card className="bg-gray-900/50 border-gray-800">
                   <CardHeader>
                     <CardTitle className="text-white">
-                      Cortex vs {selectedMetrics.name} - Variant Performance
+                      CX vs {selectedMetrics.name} - Variant Performance
                     </CardTitle>
                   </CardHeader>
                   <CardContent>

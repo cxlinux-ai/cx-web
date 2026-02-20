@@ -50,21 +50,21 @@ export default function GettingStarted() {
   const quickNavCards = [
     {
       title: "Installation Guide",
-      description: "Get Cortex running on your system in minutes with our guided setup",
+      description: "Get CX running on your system in minutes with our guided setup",
       icon: Download,
       link: "/blog/install-cortex-linux-beginner-guide",
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Your First Task",
-      description: "Tell Cortex what you need—from server config to automation to anything in between",
+      description: "Tell CX what you need—from server config to automation to anything in between",
       icon: Terminal,
       link: "/blog/getting-started-cortex-first-workflow",
       color: "from-purple-500 to-pink-500"
     },
     {
       title: "Unlimited Possibilities",
-      description: "See how Cortex handles any Linux operation through natural language",
+      description: "See how CX handles any Linux operation through natural language",
       icon: Sparkles,
       link: "/blog/first-ai-task-cortex-linux",
       color: "from-orange-500 to-red-500"
@@ -83,7 +83,7 @@ export default function GettingStarted() {
     {
       number: 1,
       title: "Choose Your Installation Method",
-      description: "Cortex Linux supports multiple installation methods: fresh install, dual-boot, virtual machine, or WSL2. Choose the method that best fits your workflow.",
+      description: "CX Linux supports multiple installation methods: fresh install, dual-boot, virtual machine, or WSL2. Choose the method that best fits your workflow.",
       details: [
         "Fresh install for dedicated development machines",
         "Dual-boot to keep your existing OS",
@@ -93,8 +93,8 @@ export default function GettingStarted() {
     },
     {
       number: 2,
-      title: "Install Cortex Linux",
-      description: "Follow our guided installer to set up Cortex Linux. The process takes about 15 minutes and handles all dependencies automatically.",
+      title: "Install CX Linux",
+      description: "Follow our guided installer to set up CX Linux. The process takes about 15 minutes and handles all dependencies automatically.",
       details: [
         "Download the ISO from our official site",
         "Create bootable USB or mount in VM",
@@ -105,30 +105,30 @@ export default function GettingStarted() {
     {
       number: 3,
       title: "Verify Installation",
-      description: "Confirm that Cortex is properly installed and all components are functioning correctly.",
+      description: "Confirm that CX is properly installed and all components are functioning correctly.",
       details: [
-        "Run 'cortex --version' to check installation",
-        "Execute 'cortex hw detect' to verify hardware detection",
-        "Check GPU status with 'cortex gpu status'",
-        "Review system health with 'cortex diagnose'"
+        "Run 'cx --version' to check installation",
+        "Execute 'cx hw detect' to verify hardware detection",
+        "Check GPU status with 'cx gpu status'",
+        "Review system health with 'cx diagnose'"
       ]
     },
     {
       number: 4,
       title: "Run Your First Command",
-      description: "Experience the power of intent-based computing. Simply describe what you want to accomplish—Cortex handles the rest.",
+      description: "Experience the power of intent-based computing. Simply describe what you want to accomplish—CX handles the rest.",
       details: [
-        "Try: 'cortex configure my nginx web server with SSL'",
-        "Or: 'cortex set up automated daily backups to S3'",
-        "Or: 'cortex install monitoring with Prometheus and Grafana'",
-        "Or: 'cortex set up a Python dev environment with Django'",
+        "Try: 'cx configure my nginx web server with SSL'",
+        "Or: 'cx set up automated daily backups to S3'",
+        "Or: 'cx install monitoring with Prometheus and Grafana'",
+        "Or: 'cx set up a Python dev environment with Django'",
         "Preview commands before execution and watch dependencies resolve automatically"
       ]
     },
     {
       number: 5,
       title: "Do Anything on Linux",
-      description: "Cortex is your intelligent Linux assistant. Whatever you need to accomplish, just ask.",
+      description: "CX is your intelligent Linux assistant. Whatever you need to accomplish, just ask.",
       details: [
         "System administration: users, permissions, services, networking",
         "DevOps: containers, CI/CD, infrastructure automation",
@@ -143,13 +143,13 @@ export default function GettingStarted() {
     {
       title: "Beginner Path",
       icon: GraduationCap,
-      description: "New to Linux? Let Cortex be your guide.",
+      description: "New to Linux? Let CX be your guide.",
       color: "from-green-500 to-emerald-500",
       resources: [
-        { title: "Getting Started with Cortex", link: "/blog/getting-started-cortex-first-workflow" },
-        { title: "How to Install Cortex Linux", link: "/blog/install-cortex-linux-beginner-guide" },
+        { title: "Getting Started with CX", link: "/blog/getting-started-cortex-first-workflow" },
+        { title: "How to Install CX Linux", link: "/blog/install-cortex-linux-beginner-guide" },
         { title: "Your First Linux Tasks", link: "/blog/first-ai-task-cortex-linux" },
-        { title: "Cortex for Students", link: "/blog/cortex-linux-for-students" },
+        { title: "CX for Students", link: "/blog/cortex-linux-for-students" },
         { title: "FAQ for New Users", link: "/faq" }
       ]
     },
@@ -162,7 +162,7 @@ export default function GettingStarted() {
         { title: "Server Configuration Automation", link: "/blog" },
         { title: "User and Permission Management", link: "/blog" },
         { title: "Backup and Disaster Recovery", link: "/blog" },
-        { title: "Security Hardening with Cortex", link: "/blog" },
+        { title: "Security Hardening with CX", link: "/blog" },
         { title: "Monitoring and Alerting Setup", link: "/blog" }
       ]
     },
@@ -220,7 +220,7 @@ export default function GettingStarted() {
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Stop memorizing commands. Just describe what you need—configure servers, 
             automate tasks, manage infrastructure, set up development environments, 
-            or anything else. Cortex understands your intent and makes it happen.
+            or anything else. CX understands your intent and makes it happen.
           </p>
         </motion.div>
       </section>
@@ -310,8 +310,8 @@ export default function GettingStarted() {
               
               <div className="mt-8 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
                 <p className="text-sm text-gray-300">
-                  <strong className="text-blue-300">Note:</strong> Cortex Linux is built on Ubuntu 24.04 LTS. 
-                  If your hardware runs Ubuntu, it will run Cortex Linux. GPU support requires NVIDIA drivers 530+.
+                  <strong className="text-blue-300">Note:</strong> CX Linux is built on Ubuntu 24.04 LTS. 
+                  If your hardware runs Ubuntu, it will run CX Linux. GPU support requires NVIDIA drivers 530+.
                 </p>
               </div>
             </div>
@@ -398,7 +398,7 @@ export default function GettingStarted() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Getting Started in 5 Minutes</h3>
               <p className="text-gray-400 text-center max-w-md">
-                Watch our quick start tutorial to see Cortex Linux in action. Video coming soon.
+                Watch our quick start tutorial to see CX Linux in action. Video coming soon.
               </p>
             </div>
           </motion.div>
@@ -478,7 +478,7 @@ export default function GettingStarted() {
               <h2 className="text-3xl font-bold text-white">Community and Support</h2>
             </div>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Join our community of developers, get help, and contribute to Cortex Linux
+              Join our community of developers, get help, and contribute to CX Linux
             </p>
           </motion.div>
           
@@ -503,7 +503,7 @@ export default function GettingStarted() {
             </a>
             
             <a 
-              href="https://github.com/cortexlinux/cortex" 
+              href="https://github.com/cortexlinux/cx" 
               target="_blank" 
               rel="noopener noreferrer"
               className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-500/50 transition-all duration-300 text-center group"
@@ -538,10 +538,10 @@ export default function GettingStarted() {
             <Link 
               href="/beta"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300"
-              data-testid="button-try-cortex"
+              data-testid="button-try-cx"
             >
               <Sparkles className="w-5 h-5" />
-              Try Cortex Linux Now
+              Try CX Linux Now
               <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>

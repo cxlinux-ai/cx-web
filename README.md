@@ -1,6 +1,6 @@
-# Cortex Linux Website
+# CX Linux Website
 
-The official website [Cortex Linux](https://cortexlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
+The official website [CX Linux](https://cortexlinux.com/) - the AI-native operating system that simplifies software installation using natural language.
 
 ## Tech Stack
 
@@ -17,11 +17,11 @@ The official website [Cortex Linux](https://cortexlinux.com/) - the AI-native op
 |-------|-------------|
 | `/` | Landing page with features, pricing, and community info |
 | `/faq` | Frequently asked questions |
-| `/beta` | Interactive demo - try Cortex with your own API key |
+| `/beta` | Interactive demo - try CX with your own API key |
 
 ## Beta Demo Page (`/beta`)
 
-The beta page allows users to experience Cortex Linux capabilities directly in the browser:
+The beta page allows users to experience CX Linux capabilities directly in the browser:
 
 ### Features
 - **Natural Language Input**: Enter commands like "install docker" or "set up python for ML"
@@ -34,7 +34,7 @@ The beta page allows users to experience Cortex Linux capabilities directly in t
 ### Privacy
 - API keys are stored in localStorage only
 - All API calls are made directly from the browser to Anthropic/OpenAI
-- No data is sent to Cortex servers
+- No data is sent to CX servers
 
 ## Development
 
@@ -101,11 +101,11 @@ No environment variables required for local development. The beta page uses clie
 
 ## Related Projects
 
-- [Cortex Linux CLI](https://github.com/cortexlinux/cortex) - The main Cortex Linux project
+- [CX Linux CLI](https://github.com/cortexlinux/cortex) - The main CX Linux project
 
 ## License
 
-This project is part of the Cortex Linux ecosystem. See the main repository for license information.
+This project is part of the CX Linux ecosystem. See the main repository for license information.
 
 ---
 

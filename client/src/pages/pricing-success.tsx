@@ -27,8 +27,8 @@ export default function PricingSuccessPage() {
 
   useEffect(() => {
     const cleanup = updateSEO({
-      title: 'Subscription Confirmed | Cortex Linux',
-      description: 'Your Cortex Linux subscription has been confirmed. Welcome to the team!',
+      title: 'Subscription Confirmed | CX Linux',
+      description: 'Your CX Linux subscription has been confirmed. Welcome to the team!',
       canonicalPath: '/pricing/success',
       noIndex: true
     });
@@ -153,7 +153,7 @@ export default function PricingSuccessPage() {
           className="text-center"
         >
           <h1 className="text-4xl font-bold text-white mb-2">
-            Welcome to Cortex {sessionData?.planName}!
+            Welcome to CX {sessionData?.planName}!
           </h1>
           <p className="text-gray-400 text-lg mb-8">
             Your 14-day free trial has started. Here's everything you need to get going.
@@ -185,7 +185,7 @@ export default function PricingSuccessPage() {
             </Button>
           </div>
           <p className="text-gray-500 text-sm mt-3">
-            Save this key - you'll need it to activate Cortex on your systems.
+            Save this key - you'll need it to activate CX on your systems.
           </p>
         </motion.div>
 
@@ -196,7 +196,7 @@ export default function PricingSuccessPage() {
           transition={{ delay: 0.4 }}
           className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6"
         >
-          <h2 className="text-lg font-semibold text-white mb-4">Install Cortex Pro</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Install CX Pro</h2>
           
           <div className="space-y-4">
             <div>
@@ -259,11 +259,11 @@ export default function PricingSuccessPage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">2</span>
-              <span>Run the install command above to activate Cortex</span>
+              <span>Run the install command above to activate CX</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">3</span>
-              <span>Start using natural language: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cortex install nginx</code></span>
+              <span>Start using natural language: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx install nginx</code></span>
             </li>
           </ol>
         </motion.div>
@@ -288,7 +288,7 @@ export default function PricingSuccessPage() {
           </a>
           <span className="text-gray-600">|</span>
           <a
-            href="https://github.com/cortexlinux/cortex"
+            href="https://github.com/cortexlinux/cx"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"

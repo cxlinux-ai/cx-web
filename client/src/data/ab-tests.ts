@@ -33,7 +33,7 @@ export const homeCtaTest: ABTestConfig = {
       id: 'control',
       weight: 50,
       content: {
-        primary_cta: 'Try Cortex Now',
+        primary_cta: 'Try CX Now',
         secondary_cta: 'View on GitHub',
       },
     },

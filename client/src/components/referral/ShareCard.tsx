@@ -38,7 +38,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
   const renderWaitlistCard = () => (
     <div className="share-card waitlist-card">
       <div className="card-content">
-        <div className="card-logo">🧠 Cortex Linux</div>
+        <div className="card-logo">🧠 CX Linux</div>
         <div className="card-position">
           <span className="position-number">#{data.position?.toLocaleString()}</span>
           <span className="position-text">in line for early access</span>
@@ -46,7 +46,7 @@ export function ShareCard({ type, data }: ShareCardProps) {
         <div className="card-cta">Join the waitlist →</div>
       </div>
       <div className="card-footer">
-        <span className="powered-by">Powered by Cortex Linux</span>
+        <span className="powered-by">Powered by CX Linux</span>
       </div>
     </div>
   );
@@ -55,9 +55,9 @@ export function ShareCard({ type, data }: ShareCardProps) {
     <div className="share-card install-card">
       <div className="card-content">
         <div className="card-icon">🎉</div>
-        <h3>Successfully installed Cortex Linux!</h3>
+        <h3>Successfully installed CX Linux!</h3>
         {data.osInfo && <p className="os-info">{data.osInfo}</p>}
-        <div className="card-badge">🧠 Powered by Cortex Linux</div>
+        <div className="card-badge">🧠 Powered by CX Linux</div>
       </div>
       <div className="card-cta">
         Get AI-powered Linux at cortexlinux.com
@@ -70,10 +70,10 @@ export function ShareCard({ type, data }: ShareCardProps) {
       <div className="card-content">
         <div className="card-header">
           <span className="card-icon">⚡</span>
-          <span className="card-label">Cortex Linux</span>
+          <span className="card-label">CX Linux</span>
         </div>
         <div className="command-block">
-          <div className="prompt">$ cortex</div>
+          <div className="prompt">$ cx</div>
           <div className="command">"{data.command}"</div>
         </div>
         {data.result && (
@@ -96,18 +96,18 @@ export function ShareCard({ type, data }: ShareCardProps) {
       <div className="badge-preview">
         <img
           src={`https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge`}
-          alt="Powered by Cortex Linux"
+          alt="Powered by CX Linux"
         />
       </div>
       <div className="badge-code">
         <h4>Markdown</h4>
         <code>
-          {`[![Powered by Cortex Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`}
+          {`[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`}
         </code>
         <button
           onClick={() =>
             handleCopy(
-              `[![Powered by Cortex Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`
+              `[![Powered by CX Linux](https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge)](${getShareUrl()})`
             )
           }
           className="copy-btn"
@@ -118,12 +118,12 @@ export function ShareCard({ type, data }: ShareCardProps) {
       <div className="badge-code">
         <h4>HTML</h4>
         <code>
-          {`<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by Cortex Linux" /></a>`}
+          {`<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`}
         </code>
         <button
           onClick={() =>
             handleCopy(
-              `<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by Cortex Linux" /></a>`
+              `<a href="${getShareUrl()}"><img src="https://img.shields.io/badge/Powered%20by-Cortex%20Linux-blue?style=for-the-badge" alt="Powered by CX Linux" /></a>`
             )
           }
           className="copy-btn"
@@ -154,10 +154,10 @@ export function ShareCard({ type, data }: ShareCardProps) {
 
   const shareCard = () => {
     const shareText = {
-      waitlist: `Just joined the Cortex Linux waitlist! AI that actually understands Linux. Join me 👇`,
-      install: `Just installed Cortex Linux! 🧠 AI-powered Linux is here.`,
-      command: `This Cortex Linux command just saved me ${data.timeSaved || "so much time"}!`,
-      badge: `Using Cortex Linux on my projects!`,
+      waitlist: `Just joined the CX Linux waitlist! AI that actually understands Linux. Join me 👇`,
+      install: `Just installed CX Linux! 🧠 AI-powered Linux is here.`,
+      command: `This CX Linux command just saved me ${data.timeSaved || "so much time"}!`,
+      badge: `Using CX Linux on my projects!`,
     };
 
     const text = encodeURIComponent(shareText[type]);

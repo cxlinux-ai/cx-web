@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
     id: "1",
     slug: "what-ai-native-linux-means",
     title: "What is AI-Native Linux? A Practical Guide",
-    seoTitle: "What is AI-Native Linux? A Practical Guide | Cortex Linux",
+    seoTitle: "What is AI-Native Linux? A Practical Guide | CX Linux",
     seoDescription: "Deep dive into AI-native Linux architecture. Learn how intent-based computing, GPU optimization, and declarative configs transform ML workflows.",
     excerpt: "Beyond buzzwords: understand how AI-native operating systems fundamentally change developer workflows with intent-based computing and automatic optimization.",
     content: `**The 3 AM wake-up call nobody wants:** A senior ML engineer at a Fortune 500 company spent 14 hours debugging why their PyTorch installation suddenly broke after a routine system update. The culprit? A kernel upgrade silently broke the NVIDIA driver, which broke CUDA, which broke everything. Three sprints of work—gone. Their model training pipeline sat idle for a week while they manually rebuilt their environment from scratch.
@@ -112,7 +112,7 @@ Entity Extraction:
 
 \`\`\`bash
 # The system automatically runs hardware detection
-$ cortex hw detect --json
+$ cx hw detect --json
 {
   "gpu": {
     "vendor": "nvidia",
@@ -223,7 +223,7 @@ The AI-native approach:
 
 \`\`\`bash
 # AI-Native: Kernel updates are transactional
-cortex system upgrade
+cx system upgrade
 
 # Output:
 # Analyzing upgrade path...
@@ -246,7 +246,7 @@ cortex system upgrade
 
 ---
 
-## CLI Deep Dive: Cortex Commands vs Traditional Equivalents
+## CLI Deep Dive: CX Commands vs Traditional Equivalents
 
 ### Environment Setup
 
@@ -271,10 +271,10 @@ pip install flash-attn --no-build-isolation
 # Debug for 30 more minutes...
 \`\`\`
 
-**Cortex equivalent:**
+**CX equivalent:**
 
 \`\`\`bash
-cortex env create ml-training --preset pytorch-gpu
+cx env create ml-training --preset pytorch-gpu
 
 # System automatically:
 # - Detects GPU and CUDA requirements
@@ -305,10 +305,10 @@ sudo apt install nvidia-driver-535
 sudo reboot
 \`\`\`
 
-**Cortex equivalent:**
+**CX equivalent:**
 
 \`\`\`bash
-cortex gpu setup
+cx gpu setup
 
 # Output:
 # Detected: NVIDIA RTX 4090
@@ -340,10 +340,10 @@ pip install package-b
 # Still fails because transitive dependency conflicts...
 \`\`\`
 
-**Cortex equivalent:**
+**CX equivalent:**
 
 \`\`\`bash
-cortex add package-a package-b
+cx add package-a package-b
 
 # Output:
 # ⚠ Version conflict detected:
@@ -391,7 +391,7 @@ The result: "Works on my machine" becomes a genuine mystery.
 ### AI-Native Solution: Hardware-Aware Lockfiles
 
 \`\`\`yaml
-# cortex.lock
+# cx.lock
 packages:
   torch:
     version: "2.1.2+cu121"
@@ -420,7 +420,7 @@ hardware_requirements:
 
 We measured end-to-end setup times for common ML environments on fresh installations:
 
-| Environment | Traditional Linux | AI-Native (Cortex) | Speedup |
+| Environment | Traditional Linux | AI-Native (CX) | Speedup |
 |-------------|-------------------|-------------------|---------|
 | PyTorch + CUDA (fresh install) | 127 min | 8 min | 15.9x |
 | Full LLM training stack (DeepSpeed, Flash Attn) | 240+ min | 15 min | 16x |
@@ -439,17 +439,17 @@ Sometimes the NLP parser misinterprets intent. Here's how to handle common cases
 
 | User Said | System Understood | Actual Intent | Solution |
 |-----------|-------------------|---------------|----------|
-| "Install TensorFlow" | Install tensorflow (CPU) | TensorFlow with GPU | \`cortex add tensorflow --gpu\` |
-| "Set up Python" | Install Python 3.12 (latest) | Python 3.10 for compatibility | \`cortex env create --python 3.10\` |
-| "Update PyTorch" | Upgrade to latest PyTorch | Update within compatible range | \`cortex update torch --compatible\` |
-| "Fix my GPU" | Reinstall drivers | Diagnose specific issue | \`cortex gpu diagnose\` first |
-| "Make it faster" | Enable general optimizations | Specific optimization needed | Be explicit: \`cortex optimize --memory\` or \`--throughput\` |
+| "Install TensorFlow" | Install tensorflow (CPU) | TensorFlow with GPU | \`cx add tensorflow --gpu\` |
+| "Set up Python" | Install Python 3.12 (latest) | Python 3.10 for compatibility | \`cx env create --python 3.10\` |
+| "Update PyTorch" | Upgrade to latest PyTorch | Update within compatible range | \`cx update torch --compatible\` |
+| "Fix my GPU" | Reinstall drivers | Diagnose specific issue | \`cx gpu diagnose\` first |
+| "Make it faster" | Enable general optimizations | Specific optimization needed | Be explicit: \`cx optimize --memory\` or \`--throughput\` |
 
 ### Debugging Intent Resolution
 
 \`\`\`bash
 # See how your command was interpreted
-cortex --explain "set up environment for fine-tuning LLaMA"
+cx --explain "set up environment for fine-tuning LLaMA"
 
 # Output:
 # Intent Analysis:
@@ -516,14 +516,14 @@ The future of ML infrastructure isn't about memorizing more commands or debuggin
 - **AI-native systems are intent-based, not instruction-based** - You describe what you want to achieve, and the system determines the optimal execution path
 - **Hardware-aware dependency resolution eliminates compatibility nightmares** - The system automatically validates GPU drivers, CUDA versions, and library compatibility before installation
 - **Atomic transactions with instant rollback provide safety nets** - Every system change is reversible, turning multi-hour debugging sessions into seconds of recovery
-- **Cortex Linux implements these principles at the kernel level** - This isn't a wrapper or tool; it's a fundamental reimagining of how operating systems should work for ML
+- **CX Linux implements these principles at the kernel level** - This isn't a wrapper or tool; it's a fundamental reimagining of how operating systems should work for ML
 
 Ready to eliminate config hell entirely? Check out our guide on [How to Run ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell) for step-by-step implementation.
 `,
     date: "2025-12-08",
     readingTime: "15 min read",
     wordCount: 2480,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Fundamentals",
     image: "/stock_images/artificial_intellige_4e290bd4.jpg",
     imageAlt: "Abstract artificial intelligence concept with glowing neural connections representing AI-native Linux",
@@ -534,7 +534,7 @@ Ready to eliminate config hell entirely? Check out our guide on [How to Run ML W
     id: "2",
     slug: "ml-workloads-without-config-hell",
     title: "How to Run ML Workloads Without Config Hell",
-    seoTitle: "Eliminate ML Config Hell: Declarative Environments & Reproducible Workflows | Cortex",
+    seoTitle: "Eliminate ML Config Hell: Declarative Environments & Reproducible Workflows | CX",
     seoDescription: "Step-by-step guide to eliminating hours of ML environment setup. Master declarative configs, snapshot management, and dependency resolution.",
     excerpt: "A step-by-step guide to eliminating the hours spent on environment setup. From CUDA drivers to Python dependencies, master the modern approach.",
     content: `**$47,000 in wasted GPU compute.** That's what one startup burned through in a single month because their ML environments were inconsistent across their team. Different CUDA versions, mismatched PyTorch builds, and driver conflicts meant half their training runs failed silently—producing models that looked trained but performed at random chance in production.
@@ -565,7 +565,7 @@ A "simple" PyTorch installation spans four distinct layers: the **Application La
 
 ## The Dependency Resolution Architecture
 
-Cortex implements a unified dependency resolver that works through multiple phases:
+CX implements a unified dependency resolver that works through multiple phases:
 
 **Phase 1: Hardware Introspection** - The system queries your hardware configuration including GPU model, compute capability, driver version, maximum CUDA version supported, available cuDNN versions, NVLink status, and PCIe generation.
 
@@ -585,22 +585,22 @@ This tutorial walks through setting up a complete PyTorch environment with GPU s
 
 \`\`\`bash
 # Create a new ML environment
-cortex env create llm-training
+cx env create llm-training
 
 # Output:
 # Creating environment 'llm-training'...
 # Python version: 3.11.5 (detected from system)
-# Base path: ~/.cortex/envs/llm-training
+# Base path: ~/.cx/envs/llm-training
 # 
 # Environment created. Activate with:
-#   cortex env use llm-training
+#   cx env use llm-training
 \`\`\`
 
 ### Step 2: Configure Hardware Requirements
 
 \`\`\`bash
 # Declare what hardware you need
-cortex env require gpu --min-memory 16 --compute-capability 8.0
+cx env require gpu --min-memory 16 --compute-capability 8.0
 
 # Output:
 # Hardware requirements set:
@@ -617,7 +617,7 @@ cortex env require gpu --min-memory 16 --compute-capability 8.0
 
 \`\`\`bash
 # Install PyTorch with automatic CUDA detection
-cortex add pytorch --gpu
+cx add pytorch --gpu
 
 # Output:
 # Resolving pytorch installation...
@@ -657,7 +657,7 @@ cortex add pytorch --gpu
 
 \`\`\`bash
 # Add Hugging Face ecosystem and Flash Attention
-cortex add transformers accelerate flash-attn
+cx add transformers accelerate flash-attn
 
 # Output:
 # Resolving dependencies...
@@ -695,7 +695,7 @@ cortex add transformers accelerate flash-attn
 
 \`\`\`bash
 # Run comprehensive validation
-cortex validate
+cx validate
 
 # Output:
 # Running validation suite...
@@ -729,12 +729,12 @@ cortex validate
 
 ## Configuration Files Deep Dive
 
-### The .cortexrc File
+### The .cxrc File
 
-The \`.cortexrc\` file in your home directory controls global Cortex behavior:
+The \`.cxrc\` file in your home directory controls global CX behavior:
 
 \`\`\`yaml
-# ~/.cortexrc
+# ~/.cxrc
 version: 1
 
 # Default behavior for new environments
@@ -766,7 +766,7 @@ snapshots:
 # Logging
 logging:
   level: "info"  # debug, info, warn, error
-  file: "~/.cortex/logs/cortex.log"
+  file: "~/.cx/logs/cx.log"
   max_size_mb: 100
 \`\`\`
 
@@ -776,7 +776,7 @@ Each environment can have a declarative manifest:
 
 \`\`\`yaml
 # cortex-env.yaml
-apiVersion: cortex/v1
+apiVersion: cx/v1
 kind: Environment
 metadata:
   name: llm-training
@@ -836,10 +836,10 @@ spec:
 Apply with:
 
 \`\`\`bash
-cortex env apply cortex-env.yaml
+cx env apply cortex-env.yaml
 
 # Or create from manifest
-cortex env create --from cortex-env.yaml
+cx env create --from cortex-env.yaml
 \`\`\`
 
 ---
@@ -857,7 +857,7 @@ for execution on the device
 
 **Diagnosis:**
 \`\`\`bash
-cortex diagnose cuda-mismatch
+cx diagnose cuda-mismatch
 
 # Output:
 # CUDA Version Analysis:
@@ -869,12 +869,12 @@ cortex diagnose cuda-mismatch
 # While forward compatible, kernel generation may fail.
 #
 # Recommended fix:
-#   cortex update pytorch --match-cuda
+#   cx update pytorch --match-cuda
 \`\`\`
 
 **Fix:**
 \`\`\`bash
-cortex repair cuda-mismatch --auto
+cx repair cuda-mismatch --auto
 
 # Reinstalls PyTorch with matching CUDA version
 \`\`\`
@@ -890,7 +890,7 @@ with the NVIDIA driver
 
 **Diagnosis:**
 \`\`\`bash
-cortex diagnose driver-failure
+cx diagnose driver-failure
 
 # Output:
 # Driver Status Analysis:
@@ -902,12 +902,12 @@ cortex diagnose driver-failure
 # Issue: Driver not built for current kernel
 #
 # Recommended fix:
-#   cortex driver rebuild
+#   cx driver rebuild
 \`\`\`
 
 **Fix:**
 \`\`\`bash
-cortex driver rebuild
+cx driver rebuild
 
 # Automatically installs headers and rebuilds DKMS module
 \`\`\`
@@ -923,7 +923,7 @@ No such file or directory
 
 **Diagnosis:**
 \`\`\`bash
-cortex diagnose library-path
+cx diagnose library-path
 
 # Output:
 # Library Path Analysis:
@@ -937,12 +937,12 @@ cortex diagnose library-path
 #   cuDNN installation: NOT DETECTED
 #
 # Recommended fix:
-#   cortex add cudnn
+#   cx add cudnn
 \`\`\`
 
 **Fix:**
 \`\`\`bash
-cortex repair library-path
+cx repair library-path
 
 # Installs missing libraries and configures paths
 \`\`\`
@@ -957,7 +957,7 @@ RuntimeError: FlashAttention only supports Ampere GPUs or newer
 
 **Diagnosis:**
 \`\`\`bash
-cortex diagnose flash-attn
+cx diagnose flash-attn
 
 # Output:
 # Flash Attention Compatibility:
@@ -980,7 +980,7 @@ When something goes wrong, follow this systematic debugging approach:
 ### Step 1: Capture Current State
 
 \`\`\`bash
-cortex debug capture
+cx debug capture
 
 # Output:
 # Capturing debug information...
@@ -990,13 +990,13 @@ cortex debug capture
 #   ✓ Installed packages
 #   ✓ Recent logs
 #
-# Debug bundle created: ~/.cortex/debug/debug-2025-01-15-143022.tar.gz
+# Debug bundle created: ~/.cx/debug/debug-2025-01-15-143022.tar.gz
 \`\`\`
 
 ### Step 2: Run Diagnostic Suite
 
 \`\`\`bash
-cortex diagnose --full
+cx diagnose --full
 
 # Output:
 # Running full diagnostic suite...
@@ -1032,35 +1032,35 @@ cortex diagnose --full
 
 \`\`\`bash
 # GPU-specific diagnostics
-cortex diagnose gpu --verbose
+cx diagnose gpu --verbose
 
 # Python environment diagnostics
-cortex diagnose python-env
+cx diagnose python-env
 
 # Network/download diagnostics
-cortex diagnose network
+cx diagnose network
 \`\`\`
 
 ### Step 4: Review Logs
 
 \`\`\`bash
 # View recent operations
-cortex logs --last 50
+cx logs --last 50
 
 # Filter by severity
-cortex logs --level error
+cx logs --level error
 
 # View specific operation
-cortex logs --operation install-pytorch-2025-01-15
+cx logs --operation install-pytorch-2025-01-15
 \`\`\`
 
 ---
 
-## Manual Setup vs Cortex: Time Comparison
+## Manual Setup vs CX: Time Comparison
 
 We conducted controlled experiments measuring setup time for common ML configurations:
 
-| Configuration | Manual Setup | Cortex | Time Saved | Success Rate Improvement |
+| Configuration | Manual Setup | CX | Time Saved | Success Rate Improvement |
 |---------------|--------------|--------|------------|-------------------------|
 | PyTorch + CUDA (basic) | 45-90 min | 6 min | 87-93% | 78% → 99% |
 | PyTorch + CUDA + cuDNN | 60-120 min | 8 min | 87-93% | 72% → 99% |
@@ -1084,7 +1084,7 @@ Breakdown of time spent in manual PyTorch + CUDA setup:
 | Resolving pip conflicts | 5-20 | 13% |
 | Validation and testing | 5-10 | 5% |
 
-Cortex eliminates the research and debugging phases entirely, which account for 67% of manual setup time.
+CX eliminates the research and debugging phases entirely, which account for 67% of manual setup time.
 
 ---
 
@@ -1095,7 +1095,7 @@ Before starting any training run, execute this checklist:
 ### Automated Pre-flight
 
 \`\`\`bash
-cortex preflight
+cx preflight
 
 # Output:
 # Running pre-flight checks for training...
@@ -1131,7 +1131,7 @@ cortex preflight
 
 ### Manual Checklist
 
-- [ ] **Environment activated** - \`cortex env use <name>\` executed
+- [ ] **Environment activated** - \`cx env use <name>\` executed
 - [ ] **GPU accessible** - \`nvidia-smi\` shows expected GPU(s)
 - [ ] **CUDA functional** - \`python -c "import torch; print(torch.cuda.is_available())"\` returns True
 - [ ] **Sufficient GPU memory** - Free VRAM > expected model + batch size requirement
@@ -1140,7 +1140,7 @@ cortex preflight
 - [ ] **Data accessible** - Training data path exists and is readable
 - [ ] **Model weights downloaded** - If using pretrained models
 - [ ] **Environment variables set** - CUDA_VISIBLE_DEVICES, etc.
-- [ ] **Snapshot created** - \`cortex snapshot create pre-training\` for rollback
+- [ ] **Snapshot created** - \`cx snapshot create pre-training\` for rollback
 
 ---
 
@@ -1156,14 +1156,14 @@ Config hell is not an inevitable part of ML engineering—it's a symptom of usin
 - **Dependencies span multiple system layers** - You need a resolver that understands kernel, drivers, CUDA, and Python together
 - **Hardware compatibility is non-negotiable** - Version selection must account for GPU capabilities and driver compatibility
 - **Rollback capability is essential** - Use snapshots so any change is instantly reversible
-- **Cortex Linux eliminates config hell** - Declarative environments, atomic transactions, and automatic validation prevent issues before they occur
+- **CX Linux eliminates config hell** - Declarative environments, atomic transactions, and automatic validation prevent issues before they occur
 
 > **Related Reading:** [How to Understand AI-Native Linux](/blog/what-ai-native-linux-means) | [Building Reproducible ML Pipelines](/blog/building-reproducible-ml-pipelines) | [GPU Optimization: Real Techniques](/blog/gpu-optimization-real-techniques)
 `,
     date: "2025-12-07",
     readingTime: "14 min read",
     wordCount: 2350,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/machine_learning_ai__1a6c2387.jpg",
     imageAlt: "Machine learning AI visualization with data flowing through neural network representing ML workloads",
@@ -1174,7 +1174,7 @@ Config hell is not an inevitable part of ML engineering—it's a symptom of usin
     id: "3",
     slug: "gpu-optimization-real-techniques",
     title: "GPU Optimization: Techniques That Actually Work",
-    seoTitle: "GPU Optimization: Techniques That Actually Work | Cortex Linux",
+    seoTitle: "GPU Optimization: Techniques That Actually Work | CX Linux",
     seoDescription: "Cut through GPU optimization noise. Learn memory management, mixed precision, and kernel optimization with real benchmarks and actionable code.",
     excerpt: "Cut through the noise. These are the GPU optimization techniques that deliver measurable performance gains, backed by benchmarks and production experience.",
     content: `**A team at a well-funded AI startup watched $180,000 evaporate in 6 weeks.** Their training runs took 3x longer than expected because nobody noticed their A100s were running at 30% utilization. The GPUs were starving—waiting on data that was bottlenecked at the CPU. By the time they diagnosed the issue, they'd burned through their entire quarterly compute budget on what should have been a 2-week training run.
@@ -1805,14 +1805,14 @@ The key insight: profile before optimizing. A 10-minute profiling session can sa
 - **Profile before optimizing** - A 10-minute profiling session with PyTorch Profiler or Nsight can save hours of implementing ineffective optimizations
 - **Flash Attention and mixed precision deliver the biggest gains** - These two techniques alone can double throughput for transformer models
 - **Memory fragmentation kills performance silently** - Configure PYTORCH_CUDA_ALLOC_CONF to prevent memory allocation failures during long training runs
-- **Cortex Linux provides built-in profiling and optimization tools** - Automatic hardware detection and tuning recommendations based on your specific GPU
+- **CX Linux provides built-in profiling and optimization tools** - Automatic hardware detection and tuning recommendations based on your specific GPU
 
 > **Related Reading:** [How to Run ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell) | [Multi-GPU Training Setup Guide](/blog/multi-gpu-training-setup-guide) | [Cost Optimization for ML Infrastructure](/blog/cost-optimization-ml-infrastructure)
 `,
     date: "2025-12-06",
     readingTime: "18 min read",
     wordCount: 2420,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Performance",
     image: "/stock_images/gpu_graphics_card_co_c8e42e49.jpg",
     imageAlt: "High-performance GPU graphics card with RGB lighting for ML optimization",
@@ -1823,7 +1823,7 @@ The key insight: profile before optimizing. A 10-minute profiling session can sa
     id: "4",
     slug: "building-reproducible-ml-pipelines",
     title: "Reproducible ML Pipelines: From Chaos to Production",
-    seoTitle: "Reproducible ML Pipelines: From Chaos to Production | Cortex Linux",
+    seoTitle: "Reproducible ML Pipelines: From Chaos to Production | CX Linux",
     seoDescription: "Master ML pipeline reproducibility with DVC integration, artifact tracking, CI/CD examples, and debugging strategies. Complete guide with code examples.",
     excerpt: "Stop debugging 'why did my model change?' forever. Learn the complete system for reproducible ML pipelines from data versioning to deployment.",
     content: `**"We can't reproduce last quarter's results."** Those six words cost a biotech company their Series B. They'd shown promising drug discovery results to investors, but when due diligence came, their ML team couldn't recreate the model performance. The training data had silently changed. The random seeds weren't logged. The exact package versions were lost in a Jupyter notebook that someone had since overwritten.
@@ -2650,14 +2650,14 @@ Start with DVC for data versioning—it integrates with your existing git workfl
 - **Lock dependencies with exact versions and cryptographic hashes** - Approximate version constraints (>=, ~=) guarantee future breakage
 - **Automate verification with CI/CD pipelines** - Every commit should trigger reproducibility checks that prove your experiments can be replicated
 - **Start with DVC for data versioning** - It integrates with git and provides immediate value without requiring infrastructure changes
-- **Cortex Linux provides built-in environment locking** - Declarative configs and atomic snapshots eliminate environment drift
+- **CX Linux provides built-in environment locking** - Declarative configs and atomic snapshots eliminate environment drift
 
 For more on environment management, see [How to Run ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell).
 `,
     date: "2025-12-05",
     readingTime: "13 min read",
     wordCount: 2380,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Best Practices",
     image: "/stock_images/data_pipeline_workfl_0db74564.jpg",
     imageAlt: "Data pipeline workflow visualization representing reproducible ML pipelines",
@@ -2668,7 +2668,7 @@ For more on environment management, see [How to Run ML Workloads Without Config 
     id: "5",
     slug: "container-vs-bare-metal-ml",
     title: "Container vs Bare Metal for ML: How to Choose",
-    seoTitle: "Container vs Bare Metal for ML: How to Choose | Cortex Linux",
+    seoTitle: "Container vs Bare Metal for ML: How to Choose | CX Linux",
     seoDescription: "Comprehensive comparison of containerized vs bare-metal ML infrastructure. Performance benchmarks, GPU passthrough, Kubernetes analysis, and cost breakdown.",
     excerpt: "Cut through the container hype. When does Docker make sense for ML, and when is bare metal the right choice? Data-driven analysis inside.",
     content: `**The CTO called it "the most expensive Docker run command in company history."** A fintech team containerized their fraud detection model without understanding GPU passthrough overhead. In production, their P99 latency jumped from 8ms to 47ms—well outside SLA. They lost three enterprise contracts worth $2.3M ARR before diagnosing the issue.
@@ -3213,14 +3213,14 @@ For most production ML workloads, containers with proper configuration add only 
 - **Choose bare metal for long training runs and maximum performance** - Multi-day training jobs and sub-millisecond inference latency favor bare metal
 - **Choose containers for team collaboration and reproducibility** - Environment isolation and portability benefits outweigh marginal performance loss
 - **Hybrid approaches work well** - Use containers for development and inference, bare metal for production training
-- **Cortex Linux optimizes both environments** - Hardware-aware configurations work seamlessly whether containerized or bare metal
+- **CX Linux optimizes both environments** - Hardware-aware configurations work seamlessly whether containerized or bare metal
 
 For guidance on GPU optimization within either environment, see [GPU Optimization: Real Techniques That Actually Matter](/blog/gpu-optimization-real-techniques).
 `,
     date: "2025-12-04",
     readingTime: "14 min read",
     wordCount: 2450,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Infrastructure",
     image: "/stock_images/container_shipping_d_dfd02c5d.jpg",
     imageAlt: "Shipping containers representing containerized vs bare metal ML infrastructure choices",
@@ -3231,7 +3231,7 @@ For guidance on GPU optimization within either environment, see [GPU Optimizatio
     id: "6",
     slug: "multi-gpu-training-setup-guide",
     title: "Why Multi-GPU Training Breaks: Setup Guide That Actually Works",
-    seoTitle: "Multi-GPU Training Guide: DDP, FSDP, DeepSpeed & NCCL Tuning | Cortex",
+    seoTitle: "Multi-GPU Training Guide: DDP, FSDP, DeepSpeed & NCCL Tuning | CX",
     seoDescription: "Complete guide to multi-GPU training with PyTorch DDP, FSDP, and DeepSpeed. Includes NVLink topology, NCCL tuning, scaling benchmarks, and troubleshooting.",
     excerpt: "Scale from 1 GPU to 8 without wasting compute. Complete setup guide with code examples, topology visualization, and performance benchmarks.",
     content: `**8 GPUs. 1.2x speedup.** That's what a research team got after spending $400,000 on an 8x H100 server. They expected near-linear 8x speedup. Instead, their training was barely faster than a single GPU because their NCCL configuration was wrong, their batch size wasn't scaled, and their data loading was now the bottleneck.
@@ -3896,7 +3896,7 @@ Multi-GPU training unlocks significant speedups, but only with proper configurat
 - **Understand your topology first** - NVLink vs PCIe fundamentally changes your optimization strategy
 - **Choose the right parallelism strategy** - DDP for models that fit in memory, FSDP or DeepSpeed for larger models
 - **Tune NCCL settings** - Default settings are rarely optimal; NCCL_IB_DISABLE, buffer sizes, and ring order matter
-- **Cortex Linux simplifies multi-GPU setup** - Automatic topology detection and NCCL tuning eliminate common configuration pitfalls
+- **CX Linux simplifies multi-GPU setup** - Automatic topology detection and NCCL tuning eliminate common configuration pitfalls
 
 > **Related Reading:** [GPU Optimization: Real Techniques](/blog/gpu-optimization-real-techniques) | [Cost Optimization for ML Infrastructure](/blog/cost-optimization-ml-infrastructure)
 
@@ -3907,7 +3907,7 @@ For environment setup that just works, see [How to Run ML Workloads Without Conf
     date: "2025-12-03",
     readingTime: "15 min read",
     wordCount: 2420,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/developer_workstatio_dc319f2e.jpg",
     imageAlt: "Developer workstation with multiple GPUs for multi-GPU training setup",
@@ -3918,7 +3918,7 @@ For environment setup that just works, see [How to Run ML Workloads Without Conf
     id: "7",
     slug: "ml-debugging-finding-real-problem",
     title: "ML Debugging: Finding and Fixing Real Problems",
-    seoTitle: "ML Debugging: Finding and Fixing Real Problems | Cortex Linux",
+    seoTitle: "ML Debugging: Finding and Fixing Real Problems | CX Linux",
     seoDescription: "Master ML debugging with PyTorch profiling tools, memory analysis, gradient debugging, and systematic troubleshooting for training failures.",
     excerpt: "When your model refuses to learn, loss explodes, or training hangs mysteriously, you need a systematic approach. This guide covers the debugging techniques that actually work.",
     content: `**72 hours of training. Zero learning.** An ML engineer at a healthcare AI company ran a week-long training job on a cluster of A100s. The loss curve looked perfect—steadily decreasing, smooth convergence. When they evaluated the model, it performed at random chance. The bug? A single line: they'd accidentally frozen all layers except the final classifier head.
@@ -4727,7 +4727,7 @@ When training fails and you need to diagnose quickly, run through this checklist
 - [ ] Are you running in eval mode accidentally? Verify \`model.training == True\`
 - [ ] Is mixed precision causing issues? Try with full fp32
 - [ ] Is DataLoader num_workers causing deadlocks? Try \`num_workers=0\`
-- [ ] Are there CUDA/driver version mismatches? Run \`cortex diagnose cuda-mismatch\`
+- [ ] Are there CUDA/driver version mismatches? Run \`cx diagnose cuda-mismatch\`
 
 ### Nuclear Options (When All Else Fails)
 
@@ -4743,7 +4743,7 @@ When training fails and you need to diagnose quickly, run through this checklist
 
 ML debugging is a skill that improves with systematic practice. The key principles are: always verify assumptions, test components in isolation, and log everything for post-hoc analysis. When facing a mysterious failure, resist the urge to make random changes. Instead, form hypotheses and test them methodically.
 
-The debugging tools and techniques in this guide cover the most common failure modes. For environment-related issues, use [cortex diagnose](/blog/ml-workloads-without-config-hell) to identify configuration problems automatically.
+The debugging tools and techniques in this guide cover the most common failure modes. For environment-related issues, use [cx diagnose](/blog/ml-workloads-without-config-hell) to identify configuration problems automatically.
 
 ---
 
@@ -4753,7 +4753,7 @@ The debugging tools and techniques in this guide cover the most common failure m
 - **Use systematic isolation** - Binary search through your pipeline to locate the exact component causing failures
 - **Profile memory usage early** - OOM errors are easier to prevent than debug; use torch.cuda.memory_summary() regularly
 - **Check gradients for NaN/Inf values** - Exploding or vanishing gradients indicate learning rate or initialization problems
-- **Cortex Linux provides integrated debugging tools** - Built-in diagnostics and profiling simplify the debugging workflow
+- **CX Linux provides integrated debugging tools** - Built-in diagnostics and profiling simplify the debugging workflow
 
 > **Related Reading:** [GPU Optimization: Real Techniques](/blog/gpu-optimization-real-techniques) | [Building Reproducible ML Pipelines](/blog/building-reproducible-ml-pipelines) | [Multi-GPU Training Setup](/blog/multi-gpu-training-setup-guide)
 
@@ -4762,7 +4762,7 @@ Remember: Every bug you debug teaches you something about ML systems. Document y
     date: "2025-12-02",
     readingTime: "14 min read",
     wordCount: 2350,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Troubleshooting",
     image: "/stock_images/debugging_code_error_66087c7b.jpg",
     imageAlt: "Code debugging interface showing error detection and troubleshooting for ML problems",
@@ -4773,7 +4773,7 @@ Remember: Every bug you debug teaches you something about ML systems. Document y
     id: "8",
     slug: "cost-optimization-ml-infrastructure",
     title: "ML Infrastructure Costs: Practical Strategies",
-    seoTitle: "ML Infrastructure Costs: Practical Strategies | Cortex Linux",
+    seoTitle: "ML Infrastructure Costs: Practical Strategies | CX Linux",
     seoDescription: "Reduce ML infrastructure costs by 40-70% with proven strategies. Compare cloud pricing, master spot instances, and optimize training and inference expenses.",
     excerpt: "Cloud ML costs can spiral out of control fast. Learn the strategies that save teams 40-70% on GPU compute while maintaining training velocity and reliability.",
     content: `**$340,000 cloud bill. For a model that never shipped.** A Series A startup scaled their training infrastructure "just in case" before actually needing it. They spun up reserved instances for GPUs they used 4 hours a week. They stored every checkpoint "for reproducibility" without ever deleting old experiments. They ran inference endpoints 24/7 for an internal demo that got used twice.
@@ -5344,14 +5344,14 @@ The key is treating cost optimization as an ongoing practice, not a one-time pro
 - **Right-size your instances** - Most teams over-provision; start small and scale based on actual utilization metrics
 - **Implement automatic scaling** - Scale inference endpoints based on queue depth, not just CPU metrics
 - **Track cost per experiment** - Visibility into spending patterns enables informed optimization decisions
-- **Cortex Linux optimizes resource utilization automatically** - Built-in monitoring and auto-scaling reduce operational overhead
+- **CX Linux optimizes resource utilization automatically** - Built-in monitoring and auto-scaling reduce operational overhead
 
 > **Related Reading:** [How to Understand AI-Native Linux](/blog/what-ai-native-linux-means) | [GPU Optimization: Real Techniques](/blog/gpu-optimization-real-techniques) | [Multi-GPU Training Setup](/blog/multi-gpu-training-setup-guide)
 `,
     date: "2025-12-01",
     readingTime: "14 min read",
     wordCount: 2480,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Best Practices",
     image: "/stock_images/cloud_computing_cost_fffca8e4.jpg",
     imageAlt: "Cloud computing cost analysis dashboard representing ML infrastructure cost strategies",
@@ -5362,7 +5362,7 @@ The key is treating cost optimization as an ongoing practice, not a one-time pro
     id: "9",
     slug: "security-best-practices-ml-systems",
     title: "ML Security: Best Practices That Actually Work",
-    seoTitle: "ML Security: Best Practices That Actually Work | Cortex Linux",
+    seoTitle: "ML Security: Best Practices That Actually Work | CX Linux",
     seoDescription: "Comprehensive ML security guide covering model theft prevention, data poisoning detection, API security, secrets management, and compliance requirements.",
     excerpt: "ML systems introduce unique security challenges from model theft to data poisoning. This guide covers the security practices every ML team needs to implement.",
     content: `**Model stolen. Competitor ships identical product 6 weeks later.** An AI startup discovered their proprietary computer vision model—representing 18 months of R&D and $2.4M in training compute—was being sold on a Chinese marketplace for $500. The theft vector? A former contractor who'd had access to the model weights and no audit trail showing they'd downloaded them.
@@ -5910,14 +5910,14 @@ Start with the fundamentals: strong access control, encryption, and logging. The
 - **Data poisoning is an underappreciated threat** - Validate training data integrity and monitor for distribution shifts
 - **Secrets management is critical** - Never commit API keys; use environment variables and vault systems
 - **Supply chain attacks target ML pipelines** - Verify package signatures and use dependency scanning tools
-- **Cortex Linux provides security-first infrastructure** - Built-in encryption, access controls, and audit logging reduce security overhead
+- **CX Linux provides security-first infrastructure** - Built-in encryption, access controls, and audit logging reduce security overhead
 
 > **Related Reading:** [How to Understand AI-Native Linux](/blog/what-ai-native-linux-means) | [Building Reproducible ML Pipelines](/blog/building-reproducible-ml-pipelines) | [Container vs Bare Metal for ML](/blog/container-vs-bare-metal-ml)
 `,
     date: "2025-11-30",
     readingTime: "15 min read",
     wordCount: 2510,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Security",
     image: "/stock_images/cybersecurity_padloc_32c383b4.jpg",
     imageAlt: "Cybersecurity padlock with digital protection representing ML security best practices",
@@ -5928,7 +5928,7 @@ Start with the fundamentals: strong access control, encryption, and logging. The
     id: "10",
     slug: "future-ai-native-computing",
     title: "Future of AI-Native Computing: 2025-2030",
-    seoTitle: "Future of AI-Native Computing: 2025-2030 | Cortex Linux",
+    seoTitle: "Future of AI-Native Computing: 2025-2030 | CX Linux",
     seoDescription: "Explore the future of ML infrastructure—from custom silicon to edge AI, AutoML to energy efficiency. Strategic insights for building forward-looking ML platforms.",
     excerpt: "The ML infrastructure landscape is evolving rapidly. Here's where it's headed and what that means for teams building ML platforms today.",
     content: `**"We bet on the wrong framework. Twice."** A autonomous vehicle company rewrote their entire perception stack from TensorFlow to PyTorch in 2019, then spent 2022 partially migrating to JAX for TPU support, then pivoted again when PyTorch 2.0 closed the compiler gap. Each migration cost 6-9 months of engineering time and tens of millions in delayed products.
@@ -6232,14 +6232,14 @@ For teams building ML platforms today, the key is balancing current needs with f
 - **Edge AI deployment will grow 10x** - Models running on-device enable privacy-preserving and low-latency applications
 - **Energy efficiency becomes a competitive advantage** - Sustainability pressures and electricity costs drive optimization focus
 - **Build for hardware portability** - Avoid framework lock-in; abstraction layers future-proof your infrastructure
-- **Cortex Linux is designed for this future** - AI-native architecture adapts to emerging hardware and software trends
+- **CX Linux is designed for this future** - AI-native architecture adapts to emerging hardware and software trends
 
 The future of computing is AI-native. The infrastructure we build today determines how well we can capitalize on that future.
 `,
     date: "2025-11-29",
     readingTime: "14 min read",
     wordCount: 2450,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Industry Trends",
     image: "/stock_images/futuristic_smart_cit_51642b32.jpg",
     imageAlt: "Futuristic smart city with AI technology representing the future of AI-native computing 2025-2030",
@@ -6249,43 +6249,43 @@ The future of computing is AI-native. The infrastructure we build today determin
   {
     id: "11",
     slug: "getting-started-cortex-first-workflow",
-    title: "Getting Started with Cortex Linux: Your First Workflow",
-    seoTitle: "Cortex Linux Getting Started Guide: Your First Workflow",
-    seoDescription: "Learn how to get started with Cortex Linux. This beginner-friendly guide walks you through your first workflow with step-by-step instructions.",
-    excerpt: "New to Cortex Linux? This beginner-friendly guide walks you through your first workflow, from basic concepts to running your first commands.",
+    title: "Getting Started with CX Linux: Your First Workflow",
+    seoTitle: "CX Linux Getting Started Guide: Your First Workflow",
+    seoDescription: "Learn how to get started with CX Linux. This beginner-friendly guide walks you through your first workflow with step-by-step instructions.",
+    excerpt: "New to CX Linux? This beginner-friendly guide walks you through your first workflow, from basic concepts to running your first commands.",
     content: `**"I spent my entire first week just trying to get PyTorch to see my GPU."** That's a direct quote from a developer who abandoned three different ML frameworks before finding one that would install without errors. They weren't doing anything exotic—just trying to run a tutorial notebook on a standard laptop with an NVIDIA graphics card.
 
 This is the normal experience for most people entering AI development. Environment setup is the number one reason beginners quit before building their first model.
 
 According to a 2024 Stack Overflow survey, developers spend an average of 23% of their working time on environment setup, dependency management, and configuration issues rather than writing code. For machine learning engineers, this number climbs even higher due to the complex interplay between GPU drivers, CUDA versions, and Python package dependencies.
 
-This guide eliminates that overhead. By the end of this tutorial, you will have a working Cortex Linux system, understand the core concepts, and complete your first project in under 30 minutes.
+This guide eliminates that overhead. By the end of this tutorial, you will have a working CX Linux system, understand the core concepts, and complete your first project in under 30 minutes.
 
 ---
 
-## What is Cortex Linux?
+## What is CX Linux?
 
-Cortex Linux is an AI-native operating system designed to simplify how developers and researchers work with artificial intelligence and machine learning. Unlike traditional Linux distributions where you need to manually configure every component, Cortex Linux understands your intent and handles the complex setup automatically.
+CX Linux is an AI-native operating system designed to simplify how developers and researchers work with artificial intelligence and machine learning. Unlike traditional Linux distributions where you need to manually configure every component, CX Linux understands your intent and handles the complex setup automatically.
 
-Think of it as having an intelligent assistant built directly into your operating system. When you tell Cortex what you want to accomplish, it figures out the best way to make it happen. This approach is called intent-based computing, and it represents a fundamental shift in how we interact with computers.
+Think of it as having an intelligent assistant built directly into your operating system. When you tell CX what you want to accomplish, it figures out the best way to make it happen. This approach is called intent-based computing, and it represents a fundamental shift in how we interact with computers.
 
 For beginners, this means you can focus on learning AI and ML concepts without getting bogged down in environment configuration, dependency management, and troubleshooting obscure errors. The system handles the complexity so you can concentrate on what matters most: building and learning.
 
 ---
 
-## Why Choose Cortex Linux?
+## Why Choose CX Linux?
 
-If you are new to AI development, you might wonder why you should choose Cortex Linux over more established distributions. Here are the key benefits for beginners:
+If you are new to AI development, you might wonder why you should choose CX Linux over more established distributions. Here are the key benefits for beginners:
 
-**Simplified Setup**: Traditional ML environments require installing dozens of packages with specific version requirements. Cortex handles this automatically, reducing hours of setup to minutes.
+**Simplified Setup**: Traditional ML environments require installing dozens of packages with specific version requirements. CX handles this automatically, reducing hours of setup to minutes.
 
 **Error Prevention**: The system checks for compatibility issues before you run into problems. Instead of cryptic error messages, you get clear explanations and solutions.
 
-**Learning-Friendly**: Cortex is designed with learners in mind. Commands are intuitive, documentation is accessible, and the community welcomes newcomers.
+**Learning-Friendly**: CX is designed with learners in mind. Commands are intuitive, documentation is accessible, and the community welcomes newcomers.
 
-**GPU Support Out of the Box**: If you have a graphics card capable of accelerating AI workloads, Cortex detects and configures it automatically. No manual driver installation required.
+**GPU Support Out of the Box**: If you have a graphics card capable of accelerating AI workloads, CX detects and configures it automatically. No manual driver installation required.
 
-**Reproducible Environments**: When you create a project, Cortex tracks exactly what is installed. You can recreate the same environment on another machine or share it with classmates.
+**Reproducible Environments**: When you create a project, CX tracks exactly what is installed. You can recreate the same environment on another machine or share it with classmates.
 
 ---
 
@@ -6308,19 +6308,19 @@ Before you begin, review the following requirements:
 - A USB drive (8GB or larger) for installation media
 - Willingness to learn command-line basics
 
-Do not worry if you do not have a powerful GPU. Many AI tasks can run on CPU, and Cortex optimizes performance based on your available hardware.
+Do not worry if you do not have a powerful GPU. Many AI tasks can run on CPU, and CX optimizes performance based on your available hardware.
 
 ---
 
-## Installing Cortex Linux
+## Installing CX Linux
 
 This section provides a brief overview of installation. For detailed instructions, see our complete [installation guide](/blog/install-cx-linux-beginner-guide).
 
 ### Quick Installation Steps
 
-**Step 1: Download Cortex Linux**
+**Step 1: Download CX Linux**
 
-Visit the official Cortex website and download the ISO file. Choose the edition that matches your hardware:
+Visit the official CX website and download the ISO file. Choose the edition that matches your hardware:
 - Standard Edition: For systems without NVIDIA GPUs
 - GPU Edition: Pre-configured for NVIDIA graphics cards
 
@@ -6334,17 +6334,17 @@ Insert the USB drive and restart your computer. Access your boot menu (usually b
 
 **Step 4: Complete First Boot Setup**
 
-After installation, Cortex runs initial configuration. This includes hardware detection, network setup, and optional account creation.
+After installation, CX runs initial configuration. This includes hardware detection, network setup, and optional account creation.
 
 ---
 
 ## Your First Workflow
 
-Now that Cortex is installed, let us walk through your first workflow. A workflow in Cortex is simply a series of steps to accomplish a goal. We will start with something simple: creating an environment and running a basic AI task.
+Now that CX is installed, let us walk through your first workflow. A workflow in CX is simply a series of steps to accomplish a goal. We will start with something simple: creating an environment and running a basic AI task.
 
 ### Opening the Terminal
 
-The terminal is where you will interact with Cortex. You can open it by:
+The terminal is where you will interact with CX. You can open it by:
 - Clicking the terminal icon in the application menu
 - Pressing Ctrl+Alt+T on your keyboard
 
@@ -6354,14 +6354,14 @@ You will see a command prompt that looks something like this:
 user@cortex:~$
 \`\`\`
 
-This indicates Cortex is ready to receive commands.
+This indicates CX is ready to receive commands.
 
 ### Checking System Status
 
 Before starting any workflow, verify that your system is ready:
 
 \`\`\`bash
-cortex status
+cx status
 \`\`\`
 
 This command displays information about your system including:
@@ -6379,18 +6379,18 @@ An environment is an isolated space where you can install packages without affec
 Create your first environment with:
 
 \`\`\`bash
-cortex env create my-first-project
+cx env create my-first-project
 \`\`\`
 
-Cortex responds with confirmation:
+CX responds with confirmation:
 
 \`\`\`
 Creating environment 'my-first-project'...
 Python version: 3.11.5
-Base path: ~/.cortex/envs/my-first-project
+Base path: ~/.cx/envs/my-first-project
 
 Environment created. Activate with:
-  cortex env use my-first-project
+  cx env use my-first-project
 \`\`\`
 
 ### Activating the Environment
@@ -6398,7 +6398,7 @@ Environment created. Activate with:
 To work inside your new environment:
 
 \`\`\`bash
-cortex env use my-first-project
+cx env use my-first-project
 \`\`\`
 
 Your prompt changes to indicate the active environment:
@@ -6411,32 +6411,32 @@ Now any packages you install will be contained within this environment.
 
 ---
 
-## Understanding the Cortex Terminal
+## Understanding the CX Terminal
 
-The Cortex terminal works like other Linux terminals but includes AI-powered features that make it more accessible for beginners.
+The CX terminal works like other Linux terminals but includes AI-powered features that make it more accessible for beginners.
 
 ### Natural Language Commands
 
 One of the most helpful features for beginners is the ability to use natural language. Instead of memorizing exact command syntax, you can describe what you want:
 
 \`\`\`bash
-cortex "show me what packages are installed"
+cx "show me what packages are installed"
 \`\`\`
 
-Cortex interprets your intent and runs the appropriate command. This is especially helpful when you are learning.
+CX interprets your intent and runs the appropriate command. This is especially helpful when you are learning.
 
 ### Getting Help
 
 When you are unsure about a command, add \`--help\` to see available options:
 
 \`\`\`bash
-cortex env --help
+cx env --help
 \`\`\`
 
 For comprehensive documentation:
 
 \`\`\`bash
-cortex docs
+cx docs
 \`\`\`
 
 This opens the built-in documentation browser where you can search for topics and read tutorials.
@@ -6455,7 +6455,7 @@ Here are essential commands every beginner should know:
 
 \`\`\`bash
 # Check overall system status
-cortex status
+cx status
 
 # Expected output:
 # System Status
@@ -6468,7 +6468,7 @@ cortex status
 # All systems operational.
 
 # View detailed hardware information
-cortex hw detect
+cx hw detect
 
 # Expected output:
 # Hardware Detection
@@ -6480,18 +6480,18 @@ cortex hw detect
 # Network: Intel I225-V Ethernet
 
 # Check available disk space
-cortex disk
+cx disk
 
 # Expected output:
 # Disk Usage Summary
 # ==================
 # System disk: 320 GB used of 500 GB (64%)
-# Cortex environments: 8.5 GB
+# CX environments: 8.5 GB
 # Package cache: 3.2 GB
 # Available: 180 GB
 
 # View current environment
-cortex env list
+cx env list
 
 # Expected output:
 # Available environments:
@@ -6502,31 +6502,31 @@ cortex env list
 
 \`\`\`bash
 # Create a new environment
-cortex env create project-name
+cx env create project-name
 
 # Expected output:
 # Creating environment 'project-name'...
 # [=====================================] 100%
 # Done: Environment 'project-name' created
 # Python version: 3.11.5
-# Activate with: cortex env use project-name
+# Activate with: cx env use project-name
 
 # Switch to an environment
-cortex env use project-name
+cx env use project-name
 
 # Expected output:
 # Switching to environment 'project-name'...
 # Environment activated.
 
 # List all environments
-cortex env list
+cx env list
 
 # Expected output:
 # Available environments:
 #   * project-name (active)
 
 # Delete an environment
-cortex env delete project-name
+cx env delete project-name
 
 # Expected output:
 # Deleting environment 'project-name'...
@@ -6537,7 +6537,7 @@ cortex env delete project-name
 
 \`\`\`bash
 # Install a package
-cortex add package-name
+cx add package-name
 
 # Expected output:
 # Resolving dependencies...
@@ -6546,7 +6546,7 @@ cortex add package-name
 # Installation complete.
 
 # Install multiple packages
-cortex add numpy pandas matplotlib
+cx add numpy pandas matplotlib
 
 # Expected output:
 # Resolving dependencies...
@@ -6555,14 +6555,14 @@ cortex add numpy pandas matplotlib
 # Installation complete.
 
 # Remove a package
-cortex remove package-name
+cx remove package-name
 
 # Expected output:
 # Removing: package-name
 # Package removed.
 
 # List installed packages
-cortex list
+cx list
 
 # Expected output:
 # Installed packages:
@@ -6575,7 +6575,7 @@ cortex list
 
 \`\`\`bash
 # Validate your environment
-cortex validate
+cx validate
 
 # Expected output:
 # Validation Results
@@ -6586,7 +6586,7 @@ cortex validate
 # All checks passed.
 
 # Run diagnostics if something seems wrong
-cortex diagnose
+cx diagnose
 
 # Expected output:
 # System Diagnostics
@@ -6599,7 +6599,7 @@ cortex diagnose
 # No issues detected.
 
 # Check for updates
-cortex update --check
+cx update --check
 
 # Expected output:
 # Checking for updates...
@@ -6617,15 +6617,15 @@ Let us put everything together by creating a simple project. We will set up an e
 ### Step 1: Create and Activate Environment
 
 \`\`\`bash
-cortex env create hello-ai
-cortex env use hello-ai
+cx env create hello-ai
+cx env use hello-ai
 
 # Expected output:
 # Creating environment 'hello-ai'...
 # [=====================================] 100%
 # Done: Environment 'hello-ai' created
 # Python version: 3.11.5
-# Activate with: cortex env use hello-ai
+# Activate with: cx env use hello-ai
 # Switching to environment 'hello-ai'...
 # Environment activated.
 \`\`\`
@@ -6635,10 +6635,10 @@ cortex env use hello-ai
 For a simple start, install NumPy (for numerical computing) and Matplotlib (for creating charts):
 
 \`\`\`bash
-cortex add numpy matplotlib
+cx add numpy matplotlib
 \`\`\`
 
-Cortex resolves dependencies and installs everything needed:
+CX resolves dependencies and installs everything needed:
 
 \`\`\`
 Resolving dependencies...
@@ -6687,19 +6687,19 @@ python hello_ai.py
 # Plot saved as my_first_plot.png
 \`\`\`
 
-Congratulations! You have just completed your first project in Cortex Linux.
+Congratulations! You have just completed your first project in CX Linux.
 
 ---
 
 ## Common Issues and Troubleshooting
 
-Even with Cortex's simplified approach, you may encounter occasional issues. Here are solutions to the most common problems beginners face:
+Even with CX's simplified approach, you may encounter occasional issues. Here are solutions to the most common problems beginners face:
 
 ### Issue 1: "Command not found" Error
 
-**Symptoms:** Running \`cortex\` shows "command not found" or similar error.
+**Symptoms:** Running \`cx\` shows "command not found" or similar error.
 
-**Cause:** Your shell configuration has not loaded the Cortex command path, or the installation did not complete successfully.
+**Cause:** Your shell configuration has not loaded the CX command path, or the installation did not complete successfully.
 
 **Solution:**
 
@@ -6715,17 +6715,17 @@ source ~/.bashrc
 If that does not work, verify the installation completed successfully:
 
 \`\`\`bash
-which cortex
+which cx
 
 # Expected output:
-# /usr/local/bin/cortex
+# /usr/local/bin/cx
 \`\`\`
 
-If nothing is returned, reinstall Cortex following the installation guide.
+If nothing is returned, reinstall CX following the installation guide.
 
 ### Issue 2: Environment Not Activating
 
-**Symptoms:** After running \`cortex env use my-project\`, the prompt does not change or packages are not accessible.
+**Symptoms:** After running \`cx env use my-project\`, the prompt does not change or packages are not accessible.
 
 **Cause:** The environment may not exist, or the shell session has a configuration issue preventing environment activation.
 
@@ -6734,7 +6734,7 @@ If nothing is returned, reinstall Cortex following the installation guide.
 First, verify the environment exists:
 
 \`\`\`bash
-cortex env list
+cx env list
 
 # Expected output:
 # Available environments:
@@ -6745,8 +6745,8 @@ cortex env list
 If your environment is listed, try deactivating and reactivating:
 
 \`\`\`bash
-cortex env deactivate
-cortex env use my-project
+cx env deactivate
+cx env use my-project
 
 # Expected output:
 # Environment deactivated.
@@ -6754,11 +6754,11 @@ cortex env use my-project
 # Environment activated.
 \`\`\`
 
-If the environment is not listed, recreate it with \`cortex env create my-project\`.
+If the environment is not listed, recreate it with \`cx env create my-project\`.
 
 ### Issue 3: Package Installation Fails
 
-**Symptoms:** \`cortex add\` shows connection errors or download failures.
+**Symptoms:** \`cx add\` shows connection errors or download failures.
 
 **Cause:** Network connectivity issues, firewall blocking package downloads, or temporary server unavailability.
 
@@ -6767,7 +6767,7 @@ If the environment is not listed, recreate it with \`cortex env create my-projec
 Run the network diagnostic tool:
 
 \`\`\`bash
-cortex diagnose network
+cx diagnose network
 
 # Expected output:
 # Network Diagnostics
@@ -6781,8 +6781,8 @@ cortex diagnose network
 If the network is fine, clear the package cache and retry:
 
 \`\`\`bash
-cortex cache clear
-cortex add package-name --verbose
+cx cache clear
+cx add package-name --verbose
 
 # Expected output:
 # Cache cleared.
@@ -6805,13 +6805,13 @@ The verbose flag provides additional information if the problem persists.
 Check available disk space:
 
 \`\`\`bash
-cortex disk
+cx disk
 
 # Expected output:
 # Disk Usage Summary
 # ==================
 # System disk: 45.2 GB used of 100 GB (45%)
-# Cortex environments: 12.3 GB
+# CX environments: 12.3 GB
 # Package cache: 5.8 GB
 # Available: 54.8 GB
 \`\`\`
@@ -6819,8 +6819,8 @@ cortex disk
 If space is low, clear unused caches and old environments:
 
 \`\`\`bash
-cortex cache clear
-cortex env delete old-unused-environment
+cx cache clear
+cx env delete old-unused-environment
 
 # Expected output:
 # Cache cleared. Freed 5.8 GB.
@@ -6830,7 +6830,7 @@ cortex env delete old-unused-environment
 
 ### Issue 5: GPU Not Detected
 
-**Symptoms:** \`cortex status\` shows no GPU when you have one installed.
+**Symptoms:** \`cx status\` shows no GPU when you have one installed.
 
 **Cause:** GPU drivers are not installed, or the hardware is not properly connected/recognized by the system.
 
@@ -6839,7 +6839,7 @@ cortex env delete old-unused-environment
 Run the GPU setup command:
 
 \`\`\`bash
-cortex gpu setup
+cx gpu setup
 
 # Expected output:
 # Detecting GPU hardware...
@@ -6856,15 +6856,15 @@ This detects your GPU and installs appropriate drivers. A reboot may be required
 
 ## Best Practices
 
-Following these practices will help you get the most out of Cortex Linux:
+Following these practices will help you get the most out of CX Linux:
 
 - **Create separate environments for each project** to prevent dependency conflicts between projects
-- **Run \`cortex status\` before starting work** to verify your system is healthy and ready
+- **Run \`cx status\` before starting work** to verify your system is healthy and ready
 - **Use descriptive environment names** like \`image-classifier-v2\` rather than generic names like \`test\`
-- **Run \`cortex validate\` after installing packages** to catch any compatibility issues early
-- **Keep environments clean** by removing unused packages with \`cortex remove package-name\`
-- **Use \`cortex diagnose\` when something seems wrong** rather than guessing at solutions
-- **Commit your cortex.lock file to version control** to ensure reproducible environments across machines
+- **Run \`cx validate\` after installing packages** to catch any compatibility issues early
+- **Keep environments clean** by removing unused packages with \`cx remove package-name\`
+- **Use \`cx diagnose\` when something seems wrong** rather than guessing at solutions
+- **Commit your cx.lock file to version control** to ensure reproducible environments across machines
 
 ---
 
@@ -6872,14 +6872,14 @@ Following these practices will help you get the most out of Cortex Linux:
 
 In this tutorial, you accomplished the following:
 
-1. **Understood what Cortex Linux is** and how intent-based computing differs from traditional systems
+1. **Understood what CX Linux is** and how intent-based computing differs from traditional systems
 2. **Verified system requirements** and completed the installation process
 3. **Created and activated an isolated Python environment** to keep your projects organized
-4. **Installed packages using the Cortex package manager** with automatic dependency resolution
+4. **Installed packages using the CX package manager** with automatic dependency resolution
 5. **Created and ran a Python script** that generated a data visualization
 6. **Learned essential commands** for system status, environment management, and package handling
 
-These foundational skills apply to every project you will build with Cortex Linux. The concepts of environment isolation, dependency management, and system diagnostics are fundamental to professional AI development.
+These foundational skills apply to every project you will build with CX Linux. The concepts of environment isolation, dependency management, and system diagnostics are fundamental to professional AI development.
 
 ---
 
@@ -6893,62 +6893,62 @@ Now that you have completed your first workflow, here are recommended next steps
 
 2. **Run Your First AI Task**: Follow our tutorial on [running your first AI task](/blog/first-ai-task-cx-linux) to experience AI-powered features.
 
-3. **Explore the Documentation**: Use \`cortex docs\` to browse built-in tutorials and reference materials.
+3. **Explore the Documentation**: Use \`cx docs\` to browse built-in tutorials and reference materials.
 
 ### Building Your Skills
 
 - Practice creating and managing environments for different projects
-- Experiment with natural language commands to discover Cortex capabilities
-- Join the Cortex community forums to ask questions and learn from others
+- Experiment with natural language commands to discover CX capabilities
+- Join the CX community forums to ask questions and learn from others
 
 ### Additional Resources
 
-- [Cortex Linux for Students](/blog/cx-linux-for-students): Special guide for academic users
+- [CX Linux for Students](/blog/cx-linux-for-students): Special guide for academic users
 - Community Discord for real-time help
-- Video tutorials on the official Cortex YouTube channel
+- Video tutorials on the official CX YouTube channel
 
 ---
 
 ## Key Takeaways
 
-- **Environment setup doesn't have to be painful** - Cortex Linux eliminates the hours traditionally spent on configuration
+- **Environment setup doesn't have to be painful** - CX Linux eliminates the hours traditionally spent on configuration
 - **Intent-based computing is the future** - Describe what you want; let the system figure out how
 - **Environment isolation prevents conflicts** - Create separate environments for each project
-- **Built-in validation catches issues early** - \`cortex validate\` and \`cortex status\` keep you productive
-- **Cortex Linux is designed for beginners** - Clear commands, helpful error messages, and built-in documentation
+- **Built-in validation catches issues early** - \`cx validate\` and \`cx status\` keep you productive
+- **CX Linux is designed for beginners** - Clear commands, helpful error messages, and built-in documentation
 
-> **Related Reading:** [How to Install Cortex Linux](/blog/install-cx-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cx-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
+> **Related Reading:** [How to Install CX Linux](/blog/install-cx-linux-beginner-guide) | [Run Your First AI Task](/blog/first-ai-task-cx-linux) | [ML Workloads Without Config Hell](/blog/ml-workloads-without-config-hell)
 
-Remember, everyone starts as a beginner. The Cortex community is welcoming and supportive. Do not hesitate to ask questions and experiment. The best way to learn is by doing.
+Remember, everyone starts as a beginner. The CX community is welcoming and supportive. Do not hesitate to ask questions and experiment. The best way to learn is by doing.
 
-Welcome to Cortex Linux. Your AI development journey starts here.
+Welcome to CX Linux. Your AI development journey starts here.
 `,
     date: "2025-12-15",
     readingTime: "14 min read",
     wordCount: 2800,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Getting Started",
     image: "/stock_images/person_laptop_progra_f5b9ce6c.jpg",
-    imageAlt: "Person working on laptop with programming code representing getting started with Cortex Linux workflow",
+    imageAlt: "Person working on laptop with programming code representing getting started with CX Linux workflow",
     tags: ["Getting Started", "Beginner", "Workflow", "Tutorial"],
     relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "12",
     slug: "install-cx-linux-beginner-guide",
-    title: "Install Cortex Linux: Complete Beginner Guide",
-    seoTitle: "Install Cortex Linux: Complete Beginner Guide | Cortex Linux",
-    seoDescription: "Step-by-step guide to installing Cortex Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
-    excerpt: "A complete walkthrough for installing Cortex Linux on your computer. From checking system requirements to verifying your installation, this guide covers everything beginners need.",
+    title: "Install CX Linux: Complete Beginner Guide",
+    seoTitle: "Install CX Linux: Complete Beginner Guide | CX Linux",
+    seoDescription: "Step-by-step guide to installing CX Linux. Covers system requirements, download options, installation walkthrough, and troubleshooting tips.",
+    excerpt: "A complete walkthrough for installing CX Linux on your computer. From checking system requirements to verifying your installation, this guide covers everything beginners need.",
     content: `**"Installation failed. Again."** A computer science student spent her entire weekend trying to set up a deep learning environment for her thesis project. She followed three different tutorials, each promising to be "the complete guide." None of them worked. By Sunday night, she had a corrupted Python installation, conflicting CUDA versions, and no working ML environment.
 
 She nearly switched her thesis topic to avoid dealing with the tooling.
 
 This isn't a story about lacking technical skills—she's now a senior ML engineer at Google. It's a story about how unnecessarily difficult ML environment setup has become. The average developer abandons 1 in 4 tool installations due to setup complexity. A 2024 survey of over 10,000 developers found that 68% cite "getting the environment right" as their biggest frustration when adopting new development tools. For machine learning frameworks, the abandonment rate climbs even higher due to GPU driver conflicts, CUDA version mismatches, and Python dependency nightmares.
 
-This guide eliminates that frustration. Cortex Linux was designed from the ground up to make installation straightforward, with intelligent hardware detection and automatic driver configuration. By following this tutorial, you will have a fully functional AI development environment in under 45 minutes, regardless of your technical background.
+This guide eliminates that frustration. CX Linux was designed from the ground up to make installation straightforward, with intelligent hardware detection and automatic driver configuration. By following this tutorial, you will have a fully functional AI development environment in under 45 minutes, regardless of your technical background.
 
-Installing a new operating system may feel intimidating if you have never done it before. This guide walks you through every step, from preparing your computer to verifying everything works correctly. By the end, you will have Cortex Linux installed and ready for AI development and learning.
+Installing a new operating system may feel intimidating if you have never done it before. This guide walks you through every step, from preparing your computer to verifying everything works correctly. By the end, you will have CX Linux installed and ready for AI development and learning.
 
 ---
 
@@ -6969,11 +6969,11 @@ Before starting the installation, review these requirements:
 
 ## System Requirements
 
-Before downloading Cortex Linux, verify that your computer meets the minimum requirements. Meeting the recommended specifications ensures a smoother experience, especially for AI workloads.
+Before downloading CX Linux, verify that your computer meets the minimum requirements. Meeting the recommended specifications ensures a smoother experience, especially for AI workloads.
 
 ### Minimum Requirements
 
-These are the absolute minimum specifications needed to run Cortex Linux:
+These are the absolute minimum specifications needed to run CX Linux:
 
 | Component | Minimum | Purpose |
 |-----------|---------|---------|
@@ -6997,7 +6997,7 @@ For a comfortable AI development experience, aim for these specifications:
 
 ### GPU Considerations
 
-While a dedicated GPU is not required, it significantly accelerates AI workloads. Cortex Linux supports NVIDIA GPUs with CUDA capability. If you have an NVIDIA graphics card, check its compute capability:
+While a dedicated GPU is not required, it significantly accelerates AI workloads. CX Linux supports NVIDIA GPUs with CUDA capability. If you have an NVIDIA graphics card, check its compute capability:
 
 - **Compute Capability 6.0+**: Supported, good for learning
 - **Compute Capability 7.0+**: Better performance for training
@@ -7005,13 +7005,13 @@ While a dedicated GPU is not required, it significantly accelerates AI workloads
 
 To find your GPU's compute capability, search online for your graphics card model followed by "compute capability."
 
-AMD and Intel GPUs have limited support for AI acceleration. Cortex can use these for display purposes, but AI workloads will run on CPU instead.
+AMD and Intel GPUs have limited support for AI acceleration. CX can use these for display purposes, but AI workloads will run on CPU instead.
 
 ---
 
 ## Choosing Your Download Option
 
-Cortex Linux offers several download options to match different hardware configurations and use cases.
+CX Linux offers several download options to match different hardware configurations and use cases.
 
 ### Standard Edition
 
@@ -7061,7 +7061,7 @@ If you are installing on a computer that contains important files, back them up 
 
 ### Step 2: Download the ISO File
 
-Visit the official Cortex Linux website and download your chosen edition. The file has an .iso extension and may take some time to download depending on your internet speed.
+Visit the official CX Linux website and download your chosen edition. The file has an .iso extension and may take some time to download depending on your internet speed.
 
 After downloading, verify the file integrity by checking its checksum (a unique code that confirms the file was not corrupted during download). The website provides checksums for comparison.
 
@@ -7073,14 +7073,14 @@ You need a USB drive with at least 8 GB capacity. The drive will be erased, so b
 1. Download Rufus from rufus.ie
 2. Insert your USB drive
 3. Open Rufus and select your USB drive
-4. Click "Select" and choose the Cortex ISO file
+4. Click "Select" and choose the CX ISO file
 5. Click "Start" and wait for completion
 
 **On macOS**:
 1. Download Etcher from balena.io/etcher
 2. Insert your USB drive
 3. Open Etcher and click "Flash from file"
-4. Select the Cortex ISO file
+4. Select the CX ISO file
 5. Select your USB drive as the target
 6. Click "Flash" and enter your password when prompted
 
@@ -7111,7 +7111,7 @@ With your bootable USB ready, you can proceed with installation.
 1. Insert the USB drive into your computer
 2. Restart your computer
 3. If the computer does not boot from USB, access the boot menu (commonly F12) and select the USB drive
-4. Wait for the Cortex installer to load
+4. Wait for the CX installer to load
 
 ### Welcome Screen
 
@@ -7119,11 +7119,11 @@ The installer displays a welcome screen with language and keyboard layout option
 
 ### Installation Type
 
-Choose how you want to install Cortex:
+Choose how you want to install CX:
 
-**Erase Disk and Install**: Removes everything on the selected drive and installs Cortex. Choose this for a clean installation or if you are dedicating the entire computer to Cortex.
+**Erase Disk and Install**: Removes everything on the selected drive and installs CX. Choose this for a clean installation or if you are dedicating the entire computer to CX.
 
-**Install Alongside**: Keeps your existing operating system and installs Cortex in available space. You can choose which system to boot each time you start your computer. This is useful if you want to keep Windows or another OS.
+**Install Alongside**: Keeps your existing operating system and installs CX in available space. You can choose which system to boot each time you start your computer. This is useful if you want to keep Windows or another OS.
 
 **Manual Partitioning**: For advanced users who want complete control over disk layout. Not recommended for beginners.
 
@@ -7131,7 +7131,7 @@ For most beginners, "Erase Disk and Install" on a dedicated drive or "Install Al
 
 ### Disk Selection
 
-If your computer has multiple drives, select where to install Cortex. For best performance, install on an SSD if available.
+If your computer has multiple drives, select where to install CX. For best performance, install on an SSD if available.
 
 ### User Account Creation
 
@@ -7157,11 +7157,11 @@ When installation finishes, you will be prompted to restart. Remove the USB driv
 
 ## Post-Installation Setup
 
-After restarting, Cortex Linux loads for the first time and runs initial configuration.
+After restarting, CX Linux loads for the first time and runs initial configuration.
 
 ### First Boot Configuration
 
-On first boot, Cortex performs several automatic setup tasks:
+On first boot, CX performs several automatic setup tasks:
 - Hardware detection and driver configuration
 - Network connection setup
 - System optimization based on your hardware
@@ -7182,7 +7182,7 @@ An internet connection is essential for downloading packages and updates.
 After connecting to the internet, update your system to get the latest improvements and security patches:
 
 \`\`\`bash
-cortex update
+cx update
 
 # Expected output:
 # Checking for updates...
@@ -7200,7 +7200,7 @@ This downloads and installs available updates. Follow any prompts that appear.
 If you installed the GPU Edition with an NVIDIA card, drivers should already be configured. Verify with:
 
 \`\`\`bash
-cortex gpu status
+cx gpu status
 
 # Expected output:
 # GPU Status
@@ -7215,7 +7215,7 @@ cortex gpu status
 If you installed Standard Edition and want to add GPU support:
 
 \`\`\`bash
-cortex gpu setup
+cx gpu setup
 
 # Expected output:
 # Detecting GPU hardware...
@@ -7239,7 +7239,7 @@ Confirm everything is working correctly with these verification steps.
 Run the comprehensive status check:
 
 \`\`\`bash
-cortex status
+cx status
 
 # Expected output:
 # System Status
@@ -7257,7 +7257,7 @@ cortex status
 Run the built-in validation to check all components:
 
 \`\`\`bash
-cortex validate
+cx validate
 
 # Expected output:
 # Validation Results
@@ -7276,9 +7276,9 @@ This performs a series of tests and reports any issues. A successful validation 
 Verify environment management works:
 
 \`\`\`bash
-cortex env create test-install
-cortex env use test-install
-cortex add numpy
+cx env create test-install
+cx env use test-install
+cx add numpy
 
 # Expected output:
 # Creating environment 'test-install'...
@@ -7298,7 +7298,7 @@ If these commands complete successfully, package management is working correctly
 Clean up the test environment:
 
 \`\`\`bash
-cortex env delete test-install
+cx env delete test-install
 
 # Expected output:
 # Deleting environment 'test-install'...
@@ -7361,7 +7361,7 @@ If frozen, wait at least 15 minutes (some steps are slow). Check if hard drive a
 **Solution:**
 
 \`\`\`bash
-cortex diagnose network
+cx diagnose network
 
 # Expected output:
 # Network Diagnostics
@@ -7369,21 +7369,21 @@ cortex diagnose network
 # Ethernet: Not connected
 # WiFi adapter: Detected (Intel AX200)
 # WiFi status: Disabled
-# Recommendation: Enable WiFi with 'cortex network wifi enable'
+# Recommendation: Enable WiFi with 'cx network wifi enable'
 \`\`\`
 
-For WiFi issues, run \`cortex driver install wireless\`. For wired connections, check physical cable connections and try \`cortex network restart\`.
+For WiFi issues, run \`cx driver install wireless\`. For wired connections, check physical cable connections and try \`cx network restart\`.
 
 ### Issue 4: GPU Not Detected After Installation
 
-**Symptoms:** \`cortex gpu status\` shows "No GPU detected" or driver errors when you have an NVIDIA card installed.
+**Symptoms:** \`cx gpu status\` shows "No GPU detected" or driver errors when you have an NVIDIA card installed.
 
 **Cause:** NVIDIA drivers not installed, or GPU disabled in BIOS settings.
 
 **Solution:**
 
 \`\`\`bash
-cortex driver install nvidia
+cx driver install nvidia
 
 # Expected output:
 # Detecting GPU hardware...
@@ -7392,10 +7392,10 @@ cortex driver install nvidia
 # [=====================================] 100%
 # Installing driver...
 # Driver installed successfully.
-# Reboot required. Run: cortex reboot
+# Reboot required. Run: cx reboot
 \`\`\`
 
-After installation, restart your computer. Verify with \`cortex gpu status\`. If still not detected, check BIOS to ensure the GPU is enabled.
+After installation, restart your computer. Verify with \`cx gpu status\`. If still not detected, check BIOS to ensure the GPU is enabled.
 
 ### Issue 5: Slow Performance After Installation
 
@@ -7406,7 +7406,7 @@ After installation, restart your computer. Verify with \`cortex gpu status\`. If
 **Solution:**
 
 \`\`\`bash
-cortex status
+cx status
 
 # Expected output:
 # System Status
@@ -7417,7 +7417,7 @@ cortex status
 # GPU: NVIDIA RTX 3080 - OK
 # Network: Connected
 
-cortex optimize
+cx optimize
 
 # Expected output:
 # Analyzing system...
@@ -7428,7 +7428,7 @@ cortex optimize
 # Optimization complete.
 \`\`\`
 
-Close unused applications and verify you meet minimum requirements (8GB RAM, 50GB disk). Run \`cortex optimize\` for automatic performance tuning.
+Close unused applications and verify you meet minimum requirements (8GB RAM, 50GB disk). Run \`cx optimize\` for automatic performance tuning.
 
 ---
 
@@ -7438,26 +7438,26 @@ If you encounter issues not covered in this guide, several resources are availab
 
 ### Built-In Help
 
-Access comprehensive documentation directly in Cortex:
+Access comprehensive documentation directly in CX:
 
 \`\`\`bash
-cortex docs
-cortex help
-cortex diagnose
+cx docs
+cx help
+cx diagnose
 \`\`\`
 
 ### Community Support
 
-Join the Cortex community for assistance:
+Join the CX community for assistance:
 - **Community Forums**: Post questions and search previous answers
 - **Discord Server**: Real-time chat with other users
 - **GitHub Issues**: Report bugs or technical problems
 
 ### Additional Guides
 
-Continue your Cortex journey with these related guides:
+Continue your CX journey with these related guides:
 - [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow)
-- [Cortex Linux for Students](/blog/cx-linux-for-students)
+- [CX Linux for Students](/blog/cx-linux-for-students)
 - [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
 ---
@@ -7470,7 +7470,7 @@ Follow these recommendations for a smooth installation and optimal system perfor
 - **Verify the ISO checksum** after downloading to ensure the file is not corrupted
 - **Use the GPU Edition if you have an NVIDIA card** rather than adding drivers later
 - **Connect to Ethernet during installation** if possible for faster package downloads
-- **Run \`cortex update\` immediately after first boot** to get the latest security patches
+- **Run \`cx update\` immediately after first boot** to get the latest security patches
 - **Create a test environment after installation** to verify everything works before starting real projects
 - **Document your installation choices** in case you need to replicate the setup later
 
@@ -7488,46 +7488,46 @@ In this tutorial, you accomplished the following:
 6. **Verified your installation** using built-in diagnostic and validation tools
 7. **Learned troubleshooting techniques** for common installation issues
 
-You now have a fully functional Cortex Linux system ready for AI development. These installation skills also apply to other Linux distributions if you work with different systems in the future.
+You now have a fully functional CX Linux system ready for AI development. These installation skills also apply to other Linux distributions if you work with different systems in the future.
 
 ---
 
 ## Key Takeaways
 
-- **Installation doesn't require Linux expertise** - Cortex Linux guides you through every step with clear instructions
+- **Installation doesn't require Linux expertise** - CX Linux guides you through every step with clear instructions
 - **Choose the right edition for your hardware** - GPU Edition for NVIDIA cards, Standard Edition otherwise
 - **Always back up your data first** - Operating system installation can erase existing data
-- **Post-installation updates are critical** - Run \`cortex update\` immediately after first boot
-- **Cortex Linux eliminates setup complexity** - Automatic hardware detection and driver configuration save hours
+- **Post-installation updates are critical** - Run \`cx update\` immediately after first boot
+- **CX Linux eliminates setup complexity** - Automatic hardware detection and driver configuration save hours
 
-> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [Cortex Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
+> **Related Reading:** [Getting Started with Your First Workflow](/blog/getting-started-cortex-first-workflow) | [CX Linux for Students](/blog/cx-linux-for-students) | [Run Your First AI Task](/blog/first-ai-task-cx-linux)
 
-You have successfully installed Cortex Linux. Welcome to the community, and enjoy your AI development journey.
+You have successfully installed CX Linux. Welcome to the community, and enjoy your AI development journey.
 `,
     date: "2025-12-14",
     readingTime: "14 min read",
     wordCount: 2750,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Getting Started",
     image: "/stock_images/software_installatio_76449a37.jpg",
-    imageAlt: "Software installation process showing complete beginner guide for Cortex Linux",
+    imageAlt: "Software installation process showing complete beginner guide for CX Linux",
     tags: ["Getting Started", "Installation", "Beginner", "Setup"],
     relatedPosts: ["getting-started-cortex-first-workflow", "cx-linux-for-students"]
   },
   {
     id: "13",
     slug: "cx-linux-for-students",
-    title: "Cortex Linux for Students: AI Development Guide",
-    seoTitle: "Cortex Linux for Students: AI Development Guide | Cortex Linux",
-    seoDescription: "Discover how Cortex Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
-    excerpt: "A comprehensive guide for students using Cortex Linux for academic work. Learn how to set up your environment for coursework, discover learning paths, and explore project ideas.",
+    title: "CX Linux for Students: AI Development Guide",
+    seoTitle: "CX Linux for Students: AI Development Guide | CX Linux",
+    seoDescription: "Discover how CX Linux helps students learn AI and machine learning. Covers setup for coursework, learning paths, resources, and academic projects.",
+    excerpt: "A comprehensive guide for students using CX Linux for academic work. Learn how to set up your environment for coursework, discover learning paths, and explore project ideas.",
     content: `**"I failed the assignment because I couldn't get TensorFlow installed."** A sophomore's words to their professor after spending 8 hours on a lab that should have taken 2. The GPU drivers wouldn't load. The CUDA version didn't match. The Python virtual environment got corrupted halfway through.
 
 Their grade suffered. Their confidence in AI development plummeted. They almost changed majors.
 
 This happens in computer science departments every single semester. Research from a 2024 academic computing study shows that computer science students spend up to 40% of their lab time troubleshooting environment issues rather than learning core concepts. A separate analysis of university help desk tickets found that "Python environment problems" and "GPU driver issues" account for more support requests than all other technical issues combined.
 
-This guide is designed to help you avoid those pitfalls. Whether you are taking your first programming course or working on an advanced thesis project, Cortex Linux removes the technical barriers so you can focus on what matters: learning AI and building projects that advance your education and career.
+This guide is designed to help you avoid those pitfalls. Whether you are taking your first programming course or working on an advanced thesis project, CX Linux removes the technical barriers so you can focus on what matters: learning AI and building projects that advance your education and career.
 
 ---
 
@@ -7539,72 +7539,72 @@ Before you begin, review these requirements:
 |-------------|---------|
 | **Skill Level** | Complete beginner to intermediate |
 | **Time to Complete** | 20-30 minutes to set up your first course environment |
-| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
+| **CX Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **Internet** | Connection for downloading course packages |
 | **Course Materials** | Syllabus or project requirements for your specific course |
 
 ---
 
-## Why Students Should Use Cortex Linux
+## Why Students Should Use CX Linux
 
-As a student entering the world of artificial intelligence and machine learning, choosing the right tools can significantly impact your learning experience. Cortex Linux offers unique advantages that make it particularly well-suited for academic work.
+As a student entering the world of artificial intelligence and machine learning, choosing the right tools can significantly impact your learning experience. CX Linux offers unique advantages that make it particularly well-suited for academic work.
 
 ### Reduced Setup Complexity
 
 One of the biggest barriers for students learning AI is the complex setup process. Traditional approaches require installing Python, managing virtual environments, configuring GPU drivers, and resolving dependency conflicts. Hours that could be spent learning are instead spent troubleshooting environment issues.
 
-Cortex eliminates this friction. What traditionally takes an afternoon of configuration happens in minutes. This means you can focus on understanding concepts rather than fighting with your tools.
+CX eliminates this friction. What traditionally takes an afternoon of configuration happens in minutes. This means you can focus on understanding concepts rather than fighting with your tools.
 
 ### Industry-Relevant Skills
 
-While Cortex simplifies many tasks, it teaches you skills that transfer directly to industry work. The concepts you learn, such as environment management, dependency resolution, and GPU utilization, apply regardless of which specific tools you use in future jobs. Cortex makes these concepts accessible without hiding them entirely.
+While CX simplifies many tasks, it teaches you skills that transfer directly to industry work. The concepts you learn, such as environment management, dependency resolution, and GPU utilization, apply regardless of which specific tools you use in future jobs. CX makes these concepts accessible without hiding them entirely.
 
 ### Cost Effective
 
-Cortex Linux offers a free tier. As a student, you likely have limited budgets for software. Cortex provides professional-grade AI development tools with a free tier to get started.
+CX Linux offers a free tier. As a student, you likely have limited budgets for software. CX provides professional-grade AI development tools with a free tier to get started.
 
 ### Hardware Flexibility
 
-Students often work with varied hardware. You might have a laptop without a GPU, a desktop with a gaming graphics card, or access to university computing clusters. Cortex adapts to your available hardware, optimizing performance whether you are running on CPU or the latest GPU.
+Students often work with varied hardware. You might have a laptop without a GPU, a desktop with a gaming graphics card, or access to university computing clusters. CX adapts to your available hardware, optimizing performance whether you are running on CPU or the latest GPU.
 
 ---
 
 ## Educational Benefits
 
-Cortex Linux is designed with learning in mind. Here are specific ways it supports your educational journey.
+CX Linux is designed with learning in mind. Here are specific ways it supports your educational journey.
 
 ### Immediate Feedback
 
-When learning to code, immediate feedback accelerates understanding. Cortex provides clear, actionable error messages instead of cryptic failures. When something goes wrong, you understand why and how to fix it.
+When learning to code, immediate feedback accelerates understanding. CX provides clear, actionable error messages instead of cryptic failures. When something goes wrong, you understand why and how to fix it.
 
-For example, instead of seeing "Segmentation fault (core dumped)", Cortex explains: "Memory allocation failed because the requested model exceeds available GPU memory. Consider using a smaller model or enabling memory optimization."
+For example, instead of seeing "Segmentation fault (core dumped)", CX explains: "Memory allocation failed because the requested model exceeds available GPU memory. Consider using a smaller model or enabling memory optimization."
 
 ### Concept Reinforcement
 
-Every Cortex command teaches underlying concepts. When you create an environment, you learn about isolation and reproducibility. When you install packages, you observe dependency resolution in action. The tool reinforces computer science concepts through practical application.
+Every CX command teaches underlying concepts. When you create an environment, you learn about isolation and reproducibility. When you install packages, you observe dependency resolution in action. The tool reinforces computer science concepts through practical application.
 
 ### Safe Experimentation
 
-Learning requires experimentation, and experimentation means making mistakes. Cortex's snapshot system allows you to try things without fear. If you break something, restore a previous state in seconds. This safety net encourages exploration and deeper learning.
+Learning requires experimentation, and experimentation means making mistakes. CX's snapshot system allows you to try things without fear. If you break something, restore a previous state in seconds. This safety net encourages exploration and deeper learning.
 
 ### Documentation Integration
 
-Built-in documentation means you always have learning resources available, even when working offline. Use \`cortex docs\` to access tutorials, reference materials, and concept explanations directly in your terminal.
+Built-in documentation means you always have learning resources available, even when working offline. Use \`cx docs\` to access tutorials, reference materials, and concept explanations directly in your terminal.
 
 ---
 
-## Setting Up Cortex for Coursework
+## Setting Up CX for Coursework
 
-Different courses have different requirements. Here is how to set up Cortex for common academic scenarios.
+Different courses have different requirements. Here is how to set up CX for common academic scenarios.
 
 ### General Machine Learning Course
 
 Most introductory ML courses use Python with libraries like NumPy, Pandas, Scikit-learn, and Matplotlib. Set up this environment:
 
 \`\`\`bash
-cortex env create ml-course
-cortex env use ml-course
-cortex add numpy pandas scikit-learn matplotlib jupyter
+cx env create ml-course
+cx env use ml-course
+cx add numpy pandas scikit-learn matplotlib jupyter
 
 # Expected output:
 # Creating environment 'ml-course'...
@@ -7622,7 +7622,7 @@ cortex add numpy pandas scikit-learn matplotlib jupyter
 For courses that include neural networks, add deep learning libraries:
 
 \`\`\`bash
-cortex add pytorch --gpu  # or tensorflow, depending on course
+cx add pytorch --gpu  # or tensorflow, depending on course
 
 # Expected output:
 # Resolving dependencies...
@@ -7637,10 +7637,10 @@ cortex add pytorch --gpu  # or tensorflow, depending on course
 Data science courses often require additional tools for data manipulation and visualization:
 
 \`\`\`bash
-cortex env create data-science
-cortex env use data-science
-cortex add numpy pandas matplotlib seaborn jupyter
-cortex add scipy statsmodels
+cx env create data-science
+cx env use data-science
+cx add numpy pandas matplotlib seaborn jupyter
+cx add scipy statsmodels
 
 # Expected output:
 # Creating environment 'data-science'...
@@ -7661,10 +7661,10 @@ cortex add scipy statsmodels
 NLP courses typically use specialized libraries for text processing:
 
 \`\`\`bash
-cortex env create nlp-course
-cortex env use nlp-course
-cortex add pytorch transformers datasets tokenizers
-cortex add nltk spacy
+cx env create nlp-course
+cx env use nlp-course
+cx add pytorch transformers datasets tokenizers
+cx add nltk spacy
 
 # Expected output:
 # Creating environment 'nlp-course'...
@@ -7685,10 +7685,10 @@ cortex add nltk spacy
 For image processing and computer vision:
 
 \`\`\`bash
-cortex env create cv-course
-cortex env use cv-course
-cortex add pytorch torchvision pillow opencv-python
-cortex add matplotlib jupyter
+cx env create cv-course
+cx env use cv-course
+cx add pytorch torchvision pillow opencv-python
+cx add matplotlib jupyter
 
 # Expected output:
 # Creating environment 'cv-course'...
@@ -7709,7 +7709,7 @@ cortex add matplotlib jupyter
 You can export your environment configuration to share with study groups:
 
 \`\`\`bash
-cortex env export ml-course > ml-course-env.yaml
+cx env export ml-course > ml-course-env.yaml
 
 # Expected output:
 # Exporting environment 'ml-course'...
@@ -7719,7 +7719,7 @@ cortex env export ml-course > ml-course-env.yaml
 Classmates import with:
 
 \`\`\`bash
-cortex env create --from ml-course-env.yaml
+cx env create --from ml-course-env.yaml
 
 # Expected output:
 # Creating environment from ml-course-env.yaml...
@@ -7748,7 +7748,7 @@ If you are new to programming and AI:
 
 **Weeks 3-4: Python Basics**
 - Learn Python fundamentals (variables, loops, functions)
-- Practice with simple scripts in Cortex
+- Practice with simple scripts in CX
 - Get comfortable with Jupyter notebooks
 
 **Weeks 5-8: Introduction to ML**
@@ -7766,7 +7766,7 @@ If you are new to programming and AI:
 If you can already code but are new to AI:
 
 **Weeks 1-2: Environment Setup**
-- [Install Cortex Linux](/blog/install-cx-linux-beginner-guide)
+- [Install CX Linux](/blog/install-cx-linux-beginner-guide)
 - [Run your first AI task](/blog/first-ai-task-cx-linux)
 - Understand the ML development workflow
 
@@ -7789,8 +7789,8 @@ If you can already code but are new to AI:
 
 If you have programming and some ML experience:
 
-**Week 1: Cortex Mastery**
-- Explore advanced Cortex features
+**Week 1: CX Mastery**
+- Explore advanced CX features
 - Set up optimized development workflow
 - Configure for your specific hardware
 
@@ -7827,27 +7827,27 @@ If you have programming and some ML experience:
 
 ### Datasets for Practice
 
-Cortex provides easy access to common academic datasets:
+CX provides easy access to common academic datasets:
 
 \`\`\`bash
 # Download popular datasets
-cortex data get mnist        # Handwritten digits
-cortex data get cifar10      # Object recognition
-cortex data get imdb         # Sentiment analysis
+cx data get mnist        # Handwritten digits
+cx data get cifar10      # Object recognition
+cx data get imdb         # Sentiment analysis
 
 # Expected output:
 # Downloading dataset 'mnist'...
 # [=====================================] 100%
-# Dataset saved to ~/.cortex/datasets/mnist
+# Dataset saved to ~/.cx/datasets/mnist
 # Downloading dataset 'cifar10'...
 # [=====================================] 100%
-# Dataset saved to ~/.cortex/datasets/cifar10
+# Dataset saved to ~/.cx/datasets/cifar10
 # Downloading dataset 'imdb'...
 # [=====================================] 100%
-# Dataset saved to ~/.cortex/datasets/imdb
+# Dataset saved to ~/.cx/datasets/imdb
 
 # List available datasets
-cortex data list
+cx data list
 
 # Expected output:
 # Available datasets:
@@ -7935,9 +7935,9 @@ Here are project ideas appropriate for different course levels.
 Create separate environments for each course or major project:
 
 \`\`\`bash
-cortex env create cs231n-cv        # Computer Vision course
-cortex env create cs224n-nlp       # NLP course
-cortex env create thesis-project   # Research work
+cx env create cs231n-cv        # Computer Vision course
+cx env create cs224n-nlp       # NLP course
+cx env create thesis-project   # Research work
 
 # Expected output (for each):
 # Creating environment 'cs231n-cv'...
@@ -7984,13 +7984,13 @@ This creates a history of your work, essential for collaboration and demonstrati
 
 Do not spend hours stuck on a problem. Resources available to you include:
 - Course teaching assistants and office hours
-- Cortex community forums
+- CX community forums
 - Stack Overflow for specific error messages
 - Study groups with classmates
 
 ### Balance Theory and Practice
 
-Understanding why algorithms work is as important as implementing them. For every hands-on project, ensure you understand the underlying theory. Cortex makes implementation easier, but the learning happens in your mind.
+Understanding why algorithms work is as important as implementing them. For every hands-on project, ensure you understand the underlying theory. CX makes implementation easier, but the learning happens in your mind.
 
 ---
 
@@ -8007,7 +8007,7 @@ Check if your university offers:
 ### Online Communities
 
 Join communities where students help each other:
-- Cortex Discord: Real-time help and discussion
+- CX Discord: Real-time help and discussion
 - Reddit r/MachineLearning: Industry and academic discussions
 - Course-specific forums and Slack channels
 
@@ -8038,22 +8038,22 @@ Even careful setups can encounter problems. Here are solutions to the most commo
 Always use separate environments for each course:
 
 \`\`\`bash
-cortex env create cs231n-cv
-cortex env create cs224n-nlp
+cx env create cs231n-cv
+cx env create cs224n-nlp
 
 # Expected output:
 # Creating environment 'cs231n-cv'...
 # [=====================================] 100%
 # Done: Environment 'cs231n-cv' created
 # Python version: 3.11.5
-# Activate with: cortex env use cs231n-cv
+# Activate with: cx env use cs231n-cv
 \`\`\`
 
 If you accidentally installed conflicting packages, delete the environment and recreate it:
 
 \`\`\`bash
-cortex env delete broken-env
-cortex env create course-name --from syllabus-requirements.yaml
+cx env delete broken-env
+cx env create course-name --from syllabus-requirements.yaml
 
 # Expected output:
 # Deleting environment 'broken-env'...
@@ -8074,7 +8074,7 @@ cortex env create course-name --from syllabus-requirements.yaml
 Export your environment configuration and compare with course requirements:
 
 \`\`\`bash
-cortex env export my-course > my-env.yaml
+cx env export my-course > my-env.yaml
 
 # Expected output:
 # Exporting environment 'my-course'...
@@ -8084,7 +8084,7 @@ cortex env export my-course > my-env.yaml
 Check that your package versions match the course specifications. Install exact versions when needed:
 
 \`\`\`bash
-cortex add numpy==1.24.0 pandas==2.0.0
+cx add numpy==1.24.0 pandas==2.0.0
 
 # Expected output:
 # Resolving dependencies...
@@ -8104,9 +8104,9 @@ cortex add numpy==1.24.0 pandas==2.0.0
 Clean up unused environments and model caches:
 
 \`\`\`bash
-cortex env list
-cortex env delete old-project
-cortex cache clear
+cx env list
+cx env delete old-project
+cx cache clear
 
 # Expected output:
 # Available environments:
@@ -8130,9 +8130,9 @@ cortex cache clear
 Verify you are in the correct environment:
 
 \`\`\`bash
-cortex env list
-cortex env use course-name
-cortex list
+cx env list
+cx env use course-name
+cx list
 
 # Expected output:
 # Available environments:
@@ -8157,8 +8157,8 @@ cortex list
 Install Jupyter within the same environment:
 
 \`\`\`bash
-cortex env use course-name
-cortex add jupyter
+cx env use course-name
+cx add jupyter
 jupyter notebook
 
 # Expected output:
@@ -8180,11 +8180,11 @@ Following these practices will help you succeed in your coursework:
 
 - **Create a new environment at the start of each semester** with the course name and term (e.g., \`ml-fall-2025\`)
 - **Read the syllabus for specific version requirements** and install exact versions when specified
-- **Export and save your working environment** before making changes: \`cortex env export course > backup.yaml\`
+- **Export and save your working environment** before making changes: \`cx env export course > backup.yaml\`
 - **Start assignments early** so you have time to troubleshoot issues before deadlines
 - **Document solutions to problems you solve** in a troubleshooting notes file for future reference
 - **Use version control (Git) from day one** for all assignments and projects
-- **Ask for help early** from TAs, professors, or the Cortex community when stuck
+- **Ask for help early** from TAs, professors, or the CX community when stuck
 
 ---
 
@@ -8192,7 +8192,7 @@ Following these practices will help you succeed in your coursework:
 
 In this guide, you accomplished the following:
 
-1. **Understood why Cortex Linux is ideal for students** with its reduced setup complexity and cost-effectiveness
+1. **Understood why CX Linux is ideal for students** with its reduced setup complexity and cost-effectiveness
 2. **Set up course-specific environments** for machine learning, data science, NLP, and computer vision
 3. **Learned to share environments with classmates** using export and import functionality
 4. **Explored learning path recommendations** matched to your experience level
@@ -8210,29 +8210,29 @@ These skills will serve you throughout your academic career and into industry po
 - **Start with guided learning paths** - Match your experience level to appropriate resources (Fast.ai for beginners, academic papers for advanced)
 - **Build projects that interest you** - Hands-on experience accelerates learning more than passive consumption
 - **Use version control from day one** - Git skills are essential for collaboration and project management
-- **Cortex Linux eliminates setup barriers** - Focus on learning concepts instead of debugging configurations
+- **CX Linux eliminates setup barriers** - Focus on learning concepts instead of debugging configurations
 
-Cortex Linux provides an excellent foundation for your AI education. By removing technical barriers, it lets you focus on what matters: understanding concepts, building projects, and developing skills that will serve your career. Start with the basics, be consistent in your practice, and do not hesitate to ask for help.
+CX Linux provides an excellent foundation for your AI education. By removing technical barriers, it lets you focus on what matters: understanding concepts, building projects, and developing skills that will serve your career. Start with the basics, be consistent in your practice, and do not hesitate to ask for help.
 
 Welcome to the future of AI development. Your journey as an AI practitioner starts here.
 `,
     date: "2025-12-13",
     readingTime: "15 min read",
     wordCount: 2950,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Getting Started",
     image: "/stock_images/student_studying_lap_3e4c316a.jpg",
-    imageAlt: "Student studying on laptop representing AI development guide for students using Cortex Linux",
+    imageAlt: "Student studying on laptop representing AI development guide for students using CX Linux",
     tags: ["Getting Started", "Students", "Education", "Learning"],
     relatedPosts: ["install-cx-linux-beginner-guide", "first-ai-task-cx-linux"]
   },
   {
     id: "14",
     slug: "first-ai-task-cx-linux",
-    title: "Run Your First AI Task with Cortex Linux",
-    seoTitle: "Run Your First AI Task with Cortex Linux | Cortex Linux",
-    seoDescription: "Step-by-step tutorial to run your first AI task with Cortex Linux. Learn image classification and text generation with easy-to-follow instructions.",
-    excerpt: "Ready to run your first AI task? This hands-on tutorial guides you through image classification and text generation, showing you the power of Cortex Linux for AI development.",
+    title: "Run Your First AI Task with CX Linux",
+    seoTitle: "Run Your First AI Task with CX Linux | CX Linux",
+    seoDescription: "Step-by-step tutorial to run your first AI task with CX Linux. Learn image classification and text generation with easy-to-follow instructions.",
+    excerpt: "Ready to run your first AI task? This hands-on tutorial guides you through image classification and text generation, showing you the power of CX Linux for AI development.",
     content: `**"I just wanted to see if I could make an image classifier."** A hobbyist developer's first attempt at AI turned into a 12-hour debugging marathon. They installed PyTorch (wrong version). Fixed that, hit a CUDA error. Fixed that, got a memory error. By the time they gave up, they'd learned nothing about AI—only that AI development was apparently only for experts with computer science degrees.
 
 They're not alone. Most people who try AI development quit during setup, never writing a single line of actual AI code.
@@ -8245,7 +8245,7 @@ This tutorial puts that power in your hands. By the end of this guide, you will 
 - Understood how to interpret AI model outputs
 - Gained skills to explore thousands of additional AI models
 
-No prior machine learning experience is required. If you have completed the basic Cortex setup, you are ready to run your first AI task.
+No prior machine learning experience is required. If you have completed the basic CX setup, you are ready to run your first AI task.
 
 ---
 
@@ -8257,7 +8257,7 @@ Before starting, ensure you have completed these requirements:
 |-------------|---------|
 | **Skill Level** | Beginner - basic terminal familiarity required |
 | **Time to Complete** | 25-35 minutes (includes model download time) |
-| **Cortex Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
+| **CX Linux** | Installed and running ([installation guide](/blog/install-cx-linux-beginner-guide)) |
 | **RAM** | 8GB minimum, 16GB recommended |
 | **Disk Space** | 10GB free for models and datasets |
 | **Internet** | Connection for downloading AI models |
@@ -8265,9 +8265,9 @@ Before starting, ensure you have completed these requirements:
 
 ---
 
-## Understanding AI Tasks in Cortex
+## Understanding AI Tasks in CX
 
-Before running your first AI task, it helps to understand what we mean by "AI task" and how Cortex makes them accessible.
+Before running your first AI task, it helps to understand what we mean by "AI task" and how CX makes them accessible.
 
 An AI task is any operation that uses machine learning models to process data and produce intelligent outputs. Common examples include:
 
@@ -8277,9 +8277,9 @@ An AI task is any operation that uses machine learning models to process data an
 - **Object Detection**: Locating and labeling objects within images
 - **Translation**: Converting text from one language to another
 
-In traditional setups, running these tasks requires installing multiple libraries, downloading model weights, configuring hardware acceleration, and writing significant boilerplate code. Cortex simplifies this process dramatically.
+In traditional setups, running these tasks requires installing multiple libraries, downloading model weights, configuring hardware acceleration, and writing significant boilerplate code. CX simplifies this process dramatically.
 
-With Cortex, you describe what you want to accomplish, and the system handles the complexity. The intent-based approach means you focus on the problem you are solving, not on infrastructure details.
+With CX, you describe what you want to accomplish, and the system handles the complexity. The intent-based approach means you focus on the problem you are solving, not on infrastructure details.
 
 ---
 
@@ -8289,7 +8289,7 @@ Before starting, ensure you have the following ready:
 
 ### System Requirements
 
-- Cortex Linux installed and running ([installation guide](/blog/install-cx-linux-beginner-guide))
+- CX Linux installed and running ([installation guide](/blog/install-cx-linux-beginner-guide))
 - Internet connection for downloading models
 - At least 8GB of RAM (16GB recommended for larger models)
 - 10GB of free disk space for models and datasets
@@ -8301,11 +8301,11 @@ Before starting, ensure you have the following ready:
 
 ### Knowledge Requirements
 
-- Basic familiarity with the Cortex terminal
+- Basic familiarity with the CX terminal
 - Understanding of how to create and use environments
 - No prior AI or machine learning experience required
 
-If you have not installed Cortex yet, start with our [installation guide](/blog/install-cx-linux-beginner-guide) before continuing.
+If you have not installed CX yet, start with our [installation guide](/blog/install-cx-linux-beginner-guide) before continuing.
 
 ---
 
@@ -8318,15 +8318,15 @@ Let us create a dedicated environment for AI experiments. This keeps your AI wor
 Open your terminal and run:
 
 \`\`\`bash
-cortex env create my-first-ai
-cortex env use my-first-ai
+cx env create my-first-ai
+cx env use my-first-ai
 
 # Expected output:
 # Creating environment 'my-first-ai'...
 # [=====================================] 100%
 # Done: Environment 'my-first-ai' created
 # Python version: 3.11.5
-# Activate with: cortex env use my-first-ai
+# Activate with: cx env use my-first-ai
 # Switching to environment 'my-first-ai'...
 # Environment activated.
 \`\`\`
@@ -8338,7 +8338,7 @@ You should see confirmation that the environment is created and activated.
 We will use PyTorch and the Transformers library, which provide access to thousands of pre-trained AI models:
 
 \`\`\`bash
-cortex add pytorch transformers pillow
+cx add pytorch transformers pillow
 
 # Expected output:
 # Resolving dependencies...
@@ -8349,7 +8349,7 @@ cortex add pytorch transformers pillow
 # Installation complete.
 \`\`\`
 
-Cortex resolves dependencies and installs everything needed. If you have an NVIDIA GPU, it automatically configures GPU acceleration.
+CX resolves dependencies and installs everything needed. If you have an NVIDIA GPU, it automatically configures GPU acceleration.
 
 The installation may take a few minutes. You will see progress indicators as packages download and install.
 
@@ -8358,7 +8358,7 @@ The installation may take a few minutes. You will see progress indicators as pac
 Confirm everything is working:
 
 \`\`\`bash
-cortex validate
+cx validate
 
 # Expected output:
 # Validation Results
@@ -8681,8 +8681,8 @@ from transformers import pipeline
 
 qa = pipeline("question-answering")
 result = qa(
-    question="What is Cortex Linux?",
-    context="Cortex Linux is an AI-native operating system designed for machine learning developers."
+    question="What is CX Linux?",
+    context="CX Linux is an AI-native operating system designed for machine learning developers."
 )
 print(result)
 \`\`\`
@@ -8729,7 +8729,7 @@ for item in results:
 
 ## Common Issues and Troubleshooting
 
-Even with Cortex's simplified approach, you may encounter occasional issues. Here are solutions to the most common problems:
+Even with CX's simplified approach, you may encounter occasional issues. Here are solutions to the most common problems:
 
 ### Issue 1: Model Download Failures
 
@@ -8740,8 +8740,8 @@ Even with Cortex's simplified approach, you may encounter occasional issues. Her
 **Solution:**
 
 \`\`\`bash
-cortex cache clear
-cortex diagnose network
+cx cache clear
+cx diagnose network
 
 # Expected output:
 # Cache cleared.
@@ -8783,7 +8783,7 @@ Close other applications to free memory, or use smaller model variants (look for
 **Solution:**
 
 \`\`\`bash
-cortex gpu status
+cx gpu status
 
 # Expected output:
 # GPU Status
@@ -8795,7 +8795,7 @@ cortex gpu status
 # Status: Ready
 \`\`\`
 
-If GPU shows "Not detected," run \`cortex gpu setup\`. First runs are always slow due to model download; subsequent runs use cached models.
+If GPU shows "Not detected," run \`cx gpu setup\`. First runs are always slow due to model download; subsequent runs use cached models.
 
 ### Issue 4: Import Errors
 
@@ -8806,9 +8806,9 @@ If GPU shows "Not detected," run \`cortex gpu setup\`. First runs are always slo
 **Solution:**
 
 \`\`\`bash
-cortex env list
-cortex env use my-first-ai
-cortex add transformers pytorch pillow
+cx env list
+cx env use my-first-ai
+cx add transformers pytorch pillow
 
 # Expected output:
 # Available environments:
@@ -8832,7 +8832,7 @@ cortex add transformers pytorch pillow
 
 \`\`\`bash
 # Validate your environment setup
-cortex validate
+cx validate
 
 # Expected output:
 # Validation Results
@@ -8853,10 +8853,10 @@ For image classification, use clear images with single subjects. For text genera
 Following these practices will help you succeed with AI tasks:
 
 - **Start with smaller models** when learning, then scale up as needed for production
-- **Save your environment configuration** before experimenting with new models: \`cortex env export my-ai > backup.yaml\`
-- **Monitor memory usage** with \`cortex status\` when running large models
+- **Save your environment configuration** before experimenting with new models: \`cx env export my-ai > backup.yaml\`
+- **Monitor memory usage** with \`cx status\` when running large models
 - **Use CPU mode intentionally for learning** to avoid GPU memory constraints: \`device=-1\` in pipelines
-- **Cache models locally** to speed up repeated runs (Cortex does this automatically)
+- **Cache models locally** to speed up repeated runs (CX does this automatically)
 - **Verify model outputs manually** before using AI results for important decisions
 - **Experiment with different prompts** to understand how input affects output quality
 - **Document what works** including successful prompts, model versions, and configurations
@@ -8885,14 +8885,14 @@ These foundational skills apply to countless AI applications. The patterns you l
 - **Hugging Face pipelines abstract complexity** - A few lines of code give you access to thousands of models
 - **Start small and scale up** - Use smaller models for learning, then upgrade for production workloads
 - **Interpret AI outputs critically** - Confidence scores and generated text require human verification
-- **Cortex Linux handles the infrastructure** - Focus on building AI applications instead of managing dependencies
+- **CX Linux handles the infrastructure** - Focus on building AI applications instead of managing dependencies
 
-You have successfully run your first AI tasks with Cortex Linux. You have classified images, generated text, and learned how to interpret AI outputs. These foundational skills apply to countless AI applications.
+You have successfully run your first AI tasks with CX Linux. You have classified images, generated text, and learned how to interpret AI outputs. These foundational skills apply to countless AI applications.
 
 Continue your journey by exploring different models, experimenting with various tasks, and building projects that interest you. The Hugging Face model hub contains thousands of models for different purposes, all accessible through the pipelines you have learned to use.
 
 For more guidance, check out:
-- [Getting Started with Cortex Linux](/blog/getting-started-cortex-first-workflow)
+- [Getting Started with CX Linux](/blog/getting-started-cortex-first-workflow)
 - [What AI-Native Linux Actually Means](/blog/what-ai-native-linux-means)
 
 Welcome to the world of AI development. The possibilities are endless.
@@ -8900,10 +8900,10 @@ Welcome to the world of AI development. The possibilities are endless.
     date: "2025-12-12",
     readingTime: "15 min read",
     wordCount: 2850,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Getting Started",
     image: "/stock_images/rocket_launch_startu_42e0ce04.jpg",
-    imageAlt: "Rocket launch representing running your first AI task with Cortex Linux",
+    imageAlt: "Rocket launch representing running your first AI task with CX Linux",
     tags: ["Getting Started", "AI", "Machine Learning", "Tutorial"],
     relatedPosts: ["getting-started-cortex-first-workflow", "what-ai-native-linux-means"]
   },
@@ -8911,14 +8911,14 @@ Welcome to the world of AI development. The possibilities are endless.
     id: "15",
     slug: "linux-essential-terminal-commands",
     title: "Linux Commands Cheat Sheet: 50 Essential Commands for 2026",
-    seoTitle: "Linux Commands Cheat Sheet 2026: 50 Essential Commands | Cortex Linux",
+    seoTitle: "Linux Commands Cheat Sheet 2026: 50 Essential Commands | CX Linux",
     seoDescription: "Master Linux with our comprehensive 2026 cheat sheet. 50 essential commands for file navigation, text processing, system monitoring, and networking with examples.",
     excerpt: "The complete Linux command reference for 2026. From basic file operations to advanced text processing and networking, master the terminal with practical examples.",
     content: `**Every Linux user has been there:** you're in the middle of a critical task, and you can't remember the exact syntax for that one command you need. Was it \`grep -r\` or \`grep -R\`? Does \`rm -rf\` delete directories or just files? These moments cost time and break your flow.
 
 This cheat sheet is your definitive reference for 2026. We've compiled the 50 most essential Linux commands, organized by category, with practical examples you can copy and paste directly into your terminal. Whether you're a beginner learning the basics or an experienced admin who needs a quick refresher, this guide has you covered.
 
-> **Pro Tip:** With Cortex Linux, you can skip memorizing syntax entirely. Just describe what you want to do in plain English, and the AI handles the command translation. But understanding these fundamentals still makes you a more effective Linux user.
+> **Pro Tip:** With CX Linux, you can skip memorizing syntax entirely. Just describe what you want to do in plain English, and the AI handles the command translation. But understanding these fundamentals still makes you a more effective Linux user.
 
 ---
 
@@ -9705,24 +9705,24 @@ nohup command > output.log 2>&1 &
 
 ---
 
-## The Cortex Linux Advantage
+## The CX Linux Advantage
 
-While memorizing these 50 commands is valuable, Cortex Linux offers an alternative approach. With AI-native command execution, you can describe what you want in natural language:
+While memorizing these 50 commands is valuable, CX Linux offers an alternative approach. With AI-native command execution, you can describe what you want in natural language:
 
 \`\`\`bash
 # Traditional approach
 find /var/log -name "*.log" -mtime +30 -exec rm {} \\;
 
-# Cortex approach
-cortex "delete log files older than 30 days in /var/log"
+# CX approach
+cx "delete log files older than 30 days in /var/log"
 \`\`\`
 
 \`\`\`bash
 # Traditional approach
 tar -czvf backup-$(date +%Y%m%d).tar.gz --exclude='*.tmp' /home/user/projects
 
-# Cortex approach
-cortex "create a dated backup of my projects folder, excluding temp files"
+# CX approach
+cx "create a dated backup of my projects folder, excluding temp files"
 \`\`\`
 
 The AI validates your intent, shows you the exact commands it will run, and handles edge cases automatically. You get the power of Linux with the convenience of natural language.
@@ -9762,7 +9762,7 @@ The AI validates your intent, shows you the exact commands it will run, and hand
 - **Combine commands with pipes** - The real power of Linux comes from chaining commands together
 - **Use man pages** - Every command has documentation: \`man command\`
 - **Practice regularly** - Muscle memory develops with consistent use
-- **Consider AI assistance** - Tools like Cortex Linux can help you learn while remaining productive
+- **Consider AI assistance** - Tools like CX Linux can help you learn while remaining productive
 
 Bookmark this cheat sheet and refer to it whenever you need a quick syntax reminder. With practice, these commands will become second nature.
 
@@ -9771,7 +9771,7 @@ For more Linux security topics, check out our guide on [Linux File Permissions E
     date: "2026-01-12",
     readingTime: "10 min read",
     wordCount: 2150,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/terminal_command_lin_a5efdb77.jpg",
     imageAlt: "Terminal command line interface showing essential Linux commands cheat sheet for 2026",
@@ -9782,7 +9782,7 @@ For more Linux security topics, check out our guide on [Linux File Permissions E
     id: "16",
     slug: "linux-file-permissions-guide",
     title: "Linux File Permissions Explained: chmod, chown, and Security",
-    seoTitle: "Linux File Permissions Explained: chmod, chown Guide 2026 | Cortex Linux",
+    seoTitle: "Linux File Permissions Explained: chmod, chown Guide 2026 | CX Linux",
     seoDescription: "Complete guide to Linux file permissions. Master chmod, chown, numeric notation, symbolic notation, SUID, SGID, sticky bit with practical examples.",
     excerpt: "Understand Linux file permissions from the ground up. Learn to read, set, and troubleshoot permissions with chmod and chown, including special permissions like SUID and SGID.",
     content: `**A single misconfigured permission cost one company $2.3 million.** Their web server's upload directory was set to 777, allowing anyone to write executable files. An attacker uploaded a PHP shell, gained server access, and exfiltrated their entire customer database. The fix would have taken 30 seconds: \`chmod 755 uploads/\`.
@@ -10341,9 +10341,9 @@ newgrp developers
 
 ---
 
-## Cortex Linux: Natural Language Permissions
+## CX Linux: Natural Language Permissions
 
-Managing permissions with Cortex Linux becomes intuitive through natural language:
+Managing permissions with CX Linux becomes intuitive through natural language:
 
 \`\`\`bash
 # Traditional approach
@@ -10351,8 +10351,8 @@ find /var/www -type d -exec chmod 755 {} \\;
 find /var/www -type f -exec chmod 644 {} \\;
 chown -R www-data:www-data /var/www
 
-# Cortex approach
-cortex "secure the web directory at /var/www for Apache"
+# CX approach
+cx "secure the web directory at /var/www for Apache"
 \`\`\`
 
 \`\`\`bash
@@ -10362,16 +10362,16 @@ chmod 644 ~/.ssh/id_rsa.pub
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 
-# Cortex approach
-cortex "fix SSH permissions in my home directory"
+# CX approach
+cx "fix SSH permissions in my home directory"
 \`\`\`
 
 The AI understands security best practices and applies them automatically:
 
 \`\`\`bash
-cortex "set up a shared project directory for the developers group at /projects/app"
+cx "set up a shared project directory for the developers group at /projects/app"
 
-# Cortex will:
+# CX will:
 # 1. Create the directory
 # 2. Set ownership to :developers
 # 3. Apply SGID for group inheritance
@@ -10449,7 +10449,7 @@ For a quick reference of all essential Linux commands, see our [Linux Commands C
     date: "2026-01-12",
     readingTime: "10 min read",
     wordCount: 2180,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Security",
     image: "/stock_images/padlock_key_access_p_9458c5fa.jpg",
     imageAlt: "Padlock and key representing file access permissions and security with chmod and chown",
@@ -10460,7 +10460,7 @@ For a quick reference of all essential Linux commands, see our [Linux Commands C
     id: "17",
     slug: "linux-gaming-guide-2026",
     title: "Linux For Gaming in 2026: Complete Setup Guide",
-    seoTitle: "Linux For Gaming in 2026: Complete Setup Guide | Cortex Linux",
+    seoTitle: "Linux For Gaming in 2026: Complete Setup Guide | CX Linux",
     seoDescription: "Master Linux gaming in 2026 with our complete guide. Learn about gaming distros, Steam Proton, GPU drivers, Lutris, Wine, and performance optimization.",
     excerpt: "Transform your Linux machine into a gaming powerhouse. From choosing the right distro to optimizing Proton performance, here's everything you need to play games on Linux in 2026.",
     content: `**The gaming landscape has fundamentally shifted.** In 2026, Linux gaming isn't just viable—it's often preferable. With Steam Deck selling over 10 million units, Proton reaching 95%+ compatibility with Windows games, and native Linux ports becoming standard, the question has changed from "Can I game on Linux?" to "Why would I game on anything else?"
@@ -10746,13 +10746,13 @@ sudo pacman -S mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
 export RADV_PERFTEST=aco
 \`\`\`
 
-### Cortex Linux: AI-Assisted Driver Setup
+### CX Linux: AI-Assisted Driver Setup
 
-**This is where AI-native systems shine.** Traditional driver installation involves checking hardware, finding compatible versions, managing kernel module builds, and debugging conflicts. With Cortex Linux, this becomes:
+**This is where AI-native systems shine.** Traditional driver installation involves checking hardware, finding compatible versions, managing kernel module builds, and debugging conflicts. With CX Linux, this becomes:
 
 \`\`\`bash
-# AI-native approach with Cortex
-cortex gpu setup --gaming
+# AI-native approach with CX
+cx gpu setup --gaming
 
 # Output:
 # Detected: NVIDIA RTX 4080 (compute 8.9)
@@ -11007,7 +11007,7 @@ sudo apt install steam-devices
 - **Proton-GE is essential** - The community Proton builds often have better compatibility than official releases
 - **GPU drivers are critical** - Spend time getting them right; NVIDIA users should consider Pop!_OS for the easiest experience
 - **GameMode and MangoHud are must-haves** - Free performance gains and monitoring
-- **AI-native systems like Cortex simplify everything** - Let the system handle driver conflicts and optimization automatically
+- **AI-native systems like CX simplify everything** - Let the system handle driver conflicts and optimization automatically
 
 The age of "Linux isn't for gaming" is over. With the right setup, Linux delivers better performance, more control, and zero licensing costs. Welcome to the future of PC gaming.
 
@@ -11023,7 +11023,7 @@ Ready to dive deeper? Check out these related guides:
     date: "2026-01-12",
     readingTime: "11 min read",
     wordCount: 2180,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/gaming_setup_rgb_key_05ecf14a.jpg",
     imageAlt: "RGB gaming keyboard setup for complete Linux gaming guide in 2026",
@@ -11034,7 +11034,7 @@ Ready to dive deeper? Check out these related guides:
     id: "18",
     slug: "linux-desktop-environments-compared",
     title: "Linux Desktop Environments: GNOME vs KDE vs Xfce Compared",
-    seoTitle: "Linux Desktop Environments Compared: GNOME vs KDE vs Xfce 2026 Guide | Cortex Linux",
+    seoTitle: "Linux Desktop Environments Compared: GNOME vs KDE vs Xfce 2026 Guide | CX Linux",
     seoDescription: "Complete comparison of Linux desktop environments in 2026. Compare GNOME, KDE Plasma, Xfce, Cinnamon, MATE, and LXQt with pros, cons, and recommendations.",
     excerpt: "Choosing the right desktop environment can make or break your Linux experience. This comprehensive comparison helps you pick the perfect DE for your workflow, hardware, and preferences.",
     content: `**Your desktop environment shapes every interaction with your computer.** It determines how you launch apps, manage windows, customize appearance, and navigate your workflow. Yet many Linux newcomers either accept their distro's default or switch randomly without understanding what they're gaining—or losing.
@@ -11426,9 +11426,9 @@ rm -rf ~/.local/share/gnome-*
 - **App duplication** - GNOME's Files vs KDE's Dolphin vs Thunar
 - **Theme inconsistency** - GTK apps in KDE (or vice versa) may look different
 
-### Cortex Linux: AI-Assisted DE Customization
+### CX Linux: AI-Assisted DE Customization
 
-Setting up and customizing a desktop environment involves countless configuration files, theme installations, and package management. Cortex Linux simplifies this with intent-based commands:
+Setting up and customizing a desktop environment involves countless configuration files, theme installations, and package management. CX Linux simplifies this with intent-based commands:
 
 \`\`\`bash
 # Traditional way: Install and configure Plasma with custom theme
@@ -11438,8 +11438,8 @@ sudo apt install papirus-icon-theme
 # Configure theme via System Settings → Appearance → ...
 # 20+ minutes of clicking through menus
 
-# Cortex way:
-cortex desktop setup kde-plasma --theme "modern-dark" --icons "papirus"
+# CX way:
+cx desktop setup kde-plasma --theme "modern-dark" --icons "papirus"
 
 # Output:
 # Installing KDE Plasma...
@@ -11481,7 +11481,7 @@ Real-world measurements on identical hardware (Intel i5-12400, 16GB RAM, Intel U
 - **Xfce** prioritizes stability and speed—choose it for older hardware or when reliability matters most
 - **Try multiple DEs** before committing—they're easy to install side-by-side
 - **Your DE choice isn't permanent**—switching takes minutes, not hours
-- **AI-native tools like Cortex** can simplify DE setup and customization, turning hours of configuration into single commands
+- **AI-native tools like CX** can simplify DE setup and customization, turning hours of configuration into single commands
 
 The "best" desktop environment is the one that fits your workflow, hardware, and preferences. Don't let anyone tell you there's only one right answer.
 
@@ -11496,7 +11496,7 @@ The "best" desktop environment is the one that fits your workflow, hardware, and
     date: "2026-01-12",
     readingTime: "12 min read",
     wordCount: 2350,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Fundamentals",
     image: "/stock_images/modern_desktop_compu_65bd9ebe.jpg",
     imageAlt: "Modern desktop computer comparing GNOME vs KDE vs Xfce Linux desktop environments",
@@ -11507,7 +11507,7 @@ The "best" desktop environment is the one that fits your workflow, hardware, and
     id: "19",
     slug: "linux-firewall-configuration-guide",
     title: "Linux Firewall Configuration: iptables and UFW Made Simple",
-    seoTitle: "Linux Firewall Configuration Guide: iptables & UFW Tutorial 2026 | Cortex Linux",
+    seoTitle: "Linux Firewall Configuration Guide: iptables & UFW Tutorial 2026 | CX Linux",
     seoDescription: "Master Linux firewall configuration with iptables, UFW, and firewalld. Step-by-step guide to securing SSH, opening ports, and firewall best practices.",
     excerpt: "Your complete guide to Linux firewall configuration. Learn iptables rules, UFW commands, and firewalld management with practical examples and security best practices.",
     content: `**A single misconfigured firewall rule cost a fintech startup $2.3 million.** An intern accidentally opened port 3306 (MySQL) to the public internet during a routine update. Within 72 hours, attackers had exfiltrated their entire customer database. The breach wasn't sophisticated—it was a simple port scan that found an open door.
@@ -11947,9 +11947,9 @@ sudo tail -f /var/log/ufw.log
 
 ---
 
-## The Cortex Approach: Natural Language Firewall Management
+## The CX Approach: Natural Language Firewall Management
 
-With Cortex Linux, firewall configuration becomes conversational:
+With CX Linux, firewall configuration becomes conversational:
 
 \`\`\`bash
 # Traditional approach
@@ -11961,8 +11961,8 @@ sudo ufw allow 443/tcp
 sudo ufw allow from 10.0.1.0/24 to any port 5432
 sudo ufw enable
 
-# Cortex approach
-cortex firewall setup
+# CX approach
+cx firewall setup
 
 # Output:
 # Analyzing your services...
@@ -11980,7 +11980,7 @@ cortex firewall setup
 Or use natural language:
 
 \`\`\`bash
-cortex "secure my web server and only allow database access from the app server at 10.0.1.10"
+cx "secure my web server and only allow database access from the app server at 10.0.1.10"
 
 # Output:
 # Configuring firewall...
@@ -12063,7 +12063,7 @@ sudo firewall-cmd --reload
 - **firewalld excels at dynamic rules** - Better for complex, zone-based configurations
 - **Document your rules** - Use comments and maintain a firewall changelog
 - **Regular audits prevent drift** - Review rules monthly to remove unused exceptions
-- **Cortex can automate this** - Natural language firewall management reduces human error
+- **CX can automate this** - Natural language firewall management reduces human error
 
 A properly configured firewall won't make your system impenetrable, but it dramatically reduces your attack surface. Combined with other security measures like SSH key authentication and regular updates, you're building defense in depth.
 
@@ -12078,7 +12078,7 @@ A properly configured firewall won't make your system impenetrable, but it drama
     date: "2026-01-12",
     readingTime: "10 min read",
     wordCount: 2150,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Security",
     image: "/stock_images/network_firewall_ser_4a1ed609.jpg",
     imageAlt: "Network firewall server protecting Linux system with iptables and UFW configuration",
@@ -12089,7 +12089,7 @@ A properly configured firewall won't make your system impenetrable, but it drama
     id: "20",
     slug: "linux-find-command-tutorial",
     title: "Linux Find Command: Master File Search with 20 Examples",
-    seoTitle: "Linux Find Command Tutorial: 20 Practical Examples (2026 Guide) | Cortex Linux",
+    seoTitle: "Linux Find Command Tutorial: 20 Practical Examples (2026 Guide) | CX Linux",
     seoDescription: "Master the Linux find command with 20+ practical examples. Learn to search by name, size, time, permissions, and combine with exec for powerful file operations.",
     excerpt: "The definitive guide to the Linux find command. Master file searching by name, type, size, time, and permissions with 20+ real-world examples and performance tips.",
     content: `**It took 47 minutes to find a single log file.** A DevOps engineer at a major e-commerce company was troubleshooting a production outage at 2 AM. They knew the error was logged somewhere in /var/log, but with thousands of log files across dozens of subdirectories, manually searching was a nightmare. The outage stretched on while they fumbled through directories.
@@ -12499,16 +12499,16 @@ find / -readable -name "myfile"
 
 ---
 
-## The Cortex Approach: AI-Powered File Search
+## The CX Approach: AI-Powered File Search
 
-With Cortex Linux, file searching becomes conversational:
+With CX Linux, file searching becomes conversational:
 
 \`\`\`bash
 # Traditional
 find . -type f -name "*.log" -mtime -7 -size +10M
 
-# Cortex natural language
-cortex "find large log files from this week"
+# CX natural language
+cx "find large log files from this week"
 
 # Output:
 # Found 3 files matching "large log files from this week":
@@ -12526,7 +12526,7 @@ cortex "find large log files from this week"
 Or for complex searches:
 
 \`\`\`bash
-cortex "find all Python files containing 'deprecated' that haven't been modified in 6 months"
+cx "find all Python files containing 'deprecated' that haven't been modified in 6 months"
 
 # Output:
 # Searching...
@@ -12543,10 +12543,10 @@ cortex "find all Python files containing 'deprecated' that haven't been modified
 # - Removing if unused
 \`\`\`
 
-Cortex understands intent and suggests relevant actions based on context:
+CX understands intent and suggests relevant actions based on context:
 
 \`\`\`bash
-cortex "clean up temporary files safely"
+cx "clean up temporary files safely"
 
 # Output:
 # Analyzing temporary files...
@@ -12602,7 +12602,7 @@ cortex "clean up temporary files safely"
 - **-print0 with xargs -0** - Safely handle filenames with spaces
 - **find + grep = powerful content search** - Filter files first, then search content
 - **Always preview before delete** - Run without -delete first to verify matches
-- **Cortex makes this conversational** - Describe what you want in natural language
+- **CX makes this conversational** - Describe what you want in natural language
 
 The find command is deceptively simple in basic use but incredibly powerful when mastered. These 20 examples cover the scenarios you'll encounter most often. Practice them until they become muscle memory, and you'll never waste time hunting for files again.
 
@@ -12617,7 +12617,7 @@ The find command is deceptively simple in basic use but incredibly powerful when
     date: "2026-01-12",
     readingTime: "11 min read",
     wordCount: 2280,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/search_files_magnify_9c1ede48.jpg",
     imageAlt: "Magnifying glass searching files representing Linux find command tutorial with examples",
@@ -12628,14 +12628,14 @@ The find command is deceptively simple in basic use but incredibly powerful when
     id: "21",
     slug: "linux-commands-cheat-sheet",
     title: "Linux Commands Cheat Sheet: 50+ Essential Commands for 2026",
-    seoTitle: "Linux Commands Cheat Sheet: 50+ Essential Commands (2026) | Cortex Linux",
+    seoTitle: "Linux Commands Cheat Sheet: 50+ Essential Commands (2026) | CX Linux",
     seoDescription: "Master 50+ essential Linux commands with our comprehensive cheat sheet. File operations, text processing, networking, and system administration made simple.",
     excerpt: "Your complete reference guide to essential Linux commands. From basic file operations to advanced system administration, master the terminal with practical examples.",
     content: `**Three keystrokes cost a developer their entire weekend.** A junior engineer typed \`rm -rf /\` instead of \`rm -rf ./\` and wiped their development server clean. No backup, no recovery—just 72 hours of rebuilding their environment from scratch.
 
 The difference between Linux mastery and Linux disaster often comes down to knowing the right command at the right time. This cheat sheet compiles the 50+ commands that every Linux user—from beginner to seasoned administrator—needs at their fingertips.
 
-Whether you're navigating directories, processing text files, managing users, or troubleshooting network issues, this guide has you covered. Bookmark it, print it, or better yet—let Cortex remember it all for you.
+Whether you're navigating directories, processing text files, managing users, or troubleshooting network issues, this guide has you covered. Bookmark it, print it, or better yet—let CX remember it all for you.
 
 > **Related Reading:** For deeper dives into specific topics, see [Linux Find Command Tutorial](/blog/linux-find-command-tutorial) and [Linux File Permissions Explained](/blog/linux-file-permissions-explained).
 
@@ -13046,16 +13046,16 @@ Tab                               # Auto-complete
 
 ---
 
-## The Cortex Approach: Commands Without Memorization
+## The CX Approach: Commands Without Memorization
 
-With Cortex Linux, you don't need to memorize any of this. Just describe what you want:
+With CX Linux, you don't need to memorize any of this. Just describe what you want:
 
 \`\`\`bash
 # Traditional: Remember exact syntax
 find . -type f -name "*.log" -mtime +30 -exec rm {} \\;
 
-# Cortex: Natural language
-cortex "delete log files older than 30 days"
+# CX: Natural language
+cx "delete log files older than 30 days"
 
 # Output:
 # Found 47 .log files older than 30 days (total: 2.3GB)
@@ -13072,16 +13072,16 @@ cortex "delete log files older than 30 days"
 More examples:
 
 \`\`\`bash
-cortex "show me what's using the most disk space"
+cx "show me what's using the most disk space"
 # Analyzes disk usage, shows top consumers with actionable suggestions
 
-cortex "find all Python files containing 'deprecated'"
+cx "find all Python files containing 'deprecated'"
 # Searches recursively, shows context, suggests cleanup actions
 
-cortex "compress the logs folder for backup"
+cx "compress the logs folder for backup"
 # Creates optimized tar.gz with appropriate options
 
-cortex "what ports are open on this machine"
+cx "what ports are open on this machine"
 # Shows listening ports with process names and security recommendations
 \`\`\`
 
@@ -13123,7 +13123,7 @@ cortex "what ports are open on this machine"
 - **Learn grep and find** - Essential for searching files and content
 - **Understand permissions** - Security starts with \`chmod\` and \`chown\`
 - **Practice in a safe environment** - Use a VM or container before production
-- **Cortex removes the memorization burden** - Describe what you want, get it done
+- **CX removes the memorization burden** - Describe what you want, get it done
 
 The Linux command line is a force multiplier. These 50+ commands form the foundation—once you're comfortable with them, you'll wonder how you ever worked without terminal access.
 
@@ -13138,7 +13138,7 @@ The Linux command line is a force multiplier. These 50+ commands form the founda
     date: "2026-01-12",
     readingTime: "14 min read",
     wordCount: 2450,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Fundamentals",
     image: "/stock_images/code_editor_programm_d8bd64a8.jpg",
     imageAlt: "Code editor with syntax highlighting showing essential Linux commands reference",
@@ -13149,7 +13149,7 @@ The Linux command line is a force multiplier. These 50+ commands form the founda
     id: "22",
     slug: "linux-file-permissions-explained",
     title: "Linux File Permissions Explained: chmod, chown, and rwx Demystified",
-    seoTitle: "Linux File Permissions Explained: chmod, chown, rwx Guide (2026) | Cortex Linux",
+    seoTitle: "Linux File Permissions Explained: chmod, chown, rwx Guide (2026) | CX Linux",
     seoDescription: "Master Linux file permissions with our complete guide. Learn chmod, chown, permission numbers, rwx notation, and common permission scenarios with examples.",
     excerpt: "Understand Linux file permissions once and for all. Learn the rwx system, chmod numeric notation, chown usage, and solve common permission problems with practical examples.",
     content: `**A single permission mistake exposed 100 million user records.** In 2019, a major financial services company left a database backup file world-readable on a public server. The file sat there for months before a security researcher discovered it. The fix took 30 seconds—\`chmod 600\`—but the damage was done.
@@ -13587,17 +13587,17 @@ ls -l
 
 ---
 
-## The Cortex Approach: AI-Assisted Permission Management
+## The CX Approach: AI-Assisted Permission Management
 
-With Cortex Linux, permission management becomes conversational:
+With CX Linux, permission management becomes conversational:
 
 \`\`\`bash
 # Traditional approach
 chmod 640 config.yaml
 chown myapp:myapp config.yaml
 
-# Cortex approach
-cortex "make config.yaml readable only by the myapp user and group"
+# CX approach
+cx "make config.yaml readable only by the myapp user and group"
 
 # Output:
 # Current permissions: -rw-r--r-- root root
@@ -13615,7 +13615,7 @@ cortex "make config.yaml readable only by the myapp user and group"
 Complex scenarios become simple:
 
 \`\`\`bash
-cortex "set up /var/www/mysite for nginx with the developers group able to edit files"
+cx "set up /var/www/mysite for nginx with the developers group able to edit files"
 
 # Output:
 # Configuring /var/www/mysite for Nginx + developer access:
@@ -13723,7 +13723,7 @@ aa-status
 - **Special bits exist** - SUID (4), SGID (2), sticky (1) for advanced cases
 - **SSH is strict** - 600 for private keys, 700 for ~/.ssh
 - **Web servers need access** - match ownership to web server user
-- **Cortex simplifies this** - describe what you need, let AI handle the syntax
+- **CX simplifies this** - describe what you need, let AI handle the syntax
 
 Permissions are the foundation of Linux security. Get them right, and you've built a solid base. Get them wrong, and you've created a vulnerability. Take the time to understand this system—your future self (and your data) will thank you.
 
@@ -13738,7 +13738,7 @@ Permissions are the foundation of Linux security. Get them right, and you've bui
     date: "2026-01-12",
     readingTime: "13 min read",
     wordCount: 2380,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/access_control_key_p_8797cbe4.jpg",
     imageAlt: "Access control key and password authentication for Linux file permissions guide",
@@ -13749,7 +13749,7 @@ Permissions are the foundation of Linux security. Get them right, and you've bui
     id: "23",
     slug: "linux-gaming-guide-2026",
     title: "Linux Gaming in 2026: The Complete Setup Guide",
-    seoTitle: "Linux Gaming Guide 2026: Steam, Proton, GPU Drivers & Optimization | Cortex Linux",
+    seoTitle: "Linux Gaming Guide 2026: Steam, Proton, GPU Drivers & Optimization | CX Linux",
     seoDescription: "Complete Linux gaming setup guide for 2026. Learn Steam Proton, GPU driver installation, game optimization, and why Linux is now a viable gaming platform.",
     excerpt: "Linux gaming has arrived. Learn how to set up Steam with Proton, install NVIDIA/AMD drivers, optimize performance, and play your entire library on Linux in 2026.",
     content: `**93% of Steam's top 100 games now work on Linux.** That's not a typo. In 2020, that number was under 25%. The Steam Deck changed everything—Valve's investment in Proton compatibility has transformed Linux from a gaming wasteland into a legitimate platform.
@@ -14215,12 +14215,12 @@ Check BattlEye/EAC status: https://areweanticheatyet.com/
 
 ---
 
-## The Cortex Approach: Automated Gaming Setup
+## The CX Approach: Automated Gaming Setup
 
-With Cortex Linux, gaming setup becomes a conversation:
+With CX Linux, gaming setup becomes a conversation:
 
 \`\`\`bash
-cortex "set up my system for gaming"
+cx "set up my system for gaming"
 
 # Output:
 # Analyzing your system...
@@ -14249,7 +14249,7 @@ cortex "set up my system for gaming"
 Or for specific games:
 
 \`\`\`bash
-cortex "optimize my system for Cyberpunk 2077"
+cx "optimize my system for Cyberpunk 2077"
 
 # Output:
 # Checking Cyberpunk 2077 compatibility...
@@ -14298,7 +14298,7 @@ cortex "optimize my system for Cyberpunk 2077"
 - **Proton-GE adds extra compatibility** - Install it via ProtonUp-Qt
 - **GameMode and MangoHud enhance experience** - Use them in launch options
 - **Check ProtonDB before buying** - Know compatibility before purchasing
-- **Cortex automates the setup** - From driver installation to game optimization
+- **CX automates the setup** - From driver installation to game optimization
 
 The era of "Linux can't game" is over. With proper setup, you'll find that Linux can match—and in some cases exceed—Windows gaming performance. Welcome to the future.
 
@@ -14313,7 +14313,7 @@ The era of "Linux can't game" is over. With proper setup, you'll find that Linux
     date: "2026-01-12",
     readingTime: "15 min read",
     wordCount: 2480,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/esports_gaming_compu_0a8b004e.jpg",
     imageAlt: "Esports gaming computer with neon purple lights for Linux gaming setup",
@@ -14324,7 +14324,7 @@ The era of "Linux can't game" is over. With proper setup, you'll find that Linux
     id: "24",
     slug: "linux-desktop-environments-compared",
     title: "Linux Desktop Environments Compared: GNOME vs KDE vs XFCE vs Cinnamon",
-    seoTitle: "Linux Desktop Environments Compared: GNOME, KDE, XFCE, Cinnamon (2026) | Cortex Linux",
+    seoTitle: "Linux Desktop Environments Compared: GNOME, KDE, XFCE, Cinnamon (2026) | CX Linux",
     seoDescription: "Compare Linux desktop environments: GNOME, KDE Plasma, XFCE, and Cinnamon. Find the best DE for your workflow with our detailed comparison of features and performance.",
     excerpt: "Choosing a Linux desktop environment can be overwhelming. Compare GNOME, KDE Plasma, XFCE, and Cinnamon to find the perfect balance of features, performance, and customization for your needs.",
     content: `**Your desktop environment affects every second of your Linux experience.** It's the first thing you see, the interface you interact with constantly, and a major factor in both productivity and system performance. Choose wrong, and you'll fight your computer daily. Choose right, and Linux becomes a joy to use.
@@ -14726,12 +14726,12 @@ sudo pacman -S xfce4 xfce4-goodies
 
 ---
 
-## The Cortex Approach: Easy DE Management
+## The CX Approach: Easy DE Management
 
-With Cortex Linux, desktop environment switching becomes effortless:
+With CX Linux, desktop environment switching becomes effortless:
 
 \`\`\`bash
-cortex "switch to KDE Plasma"
+cx "switch to KDE Plasma"
 
 # Output:
 # Current DE: GNOME 45.2
@@ -14753,7 +14753,7 @@ cortex "switch to KDE Plasma"
 Or ask for recommendations:
 
 \`\`\`bash
-cortex "which desktop environment is best for my 8-year-old laptop with 4GB RAM?"
+cx "which desktop environment is best for my 8-year-old laptop with 4GB RAM?"
 
 # Output:
 # Analyzing system: Intel Core i5-6200U, 4GB RAM, Intel HD 520
@@ -14819,7 +14819,7 @@ cortex "which desktop environment is best for my 8-year-old laptop with 4GB RAM?
 - **XFCE** is the lightweight champion for older hardware
 - **Cinnamon** is the best Windows-like experience on Linux
 - **You can try multiple DEs** - Install them side-by-side and switch at login
-- **Cortex simplifies the process** - Install, configure, and switch with natural language
+- **CX simplifies the process** - Install, configure, and switch with natural language
 
 The desktop environment is your daily driver. Take time to try a few options before settling. Most distros offer live USB environments—boot into them and use them for a day before committing.
 
@@ -14834,7 +14834,7 @@ The desktop environment is your daily driver. Take time to try a few options bef
     date: "2026-01-12",
     readingTime: "14 min read",
     wordCount: 2420,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Fundamentals",
     image: "/stock_images/multiple_monitors_wo_f4014b95.jpg",
     imageAlt: "Multiple monitors workspace showing different Linux desktop environments comparison",
@@ -14845,7 +14845,7 @@ The desktop environment is your daily driver. Take time to try a few options bef
     id: "27",
     slug: "linux-firewall-configuration",
     title: "Linux Firewall Configuration Guide: UFW, iptables, and firewalld",
-    seoTitle: "Linux Firewall Configuration Guide: UFW, iptables, firewalld | Cortex Linux",
+    seoTitle: "Linux Firewall Configuration Guide: UFW, iptables, firewalld | CX Linux",
     seoDescription: "Master Linux firewall configuration with UFW, iptables, and firewalld. Learn port management, security rules, and best practices for protecting your system.",
     excerpt: "Secure your Linux system with proper firewall configuration. This comprehensive guide covers UFW, iptables, and firewalld with practical examples and security best practices.",
     content: `**Your Linux server is under attack right now.** Every minute, automated bots scan the internet for vulnerable systems. Without a properly configured firewall, your machine is an open invitation for exploitation. The good news? Linux provides powerful, free tools to protect yourself. The challenge? Understanding which tool to use and how to configure it correctly.
@@ -15369,12 +15369,12 @@ sudo iptables -L -v -n
 
 ---
 
-## The Cortex Approach: Firewall Configuration Made Simple
+## The CX Approach: Firewall Configuration Made Simple
 
-With Cortex Linux, firewall configuration becomes conversational:
+With CX Linux, firewall configuration becomes conversational:
 
 \`\`\`bash
-cortex "secure my server for web hosting"
+cx "secure my server for web hosting"
 
 # Output:
 # Analyzing system configuration...
@@ -15407,7 +15407,7 @@ cortex "secure my server for web hosting"
 Or describe specific security requirements:
 
 \`\`\`bash
-cortex "allow my home IP 73.45.123.89 to access SSH, block everyone else"
+cx "allow my home IP 73.45.123.89 to access SSH, block everyone else"
 
 # Output:
 # Creating SSH access rule...
@@ -15479,7 +15479,7 @@ sudo systemctl disable --now firewalld
 - **Default deny is essential** - Only allow traffic you explicitly need
 - **Protect SSH first** - Always allow SSH before enabling any firewall
 - **Test from a second connection** - Never lock yourself out of a remote server
-- **Cortex automates the complexity** - Describe your security needs in plain language
+- **CX automates the complexity** - Describe your security needs in plain language
 
 A properly configured firewall is your first line of defense. Take the time to set it up correctly, and your system will be significantly more secure against the constant barrage of internet threats.
 
@@ -15494,7 +15494,7 @@ A properly configured firewall is your first line of defense. Take the time to s
     date: "2026-01-12",
     readingTime: "14 min read",
     wordCount: 2380,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Security",
     image: "/stock_images/network_cables_ether_924b4b36.jpg",
     imageAlt: "Network cables and ethernet server infrastructure for Linux firewall configuration",
@@ -15505,7 +15505,7 @@ A properly configured firewall is your first line of defense. Take the time to s
     id: "28",
     slug: "linux-find-command-mastery",
     title: "Mastering the Linux Find Command: Complete Guide with Examples",
-    seoTitle: "Linux Find Command Guide: Search Files by Name, Size, Date | Cortex Linux",
+    seoTitle: "Linux Find Command Guide: Search Files by Name, Size, Date | CX Linux",
     seoDescription: "Master the Linux find command with practical examples. Learn to search by name, size, date, type, and combine with exec. Complete tutorial with real-world use cases.",
     excerpt: "The find command is one of Linux's most powerful utilities. Learn to locate files by name, size, date, permissions, and more—then combine it with other commands for powerful automation.",
     content: `**"Where is that file?"** This question haunts every Linux user. You know it exists. You remember creating it. But your filesystem is a maze of directories, and searching manually would take hours. The \`find\` command is your solution—one of Linux's most powerful and flexible utilities for locating files and directories.
@@ -15998,12 +15998,12 @@ find . -name "*.txt" -print0 | xargs -0 grep "pattern"
 
 ---
 
-## The Cortex Approach: Natural Language File Search
+## The CX Approach: Natural Language File Search
 
-With Cortex Linux, complex file searches become simple conversations:
+With CX Linux, complex file searches become simple conversations:
 
 \`\`\`bash
-cortex "find all Python files I modified this week"
+cx "find all Python files I modified this week"
 
 # Output:
 # Searching in /home/user...
@@ -16021,7 +16021,7 @@ cortex "find all Python files I modified this week"
 Or describe complex searches naturally:
 
 \`\`\`bash
-cortex "find large video files I haven't watched in months"
+cx "find large video files I haven't watched in months"
 
 # Output:
 # Searching for video files (mp4, mkv, avi, mov)
@@ -16041,7 +16041,7 @@ cortex "find large video files I haven't watched in months"
 Or combine with actions:
 
 \`\`\`bash
-cortex "find all log files over 50MB and compress them"
+cx "find all log files over 50MB and compress them"
 
 # Output:
 # Found 8 log files exceeding 50MB:
@@ -16122,7 +16122,7 @@ find . -type d -name "logs"
 - **\`-exec\` transforms find into automation** - Perform actions on every matching file
 - **\`+\` is faster than \`\\;\`** - Batch execution when command supports multiple files
 - **Test before deleting** - Always run \`find\` without \`-delete\` first
-- **Cortex simplifies complex searches** - Describe what you want in plain English
+- **CX simplifies complex searches** - Describe what you want in plain English
 
 The \`find\` command is one of the most powerful tools in Linux. With practice, you'll instinctively reach for it whenever you need to locate, analyze, or process files across your system.
 
@@ -16137,7 +16137,7 @@ The \`find\` command is one of the most powerful tools in Linux. With practice, 
     date: "2026-01-12",
     readingTime: "13 min read",
     wordCount: 2250,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/document_folder_orga_859dac81.jpg",
     imageAlt: "Document folder organization for mastering Linux find command file search",
@@ -16148,7 +16148,7 @@ The \`find\` command is one of the most powerful tools in Linux. With practice, 
     id: "29",
     slug: "linux-user-group-management",
     title: "Linux User and Group Management: Complete Administration Guide",
-    seoTitle: "Linux User and Group Management: useradd, usermod, groupadd | Cortex Linux",
+    seoTitle: "Linux User and Group Management: useradd, usermod, groupadd | CX Linux",
     seoDescription: "Master Linux user and group management. Learn useradd, usermod, groupadd, sudo access, and best practices for secure multi-user system administration.",
     excerpt: "Learn to manage Linux users and groups effectively. From creating accounts to configuring sudo access, this guide covers everything for secure multi-user system administration.",
     content: `**Every security breach has a simple question at its root:** Who had access? Linux's user and group system is your first line of defense—and your biggest administrative responsibility. Misconfigure user permissions, and you've opened the door to data theft, system compromise, or accidental destruction.
@@ -16679,12 +16679,12 @@ fi
 
 ---
 
-## The Cortex Approach: Automated User Management
+## The CX Approach: Automated User Management
 
-With Cortex Linux, user management becomes conversational:
+With CX Linux, user management becomes conversational:
 
 \`\`\`bash
-cortex "create a new developer account for John Smith with SSH access"
+cx "create a new developer account for John Smith with SSH access"
 
 # Output:
 # Creating user account...
@@ -16710,7 +16710,7 @@ cortex "create a new developer account for John Smith with SSH access"
 Or handle complex operations:
 
 \`\`\`bash
-cortex "John Smith is leaving the company, secure his account and archive his files"
+cx "John Smith is leaving the company, secure his account and archive his files"
 
 # Output:
 # Starting offboarding process for jsmith...
@@ -16796,7 +16796,7 @@ stat /path/to/file
 - **Principle of least privilege** - Users should have minimum necessary access
 - **Audit regularly** - Review who has sudo access and which accounts are unused
 - **Use sudoers.d for custom rules** - Modular configuration is easier to manage
-- **Cortex automates provisioning** - Create, modify, and offboard users with natural language
+- **CX automates provisioning** - Create, modify, and offboard users with natural language
 
 Proper user management is the foundation of Linux security. Take time to establish clear policies and consistent practices—your future self (and your security team) will thank you.
 
@@ -16811,7 +16811,7 @@ Proper user management is the foundation of Linux security. Take time to establi
     date: "2026-01-12",
     readingTime: "14 min read",
     wordCount: 2320,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Infrastructure",
     image: "/stock_images/team_collaboration_b_7b707aa8.jpg",
     imageAlt: "Team collaboration representing Linux user and group management administration",
@@ -16822,7 +16822,7 @@ Proper user management is the foundation of Linux security. Take time to establi
     id: "30",
     slug: "create-linux-bootable-usb",
     title: "Creating a Linux Bootable USB: Complete Guide for Windows, Mac, and Linux",
-    seoTitle: "Create Linux Bootable USB: dd, Rufus, Etcher Guide | Cortex Linux",
+    seoTitle: "Create Linux Bootable USB: dd, Rufus, Etcher Guide | CX Linux",
     seoDescription: "Create a Linux bootable USB drive step-by-step. Learn to use dd, Rufus, Etcher, and Ventoy on Windows, Mac, and Linux with verification instructions.",
     excerpt: "Learn to create a bootable Linux USB on any operating system. This complete guide covers dd, Rufus, Etcher, and Ventoy with verification steps to ensure your installation media works perfectly.",
     content: `**Your Linux journey starts with a USB drive.** Whether you're installing Linux for the first time, rescuing a broken system, or testing a new distribution, a bootable USB is your essential tool. But creating one isn't as straightforward as copying files—you need to write the ISO image correctly, or your system won't boot.
@@ -17196,12 +17196,12 @@ sha256sum linux.iso
 
 ---
 
-## The Cortex Approach: Streamlined USB Creation
+## The CX Approach: Streamlined USB Creation
 
-With Cortex Linux, creating bootable media becomes effortless:
+With CX Linux, creating bootable media becomes effortless:
 
 \`\`\`bash
-cortex "create a bootable USB for Ubuntu"
+cx "create a bootable USB for Ubuntu"
 
 # Output:
 # USB Creation Wizard
@@ -17241,7 +17241,7 @@ cortex "create a bootable USB for Ubuntu"
 Or create multi-boot drives:
 
 \`\`\`bash
-cortex "set up this USB for testing multiple Linux distros"
+cx "set up this USB for testing multiple Linux distros"
 
 # Output:
 # Setting up multi-boot USB with Ventoy...
@@ -17312,7 +17312,7 @@ Always back up important data before installing Linux, even if you plan to dual-
 - **Test before you need it** - Boot from USB and verify it works
 - **Ventoy is magic** - Multiple bootable ISOs on one drive
 - **Disable Secure Boot** if USB won't boot on modern systems
-- **Cortex automates everything** - Download, verify, write, and boot with simple commands
+- **CX automates everything** - Download, verify, write, and boot with simple commands
 
 Creating a bootable USB is a fundamental Linux skill. Once you've done it a few times, it becomes second nature—and you'll always be ready to install, rescue, or explore new distributions.
 
@@ -17327,7 +17327,7 @@ Creating a bootable USB is a fundamental Linux skill. Once you've done it a few 
     date: "2026-01-12",
     readingTime: "12 min read",
     wordCount: 2180,
-    author: "Cortex Team",
+    author: "CX Team",
     category: "Tutorials",
     image: "/stock_images/usb_flash_drive_tech_5a4002dc.jpg",
     imageAlt: "USB flash drive technology for creating bootable Linux installation media",
