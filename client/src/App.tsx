@@ -38,11 +38,23 @@ import SupportPage from "./pages/support";
 import ArchitecturePage from "./pages/architecture";
 import CareersPage from "./pages/careers";
 
+
+interface GitHubStats {
+  stars: number;
+  forks: number;
+  watchers: number;
+}
 export default function App() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
+
+  // Fetch GitHub stars for navbar
+  const { data: githubStats } = useQuery<GitHubStats>({
+    queryKey: ["/api/github/stats"],
+  });
+
 
   // Hide navigation on checkout pages for cleaner conversion flow
   const isCheckoutPage = location.startsWith("/pricing/checkout") || location.startsWith("/pricing/success");
@@ -253,7 +265,7 @@ export default function App() {
                 >
                   <Github size={16} />
                   <Star size={14} className="text-yellow-400" />
-                  <span>25</span>
+                  <span>{githubStats?.stars || 25}</span>
                 </a>
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
