@@ -2,20 +2,20 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// Docusaurus configuration for Cortex Linux documentation
+// Docusaurus configuration for CX Linux documentation
 // This config enables versioning, Algolia search, and SEO optimization
 const config: Config = {
-  title: 'Cortex Linux',
+  title: 'CX Linux',
   tagline: 'The AI-native operating system that simplifies software installation using natural language',
   favicon: 'img/favicon.ico',
 
   // Production URL - update this when deploying
-  url: 'https://docs.cortexlinux.com',
+  url: 'https://docs.cxlinux.com',
   baseUrl: '/',
 
   // GitHub repository configuration for "Edit this page" links
-  organizationName: 'cortexlinux',
-  projectName: 'cortex',
+  organizationName: 'cxlinux-ai',
+  projectName: 'cx-core',
 
   // Strict mode to catch broken links during build
   onBrokenLinks: 'throw',
@@ -34,7 +34,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           // Enable "Edit this page" links to GitHub
-          editUrl: 'https://github.com/cortexlinux/cortex/tree/main/docs/',
+          editUrl: 'https://github.com/cxlinux-ai/cx-core/tree/main/docs/',
           // Enable versioning with 'current' as the development version
           lastVersion: 'current',
           versions: {
@@ -69,13 +69,13 @@ const config: Config = {
 
   themeConfig: {
     // Social card image for OpenGraph
-    image: 'img/cortex-social-card.png',
+    image: 'img/cx-social-card.png',
 
     // Announcement bar for important updates
     announcementBar: {
       id: 'hackathon_2025',
       content:
-        'Join the Global AI Hackathon 2025! <a target="_blank" rel="noopener noreferrer" href="https://cortexlinux.com/hackathon">Learn more</a>',
+        'Join the Global AI Hackathon 2025! <a target="_blank" rel="noopener noreferrer" href="https://cxlinux.com/hackathon">Learn more</a>',
       backgroundColor: '#6366f1',
       textColor: '#ffffff',
       isCloseable: true,
@@ -83,9 +83,9 @@ const config: Config = {
 
     // Navbar configuration
     navbar: {
-      title: 'Cortex Linux',
+      title: 'CX Linux',
       logo: {
-        alt: 'Cortex Linux Logo',
+        alt: 'CX Linux Logo',
         src: 'img/logo.svg',
         srcDark: 'img/logo-dark.svg',
       },
@@ -122,13 +122,13 @@ const config: Config = {
               value: '<b>Archived versions</b>',
             },
             {
-              href: 'https://github.com/cortexlinux/cortex/releases',
+              href: 'https://github.com/cxlinux-ai/cx-core/releases',
               label: 'All releases',
             },
           ],
         },
         {
-          href: 'https://github.com/cortexlinux/cortex',
+          href: 'https://github.com/cxlinux-ai/cx-core',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -166,11 +166,11 @@ const config: Config = {
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/cortexlinux',
+              href: 'https://twitter.com/cxlinux_ai',
             },
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/cortexlinux/cortex/discussions',
+              href: 'https://github.com/cxlinux-ai/cx-core/discussions',
             },
           ],
         },
@@ -179,7 +179,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/cortexlinux/cortex',
+              href: 'https://github.com/cxlinux-ai/cx-core',
             },
             {
               label: 'Contributing',
@@ -200,7 +200,7 @@ const config: Config = {
     algolia: {
       appId: 'YOUR_APP_ID', // Replace with actual Algolia App ID
       apiKey: 'YOUR_SEARCH_API_KEY', // Replace with public search-only API key
-      indexName: 'cortexlinux',
+      indexName: 'cxlinux',
       contextualSearch: true,
       // Optional: path for search page
       searchPagePath: 'search',
@@ -262,7 +262,7 @@ const config: Config = {
 
     // Metadata for SEO
     metadata: [
-      { name: 'keywords', content: 'cortex linux, ai operating system, natural language commands, linux distro, ai-native os' },
+      { name: 'keywords', content: 'cx linux, ai operating system, natural language commands, linux distro, ai-native os' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'og:type', content: 'website' },
     ],
@@ -300,11 +300,11 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
-        name: 'Cortex Linux',
+        name: 'CX Linux',
         applicationCategory: 'OperatingSystem',
         operatingSystem: 'Linux',
         description: 'The AI-native operating system that simplifies software installation using natural language',
-        url: 'https://cortexlinux.com',
+        url: 'https://cxlinux.com',
         author: {
           '@type': 'Organization',
           name: 'AI Venture Holdings LLC',

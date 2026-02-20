@@ -1,7 +1,7 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 /**
- * Sidebar configuration for Cortex Linux documentation
+ * Sidebar configuration for CX Linux documentation
  *
  * Structure follows the exact information architecture specified:
  * - Getting Started: Installation, Quick Start, Configuration, First Commands
@@ -20,7 +20,7 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
         title: 'Getting Started',
-        description: 'Get up and running with Cortex Linux in minutes. Learn how to install, configure, and start using AI-powered system management.',
+        description: 'Get up and running with CX Linux in minutes. Learn how to install, configure, and start using AI-powered system management.',
         slug: '/getting-started',
         keywords: ['install', 'setup', 'quickstart', 'configuration'],
       },
@@ -40,7 +40,7 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
         title: 'User Guide',
-        description: 'Learn how to use Cortex Linux for everyday tasks with natural language commands.',
+        description: 'Learn how to use CX Linux for everyday tasks with natural language commands.',
         slug: '/user-guide',
         keywords: ['guide', 'usage', 'commands', 'natural language'],
       },
@@ -60,7 +60,7 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
         title: 'Reference',
-        description: 'Complete technical reference for Cortex Linux CLI, configuration, and integrations.',
+        description: 'Complete technical reference for CX Linux CLI, configuration, and integrations.',
         slug: '/reference',
         keywords: ['cli', 'api', 'configuration', 'reference'],
       },
@@ -98,7 +98,7 @@ const sidebars: SidebarsConfig = {
       link: {
         type: 'generated-index',
         title: 'Contributing',
-        description: 'Help improve Cortex Linux. Learn how to contribute code, documentation, and more.',
+        description: 'Help improve CX Linux. Learn how to contribute code, documentation, and more.',
         slug: '/contributing',
         keywords: ['contributing', 'development', 'open source', 'bounty'],
       },

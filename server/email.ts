@@ -9,8 +9,8 @@ import { Resend } from 'resend';
 // Only initialize Resend if API key is available
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-const FROM_EMAIL = process.env.FROM_EMAIL || 'Cortex Linux <hello@cortexlinux.com>';
-const BASE_URL = process.env.BASE_URL || 'https://cortexlinux.com';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'CX Linux <hello@cxlinux.com>';
+const BASE_URL = process.env.BASE_URL || 'https://cxlinux.com';
 
 /**
  * Send verification email to new signups
@@ -27,7 +27,7 @@ export async function sendVerificationEmail(email: string, verificationToken: st
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: 'Verify your email - Cortex Linux Waitlist',
+      subject: 'Verify your email - CX Linux Waitlist',
       html: `
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@ export async function sendVerificationEmail(email: string, verificationToken: st
           <!-- Header -->
           <tr>
             <td style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 32px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Cortex Linux</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">CX Linux</h1>
             </td>
           </tr>
 
@@ -52,7 +52,7 @@ export async function sendVerificationEmail(email: string, verificationToken: st
             <td style="padding: 40px 32px;">
               <h2 style="margin: 0 0 16px; color: #18181b; font-size: 20px; font-weight: 600;">Verify your email address</h2>
               <p style="margin: 0 0 24px; color: #52525b; font-size: 16px; line-height: 1.6;">
-                Thanks for joining the Cortex Linux waitlist! Click the button below to verify your email and secure your spot.
+                Thanks for joining the CX Linux waitlist! Click the button below to verify your email and secure your spot.
               </p>
 
               <!-- CTA Button -->
@@ -83,7 +83,7 @@ export async function sendVerificationEmail(email: string, verificationToken: st
           <tr>
             <td style="padding: 24px 32px; background-color: #f4f4f5; text-align: center;">
               <p style="margin: 0; color: #71717a; font-size: 14px;">
-                If you didn't sign up for Cortex Linux, you can safely ignore this email.
+                If you didn't sign up for CX Linux, you can safely ignore this email.
               </p>
             </td>
           </tr>
@@ -124,7 +124,7 @@ export async function sendWelcomeEmail(email: string, referralCode: string): Pro
     const { error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: 'Welcome to Cortex Linux! 🎉',
+      subject: 'Welcome to CX Linux! 🎉',
       html: `
 <!DOCTYPE html>
 <html>
@@ -140,7 +140,7 @@ export async function sendWelcomeEmail(email: string, referralCode: string): Pro
           <!-- Header -->
           <tr>
             <td style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 32px; text-align: center;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Welcome to Cortex Linux!</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">Welcome to CX Linux!</h1>
             </td>
           </tr>
 

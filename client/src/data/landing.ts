@@ -77,14 +77,14 @@ export const securityFeatures = [
 export const comparisonData = {
   tools: ["Feature", "Warp/Gemini CLI", "Claude Code", "CX Linux"],
   features: [
-    { name: "AI-assisted commands", warp: true, claude: true, cortex: true },
-    { name: "Hardware detection", warp: false, claude: false, cortex: true },
-    { name: "Dependency resolution", warp: false, claude: false, cortex: true },
-    { name: "GPU optimization", warp: false, claude: false, cortex: true },
-    { name: "System configuration", warp: false, claude: false, cortex: true },
-    { name: "OS-level integration", warp: false, claude: false, cortex: true },
-    { name: "Preview commands", warp: true, claude: true, cortex: true },
-    { name: "Rollback capability", warp: false, claude: false, cortex: true }
+    { name: "AI-assisted commands", warp: true, claude: true, cx: true },
+    { name: "Hardware detection", warp: false, claude: false, cx: true },
+    { name: "Dependency resolution", warp: false, claude: false, cx: true },
+    { name: "GPU optimization", warp: false, claude: false, cx: true },
+    { name: "System configuration", warp: false, claude: false, cx: true },
+    { name: "OS-level integration", warp: false, claude: false, cx: true },
+    { name: "Preview commands", warp: true, claude: true, cx: true },
+    { name: "Rollback capability", warp: false, claude: false, cx: true }
   ]
 };
 
