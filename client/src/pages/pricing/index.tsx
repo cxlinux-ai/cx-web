@@ -149,8 +149,8 @@ const tiers: PricingTier[] = [
       commands: "Unlimited",
       support: "Dedicated (1h)",
     },
-    cta: "Contact Sales",
-    ctaLink: "/support",
+    cta: "Schedule Demo",
+    ctaLink: "https://calendly.com/ai-consultant/vip",
     icon: Building2,
     gradient: "from-orange-500 to-amber-500",
   },
@@ -544,7 +544,7 @@ export default function PricingPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 id="pricing-demo-link"
-                href="https://calendly.com/cxlinux/enterprise"
+                href="https://calendly.com/ai-consultant/vip"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"

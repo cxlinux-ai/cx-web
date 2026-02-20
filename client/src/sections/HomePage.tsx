@@ -459,8 +459,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         '99.9% SLA',
         '100 systems included'
       ],
-      cta: 'Contact Sales',
-      ctaLink: '/support',
+      cta: 'Schedule Demo',
+      ctaLink: 'https://calendly.com/ai-consultant/vip',
       highlighted: false
     }
   ];
