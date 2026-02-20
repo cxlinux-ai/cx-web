@@ -319,6 +319,93 @@ export default function GettingStarted() {
         </div>
       </section>
 
+      {/* Quick Install Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-lg bg-terminal-green/20 flex items-center justify-center">
+                <Terminal className="w-5 h-5 text-terminal-green" />
+              </div>
+              <h2 className="text-3xl font-bold text-white">Quick Install</h2>
+            </div>
+            
+            <div className="p-6 rounded-xl backdrop-blur-xl bg-white/5 border border-white/10">
+              <p className="text-gray-400 mb-6">
+                Install CX Linux on any Ubuntu/Debian system with these commands:
+              </p>
+              
+              <div className="space-y-6">
+                {/* Step 1 */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">Step 1: Add Repository</span>
+                  </div>
+                  <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-gray-300">
+                      <span className="text-gray-500"># Add GPG key</span>{'\n'}
+                      curl -fsSL https://apt.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n\n'}
+                      <span className="text-gray-500"># Add repository</span>{'\n'}
+                      echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://apt.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
+                    </code>
+                  </pre>
+                </div>
+
+                {/* Step 2 */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">Step 2: Install</span>
+                  </div>
+                  <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-gray-300">
+                      sudo apt update && sudo apt install cx-terminal
+                    </code>
+                  </pre>
+                </div>
+
+                {/* Step 3 */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-gray-500 uppercase tracking-wide">Step 3: Launch & Try</span>
+                  </div>
+                  <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-gray-300">
+                      <span className="text-gray-500"># Launch CX Terminal</span>{'\n'}
+                      cx-terminal{'\n\n'}
+                      <span className="text-gray-500"># Try your first AI command</span>{'\n'}
+                      cx "install nginx and set up a basic website"
+                    </code>
+                  </pre>
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Link href="/pricing">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors">
+                    <Zap className="w-4 h-4" />
+                    Get Pro Features
+                  </span>
+                </Link>
+                <a 
+                  href="https://github.com/cxlinux-ai/cx-core" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  View Source
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Step-by-Step Getting Started */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">

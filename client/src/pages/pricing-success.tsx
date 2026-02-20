@@ -131,8 +131,11 @@ export default function PricingSuccessPage() {
     );
   }
 
-  const installCommand = `pip install CX-pro\nCX-pro activate ${sessionData?.licenseKey}`;
-  const onelinerCommand = `pip install CX-pro && CX-pro activate ${sessionData?.licenseKey}`;
+  // APT installation commands
+  const setupRepoCommand = `curl -fsSL https://apt.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg
+echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://apt.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list`;
+  const installCommand = `sudo apt update && sudo apt install cx-terminal`;
+  const activateCommand = `cx activate ${sessionData?.licenseKey}`;
 
   return (
     <div className="min-h-screen pt-20 pb-16 bg-black">
@@ -196,18 +199,19 @@ export default function PricingSuccessPage() {
           transition={{ delay: 0.4 }}
           className="bg-white/5 border border-white/10 rounded-xl p-6 mb-6"
         >
-          <h2 className="text-lg font-semibold text-white mb-4">Install CX Pro</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Install CX Linux</h2>
           
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* Step 1: Add Repository */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Standard installation:</span>
+                <span className="text-sm text-gray-400">Step 1: Add CX Linux repository</span>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => copyToClipboard(installCommand, 'install')}
+                  onClick={() => copyToClipboard(setupRepoCommand, 'install')}
                   className="h-7 px-2"
-                  data-testid="button-copy-install"
+                  data-testid="button-copy-repo"
                 >
                   {copiedInstall ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
                   <span className="ml-1 text-xs">Copy</span>
@@ -215,21 +219,23 @@ export default function PricingSuccessPage() {
               </div>
               <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm text-gray-300">
-                  <span className="text-gray-500">$</span> pip install CX-pro{'\n'}
-                  <span className="text-gray-500">$</span> CX-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                  <span className="text-gray-500">#</span> Add GPG key and repository{'\n'}
+                  <span className="text-gray-500">$</span> curl -fsSL https://apt.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n'}
+                  <span className="text-gray-500">$</span> echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://apt.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
                 </code>
               </pre>
             </div>
 
+            {/* Step 2: Install */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Or one-liner:</span>
+                <span className="text-sm text-gray-400">Step 2: Install CX Terminal</span>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => copyToClipboard(onelinerCommand, 'oneliner')}
+                  onClick={() => copyToClipboard(installCommand, 'oneliner')}
                   className="h-7 px-2"
-                  data-testid="button-copy-oneliner"
+                  data-testid="button-copy-install"
                 >
                   {copiedOneliner ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
                   <span className="ml-1 text-xs">Copy</span>
@@ -237,7 +243,29 @@ export default function PricingSuccessPage() {
               </div>
               <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm text-gray-300">
-                  <span className="text-gray-500">$</span> pip install CX-pro && CX-pro activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
+                  <span className="text-gray-500">$</span> sudo apt update && sudo apt install cx-terminal
+                </code>
+              </pre>
+            </div>
+
+            {/* Step 3: Activate */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm text-gray-400">Step 3: Activate your license</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => copyToClipboard(activateCommand, 'key')}
+                  className="h-7 px-2"
+                  data-testid="button-copy-activate"
+                >
+                  {copiedKey ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
+                  <span className="ml-1 text-xs">Copy</span>
+                </Button>
+              </div>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                <code className="text-sm text-gray-300">
+                  <span className="text-gray-500">$</span> cx activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
                 </code>
               </pre>
             </div>
@@ -251,19 +279,19 @@ export default function PricingSuccessPage() {
           transition={{ delay: 0.5 }}
           className="bg-white/5 border border-white/10 rounded-xl p-6 mb-8"
         >
-          <h2 className="text-lg font-semibold text-white mb-4">Next Steps</h2>
+          <h2 className="text-lg font-semibold text-white mb-4">Quick Start</h2>
           <ol className="space-y-3 text-gray-400">
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">1</span>
-              <span>Open a terminal on any Linux system</span>
+              <span>Run the 3 commands above on any Ubuntu/Debian system</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">2</span>
-              <span>Run the install command above to activate CX</span>
+              <span>Launch CX Terminal: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx-terminal</code></span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-medium">3</span>
-              <span>Start using natural language: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx install nginx</code></span>
+              <span>Try your first command: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx "install nginx and configure it"</code></span>
             </li>
           </ol>
         </motion.div>
