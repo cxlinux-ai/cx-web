@@ -28,22 +28,40 @@ const FEATURE_SLIDES = [
 
 export default function FeatureCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
 
   // Auto-rotate slides
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection(1);
       setCurrentSlide((prev) => (prev + 1) % FEATURE_SLIDES.length);
     }, 5000);
     
     return () => clearInterval(interval);
   }, []);
 
+  // Slide animation variants - left/right
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+    }),
+  };
+
   return (
-    <div className="w-full max-w-5xl mx-auto px-4">
-      {/* Terminal-style container */}
-      <div className="relative rounded-xl overflow-hidden border border-gray-800/50 shadow-2xl">
+    <div className="w-full max-w-5xl mx-auto px-4 relative">
+      {/* Terminal-style container - clean dark background, glow comes from outside */}
+      <div className="relative rounded-xl overflow-hidden border border-purple-500/20 shadow-[0_0_60px_-15px_rgba(168,85,247,0.4)]">
         {/* Terminal Header */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-gray-900/80 border-b border-gray-800/50">
+        <div className="flex items-center gap-2 px-4 py-3 bg-gray-900/90 border-b border-gray-800/50">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500/80" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
@@ -54,25 +72,26 @@ export default function FeatureCarousel() {
           </span>
         </div>
 
-        {/* Content area with purple gradient */}
-        <div className="relative h-[320px] sm:h-[360px] md:h-[400px] bg-gradient-to-b from-purple-900/30 via-purple-800/20 to-gray-950/80 overflow-hidden">
-          {/* Subtle purple glow effects */}
-          <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[80px]" />
+        {/* Content area - clean dark background */}
+        <div className="relative h-[320px] sm:h-[360px] md:h-[400px] bg-gradient-to-b from-gray-900/95 via-gray-950/95 to-gray-950 overflow-hidden">
+          {/* Subtle inner glow from edges */}
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-transparent pointer-events-none" />
           
-          {/* Feature Carousel */}
-          <AnimatePresence mode="wait">
+          {/* Feature Carousel - Left/Right animation */}
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 py-6"
             >
               {/* Icon */}
               <div className="relative mb-6">
-                <div className="absolute inset-0 bg-purple-500/20 blur-3xl rounded-full scale-[2]" />
+                <div className="absolute inset-0 bg-purple-500/20 blur-2xl rounded-full scale-[2]" />
                 {(() => {
                   const IconComponent = FEATURE_SLIDES[currentSlide].icon;
                   return (
@@ -95,21 +114,6 @@ export default function FeatureCarousel() {
               </p>
             </motion.div>
           </AnimatePresence>
-          
-          {/* Slide indicators */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {FEATURE_SLIDES.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === currentSlide 
-                    ? 'bg-purple-400 w-8' 
-                    : 'bg-gray-600 w-2 hover:bg-gray-500'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </div>
