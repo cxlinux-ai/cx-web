@@ -874,7 +874,7 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
       ? `https://${process.env.REPLIT_DEV_DOMAIN}`
       : process.env.REPLIT_DOMAINS 
         ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
-        : 'https://cortexlinux.com';
+        : 'https://cxlinux.com';
 
     const session = await stripe!.checkout.sessions.create({
       mode: 'subscription',
@@ -914,10 +914,10 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
 const PRICE_TO_TIER: Record<string, { name: string; prefix: string }> = {
   'price_1SpotMJ4X1wkC4EspVzV5tT6': { name: 'Pro', prefix: 'CX-PRO-' },
   'price_1SpotMJ4X1wkC4Es3tuZGVHY': { name: 'Pro', prefix: 'CX-PRO-' },
-  'price_1SpotNJ4X1wkC4EsN13pV2dA': { name: 'Enterprise', prefix: 'CORTEX-ENT-' },
-  'price_1SpotNJ4X1wkC4Esw5ienNNQ': { name: 'Enterprise', prefix: 'CORTEX-ENT-' },
-  'price_1SpotOJ4X1wkC4Es7ZqOzh1H': { name: 'Managed', prefix: 'CORTEX-MNG-' },
-  'price_1SpotOJ4X1wkC4EslmMmWWZI': { name: 'Managed', prefix: 'CORTEX-MNG-' },
+  'price_1SpotNJ4X1wkC4EsN13pV2dA': { name: 'Enterprise', prefix: 'CX-ENT-' },
+  'price_1SpotNJ4X1wkC4Esw5ienNNQ': { name: 'Enterprise', prefix: 'CX-ENT-' },
+  'price_1SpotOJ4X1wkC4Es7ZqOzh1H': { name: 'Managed', prefix: 'CX-MNG-' },
+  'price_1SpotOJ4X1wkC4EslmMmWWZI': { name: 'Managed', prefix: 'CX-MNG-' },
 };
 
 function generateLicenseKey(prefix: string): string {
