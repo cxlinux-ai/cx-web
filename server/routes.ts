@@ -465,7 +465,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           error: "This email is already registered for the hackathon" 
         });
       }
-      }
 
       const registration = await storage.createFullRegistration(data);
 
