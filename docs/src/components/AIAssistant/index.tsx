@@ -1,7 +1,7 @@
 /**
  * AI Documentation Assistant Component
  *
- * A floating chat bubble that provides AI-powered help for Cortex Linux documentation.
+ * A floating chat bubble that provides AI-powered help for CX Linux documentation.
  * Features:
  * - Floating button on all pages
  * - Expandable chat interface
@@ -26,14 +26,14 @@ interface Message {
 // In production, this would be replaced with actual RAG/vector search
 const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: string; url: string }> }> = {
   install: {
-    answer: 'To install Cortex Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cortexlinux.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
+    answer: 'To install CX Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cortexlinux.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
     links: [
       { title: 'Installation Guide', url: '/docs/getting-started/installation' },
       { title: 'Quick Start', url: '/docs/getting-started/quick-start' },
     ],
   },
   uninstall: {
-    answer: 'To uninstall Cortex Linux:\n\n```bash\ncortex uninstall\n```\n\nOr manually remove the binary and data:\n```bash\nsudo rm /usr/local/bin/cortex\nrm -rf ~/.cortex\n```',
+    answer: 'To uninstall CX Linux:\n\n```bash\ncortex uninstall\n```\n\nOr manually remove the binary and data:\n```bash\nsudo rm /usr/local/bin/cortex\nrm -rf ~/.cortex\n```',
     links: [
       { title: 'Installation Guide', url: '/docs/getting-started/installation' },
     ],
@@ -46,7 +46,7 @@ const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: str
     ],
   },
   rollback: {
-    answer: 'Cortex automatically creates snapshots before changes. To undo the last operation:\n\n```bash\ncortex rollback\n```\n\nTo rollback a specific operation:\n```bash\ncortex history\ncortex rollback 3\n```',
+    answer: 'Cortex automatically creates snapshots before changes. To undo the last operation:\n\n```bash\ncx rollback\n```\n\nTo rollback a specific operation:\n```bash\ncx history\ncx rollback 3\n```',
     links: [
       { title: 'Rollback & Recovery', url: '/docs/user-guide/rollback-recovery' },
     ],
@@ -74,7 +74,7 @@ const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: str
     ],
   },
   docker: {
-    answer: 'Cortex works great with Docker. To install Docker:\n\n```bash\ncortex "install docker"\n```\n\nCortex can help with container management, building images, and docker-compose.',
+    answer: 'Cortex works great with Docker. To install Docker:\n\n```bash\ncx "install docker"\n```\n\nCortex can help with container management, building images, and docker-compose.',
     links: [
       { title: 'Docker Integration', url: '/docs/tutorials/docker-integration' },
     ],
@@ -199,7 +199,7 @@ export default function AIAssistant(): JSX.Element {
           <div className={styles.chatHeader}>
             <div className={styles.headerTitle}>
               <span className={styles.headerIcon}>🧠</span>
-              <span>Ask about Cortex</span>
+              <span>Ask about CX Linux</span>
             </div>
             <button
               className={styles.closeButton}
@@ -213,7 +213,7 @@ export default function AIAssistant(): JSX.Element {
           <div className={styles.messagesContainer}>
             {messages.length === 0 && (
               <div className={styles.welcomeMessage}>
-                <p>Hi! I can help you find information in the Cortex Linux documentation.</p>
+                <p>Hi! I can help you find information in the CX Linux documentation.</p>
                 <p>Try asking about:</p>
                 <ul>
                   <li>Installation</li>
@@ -286,7 +286,7 @@ export default function AIAssistant(): JSX.Element {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about Cortex..."
+              placeholder="Ask about CX Linux..."
               className={styles.input}
               disabled={isLoading}
             />
