@@ -7,7 +7,7 @@ keywords: [packages, apt, dnf, pacman, install, update, remove]
 
 # Package Management
 
-Cortex provides a unified interface for package management across all major Linux distributions. Forget memorizing different package managers—just describe what you need.
+CX Linux provides a unified interface for package management across all major Linux distributions. Forget memorizing different package managers—just describe what you need.
 
 ## Universal Package Operations
 
@@ -15,50 +15,50 @@ Cortex provides a unified interface for package management across all major Linu
 
 ```bash
 # Single package
-cortex "install nginx"
+cx "install nginx"
 
 # Multiple packages
-cortex "install git, curl, and wget"
+cx "install git, curl, and wget"
 
 # With specific version
-cortex "install nodejs version 18"
+cx "install nodejs version 18"
 
 # From specific repository
-cortex "install docker from the official docker repo"
+cx "install docker from the official docker repo"
 ```
 
 ### Removing Packages
 
 ```bash
 # Basic removal
-cortex "remove nginx"
+cx "remove nginx"
 
 # Remove with configuration
-cortex "completely remove nginx including config files"
+cx "completely remove nginx including config files"
 
 # Remove unused dependencies
-cortex "remove nginx and clean up unused dependencies"
+cx "remove nginx and clean up unused dependencies"
 ```
 
 ### Updating Packages
 
 ```bash
 # Update everything
-cortex "update all packages"
+cx "update all packages"
 
 # Update specific package
-cortex "update nodejs to the latest version"
+cx "update nodejs to the latest version"
 
 # Security updates only
-cortex "apply security updates only"
+cx "apply security updates only"
 
 # Update package lists
-cortex "refresh package lists"
+cx "refresh package lists"
 ```
 
 ## Cross-Distribution Compatibility
 
-Cortex translates your request to the appropriate package manager:
+CX Linux translates your request to the appropriate package manager:
 
 | Your Command | Ubuntu/Debian | Fedora/RHEL | Arch |
 |-------------|---------------|-------------|------|
@@ -68,10 +68,10 @@ Cortex translates your request to the appropriate package manager:
 
 ### Package Name Translation
 
-Cortex handles package naming differences:
+CX Linux handles package naming differences:
 
 ```bash
-cortex "install the apache web server"
+cx "install the apache web server"
 
 # Ubuntu: apache2
 # Fedora: httpd
@@ -84,30 +84,30 @@ cortex "install the apache web server"
 
 ```bash
 # Search by name
-cortex "search for packages related to python machine learning"
+cx "search for packages related to python machine learning"
 
 # Search by function
-cortex "what package provides the convert command?"
+cx "what package provides the convert command?"
 
 # List installed packages
-cortex "show all installed packages"
-cortex "list packages matching 'node*'"
+cx "show all installed packages"
+cx "list packages matching 'node*'"
 ```
 
 ### Package Information
 
 ```bash
 # Package details
-cortex "show information about the nginx package"
+cx "show information about the nginx package"
 
 # Check if installed
-cortex "is docker installed?"
+cx "is docker installed?"
 
 # Version information
-cortex "what version of python is installed?"
+cx "what version of python is installed?"
 
 # Package files
-cortex "what files does nginx install?"
+cx "what files does nginx install?"
 ```
 
 ## Repository Management
@@ -116,27 +116,27 @@ cortex "what files does nginx install?"
 
 ```bash
 # Official third-party repos
-cortex "add the docker official repository"
-cortex "add the nodejs 18.x repository"
+cx "add the docker official repository"
+cx "add the nodejs 18.x repository"
 
 # PPAs (Ubuntu)
-cortex "add the graphics drivers PPA"
+cx "add the graphics drivers PPA"
 
 # Custom repositories
-cortex "add repository https://packages.example.com/stable"
+cx "add repository https://packages.example.com/stable"
 ```
 
 ### Managing Repositories
 
 ```bash
 # List repositories
-cortex "show all configured repositories"
+cx "show all configured repositories"
 
 # Remove repository
-cortex "remove the docker repository"
+cx "remove the docker repository"
 
 # Enable/disable
-cortex "disable the testing repository"
+cx "disable the testing repository"
 ```
 
 ## Dependency Management
@@ -145,26 +145,26 @@ cortex "disable the testing repository"
 
 ```bash
 # Show dependencies
-cortex "what does nginx depend on?"
+cx "what does nginx depend on?"
 
 # Reverse dependencies
-cortex "what packages depend on openssl?"
+cx "what packages depend on openssl?"
 
 # Check for broken dependencies
-cortex "check for dependency problems"
+cx "check for dependency problems"
 ```
 
 ### Resolving Issues
 
 ```bash
 # Fix broken packages
-cortex "fix broken package dependencies"
+cx "fix broken package dependencies"
 
 # Force reinstall
-cortex "reinstall nginx and its dependencies"
+cx "reinstall nginx and its dependencies"
 
 # Clean package cache
-cortex "clear the package cache to free disk space"
+cx "clear the package cache to free disk space"
 ```
 
 ## Version Management
@@ -173,26 +173,26 @@ cortex "clear the package cache to free disk space"
 
 ```bash
 # Install specific version
-cortex "install nodejs 18.17.0"
+cx "install nodejs 18.17.0"
 
 # Downgrade
-cortex "downgrade nginx to version 1.18"
+cx "downgrade nginx to version 1.18"
 
 # Pin version
-cortex "install and pin postgresql to version 14"
+cx "install and pin postgresql to version 14"
 ```
 
 ### Version Queries
 
 ```bash
 # Available versions
-cortex "what versions of nodejs are available?"
+cx "what versions of nodejs are available?"
 
 # Check current version
-cortex "what version of python is installed?"
+cx "what version of python is installed?"
 
 # Compare versions
-cortex "is my nginx version up to date?"
+cx "is my nginx version up to date?"
 ```
 
 ## Bulk Operations
@@ -201,23 +201,23 @@ cortex "is my nginx version up to date?"
 
 ```bash
 # Development tools
-cortex "install development tools for C/C++"
+cx "install development tools for C/C++"
 
 # Language environments
-cortex "set up a complete python development environment"
+cx "set up a complete python development environment"
 
 # Server stacks
-cortex "install the LEMP stack"
+cx "install the LEMP stack"
 ```
 
 ### From Requirements
 
 ```bash
 # Package list file
-cortex "install packages from packages.txt"
+cx "install packages from packages.txt"
 
 # Development dependencies
-cortex "install all dependencies for this nodejs project"
+cx "install all dependencies for this nodejs project"
 ```
 
 ## Package Verification
@@ -226,26 +226,26 @@ cortex "install all dependencies for this nodejs project"
 
 ```bash
 # Verify package integrity
-cortex "verify the integrity of installed packages"
+cx "verify the integrity of installed packages"
 
 # Check signatures
-cortex "are all packages properly signed?"
+cx "are all packages properly signed?"
 
 # Security audit
-cortex "check for packages with known vulnerabilities"
+cx "check for packages with known vulnerabilities"
 ```
 
 ### Package Comparison
 
 ```bash
 # Compare with fresh install
-cortex "show packages that differ from a fresh install"
+cx "show packages that differ from a fresh install"
 
 # Find manually installed
-cortex "list manually installed packages"
+cx "list manually installed packages"
 
 # Package history
-cortex "show package installation history"
+cx "show package installation history"
 ```
 
 ## Cleanup and Maintenance
@@ -254,26 +254,26 @@ cortex "show package installation history"
 
 ```bash
 # Auto-remove
-cortex "remove unused packages"
+cx "remove unused packages"
 
 # Clean cache
-cortex "clear package cache"
+cx "clear package cache"
 
 # Remove old kernels
-cortex "remove old kernel versions keeping the last two"
+cx "remove old kernel versions keeping the last two"
 ```
 
 ### Disk Space
 
 ```bash
 # Cache size
-cortex "how much disk space is the package cache using?"
+cx "how much disk space is the package cache using?"
 
 # Package sizes
-cortex "show largest installed packages"
+cx "show largest installed packages"
 
 # Free space
-cortex "clean up packages to free disk space"
+cx "clean up packages to free disk space"
 ```
 
 ## Offline and Air-Gapped Systems
@@ -282,20 +282,20 @@ cortex "clean up packages to free disk space"
 
 ```bash
 # Download without installing
-cortex "download nginx and dependencies for offline install"
+cx "download nginx and dependencies for offline install"
 
 # Create local mirror
-cortex "mirror the security updates repository"
+cx "mirror the security updates repository"
 ```
 
 ### Install from Local
 
 ```bash
 # Install from file
-cortex "install nginx from the downloaded package"
+cx "install nginx from the downloaded package"
 
 # Local repository
-cortex "install packages from /media/packages"
+cx "install packages from /media/packages"
 ```
 
 ## Configuration Handling
@@ -304,23 +304,23 @@ cortex "install packages from /media/packages"
 
 ```bash
 # Reconfigure
-cortex "reconfigure the keyboard settings"
+cx "reconfigure the keyboard settings"
 
 # Show configuration
-cortex "show nginx package configuration options"
+cx "show nginx package configuration options"
 
 # Reset to defaults
-cortex "reset nginx configuration to package defaults"
+cx "reset nginx configuration to package defaults"
 ```
 
 ### Configuration Files
 
 ```bash
 # Keep or replace
-cortex "update packages but keep my configuration files"
+cx "update packages but keep my configuration files"
 
 # Find modified configs
-cortex "show configuration files I've modified"
+cx "show configuration files I've modified"
 ```
 
 ## Troubleshooting
@@ -330,42 +330,42 @@ cortex "show configuration files I've modified"
 #### Package Not Found
 
 ```bash
-cortex "install superapp"
+cx "install superapp"
 # Error: Package 'superapp' not found
 
 # Try:
-cortex "search for packages named like superapp"
-cortex "what package provides superapp?"
+cx "search for packages named like superapp"
+cx "what package provides superapp?"
 ```
 
 #### Dependency Conflicts
 
 ```bash
-# Let Cortex resolve
-cortex "install package-a, resolve any conflicts automatically"
+# Let CX Linux resolve
+cx "install package-a, resolve any conflicts automatically"
 
 # Or investigate
-cortex "why can't package-a and package-b be installed together?"
+cx "why can't package-a and package-b be installed together?"
 ```
 
 #### Locked Package Database
 
 ```bash
-cortex "fix the locked package database"
-cortex "another package manager is running, wait for it"
+cx "fix the locked package database"
+cx "another package manager is running, wait for it"
 ```
 
 ### Diagnostic Commands
 
 ```bash
 # System check
-cortex "check the package system health"
+cx "check the package system health"
 
 # Repair
-cortex "repair the package database"
+cx "repair the package database"
 
 # Logs
-cortex "show recent package manager errors"
+cx "show recent package manager errors"
 ```
 
 ## Best Practices
@@ -373,7 +373,7 @@ cortex "show recent package manager errors"
 ### 1. Update Before Installing
 
 ```bash
-cortex "update package lists and then install nginx"
+cx "update package lists and then install nginx"
 ```
 
 ### 2. Use Dry Run for Major Changes
@@ -385,13 +385,13 @@ cortex --dry-run "upgrade all packages"
 ### 3. Keep Track of Manual Installs
 
 ```bash
-cortex "mark nginx as manually installed"
+cx "mark nginx as manually installed"
 ```
 
 ### 4. Regular Maintenance
 
 ```bash
-cortex "perform weekly package maintenance"
+cx "perform weekly package maintenance"
 # Updates, cleanup, and security checks
 ```
 
