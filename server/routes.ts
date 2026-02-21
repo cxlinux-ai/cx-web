@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import type { Contributor } from "@shared/schema";
-import { insertHackathonRegistrationSchema, fullHackathonRegistrationSchema, visitorReferrals, ipReferralCodes } from "@shared/schema";
+import { insertHackathonRegistrationSchema, fullHackathonRegistrationSchema } from "@shared/schema";
 import { db } from "./db";
 import { eq, sql } from "drizzle-orm";
 
@@ -57,7 +57,7 @@ const STATS_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let issuesCache: { data: any[]; timestamp: number } | null = null;
 const ISSUES_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
-// Fallback data for when GitHub is unavailable (Real data from https://github.com/cortexlinux/Cortex)
+// Fallback data for when GitHub is unavailable (Real data from https://github.com/cxlinux-ai/cx-core)
 const FALLBACK_STATS = {
   openIssues: 12,
   contributors: 5,
@@ -67,10 +67,10 @@ const FALLBACK_STATS = {
 };
 
 const FALLBACK_ISSUES = [
-  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
+  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cx-core/issues" },
 ];
 
 const FALLBACK_CONTRIBUTORS: Contributor[] = [
@@ -161,7 +161,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Start keep-alive self-ping (for Replit deployments)
-  const baseUrl = process.env.REPLIT_URL || process.env.BASE_URL || "https://cortexlinux.com";
+  const baseUrl = process.env.REPLIT_URL || process.env.BASE_URL || "https://cxlinux.com";
   startKeepAlive(baseUrl);
 
   // GitHub API endpoint to fetch repository stats
@@ -178,14 +178,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_STATS);
       }
 
-      const owner = "cortexlinux";
-      const repo = "cortex";
+      const owner = "cxlinux-ai";
+      const repo = "cx-core";
       
       const headers = {
         "Authorization": `token ${token}`,
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "Cortex-Linux-Landing-Page"
+        "User-Agent": "CX-Linux-Landing-Page"
       };
 
       const repoResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
@@ -242,14 +242,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_ISSUES);
       }
 
-      const owner = "cortexlinux";
-      const repo = "cortex";
+      const owner = "cxlinux-ai";
+      const repo = "cx-core";
       
       const headers = {
         "Authorization": `token ${token}`,
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "Cortex-Linux-Landing-Page"
+        "User-Agent": "CX-Linux-Landing-Page"
       };
 
       const issuesResponse = await fetch(
@@ -322,12 +322,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.json(FALLBACK_CONTRIBUTORS);
       }
 
-      const owner = "cortexlinux";
-      const repo = "cortex";
+      const owner = "cxlinux-ai";
+      const repo = "cx-core";
       
       const headers: Record<string, string> = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "Cortex-Linux-Landing-Page",
+        "User-Agent": "CX-Linux-Landing-Page",
         "Authorization": `token ${token}`,
         "X-GitHub-Api-Version": "2022-11-28"
       };
@@ -575,7 +575,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const registrations = await storage.getAllHackathonRegistrations();
       
-      const csvHeader = "Full Name,Email,Country,Role,Organization,GitHub,LinkedIn,Linux Exp,AI/ML Exp,Languages,Team/Solo,Team Name,Project Idea,Used Cortex,How Heard,Registered At\n";
+      const csvHeader = "Full Name,Email,Country,Role,Organization,GitHub,LinkedIn,Linux Exp,AI/ML Exp,Languages,Team/Solo,Team Name,Project Idea,Used CX Linux,How Heard,Registered At\n";
       const csvRows = registrations.map(r => 
         `"${r.fullName || r.name || ''}","${r.email}","${r.country || ''}","${r.currentRole || ''}","${r.organization || ''}","${r.githubUrl || ''}","${r.linkedinUrl || ''}","${r.linuxExperience || ''}","${r.aiMlExperience || ''}","${r.programmingLanguages || ''}","${r.teamOrSolo || ''}","${r.teamName || ''}","${(r.projectIdea || '').replace(/"/g, '""')}","${r.usedCortexBefore || ''}","${r.howHeardAboutUs || ''}","${r.registeredAt}"`
       ).join("\n");
@@ -620,18 +620,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Generate Hackathon Rules PDF
-  app.get("/downloads/cortex-hackathon-rules-2026.pdf", (req, res) => {
+  app.get("/downloads/cx-hackathon-rules-2026.pdf", (req, res) => {
     try {
       const doc = new PDFDocument({ size: "A4", margin: 50 });
       
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", "inline; filename=cortex-hackathon-rules-2026.pdf");
+      res.setHeader("Content-Disposition", "inline; filename=cx-hackathon-rules-2026.pdf");
       
       doc.pipe(res);
       
       // Title
       doc.fontSize(28).font("Helvetica-Bold").fillColor("#0066ff")
-         .text("Cortex Hackathon 2026", { align: "center" });
+         .text("CX Linux Hackathon 2026", { align: "center" });
       doc.moveDown(0.5);
       doc.fontSize(16).font("Helvetica").fillColor("#666666")
          .text("Official Rules & Guidelines", { align: "center" });
@@ -642,17 +642,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Overview");
       doc.moveDown(0.5);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("The Cortex Hackathon 2026 is a 13-week program designed to generate monetizable product ideas and turn them into production-ready code for Cortex Linux. Total prize pool: $18,700 ($13,800 cash + $4,900 worth of goodies & services).", { align: "left", lineGap: 4 });
+         .text("The CX Linux Hackathon 2026 is a 13-week program designed to generate monetizable product ideas and turn them into production-ready code for CX Linux. Total prize pool: $18,700 ($13,800 cash + $4,900 worth of goodies & services).", { align: "left", lineGap: 4 });
       doc.moveDown(1.5);
       
       // Phase 1: Ideathon
       doc.fontSize(16).font("Helvetica-Bold").fillColor("#f59e0b")
-         .text("Phase 1: Cortex Ideathon");
+         .text("Phase 1: CX Ideathon");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("Timeline: Weeks 1-4 (4 weeks)", { lineGap: 3 })
          .text("Prize Pool: $3,800", { lineGap: 3 })
-         .text("Goal: Generate monetizable feature ideas for Cortex Linux", { lineGap: 3 });
+         .text("Goal: Generate monetizable feature ideas for CX Linux", { lineGap: 3 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Prize Breakdown:", { lineGap: 3 });
       doc.font("Helvetica")
@@ -672,7 +672,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Phase 2: Hackathon
       doc.fontSize(16).font("Helvetica-Bold").fillColor("#3b82f6")
-         .text("Phase 2: Cortex Hackathon");
+         .text("Phase 2: CX Linux Hackathon");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("Timeline: Weeks 5-13 (9 weeks)", { lineGap: 3 })
@@ -683,7 +683,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Build Sprint
       doc.font("Helvetica-Bold").text("Build Sprint (Weeks 5-9):", { lineGap: 3 });
       doc.font("Helvetica")
-         .text("Build features, plugins, extensions, or integrations for Cortex Linux.", { lineGap: 3 })
+         .text("Build features, plugins, extensions, or integrations for CX Linux.", { lineGap: 3 })
          .text("Submit via GitHub Pull Request with comprehensive documentation.", { lineGap: 3 });
       doc.moveDown(0.5);
       doc.font("Helvetica-Bold").text("Prize Breakdown:", { lineGap: 3 });
@@ -705,7 +705,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Review Period
       doc.font("Helvetica-Bold").text("Review Period (Weeks 10-14):", { lineGap: 3 });
       doc.font("Helvetica")
-         .text("Submissions are reviewed by the Cortex maintainer team. One-on-one code reviews, PR refinement, and final judging. Winners announced at end of Week 14.", { lineGap: 3 });
+         .text("Submissions are reviewed by the CX Linux maintainer team. One-on-one code reviews, PR refinement, and final judging. Winners announced at end of Week 14.", { lineGap: 3 });
       doc.moveDown(1.5);
       
       // Builder Pack
@@ -713,7 +713,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Builder Pack");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("All participants who submit a valid entry receive a $5 Cortex Linux credit as a thank you for participating.", { lineGap: 3 });
+         .text("All participants who submit a valid entry receive a $5 CX Linux credit as a thank you for participating.", { lineGap: 3 });
       doc.moveDown(1.5);
       
       // Category Awards
@@ -742,8 +742,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("• Solo participants or teams of 2-5 members", { lineGap: 3 })
          .text("• All submissions must be original work", { lineGap: 3 })
          .text("• Code must be submitted under MIT license", { lineGap: 3 })
-         .text("• Employees of Cortex Linux and their families are not eligible", { lineGap: 3 })
-         .text("• All submissions become property of Cortex Linux project", { lineGap: 3 })
+         .text("• Employees of CX Linux and their families are not eligible", { lineGap: 3 })
+         .text("• All submissions become property of CX Linux project", { lineGap: 3 })
          .text("• Decisions by judges are final", { lineGap: 3 });
       doc.moveDown(1.5);
       
@@ -752,15 +752,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
          .text("Contact & Resources");
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
-         .text("• Website: https://cortexlinux.com/hackathon", { lineGap: 3 })
-         .text("• GitHub: https://github.com/cortexlinux/cortex", { lineGap: 3 })
+         .text("• Website: https://cxlinux.com/hackathon", { lineGap: 3 })
+         .text("• GitHub: https://github.com/cxlinux-ai/cx-core", { lineGap: 3 })
          .text("• Discord: https://discord.gg/ASvzWcuTfk", { lineGap: 3 })
-         .text("• Email: hackathon@cortexlinux.com", { lineGap: 3 });
+         .text("• Email: hello@cxlinux.com", { lineGap: 3 });
       doc.moveDown(2);
       
       // Footer
       doc.fontSize(9).font("Helvetica").fillColor("#999999")
-         .text("© 2026 Cortex Linux. All rights reserved. Last updated: January 2026", { align: "center" });
+         .text("© 2026 CX Linux. All rights reserved. Last updated: January 2026", { align: "center" });
       
       doc.end();
     } catch (error) {
