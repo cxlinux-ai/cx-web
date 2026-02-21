@@ -63,7 +63,7 @@ function hasAdminPermission(interaction: ChatInputCommandInteraction): boolean {
 // Define slash commands
 export const commands = [
   new SlashCommandBuilder()
-    .setName("cortex")
+    .setName("cx")
     .setDescription("Ask CX AI a question")
     .addStringOption((option) =>
       option
@@ -165,8 +165,8 @@ export async function handleSlashCommand(
 
   try {
     switch (commandName) {
-      case "cortex":
-        await handleCortexCommand(interaction);
+      case "cx":
+        await handleCX LinuxCommand(interaction);
         break;
       case "help":
         await handleHelpCommand(interaction);
@@ -228,9 +228,9 @@ export async function handleSlashCommand(
 }
 
 /**
- * Handle /cortex command
+ * Handle /cx command
  */
-async function handleCortexCommand(
+async function handleCX LinuxCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
   const question = interaction.options.getString("question", true);
@@ -287,7 +287,7 @@ async function handleHelpCommand(
       {
         name: "Everyone",
         value: [
-          "`/cortex <question>` - Ask me anything about CX Linux",
+          "`/cx <question>` - Ask me anything about CX Linux",
           "`/help` - Show this help message",
           "`/apply` - Apply to become a contributor",
           "`/referral` - Learn about our referral program",
@@ -316,7 +316,7 @@ async function handleHelpCommand(
       {
         name: "Other Ways to Ask",
         value: [
-          "**@mention me:** @CortexLinuxAI how do I install?",
+          "**@mention me:** @CX LinuxLinuxAI how do I install?",
           "**Reply to my messages:** Continue conversations naturally",
         ].join("\n"),
       },
@@ -327,9 +327,9 @@ async function handleHelpCommand(
       {
         name: "Links",
         value: [
-          "[Website](https://cortexlinux.com)",
-          "[GitHub](https://github.com/cortexlinux/cortex)",
-          "[Hackathon](https://cortexlinux.com/hackathon)",
+          "[Website](https://cxlinux.com)",
+          "[GitHub](https://github.com/cxlinux/cx)",
+          "[Hackathon](https://cxlinux.com/hackathon)",
         ].join(" | "),
       }
     )
@@ -405,16 +405,16 @@ async function handleReferralCommand(
       {
         name: "How to Participate",
         value:
-          "1. Sign up at https://cortexlinux.com/referrals\n2. Get your unique referral link\n3. Share with friends\n4. Earn rewards when they join Discord AND contribute!",
+          "1. Sign up at https://cxlinux.com/referrals\n2. Get your unique referral link\n3. Share with friends\n4. Earn rewards when they join Discord AND contribute!",
       }
     )
-    .setURL("https://cortexlinux.com/referrals");
+    .setURL("https://cxlinux.com/referrals");
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setLabel("Get Your Referral Link")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cortexlinux.com/referrals")
+      .setURL("https://cxlinux.com/referrals")
   );
 
   await interaction.reply({ embeds: [embed], components: [row] });
@@ -450,17 +450,17 @@ async function handleHackathonCommand(
         value: "1st: $5K | 2nd: $3K | 3rd: $2K | 4th-10th: $700 worth of goodies + 2mo managed service",
       }
     )
-    .setURL("https://cortexlinux.com/hackathon");
+    .setURL("https://cxlinux.com/hackathon");
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setLabel("Register Now")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cortexlinux.com/hackathon"),
+      .setURL("https://cxlinux.com/hackathon"),
     new ButtonBuilder()
       .setLabel("View Rules")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cortexlinux.com/downloads/cortex-hackathon-rules-2026.pdf")
+      .setURL("https://cxlinux.com/downloads/cx-hackathon-rules-2026.pdf")
   );
 
   await interaction.reply({ embeds: [embed], components: [row] });
@@ -642,12 +642,12 @@ async function handleLinksCommand(
     .setColor(COLORS.primary)
     .setTitle("CX Linux Links")
     .addFields(
-      { name: "Website", value: "[cortexlinux.com](https://cortexlinux.com)", inline: true },
-      { name: "GitHub", value: "[github.com/cortexlinux](https://github.com/cortexlinux)", inline: true },
-      { name: "Bounties", value: "[/bounties](https://cortexlinux.com/bounties)", inline: true },
-      { name: "Hackathon", value: "[/hackathon](https://cortexlinux.com/hackathon)", inline: true },
-      { name: "Referrals", value: "[/referrals](https://cortexlinux.com/referrals)", inline: true },
-      { name: "Blog", value: "[/blog](https://cortexlinux.com/blog)", inline: true }
+      { name: "Website", value: "[cxlinux.com](https://cxlinux.com)", inline: true },
+      { name: "GitHub", value: "[github.com/cxlinux](https://github.com/cxlinux)", inline: true },
+      { name: "Bounties", value: "[/bounties](https://cxlinux.com/bounties)", inline: true },
+      { name: "Hackathon", value: "[/hackathon](https://cxlinux.com/hackathon)", inline: true },
+      { name: "Referrals", value: "[/referrals](https://cxlinux.com/referrals)", inline: true },
+      { name: "Blog", value: "[/blog](https://cxlinux.com/blog)", inline: true }
     )
     .setFooter({ text: "The AI Layer for Linux" });
 
@@ -707,7 +707,7 @@ async function handleBountiesCommand(
       .setTitle("Open Bounties & PRs")
       .setDescription(
         `Found **${stats.totalOpen}** open bounties worth **$${stats.totalOpenAmount.toLocaleString()}** total!\n\n` +
-        `View all bounties at [cortexlinux.com/bounties](https://cortexlinux.com/bounties)`
+        `View all bounties at [cxlinux.com/bounties](https://cxlinux.com/bounties)`
       )
       .setTimestamp();
 
@@ -718,7 +718,7 @@ async function handleBountiesCommand(
       const bountiesList = topBounties.map((bounty: any) => {
         const amount = bounty.bountyAmount ? `$${bounty.bountyAmount}` : "Bounty to be discussed";
         const difficulty = bounty.difficulty ? ` (${bounty.difficulty})` : "";
-        const repo = bounty.repositoryName || "cortex";
+        const repo = bounty.repositoryName || "cx";
         return `**[#${bounty.number}](${bounty.url})** - ${amount}${difficulty}\n${bounty.title.slice(0, 60)}${bounty.title.length > 60 ? "..." : ""} *(${repo})*`;
       }).join("\n\n");
       
@@ -741,7 +741,7 @@ async function handleBountiesCommand(
       { name: "Completed", value: `${stats.totalClosed} bounties`, inline: true }
     );
 
-    embed.setFooter({ text: "Contribute to Cortex and earn rewards!" });
+    embed.setFooter({ text: "Contribute to CX Linux and earn rewards!" });
 
     await interaction.editReply({ embeds: [embed] });
   } catch (error: any) {
@@ -752,9 +752,9 @@ async function handleBountiesCommand(
       .setColor(COLORS.warning)
       .setTitle("Bounties Board")
       .setDescription(
-        "Check out open bounties and contribute to Cortex Linux!\n\n" +
+        "Check out open bounties and contribute to CX Linux Linux!\n\n" +
         "**Browse all bounties:**\n" +
-        "[cortexlinux.com/bounties](https://cortexlinux.com/bounties)\n\n" +
+        "[cxlinux.com/bounties](https://cxlinux.com/bounties)\n\n" +
         "**How it works:**\n" +
         "1. Find a bounty you want to work on\n" +
         "2. Comment on the GitHub issue to claim it\n" +
@@ -768,7 +768,7 @@ async function handleBountiesCommand(
 }
 
 /**
- * Server setup configuration for Cortex Linux Discord
+ * Server setup configuration for CX Linux Linux Discord
  * Organizes existing channels into logical categories
  * Adds topics and welcome messages to each channel
  */
@@ -780,20 +780,20 @@ const SERVER_SETUP = {
       channels: [
         {
           name: "welcome",
-          topic: "Welcome to Cortex Linux! Read this channel to get started.",
+          topic: "Welcome to CX Linux Linux! Read this channel to get started.",
           welcome: {
-            title: "Welcome to Cortex Linux!",
+            title: "Welcome to CX Linux Linux!",
             description: "The AI Layer for Linux. We're building the future of intelligent computing.",
             color: 0x6366f1,
             fields: [
-              { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cortexlinux-ai" },
-              { name: "Links", value: "[Website](https://cortexlinux.com) • [GitHub](https://github.com/cortexlinux) • [Hackathon](https://cortexlinux.com/hackathon)" },
+              { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cxlinux-ai" },
+              { name: "Links", value: "[Website](https://cxlinux.com) • [GitHub](https://github.com/cxlinux) • [Hackathon](https://cxlinux.com/hackathon)" },
             ]
           }
         },
         {
           name: "announcements",
-          topic: "Official announcements, updates, and news from the Cortex team.",
+          topic: "Official announcements, updates, and news from the CX Linux team.",
           skipIfNoAccess: true,
         },
         {
@@ -823,21 +823,21 @@ const SERVER_SETUP = {
       emoji: "🤖",
       channels: [
         {
-          name: "cortexlinux-ai",
-          topic: "Chat with the Cortex AI assistant! Mention @CortexLinuxAI or use /cortex",
+          name: "cxlinux-ai",
+          topic: "Chat with the CX Linux AI assistant! Mention @CX LinuxLinuxAI or use /cx",
           welcome: {
-            title: "Cortex AI Assistant",
-            description: "I'm here to help with anything Cortex Linux related!",
+            title: "CX Linux AI Assistant",
+            description: "I'm here to help with anything CX Linux Linux related!",
             color: 0x10b981,
             fields: [
-              { name: "How to Use", value: "• **Mention me:** @CortexLinuxAI how do I install?\n• **Slash command:** `/cortex your question`\n• **Reply:** Just reply to my messages to continue" },
+              { name: "How to Use", value: "• **Mention me:** @CX LinuxLinuxAI how do I install?\n• **Slash command:** `/cx your question`\n• **Reply:** Just reply to my messages to continue" },
               { name: "What I Can Help With", value: "Installation, configuration, troubleshooting, features, hackathon info, and more!" },
             ]
           }
         },
         {
           name: "prompts",
-          topic: "Share and discover great prompts for the Cortex AI.",
+          topic: "Share and discover great prompts for the CX Linux AI.",
         },
         {
           name: "help",
@@ -884,8 +884,8 @@ const SERVER_SETUP = {
             color: 0xf59e0b,
             fields: [
               { name: "Cash Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000" },
-              { name: "4th-10th Place", value: "$700 worth of goodies + 2 months Cortex managed service each" },
-              { name: "How to Join", value: "Register at [cortexlinux.com/hackathon](https://cortexlinux.com/hackathon)" },
+              { name: "4th-10th Place", value: "$700 worth of goodies + 2 months CX Linux managed service each" },
+              { name: "How to Join", value: "Register at [cxlinux.com/hackathon](https://cxlinux.com/hackathon)" },
             ]
           }
         },
@@ -894,7 +894,7 @@ const SERVER_SETUP = {
           topic: "Earn money by contributing! Use /bounties to see open tasks.",
           welcome: {
             title: "Bounty Board",
-            description: "Get paid to contribute to Cortex Linux!",
+            description: "Get paid to contribute to CX Linux Linux!",
             color: 0x22c55e,
             fields: [
               { name: "How It Works", value: "1. Use `/bounties` to see open tasks\n2. Comment on the GitHub issue to claim\n3. Submit a PR and get paid when merged!" },
@@ -1699,7 +1699,7 @@ export async function handleApplicationButton(
       // DM user
       try {
         await targetMember.send(
-          `Thank you for your interest in contributing to Cortex Linux.\n\n` +
+          `Thank you for your interest in contributing to CX Linux Linux.\n\n` +
           `Unfortunately, your application was not approved at this time.\n\n` +
           `You're welcome to reapply in the future if circumstances change. ` +
           `Feel free to continue participating in our public channels!`
