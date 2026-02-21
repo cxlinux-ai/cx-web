@@ -752,7 +752,7 @@ async function handleBountiesCommand(
       .setColor(COLORS.warning)
       .setTitle("Bounties Board")
       .setDescription(
-        "Check out open bounties and contribute to CX Linux Linux!\n\n" +
+        "Check out open bounties and contribute to CX Linux!\n\n" +
         "**Browse all bounties:**\n" +
         "[cxlinux.com/bounties](https://cxlinux.com/bounties)\n\n" +
         "**How it works:**\n" +
@@ -768,7 +768,7 @@ async function handleBountiesCommand(
 }
 
 /**
- * Server setup configuration for CX Linux Linux Discord
+ * Server setup configuration for CX Linux Discord
  * Organizes existing channels into logical categories
  * Adds topics and welcome messages to each channel
  */
@@ -780,9 +780,9 @@ const SERVER_SETUP = {
       channels: [
         {
           name: "welcome",
-          topic: "Welcome to CX Linux Linux! Read this channel to get started.",
+          topic: "Welcome to CX Linux! Read this channel to get started.",
           welcome: {
-            title: "Welcome to CX Linux Linux!",
+            title: "Welcome to CX Linux!",
             description: "The AI Layer for Linux. We're building the future of intelligent computing.",
             color: 0x6366f1,
             fields: [
@@ -827,7 +827,7 @@ const SERVER_SETUP = {
           topic: "Chat with the CX Linux AI assistant! Mention @CXLinuxAI or use /cx",
           welcome: {
             title: "CX Linux AI Assistant",
-            description: "I'm here to help with anything CX Linux Linux related!",
+            description: "I'm here to help with anything CX Linux related!",
             color: 0x10b981,
             fields: [
               { name: "How to Use", value: "• **Mention me:** @CXLinuxAI how do I install?\n• **Slash command:** `/cx your question`\n• **Reply:** Just reply to my messages to continue" },
@@ -894,7 +894,7 @@ const SERVER_SETUP = {
           topic: "Earn money by contributing! Use /bounties to see open tasks.",
           welcome: {
             title: "Bounty Board",
-            description: "Get paid to contribute to CX Linux Linux!",
+            description: "Get paid to contribute to CX Linux!",
             color: 0x22c55e,
             fields: [
               { name: "How It Works", value: "1. Use `/bounties` to see open tasks\n2. Comment on the GitHub issue to claim\n3. Submit a PR and get paid when merged!" },
@@ -1699,7 +1699,7 @@ export async function handleApplicationButton(
       // DM user
       try {
         await targetMember.send(
-          `Thank you for your interest in contributing to CX Linux Linux.\n\n` +
+          `Thank you for your interest in contributing to CX Linux.\n\n` +
           `Unfortunately, your application was not approved at this time.\n\n` +
           `You're welcome to reapply in the future if circumstances change. ` +
           `Feel free to continue participating in our public channels!`
