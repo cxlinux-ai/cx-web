@@ -41,7 +41,7 @@ const WEB_SEARCH_TRIGGERS = [
 
 // Topics we should NOT search for (handle internally)
 const INTERNAL_TOPICS = [
-  /cortex\s*linux/i,
+  /cx\s*linux/i,
   /hackathon/i,
   /referral/i,
   /\binstall(ation)?\b/i,
@@ -80,7 +80,7 @@ export async function searchWeb(query: string): Promise<SearchResult[]> {
 
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "CortexLinuxBot/1.0",
+        "User-Agent": "CXLinuxBot/1.0",
       },
     });
 
