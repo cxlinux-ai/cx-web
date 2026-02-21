@@ -19,7 +19,6 @@ function getClientIp(req: Request): string {
   return req.ip || req.socket.remoteAddress || "unknown";
 }
 import stripeRoutes from "./stripe";
-import referralRoutes from "./referral";
 import bountiesRoutes from "./bounties";
 import oauthRoutes from "./oauth";
 import discordBot from "./discord-bot";
@@ -371,7 +370,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api/stripe", stripeRoutes);
 
   // Mount Referral routes (viral growth system)
-  app.use("/api/referral", referralRoutes);
 
   // Mount Bounties routes (bounty board)
   app.use("/api/bounties", bountiesRoutes);
@@ -467,58 +465,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           error: "This email is already registered for the hackathon" 
         });
       }
-
-      // Check for visitor referral attribution (IP-based tracking)
-      const clientIp = getClientIp(req);
-      let referrerCode = "";
-      let referrerSource = "";
-      let referrerEmail = "";
-      
-      try {
-        const visitorRef = await db
-          .select()
-          .from(visitorReferrals)
-          .where(eq(visitorReferrals.visitorIp, clientIp))
-          .limit(1);
-        
-        if (visitorRef.length > 0 && !visitorRef[0].convertedToRegistration) {
-          referrerCode = visitorRef[0].referralCode;
-          referrerSource = visitorRef[0].source || "referral";
-          
-          // Get the referrer's email from ipReferralCodes table
-          const referrerInfo = await db
-            .select()
-            .from(ipReferralCodes)
-            .where(eq(ipReferralCodes.referralCode, referrerCode))
-            .limit(1);
-          
-          if (referrerInfo.length > 0 && referrerInfo[0].email) {
-            referrerEmail = referrerInfo[0].email;
-          }
-          
-          // Mark as converted
-          await db
-            .update(visitorReferrals)
-            .set({
-              convertedToRegistration: true,
-              registrationEmail: data.email,
-            })
-            .where(eq(visitorReferrals.id, visitorRef[0].id));
-          
-          // Credit the referrer (update their total referrals)
-          await db
-            .update(ipReferralCodes)
-            .set({
-              totalReferrals: sql`${ipReferralCodes.totalReferrals} + 1`,
-              lastAccessedAt: new Date(),
-            })
-            .where(eq(ipReferralCodes.referralCode, referrerCode));
-          
-          console.log(`[Referral] Registration attributed to referrer: ${referrerCode} (${referrerEmail})`);
-        }
-      } catch (refError) {
-        console.error("[Referral] Error checking visitor referral:", refError);
-        // Continue with registration even if referral check fails
       }
 
       const registration = await storage.createFullRegistration(data);
@@ -563,10 +509,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             ? data.postHackathonInvolvement.join(", ") 
             : "",
           threeYearVision: data.threeYearVision || "",
-          // Referral Attribution
-          referredBy: referrerCode,
-          referrerEmail: referrerEmail,
-          referralSource: referrerSource,
         };
 
         fetch(sheetsWebhookUrl, {
