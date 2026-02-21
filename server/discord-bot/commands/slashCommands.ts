@@ -81,8 +81,6 @@ export const commands = [
     .setDescription("Show bot statistics (Admin only)"),
 
   new SlashCommandBuilder()
-    .setName("referral")
-    .setDescription("Get information about the referral program"),
 
   new SlashCommandBuilder()
     .setName("hackathon")
@@ -173,9 +171,6 @@ export async function handleSlashCommand(
         break;
       case "stats":
         await handleStatsCommand(interaction);
-        break;
-      case "referral":
-        await handleReferralCommand(interaction);
         break;
       case "hackathon":
         await handleHackathonCommand(interaction);
@@ -290,7 +285,6 @@ async function handleHelpCommand(
           "`/cx <question>` - Ask me anything about CX Linux",
           "`/help` - Show this help message",
           "`/apply` - Apply to become a contributor",
-          "`/referral` - Learn about our referral program",
           "`/hackathon` - Get hackathon information",
           "`/clear` - Clear your conversation history",
           "`/links` - Get important links",
@@ -381,47 +375,6 @@ async function handleStatsCommand(
 }
 
 /**
- * Handle /referral command
- */
-async function handleReferralCommand(
-  interaction: ChatInputCommandInteraction
-): Promise<void> {
-  const embed = new EmbedBuilder()
-    .setColor(COLORS.success)
-    .setTitle("CX Linux Referral Program")
-    .setDescription("Invite friends and earn exclusive rewards!")
-    .addFields(
-      {
-        name: "Reward Tiers",
-        value: [
-          "**1 referral:** Bronze badge + 100 spots up",
-          "**3 referrals:** Silver + Discord access",
-          "**5 referrals:** Gold + Swag pack",
-          "**10 referrals:** Platinum + 1 month Pro",
-          "**20 referrals:** Diamond + Ambassador status",
-          "**50 referrals:** Legendary + Lifetime VIP",
-        ].join("\n"),
-      },
-      {
-        name: "How to Participate",
-        value:
-          "1. Sign up at https://cxlinux.com/referrals\n2. Get your unique referral link\n3. Share with friends\n4. Earn rewards when they join Discord AND contribute!",
-      }
-    )
-    .setURL("https://cxlinux.com/referrals");
-
-  const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-    new ButtonBuilder()
-      .setLabel("Get Your Referral Link")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux.com/referrals")
-  );
-
-  await interaction.reply({ embeds: [embed], components: [row] });
-}
-
-/**
- * Handle /hackathon command
  */
 async function handleHackathonCommand(
   interaction: ChatInputCommandInteraction
@@ -646,7 +599,6 @@ async function handleLinksCommand(
       { name: "GitHub", value: "[github.com/cxlinux](https://github.com/cxlinux)", inline: true },
       { name: "Bounties", value: "[/bounties](https://cxlinux.com/bounties)", inline: true },
       { name: "Hackathon", value: "[/hackathon](https://cxlinux.com/hackathon)", inline: true },
-      { name: "Referrals", value: "[/referrals](https://cxlinux.com/referrals)", inline: true },
       { name: "Blog", value: "[/blog](https://cxlinux.com/blog)", inline: true }
     )
     .setFooter({ text: "The AI Layer for Linux" });
