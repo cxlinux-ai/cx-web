@@ -493,8 +493,8 @@ export const githubContributions = pgTable("github_contributions", {
   prNumber: integer("pr_number").notNull(),
   prUrl: text("pr_url").notNull(),
   prTitle: text("pr_title").notNull(),
-  repoOwner: text("repo_owner").notNull(), // e.g., "cortexlinux"
-  repoName: text("repo_name").notNull(), // e.g., "cortex"
+  repoOwner: text("repo_owner").notNull(), // e.g., "cxlinux-ai"
+  repoName: text("repo_name").notNull(), // e.g., "cx-core"
 
   // Status
   state: text("state").notNull(), // open, closed, merged
