@@ -18,7 +18,7 @@ This tutorial covers using Cortex in CI/CD pipelines. Automate installations, co
 
 - CI/CD platform access
 - Repository with code
-- Cortex installation script or pre-built image
+- CX Linux installation script or pre-built image
 
 ## GitHub Actions
 
@@ -47,16 +47,16 @@ jobs:
           echo "$HOME/.cortex/bin" >> $GITHUB_PATH
 
       - name: Setup environment
-        run: cortex "install all dependencies for this project"
+        run: cx "install all dependencies for this project"
         env:
           CORTEX_CI: true
           CORTEX_YES: true
 
       - name: Run tests
-        run: cortex "run the test suite"
+        run: cx "run the test suite"
 
       - name: Build
-        run: cortex "build for production"
+        run: cx "build for production"
 ```
 
 ### Using Cortex Action
@@ -80,8 +80,8 @@ jobs:
 
       - name: Setup and test
         run: |
-          cortex "install dependencies"
-          cortex "run tests"
+          cx "install dependencies"
+          cx "run tests"
         env:
           CORTEX_CI: true
 ```
@@ -102,12 +102,12 @@ jobs:
       - uses: cortexlinux/setup-cortex@v1
 
       - name: Setup Node ${{ matrix.node }}
-        run: cortex "install nodejs version ${{ matrix.node }}"
+        run: cx "install nodejs version ${{ matrix.node }}"
         env:
           CORTEX_CI: true
 
       - name: Test
-        run: cortex "run tests"
+        run: cx "run tests"
 ```
 
 ### Deploy Workflow
@@ -130,18 +130,18 @@ jobs:
       - uses: cortexlinux/setup-cortex@v1
 
       - name: Build
-        run: cortex "build docker image for production"
+        run: cx "build docker image for production"
         env:
           CORTEX_CI: true
 
       - name: Push to registry
-        run: cortex "push image to docker hub"
+        run: cx "push image to docker hub"
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Deploy
-        run: cortex "deploy to kubernetes cluster"
+        run: cx "deploy to kubernetes cluster"
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
 ```
@@ -171,8 +171,8 @@ before_script:
 test:
   stage: test
   script:
-    - cortex "install project dependencies"
-    - cortex "run tests"
+    - cx "install project dependencies"
+    - cx "run tests"
   artifacts:
     reports:
       junit: test-results.xml
@@ -180,7 +180,7 @@ test:
 build:
   stage: build
   script:
-    - cortex "build for production"
+    - cx "build for production"
   artifacts:
     paths:
       - dist/
@@ -188,7 +188,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - cortex "deploy to production server"
+    - cx "deploy to production server"
   only:
     - main
   environment:
@@ -208,12 +208,12 @@ stages:
 test:
   stage: test
   script:
-    - cortex "install dependencies and run tests"
+    - cx "install dependencies and run tests"
 
 deploy:
   stage: deploy
   script:
-    - cortex "deploy application"
+    - cx "deploy application"
   only:
     - main
 ```
@@ -229,7 +229,7 @@ stages:
 test:
   stage: test
   script:
-    - cortex "run tests"
+    - cx "run tests"
 
 trigger-deploy:
   stage: trigger
@@ -266,13 +266,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'cortex "install all project dependencies"'
+                sh 'cx "install all project dependencies"'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'cortex "run test suite"'
+                sh 'cx "run test suite"'
             }
             post {
                 always {
@@ -283,7 +283,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'cortex "build for production"'
+                sh 'cx "build for production"'
             }
         }
 
@@ -292,14 +292,14 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh 'cortex "deploy to production"'
+                sh 'cx "deploy to production"'
             }
         }
     }
 
     post {
         failure {
-            sh 'cortex "collect logs and diagnostics"'
+            sh 'cx "collect logs and diagnostics"'
         }
     }
 }
@@ -318,7 +318,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'cortex "install dependencies and run tests"'
+                sh 'cx "install dependencies and run tests"'
             }
         }
     }
@@ -347,10 +347,10 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: cortex "install project dependencies"
+          command: cx "install project dependencies"
       - run:
           name: Run tests
-          command: cortex "run tests"
+          command: cx "run tests"
       - store_test_results:
           path: test-results
 
@@ -360,7 +360,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: cortex "deploy to production"
+          command: cx "deploy to production"
 
 workflows:
   build-and-deploy:
@@ -402,13 +402,13 @@ stages:
               export PATH="$HOME/.cortex/bin:$PATH"
             displayName: 'Install Cortex'
 
-          - script: cortex "install dependencies"
+          - script: cx "install dependencies"
             displayName: 'Install Dependencies'
 
-          - script: cortex "run tests"
+          - script: cx "run tests"
             displayName: 'Run Tests'
 
-          - script: cortex "build for production"
+          - script: cx "build for production"
             displayName: 'Build'
 
           - task: PublishBuildArtifacts@1
@@ -425,7 +425,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - script: cortex "deploy application"
+                - script: cx "deploy application"
                   displayName: 'Deploy'
 ```
 
@@ -468,7 +468,7 @@ KUBECONFIG=...          # For deployments
 ### Dependency Installation
 
 ```yaml
-- run: cortex "install all dependencies for this project"
+- run: cx "install all dependencies for this project"
 ```
 
 Cortex detects:
@@ -480,26 +480,26 @@ Cortex detects:
 ### Running Tests
 
 ```yaml
-- run: cortex "run tests and generate coverage report"
+- run: cx "run tests and generate coverage report"
 ```
 
 ### Building
 
 ```yaml
-- run: cortex "build for production optimizing for size"
+- run: cx "build for production optimizing for size"
 ```
 
 ### Docker Operations
 
 ```yaml
-- run: cortex "build docker image tagged with git sha"
-- run: cortex "push image to registry"
+- run: cx "build docker image tagged with git sha"
+- run: cx "push image to registry"
 ```
 
 ### Deployment
 
 ```yaml
-- run: cortex "deploy to kubernetes namespace production"
+- run: cx "deploy to kubernetes namespace production"
 ```
 
 ---
@@ -534,7 +534,7 @@ cache:
 
 ```yaml
 # GitHub Actions
-- run: cortex "install dependencies"
+- run: cx "install dependencies"
   continue-on-error: false
   timeout-minutes: 10
 ```
@@ -542,10 +542,10 @@ cache:
 ### Diagnostics on Failure
 
 ```yaml
-- run: cortex "run tests"
+- run: cx "run tests"
 
 - if: failure()
-  run: cortex "collect diagnostic information"
+  run: cx "collect diagnostic information"
 
 - if: failure()
   uses: actions/upload-artifact@v3
@@ -580,7 +580,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cortexlinux/setup-cortex@v1
-      - run: cortex "run linter and format check"
+      - run: cx "run linter and format check"
 
   test:
     runs-on: ubuntu-latest
@@ -591,9 +591,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cortexlinux/setup-cortex@v1
-      - run: cortex "install nodejs ${{ matrix.node }}"
-      - run: cortex "install dependencies"
-      - run: cortex "run tests with coverage"
+      - run: cx "install nodejs ${{ matrix.node }}"
+      - run: cx "install dependencies"
+      - run: cx "run tests with coverage"
       - uses: codecov/codecov-action@v3
 
   build:
@@ -602,8 +602,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cortexlinux/setup-cortex@v1
-      - run: cortex "build docker image"
-      - run: cortex "push to ghcr.io"
+      - run: cx "build docker image"
+      - run: cx "push to ghcr.io"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -615,7 +615,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cortexlinux/setup-cortex@v1
-      - run: cortex "deploy to staging environment"
+      - run: cx "deploy to staging environment"
         env:
           KUBECONFIG: ${{ secrets.STAGING_KUBECONFIG }}
 
@@ -627,7 +627,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cortexlinux/setup-cortex@v1
-      - run: cortex "deploy to production with rolling update"
+      - run: cx "deploy to production with rolling update"
         env:
           KUBECONFIG: ${{ secrets.PROD_KUBECONFIG }}
 ```
