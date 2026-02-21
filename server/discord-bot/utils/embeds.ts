@@ -106,7 +106,7 @@ export function createHackathonEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.primary)
     .setTitle("The First AI Linux Hackathon Worldwide")
-    .setDescription("Build the future of AI-powered Linux! All participants receive a $5 Cortex Linux credit.")
+    .setDescription("Build the future of AI-powered Linux! All participants receive a $5 CX Linux credit.")
     .addFields(
       {
         name: "Total Prizes",
@@ -153,7 +153,7 @@ export function createReferralTiersEmbed(): EmbedBuilder {
     .addFields(
       {
         name: "Starter Tier (5 referrals)",
-        value: "$20 worth of Cortex Linux credit",
+        value: "$20 worth of CX Linux credit",
         inline: true,
       },
       {
@@ -163,7 +163,7 @@ export function createReferralTiersEmbed(): EmbedBuilder {
       },
       {
         name: "Ambassador Tier (50 referrals)",
-        value: "Cortex Linux Premium (3 months) + full goodies bundle",
+        value: "CX Linux Premium (3 months) + full goodies bundle",
         inline: true,
       },
       {
@@ -186,7 +186,7 @@ export function createReferralTiersEmbed(): EmbedBuilder {
 export function createInstallEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.success)
-    .setTitle("Installing Cortex Linux")
+    .setTitle("Installing CX Linux")
     .addFields(
       {
         name: "Requirements",
