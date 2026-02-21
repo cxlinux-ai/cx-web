@@ -13,7 +13,7 @@ interface FollowUpSet {
 // Topic-based follow-up suggestions
 const FOLLOW_UP_SETS: FollowUpSet[] = [
   {
-    keywords: ["what is", "cortex", "about", "overview"],
+    keywords: ["what is", "cx-core", "about", "overview"],
     suggestions: [
       "How do I install it?",
       "What can I do with natural language commands?",
@@ -98,7 +98,7 @@ const FOLLOW_UP_SETS: FollowUpSet[] = [
 const GENERIC_SUGGESTIONS = [
   "Tell me about the hackathon",
   "How do I join the community?",
-  "What makes Cortex different?",
+  "What makes CX Linux different?",
 ];
 
 /**
