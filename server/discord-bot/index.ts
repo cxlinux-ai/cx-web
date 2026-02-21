@@ -1,5 +1,5 @@
 /**
- * Cortex Linux Discord Bot
+ * CX Linux Discord Bot
  *
  * Main entry point for the Discord bot with:
  * - Claude AI-powered responses
@@ -248,7 +248,7 @@ client.once(Events.ClientReady, async () => {
   await registerSlashCommands();
 
   // Set activity
-  client.user!.setActivity("/cortex help", { type: ActivityType.Listening });
+  client.user!.setActivity("/cx help", { type: ActivityType.Listening });
 
   console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
   console.log("[Bot] Ready and operational!");
