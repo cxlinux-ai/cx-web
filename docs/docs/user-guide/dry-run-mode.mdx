@@ -73,7 +73,7 @@ Make dry-run the default mode:
 default_mode: dry-run
 
 # Or via command
-cortex config set default_mode dry-run
+cx config set default_mode dry-run
 ```
 
 Then use `--execute` to actually run:
@@ -340,7 +340,7 @@ cortex --dry-run --output summary "production deployment changes" | cortex share
 
 ```bash
 # Development - maybe skip dry-run
-cortex "install debugging tools"
+cx "install debugging tools"
 
 # Production - always dry-run
 cortex --dry-run "apply configuration changes"
