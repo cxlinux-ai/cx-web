@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: CLI Commands
-description: Complete reference for all Cortex Linux CLI commands, flags, and options.
+description: Complete reference for all CX Linux CLI commands, flags, and options.
 keywords: [cli, commands, reference, flags, options, terminal]
 ---
 
@@ -38,49 +38,49 @@ These flags work with any command:
 The primary way to interact with Cortex:
 
 ```bash
-cortex "your natural language request"
+cx "your natural language request"
 ```
 
 ### Examples
 
 ```bash
 # Package management
-cortex "install nodejs"
-cortex "update all packages"
-cortex "remove unused packages"
+cx "install nodejs"
+cx "update all packages"
+cx "remove unused packages"
 
 # System configuration
-cortex "start nginx service"
-cortex "create user developer"
-cortex "open port 443 in firewall"
+cx "start nginx service"
+cx "create user developer"
+cx "open port 443 in firewall"
 
 # Information queries
-cortex "what version of python is installed?"
-cortex "show disk usage"
-cortex "is docker running?"
+cx "what version of python is installed?"
+cx "show disk usage"
+cx "is docker running?"
 ```
 
 ## Subcommands
 
-### `cortex config`
+### `cx config`
 
 Manage Cortex configuration.
 
 ```bash
 # View all settings
-cortex config list
+cx config list
 
 # Get specific setting
-cortex config get default_mode
+cx config get default_mode
 
 # Set value
-cortex config set default_mode dry-run
+cx config set default_mode dry-run
 
 # Reset to default
-cortex config reset default_mode
+cx config reset default_mode
 
 # Edit config file
-cortex config edit
+cx config edit
 ```
 
 #### Options
@@ -92,29 +92,29 @@ cortex config edit
 
 ---
 
-### `cortex history`
+### `cx history`
 
 View command history and operations.
 
 ```bash
 # Show recent operations
-cortex history
+cx history
 
 # Detailed history
-cortex history --verbose
+cx history --verbose
 
 # Filter by type
-cortex history --type packages
-cortex history --type config
-cortex history --type services
+cx history --type packages
+cx history --type config
+cx history --type services
 
 # Filter by date
-cortex history --since "2024-01-01"
-cortex history --today
-cortex history --last 10
+cx history --since "2024-01-01"
+cx history --today
+cx history --last 10
 
 # Search history
-cortex history --search "nginx"
+cx history --search "nginx"
 ```
 
 #### Options
@@ -132,24 +132,24 @@ cortex history --search "nginx"
 
 ---
 
-### `cortex rollback`
+### `cx rollback`
 
 Undo previous operations.
 
 ```bash
 # Undo last operation
-cortex rollback
+cx rollback
 
 # Undo specific operation
-cortex rollback 3
-cortex rollback "nginx installation"
+cx rollback 3
+cx rollback "nginx installation"
 
 # Preview rollback
-cortex rollback --dry-run 3
+cx rollback --dry-run 3
 
 # Selective rollback
-cortex rollback 3 --only packages
-cortex rollback 3 --except firewall
+cx rollback 3 --only packages
+cx rollback 3 --except firewall
 ```
 
 #### Options
@@ -210,25 +210,25 @@ cortex snapshot cleanup --older-than "30 days"
 
 ---
 
-### `cortex restore`
+### `cx restore`
 
 Restore files, packages, or services.
 
 ```bash
 # Restore file
-cortex restore /etc/nginx/nginx.conf
+cx restore /etc/nginx/nginx.conf
 
 # Restore from specific snapshot
-cortex restore /etc/nginx/ --from snapshot-1
+cx restore /etc/nginx/ --from snapshot-1
 
 # Restore package version
-cortex restore nginx --version 1.22.0
+cx restore nginx --version 1.22.0
 
 # Restore service state
-cortex restore service nginx
+cx restore service nginx
 
 # Restore to package default
-cortex restore /etc/nginx/nginx.conf --default
+cx restore /etc/nginx/nginx.conf --default
 ```
 
 #### Options
