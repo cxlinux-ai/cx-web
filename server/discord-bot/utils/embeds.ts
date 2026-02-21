@@ -139,7 +139,7 @@ export function createHackathonEmbed(): EmbedBuilder {
         inline: false,
       }
     )
-    .setFooter({ text: "cortexlinux.com/hackathon" });
+    .setFooter({ text: "cxlinux-ai.com/hackathon" });
 }
 
 /**
@@ -177,7 +177,7 @@ export function createReferralTiersEmbed(): EmbedBuilder {
         inline: false,
       }
     )
-    .setFooter({ text: "cortexlinux.com/referrals • Referrals must complete both hackathon phases" });
+    .setFooter({ text: "cxlinux-ai.com/referrals • Referrals must complete both hackathon phases" });
 }
 
 /**
@@ -195,7 +195,7 @@ export function createInstallEmbed(): EmbedBuilder {
       },
       {
         name: "Step 1",
-        value: "Download ISO from cortexlinux.com/download",
+        value: "Download ISO from cxlinux-ai.com/download",
         inline: false,
       },
       {
