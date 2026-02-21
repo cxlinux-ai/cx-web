@@ -1,12 +1,12 @@
 /**
  * GitHub Integration
  *
- * Fetches documentation, README, and issues from the Cortex Linux GitHub repo.
+ * Fetches documentation, README, and issues from the CX Linux GitHub repo.
  * Uses GitHub's public API (no auth required for public repos).
  */
 
-const GITHUB_ORG = "cortexlinux";
-const GITHUB_REPO = "cortex";
+const GITHUB_ORG = "cxlinux-ai";
+const GITHUB_REPO = "cx-core";
 const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
 interface GitHubIssue {
