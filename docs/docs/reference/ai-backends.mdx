@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Supported AI Backends
-description: Configure and use different AI backends with Cortex Linux. Local models, OpenAI, Anthropic, and more.
+description: Configure and use different AI backends with CX Linux. Local models, OpenAI, Anthropic, and more.
 keywords: [ai, backends, models, openai, anthropic, ollama, local]
 ---
 
@@ -13,7 +13,7 @@ Cortex supports multiple AI backends for natural language processing. Choose bas
 
 | Backend | Privacy | Speed | Offline | Cost |
 |---------|---------|-------|---------|------|
-| Local (Cortex) | Excellent | Fast | Yes | Free |
+| Local (CX) | Excellent | Fast | Yes | Free |
 | Ollama | Excellent | Fast | Yes | Free |
 | OpenAI | Low | Very Fast | No | Pay-per-use |
 | Anthropic | Low | Very Fast | No | Pay-per-use |
@@ -51,7 +51,7 @@ cortex backend models
 cortex backend download cortex-13b
 
 # Set default model
-cortex config set backend.model cortex-13b
+cx config set backend.model cortex-13b
 ```
 
 ### Hardware Acceleration
@@ -113,7 +113,7 @@ backend:
 cortex backend set ollama
 
 # Specify model
-cortex config set backend.model codellama
+cx config set backend.model codellama
 
 # Test connection
 cortex backend test
@@ -213,7 +213,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 cortex backend set anthropic
 
 # Set model
-cortex config set backend.model claude-3-sonnet
+cx config set backend.model claude-3-sonnet
 
 # Test connection
 cortex backend test
@@ -391,7 +391,7 @@ cortex backend test --verbose
 
 ```bash
 # Enable backend debugging
-CORTEX_DEBUG_BACKEND=true cortex "your command"
+CORTEX_DEBUG_BACKEND=true cx "your command"
 ```
 
 ---
