@@ -47,7 +47,7 @@ export class DatabaseStorage implements IStorage {
       name: data.fullName,
       email: data.email.toLowerCase(),
       country: data.country || null,
-      currentRole: data.currentRole,
+      currentRole: data.technicalRole,
       organization: data.organization || null,
       githubUrl: data.githubUrl,
       linkedinUrl: data.linkedinUrl || null,
@@ -56,9 +56,9 @@ export class DatabaseStorage implements IStorage {
       programmingLanguages: JSON.stringify(data.programmingLanguages),
       teamOrSolo: data.teamOrSolo,
       teamName: data.teamOrSolo === "team" ? data.teamName : null,
-      projectIdea: data.projectIdea,
-      usedCortexBefore: data.usedCortexBefore,
-      howHeardAboutUs: data.howHeardAboutUs,
+      projectIdea: data.contributionPlan,
+      usedCortexBefore: (data as any).usedCortexBefore,
+      howHeardAboutUs: (data as any).howHeardAboutUs,
     }).returning();
     return result[0];
   }
