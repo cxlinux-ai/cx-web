@@ -13,7 +13,7 @@ Cortex automatically tracks changes, making it easy to undo modifications and re
 
 ### What Gets Tracked
 
-Cortex creates snapshots before:
+CX Linux creates snapshots before:
 
 - Package installations and removals
 - System configuration changes
@@ -43,10 +43,10 @@ Each snapshot includes:
 
 ```bash
 # Undo the most recent operation
-cortex rollback
+cx rollback
 
 # Confirm before rollback
-cortex rollback --confirm
+cx rollback --confirm
 ```
 
 ### Undo Specific Operation
@@ -61,10 +61,10 @@ cortex history
 # [3] 2024-01-15 13:45 - Added user deploy
 
 # Rollback specific operation
-cortex rollback 1
+cx rollback 1
 
 # Or by description
-cortex rollback "nginx installation"
+cx rollback "nginx installation"
 ```
 
 ## Viewing History
@@ -100,7 +100,7 @@ cortex snapshot show 1
 # Created: 2024-01-15 14:30:22
 # ═══════════════════════════════════════════════════════════
 #
-# Command: cortex "install nginx and enable it"
+# Command: cx "install nginx and enable it"
 #
 # Changes:
 # ├─ Package installed: nginx 1.24.0
@@ -110,7 +110,7 @@ cortex snapshot show 1
 # ├─ Service started: nginx
 # └─ Firewall: allowed port 80/tcp
 #
-# Rollback command: cortex rollback 1
+# Rollback command: cx rollback 1
 # ═══════════════════════════════════════════════════════════
 ```
 
@@ -120,13 +120,13 @@ cortex snapshot show 1
 
 ```bash
 # Rollback only package changes
-cortex rollback 1 --only packages
+cx rollback 1 --only packages
 
 # Rollback only configuration
-cortex rollback 1 --only config
+cx rollback 1 --only config
 
 # Rollback everything except firewall
-cortex rollback 1 --except firewall
+cx rollback 1 --except firewall
 ```
 
 ### Partial Recovery
@@ -187,13 +187,13 @@ cortex diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
 
 ```bash
 # Remove recently installed package and deps
-cortex rollback "nginx installation"
+cx rollback "nginx installation"
 
 # Reinstall removed package
-cortex rollback "nginx removal"
+cx rollback "nginx removal"
 
 # Downgrade to previous version
-cortex rollback "nodejs upgrade"
+cx rollback "nodejs upgrade"
 ```
 
 ### Package History
@@ -237,7 +237,7 @@ cortex diagnose nginx
 cortex repair nginx
 
 # Rollback to last working state
-cortex rollback --to-working nginx
+cx rollback --to-working nginx
 ```
 
 ## System Recovery
@@ -353,14 +353,14 @@ cortex snapshot import snapshot-backup.tar.gz
 
 ```bash
 cortex snapshot create "pre-upgrade-2024-01"
-cortex "upgrade all packages"
+cx "upgrade all packages"
 ```
 
 ### 2. Test Rollback Capability
 
 ```bash
 # Verify you can rollback
-cortex rollback --dry-run "recent change"
+cx rollback --dry-run "recent change"
 ```
 
 ### 3. Keep Critical Snapshots
@@ -385,13 +385,13 @@ cortex snapshot cleanup --older-than "60 days" --keep-marked
 
 ```bash
 # Check what went wrong
-cortex rollback-status
+cx rollback-status
 
 # Retry with force
-cortex rollback 1 --force
+cx rollback 1 --force
 
 # Manual intervention
-cortex rollback 1 --step-by-step
+cx rollback 1 --step-by-step
 ```
 
 ### Snapshot Corrupted
@@ -416,10 +416,10 @@ If rollback partially completed:
 cortex status
 
 # Continue rollback
-cortex rollback --continue
+cx rollback --continue
 
 # Or abort and cleanup
-cortex rollback --abort
+cx rollback --abort
 ```
 
 ## Related Documentation
