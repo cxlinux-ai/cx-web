@@ -34,13 +34,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["what is", "cortex", "about", "explain", "tell me", "overview", "introduction"],
     category: "overview",
     priority: 10,
-    content: `Cortex Linux is an AI-native operating system that lets you control your computer with natural language. Instead of memorizing terminal commands, you just type what you want in plain English. It's built on Arch Linux, so you get all the power and flexibility of Arch with a much friendlier interface. We're fully open source and community-driven.`,
+    content: `CX Linux Linux is an AI-native operating system that lets you control your computer with natural language. Instead of memorizing terminal commands, you just type what you want in plain English. It's built on Arch Linux, so you get all the power and flexibility of Arch with a much friendlier interface. We're fully open source and community-driven.`,
   },
   {
     keywords: ["why", "benefit", "advantage", "better", "special", "unique", "different"],
     category: "overview",
     priority: 8,
-    content: `What makes Cortex special is the AI layer that understands what you mean, not just what you type. You don't need to remember if it's 'ls -la' or 'dir' or whatever. Just say 'show all files including hidden ones' and it figures it out. It's especially great for people new to Linux or anyone who's tired of googling commands.`,
+    content: `What makes CX Linux special is the AI layer that understands what you mean, not just what you type. You don't need to remember if it's 'ls -la' or 'dir' or whatever. Just say 'show all files including hidden ones' and it figures it out. It's especially great for people new to Linux or anyone who's tired of googling commands.`,
   },
 
   // === INSTALLATION ===
@@ -48,7 +48,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["install", "installation", "setup", "get started", "download", "iso"],
     category: "installation",
     priority: 10,
-    content: `To install Cortex Linux, download the ISO from cortexlinux.com/download, then flash it to a USB with Rufus, Balena Etcher, or the dd command. Boot from the USB and the installer guides you through everything. The AI even helps with disk partitioning so you don't have to stress about that part.`,
+    content: `To install CX Linux Linux, download the ISO from cortexlinux.com/download, then flash it to a USB with Rufus, Balena Etcher, or the dd command. Boot from the USB and the installer guides you through everything. The AI even helps with disk partitioning so you don't have to stress about that part.`,
   },
   {
     keywords: ["requirements", "specs", "minimum", "need", "ram", "disk", "cpu", "hardware"],
@@ -60,19 +60,19 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["dual boot", "windows", "alongside", "keep", "both"],
     category: "installation",
     priority: 6,
-    content: `You can totally dual boot Cortex with Windows. During installation, choose the manual partitioning option and create a separate partition for Cortex. The bootloader will detect Windows and let you choose which OS to boot. Just make sure to back up your data first, as always with disk operations.`,
+    content: `You can totally dual boot CX Linux with Windows. During installation, choose the manual partitioning option and create a separate partition for CX Linux. The bootloader will detect Windows and let you choose which OS to boot. Just make sure to back up your data first, as always with disk operations.`,
   },
   {
     keywords: ["virtual", "vm", "virtualbox", "vmware", "qemu", "virtual machine"],
     category: "installation",
     priority: 6,
-    content: `Cortex runs great in virtual machines. VirtualBox, VMware, and QEMU all work well. Allocate at least 4GB RAM and 2 CPU cores to the VM for decent performance. Enable 3D acceleration if you want a smoother desktop experience. It's a great way to try Cortex without touching your main system.`,
+    content: `CX Linux runs great in virtual machines. VirtualBox, VMware, and QEMU all work well. Allocate at least 4GB RAM and 2 CPU cores to the VM for decent performance. Enable 3D acceleration if you want a smoother desktop experience. It's a great way to try CX Linux without touching your main system.`,
   },
   {
     keywords: ["mac", "macbook", "apple", "m1", "m2", "silicon", "intel mac"],
     category: "installation",
     priority: 7,
-    content: `For Intel Macs, you can dual boot or run Cortex in a VM like Parallels or VirtualBox. For M1/M2 Apple Silicon Macs, native install isn't supported since we're x86-based, but you can run it in UTM or other ARM-compatible VM software with x86 emulation. Performance won't be as snappy though.`,
+    content: `For Intel Macs, you can dual boot or run CX Linux in a VM like Parallels or VirtualBox. For M1/M2 Apple Silicon Macs, native install isn't supported since we're x86-based, but you can run it in UTM or other ARM-compatible VM software with x86 emulation. Performance won't be as snappy though.`,
   },
 
   // === FEATURES ===
@@ -86,13 +86,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["example", "commands", "can do", "show me", "demo", "try"],
     category: "features",
     priority: 8,
-    content: `Here are some things you can say: 'show my disk usage', 'find large files in downloads', 'install firefox', 'update everything', 'compress this folder', 'show running processes', 'kill chrome', 'connect to wifi', 'show my IP address', 'create a backup of my documents'. Just speak naturally and Cortex figures out the right commands.`,
+    content: `Here are some things you can say: 'show my disk usage', 'find large files in downloads', 'install firefox', 'update everything', 'compress this folder', 'show running processes', 'kill chrome', 'connect to wifi', 'show my IP address', 'create a backup of my documents'. Just speak naturally and CX Linux figures out the right commands.`,
   },
   {
     keywords: ["arch", "base", "pacman", "aur", "package", "repository"],
     category: "features",
     priority: 7,
-    content: `Under the hood, Cortex is Arch Linux. You get pacman for package management, access to the official Arch repos, and the AUR which has basically every piece of software you could want. Rolling release means you're always on the latest versions. All your Arch knowledge still applies, the AI is just an additional layer on top.`,
+    content: `Under the hood, CX Linux is Arch Linux. You get pacman for package management, access to the official Arch repos, and the AUR which has basically every piece of software you could want. Rolling release means you're always on the latest versions. All your Arch knowledge still applies, the AI is just an additional layer on top.`,
   },
   {
     keywords: ["offline", "internet", "connection", "without wifi", "no internet"],
@@ -110,7 +110,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["desktop", "gui", "kde", "gnome", "interface", "ui"],
     category: "features",
     priority: 5,
-    content: `Cortex comes with a clean desktop environment. The AI assistant is accessible from anywhere with a keyboard shortcut. You can use it alongside traditional GUI apps. We support both KDE and GNOME flavors depending on your preference. The AI works whether you're in a terminal or using graphical apps.`,
+    content: `CX Linux comes with a clean desktop environment. The AI assistant is accessible from anywhere with a keyboard shortcut. You can use it alongside traditional GUI apps. We support both KDE and GNOME flavors depending on your preference. The AI works whether you're in a terminal or using graphical apps.`,
   },
 
   // === HACKATHON ===
@@ -118,13 +118,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["hackathon", "contribute", "prize", "competition", "build", "participate", "join", "enter"],
     category: "hackathon",
     priority: 10,
-    content: `The Cortex Hackathon 2026 has fifteen thousand dollars in total prizes. It's in two phases. The Ideathon runs weeks one through four where you submit feature ideas and can win from the three thousand dollar prize pool distributed across thirty winners: Top 3 get $250 each, Top 10 (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. Then the main Hackathon is weeks five through thirteen where you build features, with twelve thousand in prizes. All skill levels welcome.`,
+    content: `The CX Linux Hackathon 2026 has fifteen thousand dollars in total prizes. It's in two phases. The Ideathon runs weeks one through four where you submit feature ideas and can win from the three thousand dollar prize pool distributed across thirty winners: Top 3 get $250 each, Top 10 (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. Then the main Hackathon is weeks five through thirteen where you build features, with twelve thousand in prizes. All skill levels welcome.`,
   },
   {
     keywords: ["ideathon", "idea", "submit", "proposal", "phase 1", "first phase"],
     category: "hackathon",
     priority: 7,
-    content: `The Ideathon is the first phase where you don't need to code anything. Just submit your best ideas for Cortex features. Think about what would make the AI assistant better, what integrations would be useful, or what pain points in Linux could be solved. Three thousand dollars in prizes distributed to thirty winners across three tiers: Top 3 Grand Winners, Top 10 Excellence Winners, and Top 30 Ideathon Winners.`,
+    content: `The Ideathon is the first phase where you don't need to code anything. Just submit your best ideas for CX Linux features. Think about what would make the AI assistant better, what integrations would be useful, or what pain points in Linux could be solved. Three thousand dollars in prizes distributed to thirty winners across three tiers: Top 3 Grand Winners, Top 10 Excellence Winners, and Top 30 Ideathon Winners.`,
   },
   {
     keywords: ["hackathon prize", "win", "reward", "money", "award", "winner"],
@@ -176,13 +176,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["github", "source", "code", "contribute", "open source", "repo", "repository"],
     category: "community",
     priority: 7,
-    content: `Cortex is fully open source. Check out our GitHub at github.com/cortexlinux/cortex. You can browse the code, report issues, submit pull requests, or fork it for your own projects. We welcome contributions of all kinds, from code to documentation to translations.`,
+    content: `CX Linux is fully open source. Check out our GitHub at github.com/cortexlinux/cortex. You can browse the code, report issues, submit pull requests, or fork it for your own projects. We welcome contributions of all kinds, from code to documentation to translations.`,
   },
   {
     keywords: ["team", "who made", "creator", "behind", "company", "developer"],
     category: "community",
     priority: 5,
-    content: `Cortex is built by a small passionate team that believes Linux should be accessible to everyone. We're backed by the community and focused on making AI-powered computing a reality. Check out cortexlinux.com/about for more on the team and our mission.`,
+    content: `CX Linux is built by a small passionate team that believes Linux should be accessible to everyone. We're backed by the community and focused on making AI-powered computing a reality. Check out cortexlinux.com/about for more on the team and our mission.`,
   },
 
   // === TROUBLESHOOTING ===
@@ -196,13 +196,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["slow", "performance", "lag", "freeze", "hanging", "speed"],
     category: "troubleshooting",
     priority: 6,
-    content: `If Cortex feels slow, check your RAM usage with 'free -h'. The AI works better with more memory available. You can also try switching to local-only mode in settings if cloud queries are slow. Make sure you're not running too many heavy apps simultaneously. An SSD instead of HDD makes a huge difference too.`,
+    content: `If CX Linux feels slow, check your RAM usage with 'free -h'. The AI works better with more memory available. You can also try switching to local-only mode in settings if cloud queries are slow. Make sure you're not running too many heavy apps simultaneously. An SSD instead of HDD makes a huge difference too.`,
   },
   {
     keywords: ["boot", "grub", "won't start", "black screen", "startup"],
     category: "troubleshooting",
     priority: 7,
-    content: `Boot issues usually relate to the bootloader or graphics drivers. Try booting with 'nomodeset' kernel parameter from GRUB. If dual-booting and can't see Cortex, run 'sudo update-grub' from a live USB. For black screens, it's often a GPU driver issue. Check the Arch Wiki for your specific graphics card.`,
+    content: `Boot issues usually relate to the bootloader or graphics drivers. Try booting with 'nomodeset' kernel parameter from GRUB. If dual-booting and can't see CX Linux, run 'sudo update-grub' from a live USB. For black screens, it's often a GPU driver issue. Check the Arch Wiki for your specific graphics card.`,
   },
   {
     keywords: ["wifi", "network", "internet", "connect", "ethernet", "no connection"],
@@ -216,7 +216,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["pro", "premium", "subscription", "paid", "price", "cost", "free", "pricing"],
     category: "pricing",
     priority: 8,
-    content: `Cortex has a free Community edition with full OS functionality, basic AI commands, and community support. Pro is coming soon with advanced AI features, priority cloud processing, extended command history, custom AI training, and priority support. Join the waitlist through our referral program for early Pro access.`,
+    content: `CX Linux has a free Community edition with full OS functionality, basic AI commands, and community support. Pro is coming soon with advanced AI features, priority cloud processing, extended command history, custom AI training, and priority support. Join the waitlist through our referral program for early Pro access.`,
   },
   {
     keywords: ["free", "cost nothing", "no money", "free tier", "community edition"],
@@ -230,13 +230,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["compare", "vs", "versus", "ubuntu", "fedora", "mint", "other distro", "difference"],
     category: "comparison",
     priority: 6,
-    content: `Compared to Ubuntu or Mint, Cortex is more cutting-edge since it's based on Arch with rolling releases. The main difference is the AI assistant that no other distro has built-in. Compared to plain Arch, we're much more beginner-friendly with guided installation and natural language commands. Think of it as Arch made accessible.`,
+    content: `Compared to Ubuntu or Mint, CX Linux is more cutting-edge since it's based on Arch with rolling releases. The main difference is the AI assistant that no other distro has built-in. Compared to plain Arch, we're much more beginner-friendly with guided installation and natural language commands. Think of it as Arch made accessible.`,
   },
   {
     keywords: ["chatgpt", "copilot", "ai assistant", "other ai", "gpt"],
     category: "comparison",
     priority: 5,
-    content: `Unlike ChatGPT or Copilot which are chat interfaces, Cortex AI is deeply integrated into the operating system. It can actually execute commands, manage files, install software, and control your system. It's not just answering questions, it's doing the work. And it understands Linux context natively.`,
+    content: `Unlike ChatGPT or Copilot which are chat interfaces, CX Linux AI is deeply integrated into the operating system. It can actually execute commands, manage files, install software, and control your system. It's not just answering questions, it's doing the work. And it understands Linux context natively.`,
   },
 ];
 
