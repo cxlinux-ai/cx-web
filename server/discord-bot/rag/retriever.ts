@@ -31,10 +31,10 @@ const KNOWLEDGE_BASE: Array<{
 }> = [
   // === OVERVIEW ===
   {
-    keywords: ["what is", "cortex", "about", "explain", "tell me", "overview", "introduction"],
+    keywords: ["what is", "cx", "about", "explain", "tell me", "overview", "introduction"],
     category: "overview",
     priority: 10,
-    content: `CX Linux Linux is an AI-native operating system that lets you control your computer with natural language. Instead of memorizing terminal commands, you just type what you want in plain English. It's built on Arch Linux, so you get all the power and flexibility of Arch with a much friendlier interface. We're fully open source and community-driven.`,
+    content: `CX Linux is an AI-native operating system that lets you control your computer with natural language. Instead of memorizing terminal commands, you just type what you want in plain English. It's built on Arch Linux, so you get all the power and flexibility of Arch with a much friendlier interface. We're fully open source and community-driven.`,
   },
   {
     keywords: ["why", "benefit", "advantage", "better", "special", "unique", "different"],
@@ -48,7 +48,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["install", "installation", "setup", "get started", "download", "iso"],
     category: "installation",
     priority: 10,
-    content: `To install CX Linux Linux, download the ISO from cortexlinux.com/download, then flash it to a USB with Rufus, Balena Etcher, or the dd command. Boot from the USB and the installer guides you through everything. The AI even helps with disk partitioning so you don't have to stress about that part.`,
+    content: `To install CX Linux, download the ISO from cxlinux.com/download, then flash it to a USB with Rufus, Balena Etcher, or the dd command. Boot from the USB and the installer guides you through everything. The AI even helps with disk partitioning so you don't have to stress about that part.`,
   },
   {
     keywords: ["requirements", "specs", "minimum", "need", "ram", "disk", "cpu", "hardware"],
@@ -136,13 +136,13 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["register", "sign up", "hackathon how", "start", "begin"],
     category: "hackathon",
     priority: 8,
-    content: `To join the hackathon, head to cortexlinux.com/hackathon and register with your email. You'll get access to participant channels, the submission portal, and updates. You can participate solo or form teams of up to four people.`,
+    content: `To join the hackathon, head to cxlinux.com/hackathon and register with your email. You'll get access to participant channels, the submission portal, and updates. You can participate solo or form teams of up to four people.`,
   },
   {
     keywords: ["deadline", "when", "date", "timeline", "schedule", "end"],
     category: "hackathon",
     priority: 6,
-    content: `The hackathon timeline: Ideathon runs for the first four weeks, then the main build phase is weeks five through thirteen. Check cortexlinux.com/hackathon for exact dates and deadlines. There's a midpoint check-in during week nine where you can get feedback on your progress.`,
+    content: `The hackathon timeline: Ideathon runs for the first four weeks, then the main build phase is weeks five through thirteen. Check cxlinux.com/hackathon for exact dates and deadlines. There's a midpoint check-in during week nine where you can get feedback on your progress.`,
   },
 
   // === REFERRAL PROGRAM ===
@@ -150,7 +150,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["referral", "invite", "rewards", "share", "waitlist", "friend", "refer"],
     category: "referral",
     priority: 9,
-    content: `Our referral program lets you earn rewards by inviting friends. You get a unique link at cortexlinux.com/referrals. As people sign up with your link, you climb tiers: Bronze at one referral gets you a badge and moves you up 100 waitlist spots. Silver at three gets Discord access. It goes all the way to Legendary at fifty referrals with lifetime VIP status.`,
+    content: `Our referral program lets you earn rewards by inviting friends. You get a unique link at cxlinux.com/referrals. As people sign up with your link, you climb tiers: Bronze at one referral gets you a badge and moves you up 100 waitlist spots. Silver at three gets Discord access. It goes all the way to Legendary at fifty referrals with lifetime VIP status.`,
   },
   {
     keywords: ["tier", "bronze", "silver", "gold", "platinum", "diamond", "legendary", "level"],
@@ -162,7 +162,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["waitlist", "early access", "beta", "when release", "launch"],
     category: "referral",
     priority: 6,
-    content: `We're currently in beta with a waitlist for the public release. Join at cortexlinux.com and refer friends to move up the list faster. Beta testers get early access and can provide feedback that shapes the final product. The more referrals you have, the sooner you'll get access.`,
+    content: `We're currently in beta with a waitlist for the public release. Join at cxlinux.com and refer friends to move up the list faster. Beta testers get early access and can provide feedback that shapes the final product. The more referrals you have, the sooner you'll get access.`,
   },
 
   // === COMMUNITY ===
@@ -182,7 +182,7 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["team", "who made", "creator", "behind", "company", "developer"],
     category: "community",
     priority: 5,
-    content: `CX Linux is built by a small passionate team that believes Linux should be accessible to everyone. We're backed by the community and focused on making AI-powered computing a reality. Check out cortexlinux.com/about for more on the team and our mission.`,
+    content: `CX Linux is built by a small passionate team that believes Linux should be accessible to everyone. We're backed by the community and focused on making AI-powered computing a reality. Check out cxlinux.com/about for more on the team and our mission.`,
   },
 
   // === TROUBLESHOOTING ===
