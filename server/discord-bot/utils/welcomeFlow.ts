@@ -34,11 +34,11 @@ const welcomeFlowState = new Map<string, {
 export function createWelcomeEmbed(member: GuildMember): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(0x3b82f6)
-    .setTitle(`Welcome to Cortex Linux, ${member.displayName}! 🎉`)
+    .setTitle(`Welcome to CX Linux, ${member.displayName}! 🎉`)
     .setDescription(
-      `Great to have you here! I'm the Cortex AI assistant.\n\n` +
+      `Great to have you here! I'm the CX AI assistant.\n\n` +
       `Before we get started, I'd love to know a bit about you so I can help you better.\n\n` +
-      `**What brings you to Cortex Linux?**`
+      `**What brings you to CX Linux?**`
     )
     .setThumbnail(member.user.displayAvatarURL())
     .setFooter({ text: "Click a button below to continue" });
@@ -283,7 +283,7 @@ async function completeWelcomeFlow(
   // Personalize based on reason
   switch (reason) {
     case "curious":
-      message += "Feel free to explore and ask me anything about Cortex Linux!\n\n";
+      message += "Feel free to explore and ask me anything about CX Linux!\n\n";
       break;
     case "install":
       message += "Ready to install? Check out `/cortex how do I install?` or visit **cortexlinux.com/download**\n\n";
