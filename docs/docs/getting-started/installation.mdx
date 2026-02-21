@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Installation
-description: Install Cortex Linux on your system in minutes. Supports Ubuntu, Fedora, Arch, and other major distributions.
+description: Install CX Linux on your system in minutes. Supports Ubuntu, Fedora, Arch, and other major distributions.
 keywords: [install, setup, download, linux, package manager]
 ---
 
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 # Installation
 
-Get Cortex Linux running on your system in under 5 minutes. Choose your preferred installation method below.
+Get CX Linux running on your system in under 5 minutes. Choose your preferred installation method below.
 
 ## System Requirements
 
@@ -25,9 +25,9 @@ Before installing, ensure your system meets these minimum requirements:
 
 ## Quick Install (Recommended)
 
-The fastest way to install Cortex Linux is using our install script:
+The fastest way to install CX Linux is using our install script:
 
-```bash title="Install Cortex Linux"
+```bash title="Install CX Linux"
 curl -fsSL https://cortexlinux.com/install.sh | bash
 ```
 
@@ -84,10 +84,10 @@ paru -S cortex-bin
 
 ```bash
 # Install via pip (requires Python 3.9+)
-pip install cortex-linux
+pip install cx-linux
 
 # Or with pipx for isolated installation
-pipx install cortex-linux
+pipx install cx-linux
 ```
 
   </TabItem>
@@ -121,10 +121,10 @@ After installation, verify that Cortex is working correctly:
 # Check version
 cortex --version
 # highlight-next-line
-# Output: Cortex Linux v1.0.0
+# Output: CX Linux v1.0.0
 
 # Run a test command
-cortex "show system information"
+cx "show system information"
 ```
 
 ## Post-Installation Setup
@@ -169,7 +169,7 @@ Add this line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.).
 If you encounter permission errors, try installing with `--user`:
 
 ```bash
-pip install --user cortex-linux
+pip install --user cx-linux
 ```
 
 </details>
@@ -189,7 +189,7 @@ Use [pyenv](https://github.com/pyenv/pyenv) to manage multiple Python versions i
 
 ## Uninstallation
 
-To remove Cortex Linux from your system:
+To remove CX Linux from your system:
 
 <Tabs>
   <TabItem value="apt" label="Debian/Ubuntu" default>
@@ -210,7 +210,7 @@ sudo dnf remove cortex
   <TabItem value="pip" label="pip">
 
 ```bash
-pip uninstall cortex-linux
+pip uninstall cx-linux
 ```
 
   </TabItem>
