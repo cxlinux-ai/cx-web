@@ -98,7 +98,7 @@ export function getLimitExceededMessage(): string {
     `You've reached your daily question limit (${DAILY_LIMIT} questions).\n\n` +
     `**Get unlimited access:**\n` +
     `• Join our Discord server for unlimited questions!\n` +
-    `• https://discord.gg/cortexlinux\n\n` +
+    `• https://discord.gg/cxlinux-ai\n\n` +
     `Your limit resets at midnight UTC.`
   );
 }
