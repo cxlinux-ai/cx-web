@@ -7,7 +7,7 @@ keywords: [docker, containers, compose, kubernetes, deployment]
 
 # Docker Integration
 
-This tutorial covers using Cortex for Docker operations. From basic container management to complex orchestration, Cortex simplifies containerized workflows.
+This tutorial covers using CX Linux for Docker operations. From basic container management to complex orchestration, CX Linux simplifies containerized workflows.
 
 ## Time Required
 
@@ -24,7 +24,7 @@ This tutorial covers using Cortex for Docker operations. From basic container ma
 ### Quick Install
 
 ```bash
-cortex "install docker"
+cx "install docker"
 ```
 
 Cortex will:
@@ -37,7 +37,7 @@ Cortex will:
 ### Verify Installation
 
 ```bash
-cortex "verify docker is working correctly"
+cx "verify docker is working correctly"
 ```
 
 ---
@@ -48,52 +48,52 @@ cortex "verify docker is working correctly"
 
 ```bash
 # Run a container
-cortex "run an nginx container on port 8080"
+cx "run an nginx container on port 8080"
 
 # Run in background
-cortex "run nginx container in background on port 80"
+cx "run nginx container in background on port 80"
 
 # Run with name
-cortex "run redis container named my-redis"
+cx "run redis container named my-redis"
 ```
 
 ### Managing Containers
 
 ```bash
 # List containers
-cortex "show running containers"
-cortex "show all containers including stopped"
+cx "show running containers"
+cx "show all containers including stopped"
 
 # Stop containers
-cortex "stop the nginx container"
-cortex "stop all running containers"
+cx "stop the nginx container"
+cx "stop all running containers"
 
 # Remove containers
-cortex "remove stopped containers"
-cortex "remove all containers"
+cx "remove stopped containers"
+cx "remove all containers"
 ```
 
 ### Container Logs
 
 ```bash
 # View logs
-cortex "show logs from nginx container"
+cx "show logs from nginx container"
 
 # Follow logs
-cortex "follow logs from my-app container"
+cx "follow logs from my-app container"
 
 # Recent logs
-cortex "show last 100 log lines from my-app"
+cx "show last 100 log lines from my-app"
 ```
 
 ### Container Shell
 
 ```bash
 # Enter container
-cortex "open shell in the nginx container"
+cx "open shell in the nginx container"
 
 # Run command
-cortex "run 'cat /etc/nginx/nginx.conf' in nginx container"
+cx "run 'cat /etc/nginx/nginx.conf' in nginx container"
 ```
 
 ---
@@ -104,30 +104,30 @@ cortex "run 'cat /etc/nginx/nginx.conf' in nginx container"
 
 ```bash
 # Pull image
-cortex "pull the latest nginx image"
+cx "pull the latest nginx image"
 
 # Specific version
-cortex "pull node version 18 alpine image"
+cx "pull node version 18 alpine image"
 ```
 
 ### Listing Images
 
 ```bash
-cortex "show all docker images"
-cortex "show images taking the most space"
+cx "show all docker images"
+cx "show images taking the most space"
 ```
 
 ### Cleaning Up
 
 ```bash
 # Remove unused images
-cortex "remove unused docker images"
+cx "remove unused docker images"
 
 # Full cleanup
-cortex "clean up all unused docker resources"
+cx "clean up all unused docker resources"
 
 # Specific image
-cortex "remove the old nginx image"
+cx "remove the old nginx image"
 ```
 
 ---
@@ -138,30 +138,30 @@ cortex "remove the old nginx image"
 
 ```bash
 # Build from Dockerfile
-cortex "build docker image from this directory"
+cx "build docker image from this directory"
 
 # With tag
-cortex "build docker image and tag as myapp:v1"
+cx "build docker image and tag as myapp:v1"
 ```
 
 ### Build Optimization
 
 ```bash
 # Multi-stage build help
-cortex "help me create a multi-stage dockerfile for this node app"
+cx "help me create a multi-stage dockerfile for this node app"
 
 # Optimize existing
-cortex "how can I reduce the size of this docker image?"
+cx "how can I reduce the size of this docker image?"
 ```
 
 ### Build Troubleshooting
 
 ```bash
 # Debug failed build
-cortex "my docker build is failing, help me fix it"
+cx "my docker build is failing, help me fix it"
 
 # Layer caching
-cortex "why isn't docker caching my build layers?"
+cx "why isn't docker caching my build layers?"
 ```
 
 ---
@@ -172,45 +172,45 @@ cortex "why isn't docker caching my build layers?"
 
 ```bash
 # Start services
-cortex "start docker compose services"
+cx "start docker compose services"
 
 # Stop services
-cortex "stop docker compose services"
+cx "stop docker compose services"
 
 # Restart
-cortex "restart the web service in docker compose"
+cx "restart the web service in docker compose"
 ```
 
 ### Managing Services
 
 ```bash
 # Scale service
-cortex "scale the worker service to 3 instances"
+cx "scale the worker service to 3 instances"
 
 # View logs
-cortex "show logs from all compose services"
+cx "show logs from all compose services"
 
 # Status
-cortex "show status of docker compose services"
+cx "show status of docker compose services"
 ```
 
 ### Compose Files
 
 ```bash
 # Create compose file
-cortex "create docker compose file for node app with postgres and redis"
+cx "create docker compose file for node app with postgres and redis"
 
 # Validate
-cortex "validate this docker compose file"
+cx "validate this docker compose file"
 
 # Convert
-cortex "help me convert this docker run command to compose"
+cx "help me convert this docker run command to compose"
 ```
 
 ### Example Compose Generation
 
 ```bash
-cortex "create docker compose for a MERN stack application"
+cx "create docker compose for a MERN stack application"
 ```
 
 Cortex generates:
@@ -267,26 +267,26 @@ volumes:
 
 ```bash
 # Create network
-cortex "create docker network for my microservices"
+cx "create docker network for my microservices"
 
 # List networks
-cortex "show docker networks"
+cx "show docker networks"
 
 # Connect container
-cortex "connect my-app container to the backend network"
+cx "connect my-app container to the backend network"
 
 # Inspect
-cortex "show which containers are on the backend network"
+cx "show which containers are on the backend network"
 ```
 
 ### Network Troubleshooting
 
 ```bash
 # Debug connectivity
-cortex "container A can't connect to container B, help me debug"
+cx "container A can't connect to container B, help me debug"
 
 # DNS issues
-cortex "docker container dns resolution isn't working"
+cx "docker container dns resolution isn't working"
 ```
 
 ---
@@ -297,33 +297,33 @@ cortex "docker container dns resolution isn't working"
 
 ```bash
 # Create volume
-cortex "create docker volume for database data"
+cx "create docker volume for database data"
 
 # List volumes
-cortex "show docker volumes"
+cx "show docker volumes"
 
 # Inspect volume
-cortex "where is the postgres-data volume stored?"
+cx "where is the postgres-data volume stored?"
 
 # Remove volume
-cortex "remove unused docker volumes"
+cx "remove unused docker volumes"
 ```
 
 ### Bind Mounts
 
 ```bash
 # Development mount
-cortex "run node container with current directory mounted for development"
+cx "run node container with current directory mounted for development"
 ```
 
 ### Backup and Restore
 
 ```bash
 # Backup volume
-cortex "backup the postgres-data volume to a tar file"
+cx "backup the postgres-data volume to a tar file"
 
 # Restore volume
-cortex "restore postgres-data volume from backup.tar"
+cx "restore postgres-data volume from backup.tar"
 ```
 
 ---
@@ -334,33 +334,33 @@ cortex "restore postgres-data volume from backup.tar"
 
 ```bash
 # Run dev environment
-cortex "run development container for this nodejs project"
+cx "run development container for this nodejs project"
 
 # Hot reload
-cortex "set up docker container with hot reload for react development"
+cx "set up docker container with hot reload for react development"
 ```
 
 ### Debug Containers
 
 ```bash
 # Inspect container
-cortex "show detailed information about my-app container"
+cx "show detailed information about my-app container"
 
 # Resource usage
-cortex "show memory and cpu usage of running containers"
+cx "show memory and cpu usage of running containers"
 
 # Processes
-cortex "show processes running in my-app container"
+cx "show processes running in my-app container"
 ```
 
 ### Testing
 
 ```bash
 # Run tests in container
-cortex "run tests in a docker container"
+cx "run tests in a docker container"
 
 # CI environment
-cortex "set up docker container matching CI environment for testing"
+cx "set up docker container matching CI environment for testing"
 ```
 
 ---
@@ -371,33 +371,33 @@ cortex "set up docker container matching CI environment for testing"
 
 ```bash
 # Deploy with compose
-cortex "deploy my application using docker compose in production mode"
+cx "deploy my application using docker compose in production mode"
 
 # Update service
-cortex "update the web service to the new image version"
+cx "update the web service to the new image version"
 
 # Rolling update
-cortex "perform rolling update of the api service"
+cx "perform rolling update of the api service"
 ```
 
 ### Health Checks
 
 ```bash
 # Add health check
-cortex "add health check to my docker container"
+cx "add health check to my docker container"
 
 # Check container health
-cortex "show health status of all containers"
+cx "show health status of all containers"
 ```
 
 ### Resource Limits
 
 ```bash
 # Set limits
-cortex "run container with 512MB memory limit and 0.5 CPU"
+cx "run container with 512MB memory limit and 0.5 CPU"
 
 # Update limits
-cortex "update my-app container to use max 1GB memory"
+cx "update my-app container to use max 1GB memory"
 ```
 
 ---
@@ -408,26 +408,26 @@ cortex "update my-app container to use max 1GB memory"
 
 ```bash
 # Login
-cortex "login to docker hub"
+cx "login to docker hub"
 
 # Push image
-cortex "push myapp:v1 to docker hub"
+cx "push myapp:v1 to docker hub"
 
 # Pull private image
-cortex "pull private image from my docker hub account"
+cx "pull private image from my docker hub account"
 ```
 
 ### Private Registry
 
 ```bash
 # Set up registry
-cortex "set up local docker registry"
+cx "set up local docker registry"
 
 # Configure auth
-cortex "configure docker to use private registry at registry.company.com"
+cx "configure docker to use private registry at registry.company.com"
 
 # Push to private
-cortex "push myapp:v1 to our private registry"
+cx "push myapp:v1 to our private registry"
 ```
 
 ---
@@ -444,17 +444,17 @@ FROM ubuntu:22.04
 RUN curl -fsSL https://cortexlinux.com/install.sh | bash
 
 # Use Cortex for setup
-RUN cortex "install python development environment"
+RUN cx "install python development environment"
 ```
 
 ### Cortex with Docker Host
 
 ```bash
 # Manage host docker from Cortex
-cortex "show docker containers on this host"
+cx "show docker containers on this host"
 
 # Remote docker
-DOCKER_HOST=tcp://remote:2375 cortex "list containers on remote docker"
+DOCKER_HOST=tcp://remote:2375 cx "list containers on remote docker"
 ```
 
 ---
@@ -465,32 +465,32 @@ DOCKER_HOST=tcp://remote:2375 cortex "list containers on remote docker"
 
 ```bash
 # Install kubectl
-cortex "install kubectl"
+cx "install kubectl"
 
 # Get resources
-cortex "show kubernetes pods in default namespace"
+cx "show kubernetes pods in default namespace"
 
 # Deploy
-cortex "deploy my-app using the kubernetes manifest"
+cx "deploy my-app using the kubernetes manifest"
 ```
 
 ### Minikube
 
 ```bash
 # Install minikube
-cortex "set up minikube for local kubernetes"
+cx "set up minikube for local kubernetes"
 
 # Start cluster
-cortex "start minikube cluster"
+cx "start minikube cluster"
 
 # Deploy to minikube
-cortex "deploy nginx to minikube"
+cx "deploy nginx to minikube"
 ```
 
 ### Convert Compose to K8s
 
 ```bash
-cortex "convert my docker compose file to kubernetes manifests"
+cx "convert my docker compose file to kubernetes manifests"
 ```
 
 ---
@@ -501,29 +501,29 @@ cortex "convert my docker compose file to kubernetes manifests"
 
 ```bash
 # Permission denied
-cortex "docker permission denied error"
+cx "docker permission denied error"
 
 # Port in use
-cortex "docker port 80 already in use"
+cx "docker port 80 already in use"
 
 # Out of disk space
-cortex "docker is using too much disk space"
+cx "docker is using too much disk space"
 
 # Container won't start
-cortex "help me debug why my container exits immediately"
+cx "help me debug why my container exits immediately"
 ```
 
 ### Diagnostics
 
 ```bash
 # System info
-cortex "show docker system information"
+cx "show docker system information"
 
 # Events
-cortex "show recent docker events"
+cx "show recent docker events"
 
 # Inspect issues
-cortex "diagnose docker problems on this system"
+cx "diagnose docker problems on this system"
 ```
 
 ---
