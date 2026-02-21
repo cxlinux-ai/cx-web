@@ -39,14 +39,14 @@ const SIMPLE_PATTERNS = [
   /^(thanks|thank you|thx|ty)\b/i,
   /^(bye|goodbye|cya|later)\b/i,
   /^(ok|okay|sure|cool|nice|great|got it|understood)\b/i,
-  /^what('s| is) (your name|cortex)/i,
+  /^what('s| is) (your name|cx)/i,
   /^who are you/i,
   /^(gm|gn|good morning|good night)\b/i,
   /^(what|where|when|how).{0,20}(hackathon|referral|discord|install|download)/i,
-  /^(tell me about|what is|explain) (cortex|the hackathon|referral)/i,
+  /^(tell me about|what is|explain) (cx|the hackathon|referral)/i,
   /^how (do i|can i|to) (join|sign up|register|install|download)/i,
   /^(where|what).{0,10}(link|url|website|discord)/i,
-  /^(is it|is cortex) free/i,
+  /^(is it|is cx) free/i,
   /^what (are the|is the) (requirements?|specs?)/i,
 ];
 
