@@ -166,7 +166,7 @@ export async function handleSlashCommand(
   try {
     switch (commandName) {
       case "cx":
-        await handleCX LinuxCommand(interaction);
+        await handleCXCommand(interaction);
         break;
       case "help":
         await handleHelpCommand(interaction);
@@ -230,7 +230,7 @@ export async function handleSlashCommand(
 /**
  * Handle /cx command
  */
-async function handleCX LinuxCommand(
+async function handleCXCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
   const question = interaction.options.getString("question", true);
@@ -316,7 +316,7 @@ async function handleHelpCommand(
       {
         name: "Other Ways to Ask",
         value: [
-          "**@mention me:** @CX LinuxLinuxAI how do I install?",
+          "**@mention me:** @CXLinuxAI how do I install?",
           "**Reply to my messages:** Continue conversations naturally",
         ].join("\n"),
       },
@@ -824,13 +824,13 @@ const SERVER_SETUP = {
       channels: [
         {
           name: "cxlinux-ai",
-          topic: "Chat with the CX Linux AI assistant! Mention @CX LinuxLinuxAI or use /cx",
+          topic: "Chat with the CX Linux AI assistant! Mention @CXLinuxAI or use /cx",
           welcome: {
             title: "CX Linux AI Assistant",
             description: "I'm here to help with anything CX Linux Linux related!",
             color: 0x10b981,
             fields: [
-              { name: "How to Use", value: "• **Mention me:** @CX LinuxLinuxAI how do I install?\n• **Slash command:** `/cx your question`\n• **Reply:** Just reply to my messages to continue" },
+              { name: "How to Use", value: "• **Mention me:** @CXLinuxAI how do I install?\n• **Slash command:** `/cx your question`\n• **Reply:** Just reply to my messages to continue" },
               { name: "What I Can Help With", value: "Installation, configuration, troubleshooting, features, hackathon info, and more!" },
             ]
           }
