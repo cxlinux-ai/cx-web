@@ -42,8 +42,6 @@ const SIMPLE_PATTERNS = [
   /^what('s| is) (your name|cx)/i,
   /^who are you/i,
   /^(gm|gn|good morning|good night)\b/i,
-  /^(what|where|when|how).{0,20}(hackathon|referral|discord|install|download)/i,
-  /^(tell me about|what is|explain) (cx|the hackathon|referral)/i,
   /^how (do i|can i|to) (join|sign up|register|install|download)/i,
   /^(where|what).{0,10}(link|url|website|discord)/i,
   /^(is it|is cx) free/i,
