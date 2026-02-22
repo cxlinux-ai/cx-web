@@ -44,7 +44,7 @@ export const hackathonRegistrations = pgTable("hackathon_registrations", {
   teamName: text("team_name"),
   phaseParticipation: text("phase_participation"), // phase1, phase2, or both
   projectIdea: text("project_idea"),
-  usedCortexBefore: text("used_cortex_before"),
+  usedCXBefore: text("used_cx_before"),
   howHeardAboutUs: text("how_heard_about_us"),
   registeredAt: timestamp("registered_at").notNull().defaultNow(),
   // Legacy fields for backward compatibility
@@ -75,7 +75,7 @@ export const insertHackathonRegistrationSchema = createInsertSchema(hackathonReg
     teamName: z.string().optional(),
     phaseParticipation: z.enum(["phase1", "phase2", "both"]).optional(),
     projectIdea: z.string().optional(),
-    usedCortexBefore: z.enum(["yes", "no", "whats_that"]).optional(),
+    usedCXBefore: z.enum(["yes", "no", "whats_that"]).optional(),
     howHeardAboutUs: z.enum(["Twitter", "GitHub", "Discord", "Friend", "Other"]).optional(),
   });
 
@@ -107,7 +107,7 @@ export const fullHackathonRegistrationSchema = z.object({
   // Section 4: Motivations
   whyJoinHackathon: z.array(z.string()).min(1, "Please select at least one reason"),
   whyJoinOther: z.string().optional(),
-  cortexAreaInterest: z.string().min(1, "Please select an area of interest"),
+  cxAreaInterest: z.string().min(1, "Please select an area of interest"),
   // Section 5: Vision (Optional)
   whatExcitesYou: z.string().optional(),
   contributionPlan: z.string().optional(),
@@ -608,7 +608,7 @@ export const REWARD_TIERS = {
     positionBoost: 0,
     tier: "diamond",
     badge: "Ambassador",
-    description: "Featured on contributors page + Cortex 'Ambassador' title",
+    description: "Featured on contributors page + CX Linux 'Ambassador' title",
     icon: "star",
     color: "#b9f2ff",
     specialReward: "ambassador",
