@@ -46,6 +46,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/affiliates" className="hover:text-[#00FF9F] transition-colors">
+                  Affiliates (10%)
+                </Link>
+              </li>
+              <li>
                 <a href="mailto:sales@cxlinux.com" className="hover:text-[#00FF9F] transition-colors">
                   Contact Sales
                 </a>

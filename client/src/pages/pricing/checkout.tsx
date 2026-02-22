@@ -104,11 +104,12 @@ export default function CheckoutPage() {
   const params = new URLSearchParams(window.location.search);
   const planId = params.get("plan") || "pro";
   const billingCycle = params.get("billing") || "monthly";
-  const referralCode = params.get("ref") || localStorage.getItem("cx_referral") || "";
+  const initialReferralCode = params.get("ref") || localStorage.getItem("cx_referral") || "";
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [referralCode, setReferralCode] = useState(initialReferralCode);
   const [isLoading, setIsLoading] = useState(false);
   const [isAnnual, setIsAnnual] = useState(billingCycle === "annual");
 
@@ -242,8 +243,8 @@ export default function CheckoutPage() {
               Secure checkout powered by Stripe.
             </p>
 
-            {/* Referral Badge */}
-            {referralCode && (
+            {/* Referral Badge - only show if code came from URL */}
+            {initialReferralCode && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -253,7 +254,7 @@ export default function CheckoutPage() {
                 <div>
                   <p className="font-semibold text-green-400">Referred by a friend</p>
                   <p className="text-sm text-gray-400">
-                    Code: <span className="font-mono text-green-300">{referralCode}</span>
+                    Code: <span className="font-mono text-green-300">{initialReferralCode}</span>
                   </p>
                 </div>
               </motion.div>
@@ -302,6 +303,30 @@ export default function CheckoutPage() {
                   placeholder="Acme Corp"
                   className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                 />
+              </div>
+
+              {/* Referral Code */}
+              <div id="checkout-field-referral">
+                <Label htmlFor="referral" className="text-gray-300">
+                  Referral Code <span className="text-gray-500">(Optional)</span>
+                </Label>
+                <Input
+                  id="referral"
+                  type="text"
+                  value={referralCode}
+                  onChange={(e) => {
+                    const code = e.target.value.toUpperCase();
+                    setReferralCode(code);
+                    if (code) {
+                      localStorage.setItem("cx_referral", code);
+                    }
+                  }}
+                  placeholder="Enter referral code"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] font-mono uppercase"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Have a friend who uses CX Linux? Enter their code here.
+                </p>
               </div>
 
               {/* Billing Toggle */}

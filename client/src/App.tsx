@@ -19,6 +19,7 @@ const Terms = lazy(() => import("./pages/terms"));
 const License = lazy(() => import("./pages/license"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const FAQ = lazy(() => import("./pages/faq"));
+const Affiliates = lazy(() => import("./pages/affiliates"));
 
 // Loading component
 const PageLoader = () => (
@@ -197,6 +198,7 @@ function App() {
               <Route path="/terms" component={Terms} />
               <Route path="/license" component={License} />
               <Route path="/faq" component={FAQ} />
+              <Route path="/affiliates" component={Affiliates} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
