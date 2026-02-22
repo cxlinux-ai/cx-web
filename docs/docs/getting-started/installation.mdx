@@ -28,7 +28,7 @@ Before installing, ensure your system meets these minimum requirements:
 The fastest way to install CX Linux is using our install script:
 
 ```bash title="Install CX Linux"
-curl -fsSL https://cortexlinux.com/install.sh | bash
+curl -fsSL https://cxlinux.com/install.sh | bash
 ```
 
 This script automatically:
@@ -43,29 +43,29 @@ This script automatically:
   <TabItem value="apt" label="Debian/Ubuntu" default>
 
 ```bash
-# Add the Cortex repository
+# Add the CX Linux repository
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
 
-curl -fsSL https://cortexlinux.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cortex.gpg
+curl -fsSL https://cxlinux.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cx.gpg
 
-echo "deb [signed-by=/usr/share/keyrings/cortex.gpg] https://apt.cortexlinux.com stable main" | \
-  sudo tee /etc/apt/sources.list.d/cortex.list
+echo "deb [signed-by=/usr/share/keyrings/cx.gpg] https://apt.cxlinux.com stable main" | \
+  sudo tee /etc/apt/sources.list.d/cx.list
 
-# Install Cortex
+# Install CX Linux
 sudo apt-get update
-sudo apt-get install cortex
+sudo apt-get install cx
 ```
 
   </TabItem>
   <TabItem value="dnf" label="Fedora/RHEL">
 
 ```bash
-# Add the Cortex repository
-sudo dnf config-manager --add-repo https://rpm.cortexlinux.com/cortex.repo
+# Add the CX Linux repository
+sudo dnf config-manager --add-repo https://rpm.cxlinux.com/cx.repo
 
-# Install Cortex
-sudo dnf install cortex
+# Install CX Linux
+sudo dnf install cx
 ```
 
   </TabItem>
@@ -73,10 +73,10 @@ sudo dnf install cortex
 
 ```bash
 # Install from AUR using yay
-yay -S cortex-bin
+yay -S cx-bin
 
 # Or using paru
-paru -S cortex-bin
+paru -S cx-bin
 ```
 
   </TabItem>
@@ -99,8 +99,8 @@ For developers or those who want the latest features:
 
 ```bash
 # Clone the repository
-git clone https://github.com/cortexlinux/cortex.git
-cd cortex
+git clone https://github.com/cxlinux-ai/cx-core.git
+cd cx-core
 
 # Create virtual environment
 python -m venv .venv
@@ -110,16 +110,16 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 
 # Verify installation
-cortex --version
+cx --version
 ```
 
 ## Verify Installation
 
-After installation, verify that Cortex is working correctly:
+After installation, verify that CX Linux is working correctly:
 
 ```bash
 # Check version
-cortex --version
+cx --version
 # highlight-next-line
 # Output: CX Linux v1.0.0
 
@@ -136,13 +136,13 @@ Enable shell completions for a better experience:
 
 ```bash
 # Bash
-cortex completion bash >> ~/.bashrc
+cx completion bash >> ~/.bashrc
 
 # Zsh
-cortex completion zsh >> ~/.zshrc
+cx completion zsh >> ~/.zshrc
 
 # Fish
-cortex completion fish > ~/.config/fish/completions/cortex.fish
+cx completion fish > ~/.config/fish/completions/cx.fish
 ```
 :::
 
@@ -151,7 +151,7 @@ cortex completion fish > ~/.config/fish/completions/cortex.fish
 ### Common Issues
 
 <details>
-<summary>Command not found: cortex</summary>
+<summary>Command not found: cx</summary>
 
 Ensure the installation directory is in your PATH:
 
@@ -177,7 +177,7 @@ pip install --user cx-linux
 <details>
 <summary>Python version too old</summary>
 
-Cortex requires Python 3.9 or newer. Check your version:
+CX Linux requires Python 3.9 or newer. Check your version:
 
 ```bash
 python3 --version
@@ -195,15 +195,15 @@ To remove CX Linux from your system:
   <TabItem value="apt" label="Debian/Ubuntu" default>
 
 ```bash
-sudo apt-get remove cortex
-sudo rm /etc/apt/sources.list.d/cortex.list
+sudo apt-get remove cx
+sudo rm /etc/apt/sources.list.d/cx.list
 ```
 
   </TabItem>
   <TabItem value="dnf" label="Fedora/RHEL">
 
 ```bash
-sudo dnf remove cortex
+sudo dnf remove cx
 ```
 
   </TabItem>
