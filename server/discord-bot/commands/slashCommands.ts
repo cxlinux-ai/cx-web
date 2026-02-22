@@ -166,8 +166,6 @@ export async function handleSlashCommand(
       case "stats":
         await handleStatsCommand(interaction);
         break;
-      case "hackathon":
-        await handleHackathonCommand(interaction);
         break;
       case "clear":
         await handleClearCommand(interaction);
@@ -279,7 +277,6 @@ async function handleHelpCommand(
           "`/cx <question>` - Ask me anything about CX Linux",
           "`/help` - Show this help message",
           "`/apply` - Apply to become a contributor",
-          "`/hackathon` - Get hackathon information",
           "`/clear` - Clear your conversation history",
           "`/links` - Get important links",
           "`/ping` - Check bot status",
@@ -317,7 +314,6 @@ async function handleHelpCommand(
         value: [
           "[Website](https://cxlinux.com)",
           "[GitHub](https://github.com/cxlinux/cx)",
-          "[Hackathon](https://cxlinux.com/hackathon)",
         ].join(" | "),
       }
     )
@@ -370,12 +366,10 @@ async function handleStatsCommand(
 
 /**
  */
-async function handleHackathonCommand(
   interaction: ChatInputCommandInteraction
 ): Promise<void> {
   const embed = new EmbedBuilder()
     .setColor(0xf59e0b)
-    .setTitle("The First AI Linux Hackathon Worldwide")
     .setDescription("$13,800 cash + $4,900 worth of prizes - Build the future of AI-powered Linux!")
     .addFields(
       {
@@ -384,7 +378,6 @@ async function handleHackathonCommand(
         inline: true,
       },
       {
-        name: "Phase 2: Hackathon",
         value: "Weeks 5-13 | $10K cash + prizes\nBuild production-ready code",
         inline: true,
       },
@@ -397,17 +390,14 @@ async function handleHackathonCommand(
         value: "1st: $5K | 2nd: $3K | 3rd: $2K | 4th-10th: $700 worth of goodies + 2mo managed service",
       }
     )
-    .setURL("https://cxlinux.com/hackathon");
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
       .setLabel("Register Now")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux.com/hackathon"),
     new ButtonBuilder()
       .setLabel("View Rules")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://cxlinux.com/downloads/cx-hackathon-rules-2026.pdf")
   );
 
   await interaction.reply({ embeds: [embed], components: [row] });
@@ -592,7 +582,6 @@ async function handleLinksCommand(
       { name: "Website", value: "[cxlinux.com](https://cxlinux.com)", inline: true },
       { name: "GitHub", value: "[github.com/cxlinux](https://github.com/cxlinux)", inline: true },
       { name: "Bounties", value: "[/bounties](https://cxlinux.com/bounties)", inline: true },
-      { name: "Hackathon", value: "[/hackathon](https://cxlinux.com/hackathon)", inline: true },
       { name: "Blog", value: "[/blog](https://cxlinux.com/blog)", inline: true }
     )
     .setFooter({ text: "The AI Layer for Linux" });
@@ -733,7 +722,6 @@ const SERVER_SETUP = {
             color: 0x6366f1,
             fields: [
               { name: "Get Started", value: "1. Check out #announcements for news\n2. Ask questions in #help or #questions\n3. Chat with our AI in #cxlinux-ai" },
-              { name: "Links", value: "[Website](https://cxlinux.com) • [GitHub](https://github.com/cxlinux) • [Hackathon](https://cxlinux.com/hackathon)" },
             ]
           }
         },
@@ -777,7 +765,6 @@ const SERVER_SETUP = {
             color: 0x10b981,
             fields: [
               { name: "How to Use", value: "• **Mention me:** @CXLinuxAI how do I install?\n• **Slash command:** `/cx your question`\n• **Reply:** Just reply to my messages to continue" },
-              { name: "What I Can Help With", value: "Installation, configuration, troubleshooting, features, hackathon info, and more!" },
             ]
           }
         },
@@ -822,16 +809,13 @@ const SERVER_SETUP = {
       emoji: "🚀",
       channels: [
         {
-          name: "hackathon",
           topic: "$18,700 in prizes! Build the future of AI-powered Linux.",
           welcome: {
-            title: "The First AI Linux Hackathon Worldwide",
             description: "$13,800 cash + $4,900 worth of prizes - Build the future of AI-powered Linux!",
             color: 0xf59e0b,
             fields: [
               { name: "Cash Prizes", value: "1st: $5,000 • 2nd: $3,000 • 3rd: $2,000" },
               { name: "4th-10th Place", value: "$700 worth of goodies + 2 months CX Linux managed service each" },
-              { name: "How to Join", value: "Register at [cxlinux.com/hackathon](https://cxlinux.com/hackathon)" },
             ]
           }
         },
@@ -1442,7 +1426,6 @@ async function handleApproveCommand(
         `**Congratulations!** Your application to CX Linux has been approved!\n\n` +
         `You now have access to:\n` +
         `- Community channels\n` +
-        `- Hackathon discussions\n` +
         `- Bounties & contributions\n\n` +
         `Welcome to the team! Check out the community channels to get started.`
       );
@@ -1617,7 +1600,6 @@ export async function handleApplicationButton(
           `**Congratulations!** Your application to CX Linux has been approved!\n\n` +
           `You now have access to:\n` +
           `- Community channels\n` +
-          `- Hackathon discussions\n` +
           `- Bounties & contributions\n\n` +
           `Welcome to the team! Check out the community channels to get started.`
         );
