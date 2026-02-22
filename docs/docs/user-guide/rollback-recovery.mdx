@@ -1,13 +1,13 @@
 ---
 sidebar_position: 5
 title: Rollback & Recovery
-description: Undo changes and recover from issues. Cortex tracks all modifications for easy rollback.
+description: Undo changes and recover from issues. CX Linux tracks all modifications for easy rollback.
 keywords: [rollback, recovery, undo, backup, restore, snapshots]
 ---
 
 # Rollback & Recovery
 
-Cortex automatically tracks changes, making it easy to undo modifications and recover from issues. Every operation creates a recovery point.
+CX Linux automatically tracks changes, making it easy to undo modifications and recover from issues. Every operation creates a recovery point.
 
 ## Understanding Snapshots
 
@@ -53,7 +53,7 @@ cx rollback --confirm
 
 ```bash
 # List recent operations
-cortex history
+cx history
 
 # Output:
 # [1] 2024-01-15 14:30 - Installed nginx
@@ -73,26 +73,26 @@ cx rollback "nginx installation"
 
 ```bash
 # Recent operations
-cortex history
+cx history
 
 # Detailed view
-cortex history --verbose
+cx history --verbose
 
 # Filter by type
-cortex history --type packages
-cortex history --type config
-cortex history --type services
+cx history --type packages
+cx history --type config
+cx history --type services
 
 # Filter by date
-cortex history --since "2024-01-01"
-cortex history --today
+cx history --since "2024-01-01"
+cx history --today
 ```
 
 ### Snapshot Details
 
 ```bash
 # View specific snapshot
-cortex snapshot show 1
+cx snapshot show 1
 
 # Output:
 # ═══════════════════════════════════════════════════════════
@@ -133,13 +133,13 @@ cx rollback 1 --except firewall
 
 ```bash
 # Restore just one file
-cortex restore /etc/nginx/nginx.conf
+cx restore /etc/nginx/nginx.conf
 
 # Restore files from specific snapshot
-cortex restore /etc/nginx/ --from snapshot-1
+cx restore /etc/nginx/ --from snapshot-1
 
 # Restore service state
-cortex restore service nginx --from snapshot-1
+cx restore service nginx --from snapshot-1
 ```
 
 ## Configuration File Recovery
@@ -148,7 +148,7 @@ cortex restore service nginx --from snapshot-1
 
 ```bash
 # See all versions of a config
-cortex file-history /etc/nginx/nginx.conf
+cx file-history /etc/nginx/nginx.conf
 
 # Output:
 # /etc/nginx/nginx.conf
@@ -162,23 +162,23 @@ cortex file-history /etc/nginx/nginx.conf
 
 ```bash
 # Restore from snapshot
-cortex restore /etc/nginx/nginx.conf --from snapshot-1
+cx restore /etc/nginx/nginx.conf --from snapshot-1
 
 # Restore to package default
-cortex restore /etc/nginx/nginx.conf --default
+cx restore /etc/nginx/nginx.conf --default
 
 # View diff before restore
-cortex diff /etc/nginx/nginx.conf --from snapshot-1
+cx diff /etc/nginx/nginx.conf --from snapshot-1
 ```
 
 ### Compare Versions
 
 ```bash
 # Diff current vs snapshot
-cortex diff /etc/nginx/nginx.conf snapshot-1
+cx diff /etc/nginx/nginx.conf snapshot-1
 
 # Diff two snapshots
-cortex diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
+cx diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
 ```
 
 ## Package Recovery
@@ -200,7 +200,7 @@ cx rollback "nodejs upgrade"
 
 ```bash
 # View package history
-cortex package-history nginx
+cx package-history nginx
 
 # Output:
 # nginx version history:
@@ -209,7 +209,7 @@ cortex package-history nginx
 # └─ 1.18.0 - earlier (2023-01-15 - 2023-06-01)
 
 # Restore specific version
-cortex restore nginx --version 1.22.1
+cx restore nginx --version 1.22.1
 ```
 
 ## Service Recovery
@@ -218,23 +218,23 @@ cortex restore nginx --version 1.22.1
 
 ```bash
 # View service history
-cortex service-history nginx
+cx service-history nginx
 
 # Restore previous state
-cortex restore service nginx --from snapshot-1
+cx restore service nginx --from snapshot-1
 
 # Reset to default configuration
-cortex service reset nginx
+cx service reset nginx
 ```
 
 ### Recover Failed Services
 
 ```bash
 # Diagnose service failure
-cortex diagnose nginx
+cx diagnose nginx
 
 # Auto-repair common issues
-cortex repair nginx
+cx repair nginx
 
 # Rollback to last working state
 cx rollback --to-working nginx
@@ -246,44 +246,44 @@ cx rollback --to-working nginx
 
 ```bash
 # Before major changes
-cortex snapshot create "before-kubernetes-install"
+cx snapshot create "before-kubernetes-install"
 
 # With description
-cortex snapshot create "pre-upgrade" --note "System state before dist-upgrade"
+cx snapshot create "pre-upgrade" --note "System state before dist-upgrade"
 ```
 
 ### List All Snapshots
 
 ```bash
 # All snapshots
-cortex snapshot list
+cx snapshot list
 
 # With details
-cortex snapshot list --verbose
+cx snapshot list --verbose
 
 # Filter
-cortex snapshot list --since "1 week ago"
+cx snapshot list --since "1 week ago"
 ```
 
 ### Restore Full Snapshot
 
 ```bash
 # Preview what would be restored
-cortex restore --from "before-kubernetes-install" --dry-run
+cx restore --from "before-kubernetes-install" --dry-run
 
 # Perform full restore
-cortex restore --from "before-kubernetes-install"
+cx restore --from "before-kubernetes-install"
 ```
 
 ## Emergency Recovery
 
 ### Recovery Mode
 
-If Cortex itself is affected:
+If CX Linux itself is affected:
 
 ```bash
 # Direct command execution
-cortex-recover
+cx-recover
 
 # This provides:
 # 1. List of all snapshots
@@ -291,13 +291,13 @@ cortex-recover
 # 3. Manual recovery instructions
 ```
 
-### Without Cortex
+### Without CX Linux
 
-If Cortex isn't available:
+If CX Linux isn't available:
 
 ```bash
 # Snapshots are stored in plain text
-ls ~/.cortex/snapshots/
+ls ~/.cx/snapshots/
 
 # Each snapshot contains:
 # - manifest.json (what changed)
@@ -305,7 +305,7 @@ ls ~/.cortex/snapshots/
 # - packages.txt (package states)
 
 # Manual restore example
-cp ~/.cortex/snapshots/snapshot-1/files/etc/nginx/nginx.conf /etc/nginx/
+cp ~/.cx/snapshots/snapshot-1/files/etc/nginx/nginx.conf /etc/nginx/
 ```
 
 ## Snapshot Management
@@ -314,10 +314,10 @@ cp ~/.cortex/snapshots/snapshot-1/files/etc/nginx/nginx.conf /etc/nginx/
 
 ```bash
 # View snapshot storage
-cortex snapshot storage
+cx snapshot storage
 
 # Output:
-# Snapshot storage: /home/user/.cortex/snapshots
+# Snapshot storage: /home/user/.cx/snapshots
 # Total size: 156 MB
 # Snapshots: 45
 # Oldest: 2023-12-01
@@ -328,23 +328,23 @@ cortex snapshot storage
 
 ```bash
 # Remove old snapshots
-cortex snapshot cleanup --older-than "30 days"
+cx snapshot cleanup --older-than "30 days"
 
 # Keep only last N snapshots
-cortex snapshot cleanup --keep-last 20
+cx snapshot cleanup --keep-last 20
 
 # Interactive cleanup
-cortex snapshot cleanup --interactive
+cx snapshot cleanup --interactive
 ```
 
 ### Export/Import
 
 ```bash
 # Export snapshot for backup
-cortex snapshot export snapshot-1 -o snapshot-backup.tar.gz
+cx snapshot export snapshot-1 -o snapshot-backup.tar.gz
 
 # Import on another system
-cortex snapshot import snapshot-backup.tar.gz
+cx snapshot import snapshot-backup.tar.gz
 ```
 
 ## Rollback Best Practices
@@ -352,7 +352,7 @@ cortex snapshot import snapshot-backup.tar.gz
 ### 1. Create Snapshots Before Major Changes
 
 ```bash
-cortex snapshot create "pre-upgrade-2024-01"
+cx snapshot create "pre-upgrade-2024-01"
 cx "upgrade all packages"
 ```
 
@@ -367,7 +367,7 @@ cx rollback --dry-run "recent change"
 
 ```bash
 # Mark important snapshots
-cortex snapshot keep "working-production-state"
+cx snapshot keep "working-production-state"
 
 # Won't be auto-cleaned
 ```
@@ -376,7 +376,7 @@ cortex snapshot keep "working-production-state"
 
 ```bash
 # Add to cron or timer
-cortex snapshot cleanup --older-than "60 days" --keep-marked
+cx snapshot cleanup --older-than "60 days" --keep-marked
 ```
 
 ## Troubleshooting
@@ -398,13 +398,13 @@ cx rollback 1 --step-by-step
 
 ```bash
 # Verify snapshot integrity
-cortex snapshot verify snapshot-1
+cx snapshot verify snapshot-1
 
 # Repair if possible
-cortex snapshot repair snapshot-1
+cx snapshot repair snapshot-1
 
 # Remove corrupted snapshot
-cortex snapshot remove snapshot-1 --force
+cx snapshot remove snapshot-1 --force
 ```
 
 ### Partial Rollback
@@ -413,7 +413,7 @@ If rollback partially completed:
 
 ```bash
 # Check current state
-cortex status
+cx status
 
 # Continue rollback
 cx rollback --continue
