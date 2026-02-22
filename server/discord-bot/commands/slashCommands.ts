@@ -81,12 +81,6 @@ export const commands = [
     .setDescription("Show bot statistics (Admin only)"),
 
   new SlashCommandBuilder()
-
-  new SlashCommandBuilder()
-    .setName("hackathon")
-    .setDescription("Get information about the CX Hackathon"),
-
-  new SlashCommandBuilder()
     .setName("clear")
     .setDescription("Clear your conversation history with the bot"),
 
