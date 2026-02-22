@@ -272,14 +272,14 @@ client.on(Events.GuildMemberAdd, async (member) => {
     console.log(`[Bot] Couldn't start welcome flow for ${member.user.tag} (DMs disabled)`);
     try {
       await member.send(
-        `Hey! Welcome to the Cortex Linux server.\n\n` +
+        `Hey! Welcome to the CX Linux server.\n\n` +
           `I'm the AI support bot. You can:\n` +
           `• Mention me: \`@${client.user!.username} how do I install?\`\n` +
-          `• Use slash commands: \`/cortex help\`\n` +
+          `• Use slash commands: \`/cx help\`\n` +
           `• Reply to my messages to continue a conversation\n\n` +
           `**Quick Links:**\n` +
-          `• Website: https://cortexlinux.com\n` +
-          `• Hackathon: https://cortexlinux.com/hackathon`
+          `• Website: https://cxlinux.com\n` +
+          `• Hackathon: https://cxlinux.com/hackathon`
       );
     } catch {
       // Can't DM user at all
@@ -421,7 +421,7 @@ client.on(Events.MessageCreate, async (message) => {
   if (!question || question.length === 0) {
     await message.reply(
       "Hi! How can I help you? Please include a question when mentioning me.\n\n" +
-        "**Tip:** Try `/cortex help` for available commands!"
+        "**Tip:** Try `/cx help` for available commands!"
     );
     return;
   }
