@@ -7,13 +7,13 @@ keywords: [cli, commands, reference, flags, options, terminal]
 
 # CLI Commands
 
-Complete reference for the Cortex CLI. All commands support natural language input and standard flags.
+Complete reference for the CX CLI. All commands support natural language input and standard flags.
 
 ## Basic Syntax
 
 ```bash
-cortex [flags] "natural language command"
-cortex [flags] <subcommand> [args]
+cx [flags] "natural language command"
+cx [flags] <subcommand> [args]
 ```
 
 ## Global Flags
@@ -35,7 +35,7 @@ These flags work with any command:
 
 ## Natural Language Commands
 
-The primary way to interact with Cortex:
+The primary way to interact with CX Linux:
 
 ```bash
 cx "your natural language request"
@@ -64,7 +64,7 @@ cx "is docker running?"
 
 ### `cx config`
 
-Manage Cortex configuration.
+Manage CX Linux configuration.
 
 ```bash
 # View all settings
@@ -164,34 +164,34 @@ cx rollback 3 --except firewall
 
 ---
 
-### `cortex snapshot`
+### `cx snapshot`
 
 Manage system snapshots.
 
 ```bash
 # Create snapshot
-cortex snapshot create
-cortex snapshot create "before-upgrade"
+cx snapshot create
+cx snapshot create "before-upgrade"
 
 # List snapshots
-cortex snapshot list
-cortex snapshot list --verbose
+cx snapshot list
+cx snapshot list --verbose
 
 # Show snapshot details
-cortex snapshot show 1
+cx snapshot show 1
 
 # Delete snapshot
-cortex snapshot delete 1
+cx snapshot delete 1
 
 # Restore from snapshot
-cortex snapshot restore 1
+cx snapshot restore 1
 
 # Export/import
-cortex snapshot export 1 -o backup.tar.gz
-cortex snapshot import backup.tar.gz
+cx snapshot export 1 -o backup.tar.gz
+cx snapshot import backup.tar.gz
 
 # Cleanup
-cortex snapshot cleanup --older-than "30 days"
+cx snapshot cleanup --older-than "30 days"
 ```
 
 #### Subcommands
@@ -242,21 +242,21 @@ cx restore /etc/nginx/nginx.conf --default
 
 ---
 
-### `cortex status`
+### `cx status`
 
-Show system and Cortex status.
+Show system and CX Linux status.
 
 ```bash
 # Overall status
-cortex status
+cx status
 
 # Specific subsystem
-cortex status packages
-cortex status services
-cortex status network
+cx status packages
+cx status services
+cx status network
 
 # JSON output
-cortex status --json
+cx status --json
 ```
 
 #### Options
@@ -268,158 +268,158 @@ cortex status --json
 
 ---
 
-### `cortex diagnose`
+### `cx diagnose`
 
 Diagnose issues with services or system.
 
 ```bash
 # Diagnose service
-cortex diagnose nginx
+cx diagnose nginx
 
 # System diagnosis
-cortex diagnose system
+cx diagnose system
 
 # Network diagnosis
-cortex diagnose network
+cx diagnose network
 
 # Package issues
-cortex diagnose packages
+cx diagnose packages
 ```
 
 ---
 
-### `cortex repair`
+### `cx repair`
 
 Automatically fix common issues.
 
 ```bash
 # Repair service
-cortex repair nginx
+cx repair nginx
 
 # Repair packages
-cortex repair packages
+cx repair packages
 
 # Full system repair
-cortex repair system
+cx repair system
 
 # Dry run
-cortex repair nginx --dry-run
+cx repair nginx --dry-run
 ```
 
 ---
 
-### `cortex diff`
+### `cx diff`
 
 Compare configurations and states.
 
 ```bash
 # Current vs snapshot
-cortex diff /etc/nginx/nginx.conf snapshot-1
+cx diff /etc/nginx/nginx.conf snapshot-1
 
 # Two snapshots
-cortex diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
+cx diff /etc/nginx/nginx.conf snapshot-1 snapshot-3
 
 # Current vs package default
-cortex diff /etc/nginx/nginx.conf --default
+cx diff /etc/nginx/nginx.conf --default
 ```
 
 ---
 
-### `cortex explain`
+### `cx explain`
 
 Get explanations for commands or operations.
 
 ```bash
 # Explain what command does
-cortex explain "apt install nginx"
+cx explain "apt install nginx"
 
-# Explain Cortex operation
-cortex explain snapshot-1
+# Explain CX Linux operation
+cx explain snapshot-1
 
 # Explain concept
-cortex explain "what is systemd"
+cx explain "what is systemd"
 ```
 
 ---
 
-### `cortex auth`
+### `cx auth`
 
 Manage AI backend authentication.
 
 ```bash
 # Login to backend
-cortex auth login
+cx auth login
 
 # Check auth status
-cortex auth status
+cx auth status
 
 # Logout
-cortex auth logout
+cx auth logout
 
 # Switch backend
-cortex auth switch local
-cortex auth switch openai
+cx auth switch local
+cx auth switch openai
 ```
 
 ---
 
-### `cortex backend`
+### `cx backend`
 
 Manage AI backend configuration.
 
 ```bash
 # List backends
-cortex backend list
+cx backend list
 
 # Show current backend
-cortex backend current
+cx backend current
 
 # Set backend
-cortex backend set local
-cortex backend set openai
+cx backend set local
+cx backend set openai
 
 # Test backend
-cortex backend test
+cx backend test
 
 # Configure backend
-cortex backend config openai --api-key YOUR_KEY
+cx backend config openai --api-key YOUR_KEY
 ```
 
 ---
 
-### `cortex update`
+### `cx update`
 
-Update Cortex itself.
+Update CX Linux itself.
 
 ```bash
 # Check for updates
-cortex update --check
+cx update --check
 
 # Update to latest
-cortex update
+cx update
 
 # Update to specific version
-cortex update --version 2.1.0
+cx update --version 2.1.0
 
 # Update to canary
-cortex update --canary
+cx update --canary
 ```
 
 ---
 
-### `cortex completion`
+### `cx completion`
 
 Generate shell completions.
 
 ```bash
 # Bash
-cortex completion bash > /etc/bash_completion.d/cortex
+cx completion bash > /etc/bash_completion.d/cx
 
 # Zsh
-cortex completion zsh > ~/.zfunc/_cortex
+cx completion zsh > ~/.zfunc/_cx
 
 # Fish
-cortex completion fish > ~/.config/fish/completions/cortex.fish
+cx completion fish > ~/.config/fish/completions/cx.fish
 ```
 
 ---
@@ -430,13 +430,13 @@ Override settings via environment:
 
 | Variable | Description |
 |----------|-------------|
-| `CORTEX_CONFIG` | Config file path |
-| `CORTEX_MODE` | Default mode (execute/dry-run) |
-| `CORTEX_BACKEND` | AI backend to use |
-| `CORTEX_API_KEY` | API key for cloud backend |
-| `CORTEX_VERBOSE` | Enable verbose output |
-| `CORTEX_NO_COLOR` | Disable colored output |
-| `CORTEX_LOG_LEVEL` | Logging level |
+| `CX_CONFIG` | Config file path |
+| `CX_MODE` | Default mode (execute/dry-run) |
+| `CX_BACKEND` | AI backend to use |
+| `CX_API_KEY` | API key for cloud backend |
+| `CX_VERBOSE` | Enable verbose output |
+| `CX_NO_COLOR` | Disable colored output |
+| `CX_LOG_LEVEL` | Logging level |
 
 See [Environment Variables](/docs/reference/environment-variables) for complete list.
 
@@ -455,11 +455,11 @@ See [Environment Variables](/docs/reference/environment-variables) for complete 
 
 ## Configuration Files
 
-Cortex reads configuration from:
+CX Linux reads configuration from:
 
-1. `/etc/cortex/config.yaml` - System-wide
-2. `~/.config/cortex/config.yaml` - User config
-3. `./.cortex.yaml` - Project config
+1. `/etc/cx/config.yaml` - System-wide
+2. `~/.config/cx/config.yaml` - User config
+3. `./.cx.yaml` - Project config
 4. Environment variables
 5. Command-line flags
 
