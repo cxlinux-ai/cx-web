@@ -22,11 +22,11 @@ Set up your preferred AI provider:
 
 ```bash
 # Using Anthropic Claude (recommended)
-export CORTEX_AI_PROVIDER=anthropic
+export CX_AI_PROVIDER=anthropic
 export ANTHROPIC_API_KEY=sk-ant-xxx...
 
 # Or using OpenAI
-export CORTEX_AI_PROVIDER=openai
+export CX_AI_PROVIDER=openai
 export OPENAI_API_KEY=sk-xxx...
 ```
 
@@ -42,7 +42,7 @@ Try a simple command to verify everything works:
 cx "what is my current disk usage"
 ```
 
-Cortex will:
+CX Linux will:
 1. Parse your natural language request
 2. Generate the appropriate shell command
 3. Display the command for your approval
@@ -95,11 +95,11 @@ Execute these commands? [Y/n]:
 Preview commands without executing them using the `--dry-run` flag:
 
 ```bash
-cortex --dry-run "remove all unused docker images"
+cx --dry-run "remove all unused docker images"
 ```
 
 This is perfect for:
-- Learning what commands Cortex would run
+- Learning what commands CX Linux would run
 - Reviewing potentially destructive operations
 - Understanding complex system tasks
 
@@ -109,8 +109,8 @@ Speed up common tasks with aliases:
 
 ```bash
 # Add to your shell configuration
-alias cx="cortex"
-alias cxd="cortex --dry-run"
+# cx is the main command
+alias cxd="cx --dry-run"
 ```
 
 Now you can use:
@@ -122,7 +122,7 @@ cxd "clean up temp files"
 
 ## Common Commands to Try
 
-Here are some useful commands to explore Cortex's capabilities:
+Here are some useful commands to explore CX Linux's capabilities:
 
 ### System Information
 
@@ -168,7 +168,7 @@ cx "enable ssh to start on boot"
 
 ## Understanding the Output
 
-Cortex provides structured output to keep you informed:
+CX Linux provides structured output to keep you informed:
 
 ```
 > Understanding request: "your request here"
@@ -190,7 +190,7 @@ Execute this command? [Y/n]:
 
 ## Safety Features
 
-Cortex includes built-in safety features:
+CX Linux includes built-in safety features:
 
 - **Confirmation prompts** before executing any command
 - **Dry-run mode** to preview without executing
@@ -198,14 +198,14 @@ Cortex includes built-in safety features:
 - **Warning flags** for potentially dangerous commands
 
 :::warning Dangerous Command Detection
-When Cortex detects a potentially dangerous command (like `rm -rf`), it will display additional warnings and require explicit confirmation.
+When CX Linux detects a potentially dangerous command (like `rm -rf`), it will display additional warnings and require explicit confirmation.
 :::
 
 ## What's Next?
 
 Now that you understand the basics, explore more features:
 
-- [Configuration](/docs/getting-started/configuration) - Customize Cortex behavior
+- [Configuration](/docs/getting-started/configuration) - Customize CX Linux behavior
 - [Natural Language Commands](/docs/user-guide/natural-language-commands) - Master the command syntax
 - [Dry-Run Mode](/docs/user-guide/dry-run-mode) - Safe command preview
 - [Rollback & Recovery](/docs/user-guide/rollback-recovery) - Undo changes when needed
