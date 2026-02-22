@@ -26,33 +26,33 @@ interface Message {
 // In production, this would be replaced with actual RAG/vector search
 const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: string; url: string }> }> = {
   install: {
-    answer: 'To install CX Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cortexlinux.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
+    answer: 'To install CX Linux, run the following command in your terminal:\n\n```bash\ncurl -fsSL https://cxlinux.com/install.sh | bash\n```\n\nThis works on Ubuntu, Debian, Fedora, Arch, and other major distributions.',
     links: [
       { title: 'Installation Guide', url: '/docs/getting-started/installation' },
       { title: 'Quick Start', url: '/docs/getting-started/quick-start' },
     ],
   },
   uninstall: {
-    answer: 'To uninstall CX Linux:\n\n```bash\ncortex uninstall\n```\n\nOr manually remove the binary and data:\n```bash\nsudo rm /usr/local/bin/cortex\nrm -rf ~/.cortex\n```',
+    answer: 'To uninstall CX Linux:\n\n```bash\ncx uninstall\n```\n\nOr manually remove the binary and data:\n```bash\nsudo rm /usr/local/bin/cx\nrm -rf ~/.cx\n```',
     links: [
       { title: 'Installation Guide', url: '/docs/getting-started/installation' },
     ],
   },
   'dry-run': {
-    answer: 'Dry-run mode lets you preview commands without executing them. Use the `--dry-run` or `-n` flag:\n\n```bash\ncortex --dry-run "install nginx"\n```\n\nYou can also set dry-run as the default mode in your configuration.',
+    answer: 'Dry-run mode lets you preview commands without executing them. Use the `--dry-run` or `-n` flag:\n\n```bash\ncx --dry-run "install nginx"\n```\n\nYou can also set dry-run as the default mode in your configuration.',
     links: [
       { title: 'Dry-Run Mode', url: '/docs/user-guide/dry-run-mode' },
       { title: 'Configuration', url: '/docs/getting-started/configuration' },
     ],
   },
   rollback: {
-    answer: 'Cortex automatically creates snapshots before changes. To undo the last operation:\n\n```bash\ncx rollback\n```\n\nTo rollback a specific operation:\n```bash\ncx history\ncx rollback 3\n```',
+    answer: 'CX Linux automatically creates snapshots before changes. To undo the last operation:\n\n```bash\ncx rollback\n```\n\nTo rollback a specific operation:\n```bash\ncx history\ncx rollback 3\n```',
     links: [
       { title: 'Rollback & Recovery', url: '/docs/user-guide/rollback-recovery' },
     ],
   },
   backend: {
-    answer: 'Cortex supports multiple AI backends:\n\n- **Local** (default): Runs on your machine, fully private\n- **OpenAI**: GPT-4/3.5 models\n- **Anthropic**: Claude models\n- **Ollama**: Local models via Ollama\n\nChange backend with:\n```bash\ncortex backend set openai\n```',
+    answer: 'CX Linux supports multiple AI backends:\n\n- **Local** (default): Runs on your machine, fully private\n- **OpenAI**: GPT-4/3.5 models\n- **Anthropic**: Claude models\n- **Ollama**: Local models via Ollama\n\nChange backend with:\n```bash\ncx backend set openai\n```',
     links: [
       { title: 'Supported AI Backends', url: '/docs/reference/ai-backends' },
       { title: 'Configuration', url: '/docs/getting-started/configuration' },
@@ -74,13 +74,13 @@ const KNOWLEDGE_BASE: Record<string, { answer: string; links: Array<{ title: str
     ],
   },
   docker: {
-    answer: 'Cortex works great with Docker. To install Docker:\n\n```bash\ncx "install docker"\n```\n\nCortex can help with container management, building images, and docker-compose.',
+    answer: 'CX Linux works great with Docker. To install Docker:\n\n```bash\ncx "install docker"\n```\n\nCX Linux can help with container management, building images, and docker-compose.',
     links: [
       { title: 'Docker Integration', url: '/docs/tutorials/docker-integration' },
     ],
   },
   ci: {
-    answer: 'Cortex works in CI/CD pipelines. Set these environment variables:\n\n```bash\nCORTEX_CI=true\nCORTEX_YES=true\n```\n\nWe have guides for GitHub Actions, GitLab CI, Jenkins, and more.',
+    answer: 'CX Linux works in CI/CD pipelines. Set these environment variables:\n\n```bash\nCX_CI=true\nCX_YES=true\n```\n\nWe have guides for GitHub Actions, GitLab CI, Jenkins, and more.',
     links: [
       { title: 'CI/CD Usage', url: '/docs/tutorials/cicd-usage' },
       { title: 'Environment Variables', url: '/docs/reference/environment-variables' },
