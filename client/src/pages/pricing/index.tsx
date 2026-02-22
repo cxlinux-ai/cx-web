@@ -68,7 +68,7 @@ const tiers: PricingTier[] = [
     cta: "Get Started Free",
     ctaLink: "/pricing/checkout?plan=core",
     icon: Terminal,
-    gradient: "from-violet-500 to-purple-600",
+    gradient: "from-[#00FF9F] to-[#00CC7F]",
   },
   {
     id: "pro",
@@ -97,7 +97,7 @@ const tiers: PricingTier[] = [
     highlighted: true,
     badge: "Most Popular",
     icon: Zap,
-    gradient: "from-purple-500 to-cyan-500",
+    gradient: "from-[#00FF9F] to-[#00FFFF]",
   },
   {
     id: "team",
@@ -194,14 +194,14 @@ export default function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-purple-400 text-sm font-semibold tracking-wider uppercase mb-4 block">
+            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-4 block">
               PRICING
             </span>
             <h1 id="pricing-hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
-              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-[#00FF9F] bg-clip-text text-transparent">
                 Simple Transparent
               </span>{" "}
-              <span className="text-purple-400">Pricing</span>
+              <span className="text-[#00FF9F]">Pricing</span>
             </h1>
             <p id="pricing-hero-subtitle" className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
               Start free, scale as you grow. All plans include a 14-day free trial.
@@ -230,7 +230,7 @@ export default function PricingPage() {
                 id="pricing-toggle-switch"
                 checked={isAnnual}
                 onCheckedChange={setIsAnnual}
-                className="data-[state=checked]:bg-purple-500"
+                className="data-[state=checked]:bg-[#00FF9F]"
               />
               <span className={`text-lg ${isAnnual ? "text-white" : "text-gray-500"}`}>
                 Annual
@@ -245,16 +245,16 @@ export default function PricingPage() {
       <section id="pricing-cards-section" className="pb-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Purple gradient background container */}
-          <div className="relative rounded-3xl bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-950 p-8 md:p-12 overflow-hidden">
+          <div className="relative rounded-3xl bg-gradient-to-br from-[#0D0D0D] via-[#161616] to-[#1E1E1E] p-8 md:p-12 overflow-hidden">
             {/* Decorative gradient orbs - hidden on mobile */}
-            <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-600/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+            <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-[#00CC7F]/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-[#00CC7F]/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
             <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {tiers.map((tier, index) => {
                 const tileBackgrounds: Record<string, string> = {
-                  core: "bg-gradient-to-br from-violet-500/20 to-purple-600/30 border border-violet-400/30",
-                  pro: "bg-gradient-to-br from-purple-500/20 to-cyan-500/30 border border-purple-400/30",
+                  core: "bg-gradient-to-br from-[#00FF9F]/20 to-[#00CC7F]/30 border border-[#00FF9F]/30",
+                  pro: "bg-gradient-to-br from-[#00FF9F]/20 to-[#00FFFF]/30 border border-[#00FF9F]/30",
                   team: "bg-gradient-to-br from-emerald-500/20 to-teal-500/30 border border-emerald-400/30",
                   enterprise: "bg-gradient-to-br from-orange-500/20 to-amber-500/30 border border-orange-400/30",
                 };
@@ -273,7 +273,7 @@ export default function PricingPage() {
                 >
                   {tier.badge && (
                     <div id={`pricing-badge-${tier.id}`} className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-violet-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      <span className="bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         {tier.badge}
                       </span>
                     </div>
@@ -282,7 +282,7 @@ export default function PricingPage() {
                   {/* Logo/Icon */}
                   <div id={`pricing-icon-${tier.id}`} className={`px-4 py-3 rounded-2xl flex items-center justify-center gap-1.5 mb-4 ${
                     tier.badge
-                      ? "bg-gradient-to-br from-violet-500 to-purple-600"
+                      ? "bg-gradient-to-br from-[#00FF9F] to-[#00CC7F]"
                       : "bg-white/10"
                   }`}>
                     <span className={`text-lg font-bold ${tier.badge ? "text-white" : "text-white"}`}>
@@ -307,7 +307,7 @@ export default function PricingPage() {
                   </div>
 
                   {/* Key Limits */}
-                  <div className={`mb-4 p-3 rounded-lg ${tier.badge ? "bg-violet-50" : "bg-white/5"}`}>
+                  <div className={`mb-4 p-3 rounded-lg ${tier.badge ? "bg-[#00FF9F]" : "bg-white/5"}`}>
                     <div className="grid grid-cols-1 gap-2 text-xs">
                       <div className="flex justify-between">
                         <span className={tier.badge ? "text-gray-500" : "text-white/60"}>Servers</span>
@@ -328,13 +328,13 @@ export default function PricingPage() {
                     {tier.features.slice(0, 5).map((feature, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs">
                         <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                          tier.badge ? "text-violet-500" : "text-green-400"
+                          tier.badge ? "text-[#00FF9F]" : "text-green-400"
                         }`} />
                         <span className={tier.badge ? "text-gray-600" : "text-white/80"}>{feature}</span>
                       </li>
                     ))}
                     {tier.features.length > 5 && (
-                      <li className={`text-xs ${tier.badge ? "text-violet-500" : "text-white/60"}`}>
+                      <li className={`text-xs ${tier.badge ? "text-[#00FF9F]" : "text-white/60"}`}>
                         +{tier.features.length - 5} more features
                       </li>
                     )}
@@ -348,7 +348,7 @@ export default function PricingPage() {
                       rel={tier.ctaLink.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                       className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
                         tier.badge
-                          ? "bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:shadow-lg hover:shadow-violet-500/30"
+                          ? "bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white hover:shadow-lg hover:shadow-[#00FF9F]0/30"
                           : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
                       }`}
                     >
@@ -360,7 +360,7 @@ export default function PricingPage() {
                       href={tier.ctaLink + (isAnnual ? "&billing=annual" : "&billing=monthly")}
                       className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
                         tier.badge
-                          ? "bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:shadow-lg hover:shadow-violet-500/30"
+                          ? "bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white hover:shadow-lg hover:shadow-[#00FF9F]0/30"
                           : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
                       }`}
                     >
@@ -388,7 +388,7 @@ export default function PricingPage() {
                 transition={{ delay: 0.5 + index * 0.1 }}
                 className="flex flex-col items-center"
               >
-                <badge.icon className="w-8 h-8 text-violet-400 mb-2" />
+                <badge.icon className="w-8 h-8 text-[#00FF9F] mb-2" />
                 <span className="text-white font-semibold">{badge.label}</span>
                 <span className="text-gray-500 text-sm">{badge.description}</span>
               </motion.div>
@@ -419,8 +419,8 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-white/10">
                   <th className="text-left py-4 px-4 text-gray-400 font-medium">Feature</th>
-                  <th className="text-center py-4 px-4 text-violet-400 font-semibold">CX Core</th>
-                  <th className="text-center py-4 px-4 text-purple-400 font-semibold">CX Pro</th>
+                  <th className="text-center py-4 px-4 text-[#00FF9F] font-semibold">CX Core</th>
+                  <th className="text-center py-4 px-4 text-[#00FF9F] font-semibold">CX Pro</th>
                   <th className="text-center py-4 px-4 text-emerald-400 font-semibold">CX Team</th>
                   <th className="text-center py-4 px-4 text-orange-400 font-semibold">CX Enterprise</th>
                 </tr>
@@ -437,7 +437,7 @@ export default function PricingPage() {
                     className="border-b border-white/5 hover:bg-white/5 transition-colors"
                   >
                     <td className="py-4 px-4 text-gray-300">{row.feature}</td>
-                    <td className="py-4 px-4 text-center bg-violet-500/5">
+                    <td className="py-4 px-4 text-center bg-[#00FF9F]/5">
                       {typeof row.core === "boolean" ? (
                         row.core ? (
                           <Check className="w-5 h-5 text-green-400 mx-auto" />
@@ -498,7 +498,7 @@ export default function PricingPage() {
             viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center"
           >
-            <HelpCircle className="w-12 h-12 text-violet-400 mx-auto mb-4" />
+            <HelpCircle className="w-12 h-12 text-[#00FF9F] mx-auto mb-4" />
             <h3 id="pricing-faq-cta-title" className="text-2xl font-bold mb-4">Have Questions?</h3>
             <p id="pricing-faq-cta-desc" className="text-gray-400 mb-6">
               Check out our pricing FAQ or contact our sales team for custom solutions.
@@ -507,7 +507,7 @@ export default function PricingPage() {
               <Link
                 id="pricing-faq-link"
                 href="/pricing/faq"
-                className="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
               >
                 View Pricing FAQ
                 <ArrowRight className="w-4 h-4" />
@@ -515,7 +515,7 @@ export default function PricingPage() {
               <a
                 id="pricing-contact-link"
                 href="mailto:sales@cxlinux.com"
-                className="px-6 py-3 border-2 border-violet-400 text-violet-400 font-semibold rounded-lg hover:bg-violet-400/10 transition-all"
+                className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
               >
                 Contact Sales
               </a>
@@ -525,15 +525,15 @@ export default function PricingPage() {
       </section>
 
       {/* Enterprise CTA */}
-      <section id="pricing-enterprise-cta-section" className="py-16 px-4 bg-gradient-to-b from-transparent to-violet-950/10">
+      <section id="pricing-enterprise-cta-section" className="py-16 px-4 bg-gradient-to-b from-transparent to-[#0D0D0D]/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-2 border-violet-400/50 rounded-2xl p-8 md:p-12 text-center"
+            className="bg-gradient-to-r from-[#00FF9F]/10 to-[#00FF9F]/10 border-2 border-[#00FF9F]/50 rounded-2xl p-8 md:p-12 text-center"
           >
-            <Building2 className="w-12 h-12 text-violet-400 mx-auto mb-4" />
+            <Building2 className="w-12 h-12 text-[#00FF9F] mx-auto mb-4" />
             <h3 id="pricing-enterprise-title" className="text-3xl font-bold mb-4">
               Need a Custom Solution?
             </h3>
@@ -547,14 +547,14 @@ export default function PricingPage() {
                 href="https://calendly.com/ai-consultant/vip"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
+                className="px-8 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
               >
                 <Calendar className="w-5 h-5" />
                 Schedule Enterprise Demo
               </a>
               <a
                 href="mailto:sales@cxlinux.com"
-                className="px-8 py-3 border-2 border-violet-400 text-violet-400 font-semibold rounded-lg hover:bg-violet-400/10 transition-all"
+                className="px-8 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
               >
                 Contact Sales
               </a>
