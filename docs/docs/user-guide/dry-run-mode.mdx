@@ -1,13 +1,13 @@
 ---
 sidebar_position: 4
 title: Dry-Run Mode
-description: Preview commands before execution. Understand exactly what Cortex will do without making changes.
+description: Preview commands before execution. Understand exactly what CX Linux will do without making changes.
 keywords: [dry-run, preview, safe mode, testing, simulation]
 ---
 
 # Dry-Run Mode
 
-Dry-run mode lets you see exactly what Cortex will do before it does anything. This is essential for learning, validating complex operations, and building confidence with the system.
+Dry-run mode lets you see exactly what CX Linux will do before it does anything. This is essential for learning, validating complex operations, and building confidence with CX Linux.
 
 ## Why Use Dry-Run
 
@@ -17,7 +17,7 @@ Before executing potentially impactful commands:
 
 ```bash
 # See what will happen
-cortex --dry-run "remove all packages installed in the last week"
+cx --dry-run "remove all packages installed in the last week"
 
 # Output shows:
 # Would remove: package1, package2, package3
@@ -30,7 +30,7 @@ cortex --dry-run "remove all packages installed in the last week"
 Understand what commands translate to:
 
 ```bash
-cortex --dry-run "set up a secure SSH server"
+cx --dry-run "set up a secure SSH server"
 
 # Shows you:
 # 1. Would install openssh-server
@@ -45,9 +45,9 @@ cortex --dry-run "set up a secure SSH server"
 Verify your intent was understood correctly:
 
 ```bash
-cortex --dry-run "update only security packages"
+cx --dry-run "update only security packages"
 
-# Confirms Cortex will:
+# Confirms CX Linux will:
 # - Update: libssl, openssl, linux-image (security)
 # - Skip: nodejs, nginx (not security updates)
 ```
@@ -58,10 +58,10 @@ cortex --dry-run "update only security packages"
 
 ```bash
 # Long form
-cortex --dry-run "your command"
+cx --dry-run "your command"
 
 # Short form
-cortex -n "your command"
+cx -n "your command"
 ```
 
 ### Configuration Default
@@ -69,7 +69,7 @@ cortex -n "your command"
 Make dry-run the default mode:
 
 ```bash
-# In ~/.config/cortex/config.yaml
+# In ~/.config/cx/config.yaml
 default_mode: dry-run
 
 # Or via command
@@ -79,8 +79,8 @@ cx config set default_mode dry-run
 Then use `--execute` to actually run:
 
 ```bash
-cortex --execute "install nginx"
-cortex -e "install nginx"
+cx --execute "install nginx"
+cx -e "install nginx"
 ```
 
 ### Interactive Mode
@@ -89,7 +89,7 @@ During execution preview:
 
 ```
 ┌─────────────────────────────────────────┐
-│ Cortex will execute:                    │
+│ CX Linux will execute:                    │
 ├─────────────────────────────────────────┤
 │ apt install nginx                       │
 │ systemctl enable nginx                  │
@@ -106,7 +106,7 @@ Press `d` to switch to dry-run for that command.
 ### Standard Output
 
 ```bash
-cortex --dry-run "install docker"
+cx --dry-run "install docker"
 ```
 
 ```
@@ -129,7 +129,7 @@ cortex --dry-run "install docker"
    └─ Would add current user to: docker
 
 ═══════════════════════════════════════════════════════════════
- To execute, run: cortex --execute "install docker"
+ To execute, run: cx --execute "install docker"
 ═══════════════════════════════════════════════════════════════
 ```
 
@@ -138,7 +138,7 @@ cortex --dry-run "install docker"
 For more detail:
 
 ```bash
-cortex --dry-run --verbose "configure the firewall for a web server"
+cx --dry-run --verbose "configure the firewall for a web server"
 ```
 
 ```
@@ -179,7 +179,7 @@ Step 6: Reload firewall
 For configuration changes:
 
 ```bash
-cortex --dry-run "optimize nginx for high traffic"
+cx --dry-run "optimize nginx for high traffic"
 ```
 
 ```
@@ -209,52 +209,52 @@ File: /etc/nginx/nginx.conf
 
 ```bash
 # System upgrades
-cortex --dry-run "upgrade all packages"
+cx --dry-run "upgrade all packages"
 
 # Removals
-cortex --dry-run "remove unused packages"
+cx --dry-run "remove unused packages"
 
 # Major version upgrades
-cortex --dry-run "upgrade python to version 3.12"
+cx --dry-run "upgrade python to version 3.12"
 ```
 
 ### System Configuration
 
 ```bash
 # Network changes
-cortex --dry-run "configure static IP address"
+cx --dry-run "configure static IP address"
 
 # Service modifications
-cortex --dry-run "set up nginx as reverse proxy"
+cx --dry-run "set up nginx as reverse proxy"
 
 # Security changes
-cortex --dry-run "harden SSH configuration"
+cx --dry-run "harden SSH configuration"
 ```
 
 ### File Operations
 
 ```bash
 # Permission changes
-cortex --dry-run "secure the /var/www directory"
+cx --dry-run "secure the /var/www directory"
 
 # Ownership changes
-cortex --dry-run "set up proper ownership for web files"
+cx --dry-run "set up proper ownership for web files"
 
 # Bulk operations
-cortex --dry-run "clean up temporary files older than 7 days"
+cx --dry-run "clean up temporary files older than 7 days"
 ```
 
 ### User Management
 
 ```bash
 # User creation
-cortex --dry-run "create deployment user with appropriate permissions"
+cx --dry-run "create deployment user with appropriate permissions"
 
 # Permission changes
-cortex --dry-run "add user to docker group"
+cx --dry-run "add user to docker group"
 
 # Access modifications
-cortex --dry-run "configure sudo access for the dev team"
+cx --dry-run "configure sudo access for the dev team"
 ```
 
 ## Dry-Run with Explanation
@@ -262,7 +262,7 @@ cortex --dry-run "configure sudo access for the dev team"
 Combine dry-run with explanation mode:
 
 ```bash
-cortex --dry-run --explain "set up automatic security updates"
+cx --dry-run --explain "set up automatic security updates"
 ```
 
 ```
@@ -301,13 +301,13 @@ Would modify: /etc/apt/apt.conf.d/50unattended-upgrades
 ### Save to File
 
 ```bash
-cortex --dry-run "major system update" > update-plan.txt
+cx --dry-run "major system update" > update-plan.txt
 ```
 
 ### JSON Format
 
 ```bash
-cortex --dry-run --format json "install development tools"
+cx --dry-run --format json "install development tools"
 ```
 
 ```json
@@ -331,7 +331,7 @@ cortex --dry-run --format json "install development tools"
 
 ```bash
 # Generate shareable summary
-cortex --dry-run --output summary "production deployment changes" | cortex share
+cx --dry-run --output summary "production deployment changes" | cx share
 ```
 
 ## Best Practices
@@ -343,25 +343,25 @@ cortex --dry-run --output summary "production deployment changes" | cortex share
 cx "install debugging tools"
 
 # Production - always dry-run
-cortex --dry-run "apply configuration changes"
+cx --dry-run "apply configuration changes"
 # Review output carefully
-cortex --execute "apply configuration changes"
+cx --execute "apply configuration changes"
 ```
 
 ### 2. Use for Learning
 
 ```bash
 # Learn what common tasks involve
-cortex --dry-run "set up a LAMP stack"
-cortex --dry-run "configure a mail server"
-cortex --dry-run "install kubernetes"
+cx --dry-run "set up a LAMP stack"
+cx --dry-run "configure a mail server"
+cx --dry-run "install kubernetes"
 ```
 
 ### 3. Validate Understanding
 
 ```bash
-# Confirm Cortex understood correctly
-cortex --dry-run "install postgres but not the graphical tools"
+# Confirm CX Linux understood correctly
+cx --dry-run "install postgres but not the graphical tools"
 # Check output shows only CLI packages
 ```
 
@@ -369,10 +369,10 @@ cortex --dry-run "install postgres but not the graphical tools"
 
 ```bash
 # Create audit trail
-cortex --dry-run "quarterly security hardening" > changes-q1-2024.txt
+cx --dry-run "quarterly security hardening" > changes-q1-2024.txt
 # Review with team
 # Execute with confidence
-cortex --execute "quarterly security hardening"
+cx --execute "quarterly security hardening"
 ```
 
 ## Limitations
@@ -390,15 +390,15 @@ Even after dry-run, be careful with:
 
 ```bash
 # Data deletion
-cortex --dry-run "clean up old databases"
+cx --dry-run "clean up old databases"
 # Verify backup exists before execute
 
 # Network changes
-cortex --dry-run "reconfigure network interfaces"
+cx --dry-run "reconfigure network interfaces"
 # Have physical access or out-of-band management
 
 # Kernel updates
-cortex --dry-run "update kernel"
+cx --dry-run "update kernel"
 # Ensure you can recover if boot fails
 ```
 
