@@ -142,11 +142,6 @@ export function createDailyDigestEmbed(stats: DigestStats): EmbedBuilder {
     .setTimestamp()
     .setFooter({ text: "CX Linux Community" });
 
-    embed.addFields({
-      inline: false,
-    });
-  }
-
   return embed;
 }
 
