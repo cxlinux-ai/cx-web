@@ -100,45 +100,6 @@ export function createLinkButton(
 }
 
 /**
- */
-  return new EmbedBuilder()
-    .setColor(COLORS.primary)
-    .setDescription("Build the future of AI-powered Linux! All participants receive a $5 CX Linux credit.")
-    .addFields(
-      {
-        name: "Total Prizes",
-        value: "$13.8K cash + $4.9K prizes",
-        inline: true,
-      },
-      {
-        name: "Phases",
-        value: "Ideathon + Build",
-        inline: true,
-      },
-      {
-        name: "Team Size",
-        value: "1-4 people",
-        inline: true,
-      },
-      {
-        name: "Phase 1: Ideathon",
-        value: "Submit feature ideas - $3,800 in prizes",
-        inline: false,
-      },
-      {
-        name: "Phase 2: Build",
-        value: "1st-3rd: $10K cash | 4th-10th: $700 worth of goodies + 2mo managed service (not cash)",
-        inline: false,
-      },
-      {
-        name: "Category Awards",
-        value: "Best Plugin, Best Automation, Best Enterprise: 6 months Premium each",
-        inline: false,
-      }
-    )
-}
-
-/**
  * Create a referral tiers embed
  */
 export function createReferralTiersEmbed(): EmbedBuilder {
@@ -253,13 +214,8 @@ export function createStatsEmbed(stats: {
 /**
  * Detect if response should use rich embed
  */
+export function shouldUseEmbed(question: string): string | null {
   const lower = question.toLowerCase();
-
-  }
-
-  if (/\b(referral|tier|invite|reward)\b/.test(lower) && /\b(what|how|info|all)\b/.test(lower)) {
-    return "referral";
-  }
 
   if (/\b(install|setup)\b/.test(lower) && /\b(how|guide|step|start)\b/.test(lower)) {
     return "install";
