@@ -1,7 +1,7 @@
 {
-  "name": "cortex-linux-docs",
+  "name": "cx-linux-docs",
   "version": "1.0.0",
-  "description": "Official documentation for Cortex Linux - the AI-native operating system",
+  "description": "Official documentation for CX Linux - the AI-native operating system",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
