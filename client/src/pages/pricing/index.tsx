@@ -552,12 +552,12 @@ export default function PricingPage() {
                 <Calendar className="w-5 h-5" />
                 Schedule Enterprise Demo
               </a>
-              <Link
-                href="/support"
+              <a
+                href="mailto:sales@cxlinux.com"
                 className="px-8 py-3 border-2 border-violet-400 text-violet-400 font-semibold rounded-lg hover:bg-violet-400/10 transition-all"
               >
                 Contact Sales
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
