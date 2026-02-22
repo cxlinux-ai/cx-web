@@ -13,7 +13,6 @@ const CHANNEL_REFERENCES: Record<string, string> = {
   support: "#help",
   general: "#general",
   dev: "#dev-chat",
-  hackathon: "#hackathon",
   announcements: "#announcements",
   questions: "#questions",
 };
@@ -53,8 +52,6 @@ export function suggestChannel(query: string): string | null {
   if (/\b(help|issue|problem|error|stuck|broken)\b/.test(lowerQuery)) {
     return CHANNEL_REFERENCES.support;
   }
-  if (/\b(hackathon|competition|prize|submit)\b/.test(lowerQuery)) {
-    return CHANNEL_REFERENCES.hackathon;
   }
   if (/\b(contribute|code|develop|pr|pull request)\b/.test(lowerQuery)) {
     return CHANNEL_REFERENCES.dev;
