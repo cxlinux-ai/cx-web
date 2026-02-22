@@ -65,7 +65,7 @@ function App() {
               </button>
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-8">
+              <div className="hidden md:flex items-center space-x-6">
                 <Link
                   href="/getting-started"
                   className={`text-sm font-medium transition-colors ${
@@ -74,6 +74,22 @@ function App() {
                 >
                   Terminal
                 </Link>
+                <a
+                  href="https://docs.cxlinux.com/reference/cli-engine"
+                  className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CLI Engine
+                </a>
+                <a
+                  href="https://docs.cxlinux.com/getting-started/installation"
+                  className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Distro
+                </a>
                 <a
                   href="https://docs.cxlinux.com"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
@@ -135,6 +151,22 @@ function App() {
                     >
                       Terminal
                     </Link>
+                    <a
+                      href="https://docs.cxlinux.com/reference/cli-engine"
+                      className="block text-gray-400 hover:text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      CLI Engine
+                    </a>
+                    <a
+                      href="https://docs.cxlinux.com/getting-started/installation"
+                      className="block text-gray-400 hover:text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Distro
+                    </a>
                     <a
                       href="https://docs.cxlinux.com"
                       className="block text-gray-400 hover:text-white"
