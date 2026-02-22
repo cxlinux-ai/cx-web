@@ -554,9 +554,7 @@ client.on(Events.MessageCreate, async (message) => {
     // Check if we should include a rich embed
     const embedType = shouldUseEmbed(question);
     let richEmbed = null;
-    } else if (embedType === "referral") {
-      richEmbed = createReferralTiersEmbed();
-    } else if (embedType === "install") {
+    if (embedType === "install") {
       richEmbed = createInstallEmbed();
     }
 
