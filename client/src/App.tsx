@@ -75,7 +75,7 @@ function App() {
                   Terminal
                 </Link>
                 <a
-                  href="https://docs.cxlinux.com/reference/cli-engine"
+                  href="https://github.com/cxlinux-ai/cx-cli"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -152,7 +152,7 @@ function App() {
                       Terminal
                     </Link>
                     <a
-                      href="https://docs.cxlinux.com/reference/cli-engine"
+                      href="https://github.com/cxlinux-ai/cx-cli"
                       className="block text-gray-400 hover:text-white"
                       target="_blank"
                       rel="noopener noreferrer"
