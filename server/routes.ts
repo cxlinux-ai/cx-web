@@ -57,7 +57,7 @@ const STATS_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 let issuesCache: { data: any[]; timestamp: number } | null = null;
 const ISSUES_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
-// Fallback data for when GitHub is unavailable (Real data from https://github.com/cortexlinux/Cortex)
+// Fallback data for when GitHub is unavailable (Real data from https://github.com/cxlinux-ai/cx-core)
 const FALLBACK_STATS = {
   openIssues: 12,
   contributors: 5,
@@ -67,10 +67,10 @@ const FALLBACK_STATS = {
 };
 
 const FALLBACK_ISSUES = [
-  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cortexlinux/cortex/issues" },
-  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cortexlinux/cortex/issues" },
+  { title: "Improve AI model integration", bounty: "$150", skills: ["Python", "ML"], difficulty: "Medium", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Add dark mode support", bounty: "$100", skills: ["CSS", "React"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Optimize kernel module loading", bounty: "$200", skills: ["C", "Linux"], difficulty: "Advanced", url: "https://github.com/cxlinux-ai/cx-core/issues" },
+  { title: "Documentation improvements", bounty: "$75", skills: ["Markdown", "Docs"], difficulty: "Beginner", url: "https://github.com/cxlinux-ai/cx-core/issues" },
 ];
 
 const FALLBACK_CONTRIBUTORS: Contributor[] = [
@@ -752,7 +752,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.moveDown(0.3);
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("• Website: https://cortexlinux.com/hackathon", { lineGap: 3 })
-         .text("• GitHub: https://github.com/cortexlinux/cortex", { lineGap: 3 })
+         .text("• GitHub: https://github.com/cxlinux-ai/cx-core", { lineGap: 3 })
          .text("• Discord: https://discord.gg/ASvzWcuTfk", { lineGap: 3 })
          .text("• Email: hackathon@cortexlinux.com", { lineGap: 3 });
       doc.moveDown(2);
