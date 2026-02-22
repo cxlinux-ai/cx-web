@@ -1,227 +1,112 @@
 import { Github } from "lucide-react";
-import { FaTwitter, FaDiscord } from "react-icons/fa";
-import { Link, useLocation } from "wouter";
-import { scrollToElement } from "@/lib/smooth-scroll";
-
-interface SmoothLinkProps {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-  "data-testid"?: string;
-}
-
-function SmoothLink({ href, children, className, "data-testid": testId }: SmoothLinkProps) {
-  const [, setLocation] = useLocation();
-
-  const isHashLink = href.includes("#");
-  const isExternalLink = href.startsWith("http") || href.startsWith("mailto:");
-
-  if (isExternalLink) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={className}
-        data-testid={testId}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  if (isHashLink) {
-    const [pathname, hash] = href.split("#");
-    const targetPath = pathname === "" ? "/" : pathname;
-    
-    return (
-      <a
-        href={href}
-        className={className}
-        data-testid={testId}
-        onClick={(e) => {
-          e.preventDefault();
-          const currentPath = window.location.pathname;
-
-          if (currentPath === targetPath) {
-            scrollToElement(hash);
-            window.history.pushState(null, "", `${targetPath}#${hash}`);
-          } else {
-            setLocation(targetPath);
-            const maxAttempts = 60;
-            let attempts = 0;
-            
-            const waitForRouteAndScroll = () => {
-              attempts++;
-              const nowPath = window.location.pathname;
-              
-              if (nowPath === targetPath) {
-                const element = document.getElementById(hash);
-                if (element) {
-                  scrollToElement(hash);
-                  window.history.replaceState(null, "", `${targetPath}#${hash}`);
-                  return;
-                }
-              }
-              
-              if (attempts < maxAttempts) {
-                setTimeout(waitForRouteAndScroll, 50);
-              }
-            };
-            
-            setTimeout(waitForRouteAndScroll, 100);
-          }
-        }}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={href} className={className} data-testid={testId}>
-      {children}
-    </Link>
-  );
-}
+import { FaTwitter } from "react-icons/fa";
+import { Link } from "wouter";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 py-16 px-4 bg-black">
+    <footer className="border-t border-[#333] py-12 px-4 bg-[#1E1E1E]">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-          <div className="col-span-2">
-            <Link 
-              href="/"
-              className="text-2xl font-bold mb-4 block text-left"
-              data-testid="footer-logo"
-            >
-              <span className="text-white">CX</span>{" "}
-              <span className="text-blue-300">LINUX</span>
-            </Link>
-            <p className="text-gray-400 text-sm max-w-xs mb-4">
-              Open-source AI infrastructure for the modern developer.
-            </p>
-            <div className="text-gray-500 text-xs space-y-1">
-              <p>A75 Towne Ridge Parkway, Suite 125</p>
-              <p>Sandy UT, 84070</p>
-              <p className="mt-2">(385) 608-4343</p>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          {/* Product */}
           <div>
             <h4 className="font-semibold mb-4 text-white">Product</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/#about" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-features">
-                  Features
-                </SmoothLink>
+                <Link href="/getting-started" className="hover:text-[#00FF9F] transition-colors">
+                  Terminal
+                </Link>
               </li>
               <li>
-                <SmoothLink href="/pricing" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-pricing">
-                  Pricing
-                </SmoothLink>
-              </li>
-              <li>
-                <a href="https://docs.cxlinux.com" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-docs">
-                  Documentation
+                <a href="https://docs.cxlinux.com/reference/cli-engine" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
+                  CLI Engine
                 </a>
               </li>
               <li>
-                <SmoothLink href="/faq" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-faq">
-                  FAQ
-                </SmoothLink>
+                <a href="https://docs.cxlinux.com/getting-started/installation" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
+                  Distro
+                </a>
               </li>
             </ul>
           </div>
 
+          {/* Resources */}
           <div>
             <h4 className="font-semibold mb-4 text-white">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/blog" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-blog">
-                  Blog
-                </SmoothLink>
+                <a href="https://docs.cxlinux.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
+                  Docs
+                </a>
               </li>
               <li>
-                <a href="https://docs.cxlinux.com/api" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-api">
+                <a href="https://docs.cxlinux.com/api" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
                   API Reference
                 </a>
               </li>
               <li>
-                <SmoothLink href="/getting-started" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-get-started">
-                  Get Started
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/status" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-status">
-                  Status
-                </SmoothLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Community</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-discord">
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/cxlinux" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-twitter">
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-github">
+                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
                   GitHub
                 </a>
               </li>
+            </ul>
+          </div>
+
+          {/* Commercial */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Commercial</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/careers" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-careers">
-                  Careers
-                </SmoothLink>
+                <Link href="/pricing" className="hover:text-[#00FF9F] transition-colors">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:sales@cxlinux.com" className="hover:text-[#00FF9F] transition-colors">
+                  Contact Sales
+                </a>
+              </li>
+              <li>
+                <a href="mailto:support@cxlinux.com" className="hover:text-[#00FF9F] transition-colors">
+                  Support
+                </a>
               </li>
             </ul>
           </div>
 
+          {/* Legal */}
           <div>
             <h4 className="font-semibold mb-4 text-white">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <SmoothLink href="/privacy" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-privacy">
+                <Link href="/privacy" className="hover:text-[#00FF9F] transition-colors">
                   Privacy Policy
-                </SmoothLink>
+                </Link>
               </li>
               <li>
-                <SmoothLink href="/terms" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-terms">
+                <Link href="/terms" className="hover:text-[#00FF9F] transition-colors">
                   Terms of Service
-                </SmoothLink>
+                </Link>
               </li>
               <li>
-                <SmoothLink href="/security-policy" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-security">
-                  Security
-                </SmoothLink>
-              </li>
-              <li>
-                <SmoothLink href="/license" className="block py-2 hover:text-white transition-colors" data-testid="footer-link-license">
-                  License (BSL 1.1)
-                </SmoothLink>
+                <Link href="/license" className="hover:text-[#00FF9F] transition-colors">
+                  License
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">&copy; 2026 CX Linux. All rights reserved.</p>
-          <div className="flex gap-4">
-            <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-github">
-              <Github size={20} />
+        {/* Bottom */}
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#333]">
+          <p className="text-gray-500 text-sm mb-4 md:mb-0">
+            © 2026 CX Linux. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            <a href="https://github.com/cxlinux-ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00FF9F] transition-colors">
+              <Github className="w-5 h-5" />
             </a>
-            <a href="https://discord.gg/ASvzWcuTfk" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors" data-testid="footer-social-discord">
-              <FaDiscord size={20} />
+            <a href="https://twitter.com/cxlinux" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00FF9F] transition-colors">
+              <FaTwitter className="w-5 h-5" />
             </a>
           </div>
         </div>
