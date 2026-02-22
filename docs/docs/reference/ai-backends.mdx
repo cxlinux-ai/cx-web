@@ -7,7 +7,7 @@ keywords: [ai, backends, models, openai, anthropic, ollama, local]
 
 # Supported AI Backends
 
-Cortex supports multiple AI backends for natural language processing. Choose based on your privacy requirements, performance needs, and internet connectivity.
+CX Linux supports multiple AI backends for natural language processing. Choose based on your privacy requirements, performance needs, and internet connectivity.
 
 ## Backend Comparison
 
@@ -21,37 +21,37 @@ Cortex supports multiple AI backends for natural language processing. Choose bas
 
 ## Local Backend (Default)
 
-The built-in Cortex model runs entirely on your machine. No data leaves your system.
+The built-in CX model runs entirely on your machine. No data leaves your system.
 
 ### Configuration
 
 ```yaml
 backend:
   provider: local
-  model: cortex-7b
+  model: cx-7b
 ```
 
 ### Available Models
 
 | Model | Size | RAM Required | Best For |
 |-------|------|--------------|----------|
-| `cortex-3b` | 3B params | 4GB | Low-resource systems |
-| `cortex-7b` | 7B params | 8GB | General use (default) |
-| `cortex-13b` | 13B params | 16GB | Complex operations |
+| `cx-3b` | 3B params | 4GB | Low-resource systems |
+| `cx-7b` | 7B params | 8GB | General use (default) |
+| `cx-13b` | 13B params | 16GB | Complex operations |
 
 ### Setup
 
-The local model is installed with Cortex:
+The local model is installed with CX Linux:
 
 ```bash
 # Check installed models
-cortex backend models
+cx backend models
 
 # Download additional models
-cortex backend download cortex-13b
+cx backend download cx-13b
 
 # Set default model
-cx config set backend.model cortex-13b
+cx config set backend.model cx-13b
 ```
 
 ### Hardware Acceleration
@@ -59,7 +59,7 @@ cx config set backend.model cortex-13b
 ```yaml
 backend:
   provider: local
-  model: cortex-7b
+  model: cx-7b
   acceleration: auto  # auto, cuda, rocm, metal, cpu
 ```
 
@@ -110,13 +110,13 @@ backend:
 
 ```bash
 # Configure Ollama backend
-cortex backend set ollama
+cx backend set ollama
 
 # Specify model
 cx config set backend.model codellama
 
 # Test connection
-cortex backend test
+cx backend test
 ```
 
 ---
@@ -155,13 +155,13 @@ backend:
 export OPENAI_API_KEY="sk-..."
 
 # Or configure directly (less secure)
-cortex backend config openai --api-key "sk-..."
+cx backend config openai --api-key "sk-..."
 
 # Enable OpenAI backend
-cortex backend set openai
+cx backend set openai
 
 # Test connection
-cortex backend test
+cx backend test
 ```
 
 ### Rate Limiting
@@ -210,13 +210,13 @@ backend:
 export ANTHROPIC_API_KEY="sk-ant-..."
 
 # Enable Anthropic backend
-cortex backend set anthropic
+cx backend set anthropic
 
 # Set model
 cx config set backend.model claude-3-sonnet
 
 # Test connection
-cortex backend test
+cx backend test
 ```
 
 ---
@@ -273,19 +273,19 @@ backend:
 
 ```bash
 # Quick switch
-cortex --backend openai "complex analysis task"
-cortex --backend local "simple package install"
+cx --backend openai "complex analysis task"
+cx --backend local "simple package install"
 
 # Permanent switch
-cortex backend set openai
+cx backend set openai
 ```
 
 ### Per-Project Configuration
 
-Create `.cortex.yaml` in your project:
+Create `.cx.yaml` in your project:
 
 ```yaml
-# .cortex.yaml - project-specific settings
+# .cx.yaml - project-specific settings
 backend:
   provider: openai
   model: gpt-4
@@ -295,10 +295,10 @@ backend:
 
 ```bash
 # Development
-export CORTEX_BACKEND=local
+export CX_BACKEND=local
 
 # Production
-export CORTEX_BACKEND=openai
+export CX_BACKEND=openai
 ```
 
 ---
@@ -316,7 +316,7 @@ backend:
     - provider: anthropic
       model: claude-3-sonnet
     - provider: local
-      model: cortex-7b
+      model: cx-7b
 ```
 
 ---
@@ -330,7 +330,7 @@ backend:
   provider: openai
   cache:
     enabled: true
-    directory: ~/.cortex/cache
+    directory: ~/.cx/cache
     ttl_hours: 24
     max_size_mb: 500
 ```
@@ -343,7 +343,7 @@ backend:
 
 ```bash
 # View usage stats
-cortex backend stats
+cx backend stats
 
 # Output:
 # Backend: openai
@@ -371,10 +371,10 @@ backend:
 
 ```bash
 # Test backend connectivity
-cortex backend test
+cx backend test
 
 # Verbose test
-cortex backend test --verbose
+cx backend test --verbose
 ```
 
 ### Common Errors
@@ -391,7 +391,7 @@ cortex backend test --verbose
 
 ```bash
 # Enable backend debugging
-CORTEX_DEBUG_BACKEND=true cx "your command"
+CX_DEBUG_BACKEND=true cx "your command"
 ```
 
 ---
@@ -406,7 +406,7 @@ export OPENAI_API_KEY="sk-..."
 
 # Good: Secret manager
 backend:
-  api_key: ${vault:secret/cortex/openai}
+  api_key: ${vault:secret/cx/openai}
 
 # Bad: Hardcoded in config (don't do this)
 backend:
