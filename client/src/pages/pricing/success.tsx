@@ -118,7 +118,7 @@ export default function SuccessPage() {
             transition={{ delay: 0.3 }}
             className="text-4xl sm:text-5xl font-extrabold mb-4"
           >
-            <span className="bg-gradient-to-r from-green-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-400 to-[#00CC7F] bg-clip-text text-transparent">
               Welcome to CX Linux!
             </span>
           </motion.h1>
@@ -137,7 +137,7 @@ export default function SuccessPage() {
         {/* Subscription Details Card */}
         {loading ? (
           <div id="success-loading" className="flex items-center justify-center py-12">
-            <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#00FF9F] animate-spin" />
           </div>
         ) : error ? (
           <motion.div
@@ -160,7 +160,7 @@ export default function SuccessPage() {
             className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 mb-12"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Mail className="w-5 h-5 text-purple-400" />
+              <Mail className="w-5 h-5 text-[#00FF9F]" />
               <span className="text-gray-400">Confirmation sent to:</span>
               <span className="text-white font-medium">{subscription.email}</span>
             </div>
@@ -211,10 +211,10 @@ export default function SuccessPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 hover:border-purple-400/50 transition-all"
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 hover:border-[#00FF9F]/50 transition-all"
               >
-                <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
-                  <step.icon className="w-6 h-6 text-purple-400" />
+                <div className="w-12 h-12 bg-[#00FF9F]/20 rounded-xl flex items-center justify-center mb-4">
+                  <step.icon className="w-6 h-6 text-[#00FF9F]" />
                 </div>
                 <h3 className="font-semibold mb-2">{step.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{step.description}</p>
@@ -223,14 +223,14 @@ export default function SuccessPage() {
                     href={step.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-purple-400 text-sm hover:text-purple-300 transition-colors"
+                    className="inline-flex items-center gap-1 text-[#00FF9F] text-sm hover:text-[#00FF9F] transition-colors"
                   >
                     Get Started <ArrowRight className="w-4 h-4" />
                   </a>
                 ) : (
                   <Link
                     href={step.link}
-                    className="inline-flex items-center gap-1 text-purple-400 text-sm hover:text-purple-300 transition-colors"
+                    className="inline-flex items-center gap-1 text-[#00FF9F] text-sm hover:text-[#00FF9F] transition-colors"
                   >
                     Get Started <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -255,14 +255,14 @@ export default function SuccessPage() {
             <a
               id="success-email-support"
               href="mailto:support@cxlinux.com"
-              className="px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
+              className="px-6 py-3 bg-[#00FF9F] text-white font-semibold rounded-lg hover:bg-[#00FF9F] hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
             >
               Contact Support
             </a>
             <Link
               id="success-faq-link"
               href="/pricing/faq"
-              className="px-6 py-3 border-2 border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-400/10 transition-all"
+              className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
             >
               View FAQ
             </Link>
