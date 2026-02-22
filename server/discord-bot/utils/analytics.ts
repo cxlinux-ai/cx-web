@@ -41,7 +41,6 @@ const FLUSH_INTERVAL = 30000; // 30 seconds
 const CATEGORY_PATTERNS: Record<string, RegExp> = {
   installation: /\b(install|setup|download|boot|partition|dual.?boot)\b/i,
   features: /\b(natural language|ai command|feature|can|does|how do)\b/i,
-  hackathon: /\b(hackathon|competition|prize|ideathon|submit)\b/i,
   referral: /\b(referral|invite|reward|tier|waitlist)\b/i,
   troubleshooting: /\b(error|problem|issue|fix|broken|not working|help)\b/i,
   technical: /\b(kernel|driver|systemd|pacman|aur|arch|config)\b/i,
