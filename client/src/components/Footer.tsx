@@ -29,16 +29,6 @@ export default function Footer() {
             <h4 className="font-semibold mb-4 text-white">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
-                  Docs
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
-                  API Reference
-                </a>
-              </li>
-              <li>
                 <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
                   GitHub
                 </a>
