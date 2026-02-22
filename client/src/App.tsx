@@ -83,7 +83,7 @@ function App() {
                   CLI Engine
                 </a>
                 <a
-                  href="https://docs.cxlinux.com/getting-started/installation"
+                  href="https://github.com/cxlinux-ai/cx-distro"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -91,7 +91,7 @@ function App() {
                   Distro
                 </a>
                 <a
-                  href="https://docs.cxlinux.com"
+                  href="https://github.com/cxlinux-ai/cx-docs"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -160,7 +160,7 @@ function App() {
                       CLI Engine
                     </a>
                     <a
-                      href="https://docs.cxlinux.com/getting-started/installation"
+                      href="https://github.com/cxlinux-ai/cx-distro"
                       className="block text-gray-400 hover:text-white"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -168,7 +168,7 @@ function App() {
                       Distro
                     </a>
                     <a
-                      href="https://docs.cxlinux.com"
+                      href="https://github.com/cxlinux-ai/cx-docs"
                       className="block text-gray-400 hover:text-white"
                       target="_blank"
                       rel="noopener noreferrer"
