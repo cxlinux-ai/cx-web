@@ -75,14 +75,6 @@ function App() {
                   Terminal
                 </Link>
                 <a
-                  href="https://github.com/cxlinux-ai/cx-core"
-                  className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CLI Engine
-                </a>
-                <a
                   href="https://github.com/cxlinux-ai/cx-distro"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   target="_blank"
@@ -151,14 +143,6 @@ function App() {
                     >
                       Terminal
                     </Link>
-                    <a
-                      href="https://github.com/cxlinux-ai/cx-core"
-                      className="block text-gray-400 hover:text-white"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      CLI Engine
-                    </a>
                     <a
                       href="https://github.com/cxlinux-ai/cx-distro"
                       className="block text-gray-400 hover:text-white"
