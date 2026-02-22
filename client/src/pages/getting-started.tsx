@@ -211,7 +211,7 @@ export default function GettingStarted() {
                 Register Free Core <ChevronRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
-            <a href="https://docs.cxlinux.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="border-[#333] text-white hover:bg-[#333] px-6 py-3">
                 Read Docs
               </Button>
