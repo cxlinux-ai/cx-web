@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Docker Integration
-description: Use Cortex with Docker for containerized development and deployment. Build, manage, and orchestrate containers.
+description: Use CX Linux with Docker for containerized development and deployment. Build, manage, and orchestrate containers.
 keywords: [docker, containers, compose, kubernetes, deployment]
 ---
 
@@ -16,8 +16,8 @@ This tutorial covers using CX Linux for Docker operations. From basic container 
 
 ## Prerequisites
 
-- Docker installed (or let Cortex install it)
-- Cortex installed
+- Docker installed (or let CX Linux install it)
+- CX Linux installed
 
 ## Installing Docker
 
@@ -27,7 +27,7 @@ This tutorial covers using CX Linux for Docker operations. From basic container 
 cx "install docker"
 ```
 
-Cortex will:
+CX Linux will:
 1. Add Docker repository
 2. Install Docker CE
 3. Install Docker Compose
@@ -213,7 +213,7 @@ cx "help me convert this docker run command to compose"
 cx "create docker compose for a MERN stack application"
 ```
 
-Cortex generates:
+CX Linux generates:
 
 ```yaml
 version: '3.8'
@@ -432,25 +432,25 @@ cx "push myapp:v1 to our private registry"
 
 ---
 
-## Docker and Cortex Best Practices
+## Docker and CX Linux Best Practices
 
-### Using Cortex Inside Containers
+### Using CX Linux Inside Containers
 
 ```dockerfile
-# Dockerfile with Cortex
+# Dockerfile with CX Linux
 FROM ubuntu:22.04
 
-# Install Cortex
-RUN curl -fsSL https://cortexlinux.com/install.sh | bash
+# Install CX Linux
+RUN curl -fsSL https://cxlinux-ai.com/install.sh | bash
 
-# Use Cortex for setup
+# Use CX Linux for setup
 RUN cx "install python development environment"
 ```
 
-### Cortex with Docker Host
+### CX Linux with Docker Host
 
 ```bash
-# Manage host docker from Cortex
+# Manage host docker from CX Linux
 cx "show docker containers on this host"
 
 # Remote docker
