@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, Star } from "lucide-react";
 import analytics from "./lib/analytics";
 
 // Lazy load pages
@@ -30,9 +30,24 @@ const PageLoader = () => (
 function App() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [starCount, setStarCount] = useState<number | null>(null);
 
   // Hide navigation on checkout pages
   const isCheckoutPage = location.includes("/checkout") || location.includes("/success");
+
+  // Fetch GitHub star count
+  useEffect(() => {
+    fetch("https://api.github.com/repos/cxlinux-ai/cx-core")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.stargazers_count) {
+          setStarCount(data.stargazers_count);
+        }
+      })
+      .catch(() => {
+        // Silently fail, badge will just not show count
+      });
+  }, []);
 
   // Scroll to top when navigating
   useEffect(() => {
@@ -98,9 +113,13 @@ function App() {
                   href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#333] border border-[#444] rounded-lg transition-colors"
                 >
-                  <Github size={20} />
+                  <Github size={18} className="text-white" />
+                  <Star size={16} className="text-[#FFD700] fill-[#FFD700]" />
+                  {starCount !== null && (
+                    <span className="text-white text-sm font-medium">{starCount}</span>
+                  )}
                 </a>
                 <Link href="/pricing">
                   <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors">
