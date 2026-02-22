@@ -100,12 +100,9 @@ export function createLinkButton(
 }
 
 /**
- * Create a hackathon info embed
  */
-export function createHackathonEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.primary)
-    .setTitle("The First AI Linux Hackathon Worldwide")
     .setDescription("Build the future of AI-powered Linux! All participants receive a $5 CX Linux credit.")
     .addFields(
       {
@@ -139,7 +136,6 @@ export function createHackathonEmbed(): EmbedBuilder {
         inline: false,
       }
     )
-    .setFooter({ text: "cxlinux-ai.com/hackathon" });
 }
 
 /**
@@ -149,7 +145,6 @@ export function createReferralTiersEmbed(): EmbedBuilder {
   return new EmbedBuilder()
     .setColor(COLORS.info)
     .setTitle("Referral Rewards Program")
-    .setDescription("Invite hackathon participants and earn rewards! Referrals must register for BOTH phases and submit work to count.")
     .addFields(
       {
         name: "Starter Tier (5 referrals)",
@@ -177,7 +172,6 @@ export function createReferralTiersEmbed(): EmbedBuilder {
         inline: false,
       }
     )
-    .setFooter({ text: "cxlinux-ai.com/referrals • Referrals must complete both hackathon phases" });
 }
 
 /**
@@ -259,11 +253,8 @@ export function createStatsEmbed(stats: {
 /**
  * Detect if response should use rich embed
  */
-export function shouldUseEmbed(question: string): "hackathon" | "referral" | "install" | null {
   const lower = question.toLowerCase();
 
-  if (/\b(hackathon|prize|competition|contest)\b/.test(lower) && /\b(info|detail|about|tell)\b/.test(lower)) {
-    return "hackathon";
   }
 
   if (/\b(referral|tier|invite|reward)\b/.test(lower) && /\b(what|how|info|all)\b/.test(lower)) {
@@ -283,7 +274,6 @@ export default {
   createErrorEmbed,
   createFeedbackButtons,
   createLinkButton,
-  createHackathonEmbed,
   createReferralTiersEmbed,
   createInstallEmbed,
   createStatsEmbed,
