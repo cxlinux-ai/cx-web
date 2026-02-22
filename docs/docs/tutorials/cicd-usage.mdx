@@ -1,13 +1,13 @@
 ---
 sidebar_position: 4
 title: CI/CD Usage
-description: Use Cortex in continuous integration and deployment pipelines. GitHub Actions, GitLab CI, Jenkins, and more.
+description: Use CX Linux in continuous integration and deployment pipelines. GitHub Actions, GitLab CI, Jenkins, and more.
 keywords: [ci, cd, continuous integration, deployment, github actions, gitlab ci]
 ---
 
 # CI/CD Usage
 
-This tutorial covers using Cortex in CI/CD pipelines. Automate installations, configurations, and deployments with natural language commands.
+This tutorial covers using CX Linux in CI/CD pipelines. Automate installations, configurations, and deployments with natural language commands.
 
 ## Time Required
 
@@ -41,16 +41,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Cortex
+      - name: Install CX Linux
         run: |
-          curl -fsSL https://cortexlinux.com/install.sh | bash
-          echo "$HOME/.cortex/bin" >> $GITHUB_PATH
+          curl -fsSL https://cxlinux.com/install.sh | bash
+          echo "$HOME/.cx/bin" >> $GITHUB_PATH
 
       - name: Setup environment
         run: cx "install all dependencies for this project"
         env:
-          CORTEX_CI: true
-          CORTEX_YES: true
+          CX_CI: true
+          CX_YES: true
 
       - name: Run tests
         run: cx "run the test suite"
@@ -59,7 +59,7 @@ jobs:
         run: cx "build for production"
 ```
 
-### Using Cortex Action
+### Using CX Linux Action
 
 ```yaml
 # .github/workflows/ci.yml
@@ -74,7 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
         with:
           version: 'latest'
 
@@ -83,7 +83,7 @@ jobs:
           cx "install dependencies"
           cx "run tests"
         env:
-          CORTEX_CI: true
+          CX_CI: true
 ```
 
 ### Matrix Builds
@@ -99,12 +99,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
 
       - name: Setup Node ${{ matrix.node }}
         run: cx "install nodejs version ${{ matrix.node }}"
         env:
-          CORTEX_CI: true
+          CX_CI: true
 
       - name: Test
         run: cx "run tests"
@@ -127,12 +127,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
 
       - name: Build
         run: cx "build docker image for production"
         env:
-          CORTEX_CI: true
+          CX_CI: true
 
       - name: Push to registry
         run: cx "push image to docker hub"
@@ -161,12 +161,12 @@ stages:
   - deploy
 
 variables:
-  CORTEX_CI: "true"
-  CORTEX_YES: "true"
+  CX_CI: "true"
+  CX_YES: "true"
 
 before_script:
-  - curl -fsSL https://cortexlinux.com/install.sh | bash
-  - export PATH="$HOME/.cortex/bin:$PATH"
+  - curl -fsSL https://cxlinux.com/install.sh | bash
+  - export PATH="$HOME/.cx/bin:$PATH"
 
 test:
   stage: test
@@ -195,11 +195,11 @@ deploy:
     name: production
 ```
 
-### Using Cortex Docker Image
+### Using CX Linux Docker Image
 
 ```yaml
 # .gitlab-ci.yml
-image: cortexlinux/cortex:latest
+image: cxlinux-ai/cx:latest
 
 stages:
   - test
@@ -252,15 +252,15 @@ pipeline {
     agent any
 
     environment {
-        CORTEX_CI = 'true'
-        CORTEX_YES = 'true'
+        CX_CI = 'true'
+        CX_YES = 'true'
     }
 
     stages {
-        stage('Setup Cortex') {
+        stage('Setup CX Linux') {
             steps {
-                sh 'curl -fsSL https://cortexlinux.com/install.sh | bash'
-                sh 'export PATH="$HOME/.cortex/bin:$PATH"'
+                sh 'curl -fsSL https://cxlinux.com/install.sh | bash'
+                sh 'export PATH="$HOME/.cx/bin:$PATH"'
             }
         }
 
@@ -311,7 +311,7 @@ pipeline {
 pipeline {
     agent {
         docker {
-            image 'cortexlinux/cortex:latest'
+            image 'cxlinux-ai/cx:latest'
         }
     }
 
@@ -336,13 +336,13 @@ pipeline {
 version: 2.1
 
 executors:
-  cortex:
+  cx:
     docker:
-      - image: cortexlinux/cortex:latest
+      - image: cxlinux-ai/cx:latest
 
 jobs:
   test:
-    executor: cortex
+    executor: cx
     steps:
       - checkout
       - run:
@@ -355,7 +355,7 @@ jobs:
           path: test-results
 
   deploy:
-    executor: cortex
+    executor: cx
     steps:
       - checkout
       - run:
@@ -389,8 +389,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  CORTEX_CI: 'true'
-  CORTEX_YES: 'true'
+  CX_CI: 'true'
+  CX_YES: 'true'
 
 stages:
   - stage: Build
@@ -398,9 +398,9 @@ stages:
       - job: BuildJob
         steps:
           - script: |
-              curl -fsSL https://cortexlinux.com/install.sh | bash
-              export PATH="$HOME/.cortex/bin:$PATH"
-            displayName: 'Install Cortex'
+              curl -fsSL https://cxlinux.com/install.sh | bash
+              export PATH="$HOME/.cx/bin:$PATH"
+            displayName: 'Install CX Linux'
 
           - script: cx "install dependencies"
             displayName: 'Install Dependencies'
@@ -437,26 +437,26 @@ stages:
 
 ```bash
 # Always set in CI environments
-CORTEX_CI=true          # Enable CI mode
-CORTEX_YES=true         # Skip confirmations
-CORTEX_NONINTERACTIVE=true  # No interactive prompts
+CX_CI=true          # Enable CI mode
+CX_YES=true         # Skip confirmations
+CX_NONINTERACTIVE=true  # No interactive prompts
 ```
 
 ### Optional Variables
 
 ```bash
 # Customize behavior
-CORTEX_MODE=execute     # Always execute (not dry-run)
-CORTEX_NO_COLOR=true    # Disable colored output
-CORTEX_FORMAT=json      # Machine-readable output
-CORTEX_LOG_LEVEL=warn   # Reduce log verbosity
+CX_MODE=execute     # Always execute (not dry-run)
+CX_NO_COLOR=true    # Disable colored output
+CX_FORMAT=json      # Machine-readable output
+CX_LOG_LEVEL=warn   # Reduce log verbosity
 ```
 
 ### Secrets
 
 ```bash
 # Never commit these - use CI secret management
-CORTEX_API_KEY=...      # If using cloud backend
+CX_API_KEY=...      # If using cloud backend
 DOCKER_PASSWORD=...     # For registry auth
 KUBECONFIG=...          # For deployments
 ```
@@ -471,7 +471,7 @@ KUBECONFIG=...          # For deployments
 - run: cx "install all dependencies for this project"
 ```
 
-Cortex detects:
+CX Linux detects:
 - `package.json` → npm/yarn
 - `requirements.txt` → pip
 - `Cargo.toml` → cargo
@@ -511,10 +511,10 @@ Cortex detects:
 ```yaml
 - uses: actions/cache@v3
   with:
-    path: ~/.cortex/cache
-    key: cortex-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+    path: ~/.cx/cache
+    key: cx-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
     restore-keys: |
-      cortex-${{ runner.os }}-
+      cx-${{ runner.os }}-
 ```
 
 ### GitLab CI
@@ -522,7 +522,7 @@ Cortex detects:
 ```yaml
 cache:
   paths:
-    - ~/.cortex/cache/
+    - ~/.cx/cache/
     - node_modules/
 ```
 
@@ -558,7 +558,7 @@ cache:
 
 ## Example Complete Pipeline
 
-### Full CI/CD with Cortex
+### Full CI/CD with CX Linux
 
 ```yaml
 # .github/workflows/ci-cd.yml
@@ -571,15 +571,15 @@ on:
     branches: [main]
 
 env:
-  CORTEX_CI: true
-  CORTEX_YES: true
+  CX_CI: true
+  CX_YES: true
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
       - run: cx "run linter and format check"
 
   test:
@@ -590,7 +590,7 @@ jobs:
         node: [18, 20]
     steps:
       - uses: actions/checkout@v4
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
       - run: cx "install nodejs ${{ matrix.node }}"
       - run: cx "install dependencies"
       - run: cx "run tests with coverage"
@@ -601,7 +601,7 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
       - run: cx "build docker image"
       - run: cx "push to ghcr.io"
         env:
@@ -614,7 +614,7 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
       - run: cx "deploy to staging environment"
         env:
           KUBECONFIG: ${{ secrets.STAGING_KUBECONFIG }}
@@ -626,7 +626,7 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
-      - uses: cortexlinux/setup-cortex@v1
+      - uses: cxlinux-ai/setup-cx@v1
       - run: cx "deploy to production with rolling update"
         env:
           KUBECONFIG: ${{ secrets.PROD_KUBECONFIG }}
