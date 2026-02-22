@@ -11,7 +11,6 @@
 // Synonym mappings for query expansion
 const SYNONYMS: Record<string, string[]> = {
   install: ["setup", "download", "get", "put", "add", "installation"],
-  hackathon: ["hack", "competition", "contest", "event", "build"],
   referral: ["refer", "invite", "share", "friend", "reward"],
   help: ["support", "assist", "question", "issue", "problem"],
   feature: ["capability", "function", "ability", "can do"],
@@ -115,34 +114,22 @@ const KNOWLEDGE_BASE: Array<{
 
   // === HACKATHON ===
   {
-    keywords: ["hackathon", "contribute", "prize", "competition", "build", "participate", "join", "enter"],
-    category: "hackathon",
     priority: 10,
-    content: `The CX Linux Hackathon 2026 has fifteen thousand dollars in total prizes. It's in two phases. The Ideathon runs weeks one through four where you submit feature ideas and can win from the three thousand dollar prize pool distributed across thirty winners: Top 3 get $250 each, Top 10 (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. Then the main Hackathon is weeks five through thirteen where you build features, with twelve thousand in prizes. All skill levels welcome.`,
   },
   {
     keywords: ["ideathon", "idea", "submit", "proposal", "phase 1", "first phase"],
-    category: "hackathon",
     priority: 7,
     content: `The Ideathon is the first phase where you don't need to code anything. Just submit your best ideas for CX Linux features. Think about what would make the AI assistant better, what integrations would be useful, or what pain points in Linux could be solved. Three thousand dollars in prizes distributed to thirty winners across three tiers: Top 3 Grand Winners, Top 10 Excellence Winners, and Top 30 Ideathon Winners.`,
   },
   {
-    keywords: ["hackathon prize", "win", "reward", "money", "award", "winner"],
-    category: "hackathon",
     priority: 8,
-    content: `Prize breakdown: Ideathon has three thousand total distributed to 30 winners - Top 3 Grand Winners get $250 each, Top 10 Excellence (ranks 4-10) get $130 each, and Top 30 (ranks 11-30) get $67 each. The main Hackathon has twelve thousand with first place getting five thousand, second three thousand, third two thousand, and ranks 4-7 getting $500 each.`,
   },
   {
-    keywords: ["register", "sign up", "hackathon how", "start", "begin"],
-    category: "hackathon",
     priority: 8,
-    content: `To join the hackathon, head to cxlinux.com/hackathon and register with your email. You'll get access to participant channels, the submission portal, and updates. You can participate solo or form teams of up to four people.`,
   },
   {
     keywords: ["deadline", "when", "date", "timeline", "schedule", "end"],
-    category: "hackathon",
     priority: 6,
-    content: `The hackathon timeline: Ideathon runs for the first four weeks, then the main build phase is weeks five through thirteen. Check cxlinux.com/hackathon for exact dates and deadlines. There's a midpoint check-in during week nine where you can get feedback on your progress.`,
   },
 
   // === REFERRAL PROGRAM ===
@@ -170,7 +157,6 @@ const KNOWLEDGE_BASE: Array<{
     keywords: ["discord", "community", "chat", "help", "support", "contact", "talk to"],
     category: "community",
     priority: 9,
-    content: `The Discord community is the best place to get help, chat with other users, and stay updated. We have channels for general discussion, tech support, development talk, and hackathon coordination. The community is super welcoming to newcomers.`,
   },
   {
     keywords: ["github", "source", "code", "contribute", "open source", "repo", "repository"],
