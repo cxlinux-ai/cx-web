@@ -17,11 +17,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
-                  CLI Engine
-                </a>
-              </li>
-              <li>
                 <a href="https://github.com/cxlinux-ai/cx-distro" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F] transition-colors">
                   Distro
                 </a>
