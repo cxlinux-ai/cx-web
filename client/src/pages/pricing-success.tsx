@@ -168,7 +168,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com sta
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl p-6 mb-6"
+          className="bg-gradient-to-br from-blue-600/20 to-[#00CC7F]/20 border border-blue-500/30 rounded-xl p-6 mb-6"
         >
           <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
             <Terminal size={20} className="text-blue-400" />
