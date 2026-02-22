@@ -286,19 +286,19 @@ async function completeWelcomeFlow(
       message += "Feel free to explore and ask me anything about CX Linux!\n\n";
       break;
     case "install":
-      message += "Ready to install? Check out `/cortex how do I install?` or visit **cxlinux-ai.com/download**\n\n";
+      message += "Ready to install? Check out `/cx how do I install?` or visit **cxlinux.com/download**\n\n";
       break;
     case "hackathon":
-      message += "Awesome! Check out **cxlinux-ai.com/hackathon** for all the details. We have $13,800 cash + $4,900 worth of prizes! 🏆\n\n";
+      message += "Awesome! Check out **cxlinux.com/hackathon** for all the details. We have $13,800 cash + $4,900 worth of prizes! 🏆\n\n";
       break;
     case "contribute":
-      message += "We love contributors! Check out our GitHub at **github.com/cxlinux-ai/cortex** and join the #dev channel.\n\n";
+      message += "We love contributors! Check out our GitHub at **github.com/cxlinux-ai/cx-core** and join the #dev channel.\n\n";
       break;
   }
 
   // Add experience-specific tips
   if (experience === "beginner") {
-    message += "💡 **Tip:** As a beginner, you'll love Cortex's natural language commands. Just tell it what you want to do in plain English!\n\n";
+    message += "💡 **Tip:** As a beginner, you'll love CX Linux's natural language commands. Just tell it what you want to do in plain English!\n\n";
   } else if (experience === "expert") {
     message += "💡 **Tip:** As an expert, you might enjoy diving into our Arch base. All your terminal skills still apply, plus AI superpowers!\n\n";
   }
