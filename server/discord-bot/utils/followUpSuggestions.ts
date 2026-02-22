@@ -29,7 +29,6 @@ const FOLLOW_UP_SETS: FollowUpSet[] = [
     ],
   },
   {
-    keywords: ["hackathon", "competition", "prize"],
     suggestions: [
       "How do I register?",
       "What are the prizes?",
@@ -65,7 +64,6 @@ const FOLLOW_UP_SETS: FollowUpSet[] = [
     suggestions: [
       "What channels are available?",
       "How do I get verified?",
-      "Is there a hackathon channel?",
     ],
   },
   {
@@ -96,7 +94,6 @@ const FOLLOW_UP_SETS: FollowUpSet[] = [
 
 // Generic fallback suggestions
 const GENERIC_SUGGESTIONS = [
-  "Tell me about the hackathon",
   "How do I join the community?",
   "What makes CX Linux different?",
 ];
