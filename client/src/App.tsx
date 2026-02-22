@@ -106,6 +106,14 @@ function App() {
                 >
                   Pricing
                 </Link>
+                <Link
+                  href="/affiliates"
+                  className={`text-sm font-medium transition-colors ${
+                    location === "/affiliates" ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Affiliates
+                </Link>
               </div>
 
               {/* Desktop CTAs */}
@@ -169,6 +177,13 @@ function App() {
                       className="block text-gray-400 hover:text-white"
                     >
                       Pricing
+                    </Link>
+                    <Link
+                      href="/affiliates"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-gray-400 hover:text-white"
+                    >
+                      Affiliates
                     </Link>
                     <Link
                       href="/pricing"
