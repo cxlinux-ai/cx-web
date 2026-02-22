@@ -53,7 +53,6 @@ import {
   createResponseEmbed,
   createErrorEmbed,
   createFeedbackButtons,
-  createHackathonEmbed,
   createReferralTiersEmbed,
   createInstallEmbed,
   createStatsEmbed,
@@ -279,7 +278,6 @@ client.on(Events.GuildMemberAdd, async (member) => {
           `• Reply to my messages to continue a conversation\n\n` +
           `**Quick Links:**\n` +
           `• Website: https://cxlinux.com\n` +
-          `• Hackathon: https://cxlinux.com/hackathon`
       );
     } catch {
       // Can't DM user at all
@@ -555,8 +553,6 @@ client.on(Events.MessageCreate, async (message) => {
     // Check if we should include a rich embed
     const embedType = shouldUseEmbed(question);
     let richEmbed = null;
-    if (embedType === "hackathon") {
-      richEmbed = createHackathonEmbed();
     } else if (embedType === "referral") {
       richEmbed = createReferralTiersEmbed();
     } else if (embedType === "install") {
