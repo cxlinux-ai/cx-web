@@ -45,10 +45,10 @@ export default function GettingStarted() {
   const npmCommand = "npm install -g cx-cli";
 
   const prerequisites = [
-    { text: "64-bit x86 processor (AMD64/Intel)", icon: Cpu },
-    { text: "8GB RAM minimum (16GB recommended)", icon: Database },
-    { text: "50GB free disk space", icon: Monitor },
-    { text: "NVIDIA GPU with CUDA (optional)", icon: Zap },
+    { text: "Ubuntu 20.04+, Debian 11+, or compatible Linux", icon: Server },
+    { text: "64-bit processor (x86_64 / ARM64)", icon: Cpu },
+    { text: "100MB free disk space", icon: Database },
+    { text: "Internet connection for cloud AI features", icon: Zap },
   ];
 
   const cliExamples = [
