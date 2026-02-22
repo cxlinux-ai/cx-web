@@ -82,14 +82,6 @@ function App() {
                 >
                   Distro
                 </a>
-                <a
-                  href="https://github.com/cxlinux-ai/cx-docs"
-                  className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Docs
-                </a>
                 <Link
                   href="/pricing"
                   className={`text-sm font-medium transition-colors ${
@@ -150,14 +142,6 @@ function App() {
                       rel="noopener noreferrer"
                     >
                       Distro
-                    </a>
-                    <a
-                      href="https://github.com/cxlinux-ai/cx-docs"
-                      className="block text-gray-400 hover:text-white"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Docs
                     </a>
                     <Link
                       href="/pricing"
