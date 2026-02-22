@@ -128,6 +128,8 @@ html, body {
 .animate-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+.dark {
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;
