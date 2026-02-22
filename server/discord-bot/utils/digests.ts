@@ -1,7 +1,6 @@
 /**
  * Daily/Weekly Digests
  *
- * Auto-post summaries: top questions, hackathon updates, community stats.
  */
 
 import { Client, TextChannel, EmbedBuilder } from "discord.js";
@@ -22,7 +21,6 @@ interface DigestStats {
   newMembers: number;
   activeUsers: number;
   topQuestions: string[];
-  hackathonUpdates: string[];
 }
 
 /**
@@ -104,7 +102,6 @@ async function gatherStats(hours: number = 24): Promise<DigestStats> {
       newMembers: 0, // Would need to track join dates
       activeUsers: uniqueUsers.size,
       topQuestions,
-      hackathonUpdates: [],
     };
   } catch (error) {
     console.error("[Digests] Error gathering stats:", error);
@@ -114,7 +111,6 @@ async function gatherStats(hours: number = 24): Promise<DigestStats> {
       newMembers: 0,
       activeUsers: 0,
       topQuestions: [],
-      hackathonUpdates: [],
     };
   }
 }
@@ -146,10 +142,7 @@ export function createDailyDigestEmbed(stats: DigestStats): EmbedBuilder {
     .setTimestamp()
     .setFooter({ text: "CX Linux Community" });
 
-  if (stats.hackathonUpdates.length > 0) {
     embed.addFields({
-      name: "🏆 Hackathon Updates",
-      value: stats.hackathonUpdates.join("\n"),
       inline: false,
     });
   }
