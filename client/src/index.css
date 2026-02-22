@@ -1,3 +1,4 @@
+/* CX Linux Theme - Terminal Green */
 /* Font loaded via index.html for faster rendering */
 
 @tailwind base;
@@ -9,94 +10,124 @@ html, body {
   overflow-x: hidden;
 }
 
-/* LIGHT MODE */
+/* CX Linux Dark Theme (Default) */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
-  --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-  --background: 0 0% 100%;
-  --foreground: 0 0% 10%;
-  --border: 0 0% 92%;
-  --card: 0 0% 98%;
-  --card-foreground: 0 0% 10%;
-  --card-border: 0 0% 95%;
-  --sidebar: 0 0% 96%;
-  --sidebar-foreground: 0 0% 10%;
-  --sidebar-border: 0 0% 93%;
-  --sidebar-primary: 217 100% 50%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 0 0% 94%;
-  --sidebar-accent-foreground: 0 0% 10%;
-  --sidebar-ring: 217 100% 50%;
-  --popover: 0 0% 95%;
-  --popover-foreground: 0 0% 10%;
-  --popover-border: 0 0% 92%;
-  --primary: 217 100% 50%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 93%;
-  --secondary-foreground: 0 0% 10%;
-  --muted: 210 6% 91%;
-  --muted-foreground: 0 0% 40%;
-  --accent: 210 8% 94%;
-  --accent-foreground: 0 0% 10%;
+  /* Primary Colors */
+  --cx-bg: #1E1E1E;
+  --cx-bg-secondary: #161616;
+  --cx-bg-card: #0D0D0D;
+  --cx-accent: #00FF9F;
+  --cx-accent-hover: #00CC7F;
+  --cx-text: #FFFFFF;
+  --cx-text-muted: #9CA3AF;
+  --cx-border: #333333;
+  
+  /* Fonts */
+  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Component Variables */
+  --background: 0 0% 12%;
+  --foreground: 0 0% 100%;
+  --border: 0 0% 20%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 100%;
+  --primary: 156 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 25%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 156 100% 50%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 84% 45%;
   --destructive-foreground: 0 0% 98%;
-  --success: 120 100% 50%;
-  --success-foreground: 0 0% 10%;
-  --input: 0 0% 75%;
-  --ring: 217 100% 50%;
-  --chart-1: 217 91% 45%;
-  --chart-2: 142 76% 36%;
-  --chart-3: 262 83% 58%;
-  --chart-4: 38 92% 50%;
-  --chart-5: 340 82% 52%;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  --radius: .5rem;
-  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.02);
-  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.03);
-  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.04), 0px 1px 2px -1px hsl(0 0% 0% / 0.06);
-  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.08);
-  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.06), 0px 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.08), 0px 4px 6px -1px hsl(0 0% 0% / 0.12);
-  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.10), 0px 8px 10px -1px hsl(0 0% 0% / 0.15);
-  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.12);
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-
-/* Fallback for older browsers */
-  --sidebar-primary-border: hsl(var(--sidebar-primary));
-  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --sidebar-accent-border: hsl(var(--sidebar-accent));
-  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --primary-border: hsl(var(--primary));
-  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --secondary-border: hsl(var(--secondary));
-  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --muted-border: hsl(var(--muted));
-  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --accent-border: hsl(var(--accent));
-  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
-
-  /* Fallback for older browsers */
-  --destructive-border: hsl(var(--destructive));
-  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --success: 156 100% 50%;
+  --success-foreground: 0 0% 0%;
+  --input: 0 0% 25%;
+  --ring: 156 100% 50%;
+  --radius: 0.5rem;
 }
 
-.dark {
+/* Utility Classes */
+.bg-cx-primary { background-color: var(--cx-bg); }
+.bg-cx-secondary { background-color: var(--cx-bg-secondary); }
+.bg-cx-card { background-color: var(--cx-bg-card); }
+.text-cx-accent { color: var(--cx-accent); }
+.border-cx { border-color: var(--cx-border); }
+
+/* Terminal Code Styling */
+.terminal-code {
+  font-family: var(--font-mono);
+  background-color: var(--cx-bg-card);
+  border: 1px solid var(--cx-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: var(--cx-accent);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #00FF9F 0%, #00FFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphic Header */
+.glass-header {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 30, 0.8);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--cx-accent);
+  color: #000;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+.btn-primary:hover {
+  background-color: var(--cx-accent-hover);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cx-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cx-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cx-text-muted);
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 255, 159, 0.3);
+  color: #fff;
+}
+
+/* Focus Ring */
+*:focus-visible {
+  outline: 2px solid var(--cx-accent);
+  outline-offset: 2px;
+}
+
+/* Animation */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px var(--cx-accent); }
+  50% { box-shadow: 0 0 20px var(--cx-accent); }
+}
+
+.animate-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;
