@@ -278,6 +278,7 @@ client.on(Events.GuildMemberAdd, async (member) => {
           `• Reply to my messages to continue a conversation\n\n` +
           `**Quick Links:**\n` +
           `• Website: https://cxlinux.com\n` +
+          `• GitHub: https://github.com/cxlinux-ai/cx-core`
       );
     } catch {
       // Can't DM user at all
