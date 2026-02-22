@@ -1,13 +1,13 @@
 [Unit]
 Description=Sapiens 0.27B Reasoning Engine
-Documentation=https://github.com/cortexlinux/cortex
+Documentation=https://github.com/cxlinux-ai/cx-core
 After=network.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-User=cortex
-Group=cortex
+User=cx
+Group=cx
 WorkingDirectory=/opt/sapiens
 ExecStart=/usr/bin/python3 /opt/sapiens/run_sapiens.py --host 0.0.0.0 --port 8100
 ExecReload=/bin/kill -HUP $MAINPID
