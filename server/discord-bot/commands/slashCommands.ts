@@ -365,45 +365,6 @@ async function handleStatsCommand(
 }
 
 /**
- */
-  interaction: ChatInputCommandInteraction
-): Promise<void> {
-  const embed = new EmbedBuilder()
-    .setColor(0xf59e0b)
-    .setDescription("$13,800 cash + $4,900 worth of prizes - Build the future of AI-powered Linux!")
-    .addFields(
-      {
-        name: "Phase 1: Ideathon",
-        value: "Weeks 1-4 | $3,800 prizes\nSubmit monetizable feature ideas",
-        inline: true,
-      },
-      {
-        value: "Weeks 5-13 | $10K cash + prizes\nBuild production-ready code",
-        inline: true,
-      },
-      {
-        name: "Who Can Join",
-        value: "Anyone 18+, any skill level. Solo or teams of 2-5.",
-      },
-      {
-        name: "Top Prizes",
-        value: "1st: $5K | 2nd: $3K | 3rd: $2K | 4th-10th: $700 worth of goodies + 2mo managed service",
-      }
-    )
-
-  const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-    new ButtonBuilder()
-      .setLabel("Register Now")
-      .setStyle(ButtonStyle.Link)
-    new ButtonBuilder()
-      .setLabel("View Rules")
-      .setStyle(ButtonStyle.Link)
-  );
-
-  await interaction.reply({ embeds: [embed], components: [row] });
-}
-
-/**
  * Handle /clear command
  */
 async function handleClearCommand(
