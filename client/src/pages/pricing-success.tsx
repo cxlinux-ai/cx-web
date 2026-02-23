@@ -119,7 +119,7 @@ export default function PricingSuccessPage() {
             <Button variant="outline" asChild className="w-full" data-testid="link-contact-support">
               <a
                 href="https://discord.gg/cxlinux"
-                target="_blank"
+                target="_blank" rel="noopener noreferrer"
                 rel="noopener noreferrer"
               >
                 Contact Support
@@ -306,7 +306,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <span className="text-gray-500">Need help?</span>
           <a
             href="https://discord.gg/cxlinux"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             data-testid="link-discord"
@@ -317,7 +317,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <span className="text-gray-600">|</span>
           <a
             href="https://github.com/cxlinux-ai/cx-core"
-            target="_blank"
+            target="_blank" rel="noopener noreferrer"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             data-testid="link-docs"
@@ -327,11 +327,11 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           </a>
           <span className="text-gray-600">|</span>
           <Link
-            href="/support"
+            href="/faq"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             data-testid="link-support"
           >
-            Support
+            Support & FAQ
           </Link>
         </motion.div>
 

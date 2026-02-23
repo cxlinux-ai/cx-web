@@ -93,7 +93,7 @@ function App() {
                 <a
                   href="https://github.com/cxlinux-ai/cx-distro"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   rel="noopener noreferrer"
                 >
                   Distro
@@ -120,7 +120,7 @@ function App() {
               <div className="hidden md:flex items-center gap-4">
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#333] border border-[#444] rounded-lg transition-colors"
                 >
@@ -166,7 +166,7 @@ function App() {
                     <a
                       href="https://github.com/cxlinux-ai/cx-distro"
                       className="block text-gray-400 hover:text-white"
-                      target="_blank"
+                      target="_blank" rel="noopener noreferrer"
                       rel="noopener noreferrer"
                     >
                       Distro

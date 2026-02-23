@@ -221,7 +221,7 @@ export default function SuccessPage() {
                 {step.external ? (
                   <a
                     href={step.link}
-                    target="_blank"
+                    target="_blank" rel="noopener noreferrer"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-[#00FF9F] text-sm hover:text-[#00FF9F] transition-colors"
                   >
