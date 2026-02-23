@@ -21,7 +21,7 @@ function getClientIp(req: Request): string {
 import stripeRoutes from "./stripe";
 import bountiesRoutes from "./bounties";
 import oauthRoutes from "./oauth";
-import discordBot from "./discord-bot";
+// Discord bot removed - import discordBot from "./discord-bot";
 import licenseRoutes from "./license";
 import emailCaptureRoutes from "./email-capture";
 import PDFDocument from "pdfkit";
@@ -105,59 +105,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Discord server structure endpoint (for debugging)
+  // Discord server structure endpoint (disabled - bot removed)
   app.get("/api/discord/server-structure", async (req, res) => {
-    try {
-      if (!discordBot.isBotReady()) {
-        return res.status(503).json({ error: "Bot is not ready" });
-      }
-      const client = discordBot.getBotClient();
-      const guild = client.guilds.cache.first();
-      if (!guild) {
-        return res.status(404).json({ error: "Bot is not in any guilds" });
-      }
-
-      await guild.roles.fetch();
-      await guild.channels.fetch();
-
-      const roles = guild.roles.cache
-        .filter((r) => r.name !== "@everyone")
-        .sort((a, b) => b.position - a.position)
-        .map((r) => ({
-          name: r.name,
-          id: r.id,
-          color: r.hexColor,
-          position: r.position,
-          permissions: {
-            admin: r.permissions.has("Administrator"),
-            manageMessages: r.permissions.has("ManageMessages"),
-            manageChannels: r.permissions.has("ManageChannels"),
-            manageRoles: r.permissions.has("ManageRoles"),
-          },
-        }));
-
-      const channels = guild.channels.cache
-        .sort((a, b) => a.position - b.position)
-        .map((c) => ({
-          name: c.name,
-          id: c.id,
-          type: c.type,
-          parentId: c.parentId,
-          position: c.position,
-        }));
-
-      res.json({
-        server: {
-          name: guild.name,
-          id: guild.id,
-          memberCount: guild.memberCount,
-        },
-        roles,
-        channels,
-      });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
-    }
+    return res.status(410).json({ error: "Discord bot has been removed" });
   });
 
   // Start keep-alive self-ping (for Replit deployments)
@@ -588,34 +538,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Discord Bot Admin Routes
+  // Discord Bot Admin Routes (disabled - bot removed)
   app.get("/api/admin/discord/status", async (req, res) => {
-    try {
-      const isReady = discordBot.isBotReady();
-      const client = discordBot.getBotClient();
-      res.json({
-        online: isReady,
-        username: client.user?.username || null,
-        servers: client.guilds.cache.size,
-      });
-    } catch (error) {
-      console.error("Discord bot status error:", error);
-      res.status(500).json({ error: "Failed to get bot status" });
-    }
+    return res.status(410).json({ error: "Discord bot has been removed", online: false });
   });
 
   app.post("/api/admin/discord/verify-user", async (req, res) => {
-    try {
-      const { discordId } = req.body;
-      if (!discordId) {
-        return res.status(400).json({ error: "Missing discordId" });
-      }
-      await discordBot.verifyMember(discordId);
-      res.json({ message: "User verified successfully" });
-    } catch (error) {
-      console.error("User verify error:", error);
-      res.status(500).json({ error: "Failed to verify user" });
-    }
+    return res.status(410).json({ error: "Discord bot has been removed" });
   });
 
   // Generate Hackathon Rules PDF
