@@ -133,7 +133,7 @@ export default function PricingSuccessPage() {
 
   // APT installation commands
   const setupRepoCommand = `curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg
-echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list`;
+echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list`;
   const installCommand = `sudo apt update && sudo apt install cx-terminal`;
   const activateCommand = `cx activate ${sessionData?.licenseKey}`;
 
@@ -221,7 +221,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com sta
                 <code className="text-sm text-gray-300">
                   <span className="text-gray-500">#</span> Add GPG key and repository{'\n'}
                   <span className="text-gray-500">$</span> curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n'}
-                  <span className="text-gray-500">$</span> echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
+                  <span className="text-gray-500">$</span> echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
                 </code>
               </pre>
             </div>
