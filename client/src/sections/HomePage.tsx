@@ -306,17 +306,14 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4 text-white">Product</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li><Link href="/getting-started" className="hover:text-[#00FF9F]">Terminal</Link></li>
-                <li><Link href="/getting-started" className="hover:text-[#00FF9F]">CLI Engine</Link></li>
-                <li><Link href="/getting-started" className="hover:text-[#00FF9F]">Distro</Link></li>
+                <li><a href="https://github.com/cxlinux-ai/cx-distro" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F]">Distro</a></li>
               </ul>
             </div>
             {/* Resources */}
             <div>
               <h4 className="font-semibold mb-4 text-white">Resources</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="https://docs.cxlinux.com" className="hover:text-[#00FF9F]">Docs</a></li>
-                <li><a href="https://docs.cxlinux.com/api" className="hover:text-[#00FF9F]">API Reference</a></li>
-                <li><a href="https://github.com/cxlinux-ai/cx-core" className="hover:text-[#00FF9F]">GitHub</a></li>
+                <li><a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="hover:text-[#00FF9F]">GitHub</a></li>
               </ul>
             </div>
             {/* Commercial */}
@@ -324,6 +321,7 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4 text-white">Commercial</h4>
               <ul className="space-y-2 text-gray-400 text-sm">
                 <li><Link href="/pricing" className="hover:text-[#00FF9F]">Pricing</Link></li>
+                <li><Link href="/affiliates" className="hover:text-[#00FF9F]">Affiliates (10%)</Link></li>
                 <li><a href="mailto:sales@cxlinux.com" className="hover:text-[#00FF9F]">Contact Sales</a></li>
                 <li><a href="mailto:support@cxlinux.com" className="hover:text-[#00FF9F]">Support</a></li>
               </ul>
