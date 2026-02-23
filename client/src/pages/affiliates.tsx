@@ -254,7 +254,7 @@ export default function AffiliatesPage() {
                     className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    We'll send commission payouts to this email.
+                    Commission contact email (payouts processed monthly via Stripe or bank transfer)
                   </p>
                 </div>
 
