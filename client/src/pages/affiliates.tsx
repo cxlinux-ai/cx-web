@@ -65,7 +65,7 @@ export default function AffiliatesPage() {
         throw new Error(data.error || "Failed to register");
       }
 
-      setReferralCode(data.code);
+      setReferralCode(data.referral_code);
       toast({
         title: "Success!",
         description: "Your referral code has been created.",
