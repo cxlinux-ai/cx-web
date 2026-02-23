@@ -17,7 +17,8 @@ const BASE_URL = process.env.BASE_URL || 'https://cxlinux.com';
  */
 export async function sendVerificationEmail(email: string, verificationToken: string): Promise<boolean> {
   if (!resend) {
-    console.log(`[Email] Skipping verification email (no API key). Token: ${verificationToken}`);
+    console.log(`[Email] Skipping verification email (no API key configured)`);
+    // Note: Token intentionally not logged for security
     return true; // Return true to not block signup flow
   }
 
@@ -113,7 +114,8 @@ export async function sendVerificationEmail(email: string, verificationToken: st
  */
 export async function sendWelcomeEmail(email: string, referralCode: string): Promise<boolean> {
   if (!resend) {
-    console.log(`[Email] Skipping welcome email (no API key). Code: ${referralCode}`);
+    console.log(`[Email] Skipping welcome email (no API key configured)`);
+    // Note: Referral code intentionally not logged for security
     return true; // Return true to not block verification flow
   }
 

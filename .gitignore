@@ -22,4 +22,4 @@ ENV/
 *.pth
 
 # Model cache
-.cache/huggingface/
+.cache/huggingface/.env*
