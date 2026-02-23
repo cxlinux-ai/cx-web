@@ -682,7 +682,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       doc.fontSize(11).font("Helvetica").fillColor("#333333")
          .text("• Website: https://cxlinux.com/hackathon", { lineGap: 3 })
          .text("• GitHub: https://github.com/cxlinux-ai/cx-core", { lineGap: 3 })
-         .text("• Discord: https://discord.gg/ASvzWcuTfk", { lineGap: 3 })
+         .text("• Discord: https://discord.gg/cxlinux", { lineGap: 3 })
          .text("• Email: hackathon@cxlinux.com", { lineGap: 3 });
       doc.moveDown(2);
       

@@ -97,7 +97,7 @@ Last updated: February 2026`
 
 Email: privacy@cxlinux.com
 GitHub: github.com/cxlinux-ai/cx-core/issues
-Discord: discord.gg/ASvzWcuTfk
+Discord: discord.gg/cxlinux
 
 We aim to respond to all privacy requests within 30 days.
 

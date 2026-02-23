@@ -118,7 +118,7 @@ export default function PricingSuccessPage() {
             </Button>
             <Button variant="outline" asChild className="w-full" data-testid="link-contact-support">
               <a
-                href="https://discord.gg/uCqHvxjU83"
+                href="https://discord.gg/cxlinux"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -305,7 +305,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com sta
         >
           <span className="text-gray-500">Need help?</span>
           <a
-            href="https://discord.gg/uCqHvxjU83"
+            href="https://discord.gg/cxlinux"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
