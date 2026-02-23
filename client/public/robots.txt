@@ -4,14 +4,6 @@ Allow: /
 # Sitemap
 Sitemap: https://cxlinux.com/sitemap.xml
 
-# Block admin and private pages
-Disallow: /admin/
-Disallow: /beta
-
-# Allow all other pages
-Allow: /blog/
-Allow: /news/
-Allow: /hackathon
-Allow: /getting-started
-Allow: /faq
-Allow: /startup
+# Block checkout success pages from indexing
+Disallow: /pricing/success
+Disallow: /pricing/checkout
