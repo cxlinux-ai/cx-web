@@ -198,7 +198,6 @@ export function useDemoAnimation() {
       setState(prev => ({ ...prev, isAnimating: false }));
     } catch (e) {
       // Animation was cancelled
-      console.log('Animation cancelled');
     }
   }, []);
 

@@ -1,0 +1,16 @@
+{
+  "name": "CX Linux",
+  "short_name": "CX Linux",
+  "description": "AI-Native Operating System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00FF9F",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
