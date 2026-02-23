@@ -296,7 +296,6 @@ export default function FAQ() {
             <a
               href="https://discord.gg/cxlinux"
               target="_blank" rel="noopener noreferrer"
-              rel="noopener noreferrer"
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-discord"
             >
@@ -312,7 +311,6 @@ export default function FAQ() {
             <a
               href="https://github.com/cxlinux-ai/cx-core/issues"
               target="_blank" rel="noopener noreferrer"
-              rel="noopener noreferrer"
               className="px-6 py-3 border-2 border-blue-400 hover:bg-blue-400/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-github"
             >

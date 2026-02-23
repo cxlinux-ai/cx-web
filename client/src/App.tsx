@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Github, Star } from "lucide-react";
 import analytics from "./lib/analytics";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Lazy load pages
 const HomePage = lazy(() => import("./sections/HomePage"));
@@ -66,6 +67,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
       <div className="min-h-screen bg-[#1E1E1E]">
         {/* Navigation */}
         {!isCheckoutPage && (
@@ -94,7 +96,6 @@ function App() {
                   href="https://github.com/cxlinux-ai/cx-distro"
                   className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
                   target="_blank" rel="noopener noreferrer"
-                  rel="noopener noreferrer"
                 >
                   Distro
                 </a>
@@ -121,7 +122,6 @@ function App() {
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank" rel="noopener noreferrer"
-                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#333] border border-[#444] rounded-lg transition-colors"
                 >
                   <Github size={18} className="text-white" />
@@ -167,7 +167,6 @@ function App() {
                       href="https://github.com/cxlinux-ai/cx-distro"
                       className="block text-gray-400 hover:text-white"
                       target="_blank" rel="noopener noreferrer"
-                      rel="noopener noreferrer"
                     >
                       Distro
                     </a>
@@ -221,6 +220,7 @@ function App() {
 
         <Toaster />
       </div>
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 }

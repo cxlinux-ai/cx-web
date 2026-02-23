@@ -546,7 +546,6 @@ export default function PricingPage() {
                 id="pricing-demo-link"
                 href="https://calendly.com/ai-consultant/vip"
                 target="_blank" rel="noopener noreferrer"
-                rel="noopener noreferrer"
                 className="px-8 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
               >
                 <Calendar className="w-5 h-5" />

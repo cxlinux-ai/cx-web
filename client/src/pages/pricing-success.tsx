@@ -120,7 +120,6 @@ export default function PricingSuccessPage() {
               <a
                 href="https://discord.gg/cxlinux"
                 target="_blank" rel="noopener noreferrer"
-                rel="noopener noreferrer"
               >
                 Contact Support
               </a>
@@ -307,7 +306,6 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <a
             href="https://discord.gg/cxlinux"
             target="_blank" rel="noopener noreferrer"
-            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             data-testid="link-discord"
           >
@@ -318,7 +316,6 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <a
             href="https://github.com/cxlinux-ai/cx-core"
             target="_blank" rel="noopener noreferrer"
-            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             data-testid="link-docs"
           >

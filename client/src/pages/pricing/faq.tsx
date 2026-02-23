@@ -309,7 +309,6 @@ export default function PricingFAQ() {
               id="pricing-faq-sales-link"
               href="https://calendly.com/ai-consultant/vip"
               target="_blank" rel="noopener noreferrer"
-              rel="noopener noreferrer"
               className="px-6 py-3 bg-[#00FF9F] text-white font-semibold rounded-lg hover:bg-[#00FF9F] hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
             >
               Schedule Demo
@@ -325,7 +324,6 @@ export default function PricingFAQ() {
               id="pricing-faq-discord-link"
               href="https://discord.gg/cxlinux"
               target="_blank" rel="noopener noreferrer"
-              rel="noopener noreferrer"
               className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
             >
               Ask on Discord
