@@ -114,7 +114,7 @@ This prompt covers **all UI components** that need polished, production-ready st
 │  🚀 Move up the list. Earn real perks.                      │
 │                                                             │
 │  ┌───────────────────────────────────┐ ┌─────────────────┐ │
-│  │ cortexlinux.com/join?ref=ABC123   │ │  📋 Copy Link   │ │
+│  │ cxlinux.com/join?ref=ABC123   │ │  📋 Copy Link   │ │
 │  └───────────────────────────────────┘ └─────────────────┘ │
 │                                                             │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │
@@ -160,7 +160,7 @@ This prompt covers **all UI components** that need polished, production-ready st
 │                                                                     │
 │  YOUR REFERRAL LINK                                                │
 │  ┌────────────────────────────────────────┐ ┌──────┐ ┌──────────┐ │
-│  │ https://cortexlinux.com/join?ref=...   │ │ Copy │ │ QR Code  │ │
+│  │ https://cxlinux.com/join?ref=...   │ │ Copy │ │ QR Code  │ │
 │  └────────────────────────────────────────┘ └──────┘ └──────────┘ │
 │                                                                     │
 │  [Overview]  [Referrals (12)]  [Rewards]                           │
@@ -423,7 +423,7 @@ Create visually stunning, social-media-ready cards for:
 │  ⚡ QUICK INSTALL                   │
 ├─────────────────────────────────────┤
 │                                     │
-│  curl -fsSL cortexlinux.com/i | sh  │
+│  curl -fsSL cxlinux.com/i | sh  │
 │                                     │
 │            [📋 Copy]                │
 │                                     │
