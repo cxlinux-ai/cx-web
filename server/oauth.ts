@@ -86,8 +86,8 @@ async function checkAndUpdateVerification(waitlistEntryId: string): Promise<bool
   const user = entry[0];
 
   // Check full verification: discord_verified AND (pr_completed OR hackathon_participated)
-  const discordVerified = user.discordConnected && user.discordJoinedServer;
-  const contributionVerified = user.prCompleted || user.hackathonParticipated;
+  const discordVerified = !!(user.discordConnected && user.discordJoinedServer);
+  const contributionVerified = !!(user.prCompleted || user.hackathonParticipated);
 
   const isFullyVerified = discordVerified && contributionVerified;
 
