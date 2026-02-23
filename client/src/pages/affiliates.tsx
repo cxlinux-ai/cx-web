@@ -65,11 +65,12 @@ export default function AffiliatesPage() {
         throw new Error(data.error || "Failed to register");
       }
 
-      setReferralCode(data.referral_code);
       toast({
-        title: "Success!",
-        description: "Your referral code has been created.",
+        title: "Check Your Email!",
+        description: "Your referral code has been sent to your email address.",
       });
+      // Show email sent state
+      setReferralCode("EMAIL_SENT");
     } catch (error) {
       toast({
         title: "Registration Failed",
@@ -289,38 +290,26 @@ export default function AffiliatesPage() {
               
               <h2 className="text-2xl font-bold mb-2">You're In!</h2>
               <p className="text-gray-400 mb-6">
-                Share this link to start earning commission.
+                We've sent your referral code and link to your email. Check your inbox!
               </p>
 
-              <div className="bg-black/30 rounded-xl p-4 mb-4">
-                <p className="text-xs text-gray-500 mb-2">Your Referral Code</p>
-                <p className="text-2xl font-mono font-bold text-[#00FF9F]">
-                  {referralCode}
-                </p>
-              </div>
-
               <div className="bg-black/30 rounded-xl p-4 mb-6">
-                <p className="text-xs text-gray-500 mb-2">Your Referral Link</p>
-                <p className="text-sm font-mono text-gray-300 break-all">
-                  {referralLink}
+                <p className="text-gray-300 mb-4">
+                  📧 We've sent your <span className="text-[#00FF9F] font-bold">referral code</span> and <span className="text-[#00FF9F] font-bold">unique link</span> to:
                 </p>
+                <p className="text-xl font-mono text-[#00FF9F]">{email}</p>
               </div>
+              
+              <p className="text-sm text-gray-400 mb-4">
+                Already registered? Enter the same email to resend your code.
+              </p>
 
               <button
-                onClick={() => copyToClipboard(referralLink)}
-                className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all flex items-center justify-center gap-2"
+                onClick={() => { setReferralCode(""); setEmail(""); setName(""); }}
+                className="w-full py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"
               >
-                {copied ? (
-                  <>
-                    <Check className="w-5 h-5" />
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-5 h-5" />
-                    Copy Referral Link
-                  </>
-                )}
+                <ArrowRight className="w-5 h-5" />
+                Register Another Email
               </button>
             </motion.div>
           )}
