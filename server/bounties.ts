@@ -394,7 +394,7 @@ async function fetchBountiesFromGitHub(): Promise<{
   const buildHeaders = (useToken: boolean): Record<string, string> => {
     const headers: Record<string, string> = {
       Accept: "application/vnd.github+json",
-      "User-Agent": "Cortex-Linux-Bounties-Board",
+      "User-Agent": "CX-Linux-Bounties-Board",
       "X-GitHub-Api-Version": "2022-11-28",
     };
     if (useToken && token) {

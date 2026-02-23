@@ -714,7 +714,7 @@ const SERVER_SETUP = {
       ],
     },
     {
-      name: "CORTEX AI",
+      name: "CX AI",
       emoji: "🤖",
       channels: [
         {

@@ -57,7 +57,7 @@ export class DatabaseStorage implements IStorage {
       teamOrSolo: data.teamOrSolo,
       teamName: data.teamOrSolo === "team" ? data.teamName : null,
       projectIdea: data.contributionPlan,
-      usedCortexBefore: (data as any).usedCortexBefore,
+      usedCXBefore: (data as any).usedCXBefore,
       howHeardAboutUs: (data as any).howHeardAboutUs,
     }).returning();
     return result[0];

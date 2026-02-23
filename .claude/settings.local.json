@@ -37,7 +37,7 @@
       "Bash(xargs:*)",
       "Bash(pkill:*)",
       "Bash(NODE_ENV=development tsx:*)",
-      "WebFetch(domain:cortexlinux.com)",
+      "WebFetch(domain:cxlinux.com)",
       "WebSearch",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:news.ycombinator.com)",
