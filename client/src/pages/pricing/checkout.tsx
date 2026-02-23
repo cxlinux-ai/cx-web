@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   CreditCard,
   Shield,
@@ -11,17 +11,22 @@ import {
   Zap,
   Server,
   Gift,
+  Mail,
+  Key,
+  Copy,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
+const LICENSE_SERVER = "https://license.cxlinux.com";
+
 interface PlanDetails {
   id: string;
   name: string;
   monthlyPrice: number;
-  annualPrice: number;  // Actual annual price (not monthly equivalent)
+  annualPrice: number;
   features: string[];
   stripePriceIdMonthly: string;
   stripePriceIdAnnual: string;
@@ -50,7 +55,7 @@ const plans: Record<string, PlanDetails> = {
     id: "pro",
     name: "Pro",
     monthlyPrice: 20,
-    annualPrice: 200,  // $200/year (actual Stripe price)
+    annualPrice: 200,
     features: [
       "Cloud LLMs (GPT-4, Claude)",
       "Web console dashboard",
@@ -66,7 +71,7 @@ const plans: Record<string, PlanDetails> = {
     id: "team",
     name: "Team",
     monthlyPrice: 99,
-    annualPrice: 990,  // $990/year
+    annualPrice: 990,
     features: [
       "Everything in Pro",
       "Team workspaces",
@@ -82,7 +87,7 @@ const plans: Record<string, PlanDetails> = {
     id: "enterprise",
     name: "Enterprise",
     monthlyPrice: 299,
-    annualPrice: 2990,  // $2990/year
+    annualPrice: 2990,
     features: [
       "SSO/LDAP integration",
       "Audit logs & compliance",
@@ -95,6 +100,8 @@ const plans: Record<string, PlanDetails> = {
     icon: Server,
   },
 };
+
+type FreeStep = "form" | "otp" | "success";
 
 export default function CheckoutPage() {
   const [, navigate] = useLocation();
@@ -112,16 +119,20 @@ export default function CheckoutPage() {
   const [referralCode, setReferralCode] = useState(initialReferralCode);
   const [isLoading, setIsLoading] = useState(false);
   const [isAnnual, setIsAnnual] = useState(billingCycle === "annual");
+  
+  // Free tier OTP flow
+  const [freeStep, setFreeStep] = useState<FreeStep>("form");
+  const [otp, setOtp] = useState("");
+  const [licenseKey, setLicenseKey] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const plan = plans[planId] || plans.pro;
   const priceId = isAnnual ? plan.stripePriceIdAnnual : plan.stripePriceIdMonthly;
   
-  // Calculate savings for annual
   const monthlyCostIfAnnual = plan.annualPrice / 12;
   const annualSavings = (plan.monthlyPrice * 12) - plan.annualPrice;
   const savingsPercent = Math.round((annualSavings / (plan.monthlyPrice * 12)) * 100);
 
-  // Store referral code in localStorage for persistence
   useEffect(() => {
     const urlRef = params.get("ref");
     if (urlRef) {
@@ -133,7 +144,107 @@ export default function CheckoutPage() {
     setIsAnnual(billingCycle === "annual");
   }, [billingCycle]);
 
-  const handleCheckout = async (e: React.FormEvent) => {
+  // Handle free tier OTP send
+  const handleSendOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !name) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in your name and email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${LICENSE_SERVER}/api/v1/licenses/send-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Check if user already has a license
+        if (data.existing && data.license_key) {
+          setLicenseKey(data.license_key);
+          setFreeStep("success");
+          toast({
+            title: "Welcome back!",
+            description: "You already have a license. Here's your key.",
+          });
+          return;
+        }
+        throw new Error(data.error || "Failed to send verification code");
+      }
+
+      setFreeStep("otp");
+      toast({
+        title: "Check your email",
+        description: "We sent a 6-digit verification code.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to send verification code.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle free tier OTP verification
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!otp || otp.length !== 6) {
+      toast({
+        title: "Invalid Code",
+        description: "Please enter the 6-digit verification code.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${LICENSE_SERVER}/api/v1/licenses/verify-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Verification failed");
+      }
+
+      setLicenseKey(data.license_key);
+      setFreeStep("success");
+      toast({
+        title: "Welcome to CX Linux!",
+        description: "Your free license is ready.",
+      });
+    } catch (error) {
+      toast({
+        title: "Verification Failed",
+        description: error instanceof Error ? error.message : "Invalid or expired code.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle paid tier checkout
+  const handlePaidCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !name) {
@@ -150,37 +261,9 @@ export default function CheckoutPage() {
     try {
       const ref = referralCode || localStorage.getItem("cx_referral") || "";
       
-      // Handle free tier (Core) - just register and redirect to success
-      if (plan.id === "core") {
-        const response = await fetch("/api/register-free-tier", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            name,
-            company,
-            referralCode: ref,
-          }),
-        });
-
-        // Even if registration fails, proceed to success page (best effort)
-        if (!response.ok) {
-          console.warn("Free tier registration failed, proceeding anyway");
-        }
-
-        // Redirect to success page for free tier
-        navigate(`/pricing/success?plan=core&email=${encodeURIComponent(email)}`);
-        return;
-      }
-      
-      // Paid tiers - Stripe checkout
       const response = await fetch("/api/stripe/checkout-session", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           name,
@@ -206,22 +289,248 @@ export default function CheckoutPage() {
         throw new Error("No checkout URL returned");
       }
     } catch (error) {
-      console.error("Checkout error:", error);
       toast({
         title: "Checkout Error",
-        description: error instanceof Error ? error.message : "Failed to start checkout. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to start checkout.",
         variant: "destructive",
       });
       setIsLoading(false);
     }
   };
 
+  const copyLicenseKey = () => {
+    navigator.clipboard.writeText(licenseKey);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+    toast({ title: "Copied!", description: "License key copied to clipboard." });
+  };
+
+  // Free tier flow
+  if (plan.id === "core") {
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <div className="max-w-2xl mx-auto px-4 py-24">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Pricing
+          </Link>
+
+          <AnimatePresence mode="wait">
+            {freeStep === "form" && (
+              <motion.div
+                key="form"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+              >
+                <h1 className="text-3xl font-bold mb-2">Get CX Core Free</h1>
+                <p className="text-gray-400 mb-8">
+                  Register to get your free license key. No credit card required.
+                </p>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
+                  <h3 className="font-semibold mb-4 flex items-center gap-2">
+                    <Server className="w-5 h-5 text-[#00FF9F]" />
+                    CX Core includes:
+                  </h3>
+                  <ul className="space-y-2">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-gray-300">
+                        <Check className="w-4 h-4 text-green-400" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <form onSubmit={handleSendOTP} className="space-y-6">
+                  <div>
+                    <Label htmlFor="name" className="text-gray-300">
+                      Full Name <span className="text-red-400">*</span>
+                    </Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="John Doe"
+                      required
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="email" className="text-gray-300">
+                      Email Address <span className="text-red-400">*</span>
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="john@example.com"
+                      required
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-5 h-5" />
+                        Send Verification Code
+                      </>
+                    )}
+                  </button>
+                </form>
+              </motion.div>
+            )}
+
+            {freeStep === "otp" && (
+              <motion.div
+                key="otp"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+              >
+                <h1 className="text-3xl font-bold mb-2">Check Your Email</h1>
+                <p className="text-gray-400 mb-8">
+                  We sent a 6-digit code to <span className="text-[#00FF9F]">{email}</span>
+                </p>
+
+                <form onSubmit={handleVerifyOTP} className="space-y-6">
+                  <div>
+                    <Label htmlFor="otp" className="text-gray-300">
+                      Verification Code
+                    </Label>
+                    <Input
+                      id="otp"
+                      type="text"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                      placeholder="000000"
+                      maxLength={6}
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] text-center text-2xl tracking-widest font-mono"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading || otp.length !== 6}
+                    className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Verifying...
+                      </>
+                    ) : (
+                      <>
+                        <Check className="w-5 h-5" />
+                        Verify & Get License
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setFreeStep("form")}
+                    className="w-full py-2 text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    ← Use different email
+                  </button>
+                </form>
+              </motion.div>
+            )}
+
+            {freeStep === "success" && (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#00FF9F]/20 flex items-center justify-center">
+                  <Check className="w-10 h-10 text-[#00FF9F]" />
+                </div>
+
+                <h1 className="text-3xl font-bold mb-2">Welcome to CX Linux!</h1>
+                <p className="text-gray-400 mb-8">
+                  Your free license is ready. We've also sent it to your email.
+                </p>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
+                  <p className="text-sm text-gray-400 mb-3">Your License Key</p>
+                  <div className="flex items-center justify-center gap-3">
+                    <code className="text-xl font-mono text-[#00FF9F] font-bold">
+                      {licenseKey}
+                    </code>
+                    <button
+                      onClick={copyLicenseKey}
+                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    >
+                      {copied ? (
+                        <Check className="w-5 h-5 text-green-400" />
+                      ) : (
+                        <Copy className="w-5 h-5 text-gray-400" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-[#1E1E1E] rounded-xl p-6 text-left mb-8">
+                  <h3 className="font-semibold mb-4 flex items-center gap-2">
+                    <Key className="w-5 h-5 text-[#00FF9F]" />
+                    Next Steps
+                  </h3>
+                  <ol className="space-y-3 text-sm text-gray-300">
+                    <li className="flex gap-3">
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                      <span>Install CX Terminal from <a href="/getting-started" className="text-[#00FF9F] hover:underline">Getting Started</a></span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                      <span>Run: <code className="bg-black/50 px-2 py-1 rounded text-[#00FF9F]">cx license activate {licenseKey}</code></span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                      <span>Start using AI-powered terminal commands!</span>
+                    </li>
+                  </ol>
+                </div>
+
+                <Link
+                  href="/getting-started"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all"
+                >
+                  Go to Getting Started
+                  <ArrowLeft className="w-4 h-4 rotate-180" />
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
+
+  // Paid tier flow (unchanged)
   return (
-    <div id="checkout-page-container" className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white">
       <div className="max-w-6xl mx-auto px-4 py-24">
-        {/* Back Link */}
         <Link
-          id="checkout-back-link"
           href="/pricing"
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
         >
@@ -230,20 +539,14 @@ export default function CheckoutPage() {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left Column - Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 id="checkout-title" className="text-3xl font-bold mb-2">
-              Complete Your Subscription
-            </h1>
-            <p id="checkout-subtitle" className="text-gray-400 mb-8">
-              Secure checkout powered by Stripe.
-            </p>
+            <h1 className="text-3xl font-bold mb-2">Complete Your Subscription</h1>
+            <p className="text-gray-400 mb-8">Secure checkout powered by Stripe.</p>
 
-            {/* Referral Badge - only show if code came from URL */}
             {initialReferralCode && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -260,8 +563,8 @@ export default function CheckoutPage() {
               </motion.div>
             )}
 
-            <form id="checkout-form" onSubmit={handleCheckout} className="space-y-6">
-              <div id="checkout-field-name">
+            <form onSubmit={handlePaidCheckout} className="space-y-6">
+              <div>
                 <Label htmlFor="name" className="text-gray-300">
                   Full Name <span className="text-red-400">*</span>
                 </Label>
@@ -276,7 +579,7 @@ export default function CheckoutPage() {
                 />
               </div>
 
-              <div id="checkout-field-email">
+              <div>
                 <Label htmlFor="email" className="text-gray-300">
                   Email Address <span className="text-red-400">*</span>
                 </Label>
@@ -291,7 +594,7 @@ export default function CheckoutPage() {
                 />
               </div>
 
-              <div id="checkout-field-company">
+              <div>
                 <Label htmlFor="company" className="text-gray-300">
                   Company Name <span className="text-gray-500">(Optional)</span>
                 </Label>
@@ -305,8 +608,7 @@ export default function CheckoutPage() {
                 />
               </div>
 
-              {/* Referral Code */}
-              <div id="checkout-field-referral">
+              <div>
                 <Label htmlFor="referral" className="text-gray-300">
                   Referral Code <span className="text-gray-500">(Optional)</span>
                 </Label>
@@ -317,29 +619,21 @@ export default function CheckoutPage() {
                   onChange={(e) => {
                     const code = e.target.value.toUpperCase();
                     setReferralCode(code);
-                    if (code) {
-                      localStorage.setItem("cx_referral", code);
-                    }
+                    if (code) localStorage.setItem("cx_referral", code);
                   }}
                   placeholder="Enter referral code"
                   className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] font-mono uppercase"
                 />
-                <p className="text-xs text-gray-500 mt-1">
-                  Have a friend who uses CX Linux? Enter their code here.
-                </p>
               </div>
 
-              {/* Billing Toggle */}
-              <div id="checkout-billing-toggle" className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
                 <p className="text-sm text-gray-400 mb-3">Billing Cycle</p>
                 <div className="flex gap-3">
                   <button
                     type="button"
                     onClick={() => setIsAnnual(false)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
-                      !isAnnual
-                        ? "bg-[#00FF9F] text-black"
-                        : "bg-white/5 text-gray-400 hover:bg-white/10"
+                      !isAnnual ? "bg-[#00FF9F] text-black" : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
                     Monthly
@@ -349,35 +643,26 @@ export default function CheckoutPage() {
                     type="button"
                     onClick={() => setIsAnnual(true)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
-                      isAnnual
-                        ? "bg-[#00FF9F] text-black"
-                        : "bg-white/5 text-gray-400 hover:bg-white/10"
+                      isAnnual ? "bg-[#00FF9F] text-black" : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
                     Annual
                     <span className="block text-xs mt-1 opacity-75">
-                      ${plan.annualPrice}/yr{" "}
-                      <span className="text-green-400">Save {savingsPercent}%</span>
+                      ${plan.annualPrice}/yr <span className="text-green-400">Save {savingsPercent}%</span>
                     </span>
                   </button>
                 </div>
               </div>
 
               <button
-                id="checkout-submit-btn"
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] hover:shadow-[0_0_20px_rgba(0,255,159,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
                     Processing...
-                  </>
-                ) : plan.monthlyPrice === 0 ? (
-                  <>
-                    <Check className="w-5 h-5" />
-                    Get Started Free
                   </>
                 ) : (
                   <>
@@ -387,25 +672,22 @@ export default function CheckoutPage() {
                 )}
               </button>
 
-              {/* Security Note */}
-              <div id="checkout-security-note" className="flex items-center justify-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
                 <Lock className="w-4 h-4" />
                 Secured by Stripe. Your payment info is encrypted.
               </div>
             </form>
           </motion.div>
 
-          {/* Right Column - Order Summary */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div id="checkout-order-summary" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sticky top-24">
-              <h2 id="checkout-summary-title" className="text-xl font-bold mb-6">Order Summary</h2>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sticky top-24">
+              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
 
-              {/* Plan Card */}
-              <div id="checkout-plan-card" className="bg-gradient-to-r from-[#00FF9F]/10 to-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-xl p-4 mb-6">
+              <div className="bg-gradient-to-r from-[#00FF9F]/10 to-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 bg-[#00FF9F]/20 rounded-lg flex items-center justify-center">
                     <plan.icon className="w-5 h-5 text-[#00FF9F]" />
@@ -427,20 +709,12 @@ export default function CheckoutPage() {
                 </ul>
               </div>
 
-              {/* Price Breakdown */}
-              <div id="checkout-price-breakdown" className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-400">
-                  <span>{plan.name} {plan.monthlyPrice > 0 ? `(${isAnnual ? "Annual" : "Monthly"})` : ""}</span>
-                  <span>
-                    {plan.monthlyPrice === 0 
-                      ? "Free"
-                      : isAnnual 
-                        ? `$${plan.annualPrice}/yr`
-                        : `$${plan.monthlyPrice}/mo`
-                    }
-                  </span>
+                  <span>{plan.name} ({isAnnual ? "Annual" : "Monthly"})</span>
+                  <span>{isAnnual ? `$${plan.annualPrice}/yr` : `$${plan.monthlyPrice}/mo`}</span>
                 </div>
-                {isAnnual && plan.monthlyPrice > 0 && (
+                {isAnnual && (
                   <div className="flex justify-between text-green-400 text-sm">
                     <span>You save vs monthly</span>
                     <span>-${annualSavings}/yr</span>
@@ -448,17 +722,12 @@ export default function CheckoutPage() {
                 )}
                 <div className="border-t border-white/10 pt-3">
                   <div className="flex justify-between text-lg font-bold">
-                    <span>{plan.monthlyPrice === 0 ? "Price" : "Due today"}</span>
+                    <span>Due today</span>
                     <span className="text-green-400">
-                      {plan.monthlyPrice === 0 
-                        ? "Free forever"
-                        : isAnnual 
-                          ? `$${plan.annualPrice}`
-                          : `$${plan.monthlyPrice}`
-                      }
+                      {isAnnual ? `$${plan.annualPrice}` : `$${plan.monthlyPrice}`}
                     </span>
                   </div>
-                  {isAnnual && plan.monthlyPrice > 0 && (
+                  {isAnnual && (
                     <p className="text-xs text-gray-500 mt-1">
                       That's ~${monthlyCostIfAnnual.toFixed(2)}/mo
                     </p>
@@ -466,21 +735,19 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Guarantee */}
-              <div id="checkout-guarantee" className="bg-green-500/10 border border-green-400/30 rounded-lg p-4 mb-6">
+              <div className="bg-green-500/10 border border-green-400/30 rounded-lg p-4 mb-6">
                 <div className="flex items-start gap-3">
                   <Shield className="w-5 h-5 text-green-400 mt-0.5" />
                   <div>
                     <p className="font-semibold text-green-400">30-Day Money Back</p>
                     <p className="text-sm text-gray-400">
-                      Not satisfied? Get a full refund within 30 days, no questions asked.
+                      Not satisfied? Get a full refund within 30 days.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Trust Signals */}
-              <div id="checkout-trust-signals" className="flex items-center justify-center gap-6 text-gray-500 text-sm">
+              <div className="flex items-center justify-center gap-6 text-gray-500 text-sm">
                 <div className="flex items-center gap-1">
                   <Lock className="w-4 h-4" />
                   <span>SSL Encrypted</span>
