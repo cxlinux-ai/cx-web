@@ -912,12 +912,15 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
 // =============================================================================
 
 const PRICE_TO_TIER: Record<string, { name: string; prefix: string }> = {
-  'price_1SpotMJ4X1wkC4EspVzV5tT6': { name: 'Pro', prefix: 'CX-PRO-' },
-  'price_1SpotMJ4X1wkC4Es3tuZGVHY': { name: 'Pro', prefix: 'CX-PRO-' },
-  'price_1SpotNJ4X1wkC4EsN13pV2dA': { name: 'Enterprise', prefix: 'CX-ENT-' },
-  'price_1SpotNJ4X1wkC4Esw5ienNNQ': { name: 'Enterprise', prefix: 'CX-ENT-' },
-  'price_1SpotOJ4X1wkC4Es7ZqOzh1H': { name: 'Managed', prefix: 'CX-MNG-' },
-  'price_1SpotOJ4X1wkC4EslmMmWWZI': { name: 'Managed', prefix: 'CX-MNG-' },
+  // Pro (Core+)
+  'price_1SqYQjJ4X1wkC4EsLDB6ZbOk': { name: 'Pro', prefix: 'CX-PRO-' },
+  'price_1SqYQjJ4X1wkC4EslIkZEJFZ': { name: 'Pro', prefix: 'CX-PRO-' },
+  // Team (Pro+)
+  'price_1SqYQkJ4X1wkC4Es8OMt79pZ': { name: 'Team', prefix: 'CX-TEAM-' },
+  'price_1SqYQkJ4X1wkC4EsWYwUgceu': { name: 'Team', prefix: 'CX-TEAM-' },
+  // Enterprise
+  'price_1SqYQkJ4X1wkC4EsCFVBHYnT': { name: 'Enterprise', prefix: 'CX-ENT-' },
+  'price_1SqYQlJ4X1wkC4EsJcPW7Of2': { name: 'Enterprise', prefix: 'CX-ENT-' },
 };
 
 function generateLicenseKey(prefix: string): string {
