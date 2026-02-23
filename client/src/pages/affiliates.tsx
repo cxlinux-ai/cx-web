@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { updateSEO, seoConfigs } from "@/lib/seo";
 import { 
   Gift, 
   DollarSign, 
@@ -22,6 +23,11 @@ type Step = "form" | "otp" | "success";
 
 export default function AffiliatesPage() {
   const { toast } = useToast();
+  
+  useEffect(() => {
+    const cleanup = updateSEO(seoConfigs.affiliates);
+    return cleanup;
+  }, []);
   
   const [step, setStep] = useState<Step>("form");
   

@@ -524,5 +524,11 @@ export const seoConfigs = {
         ]
       }
     }
+  },
+  affiliates: {
+    title: 'Affiliate Program - CX Linux | Earn 10% Recurring Commission',
+    description: 'Join the CX Linux affiliate program and earn 10% recurring commission on every referral. Easy to join, transparent payouts, and dedicated support.',
+    canonicalPath: '/affiliates',
+    keywords: ['CX Linux affiliate', 'affiliate program', 'tech affiliate', 'Linux affiliate', 'recurring commission'],
   }
 };
