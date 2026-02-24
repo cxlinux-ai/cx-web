@@ -63,15 +63,19 @@ CX Linux is ready for production release. All critical systems have been audited
 | cx-ask (AI commands) | ✅ | ✅ | ✅ | ✅ |
 | cx-status | ✅ | ✅ | ✅ | ✅ |
 | Local LLM support | ✅ | ✅ | ✅ | ✅ |
-| Cloud LLM (Anthropic) | ❌ | ✅ | ✅ | ✅ |
+| Cloud LLM (Anthropic) | ❌ | ❌ | ✅ | ✅ |
 | cx-demo mode | ❌ | ✅ | ✅ | ✅ |
+| External APIs | ❌ | ✅ | ✅ | ✅ |
 | Email support | ❌ | ✅ | ✅ | ✅ |
-| Priority support | ❌ | ❌ | ✅ | ✅ |
-| API access | ❌ | ❌ | ✅ | ✅ |
+| API access | ❌ | ✅ | ✅ | ✅ |
+| Team dashboard | ❌ | ❌ | ✅ | ✅ |
+| Audit logging | ❌ | ❌ | ✅ | ✅ |
+| Priority support | ❌ | ❌ | ❌ | ✅ |
 | SSO integration | ❌ | ❌ | ❌ | ✅ |
-| Audit logging | ❌ | ❌ | ❌ | ✅ |
 | Compliance reports | ❌ | ❌ | ❌ | ✅ |
 | Dedicated support | ❌ | ❌ | ❌ | ✅ |
+
+> **Note:** Cloud LLM is available from Team tier and above. Pro tier uses local LLM only.
 
 ---
 
@@ -293,15 +297,15 @@ const COMMISSION_RATE = 0.10; // 10%
 
 // Price mapping (cents)
 const PRICE_AMOUNTS = {
-  'price_1SqYQjJ4X1wkC4EsLDB6ZbOk': 2900,   // Pro monthly
-  'price_1SqYQjJ4X1wkC4EslIkZEJFZ': 29000,  // Pro annual
-  'price_1SqYQkJ4X1wkC4Es8OMt79pZ': 9900,   // Team monthly
-  'price_1SqYQkJ4X1wkC4EsWYwUgceu': 99000,  // Team annual
-  'price_1SqYQkJ4X1wkC4EsCFVBHYnT': 29900,  // Enterprise monthly
-  'price_1SqYQlJ4X1wkC4EsJcPW7Of2': 299000, // Enterprise annual
+  'price_1SqYQjJ4X1wkC4EsLDB6ZbOk': 2000,   // Pro monthly ($20)
+  'price_1SqYQjJ4X1wkC4EslIkZEJFZ': 20000,  // Pro annual ($200)
+  'price_1SqYQkJ4X1wkC4Es8OMt79pZ': 9900,   // Team monthly ($99)
+  'price_1SqYQkJ4X1wkC4EsWYwUgceu': 99000,  // Team annual ($990)
+  'price_1SqYQkJ4X1wkC4EsCFVBHYnT': 29900,  // Enterprise monthly ($299)
+  'price_1SqYQlJ4X1wkC4EsJcPW7Of2': 299000, // Enterprise annual ($2990)
 };
 
-// Example: Pro annual = $290 → $29 commission per year
+// Example: Pro annual = $200 → $20 commission per year
 ```
 
 ---
@@ -560,7 +564,112 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 
 ---
 
-## 12. Conclusion
+## 12. End-to-End Verification Testing
+
+### 12.1 Part A: API & Website Testing (2026-02-24)
+
+All endpoints were tested and verified live:
+
+| Component | Endpoint | Status |
+|-----------|----------|--------|
+| Main Website | https://cxlinux.com | ✅ 200 OK |
+| Pricing Page | https://cxlinux.com/pricing | ✅ 200 OK |
+| Download Page | https://cxlinux.com/download | ✅ 200 OK |
+| Affiliates Page | https://cxlinux.com/affiliates | ✅ 200 OK |
+| License Server Health | https://license.cxlinux.com/health | ✅ v1.5.0 |
+| APT GPG Key | https://repo.cxlinux.com/key.gpg | ✅ 200 OK |
+| APT Release | https://repo.cxlinux.com/apt/dists/stable/Release | ✅ 200 OK |
+| APT Packages | https://repo.cxlinux.com/apt/dists/stable/main/binary-amd64/Packages | ✅ 200 OK |
+
+### 12.2 License Server API Testing
+
+Complete license lifecycle tested:
+
+| Operation | Endpoint | Result |
+|-----------|----------|--------|
+| Create License | POST /admin/create-license | ✅ License generated |
+| Validate | POST /api/v1/licenses/validate | ✅ Returns tier & features |
+| Activate | POST /api/v1/licenses/activate | ✅ Device activated |
+| Send OTP | POST /api/v1/licenses/send-otp | ✅ Email sent |
+| Deactivate | POST /api/v1/licenses/deactivate | ✅ Device removed |
+| Referral Register | POST /api/v1/referrals/register | ✅ Code generated |
+| Admin Pending | GET /admin/referrals/pending | ✅ Returns payouts |
+
+**Test License Created:**
+```
+License Key: CX-PRO-7QGS-SC3S-VUXW-ZE6K
+Tier: pro
+Systems Allowed: 5
+Features: cx-ask, cx-status, cx-demo, local-llm, external-apis, email-support, api-access
+```
+
+### 12.3 Part B: Real Installation Testing (GitHub Actions)
+
+Full installation test on Ubuntu 24.04 via GitHub Actions:
+
+**Workflow:** `.github/workflows/apt-test.yml`  
+**Run ID:** 22359079286  
+**Date:** 2026-02-24T16:04:14Z  
+**Result:** ✅ SUCCESS
+
+#### Installation Steps Verified:
+```bash
+# All steps completed successfully
+✅ GPG key imported: /etc/apt/keyrings/cxlinux.gpg
+✅ APT source added: /etc/apt/sources.list.d/cxlinux.list
+✅ apt update: Downloaded InRelease from repo.cxlinux.com
+✅ apt install: cx-terminal (20260223-145346-e97bbc7b) installed
+✅ Dependencies resolved: libxcb-image0, libxcb-util1, libxcb-xkb1, libxkbcommon-x11-0
+```
+
+#### Binary Verification:
+```
+Location: /usr/bin/cx-terminal
+Version: cx-terminal 20260223-145346-e97bbc7b
+Package Size: 40.8 MB
+```
+
+#### Runtime Test Output:
+```
+CX Terminal - AI-Native Terminal for CX Linux
+https://cxlinux.com
+
+Commands:
+  start                  Start the GUI
+  ssh                    Establish an ssh session
+  serial                 Open a serial port
+  connect                Connect to wezterm multiplexer
+  ls-fonts               Display information about fonts
+  show-keys              Show key assignments
+  cli                    Interact with experimental mux server
+  imgcat                 Output an image to the terminal
+  record                 Record a terminal session
+  replay                 Replay an asciicast terminal session
+  shell-completion       Generate shell completion information
+  ask                    Ask AI a question or request an action
+  install                Install packages using natural language
+  setup                  Setup systems using natural language
+  what                   Ask about your system
+  fix                    Fix errors using AI assistance
+  explain                Explain a command or concept
+  daemon                 Manage the CX daemon
+  ai                     Manage AI models
+```
+
+### 12.4 Verification Summary
+
+| Test Category | Items Tested | Pass Rate |
+|---------------|--------------|-----------|
+| Website Endpoints | 4 | 100% |
+| APT Repository | 4 | 100% |
+| License API | 7 | 100% |
+| Package Installation | 5 | 100% |
+| Binary Execution | 3 | 100% |
+| **Total** | **23** | **100%** |
+
+---
+
+## 13. Conclusion
 
 **CX Linux is READY FOR RELEASE.**
 
@@ -574,10 +683,14 @@ All systems have been thoroughly audited and tested:
 ✅ Abuse prevention in place  
 ✅ Security measures implemented  
 ✅ Code quality verified  
+✅ **APT repository installation verified (GitHub Actions)**  
+✅ **Binary execution verified on Ubuntu 24.04**  
+✅ **All 23 verification tests passed (100%)**  
 
 **Recommendation:** Proceed with public launch.
 
 ---
 
 *Report generated: February 24, 2026*  
+*Verification completed: February 24, 2026 23:11 GMT+7*  
 *Next review: Post-launch (1 week)*
