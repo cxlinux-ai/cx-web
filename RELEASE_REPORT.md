@@ -39,7 +39,7 @@ CX Linux is ready for production release. All critical systems have been audited
 | Stripe | Payment processing | ✅ Configured |
 | Resend | Transactional emails | ✅ Configured |
 | Cloudflare D1 | License database | ✅ Active |
-| Rewardful | Affiliate tracking | ✅ Integrated |
+| Custom Referral System | Affiliate tracking | ✅ Built-in (license server) |
 | Google Analytics | Usage analytics | ✅ Tracking |
 
 ---
@@ -50,7 +50,7 @@ CX Linux is ready for production release. All critical systems have been audited
 
 | Plan | Monthly | Annual | Systems | Features |
 |------|---------|--------|---------|----------|
-| **Community** | Free | Free | 1 | cx-ask, cx-status, local-llm |
+| **CX Core** | Free | Free | 1 | cx-ask, cx-status, local-llm |
 | **Pro** | $29/mo | $290/yr | 3 | + cloud-llm, cx-demo, email support |
 | **Team** | $99/mo | $990/yr | 10 | + priority support, API access |
 | **Enterprise** | $299/mo | $2,990/yr | Unlimited | + SSO, audit-log, compliance, dedicated support |
@@ -58,7 +58,7 @@ CX Linux is ready for production release. All critical systems have been audited
 
 ### 2.2 Feature Matrix
 
-| Feature | Community | Pro | Team | Enterprise |
+| Feature | CX Core | Pro | Team | Enterprise |
 |---------|-----------|-----|------|------------|
 | cx-ask (AI commands) | ✅ | ✅ | ✅ | ✅ |
 | cx-status | ✅ | ✅ | ✅ | ✅ |
@@ -84,12 +84,12 @@ CX Linux is ready for production release. All critical systems have been audited
 | Device limit | 1 system | License server activation check |
 | Cloud LLM | Disabled | Feature flag in license response |
 | Demo mode | Disabled | Feature flag in license response |
-| Support | Community only | No SLA |
+| Support | Discord only | No SLA |
 
 ### 3.2 Registration Requirement
 
 - **Free users MUST register** to use CX Terminal
-- Registration generates a Community license key
+- Registration generates a CX Core license key
 - License is validated at application startup
 - Grace period: 7 days offline before re-validation required
 
@@ -218,7 +218,7 @@ CX Linux is ready for production release. All critical systems have been audited
 | Parameter | Value |
 |-----------|-------|
 | Commission rate | 10% recurring |
-| Cookie duration | 60 days (via Rewardful) |
+| Cookie duration | 60 days |
 | Payout methods | PayPal, Bank Transfer, Crypto |
 | Minimum payout | $50 |
 | Payout schedule | Monthly (15th) |
@@ -322,7 +322,7 @@ const PRICE_AMOUNTS = {
 
 | Tier | Max Devices | Enforcement |
 |------|-------------|-------------|
-| Community | 1 | Hard limit at activation |
+| CX Core | 1 | Hard limit at activation |
 | Pro | 3 | Hard limit at activation |
 | Team | 10 | Hard limit at activation |
 | Enterprise | Unlimited | No limit |
