@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 
 const LICENSE_SERVER = "https://license.cxlinux.com";
 
@@ -490,6 +491,7 @@ export default function AffiliatesPage() {
           )}
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }
