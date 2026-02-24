@@ -15,11 +15,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.googletagmanager.com", "https://js.stripe.com", "https://r.wdfl.co", "https://cdn.retellai.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://www.googletagmanager.com", "https://js.stripe.com", "https://cdn.retellai.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "https://api.github.com", "https://api.anthropic.com", "https://api.stripe.com", "https://r.wdfl.co", "wss:", "ws:"],
+      connectSrc: ["'self'", "https://api.github.com", "https://api.anthropic.com", "https://api.stripe.com", "wss:", "ws:"],
       frameSrc: ["'self'", "https://js.stripe.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
