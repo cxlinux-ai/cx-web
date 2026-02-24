@@ -739,9 +739,9 @@ export default function CheckoutPage() {
                 <div className="flex items-start gap-3">
                   <Shield className="w-5 h-5 text-green-400 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-green-400">30-Day Money Back</p>
+                    <p className="font-semibold text-green-400">7-Day Money Back</p>
                     <p className="text-sm text-gray-400">
-                      Not satisfied? Get a full refund within 30 days.
+                      Not satisfied? Get a full refund within 7 days.
                     </p>
                   </div>
                 </div>

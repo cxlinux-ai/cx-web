@@ -97,7 +97,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "Is there a minimum commitment?",
-        a: "No minimum commitment for monthly plans - you can cancel anytime. Annual plans have a 12-month commitment but include a 30-day money-back guarantee. Enterprise contracts may have custom terms negotiated during the sales process.",
+        a: "No minimum commitment for monthly plans - you can cancel anytime. Annual plans have a 12-month commitment but include a 7-day money-back guarantee. Enterprise contracts may have custom terms negotiated during the sales process.",
       },
       {
         q: "Can I add team members to my plan?",
@@ -115,7 +115,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "What's your refund policy?",
-        a: "We offer a 30-day money-back guarantee for all new subscriptions. If you're not satisfied within the first 30 days, contact support for a full refund - no questions asked.\n\nAfter 30 days:\n• Monthly plans: No refunds for partial months\n• Annual plans: Prorated refund minus a 10% early termination fee",
+        a: "We offer a 7-day money-back guarantee for all new subscriptions. If you're not satisfied within the first 7 days, contact support for a full refund - no questions asked.\n\nAfter 7 days:\n• Monthly plans: No refunds for partial months\n• Annual plans: Prorated refund minus a 10% early termination fee",
       },
       {
         q: "Can I pause my subscription instead of canceling?",
@@ -123,7 +123,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "What happens to my data after I cancel?",
-        a: "When you cancel, we retain your data for 30 days in case you decide to return. After 30 days:\n\n• Account data is permanently deleted\n• Usage logs are anonymized for analytics\n• You can request immediate deletion by contacting support\n\nWe comply with GDPR, CCPA, and other data protection regulations.",
+        a: "When you cancel, we retain your data for 30 days in case you decide to return. After 7 days:\n\n• Account data is permanently deleted\n• Usage logs are anonymized for analytics\n• You can request immediate deletion by contacting support\n\nWe comply with GDPR, CCPA, and other data protection regulations.",
       },
     ],
   },

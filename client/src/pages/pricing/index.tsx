@@ -211,7 +211,7 @@ export default function PricingPage() {
             <div className="flex items-center justify-center gap-6 mb-8 text-sm text-gray-500">
               <span className="flex items-center gap-2">
                 <RefreshCw className="w-4 h-4" />
-                30-day money back
+                7-day money back
               </span>
               <span className="flex items-center gap-2">
                 <Lock className="w-4 h-4" />

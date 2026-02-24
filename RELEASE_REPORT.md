@@ -204,7 +204,7 @@ CX Linux is ready for production release. All critical systems have been audited
 
 ### 4.4 Money-Back Guarantee
 
-- **30-day full refund** policy advertised
+- **7-day full refund** policy advertised
 - Refunds processed through Stripe dashboard
 - Automatic license revocation on refund webhook
 - No partial refunds for annual plans
