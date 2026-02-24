@@ -51,8 +51,8 @@ CX Linux is ready for production release. All critical systems have been audited
 | Plan | Monthly | Annual | Systems | Features |
 |------|---------|--------|---------|----------|
 | **CX Core** | Free | Free | 1 | cx-ask, cx-status, local-llm |
-| **Pro** | $29/mo | $290/yr | 3 | + cloud-llm, cx-demo, email support |
-| **Team** | $99/mo | $990/yr | 10 | + priority support, API access |
+| **Pro** | $20/mo | $200/yr | 5 | + cloud-llm, cx-demo, email support |
+| **Team** | $99/mo | $990/yr | 25 | + priority support, API access |
 | **Enterprise** | $299/mo | $2,990/yr | Unlimited | + SSO, audit-log, compliance, dedicated support |
 | **Managed** | Custom | Custom | Custom | + custom features, SLA |
 
@@ -323,8 +323,8 @@ const PRICE_AMOUNTS = {
 | Tier | Max Devices | Enforcement |
 |------|-------------|-------------|
 | CX Core | 1 | Hard limit at activation |
-| Pro | 3 | Hard limit at activation |
-| Team | 10 | Hard limit at activation |
+| Pro | 5 | Hard limit at activation |
+| Team | 25 | Hard limit at activation |
 | Enterprise | Unlimited | No limit |
 
 **Activation Flow:**
