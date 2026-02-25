@@ -47,7 +47,7 @@ export default function PricingSuccessPage() {
 
   const fetchSessionDetails = async (sessionId: string) => {
     try {
-      const response = await fetch(`/api/stripe/session/${sessionId}`);
+      const response = await fetch(`https://license.cxlinux.com/api/v1/stripe/checkout-session/${sessionId}`);
       const data = await response.json();
 
       if (data.success) {

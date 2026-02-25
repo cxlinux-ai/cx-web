@@ -261,14 +261,12 @@ export default function CheckoutPage() {
     try {
       const ref = referralCode || localStorage.getItem("cx_referral") || "";
       
-      const response = await fetch("/api/stripe/checkout-session", {
+      const response = await fetch(`${LICENSE_SERVER}/api/v1/stripe/checkout-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           name,
-          company,
-          priceId,
           planId: plan.id,
           billingCycle: isAnnual ? "annual" : "monthly",
           referralCode: ref,

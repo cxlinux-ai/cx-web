@@ -38,7 +38,7 @@ export default function SuccessPage() {
       }
 
       try {
-        const response = await fetch(`/api/stripe/checkout-session/${sessionId}`);
+        const response = await fetch(`https://license.cxlinux.com/api/v1/stripe/checkout-session/${sessionId}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -178,6 +178,25 @@ export default function SuccessPage() {
                 <p className="text-white font-semibold">{subscription.trialEnds}</p>
               </div>
             </div>
+            {subscription.licenseKey && (
+              <div className="mt-6 p-4 bg-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-lg">
+                <p className="text-sm text-gray-400 mb-2">Your License Key</p>
+                <div className="flex items-center justify-between">
+                  <code className="text-lg font-mono text-[#00FF9F] font-bold">{subscription.licenseKey}</code>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(subscription.licenseKey!);
+                    }}
+                    className="px-3 py-1 text-sm bg-[#00FF9F]/20 hover:bg-[#00FF9F]/30 rounded text-[#00FF9F] transition-colors"
+                  >
+                    Copy
+                  </button>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Use this key to activate CX Terminal: <code className="text-[#00FF9F]">cx license activate {subscription.licenseKey}</code>
+                </p>
+              </div>
+            )}
           </motion.div>
         ) : (
           <motion.div
