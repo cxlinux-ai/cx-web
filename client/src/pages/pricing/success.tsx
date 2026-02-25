@@ -25,16 +25,21 @@ export default function SuccessPage() {
   const [loading, setLoading] = useState(true);
   const [subscription, setSubscription] = useState<SubscriptionDetails | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pollingForLicense, setPollingForLicense] = useState(false);
 
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get("session_id");
 
   useEffect(() => {
-    // Fetch subscription details
-    const fetchSubscription = async () => {
+    let pollCount = 0;
+    const maxPolls = 5;
+    const pollInterval = 2000; // 2 seconds
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    const fetchSubscription = async (): Promise<boolean> => {
       if (!sessionId) {
         setLoading(false);
-        return;
+        return true; // stop polling
       }
 
       try {
@@ -46,15 +51,41 @@ export default function SuccessPage() {
         }
 
         setSubscription(data);
+        setLoading(false);
+
+        // If we have a license key, stop polling
+        if (data.licenseKey) {
+          setPollingForLicense(false);
+          return true;
+        }
+
+        // No license key yet, continue polling if under limit
+        return false;
       } catch (err) {
         console.error("Error fetching subscription:", err);
         setError(err instanceof Error ? err.message : "Failed to load subscription details");
-      } finally {
         setLoading(false);
+        return true; // stop polling on error
       }
     };
 
-    fetchSubscription();
+    const poll = async () => {
+      const shouldStop = await fetchSubscription();
+      
+      if (!shouldStop && pollCount < maxPolls) {
+        pollCount++;
+        setPollingForLicense(true);
+        timeoutId = setTimeout(poll, pollInterval);
+      } else {
+        setPollingForLicense(false);
+      }
+    };
+
+    poll();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [sessionId]);
 
   const nextSteps = [
@@ -178,7 +209,7 @@ export default function SuccessPage() {
                 <p className="text-white font-semibold">{subscription.trialEnds}</p>
               </div>
             </div>
-            {subscription.licenseKey && (
+            {subscription.licenseKey ? (
               <div className="mt-6 p-4 bg-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-lg">
                 <p className="text-sm text-gray-400 mb-2">Your License Key</p>
                 <div className="flex items-center justify-between">
@@ -195,6 +226,24 @@ export default function SuccessPage() {
                 <p className="text-xs text-gray-500 mt-2">
                   Use this key to activate CX Terminal: <code className="text-[#00FF9F]">cx license activate {subscription.licenseKey}</code>
                 </p>
+              </div>
+            ) : (
+              <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-400/30 rounded-lg">
+                <div className="flex items-center gap-3">
+                  {pollingForLicense ? (
+                    <>
+                      <Loader2 className="w-5 h-5 text-yellow-400 animate-spin" />
+                      <p className="text-yellow-400 text-sm">Generating your license key...</p>
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="w-5 h-5 text-yellow-400" />
+                      <p className="text-yellow-400 text-sm">
+                        Your license key will be sent to <span className="font-medium">{subscription.email}</span> within a minute.
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
             )}
           </motion.div>

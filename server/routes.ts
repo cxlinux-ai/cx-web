@@ -16,7 +16,6 @@ function getClientIp(req: Request): string {
 }
 
 import stripeRoutes from "./stripe";
-import licenseRoutes from "./license";
 import emailCaptureRoutes from "./email-capture";
 
 // Keep-alive: Self-ping to prevent sleep
@@ -96,9 +95,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Mount Stripe routes
   app.use("/api/stripe", stripeRoutes);
-
-  // Mount License routes
-  app.use("/api/license", licenseRoutes);
 
   // Mount Email Capture routes
   app.use(emailCaptureRoutes);
