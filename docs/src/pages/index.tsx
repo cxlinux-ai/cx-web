@@ -208,7 +208,7 @@ function HomepageCTA(): JSX.Element {
           </Link>
           <Link
             className="button button--outline button--lg"
-            to="https://github.com/cxlinux/cx-linux"
+            to="https://github.com/cxlinux-ai/cx-core"
           >
             Star on GitHub
           </Link>

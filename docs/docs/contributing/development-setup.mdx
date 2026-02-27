@@ -1,20 +1,19 @@
 ---
 sidebar_position: 1
 title: Development Setup
-description: Set up your local development environment to contribute to Cortex Linux.
+description: Set up your local development environment to contribute to CX Linux.
 keywords: [development, setup, contributing, build, local]
 ---
 
 # Development Setup
 
-This guide walks you through setting up a local development environment for contributing to Cortex Linux.
+This guide walks you through setting up a local development environment for contributing to CX Linux.
 
 ## Prerequisites
 
-- Linux system (Ubuntu 20.04+, Fedora 36+, or Arch Linux)
+- Linux system (Ubuntu 20.04+, Fedora 39+, or Arch Linux)
 - Git
-- Rust 1.70+
-- Python 3.10+
+- Rust 1.70+ ([rustup.rs](https://rustup.rs/))
 - Node.js 18+ (for documentation)
 - Docker (optional, for testing)
 
@@ -24,31 +23,25 @@ This guide walks you through setting up a local development environment for cont
 
 ```bash
 # Fork the repository on GitHub first, then:
-git clone https://github.com/YOUR_USERNAME/cortex-linux.git
-cd cortex-linux
+git clone https://github.com/YOUR_USERNAME/cx-core.git
+cd cx-core
 
 # Add upstream remote
-git remote add upstream https://github.com/cortexlinux/cortex-linux.git
+git remote add upstream https://github.com/cxlinux-ai/cx-core.git
 ```
 
 ### 2. Install Dependencies
 
 ```bash
-# Using Cortex itself (if installed)
-cortex "install development dependencies for this project"
-
-# Or manually:
-# Rust
+# Install Rust (if not already installed)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
-# Python dependencies
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-dev.txt
+# Install build dependencies (Ubuntu/Debian)
+sudo apt install build-essential pkg-config libssl-dev
 
-# Node.js (for docs)
-npm install
+# Install build dependencies (Fedora)
+sudo dnf install gcc pkg-config openssl-devel
 ```
 
 ### 3. Build
@@ -68,34 +61,30 @@ cargo test
 
 ```bash
 # Run debug build
-./target/debug/cortex "hello world"
+./target/debug/cx --version
 
 # Or add to PATH temporarily
 export PATH="$(pwd)/target/debug:$PATH"
-cortex "test command"
+cx status
 ```
 
 ## Project Structure
 
 ```
-cortex-linux/
+cx-core/
 ├── src/
 │   ├── main.rs           # Entry point
 │   ├── cli/              # CLI argument parsing
 │   ├── ai/               # AI backend integration
 │   ├── commands/         # Command execution
 │   ├── config/           # Configuration handling
-│   ├── packages/         # Package manager abstraction
-│   ├── snapshots/        # Snapshot and rollback
 │   └── utils/            # Shared utilities
+├── cx-daemon/            # Background daemon service
 ├── tests/
 │   ├── unit/             # Unit tests
-│   ├── integration/      # Integration tests
-│   └── fixtures/         # Test data
-├── docs/                 # Documentation (Docusaurus)
-├── scripts/              # Build and utility scripts
+│   └── integration/      # Integration tests
+├── docs/                 # Documentation
 ├── Cargo.toml            # Rust dependencies
-├── requirements.txt      # Python dependencies
 └── README.md
 ```
 
@@ -135,7 +124,7 @@ cargo test -- --nocapture
 # Integration tests only
 cargo test --test integration
 
-# With coverage
+# With coverage (requires cargo-tarpaulin)
 cargo tarpaulin --out html
 ```
 
@@ -151,7 +140,7 @@ cargo fmt --check
 # Lint
 cargo clippy
 
-# All checks
+# All checks (strict)
 cargo clippy -- -D warnings
 ```
 
@@ -176,10 +165,10 @@ npm run build
 
 ```bash
 # Build test image
-docker build -t cortex-test -f Dockerfile.test .
+docker build -t cx-test -f Dockerfile.test .
 
 # Run tests in container
-docker run --rm cortex-test cargo test
+docker run --rm cx-test cargo test
 
 # Test on specific distro
 docker run --rm -it ubuntu:22.04 bash
@@ -191,13 +180,9 @@ docker run --rm -it ubuntu:22.04 bash
 For testing package manager integration:
 
 ```bash
-# Vagrant (if available)
-vagrant up ubuntu
-vagrant ssh ubuntu
-
-# Or use multipass
-multipass launch -n cortex-test
-multipass shell cortex-test
+# Using multipass
+multipass launch -n cx-test
+multipass shell cx-test
 ```
 
 ## IDE Setup
@@ -263,15 +248,15 @@ require('lspconfig').rust_analyzer.setup {
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug cortex",
+      "name": "Debug cx",
       "cargo": {
-        "args": ["build", "--bin=cortex"],
+        "args": ["build", "--bin=cx"],
         "filter": {
-          "name": "cortex",
+          "name": "cx",
           "kind": "bin"
         }
       },
-      "args": ["install", "nginx"],
+      "args": ["status"],
       "cwd": "${workspaceFolder}"
     }
   ]
@@ -282,13 +267,13 @@ require('lspconfig').rust_analyzer.setup {
 
 ```bash
 # With rust-gdb
-rust-gdb ./target/debug/cortex
+rust-gdb ./target/debug/cx
 
 # With rust-lldb
-rust-lldb ./target/debug/cortex
+rust-lldb ./target/debug/cx
 
 # Enable debug logging
-RUST_LOG=debug ./target/debug/cortex "your command"
+RUST_LOG=debug ./target/debug/cx status
 ```
 
 ## Environment Variables for Development
@@ -296,20 +281,19 @@ RUST_LOG=debug ./target/debug/cortex "your command"
 ```bash
 # Enable debug output
 export RUST_LOG=debug
-export CORTEX_DEBUG=true
+export CX_DEBUG=true
 
 # Use local AI model
-export CORTEX_BACKEND=local
-export CORTEX_MODEL=cortex-7b-dev
+export CX_BACKEND=local
 
-# Skip package operations (for testing)
-export CORTEX_DRY_RUN=true
+# Dry run mode (skip actual execution)
+export CX_DRY_RUN=true
 ```
 
 ## Useful Commands
 
 ```bash
-# Watch and rebuild on changes
+# Watch and rebuild on changes (requires cargo-watch)
 cargo watch -x build
 
 # Check for outdated dependencies
@@ -321,15 +305,14 @@ cargo audit
 # Generate docs
 cargo doc --open
 
-# Benchmark
+# Benchmark (if benchmarks exist)
 cargo bench
 ```
 
 ## Getting Help
 
-- [Discord](https://discord.gg/ASvzWcuTfk) - #dev-help channel
-- [GitHub Discussions](https://github.com/cortexlinux/cortex-linux/discussions)
-- Weekly dev meeting (Tuesdays, 5pm UTC)
+- [Discord](https://discord.gg/uCqHvxjU83) - #dev-help channel
+- [GitHub Discussions](https://github.com/cxlinux-ai/cx-core/discussions)
 
 ## Next Steps
 

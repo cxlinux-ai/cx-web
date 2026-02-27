@@ -77,9 +77,10 @@ yay -S cx
 ### From Source
 
 ```bash
-git clone https://github.com/cxlinux/cx-linux.git
-cd cx-linux
-cargo install --path .
+git clone https://github.com/cxlinux-ai/cx-core.git
+cd cx-core
+cargo build --release
+sudo cp target/release/cx /usr/local/bin/
 ```
 
 </details>
@@ -191,15 +192,15 @@ cx "configure git with my name and email"
 ## Community
 
 - **Discord**: [Join our community](https://discord.gg/ASvzWcuTfk)
-- **GitHub**: [Star us on GitHub](https://github.com/cxlinux/cx-linux)
+- **GitHub**: [Star us on GitHub](https://github.com/cxlinux-ai/cx-core)
 - **Twitter**: [@cxlinux](https://twitter.com/cxlinux)
 
 ## Contributing
 
 CX is open source! We welcome contributions:
 
-- 🐛 [Report bugs](https://github.com/cxlinux/cx-linux/issues)
-- 💡 [Suggest features](https://github.com/cxlinux/cx-linux/discussions)
+- 🐛 [Report bugs](https://github.com/cxlinux-ai/cx-core/issues)
+- 💡 [Suggest features](https://github.com/cxlinux-ai/cx-core/discussions)
 - 🔧 [Submit PRs](/docs/contributing/pr-guidelines)
 - 💰 [Earn bounties](/docs/contributing/bounty-program)
 
