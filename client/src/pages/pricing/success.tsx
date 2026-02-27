@@ -107,7 +107,7 @@ export default function SuccessPage() {
       icon: MessageSquare,
       title: "Join Discord",
       description: "Connect with the community and get support",
-      link: "https://discord.gg/cxlinux",
+      link: "https://discord.gg/7K6TR7qtS",
       external: true,
     },
   ];

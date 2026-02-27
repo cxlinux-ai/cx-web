@@ -162,7 +162,7 @@ const config: Config = {
           items: [
             {
               label: 'Discord',
-              href: 'https://discord.gg/cxlinux',
+              href: 'https://discord.gg/7K6TR7qtS',
             },
             {
               label: 'Twitter',
