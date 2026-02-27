@@ -37,7 +37,7 @@ export default function PricingSuccessPage() {
     const sessionId = urlParams.get('session_id');
 
     if (sessionId) {
-      fetchSessionDetails(sessionId);
+      fetchWithRetry(sessionId);
     } else {
       setStatus('error');
     }
@@ -45,20 +45,48 @@ export default function PricingSuccessPage() {
     return cleanup;
   }, []);
 
-  const fetchSessionDetails = async (sessionId: string) => {
-    try {
-      const response = await fetch(`https://license.cxlinux.com/api/v1/stripe/checkout-session/${sessionId}`);
-      const data = await response.json();
+  const fetchWithRetry = async (sessionId: string) => {
+    const maxAttempts = 10;
+    const delayMs = 2000; // 2 seconds between attempts
+    
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const response = await fetch(`https://license.cxlinux.com/api/v1/stripe/checkout-session/${sessionId}`);
+        const data = await response.json();
 
-      if (data.success) {
-        setSessionData(data);
-        setStatus('success');
-      } else {
+        if (data.success && data.licenseKey) {
+          // Got license key, success!
+          setSessionData(data);
+          setStatus('success');
+          return;
+        } else if (data.success && !data.licenseKey && attempt < maxAttempts) {
+          // Session valid but no license yet, retry
+          console.log(`Attempt ${attempt}: License not ready yet, retrying...`);
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+          continue;
+        } else if (data.success && !data.licenseKey) {
+          // Last attempt, show success without license (email fallback)
+          setSessionData(data);
+          setStatus('success');
+          return;
+        } else {
+          // API returned error
+          if (attempt < maxAttempts) {
+            await new Promise(resolve => setTimeout(resolve, delayMs));
+            continue;
+          }
+          setStatus('error');
+          return;
+        }
+      } catch (error) {
+        console.error(`Attempt ${attempt} failed:`, error);
+        if (attempt < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+          continue;
+        }
         setStatus('error');
+        return;
       }
-    } catch (error) {
-      console.error('Failed to fetch session:', error);
-      setStatus('error');
     }
   };
 
@@ -173,22 +201,32 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
             <Terminal size={20} className="text-blue-400" />
             Your License Key
           </h2>
-          <div className="flex items-center gap-3">
-            <code className="flex-1 bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-terminal-green text-sm md:text-base break-all">
-              {sessionData?.licenseKey}
-            </code>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => copyToClipboard(sessionData?.licenseKey || '', 'key')}
-              data-testid="button-copy-license"
-            >
-              {copiedKey ? <Check size={18} className="text-terminal-green" /> : <Copy size={18} />}
-            </Button>
-          </div>
-          <p className="text-gray-500 text-sm mt-3">
-            Save this key - you'll need it to activate CX on your systems.
-          </p>
+          {sessionData?.licenseKey ? (
+            <>
+              <div className="flex items-center gap-3">
+                <code className="flex-1 bg-black/50 border border-white/10 rounded-lg px-4 py-3 font-mono text-terminal-green text-sm md:text-base break-all">
+                  {sessionData.licenseKey}
+                </code>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(sessionData.licenseKey || '', 'key')}
+                  data-testid="button-copy-license"
+                >
+                  {copiedKey ? <Check size={18} className="text-terminal-green" /> : <Copy size={18} />}
+                </Button>
+              </div>
+              <p className="text-gray-500 text-sm mt-3">
+                Save this key - you'll need it to activate CX on your systems.
+              </p>
+            </>
+          ) : (
+            <div className="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+              <p className="text-yellow-400 text-sm">
+                Your license key is being generated and will be sent to <span className="font-medium">{sessionData?.email}</span> within a minute.
+              </p>
+            </div>
+          )}
         </motion.div>
 
         {/* Installation Commands */}
@@ -248,26 +286,35 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
             </div>
 
             {/* Step 3: Activate */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Step 3: Activate your license</span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => copyToClipboard(activateCommand, 'key')}
-                  className="h-7 px-2"
-                  data-testid="button-copy-activate"
-                >
-                  {copiedKey ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
-                  <span className="ml-1 text-xs">Copy</span>
-                </Button>
+            {sessionData?.licenseKey ? (
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-gray-400">Step 3: Activate your license</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => copyToClipboard(activateCommand, 'key')}
+                    className="h-7 px-2"
+                    data-testid="button-copy-activate"
+                  >
+                    {copiedKey ? <Check size={14} className="text-terminal-green" /> : <Copy size={14} />}
+                    <span className="ml-1 text-xs">Copy</span>
+                  </Button>
+                </div>
+                <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
+                  <code className="text-sm text-gray-300">
+                    <span className="text-gray-500">$</span> cx activate <span className="text-terminal-green">{sessionData.licenseKey}</span>
+                  </code>
+                </pre>
               </div>
-              <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
-                <code className="text-sm text-gray-300">
-                  <span className="text-gray-500">$</span> cx activate <span className="text-terminal-green">{sessionData?.licenseKey}</span>
-                </code>
-              </pre>
-            </div>
+            ) : (
+              <div>
+                <span className="text-sm text-gray-400">Step 3: Activate your license</span>
+                <p className="text-yellow-400 text-sm mt-2">
+                  Check your email for the license key, then run: <code className="bg-black/50 px-2 py-0.5 rounded">cx activate YOUR_LICENSE_KEY</code>
+                </p>
+              </div>
+            )}
           </div>
         </motion.div>
 
