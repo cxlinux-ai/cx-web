@@ -18,9 +18,9 @@ Before installing, ensure your system meets these minimum requirements:
 
 | Requirement | Minimum | Recommended |
 |-------------|---------|-------------|
+| Architecture | x86_64 (amd64) | x86_64 (amd64) |
 | RAM | 2 GB | 4 GB+ |
 | Storage | 500 MB | 1 GB |
-| Python | 3.9+ | 3.11+ |
 | OS | Linux kernel 5.4+ | Latest LTS kernel |
 
 ## Quick Install (Recommended)
@@ -47,14 +47,14 @@ This script automatically:
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
 
-curl -fsSL https://cxlinux.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/cx.gpg
+curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg
 
-echo "deb [signed-by=/usr/share/keyrings/cx.gpg] https://apt.cxlinux.com stable main" | \
-  sudo tee /etc/apt/sources.list.d/cx.list
+echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | \
+  sudo tee /etc/apt/sources.list.d/cxlinux.list
 
 # Install CX Linux
 sudo apt-get update
-sudo apt-get install cx
+sudo apt-get install cx-terminal
 ```
 
   </TabItem>
@@ -80,17 +80,6 @@ paru -S cx-bin
 ```
 
   </TabItem>
-  <TabItem value="pip" label="pip (Universal)">
-
-```bash
-# Install via pip (requires Python 3.9+)
-pip install cx-linux
-
-# Or with pipx for isolated installation
-pipx install cx-linux
-```
-
-  </TabItem>
 </Tabs>
 
 ## Building from Source
@@ -102,16 +91,22 @@ For developers or those who want the latest features:
 git clone https://github.com/cxlinux-ai/cx-core.git
 cd cx-core
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate
+# Build with Cargo (requires Rust toolchain)
+cargo build --release
 
-# Install dependencies
-pip install -e ".[dev]"
+# Install the binary
+sudo cp target/release/cx /usr/local/bin/
 
 # Verify installation
 cx --version
 ```
+
+:::note Rust Toolchain
+If you don't have Rust installed, get it from [rustup.rs](https://rustup.rs/):
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+:::
 
 ## Verify Installation
 
@@ -121,10 +116,10 @@ After installation, verify that CX Linux is working correctly:
 # Check version
 cx --version
 # highlight-next-line
-# Output: CX Linux v1.0.0
+# Output: CX Linux v0.3.x
 
 # Run a test command
-cx "show system information"
+cx status
 ```
 
 ## Post-Installation Setup
@@ -156,7 +151,7 @@ cx completion fish > ~/.config/fish/completions/cx.fish
 Ensure the installation directory is in your PATH:
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 ```
 
 Add this line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.).
@@ -166,24 +161,34 @@ Add this line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.).
 <details>
 <summary>Permission denied during installation</summary>
 
-If you encounter permission errors, try installing with `--user`:
+Make sure you have sudo privileges, or install to a user-writable location:
 
 ```bash
-pip install --user cx-linux
+# Install to ~/.local/bin instead
+mkdir -p ~/.local/bin
+cp target/release/cx ~/.local/bin/
 ```
 
 </details>
 
 <details>
-<summary>Python version too old</summary>
+<summary>Build fails with cargo</summary>
 
-CX Linux requires Python 3.9 or newer. Check your version:
+Ensure you have the latest Rust toolchain:
 
 ```bash
-python3 --version
+rustup update
 ```
 
-Use [pyenv](https://github.com/pyenv/pyenv) to manage multiple Python versions if needed.
+You may also need build essentials:
+
+```bash
+# Debian/Ubuntu
+sudo apt install build-essential pkg-config libssl-dev
+
+# Fedora
+sudo dnf install gcc pkg-config openssl-devel
+```
 
 </details>
 
@@ -195,8 +200,9 @@ To remove CX Linux from your system:
   <TabItem value="apt" label="Debian/Ubuntu" default>
 
 ```bash
-sudo apt-get remove cx
-sudo rm /etc/apt/sources.list.d/cx.list
+sudo apt-get remove cx-terminal
+sudo rm /etc/apt/sources.list.d/cxlinux.list
+sudo rm /etc/apt/keyrings/cxlinux.gpg
 ```
 
   </TabItem>
@@ -207,10 +213,10 @@ sudo dnf remove cx
 ```
 
   </TabItem>
-  <TabItem value="pip" label="pip">
+  <TabItem value="manual" label="Manual Install">
 
 ```bash
-pip uninstall cx-linux
+sudo rm /usr/local/bin/cx
 ```
 
   </TabItem>
