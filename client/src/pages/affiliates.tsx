@@ -357,9 +357,11 @@ export default function AffiliatesPage() {
             >
               <button
                 onClick={() => setMode("signup")}
-                className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:border-[#00FF9F]/50 hover:bg-[#00FF9F]/5 transition-all group"
+                className="border-2 border-[#00FF9F] rounded-2xl p-8 text-center bg-[#00FF9F]/5 hover:bg-[#00FF9F]/15 hover:shadow-[0_0_30px_rgba(0,255,159,0.15)] transition-all duration-300 group"
               >
-                <UserPlus className="w-12 h-12 text-[#00FF9F] mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#00FF9F]/10 flex items-center justify-center group-hover:bg-[#00FF9F]/20 transition-colors">
+                  <UserPlus className="w-7 h-7 text-[#00FF9F]" />
+                </div>
                 <h2 className="text-xl font-bold mb-2">Become an Affiliate</h2>
                 <p className="text-sm text-gray-400">
                   Sign up and get your unique referral code
@@ -368,9 +370,11 @@ export default function AffiliatesPage() {
 
               <button
                 onClick={() => setMode("login")}
-                className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:border-[#00FF9F]/50 hover:bg-[#00FF9F]/5 transition-all group"
+                className="border-2 border-[#00FF9F]/50 rounded-2xl p-8 text-center bg-transparent hover:border-[#00FF9F] hover:bg-[#00FF9F]/10 hover:shadow-[0_0_30px_rgba(0,255,159,0.1)] transition-all duration-300 group"
               >
-                <BarChart3 className="w-12 h-12 text-[#00FF9F] mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00FF9F]/10 transition-colors">
+                  <BarChart3 className="w-7 h-7 text-[#00FF9F]" />
+                </div>
                 <h2 className="text-xl font-bold mb-2">View Dashboard</h2>
                 <p className="text-sm text-gray-400">
                   Check your referrals, earnings & performance
