@@ -49,49 +49,60 @@ export const blogPosts: BlogPost[] = [
     tags: ["introduction", "AI", "Linux"],
   },
   {
-    slug: "why-seo-matters-for-open-source",
-    title: "Why SEO Matters for Open Source Projects (And How We're Doing It)",
-    excerpt: "Open source projects live or die by discoverability. Here's our approach to SEO for CX Linux — from structured data to content strategy.",
+    slug: "linux-tasks-30-seconds-with-cx",
+    title: "5 Linux Tasks That Take 30 Minutes — Done in 30 Seconds with CX",
+    excerpt: "Setting up nginx, configuring firewalls, deploying Docker stacks — these routine tasks eat hours. Here's how CX Linux turns each one into a single natural language command.",
     content: `
-<p>Building great software isn't enough. If people can't find you, you don't exist. For open source projects, SEO is often an afterthought — but it shouldn't be.</p>
+<p>Every sysadmin knows the drill. You need to set up a reverse proxy, so you open three browser tabs — one for the nginx docs, one for Stack Overflow, one for that blog post you bookmarked six months ago. Forty-five minutes later, you've got a working config. Maybe.</p>
 
-<h2>The Discovery Problem</h2>
-<p>Most developers discover tools through three channels: Google search, GitHub explore, and word of mouth. If your project doesn't rank for relevant queries, you're invisible to the majority of potential users.</p>
+<p>CX Linux changes this equation entirely. Here are five real tasks that used to take 30+ minutes, now done in under 30 seconds.</p>
 
-<h2>Our SEO Strategy</h2>
-<p>At CX Linux, we're taking a systematic approach:</p>
+<h2>1. Set Up an Nginx Reverse Proxy with SSL</h2>
+<p><strong>The old way:</strong> Install nginx, write the config, install certbot, generate certificates, configure renewal, test, debug, restart.</p>
 
-<h3>1. Technical SEO</h3>
-<ul>
-<li>Structured data (JSON-LD) for every page type</li>
-<li>Comprehensive sitemap with all content pages</li>
-<li>Proper canonical URLs and meta tags</li>
-<li>Fast load times via Cloudflare CDN</li>
-</ul>
+<pre><code>cx "set up nginx as a reverse proxy for my Node.js app on port 3000 with SSL using Let's Encrypt for myapp.com"</code></pre>
 
-<h3>2. Content Strategy</h3>
-<ul>
-<li>Blog posts targeting long-tail keywords</li>
-<li>Tutorials that solve real problems</li>
-<li>Documentation optimized for search</li>
-</ul>
+<p>CX detects your system state, installs what's needed, generates the config, obtains the SSL certificate, and sets up auto-renewal. You review the commands, approve, and it's done.</p>
 
-<h3>3. Community Signals</h3>
-<ul>
-<li>GitHub stars and contributor activity</li>
-<li>Discord community engagement</li>
-<li>Affiliate program for organic reach</li>
-</ul>
+<h2>2. Harden SSH and Configure a Firewall</h2>
+<p><strong>The old way:</strong> Edit sshd_config (hope you don't lock yourself out), install ufw or iptables, figure out which ports to open, test from another machine.</p>
 
-<h2>Measuring What Matters</h2>
-<p>We use Google Analytics 4 and Google Search Console to track organic traffic, keyword rankings, and user behavior. Every piece of content is measured against these metrics.</p>
+<pre><code>cx "harden SSH — disable root login, use key-only auth, change port to 2222 — and set up ufw allowing only SSH, HTTP, and HTTPS"</code></pre>
 
-<p>If you're building an open source project, don't sleep on SEO. Start early, be consistent, and measure everything.</p>
+<p>CX handles the full sequence: backup current config, apply changes, configure firewall rules, verify you won't lose access, and create a rollback point.</p>
+
+<h2>3. Deploy a Full Docker Stack</h2>
+<p><strong>The old way:</strong> Install Docker, write docker-compose.yml, configure volumes, set up networking, figure out environment variables, debug port conflicts.</p>
+
+<pre><code>cx "deploy a production Docker stack with PostgreSQL, Redis, and my app from the Dockerfile in ./app — expose the app on port 443 with Traefik as reverse proxy"</code></pre>
+
+<p>CX generates the compose file, configures Traefik with automatic SSL, sets up persistent volumes, and handles the networking. All previewed before execution.</p>
+
+<h2>4. Set Up Automated Backups to S3</h2>
+<p><strong>The old way:</strong> Write a bash script, configure AWS CLI, set up cron jobs, test restoration, hope you didn't forget anything.</p>
+
+<pre><code>cx "set up daily backups of /var/www and my PostgreSQL databases to S3 bucket my-backups, keep 30 days retention, encrypt at rest, notify me on failure"</code></pre>
+
+<p>CX creates the backup scripts, configures encryption, sets up the cron schedule, and even includes a test restoration step to verify everything works.</p>
+
+<h2>5. Monitor System Health with Alerts</h2>
+<p><strong>The old way:</strong> Install Prometheus, configure exporters, set up Grafana, write alert rules, configure notification channels.</p>
+
+<pre><code>cx "monitor CPU, memory, disk, and my nginx service — alert me via email if CPU > 80%, disk > 90%, or nginx goes down"</code></pre>
+
+<p>CX sets up lightweight monitoring with sensible defaults, configures alerts, and gives you a dashboard — without the complexity of a full observability stack.</p>
+
+<h2>The Common Thread</h2>
+<p>Every one of these tasks involves the same pattern: research → configure → test → debug → repeat. CX collapses this into describe → review → approve. The AI handles the research and configuration. You keep full control with command preview and instant rollback.</p>
+
+<p>This is what we mean by intent-based computing. You declare what you want. CX figures out how to get there.</p>
+
+<p><a href="/getting-started">Try CX Linux →</a></p>
     `,
     author: "CX Linux Team",
     date: "2026-03-11",
-    readTime: "3 min read",
-    tags: ["SEO", "marketing", "open source"],
+    readTime: "4 min read",
+    tags: ["tutorial", "productivity", "DevOps"],
   },
   {
     slug: "sandboxed-execution-linux-safety",
