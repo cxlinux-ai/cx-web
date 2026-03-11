@@ -21,6 +21,8 @@ const License = lazy(() => import("./pages/license"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const FAQ = lazy(() => import("./pages/faq"));
 const Affiliates = lazy(() => import("./pages/affiliates"));
+const BlogIndex = lazy(() => import("./pages/blog/index"));
+const BlogPost = lazy(() => import("./pages/blog/post"));
 
 // Loading component
 const PageLoader = () => (
@@ -115,6 +117,14 @@ function App() {
                 >
                   Affiliates
                 </Link>
+                <Link
+                  href="/blog"
+                  className={`text-sm font-medium transition-colors ${
+                    location.startsWith("/blog") ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Blog
+                </Link>
               </div>
 
               {/* Desktop CTAs */}
@@ -185,6 +195,13 @@ function App() {
                       Affiliates
                     </Link>
                     <Link
+                      href="/blog"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-gray-400 hover:text-white"
+                    >
+                      Blog
+                    </Link>
+                    <Link
                       href="/pricing"
                       onClick={() => setMobileMenuOpen(false)}
                       className="block w-full text-center px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg"
@@ -213,6 +230,8 @@ function App() {
               <Route path="/license" component={License} />
               <Route path="/faq" component={FAQ} />
               <Route path="/affiliates" component={Affiliates} />
+              <Route path="/blog" component={BlogIndex} />
+              <Route path="/blog/:slug" component={BlogPost} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
