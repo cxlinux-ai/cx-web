@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,10 @@ import {
   Users,
   Building2,
   ChevronRight,
+  Play,
+  Loader2,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import Footer from "@/components/Footer";
@@ -24,6 +28,220 @@ import Footer from "@/components/Footer";
 // ============================================
 // CX Linux - Admin-Focused Homepage
 // ============================================
+
+// ============================================
+// Try Panel — Interactive CX Demo (3 commands/IP/day)
+// ============================================
+const DEMO_RESPONSES: Record<string, { commands: string[]; explanation: string }> = {
+  "set up nginx reverse proxy for port 3000": {
+    commands: [
+      "sudo apt install -y nginx",
+      "sudo tee /etc/nginx/sites-available/app <<EOF\nserver {\n    listen 80;\n    server_name _;\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n}\nEOF",
+      "sudo ln -sf /etc/nginx/sites-available/app /etc/nginx/sites-enabled/",
+      "sudo nginx -t && sudo systemctl reload nginx",
+    ],
+    explanation: "Installs nginx, creates a reverse proxy config for your app on port 3000, enables the site, and reloads nginx after testing the config.",
+  },
+  "harden ssh and set up firewall": {
+    commands: [
+      "sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak",
+      "sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config",
+      "sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config",
+      "sudo systemctl restart sshd",
+      "sudo ufw default deny incoming",
+      "sudo ufw default allow outgoing",
+      "sudo ufw allow ssh && sudo ufw allow http && sudo ufw allow https",
+      "sudo ufw --force enable",
+    ],
+    explanation: "Backs up SSH config, disables root login and password auth, restarts SSH, then configures UFW firewall to allow only SSH, HTTP, and HTTPS.",
+  },
+  "install docker and docker compose": {
+    commands: [
+      "sudo apt update",
+      "sudo apt install -y ca-certificates curl gnupg",
+      "sudo install -m 0755 -d /etc/apt/keyrings",
+      'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg',
+      'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list',
+      "sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin",
+      "sudo usermod -aG docker $USER",
+    ],
+    explanation: "Adds Docker's official GPG key and repository, installs Docker Engine + Compose plugin, and adds your user to the docker group.",
+  },
+};
+
+const DEMO_SUGGESTIONS = [
+  "set up nginx reverse proxy for port 3000",
+  "harden ssh and set up firewall",
+  "install docker and docker compose",
+];
+
+function TryPanel() {
+  const [input, setInput] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
+  const [result, setResult] = useState<{ commands: string[]; explanation: string } | null>(null);
+  const [usageCount, setUsageCount] = useState(0);
+  const MAX_TRIES = 3;
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Check usage from localStorage
+    const stored = localStorage.getItem("cx_demo_usage");
+    if (stored) {
+      const { count, date } = JSON.parse(stored);
+      const today = new Date().toISOString().slice(0, 10);
+      if (date === today) {
+        setUsageCount(count);
+      }
+    }
+  }, []);
+
+  const incrementUsage = () => {
+    const today = new Date().toISOString().slice(0, 10);
+    const newCount = usageCount + 1;
+    setUsageCount(newCount);
+    localStorage.setItem("cx_demo_usage", JSON.stringify({ count: newCount, date: today }));
+  };
+
+  const handleRun = async (command?: string) => {
+    const cmd = (command || input).trim().toLowerCase();
+    if (!cmd) return;
+    if (usageCount >= MAX_TRIES) return;
+
+    setIsRunning(true);
+    setInput(cmd);
+    setResult(null);
+
+    // Find best matching demo response
+    let bestMatch = DEMO_RESPONSES[cmd];
+    if (!bestMatch) {
+      // Fuzzy match
+      for (const key of Object.keys(DEMO_RESPONSES)) {
+        if (cmd.includes("nginx") || cmd.includes("reverse proxy") || cmd.includes("proxy")) {
+          bestMatch = DEMO_RESPONSES["set up nginx reverse proxy for port 3000"];
+          break;
+        }
+        if (cmd.includes("ssh") || cmd.includes("firewall") || cmd.includes("harden") || cmd.includes("ufw")) {
+          bestMatch = DEMO_RESPONSES["harden ssh and set up firewall"];
+          break;
+        }
+        if (cmd.includes("docker") || cmd.includes("container")) {
+          bestMatch = DEMO_RESPONSES["install docker and docker compose"];
+          break;
+        }
+      }
+    }
+
+    // Simulate processing time
+    await new Promise((r) => setTimeout(r, 1200));
+
+    if (bestMatch) {
+      setResult(bestMatch);
+      incrementUsage();
+    } else {
+      setResult({
+        commands: [`# CX would analyze your system and generate commands for: "${cmd}"`],
+        explanation: "In the full version, CX analyzes your system state, generates the right commands, and lets you review before executing. Try one of the suggested commands above to see a real example!",
+      });
+      incrementUsage();
+    }
+
+    setIsRunning(false);
+  };
+
+  const remaining = MAX_TRIES - usageCount;
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="bg-[#0A0A0A] border border-[#333] rounded-xl overflow-hidden">
+        {/* Terminal header */}
+        <div className="flex items-center gap-2 px-4 py-2 bg-[#161616] border-b border-[#333]">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-red-500/80" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+            <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          </div>
+          <span className="text-xs text-gray-500 ml-2 font-mono">cx — try it live</span>
+          <div className="ml-auto flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-[#00FF9F]" />
+            <span className="text-xs text-gray-500">{remaining} tries left today</span>
+          </div>
+        </div>
+
+        {/* Suggestion chips */}
+        <div className="px-4 pt-3 pb-2 flex flex-wrap gap-2">
+          {DEMO_SUGGESTIONS.map((s) => (
+            <button
+              key={s}
+              onClick={() => handleRun(s)}
+              disabled={isRunning || remaining <= 0}
+              className="text-xs px-3 py-1.5 rounded-full bg-[#00FF9F]/10 text-[#00FF9F] hover:bg-[#00FF9F]/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        {/* Input */}
+        <div className="px-4 pb-3">
+          <div className="flex items-center gap-2 bg-[#111] rounded-lg border border-[#333] px-3 py-2">
+            <span className="text-[#00FF9F] font-mono text-sm font-bold">cx</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleRun()}
+              placeholder={remaining > 0 ? '"describe what you want to do..."' : "Daily limit reached — install CX for unlimited use"}
+              disabled={isRunning || remaining <= 0}
+              className="flex-1 bg-transparent text-white text-sm font-mono placeholder:text-gray-600 outline-none disabled:opacity-50"
+            />
+            <button
+              onClick={() => handleRun()}
+              disabled={isRunning || !input.trim() || remaining <= 0}
+              className="p-1.5 rounded bg-[#00FF9F]/10 hover:bg-[#00FF9F]/20 transition-colors disabled:opacity-30"
+            >
+              {isRunning ? (
+                <Loader2 className="w-4 h-4 text-[#00FF9F] animate-spin" />
+              ) : (
+                <Play className="w-4 h-4 text-[#00FF9F]" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Result */}
+        {(isRunning || result) && (
+          <div className="px-4 pb-4 border-t border-[#222]">
+            {isRunning && (
+              <div className="flex items-center gap-2 py-3 text-gray-400 text-sm font-mono">
+                <Loader2 className="w-4 h-4 animate-spin text-[#00FF9F]" />
+                Analyzing system and generating commands...
+              </div>
+            )}
+            {result && !isRunning && (
+              <div className="pt-3 space-y-2">
+                <p className="text-xs text-gray-500 mb-2">📋 CX would generate and preview these commands:</p>
+                <div className="bg-black/50 rounded-lg p-3 max-h-48 overflow-y-auto">
+                  {result.commands.map((cmd, i) => (
+                    <div key={i} className="font-mono text-xs text-[#00FF9F] mb-1 whitespace-pre-wrap">
+                      <span className="text-gray-600">$ </span>{cmd}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed mt-2">
+                  💡 {result.explanation}
+                </p>
+                <p className="text-xs text-gray-600 mt-1">
+                  In CX, you'd review these commands then approve with one keystroke. Every action has instant rollback.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   // SEO
@@ -49,70 +267,36 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
-      {/* Hero Section */}
-      <section className="min-h-[400px] flex flex-col justify-center px-4 py-16 md:py-24">
+      {/* Hero Section — WIFM: User outcome first */}
+      <section className="min-h-[500px] flex flex-col justify-center px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            CX Linux: <span className="text-[#00FF9F]">AI-Powered Fleet Management</span> for Linux Admins
+            Stop Googling Linux Commands.
+            <br />
+            <span className="text-[#00FF9F]">Just Tell CX What You Need.</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            Natural language commands for servers—no manual SSH, automate backups/firewalls/logs.
+          <p className="text-lg md:text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
+            Set up servers, configure firewalls, deploy apps — in plain English.
+            <br className="hidden md:block" />
+            CX handles the commands. You stay in control.
+          </p>
+          <p className="text-sm text-gray-500 mb-8">
+            Works on any Ubuntu/Debian system. Free to start. No credit card required.
           </p>
 
-          {/* Install Commands */}
-          <div className="space-y-4 mb-8">
-            {/* APT Install */}
-            <div className="bg-[#0D0D0D] border border-[#333] rounded-lg p-4 max-w-2xl mx-auto">
-              <div className="flex items-center justify-between gap-4">
-                <code className="text-[#00FF9F] font-mono text-sm md:text-base flex-1 text-left overflow-x-auto">
-                  {aptCommand}
-                </code>
-                <button
-                  onClick={() => copyToClipboard(aptCommand, "apt")}
-                  className="p-2 hover:bg-[#333] rounded transition-colors flex-shrink-0"
-                  aria-label="Copy APT install command"
-                >
-                  {copiedApt ? <Check className="w-5 h-5 text-[#00FF9F]" /> : <Copy className="w-5 h-5 text-gray-400" />}
-                </button>
-              </div>
-            </div>
-
-            {/* NPM Install (alternative) */}
-            <div className="bg-[#0D0D0D] border border-[#333] rounded-lg p-4 max-w-2xl mx-auto">
-              <div className="flex items-center justify-between gap-4">
-                <code className="text-[#00FF9F] font-mono text-sm md:text-base flex-1 text-left">
-                  {npmCommand}
-                </code>
-                <button
-                  onClick={() => copyToClipboard(npmCommand, "npm")}
-                  className="p-2 hover:bg-[#333] rounded transition-colors flex-shrink-0"
-                  aria-label="Copy NPM install command"
-                >
-                  {copiedNpm ? <Check className="w-5 h-5 text-[#00FF9F]" /> : <Copy className="w-5 h-5 text-gray-400" />}
-                </button>
-              </div>
-            </div>
-
-            <p className="text-yellow-500 text-sm">
-              ⚠️ Review script/code before running; use sudo if needed.
-            </p>
-          </div>
+          {/* Try It Now — Interactive Demo */}
+          <TryPanel />
 
           {/* CTAs */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/pricing">
-              <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-6 py-3">
-                Register Free Core
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            <Link href="/getting-started">
+              <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-8 py-3 text-base">
+                Get Started Free <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Link href="/pricing">
-              <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10 px-6 py-3">
-                Upgrade to Pro
-              </Button>
-            </Link>
-            <Link href="/pricing">
-              <Button variant="outline" className="border-gray-500 text-gray-300 hover:bg-gray-800 px-6 py-3">
-                Get Team Plan
+              <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10 px-8 py-3 text-base">
+                View Plans
               </Button>
             </Link>
           </div>
