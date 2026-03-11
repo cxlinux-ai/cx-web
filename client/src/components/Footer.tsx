@@ -33,6 +33,11 @@ export default function Footer() {
                   GitHub
                 </a>
               </li>
+              <li>
+                <a href="/blog" className="hover:text-[#00FF9F] transition-colors">
+                  Blog
+                </a>
+              </li>
             </ul>
           </div>
 
