@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useSearch } from "wouter";
 import { motion } from "framer-motion";
 import {
   Check,
@@ -183,9 +183,26 @@ const trustBadges = [
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const searchString = useSearch();
+  const params = new URLSearchParams(searchString);
+  const referralCode = params.get("ref");
 
   return (
     <div id="pricing-page-container" className="min-h-screen bg-black text-white">
+      {/* Referral Banner */}
+      {referralCode && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-[#00FF9F]/20 via-[#00FF9F]/10 to-[#00FF9F]/20 border-b border-[#00FF9F]/30 py-3 px-4 text-center"
+        >
+          <p className="text-sm md:text-base font-semibold">
+            🎉 <span className="text-[#00FF9F]">You've been referred!</span>{" "}
+            Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on any paid plan.
+          </p>
+        </motion.div>
+      )}
+
       {/* Hero Section */}
       <section id="pricing-hero-section" className="pt-24 pb-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
@@ -204,7 +221,9 @@ export default function PricingPage() {
               <span className="text-[#00FF9F]">Pricing</span>
             </h1>
             <p id="pricing-hero-subtitle" className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-              Start free, scale as you grow. All plans include a 14-day free trial.
+              {referralCode
+                ? "You've been invited to try CX Linux — enjoy 3 months free on any paid plan!"
+                : "Start free, scale as you grow. All plans include a 14-day free trial."}
             </p>
 
             {/* Trust indicators */}
@@ -357,7 +376,7 @@ export default function PricingPage() {
                   ) : (
                     <Link
                       id={`pricing-cta-${tier.id}`}
-                      href={tier.ctaLink + (isAnnual ? "&billing=annual" : "&billing=monthly")}
+                      href={tier.ctaLink + (isAnnual ? "&billing=annual" : "&billing=monthly") + (referralCode ? `&ref=${referralCode}` : "")}
                       className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
                         tier.badge
                           ? "bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white hover:shadow-lg hover:shadow-[#00FF9F]0/30"

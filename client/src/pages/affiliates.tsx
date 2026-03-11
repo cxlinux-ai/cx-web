@@ -291,9 +291,9 @@ export default function AffiliatesPage() {
       desc: "Get paid every month they stay subscribed",
     },
     {
-      icon: Users,
-      title: "No Limits",
-      desc: "Refer as many developers as you want",
+      icon: Gift,
+      title: "3 Months Free",
+      desc: "Your referrals get 3 months free on any paid plan",
     },
   ];
 
@@ -572,6 +572,12 @@ export default function AffiliatesPage() {
                 </button>
               </div>
 
+              <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-4">
+                <p className="text-xs text-[#00FF9F]">
+                  🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on any paid plan — tell them!
+                </p>
+              </div>
+
               <p className="text-sm text-gray-500 mb-6">
                 We've also sent this to your email for safekeeping.
               </p>
@@ -785,6 +791,12 @@ export default function AffiliatesPage() {
                   >
                     {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                   </button>
+                </div>
+
+                <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-3">
+                  <p className="text-xs text-[#00FF9F]">
+                    🎁 People who use your link get <strong>3 months free</strong> — mention this when sharing!
+                  </p>
                 </div>
 
                 <div className="flex items-center gap-2">
