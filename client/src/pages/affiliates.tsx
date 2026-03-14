@@ -31,6 +31,11 @@ interface DashboardData {
   referral_code: string;
   referral_link: string;
   name: string | null;
+  tier: string;
+  tier_label: string;
+  commission_rate: string;
+  second_level_rate: string | null;
+  commission_duration: string;
   total_referrals: number;
   total_earned: string;
   unpaid_amount: string;
@@ -744,15 +749,42 @@ export default function AffiliatesPage() {
             >
               {/* Welcome bar */}
               <div className="flex items-center justify-between">
-                <p className="text-gray-400">
-                  Welcome back{dashboard.name ? `, ${dashboard.name}` : ""}
-                </p>
+                <div className="flex items-center gap-3">
+                  <p className="text-gray-400">
+                    Welcome back{dashboard.name ? `, ${dashboard.name}` : ""}
+                  </p>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    dashboard.tier === 'private'
+                      ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
+                      : 'bg-green-900/30 text-green-400 border border-green-500/30'
+                  }`}>
+                    {dashboard.tier === 'private' ? '🔒 Private Invite' : '🧪 Beta Tester'}
+                  </span>
+                </div>
                 <button
                   onClick={resetToLanding}
                   className="text-sm text-gray-500 hover:text-white transition-colors"
                 >
                   Sign Out
                 </button>
+              </div>
+
+              {/* Program Details */}
+              <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-wrap gap-6 text-sm">
+                <div>
+                  <span className="text-gray-500">Commission</span>
+                  <span className="ml-2 text-[#00FF9F] font-semibold">{dashboard.commission_rate}</span>
+                </div>
+                {dashboard.second_level_rate && (
+                  <div>
+                    <span className="text-gray-500">L2 Commission</span>
+                    <span className="ml-2 text-yellow-400 font-semibold">{dashboard.second_level_rate}</span>
+                  </div>
+                )}
+                <div>
+                  <span className="text-gray-500">Duration</span>
+                  <span className="ml-2 text-white font-semibold">{dashboard.commission_duration}</span>
+                </div>
               </div>
 
               {/* Stats Grid */}
