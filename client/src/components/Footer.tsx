@@ -65,6 +65,11 @@ export default function Footer() {
                   Support
                 </a>
               </li>
+              <li>
+                <Link href="/about" className="hover:text-[#00FF9F] transition-colors">
+                  About Us
+                </Link>
+              </li>
             </ul>
           </div>
 
