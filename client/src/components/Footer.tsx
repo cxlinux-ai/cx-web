@@ -70,6 +70,11 @@ export default function Footer() {
                   About Us
                 </Link>
               </li>
+              <li>
+                <Link href="/status" className="hover:text-[#00FF9F] transition-colors">
+                  System Status
+                </Link>
+              </li>
             </ul>
           </div>
 

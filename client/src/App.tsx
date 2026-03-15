@@ -25,6 +25,7 @@ const BlogIndex = lazy(() => import("./pages/blog/index"));
 const BlogPost = lazy(() => import("./pages/blog/post"));
 const AdminReferrals = lazy(() => import("./pages/admin/referrals"));
 const AboutPage = lazy(() => import("./pages/about"));
+const StatusPage = lazy(() => import("./pages/status"));
 
 // Loading component
 const PageLoader = () => (
@@ -247,6 +248,7 @@ function App() {
               <Route path="/license" component={License} />
               <Route path="/faq" component={FAQ} />
               <Route path="/about" component={AboutPage} />
+              <Route path="/status" component={StatusPage} />
               <Route path="/affiliates" component={Affiliates} />
               <Route path="/blog" component={BlogIndex} />
               <Route path="/blog/:slug" component={BlogPost} />
