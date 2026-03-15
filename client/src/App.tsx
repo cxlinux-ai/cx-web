@@ -23,6 +23,7 @@ const FAQ = lazy(() => import("./pages/faq"));
 const Affiliates = lazy(() => import("./pages/affiliates"));
 const BlogIndex = lazy(() => import("./pages/blog/index"));
 const BlogPost = lazy(() => import("./pages/blog/post"));
+const AdminReferrals = lazy(() => import("./pages/admin/referrals"));
 
 // Loading component
 const PageLoader = () => (
@@ -232,6 +233,7 @@ function App() {
               <Route path="/affiliates" component={Affiliates} />
               <Route path="/blog" component={BlogIndex} />
               <Route path="/blog/:slug" component={BlogPost} />
+              <Route path="/admin/referrals" component={AdminReferrals} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
