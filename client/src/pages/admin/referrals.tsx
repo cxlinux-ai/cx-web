@@ -43,8 +43,8 @@ interface Transaction {
 
 interface DashboardData {
   summary: {
-    beta_referrers: number;
-    private_referrers: number;
+    standard_referrers: number;
+    founding_referrers: number;
     active_referrers: number;
     total_commissions: string;
     total_unpaid: string;
@@ -67,7 +67,7 @@ export default function AdminReferrals() {
   const [addMessage, setAddMessage] = useState("");
 
   // Filter
-  const [tierFilter, setTierFilter] = useState<"all" | "beta" | "private">("all");
+  const [tierFilter, setTierFilter] = useState<"all" | "standard" | "founding">("all");
 
   const fetchDashboard = useCallback(async () => {
     if (!apiKey) return;
@@ -100,11 +100,11 @@ export default function AdminReferrals() {
     fetchDashboard();
   };
 
-  const handleAddPrivate = async (e: React.FormEvent) => {
+  const handleAddFounding = async (e: React.FormEvent) => {
     e.preventDefault();
     setAddMessage("");
     try {
-      const res = await fetch(`${API_BASE}/admin/referrals/add-private`, {
+      const res = await fetch(`${API_BASE}/admin/referrals/add-founding`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -231,7 +231,7 @@ export default function AdminReferrals() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Referral Dashboard</h1>
-            <p className="text-gray-400 mt-1">Manage beta testers & private invite referrers</p>
+            <p className="text-gray-400 mt-1">Manage founding & standard affiliates</p>
           </div>
           <button
             onClick={fetchDashboard}
@@ -257,7 +257,7 @@ export default function AdminReferrals() {
               {tab === "overview" && "📊 Overview"}
               {tab === "referrers" && `👥 Referrers (${data?.referrers.length || 0})`}
               {tab === "transactions" && `💰 Transactions`}
-              {tab === "add" && "➕ Add Private"}
+              {tab === "add" && "➕ Add Founding"}
             </button>
           ))}
         </div>
@@ -266,8 +266,8 @@ export default function AdminReferrals() {
         {activeTab === "overview" && data && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             {[
-              { label: "Beta Referrers", value: data.summary.beta_referrers, color: "#00FF9F" },
-              { label: "Private Referrers", value: data.summary.private_referrers, color: "#FFD700" },
+              { label: "Standard Referrers", value: data.summary.standard_referrers, color: "#00FF9F" },
+              { label: "Founding Affiliates", value: data.summary.founding_referrers, color: "#FFD700" },
               { label: "Active Total", value: data.summary.active_referrers, color: "#00BFFF" },
               { label: "Total Commissions", value: `$${data.summary.total_commissions}`, color: "#00FF9F" },
               { label: "Unpaid", value: `$${data.summary.total_unpaid}`, color: "#FF6B6B" },
@@ -286,7 +286,7 @@ export default function AdminReferrals() {
         {activeTab === "referrers" && (
           <>
             <div className="flex gap-2 mb-4">
-              {(["all", "beta", "private"] as const).map((f) => (
+              {(["all", "standard", "founding"] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setTierFilter(f)}
@@ -296,7 +296,7 @@ export default function AdminReferrals() {
                       : "border-[#444] text-gray-400 hover:border-[#666]"
                   }`}
                 >
-                  {f === "all" ? "All" : f === "beta" ? "🧪 Beta" : "🔒 Private"}
+                  {f === "all" ? "All" : f === "standard" ? "📋 Standard" : "⭐ Founding"}
                 </button>
               ))}
             </div>
@@ -333,12 +333,12 @@ export default function AdminReferrals() {
                       <td className="p-3">
                         <span
                           className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            r.tier === "private"
+                            r.tier === "founding"
                               ? "bg-yellow-900/30 text-yellow-400 border border-yellow-500/30"
                               : "bg-green-900/30 text-green-400 border border-green-500/30"
                           }`}
                         >
-                          {r.tier === "private" ? "🔒 Private" : "🧪 Beta"}
+                          {r.tier === "founding" ? "⭐ Founding" : "📋 Standard"}
                         </span>
                         <div className="text-xs text-gray-500 mt-1">
                           {r.commission_rate * 100}%{r.second_level_rate > 0 && ` + ${r.second_level_rate * 100}% L2`}
@@ -377,11 +377,11 @@ export default function AdminReferrals() {
                             onClick={() =>
                               handleChangeTier(
                                 r.referral_code,
-                                r.tier === "beta" ? "private" : "beta"
+                                r.tier === "standard" ? "founding" : "standard"
                               )
                             }
                             className="px-2 py-1 text-xs bg-blue-900/30 text-blue-400 rounded hover:bg-blue-900/50 transition"
-                            title={`Switch to ${r.tier === "beta" ? "private" : "beta"}`}
+                            title={`Switch to ${r.tier === "standard" ? "founding" : "standard"}`}
                           >
                             🔄
                           </button>
@@ -481,14 +481,14 @@ export default function AdminReferrals() {
           </div>
         )}
 
-        {/* Add Private Tab */}
+        {/* Add Founding Tab */}
         {activeTab === "add" && (
           <div className="max-w-lg">
             <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-6">
-              <h2 className="text-xl font-bold mb-1">Add Private Invite Referrer</h2>
+              <h2 className="text-xl font-bold mb-1">Add Founding Affiliate</h2>
               <p className="text-gray-400 text-sm mb-6">
-                Private referrers get 10% L1 + 5% L2 commissions for 36 months.
-                If the email already exists as beta, they'll be upgraded.
+                Founding affiliates get 10% L1 + 5% L2 commissions for 36 months.
+                If the email already exists as standard, they'll be upgraded.
               </p>
               {addMessage && (
                 <div
@@ -501,7 +501,7 @@ export default function AdminReferrals() {
                   {addMessage}
                 </div>
               )}
-              <form onSubmit={handleAddPrivate}>
+              <form onSubmit={handleAddFounding}>
                 <div className="mb-4">
                   <label className="block text-sm text-gray-400 mb-1">Email *</label>
                   <input
@@ -527,7 +527,7 @@ export default function AdminReferrals() {
                   type="submit"
                   className="w-full py-3 bg-[#FFD700] text-black font-semibold rounded-lg hover:bg-[#e6c200] transition"
                 >
-                  Add Private Referrer
+                  Add Founding Referrer
                 </button>
               </form>
             </div>
@@ -539,8 +539,8 @@ export default function AdminReferrals() {
                 <thead>
                   <tr className="text-gray-400 border-b border-[#333]">
                     <th className="text-left p-2"></th>
-                    <th className="text-left p-2">🧪 Beta Tester</th>
-                    <th className="text-left p-2">🔒 Private Invite</th>
+                    <th className="text-left p-2">📋 Standard</th>
+                    <th className="text-left p-2">⭐ Founding</th>
                   </tr>
                 </thead>
                 <tbody className="text-gray-300">

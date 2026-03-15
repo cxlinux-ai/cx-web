@@ -754,11 +754,11 @@ export default function AffiliatesPage() {
                     Welcome back{dashboard.name ? `, ${dashboard.name}` : ""}
                   </p>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    dashboard.tier === 'private'
+                    dashboard.tier === 'founding'
                       ? 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/30'
                       : 'bg-green-900/30 text-green-400 border border-green-500/30'
                   }`}>
-                    {dashboard.tier === 'private' ? '🔒 Private Invite' : '🧪 Beta Tester'}
+                    {dashboard.tier === 'founding' ? '⭐ Founding' : '📋 Standard'}
                   </span>
                 </div>
                 <button
