@@ -22,7 +22,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaDiscord } from "react-icons/fa";
 import Footer from "@/components/Footer";
 
 // ============================================
@@ -530,8 +530,8 @@ export default function HomePage() {
               <a href="https://github.com/cxlinux-ai" className="text-gray-400 hover:text-[#00FF9F]">
                 <FaGithub className="w-5 h-5" />
               </a>
-              <a href="https://twitter.com/cxlinux" className="text-gray-400 hover:text-[#00FF9F]">
-                <FaTwitter className="w-5 h-5" />
+              <a href="https://discord.gg/7K6TR7qtS" className="text-gray-400 hover:text-[#00FF9F]">
+                <FaDiscord className="w-5 h-5" />
               </a>
             </div>
           </div>

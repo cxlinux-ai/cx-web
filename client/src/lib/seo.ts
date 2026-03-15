@@ -12,7 +12,7 @@ interface SEOConfig {
 const BASE_URL = 'https://cxlinux.com';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'CX Linux';
-const TWITTER_HANDLE = '@cxlinux';
+const TWITTER_HANDLE = '@cxlinuxai';
 
 export function updateSEO(config: SEOConfig): () => void {
   const {

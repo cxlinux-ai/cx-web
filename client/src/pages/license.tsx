@@ -149,7 +149,7 @@ export default function License() {
             For Commercial Use licensing, contact:{" "}
             <a
               href="mailto:licensing@cxlinux.com"
-              className="text-blue-300 hover:underline"
+              className="text-[#00FF9F] hover:underline"
             >
               licensing@cxlinux.com
             </a>
@@ -179,7 +179,7 @@ export default function License() {
             </div>
           </div>
           <p className="text-gray-500 text-sm mt-4 text-center">
-            See <a href="/pricing" className="text-blue-300 hover:underline">pricing page</a> for current rates
+            See <a href="/pricing" className="text-[#00FF9F] hover:underline">pricing page</a> for current rates
           </p>
         </div>
 
@@ -211,7 +211,7 @@ export default function License() {
             For trademark inquiries, contact:{" "}
             <a
               href="mailto:legal@cxlinux.com"
-              className="text-blue-300 hover:underline"
+              className="text-[#00FF9F] hover:underline"
             >
               legal@cxlinux.com
             </a>
@@ -228,7 +228,7 @@ export default function License() {
           <a
             href="https://github.com/cxlinux-ai/cx-core"
             target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00FF9F] hover:bg-[#00DD8A] text-white font-semibold rounded-lg transition-colors"
             data-testid="link-github"
           >
             <Github className="h-5 w-5" />
@@ -240,7 +240,7 @@ export default function License() {
         <p className="text-center text-gray-500 text-sm mt-8">
           This license is based on the Business Source License 1.1, created by MariaDB Corporation.
           For more information, see{" "}
-          <a href="https://mariadb.com/bsl11/" className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">
+          <a href="https://mariadb.com/bsl11/" className="text-[#00FF9F] hover:underline" target="_blank" rel="noopener noreferrer">
             mariadb.com/bsl11
           </a>
         </p>

@@ -1,5 +1,5 @@
 import { Github } from "lucide-react";
-import { FaTwitter } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 import { Link } from "wouter";
 
 export default function Footer() {
@@ -100,8 +100,8 @@ export default function Footer() {
             <a href="https://github.com/cxlinux-ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00FF9F] transition-colors">
               <Github className="w-5 h-5" />
             </a>
-            <a href="https://twitter.com/cxlinux" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00FF9F] transition-colors">
-              <FaTwitter className="w-5 h-5" />
+            <a href="https://discord.gg/7K6TR7qtS" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#00FF9F] transition-colors">
+              <FaDiscord className="w-5 h-5" />
             </a>
           </div>
         </div>

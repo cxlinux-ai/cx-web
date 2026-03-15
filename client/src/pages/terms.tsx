@@ -105,7 +105,7 @@ For users outside the United States, you agree to comply with all local laws reg
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-300 transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00FF9F] transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
           Back to Home
         </Link>
@@ -135,8 +135,8 @@ For users outside the United States, you agree to comply with all local laws reg
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <section.icon size={20} className="text-blue-300" />
+                <div className="p-2 bg-[#00FF9F]/10 rounded-lg">
+                  <section.icon size={20} className="text-[#00FF9F]" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>
