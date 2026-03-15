@@ -298,7 +298,7 @@ export default function AffiliatesPage() {
     {
       icon: Gift,
       title: "3 Months Free",
-      desc: "Your referrals get 3 months free on any paid plan",
+      desc: "Your referrals get 3 months free on the Pro plan",
     },
   ];
 
@@ -579,7 +579,7 @@ export default function AffiliatesPage() {
 
               <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-4">
                 <p className="text-xs text-[#00FF9F]">
-                  🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on any paid plan — tell them!
+                  🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on the Pro plan — tell them!
                 </p>
               </div>
 

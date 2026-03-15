@@ -198,7 +198,7 @@ export default function PricingPage() {
         >
           <p className="text-sm md:text-base font-semibold">
             🎉 <span className="text-[#00FF9F]">You've been referred!</span>{" "}
-            Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on any paid plan.
+            Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on the Pro plan.
           </p>
         </motion.div>
       )}
@@ -222,7 +222,7 @@ export default function PricingPage() {
             </h1>
             <p id="pricing-hero-subtitle" className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
               {referralCode
-                ? "You've been invited to try CX Linux — enjoy 3 months free on any paid plan!"
+                ? "You've been invited to try CX Linux — enjoy 3 months free on the Pro plan!"
                 : "Start free, scale as you grow. All plans include a 14-day free trial."}
             </p>
 
