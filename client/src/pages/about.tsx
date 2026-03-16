@@ -23,12 +23,14 @@ const teamMembers = [
 ];
 
 const milestones = [
-  { date: "2024 Q3", event: "Project inception — AI-native terminal concept" },
-  { date: "2024 Q4", event: "First working prototype built on WezTerm fork" },
-  { date: "2025 Q1", event: "Private alpha — natural language commands" },
-  { date: "2025 Q2", event: "APT repository & license server launched" },
-  { date: "2025 Q3", event: "Rebrand: Cortex Linux → CX Linux" },
-  { date: "2026 Q1", event: "Public beta — v0.3.2 released" },
+  { date: "Aug 2025", event: "Project kicked off — AI-native terminal concept validated" },
+  { date: "Sep 2025", event: "Core architecture: WezTerm fork + Rust AI command engine" },
+  { date: "Oct 2025", event: "Natural language CLI working — cx ask, cx install, cx fix" },
+  { date: "Nov 2025", event: "License server, Stripe integration, affiliate program" },
+  { date: "Dec 2025", event: "APT repository live — cx-terminal installable via apt" },
+  { date: "Jan 2026", event: "Brand launch: CX Linux — website, docs, community" },
+  { date: "Feb 2026", event: "v0.3.2 released — Quick Blocks, workspace snapshots, security scanning" },
+  { date: "Mar 2026", event: "Public beta — install script, CLI reference, docs site" },
 ];
 
 const values = [
