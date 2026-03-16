@@ -14,11 +14,42 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 
-const teamMembers = [
+const coreContributors = [
   {
     name: "Mike Morgan",
-    role: "CEO & Founder",
-    description: "AI infrastructure veteran. Building the future of Linux administration.",
+    role: "Founder & CEO",
+    github: "mikejmorgan-ai",
+    avatar: "https://avatars.githubusercontent.com/u/73376634?v=4",
+  },
+  {
+    name: "Gary Xue",
+    role: "CTO",
+    github: "0xBigotry7",
+    avatar: "https://avatars.githubusercontent.com/u/192658339?v=4",
+  },
+  {
+    name: "Wez Furlong",
+    role: "WezTerm Creator",
+    github: "wez",
+    avatar: "https://avatars.githubusercontent.com/u/117777?v=4",
+  },
+  {
+    name: "Sahil Bhatane",
+    role: "Frontend",
+    github: "Sahilbhatane",
+    avatar: "https://avatars.githubusercontent.com/u/235881233?v=4",
+  },
+  {
+    name: "Siarhei Fedartsou",
+    role: "Core",
+    github: "jsgf",
+    avatar: "https://avatars.githubusercontent.com/u/147966?v=4",
+  },
+  {
+    name: "Marvin Löbel",
+    role: "Core",
+    github: "nagisa",
+    avatar: "https://avatars.githubusercontent.com/u/679122?v=4",
   },
 ];
 
@@ -198,26 +229,36 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Core Contributors */}
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0D0D0D]/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-12">Leadership</h2>
-          <div className="flex justify-center">
-            {teamMembers.map((member) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Core Contributors</h2>
+          <p className="text-gray-400 mb-12">The people building CX Linux</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {coreContributors.map((member, i) => (
+              <motion.a
+                key={member.github}
+                href={`https://github.com/${member.github}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white/5 border border-white/10 rounded-xl p-8 max-w-sm"
+                transition={{ delay: i * 0.1 }}
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-[#00FF9F]/30 transition-all group"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-[#00FF9F] to-[#00CC7F] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold">{member.name}</h3>
-                <p className="text-[#00FF9F] text-sm mb-3">{member.role}</p>
-                <p className="text-gray-400 text-sm">{member.description}</p>
-              </motion.div>
+                <img
+                  src={member.avatar}
+                  alt={member.name}
+                  className="w-16 h-16 rounded-full mx-auto mb-3 border-2 border-white/10 group-hover:border-[#00FF9F]/50 transition-all"
+                />
+                <h3 className="font-semibold">{member.name}</h3>
+                <p className="text-[#00FF9F] text-sm">{member.role}</p>
+                <p className="text-gray-500 text-xs mt-1 flex items-center justify-center gap-1">
+                  <Github className="w-3 h-3" />
+                  {member.github}
+                </p>
+              </motion.a>
             ))}
           </div>
         </div>
