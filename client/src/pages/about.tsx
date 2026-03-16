@@ -22,34 +22,46 @@ const coreContributors = [
     avatar: "https://avatars.githubusercontent.com/u/73376634?v=4",
   },
   {
-    name: "Gary Xue",
-    role: "CTO",
-    github: "0xBigotry7",
-    avatar: "https://avatars.githubusercontent.com/u/192658339?v=4",
-  },
-  {
     name: "Wez Furlong",
     role: "WezTerm Creator",
     github: "wez",
     avatar: "https://avatars.githubusercontent.com/u/117777?v=4",
   },
   {
-    name: "Sahil Bhatane",
-    role: "Frontend",
-    github: "Sahilbhatane",
-    avatar: "https://avatars.githubusercontent.com/u/235881233?v=4",
-  },
-  {
-    name: "Siarhei Fedartsou",
+    name: "Jeremy Fitzhardinge",
     role: "Core",
     github: "jsgf",
     avatar: "https://avatars.githubusercontent.com/u/147966?v=4",
   },
   {
-    name: "Marvin Löbel",
+    name: "Simonas Kazlauskas",
     role: "Core",
     github: "nagisa",
     avatar: "https://avatars.githubusercontent.com/u/679122?v=4",
+  },
+  {
+    name: "Spenser Black",
+    role: "Core",
+    github: "spenserblack",
+    avatar: "https://avatars.githubusercontent.com/u/8546709?v=4",
+  },
+  {
+    name: "Anton Ryzhov",
+    role: "Core",
+    github: "anton-ryzhov",
+    avatar: "https://avatars.githubusercontent.com/u/556933?v=4",
+  },
+  {
+    name: "Julien Giannuzzi",
+    role: "Core",
+    github: "jgiannuzzi",
+    avatar: "https://avatars.githubusercontent.com/u/3692455?v=4",
+  },
+  {
+    name: "Vikram S.",
+    role: "Core",
+    github: "vikramships",
+    avatar: "https://avatars.githubusercontent.com/u/235881233?v=4",
   },
 ];
 
