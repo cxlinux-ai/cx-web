@@ -943,28 +943,24 @@ interface LeaderboardEntry {
 
 function LeaderboardSection() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+  const [totalAffiliates, setTotalAffiliates] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${LICENSE_SERVER}/api/v1/referrals/leaderboard`)
       .then(r => r.json())
       .then(data => {
-        if (data.success) setEntries(data.leaderboard);
+        if (data.success) {
+          // Only show affiliates with actual referrals (> 0)
+          setEntries(data.leaderboard.filter((e: LeaderboardEntry) => e.total_referrals > 0));
+          setTotalAffiliates(data.total_affiliates);
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto mt-16 text-center text-gray-500">
-        <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
-        Loading leaderboard...
-      </div>
-    );
-  }
-
-  if (entries.length === 0) return null;
+  if (loading) return null;
 
   const tierBadge = (tier: string) => {
     if (tier === "founding") return "⭐ Founding";
@@ -992,54 +988,68 @@ function LeaderboardSection() {
         <p className="text-gray-400 mt-2">Top affiliates by referrals</p>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-white/10 text-sm text-gray-500">
-                <th className="text-left py-3 px-4">Rank</th>
-                <th className="text-left py-3 px-4">Affiliate</th>
-                <th className="text-left py-3 px-4">Tier</th>
-                <th className="text-center py-3 px-4">Referrals</th>
-                <th className="text-right py-3 px-4">Earned</th>
-              </tr>
-            </thead>
-            <tbody>
-              {entries.map((entry) => (
-                <tr
-                  key={entry.referral_code}
-                  className={`border-b border-white/5 hover:bg-white/5 transition-colors ${
-                    entry.rank <= 3 ? "bg-[#00FF9F]/5" : ""
-                  }`}
-                >
-                  <td className="py-3 px-4 text-lg">
-                    {rankEmoji(entry.rank)}
-                  </td>
-                  <td className="py-3 px-4">
-                    <span className="text-white font-medium">{entry.display_name}</span>
-                    <span className="text-gray-600 text-xs ml-2">{entry.referral_code}</span>
-                  </td>
-                  <td className="py-3 px-4">
-                    <span className="text-xs px-2 py-1 rounded-full bg-white/10">
-                      {tierBadge(entry.tier)}
-                    </span>
-                  </td>
-                  <td className="py-3 px-4 text-center text-white font-semibold">
-                    {entry.total_referrals}
-                  </td>
-                  <td className="py-3 px-4 text-right text-[#00FF9F] font-semibold">
-                    {entry.total_earned}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {entries.length > 0 ? (
+        <>
+          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-white/10 text-sm text-gray-500">
+                    <th className="text-left py-3 px-4">Rank</th>
+                    <th className="text-left py-3 px-4">Affiliate</th>
+                    <th className="text-left py-3 px-4">Tier</th>
+                    <th className="text-center py-3 px-4">Referrals</th>
+                    <th className="text-right py-3 px-4">Earned</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {entries.map((entry) => (
+                    <tr
+                      key={entry.referral_code}
+                      className={`border-b border-white/5 hover:bg-white/5 transition-colors ${
+                        entry.rank <= 3 ? "bg-[#00FF9F]/5" : ""
+                      }`}
+                    >
+                      <td className="py-3 px-4 text-lg">{rankEmoji(entry.rank)}</td>
+                      <td className="py-3 px-4">
+                        <span className="text-white font-medium">{entry.display_name}</span>
+                        <span className="text-gray-600 text-xs ml-2">{entry.referral_code}</span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <span className="text-xs px-2 py-1 rounded-full bg-white/10">
+                          {tierBadge(entry.tier)}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-center text-white font-semibold">
+                        {entry.total_referrals}
+                      </td>
+                      <td className="py-3 px-4 text-right text-[#00FF9F] font-semibold">
+                        {entry.total_earned}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p className="text-center text-gray-600 text-xs mt-4">
+            Names are partially anonymized for privacy. Earnings update in real-time.
+          </p>
+        </>
+      ) : (
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-10 text-center">
+          <p className="text-4xl mb-4">🚀</p>
+          <h3 className="text-xl font-semibold mb-2">Be the first on the leaderboard</h3>
+          <p className="text-gray-400 text-sm max-w-md mx-auto mb-4">
+            {totalAffiliates > 0 ? `${totalAffiliates} affiliates have joined` : "Affiliates are signing up"} — but no one has landed their first referral yet. Share your link and claim the #1 spot.
+          </p>
+          <div className="flex items-center justify-center gap-3 text-sm text-gray-500">
+            <span className="flex items-center gap-1">🥇 10% commission on every sale</span>
+            <span>·</span>
+            <span className="flex items-center gap-1">⭐ First 100 get Founding status</span>
+          </div>
         </div>
-      </div>
-
-      <p className="text-center text-gray-600 text-xs mt-4">
-        Names are partially anonymized for privacy. Earnings update in real-time.
-      </p>
+      )}
     </motion.section>
   );
 }
