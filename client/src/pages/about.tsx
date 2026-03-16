@@ -278,8 +278,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Contributors — dynamic from GitHub */}
-      <ContributorsSection />
+
 
       {/* Community CTA */}
       <section className="py-20 px-4">
