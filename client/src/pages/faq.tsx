@@ -149,7 +149,7 @@ export default function FAQ() {
       questions: [
         {
           q: "How do I install CX?",
-          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux.com | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: https://docs.cxlinux.com/getting-started"
+          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux.com | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: https://github.com/cxlinux-ai/cx-core#getting-started"
         },
         {
           q: "Is it ready to use now?",
@@ -179,7 +179,7 @@ export default function FAQ() {
         },
         {
           q: "Where can I get help?",
-          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/7K6TR7qtS\n• GitHub Issues: github.com/cxlinux-ai/cx-core/issues\n• Documentation: docs.cxlinux.com\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
+          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/7K6TR7qtS\n• GitHub Issues: github.com/cxlinux-ai/cx-core/issues\n• Documentation: github.com/cxlinux-ai/cx-core\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
         },
         {
           q: "Is my data private?",

@@ -294,13 +294,11 @@ export default function AboutPage() {
                 View on GitHub
               </a>
               <a
-                href="https://docs.cxlinux.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/faq"
                 className="px-8 py-3 border-2 border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-all flex items-center gap-2"
               >
                 <BookOpen className="w-5 h-5" />
-                Read the Docs
+                FAQ
               </a>
             </div>
           </div>

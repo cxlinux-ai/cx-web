@@ -46,13 +46,7 @@ const initialServices: ServiceStatus[] = [
     status: "checking",
     description: "Package repository for Ubuntu/Debian",
   },
-  {
-    name: "Documentation",
-    url: "https://docs.cxlinux.com",
-    icon: Terminal,
-    status: "checking",
-    description: "Developer documentation (GitHub Pages)",
-  },
+
   {
     name: "GitHub",
     url: "https://github.com/cxlinux-ai/cx-core",
