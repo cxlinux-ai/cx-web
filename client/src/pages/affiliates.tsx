@@ -903,8 +903,8 @@ export default function AffiliatesPage() {
                     <p className="text-gray-300">{dashboard.payout_email}</p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Method</p>
-                    <p className="text-gray-300 capitalize">{dashboard.payout_method}</p>
+                    <p className="text-gray-500">Payout Method</p>
+                    <p className="text-gray-300">To be confirmed</p>
                   </div>
                   <div>
                     <p className="text-gray-500">Total Earned</p>
