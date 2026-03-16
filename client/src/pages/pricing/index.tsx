@@ -74,15 +74,15 @@ const tiers: PricingTier[] = [
     id: "pro",
     name: "CX Pro",
     subtitle: "For Power Users",
-    price: 29,
-    annualPrice: 290,
+    price: 20,
+    annualPrice: 200,
     description: "Unlock cloud AI models, web console, and priority support. Perfect for developers managing multiple servers.",
     features: [
       "Everything in CX Core",
       "Cloud LLMs (GPT-4o, Claude 3.5)",
       "Web console dashboard",
       "API access & webhooks",
-      "Slack Connect support",
+      "Email support (24h response)",
       "Priority updates",
       "Usage analytics",
       "Custom command aliases",
@@ -90,7 +90,7 @@ const tiers: PricingTier[] = [
     limits: {
       servers: "Up to 5 servers",
       commands: "10,000/month cloud",
-      support: "Slack (24h)",
+      support: "Email (24h)",
     },
     cta: "Upgrade Now",
     ctaLink: "/pricing/checkout?plan=pro",
@@ -103,8 +103,8 @@ const tiers: PricingTier[] = [
     id: "team",
     name: "CX Team",
     subtitle: "For Growing Teams",
-    price: 79,
-    annualPrice: 790,
+    price: 99,
+    annualPrice: 990,
     description: "Collaborate with your team. Shared configurations, role-based access, and centralized management for dev teams.",
     features: [
       "Everything in CX Pro",
@@ -113,8 +113,8 @@ const tiers: PricingTier[] = [
       "Shared command history",
       "Centralized config management",
       "Team analytics dashboard",
-      "Dedicated Slack channel",
-      "Priority support (4h)",
+      "Slack integration",
+      "Priority email support",
     ],
     limits: {
       servers: "Up to 25 servers",
@@ -130,16 +130,16 @@ const tiers: PricingTier[] = [
     id: "enterprise",
     name: "CX Enterprise",
     subtitle: "For Organizations",
-    price: 149,
-    annualPrice: 1490,
-    description: "Enterprise-grade security, compliance, and dedicated support. SSO, audit logs, custom AI models, and SLAs for large organizations.",
+    price: 299,
+    annualPrice: 2990,
+    description: "Enterprise-grade security, compliance, and dedicated support. SSO, audit logs, and custom SLAs for large organizations.",
     features: [
       "Everything in CX Team",
       "SSO/SAML/LDAP integration",
       "Audit logs & compliance",
       "SOC2 & HIPAA reports",
-      "Custom AI models & fine-tuning",
       "99.9% SLA guarantee",
+      "Dedicated Slack channel",
       "Custom integrations",
       "On-premise deployment option",
       "Dedicated account manager",
@@ -163,13 +163,11 @@ const featureComparison = [
   { feature: "Cloud LLMs (GPT-4o/Claude)", core: false, pro: true, team: true, enterprise: true },
   { feature: "Web Console Dashboard", core: false, pro: true, team: true, enterprise: true },
   { feature: "API Access", core: false, pro: true, team: true, enterprise: true },
-  { feature: "Slack Connect Support", core: false, pro: true, team: true, enterprise: true },
   { feature: "Team Workspaces", core: false, pro: false, team: true, enterprise: true },
   { feature: "Role-Based Access", core: false, pro: false, team: true, enterprise: true },
   { feature: "SSO/SAML/LDAP", core: false, pro: false, team: false, enterprise: true },
-  { feature: "Custom AI Models", core: false, pro: false, team: false, enterprise: true },
   { feature: "Audit Logs", core: false, pro: false, team: false, enterprise: true },
-  { feature: "SOC2 & HIPAA Reports", core: false, pro: false, team: false, enterprise: true },
+  { feature: "Compliance Reports", core: false, pro: false, team: false, enterprise: true },
   { feature: "On-Premise Deployment", core: false, pro: false, team: false, enterprise: true },
   { feature: "Server Limit", core: "1", pro: "5", team: "25", enterprise: "Unlimited" },
   { feature: "Cloud Commands/Month", core: "-", pro: "10,000", team: "50,000", enterprise: "Unlimited" },
@@ -255,7 +253,7 @@ export default function PricingPage() {
               />
               <span className={`text-lg ${isAnnual ? "text-white" : "text-gray-500"}`}>
                 Annual
-                <span className="ml-2 text-sm text-green-400 font-semibold">Save 2 months</span>
+                <span className="ml-2 text-sm text-green-400 font-semibold">Save 20%</span>
               </span>
             </div>
           </motion.div>
