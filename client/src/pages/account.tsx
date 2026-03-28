@@ -91,6 +91,14 @@ function transformDashboard(raw: any): DashboardData {
     enterprise: '$299/mo',
   };
 
+  // Display-friendly plan names
+  const planNameMap: Record<string, string> = {
+    core: 'Free',
+    pro: 'Pro',
+    team: 'Team',
+    enterprise: 'Enterprise',
+  };
+
   return {
     user: {
       name: raw.account?.name || null,
@@ -99,7 +107,7 @@ function transformDashboard(raw: any): DashboardData {
     },
     license: primary ? {
       key: primary.license_key,
-      plan: primary.tier.charAt(0).toUpperCase() + primary.tier.slice(1),
+      plan: planNameMap[primary.tier] || primary.tier.charAt(0).toUpperCase() + primary.tier.slice(1),
       status: primary.active ? 'active' : 'expired',
       max_devices: primary.systems_allowed,
       activated_devices: primary.systems_used || 0,
@@ -118,6 +126,7 @@ function transformDashboard(raw: any): DashboardData {
 }
 
 const planColors: Record<string, string> = {
+  free: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
   team: "bg-blue-500/20 text-blue-300 border-blue-500/30",
@@ -487,7 +496,7 @@ export default function AccountPage() {
     if (!dashboard) return null;
     const { user, license, devices, affiliate } = dashboard;
     const plan = license?.plan?.toLowerCase() || "core";
-    const isFreePlan = !license || plan === "core";
+    const isFreePlan = !license || plan === "Free" || plan === "core";
     const days = license ? daysRemaining(license.expires_at) : 0;
 
     return (
@@ -772,7 +781,7 @@ export default function AccountPage() {
                   className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors"
                 >
                   <CreditCard className="w-4 h-4" />
-                  Manage Billing
+                  Manage Billing & Cancel
                 </button>
                 <Link href="/pricing">
                   <span className="flex items-center gap-2 px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors cursor-pointer">
