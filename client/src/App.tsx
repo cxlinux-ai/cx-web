@@ -26,6 +26,7 @@ const BlogPost = lazy(() => import("./pages/blog/post"));
 const AdminReferrals = lazy(() => import("./pages/admin/referrals"));
 const AboutPage = lazy(() => import("./pages/about"));
 const StatusPage = lazy(() => import("./pages/status"));
+const AccountPage = lazy(() => import("./pages/account"));
 
 // Loading component
 const PageLoader = () => (
@@ -151,9 +152,9 @@ function App() {
                     <span className="text-white text-sm font-medium">{starCount}</span>
                   )}
                 </a>
-                <Link href="/pricing">
+                <Link href="/account">
                   <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors">
-                    Sign Up Free
+                    My Account
                   </button>
                 </Link>
               </div>
@@ -220,11 +221,18 @@ function App() {
                       About
                     </Link>
                     <Link
-                      href="/pricing"
+                      href="/account"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-gray-400 hover:text-white"
+                    >
+                      My Account
+                    </Link>
+                    <Link
+                      href="/account"
                       onClick={() => setMobileMenuOpen(false)}
                       className="block w-full text-center px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg"
                     >
-                      Sign Up Free
+                      My Account
                     </Link>
                   </div>
                 </motion.div>
@@ -252,6 +260,7 @@ function App() {
               <Route path="/affiliates" component={Affiliates} />
               <Route path="/blog" component={BlogIndex} />
               <Route path="/blog/:slug" component={BlogPost} />
+              <Route path="/account" component={AccountPage} />
               <Route path="/admin/referrals" component={AdminReferrals} />
               <Route component={NotFound} />
             </Switch>
