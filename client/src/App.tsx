@@ -23,7 +23,7 @@ const FAQ = lazy(() => import("./pages/faq"));
 const Affiliates = lazy(() => import("./pages/affiliates"));
 const BlogIndex = lazy(() => import("./pages/blog/index"));
 const BlogPost = lazy(() => import("./pages/blog/post"));
-const AdminReferrals = lazy(() => import("./pages/admin/referrals"));
+const AdminPanel = lazy(() => import("./pages/admin/index"));
 const AboutPage = lazy(() => import("./pages/about"));
 const StatusPage = lazy(() => import("./pages/status"));
 const AccountPage = lazy(() => import("./pages/account"));
@@ -254,7 +254,8 @@ function App() {
               <Route path="/blog" component={BlogIndex} />
               <Route path="/blog/:slug" component={BlogPost} />
               <Route path="/account" component={AccountPage} />
-              <Route path="/admin/referrals" component={AdminReferrals} />
+              <Route path="/admin" component={AdminPanel} />
+              <Route path="/admin/referrals" component={AdminPanel} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>
