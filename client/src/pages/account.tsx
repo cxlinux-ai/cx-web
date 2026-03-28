@@ -574,9 +574,9 @@ export default function AccountPage() {
               Days Remaining
             </div>
             <span
-              className={`text-xl font-bold ${days < 30 && license ? "text-yellow-400" : "text-white"}`}
+              className={`text-xl font-bold ${days < 30 && days > 0 && !isFreePlan ? "text-yellow-400" : "text-white"}`}
             >
-              {license ? days : "—"}
+              {!license ? "—" : isFreePlan ? "∞" : days}
             </span>
           </motion.div>
         </div>
@@ -649,7 +649,7 @@ export default function AccountPage() {
                   used
                 </span>
                 <span className="text-gray-400">
-                  Expires {formatDate(license.expires_at)}
+                  {isFreePlan ? "No Expiry" : `Expires ${formatDate(license.expires_at)}`}
                 </span>
               </div>
               <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
@@ -660,7 +660,7 @@ export default function AccountPage() {
                   }}
                 />
               </div>
-              {days < 30 && days > 0 && (
+              {days < 30 && days > 0 && !isFreePlan && (
                 <p className="text-yellow-400 text-sm mt-2">
                   ⚠ Your license expires in {days} days
                 </p>
@@ -760,7 +760,7 @@ export default function AccountPage() {
                       className={`w-2 h-2 rounded-full ${license ? statusColor(license.status, license.expires_at) : "bg-gray-500"}`}
                     />
                     <p className="text-white font-medium">
-                      {license ? formatDate(license.expires_at) : "—"}
+                      {!license ? "—" : isFreePlan ? "No Expiry" : formatDate(license.expires_at)}
                     </p>
                   </div>
                 </div>
