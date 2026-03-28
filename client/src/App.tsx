@@ -223,13 +223,6 @@ function App() {
                     <Link
                       href="/account"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
-                    >
-                      My Account
-                    </Link>
-                    <Link
-                      href="/account"
-                      onClick={() => setMobileMenuOpen(false)}
                       className="block w-full text-center px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg"
                     >
                       My Account

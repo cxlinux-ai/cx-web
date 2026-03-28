@@ -74,6 +74,49 @@ interface DashboardData {
   affiliate: AffiliateData | null;
 }
 
+// Transform backend response to frontend DashboardData
+function transformDashboard(raw: any): DashboardData {
+  const licenses = raw.licenses || [];
+  // Pick primary active license (highest tier first: enterprise > team > pro > core)
+  const tierOrder = ['enterprise', 'team', 'pro', 'core'];
+  const activeLicenses = licenses.filter((l: any) => l.active);
+  activeLicenses.sort((a: any, b: any) => tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier));
+  const primary = activeLicenses[0] || licenses[0] || null;
+
+  // Determine billing info from tier
+  const priceMap: Record<string, string> = {
+    core: 'Free',
+    pro: '$20/mo',
+    team: '$99/mo',
+    enterprise: '$299/mo',
+  };
+
+  return {
+    user: {
+      name: raw.account?.name || null,
+      email: raw.account?.email || '',
+      created_at: raw.account?.member_since || new Date().toISOString(),
+    },
+    license: primary ? {
+      key: primary.license_key,
+      plan: primary.tier.charAt(0).toUpperCase() + primary.tier.slice(1),
+      status: primary.active ? 'active' : 'expired',
+      max_devices: primary.systems_allowed,
+      activated_devices: primary.systems_used || 0,
+      expires_at: primary.expires_at,
+      billing_cycle: primary.stripe_subscription_id ? 'Monthly' : null,
+      price: priceMap[primary.tier] || null,
+    } : null,
+    devices: (raw.devices || []).filter((d: any) => d.active),
+    affiliate: raw.affiliate ? {
+      ...raw.affiliate,
+      unpaid_amount: `$${raw.affiliate.unpaid_amount}`,
+      paid_amount: `$${raw.affiliate.paid_amount}`,
+      total_earned: raw.affiliate.total_earned,
+    } : null,
+  };
+}
+
 const planColors: Record<string, string> = {
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
@@ -134,10 +177,10 @@ export default function AccountPage() {
   const loadDashboard = async (authToken: string) => {
     setIsLoading(true);
     try {
-      const data = await apiCall(`${LICENSE_SERVER}/api/v1/user/dashboard`, {
+      const raw = await apiCall(`${LICENSE_SERVER}/api/v1/user/dashboard`, {
         token: authToken,
       });
-      setDashboard(data);
+      setDashboard(transformDashboard(raw));
       setMode("dashboard");
     } catch (error) {
       if ((error as Error).message !== "Session expired") {
