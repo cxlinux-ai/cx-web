@@ -108,10 +108,24 @@ function smoothPath(pts: number[][]): string {
   return d;
 }
 
-/* ── Real graph (axis + smoothed line + area + threshold + glow) ───────── */
+/* ── Real graph — responsive width via ResizeObserver ──────────────────── */
 function Graph({ vals, color, animate: shouldAnimate, delay = 0 }: { vals: number[]; color: string; animate: boolean; delay?: number }) {
-  const PAD_L = 22, PAD_R = 6, PAD_T = 5, PAD_B = 12;
-  const W = 180, H = 60;
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [W, setW] = useState(200);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const w = Math.floor(entries[0].contentRect.width);
+      if (w > 0) setW(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const H = 76;
+  const PAD_L = 22, PAD_R = 6, PAD_T = 6, PAD_B = 14;
   const innerW = W - PAD_L - PAD_R;
   const innerH = H - PAD_T - PAD_B;
 
@@ -128,177 +142,141 @@ function Graph({ vals, color, animate: shouldAnimate, delay = 0 }: { vals: numbe
 
   const pathRef = useRef<SVGPathElement>(null);
   const [len, setLen] = useState(0);
-  useEffect(() => { if (pathRef.current) setLen(pathRef.current.getTotalLength()); }, [lineD]);
+  useEffect(() => { if (pathRef.current) setLen(pathRef.current.getTotalLength()); }, [lineD, W]);
 
   const idSafe = color.replace("#", "");
-  const gradId = `g-${idSafe}`;
-  const glowId = `glow-${idSafe}`;
-  const haloId = `halo-${idSafe}`;
+  const gradId  = `g-${idSafe}`;
+  const glowId  = `glow-${idSafe}`;
+  const haloId  = `halo-${idSafe}`;
 
   const yTicks = [0, 50, 100];
   const xTicks = ["1h", "30m", "now"];
 
-  // peak point (highest value) — annotates real drama
   const peakIdx = vals.indexOf(Math.max(...vals));
   const peakVal = vals[peakIdx];
 
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="overflow-visible flex-shrink-0">
-      <defs>
-        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stopColor={color} stopOpacity="0.35" />
-          <stop offset="60%" stopColor={color} stopOpacity="0.08" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-        <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="0.9" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <filter id={haloId} x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="2.5" />
-        </filter>
-      </defs>
+    <div ref={wrapRef} className="w-full">
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="overflow-visible block">
+        <defs>
+          <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor={color} stopOpacity="0.38" />
+            <stop offset="65%"  stopColor={color} stopOpacity="0.07" />
+            <stop offset="100%" stopColor={color} stopOpacity="0" />
+          </linearGradient>
+          <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="0.9" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id={haloId} x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2.5" />
+          </filter>
+        </defs>
 
-      {/* gridlines + y labels */}
-      {yTicks.map((t) => {
-        const y = yToPx(t);
-        return (
-          <g key={t}>
-            <line
-              x1={PAD_L} y1={y} x2={PAD_L + innerW} y2={y}
-              stroke="#ffffff"
-              strokeOpacity={t === 0 ? 0.07 : 0.04}
-              strokeWidth="0.5"
-              strokeDasharray={t === 0 ? "" : "1.5 2.5"}
-            />
-            <text
-              x={PAD_L - 4}
-              y={y + 2}
-              textAnchor="end"
-              fill="#ffffff"
-              fillOpacity="0.28"
-              fontSize="6.5"
-              fontFamily="ui-monospace, monospace"
-            >
-              {t}
-            </text>
-          </g>
-        );
-      })}
+        {/* gridlines + y labels */}
+        {yTicks.map((t) => {
+          const y = yToPx(t);
+          return (
+            <g key={t}>
+              <line
+                x1={PAD_L} y1={y} x2={PAD_L + innerW} y2={y}
+                stroke="#ffffff"
+                strokeOpacity={t === 0 ? 0.07 : 0.04}
+                strokeWidth="0.5"
+                strokeDasharray={t === 0 ? "" : "1.5 2.5"}
+              />
+              <text
+                x={PAD_L - 4} y={y + 2}
+                textAnchor="end"
+                fill="#ffffff" fillOpacity="0.28"
+                fontSize="6.5" fontFamily="ui-monospace, monospace"
+              >{t}</text>
+            </g>
+          );
+        })}
 
-      {/* x-axis time labels */}
-      {xTicks.map((label, i) => {
-        const x = PAD_L + (i / (xTicks.length - 1)) * innerW;
-        return (
+        {/* x-axis labels */}
+        {xTicks.map((label, i) => (
           <text
             key={label}
-            x={x}
+            x={PAD_L + (i / (xTicks.length - 1)) * innerW}
             y={H - 2}
             textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
-            fill="#ffffff"
-            fillOpacity="0.22"
-            fontSize="6.5"
-            fontFamily="ui-monospace, monospace"
-          >
-            {label}
-          </text>
-        );
-      })}
+            fill="#ffffff" fillOpacity="0.22"
+            fontSize="6.5" fontFamily="ui-monospace, monospace"
+          >{label}</text>
+        ))}
 
-      {/* threshold line at 75% — subtle "warning" reference */}
-      <line
-        x1={PAD_L} y1={yToPx(75)} x2={PAD_L + innerW} y2={yToPx(75)}
-        stroke="#fbbf24"
-        strokeOpacity="0.15"
-        strokeWidth="0.5"
-        strokeDasharray="2 3"
-      />
+        {/* 75% warning threshold */}
+        <line
+          x1={PAD_L} y1={yToPx(75)} x2={PAD_L + innerW} y2={yToPx(75)}
+          stroke="#fbbf24" strokeOpacity="0.15" strokeWidth="0.5" strokeDasharray="2 3"
+        />
 
-      {/* y-axis tick line */}
-      <line
-        x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + innerH}
-        stroke="#ffffff"
-        strokeOpacity="0.08"
-        strokeWidth="0.5"
-      />
+        {/* y-axis rule */}
+        <line
+          x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + innerH}
+          stroke="#ffffff" strokeOpacity="0.08" strokeWidth="0.5"
+        />
 
-      {/* area fill */}
-      <motion.path
-        d={areaD}
-        fill={`url(#${gradId})`}
-        initial={{ opacity: 0 }}
-        animate={shouldAnimate ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.9, delay: delay + 0.5, ease: "easeOut" }}
-      />
+        {/* area fill */}
+        <motion.path
+          d={areaD}
+          fill={`url(#${gradId})`}
+          initial={{ opacity: 0 }}
+          animate={shouldAnimate ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.9, delay: delay + 0.5, ease: "easeOut" }}
+        />
 
-      {/* line — smoothed + soft glow */}
-      <path
-        ref={pathRef}
-        d={lineD}
-        fill="none"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeDasharray={len}
-        strokeDashoffset={shouldAnimate ? 0 : len}
-        filter={`url(#${glowId})`}
-        style={{
-          transition: shouldAnimate ? `stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, opacity 0.5s ease ${delay}s` : "none",
-          opacity: shouldAnimate ? 0.95 : 0,
-        }}
-      />
+        {/* smoothed line */}
+        <path
+          ref={pathRef}
+          d={lineD}
+          fill="none"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray={len}
+          strokeDashoffset={shouldAnimate ? 0 : len}
+          filter={`url(#${glowId})`}
+          style={{
+            transition: shouldAnimate
+              ? `stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, opacity 0.5s ease ${delay}s`
+              : "none",
+            opacity: shouldAnimate ? 0.95 : 0,
+          }}
+        />
 
-      {/* peak marker — tiny dot at the highest point */}
-      {peakIdx !== vals.length - 1 && peakVal >= 60 && (
+        {/* peak marker */}
+        {peakIdx !== vals.length - 1 && peakVal >= 60 && (
+          <motion.circle
+            cx={pts[peakIdx][0]} cy={pts[peakIdx][1]} r="1.4"
+            fill="#fbbf24" opacity="0.7"
+            initial={{ opacity: 0 }}
+            animate={shouldAnimate ? { opacity: 0.7 } : { opacity: 0 }}
+            transition={{ duration: 0.4, delay: delay + 1.4 }}
+          />
+        )}
+
+        {/* endpoint halo + node */}
         <motion.g
           initial={{ opacity: 0 }}
           animate={shouldAnimate ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.4, delay: delay + 1.4 }}
+          transition={{ duration: 0.5, delay: delay + 1.3 }}
         >
-          <circle
-            cx={pts[peakIdx][0]}
-            cy={pts[peakIdx][1]}
-            r="1.4"
-            fill="#fbbf24"
-            opacity="0.7"
-          />
+          <circle cx={pts[pts.length-1][0]} cy={pts[pts.length-1][1]} r="5"
+            fill={color} opacity="0.18" filter={`url(#${haloId})`} />
+          <circle cx={pts[pts.length-1][0]} cy={pts[pts.length-1][1]} r="2.4"
+            fill={color} filter={`url(#${glowId})`} />
+          <circle cx={pts[pts.length-1][0]} cy={pts[pts.length-1][1]} r="1"
+            fill="#ffffff" opacity="0.9" />
         </motion.g>
-      )}
-
-      {/* current-value halo + glowing node */}
-      <motion.g
-        initial={{ opacity: 0 }}
-        animate={shouldAnimate ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5, delay: delay + 1.3 }}
-      >
-        <circle
-          cx={pts[pts.length - 1][0]}
-          cy={pts[pts.length - 1][1]}
-          r="5"
-          fill={color}
-          opacity="0.18"
-          filter={`url(#${haloId})`}
-        />
-        <circle
-          cx={pts[pts.length - 1][0]}
-          cy={pts[pts.length - 1][1]}
-          r="2.4"
-          fill={color}
-          filter={`url(#${glowId})`}
-        />
-        <circle
-          cx={pts[pts.length - 1][0]}
-          cy={pts[pts.length - 1][1]}
-          r="1"
-          fill="#ffffff"
-          opacity="0.9"
-        />
-      </motion.g>
-    </svg>
+      </svg>
+    </div>
   );
 }
 
@@ -405,13 +383,13 @@ export function FleetMetricsPanel() {
                   initial={{ opacity: 0, filter: "blur(6px)" }}
                   animate={inView ? { opacity: 1, filter: "blur(0px)" } : {}}
                   transition={{ delay: rowDelay, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="px-4 py-2.5 flex items-center gap-3"
+                  className="px-4 py-3 flex items-center gap-3"
                 >
                   <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${STATUS_COLOR[srv.status]}`} />
-                  <div className="text-[12px] font-mono text-gray-200 w-24 truncate flex-shrink-0">
+                  <div className="text-[12px] font-mono text-gray-200 w-[72px] truncate flex-shrink-0">
                     {srv.name}
                   </div>
-                  <div className="flex-1 flex justify-end">
+                  <div className="flex-1 min-w-0">
                     <Graph
                       vals={srv.spark}
                       color={srv.cpu >= 75 ? "#fbbf24" : "#00FF9F"}
@@ -419,7 +397,7 @@ export function FleetMetricsPanel() {
                       delay={rowDelay + 0.1}
                     />
                   </div>
-                  <span className="text-[11px] font-mono tabular-nums text-gray-400 w-10 text-right flex-shrink-0">
+                  <span className="text-[11px] font-mono tabular-nums text-gray-400 w-9 text-right flex-shrink-0">
                     {srv.cpu}%
                   </span>
                 </motion.div>
