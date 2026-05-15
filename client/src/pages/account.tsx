@@ -1026,8 +1026,12 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#121212]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <div className="relative min-h-screen bg-[#1E1E1E] overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
+      </div>
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <AnimatePresence mode="wait">
           {mode === "login" && renderLogin()}
           {mode === "otp" && renderOTP()}

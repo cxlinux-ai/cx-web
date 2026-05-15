@@ -10,8 +10,12 @@ export default function License() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[350px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
+      </div>
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-400/20 border border-emerald-400/30 mb-6">
             <Scale className="h-4 w-4 text-emerald-400" />
@@ -21,7 +25,7 @@ export default function License() {
           </div>
           <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
             <span className="text-white">Business Source</span>{" "}
-            <span className="gradient-text">License 1.1</span>
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">License 1.1</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             CX Linux software licensing terms

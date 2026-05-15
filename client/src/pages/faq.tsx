@@ -206,11 +206,15 @@ export default function FAQ() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
+      </div>
       <section aria-labelledby="faq-heading" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <h1 id="faq-heading" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6 bg-gradient-to-r from-gray-300 via-gray-200 to-[#00FF9F] bg-clip-text text-transparent">
-            Frequently Asked <span className="gradient-text">Questions</span>
+          <h1 id="faq-heading" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
+            <span className="text-white">Frequently Asked</span> <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Questions</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Everything you need to know about CX Linux

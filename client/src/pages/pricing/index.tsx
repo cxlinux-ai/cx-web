@@ -4,13 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Check,
   X,
-  Sparkles,
   Shield,
-  Zap,
   ArrowRight,
   Calendar,
-  Users,
-  Terminal,
   Building2,
   BadgeCheck,
   RefreshCw,
@@ -18,113 +14,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Footer from "@/components/Footer";
-
-interface PricingTier {
-  id: string;
-  name: string;
-  subtitle: string;
-  price: number;
-  annualPrice: number;
-  description: string;
-  features: string[];
-  limits: { servers: string; commands: string; support: string };
-  cta: string;
-  ctaLink: string;
-  highlighted?: boolean;
-  icon: typeof Sparkles;
-}
-
-const tiers: PricingTier[] = [
-  {
-    id: "core",
-    name: "CX Core",
-    subtitle: "Free forever",
-    price: 0,
-    annualPrice: 0,
-    description: "AI-powered package manager for personal use. Natural language commands with local LLM.",
-    features: [
-      "Natural language commands",
-      "Hardware detection & optimization",
-      "Dry-run mode for safety",
-      "Local LLM (Mistral 7B)",
-      "Full CLI access",
-      "Community Discord support",
-      "BSL 1.1 License",
-    ],
-    limits: { servers: "1 server", commands: "Unlimited local", support: "Community" },
-    cta: "Get Started Free",
-    ctaLink: "/pricing/checkout?plan=core",
-    icon: Terminal,
-  },
-  {
-    id: "pro",
-    name: "CX Pro",
-    subtitle: "Most popular",
-    price: 20,
-    annualPrice: 200,
-    description: "Cloud AI models, web console, and priority support for developers managing multiple servers.",
-    features: [
-      "Everything in CX Core",
-      "Cloud LLMs (GPT-4o, Claude 3.5)",
-      "Web console dashboard",
-      "API access & webhooks",
-      "Email support (24h response)",
-      "Priority updates",
-      "Usage analytics",
-      "Custom command aliases",
-    ],
-    limits: { servers: "5 servers", commands: "10,000/mo cloud", support: "Email (24h)" },
-    cta: "Upgrade to Pro",
-    ctaLink: "/pricing/checkout?plan=pro",
-    highlighted: true,
-    icon: Zap,
-  },
-  {
-    id: "team",
-    name: "CX Team",
-    subtitle: "For growing teams",
-    price: 99,
-    annualPrice: 990,
-    description: "Shared configurations, role-based access, and centralized management for dev teams.",
-    features: [
-      "Everything in CX Pro",
-      "Team workspaces",
-      "Role-based access control",
-      "Shared command history",
-      "Centralized config management",
-      "Team analytics dashboard",
-      "Slack integration",
-      "Priority email support",
-    ],
-    limits: { servers: "25 servers", commands: "50,000/mo cloud", support: "Priority (4h)" },
-    cta: "Start Team Plan",
-    ctaLink: "/pricing/checkout?plan=team",
-    icon: Users,
-  },
-  {
-    id: "enterprise",
-    name: "CX Enterprise",
-    subtitle: "Custom pricing",
-    price: 299,
-    annualPrice: 2990,
-    description: "SSO, audit logs, compliance reports, and dedicated support for large organizations.",
-    features: [
-      "Everything in CX Team",
-      "SSO / SAML / LDAP",
-      "Audit logs & compliance",
-      "SOC2 & HIPAA reports",
-      "99.9% SLA guarantee",
-      "Dedicated Slack channel",
-      "Custom integrations",
-      "On-premise deployment",
-      "Dedicated account manager",
-    ],
-    limits: { servers: "Unlimited", commands: "Unlimited", support: "Dedicated (1h)" },
-    cta: "Schedule Demo",
-    ctaLink: "https://calendly.com/ai-consultant/vip",
-    icon: Building2,
-  },
-];
+import PricingCards from "@/components/PricingCards";
 
 type ComparisonRow =
   | { kind: "section"; label: string }
@@ -172,12 +62,6 @@ const trustBadges = [
   { label: "BSL 1.1", description: "Source Available", icon: RefreshCw },
 ];
 
-const stats = [
-  { value: "2,400+", label: "Engineers" },
-  { value: "4.8★", label: "Rating" },
-  { value: "99.9%", label: "Uptime" },
-  { value: "<48h", label: "Onboarding" },
-];
 
 const faqs = [
   {
@@ -214,9 +98,9 @@ export default function PricingPage() {
   const referralCode = params.get("ref");
 
   return (
-    <div className="relative min-h-screen bg-[#080808] text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-x-hidden">
       {/* Ambient glow — top centre */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#00FF9F]/[0.035] rounded-full blur-[160px]" />
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#00FF9F]/[0.05] rounded-full blur-[160px]" />
 
       {/* Referral banner */}
       {referralCode && (
@@ -238,14 +122,14 @@ export default function PricingPage() {
               Pricing
             </span>
             <h1 className="text-5xl sm:text-[3.75rem] font-extrabold tracking-tight leading-[1.07] mb-5">
-              Simple,{" "}
+              Simple{" "}
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
-                transparent
+                Transparent
               </span>{" "}
-              pricing
+              Pricing
             </h1>
             <p className="text-[1.05rem] text-gray-400 mb-10 leading-relaxed">
-              Start free. Scale as you grow. No hidden fees, no lock-in.
+              Start free, scale as you grow. All plans include a 14-day free trial.
             </p>
 
             {/* Trust row */}
@@ -285,7 +169,7 @@ export default function PricingPage() {
                     isAnnual ? "bg-[#00FF9F] text-black" : "bg-[#00FF9F]/20 text-[#00FF9F]"
                   }`}
                 >
-                  −20%
+                  2 months free
                 </span>
               </button>
             </div>
@@ -293,188 +177,11 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── Stats bar ── */}
-      <section className="pb-16 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.4 }}
-          className="max-w-lg mx-auto"
-        >
-          <div className="flex flex-wrap justify-center items-center border border-white/[0.07] rounded-2xl divide-x divide-white/[0.07] bg-white/[0.02] overflow-hidden">
-            {stats.map((s) => (
-              <div key={s.label} className="flex-1 min-w-[80px] py-4 px-3 text-center">
-                <p className="text-2xl font-black text-white tabular-nums tracking-tight">{s.value}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5 uppercase tracking-wide">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
 
       {/* ── Pricing cards ── */}
       <section className="relative pb-24 px-4">
         <div className="max-w-[1180px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-start">
-            {tiers.map((tier, index) => {
-              const isHighlighted = !!tier.highlighted;
-              const displayPrice = isAnnual ? tier.annualPrice : tier.price;
-              const annualSavings = tier.price * 12 - tier.annualPrice;
-
-              return (
-                <motion.div
-                  key={tier.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: index * 0.08 }}
-                  className={`relative flex flex-col rounded-2xl p-8 transition-all duration-200 ${
-                    isHighlighted
-                      ? "bg-[#0f1510] border border-[#00FF9F]/40 shadow-[0_0_120px_rgba(0,255,159,0.13),inset_0_1px_0_rgba(0,255,159,0.12)] mt-5 md:mt-0"
-                      : "bg-[#111111] border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[0_16px_48px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)]"
-                  }`}
-                >
-                  {/* Pro card: top-edge inner glow overlay */}
-                  {isHighlighted && (
-                    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-[#00FF9F]/[0.07] via-[#00FF9F]/[0.01] to-transparent" />
-                  )}
-
-                  {/* Most Popular badge */}
-                  {isHighlighted && (
-                    <div className="absolute -top-[14px] inset-x-0 flex justify-center pointer-events-none">
-                      <span className="bg-[#00FF9F] text-black text-[10px] font-extrabold uppercase tracking-[0.18em] px-4 py-1 rounded-full shadow-[0_0_20px_rgba(0,255,159,0.4)]">
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Plan header */}
-                  <div className="mb-7">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                          isHighlighted
-                            ? "bg-[#00FF9F]/20 ring-1 ring-[#00FF9F]/30"
-                            : "bg-white/[0.07] ring-1 ring-white/[0.08]"
-                        }`}
-                      >
-                        <tier.icon className={`w-[18px] h-[18px] ${isHighlighted ? "text-[#00FF9F]" : "text-gray-300"}`} />
-                      </div>
-                      <span
-                        className={`text-[11px] uppercase tracking-[0.15em] font-bold ${
-                          isHighlighted ? "text-[#00FF9F]" : "text-gray-500"
-                        }`}
-                      >
-                        {tier.subtitle}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-white leading-tight tracking-tight">{tier.name}</h3>
-                    <p className="text-[13px] text-gray-500 mt-2 leading-relaxed">{tier.description}</p>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mb-7">
-                    <div className="flex items-end gap-2">
-                      <span className="text-[3.25rem] font-black tracking-tight text-white leading-none">
-                        {tier.id === "enterprise"
-                          ? "Custom"
-                          : tier.price === 0
-                          ? "Free"
-                          : `$${displayPrice}`}
-                      </span>
-                      {tier.price > 0 && tier.id !== "enterprise" && (
-                        <span className="text-gray-500 text-sm mb-2">{isAnnual ? "/yr" : "/mo"}</span>
-                      )}
-                    </div>
-                    <p className="text-xs text-gray-600 mt-2 min-h-[16px]">
-                      {tier.id === "enterprise" && "Contact us for a custom quote"}
-                      {tier.id !== "enterprise" && tier.price === 0 && "No credit card required"}
-                      {tier.id !== "enterprise" && tier.price > 0 && isAnnual && (
-                        <span>
-                          Billed ${tier.annualPrice}/year ·{" "}
-                          <span className="text-[#00FF9F]">Save ${annualSavings}</span>
-                        </span>
-                      )}
-                      {tier.id !== "enterprise" &&
-                        tier.price > 0 &&
-                        !isAnnual &&
-                        `$${tier.annualPrice}/yr billed annually`}
-                    </p>
-                  </div>
-
-                  {/* CTA */}
-                  {tier.ctaLink.startsWith("http") ? (
-                    <a
-                      href={tier.ctaLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
-                        isHighlighted
-                          ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"
-                          : "border border-white/[0.14] text-white hover:border-[#00FF9F]/35 hover:text-[#00FF9F]"
-                      }`}
-                    >
-                      {tier.cta}
-                    </a>
-                  ) : (
-                    <Link
-                      href={
-                        tier.ctaLink +
-                        (isAnnual ? "&billing=annual" : "&billing=monthly") +
-                        (referralCode ? `&ref=${referralCode}` : "")
-                      }
-                      className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
-                        isHighlighted
-                          ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"
-                          : "border border-white/[0.14] text-white hover:border-[#00FF9F]/35 hover:text-[#00FF9F]"
-                      }`}
-                    >
-                      {tier.cta}
-                    </Link>
-                  )}
-
-                  {/* Features */}
-                  <div className="h-px bg-white/[0.07] mb-6" />
-                  <ul className="space-y-3.5 flex-1">
-                    {tier.features.map((f, i) => {
-                      const isInherited = f.startsWith("Everything in");
-                      return (
-                        <li key={i} className="flex items-start gap-3 text-[13px]">
-                          <Check
-                            className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                              isInherited
-                                ? "text-[#00FF9F]/25"
-                                : isHighlighted
-                                ? "text-[#00FF9F]"
-                                : "text-[#00FF9F]/55"
-                            }`}
-                          />
-                          <span className={`leading-snug ${isInherited ? "text-gray-600" : "text-gray-300"}`}>
-                            {f}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-
-                  {/* Limits footer */}
-                  <div className="mt-7 pt-5 border-t border-white/[0.07] grid grid-cols-3 gap-2 text-center">
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Servers</p>
-                      <p className="text-xs font-semibold text-gray-400">{tier.limits.servers}</p>
-                    </div>
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Commands</p>
-                      <p className="text-xs font-semibold text-gray-400">{tier.limits.commands}</p>
-                    </div>
-                    <div>
-                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Support</p>
-                      <p className="text-xs font-semibold text-gray-400">{tier.limits.support}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+          <PricingCards isAnnual={isAnnual} referralCode={referralCode} />
         </div>
       </section>
 
@@ -602,7 +309,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-20 px-4 border-t border-white/[0.05]">
+      <section id="faq" className="py-20 px-4 border-t border-white/[0.05]">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 16 }}

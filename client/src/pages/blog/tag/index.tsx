@@ -34,7 +34,7 @@ export default function BlogTagArchive() {
   }, [tag]);
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-white/8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,255,159,0.04)_0%,transparent_60%)]" />
@@ -47,7 +47,7 @@ export default function BlogTagArchive() {
             <div className="flex items-center gap-3">
               <Hash className="w-8 h-8 text-[#00FF9F]" />
               <h1 className="text-4xl md:text-5xl font-bold">
-                <span className="text-[#00FF9F]">{tag}</span>
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">{tag}</span>
               </h1>
             </div>
             {!loading && (

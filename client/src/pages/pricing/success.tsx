@@ -149,7 +149,7 @@ export default function SuccessPage() {
             transition={{ delay: 0.3 }}
             className="text-4xl sm:text-5xl font-extrabold mb-4"
           >
-            <span className="bg-gradient-to-r from-green-400 to-[#00CC7F] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
               Welcome to CX Linux!
             </span>
           </motion.h1>

@@ -487,7 +487,7 @@ export default function AdminPanel() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#1E1E1E] flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-[#00FF9F]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -533,7 +533,7 @@ export default function AdminPanel() {
   // ── Dashboard Shell ────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">

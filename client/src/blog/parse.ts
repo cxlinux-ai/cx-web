@@ -84,16 +84,17 @@ export async function getRelatedPosts(post: BlogPost, max = 3): Promise<BlogPost
   const all = await getAllPosts();
   const postTags = new Set(post.frontmatter.tags.map((t) => t.toLowerCase()));
 
-  return all
+  const ranked = all
     .filter((p) => p.slug !== post.slug)
     .map((p) => ({
       post: p,
       score: p.frontmatter.tags.filter((t) => postTags.has(t.toLowerCase())).length,
     }))
-    .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score || new Date(b.post.frontmatter.publishedAt).getTime() - new Date(a.post.frontmatter.publishedAt).getTime())
     .slice(0, max)
     .map((x) => x.post);
+
+  return ranked;
 }
 
 export async function getMdxComponent(slug: string): Promise<React.ComponentType | null> {

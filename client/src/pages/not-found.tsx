@@ -3,8 +3,11 @@ import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#1E1E1E]">
-      <div className="text-center px-4">
+    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#1E1E1E] overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#00FF9F]/[0.045] rounded-full blur-[110px]" />
+      </div>
+      <div className="relative text-center px-4">
         <h1 className="text-8xl font-bold text-[#00FF9F] mb-4">404</h1>
         <h2 className="text-2xl font-semibold text-white mb-4">Page Not Found</h2>
         <p className="text-gray-400 mb-8 max-w-md">
@@ -30,3 +33,4 @@ export default function NotFound() {
     </div>
   );
 }
+

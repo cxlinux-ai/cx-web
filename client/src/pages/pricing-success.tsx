@@ -165,8 +165,11 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
   const activateCommand = `cx activate ${sessionData?.licenseKey}`;
 
   return (
-    <div className="min-h-screen pt-20 pb-16 bg-black">
-      <div className="max-w-3xl mx-auto px-4">
+    <div className="relative min-h-screen pt-20 pb-16 bg-[#1E1E1E] overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#00FF9F]/[0.05] rounded-full blur-[120px]" />
+      </div>
+      <div className="relative max-w-3xl mx-auto px-4">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}

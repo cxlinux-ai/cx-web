@@ -118,7 +118,11 @@ export default function StatusPage() {
   const anyDown = services.some((s) => s.status === "down");
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/3 w-[500px] h-[350px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
+      </div>
       {/* Hero */}
       <section className="pt-24 pb-12 px-4">
         <div className="max-w-4xl mx-auto text-center">

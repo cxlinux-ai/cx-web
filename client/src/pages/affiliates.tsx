@@ -303,7 +303,7 @@ export default function AffiliatesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white py-16 px-4">
+    <div className="min-h-screen bg-[#1E1E1E] text-white py-16 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -313,9 +313,9 @@ export default function AffiliatesPage() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {mode === "dashboard" ? (
-              <>Your <span className="text-[#00FF9F]">Affiliate Dashboard</span></>
+              <>Your <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Affiliate Dashboard</span></>
             ) : (
-              <>Earn <span className="text-[#00FF9F]">10% Commission</span></>
+              <>Earn <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">10% Commission</span></>
             )}
           </h1>
           {mode !== "dashboard" && (

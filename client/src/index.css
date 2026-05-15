@@ -84,7 +84,7 @@ a:focus {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #00FF9F 0%, #00FFFF 100%);
+  background: linear-gradient(135deg, #00FF9F 0%, #00FFCC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -732,27 +732,6 @@ section h2 + p {
   animation-delay: -7s;
 }
 
-/* Navigation link hover effects */
-nav button, nav a {
-  position: relative;
-}
-
-nav button::after, nav a:not([class*="bg-"])::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
-  transition: width 0.3s ease, left 0.3s ease;
-}
-
-nav button:hover::after, nav a:not([class*="bg-"]):hover::after {
-  width: 100%;
-  left: 0;
-}
-
 /* Footer link hover */
 footer a {
   transition: color 0.2s ease, transform 0.2s ease;
@@ -960,12 +939,6 @@ table tbody tr:hover {
   }
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #60a5fa 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
 /* Shimmer text effect - very subtle, slow light sweep from right to left */
 .shimmer-text {

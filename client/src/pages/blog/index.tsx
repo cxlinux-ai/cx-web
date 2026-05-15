@@ -68,14 +68,14 @@ export default function BlogIndex() {
   const paginated = filtered.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-white/8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,255,159,0.06)_0%,transparent_60%)]" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-              CX Linux <span className="text-[#00FF9F]">Blog</span>
+              CX Linux <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Blog</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl">
               Tutorials, architecture deep-dives, and practical guides for AI-powered Linux engineering.
@@ -86,31 +86,32 @@ export default function BlogIndex() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-10">
+        <div className="flex flex-col gap-3 mb-10">
           {/* Search */}
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <div className="relative w-full max-w-sm">
+            <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+              <Search className="w-4 h-4 text-gray-500" />
+            </span>
             <input
               type="text"
               placeholder="Search posts…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#00FF9F]/40 focus:bg-white/8 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#00FF9F]/40 transition-all"
             />
           </div>
 
-          {/* Tags */}
+          {/* Tags — top 8 only to prevent overflow */}
           <div className="flex flex-wrap gap-2">
             <Link href="/blog">
               <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${!activeTag ? "bg-[#00FF9F] text-black border-[#00FF9F] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#00FF9F]/40 hover:text-white"}`}>
                 All
               </span>
             </Link>
-            {tags.map(({ tag, count }) => (
+            {tags.slice(0, 8).map(({ tag }) => (
               <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
                 <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${activeTag === tag ? "bg-[#00FF9F] text-black border-[#00FF9F] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#00FF9F]/40 hover:text-white"}`}>
                   {tag}
-                  <span className="ml-1 opacity-60">({count})</span>
                 </span>
               </Link>
             ))}

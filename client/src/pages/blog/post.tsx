@@ -159,7 +159,7 @@ export default function BlogPostPage() {
 
   if (post === undefined) {
     return (
-      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+      <div className="min-h-screen bg-[#1E1E1E] flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-[#00FF9F] border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -167,7 +167,7 @@ export default function BlogPostPage() {
 
   if (post === null) {
     return (
-      <div className="min-h-screen bg-[#121212] text-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#1E1E1E] text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
           <Link href="/blog" className="text-[#00FF9F] hover:underline">← Back to Blog</Link>
@@ -184,20 +184,22 @@ export default function BlogPostPage() {
   const canonicalUrl = `${BASE_URL}/blog/${slug}`;
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] text-white">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.035] rounded-full blur-[110px]" />
+        <div className="absolute bottom-1/4 right-0 w-[500px] h-[400px] bg-[#00FF9F]/[0.02] rounded-full blur-[100px]" />
+      </div>
       {/* Hero band: image + title overlay */}
       <header className="relative">
-        {frontmatter.ogImage && (
-          <div className="absolute inset-0 overflow-hidden">
-            <img
-              src={frontmatter.ogImage}
-              alt=""
-              aria-hidden="true"
-              className="w-full h-full object-cover opacity-30"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/40 via-[#0F0F0F]/80 to-[#0F0F0F]" />
-          </div>
-        )}
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src={frontmatter.ogImage || "/og-image.png"}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/40 via-[#0F0F0F]/80 to-[#0F0F0F]" />
+        </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
           {/* Back link */}
@@ -338,29 +340,6 @@ export default function BlogPostPage() {
                 <ShareBar title={frontmatter.title} url={canonicalUrl} />
               </div>
 
-              {/* Prev / Next navigation */}
-              {(prevPost || nextPost) && (
-                <div className="mt-12 grid sm:grid-cols-2 gap-4">
-                  {prevPost ? (
-                    <Link href={`/blog/${prevPost.slug}`} className="group bg-[#1A1A1A] border border-white/8 rounded-xl p-5 hover:border-[#00FF9F]/30 hover:bg-[#1F1F1F] transition-all">
-                      <p className="text-xs text-gray-500 mb-2 flex items-center gap-1 group-hover:text-[#00FF9F] transition-colors">
-                        <ArrowLeft className="w-3 h-3" />
-                        Previous
-                      </p>
-                      <p className="text-sm font-semibold text-white line-clamp-2">{prevPost.frontmatter.title}</p>
-                    </Link>
-                  ) : <div />}
-                  {nextPost ? (
-                    <Link href={`/blog/${nextPost.slug}`} className="group bg-[#1A1A1A] border border-white/8 rounded-xl p-5 hover:border-[#00FF9F]/30 hover:bg-[#1F1F1F] transition-all sm:text-right">
-                      <p className="text-xs text-gray-500 mb-2 flex items-center gap-1 sm:justify-end group-hover:text-[#00FF9F] transition-colors">
-                        Next
-                        <ArrowLeft className="w-3 h-3 rotate-180" />
-                      </p>
-                      <p className="text-sm font-semibold text-white line-clamp-2">{nextPost.frontmatter.title}</p>
-                    </Link>
-                  ) : <div />}
-                </div>
-              )}
 
               {/* Related posts */}
               {related.length > 0 && (

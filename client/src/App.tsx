@@ -83,10 +83,15 @@ function App() {
               {/* Logo */}
               <button
                 onClick={handleHomeClick}
-                className="text-2xl font-bold cursor-pointer"
+                className="flex items-center gap-3 cursor-pointer group"
               >
-                <span className="text-white">CX</span>{" "}
-                <span className="text-[#00FF9F]">LINUX</span>
+                <div className="w-8 h-8 flex-shrink-0">
+                  <img src="/logo-rocket.png" alt="CX Linux" className="w-8 h-8 object-contain" />
+                </div>
+                <span className="text-[1.1rem] font-bold tracking-wide leading-none">
+                  <span className="text-white">CX</span>
+                  <span className="text-[#00FF9F]"> LINUX</span>
+                </span>
               </button>
 
               {/* Desktop Navigation */}

@@ -193,10 +193,10 @@ export default function PricingFAQ() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6"
           >
-            <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-[#00CC7F] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
               Pricing
             </span>{" "}
-            <span className="text-[#00FF9F]">FAQ</span>
+            <span className="text-[#00FFCC]">FAQ</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

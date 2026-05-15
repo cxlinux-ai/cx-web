@@ -155,7 +155,7 @@ function ContributorsSection() {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       {/* Hero */}
       <section className="pt-24 pb-16 px-4">
         <div className="max-w-5xl mx-auto text-center">
@@ -168,10 +168,8 @@ export default function AboutPage() {
               ABOUT CX LINUX
             </span>
             <h1 className="text-5xl sm:text-6xl font-extrabold mb-6">
-              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-[#00FF9F] bg-clip-text text-transparent">
-                Making Linux
-              </span>{" "}
-              <span className="text-[#00FF9F]">Smarter</span>
+              <span className="text-white">Making Linux</span>{" "}
+              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Smarter</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               CX Linux is an AI-native terminal that lets you manage Linux servers
@@ -295,7 +293,7 @@ export default function AboutPage() {
                 href="https://discord.gg/7K6TR7qtS"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#00FF9F]/20 transition-all flex items-center gap-2"
+                className="px-8 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00E88F] hover:shadow-lg hover:shadow-[#00FF9F]/20 transition-all flex items-center gap-2"
               >
                 <MessageCircle className="w-5 h-5" />
                 Join Discord

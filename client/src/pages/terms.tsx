@@ -103,8 +103,12 @@ For users outside the United States, you agree to comply with all local laws reg
   ];
 
   return (
-    <div className="min-h-screen pt-20 pb-16">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="relative min-h-screen pt-20 pb-16 bg-[#1E1E1E] text-white overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[350px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
+      </div>
+      <div className="relative max-w-4xl mx-auto px-4">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00FF9F] transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
           Back to Home
@@ -117,7 +121,7 @@ For users outside the United States, you agree to comply with all local laws reg
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Terms of</span>{" "}
-            <span className="gradient-text">Service</span>
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Service</span>
           </h1>
           <p className="text-gray-400 text-lg">
             Legal terms governing your use of CX Linux
