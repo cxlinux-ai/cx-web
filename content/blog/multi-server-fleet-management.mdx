@@ -1,0 +1,118 @@
+---
+title: "Managing a Multi-Server Fleet with CX Linux"
+description: "How to use CX Linux Pro and Team plans to manage dozens of servers with a single command — patching, auditing, deploying, and monitoring across your entire fleet."
+publishedAt: "2026-04-05"
+author: "cx-team"
+tags: ["DevOps", "fleet", "tutorial"]
+draft: false
+featured: false
+ogImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=630&q=80"
+---
+
+Managing one server with CX is straightforward. The real power shows when you're running operations across a fleet of 10, 50, or 500 servers. Here's how CX Pro and Team plans handle fleet operations.
+
+## Setting Up Fleet Management
+
+First, install the CX agent on each server:
+
+```bash
+# On each server you want to manage
+curl -fsSL https://cxlinux.com/install.sh | bash
+cx agent start --coordinator your-coordinator-url --token $FLEET_TOKEN
+```
+
+Then register servers in your fleet:
+
+```bash
+# On your local machine
+cx fleet add server-01.prod.internal --group production --tags nginx,app
+cx fleet add server-02.prod.internal --group production --tags nginx,app
+cx fleet add db-01.prod.internal --group production --tags postgres
+cx fleet add staging-01.internal --group staging
+```
+
+<CxDemo command="cx fleet status" output="Fleet: production-fleet (12 servers)
+  production (8): all healthy
+  staging (4): all healthy
+  
+Last sync: 2 seconds ago
+Fleet agent version: 0.3.2 (all up to date)" />
+
+## Mass Security Patching
+
+The most common fleet operation is applying security updates:
+
+```bash
+# Preview what would be updated across all servers
+cx fleet "show pending security patches" --target production
+
+# Apply security patches with rolling restart
+cx fleet "apply all pending security patches — rolling update, 2 servers at a time, health check between batches" --target production
+```
+
+CX handles the rolling update logic automatically: patches 2 servers, waits for health checks to pass, patches the next 2, and so on. If health checks fail, the rollout pauses and alerts you.
+
+<Callout type="warning">
+Always preview fleet operations before approving. The `--dry-run` flag shows you exactly what would happen on each server without executing anything.
+</Callout>
+
+## Fleet-Wide Auditing
+
+```bash
+# Security audit across all production servers
+cx fleet "check for: outdated packages with CVEs, world-writable files outside /tmp, listening ports that shouldn't be open, SSH root login enabled"
+
+# Compliance check
+cx fleet "verify all servers meet CIS Benchmark Level 1 — list failures per server"
+```
+
+CX aggregates the results into a unified report, grouping findings by severity and server.
+
+## Configuration Drift Detection
+
+One of the hardest problems in fleet management is configuration drift — servers that were identical when provisioned but have diverged over time.
+
+```bash
+# Find servers that differ from the baseline
+cx fleet diff --baseline server-01.prod.internal --target production
+
+# Output shows what's different on each server:
+# server-03: nginx version mismatch (1.24.0 vs 1.26.1)
+# server-07: unexpected package installed: redis-server
+# server-08: firewall rule differs from baseline
+```
+
+## Deploying Application Updates
+
+```bash
+# Deploy new app version with blue-green on all app servers
+cx fleet "deploy app version 2.4.1 from registry.mycompany.com/app:2.4.1 — blue-green deployment, health check /health, auto-rollback if error rate > 1%" --target production --group app
+```
+
+CX coordinates the deployment across servers, maintaining a minimum number of healthy instances throughout.
+
+## Emergency Response
+
+When something goes wrong across your fleet:
+
+<CxDemo command='cx fleet "nginx is reporting 502 errors on some servers — diagnose"' output="Checking 8 production servers...
+
+server-01: OK (nginx healthy, upstream responding)
+server-02: OK  
+server-03: ISSUE — upstream app process stopped (OOM at 14:32)
+server-04: OK
+server-05: ISSUE — upstream app process stopped (OOM at 14:34)
+server-06: OK
+server-07: OK
+server-08: OK
+
+Root cause: Node.js heap limit too low — 2 servers OOM-killed
+Recommended: restart app + increase --max-old-space-size to 4096MB" />
+
+CX narrows down the affected servers and identifies the root cause before you've opened a single SSH session.
+
+## Cost and Plan Details
+
+Fleet management is available on CX Pro (up to 5 servers), CX Team (up to 25 servers), and CX Enterprise (unlimited). Each managed server requires one seat.
+
+[See fleet management pricing →](/pricing)

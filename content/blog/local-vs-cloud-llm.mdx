@@ -1,0 +1,123 @@
+---
+title: "Local LLMs vs Cloud LLMs in CX: A Practical Guide"
+description: "CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs — privacy, cost, performance, and when to use each — with benchmarks."
+publishedAt: "2026-04-01"
+author: "cx-team"
+tags: ["AI", "LLM", "configuration"]
+draft: false
+featured: false
+---
+
+import LocalVsCloudLlmImage from "@/blog/images/local-vs-cloud-llm";
+
+<LocalVsCloudLlmImage className="w-full rounded-xl border border-white/8 mb-10" />
+
+One of CX Linux's defining features is flexibility in how it thinks. You can route CX's AI reasoning through a cloud API (Claude, GPT-4o, any OpenAI-compatible endpoint) or through a local LLM running on your own hardware. Here's everything you need to know to make the right choice.
+
+## The Three Modes
+
+CX supports three LLM modes, configurable per session or globally:
+
+| Mode | How it works | Best for |
+|---|---|---|
+| `cloud` | Calls Claude or GPT-4o via API | Most users — easiest setup, best results |
+| `local` | Runs Mistral 7B via Ollama on your GPU | Privacy-sensitive workloads, air-gapped systems |
+| `hybrid` | Uses local for simple commands, cloud for complex reasoning | Cost optimization at scale |
+
+```bash
+# Switch modes
+cx config set llm.provider cloud    # default
+cx config set llm.provider local
+cx config set llm.provider hybrid
+
+# Override per-command
+cx --local "list all running services"
+cx --cloud "diagnose this intermittent networking issue"
+```
+
+## Cloud LLMs: The Default for Good Reason
+
+Cloud mode uses the strongest available models. As of 2026, that means Claude Sonnet or GPT-4o — models with broad world knowledge, strong reasoning, and excellent code generation.
+
+**Advantages:**
+- State-of-the-art reasoning for complex, multi-step operations
+- No GPU required — works on any machine with internet
+- Regular model updates without any action on your part
+- Fastest time to first result for complex commands
+
+**Tradeoffs:**
+- Requires internet connectivity
+- Per-request API cost (typically $0.002–$0.008 per CX operation)
+- Command context is sent to the cloud provider
+
+<Callout type="note">
+CX only sends the relevant context for each command — not your entire filesystem or environment. The exact data sent is shown in the preview before any command executes. Review CX's [privacy policy](/privacy) for full details.
+</Callout>
+
+## Local LLMs: Full Privacy, Zero Cost
+
+Local mode runs Mistral 7B (or your custom model) entirely on your hardware via Ollama. Nothing leaves your machine.
+
+**Advantages:**
+- Complete data privacy — no external API calls
+- Zero marginal cost after initial setup
+- Works fully offline and in air-gapped environments
+- Fast for simple, well-scoped commands
+
+**Requirements:**
+- NVIDIA GPU with 8GB+ VRAM (RTX 3060 or better)
+- Or AMD GPU with ROCm support
+- 16GB+ system RAM recommended
+
+**Tradeoffs:**
+- Mistral 7B is meaningfully less capable than Claude/GPT-4o for complex reasoning
+- Slower for long, multi-step operations
+- Requires initial setup (CX handles this automatically)
+
+### Setting Up Local Mode
+
+```bash
+# CX installs Ollama and pulls the model automatically
+cx "install Ollama with Mistral 7B and configure CX to use local mode"
+
+# Or manually
+cx config set llm.provider local
+cx config set llm.local.model mistral:7b
+```
+
+## Performance Benchmarks
+
+We benchmarked cloud vs local across five common operation types:
+
+| Operation type | Cloud (Claude) | Local (Mistral 7B) |
+|---|---|---|
+| Simple package install | ★★★★★ | ★★★★☆ |
+| Nginx + SSL setup | ★★★★★ | ★★★★☆ |
+| Multi-service Docker stack | ★★★★★ | ★★★☆☆ |
+| Complex security audit | ★★★★★ | ★★★☆☆ |
+| Shell script generation | ★★★★★ | ★★★★☆ |
+
+Local mode handles roughly 80% of common operations well. For complex reasoning tasks — diagnosing intermittent issues, multi-system orchestration, security audits — cloud mode produces significantly better results.
+
+## Hybrid Mode: The Smart Default for Teams
+
+Hybrid mode routes commands based on complexity. Simple operations (package installs, service restarts, file operations) go local. Complex operations (multi-step deployments, incident diagnosis, security audits) go to the cloud.
+
+```bash
+cx config set llm.provider hybrid
+cx config set llm.hybrid.threshold medium  # low | medium | high
+```
+
+At medium threshold, roughly 60% of operations run locally — reducing API costs significantly while maintaining quality where it matters.
+
+## Choosing the Right Configuration
+
+| Your situation | Recommended mode |
+|---|---|
+| Personal use, standard hardware | Cloud (simplest) |
+| Handling sensitive/regulated data | Local or Hybrid |
+| Air-gapped or offline environment | Local |
+| High-volume team usage | Hybrid |
+| Maximum quality regardless of cost | Cloud |
+
+[Configure your CX LLM settings →](/getting-started)

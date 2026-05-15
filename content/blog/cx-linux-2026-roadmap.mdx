@@ -1,0 +1,101 @@
+---
+title: "CX Linux 2026 Roadmap: What's Coming Next"
+description: "Multi-agent workflows, a native GUI layer, fleet intelligence, and a plugin ecosystem. Here's everything we're building in 2026 and the reasoning behind each decision."
+publishedAt: "2026-04-10"
+author: "cx-team"
+tags: ["roadmap", "features", "announcement"]
+draft: false
+featured: true
+---
+
+import CxLinuxRoadmapImage from "@/blog/images/cx-linux-roadmap";
+
+<CxLinuxRoadmapImage className="w-full rounded-xl border border-white/8 mb-10" />
+
+We shipped CX Linux's first public version in late 2025. The response has pushed us to accelerate the roadmap significantly. Here's what we're building in 2026 — and more importantly, *why*.
+
+## Where We Are: v0.3
+
+The current release handles single-server operations well. You describe a task, CX generates and executes it with preview and rollback. That core loop works, and thousands of engineers use it daily.
+
+But the feedback has been consistent: teams want more. More collaboration. More automation. More intelligence about infrastructure state over time.
+
+## v0.4 · Multi-Agent Workflows (Q2 2026)
+
+The single biggest capability gap right now is long-horizon operations. "Deploy my entire application stack from scratch" requires 50+ commands across multiple services, with dependencies between them, error recovery paths, and conditional logic.
+
+No single LLM call handles this reliably. So v0.4 introduces **multi-agent workflows**: a planner agent that breaks operations into tasks, specialist agents that execute each task, and a coordinator that manages dependencies and error recovery.
+
+```bash
+# v0.4 preview
+cx workflow "deploy my full application: provision RDS, deploy ECS cluster, configure ALB, set up CloudFront, configure Route53, deploy application containers, run smoke tests"
+```
+
+Each step shows in a directed graph. You can approve the full workflow or step through it manually.
+
+<Callout type="note">
+Multi-agent mode is still cloud-only in v0.4. Local multi-agent support is planned for v0.5 with quantized model coordination.
+</Callout>
+
+## v0.4 · Fleet Intelligence
+
+Fleet management in v0.3 is static: you target a group of servers and run a command. v0.4 introduces **fleet intelligence** — CX maintains a live model of your entire infrastructure.
+
+```bash
+# Ask questions about your fleet
+cx fleet "which servers are running outdated SSL certificates?"
+cx fleet "show me servers with disk usage above 80% that haven't been accessed in 30 days"
+cx fleet "what changed across my production fleet in the last 24 hours?"
+```
+
+This requires a lightweight agent running on each managed server that reports state changes to the CX coordinator. The agent uses less than 50MB of RAM and is fully open source.
+
+## v0.5 · Native GUI Layer (Q3 2026)
+
+CX has always been CLI-first, and that won't change. But we're building an optional native GUI for teams that need it — particularly for fleet visualization and workflow management.
+
+The GUI isn't a web console (we already have that). It's a native Linux application (GTK4/libadwaita) that gives you:
+
+- A live topology map of your infrastructure
+- Workflow builder with drag-and-drop task graph
+- Real-time log streaming from any managed server
+- Diff view for configuration changes before they apply
+
+The CLI and GUI share the same backend. Any operation you can do in the GUI, you can script with the CLI. They're two views of the same system.
+
+## v0.5 · Plugin Ecosystem
+
+The most-requested feature since launch: extensibility. v0.5 ships a plugin API that lets you build custom CX commands, custom agent types, and custom integrations.
+
+```bash
+# Install plugins from the CX registry
+cx plugin install kubernetes
+cx plugin install terraform
+cx plugin install datadog
+
+# Use them
+cx "scale my Kubernetes deployment to 5 replicas and verify rollout"
+cx "plan and apply my Terraform changes for the new VPC"
+```
+
+Plugins are TypeScript modules that declare their capabilities, required permissions, and LLM prompts. We'll open-source all first-party plugins as reference implementations.
+
+## v1.0 · General Availability (Q4 2026)
+
+The GA release is about stability, not new features. Three things:
+
+1. **API stability** — all CLI commands and plugin APIs are locked until v2
+2. **Compliance certifications** — SOC 2 Type II, completing the enterprise security requirements
+3. **SLA guarantees** — 99.9% uptime for cloud API and fleet coordination service
+
+## What We're Not Building
+
+Equally important is what's not on the roadmap:
+
+- **A new Linux distribution** — CX runs *on* your distro, it doesn't replace it
+- **A CI/CD platform** — CX complements GitHub Actions/GitLab CI, it doesn't compete
+- **An infrastructure-as-code tool** — Terraform and Pulumi are better at declarative infrastructure
+
+CX is an operations layer. We're going deep, not wide.
+
+[Follow our progress on GitHub →](https://github.com/cxlinux-ai/cx-core)

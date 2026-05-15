@@ -1,0 +1,84 @@
+---
+title: "What Is CX Linux? The AI Layer for Linux"
+description: "CX Linux is not just another distro. It's an AI layer that sits on top of any Debian or Ubuntu system and lets you control Linux with natural language. Here's how it works."
+publishedAt: "2026-03-10"
+author: "cx-team"
+tags: ["introduction", "AI", "Linux"]
+draft: false
+featured: true
+---
+
+import WhatIsCxLinuxImage from "@/blog/images/what-is-cx-linux";
+
+<WhatIsCxLinuxImage className="w-full rounded-xl border border-white/8 mb-10" />
+
+If you've ever spent an afternoon searching Stack Overflow for the right nginx config, or lost an hour to a failed package dependency chain — you know the hidden tax of working with Linux. The commands are powerful. The knowledge required to use them well takes years.
+
+CX Linux was built to change that equation.
+
+## What CX Linux Actually Is
+
+CX Linux is not a new distribution. It doesn't replace your OS. It's an **AI layer** — a daemon that runs alongside any Debian or Ubuntu system and intercepts your intent before you ever have to look up a command.
+
+You describe what you want. CX figures out how to get there.
+
+<CxDemo command='cx "set up a secure nginx reverse proxy for my Node.js app on port 3000"' output="Analyzing system state...
+→ nginx not installed → will install
+→ Generating reverse proxy config for port 3000
+→ SSL via Let's Encrypt available
+Commands ready for preview ↓" />
+
+The key difference from every other AI terminal tool: CX operates **at the OS level**. It has full awareness of your hardware, installed packages, running services, active ports, and system configuration. It doesn't generate a generic answer — it generates the exact right answer *for your machine, right now*.
+
+## The Three Pillars
+
+### 1. Intent-Based Execution
+
+Instead of remembering commands, you describe outcomes. CX handles the translation from English to Linux. Multi-step operations that would normally require a checklist of ten commands become a single natural language request.
+
+### 2. Command Preview + Approval
+
+CX never runs anything without showing you first. Every generated command appears in a diff-style preview. You review, approve, and only then does anything execute. This isn't just a safety feature — it's how you learn. Over time, you internalize the patterns.
+
+<Callout type="note">
+CX runs every approved command inside a Firejail container with limited filesystem access, restricted network, and process isolation. Nothing can escape the sandbox.
+</Callout>
+
+### 3. Instant Rollback
+
+Before any system modification, CX snapshots the affected state. If something goes wrong — or you simply change your mind — one command reverts everything:
+
+```bash
+cx rollback
+```
+
+No manual backups. No "I hope I remember what I changed." Just a clean undo.
+
+## Who Is CX For?
+
+CX is purpose-built for people who work with Linux every day:
+
+- **Developers** setting up local environments, managing Docker stacks, configuring databases
+- **DevOps engineers** provisioning servers, configuring CI/CD, hardening security
+- **Sysadmins** managing fleets, automating maintenance, auditing configurations
+- **AI/ML engineers** setting up GPU drivers, Ollama, Python environments, CUDA toolchains
+
+If you've ever felt like Linux makes you work *for it* instead of the other way around, CX Linux is for you.
+
+## How It's Different from a Chatbot or Terminal Wrapper
+
+Other tools generate suggestions. CX generates and executes — with context.
+
+When you ask CX to set up a web server, it checks what's already installed, detects your current nginx config, identifies port conflicts, and produces commands that are guaranteed to work on *your specific system*. It's the difference between a recommendation and a solution.
+
+## Getting Started in 5 Minutes
+
+CX installs on any Debian or Ubuntu system with a single command:
+
+```bash
+curl -fsSL https://cxlinux.com/install.sh | bash
+```
+
+The free Community edition gives you local LLM support (Mistral 7B), full CLI access, and unlimited personal use on a single machine. No credit card required.
+
+[Get started with CX Linux →](/getting-started)

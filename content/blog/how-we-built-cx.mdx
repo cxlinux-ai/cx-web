@@ -1,0 +1,108 @@
+---
+title: "How We Built CX: Architecture of an AI-Native OS Layer"
+description: "The technical decisions behind CX Linux — from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper."
+publishedAt: "2026-04-15"
+author: "cx-team"
+tags: ["engineering", "architecture", "AI"]
+draft: false
+featured: false
+---
+
+import HowWeBuiltCxImage from "@/blog/images/how-we-built-cx";
+
+<HowWeBuiltCxImage className="w-full rounded-xl border border-white/8 mb-10" />
+
+When we started building CX, the obvious approach was to wrap a shell: intercept terminal input, pass it to an LLM, insert the generated command. Half the "AI terminal" tools on the market work this way.
+
+We decided not to do that. Here's why, and what we built instead.
+
+## The Problem with Terminal Wrappers
+
+A terminal wrapper sees what you type and what the terminal outputs. That's it. It has no idea what's already installed, what's running, what ports are open, or what the system's health is.
+
+When you ask a terminal wrapper to "set up nginx," it generates a generic `apt install nginx` and an nginx config that may or may not be right for your system. If nginx is already installed but misconfigured, it doesn't know. If port 80 is already in use, it doesn't know. If your Ubuntu version requires a different package name, it doesn't know.
+
+We wanted CX to know all of that before generating a single command.
+
+## The System Context Layer
+
+The foundation of CX is a system context collector — a lightweight process that maintains a real-time model of the system:
+
+- **Package state:** installed packages, versions, available updates
+- **Service state:** running services, their configs, resource usage
+- **Network state:** open ports, firewall rules, active connections
+- **Hardware:** CPU, RAM, GPU, storage, performance characteristics
+- **History:** recent CX operations, their outcomes, rollback points
+
+This context is injected into every LLM prompt. When you ask CX to "configure nginx," the model already knows your nginx version, your current config, what's running on which ports, and your hardware constraints.
+
+```bash
+# You can inspect the context CX has about your system
+cx context show
+
+# Or query specific aspects
+cx context show --network
+cx context show --services nginx
+```
+
+## Why We Chose Firejail for Sandboxing
+
+We evaluated several sandboxing options: Docker (too heavy, needs a daemon), bubblewrap (not available everywhere), nsjail (complex), and Firejail (lightweight, widely available, good seccomp support).
+
+Firejail won because it's already installed on most Debian/Ubuntu systems, adds less than 100ms of overhead, and gives us the isolation primitives we need: filesystem namespaces, network namespaces, process isolation, and seccomp filtering.
+
+<Callout type="note">
+For operations that require network access (package installs, API calls), CX uses Firejail's `--netfilter` option to restrict network access to specific hosts rather than blocking it entirely.
+</Callout>
+
+## The Snapshot System
+
+Rollback was a late addition to the design, and it's now one of the most-used features. The implementation is simpler than you'd expect:
+
+For each operation, CX identifies which files will be modified. Before execution, it creates a content-addressed snapshot of those files. The snapshot metadata (file paths, content hashes, timestamps) is stored in `~/.cx/snapshots/`.
+
+Restoring is just copying files back. No btrfs, no LVM, no filesystem magic required.
+
+```bash
+# The snapshot format is intentionally simple
+cat ~/.cx/snapshots/2026-04-15T14:32:00.json
+{
+  "id": "snap_20260415143200",
+  "operation": "install nginx + SSL",
+  "modified_files": ["/etc/nginx/sites-available/default", "/etc/cron.d/certbot"],
+  "created_at": "2026-04-15T14:32:00Z"
+}
+```
+
+## LLM Selection: Why We Support Multiple Providers
+
+We built multi-provider LLM support from day one for two reasons:
+
+1. **Model quality changes fast.** The best model today won't be the best model in six months. Providers are changing monthly. We didn't want to bet on one.
+
+2. **Different operations need different capabilities.** Simple package installs work fine with Mistral 7B. Complex multi-service orchestration benefits from Claude's reasoning. Hybrid mode routes accordingly.
+
+The LLM abstraction layer uses a simple capability rating system — each registered provider declares its ratings for reasoning, code generation, speed, and cost. The hybrid mode router uses these ratings to select the provider for each operation type.
+
+## What We'd Do Differently
+
+Three things we'd change if we were starting today:
+
+1. **Build the plugin API earlier.** We shipped plugins in v0.5. We should have designed for extensibility from v0.1. The refactor was painful.
+
+2. **Invest in the test harness sooner.** Testing AI-generated command execution is hard. We built a mock execution environment eventually, but we shipped with less coverage than we should have.
+
+3. **Fleet management from the start.** We added fleet support as a feature on top of single-server architecture. A fleet-native design would have been cleaner.
+
+## The Stack
+
+For the curious:
+
+- **CLI:** Go (fast startup, single binary, great for system tooling)
+- **Context collector:** Rust (performance-critical, runs continuously)
+- **Web console:** React + TypeScript (same stack as this site)
+- **Fleet coordinator:** Go + gRPC
+- **LLM abstraction:** Go interfaces with provider plugins
+- **Sandbox:** Firejail (not written by us)
+
+All open source at [github.com/cxlinux-ai/cx-core](https://github.com/cxlinux-ai/cx-core).

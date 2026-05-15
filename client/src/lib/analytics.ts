@@ -97,4 +97,16 @@ export const analytics = {
   },
 };
 
+// Blog-specific events
+export const blogAnalytics = {
+  articleViewed: (slug: string) =>
+    trackEvent({ category: "engagement", action: "blog_article_viewed", label: slug }),
+  scrollDepth: (slug: string, pct: 25 | 50 | 75 | 100) =>
+    trackEvent({ category: "engagement", action: "blog_scroll_depth", label: `${slug}::${pct}` }),
+  copyCodeClick: (slug: string) =>
+    trackEvent({ category: "engagement", action: "blog_copy_code_click", label: slug }),
+  outboundClicked: (slug: string, url: string) =>
+    trackEvent({ category: "engagement", action: "blog_outbound_clicked", label: `${slug}::${url}` }),
+};
+
 export default analytics;

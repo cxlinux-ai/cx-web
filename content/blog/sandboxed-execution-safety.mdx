@@ -1,0 +1,97 @@
+---
+title: "How CX Linux Keeps Your System Safe"
+description: "Running AI-generated commands on your production system sounds risky. Here's exactly how CX Linux uses sandboxing, command preview, and instant rollback to make it safe."
+publishedAt: "2026-03-08"
+author: "cx-team"
+tags: ["security", "sandboxing", "safety"]
+draft: false
+featured: false
+---
+
+import SandboxedExecutionImage from "@/blog/images/sandboxed-execution";
+
+<SandboxedExecutionImage className="w-full rounded-xl border border-white/8 mb-10" />
+
+The number one question we get: *"What if CX runs something destructive?"*
+
+It's the right question. Giving an AI access to your Linux system without safety rails would be reckless. So before we wrote a single line of CX's execution engine, we designed the safety model. Here's exactly how it works.
+
+## Three Independent Safety Layers
+
+CX doesn't rely on a single safety mechanism. It uses three independent layers, each of which must be satisfied before any command touches your system.
+
+### Layer 1: Command Preview
+
+Every command CX generates is displayed in a structured preview before execution. You see:
+
+- The exact command that will run
+- Which files or directories it will affect
+- What permissions it requires
+- A plain-English explanation of what it does
+
+Nothing executes until you explicitly approve. This isn't optional — there is no "just run it" mode.
+
+### Layer 2: Firejail Sandbox
+
+When you approve a command, it runs inside a Firejail container with:
+
+- **Limited filesystem access** — only the directories explicitly needed
+- **Restricted network** — no network access unless the command requires it
+- **Process isolation** — the command can't see or signal other processes
+- **Automatic timeout** — runaway processes are killed after a configurable limit
+
+```bash
+# CX wraps every approved command internally like this:
+firejail --private-tmp --net=none --noroot <command>
+```
+
+<Callout type="note">
+Firejail is an open-source SUID sandbox that uses Linux namespaces and seccomp to isolate processes. It's the same technology used to sandbox browsers and media players.
+</Callout>
+
+### Layer 3: Snapshot and Instant Rollback
+
+Before any command that modifies system state, CX creates a snapshot of the affected files and configuration. This happens automatically — you don't need to think about it.
+
+If something goes wrong, one command undoes everything:
+
+```bash
+cx rollback
+```
+
+You can also view the full rollback history and selectively restore specific snapshots:
+
+```bash
+cx rollback --list
+cx rollback --id <snapshot-id>
+```
+
+## Dangerous Command Blocking
+
+CX maintains a blocklist of destructive command patterns. These are flagged automatically:
+
+- `rm -rf` on system directories
+- `dd` writing to block devices
+- Commands that modify boot configuration
+- Privilege escalation without an explicit reason
+- Mass file operations on `/`, `/etc`, `/boot`
+
+When a blocked pattern is detected, CX requires you to explicitly acknowledge the risk with a confirmation phrase — not just press `y`.
+
+## Open Source Security Model
+
+Our entire safety model is open source. You can audit every line of code that touches your system at [github.com/cxlinux-ai/cx-core](https://github.com/cxlinux-ai/cx-core).
+
+We believe security through obscurity is no security at all. The more eyes on the code, the safer everyone is.
+
+<Callout type="tip">
+Enterprise and Team plan users get additional audit logging: every command executed through CX is logged with timestamp, user, and session context. These logs are immutable and can be exported for compliance reporting.
+</Callout>
+
+## What This Means in Practice
+
+In over a year of production use, the safety model has prevented hundreds of potentially destructive operations — not from CX generating bad commands, but from users who pasted the wrong thing, ran the right command in the wrong directory, or didn't notice a typo in a path.
+
+The preview + sandbox + rollback combination means that even if the worst happens, you're one command away from recovery.
+
+[Read the full security documentation →](/faq)

@@ -23,6 +23,7 @@ const FAQ = lazy(() => import("./pages/faq"));
 const Affiliates = lazy(() => import("./pages/affiliates"));
 const BlogIndex = lazy(() => import("./pages/blog/index"));
 const BlogPost = lazy(() => import("./pages/blog/post"));
+const BlogTagArchive = lazy(() => import("./pages/blog/tag/index"));
 const AdminPanel = lazy(() => import("./pages/admin/index"));
 const AboutPage = lazy(() => import("./pages/about"));
 const StatusPage = lazy(() => import("./pages/status"));
@@ -252,6 +253,7 @@ function App() {
               <Route path="/status" component={StatusPage} />
               <Route path="/affiliates" component={Affiliates} />
               <Route path="/blog" component={BlogIndex} />
+              <Route path="/blog/tag/:tag" component={BlogTagArchive} />
               <Route path="/blog/:slug" component={BlogPost} />
               <Route path="/account" component={AccountPage} />
               <Route path="/admin" component={AdminPanel} />

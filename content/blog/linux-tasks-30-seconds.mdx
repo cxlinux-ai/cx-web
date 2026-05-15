@@ -1,0 +1,84 @@
+---
+title: "5 Linux Tasks Done in 30 Seconds with CX"
+description: "Setting up nginx, configuring firewalls, deploying Docker stacks — these tasks eat hours. Here's how CX Linux turns each one into a single natural language command."
+publishedAt: "2026-03-11"
+author: "cx-team"
+tags: ["tutorial", "productivity", "DevOps"]
+draft: false
+featured: false
+ogImage: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&h=630&q=80"
+---
+
+Every sysadmin knows the drill. You need to set up a reverse proxy, so you open three browser tabs — one for the nginx docs, one for Stack Overflow, one for that blog post you bookmarked six months ago. Forty-five minutes later, you've got a working config. Maybe.
+
+CX Linux changes this equation entirely. Here are five real tasks that used to take 30+ minutes, now done in under 30 seconds.
+
+## 1. Set Up an Nginx Reverse Proxy with SSL
+
+**The old way:** Install nginx, write the config, install certbot, generate certificates, configure renewal, test, debug, restart. Repeat twice because you got the server block wrong.
+
+<CxDemo command='cx "set up nginx as a reverse proxy for my Node.js app on port 3000 with SSL via Lets Encrypt for myapp.com"' output="→ nginx: installing...
+→ certbot: installing...
+→ Generating /etc/nginx/sites-available/myapp.com
+→ SSL certificate: requesting for myapp.com
+→ Auto-renewal cron: configuring
+5 commands ready for preview" />
+
+CX detects your system state, installs what's needed, generates the config, obtains the SSL certificate, and sets up auto-renewal. You review the commands, approve, and it's done.
+
+## 2. Harden SSH and Configure a Firewall
+
+**The old way:** Edit `sshd_config` (and hope you don't lock yourself out), install ufw, figure out which ports to open, test from another session before closing the current one.
+
+```bash
+cx "harden SSH: disable root login, key-only auth, change port to 2222 — then set up ufw allowing only SSH on 2222, HTTP, and HTTPS"
+```
+
+CX handles the full sequence in the right order: backup the current config, apply hardening changes, configure firewall rules, verify connectivity *before* restarting the SSH daemon, and create a rollback point in case anything goes wrong.
+
+<Callout type="warning">
+CX automatically verifies that your new SSH config is valid and that you won't lose access before applying changes. This is the check that trips up manual configuration most often.
+</Callout>
+
+## 3. Deploy a Full Docker Stack
+
+**The old way:** Install Docker, write `docker-compose.yml`, configure volumes, set up networking, figure out environment variables, debug port conflicts.
+
+<CxDemo command='cx "deploy a production Docker stack with PostgreSQL 16, Redis, and my app from ./Dockerfile — expose on port 443 with Traefik as reverse proxy"' output="→ Docker: already installed ✓
+→ Generating docker-compose.yml...
+→ Traefik config: generating with SSL
+→ Persistent volumes: /var/data/postgres, /var/data/redis
+→ Network: app_network (isolated)
+6 commands ready for preview" />
+
+CX generates the compose file with production-safe defaults, configures Traefik with automatic SSL via ACME, and sets up persistent volumes with the correct permissions.
+
+## 4. Set Up Automated Backups to S3
+
+**The old way:** Write a bash script, configure AWS CLI, set up cron jobs, handle errors, test restoration (usually skipped), pray.
+
+```bash
+cx "set up daily backups of /var/www and my PostgreSQL databases to S3 bucket my-backups — 30 days retention, AES-256 encryption, email alert on failure"
+```
+
+CX creates the backup scripts, configures server-side encryption, sets up the cron schedule with proper error handling, and includes a test restoration step to verify the backup actually works before you need it.
+
+## 5. Monitor System Health with Alerts
+
+**The old way:** Install Prometheus, configure exporters for each service, set up Grafana, write alert rules in PromQL, configure notification channels. Half a day minimum.
+
+<CxDemo command='cx "monitor CPU, memory, disk, and nginx — alert me via email if CPU > 80% for 5 minutes, disk > 90%, or nginx goes down"' output="→ node_exporter: installing...
+→ Alert rules: generating (3 rules)
+→ Email notifier: configuring with postfix
+→ Dashboard: generating minimal HTML
+4 commands ready for preview" />
+
+CX sets up lightweight monitoring with sensible thresholds, configures alerting via email or Slack, and gives you a minimal status dashboard — without the full Prometheus/Grafana operational complexity.
+
+## The Pattern Behind All of These
+
+Every one of these tasks follows the same frustrating cycle: research → configure → test → debug → repeat. CX collapses it into: **describe → review → approve**.
+
+The AI handles the research and configuration. You keep full control with command preview and instant rollback. The result is that a single DevOps engineer can operate infrastructure that would previously have required an entire ops team's institutional knowledge.
+
+[Try CX Linux free →](/getting-started)
