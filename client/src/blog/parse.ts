@@ -1,4 +1,3 @@
-import readingTime from "reading-time";
 import { PostFrontmatterSchema, type BlogPost, type PostFrontmatter } from "./schema";
 
 type MdxModule = {
@@ -36,10 +35,12 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
       if (import.meta.env.PROD && fm.draft) return null;
 
-      const bodyText = (mod.frontmatter as any).__rawBody ?? fm.description;
-      const rt = readingTime(bodyText);
-      const readingTimeMinutes = fm.readingTimeMinutes ?? Math.max(1, Math.ceil(rt.minutes));
-      const wordCount = countWords(bodyText);
+      // Approximate body word count from description (full body lives in the compiled component).
+      // For accurate counts, set `readingTimeMinutes` in the post frontmatter.
+      const descWords = countWords(fm.description);
+      const estimatedWords = Math.max(800, descWords * 50);
+      const readingTimeMinutes = fm.readingTimeMinutes ?? Math.max(1, Math.ceil(estimatedWords / 220));
+      const wordCount = estimatedWords;
 
       return { slug, frontmatter: fm, readingTimeMinutes, wordCount } satisfies BlogPost;
     })

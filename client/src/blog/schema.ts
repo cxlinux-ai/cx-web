@@ -3,11 +3,11 @@ import { z } from "zod";
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be ISO date (YYYY-MM-DD)");
 
 export const PostFrontmatterSchema = z.object({
-  title: z.string().max(60, "title must be ≤ 60 chars"),
+  title: z.string().max(70, "title must be ≤ 70 chars"),
   description: z
     .string()
-    .min(140, "description must be ≥ 140 chars")
-    .max(160, "description must be ≤ 160 chars"),
+    .min(120, "description must be ≥ 120 chars")
+    .max(200, "description must be ≤ 200 chars"),
   publishedAt: isoDate,
   updatedAt: isoDate.optional(),
   author: z.string(),

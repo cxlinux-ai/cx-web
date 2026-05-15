@@ -5,9 +5,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent horizontal scrolling from background blobs */
+/* Prevent horizontal scrolling from background blobs.
+   Use `clip` (not `hidden`) so `position: sticky` keeps working on descendants. */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Override browser default blue link color + underline everywhere.
+   Must cover all pseudo-classes because a:visited (0,0,1,1) beats a {} (0,0,0,1). */
+/* Override browser default blue link color + underline everywhere.
+   Must cover all pseudo-classes because a:visited (0,0,1,1) beats a {} (0,0,0,1). */
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  color: inherit;
+  text-decoration: none !important;
+  outline: none;
 }
 
 /* CX Linux Dark Theme (Default) */
@@ -244,13 +260,13 @@ html, body {
 
   /* Brand Colors - CX Linux */
   .text-brand-blue {
-    color: #0066FF;
+    color: #00FF9F;
   }
   .bg-brand-blue {
-    background-color: #0066FF;
+    background-color: #00FF9F;
   }
   .border-brand-blue {
-    border-color: #0066FF;
+    border-color: #00FF9F;
   }
   .text-terminal-green {
     color: #00FF00;
@@ -262,31 +278,31 @@ html, body {
     border-color: #00FF00;
   }
   .text-brand-blue\/80 {
-    color: rgba(0, 102, 255, 0.8);
+    color: rgba(0, 255, 159, 0.8);
   }
   .bg-brand-blue\/10 {
-    background-color: rgba(0, 102, 255, 0.1);
+    background-color: rgba(0, 255, 159, 0.1);
   }
   .bg-brand-blue\/20 {
-    background-color: rgba(0, 102, 255, 0.2);
+    background-color: rgba(0, 255, 159, 0.2);
   }
   .border-brand-blue\/20 {
-    border-color: rgba(0, 102, 255, 0.2);
+    border-color: rgba(0, 255, 159, 0.2);
   }
   .border-brand-blue\/30 {
-    border-color: rgba(0, 102, 255, 0.3);
+    border-color: rgba(0, 255, 159, 0.3);
   }
   .hover\:text-brand-blue:hover {
-    color: #0066FF;
+    color: #00FF9F;
   }
   .hover\:border-brand-blue\/30:hover {
-    border-color: rgba(0, 102, 255, 0.3);
+    border-color: rgba(0, 255, 159, 0.3);
   }
   .hover\:bg-brand-blue\/10:hover {
-    background-color: rgba(0, 102, 255, 0.1);
+    background-color: rgba(0, 255, 159, 0.1);
   }
   .glow-brand-blue {
-    box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 159, 0.3);
   }
   .glow-terminal-green {
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
@@ -415,13 +431,13 @@ button, a[class*="bg-blue"], a[class*="glass-card"] {
 
 /* Primary CTA buttons */
 .bg-gradient-to-r:hover,
-button[class*="bg-blue"]:hover,
-a[class*="bg-blue"]:hover {
+button[class*="bg-[#00FF9F]"]:hover,
+a[class*="bg-[#00FF9F]"]:hover {
   transform: translateY(-1px) scale(1.01);
 }
 
 .bg-gradient-to-r:active,
-button[class*="bg-blue"]:active {
+button[class*="bg-[#00FF9F]"]:active {
   transform: translateY(0) scale(0.99);
 }
 

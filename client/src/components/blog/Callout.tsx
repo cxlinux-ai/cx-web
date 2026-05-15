@@ -26,9 +26,9 @@ const config: Record<CalloutType, { icon: typeof Info; border: string; bg: strin
   },
   tip: {
     icon: Lightbulb,
-    border: "border-[#3B82F6]",
-    bg: "bg-[#3B82F6]/6",
-    iconColor: "text-[#3B82F6]",
+    border: "border-[#00FF9F]",
+    bg: "bg-[#00FF9F]/6",
+    iconColor: "text-[#00FF9F]",
     label: "Tip",
   },
 };

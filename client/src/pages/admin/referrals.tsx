@@ -380,7 +380,7 @@ export default function AdminReferrals() {
                                 r.tier === "standard" ? "founding" : "standard"
                               )
                             }
-                            className="px-2 py-1 text-xs bg-blue-900/30 text-blue-400 rounded hover:bg-blue-900/50 transition"
+                            className="px-2 py-1 text-xs bg-[#00FF9F]/10 text-[#00FF9F] rounded hover:bg-[#00FF9F]/20 transition"
                             title={`Switch to ${r.tier === "standard" ? "founding" : "standard"}`}
                           >
                             🔄
@@ -442,7 +442,7 @@ export default function AdminReferrals() {
                       <span
                         className={`px-2 py-0.5 rounded text-xs ${
                           t.level === 1
-                            ? "bg-blue-900/30 text-blue-400"
+                            ? "bg-[#00FF9F]/10 text-[#00FF9F]"
                             : "bg-purple-900/30 text-purple-400"
                         }`}
                       >

@@ -78,12 +78,12 @@ function App() {
       <div className="min-h-screen bg-[#1E1E1E]">
         {/* Navigation */}
         {!isCheckoutPage && (
-          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#1E1E1E]/80 border-b border-[#333] h-16">
+          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#1E1E1E]/95 border-b border-white/[0.07] h-16">
             <nav className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
               {/* Logo */}
               <button
                 onClick={handleHomeClick}
-                className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity"
+                className="text-2xl font-bold cursor-pointer"
               >
                 <span className="text-white">CX</span>{" "}
                 <span className="text-[#00FF9F]">LINUX</span>
@@ -94,14 +94,14 @@ function App() {
                 <Link
                   href="/getting-started"
                   className={`text-sm font-medium transition-colors ${
-                    location === "/getting-started" ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                    location === "/getting-started" ? "text-[#00FF9F]" : "text-gray-400"
                   }`}
                 >
                   Terminal
                 </Link>
                 <a
                   href="https://github.com/cxlinux-ai/cx-distro"
-                  className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+                  className="text-sm font-medium text-gray-400"
                   target="_blank" rel="noopener noreferrer"
                 >
                   Distro
@@ -109,7 +109,7 @@ function App() {
                 <Link
                   href="/pricing"
                   className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/pricing") ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                    location.startsWith("/pricing") ? "text-[#00FF9F]" : "text-gray-400"
                   }`}
                 >
                   Pricing
@@ -117,7 +117,7 @@ function App() {
                 <Link
                   href="/affiliates"
                   className={`text-sm font-medium transition-colors ${
-                    location === "/affiliates" ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                    location === "/affiliates" ? "text-[#00FF9F]" : "text-gray-400"
                   }`}
                 >
                   Affiliates
@@ -125,7 +125,7 @@ function App() {
                 <Link
                   href="/blog"
                   className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/blog") ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                    location.startsWith("/blog") ? "text-[#00FF9F]" : "text-gray-400"
                   }`}
                 >
                   Blog
@@ -133,7 +133,7 @@ function App() {
                 <Link
                   href="/about"
                   className={`text-sm font-medium transition-colors ${
-                    location === "/about" ? "text-[#00FF9F]" : "text-gray-400 hover:text-white"
+                    location === "/about" ? "text-[#00FF9F]" : "text-gray-400"
                   }`}
                 >
                   About
@@ -145,7 +145,7 @@ function App() {
                 <a
                   href="https://github.com/cxlinux-ai/cx-core"
                   target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#333] border border-[#444] rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] border border-[#444] rounded-lg"
                 >
                   <Github size={18} className="text-white" />
                   <Star size={16} className="text-[#FFD700] fill-[#FFD700]" />
@@ -154,7 +154,7 @@ function App() {
                   )}
                 </a>
                 <Link href="/account">
-                  <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors">
+                  <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg">
                     My Account
                   </button>
                 </Link>
@@ -182,13 +182,13 @@ function App() {
                     <Link
                       href="/getting-started"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                     >
                       Terminal
                     </Link>
                     <a
                       href="https://github.com/cxlinux-ai/cx-distro"
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                       target="_blank" rel="noopener noreferrer"
                     >
                       Distro
@@ -196,28 +196,28 @@ function App() {
                     <Link
                       href="/pricing"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                     >
                       Pricing
                     </Link>
                     <Link
                       href="/affiliates"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                     >
                       Affiliates
                     </Link>
                     <Link
                       href="/blog"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                     >
                       Blog
                     </Link>
                     <Link
                       href="/about"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400 hover:text-white"
+                      className="block text-gray-400"
                     >
                       About
                     </Link>

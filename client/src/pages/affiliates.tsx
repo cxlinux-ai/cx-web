@@ -867,7 +867,7 @@ export default function AffiliatesPage() {
                         <div className="flex items-center gap-3">
                           <span className={`px-2 py-1 rounded text-xs font-semibold uppercase ${
                             ref.tier === 'enterprise' ? 'bg-purple-500/20 text-purple-400' :
-                            ref.tier === 'team' ? 'bg-blue-500/20 text-blue-400' :
+                            ref.tier === 'team' ? 'bg-[#00FF9F]/15 text-[#00FF9F]' :
                             'bg-[#00FF9F]/20 text-[#00FF9F]'
                           }`}>
                             {ref.tier}

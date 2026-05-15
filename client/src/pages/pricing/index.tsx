@@ -1,26 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useSearch } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Check,
   X,
   Sparkles,
   Shield,
   Zap,
-  Server,
-  HelpCircle,
   ArrowRight,
   Calendar,
   Users,
   Terminal,
-  Cloud,
   Building2,
   BadgeCheck,
   RefreshCw,
   Lock,
+  ChevronDown,
 } from "lucide-react";
 import Footer from "@/components/Footer";
-import { Switch } from "@/components/ui/switch";
 
 interface PricingTier {
   id: string;
@@ -30,27 +27,21 @@ interface PricingTier {
   annualPrice: number;
   description: string;
   features: string[];
-  limits: {
-    servers: string;
-    commands: string;
-    support: string;
-  };
+  limits: { servers: string; commands: string; support: string };
   cta: string;
   ctaLink: string;
   highlighted?: boolean;
-  badge?: string;
   icon: typeof Sparkles;
-  gradient: string;
 }
 
 const tiers: PricingTier[] = [
   {
     id: "core",
     name: "CX Core",
-    subtitle: "Free Forever",
+    subtitle: "Free forever",
     price: 0,
     annualPrice: 0,
-    description: "Free AI-powered package manager for Linux. Natural language commands, hardware detection, and dry-run mode. Limited to 1 server for personal/non-commercial use.",
+    description: "AI-powered package manager for personal use. Natural language commands with local LLM.",
     features: [
       "Natural language commands",
       "Hardware detection & optimization",
@@ -60,23 +51,18 @@ const tiers: PricingTier[] = [
       "Community Discord support",
       "BSL 1.1 License",
     ],
-    limits: {
-      servers: "1 server",
-      commands: "Unlimited local",
-      support: "Community",
-    },
+    limits: { servers: "1 server", commands: "Unlimited local", support: "Community" },
     cta: "Get Started Free",
     ctaLink: "/pricing/checkout?plan=core",
     icon: Terminal,
-    gradient: "from-[#00FF9F] to-[#00CC7F]",
   },
   {
     id: "pro",
     name: "CX Pro",
-    subtitle: "For Power Users",
+    subtitle: "Most popular",
     price: 20,
     annualPrice: 200,
-    description: "Unlock cloud AI models, web console, and priority support. Perfect for developers managing multiple servers.",
+    description: "Cloud AI models, web console, and priority support for developers managing multiple servers.",
     features: [
       "Everything in CX Core",
       "Cloud LLMs (GPT-4o, Claude 3.5)",
@@ -87,25 +73,19 @@ const tiers: PricingTier[] = [
       "Usage analytics",
       "Custom command aliases",
     ],
-    limits: {
-      servers: "Up to 5 servers",
-      commands: "10,000/month cloud",
-      support: "Email (24h)",
-    },
-    cta: "Upgrade Now",
+    limits: { servers: "5 servers", commands: "10,000/mo cloud", support: "Email (24h)" },
+    cta: "Upgrade to Pro",
     ctaLink: "/pricing/checkout?plan=pro",
     highlighted: true,
-    badge: "Most Popular",
     icon: Zap,
-    gradient: "from-[#00FF9F] to-[#00FFFF]",
   },
   {
     id: "team",
     name: "CX Team",
-    subtitle: "For Growing Teams",
+    subtitle: "For growing teams",
     price: 99,
     annualPrice: 990,
-    description: "Collaborate with your team. Shared configurations, role-based access, and centralized management for dev teams.",
+    description: "Shared configurations, role-based access, and centralized management for dev teams.",
     features: [
       "Everything in CX Pro",
       "Team workspaces",
@@ -116,62 +96,73 @@ const tiers: PricingTier[] = [
       "Slack integration",
       "Priority email support",
     ],
-    limits: {
-      servers: "Up to 25 servers",
-      commands: "50,000/month cloud",
-      support: "Priority (4h)",
-    },
-    cta: "Upgrade Now",
+    limits: { servers: "25 servers", commands: "50,000/mo cloud", support: "Priority (4h)" },
+    cta: "Start Team Plan",
     ctaLink: "/pricing/checkout?plan=team",
     icon: Users,
-    gradient: "from-emerald-500 to-teal-500",
   },
   {
     id: "enterprise",
     name: "CX Enterprise",
-    subtitle: "For Organizations",
+    subtitle: "Custom pricing",
     price: 299,
     annualPrice: 2990,
-    description: "Enterprise-grade security, compliance, and dedicated support. SSO, audit logs, and custom SLAs for large organizations.",
+    description: "SSO, audit logs, compliance reports, and dedicated support for large organizations.",
     features: [
       "Everything in CX Team",
-      "SSO/SAML/LDAP integration",
+      "SSO / SAML / LDAP",
       "Audit logs & compliance",
       "SOC2 & HIPAA reports",
       "99.9% SLA guarantee",
       "Dedicated Slack channel",
       "Custom integrations",
-      "On-premise deployment option",
+      "On-premise deployment",
       "Dedicated account manager",
     ],
-    limits: {
-      servers: "Unlimited",
-      commands: "Unlimited",
-      support: "Dedicated (1h)",
-    },
+    limits: { servers: "Unlimited", commands: "Unlimited", support: "Dedicated (1h)" },
     cta: "Schedule Demo",
     ctaLink: "https://calendly.com/ai-consultant/vip",
     icon: Building2,
-    gradient: "from-orange-500 to-amber-500",
   },
 ];
 
-const featureComparison = [
-  { feature: "Natural Language Commands", core: true, pro: true, team: true, enterprise: true },
-  { feature: "Local LLM (Mistral 7B)", core: true, pro: true, team: true, enterprise: true },
-  { feature: "Hardware Detection", core: true, pro: true, team: true, enterprise: true },
-  { feature: "Cloud LLMs (GPT-4o/Claude)", core: false, pro: true, team: true, enterprise: true },
-  { feature: "Web Console Dashboard", core: false, pro: true, team: true, enterprise: true },
-  { feature: "API Access", core: false, pro: true, team: true, enterprise: true },
-  { feature: "Team Workspaces", core: false, pro: false, team: true, enterprise: true },
-  { feature: "Role-Based Access", core: false, pro: false, team: true, enterprise: true },
-  { feature: "SSO/SAML/LDAP", core: false, pro: false, team: false, enterprise: true },
-  { feature: "Audit Logs", core: false, pro: false, team: false, enterprise: true },
-  { feature: "Compliance Reports", core: false, pro: false, team: false, enterprise: true },
-  { feature: "On-Premise Deployment", core: false, pro: false, team: false, enterprise: true },
-  { feature: "Server Limit", core: "1", pro: "5", team: "25", enterprise: "Unlimited" },
-  { feature: "Cloud Commands/Month", core: "-", pro: "10,000", team: "50,000", enterprise: "Unlimited" },
-  { feature: "SLA", core: "-", pro: "-", team: "99.5%", enterprise: "99.9%" },
+type ComparisonRow =
+  | { kind: "section"; label: string }
+  | {
+      kind: "row";
+      feature: string;
+      core: boolean | string;
+      pro: boolean | string;
+      team: boolean | string;
+      enterprise: boolean | string;
+    };
+
+const featureComparison: ComparisonRow[] = [
+  { kind: "section", label: "Core" },
+  { kind: "row", feature: "Natural Language Commands", core: true, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Local LLM (Mistral 7B)", core: true, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Hardware Detection & Optimization", core: true, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Full CLI Access", core: true, pro: true, team: true, enterprise: true },
+  { kind: "section", label: "Cloud & Integrations" },
+  { kind: "row", feature: "Cloud LLMs (GPT-4o / Claude 3.5)", core: false, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Web Console Dashboard", core: false, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "API Access & Webhooks", core: false, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Usage Analytics", core: false, pro: true, team: true, enterprise: true },
+  { kind: "section", label: "Collaboration" },
+  { kind: "row", feature: "Team Workspaces", core: false, pro: false, team: true, enterprise: true },
+  { kind: "row", feature: "Role-Based Access Control", core: false, pro: false, team: true, enterprise: true },
+  { kind: "row", feature: "Shared Command History", core: false, pro: false, team: true, enterprise: true },
+  { kind: "row", feature: "Centralized Config Management", core: false, pro: false, team: true, enterprise: true },
+  { kind: "row", feature: "Slack Integration", core: false, pro: false, team: true, enterprise: true },
+  { kind: "section", label: "Security & Compliance" },
+  { kind: "row", feature: "SSO / SAML / LDAP", core: false, pro: false, team: false, enterprise: true },
+  { kind: "row", feature: "Audit Logs", core: false, pro: false, team: false, enterprise: true },
+  { kind: "row", feature: "Compliance Reports (SOC2 / HIPAA)", core: false, pro: false, team: false, enterprise: true },
+  { kind: "row", feature: "On-Premise Deployment", core: false, pro: false, team: false, enterprise: true },
+  { kind: "section", label: "Limits & SLA" },
+  { kind: "row", feature: "Server Limit", core: "1", pro: "5", team: "25", enterprise: "Unlimited" },
+  { kind: "row", feature: "Cloud Commands / Month", core: "—", pro: "10,000", team: "50,000", enterprise: "Unlimited" },
+  { kind: "row", feature: "SLA", core: "—", pro: "—", team: "99.5%", enterprise: "99.9%" },
 ];
 
 const trustBadges = [
@@ -181,401 +172,539 @@ const trustBadges = [
   { label: "BSL 1.1", description: "Source Available", icon: RefreshCw },
 ];
 
+const stats = [
+  { value: "2,400+", label: "Engineers" },
+  { value: "4.8★", label: "Rating" },
+  { value: "99.9%", label: "Uptime" },
+  { value: "<48h", label: "Onboarding" },
+];
+
+const faqs = [
+  {
+    q: "Can I switch plans at any time?",
+    a: "Yes. Upgrade, downgrade, or cancel from your account dashboard at any time. Upgrades take effect immediately; downgrades apply at the end of your current billing cycle.",
+  },
+  {
+    q: "Do you offer a free trial on paid plans?",
+    a: "CX Core is free forever — no trial needed. For Pro and Team, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, we'll refund your first payment in full.",
+  },
+  {
+    q: "What happens when I exceed my cloud command limit?",
+    a: "We notify you at 80% usage. Once you hit the limit, CX automatically falls back to your local LLM (Mistral 7B) so you're never blocked. You can upgrade or purchase additional credits at any time.",
+  },
+  {
+    q: "Is my data secure?",
+    a: "All data in transit is encrypted with TLS 1.3. Command history stored in the cloud is encrypted at rest (AES-256). We're SOC2 Type II certified and GDPR compliant. We never sell or share your data.",
+  },
+  {
+    q: "What payment methods do you accept?",
+    a: "We accept all major credit and debit cards via Stripe. Annual plans can also be paid by invoice or wire transfer. Contact sales@cxlinux.com for purchase orders or billing questions.",
+  },
+  {
+    q: "Do you offer discounts for open-source projects or students?",
+    a: "Yes — 50% off Pro for verified open-source maintainers and students with a valid .edu email. Email sales@cxlinux.com with a link to your project or student verification.",
+  },
+];
+
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const searchString = useSearch();
   const params = new URLSearchParams(searchString);
   const referralCode = params.get("ref");
 
   return (
-    <div id="pricing-page-container" className="min-h-screen bg-black text-white">
-      {/* Referral Banner */}
+    <div className="relative min-h-screen bg-[#080808] text-white overflow-x-hidden">
+      {/* Ambient glow — top centre */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#00FF9F]/[0.035] rounded-full blur-[160px]" />
+
+      {/* Referral banner */}
       {referralCode && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-[#00FF9F]/20 via-[#00FF9F]/10 to-[#00FF9F]/20 border-b border-[#00FF9F]/30 py-3 px-4 text-center"
+          className="bg-[#00FF9F]/10 border-b border-[#00FF9F]/20 py-3 px-4 text-center text-sm"
         >
-          <p className="text-sm md:text-base font-semibold">
-            🎉 <span className="text-[#00FF9F]">You've been referred!</span>{" "}
-            Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on the Pro plan.
-          </p>
+          🎉 <span className="text-[#00FF9F] font-semibold">You've been referred!</span>{" "}
+          Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on Pro.
         </motion.div>
       )}
 
-      {/* Hero Section */}
-      <section id="pricing-hero-section" className="pt-24 pb-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-4 block">
-              PRICING
+      {/* ── Hero ── */}
+      <section className="relative pt-28 pb-12 px-4 text-center">
+        <div className="max-w-2xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#00FF9F] font-bold mb-6">
+              Pricing
             </span>
-            <h1 id="pricing-hero-title" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
-              <span className="bg-gradient-to-r from-gray-300 via-gray-200 to-[#00FF9F] bg-clip-text text-transparent">
-                Simple Transparent
+            <h1 className="text-5xl sm:text-[3.75rem] font-extrabold tracking-tight leading-[1.07] mb-5">
+              Simple,{" "}
+              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+                transparent
               </span>{" "}
-              <span className="text-[#00FF9F]">Pricing</span>
+              pricing
             </h1>
-            <p id="pricing-hero-subtitle" className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-              {referralCode
-                ? "You've been invited to try CX Linux — enjoy 3 months free on the Pro plan!"
-                : "Start free, scale as you grow. All plans include a 14-day free trial."}
+            <p className="text-[1.05rem] text-gray-400 mb-10 leading-relaxed">
+              Start free. Scale as you grow. No hidden fees, no lock-in.
             </p>
 
-            {/* Trust indicators */}
-            <div className="flex items-center justify-center gap-6 mb-8 text-sm text-gray-500">
-              <span className="flex items-center gap-2">
-                <RefreshCw className="w-4 h-4" />
-                7-day money back
+            {/* Trust row */}
+            <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-500 mb-10">
+              <span className="flex items-center gap-1.5">
+                <RefreshCw className="w-3.5 h-3.5 text-[#00FF9F]" /> 7-day money back
               </span>
-              <span className="flex items-center gap-2">
-                <Lock className="w-4 h-4" />
-                Secure payment via Stripe
+              <span className="h-3 w-px bg-white/10 hidden sm:block" />
+              <span className="flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-[#00FF9F]" /> Stripe payments
               </span>
-              <span className="flex items-center gap-2">
-                <Check className="w-4 h-4" />
-                Cancel anytime
+              <span className="h-3 w-px bg-white/10 hidden sm:block" />
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[#00FF9F]" /> Cancel anytime
               </span>
             </div>
 
-            {/* Billing Toggle */}
-            <div id="pricing-billing-toggle" className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-lg ${!isAnnual ? "text-white" : "text-gray-500"}`}>Monthly</span>
-              <Switch
-                id="pricing-toggle-switch"
-                checked={isAnnual}
-                onCheckedChange={setIsAnnual}
-                className="data-[state=checked]:bg-[#00FF9F]"
-              />
-              <span className={`text-lg ${isAnnual ? "text-white" : "text-gray-500"}`}>
+            {/* Billing toggle */}
+            <div className="inline-flex items-center gap-1 p-1 rounded-full bg-white/[0.05] border border-white/[0.08]">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  !isAnnual ? "bg-white text-black shadow-sm" : "text-gray-400"
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`flex items-center gap-2 px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                  isAnnual ? "bg-white text-black shadow-sm" : "text-gray-400"
+                }`}
+              >
                 Annual
-                <span className="ml-2 text-sm text-green-400 font-semibold">Save 20%</span>
-              </span>
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
+                    isAnnual ? "bg-[#00FF9F] text-black" : "bg-[#00FF9F]/20 text-[#00FF9F]"
+                  }`}
+                >
+                  −20%
+                </span>
+              </button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Pricing Cards */}
-      <section id="pricing-cards-section" className="pb-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Purple gradient background container */}
-          <div className="relative rounded-3xl bg-gradient-to-br from-[#0D0D0D] via-[#161616] to-[#1E1E1E] p-8 md:p-12 overflow-hidden">
-            {/* Decorative gradient orbs - hidden on mobile */}
-            <div className="hidden md:block absolute top-0 left-0 w-96 h-96 bg-[#00CC7F]/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="hidden md:block absolute bottom-0 right-0 w-96 h-96 bg-[#00CC7F]/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      {/* ── Stats bar ── */}
+      <section className="pb-16 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.4 }}
+          className="max-w-lg mx-auto"
+        >
+          <div className="flex flex-wrap justify-center items-center border border-white/[0.07] rounded-2xl divide-x divide-white/[0.07] bg-white/[0.02] overflow-hidden">
+            {stats.map((s) => (
+              <div key={s.label} className="flex-1 min-w-[80px] py-4 px-3 text-center">
+                <p className="text-2xl font-black text-white tabular-nums tracking-tight">{s.value}</p>
+                <p className="text-[11px] text-gray-500 mt-0.5 uppercase tracking-wide">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
 
-            <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {tiers.map((tier, index) => {
-                const tileBackgrounds: Record<string, string> = {
-                  core: "bg-gradient-to-br from-[#00FF9F]/20 to-[#00CC7F]/30 border border-[#00FF9F]/30",
-                  pro: "bg-gradient-to-br from-[#00FF9F]/20 to-[#00FFFF]/30 border border-[#00FF9F]/30",
-                  team: "bg-gradient-to-br from-emerald-500/20 to-teal-500/30 border border-emerald-400/30",
-                  enterprise: "bg-gradient-to-br from-orange-500/20 to-amber-500/30 border border-orange-400/30",
-                };
-                return (
+      {/* ── Pricing cards ── */}
+      <section className="relative pb-24 px-4">
+        <div className="max-w-[1180px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-start">
+            {tiers.map((tier, index) => {
+              const isHighlighted = !!tier.highlighted;
+              const displayPrice = isAnnual ? tier.annualPrice : tier.price;
+              const annualSavings = tier.price * 12 - tier.annualPrice;
+
+              return (
                 <motion.div
                   key={tier.id}
-                  id={`pricing-card-${tier.id}`}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative rounded-2xl p-6 backdrop-blur-xl ${
-                    tier.badge
-                      ? "bg-white/95 text-gray-900 shadow-2xl scale-[1.02]"
-                      : tileBackgrounds[tier.id] || "bg-white/10 border border-white/20"
-                  } hover:scale-[1.04] hover:-translate-y-2 transition-all duration-300`}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className={`relative flex flex-col rounded-2xl p-8 transition-all duration-200 ${
+                    isHighlighted
+                      ? "bg-[#0f1510] border border-[#00FF9F]/40 shadow-[0_0_120px_rgba(0,255,159,0.13),inset_0_1px_0_rgba(0,255,159,0.12)] mt-5 md:mt-0"
+                      : "bg-[#111111] border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] hover:-translate-y-1 hover:border-white/[0.15] hover:shadow-[0_16px_48px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                  }`}
                 >
-                  {tier.badge && (
-                    <div id={`pricing-badge-${tier.id}`} className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                        {tier.badge}
+                  {/* Pro card: top-edge inner glow overlay */}
+                  {isHighlighted && (
+                    <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-[#00FF9F]/[0.07] via-[#00FF9F]/[0.01] to-transparent" />
+                  )}
+
+                  {/* Most Popular badge */}
+                  {isHighlighted && (
+                    <div className="absolute -top-[14px] inset-x-0 flex justify-center pointer-events-none">
+                      <span className="bg-[#00FF9F] text-black text-[10px] font-extrabold uppercase tracking-[0.18em] px-4 py-1 rounded-full shadow-[0_0_20px_rgba(0,255,159,0.4)]">
+                        Most Popular
                       </span>
                     </div>
                   )}
 
-                  {/* Logo/Icon */}
-                  <div id={`pricing-icon-${tier.id}`} className={`px-4 py-3 rounded-2xl flex items-center justify-center gap-1.5 mb-4 ${
-                    tier.badge
-                      ? "bg-gradient-to-br from-[#00FF9F] to-[#00CC7F]"
-                      : "bg-white/10"
-                  }`}>
-                    <span className={`text-lg font-bold ${tier.badge ? "text-white" : "text-white"}`}>
-                      CX
-                    </span>
-                    <span className={`text-sm font-medium ${tier.badge ? "text-white/80" : "text-white/70"}`}>
-                      {tier.name.replace("CX ", "")}
-                    </span>
-                  </div>
-
-                  <p className={`text-xs mb-4 ${tier.badge ? "text-gray-500" : "text-white/60"}`}>
-                    {tier.description}
-                  </p>
-
-                  <div id={`pricing-price-${tier.id}`} className="mb-6">
-                    <span className={`text-4xl font-extrabold ${tier.badge ? "text-gray-900" : "text-white"}`}>
-                      ${isAnnual ? tier.annualPrice : tier.price}
-                    </span>
-                    <span className={`text-sm ${tier.badge ? "text-gray-500" : "text-white/60"}`}>
-                      {tier.price > 0 ? (isAnnual ? "/year" : "/month") : ""}
-                    </span>
-                  </div>
-
-                  {/* Key Limits */}
-                  <div className={`mb-4 p-3 rounded-lg ${tier.badge ? "bg-[#00FF9F]" : "bg-white/5"}`}>
-                    <div className="grid grid-cols-1 gap-2 text-xs">
-                      <div className="flex justify-between">
-                        <span className={tier.badge ? "text-gray-500" : "text-white/60"}>Servers</span>
-                        <span className={`font-semibold ${tier.badge ? "text-gray-900" : "text-white"}`}>{tier.limits.servers}</span>
+                  {/* Plan header */}
+                  <div className="mb-7">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                          isHighlighted
+                            ? "bg-[#00FF9F]/20 ring-1 ring-[#00FF9F]/30"
+                            : "bg-white/[0.07] ring-1 ring-white/[0.08]"
+                        }`}
+                      >
+                        <tier.icon className={`w-[18px] h-[18px] ${isHighlighted ? "text-[#00FF9F]" : "text-gray-300"}`} />
                       </div>
-                      <div className="flex justify-between">
-                        <span className={tier.badge ? "text-gray-500" : "text-white/60"}>Cloud Commands</span>
-                        <span className={`font-semibold ${tier.badge ? "text-gray-900" : "text-white"}`}>{tier.limits.commands}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className={tier.badge ? "text-gray-500" : "text-white/60"}>Support</span>
-                        <span className={`font-semibold ${tier.badge ? "text-gray-900" : "text-white"}`}>{tier.limits.support}</span>
-                      </div>
+                      <span
+                        className={`text-[11px] uppercase tracking-[0.15em] font-bold ${
+                          isHighlighted ? "text-[#00FF9F]" : "text-gray-500"
+                        }`}
+                      >
+                        {tier.subtitle}
+                      </span>
                     </div>
+                    <h3 className="text-xl font-bold text-white leading-tight tracking-tight">{tier.name}</h3>
+                    <p className="text-[13px] text-gray-500 mt-2 leading-relaxed">{tier.description}</p>
                   </div>
 
-                  <ul id={`pricing-features-${tier.id}`} className="space-y-2 mb-6">
-                    {tier.features.slice(0, 5).map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs">
-                        <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                          tier.badge ? "text-[#00FF9F]" : "text-green-400"
-                        }`} />
-                        <span className={tier.badge ? "text-gray-600" : "text-white/80"}>{feature}</span>
-                      </li>
-                    ))}
-                    {tier.features.length > 5 && (
-                      <li className={`text-xs ${tier.badge ? "text-[#00FF9F]" : "text-white/60"}`}>
-                        +{tier.features.length - 5} more features
-                      </li>
-                    )}
-                  </ul>
+                  {/* Price */}
+                  <div className="mb-7">
+                    <div className="flex items-end gap-2">
+                      <span className="text-[3.25rem] font-black tracking-tight text-white leading-none">
+                        {tier.id === "enterprise"
+                          ? "Custom"
+                          : tier.price === 0
+                          ? "Free"
+                          : `$${displayPrice}`}
+                      </span>
+                      {tier.price > 0 && tier.id !== "enterprise" && (
+                        <span className="text-gray-500 text-sm mb-2">{isAnnual ? "/yr" : "/mo"}</span>
+                      )}
+                    </div>
+                    <p className="text-xs text-gray-600 mt-2 min-h-[16px]">
+                      {tier.id === "enterprise" && "Contact us for a custom quote"}
+                      {tier.id !== "enterprise" && tier.price === 0 && "No credit card required"}
+                      {tier.id !== "enterprise" && tier.price > 0 && isAnnual && (
+                        <span>
+                          Billed ${tier.annualPrice}/year ·{" "}
+                          <span className="text-[#00FF9F]">Save ${annualSavings}</span>
+                        </span>
+                      )}
+                      {tier.id !== "enterprise" &&
+                        tier.price > 0 &&
+                        !isAnnual &&
+                        `$${tier.annualPrice}/yr billed annually`}
+                    </p>
+                  </div>
 
-                  {tier.ctaLink.startsWith("http") || tier.ctaLink.startsWith("mailto:") ? (
+                  {/* CTA */}
+                  {tier.ctaLink.startsWith("http") ? (
                     <a
-                      id={`pricing-cta-${tier.id}`}
                       href={tier.ctaLink}
-                      target={tier.ctaLink.startsWith("mailto:") ? undefined : "_blank"}
-                      rel={tier.ctaLink.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                      className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
-                        tier.badge
-                          ? "bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white hover:shadow-lg hover:shadow-[#00FF9F]0/30"
-                          : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
+                        isHighlighted
+                          ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"
+                          : "border border-white/[0.14] text-white hover:border-[#00FF9F]/35 hover:text-[#00FF9F]"
                       }`}
                     >
                       {tier.cta}
                     </a>
                   ) : (
                     <Link
-                      id={`pricing-cta-${tier.id}`}
-                      href={tier.ctaLink + (isAnnual ? "&billing=annual" : "&billing=monthly") + (referralCode ? `&ref=${referralCode}` : "")}
-                      className={`block w-full text-center py-3 rounded-lg font-semibold transition-all duration-300 ${
-                        tier.badge
-                          ? "bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white hover:shadow-lg hover:shadow-[#00FF9F]0/30"
-                          : "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                      href={
+                        tier.ctaLink +
+                        (isAnnual ? "&billing=annual" : "&billing=monthly") +
+                        (referralCode ? `&ref=${referralCode}` : "")
+                      }
+                      className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
+                        isHighlighted
+                          ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"
+                          : "border border-white/[0.14] text-white hover:border-[#00FF9F]/35 hover:text-[#00FF9F]"
                       }`}
                     >
                       {tier.cta}
                     </Link>
                   )}
+
+                  {/* Features */}
+                  <div className="h-px bg-white/[0.07] mb-6" />
+                  <ul className="space-y-3.5 flex-1">
+                    {tier.features.map((f, i) => {
+                      const isInherited = f.startsWith("Everything in");
+                      return (
+                        <li key={i} className="flex items-start gap-3 text-[13px]">
+                          <Check
+                            className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
+                              isInherited
+                                ? "text-[#00FF9F]/25"
+                                : isHighlighted
+                                ? "text-[#00FF9F]"
+                                : "text-[#00FF9F]/55"
+                            }`}
+                          />
+                          <span className={`leading-snug ${isInherited ? "text-gray-600" : "text-gray-300"}`}>
+                            {f}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {/* Limits footer */}
+                  <div className="mt-7 pt-5 border-t border-white/[0.07] grid grid-cols-3 gap-2 text-center">
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Servers</p>
+                      <p className="text-xs font-semibold text-gray-400">{tier.limits.servers}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Commands</p>
+                      <p className="text-xs font-semibold text-gray-400">{tier.limits.commands}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.12em] text-gray-600 mb-1">Support</p>
+                      <p className="text-xs font-semibold text-gray-400">{tier.limits.support}</p>
+                    </div>
+                  </div>
                 </motion.div>
               );
-              })}
-            </div>
+            })}
           </div>
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section id="pricing-trust-section" className="py-12 px-4 border-y border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {trustBadges.map((badge, index) => (
-              <motion.div
-                key={badge.label}
-                id={`pricing-trust-badge-${index}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-                className="flex flex-col items-center"
-              >
-                <badge.icon className="w-8 h-8 text-[#00FF9F] mb-2" />
-                <span className="text-white font-semibold">{badge.label}</span>
-                <span className="text-gray-500 text-sm">{badge.description}</span>
-              </motion.div>
-            ))}
-          </div>
+      {/* ── Trust badges ── */}
+      <section className="border-y border-white/[0.05] bg-white/[0.015] py-10 px-4">
+        <div className="max-w-3xl mx-auto flex flex-wrap justify-center gap-x-14 gap-y-6">
+          {trustBadges.map((badge, i) => (
+            <motion.div
+              key={badge.label}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="flex items-center gap-3"
+            >
+              <div className="w-9 h-9 rounded-xl bg-[#00FF9F]/10 flex items-center justify-center flex-shrink-0">
+                <badge.icon className="w-4 h-4 text-[#00FF9F]" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-white leading-tight">{badge.label}</p>
+                <p className="text-xs text-gray-500">{badge.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Feature Comparison Table */}
-      <section id="pricing-comparison-section" className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
+      {/* ── Feature comparison ── */}
+      <section className="py-24 px-4">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
           >
-            <h2 id="pricing-comparison-title" className="text-3xl sm:text-4xl font-bold text-center mb-4">
-              Compare All Features
-            </h2>
-            <p id="pricing-comparison-subtitle" className="text-gray-400 text-center mb-12">
-              Find the perfect plan for your needs
-            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Compare all features</h2>
+            <p className="text-gray-500">Everything you get, clearly laid out.</p>
           </motion.div>
 
-          <div id="pricing-comparison-table" className="overflow-x-auto">
-            <table className="w-full">
+          <div className="overflow-x-auto rounded-2xl border border-white/[0.08] bg-[#0d0d0d]">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-4 px-4 text-gray-400 font-medium">Feature</th>
-                  <th className="text-center py-4 px-4 text-[#00FF9F] font-semibold">CX Core</th>
-                  <th className="text-center py-4 px-4 text-[#00FF9F] font-semibold">CX Pro</th>
-                  <th className="text-center py-4 px-4 text-emerald-400 font-semibold">CX Team</th>
-                  <th className="text-center py-4 px-4 text-orange-400 font-semibold">CX Enterprise</th>
+                <tr className="border-b border-white/[0.08]">
+                  <th className="text-left py-5 px-6 text-gray-500 font-medium w-[38%]">Feature</th>
+                  <th className="text-center py-5 px-4 text-gray-400 font-semibold">Core</th>
+                  <th className="text-center py-5 px-4 font-bold text-[#00FF9F] bg-[#00FF9F]/[0.05]">Pro</th>
+                  <th className="text-center py-5 px-4 text-gray-400 font-semibold">Team</th>
+                  <th className="text-center py-5 px-4 text-gray-400 font-semibold">Enterprise</th>
                 </tr>
               </thead>
               <tbody>
-                {featureComparison.map((row, index) => (
-                  <motion.tr
-                    key={row.feature}
-                    id={`pricing-feature-row-${index}`}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors"
-                  >
-                    <td className="py-4 px-4 text-gray-300">{row.feature}</td>
-                    <td className="py-4 px-4 text-center bg-[#00FF9F]/5">
-                      {typeof row.core === "boolean" ? (
-                        row.core ? (
-                          <Check className="w-5 h-5 text-green-400 mx-auto" />
+                {featureComparison.map((row, i) => {
+                  if (row.kind === "section") {
+                    return (
+                      <tr key={`s-${i}`} className="border-b border-white/[0.05]">
+                        <td colSpan={5} className="pt-6 pb-3 px-6">
+                          <div className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]/50 flex-shrink-0" />
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#00FF9F]/60">
+                              {row.label}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  }
+                  return (
+                    <tr
+                      key={row.feature}
+                      className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors last:border-0"
+                    >
+                      <td className="py-3.5 px-6 text-gray-300">{row.feature}</td>
+                      <td className="py-3.5 px-4 text-center">
+                        {typeof row.core === "boolean" ? (
+                          row.core ? (
+                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                          ) : (
+                            <X className="w-4 h-4 text-white/[0.12] mx-auto" />
+                          )
                         ) : (
-                          <X className="w-5 h-5 text-gray-600 mx-auto" />
-                        )
-                      ) : (
-                        <span className="text-gray-400">{row.core}</span>
-                      )}
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      {typeof row.pro === "boolean" ? (
-                        row.pro ? (
-                          <Check className="w-5 h-5 text-green-400 mx-auto" />
+                          <span className="text-gray-400">{row.core}</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-center bg-[#00FF9F]/[0.04]">
+                        {typeof row.pro === "boolean" ? (
+                          row.pro ? (
+                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                          ) : (
+                            <X className="w-4 h-4 text-white/[0.12] mx-auto" />
+                          )
                         ) : (
-                          <X className="w-5 h-5 text-gray-600 mx-auto" />
-                        )
-                      ) : (
-                        <span className="text-gray-400">{row.pro}</span>
-                      )}
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      {typeof row.team === "boolean" ? (
-                        row.team ? (
-                          <Check className="w-5 h-5 text-green-400 mx-auto" />
+                          <span className="text-gray-200 font-semibold">{row.pro}</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-center">
+                        {typeof row.team === "boolean" ? (
+                          row.team ? (
+                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                          ) : (
+                            <X className="w-4 h-4 text-white/[0.12] mx-auto" />
+                          )
                         ) : (
-                          <X className="w-5 h-5 text-gray-600 mx-auto" />
-                        )
-                      ) : (
-                        <span className="text-gray-400">{row.team}</span>
-                      )}
-                    </td>
-                    <td className="py-4 px-4 text-center">
-                      {typeof row.enterprise === "boolean" ? (
-                        row.enterprise ? (
-                          <Check className="w-5 h-5 text-green-400 mx-auto" />
+                          <span className="text-gray-400">{row.team}</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-center">
+                        {typeof row.enterprise === "boolean" ? (
+                          row.enterprise ? (
+                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                          ) : (
+                            <X className="w-4 h-4 text-white/[0.12] mx-auto" />
+                          )
                         ) : (
-                          <X className="w-5 h-5 text-gray-600 mx-auto" />
-                        )
-                      ) : (
-                        <span className="text-green-400 font-semibold">{row.enterprise}</span>
-                      )}
-                    </td>
-                  </motion.tr>
-                ))}
+                          <span className="text-[#00FF9F] font-semibold">{row.enterprise}</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      {/* FAQ CTA */}
-      <section id="pricing-faq-cta-section" className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
+      {/* ── FAQ ── */}
+      <section className="py-20 px-4 border-t border-white/[0.05]">
+        <div className="max-w-2xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center"
+            className="text-center mb-12"
           >
-            <HelpCircle className="w-12 h-12 text-[#00FF9F] mx-auto mb-4" />
-            <h3 id="pricing-faq-cta-title" className="text-2xl font-bold mb-4">Have Questions?</h3>
-            <p id="pricing-faq-cta-desc" className="text-gray-400 mb-6">
-              Check out our pricing FAQ or contact our sales team for custom solutions.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                id="pricing-faq-link"
-                href="/pricing/faq"
-                className="px-6 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
-              >
-                View Pricing FAQ
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                id="pricing-contact-link"
-                href="mailto:sales@cxlinux.com"
-                className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
-              >
-                Contact Sales
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Frequently asked questions</h2>
+            <p className="text-gray-500">
+              Still have questions?{" "}
+              <a href="mailto:sales@cxlinux.com" className="text-[#00FF9F] underline underline-offset-2">
+                Email us
               </a>
-            </div>
+              .
+            </p>
           </motion.div>
+
+          <div className="space-y-2">
+            {faqs.map((faq, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.04 }}
+                className={`rounded-xl border transition-all duration-150 overflow-hidden ${
+                  openFaq === i
+                    ? "border-[#00FF9F]/20 bg-[#00FF9F]/[0.03]"
+                    : "border-white/[0.07] bg-white/[0.01]"
+                }`}
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
+                >
+                  <span className="text-sm font-semibold text-white leading-snug">{faq.q}</span>
+                  <ChevronDown
+                    className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${
+                      openFaq === i ? "rotate-180 text-[#00FF9F]" : "text-gray-500"
+                    }`}
+                  />
+                </button>
+                <AnimatePresence initial={false}>
+                  {openFaq === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-5 pb-5 text-sm text-gray-400 leading-relaxed">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Enterprise CTA */}
-      <section id="pricing-enterprise-cta-section" className="py-16 px-4 bg-gradient-to-b from-transparent to-[#0D0D0D]/10">
+      {/* ── Enterprise CTA ── */}
+      <section className="pb-24 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-[#00FF9F]/10 to-[#00FF9F]/10 border-2 border-[#00FF9F]/50 rounded-2xl p-8 md:p-12 text-center"
+            className="relative rounded-3xl border border-[#00FF9F]/20 bg-[#0f1510] overflow-hidden px-10 py-16 sm:px-16 text-center shadow-[0_0_80px_rgba(0,255,159,0.06)]"
           >
-            <Building2 className="w-12 h-12 text-[#00FF9F] mx-auto mb-4" />
-            <h3 id="pricing-enterprise-title" className="text-3xl font-bold mb-4">
-              Need a Custom Solution?
-            </h3>
-            <p id="pricing-enterprise-desc" className="text-gray-400 mb-8 max-w-xl mx-auto">
-              We offer custom enterprise packages with volume discounts, on-premise deployment,
-              and tailored compliance solutions for your organization.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                id="pricing-demo-link"
-                href="https://calendly.com/ai-consultant/vip"
-                target="_blank" rel="noopener noreferrer"
-                className="px-8 py-3 bg-gradient-to-r from-[#00FF9F] to-[#00CC7F] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(139,92,246,0.5)] transition-all flex items-center gap-2"
-              >
-                <Calendar className="w-5 h-5" />
-                Schedule Enterprise Demo
-              </a>
-              <a
-                href="mailto:sales@cxlinux.com"
-                className="px-8 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
-              >
-                Contact Sales
-              </a>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#00FF9F]/[0.05] via-transparent to-transparent" />
+            <div className="pointer-events-none absolute -bottom-10 -right-10 w-72 h-72 bg-[#00FF9F]/[0.06] rounded-full blur-[100px]" />
+            <div className="pointer-events-none absolute inset-0 rounded-3xl shadow-[inset_0_1px_0_rgba(0,255,159,0.12)]" />
+
+            <div className="relative">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#00FF9F]/15 ring-1 ring-[#00FF9F]/25 mb-6 mx-auto">
+                <Building2 className="w-7 h-7 text-[#00FF9F]" />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Need a custom solution?</h2>
+              <p className="text-gray-400 max-w-lg mx-auto mb-8 leading-relaxed">
+                Volume pricing, on-premise deployment, dedicated support, and tailored compliance packages
+                for large engineering teams.
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+                <a
+                  href="https://calendly.com/ai-consultant/vip"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-7 py-3.5 bg-[#00FF9F] text-black text-sm font-bold rounded-xl hover:bg-[#00E88F] transition-colors shadow-[0_0_30px_rgba(0,255,159,0.2)]"
+                >
+                  <Calendar className="w-4 h-4" /> Schedule a Demo
+                </a>
+                <a
+                  href="mailto:sales@cxlinux.com"
+                  className="flex items-center gap-2 px-7 py-3.5 border border-white/[0.14] text-white text-sm font-semibold rounded-xl hover:border-[#00FF9F]/35 hover:text-[#00FF9F] transition-all"
+                >
+                  Contact Sales <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+
+              <p className="text-xs text-gray-600">No commitment required · Response within 24 hours</p>
             </div>
           </motion.div>
         </div>

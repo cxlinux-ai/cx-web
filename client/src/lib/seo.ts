@@ -4,9 +4,18 @@ interface SEOConfig {
   canonicalPath?: string;
   ogType?: 'website' | 'article';
   ogImage?: string;
+  ogImageAlt?: string;
   keywords?: string[];
   noIndex?: boolean;
   jsonLd?: object | object[];
+  article?: {
+    publishedTime: string;
+    modifiedTime?: string;
+    author?: string;
+    section?: string;
+    tags?: string[];
+    readingTime?: number;
+  };
 }
 
 const BASE_URL = 'https://cxlinux.com';
@@ -21,9 +30,11 @@ export function updateSEO(config: SEOConfig): () => void {
     canonicalPath = '',
     ogType = 'website',
     ogImage = DEFAULT_OG_IMAGE,
+    ogImageAlt,
     keywords = [],
     noIndex = false,
-    jsonLd
+    jsonLd,
+    article
   } = config;
 
   const fullTitle = title.includes('CX') ? title : `${title} | ${SITE_NAME}`;
@@ -72,6 +83,8 @@ export function updateSEO(config: SEOConfig): () => void {
   
   if (noIndex) {
     updateOrCreateMeta('meta[name="robots"]', 'content', 'noindex, nofollow');
+  } else {
+    updateOrCreateMeta('meta[name="robots"]', 'content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
   }
 
   updateOrCreateLink('canonical', canonicalUrl);
@@ -81,11 +94,55 @@ export function updateSEO(config: SEOConfig): () => void {
   updateOrCreateMeta('meta[property="og:type"]', 'content', ogType);
   updateOrCreateMeta('meta[property="og:url"]', 'content', canonicalUrl);
   updateOrCreateMeta('meta[property="og:image"]', 'content', ogImage);
+  updateOrCreateMeta('meta[property="og:image:width"]', 'content', '1200');
+  updateOrCreateMeta('meta[property="og:image:height"]', 'content', '630');
+  if (ogImageAlt) {
+    updateOrCreateMeta('meta[property="og:image:alt"]', 'content', ogImageAlt);
+  }
+  updateOrCreateMeta('meta[property="og:site_name"]', 'content', SITE_NAME);
+  updateOrCreateMeta('meta[property="og:locale"]', 'content', 'en_US');
 
+  updateOrCreateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
+  updateOrCreateMeta('meta[name="twitter:site"]', 'content', TWITTER_HANDLE);
+  updateOrCreateMeta('meta[name="twitter:creator"]', 'content', TWITTER_HANDLE);
   updateOrCreateMeta('meta[name="twitter:title"]', 'content', fullTitle);
   updateOrCreateMeta('meta[name="twitter:description"]', 'content', description);
   updateOrCreateMeta('meta[name="twitter:url"]', 'content', canonicalUrl);
   updateOrCreateMeta('meta[name="twitter:image"]', 'content', ogImage);
+  if (ogImageAlt) {
+    updateOrCreateMeta('meta[name="twitter:image:alt"]', 'content', ogImageAlt);
+  }
+
+  // Article-specific Open Graph tags
+  const articleTagElements: Element[] = [];
+  if (article) {
+    updateOrCreateMeta('meta[property="article:published_time"]', 'content', article.publishedTime);
+    if (article.modifiedTime) {
+      updateOrCreateMeta('meta[property="article:modified_time"]', 'content', article.modifiedTime);
+    }
+    if (article.author) {
+      updateOrCreateMeta('meta[property="article:author"]', 'content', article.author);
+    }
+    if (article.section) {
+      updateOrCreateMeta('meta[property="article:section"]', 'content', article.section);
+    }
+    // article:tag — one per tag (Twitter labels for reading time)
+    if (article.tags) {
+      // Remove previously added article:tag elements first
+      document.querySelectorAll('meta[property="article:tag"]').forEach((el) => el.remove());
+      article.tags.forEach((tag) => {
+        const el = document.createElement('meta');
+        el.setAttribute('property', 'article:tag');
+        el.setAttribute('content', tag);
+        document.head.appendChild(el);
+        articleTagElements.push(el);
+      });
+    }
+    if (article.readingTime !== undefined) {
+      updateOrCreateMeta('meta[name="twitter:label1"]', 'content', 'Reading time');
+      updateOrCreateMeta('meta[name="twitter:data1"]', 'content', `${article.readingTime} min read`);
+    }
+  }
 
   let jsonLdScript: HTMLScriptElement | null = null;
   if (jsonLd) {
@@ -103,16 +160,17 @@ export function updateSEO(config: SEOConfig): () => void {
 
   return () => {
     document.title = originalTitle;
-    
+
     createdElements.forEach(el => el.remove());
-    
+    articleTagElements.forEach(el => el.remove());
+
     originalValues.forEach((value, el) => {
       if (value !== null) {
         const attr = el.tagName === 'LINK' ? 'href' : 'content';
         el.setAttribute(attr, value);
       }
     });
-    
+
     if (jsonLdScript) {
       jsonLdScript.remove();
     }

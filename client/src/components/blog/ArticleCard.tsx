@@ -27,7 +27,23 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
       transition={{ delay: index * 0.06, duration: 0.4, ease: "easeOut" }}
     >
       <Link href={`/blog/${slug}`}>
-        <article className="group h-full bg-[#1A1A1A] border border-white/8 rounded-xl p-6 hover:border-[#00FF9F]/30 hover:bg-[#1F1F1F] transition-all duration-200 cursor-pointer flex flex-col">
+        <article className="group h-full bg-[#1A1A1A] border border-white/8 rounded-xl overflow-hidden hover:border-[#00FF9F]/30 hover:bg-[#1F1F1F] transition-all duration-200 cursor-pointer flex flex-col">
+          {/* Thumbnail */}
+          {!compact && frontmatter.ogImage && (
+            <div className="aspect-[1200/630] overflow-hidden bg-[#0D0D0D]">
+              <img
+                src={frontmatter.ogImage}
+                alt={frontmatter.title}
+                width={1200}
+                height={630}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+              />
+            </div>
+          )}
+
+          <div className="p-6 flex flex-col flex-1">
           {/* Meta row */}
           <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
             <span className="flex items-center gap-1">
@@ -75,6 +91,7 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
             <span className="text-[#00FF9F] text-xs flex items-center gap-1 group-hover:gap-2 transition-all duration-150">
               Read <ArrowRight className="w-3.5 h-3.5" />
             </span>
+          </div>
           </div>
         </article>
       </Link>

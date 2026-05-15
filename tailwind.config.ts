@@ -105,6 +105,28 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-links": "#00FF9F",
+            a: {
+              color: "#00FF9F",
+              textDecoration: "none",
+              fontWeight: "500",
+              "&:hover": {
+                textDecoration: "underline",
+                textDecorationColor: "#00FF9F",
+              },
+            },
+            // rehype-autolink-headings wraps headings in <a> — keep them looking like headings
+            "h1 a, h2 a, h3 a, h4 a, h5 a, h6 a": {
+              color: "inherit",
+              textDecoration: "none",
+              fontWeight: "inherit",
+            },
+          },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],

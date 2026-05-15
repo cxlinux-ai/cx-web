@@ -140,7 +140,7 @@ const tierBadge: Record<string, string> = {
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   free: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-  team: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+  team: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
   enterprise: "bg-purple-500/20 text-purple-300 border-purple-500/30",
 };
 
@@ -749,7 +749,7 @@ function OverviewTab({
       {/* Row 1: Main stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Active Licenses" value={stats.active_licenses} icon={Key} color="text-[#00FF9F]" delay={0.05} />
-        <StatCard label="Total Devices" value={stats.active_devices} icon={Monitor} color="text-blue-400" delay={0.1} />
+        <StatCard label="Total Devices" value={stats.active_devices} icon={Monitor} color="text-[#00FF9F]" delay={0.1} />
         <StatCard label="Active Affiliates" value={stats.active_referrers} icon={Users} color="text-purple-400" delay={0.15} />
         <StatCard label="Recent Signups" value={stats.recent_signups} icon={UserPlus} color="text-yellow-400" delay={0.2} />
       </div>
@@ -773,7 +773,7 @@ function OverviewTab({
             const colors: Record<string, string> = {
               core: "bg-gray-400",
               pro: "bg-emerald-400",
-              team: "bg-blue-400",
+              team: "bg-[#00FF9F]",
               enterprise: "bg-purple-400",
             };
             return (
@@ -1109,7 +1109,7 @@ function AffiliatesTab({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <StatCard label="Standard Referrers" value={data.summary.standard_referrers} icon={Users} color="text-[#00FF9F]" delay={0.05} />
           <StatCard label="Founding Affiliates" value={data.summary.founding_referrers} icon={Users} color="text-yellow-400" delay={0.1} />
-          <StatCard label="Active Total" value={data.summary.active_referrers} icon={Users} color="text-blue-400" delay={0.15} />
+          <StatCard label="Active Total" value={data.summary.active_referrers} icon={Users} color="text-[#00FF9F]" delay={0.15} />
           <StatCard label="Total Commissions" value={`$${data.summary.total_commissions}`} icon={DollarSign} color="text-[#00FF9F]" delay={0.2} />
           <StatCard label="Unpaid" value={`$${data.summary.total_unpaid}`} icon={DollarSign} color="text-red-400" delay={0.25} />
         </div>
@@ -1257,7 +1257,7 @@ function AffiliatesTab({
                         onClick={() =>
                           onChangeTier(r.referral_code, r.tier === "standard" ? "founding" : "standard")
                         }
-                        className="px-2 py-1 text-xs bg-blue-500/10 text-blue-400 rounded-md hover:bg-blue-500/20 transition-colors border border-blue-500/20"
+                        className="px-2 py-1 text-xs bg-[#00FF9F]/10 text-[#00FF9F] rounded-md hover:bg-[#00FF9F]/20 transition-colors border border-[#00FF9F]/20"
                         title={`Switch to ${r.tier === "standard" ? "founding" : "standard"}`}
                       >
                         <ArrowUpDown className="w-3.5 h-3.5" />
@@ -1318,7 +1318,7 @@ function AffiliatesTab({
                       <td className="p-3">
                         <span
                           className={`px-2 py-0.5 rounded text-xs font-medium ${
-                            t.level === 1 ? "bg-blue-500/20 text-blue-400" : "bg-purple-500/20 text-purple-400"
+                            t.level === 1 ? "bg-[#00FF9F]/15 text-[#00FF9F]" : "bg-purple-500/20 text-purple-400"
                           }`}
                         >
                           L{t.level}
@@ -1366,7 +1366,7 @@ function ActivityTab({
 }) {
   const actionColors: Record<string, string> = {
     validate: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
-    activate: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    activate: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
     deactivate: "bg-red-500/20 text-red-400 border-red-500/30",
     register: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   };

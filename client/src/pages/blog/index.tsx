@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link, useSearch } from "wouter";
 import { motion } from "framer-motion";
-import { Rss, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { getAllPosts, getAllTags } from "@/blog/parse";
 import { ArticleCard } from "@/components/blog/ArticleCard";
@@ -166,13 +166,6 @@ export default function BlogIndex() {
           </>
         )}
 
-        {/* RSS link */}
-        <div className="flex justify-center pb-10">
-          <a href="/blog/rss.xml" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#00FF9F] transition-colors">
-            <Rss className="w-4 h-4" />
-            Subscribe via RSS
-          </a>
-        </div>
       </div>
 
       <Footer />

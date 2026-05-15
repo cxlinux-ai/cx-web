@@ -129,7 +129,7 @@ const planColors: Record<string, string> = {
   free: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-  team: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+  team: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
   enterprise: "bg-purple-500/20 text-purple-300 border-purple-500/30",
 };
 
