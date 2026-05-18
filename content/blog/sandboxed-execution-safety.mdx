@@ -26,16 +26,16 @@ Every command CX generates is displayed in a structured preview before execution
 - What permissions it requires
 - A plain-English explanation of what it does
 
-Nothing executes until you explicitly approve. This isn't optional — there is no "just run it" mode.
+Nothing executes until you explicitly approve. This isn't optional, there is no "just run it" mode.
 
 ### Layer 2: Firejail Sandbox
 
 When you approve a command, it runs inside a Firejail container with:
 
-- **Limited filesystem access** — only the directories explicitly needed
-- **Restricted network** — no network access unless the command requires it
-- **Process isolation** — the command can't see or signal other processes
-- **Automatic timeout** — runaway processes are killed after a configurable limit
+- **Limited filesystem access**, only the directories explicitly needed
+- **Restricted network**, no network access unless the command requires it
+- **Process isolation**, the command can't see or signal other processes
+- **Automatic timeout**, runaway processes are killed after a configurable limit
 
 ```bash
 # CX wraps every approved command internally like this:
@@ -48,7 +48,7 @@ Firejail is an open-source SUID sandbox that uses Linux namespaces and seccomp t
 
 ### Layer 3: Snapshot and Instant Rollback
 
-Before any command that modifies system state, CX creates a snapshot of the affected files and configuration. This happens automatically — you don't need to think about it.
+Before any command that modifies system state, CX creates a snapshot of the affected files and configuration. This happens automatically, you don't need to think about it.
 
 If something goes wrong, one command undoes everything:
 
@@ -73,7 +73,7 @@ CX maintains a blocklist of destructive command patterns. These are flagged auto
 - Privilege escalation without an explicit reason
 - Mass file operations on `/`, `/etc`, `/boot`
 
-When a blocked pattern is detected, CX requires you to explicitly acknowledge the risk with a confirmation phrase — not just press `y`.
+When a blocked pattern is detected, CX requires you to explicitly acknowledge the risk with a confirmation phrase, not just press `y`.
 
 ## Open Source Security Model
 
@@ -87,7 +87,7 @@ Enterprise and Team plan users get additional audit logging: every command execu
 
 ## What This Means in Practice
 
-In over a year of production use, the safety model has prevented hundreds of potentially destructive operations — not from CX generating bad commands, but from users who pasted the wrong thing, ran the right command in the wrong directory, or didn't notice a typo in a path.
+In over a year of production use, the safety model has prevented hundreds of potentially destructive operations, not from CX generating bad commands, but from users who pasted the wrong thing, ran the right command in the wrong directory, or didn't notice a typo in a path.
 
 The preview + sandbox + rollback combination means that even if the worst happens, you're one command away from recovery.
 

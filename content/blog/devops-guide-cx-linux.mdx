@@ -1,6 +1,6 @@
 ---
 title: "The DevOps Engineer's Guide to CX Linux"
-description: "How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response — with real command examples for each workflow."
+description: "How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response, with real command examples for each workflow."
 publishedAt: "2026-03-20"
 author: "cx-team"
 tags: ["DevOps", "tutorial", "automation"]
@@ -31,47 +31,47 @@ CX integrates with GitHub Actions, GitLab CI, and Jenkins. It can generate pipel
 </Callout>
 
 ```bash
-cx "set up a GitHub Actions pipeline that: runs tests on every PR, deploys to staging on merge to develop, deploys to production on merge to main — with manual approval gate before production"
+cx "set up a GitHub Actions pipeline that: runs tests on every PR, deploys to staging on merge to develop, deploys to production on merge to main, with manual approval gate before production"
 ```
 
 CX generates the complete `.github/workflows/` directory with staging and production workflows, environment protection rules, and notification hooks.
 
 ## Zero-Downtime Deployments
 
-The hardest part of deployment automation isn't writing the script — it's handling the edge cases. What if the health check fails? What if the database migration takes too long? CX handles these patterns:
+The hardest part of deployment automation isn't writing the script, it's handling the edge cases. What if the health check fails? What if the database migration takes too long? CX handles these patterns:
 
 ```bash
-cx "deploy my Dockerized app with blue-green strategy — health check every 10s, auto-rollback if health check fails 3 times, keep old container running until new one is healthy"
+cx "deploy my Dockerized app with blue-green strategy, health check every 10s, auto-rollback if health check fails 3 times, keep old container running until new one is healthy"
 ```
 
 ## Incident Response
 
 When something breaks at 3am, you don't want to be googling commands. CX turns incident response into a guided workflow:
 
-<CxDemo command='cx "nginx is returning 502 errors — diagnose and fix"' output="→ Checking nginx status: active (running)
-→ Checking upstream: port 3000 — REFUSED
+<CxDemo command='cx "nginx is returning 502 errors, diagnose and fix"' output="→ Checking nginx status: active (running)
+→ Checking upstream: port 3000, REFUSED
 → Checking PM2: app process STOPPED (crashed)
 → Checking logs: Out of memory error at 02:47
 → Recommended: restart app + increase Node.js heap limit
 3 commands ready" />
 
-CX reads the system state, traces the error chain, and presents you with a root-cause diagnosis and a fix — not a list of commands to try.
+CX reads the system state, traces the error chain, and presents you with a root-cause diagnosis and a fix, not a list of commands to try.
 
 ## Infrastructure Auditing
 
 Security audits and compliance checks are tedious when done manually. CX automates the investigation:
 
 ```bash
-cx "audit this server for CIS Benchmark Level 1 compliance — list all failures and generate remediation commands"
+cx "audit this server for CIS Benchmark Level 1 compliance, list all failures and generate remediation commands"
 ```
 
 ```bash
-cx "find all world-writable files, SUID binaries not in the expected set, and listening ports that shouldn't be open — report with risk level"
+cx "find all world-writable files, SUID binaries not in the expected set, and listening ports that shouldn't be open, report with risk level"
 ```
 
 ## Fleet Management with CX Pro
 
-CX Pro and Team plans include fleet management — run operations across multiple servers with a single command:
+CX Pro and Team plans include fleet management, run operations across multiple servers with a single command:
 
 ```bash
 # Apply security patches to all staging servers
@@ -87,7 +87,7 @@ Fleet commands go through the same preview + approval flow as single-server comm
 
 ## Integrating CX into Your Existing Stack
 
-CX isn't a replacement for Terraform, Ansible, or Kubernetes. It's a complement — an AI layer that handles the ad-hoc operations and day-two maintenance that automation tools aren't designed for.
+CX isn't a replacement for Terraform, Ansible, or Kubernetes. It's a complement, an AI layer that handles the ad-hoc operations and day-two maintenance that automation tools aren't designed for.
 
 Think of it as the difference between infrastructure-as-code (declarative, reproducible) and operations-as-intent (imperative, adaptive). Both are necessary.
 

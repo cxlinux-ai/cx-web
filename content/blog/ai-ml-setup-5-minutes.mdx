@@ -9,7 +9,7 @@ featured: false
 ogImage: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1200&h=630&q=80"
 ---
 
-Setting up a machine learning development environment on Linux is notoriously painful. CUDA version conflicts. Python environment hell. Driver mismatches that take half a day to diagnose. CX Linux was partially designed with AI engineers in mind — here's how to go from a fresh Ubuntu machine to a fully operational ML stack.
+Setting up a machine learning development environment on Linux is notoriously painful. CUDA version conflicts. Python environment hell. Driver mismatches that take half a day to diagnose. CX Linux was partially designed with AI engineers in mind, here's how to go from a fresh Ubuntu machine to a fully operational ML stack.
 
 ## Detect Your Hardware First
 
@@ -23,7 +23,7 @@ GPU: NVIDIA RTX 4090 (24GB VRAM)
   → Recommended CUDA: 12.3
 Storage: 2TB NVMe SSD" />
 
-This matters because CX will install the exact CUDA version compatible with your GPU — not the latest, not a generic recommendation.
+This matters because CX will install the exact CUDA version compatible with your GPU, not the latest, not a generic recommendation.
 
 ## Full ML Stack in One Command
 
@@ -46,7 +46,7 @@ CX resolves all version dependencies automatically. If there's a conflict betwee
 With CX, you can run large language models locally without reading the Ollama docs:
 
 ```bash
-cx "install Ollama and pull Mistral 7B, Llama 3 8B, and Code Llama 13B — configure to start on boot and expose the API on localhost:11434"
+cx "install Ollama and pull Mistral 7B, Llama 3 8B, and Code Llama 13B, configure to start on boot and expose the API on localhost:11434"
 ```
 
 ```bash
@@ -55,7 +55,7 @@ cx "test my Ollama installation with a quick inference benchmark"
 ```
 
 <Callout type="tip">
-CX Linux itself uses Ollama under the hood for local mode. Once you've set up Ollama, you can switch CX to local mode with `cx config set llm.provider local` and all CX operations will run through your local GPU — zero API costs.
+CX Linux itself uses Ollama under the hood for local mode. Once you've set up Ollama, you can switch CX to local mode with `cx config set llm.provider local` and all CX operations will run through your local GPU, zero API costs.
 </Callout>
 
 ## Python Environment Management
@@ -63,17 +63,17 @@ CX Linux itself uses Ollama under the hood for local mode. Once you've set up Ol
 CX handles the Python environment complexity that trips up most developers:
 
 ```bash
-cx "create a clean Python 3.11 virtual environment for my stable-diffusion project — install all requirements from requirements.txt, resolving any conflicts"
+cx "create a clean Python 3.11 virtual environment for my stable-diffusion project, install all requirements from requirements.txt, resolving any conflicts"
 ```
 
 ```bash
-cx "my Python environment is broken — diagnose and rebuild it without losing my installed packages"
+cx "my Python environment is broken, diagnose and rebuild it without losing my installed packages"
 ```
 
 ## GPU Monitoring and Optimization
 
 ```bash
-cx "set up GPU monitoring: show me a live dashboard of GPU utilization, VRAM usage, temperature, and power draw — alert if temperature exceeds 85°C"
+cx "set up GPU monitoring: show me a live dashboard of GPU utilization, VRAM usage, temperature, and power draw, alert if temperature exceeds 85°C"
 ```
 
 CX installs `nvtop` or `gpustat` based on your preference and configures alerting with your chosen notification method.
@@ -81,7 +81,7 @@ CX installs `nvtop` or `gpustat` based on your preference and configures alertin
 ## Running a Fine-Tuning Job
 
 ```bash
-cx "set up LoRA fine-tuning for Llama 3 8B using my dataset in ./data/train.jsonl — 4-bit quantization, gradient checkpointing, save checkpoint every 500 steps"
+cx "set up LoRA fine-tuning for Llama 3 8B using my dataset in ./data/train.jsonl, 4-bit quantization, gradient checkpointing, save checkpoint every 500 steps"
 ```
 
 CX generates the training script with the correct hyperparameters for your GPU's VRAM budget, configures distributed training if you have multiple GPUs, and sets up checkpoint saving.
@@ -96,7 +96,7 @@ cx "deploy my PyTorch model from ./models/best.pt as a FastAPI endpoint on port 
 
 ## Why CX Matters for AI Engineers
 
-The dirty secret of AI engineering is that most of the time isn't spent on model architecture — it's spent on environment setup, debugging CUDA errors, and managing dependencies. CX eliminates that overhead.
+The dirty secret of AI engineering is that most of the time isn't spent on model architecture, it's spent on environment setup, debugging CUDA errors, and managing dependencies. CX eliminates that overhead.
 
 You ship models. Not environment configs.
 

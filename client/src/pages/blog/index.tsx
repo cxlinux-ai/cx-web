@@ -101,7 +101,7 @@ export default function BlogIndex() {
             />
           </div>
 
-          {/* Tags — top 8 only to prevent overflow */}
+          {/* Tags, top 8 only to prevent overflow */}
           <div className="flex flex-wrap gap-2">
             <Link href="/blog">
               <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${!activeTag ? "bg-[#00FF9F] text-black border-[#00FF9F] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#00FF9F]/40 hover:text-white"}`}>

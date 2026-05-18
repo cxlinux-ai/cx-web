@@ -391,7 +391,7 @@ export default function AdminPanel() {
       });
       const json = await res.json();
       if (json.success) {
-        setAddMessage(`Created founding affiliate — Code: ${json.referral_code}`);
+        setAddMessage(`Created founding affiliate, Code: ${json.referral_code}`);
         setAddEmail("");
         setAddName("");
         fetchReferrals();
@@ -1195,7 +1195,7 @@ function AffiliatesTab({
               {filteredReferrers.map((r) => (
                 <tr key={r.referral_code} className="border-b border-white/5 hover:bg-white/[0.03] transition-colors">
                   <td className="p-3">
-                    <div className="font-medium text-white">{r.name || "—"}</div>
+                    <div className="font-medium text-white">{r.name || ","}</div>
                     <div className="text-xs text-gray-500">{r.email}</div>
                   </td>
                   <td className="p-3">

@@ -23,7 +23,6 @@ import {
   Loader2,
   ArrowRight,
   Sparkles,
-  AlertTriangle,
   X,
   MessageCircle,
   Github,
@@ -40,7 +39,7 @@ import { RotatingBorderCard } from "@/components/RotatingBorderCard";
 // ============================================
 
 // ============================================
-// Try Panel — Interactive CX Demo (3 commands/IP/day)
+// Try Panel, Interactive CX Demo (3 commands/IP/day)
 // ============================================
 const DEMO_RESPONSES: Record<string, { commands: string[]; explanation: string }> = {
   "set up nginx reverse proxy for port 3000": {
@@ -170,7 +169,7 @@ function TryPanel() {
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-xs text-gray-500 ml-2 font-mono">cx — try it live</span>
+          <span className="text-xs text-gray-500 ml-2 font-mono">cx, try it live</span>
           <div className="ml-auto flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-[#00FF9F]" />
             <span className="text-xs text-gray-500">{remaining} tries left today</span>
@@ -201,7 +200,7 @@ function TryPanel() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRun()}
-              placeholder={remaining > 0 ? '"describe what you want to do..."' : "Daily limit reached — install CX for unlimited use"}
+              placeholder={remaining > 0 ? '"describe what you want to do..."' : "Daily limit reached, install CX for unlimited use"}
               disabled={isRunning || remaining <= 0}
               className="flex-1 bg-transparent text-white text-sm font-mono placeholder:text-gray-600 outline-none disabled:opacity-50"
             />
@@ -284,9 +283,9 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
-      {/* Hero Section — WIFM: User outcome first */}
+      {/* Hero Section, WIFM: User outcome first */}
       <section className="relative min-h-[600px] flex flex-col justify-center px-4 py-16 md:py-24 overflow-hidden">
-        {/* Real photo: dark server room (Unsplash — Taylor Vick) */}
+        {/* Real photo: dark server room (Unsplash, Taylor Vick) */}
         <div className="pointer-events-none absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2000&q=80"
@@ -312,26 +311,27 @@ export default function HomePage() {
             <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">Preview · Approve · Rollback</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Run any command. On any Linux box.
+            Stop Googling Linux Commands.
             <br />
-            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">In plain English.</span>
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Just Tell CX What You Need.</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
-            The AI command-line copilot for engineers who'd rather ship than read man-pages —
-            with preview, rollback, and audit on every step.
+            Set up servers, configure firewalls, deploy apps, in plain English.
+            <br className="hidden md:block" />
+            CX handles the commands. You stay in control.
           </p>
           <p className="text-sm text-gray-500 mb-8">
             Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.
           </p>
 
-          {/* Try It Now — Interactive Demo */}
+          {/* Try It Now, Interactive Demo */}
           <TryPanel />
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link href="/getting-started">
               <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-8 py-3 text-base">
-                Install in 60s — free <ArrowRight className="w-4 h-4 ml-2" />
+                Install in 60s, free <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Link href="/pricing">
@@ -341,7 +341,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Trust strip — only verifiable facts (Discord, source-available, version, GitHub) */}
+          {/* Trust strip, only verifiable facts (Discord, source-available, version, GitHub) */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
             <a
               href="https://discord.gg/7K6TR7qtS"
@@ -389,7 +389,7 @@ export default function HomePage() {
 
         {/* 42 / 58 asymmetric split */}
         <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
-          {/* Left — 42% */}
+          {/* Left, 42% */}
           <div className="w-full md:w-[42%] order-2 md:order-1 flex-shrink-0">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-6 rounded-md bg-[#00FF9F]/[0.08] border border-[#00FF9F]/20">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]" />
@@ -401,11 +401,11 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Every server.</span>
             </h2>
             <p className="text-[#9CA3AF] text-base mb-7 leading-relaxed max-w-sm">
-              Patch, configure, and audit your entire fleet in a single command — every distro, every region, at once.
+              Patch, configure, and audit your entire fleet in a single command, every distro, every region, at once.
             </p>
             <ul className="space-y-4 mb-8">
               {[
-                "Ubuntu, Debian, RHEL, Arch — anything you SSH into",
+                "Ubuntu, Debian, RHEL, Arch, anything you SSH into",
                 "Encrypted preview before anything touches your boxes",
                 "Atomic rollback across the fleet if a deploy fails",
               ].map((item, i) => (
@@ -421,12 +421,12 @@ export default function HomePage() {
               <Button
                 className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-5 py-2.5 text-sm h-auto"
               >
-                Install in 60s — free <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                Install in 60s, free <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
               </Button>
             </Link>
           </div>
 
-          {/* Right — 58% */}
+          {/* Right, 58% */}
           <div className="w-full md:w-[58%] order-1 md:order-2">
             <FleetMetricsPanel />
           </div>
@@ -441,7 +441,7 @@ export default function HomePage() {
               How It{" "}
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Works</span>
             </h2>
-            <p className="text-gray-500">From English to executed — in seconds.</p>
+            <p className="text-gray-500">From English to executed, in seconds.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 relative">
             <div className="hidden md:block absolute top-[4.5rem] left-[calc(33.33%+1.25rem)] right-[calc(33.33%+1.25rem)] h-px bg-gradient-to-r from-[#00FF9F]/20 via-[#00FF9F]/50 to-[#00FF9F]/20" />
@@ -496,7 +496,7 @@ export default function HomePage() {
 
       {/* Section 1: Admin Math */}
       <section className="relative py-20 px-4 bg-[#161616] overflow-hidden">
-        {/* Real photo: server rack with green lights (Unsplash — Massimo Botturi) */}
+        {/* Real photo: server rack with green lights (Unsplash, Massimo Botturi) */}
         <div className="pointer-events-none absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1614064642639-e398cf05badb?auto=format&fit=crop&w=2000&q=80"
@@ -543,7 +543,7 @@ export default function HomePage() {
               </div>
               <Link href="/getting-started">
                 <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold">
-                  Install in 60s — free <ChevronRight className="w-4 h-4 ml-1" />
+                  Install in 60s, free <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
             </div>
@@ -551,7 +551,7 @@ export default function HomePage() {
             {/* Right: real photo of developer workstation */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[4/5]">
-                {/* Real photo: developer at multi-monitor setup (Unsplash — Luca Bravo) */}
+                {/* Real photo: developer at multi-monitor setup (Unsplash, Luca Bravo) */}
                 <img
                   src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=85"
                   alt="Developer running CX across a server fleet"
@@ -604,56 +604,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pain Story — felt-cost of the status quo */}
-      <section className="relative py-20 px-4 overflow-hidden border-t border-white/[0.05]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(239,68,68,0.05)_0%,transparent_70%)]" />
-        </div>
-        <div className="relative max-w-3xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-5 rounded-full bg-red-500/10 border border-red-500/20">
-              <AlertTriangle className="w-3 h-3 text-red-400" />
-              <span className="text-[11px] uppercase tracking-widest font-semibold text-red-400">The 2am tax</span>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold leading-tight">
-              You already know this story.
-            </h2>
-          </div>
-
-          <div className="bg-[#0D0D0D]/80 border border-white/[0.08] rounded-2xl p-6 md:p-10 space-y-5">
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-              It's 11:47pm. An nginx config is half-broken across 14 boxes.
-              You know what you need — <span className="text-[#00FF9F] font-mono text-sm">proxy_pass</span>, reload, verify.
-            </p>
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-              You also know one typo means a production-down at 2am.
-              So you do what everyone does: open three tabs, paste into ChatGPT, copy back, hope.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-3">
-              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10">
-                <div className="text-red-400 text-2xl font-bold tabular-nums">14</div>
-                <div className="text-gray-500 text-xs mt-1">tabs open</div>
-              </div>
-              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10">
-                <div className="text-red-400 text-2xl font-bold tabular-nums">3</div>
-                <div className="text-gray-500 text-xs mt-1">syntax cheatsheets</div>
-              </div>
-              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10 col-span-2 md:col-span-1">
-                <div className="text-red-400 text-2xl font-bold tabular-nums">1</div>
-                <div className="text-gray-500 text-xs mt-1">typo away from outage</div>
-              </div>
-            </div>
-            <div className="pt-4 border-t border-white/[0.06] flex items-start gap-3">
-              <Check className="w-5 h-5 text-[#00FF9F] flex-shrink-0 mt-0.5" />
-              <p className="text-gray-300 text-base leading-relaxed">
-                CX was built to delete that loop. Describe what you want, see exactly what will run, approve once, rollback if needed.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison — how CX stacks up vs. the obvious alternatives */}
+      {/* Comparison, how CX stacks up vs. the obvious alternatives */}
       <section className="py-20 px-4 bg-[#0A0A0A] border-t border-white/[0.05]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -667,7 +618,7 @@ export default function HomePage() {
               CX is built for production.
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto text-sm">
-              We're not the only AI in the terminal — just the only one designed for fleets, with preview-and-rollback as first-class citizens.
+              We're not the only AI in the terminal, just the only one designed for fleets, with preview-and-rollback as first-class citizens.
             </p>
           </div>
 
@@ -731,14 +682,14 @@ export default function HomePage() {
             </table>
           </div>
           <p className="text-xs text-gray-600 text-center mt-6">
-            Comparison based on each tool's publicly documented features as of {new Date().getFullYear()}. We respect what other teams have built — these aren't the same product.
+            Comparison based on each tool's publicly documented features as of {new Date().getFullYear()}. We respect what other teams have built, these aren't the same product.
           </p>
         </div>
       </section>
 
       {/* Section 2: Security */}
       <section className="relative py-20 px-4 overflow-hidden">
-        {/* Real photo: cybersecurity / circuit board (Unsplash — Michael Dziedzic) */}
+        {/* Real photo: cybersecurity / circuit board (Unsplash, Michael Dziedzic) */}
         <div className="pointer-events-none absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80"
@@ -751,7 +702,7 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left: real photo — padlock on binary code (Unsplash — FLY:D) */}
+            {/* Left: real photo, padlock on binary code (Unsplash, FLY:D) */}
             <div className="order-2 md:order-1 relative">
               <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[4/5]">
                 <img
@@ -804,12 +755,12 @@ export default function HomePage() {
               </h2>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Every command runs in a sandbox, previewed before execution, rollback-ready,
-                and fully audited — so your auditors and your blast radius both stay small.
+                and fully audited, so your auditors and your blast radius both stay small.
               </p>
 
               <div className="space-y-3 mb-8">
                 {[
-                  { icon: Lock, title: "Firejail Sandboxing", desc: "Every command runs in an isolated execution environment — never touching what it shouldn't." },
+                  { icon: Lock, title: "Firejail Sandboxing", desc: "Every command runs in an isolated execution environment, never touching what it shouldn't." },
                   { icon: Eye, title: "Preview Before Execute", desc: "See the full command list before anything runs. No surprises, no accidents." },
                   { icon: Undo2, title: "Atomic Rollbacks", desc: "Made a mistake? Undo any change instantly with a single keystroke." },
                   { icon: FileText, title: "Full Audit Logs", desc: "Complete command history with timestamps, user, and output for every action." },
@@ -834,7 +785,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Risk reversal — the CX Promise */}
+          {/* Risk reversal, the CX Promise */}
           <div className="mt-16 relative overflow-hidden rounded-2xl border border-[#00FF9F]/25 bg-gradient-to-br from-[#00FF9F]/[0.06] via-[#0D0D0D]/80 to-[#0D0D0D]/80 p-6 md:p-8">
             <div className="absolute -top-12 -right-12 w-48 h-48 bg-[radial-gradient(ellipse_at_center,rgba(0,255,159,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
             <div className="relative flex flex-col md:flex-row gap-6 items-start md:items-center">
@@ -845,7 +796,7 @@ export default function HomePage() {
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The CX Promise</h3>
                 <p className="text-gray-300 leading-relaxed">
                   CX will never run a command without your explicit approval. Every action is sandboxed, previewed, and reversible.
-                  If our cloud-powered Pro plan doesn't save you time in your first 14 days, we'll refund every dollar — and you keep using Core free, forever.
+                  If our cloud-powered Pro plan doesn't save you time in your first 14 days, we'll refund every dollar.
                 </p>
               </div>
             </div>
@@ -866,7 +817,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00FF9F]/[0.06] border border-[#00FF9F]/20">
               <Clock className="w-3 h-3 text-[#00FF9F]" />
               <span className="text-xs text-gray-300">
-                <span className="font-semibold text-[#00FF9F]">Beta pricing locked</span> through public launch — annual plans rate-lock for 12 months.
+                <span className="font-semibold text-[#00FF9F]">Beta pricing locked</span> through public launch, annual plans rate-lock for 12 months.
               </span>
             </div>
           </div>
@@ -896,66 +847,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ — answers the top objections cold traffic actually has */}
-      <section className="py-20 px-4 border-t border-white/[0.05]">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-3 block">
-              Common questions
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Before you install,{" "}
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">the answers</span>.
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {[
-              {
-                q: "Can CX run a destructive command by accident?",
-                a: "No. Every command CX generates is shown to you in a preview before anything executes. Nothing runs without your explicit approval, and every action is reversible via atomic rollback. Execution itself is sandboxed with Firejail.",
-              },
-              {
-                q: "Is my server data sent to the cloud?",
-                a: "On CX Core (free), no — the local Mistral 7B model runs entirely on your machine. On Pro, you opt into cloud frontier models (GPT-5, Claude Sonnet 4.6) for higher-quality command generation. You can switch between local and cloud per-command.",
-              },
-              {
-                q: "Which Linux distros does CX actually support?",
-                a: "Ubuntu, Debian, RHEL/Fedora/CentOS, and Arch are first-class. The CLI ships as a single static binary with no runtime dependencies, so most other distros work too. Test it free on any box you SSH into.",
-              },
-              {
-                q: "How is CX different from ChatGPT or GitHub Copilot CLI?",
-                a: "Three things: (1) CX runs across an entire fleet from one prompt — Copilot CLI and ChatGPT are single-shell. (2) CX previews and rolls back; the others copy-paste and pray. (3) CX has a fully-local mode — your commands never leave your box if you don't want them to.",
-              },
-              {
-                q: "What happens to my workflows if I cancel?",
-                a: "Nothing. CX Core is free forever and source-available under BSL 1.1 (converts to Apache 2.0 in 2032). Cancel Pro any time and the CLI keeps working — you only lose the cloud frontier models and team features.",
-              },
-            ].map((item, i) => (
-              <details
-                key={i}
-                className="group bg-[#0D0D0D]/60 border border-white/[0.08] rounded-xl overflow-hidden hover:border-[#00FF9F]/25 transition-colors"
-              >
-                <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 select-none">
-                  <span className="text-white text-sm md:text-base font-medium pr-2">{item.q}</span>
-                  <ChevronDown className="w-4 h-4 text-gray-500 flex-shrink-0 group-open:rotate-180 transition-transform" />
-                </summary>
-                <div className="px-5 pb-5 text-gray-400 text-sm leading-relaxed">{item.a}</div>
-              </details>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Link href="/faq">
-              <a className="text-sm text-gray-500 hover:text-[#00FF9F] transition-colors">
-                See all questions <ArrowRight className="w-3.5 h-3.5 ml-1 inline-block" />
-              </a>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA — split-card design with animated border, copyable install command, and trust bar */}
+      {/* Final CTA, split-card design with animated border, copyable install command, and trust bar */}
       <section className="relative py-24 px-4 overflow-hidden bg-[#1E1E1E]">
         <div className="max-w-6xl mx-auto">
           <RotatingBorderCard patternId="homeFinalCtaGrid" innerClassName="px-6 sm:px-10 md:px-14 py-14 md:py-16">
@@ -1051,7 +943,7 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    {/* Why is curl | sh safe? — addresses the biggest install anxiety */}
+                    {/* Why is curl | sh safe?, addresses the biggest install anxiety */}
                     <details className="group pt-2 -mx-1">
                       <summary className="cursor-pointer flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#00FF9F] transition-colors select-none">
                         <ChevronDown className="w-3 h-3 group-open:rotate-180 transition-transform" />
@@ -1075,12 +967,12 @@ export default function HomePage() {
 
       <Footer />
 
-      {/* Mobile-only sticky CTA — primary action always reachable on small screens */}
+      {/* Mobile-only sticky CTA, primary action always reachable on small screens */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80 backdrop-blur-md border-t border-[#00FF9F]/20">
         <div className="px-4 py-3">
           <Link href="/getting-started">
             <a className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]">
-              Install in 60s — free
+              Install in 60s, free
               <ArrowRight className="w-4 h-4" />
             </a>
           </Link>

@@ -10,7 +10,7 @@ interface RotatingBorderCardProps {
   children: ReactNode;
   /** Tailwind classes applied to the inner panel (padding, text alignment, etc.) */
   innerClassName?: string;
-  /** Unique id for the SVG dot-pattern — required so multiple cards on a page don't collide */
+  /** Unique id for the SVG dot-pattern, required so multiple cards on a page don't collide */
   patternId: string;
   /** Enable the subtle 3D mouse-tilt. Defaults to true. */
   tilt?: boolean;
@@ -26,7 +26,7 @@ interface RotatingBorderCardProps {
  *   2. Animated conic-gradient border (slow rotation)
  *   3. Dark inner panel with top/bottom inset highlights (glass edge)
  *   4. Top and bottom-right radial glows + dot-grid pattern
- *   5. Optional very-subtle 3D tilt — perspective parent + heavily-damped rotation
+ *   5. Optional very-subtle 3D tilt, perspective parent + heavily-damped rotation
  */
 export function RotatingBorderCard({
   children,
@@ -38,7 +38,7 @@ export function RotatingBorderCard({
   const mouseX = useMotionValue(0); // -1..1
   const mouseY = useMotionValue(0);
 
-  // Very subtle 3D rotation — max ~0.8° each axis, heavily damped
+  // Very subtle 3D rotation, max ~0.8° each axis, heavily damped
   const rotX = useSpring(useTransform(mouseY, [-1, 1], [0.8, -0.8]), {
     stiffness: 80,
     damping: 30,
@@ -86,7 +86,7 @@ export function RotatingBorderCard({
           }}
         />
 
-        {/* Dark inner panel — glass edges via top highlight + bottom inset */}
+        {/* Dark inner panel, glass edges via top highlight + bottom inset */}
         <div
           className={`relative bg-gradient-to-b from-[#0C1210] via-[#0B100D] to-[#080C0A] rounded-[26px] overflow-hidden shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-1px_0_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] ${innerClassName}`}
         >
@@ -112,7 +112,7 @@ export function RotatingBorderCard({
             </svg>
           </div>
 
-          {/* Content — lifted slightly on Z so the tilt feels parallaxed */}
+          {/* Content, lifted slightly on Z so the tilt feels parallaxed */}
           <div className="relative" style={{ transform: "translateZ(20px)" }}>
             {children}
           </div>

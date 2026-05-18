@@ -61,11 +61,11 @@ export default function FAQ() {
         },
         {
           q: "What is CX as an 'AI Layer'?",
-          a: "CX is an intelligent layer that sits between you and Linux, translating your intent into execution:\n\nTraditional Linux: You → Terminal → Commands → OS\nCX: You → Natural Language → AI Layer → Any Linux Operation → OS\n\nThe AI Layer can execute ANY task on Linux:\n• System administration & configuration\n• Automation scripts & cron jobs\n• Security auditing & hardening\n• Performance tuning & optimization\n• Log analysis & troubleshooting\n• Infrastructure management\n• Development environment setup\n• Data processing pipelines\n• Network configuration\n• And literally anything else Linux can do\n\nPackage management is just one of many capabilities. CX doesn't replace Linux—it enhances it with intelligence."
+          a: "CX is an intelligent layer that sits between you and Linux, translating your intent into execution:\n\nTraditional Linux: You → Terminal → Commands → OS\nCX: You → Natural Language → AI Layer → Any Linux Operation → OS\n\nThe AI Layer can execute ANY task on Linux:\n• System administration & configuration\n• Automation scripts & cron jobs\n• Security auditing & hardening\n• Performance tuning & optimization\n• Log analysis & troubleshooting\n• Infrastructure management\n• Development environment setup\n• Data processing pipelines\n• Network configuration\n• And literally anything else Linux can do\n\nPackage management is just one of many capabilities. CX doesn't replace Linux,it enhances it with intelligence."
         },
         {
           q: "Does CX replace Linux or wrap it?",
-          a: "CX wraps Ubuntu 24.04 LTS as an intelligent AI Layer. It's built on standard Linux with unlimited capabilities on top.\n\nWhat this means:\n• All your normal Linux tools still work (apt, vim, git, etc.)\n• You can drop to terminal anytime\n• Existing scripts and tools are compatible\n• You choose when to use CX vs manual commands\n• CX can do ANYTHING you could do manually—just faster\n\nThink of it as having a Linux expert available 24/7 who can execute any task."
+          a: "CX wraps Ubuntu 24.04 LTS as an intelligent AI Layer. It's built on standard Linux with unlimited capabilities on top.\n\nWhat this means:\n• All your normal Linux tools still work (apt, vim, git, etc.)\n• You can drop to terminal anytime\n• Existing scripts and tools are compatible\n• You choose when to use CX vs manual commands\n• CX can do ANYTHING you could do manually,just faster\n\nThink of it as having a Linux expert available 24/7 who can execute any task."
         },
         {
           q: "Do I need to know Linux to use CX?",

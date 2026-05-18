@@ -52,8 +52,8 @@ const featureComparison: ComparisonRow[] = [
   { kind: "row", feature: "On-Premise Deployment", core: false, pro: false, team: false, enterprise: true },
   { kind: "section", label: "Limits & SLA" },
   { kind: "row", feature: "Server Limit", core: "1", pro: "5", team: "25", enterprise: "Unlimited" },
-  { kind: "row", feature: "Cloud Commands / Month", core: "—", pro: "10,000", team: "50,000", enterprise: "Unlimited" },
-  { kind: "row", feature: "SLA", core: "—", pro: "—", team: "99.5%", enterprise: "99.9%" },
+  { kind: "row", feature: "Cloud Commands / Month", core: "·", pro: "10,000", team: "50,000", enterprise: "Unlimited" },
+  { kind: "row", feature: "SLA", core: "·", pro: "·", team: "99.5%", enterprise: "99.9%" },
 ];
 
 const trustBadges = [
@@ -71,7 +71,7 @@ const faqs = [
   },
   {
     q: "Do you offer a free trial on paid plans?",
-    a: "CX Core is free forever — no trial needed. For Pro and Team, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, we'll refund your first payment in full.",
+    a: "CX Core is free forever, no trial needed. For Pro and Team, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, we'll refund your first payment in full.",
   },
   {
     q: "What happens when I exceed my cloud command limit?",
@@ -87,7 +87,7 @@ const faqs = [
   },
   {
     q: "Do you offer discounts for open-source projects or students?",
-    a: "Yes — 50% off Pro for verified open-source maintainers and students with a valid .edu email. Email sales@cxlinux.com with a link to your project or student verification.",
+    a: "Yes, 50% off Pro for verified open-source maintainers and students with a valid .edu email. Email sales@cxlinux.com with a link to your project or student verification.",
   },
 ];
 
@@ -100,7 +100,7 @@ export default function PricingPage() {
 
   return (
     <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-x-hidden">
-      {/* Ambient glow — top centre */}
+      {/* Ambient glow, top centre */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#00FF9F]/[0.05] rounded-full blur-[160px]" />
 
       {/* Referral banner */}
@@ -372,7 +372,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── Enterprise CTA — shared rotating-border shell (matches homepage Final CTA) ── */}
+      {/* ── Enterprise CTA, shared rotating-border shell (matches homepage Final CTA) ── */}
       <section className="pb-24 px-4">
         <div className="max-w-4xl mx-auto">
           <RotatingBorderCard

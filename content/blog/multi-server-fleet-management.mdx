@@ -1,6 +1,6 @@
 ---
 title: "Managing a Multi-Server Fleet with CX Linux"
-description: "How to use CX Linux Pro and Team plans to manage dozens of servers with a single command — patching, auditing, deploying, and monitoring across your entire fleet."
+description: "How to use CX Linux Pro and Team plans to manage dozens of servers with a single command, patching, auditing, deploying, and monitoring across your entire fleet."
 publishedAt: "2026-04-05"
 author: "cx-team"
 tags: ["DevOps", "fleet", "tutorial"]
@@ -47,7 +47,7 @@ The most common fleet operation is applying security updates:
 cx fleet "show pending security patches" --target production
 
 # Apply security patches with rolling restart
-cx fleet "apply all pending security patches — rolling update, 2 servers at a time, health check between batches" --target production
+cx fleet "apply all pending security patches, rolling update, 2 servers at a time, health check between batches" --target production
 ```
 
 CX handles the rolling update logic automatically: patches 2 servers, waits for health checks to pass, patches the next 2, and so on. If health checks fail, the rollout pauses and alerts you.
@@ -63,14 +63,14 @@ Always preview fleet operations before approving. The `--dry-run` flag shows you
 cx fleet "check for: outdated packages with CVEs, world-writable files outside /tmp, listening ports that shouldn't be open, SSH root login enabled"
 
 # Compliance check
-cx fleet "verify all servers meet CIS Benchmark Level 1 — list failures per server"
+cx fleet "verify all servers meet CIS Benchmark Level 1, list failures per server"
 ```
 
 CX aggregates the results into a unified report, grouping findings by severity and server.
 
 ## Configuration Drift Detection
 
-One of the hardest problems in fleet management is configuration drift — servers that were identical when provisioned but have diverged over time.
+One of the hardest problems in fleet management is configuration drift, servers that were identical when provisioned but have diverged over time.
 
 ```bash
 # Find servers that differ from the baseline
@@ -86,7 +86,7 @@ cx fleet diff --baseline server-01.prod.internal --target production
 
 ```bash
 # Deploy new app version with blue-green on all app servers
-cx fleet "deploy app version 2.4.1 from registry.mycompany.com/app:2.4.1 — blue-green deployment, health check /health, auto-rollback if error rate > 1%" --target production --group app
+cx fleet "deploy app version 2.4.1 from registry.mycompany.com/app:2.4.1, blue-green deployment, health check /health, auto-rollback if error rate > 1%" --target production --group app
 ```
 
 CX coordinates the deployment across servers, maintaining a minimum number of healthy instances throughout.
@@ -95,18 +95,18 @@ CX coordinates the deployment across servers, maintaining a minimum number of he
 
 When something goes wrong across your fleet:
 
-<CxDemo command='cx fleet "nginx is reporting 502 errors on some servers — diagnose"' output="Checking 8 production servers...
+<CxDemo command='cx fleet "nginx is reporting 502 errors on some servers, diagnose"' output="Checking 8 production servers...
 
 server-01: OK (nginx healthy, upstream responding)
 server-02: OK  
-server-03: ISSUE — upstream app process stopped (OOM at 14:32)
+server-03: ISSUE, upstream app process stopped (OOM at 14:32)
 server-04: OK
-server-05: ISSUE — upstream app process stopped (OOM at 14:34)
+server-05: ISSUE, upstream app process stopped (OOM at 14:34)
 server-06: OK
 server-07: OK
 server-08: OK
 
-Root cause: Node.js heap limit too low — 2 servers OOM-killed
+Root cause: Node.js heap limit too low, 2 servers OOM-killed
 Recommended: restart app + increase --max-old-space-size to 4096MB" />
 
 CX narrows down the affected servers and identifies the root cause before you've opened a single SSH session.

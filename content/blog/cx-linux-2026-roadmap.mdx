@@ -9,7 +9,7 @@ featured: true
 ogImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80"
 ---
 
-We shipped CX Linux's first public version in late 2025. The response has pushed us to accelerate the roadmap significantly. Here's what we're building in 2026 — and more importantly, *why*.
+We shipped CX Linux's first public version in late 2025. The response has pushed us to accelerate the roadmap significantly. Here's what we're building in 2026, and more importantly, *why*.
 
 ## Where We Are: v0.3
 
@@ -36,7 +36,7 @@ Multi-agent mode is still cloud-only in v0.4. Local multi-agent support is plann
 
 ## v0.4 · Fleet Intelligence
 
-Fleet management in v0.3 is static: you target a group of servers and run a command. v0.4 introduces **fleet intelligence** — CX maintains a live model of your entire infrastructure.
+Fleet management in v0.3 is static: you target a group of servers and run a command. v0.4 introduces **fleet intelligence**, CX maintains a live model of your entire infrastructure.
 
 ```bash
 # Ask questions about your fleet
@@ -49,7 +49,7 @@ This requires a lightweight agent running on each managed server that reports st
 
 ## v0.5 · Native GUI Layer (Q3 2026)
 
-CX has always been CLI-first, and that won't change. But we're building an optional native GUI for teams that need it — particularly for fleet visualization and workflow management.
+CX has always been CLI-first, and that won't change. But we're building an optional native GUI for teams that need it, particularly for fleet visualization and workflow management.
 
 The GUI isn't a web console (we already have that). It's a native Linux application (GTK4/libadwaita) that gives you:
 
@@ -81,17 +81,17 @@ Plugins are TypeScript modules that declare their capabilities, required permiss
 
 The GA release is about stability, not new features. Three things:
 
-1. **API stability** — all CLI commands and plugin APIs are locked until v2
-2. **Compliance certifications** — SOC 2 Type II, completing the enterprise security requirements
-3. **SLA guarantees** — 99.9% uptime for cloud API and fleet coordination service
+1. **API stability**, all CLI commands and plugin APIs are locked until v2
+2. **Compliance certifications**, SOC 2 Type II, completing the enterprise security requirements
+3. **SLA guarantees**, 99.9% uptime for cloud API and fleet coordination service
 
 ## What We're Not Building
 
 Equally important is what's not on the roadmap:
 
-- **A new Linux distribution** — CX runs *on* your distro, it doesn't replace it
-- **A CI/CD platform** — CX complements GitHub Actions/GitLab CI, it doesn't compete
-- **An infrastructure-as-code tool** — Terraform and Pulumi are better at declarative infrastructure
+- **A new Linux distribution**, CX runs *on* your distro, it doesn't replace it
+- **A CI/CD platform**, CX complements GitHub Actions/GitLab CI, it doesn't compete
+- **An infrastructure-as-code tool**, Terraform and Pulumi are better at declarative infrastructure
 
 CX is an operations layer. We're going deep, not wide.
 

@@ -114,7 +114,7 @@ export default function AdminReferrals() {
       });
       const json = await res.json();
       if (json.success) {
-        setAddMessage(`✅ ${json.message} — Code: ${json.referral_code}`);
+        setAddMessage(`✅ ${json.message}, Code: ${json.referral_code}`);
         setAddEmail("");
         setAddName("");
         fetchDashboard();
@@ -319,7 +319,7 @@ export default function AdminReferrals() {
                   {filteredReferrers.map((r) => (
                     <tr key={r.id} className="border-b border-[#222] hover:bg-[#1a1a1a]">
                       <td className="p-3">
-                        <div className="font-medium text-white">{r.name || "—"}</div>
+                        <div className="font-medium text-white">{r.name || ","}</div>
                         <div className="text-xs text-gray-500">{r.email}</div>
                       </td>
                       <td className="p-3">
@@ -551,7 +551,7 @@ export default function AdminReferrals() {
                   </tr>
                   <tr className="border-b border-[#222]">
                     <td className="p-2 text-gray-400">L2 Commission</td>
-                    <td className="p-2 text-gray-500">—</td>
+                    <td className="p-2 text-gray-500">,</td>
                     <td className="p-2 text-[#FFD700]">5%</td>
                   </tr>
                   <tr className="border-b border-[#222]">

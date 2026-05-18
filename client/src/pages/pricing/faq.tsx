@@ -75,7 +75,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "Can I use multiple Cloud LLMs on the Pro plan?",
-        a: "Yes! Pro and higher plans include access to multiple cloud LLMs including GPT-5, Claude Sonnet 4.6, Claude Opus 4.7, and more. You can switch between models based on your task requirements. Usage is included in your subscription — no per-token charges.",
+        a: "Yes! Pro and higher plans include access to multiple cloud LLMs including GPT-5, Claude Sonnet 4.6, Claude Opus 4.7, and more. You can switch between models based on your task requirements. Usage is included in your subscription, no per-token charges.",
       },
       {
         q: "Are there any usage limits?",

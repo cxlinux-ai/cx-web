@@ -126,7 +126,7 @@ export function updateSEO(config: SEOConfig): () => void {
     if (article.section) {
       updateOrCreateMeta('meta[property="article:section"]', 'content', article.section);
     }
-    // article:tag — one per tag (Twitter labels for reading time)
+    // article:tag, one per tag (Twitter labels for reading time)
     if (article.tags) {
       // Remove previously added article:tag elements first
       document.querySelectorAll('meta[property="article:tag"]').forEach((el) => el.remove());

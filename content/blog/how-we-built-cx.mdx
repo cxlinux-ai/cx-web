@@ -1,6 +1,6 @@
 ---
 title: "How We Built CX: Architecture of an AI-Native OS Layer"
-description: "The technical decisions behind CX Linux — from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper."
+description: "The technical decisions behind CX Linux, from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper."
 publishedAt: "2026-04-15"
 author: "cx-team"
 tags: ["engineering", "architecture", "AI"]
@@ -23,7 +23,7 @@ We wanted CX to know all of that before generating a single command.
 
 ## The System Context Layer
 
-The foundation of CX is a system context collector — a lightweight process that maintains a real-time model of the system:
+The foundation of CX is a system context collector, a lightweight process that maintains a real-time model of the system:
 
 - **Package state:** installed packages, versions, available updates
 - **Service state:** running services, their configs, resource usage
@@ -79,7 +79,7 @@ We built multi-provider LLM support from day one for two reasons:
 
 2. **Different operations need different capabilities.** Simple package installs work fine with Mistral 7B. Complex multi-service orchestration benefits from Claude Sonnet 4.6's reasoning. Hybrid mode routes accordingly.
 
-The LLM abstraction layer uses a simple capability rating system — each registered provider declares its ratings for reasoning, code generation, speed, and cost. The hybrid mode router uses these ratings to select the provider for each operation type.
+The LLM abstraction layer uses a simple capability rating system, each registered provider declares its ratings for reasoning, code generation, speed, and cost. The hybrid mode router uses these ratings to select the provider for each operation type.
 
 ## What We'd Do Differently
 

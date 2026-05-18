@@ -70,7 +70,7 @@ export default function GettingStarted() {
             transition={{ duration: 0.55, delay: 0.15 }}
             className="text-[#9CA3AF] text-lg mb-10 leading-relaxed max-w-xl mx-auto"
           >
-            One command installs CX. Then you describe what you want done — patching, configs, deploys, log forensics — and it does it.
+            One command installs CX. Then you describe what you want done, patching, configs, deploys, log forensics, and it does it.
           </motion.p>
 
           {/* Install widget */}
@@ -143,11 +143,11 @@ export default function GettingStarted() {
         </div>
       </section>
 
-      {/* ── Photo strip — devs at work ─────────────────────────── */}
+      {/* ── Photo strip, devs at work ─────────────────────────── */}
       <section className="relative overflow-hidden border-t border-white/[0.05]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-center">
-            {/* Photo — different from homepage */}
+            {/* Photo, different from homepage */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -166,7 +166,7 @@ export default function GettingStarted() {
                 <p className="text-[13px] text-gray-200 leading-snug mb-2">
                   "Replaced a 200-line bash script with one prompt. Friday afternoon I'm back to actual work."
                 </p>
-                <p className="text-[10px] text-gray-500 uppercase tracking-widest">— SRE, Series B startup</p>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest">, SRE, Series B startup</p>
               </div>
             </motion.div>
 
@@ -175,12 +175,12 @@ export default function GettingStarted() {
                 Built for people who already know Linux.
               </h2>
               <p className="text-[#9CA3AF] mb-5 leading-relaxed">
-                CX isn't a chatbot wrapper. It generates real shell commands, shows them to you, and only runs what you approve. You stay in the loop — you just stop typing the boring parts.
+                CX isn't a chatbot wrapper. It generates real shell commands, shows them to you, and only runs what you approve. You stay in the loop, you just stop typing the boring parts.
               </p>
               <ul className="space-y-3 text-sm text-gray-300">
                 <li className="flex items-start gap-3">
                   <span className="w-1 h-1 rounded-full bg-[#00FF9F] mt-2 flex-shrink-0" />
-                  <span>Every command previewed before execution — copy, edit, or reject</span>
+                  <span>Every command previewed before execution, copy, edit, or reject</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-1 h-1 rounded-full bg-[#00FF9F] mt-2 flex-shrink-0" />
@@ -249,7 +249,7 @@ export default function GettingStarted() {
                 Production-safe out of the box.
               </h2>
               <p className="text-[#9CA3AF] mb-7 leading-relaxed">
-                You wouldn't paste a script from a stranger. CX treats every command the same way — sandbox first, preview always, snapshot before, rollback ready.
+                You wouldn't paste a script from a stranger. CX treats every command the same way, sandbox first, preview always, snapshot before, rollback ready.
               </p>
               <div className="space-y-4">
                 {[
@@ -301,7 +301,7 @@ export default function GettingStarted() {
         </div>
       </section>
 
-      {/* ── CTA — shared rotating-border shell (matches homepage Final CTA) ─────────────────────────── */}
+      {/* ── CTA, shared rotating-border shell (matches homepage Final CTA) ─────────────────────────── */}
       <section className="relative py-24 px-4 overflow-hidden border-t border-white/[0.05] bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto">
           <RotatingBorderCard

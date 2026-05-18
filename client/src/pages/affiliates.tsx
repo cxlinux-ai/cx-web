@@ -326,7 +326,7 @@ export default function AffiliatesPage() {
           )}
         </motion.div>
 
-        {/* Features — only show on landing/signup */}
+        {/* Features, only show on landing/signup */}
         {(mode === "landing" || mode === "signup" || mode === "signup-otp" || mode === "signup-success") && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -350,7 +350,7 @@ export default function AffiliatesPage() {
         {/* Main Content */}
         <AnimatePresence mode="wait">
           {/* ============================================ */}
-          {/* LANDING — Choose Sign Up or Login */}
+          {/* LANDING, Choose Sign Up or Login */}
           {/* ============================================ */}
           {mode === "landing" && (
             <motion.div
@@ -389,7 +389,7 @@ export default function AffiliatesPage() {
           )}
 
           {/* ============================================ */}
-          {/* SIGN UP — Name + Email */}
+          {/* SIGN UP, Name + Email */}
           {/* ============================================ */}
           {mode === "signup" && (
             <motion.div
@@ -579,7 +579,7 @@ export default function AffiliatesPage() {
 
               <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-4">
                 <p className="text-xs text-[#00FF9F]">
-                  🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on the Pro plan — tell them!
+                  🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on the Pro plan, tell them!
                 </p>
               </div>
 
@@ -609,7 +609,7 @@ export default function AffiliatesPage() {
           )}
 
           {/* ============================================ */}
-          {/* LOGIN — Email */}
+          {/* LOGIN, Email */}
           {/* ============================================ */}
           {mode === "login" && (
             <motion.div
@@ -827,7 +827,7 @@ export default function AffiliatesPage() {
 
                 <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-3">
                   <p className="text-xs text-[#00FF9F]">
-                    🎁 People who use your link get <strong>3 months free</strong> — mention this when sharing!
+                    🎁 People who use your link get <strong>3 months free</strong>, mention this when sharing!
                   </p>
                 </div>
 
@@ -1041,7 +1041,7 @@ function LeaderboardSection() {
           <p className="text-4xl mb-4">🚀</p>
           <h3 className="text-xl font-semibold mb-2">Be the first on the leaderboard</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto mb-4">
-            {totalAffiliates > 0 ? `${totalAffiliates} affiliates have joined` : "Affiliates are signing up"} — but no one has landed their first referral yet. Share your link and claim the #1 spot.
+            {totalAffiliates > 0 ? `${totalAffiliates} affiliates have joined` : "Affiliates are signing up"}, but no one has landed their first referral yet. Share your link and claim the #1 spot.
           </p>
           <div className="flex items-center justify-center gap-3 text-sm text-gray-500">
             <span className="flex items-center gap-1">🥇 10% commission on every sale</span>

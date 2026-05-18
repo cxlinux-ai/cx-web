@@ -24,7 +24,7 @@ const GITHUB_REPOS = [
 ];
 const EXCLUDED_LOGINS = ["dependabot[bot]", "github-actions[bot]", "Copilot", "claude"];
 
-// Co-founders — photo URLs are placeholders. Drop final image URLs into `photo`.
+// Co-founders, photo URLs are placeholders. Drop final image URLs into `photo`.
 // Leave `photo` as "" to render an initials avatar instead.
 const coFounders = [
   {
@@ -54,14 +54,14 @@ const coFounders = [
 ];
 
 const milestones = [
-  { date: "Aug 2025", event: "Project kicked off — AI-native terminal concept validated" },
+  { date: "Aug 2025", event: "Project kicked off, AI-native terminal concept validated" },
   { date: "Sep 2025", event: "Core architecture: WezTerm fork + Rust AI command engine" },
-  { date: "Oct 2025", event: "Natural language CLI working — cx ask, cx install, cx fix" },
+  { date: "Oct 2025", event: "Natural language CLI working, cx ask, cx install, cx fix" },
   { date: "Nov 2025", event: "License server, Stripe integration, affiliate program" },
-  { date: "Dec 2025", event: "APT repository live — cx-terminal installable via apt" },
-  { date: "Jan 2026", event: "Brand launch: CX Linux — website, docs, community" },
-  { date: "Feb 2026", event: "v0.3.2 released — Quick Blocks, workspace snapshots, security scanning" },
-  { date: "Mar 2026", event: "Public beta — install script, CLI reference, docs site" },
+  { date: "Dec 2025", event: "APT repository live, cx-terminal installable via apt" },
+  { date: "Jan 2026", event: "Brand launch: CX Linux, website, docs, community" },
+  { date: "Feb 2026", event: "v0.3.2 released, Quick Blocks, workspace snapshots, security scanning" },
+  { date: "Mar 2026", event: "Public beta, install script, CLI reference, docs site" },
 ];
 
 const values = [
@@ -78,7 +78,7 @@ const values = [
   {
     icon: Code2,
     title: "Source Available",
-    description: "BSL 1.1 licensed — read, audit, and contribute. Converts to Apache 2.0 in 2032.",
+    description: "BSL 1.1 licensed, read, audit, and contribute. Converts to Apache 2.0 in 2032.",
   },
   {
     icon: Cpu,
@@ -244,12 +244,12 @@ export default function AboutPage() {
                 We believe AI can eliminate this friction.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                CX Linux embeds AI directly into the terminal — not as a chatbot, but as a
+                CX Linux embeds AI directly into the terminal, not as a chatbot, but as a
                 first-class citizen. Type what you want in plain English and CX translates it
                 into the right commands, with safety checks and explanations built in.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed">
-                We're not replacing the terminal. We're making it 10x more accessible — whether
+                We're not replacing the terminal. We're making it 10x more accessible, whether
                 you're a seasoned sysadmin or a developer who just needs to get things done.
               </p>
             </div>
@@ -266,7 +266,7 @@ export default function AboutPage() {
             </span>
             <h2 className="text-3xl font-bold mb-3">Meet the Founders</h2>
             <p className="text-gray-400 max-w-xl mx-auto">
-              Three engineers and operators who got tired of typing the same Linux commands at 2am — and decided to build the tool they wished existed.
+              Three engineers and operators who got tired of typing the same Linux commands at 2am, and decided to build the tool they wished existed.
             </p>
           </div>
 

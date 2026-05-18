@@ -9,13 +9,13 @@ featured: true
 ogImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&h=630&q=80"
 ---
 
-If you've ever spent an afternoon searching Stack Overflow for the right nginx config, or lost an hour to a failed package dependency chain — you know the hidden tax of working with Linux. The commands are powerful. The knowledge required to use them well takes years.
+If you've ever spent an afternoon searching Stack Overflow for the right nginx config, or lost an hour to a failed package dependency chain, you know the hidden tax of working with Linux. The commands are powerful. The knowledge required to use them well takes years.
 
 CX Linux was built to change that equation.
 
 ## What CX Linux Actually Is
 
-CX Linux is not a new distribution. It doesn't replace your OS. It's an **AI layer** — a daemon that runs alongside any Debian or Ubuntu system and intercepts your intent before you ever have to look up a command.
+CX Linux is not a new distribution. It doesn't replace your OS. It's an **AI layer**, a daemon that runs alongside any Debian or Ubuntu system and intercepts your intent before you ever have to look up a command.
 
 You describe what you want. CX figures out how to get there.
 
@@ -25,7 +25,7 @@ You describe what you want. CX figures out how to get there.
 → SSL via Let's Encrypt available
 Commands ready for preview ↓" />
 
-The key difference from every other AI terminal tool: CX operates **at the OS level**. It has full awareness of your hardware, installed packages, running services, active ports, and system configuration. It doesn't generate a generic answer — it generates the exact right answer *for your machine, right now*.
+The key difference from every other AI terminal tool: CX operates **at the OS level**. It has full awareness of your hardware, installed packages, running services, active ports, and system configuration. It doesn't generate a generic answer, it generates the exact right answer *for your machine, right now*.
 
 ## The Three Pillars
 
@@ -35,7 +35,7 @@ Instead of remembering commands, you describe outcomes. CX handles the translati
 
 ### 2. Command Preview + Approval
 
-CX never runs anything without showing you first. Every generated command appears in a diff-style preview. You review, approve, and only then does anything execute. This isn't just a safety feature — it's how you learn. Over time, you internalize the patterns.
+CX never runs anything without showing you first. Every generated command appears in a diff-style preview. You review, approve, and only then does anything execute. This isn't just a safety feature, it's how you learn. Over time, you internalize the patterns.
 
 <Callout type="note">
 CX runs every approved command inside a Firejail container with limited filesystem access, restricted network, and process isolation. Nothing can escape the sandbox.
@@ -43,7 +43,7 @@ CX runs every approved command inside a Firejail container with limited filesyst
 
 ### 3. Instant Rollback
 
-Before any system modification, CX snapshots the affected state. If something goes wrong — or you simply change your mind — one command reverts everything:
+Before any system modification, CX snapshots the affected state. If something goes wrong, or you simply change your mind, one command reverts everything:
 
 ```bash
 cx rollback
@@ -64,7 +64,7 @@ If you've ever felt like Linux makes you work *for it* instead of the other way 
 
 ## How It's Different from a Chatbot or Terminal Wrapper
 
-Other tools generate suggestions. CX generates and executes — with context.
+Other tools generate suggestions. CX generates and executes, with context.
 
 When you ask CX to set up a web server, it checks what's already installed, detects your current nginx config, identifies port conflicts, and produces commands that are guaranteed to work on *your specific system*. It's the difference between a recommendation and a solution.
 

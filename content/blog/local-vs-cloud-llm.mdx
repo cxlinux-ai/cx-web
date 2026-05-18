@@ -1,6 +1,6 @@
 ---
 title: "Local LLMs vs Cloud LLMs in CX: A Practical Guide"
-description: "CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs — privacy, cost, performance, and when to use each — with benchmarks."
+description: "CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs, privacy, cost, performance, and when to use each, with benchmarks."
 publishedAt: "2026-04-01"
 author: "cx-team"
 tags: ["AI", "LLM", "configuration"]
@@ -17,7 +17,7 @@ CX supports three LLM modes, configurable per session or globally:
 
 | Mode | How it works | Best for |
 |---|---|---|
-| `cloud` | Calls Claude Sonnet 4.6 or GPT-5 via API | Most users — easiest setup, best results |
+| `cloud` | Calls Claude Sonnet 4.6 or GPT-5 via API | Most users, easiest setup, best results |
 | `local` | Runs Mistral 7B via Ollama on your GPU | Privacy-sensitive workloads, air-gapped systems |
 | `hybrid` | Uses local for simple commands, cloud for complex reasoning | Cost optimization at scale |
 
@@ -34,11 +34,11 @@ cx --cloud "diagnose this intermittent networking issue"
 
 ## Cloud LLMs: The Default for Good Reason
 
-Cloud mode uses the strongest available models. As of 2026, that means Claude Sonnet 4.6 (or Opus 4.7 on higher tiers) and GPT-5 — models with broad world knowledge, strong reasoning, and excellent code generation.
+Cloud mode uses the strongest available models. As of 2026, that means Claude Sonnet 4.6 (or Opus 4.7 on higher tiers) and GPT-5, models with broad world knowledge, strong reasoning, and excellent code generation.
 
 **Advantages:**
 - State-of-the-art reasoning for complex, multi-step operations
-- No GPU required — works on any machine with internet
+- No GPU required, works on any machine with internet
 - Regular model updates without any action on your part
 - Fastest time to first result for complex commands
 
@@ -48,7 +48,7 @@ Cloud mode uses the strongest available models. As of 2026, that means Claude So
 - Command context is sent to the cloud provider
 
 <Callout type="note">
-CX only sends the relevant context for each command — not your entire filesystem or environment. The exact data sent is shown in the preview before any command executes. Review CX's [privacy policy](/privacy) for full details.
+CX only sends the relevant context for each command, not your entire filesystem or environment. The exact data sent is shown in the preview before any command executes. Review CX's [privacy policy](/privacy) for full details.
 </Callout>
 
 ## Local LLMs: Full Privacy, Zero Cost
@@ -56,7 +56,7 @@ CX only sends the relevant context for each command — not your entire filesyst
 Local mode runs Mistral 7B (or your custom model) entirely on your hardware via Ollama. Nothing leaves your machine.
 
 **Advantages:**
-- Complete data privacy — no external API calls
+- Complete data privacy, no external API calls
 - Zero marginal cost after initial setup
 - Works fully offline and in air-gapped environments
 - Fast for simple, well-scoped commands
@@ -94,7 +94,7 @@ We benchmarked cloud vs local across five common operation types:
 | Complex security audit | ★★★★★ | ★★★☆☆ |
 | Shell script generation | ★★★★★ | ★★★★☆ |
 
-Local mode handles roughly 80% of common operations well. For complex reasoning tasks — diagnosing intermittent issues, multi-system orchestration, security audits — cloud mode produces significantly better results.
+Local mode handles roughly 80% of common operations well. For complex reasoning tasks, diagnosing intermittent issues, multi-system orchestration, security audits, cloud mode produces significantly better results.
 
 ## Hybrid Mode: The Smart Default for Teams
 
@@ -105,7 +105,7 @@ cx config set llm.provider hybrid
 cx config set llm.hybrid.threshold medium  # low | medium | high
 ```
 
-At medium threshold, roughly 60% of operations run locally — reducing API costs significantly while maintaining quality where it matters.
+At medium threshold, roughly 60% of operations run locally, reducing API costs significantly while maintaining quality where it matters.
 
 ## Choosing the Right Configuration
 

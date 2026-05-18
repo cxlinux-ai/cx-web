@@ -585,7 +585,7 @@ export default function AccountPage() {
             <span
               className={`text-xl font-bold ${days < 30 && days > 0 && !isFreePlan ? "text-yellow-400" : "text-white"}`}
             >
-              {!license ? "—" : isFreePlan ? "∞" : days}
+              {!license ? "," : isFreePlan ? "∞" : days}
             </span>
           </motion.div>
         </div>
@@ -759,7 +759,7 @@ export default function AccountPage() {
                 <div>
                   <p className="text-sm text-gray-400">Price</p>
                   <p className="text-white font-medium mt-1">
-                    {license?.price || "—"}
+                    {license?.price || ","}
                   </p>
                 </div>
                 <div>
@@ -769,7 +769,7 @@ export default function AccountPage() {
                       className={`w-2 h-2 rounded-full ${license ? statusColor(license.status, license.expires_at) : "bg-gray-500"}`}
                     />
                     <p className="text-white font-medium">
-                      {!license ? "—" : isFreePlan ? "No Expiry" : formatDate(license.expires_at)}
+                      {!license ? "," : isFreePlan ? "No Expiry" : formatDate(license.expires_at)}
                     </p>
                   </div>
                 </div>
@@ -909,7 +909,7 @@ export default function AccountPage() {
               </div>
 
               <div className="bg-[#00FF9F]/5 border border-[#00FF9F]/20 rounded-lg p-4 text-sm text-gray-300">
-                🎁 People who use your link get 3 months free — mention this
+                🎁 People who use your link get 3 months free, mention this
                 when sharing!
               </div>
             </div>

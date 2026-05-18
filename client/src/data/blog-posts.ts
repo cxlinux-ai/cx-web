@@ -14,9 +14,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "what-is-cx-linux",
     title: "What Is CX Linux? The AI Layer That Changes How You Use Linux",
-    excerpt: "CX Linux is not just another distro — it's an AI layer that sits on top of any Debian/Ubuntu system and lets you control Linux with natural language. Here's how it works and why it matters.",
+    excerpt: "CX Linux is not just another distro, it's an AI layer that sits on top of any Debian/Ubuntu system and lets you control Linux with natural language. Here's how it works and why it matters.",
     content: `
-<p>If you've ever spent hours searching Stack Overflow for the right command, configuring nginx for the tenth time, or debugging a failed deployment — you know the pain. Linux is powerful, but the learning curve is steep.</p>
+<p>If you've ever spent hours searching Stack Overflow for the right command, configuring nginx for the tenth time, or debugging a failed deployment, you know the pain. Linux is powerful, but the learning curve is steep.</p>
 
 <h2>CX Linux: Intent-Based Computing</h2>
 <p>CX Linux introduces a fundamentally new way to interact with your system. Instead of memorizing commands, you simply describe what you want:</p>
@@ -25,7 +25,7 @@ export const blogPosts: BlogPost[] = [
 
 <p>CX analyzes your system state, generates the right commands, shows you a preview, and executes them only after your approval. Every action runs in a sandbox with instant rollback.</p>
 
-<h2>Not a Chatbot — An OS Layer</h2>
+<h2>Not a Chatbot, An OS Layer</h2>
 <p>Unlike terminal wrappers or AI coding tools, CX operates at the OS level. It has full awareness of your hardware, installed packages, running services, and system configuration. This means it can:</p>
 
 <ul>
@@ -50,10 +50,10 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "linux-tasks-30-seconds-with-cx",
-    title: "5 Linux Tasks That Take 30 Minutes — Done in 30 Seconds with CX",
-    excerpt: "Setting up nginx, configuring firewalls, deploying Docker stacks — these routine tasks eat hours. Here's how CX Linux turns each one into a single natural language command.",
+    title: "5 Linux Tasks That Take 30 Minutes, Done in 30 Seconds with CX",
+    excerpt: "Setting up nginx, configuring firewalls, deploying Docker stacks, these routine tasks eat hours. Here's how CX Linux turns each one into a single natural language command.",
     content: `
-<p>Every sysadmin knows the drill. You need to set up a reverse proxy, so you open three browser tabs — one for the nginx docs, one for Stack Overflow, one for that blog post you bookmarked six months ago. Forty-five minutes later, you've got a working config. Maybe.</p>
+<p>Every sysadmin knows the drill. You need to set up a reverse proxy, so you open three browser tabs, one for the nginx docs, one for Stack Overflow, one for that blog post you bookmarked six months ago. Forty-five minutes later, you've got a working config. Maybe.</p>
 
 <p>CX Linux changes this equation entirely. Here are five real tasks that used to take 30+ minutes, now done in under 30 seconds.</p>
 
@@ -67,14 +67,14 @@ export const blogPosts: BlogPost[] = [
 <h2>2. Harden SSH and Configure a Firewall</h2>
 <p><strong>The old way:</strong> Edit sshd_config (hope you don't lock yourself out), install ufw or iptables, figure out which ports to open, test from another machine.</p>
 
-<pre><code>cx "harden SSH — disable root login, use key-only auth, change port to 2222 — and set up ufw allowing only SSH, HTTP, and HTTPS"</code></pre>
+<pre><code>cx "harden SSH, disable root login, use key-only auth, change port to 2222, and set up ufw allowing only SSH, HTTP, and HTTPS"</code></pre>
 
 <p>CX handles the full sequence: backup current config, apply changes, configure firewall rules, verify you won't lose access, and create a rollback point.</p>
 
 <h2>3. Deploy a Full Docker Stack</h2>
 <p><strong>The old way:</strong> Install Docker, write docker-compose.yml, configure volumes, set up networking, figure out environment variables, debug port conflicts.</p>
 
-<pre><code>cx "deploy a production Docker stack with PostgreSQL, Redis, and my app from the Dockerfile in ./app — expose the app on port 443 with Traefik as reverse proxy"</code></pre>
+<pre><code>cx "deploy a production Docker stack with PostgreSQL, Redis, and my app from the Dockerfile in ./app, expose the app on port 443 with Traefik as reverse proxy"</code></pre>
 
 <p>CX generates the compose file, configures Traefik with automatic SSL, sets up persistent volumes, and handles the networking. All previewed before execution.</p>
 
@@ -88,9 +88,9 @@ export const blogPosts: BlogPost[] = [
 <h2>5. Monitor System Health with Alerts</h2>
 <p><strong>The old way:</strong> Install Prometheus, configure exporters, set up Grafana, write alert rules, configure notification channels.</p>
 
-<pre><code>cx "monitor CPU, memory, disk, and my nginx service — alert me via email if CPU > 80%, disk > 90%, or nginx goes down"</code></pre>
+<pre><code>cx "monitor CPU, memory, disk, and my nginx service, alert me via email if CPU > 80%, disk > 90%, or nginx goes down"</code></pre>
 
-<p>CX sets up lightweight monitoring with sensible defaults, configures alerts, and gives you a dashboard — without the complexity of a full observability stack.</p>
+<p>CX sets up lightweight monitoring with sensible defaults, configures alerts, and gives you a dashboard, without the complexity of a full observability stack.</p>
 
 <h2>The Common Thread</h2>
 <p>Every one of these tasks involves the same pattern: research → configure → test → debug → repeat. CX collapses this into describe → review → approve. The AI handles the research and configuration. You keep full control with command preview and instant rollback.</p>
@@ -119,14 +119,14 @@ export const blogPosts: BlogPost[] = [
 <h3>Layer 2: Sandboxed Execution</h3>
 <p>When you approve a command, it runs inside an isolated Firejail container. This means:</p>
 <ul>
-<li>Limited filesystem access — only the directories needed</li>
+<li>Limited filesystem access, only the directories needed</li>
 <li>Restricted network access when not required</li>
 <li>Process isolation from the rest of your system</li>
 <li>Automatic timeout for runaway processes</li>
 </ul>
 
 <h3>Layer 3: Instant Rollback</h3>
-<p>Before any system modification, CX creates a snapshot. If something goes wrong — or you simply change your mind — one command rolls back to the previous state:</p>
+<p>Before any system modification, CX creates a snapshot. If something goes wrong, or you simply change your mind, one command rolls back to the previous state:</p>
 
 <pre><code>cx rollback</code></pre>
 

@@ -2,7 +2,7 @@ import { motion, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 /* =========================================================================
-   FLEET METRICS PANEL — minimal, calm, focused.
+   FLEET METRICS PANEL, minimal, calm, focused.
    ========================================================================= */
 
 type Status = "healthy" | "warning" | "deploying";
@@ -14,7 +14,7 @@ type SrvRow = {
   spark: number[];
 };
 
-/* Realistic server metric profiles — different shapes per workload type.
+/* Realistic server metric profiles, different shapes per workload type.
    Each profile produces 40 samples with characteristic patterns. */
 function genMetric(profile: "api" | "web" | "db" | "worker", endVal: number): number[] {
   const N = 40;
@@ -44,7 +44,7 @@ function genMetric(profile: "api" | "web" | "db" | "worker", endVal: number): nu
       const climb = t * 12;
       v = (endVal - 14) + climb + Math.sin(t * Math.PI * 4) * 2.5 + (rng() - 0.5) * 4;
     } else {
-      // worker: bursty deploy pattern — quiet, then ramping up
+      // worker: bursty deploy pattern, quiet, then ramping up
       if (t < 0.55) v = 12 + (rng() - 0.5) * 6;
       else {
         const ramp = (t - 0.55) / 0.45;
@@ -108,7 +108,7 @@ function smoothPath(pts: number[][]): string {
   return d;
 }
 
-/* ── Real graph — responsive width via ResizeObserver ──────────────────── */
+/* ── Real graph, responsive width via ResizeObserver ──────────────────── */
 function Graph({ vals, color, animate: shouldAnimate, delay = 0 }: { vals: number[]; color: string; animate: boolean; delay?: number }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [W, setW] = useState(200);
@@ -346,7 +346,7 @@ export function FleetMetricsPanel() {
               <div className="w-[10px] h-[10px] rounded-full bg-[#febc2e]" />
               <div className="w-[10px] h-[10px] rounded-full bg-[#28c840]" />
             </div>
-            <span className="text-[11px] text-gray-600 font-mono ml-1.5">cx — fleet</span>
+            <span className="text-[11px] text-gray-600 font-mono ml-1.5">cx, fleet</span>
             <div className="ml-auto flex items-center gap-2">
               <motion.span
                 className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]"
@@ -357,7 +357,7 @@ export function FleetMetricsPanel() {
             </div>
           </div>
 
-          {/* KPIs — just 2 */}
+          {/* KPIs, just 2 */}
           <div className="grid grid-cols-2 border-b border-white/[0.05] divide-x divide-white/[0.05]">
             <div className="px-4 py-3 text-center">
               <div className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Online</div>
