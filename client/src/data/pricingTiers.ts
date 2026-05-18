@@ -40,13 +40,13 @@ export const tiers: PricingTier[] = [
   {
     id: "pro",
     name: "CX Pro",
-    subtitle: "Most popular · Saves 12h/week",
+    subtitle: "Most popular",
     price: 20,
     annualPrice: 200,
     description: "Frontier AI in your terminal. For developers who'd rather ship than read man-pages.",
     features: [
       "Everything in Core",
-      "Frontier cloud models (GPT-4o + Claude 3.5)",
+      "Frontier cloud models (GPT-5 + Claude Sonnet 4.6)",
       "Web console — manage from anywhere",
       "API & webhooks (automate everything)",
       "Email support — replies in under 24h",

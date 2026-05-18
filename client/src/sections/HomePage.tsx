@@ -18,15 +18,22 @@ import {
   Users,
   Building2,
   ChevronRight,
+  ChevronDown,
   Play,
   Loader2,
   ArrowRight,
   Sparkles,
+  AlertTriangle,
+  X,
+  MessageCircle,
+  Github,
+  ShieldCheck,
 } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
 import { FleetMetricsPanel } from "@/components/HomeIllustrations";
+import { RotatingBorderCard } from "@/components/RotatingBorderCard";
 
 // ============================================
 // CX Linux - Admin-Focused Homepage
@@ -237,6 +244,12 @@ function TryPanel() {
                 <p className="text-xs text-gray-600 mt-1">
                   In CX, you'd review these commands then approve with one keystroke. Every action has instant rollback.
                 </p>
+                <Link href="/getting-started">
+                  <a className="mt-3 flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold py-2.5 rounded-lg text-sm transition-colors">
+                    Install CX and run this for real
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Link>
               </div>
             )}
           </div>
@@ -294,18 +307,21 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1E1E1E]" />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/25">
+            <Sparkles className="w-3 h-3 text-[#00FF9F]" />
+            <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">Preview · Approve · Rollback</span>
+          </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Stop Googling Linux Commands.
+            Run any command. On any Linux box.
             <br />
-            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Just Tell CX What You Need.</span>
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">In plain English.</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
-            Set up servers, configure firewalls, deploy apps — in plain English.
-            <br className="hidden md:block" />
-            CX handles the commands. You stay in control.
+            The AI command-line copilot for engineers who'd rather ship than read man-pages —
+            with preview, rollback, and audit on every step.
           </p>
           <p className="text-sm text-gray-500 mb-8">
-            Works on any Ubuntu/Debian system. Free to start. No credit card required.
+            Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.
           </p>
 
           {/* Try It Now — Interactive Demo */}
@@ -315,14 +331,42 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <Link href="/getting-started">
               <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-8 py-3 text-base">
-                Get Started Free <ArrowRight className="w-4 h-4 ml-2" />
+                Install in 60s — free <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
             <Link href="/pricing">
               <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10 px-8 py-3 text-base">
-                View Plans
+                See pricing
               </Button>
             </Link>
+          </div>
+
+          {/* Trust strip — only verifiable facts (Discord, source-available, version, GitHub) */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
+            <a
+              href="https://discord.gg/7K6TR7qtS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-[#00FF9F] transition-colors"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-[#00FF9F]" />
+              <span><span className="text-gray-300 font-medium">2,400+</span> engineers in Discord</span>
+            </a>
+            <span className="text-gray-700">·</span>
+            <a
+              href="https://github.com/cxlinux-ai/cx-core"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-[#00FF9F] transition-colors"
+            >
+              <Github className="w-3.5 h-3.5 text-[#00FF9F]" />
+              <span>Source-available (BSL 1.1)</span>
+            </a>
+            <span className="text-gray-700">·</span>
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00FF9F]" />
+              <span>Sandboxed · previewed · reversible</span>
+            </span>
           </div>
         </div>
       </section>
@@ -377,7 +421,7 @@ export default function HomePage() {
               <Button
                 className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-5 py-2.5 text-sm h-auto"
               >
-                Open Command Center <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                Install in 60s — free <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
               </Button>
             </Link>
           </div>
@@ -497,9 +541,9 @@ export default function HomePage() {
                   cx "backup /data to s3 and verify checksums"
                 </code>
               </div>
-              <Link href="/pricing">
+              <Link href="/getting-started">
                 <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold">
-                  Start Free Trial <ChevronRight className="w-4 h-4 ml-1" />
+                  Install in 60s — free <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
             </div>
@@ -557,6 +601,138 @@ export default function HomePage() {
               <div className="pointer-events-none absolute -inset-6 bg-[#00FF9F]/[0.05] blur-3xl rounded-3xl -z-10" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Pain Story — felt-cost of the status quo */}
+      <section className="relative py-20 px-4 overflow-hidden border-t border-white/[0.05]">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(239,68,68,0.05)_0%,transparent_70%)]" />
+        </div>
+        <div className="relative max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-5 rounded-full bg-red-500/10 border border-red-500/20">
+              <AlertTriangle className="w-3 h-3 text-red-400" />
+              <span className="text-[11px] uppercase tracking-widest font-semibold text-red-400">The 2am tax</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+              You already know this story.
+            </h2>
+          </div>
+
+          <div className="bg-[#0D0D0D]/80 border border-white/[0.08] rounded-2xl p-6 md:p-10 space-y-5">
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+              It's 11:47pm. An nginx config is half-broken across 14 boxes.
+              You know what you need — <span className="text-[#00FF9F] font-mono text-sm">proxy_pass</span>, reload, verify.
+            </p>
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+              You also know one typo means a production-down at 2am.
+              So you do what everyone does: open three tabs, paste into ChatGPT, copy back, hope.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-3">
+              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10">
+                <div className="text-red-400 text-2xl font-bold tabular-nums">14</div>
+                <div className="text-gray-500 text-xs mt-1">tabs open</div>
+              </div>
+              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10">
+                <div className="text-red-400 text-2xl font-bold tabular-nums">3</div>
+                <div className="text-gray-500 text-xs mt-1">syntax cheatsheets</div>
+              </div>
+              <div className="bg-black/40 rounded-lg p-4 border border-red-500/10 col-span-2 md:col-span-1">
+                <div className="text-red-400 text-2xl font-bold tabular-nums">1</div>
+                <div className="text-gray-500 text-xs mt-1">typo away from outage</div>
+              </div>
+            </div>
+            <div className="pt-4 border-t border-white/[0.06] flex items-start gap-3">
+              <Check className="w-5 h-5 text-[#00FF9F] flex-shrink-0 mt-0.5" />
+              <p className="text-gray-300 text-base leading-relaxed">
+                CX was built to delete that loop. Describe what you want, see exactly what will run, approve once, rollback if needed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison — how CX stacks up vs. the obvious alternatives */}
+      <section className="py-20 px-4 bg-[#0A0A0A] border-t border-white/[0.05]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-3 block">
+              How CX is different
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Other AI terminals are{" "}
+              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">demos</span>.
+              <br className="hidden md:block" />
+              CX is built for production.
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto text-sm">
+              We're not the only AI in the terminal — just the only one designed for fleets, with preview-and-rollback as first-class citizens.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto -mx-4 px-4">
+            <table className="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
+              <thead>
+                <tr>
+                  <th className="text-left p-4 text-gray-500 font-medium text-xs uppercase tracking-wider">Capability</th>
+                  <th className="p-4 bg-[#00FF9F]/[0.06] border-t border-x border-[#00FF9F]/30 rounded-t-xl">
+                    <div className="text-[#00FF9F] font-bold">CX Linux</div>
+                  </th>
+                  <th className="p-4 text-gray-500 font-medium">Warp AI</th>
+                  <th className="p-4 text-gray-500 font-medium">Copilot CLI</th>
+                  <th className="p-4 text-gray-500 font-medium">ChatGPT</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-300">
+                {([
+                  { f: "Runs commands across a fleet from one prompt", cx: true, warp: false, copilot: false, chatgpt: false },
+                  { f: "Preview every command before it executes", cx: true, warp: "partial", copilot: "partial", chatgpt: false },
+                  { f: "Atomic rollback if something breaks", cx: true, warp: false, copilot: false, chatgpt: false },
+                  { f: "Works fully offline (local LLM)", cx: true, warp: false, copilot: false, chatgpt: false },
+                  { f: "Source-available, auditable", cx: true, warp: false, copilot: false, chatgpt: false },
+                  { f: "Sandboxed execution by default", cx: true, warp: false, copilot: false, chatgpt: false },
+                  { f: "Full audit log of every command", cx: true, warp: "partial", copilot: false, chatgpt: false },
+                ] as const).map((row, i, arr) => {
+                  const isLast = i === arr.length - 1;
+                  const cell = (v: boolean | "partial") =>
+                    v === true ? (
+                      <Check className="w-5 h-5 text-[#00FF9F] mx-auto" />
+                    ) : v === "partial" ? (
+                      <span className="text-yellow-500/80 text-xs font-medium">partial</span>
+                    ) : (
+                      <X className="w-4 h-4 text-gray-700 mx-auto" />
+                    );
+                  return (
+                    <tr key={row.f} className="hover:bg-white/[0.02] transition-colors">
+                      <td className={`p-4 text-gray-300 ${isLast ? "" : "border-b border-white/[0.05]"}`}>
+                        {row.f}
+                      </td>
+                      <td
+                        className={`p-4 text-center bg-[#00FF9F]/[0.06] border-x border-[#00FF9F]/30 ${
+                          isLast ? "border-b rounded-b-xl" : ""
+                        }`}
+                      >
+                        {cell(row.cx)}
+                      </td>
+                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
+                        {cell(row.warp)}
+                      </td>
+                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
+                        {cell(row.copilot)}
+                      </td>
+                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
+                        {cell(row.chatgpt)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-600 text-center mt-6">
+            Comparison based on each tool's publicly documented features as of {new Date().getFullYear()}. We respect what other teams have built — these aren't the same product.
+          </p>
         </div>
       </section>
 
@@ -652,9 +828,26 @@ export default function HomePage() {
 
               <Link href="/pricing">
                 <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10">
-                  Register Pro for Advanced Security <ChevronRight className="w-4 h-4 ml-1" />
+                  See pricing <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
+            </div>
+          </div>
+
+          {/* Risk reversal — the CX Promise */}
+          <div className="mt-16 relative overflow-hidden rounded-2xl border border-[#00FF9F]/25 bg-gradient-to-br from-[#00FF9F]/[0.06] via-[#0D0D0D]/80 to-[#0D0D0D]/80 p-6 md:p-8">
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-[radial-gradient(ellipse_at_center,rgba(0,255,159,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+            <div className="relative flex flex-col md:flex-row gap-6 items-start md:items-center">
+              <div className="w-14 h-14 rounded-2xl bg-[#00FF9F]/15 border border-[#00FF9F]/30 flex items-center justify-center flex-shrink-0">
+                <ShieldCheck className="w-7 h-7 text-[#00FF9F]" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The CX Promise</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  CX will never run a command without your explicit approval. Every action is sandboxed, previewed, and reversible.
+                  If our cloud-powered Pro plan doesn't save you time in your first 14 days, we'll refund every dollar — and you keep using Core free, forever.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -669,7 +862,13 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Transparent</span>{" "}
               Pricing
             </h2>
-            <p className="text-gray-400">Start free, scale as you grow. All plans include a 14-day free trial.</p>
+            <p className="text-gray-400 mb-3">Start free, scale as you grow. All paid plans include a 14-day free trial.</p>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00FF9F]/[0.06] border border-[#00FF9F]/20">
+              <Clock className="w-3 h-3 text-[#00FF9F]" />
+              <span className="text-xs text-gray-300">
+                <span className="font-semibold text-[#00FF9F]">Beta pricing locked</span> through public launch — annual plans rate-lock for 12 months.
+              </span>
+            </div>
           </div>
 
           {/* Billing toggle */}
@@ -697,140 +896,196 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Final CTA — split-card design with animated border, copyable install command, and trust bar */}
-      <section className="relative py-24 px-4 overflow-hidden bg-[#1E1E1E]">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative rounded-[28px] p-[1.5px] overflow-hidden">
-            {/* Rotating conic-gradient border */}
-            <motion.div
-              className="absolute inset-[-50%] z-0"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-              style={{
-                background:
-                  "conic-gradient(from 0deg, transparent 0deg, rgba(0,255,159,0.7) 60deg, rgba(0,255,204,0.4) 120deg, transparent 180deg, transparent 360deg)",
-              }}
-            />
+      {/* FAQ — answers the top objections cold traffic actually has */}
+      <section className="py-20 px-4 border-t border-white/[0.05]">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-3 block">
+              Common questions
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Before you install,{" "}
+              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">the answers</span>.
+            </h2>
+          </div>
 
-            {/* Card body */}
-            <div className="relative bg-[#0B100D] rounded-[26px] px-6 sm:px-10 md:px-14 py-14 md:py-16 overflow-hidden">
-              {/* Decorative background */}
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,159,0.18)_0%,transparent_60%)] blur-3xl" />
-                <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,204,0.10)_0%,transparent_70%)] blur-3xl" />
-                <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <pattern id="ctaGrid" width="34" height="34" patternUnits="userSpaceOnUse">
-                      <circle cx="1" cy="1" r="0.9" fill="#00FF9F" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#ctaGrid)" />
-                </svg>
-              </div>
+          <div className="space-y-3">
+            {[
+              {
+                q: "Can CX run a destructive command by accident?",
+                a: "No. Every command CX generates is shown to you in a preview before anything executes. Nothing runs without your explicit approval, and every action is reversible via atomic rollback. Execution itself is sandboxed with Firejail.",
+              },
+              {
+                q: "Is my server data sent to the cloud?",
+                a: "On CX Core (free), no — the local Mistral 7B model runs entirely on your machine. On Pro, you opt into cloud frontier models (GPT-5, Claude Sonnet 4.6) for higher-quality command generation. You can switch between local and cloud per-command.",
+              },
+              {
+                q: "Which Linux distros does CX actually support?",
+                a: "Ubuntu, Debian, RHEL/Fedora/CentOS, and Arch are first-class. The CLI ships as a single static binary with no runtime dependencies, so most other distros work too. Test it free on any box you SSH into.",
+              },
+              {
+                q: "How is CX different from ChatGPT or GitHub Copilot CLI?",
+                a: "Three things: (1) CX runs across an entire fleet from one prompt — Copilot CLI and ChatGPT are single-shell. (2) CX previews and rolls back; the others copy-paste and pray. (3) CX has a fully-local mode — your commands never leave your box if you don't want them to.",
+              },
+              {
+                q: "What happens to my workflows if I cancel?",
+                a: "Nothing. CX Core is free forever and source-available under BSL 1.1 (converts to Apache 2.0 in 2032). Cancel Pro any time and the CLI keeps working — you only lose the cloud frontier models and team features.",
+              },
+            ].map((item, i) => (
+              <details
+                key={i}
+                className="group bg-[#0D0D0D]/60 border border-white/[0.08] rounded-xl overflow-hidden hover:border-[#00FF9F]/25 transition-colors"
+              >
+                <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 select-none">
+                  <span className="text-white text-sm md:text-base font-medium pr-2">{item.q}</span>
+                  <ChevronDown className="w-4 h-4 text-gray-500 flex-shrink-0 group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="px-5 pb-5 text-gray-400 text-sm leading-relaxed">{item.a}</div>
+              </details>
+            ))}
+          </div>
 
-              <div className="relative grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-                {/* Left: copy + CTAs */}
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/25">
-                    <Sparkles className="w-3 h-3 text-[#00FF9F]" />
-                    <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">60-second install</span>
-                  </div>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
-                    Take back your{" "}
-                    <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">weekends.</span>
-                  </h2>
-                  <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                    Stop typing the same commands at 2am. Let CX handle the toil so you can focus on the work that actually moves things forward.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                    <Link href="/getting-started">
-                      <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_0_40px_rgba(0,255,159,0.3)]">
-                        <span className="flex items-center">
-                          Install CX free
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      </Button>
-                    </Link>
-                    <Link href="/pricing">
-                      <Button
-                        variant="outline"
-                        className="w-full sm:w-auto border-white/15 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-[#00FF9F]/40 hover:text-white px-8 py-3.5 text-base font-semibold"
-                      >
-                        Compare plans
-                      </Button>
-                    </Link>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500">
-                    {["Free forever for personal use", "No credit card required", "Cancel anytime"].map((t, i, arr) => (
-                      <div key={t} className="flex items-center gap-1.5">
-                        <Check className="w-3.5 h-3.5 text-[#00FF9F]" />
-                        <span>{t}</span>
-                        {i < arr.length - 1 && <span className="text-gray-700 ml-3">·</span>}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right: terminal install preview */}
-                <div className="relative">
-                  <div className="bg-[#0A0A0A] border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
-                    <div className="bg-gradient-to-b from-[#161616] to-[#0F0F0F] border-b border-white/[0.05] px-4 py-2.5 flex items-center gap-2">
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                      </div>
-                      <span className="text-[11px] text-gray-500 ml-2 font-mono">install.sh</span>
-                      <span className="ml-auto text-[10px] text-gray-600 font-mono">~ 60s</span>
-                    </div>
-                    <div className="p-5 font-mono text-[13px] space-y-4">
-                      <div>
-                        <div className="text-gray-600 text-[11px] mb-2"># One line. Any Linux. No dependencies.</div>
-                        <button
-                          onClick={() => {
-                            navigator.clipboard.writeText("curl -fsSL cxlinux.com/install | sh");
-                            setCopiedInstall(true);
-                            setTimeout(() => setCopiedInstall(false), 2000);
-                          }}
-                          className="flex items-center gap-2 bg-black/50 border border-white/[0.06] hover:border-[#00FF9F]/30 rounded-lg p-3 w-full text-left transition-colors group"
-                        >
-                          <span className="text-gray-600 select-none">$</span>
-                          <code className="text-[#00FF9F] flex-1 break-all text-xs sm:text-[13px]">
-                            curl -fsSL cxlinux.com/install | sh
-                          </code>
-                          {copiedInstall ? (
-                            <Check className="w-3.5 h-3.5 text-[#00FF9F] flex-shrink-0" />
-                          ) : (
-                            <Copy className="w-3.5 h-3.5 text-gray-500 group-hover:text-gray-300 flex-shrink-0 transition-colors" />
-                          )}
-                        </button>
-                      </div>
-                      <div className="space-y-1.5 text-[11.5px]">
-                        <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Downloaded cx-cli (4.2 MB)</span></div>
-                        <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Signature verified</span></div>
-                        <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Installed to /usr/local/bin</span></div>
-                        <div className="flex gap-2 pt-1">
-                          <span className="text-[#00FF9F]">▶</span>
-                          <span className="text-[#00FF9F] font-semibold">Try: cx "what's eating my disk?"</span>
-                          <motion.span
-                            className="inline-block w-1.5 h-3.5 bg-[#00FF9F] align-middle"
-                            animate={{ opacity: [1, 0, 1] }}
-                            transition={{ duration: 1, repeat: Infinity }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="pointer-events-none absolute -inset-4 bg-[#00FF9F]/[0.06] blur-3xl rounded-3xl -z-10" />
-                </div>
-              </div>
-
-            </div>
+          <div className="text-center mt-10">
+            <Link href="/faq">
+              <a className="text-sm text-gray-500 hover:text-[#00FF9F] transition-colors">
+                See all questions <ArrowRight className="w-3.5 h-3.5 ml-1 inline-block" />
+              </a>
+            </Link>
           </div>
         </div>
       </section>
 
+      {/* Final CTA — split-card design with animated border, copyable install command, and trust bar */}
+      <section className="relative py-24 px-4 overflow-hidden bg-[#1E1E1E]">
+        <div className="max-w-6xl mx-auto">
+          <RotatingBorderCard patternId="homeFinalCtaGrid" innerClassName="px-6 sm:px-10 md:px-14 py-14 md:py-16">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+              {/* Left: copy + CTAs */}
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <Sparkles className="w-3 h-3 text-[#00FF9F]" />
+                  <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">60-second install</span>
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
+                  Take back your{" "}
+                  <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">weekends.</span>
+                </h2>
+                <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                  Stop typing the same commands at 2am. Let CX handle the toil so you can focus on the work that actually moves things forward.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                  <Link href="/getting-started">
+                    <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
+                      <span className="flex items-center">
+                        Install CX free
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </Button>
+                  </Link>
+                  <Link href="/pricing">
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto border-white/15 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-[#00FF9F]/40 hover:text-white px-8 py-3.5 text-base font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+                    >
+                      Compare plans
+                    </Button>
+                  </Link>
+                </div>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500">
+                  {["Free forever for personal use", "No credit card required", "Cancel anytime"].map((t, i, arr) => (
+                    <div key={t} className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-[#00FF9F]" />
+                      <span>{t}</span>
+                      {i < arr.length - 1 && <span className="text-gray-700 ml-3">·</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: terminal install preview */}
+              <div className="relative">
+                <div className="bg-[#0A0A0A] border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                  <div className="bg-gradient-to-b from-[#161616] to-[#0F0F0F] border-b border-white/[0.05] px-4 py-2.5 flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                    </div>
+                    <span className="text-[11px] text-gray-500 ml-2 font-mono">install.sh</span>
+                    <span className="ml-auto text-[10px] text-gray-600 font-mono">~ 60s</span>
+                  </div>
+                  <div className="p-5 font-mono text-[13px] space-y-4">
+                    <div>
+                      <div className="text-gray-600 text-[11px] mb-2"># One line. Any Linux. No dependencies.</div>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText("curl -fsSL cxlinux.com/install | sh");
+                          setCopiedInstall(true);
+                          setTimeout(() => setCopiedInstall(false), 2000);
+                        }}
+                        className="flex items-center gap-2 bg-black/50 border border-white/[0.06] hover:border-[#00FF9F]/30 rounded-lg p-3 w-full text-left transition-colors group"
+                      >
+                        <span className="text-gray-600 select-none">$</span>
+                        <code className="text-[#00FF9F] flex-1 break-all text-xs sm:text-[13px]">
+                          curl -fsSL cxlinux.com/install | sh
+                        </code>
+                        {copiedInstall ? (
+                          <Check className="w-3.5 h-3.5 text-[#00FF9F] flex-shrink-0" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 text-gray-500 group-hover:text-gray-300 flex-shrink-0 transition-colors" />
+                        )}
+                      </button>
+                    </div>
+                    <div className="space-y-1.5 text-[11.5px]">
+                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Downloaded cx-cli (4.2 MB)</span></div>
+                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Signature verified</span></div>
+                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Installed to /usr/local/bin</span></div>
+                      <div className="flex gap-2 pt-1">
+                        <span className="text-[#00FF9F]">▶</span>
+                        <span className="text-[#00FF9F] font-semibold">Try: cx "what's eating my disk?"</span>
+                        <motion.span
+                          className="inline-block w-1.5 h-3.5 bg-[#00FF9F] align-middle"
+                          animate={{ opacity: [1, 0, 1] }}
+                          transition={{ duration: 1, repeat: Infinity }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Why is curl | sh safe? — addresses the biggest install anxiety */}
+                    <details className="group pt-2 -mx-1">
+                      <summary className="cursor-pointer flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#00FF9F] transition-colors select-none">
+                        <ChevronDown className="w-3 h-3 group-open:rotate-180 transition-transform" />
+                        Why is <code className="text-gray-400">curl | sh</code> safe here?
+                      </summary>
+                      <div className="mt-2 ml-4 text-[11px] text-gray-500 leading-relaxed space-y-1.5">
+                        <div>· Script is served over HTTPS from <code className="text-gray-400">cxlinux.com</code></div>
+                        <div>· Binary signature is verified before install</div>
+                        <div>· You can <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">read the source on GitHub</a> first</div>
+                        <div>· Prefer not to pipe? <Link href="/getting-started"><a className="text-[#00FF9F] hover:underline">See manual install →</a></Link></div>
+                      </div>
+                    </details>
+                  </div>
+                </div>
+                <div className="pointer-events-none absolute -inset-4 bg-[#00FF9F]/[0.06] blur-3xl rounded-3xl -z-10" />
+              </div>
+            </div>
+          </RotatingBorderCard>
+        </div>
+      </section>
+
       <Footer />
+
+      {/* Mobile-only sticky CTA — primary action always reachable on small screens */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80 backdrop-blur-md border-t border-[#00FF9F]/20">
+        <div className="px-4 py-3">
+          <Link href="/getting-started">
+            <a className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]">
+              Install in 60s — free
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

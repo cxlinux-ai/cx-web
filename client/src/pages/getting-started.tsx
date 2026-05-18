@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { RotatingBorderCard, IconPlate } from "@/components/RotatingBorderCard";
 import { Copy, Check, ArrowRight, Lock, Eye, Undo2, Shield } from "lucide-react";
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
@@ -300,51 +301,47 @@ export default function GettingStarted() {
         </div>
       </section>
 
-      {/* ── CTA — no background image ─────────────────────────── */}
-      <section className="relative py-28 px-4 overflow-hidden border-t border-white/[0.05]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_50%,rgba(0,255,159,0.055)_0%,transparent_70%)]" />
-        </div>
-
-        <div className="relative max-w-2xl mx-auto text-center">
-          {/* Glow ring card */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-10 md:p-14"
+      {/* ── CTA — shared rotating-border shell (matches homepage Final CTA) ─────────────────────────── */}
+      <section className="relative py-24 px-4 overflow-hidden border-t border-white/[0.05] bg-[#1E1E1E]">
+        <div className="max-w-4xl mx-auto">
+          <RotatingBorderCard
+            patternId="gsCtaGrid"
+            innerClassName="px-6 sm:px-10 md:px-14 py-14 md:py-16 text-center"
           >
-            <div className="w-12 h-12 rounded-xl bg-[#00FF9F]/10 border border-[#00FF9F]/20 flex items-center justify-center mx-auto mb-6">
-              <ArrowRight className="w-5 h-5 text-[#00FF9F]" />
-            </div>
+            <div className="max-w-xl mx-auto">
+              <div className="mb-6 flex justify-center">
+                <IconPlate>
+                  <ArrowRight className="w-6 h-6" />
+                </IconPlate>
+              </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight text-[#F3F5F7] leading-[1.1]">
-              Your terminal, smarter.
-              <br />
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
-                No subscription required.
-              </span>
-            </h2>
-            <p className="text-[#9CA3AF] mb-8 max-w-sm mx-auto leading-relaxed">
-              Free forever for personal use. Upgrade only if you need cloud AI or fleet management.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Link href="/pricing">
-                <Button className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-6 py-2.5 text-sm h-auto">
-                  See pricing <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                </Button>
-              </Link>
-              <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="outline"
-                  className="border-white/15 text-gray-300 hover:bg-white/[0.04] hover:text-white rounded-[10px] px-6 py-2.5 text-sm h-auto"
-                >
-                  Read the docs
-                </Button>
-              </a>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
+                Your terminal, smarter.
+                <br />
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+                  No subscription required.
+                </span>
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Free forever for personal use. Upgrade only if you need cloud AI or fleet management.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/pricing">
+                  <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
+                    See pricing <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    className="w-full sm:w-auto border-white/15 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-[#00FF9F]/40 hover:text-white px-8 py-3.5 text-base font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+                  >
+                    Read the docs
+                  </Button>
+                </a>
+              </div>
             </div>
-          </motion.div>
+          </RotatingBorderCard>
         </div>
       </section>
 

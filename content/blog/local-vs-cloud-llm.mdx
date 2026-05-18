@@ -9,7 +9,7 @@ featured: false
 ogImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80"
 ---
 
-One of CX Linux's defining features is flexibility in how it thinks. You can route CX's AI reasoning through a cloud API (Claude, GPT-4o, any OpenAI-compatible endpoint) or through a local LLM running on your own hardware. Here's everything you need to know to make the right choice.
+One of CX Linux's defining features is flexibility in how it thinks. You can route CX's AI reasoning through a cloud API (Claude Sonnet 4.6, GPT-5, any OpenAI-compatible endpoint) or through a local LLM running on your own hardware. Here's everything you need to know to make the right choice.
 
 ## The Three Modes
 
@@ -17,7 +17,7 @@ CX supports three LLM modes, configurable per session or globally:
 
 | Mode | How it works | Best for |
 |---|---|---|
-| `cloud` | Calls Claude or GPT-4o via API | Most users — easiest setup, best results |
+| `cloud` | Calls Claude Sonnet 4.6 or GPT-5 via API | Most users — easiest setup, best results |
 | `local` | Runs Mistral 7B via Ollama on your GPU | Privacy-sensitive workloads, air-gapped systems |
 | `hybrid` | Uses local for simple commands, cloud for complex reasoning | Cost optimization at scale |
 
@@ -34,7 +34,7 @@ cx --cloud "diagnose this intermittent networking issue"
 
 ## Cloud LLMs: The Default for Good Reason
 
-Cloud mode uses the strongest available models. As of 2026, that means Claude Sonnet or GPT-4o — models with broad world knowledge, strong reasoning, and excellent code generation.
+Cloud mode uses the strongest available models. As of 2026, that means Claude Sonnet 4.6 (or Opus 4.7 on higher tiers) and GPT-5 — models with broad world knowledge, strong reasoning, and excellent code generation.
 
 **Advantages:**
 - State-of-the-art reasoning for complex, multi-step operations
@@ -67,7 +67,7 @@ Local mode runs Mistral 7B (or your custom model) entirely on your hardware via 
 - 16GB+ system RAM recommended
 
 **Tradeoffs:**
-- Mistral 7B is meaningfully less capable than Claude/GPT-4o for complex reasoning
+- Mistral 7B is meaningfully less capable than Claude Sonnet 4.6 / GPT-5 for complex reasoning
 - Slower for long, multi-step operations
 - Requires initial setup (CX handles this automatically)
 
@@ -86,7 +86,7 @@ cx config set llm.local.model mistral:7b
 
 We benchmarked cloud vs local across five common operation types:
 
-| Operation type | Cloud (Claude) | Local (Mistral 7B) |
+| Operation type | Cloud (Claude Sonnet 4.6) | Local (Mistral 7B) |
 |---|---|---|
 | Simple package install | ★★★★★ | ★★★★☆ |
 | Nginx + SSL setup | ★★★★★ | ★★★★☆ |

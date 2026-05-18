@@ -57,7 +57,7 @@ const plans: Record<string, PlanDetails> = {
     monthlyPrice: 20,
     annualPrice: 200,
     features: [
-      "Cloud LLMs (GPT-4, Claude)",
+      "Cloud LLMs (GPT-5, Claude Sonnet 4.6)",
       "Web console dashboard",
       "Email support (24h response)",
       "Priority updates",

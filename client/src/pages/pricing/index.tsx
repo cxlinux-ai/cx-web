@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
+import { RotatingBorderCard, IconPlate } from "@/components/RotatingBorderCard";
 
 type ComparisonRow =
   | { kind: "section"; label: string }
@@ -34,7 +35,7 @@ const featureComparison: ComparisonRow[] = [
   { kind: "row", feature: "Hardware Detection & Optimization", core: true, pro: true, team: true, enterprise: true },
   { kind: "row", feature: "Full CLI Access", core: true, pro: true, team: true, enterprise: true },
   { kind: "section", label: "Cloud & Integrations" },
-  { kind: "row", feature: "Cloud LLMs (GPT-4o / Claude 3.5)", core: false, pro: true, team: true, enterprise: true },
+  { kind: "row", feature: "Cloud LLMs (GPT-5 / Claude Sonnet 4.6)", core: false, pro: true, team: true, enterprise: true },
   { kind: "row", feature: "Web Console Dashboard", core: false, pro: true, team: true, enterprise: true },
   { kind: "row", feature: "API Access & Webhooks", core: false, pro: true, team: true, enterprise: true },
   { kind: "row", feature: "Usage Analytics", core: false, pro: true, team: true, enterprise: true },
@@ -371,41 +372,42 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* ── Enterprise CTA ── */}
+      {/* ── Enterprise CTA — shared rotating-border shell (matches homepage Final CTA) ── */}
       <section className="pb-24 px-4">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-3xl border border-[#00FF9F]/20 bg-[#0f1510] overflow-hidden px-10 py-16 sm:px-16 text-center shadow-[0_0_80px_rgba(0,255,159,0.06)]"
+          <RotatingBorderCard
+            patternId="entCtaGrid"
+            innerClassName="px-6 sm:px-10 md:px-14 py-14 md:py-16 text-center"
           >
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#00FF9F]/[0.05] via-transparent to-transparent" />
-            <div className="pointer-events-none absolute -bottom-10 -right-10 w-72 h-72 bg-[#00FF9F]/[0.06] rounded-full blur-[100px]" />
-            <div className="pointer-events-none absolute inset-0 rounded-3xl shadow-[inset_0_1px_0_rgba(0,255,159,0.12)]" />
-
-            <div className="relative">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#00FF9F]/15 ring-1 ring-[#00FF9F]/25 mb-6 mx-auto">
-                <Building2 className="w-7 h-7 text-[#00FF9F]" />
+            <div className="max-w-xl mx-auto">
+              <div className="mb-6 flex justify-center">
+                <IconPlate>
+                  <Building2 className="w-7 h-7" />
+                </IconPlate>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Need a custom solution?</h2>
-              <p className="text-gray-400 max-w-lg mx-auto mb-8 leading-relaxed">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
+                Need a{" "}
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+                  custom solution?
+                </span>
+              </h2>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
                 Volume pricing, on-premise deployment, dedicated support, and tailored compliance packages
                 for large engineering teams.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
                 <a
                   href="https://calendly.com/ai-consultant/vip"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-7 py-3.5 bg-[#00FF9F] text-black text-sm font-bold rounded-xl hover:bg-[#00E88F] transition-colors shadow-[0_0_30px_rgba(0,255,159,0.2)]"
+                  className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-[#00FF9F] text-black text-base font-bold rounded-xl hover:bg-[#00CC7F] transition-colors shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]"
                 >
                   <Calendar className="w-4 h-4" /> Schedule a Demo
                 </a>
                 <a
                   href="mailto:sales@cxlinux.com"
-                  className="flex items-center gap-2 px-7 py-3.5 border border-white/[0.14] text-white text-sm font-semibold rounded-xl hover:border-[#00FF9F]/35 hover:text-[#00FF9F] transition-all"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 border border-white/15 bg-white/[0.02] text-white text-base font-semibold rounded-xl hover:bg-white/[0.06] hover:border-[#00FF9F]/40 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                 >
                   Contact Sales <ArrowRight className="w-4 h-4" />
                 </a>
@@ -413,7 +415,7 @@ export default function PricingPage() {
 
               <p className="text-xs text-gray-600">No commitment required · Response within 24 hours</p>
             </div>
-          </motion.div>
+          </RotatingBorderCard>
         </div>
       </section>
 

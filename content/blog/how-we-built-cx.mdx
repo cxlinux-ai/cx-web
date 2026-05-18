@@ -77,7 +77,7 @@ We built multi-provider LLM support from day one for two reasons:
 
 1. **Model quality changes fast.** The best model today won't be the best model in six months. Providers are changing monthly. We didn't want to bet on one.
 
-2. **Different operations need different capabilities.** Simple package installs work fine with Mistral 7B. Complex multi-service orchestration benefits from Claude's reasoning. Hybrid mode routes accordingly.
+2. **Different operations need different capabilities.** Simple package installs work fine with Mistral 7B. Complex multi-service orchestration benefits from Claude Sonnet 4.6's reasoning. Hybrid mode routes accordingly.
 
 The LLM abstraction layer uses a simple capability rating system — each registered provider declares its ratings for reasoning, code generation, speed, and cost. The hybrid mode router uses these ratings to select the provider for each operation type.
 

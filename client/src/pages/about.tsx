@@ -12,6 +12,8 @@ import {
   Code2,
   Cpu,
   BookOpen,
+  Linkedin,
+  Twitter,
 } from "lucide-react";
 import Footer from "@/components/Footer";
 
@@ -21,6 +23,35 @@ const GITHUB_REPOS = [
   "cxlinux-ai/cx-web",
 ];
 const EXCLUDED_LOGINS = ["dependabot[bot]", "github-actions[bot]", "Copilot", "claude"];
+
+// Co-founders — photo URLs are placeholders. Drop final image URLs into `photo`.
+// Leave `photo` as "" to render an initials avatar instead.
+const coFounders = [
+  {
+    name: "Michael Morgan",
+    role: "CEO & Co-Founder",
+    photo: "",
+    linkedin: "",
+    github: "",
+    twitter: "",
+  },
+  {
+    name: "Santiago Gonzalez",
+    role: "Co-Founder & Marketing Manager",
+    photo: "",
+    linkedin: "",
+    github: "",
+    twitter: "",
+  },
+  {
+    name: "Suyash Dongre",
+    role: "Co-Founder & Developer",
+    photo: "",
+    linkedin: "",
+    github: "",
+    twitter: "",
+  },
+];
 
 const milestones = [
   { date: "Aug 2025", event: "Project kicked off — AI-native terminal concept validated" },
@@ -226,6 +257,102 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Co-Founders */}
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-3 block">
+              THE TEAM
+            </span>
+            <h2 className="text-3xl font-bold mb-3">Meet the Founders</h2>
+            <p className="text-gray-400 max-w-xl mx-auto">
+              Three engineers and operators who got tired of typing the same Linux commands at 2am — and decided to build the tool they wished existed.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {coFounders.map((f, i) => {
+              const initials = f.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)
+                .toUpperCase();
+              return (
+                <motion.div
+                  key={f.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center hover:border-[#00FF9F]/30 transition-all"
+                >
+                  <div className="relative w-28 h-28 mx-auto mb-5">
+                    {f.photo ? (
+                      <img
+                        src={f.photo}
+                        alt={f.name}
+                        className="w-28 h-28 rounded-full object-cover border-2 border-[#00FF9F]/30"
+                      />
+                    ) : (
+                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#00FF9F]/20 to-[#00FFCC]/10 border-2 border-[#00FF9F]/30 flex items-center justify-center">
+                        <span className="text-[#00FF9F] font-bold text-2xl tracking-wider">
+                          {initials}
+                        </span>
+                      </div>
+                    )}
+                    <span className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-[#0D0D0D] border-2 border-[#00FF9F]/40 flex items-center justify-center">
+                      <Terminal className="w-3.5 h-3.5 text-[#00FF9F]" />
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-semibold text-white mb-1">{f.name}</h3>
+                  <p className="text-[#00FF9F] text-sm font-medium mb-4">{f.role}</p>
+
+                  {(f.linkedin || f.github || f.twitter) && (
+                    <div className="flex items-center justify-center gap-3 pt-4 border-t border-white/10">
+                      {f.linkedin && (
+                        <a
+                          href={f.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${f.name} on LinkedIn`}
+                          className="text-gray-500 hover:text-[#00FF9F] transition-colors"
+                        >
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      )}
+                      {f.github && (
+                        <a
+                          href={f.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${f.name} on GitHub`}
+                          className="text-gray-500 hover:text-[#00FF9F] transition-colors"
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                      {f.twitter && (
+                        <a
+                          href={f.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${f.name} on X`}
+                          className="text-gray-500 hover:text-[#00FF9F] transition-colors"
+                        >
+                          <Twitter className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Values */}
       <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0D0D0D]/50">
         <div className="max-w-6xl mx-auto">
@@ -276,7 +403,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-
+      {/* Community Contributors (renders only if GitHub returns data) */}
+      <ContributorsSection />
 
       {/* Community CTA */}
       <section className="py-20 px-4">

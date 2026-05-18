@@ -67,7 +67,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "What's the difference between Pro and Enterprise?",
-        a: "Pro is designed for developers and small teams who need cloud LLMs and basic support. Enterprise adds security and compliance features:\n\n• Pro: Cloud LLMs (GPT-4, Claude), web console, email support (24h), API access\n• Enterprise: Everything in Pro + SSO/LDAP, audit logs, compliance reports (SOC2, HIPAA), 99.9% SLA, dedicated Slack channel",
+        a: "Pro is designed for developers and small teams who need cloud LLMs and basic support. Enterprise adds security and compliance features:\n\n• Pro: Cloud LLMs (GPT-5, Claude Sonnet 4.6), web console, email support (24h), API access\n• Enterprise: Everything in Pro + SSO/LDAP, audit logs, compliance reports (SOC2, HIPAA), 99.9% SLA, dedicated Slack channel",
       },
       {
         q: "What does 'Managed' include that Enterprise doesn't?",
@@ -75,7 +75,7 @@ const faqData: FAQCategory[] = [
       },
       {
         q: "Can I use multiple Cloud LLMs on the Pro plan?",
-        a: "Yes! Pro and higher plans include access to multiple cloud LLMs including GPT-4, Claude, and more. You can switch between models based on your task requirements. Usage is included in your subscription - no per-token charges.",
+        a: "Yes! Pro and higher plans include access to multiple cloud LLMs including GPT-5, Claude Sonnet 4.6, Claude Opus 4.7, and more. You can switch between models based on your task requirements. Usage is included in your subscription — no per-token charges.",
       },
       {
         q: "Are there any usage limits?",
