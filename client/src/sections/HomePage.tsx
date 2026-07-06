@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link } from "wouter";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
@@ -8,19 +8,21 @@ import {
   Copy,
   Check,
   Shield,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize,
   Clock,
   Server,
   Lock,
   Eye,
   Undo2,
   FileText,
-  Zap,
   Users,
   Building2,
   ChevronRight,
   ChevronDown,
-  Play,
-  Loader2,
   ArrowRight,
   Sparkles,
   X,
@@ -38,222 +40,203 @@ import { RotatingBorderCard } from "@/components/RotatingBorderCard";
 // CX Linux - Admin-Focused Homepage
 // ============================================
 
-// ============================================
-// Try Panel, Interactive CX Demo (3 commands/IP/day)
-// ============================================
-const DEMO_RESPONSES: Record<string, { commands: string[]; explanation: string }> = {
-  "set up nginx reverse proxy for port 3000": {
-    commands: [
-      "sudo apt install -y nginx",
-      "sudo tee /etc/nginx/sites-available/app <<EOF\nserver {\n    listen 80;\n    server_name _;\n    location / {\n        proxy_pass http://127.0.0.1:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n}\nEOF",
-      "sudo ln -sf /etc/nginx/sites-available/app /etc/nginx/sites-enabled/",
-      "sudo nginx -t && sudo systemctl reload nginx",
-    ],
-    explanation: "Installs nginx, creates a reverse proxy config for your app on port 3000, enables the site, and reloads nginx after testing the config.",
-  },
-  "harden ssh and set up firewall": {
-    commands: [
-      "sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak",
-      "sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config",
-      "sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config",
-      "sudo systemctl restart sshd",
-      "sudo ufw default deny incoming",
-      "sudo ufw default allow outgoing",
-      "sudo ufw allow ssh && sudo ufw allow http && sudo ufw allow https",
-      "sudo ufw --force enable",
-    ],
-    explanation: "Backs up SSH config, disables root login and password auth, restarts SSH, then configures UFW firewall to allow only SSH, HTTP, and HTTPS.",
-  },
-  "install docker and docker compose": {
-    commands: [
-      "sudo apt update",
-      "sudo apt install -y ca-certificates curl gnupg",
-      "sudo install -m 0755 -d /etc/apt/keyrings",
-      'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg',
-      'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list',
-      "sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin",
-      "sudo usermod -aG docker $USER",
-    ],
-    explanation: "Adds Docker's official GPG key and repository, installs Docker Engine + Compose plugin, and adds your user to the docker group.",
-  },
-};
+function VideoPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [buffered, setBuffered] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [scrub, setScrub] = useState<{ x: number; time: number } | null>(null);
 
-const DEMO_SUGGESTIONS = [
-  "set up nginx reverse proxy for port 3000",
-  "harden ssh and set up firewall",
-  "install docker and docker compose",
-];
-
-function TryPanel() {
-  const [input, setInput] = useState("");
-  const [isRunning, setIsRunning] = useState(false);
-  const [result, setResult] = useState<{ commands: string[]; explanation: string } | null>(null);
-  const [usageCount, setUsageCount] = useState(0);
-  const MAX_TRIES = 3;
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    // Check usage from localStorage
-    const stored = localStorage.getItem("cx_demo_usage");
-    if (stored) {
-      const { count, date } = JSON.parse(stored);
-      const today = new Date().toISOString().slice(0, 10);
-      if (date === today) {
-        setUsageCount(count);
-      }
-    }
-  }, []);
-
-  const incrementUsage = () => {
-    const today = new Date().toISOString().slice(0, 10);
-    const newCount = usageCount + 1;
-    setUsageCount(newCount);
-    localStorage.setItem("cx_demo_usage", JSON.stringify({ count: newCount, date: today }));
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); setPlaying(true); }
+    else { v.pause(); setPlaying(false); }
   };
 
-  const handleRun = async (command?: string) => {
-    const cmd = (command || input).trim().toLowerCase();
-    if (!cmd) return;
-    if (usageCount >= MAX_TRIES) return;
-
-    setIsRunning(true);
-    setInput(cmd);
-    setResult(null);
-
-    // Find best matching demo response
-    let bestMatch = DEMO_RESPONSES[cmd];
-    if (!bestMatch) {
-      // Fuzzy match
-      for (const key of Object.keys(DEMO_RESPONSES)) {
-        if (cmd.includes("nginx") || cmd.includes("reverse proxy") || cmd.includes("proxy")) {
-          bestMatch = DEMO_RESPONSES["set up nginx reverse proxy for port 3000"];
-          break;
-        }
-        if (cmd.includes("ssh") || cmd.includes("firewall") || cmd.includes("harden") || cmd.includes("ufw")) {
-          bestMatch = DEMO_RESPONSES["harden ssh and set up firewall"];
-          break;
-        }
-        if (cmd.includes("docker") || cmd.includes("container")) {
-          bestMatch = DEMO_RESPONSES["install docker and docker compose"];
-          break;
-        }
-      }
-    }
-
-    // Simulate processing time
-    await new Promise((r) => setTimeout(r, 1200));
-
-    if (bestMatch) {
-      setResult(bestMatch);
-      incrementUsage();
-    } else {
-      setResult({
-        commands: [`# CX would analyze your system and generate commands for: "${cmd}"`],
-        explanation: "In the full version, CX analyzes your system state, generates the right commands, and lets you review before executing. Try one of the suggested commands above to see a real example!",
-      });
-      incrementUsage();
-    }
-
-    setIsRunning(false);
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setMuted(v.muted);
   };
 
-  const remaining = MAX_TRIES - usageCount;
+  const handleTimeUpdate = () => {
+    const v = videoRef.current;
+    if (!v || !v.duration) return;
+    setCurrentTime(v.currentTime);
+    setProgress((v.currentTime / v.duration) * 100);
+    if (v.buffered.length > 0)
+      setBuffered((v.buffered.end(v.buffered.length - 1) / v.duration) * 100);
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const v = videoRef.current;
+    const bar = progressRef.current;
+    if (!v || !bar) return;
+    const rect = bar.getBoundingClientRect();
+    v.currentTime = ((e.clientX - rect.left) / rect.width) * v.duration;
+  };
+
+  const handleScrubMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const bar = progressRef.current;
+    const v = videoRef.current;
+    if (!bar || !v) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    setScrub({ x: e.clientX - rect.left, time: ratio * v.duration });
+  };
+
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-[#0A0A0A] border border-[#333] rounded-xl overflow-hidden">
-        {/* Terminal header */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-[#161616] border-b border-[#333]">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-          <span className="text-xs text-gray-500 ml-2 font-mono">cx, try it live</span>
-          <div className="ml-auto flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-[#00FF9F]" />
-            <span className="text-xs text-gray-500">{remaining} tries left today</span>
-          </div>
-        </div>
+    <div
+      ref={containerRef}
+      className="relative w-full h-full overflow-hidden"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <video
+        ref={videoRef}
+        onClick={togglePlay}
+        className="w-full h-full block bg-black cursor-pointer"
+        style={{ transform: "scale(1.35)", transformOrigin: "center 75%", objectFit: "cover" }}
+        poster="/cx-distro-poster.jpg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onError={(e) => {
+          const v = e.currentTarget;
+          v.style.display = "none";
+          const fb = v.nextElementSibling as HTMLElement | null;
+          if (fb) fb.style.display = "flex";
+        }}
+      >
+        <source src="/cx-distro.mp4" type="video/mp4" />
+      </video>
 
-        {/* Suggestion chips */}
-        <div className="px-4 pt-3 pb-2 flex flex-wrap gap-2">
-          {DEMO_SUGGESTIONS.map((s) => (
-            <button
-              key={s}
-              onClick={() => handleRun(s)}
-              disabled={isRunning || remaining <= 0}
-              className="text-xs px-3 py-1.5 rounded-full bg-[#00FF9F]/10 text-[#00FF9F] hover:bg-[#00FF9F]/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-
-        {/* Input */}
-        <div className="px-4 pb-3">
-          <div className="flex items-center gap-2 bg-[#111] rounded-lg border border-[#333] px-3 py-2">
-            <span className="text-[#00FF9F] font-mono text-sm font-bold">cx</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleRun()}
-              placeholder={remaining > 0 ? '"describe what you want to do..."' : "Daily limit reached, install CX for unlimited use"}
-              disabled={isRunning || remaining <= 0}
-              className="flex-1 bg-transparent text-white text-sm font-mono placeholder:text-gray-600 outline-none disabled:opacity-50"
-            />
-            <button
-              onClick={() => handleRun()}
-              disabled={isRunning || !input.trim() || remaining <= 0}
-              className="p-1.5 rounded bg-[#00FF9F]/10 hover:bg-[#00FF9F]/20 transition-colors disabled:opacity-30"
-            >
-              {isRunning ? (
-                <Loader2 className="w-4 h-4 text-[#00FF9F] animate-spin" />
-              ) : (
-                <Play className="w-4 h-4 text-[#00FF9F]" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Result */}
-        {(isRunning || result) && (
-          <div className="px-4 pb-4 border-t border-[#222]">
-            {isRunning && (
-              <div className="flex items-center gap-2 py-3 text-gray-400 text-sm font-mono">
-                <Loader2 className="w-4 h-4 animate-spin text-[#00FF9F]" />
-                Analyzing system and generating commands...
-              </div>
-            )}
-            {result && !isRunning && (
-              <div className="pt-3 space-y-2">
-                <p className="text-xs text-gray-500 mb-2">📋 CX would generate and preview these commands:</p>
-                <div className="bg-black/50 rounded-lg p-3 max-h-48 overflow-y-auto">
-                  {result.commands.map((cmd, i) => (
-                    <div key={i} className="font-mono text-xs text-[#00FF9F] mb-1 whitespace-pre-wrap">
-                      <span className="text-gray-600">$ </span>{cmd}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-400 leading-relaxed mt-2">
-                  💡 {result.explanation}
-                </p>
-                <p className="text-xs text-gray-600 mt-1">
-                  In CX, you'd review these commands then approve with one keystroke. Every action has instant rollback.
-                </p>
-                <Link href="/getting-started">
-                  <a className="mt-3 flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold py-2.5 rounded-lg text-sm transition-colors">
-                    Install CX and run this for real
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
+      {/* Error fallback */}
+      <div
+        style={{ display: "none" }}
+        className="w-full h-full items-center justify-center bg-[#0A0A0A] text-gray-500 text-sm text-center px-6"
+        role="img"
+        aria-label="Demo video unavailable"
+      >
+        Demo unavailable — install CX to see it in action.
       </div>
+
+      {/* Gradient scrim */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-32 pointer-events-none transition-opacity duration-300"
+        style={{
+          opacity: hovered ? 1 : 0,
+          background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 55%, transparent 100%)",
+        }}
+      />
+
+      {/* Controls panel — slides up on hover */}
+      <div
+        className="absolute inset-x-0 bottom-0 px-3 pb-3 pointer-events-none transition-all duration-300"
+        style={{
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(6px)",
+        }}
+      >
+        <div className="bg-black/50 backdrop-blur-md border border-white/[0.08] rounded-xl px-3 pt-2 pb-2.5 pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+
+          {/* Progress bar */}
+          <div
+            ref={progressRef}
+            className="relative w-full py-2 cursor-pointer group/bar"
+            onClick={handleSeek}
+            onMouseMove={handleScrubMove}
+            onMouseLeave={() => setScrub(null)}
+          >
+            {/* Scrub time tooltip */}
+            {scrub && (
+              <div
+                className="absolute -top-7 -translate-x-1/2 bg-[#111] border border-white/10 text-white/90 text-[10px] font-mono px-2 py-0.5 rounded-md pointer-events-none shadow-lg whitespace-nowrap z-10"
+                style={{ left: scrub.x }}
+              >
+                {fmt(scrub.time)}
+              </div>
+            )}
+            {/* Track */}
+            <div className="w-full h-[3px] group-hover/bar:h-[4px] bg-white/10 rounded-full relative transition-all duration-150">
+              {/* Buffered */}
+              <div className="absolute inset-y-0 left-0 bg-white/15 rounded-full" style={{ width: `${buffered}%` }} />
+              {/* Played */}
+              <div className="absolute inset-y-0 left-0 bg-[#00FF9F] rounded-full transition-none" style={{ width: `${progress}%` }}>
+                {/* Scrub handle */}
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[13px] h-[13px] bg-white rounded-full shadow-[0_0_8px_rgba(0,255,159,0.5)] scale-0 group-hover/bar:scale-100 transition-transform duration-150 origin-center" />
+              </div>
+            </div>
+          </div>
+
+          {/* Controls row */}
+          <div className="flex items-center gap-1.5">
+            {/* Play / Pause */}
+            <button
+              onClick={togglePlay}
+              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all"
+              aria-label={playing ? "Pause" : "Play"}
+            >
+              {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 translate-x-px" />}
+            </button>
+
+            {/* Mute */}
+            <button
+              onClick={toggleMute}
+              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all"
+              aria-label={muted ? "Unmute" : "Mute"}
+            >
+              {muted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            </button>
+
+            {/* Time */}
+            <span className="text-[11px] font-mono tabular-nums ml-1 text-white/40">
+              <span className="text-white/75">{fmt(currentTime)}</span>
+              <span className="mx-1">/</span>
+              {fmt(duration)}
+            </span>
+
+            <div className="flex-1" />
+
+            {/* Fullscreen */}
+            <button
+              onClick={() => containerRef.current?.requestFullscreen?.()}
+              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-all"
+              aria-label="Fullscreen"
+            >
+              <Maximize className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Centre play button when paused */}
+      {!playing && (
+        <button
+          onClick={togglePlay}
+          className="absolute inset-0 flex items-center justify-center group pointer-events-auto"
+        >
+          <div className="w-16 h-16 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 group-hover:border-[#00FF9F]/50 group-hover:bg-black/75 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-all duration-200">
+            <Play className="w-6 h-6 text-white/90 group-hover:text-[#00FF9F] translate-x-0.5 transition-colors" />
+          </div>
+        </button>
+      )}
     </div>
   );
 }
@@ -324,8 +307,12 @@ export default function HomePage() {
             Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.
           </p>
 
-          {/* Try It Now, Interactive Demo */}
-          <TryPanel />
+          {/* Hero demo video */}
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-[#0A0A0A] border border-[#333] rounded-xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-video">
+              <VideoPlayer />
+            </div>
+          </div>
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
@@ -401,22 +388,8 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Every server.</span>
             </h2>
             <p className="text-[#9CA3AF] text-base mb-7 leading-relaxed max-w-sm">
-              Patch, configure, and audit your entire fleet in a single command, every distro, every region, at once.
+              Works on Ubuntu, Debian, RHEL, Arch—any Linux distro you SSH into.
             </p>
-            <ul className="space-y-4 mb-8">
-              {[
-                "Ubuntu, Debian, RHEL, Arch, anything you SSH into",
-                "Encrypted preview before anything touches your boxes",
-                "Atomic rollback across the fleet if a deploy fails",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-[#D1D5DB]">
-                  <span className="w-5 h-5 rounded-md bg-[#00FF9F]/10 border border-[#00FF9F]/25 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 text-[#00FF9F]" />
-                  </span>
-                  <span className="text-sm leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
             <Link href="/getting-started">
               <Button
                 className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-5 py-2.5 text-sm h-auto"
@@ -491,199 +464,6 @@ export default function HomePage() {
               <p className="text-gray-500 text-sm leading-relaxed">One keystroke runs it all. Instant rollback available if anything goes wrong.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Section 1: Admin Math */}
-      <section className="relative py-20 px-4 bg-[#161616] overflow-hidden">
-        {/* Real photo: server rack with green lights (Unsplash, Massimo Botturi) */}
-        <div className="pointer-events-none absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1614064642639-e398cf05badb?auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.08]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#161616] via-[#161616]/95 to-[#161616]/80" />
-        </div>
-        <div className="relative max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left: content */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-5 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/20">
-                <Clock className="w-3 h-3 text-[#00FF9F]" />
-                <span className="text-[11px] uppercase tracking-widest font-semibold text-[#00FF9F]">Speed</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight">
-                Save{" "}
-                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">8 hours</span>{" "}
-                per week on admin tasks.
-              </h2>
-              <p className="text-gray-400 text-lg mb-6 leading-relaxed">
-                Stop hand-typing the same SSH commands across every box. CX writes them once and runs them everywhere.
-              </p>
-              <ul className="space-y-3.5 mb-8">
-                {[
-                  "Automate backups across your entire fleet",
-                  "Configure firewalls with natural language",
-                  "Analyze logs and spot issues instantly",
-                  "Hardware detection & inventory reports",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-300">
-                    <Zap className="w-5 h-5 text-[#00FF9F] flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-black/40 backdrop-blur border border-[#2A2A2A] rounded-xl p-4 mb-8 font-mono text-sm">
-                <span className="text-gray-600">$ </span>
-                <code className="text-[#00FF9F]">
-                  cx "backup /data to s3 and verify checksums"
-                </code>
-              </div>
-              <Link href="/getting-started">
-                <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold">
-                  Install in 60s, free <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* Right: real photo of developer workstation */}
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[4/5]">
-                {/* Real photo: developer at multi-monitor setup (Unsplash, Luca Bravo) */}
-                <img
-                  src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=85"
-                  alt="Developer running CX across a server fleet"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00FF9F]/[0.04] via-transparent to-black/30" />
-
-                {/* Floating stat cards */}
-                <div className="absolute top-5 left-5 right-5 flex justify-between gap-3">
-                  <div className="bg-black/70 backdrop-blur-md border border-white/[0.08] rounded-xl px-3.5 py-2.5 shadow-xl">
-                    <div className="text-[9px] text-gray-400 uppercase tracking-widest mb-0.5">Manual SSH</div>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-red-400 font-bold text-2xl tabular-nums">30</span>
-                      <span className="text-red-400/70 text-xs">min</span>
-                    </div>
-                  </div>
-                  <div className="bg-black/70 backdrop-blur-md border border-[#00FF9F]/30 rounded-xl px-3.5 py-2.5 shadow-[0_0_24px_rgba(0,255,159,0.2)]">
-                    <div className="text-[9px] text-[#00FF9F] uppercase tracking-widest mb-0.5">With CX</div>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-[#00FF9F] font-bold text-2xl tabular-nums">5</span>
-                      <span className="text-[#00FF9F]/70 text-xs">min</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom big stat */}
-                <div className="absolute bottom-5 left-5 right-5 bg-black/70 backdrop-blur-md border border-white/[0.08] rounded-xl px-5 py-4">
-                  <div className="flex items-end justify-between gap-4">
-                    <div>
-                      <div className="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Fleet of 20 servers</div>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent tabular-nums leading-none">
-                          6×
-                        </span>
-                        <span className="text-gray-400 text-sm">faster</span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-red-400/80 text-sm line-through tabular-nums">10 hrs</div>
-                      <div className="text-[#00FF9F] font-bold text-lg tabular-nums">1.7 hrs</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute -inset-6 bg-[#00FF9F]/[0.05] blur-3xl rounded-3xl -z-10" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison, how CX stacks up vs. the obvious alternatives */}
-      <section className="py-20 px-4 bg-[#0A0A0A] border-t border-white/[0.05]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-3 block">
-              How CX is different
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">
-              Other AI terminals are{" "}
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">demos</span>.
-              <br className="hidden md:block" />
-              CX is built for production.
-            </h2>
-            <p className="text-gray-500 max-w-xl mx-auto text-sm">
-              We're not the only AI in the terminal, just the only one designed for fleets, with preview-and-rollback as first-class citizens.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto -mx-4 px-4">
-            <table className="w-full min-w-[640px] border-separate border-spacing-0 text-sm">
-              <thead>
-                <tr>
-                  <th className="text-left p-4 text-gray-500 font-medium text-xs uppercase tracking-wider">Capability</th>
-                  <th className="p-4 bg-[#00FF9F]/[0.06] border-t border-x border-[#00FF9F]/30 rounded-t-xl">
-                    <div className="text-[#00FF9F] font-bold">CX Linux</div>
-                  </th>
-                  <th className="p-4 text-gray-500 font-medium">Warp AI</th>
-                  <th className="p-4 text-gray-500 font-medium">Copilot CLI</th>
-                  <th className="p-4 text-gray-500 font-medium">ChatGPT</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-300">
-                {([
-                  { f: "Runs commands across a fleet from one prompt", cx: true, warp: false, copilot: false, chatgpt: false },
-                  { f: "Preview every command before it executes", cx: true, warp: "partial", copilot: "partial", chatgpt: false },
-                  { f: "Atomic rollback if something breaks", cx: true, warp: false, copilot: false, chatgpt: false },
-                  { f: "Works fully offline (local LLM)", cx: true, warp: false, copilot: false, chatgpt: false },
-                  { f: "Source-available, auditable", cx: true, warp: false, copilot: false, chatgpt: false },
-                  { f: "Sandboxed execution by default", cx: true, warp: false, copilot: false, chatgpt: false },
-                  { f: "Full audit log of every command", cx: true, warp: "partial", copilot: false, chatgpt: false },
-                ] as const).map((row, i, arr) => {
-                  const isLast = i === arr.length - 1;
-                  const cell = (v: boolean | "partial") =>
-                    v === true ? (
-                      <Check className="w-5 h-5 text-[#00FF9F] mx-auto" />
-                    ) : v === "partial" ? (
-                      <span className="text-yellow-500/80 text-xs font-medium">partial</span>
-                    ) : (
-                      <X className="w-4 h-4 text-gray-700 mx-auto" />
-                    );
-                  return (
-                    <tr key={row.f} className="hover:bg-white/[0.02] transition-colors">
-                      <td className={`p-4 text-gray-300 ${isLast ? "" : "border-b border-white/[0.05]"}`}>
-                        {row.f}
-                      </td>
-                      <td
-                        className={`p-4 text-center bg-[#00FF9F]/[0.06] border-x border-[#00FF9F]/30 ${
-                          isLast ? "border-b rounded-b-xl" : ""
-                        }`}
-                      >
-                        {cell(row.cx)}
-                      </td>
-                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
-                        {cell(row.warp)}
-                      </td>
-                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
-                        {cell(row.copilot)}
-                      </td>
-                      <td className={`p-4 text-center ${isLast ? "" : "border-b border-white/[0.05]"}`}>
-                        {cell(row.chatgpt)}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-xs text-gray-600 text-center mt-6">
-            Comparison based on each tool's publicly documented features as of {new Date().getFullYear()}. We respect what other teams have built, these aren't the same product.
-          </p>
         </div>
       </section>
 
