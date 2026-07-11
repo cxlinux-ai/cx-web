@@ -5,6 +5,16 @@ server/public
 vite.config.ts.*
 *.tar.gz
 
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Claude local config
+.claude/settings.local.json
+.claude/launch.json
+.claude/settings.json
+
 # Python
 __pycache__/
 *.py[cod]

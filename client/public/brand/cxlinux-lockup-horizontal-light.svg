@@ -1,0 +1,8 @@
+<svg viewBox="0 0 700 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+<g>
+<circle cx="100" cy="100" r="100" fill="#0A0E12"></circle>
+<path d="M58 58 L110 100 L58 142" fill="none" stroke="#F8FAFC" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="120" y="128" width="38" height="22" rx="6" fill="#00C87D"></rect>
+</g>
+<g transform="translate(248,0)"><text x="0" y="132" font-family="&#39;JetBrains Mono&#39;,monospace" font-weight="800" font-size="96" letter-spacing="-2"><tspan fill="#009663">cx</tspan><tspan fill="#0A0E12">linux</tspan></text><rect x="356" y="58" width="52" height="86" rx="6" fill="#009663"></rect></g>
+</svg>
