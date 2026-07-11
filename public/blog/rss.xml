@@ -4,7 +4,7 @@
         <title>CX Linux Blog</title>
         <link>https://cxlinux.com/blog</link>
         <description>Tutorials, architecture deep-dives, and practical guides for AI-powered Linux engineering.</description>
-        <lastBuildDate>Fri, 15 May 2026 12:26:38 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 08 Jul 2026 12:26:44 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -19,10 +19,10 @@
             <link>https://cxlinux.com/blog/how-we-built-cx</link>
             <guid isPermaLink="false">https://cxlinux.com/blog/how-we-built-cx</guid>
             <pubDate>Wed, 15 Apr 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[The technical decisions behind CX Linux — from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper.]]></description>
-            <content:encoded><![CDATA[<p>The technical decisions behind CX Linux — from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper.</p><p><a href="https://cxlinux.com/blog/how-we-built-cx">Read the full article →</a></p>]]></content:encoded>
+            <description><![CDATA[The technical decisions behind CX Linux, from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper.]]></description>
+            <content:encoded><![CDATA[<p>The technical decisions behind CX Linux, from the NLP layer to the sandbox runtime, LLM selection, and why we chose to build an OS layer instead of a terminal wrapper.</p><p><a href="https://cxlinux.com/blog/how-we-built-cx">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/how-we-built-cx.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1497366216548-37526070297c"/>
         </item>
         <item>
             <title><![CDATA[CX Linux 2026 Roadmap: What's Coming Next]]></title>
@@ -32,15 +32,15 @@
             <description><![CDATA[Multi-agent workflows, a native GUI layer, fleet intelligence, and a plugin ecosystem. Here's everything we're building in 2026 and the reasoning behind each decision.]]></description>
             <content:encoded><![CDATA[<p>Multi-agent workflows, a native GUI layer, fleet intelligence, and a plugin ecosystem. Here's everything we're building in 2026 and the reasoning behind each decision.</p><p><a href="https://cxlinux.com/blog/cx-linux-2026-roadmap">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/cx-linux-2026-roadmap.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1518770660439-4636190af475"/>
         </item>
         <item>
             <title><![CDATA[Managing a Multi-Server Fleet with CX Linux]]></title>
             <link>https://cxlinux.com/blog/multi-server-fleet-management</link>
             <guid isPermaLink="false">https://cxlinux.com/blog/multi-server-fleet-management</guid>
             <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[How to use CX Linux Pro and Team plans to manage dozens of servers with a single command — patching, auditing, deploying, and monitoring across your entire fleet.]]></description>
-            <content:encoded><![CDATA[<p>How to use CX Linux Pro and Team plans to manage dozens of servers with a single command — patching, auditing, deploying, and monitoring across your entire fleet.</p><p><a href="https://cxlinux.com/blog/multi-server-fleet-management">Read the full article →</a></p>]]></content:encoded>
+            <description><![CDATA[How to use CX Linux Pro and Team plans to manage dozens of servers with a single command, patching, auditing, deploying, and monitoring across your entire fleet.]]></description>
+            <content:encoded><![CDATA[<p>How to use CX Linux Pro and Team plans to manage dozens of servers with a single command, patching, auditing, deploying, and monitoring across your entire fleet.</p><p><a href="https://cxlinux.com/blog/multi-server-fleet-management">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
             <enclosure url="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1558494949-ef010cbdcc31"/>
         </item>
@@ -49,10 +49,10 @@
             <link>https://cxlinux.com/blog/local-vs-cloud-llm</link>
             <guid isPermaLink="false">https://cxlinux.com/blog/local-vs-cloud-llm</guid>
             <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs — privacy, cost, performance, and when to use each — with benchmarks.]]></description>
-            <content:encoded><![CDATA[<p>CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs — privacy, cost, performance, and when to use each — with benchmarks.</p><p><a href="https://cxlinux.com/blog/local-vs-cloud-llm">Read the full article →</a></p>]]></content:encoded>
+            <description><![CDATA[CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs, privacy, cost, performance, and when to use each, with benchmarks.]]></description>
+            <content:encoded><![CDATA[<p>CX Linux supports both local and cloud LLMs. This guide explains the real-world tradeoffs, privacy, cost, performance, and when to use each, with benchmarks.</p><p><a href="https://cxlinux.com/blog/local-vs-cloud-llm">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/local-vs-cloud-llm.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1518770660439-4636190af475"/>
         </item>
         <item>
             <title><![CDATA[CX Linux for AI/ML: Full Stack in 5 Minutes]]></title>
@@ -69,8 +69,8 @@
             <link>https://cxlinux.com/blog/devops-guide-cx-linux</link>
             <guid isPermaLink="false">https://cxlinux.com/blog/devops-guide-cx-linux</guid>
             <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response — with real command examples for each workflow.]]></description>
-            <content:encoded><![CDATA[<p>How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response — with real command examples for each workflow.</p><p><a href="https://cxlinux.com/blog/devops-guide-cx-linux">Read the full article →</a></p>]]></content:encoded>
+            <description><![CDATA[How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response, with real command examples for each workflow.]]></description>
+            <content:encoded><![CDATA[<p>How DevOps engineers are using CX Linux to automate server provisioning, CI/CD setup, monitoring, and incident response, with real command examples for each workflow.</p><p><a href="https://cxlinux.com/blog/devops-guide-cx-linux">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
             <enclosure url="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1518432031352-d6fc5c10da5a"/>
         </item>
@@ -82,15 +82,15 @@
             <description><![CDATA[Three AI-powered terminal tools, three very different approaches. We compare CX Linux, Warp, and GitHub Copilot CLI across execution, context, safety, and real-world use cases.]]></description>
             <content:encoded><![CDATA[<p>Three AI-powered terminal tools, three very different approaches. We compare CX Linux, Warp, and GitHub Copilot CLI across execution, context, safety, and real-world use cases.</p><p><a href="https://cxlinux.com/blog/cx-vs-warp-copilot-cli">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/cx-vs-warp-copilot-cli.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1517694712202-14dd9538aa97"/>
         </item>
         <item>
             <title><![CDATA[5 Linux Tasks Done in 30 Seconds with CX]]></title>
             <link>https://cxlinux.com/blog/linux-tasks-30-seconds</link>
             <guid isPermaLink="false">https://cxlinux.com/blog/linux-tasks-30-seconds</guid>
             <pubDate>Wed, 11 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[Setting up nginx, configuring firewalls, deploying Docker stacks — these tasks eat hours. Here's how CX Linux turns each one into a single natural language command.]]></description>
-            <content:encoded><![CDATA[<p>Setting up nginx, configuring firewalls, deploying Docker stacks — these tasks eat hours. Here's how CX Linux turns each one into a single natural language command.</p><p><a href="https://cxlinux.com/blog/linux-tasks-30-seconds">Read the full article →</a></p>]]></content:encoded>
+            <description><![CDATA[Setting up nginx, configuring firewalls, deploying Docker stacks, these tasks eat hours. Here's how CX Linux turns each one into a single natural language command.]]></description>
+            <content:encoded><![CDATA[<p>Setting up nginx, configuring firewalls, deploying Docker stacks, these tasks eat hours. Here's how CX Linux turns each one into a single natural language command.</p><p><a href="https://cxlinux.com/blog/linux-tasks-30-seconds">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
             <enclosure url="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1629654297299-c8506221ca97"/>
         </item>
@@ -102,7 +102,7 @@
             <description><![CDATA[CX Linux is not just another distro. It's an AI layer that sits on top of any Debian or Ubuntu system and lets you control Linux with natural language. Here's how it works.]]></description>
             <content:encoded><![CDATA[<p>CX Linux is not just another distro. It's an AI layer that sits on top of any Debian or Ubuntu system and lets you control Linux with natural language. Here's how it works.</p><p><a href="https://cxlinux.com/blog/what-is-cx-linux">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/what-is-cx-linux.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1555066931-4365d14bab8c"/>
         </item>
         <item>
             <title><![CDATA[How CX Linux Keeps Your System Safe]]></title>
@@ -112,7 +112,7 @@
             <description><![CDATA[Running AI-generated commands on your production system sounds risky. Here's exactly how CX Linux uses sandboxing, command preview, and instant rollback to make it safe.]]></description>
             <content:encoded><![CDATA[<p>Running AI-generated commands on your production system sounds risky. Here's exactly how CX Linux uses sandboxing, command preview, and instant rollback to make it safe.</p><p><a href="https://cxlinux.com/blog/sandboxed-execution-safety">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/sandboxed-execution-safety.png" length="0" type="image/png"/>
+            <enclosure url="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1563986768609-322da13575f3"/>
         </item>
     </channel>
 </rss>

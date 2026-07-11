@@ -179,7 +179,7 @@ export default function FAQ() {
         },
         {
           q: "Where can I get help?",
-          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/7K6TR7qtS\n• GitHub Issues: github.com/cxlinux-ai/cx-core/issues\n• Documentation: github.com/cxlinux-ai/cx-core\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
+          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/q4FUyBW6z\n• GitHub Issues: github.com/cxlinux-ai/cx-core/issues\n• Documentation: github.com/cxlinux-ai/cx-core\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
         },
         {
           q: "Is my data private?",
@@ -298,7 +298,7 @@ export default function FAQ() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://discord.gg/7K6TR7qtS"
+              href="https://discord.gg/q4FUyBW6z"
               target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 bg-[#00FF9F] hover:bg-[#00CC7F] text-black font-semibold rounded-lg transition-colors"
               data-testid="link-discord"

@@ -232,7 +232,7 @@ export default function StatusPage() {
             <p className="text-gray-400 text-sm">
               Service checks run automatically every 60 seconds.
               For real-time incident updates, join our{" "}
-              <a href="https://discord.gg/7K6TR7qtS" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
+              <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
                 Discord community
               </a>
               .

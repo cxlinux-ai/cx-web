@@ -418,7 +418,7 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="https://discord.gg/7K6TR7qtS"
+                href="https://discord.gg/q4FUyBW6z"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00E88F] hover:shadow-lg hover:shadow-[#00FF9F]/20 transition-all flex items-center gap-2"

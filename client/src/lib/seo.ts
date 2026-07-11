@@ -226,7 +226,7 @@ export const seoConfigs = {
         logo: 'https://cxlinux.com/og-image.png',
         sameAs: [
           'https://github.com/cxlinux-ai/cx-core',
-          'https://discord.gg/7K6TR7qtS'
+          'https://discord.gg/q4FUyBW6z'
         ],
         contactPoint: {
           '@type': 'ContactPoint',

@@ -322,7 +322,7 @@ export default function PricingFAQ() {
             </a>
             <a
               id="pricing-faq-discord-link"
-              href="https://discord.gg/7K6TR7qtS"
+              href="https://discord.gg/q4FUyBW6z"
               target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
             >

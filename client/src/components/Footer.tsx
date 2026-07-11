@@ -99,7 +99,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         {/* Logo row */}
         <div className="flex items-center gap-3 mb-10">
-          <img src="/logo-rocket.png" alt="CX Linux" className="w-7 h-7 object-contain" />
+          <img src="/logo-mark.svg" alt="CX Linux" className="w-7 h-7 object-contain" />
           <span className="text-base font-bold">
             <span className="text-white">CX</span>
             <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent"> LINUX</span>
@@ -133,7 +133,7 @@ export default function Footer() {
             <a href="https://github.com/cxlinux-ai" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
               <Github className="w-4 h-4" />
             </a>
-            <a href="https://discord.gg/7K6TR7qtS" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
+            <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
               <FaDiscord className="w-4 h-4" />
             </a>
           </div>

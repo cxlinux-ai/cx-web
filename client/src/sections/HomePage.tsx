@@ -31,6 +31,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import { FaDiscord, FaGithub, FaReddit } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
 import { FleetMetricsPanel } from "@/components/HomeIllustrations";
@@ -106,7 +107,7 @@ function VideoPlayer() {
         ref={videoRef}
         onClick={togglePlay}
         className="w-full h-full block bg-black cursor-pointer"
-        style={{ transform: "scale(1.35)", transformOrigin: "center 75%", objectFit: "cover" }}
+        style={{ objectFit: "contain" }}
         poster="/cx-distro-poster.jpg"
         autoPlay
         muted
@@ -331,7 +332,7 @@ export default function HomePage() {
           {/* Trust strip, only verifiable facts (Discord, source-available, version, GitHub) */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
             <a
-              href="https://discord.gg/7K6TR7qtS"
+              href="https://discord.gg/q4FUyBW6z"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-[#00FF9F] transition-colors"
@@ -742,6 +743,89 @@ export default function HomePage() {
               </div>
             </div>
           </RotatingBorderCard>
+        </div>
+      </section>
+
+      {/* Community Section */}
+      <section className="py-24 px-4 relative overflow-hidden">
+        {/* Background glow */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="w-[600px] h-[300px] bg-[#00FF9F]/[0.04] blur-[100px] rounded-full" />
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative">
+          <div className="inline-flex items-center gap-2 bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-full px-4 py-1.5 text-xs text-[#00FF9F] font-medium mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9F] animate-pulse" />
+            Open community
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+            Join the CX community
+          </h2>
+          <p className="text-gray-400 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+            Thousands of Linux engineers sharing configs, asking questions, building together, and making CX better every day.
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-4 mb-12">
+            {/* Discord */}
+            <a
+              href="https://discord.gg/q4FUyBW6z"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-[#5865F2]/50 rounded-2xl p-6 transition-all duration-200 hover:bg-[#5865F2]/5"
+            >
+              <div className="w-12 h-12 rounded-xl bg-[#5865F2]/10 border border-[#5865F2]/20 flex items-center justify-center group-hover:bg-[#5865F2]/20 transition-colors">
+                <FaDiscord className="w-6 h-6 text-[#5865F2]" />
+              </div>
+              <div>
+                <div className="text-white font-semibold text-sm mb-0.5">Discord</div>
+                <div className="text-gray-500 text-xs leading-relaxed">Ask questions, share configs, get help from real engineers</div>
+              </div>
+              <span className="text-[#5865F2] text-xs font-medium mt-auto group-hover:underline">Join server →</span>
+            </a>
+
+            {/* GitHub */}
+            <a
+              href="https://github.com/cxlinux-ai/cx-core"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-white/20 rounded-2xl p-6 transition-all duration-200 hover:bg-white/[0.03]"
+            >
+              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                <FaGithub className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="text-white font-semibold text-sm mb-0.5">GitHub</div>
+                <div className="text-gray-500 text-xs leading-relaxed">Open issues, request features, read the source, contribute</div>
+              </div>
+              <span className="text-gray-400 text-xs font-medium mt-auto group-hover:underline">View repo →</span>
+            </a>
+
+            {/* Reddit */}
+            <a
+              href="https://reddit.com/r/cxlinux"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-[#FF4500]/40 rounded-2xl p-6 transition-all duration-200 hover:bg-[#FF4500]/[0.04]"
+            >
+              <div className="w-12 h-12 rounded-xl bg-[#FF4500]/10 border border-[#FF4500]/20 flex items-center justify-center group-hover:bg-[#FF4500]/20 transition-colors">
+                <FaReddit className="w-6 h-6 text-[#FF4500]" />
+              </div>
+              <div>
+                <div className="text-white font-semibold text-sm mb-0.5">Reddit</div>
+                <div className="text-gray-500 text-xs leading-relaxed">Longer threads, war stories, and community showcases</div>
+              </div>
+              <span className="text-[#FF4500] text-xs font-medium mt-auto group-hover:underline">Visit subreddit →</span>
+            </a>
+          </div>
+
+          <p className="text-gray-600 text-sm">
+            Already a member?{" "}
+            <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
+              Say hi on Discord
+            </a>{" "}
+            — we read every message.
+          </p>
         </div>
       </section>
 

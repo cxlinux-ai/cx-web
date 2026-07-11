@@ -107,7 +107,7 @@ export default function SuccessPage() {
       icon: MessageSquare,
       title: "Join Discord",
       description: "Connect with the community and get support",
-      link: "https://discord.gg/7K6TR7qtS",
+      link: "https://discord.gg/q4FUyBW6z",
       external: true,
     },
   ];

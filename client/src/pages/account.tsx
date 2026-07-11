@@ -996,7 +996,7 @@ export default function AccountPage() {
           </a>
 
           <a
-            href="https://discord.gg/7K6TR7qtS"
+            href="https://discord.gg/q4FUyBW6z"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors group"

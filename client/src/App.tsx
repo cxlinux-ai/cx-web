@@ -86,7 +86,7 @@ function App() {
                 className="flex items-center gap-3 cursor-pointer group"
               >
                 <div className="w-8 h-8 flex-shrink-0">
-                  <img src="/logo-rocket.png" alt="CX Linux" className="w-8 h-8 object-contain" />
+                  <img src="/logo-mark.svg" alt="CX Linux" className="w-8 h-8 object-contain" />
                 </div>
                 <span className="text-[1.1rem] font-bold tracking-wide leading-none">
                   <span className="text-white">CX</span>
