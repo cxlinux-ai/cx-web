@@ -62,6 +62,10 @@ const milestones = [
   { date: "Jan 2026", event: "Brand launch: CX Linux, website, docs, community" },
   { date: "Feb 2026", event: "v0.3.2 released, Quick Blocks, workspace snapshots, security scanning" },
   { date: "Mar 2026", event: "Public beta, install script, CLI reference, docs site" },
+  { date: "Apr 2026", event: "Deep product focus — performance, reliability, and UX hardening" },
+  { date: "May 2026", event: "Continued iteration on core product based on beta feedback" },
+  { date: "Jun 2026", event: "Fleet management, multi-server workflows, and stability improvements" },
+  { date: "Jul 2026", event: "Community launch: Discord server, Reddit, and official service launch" },
 ];
 
 const values = [
