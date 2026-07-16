@@ -225,7 +225,6 @@ export const seoConfigs = {
         url: 'https://cxlinux.com',
         logo: 'https://cxlinux.com/og-image.png',
         sameAs: [
-          'https://github.com/cxlinux-ai/cx-core',
           'https://discord.gg/q4FUyBW6z'
         ],
         contactPoint: {
@@ -276,7 +275,7 @@ export const seoConfigs = {
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: 'The First AI Linux Hackathon Worldwide',
-      description: 'The first-ever AI Linux Hackathon. A two-phase, 17-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas, followed by a 1-month prep period. Phase 2 (Hackathon, Weeks 9-17) builds real code via GitHub PRs. $18,800 in prizes. Free to participate, open to developers worldwide.',
+      description: 'The first-ever AI Linux Hackathon. A two-phase, 17-week program: Phase 1 (Ideathon, Weeks 1-4) generates monetizable feature ideas, followed by a 1-month prep period. Phase 2 (Hackathon, Weeks 9-17) builds real code. $18,800 in prizes. Free to participate, open to developers worldwide.',
       startDate: '2026-02-17',
       endDate: '2026-05-25',
       url: 'https://cxlinux.com/hackathon',
@@ -284,7 +283,7 @@ export const seoConfigs = {
       eventStatus: 'https://schema.org/EventScheduled',
       location: {
         '@type': 'VirtualLocation',
-        url: 'https://github.com/cxlinux-ai/cx-core'
+        url: 'https://cxlinux.com/hackathon'
       },
       organizer: {
         '@type': 'Organization',
@@ -364,7 +363,7 @@ export const seoConfigs = {
           '@type': 'HowToStep',
           'position': '2',
           'name': 'Install CX Linux',
-          'text': 'Download the ISO from the official website or clone from GitHub. Create a bootable USB or mount in a virtual machine. Follow the interactive installer wizard which will handle all dependencies automatically in approximately 15 minutes.'
+          'text': 'Download the ISO from the official website. Create a bootable USB or mount in a virtual machine. Follow the interactive installer wizard which will handle all dependencies automatically in approximately 15 minutes.'
         },
         {
           '@type': 'HowToStep',
@@ -457,18 +456,11 @@ export const seoConfigs = {
   
   terms: {
     title: 'Terms of Service | CX Linux',
-    description: 'CX Linux terms of service. BSL 1.1 license, user conduct, disclaimers, and liability limitations.',
+    description: 'CX Linux terms of service. Proprietary software license, user conduct, disclaimers, and liability limitations.',
     canonicalPath: '/terms',
     noIndex: false
   },
-  
-  license: {
-    title: 'Business Source License 1.1 | CX Linux',
-    description: 'CX Linux software is licensed under the Business Source License 1.1. Free for personal use, converts to Apache 2.0 after 6 years.',
-    canonicalPath: '/license',
-    noIndex: false
-  },
-  
+
   status: {
     title: 'System Status | CX Linux',
     description: 'Check the operational status of CX Linux services and infrastructure.',
@@ -552,7 +544,7 @@ export const seoConfigs = {
     title: 'Bounty Board - Earn Rewards Contributing to CX Linux',
     description: 'Browse open bounties and earn rewards for contributing to CX Linux projects. Find issues with rewards, claim bounties, and get paid for your contributions.',
     canonicalPath: '/bounties',
-    keywords: ['developer bounties', 'GitHub bounties', 'CX Linux contributions', 'developer rewards', 'bug bounty', 'feature bounty'],
+    keywords: ['developer bounties', 'CX Linux contributions', 'developer rewards', 'bug bounty', 'feature bounty'],
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -578,7 +570,7 @@ export const seoConfigs = {
         name: 'CX Linux',
         url: 'https://cxlinux.com',
         sameAs: [
-          'https://github.com/cxlinux-ai'
+          'https://discord.gg/q4FUyBW6z'
         ]
       }
     }

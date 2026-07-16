@@ -19,7 +19,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "https://api.github.com", "https://api.anthropic.com", "https://api.stripe.com", "wss:", "ws:"],
+      connectSrc: ["'self'", "https://api.anthropic.com", "https://api.stripe.com", "wss:", "ws:"],
       frameSrc: ["'self'", "https://js.stripe.com"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],

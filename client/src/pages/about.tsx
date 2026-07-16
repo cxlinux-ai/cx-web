@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Terminal,
   Users,
   Shield,
   Zap,
-  Github,
   Globe,
   Heart,
   MessageCircle,
@@ -17,13 +15,6 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 
-// Contributors loaded dynamically from GitHub API
-const GITHUB_REPOS = [
-  "cxlinux-ai/cx-core",
-  "cxlinux-ai/cx-web",
-];
-const EXCLUDED_LOGINS = ["dependabot[bot]", "github-actions[bot]", "Copilot", "claude"];
-
 // Co-founders, photo URLs are placeholders. Drop final image URLs into `photo`.
 // Leave `photo` as "" to render an initials avatar instead.
 const coFounders = [
@@ -32,7 +23,6 @@ const coFounders = [
     role: "CEO & Co-Founder",
     photo: "",
     linkedin: "",
-    github: "",
     twitter: "",
   },
   {
@@ -40,7 +30,6 @@ const coFounders = [
     role: "Co-Founder & Marketing Manager",
     photo: "",
     linkedin: "",
-    github: "",
     twitter: "",
   },
   {
@@ -48,7 +37,6 @@ const coFounders = [
     role: "Co-Founder & Developer",
     photo: "",
     linkedin: "",
-    github: "",
     twitter: "",
   },
 ];
@@ -81,8 +69,8 @@ const values = [
   },
   {
     icon: Code2,
-    title: "Source Available",
-    description: "BSL 1.1 licensed, read, audit, and contribute. Converts to Apache 2.0 in 2032.",
+    title: "Backed by a Team",
+    description: "Commercial software with a dedicated team behind it, priority support, and regular updates.",
   },
   {
     icon: Cpu,
@@ -97,96 +85,16 @@ const values = [
   {
     icon: Heart,
     title: "Community Driven",
-    description: "Open development, public roadmap, and active Discord community.",
+    description: "We build alongside our users, with an active Discord community shaping what comes next.",
   },
 ];
 
 const stats = [
   { value: "v0.3.2", label: "Current Version" },
   { value: "Rust", label: "Core Language" },
-  { value: "BSL 1.1", label: "License" },
-  { value: "2032", label: "Apache 2.0 Conversion" },
+  { value: "2,400+", label: "Community Members" },
+  { value: "2025", label: "Founded" },
 ];
-
-interface Contributor {
-  login: string;
-  avatar_url: string;
-  html_url: string;
-  contributions: number;
-}
-
-function ContributorsSection() {
-  const [contributors, setContributors] = useState<Contributor[]>([]);
-
-  useEffect(() => {
-    async function fetchContributors() {
-      try {
-        const allContribs = new Map<string, Contributor>();
-        for (const repo of GITHUB_REPOS) {
-          const res = await fetch(`https://api.github.com/repos/${repo}/contributors?per_page=30`);
-          if (!res.ok) continue;
-          const data: Contributor[] = await res.json();
-          for (const c of data) {
-            if (EXCLUDED_LOGINS.includes(c.login)) continue;
-            const existing = allContribs.get(c.login);
-            if (existing) {
-              existing.contributions += c.contributions;
-            } else {
-              allContribs.set(c.login, { ...c });
-            }
-          }
-        }
-        const sorted = [...allContribs.values()]
-          .sort((a, b) => b.contributions - a.contributions)
-          .slice(0, 12);
-        setContributors(sorted);
-      } catch {}
-    }
-    fetchContributors();
-  }, []);
-
-  if (contributors.length === 0) return null;
-
-  return (
-    <section className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0D0D0D]/50">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-4">Core Contributors</h2>
-        <p className="text-gray-400 mb-12">The people building CX Linux</p>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {contributors.map((c, i) => (
-            <motion.a
-              key={c.login}
-              href={c.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-[#00FF9F]/30 transition-all group"
-            >
-              <img
-                src={c.avatar_url}
-                alt={c.login}
-                className="w-12 h-12 rounded-full mx-auto mb-2 border-2 border-white/10 group-hover:border-[#00FF9F]/50 transition-all"
-              />
-              <p className="text-sm font-medium truncate">{c.login}</p>
-              <p className="text-gray-500 text-xs">{c.contributions} commits</p>
-            </motion.a>
-          ))}
-        </div>
-        <a
-          href="https://github.com/cxlinux-ai/cx-core/graphs/contributors"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-6 text-sm text-gray-500 hover:text-[#00FF9F] transition-colors"
-        >
-          View all contributors on GitHub →
-        </a>
-      </div>
-    </section>
-  );
-}
 
 export default function AboutPage() {
   return (
@@ -313,7 +221,7 @@ export default function AboutPage() {
                   <h3 className="text-lg font-semibold text-white mb-1">{f.name}</h3>
                   <p className="text-[#00FF9F] text-sm font-medium mb-4">{f.role}</p>
 
-                  {(f.linkedin || f.github || f.twitter) && (
+                  {(f.linkedin || f.twitter) && (
                     <div className="flex items-center justify-center gap-3 pt-4 border-t border-white/10">
                       {f.linkedin && (
                         <a
@@ -324,17 +232,6 @@ export default function AboutPage() {
                           className="text-gray-500 hover:text-[#00FF9F] transition-colors"
                         >
                           <Linkedin className="w-4 h-4" />
-                        </a>
-                      )}
-                      {f.github && (
-                        <a
-                          href={f.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${f.name} on GitHub`}
-                          className="text-gray-500 hover:text-[#00FF9F] transition-colors"
-                        >
-                          <Github className="w-4 h-4" />
                         </a>
                       )}
                       {f.twitter && (
@@ -407,9 +304,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Community Contributors (renders only if GitHub returns data) */}
-      <ContributorsSection />
-
       {/* Community CTA */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
@@ -417,8 +311,8 @@ export default function AboutPage() {
             <MessageCircle className="w-12 h-12 text-[#00FF9F] mx-auto mb-4" />
             <h3 className="text-3xl font-bold mb-4">Join the Community</h3>
             <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-              CX Linux is built in the open. Join our Discord to share feedback,
-              report bugs, request features, and connect with other users.
+              Join our Discord to share feedback, report bugs, request features,
+              and connect with other users.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -429,15 +323,6 @@ export default function AboutPage() {
               >
                 <MessageCircle className="w-5 h-5" />
                 Join Discord
-              </a>
-              <a
-                href="https://github.com/cxlinux-ai/cx-core"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all flex items-center gap-2"
-              >
-                <Github className="w-5 h-5" />
-                View on GitHub
               </a>
               <a
                 href="/faq"

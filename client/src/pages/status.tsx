@@ -6,7 +6,6 @@ import {
   XCircle,
   Globe,
   Server,
-  Database,
   Shield,
   Terminal,
   RefreshCw,
@@ -45,14 +44,6 @@ const initialServices: ServiceStatus[] = [
     icon: Server,
     status: "checking",
     description: "Package repository for Ubuntu/Debian",
-  },
-
-  {
-    name: "GitHub",
-    url: "https://github.com/cxlinux-ai/cx-core",
-    icon: Database,
-    status: "checking",
-    description: "Source code repositories",
   },
 ];
 

@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Github, Star } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import analytics from "./lib/analytics";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
@@ -17,7 +17,6 @@ const PricingSuccessPage = lazy(() => import("./pages/pricing-success"));
 const PricingFAQ = lazy(() => import("./pages/pricing/faq"));
 const Privacy = lazy(() => import("./pages/privacy"));
 const Terms = lazy(() => import("./pages/terms"));
-const License = lazy(() => import("./pages/license"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const FAQ = lazy(() => import("./pages/faq"));
 const Affiliates = lazy(() => import("./pages/affiliates"));
@@ -39,24 +38,9 @@ const PageLoader = () => (
 function App() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [starCount, setStarCount] = useState<number | null>(null);
 
   // Hide navigation on checkout pages
   const isCheckoutPage = location.includes("/checkout") || location.includes("/success");
-
-  // Fetch GitHub star count
-  useEffect(() => {
-    fetch("https://api.github.com/repos/cxlinux-ai/cx-core")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.stargazers_count) {
-          setStarCount(data.stargazers_count);
-        }
-      })
-      .catch(() => {
-        // Silently fail, badge will just not show count
-      });
-  }, []);
 
   // Scroll to top when navigating
   useEffect(() => {
@@ -104,13 +88,6 @@ function App() {
                 >
                   Terminal
                 </Link>
-                <a
-                  href="https://github.com/cxlinux-ai/cx-distro"
-                  className="text-sm font-medium text-gray-400"
-                  target="_blank" rel="noopener noreferrer"
-                >
-                  Distro
-                </a>
                 <Link
                   href="/pricing"
                   className={`text-sm font-medium transition-colors ${
@@ -147,17 +124,6 @@ function App() {
 
               {/* Desktop CTAs */}
               <div className="hidden md:flex items-center gap-4">
-                <a
-                  href="https://github.com/cxlinux-ai/cx-core"
-                  target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 bg-[#2A2A2A] border border-[#444] rounded-lg"
-                >
-                  <Github size={18} className="text-white" />
-                  <Star size={16} className="text-[#FFD700] fill-[#FFD700]" />
-                  {starCount !== null && (
-                    <span className="text-white text-sm font-medium">{starCount}</span>
-                  )}
-                </a>
                 <Link href="/account">
                   <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg">
                     My Account
@@ -191,13 +157,6 @@ function App() {
                     >
                       Terminal
                     </Link>
-                    <a
-                      href="https://github.com/cxlinux-ai/cx-distro"
-                      className="block text-gray-400"
-                      target="_blank" rel="noopener noreferrer"
-                    >
-                      Distro
-                    </a>
                     <Link
                       href="/pricing"
                       onClick={() => setMobileMenuOpen(false)}
@@ -252,7 +211,6 @@ function App() {
               <Route path="/pricing/faq" component={PricingFAQ} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/terms" component={Terms} />
-              <Route path="/license" component={License} />
               <Route path="/faq" component={FAQ} />
               <Route path="/about" component={AboutPage} />
               <Route path="/status" component={StatusPage} />

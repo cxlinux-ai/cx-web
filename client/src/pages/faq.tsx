@@ -35,7 +35,7 @@ export default function FAQ() {
         },
         {
           q: "How do you prevent dangerous commands like 'rm -rf /'?",
-          a: "Multiple layers of protection:\n\n1. Blacklist: Destructive commands are blocked by default\n2. Dry-run mode: Test changes in simulation first\n3. User confirmation: System-wide changes require your explicit approval\n4. Severity scoring: AI classifies command risk level (safe/caution/danger)\n5. Rollback ready: Even approved commands can be undone\n\nYou can review our security architecture on GitHub."
+          a: "Multiple layers of protection:\n\n1. Blacklist: Destructive commands are blocked by default\n2. Dry-run mode: Test changes in simulation first\n3. User confirmation: System-wide changes require your explicit approval\n4. Severity scoring: AI classifies command risk level (safe/caution/danger)\n5. Rollback ready: Even approved commands can be undone"
         },
         {
           q: "What if the AI hallucinates or makes mistakes?",
@@ -149,7 +149,7 @@ export default function FAQ() {
       questions: [
         {
           q: "How do I install CX?",
-          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux.com | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: https://github.com/cxlinux-ai/cx-core#getting-started"
+          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux.com | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: cxlinux.com/getting-started"
         },
         {
           q: "Is it ready to use now?",
@@ -158,10 +158,6 @@ export default function FAQ() {
         {
           q: "When will it be production-ready?",
           a: "Roadmap:\n\nQ1 2026 (Now): Public Beta\n• Core features working\n• Community testing\n• Bug fixes and polish\n\nQ2 2026: Production v1.0\n• Enterprise features complete\n• Security audit completed\n• SLA-backed support available\n\nQ3 2026: Expansion\n• Debian, Fedora support\n• Additional AI models\n• Plugin ecosystem\n\nJoin beta now to influence features!"
-        },
-        {
-          q: "How can I contribute?",
-          a: "We welcome contributors! Options:\n\n1. CODE CONTRIBUTIONS\n   • Browse issues: github.com/cxlinux-ai/cx-core/issues\n   • Bounties: $25-500 per merged PR\n   • Filter by: \"priority: critical\" for MVP blockers\n\n2. TESTING & FEEDBACK\n   • Try beta, report bugs\n   • Test bounties: $50-75\n   • Help improve documentation\n\n3. COMMUNITY SUPPORT\n   • Answer questions on Discord\n   • Write tutorials and guides\n   • Share your success stories\n\nFirst PR merged? Get $50 bonus from Instagram recruitment."
         }
       ]
     },
@@ -179,7 +175,7 @@ export default function FAQ() {
         },
         {
           q: "Where can I get help?",
-          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/q4FUyBW6z\n• GitHub Issues: github.com/cxlinux-ai/cx-core/issues\n• Documentation: github.com/cxlinux-ai/cx-core\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• GitHub: 24 hours\n• Enterprise: 15 minutes (SLA)"
+          a: "Multiple support channels:\n\nFREE (Community):\n• Discord: discord.gg/q4FUyBW6z\n• FAQ: This page!\n\nPAID (Enterprise):\n• Email: enterprise@cxlinux.com\n• 24/7 phone support\n• Dedicated Slack channel\n• Custom integration help\n\nAverage response times:\n• Discord: 2-4 hours\n• Enterprise: 15 minutes (SLA)"
         },
         {
           q: "Is my data private?",
@@ -311,14 +307,6 @@ export default function FAQ() {
               data-testid="link-email"
             >
               Email Us
-            </a>
-            <a
-              href="https://github.com/cxlinux-ai/cx-core/issues"
-              target="_blank" rel="noopener noreferrer"
-              className="px-6 py-3 border-2 border-[#00FF9F]/60 hover:bg-[#00FF9F]/10 text-white font-semibold rounded-lg transition-colors"
-              data-testid="link-github"
-            >
-              Open GitHub Issue
             </a>
           </div>
         </div>

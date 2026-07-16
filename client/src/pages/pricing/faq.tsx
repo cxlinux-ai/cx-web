@@ -63,7 +63,7 @@ const faqData: FAQCategory[] = [
     questions: [
       {
         q: "What's included in the Community (free) plan?",
-        a: "The Community plan includes:\n• Local LLM (Mistral 7B) for offline AI capabilities\n• Full CLI access and core CX Linux features\n• Community Discord support\n• Open source updates and basic documentation\n\nIt's perfect for individual developers and hobbyists.",
+        a: "The Community plan includes:\n• Local LLM (Mistral 7B) for offline AI capabilities\n• Full CLI access and core CX Linux features\n• Community Discord support\n• Regular updates and basic documentation\n\nIt's perfect for individual developers and hobbyists.",
       },
       {
         q: "What's the difference between Pro and Enterprise?",

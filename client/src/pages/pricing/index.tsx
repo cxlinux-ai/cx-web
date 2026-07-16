@@ -60,7 +60,6 @@ const trustBadges = [
   { label: "SOC2 Type II", description: "Compliant", icon: Shield },
   { label: "HIPAA", description: "Ready", icon: Lock },
   { label: "GDPR", description: "Compliant", icon: BadgeCheck },
-  { label: "BSL 1.1", description: "Source Available", icon: RefreshCw },
 ];
 
 
@@ -86,8 +85,8 @@ const faqs = [
     a: "We accept all major credit and debit cards via Stripe. Annual plans can also be paid by invoice or wire transfer. Contact sales@cxlinux.com for purchase orders or billing questions.",
   },
   {
-    q: "Do you offer discounts for open-source projects or students?",
-    a: "Yes, 50% off Pro for verified open-source maintainers and students with a valid .edu email. Email sales@cxlinux.com with a link to your project or student verification.",
+    q: "Do you offer student discounts?",
+    a: "Yes, 50% off Pro for verified students with a valid .edu email. Email sales@cxlinux.com with your student verification.",
   },
 ];
 

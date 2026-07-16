@@ -30,7 +30,6 @@ export const tiers: PricingTier[] = [
       "Local LLM included (Mistral 7B)",
       "Full CLI, no feature gating",
       "Community Discord (2,400+ engineers)",
-      "Source-available (BSL 1.1)",
     ],
     limits: { servers: "1 server", commands: "Unlimited local", support: "Community" },
     cta: "Install in 60 seconds",

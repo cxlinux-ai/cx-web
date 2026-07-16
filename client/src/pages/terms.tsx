@@ -17,7 +17,7 @@ export default function Terms() {
       title: "Acceptance of Terms",
       content: `By accessing or using CX Linux ("the Software"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Software.
 
-These Terms apply to all users, including visitors, registered users, and contributors.
+These Terms apply to all users, including visitors and registered users.
 
 We reserve the right to update these Terms at any time. Your continued use of the Software after changes constitutes acceptance of the new Terms.
 
@@ -26,17 +26,18 @@ If you are using the Software on behalf of an organization, you represent that y
     {
       icon: Scale,
       title: "License Grant",
-      content: `CX Linux software is licensed under the Business Source License 1.1 (BSL 1.1), which grants you the right to:
+      content: `CX Linux is proprietary commercial software owned by AI Venture Holdings LLC. Subject to these Terms and payment of any applicable fees, you are granted a limited, non-exclusive, non-transferable, revocable license to install and use the Software as follows:
 
-• Use the Software for personal, non-commercial purposes (1 system)
-• Use the Software for internal business operations (not as a service)
-• Use the Software for educational and research purposes
-• Copy, modify, and create derivative works
-• Contribute to the Licensed Work
+• Personal, non-commercial use on one (1) system at no charge
+• Commercial and multi-system use under a paid subscription (see our pricing page)
 
-For commercial use (more than 1 system, managed services, or resale), a commercial license is required. See our pricing page for details.
+You may NOT:
+• Copy, modify, decompile, reverse-engineer, or create derivative works of the Software, except to the extent required by applicable law
+• Redistribute, sublicense, sell, or resell the Software
+• Offer the Software as a hosted or managed service to third parties
+• Remove or alter any proprietary notices contained in the Software
 
-CHANGE LICENSE: After 6 years from each version release, the software converts to Apache License 2.0.
+All rights not expressly granted are reserved by AI Venture Holdings LLC.
 
 TRADEMARK NOTICE: The CX Linux name, logo, and branding are protected trademarks of AI Venture Holdings LLC. You may not use these marks without prior written permission, except as required for reasonable attribution.`
     },

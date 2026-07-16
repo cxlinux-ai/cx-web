@@ -75,11 +75,11 @@ CX maintains a blocklist of destructive command patterns. These are flagged auto
 
 When a blocked pattern is detected, CX requires you to explicitly acknowledge the risk with a confirmation phrase, not just press `y`.
 
-## Open Source Security Model
+## Defense-in-Depth Security Model
 
-Our entire safety model is open source. You can audit every line of code that touches your system at [github.com/cxlinux-ai/cx-core](https://github.com/cxlinux-ai/cx-core).
+Our safety model is layered: every command runs sandboxed, is previewed before execution, and is fully reversible. Destructive patterns are blocked by default and nothing touches your system without your explicit approval.
 
-We believe security through obscurity is no security at all. The more eyes on the code, the safer everyone is.
+Safety isn't a single feature, it's enforced at every layer between your request and your system.
 
 <Callout type="tip">
 Enterprise and Team plan users get additional audit logging: every command executed through CX is logged with timestamp, user, and session context. These logs are immutable and can be exported for compliance reporting.

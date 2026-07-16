@@ -1,4 +1,4 @@
-import { Github, Twitter } from "lucide-react";
+import { Twitter } from "lucide-react";
 
 interface Author {
   id: string;
@@ -6,7 +6,6 @@ interface Author {
   title: string;
   avatar: string;
   twitter?: string;
-  github?: string;
   bio: string;
 }
 
@@ -36,17 +35,6 @@ export function AuthorCard({ author }: AuthorCardProps) {
               aria-label="Twitter"
             >
               <Twitter className="w-4 h-4" />
-            </a>
-          )}
-          {author.github && (
-            <a
-              href={`https://github.com/${author.github}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-[#00FF9F] transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-4 h-4" />
             </a>
           )}
         </div>

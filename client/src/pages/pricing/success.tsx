@@ -93,8 +93,8 @@ export default function SuccessPage() {
       icon: Download,
       title: "Install CX Linux",
       description: "Download and install CX Linux on your Linux machine",
-      link: "https://github.com/cxlinux-ai/cx",
-      external: true,
+      link: "/getting-started",
+      external: false,
     },
     {
       icon: BookOpen,

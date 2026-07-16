@@ -216,8 +216,7 @@ verify_install() {
     echo ""
     echo -e "  ${BOLD}More info:${NC}"
     echo -e "    Documentation: https://docs.cxlinux.com"
-    echo -e "    Discord:       https://discord.gg/7K6TR7qtS"
-    echo -e "    GitHub:        https://github.com/cxlinux-ai/cx-core"
+    echo -e "    Discord:       https://discord.gg/q4FUyBW6z"
     echo ""
 }
 

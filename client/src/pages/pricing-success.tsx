@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { CheckCircle2, Copy, Check, Terminal, ExternalLink } from "lucide-react";
+import { CheckCircle2, Copy, Check, Terminal } from "lucide-react";
 import { SiDiscord } from "react-icons/si";
 import Footer from "@/components/Footer";
 import { updateSEO } from "@/lib/seo";
@@ -361,16 +361,6 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           >
             <SiDiscord size={16} />
             Discord
-          </a>
-          <span className="text-gray-600">|</span>
-          <a
-            href="https://github.com/cxlinux-ai/cx-core"
-            target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
-            data-testid="link-docs"
-          >
-            <ExternalLink size={14} />
-            Documentation
           </a>
           <span className="text-gray-600">|</span>
           <Link

@@ -133,8 +133,8 @@ export const blogPosts: BlogPost[] = [
 <h2>Dangerous Command Blocking</h2>
 <p>CX maintains a blocklist of destructive patterns. Commands that could wipe data, modify boot sectors, or disable security features are flagged and require additional confirmation with explicit acknowledgment of the risks.</p>
 
-<h2>Open Source Transparency</h2>
-<p>Our security model is fully open source. You can audit every line of code that touches your system. We believe security through obscurity is no security at all.</p>
+<h2>Defense in Depth</h2>
+<p>Our security model is defense-in-depth: every command runs sandboxed, is previewed before execution, and is fully reversible. Nothing touches your system without your explicit approval.</p>
 
 <p><a href="/faq">Read more about CX Linux security →</a></p>
     `,

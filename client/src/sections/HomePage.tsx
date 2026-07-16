@@ -27,11 +27,10 @@ import {
   Sparkles,
   X,
   MessageCircle,
-  Github,
   ShieldCheck,
 } from "lucide-react";
 
-import { FaDiscord, FaGithub, FaReddit } from "react-icons/fa";
+import { FaDiscord, FaReddit } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
 import { FleetMetricsPanel } from "@/components/HomeIllustrations";
@@ -329,7 +328,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Trust strip, only verifiable facts (Discord, source-available, version, GitHub) */}
+          {/* Trust strip, only verifiable facts */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
             <a
               href="https://discord.gg/q4FUyBW6z"
@@ -339,16 +338,6 @@ export default function HomePage() {
             >
               <MessageCircle className="w-3.5 h-3.5 text-[#00FF9F]" />
               <span><span className="text-gray-300 font-medium">2,400+</span> engineers in Discord</span>
-            </a>
-            <span className="text-gray-700">·</span>
-            <a
-              href="https://github.com/cxlinux-ai/cx-core"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#00FF9F] transition-colors"
-            >
-              <Github className="w-3.5 h-3.5 text-[#00FF9F]" />
-              <span>Source-available (BSL 1.1)</span>
             </a>
             <span className="text-gray-700">·</span>
             <span className="flex items-center gap-1.5">
@@ -733,7 +722,7 @@ export default function HomePage() {
                       <div className="mt-2 ml-4 text-[11px] text-gray-500 leading-relaxed space-y-1.5">
                         <div>· Script is served over HTTPS from <code className="text-gray-400">cxlinux.com</code></div>
                         <div>· Binary signature is verified before install</div>
-                        <div>· You can <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">read the source on GitHub</a> first</div>
+                        <div>· You can inspect the script before running it</div>
                         <div>· Prefer not to pipe? <Link href="/getting-started"><a className="text-[#00FF9F] hover:underline">See manual install →</a></Link></div>
                       </div>
                     </details>
@@ -766,7 +755,7 @@ export default function HomePage() {
             Thousands of Linux engineers sharing configs, asking questions, building together, and making CX better every day.
           </p>
 
-          <div className="grid sm:grid-cols-3 gap-4 mb-12">
+          <div className="grid sm:grid-cols-2 gap-4 mb-12">
             {/* Discord */}
             <a
               href="https://discord.gg/q4FUyBW6z"
@@ -782,23 +771,6 @@ export default function HomePage() {
                 <div className="text-gray-500 text-xs leading-relaxed">Ask questions, share configs, get help from real engineers</div>
               </div>
               <span className="text-[#5865F2] text-xs font-medium mt-auto group-hover:underline">Join server →</span>
-            </a>
-
-            {/* GitHub */}
-            <a
-              href="https://github.com/cxlinux-ai/cx-core"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-white/20 rounded-2xl p-6 transition-all duration-200 hover:bg-white/[0.03]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                <FaGithub className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <div className="text-white font-semibold text-sm mb-0.5">GitHub</div>
-                <div className="text-gray-500 text-xs leading-relaxed">Open issues, request features, read the source, contribute</div>
-              </div>
-              <span className="text-gray-400 text-xs font-medium mt-auto group-hover:underline">View repo →</span>
             </a>
 
             {/* Reddit */}

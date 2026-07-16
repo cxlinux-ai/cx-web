@@ -1,4 +1,3 @@
-import { Github } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { Link, useLocation } from "wouter";
 
@@ -7,13 +6,11 @@ const columns = [
     heading: "Product",
     links: [
       { label: "Terminal", href: "/getting-started", internal: true },
-      { label: "Distro", href: "https://github.com/cxlinux-ai/cx-distro", internal: false },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { label: "GitHub", href: "https://github.com/cxlinux-ai/cx-core", internal: false },
       { label: "Blog", href: "/blog", internal: true },
       { label: "FAQ", href: "/pricing", scrollTo: "faq", internal: true },
     ],
@@ -38,7 +35,6 @@ const columns = [
     links: [
       { label: "Privacy Policy", href: "/privacy", internal: true },
       { label: "Terms of Service", href: "/terms", internal: true },
-      { label: "License", href: "/license", internal: true },
     ],
   },
 ];
@@ -130,9 +126,6 @@ export default function Footer() {
             © {new Date().getFullYear()} CX Linux. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://github.com/cxlinux-ai" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
-              <Github className="w-4 h-4" />
-            </a>
             <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
               <FaDiscord className="w-4 h-4" />
             </a>

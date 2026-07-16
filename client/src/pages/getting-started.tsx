@@ -114,19 +114,6 @@ export default function GettingStarted() {
             </button>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-[11px] text-gray-600 mt-3"
-          >
-            Inspect before you pipe. Source on{" "}
-            <a href="https://github.com/cxlinux-ai/cx-core" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
-              GitHub
-            </a>
-            .
-          </motion.p>
-
           {/* Trust chips */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -134,7 +121,7 @@ export default function GettingStarted() {
             transition={{ duration: 0.5, delay: 0.55 }}
             className="flex flex-wrap justify-center gap-4 mt-10"
           >
-            {["Works offline", "Open source", "Rollback-safe", "SSH-native"].map((t) => (
+            {["Works offline", "Rollback-safe", "SSH-native"].map((t) => (
               <span key={t} className="text-[11px] text-gray-500 flex items-center gap-1.5">
                 <span className="w-1 h-1 rounded-full bg-[#00FF9F]/50" />{t}
               </span>
@@ -331,14 +318,6 @@ export default function GettingStarted() {
                     See pricing <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <a href="https://github.com/cxlinux-ai/cx-docs" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    variant="outline"
-                    className="w-full sm:w-auto border-white/15 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-[#00FF9F]/40 hover:text-white px-8 py-3.5 text-base font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-                  >
-                    Read the docs
-                  </Button>
-                </a>
               </div>
             </div>
           </RotatingBorderCard>
