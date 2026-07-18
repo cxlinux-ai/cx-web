@@ -12,9 +12,9 @@ interface CalloutProps {
 const config: Record<CalloutType, { icon: typeof Info; border: string; bg: string; iconColor: string; label: string }> = {
   note: {
     icon: Info,
-    border: "border-[#00FF9F]",
-    bg: "bg-[#00FF9F]/6",
-    iconColor: "text-[#00FF9F]",
+    border: "border-[#2F6BFF]",
+    bg: "bg-[#2F6BFF]/6",
+    iconColor: "text-[#7AA0FF]",
     label: "Note",
   },
   warning: {
@@ -26,9 +26,9 @@ const config: Record<CalloutType, { icon: typeof Info; border: string; bg: strin
   },
   tip: {
     icon: Lightbulb,
-    border: "border-[#00FF9F]",
-    bg: "bg-[#00FF9F]/6",
-    iconColor: "text-[#00FF9F]",
+    border: "border-[#2F6BFF]",
+    bg: "bg-[#2F6BFF]/6",
+    iconColor: "text-[#7AA0FF]",
     label: "Tip",
   },
 };

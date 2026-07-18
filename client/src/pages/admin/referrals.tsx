@@ -193,7 +193,7 @@ export default function AdminReferrals() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md"
         >
-          <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-8">
+          <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-8">
             <h1 className="text-2xl font-bold text-white mb-2">🔐 Admin Access</h1>
             <p className="text-gray-400 mb-6">Referral Management Dashboard</p>
             {error && (
@@ -208,12 +208,12 @@ export default function AdminReferrals() {
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
                 placeholder="Enter your admin API key"
-                className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#00FF9F] mb-4"
+                className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#2F6BFF] mb-4"
               />
               <button
                 type="submit"
                 disabled={loading || !apiKey}
-                className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00cc7f] transition disabled:opacity-50"
+                className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#00cc7f] transition disabled:opacity-50"
               >
                 {loading ? "Authenticating..." : "Login"}
               </button>
@@ -236,7 +236,7 @@ export default function AdminReferrals() {
           <button
             onClick={fetchDashboard}
             disabled={loading}
-            className="px-4 py-2 bg-[#1a1a1a] border border-[#333] rounded-lg text-sm hover:border-[#00FF9F] transition"
+            className="px-4 py-2 bg-[#1a1a1a] border border-white/10 rounded-lg text-sm hover:border-[#2F6BFF] transition"
           >
             {loading ? "⏳" : "🔄"} Refresh
           </button>
@@ -250,7 +250,7 @@ export default function AdminReferrals() {
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition ${
                 activeTab === tab
-                  ? "bg-[#00FF9F] text-black"
+                  ? "bg-[#2F6BFF] text-white"
                   : "text-gray-400 hover:text-white"
               }`}
             >
@@ -266,13 +266,13 @@ export default function AdminReferrals() {
         {activeTab === "overview" && data && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             {[
-              { label: "Standard Referrers", value: data.summary.standard_referrers, color: "#00FF9F" },
+              { label: "Standard Referrers", value: data.summary.standard_referrers, color: "#2F6BFF" },
               { label: "Founding Affiliates", value: data.summary.founding_referrers, color: "#FFD700" },
               { label: "Active Total", value: data.summary.active_referrers, color: "#00BFFF" },
-              { label: "Total Commissions", value: `$${data.summary.total_commissions}`, color: "#00FF9F" },
+              { label: "Total Commissions", value: `$${data.summary.total_commissions}`, color: "#2F6BFF" },
               { label: "Unpaid", value: `$${data.summary.total_unpaid}`, color: "#FF6B6B" },
             ].map((stat) => (
-              <div key={stat.label} className="bg-[#1a1a1a] border border-[#333] rounded-xl p-5">
+              <div key={stat.label} className="bg-[#1a1a1a] border border-white/10 rounded-xl p-5">
                 <p className="text-gray-400 text-sm">{stat.label}</p>
                 <p className="text-2xl font-bold mt-1" style={{ color: stat.color }}>
                   {stat.value}
@@ -292,7 +292,7 @@ export default function AdminReferrals() {
                   onClick={() => setTierFilter(f)}
                   className={`px-3 py-1 rounded-full text-xs font-medium border transition ${
                     tierFilter === f
-                      ? "border-[#00FF9F] text-[#00FF9F]"
+                      ? "border-[#2F6BFF] text-[#7AA0FF]"
                       : "border-[#444] text-gray-400 hover:border-[#666]"
                   }`}
                 >
@@ -303,7 +303,7 @@ export default function AdminReferrals() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-gray-400 border-b border-[#333]">
+                  <tr className="text-gray-400 border-b border-white/10">
                     <th className="text-left p-3">Name / Email</th>
                     <th className="text-left p-3">Code</th>
                     <th className="text-left p-3">Tier</th>
@@ -323,7 +323,7 @@ export default function AdminReferrals() {
                         <div className="text-xs text-gray-500">{r.email}</div>
                       </td>
                       <td className="p-3">
-                        <code className="text-[#00FF9F] text-xs bg-[#0d0d0d] px-2 py-1 rounded">
+                        <code className="text-[#7AA0FF] text-xs bg-[#0d0d0d] px-2 py-1 rounded">
                           {r.referral_code}
                         </code>
                         {r.parent_code && (
@@ -347,7 +347,7 @@ export default function AdminReferrals() {
                       </td>
                       <td className="p-3 text-right">{r.l1_referrals}</td>
                       <td className="p-3 text-right">{r.l2_referrals}</td>
-                      <td className="p-3 text-right text-[#00FF9F]">${r.total_earned}</td>
+                      <td className="p-3 text-right text-[#7AA0FF]">${r.total_earned}</td>
                       <td className="p-3 text-right text-yellow-400">
                         ${r.unpaid}
                       </td>
@@ -380,7 +380,7 @@ export default function AdminReferrals() {
                                 r.tier === "standard" ? "founding" : "standard"
                               )
                             }
-                            className="px-2 py-1 text-xs bg-[#00FF9F]/10 text-[#00FF9F] rounded hover:bg-[#00FF9F]/20 transition"
+                            className="px-2 py-1 text-xs bg-[#2F6BFF]/10 text-[#7AA0FF] rounded hover:bg-[#2F6BFF]/20 transition"
                             title={`Switch to ${r.tier === "standard" ? "founding" : "standard"}`}
                           >
                             🔄
@@ -414,7 +414,7 @@ export default function AdminReferrals() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-gray-400 border-b border-[#333]">
+                <tr className="text-gray-400 border-b border-white/10">
                   <th className="text-left p-3">Date</th>
                   <th className="text-left p-3">Referrer</th>
                   <th className="text-left p-3">Level</th>
@@ -433,7 +433,7 @@ export default function AdminReferrals() {
                       {new Date(t.created_at).toLocaleDateString()}
                     </td>
                     <td className="p-3">
-                      <code className="text-[#00FF9F] text-xs">{t.referral_code}</code>
+                      <code className="text-[#7AA0FF] text-xs">{t.referral_code}</code>
                       <span className="text-gray-500 text-xs ml-1">
                         ({t.tier})
                       </span>
@@ -442,7 +442,7 @@ export default function AdminReferrals() {
                       <span
                         className={`px-2 py-0.5 rounded text-xs ${
                           t.level === 1
-                            ? "bg-[#00FF9F]/10 text-[#00FF9F]"
+                            ? "bg-[#2F6BFF]/10 text-[#7AA0FF]"
                             : "bg-purple-900/30 text-purple-400"
                         }`}
                       >
@@ -456,7 +456,7 @@ export default function AdminReferrals() {
                       </span>
                     </td>
                     <td className="p-3 text-right">${t.amount_paid}</td>
-                    <td className="p-3 text-right text-[#00FF9F] font-medium">
+                    <td className="p-3 text-right text-[#7AA0FF] font-medium">
                       ${t.commission}
                     </td>
                     <td className="p-3 text-xs text-gray-500">
@@ -484,7 +484,7 @@ export default function AdminReferrals() {
         {/* Add Founding Tab */}
         {activeTab === "add" && (
           <div className="max-w-lg">
-            <div className="bg-[#1a1a1a] border border-[#333] rounded-xl p-6">
+            <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-6">
               <h2 className="text-xl font-bold mb-1">Add Founding Affiliate</h2>
               <p className="text-gray-400 text-sm mb-6">
                 Founding affiliates get 10% L1 + 5% L2 commissions for 36 months.
@@ -510,7 +510,7 @@ export default function AdminReferrals() {
                     value={addEmail}
                     onChange={(e) => setAddEmail(e.target.value)}
                     placeholder="kim@example.com"
-                    className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#00FF9F]"
+                    className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#2F6BFF]"
                   />
                 </div>
                 <div className="mb-6">
@@ -520,7 +520,7 @@ export default function AdminReferrals() {
                     value={addName}
                     onChange={(e) => setAddName(e.target.value)}
                     placeholder="Kim"
-                    className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#00FF9F]"
+                    className="w-full px-4 py-3 bg-[#0d0d0d] border border-[#444] rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#2F6BFF]"
                   />
                 </div>
                 <button
@@ -533,11 +533,11 @@ export default function AdminReferrals() {
             </div>
 
             {/* Tier comparison */}
-            <div className="mt-6 bg-[#1a1a1a] border border-[#333] rounded-xl p-6">
+            <div className="mt-6 bg-[#1a1a1a] border border-white/10 rounded-xl p-6">
               <h3 className="font-bold mb-4">Tier Comparison</h3>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-gray-400 border-b border-[#333]">
+                  <tr className="text-gray-400 border-b border-white/10">
                     <th className="text-left p-2"></th>
                     <th className="text-left p-2">📋 Standard</th>
                     <th className="text-left p-2">⭐ Founding</th>
@@ -556,7 +556,7 @@ export default function AdminReferrals() {
                   </tr>
                   <tr className="border-b border-[#222]">
                     <td className="p-2 text-gray-400">Duration</td>
-                    <td className="p-2 text-[#00FF9F]">Forever</td>
+                    <td className="p-2 text-[#7AA0FF]">Forever</td>
                     <td className="p-2">36 months</td>
                   </tr>
                   <tr className="border-b border-[#222]">

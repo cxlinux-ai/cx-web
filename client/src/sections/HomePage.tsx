@@ -1,44 +1,169 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, ReactNode } from "react";
 import { Link } from "wouter";
+import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { updateSEO, seoConfigs } from "@/lib/seo";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 import {
-  Terminal,
   Copy,
   Check,
-  Shield,
   Play,
   Pause,
   Volume2,
   VolumeX,
   Maximize,
-  Clock,
-  Server,
-  Lock,
+  ArrowRight,
+  ShieldCheck,
+  BadgeCheck,
+  Users,
+  Timer,
   Eye,
   Undo2,
+  Server,
+  Shield,
+  Rocket,
+  Activity,
+  Network,
   FileText,
-  Users,
-  Building2,
-  ChevronRight,
-  ChevronDown,
-  ArrowRight,
-  Sparkles,
-  X,
-  MessageCircle,
-  ShieldCheck,
+  Terminal,
+  CheckCircle,
 } from "lucide-react";
-
 import { FaDiscord, FaReddit } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
 import { FleetMetricsPanel } from "@/components/HomeIllustrations";
-import { RotatingBorderCard } from "@/components/RotatingBorderCard";
 
 // ============================================
-// CX Linux - Admin-Focused Homepage
+// CX Linux — homepage
+// Structure: full-width alternating bands (baier-transport pattern) —
+// hero band with action card, marquee strip, icon stats bar, staggered
+// card grids, circle-step walkthrough, split feature, gradient CTA banner.
 // ============================================
+
+/* ── Live terminal demo ──────────────────────────────────────────────────── */
+
+type TermLine = {
+  text: string;
+  cls?: string;
+  prompt?: boolean;
+  typed?: boolean;
+  pause?: number;
+};
+
+const SCENARIOS: TermLine[][] = [
+  [
+    { text: 'cx "set up nginx with tls for api.acme.dev"', prompt: true, typed: true },
+    { text: "plan — 3 commands · 1 config write", cls: "text-white/40", pause: 500 },
+    { text: "  1  apt-get install -y nginx", cls: "text-white/75", pause: 210 },
+    { text: "  2  certbot --nginx -d api.acme.dev", cls: "text-white/75", pause: 210 },
+    { text: "  3  systemctl reload nginx", cls: "text-white/75", pause: 210 },
+    { text: "run plan? [y/N] y", cls: "text-white/40", pause: 900 },
+    { text: "✓ done in 8.2s — rollback point saved", cls: "text-[#4ade80]", pause: 600 },
+  ],
+  [
+    { text: 'cx "what is eating my disk?"', prompt: true, typed: true },
+    { text: "/var/log/journal      4.1 GB   61%", cls: "text-white/75", pause: 420 },
+    { text: "/var/cache/apt        1.2 GB   18%", cls: "text-white/75", pause: 240 },
+    { text: "suggest: journalctl --vacuum-size=500M", cls: "text-white/40", pause: 700 },
+    { text: "run suggestion? [y/N] y", cls: "text-white/40", pause: 900 },
+    { text: "✓ freed 3.6 GB", cls: "text-[#4ade80]", pause: 600 },
+  ],
+  [
+    { text: 'cx "patch openssl across the fleet"', prompt: true, typed: true },
+    { text: "fleet — 12 servers reachable", cls: "text-white/40", pause: 500 },
+    { text: "web-01 … web-08        ✓ patched", cls: "text-white/75", pause: 420 },
+    { text: "db-01 … db-04          ✓ patched", cls: "text-white/75", pause: 420 },
+    { text: "✓ fleet consistent — 0 drift", cls: "text-[#4ade80]", pause: 600 },
+  ],
+];
+
+function TerminalDemo() {
+  const [lines, setLines] = useState<TermLine[]>([]);
+  const [partial, setPartial] = useState<string | null>(null);
+  const [scenario, setScenario] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setLines(SCENARIOS[0]);
+      return;
+    }
+
+    let cancelled = false;
+    const timers: number[] = [];
+    const wait = (ms: number) =>
+      new Promise<void>((res) => {
+        timers.push(window.setTimeout(res, ms));
+      });
+
+    (async () => {
+      const script = SCENARIOS[scenario];
+      setLines([]);
+      setPartial(null);
+      await wait(650);
+
+      for (const line of script) {
+        if (cancelled) return;
+        if (line.typed) {
+          for (let i = 1; i <= line.text.length; i++) {
+            if (cancelled) return;
+            setPartial(line.text.slice(0, i));
+            await wait(26);
+          }
+          await wait(340);
+          setPartial(null);
+          setLines((prev) => [...prev, line]);
+        } else {
+          await wait(line.pause ?? 300);
+          if (cancelled) return;
+          setLines((prev) => [...prev, line]);
+        }
+      }
+
+      await wait(2800);
+      if (!cancelled) setScenario((s) => (s + 1) % SCENARIOS.length);
+    })();
+
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
+  }, [scenario]);
+
+  return (
+    <div className="cx-term w-full" aria-hidden>
+      <div className="cx-term-head">
+        <span className="cx-term-dot" />
+        <span className="cx-term-dot" />
+        <span className="cx-term-dot" />
+        <span className="cx-term-title">cx — ssh root@prod-web-01</span>
+        <span className="ml-auto flex items-center gap-2">
+          <span className="cx-dot-ok" />
+          <span className="cx-term-title !ml-0">live</span>
+        </span>
+      </div>
+      <div className="cx-term-body">
+        {lines.map((l, i) => (
+          <div key={i} className={l.cls ?? "text-white"}>
+            {l.prompt && <span className="text-[#7AA0FF]">$ </span>}
+            {l.text}
+          </div>
+        ))}
+        {partial !== null ? (
+          <div className="text-white">
+            <span className="text-[#7AA0FF]">$ </span>
+            {partial}
+            <span className="cx-caret" />
+          </div>
+        ) : (
+          <div>
+            <span className="text-[#7AA0FF]">$ </span>
+            <span className="cx-caret" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── Demo video player (existing capture) ────────────────────────────────── */
 
 function VideoPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -130,7 +255,7 @@ function VideoPlayer() {
       {/* Error fallback */}
       <div
         style={{ display: "none" }}
-        className="w-full h-full items-center justify-center bg-[#0A0A0A] text-gray-500 text-sm text-center px-6"
+        className="w-full h-full items-center justify-center bg-[#0a0a0d] text-gray-500 text-sm text-center px-6"
         role="img"
         aria-label="Demo video unavailable"
       >
@@ -154,7 +279,7 @@ function VideoPlayer() {
           transform: hovered ? "translateY(0)" : "translateY(6px)",
         }}
       >
-        <div className="bg-black/50 backdrop-blur-md border border-white/[0.08] rounded-xl px-3 pt-2 pb-2.5 pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        <div className="bg-black/50 backdrop-blur-md border border-white/[0.08] rounded-lg px-3 pt-2 pb-2.5 pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
 
           {/* Progress bar */}
           <div
@@ -164,48 +289,40 @@ function VideoPlayer() {
             onMouseMove={handleScrubMove}
             onMouseLeave={() => setScrub(null)}
           >
-            {/* Scrub time tooltip */}
             {scrub && (
               <div
-                className="absolute -top-7 -translate-x-1/2 bg-[#111] border border-white/10 text-white/90 text-[10px] font-mono px-2 py-0.5 rounded-md pointer-events-none shadow-lg whitespace-nowrap z-10"
+                className="absolute -top-7 -translate-x-1/2 bg-[#0e0e12] border border-white/10 text-white/90 text-[10px] font-mono px-2 py-0.5 rounded-md pointer-events-none shadow-lg whitespace-nowrap z-10"
                 style={{ left: scrub.x }}
               >
                 {fmt(scrub.time)}
               </div>
             )}
-            {/* Track */}
             <div className="w-full h-[3px] group-hover/bar:h-[4px] bg-white/10 rounded-full relative transition-all duration-150">
-              {/* Buffered */}
               <div className="absolute inset-y-0 left-0 bg-white/15 rounded-full" style={{ width: `${buffered}%` }} />
-              {/* Played */}
-              <div className="absolute inset-y-0 left-0 bg-[#00FF9F] rounded-full transition-none" style={{ width: `${progress}%` }}>
-                {/* Scrub handle */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[13px] h-[13px] bg-white rounded-full shadow-[0_0_8px_rgba(0,255,159,0.5)] scale-0 group-hover/bar:scale-100 transition-transform duration-150 origin-center" />
+              <div className="absolute inset-y-0 left-0 bg-[#2F6BFF] rounded-full transition-none" style={{ width: `${progress}%` }}>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[13px] h-[13px] bg-white rounded-full shadow-[0_0_8px_rgba(47,107,255,0.5)] scale-0 group-hover/bar:scale-100 transition-transform duration-150 origin-center" />
               </div>
             </div>
           </div>
 
           {/* Controls row */}
           <div className="flex items-center gap-1.5">
-            {/* Play / Pause */}
             <button
               onClick={togglePlay}
-              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all"
+              className="w-7 h-7 flex items-center justify-center rounded-md text-white/70 hover:text-white hover:bg-white/10 transition-all"
               aria-label={playing ? "Pause" : "Play"}
             >
               {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 translate-x-px" />}
             </button>
 
-            {/* Mute */}
             <button
               onClick={toggleMute}
-              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all"
+              className="w-7 h-7 flex items-center justify-center rounded-md text-white/70 hover:text-white hover:bg-white/10 transition-all"
               aria-label={muted ? "Unmute" : "Mute"}
             >
               {muted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
             </button>
 
-            {/* Time */}
             <span className="text-[11px] font-mono tabular-nums ml-1 text-white/40">
               <span className="text-white/75">{fmt(currentTime)}</span>
               <span className="mx-1">/</span>
@@ -214,10 +331,9 @@ function VideoPlayer() {
 
             <div className="flex-1" />
 
-            {/* Fullscreen */}
             <button
               onClick={() => containerRef.current?.requestFullscreen?.()}
-              className="w-7 h-7 flex items-center justify-center rounded-lg text-white/40 hover:text-white hover:bg-white/10 transition-all"
+              className="w-7 h-7 flex items-center justify-center rounded-md text-white/40 hover:text-white hover:bg-white/10 transition-all"
               aria-label="Fullscreen"
             >
               <Maximize className="w-3.5 h-3.5" />
@@ -232,8 +348,8 @@ function VideoPlayer() {
           onClick={togglePlay}
           className="absolute inset-0 flex items-center justify-center group pointer-events-auto"
         >
-          <div className="w-16 h-16 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 group-hover:border-[#00FF9F]/50 group-hover:bg-black/75 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-all duration-200">
-            <Play className="w-6 h-6 text-white/90 group-hover:text-[#00FF9F] translate-x-0.5 transition-colors" />
+          <div className="w-16 h-16 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 group-hover:border-[#2F6BFF]/60 group-hover:bg-black/75 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-all duration-200">
+            <Play className="w-6 h-6 text-white/90 group-hover:text-[#7AA0FF] translate-x-0.5 transition-colors" />
           </div>
         </button>
       )}
@@ -241,576 +357,540 @@ function VideoPlayer() {
   );
 }
 
+/* ── Section scaffolding (baier band pattern) ────────────────────────────── */
+
+type BandVariant = "plain" | "soft" | "elevated";
+
+const BAND_STYLES: Record<BandVariant, string> = {
+  plain: "bg-transparent",
+  soft: "bg-[#0c0c0f]",
+  elevated: "bg-[#0e0e12] border-y border-white/[0.08]",
+};
+
+function Section({
+  title,
+  subtitle,
+  background = "plain",
+  id,
+  children,
+}: {
+  title?: string;
+  subtitle?: string;
+  background?: BandVariant;
+  id?: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className={`py-16 md:py-24 ${BAND_STYLES[background]}`}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {(title || subtitle) && (
+          <div className="text-center mb-12 md:mb-16">
+            {title && (
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <p className="mt-4 text-lg text-white/55 max-w-2xl mx-auto">{subtitle}</p>
+            )}
+          </div>
+        )}
+        {children}
+      </div>
+    </section>
+  );
+}
+
+const INSTALL_CMD = "curl -fsSL cxlinux.com/install | sh";
+
+function CopyCmd({ light = false }: { light?: boolean }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      className={`cx-cmd ${light ? "!border-white/30 hover:!border-white/60" : ""}`}
+      onClick={() => {
+        navigator.clipboard.writeText(INSTALL_CMD);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      aria-label="Copy install command"
+    >
+      <span className="cx-cmd-prompt">$</span>
+      <span>{INSTALL_CMD}</span>
+      {copied ? (
+        <Check className="w-3.5 h-3.5 text-[#4ade80]" />
+      ) : (
+        <Copy className="w-3.5 h-3.5 opacity-50" />
+      )}
+    </button>
+  );
+}
+
+/* ── Content data ────────────────────────────────────────────────────────── */
+
+const TRUST_BADGES = [
+  { label: "Sandboxed & reversible", icon: ShieldCheck },
+  { label: "60-second install", icon: Timer },
+  { label: "2,400+ engineers", icon: Users },
+  { label: "Free for personal use", icon: BadgeCheck },
+];
+
+const STATS = [
+  { value: 2400, format: (n: number) => `${n.toLocaleString("en-US")}+`, label: "Engineers in Discord", icon: Users },
+  { value: 60, format: (n: number) => `${n} s`, label: "Median Install Time", icon: Timer },
+  { value: 100, format: (n: number) => `${n} %`, label: "Previewed Before Run", icon: Eye },
+  { value: 1, format: (n: number) => `${n} key`, label: "Atomic Rollback", icon: Undo2 },
+];
+
+/* Count-up number that animates when scrolled into view. */
+function CountUp({ value, format }: { value: number; format: (n: number) => string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setN(value);
+      return;
+    }
+    const t0 = performance.now();
+    const dur = 1300;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setN(Math.round(value * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+
+  return <span ref={ref}>{format(n)}</span>;
+}
+
+const SERVICES = [
+  {
+    icon: Server,
+    title: "Server Setup",
+    description: "Provision nginx, Postgres, Docker, anything — described in a sentence, configured in seconds.",
+  },
+  {
+    icon: Shield,
+    title: "Security & Firewalls",
+    description: "Harden SSH, configure ufw and iptables, rotate keys — with a preview of every rule before it applies.",
+  },
+  {
+    icon: Rocket,
+    title: "Deployments",
+    description: "Ship apps, wire up CI runners, and roll a bad release back with a single keystroke.",
+  },
+  {
+    icon: Activity,
+    title: "Diagnostics",
+    description: "“Why is disk at 94%?” CX finds the culprit, explains it, and suggests the fix.",
+  },
+  {
+    icon: Network,
+    title: "Fleet Operations",
+    description: "Patch and configure every server you can SSH into — from one prompt, with per-host results.",
+  },
+  {
+    icon: FileText,
+    title: "Audit & Rollback",
+    description: "Every action logged with user, timestamp, and output. Every change reversible.",
+  },
+];
+
+const STEPS = [
+  {
+    number: "1",
+    title: "Describe the task",
+    description:
+      "Plain English, straight into your terminal. No man pages, no Stack Overflow tabs, no syntax to memorize.",
+    icon: Terminal,
+  },
+  {
+    number: "2",
+    title: "Review the plan",
+    description:
+      "CX shows the exact command list before anything touches the machine. No surprises, no accidents.",
+    icon: Eye,
+  },
+  {
+    number: "3",
+    title: "Approve & ship",
+    description:
+      "One keystroke runs it all, sandboxed and logged. Anything goes sideways — one keystroke rolls it back.",
+    icon: CheckCircle,
+  },
+];
+
+const FLEET_BULLETS = [
+  "Any distro you can SSH into — Ubuntu, Debian, RHEL, Arch, and more",
+  "Per-host previews and results, one prompt for the whole fleet",
+  "Zero drift: every server ends up in the same verified state",
+  "Rollback points saved on every host, every run",
+];
+
+const gridContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const gridItem = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+/* ── Page ────────────────────────────────────────────────────────────────── */
+
 export default function HomePage() {
-  // SEO
   updateSEO(seoConfigs.home);
 
-  const [copiedApt, setCopiedApt] = useState(false);
-  const [copiedNpm, setCopiedNpm] = useState(false);
-  const [copiedInstall, setCopiedInstall] = useState(false);
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
-
-  const copyToClipboard = (text: string, type: "apt" | "npm") => {
-    navigator.clipboard.writeText(text);
-    if (type === "apt") {
-      setCopiedApt(true);
-      setTimeout(() => setCopiedApt(false), 2000);
-    } else {
-      setCopiedNpm(true);
-      setTimeout(() => setCopiedNpm(false), 2000);
-    }
-  };
-
-  const aptCommand = 'sudo apt update && sudo apt install cx-terminal && cx "your command here"';
-  const npmCommand = "npm install -g cx-cli";
+  const { scrollYProgress } = useScroll();
+  const progressX = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 });
 
   return (
-    <div className="min-h-screen bg-[#1E1E1E] text-white">
-      {/* Hero Section, WIFM: User outcome first */}
-      <section className="relative min-h-[600px] flex flex-col justify-center px-4 py-16 md:py-24 overflow-hidden">
-        {/* Real photo: dark server room (Unsplash, Taylor Vick) */}
-        <div className="pointer-events-none absolute inset-0">
+    <div className="min-h-screen text-white">
+      {/* Scroll progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left bg-gradient-to-r from-[#2F6BFF] via-[#5B8CFF] to-[#7AA0FF]"
+        style={{ scaleX: progressX }}
+        aria-hidden
+      />
+      {/* ── Hero band — split layout, terminal action card ── */}
+      <section className="relative overflow-hidden bg-[#0e0e12]">
+        {/* Background: product capture, heavily darkened */}
+        <div className="absolute inset-0 overflow-hidden" aria-hidden>
           <img
-            src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=2000&q=80"
+            src="/cx-distro-poster.jpg"
             alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.45]"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1E1E1E]/70 via-[#1E1E1E]/60 to-[#1E1E1E]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(0,255,159,0.08)_0%,transparent_65%)]" />
-          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.8" fill="#00FF9F" fillOpacity="0.12" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1E1E1E]" />
-        </div>
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/25">
-            <Sparkles className="w-3 h-3 text-[#00FF9F]" />
-            <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">Preview · Approve · Rollback</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Stop Googling Linux Commands.
-            <br />
-            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Just Tell CX What You Need.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-400 mb-4 max-w-2xl mx-auto">
-            Set up servers, configure firewalls, deploy apps, in plain English.
-            <br className="hidden md:block" />
-            CX handles the commands. You stay in control.
-          </p>
-          <p className="text-sm text-gray-500 mb-8">
-            Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.
-          </p>
-
-          {/* Hero demo video */}
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-[#0A0A0A] border border-[#333] rounded-xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-video">
-              <VideoPlayer />
-            </div>
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link href="/getting-started">
-              <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-8 py-3 text-base">
-                Install in 60s, free <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-            <Link href="/pricing">
-              <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10 px-8 py-3 text-base">
-                See pricing
-              </Button>
-            </Link>
-          </div>
-
-          {/* Trust strip, only verifiable facts */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
-            <a
-              href="https://discord.gg/q4FUyBW6z"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#00FF9F] transition-colors"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-[#00FF9F]" />
-              <span><span className="text-gray-300 font-medium">2,400+</span> engineers in Discord</span>
-            </a>
-            <span className="text-gray-700">·</span>
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00FF9F]" />
-              <span>Sandboxed · previewed · reversible</span>
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Fleet dashboard showcase */}
-      <section className="relative py-24 px-4 overflow-hidden border-t border-white/[0.05]">
-        {/* Cinematic depth: radial + mesh */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_70%_at_60%_50%,rgba(0,255,159,0.04)_0%,transparent_65%)]" />
-          <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00FF9F" strokeWidth="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1E1E1E] via-transparent to-[#1E1E1E]/60" />
+          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#08080a]/85 to-[#08080a]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-transparent to-transparent" />
         </div>
 
-        {/* 42 / 58 asymmetric split */}
-        <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16 items-center">
-          {/* Left, 42% */}
-          <div className="w-full md:w-[42%] order-2 md:order-1 flex-shrink-0">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-6 rounded-md bg-[#00FF9F]/[0.08] border border-[#00FF9F]/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]" />
-              <span className="text-[10px] uppercase tracking-[0.16em] font-semibold text-[#00FF9F]">One brain, your whole fleet</span>
-            </div>
-            <h2 className="text-[2rem] md:text-[2.4rem] font-bold mb-4 leading-[1.1] tracking-[-0.01em] text-[#F3F5F7]">
-              One prompt.
-              <br />
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Every server.</span>
-            </h2>
-            <p className="text-[#9CA3AF] text-base mb-7 leading-relaxed max-w-sm">
-              Works on Ubuntu, Debian, RHEL, Arch—any Linux distro you SSH into.
-            </p>
-            <Link href="/getting-started">
-              <Button
-                className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-5 py-2.5 text-sm h-auto"
-              >
-                Install in 60s, free <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-              </Button>
-            </Link>
-          </div>
-
-          {/* Right, 58% */}
-          <div className="w-full md:w-[58%] order-1 md:order-2">
-            <FleetMetricsPanel />
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20 px-4 border-t border-white/[0.05]">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">
-              How It{" "}
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Works</span>
-            </h2>
-            <p className="text-gray-500">From English to executed, in seconds.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-[4.5rem] left-[calc(33.33%+1.25rem)] right-[calc(33.33%+1.25rem)] h-px bg-gradient-to-r from-[#00FF9F]/20 via-[#00FF9F]/50 to-[#00FF9F]/20" />
-
-            {/* Step 1 */}
-            <div className="bg-[#111111] border border-white/[0.08] rounded-2xl p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#00FF9F]/10 border border-[#00FF9F]/20 flex items-center justify-center mb-5">
-                <span className="text-[#00FF9F] font-black text-sm">1</span>
-              </div>
-              <div className="bg-black/60 border border-[#1E1E1E] rounded-xl p-4 font-mono text-sm mb-5 h-[82px] flex items-center">
-                <span className="text-[#00FF9F]">$</span>
-                <span className="text-gray-400"> cx </span>
-                <span className="text-white">"set up nginx"</span>
-                <span className="ml-0.5 inline-block w-[7px] h-[15px] bg-[#00FF9F] animate-pulse rounded-sm" />
-              </div>
-              <h3 className="font-semibold text-white mb-2 text-sm">Describe the task</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">Plain English. No man pages, no Stack Overflow, no syntax to memorize.</p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="bg-[#111111] border border-white/[0.08] rounded-2xl p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#00FF9F]/10 border border-[#00FF9F]/20 flex items-center justify-center mb-5">
-                <span className="text-[#00FF9F] font-black text-sm">2</span>
-              </div>
-              <div className="bg-black/60 border border-[#1E1E1E] rounded-xl p-4 font-mono text-xs mb-5 h-[82px] space-y-1.5 overflow-hidden">
-                <div className="text-gray-600 mb-1.5">CX will run:</div>
-                <div className="text-[#00FF9F]">$ sudo apt install nginx</div>
-                <div className="text-[#00FF9F]">$ sudo tee /etc/nginx/...</div>
-                <div className="text-[#00FF9F]">$ sudo systemctl reload</div>
-              </div>
-              <h3 className="font-semibold text-white mb-2 text-sm">Review commands</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">See exactly what will run before anything happens. You're always in control.</p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="bg-[#111111] border border-white/[0.08] rounded-2xl p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#00FF9F]/10 border border-[#00FF9F]/20 flex items-center justify-center mb-5">
-                <span className="text-[#00FF9F] font-black text-sm">3</span>
-              </div>
-              <div className="bg-black/60 border border-[#1E1E1E] rounded-xl p-4 font-mono text-xs mb-5 h-[82px] space-y-1.5">
-                <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">nginx installed</span></div>
-                <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">config written</span></div>
-                <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">test: syntax ok</span></div>
-                <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-[#00FF9F] font-semibold">done in 8s</span></div>
-              </div>
-              <h3 className="font-semibold text-white mb-2 text-sm">Approve & ship</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">One keystroke runs it all. Instant rollback available if anything goes wrong.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: Security */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        {/* Real photo: cybersecurity / circuit board (Unsplash, Michael Dziedzic) */}
-        <div className="pointer-events-none absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.07]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-l from-[#1E1E1E] via-[#1E1E1E]/90 to-[#1E1E1E]/70" />
-        </div>
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left: real photo, padlock on binary code (Unsplash, FLY:D) */}
-            <div className="order-2 md:order-1 relative">
-              <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[4/5]">
-                <img
-                  src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1400&q=85"
-                  alt="Encrypted command execution"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00FF9F]/[0.05] via-transparent to-black/40" />
-
-                {/* Floating compliance badges */}
-                <div className="absolute top-5 left-5 flex flex-wrap gap-2 max-w-[80%]">
-                  {["SOC2 Type II", "ISO 27001", "GDPR", "HIPAA"].map((b) => (
-                    <span
-                      key={b}
-                      className="px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-black/70 backdrop-blur-md border border-[#00FF9F]/25 text-[#00FF9F]"
-                    >
-                      {b}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Bottom info card */}
-                <div className="absolute bottom-5 left-5 right-5 bg-black/70 backdrop-blur-md border border-white/[0.08] rounded-xl px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#00FF9F]/10 border border-[#00FF9F]/25 flex items-center justify-center flex-shrink-0">
-                      <Lock className="w-4 h-4 text-[#00FF9F]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-white font-semibold text-sm">Zero-trust execution</div>
-                      <div className="text-gray-400 text-xs">Sandboxed · previewed · audited · reversible</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute -inset-6 bg-[#00FF9F]/[0.05] blur-3xl rounded-3xl -z-10" />
-            </div>
-
-            {/* Right: feature cards */}
-            <div className="order-1 md:order-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-5 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/20">
-                <Shield className="w-3 h-3 text-[#00FF9F]" />
-                <span className="text-[11px] uppercase tracking-widest font-semibold text-[#00FF9F]">Zero-trust by default</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-5 leading-tight">
-                Built for{" "}
-                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">secure</span>{" "}
-                operations.
-              </h2>
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                Every command runs in a sandbox, previewed before execution, rollback-ready,
-                and fully audited, so your auditors and your blast radius both stay small.
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+            {/* Left column — 60% */}
+            <div className="lg:col-span-3 cx-hero-in">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                Stop Googling
+                <br />
+                Linux commands.
+                <br />
+                <span className="text-[#7AA0FF] cx-text-glow">Just tell CX.</span>
+              </h1>
+              <p className="mt-6 text-lg text-white/70 max-w-lg leading-relaxed">
+                Describe what you need in plain English. CX plans the exact
+                commands, shows you everything before it runs, and rolls back
+                with one keystroke.
               </p>
 
-              <div className="space-y-3 mb-8">
-                {[
-                  { icon: Lock, title: "Firejail Sandboxing", desc: "Every command runs in an isolated execution environment, never touching what it shouldn't." },
-                  { icon: Eye, title: "Preview Before Execute", desc: "See the full command list before anything runs. No surprises, no accidents." },
-                  { icon: Undo2, title: "Atomic Rollbacks", desc: "Made a mistake? Undo any change instantly with a single keystroke." },
-                  { icon: FileText, title: "Full Audit Logs", desc: "Complete command history with timestamps, user, and output for every action." },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 p-4 bg-[#0D0D0D]/80 backdrop-blur border border-[#2A2A2A] rounded-xl hover:border-[#00FF9F]/30 transition-colors">
-                    <div className="w-9 h-9 rounded-lg bg-[#00FF9F]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <item.icon className="w-4 h-4 text-[#00FF9F]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white mb-1 text-sm">{item.title}</h3>
-                      <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
+              {/* CTAs */}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link href="/getting-started" className="cx-btn cx-btn-primary cx-btn-lg">
+                  Install in 60 seconds
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <CopyCmd />
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                {TRUST_BADGES.map((badge) => (
+                  <div key={badge.label} className="flex items-center gap-1.5">
+                    <badge.icon className="w-4 h-4 text-[#7AA0FF]" />
+                    <span className="text-sm font-medium text-white/80">{badge.label}</span>
                   </div>
                 ))}
               </div>
-
-              <Link href="/pricing">
-                <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10">
-                  See pricing <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
             </div>
-          </div>
 
-          {/* Risk reversal, the CX Promise */}
-          <div className="mt-16 relative overflow-hidden rounded-2xl border border-[#00FF9F]/25 bg-gradient-to-br from-[#00FF9F]/[0.06] via-[#0D0D0D]/80 to-[#0D0D0D]/80 p-6 md:p-8">
-            <div className="absolute -top-12 -right-12 w-48 h-48 bg-[radial-gradient(ellipse_at_center,rgba(0,255,159,0.18)_0%,transparent_70%)] blur-2xl pointer-events-none" />
-            <div className="relative flex flex-col md:flex-row gap-6 items-start md:items-center">
-              <div className="w-14 h-14 rounded-2xl bg-[#00FF9F]/15 border border-[#00FF9F]/30 flex items-center justify-center flex-shrink-0">
-                <ShieldCheck className="w-7 h-7 text-[#00FF9F]" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">The CX Promise</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  CX will never run a command without your explicit approval. Every action is sandboxed, previewed, and reversible.
-                  If our cloud-powered Pro plan doesn't save you time in your first 14 days, we'll refund every dollar.
-                </p>
+            {/* Right column — 40% */}
+            <div className="lg:col-span-2 cx-rise-late">
+              <div className="cx-float">
+                <TerminalDemo />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3: Pricing */}
-      <section className="py-20 px-4 bg-[#080808]">
-        <div className="max-w-[1180px] mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-              Simple{" "}
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Transparent</span>{" "}
-              Pricing
-            </h2>
-            <p className="text-gray-400 mb-3">Start free, scale as you grow. All paid plans include a 14-day free trial.</p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00FF9F]/[0.06] border border-[#00FF9F]/20">
-              <Clock className="w-3 h-3 text-[#00FF9F]" />
-              <span className="text-xs text-gray-300">
-                <span className="font-semibold text-[#00FF9F]">Beta pricing locked</span> through public launch, annual plans rate-lock for 12 months.
-              </span>
-            </div>
-          </div>
+      {/* ── Stats bar ── */}
+      <section className="bg-[#0c0c0f] border-y border-white/[0.08] py-4">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            className="grid grid-cols-2 lg:grid-cols-4 gap-2"
+            variants={gridContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-40px" }}
+          >
+            {STATS.map((stat) => (
+              <motion.div
+                key={stat.label}
+                variants={gridItem}
+                className="flex flex-col items-center text-center px-4 py-6"
+              >
+                <div className="cx-breathe flex items-center justify-center w-12 h-12 rounded-xl bg-[#2F6BFF]/10 text-[#7AA0FF] mb-3">
+                  <stat.icon className="w-6 h-6" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white tracking-tight tabular-nums">
+                  <CountUp value={stat.value} format={stat.format} />
+                </div>
+                <div className="mt-1 text-sm text-white/50 font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-          {/* Billing toggle */}
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex items-center gap-1 p-1 rounded-full bg-white/[0.05] border border-white/[0.08]">
-              <button
-                onClick={() => setBillingCycle("monthly")}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${billingCycle === "monthly" ? "bg-white text-black shadow-sm" : "text-gray-400"}`}
+      {/* ── Services grid ── */}
+      <Section
+        title="What CX Handles For You"
+        subtitle="One tool for the whole job — from a fresh VPS to a hardened, audited fleet."
+      >
+        <motion.div
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {SERVICES.map((service) => (
+            <motion.div key={service.title} variants={gridItem}>
+              <Link
+                href="/getting-started"
+                className="cx-card group flex h-full flex-col p-6"
               >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBillingCycle("annual")}
-                className={`flex items-center gap-2 px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${billingCycle === "annual" ? "bg-white text-black shadow-sm" : "text-gray-400"}`}
-              >
-                Annual
-                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full transition-colors ${billingCycle === "annual" ? "bg-[#00FF9F] text-black" : "bg-[#00FF9F]/20 text-[#00FF9F]"}`}>
-                  2 months free
+                <div className="cx-icon-tile mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[#2F6BFF]/12">
+                  <service.icon className="h-5 w-5 text-[#7AA0FF]" />
+                </div>
+                <h3 className="text-lg font-semibold text-white">{service.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-white/50">
+                  {service.description}
+                </p>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-[#7AA0FF]">
+                  Learn more
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
-              </button>
-            </div>
-          </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      </Section>
 
-          <PricingCards isAnnual={billingCycle === "annual"} />
-        </div>
-      </section>
+      {/* ── How it works ── */}
+      <Section
+        background="soft"
+        title="How It Works"
+        subtitle="Three simple steps from plain English to executed — and reversible."
+      >
+        <div className="relative mt-4">
+          {/* Connecting line — draws itself in on scroll */}
+          <motion.div
+            className="absolute left-1/2 top-8 hidden h-0.5 w-[calc(66%-120px)] -translate-x-1/2 origin-left bg-gradient-to-r from-[#2F6BFF]/15 via-[#2F6BFF]/45 to-[#2F6BFF]/15 lg:block"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          />
 
-      {/* Final CTA, split-card design with animated border, copyable install command, and trust bar */}
-      <section className="relative py-24 px-4 overflow-hidden bg-[#1E1E1E]">
-        <div className="max-w-6xl mx-auto">
-          <RotatingBorderCard patternId="homeFinalCtaGrid" innerClassName="px-6 sm:px-10 md:px-14 py-14 md:py-16">
-            <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-              {/* Left: copy + CTAs */}
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-[#00FF9F]/10 border border-[#00FF9F]/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                  <Sparkles className="w-3 h-3 text-[#00FF9F]" />
-                  <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#00FF9F]">60-second install</span>
+          <div className="grid gap-12 lg:grid-cols-3 lg:gap-8">
+            {STEPS.map((step, i) => (
+              <motion.div
+                key={step.number}
+                className="relative text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2, duration: 0.5 }}
+              >
+                <div className="cx-ring relative mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#2F6BFF] text-white shadow-[0_10px_30px_rgba(47,107,255,0.35)]">
+                  <step.icon className="h-7 w-7" />
+                  <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-[#08080a] shadow">
+                    {step.number}
+                  </span>
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
-                  Take back your{" "}
-                  <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">weekends.</span>
-                </h2>
-                <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-                  Stop typing the same commands at 2am. Let CX handle the toil so you can focus on the work that actually moves things forward.
+                <h3 className="text-xl font-semibold text-white">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/50 max-w-xs mx-auto">
+                  {step.description}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                  <Link href="/getting-started">
-                    <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
-                      <span className="flex items-center">
-                        Install CX free
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </span>
-                    </Button>
-                  </Link>
-                  <Link href="/pricing">
-                    <Button
-                      variant="outline"
-                      className="w-full sm:w-auto border-white/15 bg-white/[0.02] text-white hover:bg-white/[0.06] hover:border-[#00FF9F]/40 hover:text-white px-8 py-3.5 text-base font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-                    >
-                      Compare plans
-                    </Button>
-                  </Link>
-                </div>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-500">
-                  {["Free forever for personal use", "No credit card required", "Cancel anytime"].map((t, i, arr) => (
-                    <div key={t} className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-[#00FF9F]" />
-                      <span>{t}</span>
-                      {i < arr.length - 1 && <span className="text-gray-700 ml-3">·</span>}
-                    </div>
-                  ))}
-                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ── Demo video ── */}
+      <Section
+        title="See It Run"
+        subtitle="A real session — from question to fixed, in under a minute."
+      >
+        <motion.div
+          className="cx-panel overflow-hidden aspect-video max-w-4xl mx-auto shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]"
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <VideoPlayer />
+        </motion.div>
+      </Section>
+
+      {/* ── Fleet split section ── */}
+      <Section background="soft">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              One Prompt. Every Server.
+            </h2>
+            <p className="mt-4 text-lg text-white/55">
+              Based anywhere, reaching everywhere. CX runs on any box you can
+              SSH into and keeps the whole fleet consistent — patches,
+              configs, and diagnostics from a single line of English.
+            </p>
+            <ul className="mt-6 space-y-3 text-white/55">
+              {FLEET_BULLETS.map((item, i) => (
+                <motion.li
+                  key={item}
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: i * 0.12, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#2F6BFF]" />
+                  {item}
+                </motion.li>
+              ))}
+            </ul>
+            <Link
+              href="/getting-started"
+              className="cx-btn cx-btn-primary cx-btn-lg mt-8"
+            >
+              Connect Your Fleet
+              <ArrowRight className="ml-1 w-5 h-5" />
+            </Link>
+          </div>
+          <motion.div
+            className="cx-panel overflow-hidden p-2"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <FleetMetricsPanel />
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* ── Pricing ── */}
+      <Section
+        id="pricing"
+        title="Simple, Transparent Pricing"
+        subtitle="Start free, scale as you grow. All paid plans include a 14-day free trial."
+      >
+        {/* Billing toggle */}
+        <div className="flex justify-center mb-12 -mt-4">
+          <div className="flex items-center border border-white/[0.13] rounded-lg overflow-hidden">
+            <button
+              onClick={() => setBillingCycle("monthly")}
+              className={`px-6 h-10 text-sm font-semibold transition-colors ${
+                billingCycle === "monthly" ? "bg-white/[0.08] text-white" : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              Monthly
+            </button>
+            <div className="w-px self-stretch bg-white/[0.13]" />
+            <button
+              onClick={() => setBillingCycle("annual")}
+              className={`px-6 h-10 text-sm font-semibold transition-colors ${
+                billingCycle === "annual" ? "bg-white/[0.08] text-white" : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              Annual <span className="text-[#7AA0FF] ml-1">2 months free</span>
+            </button>
+          </div>
+        </div>
+
+        <PricingCards isAnnual={billingCycle === "annual"} />
+      </Section>
+
+      {/* ── CTA banner ── */}
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative overflow-hidden rounded-2xl px-8 py-12 md:px-16 md:py-16 text-center bg-gradient-to-br from-[#0e0e12] to-[#0c0c0f] border border-white/[0.08]"
+          >
+            {/* Decorative elements — breathing blobs */}
+            <div className="cx-breathe absolute top-0 right-0 w-64 h-64 bg-[#2F6BFF]/[0.09] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="cx-breathe absolute bottom-0 left-0 w-48 h-48 bg-[#2F6BFF]/[0.07] rounded-full translate-y-1/3 -translate-x-1/3 [animation-delay:2.2s]" />
+
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight max-w-xl mx-auto text-white">
+                Take Back Your Weekends
+              </h2>
+              <p className="mt-4 text-lg text-white/60 max-w-lg mx-auto">
+                Stop typing the same commands at 2 a.m. Free forever for
+                personal use — no credit card required.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/getting-started"
+                  className="cx-btn cx-btn-primary cx-btn-lg hover:scale-105"
+                >
+                  Install CX Free
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+                <CopyCmd light />
               </div>
 
-              {/* Right: terminal install preview */}
-              <div className="relative">
-                <div className="bg-[#0A0A0A] border border-white/[0.08] rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.06)]">
-                  <div className="bg-gradient-to-b from-[#161616] to-[#0F0F0F] border-b border-white/[0.05] px-4 py-2.5 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                    </div>
-                    <span className="text-[11px] text-gray-500 ml-2 font-mono">install.sh</span>
-                    <span className="ml-auto text-[10px] text-gray-600 font-mono">~ 60s</span>
-                  </div>
-                  <div className="p-5 font-mono text-[13px] space-y-4">
-                    <div>
-                      <div className="text-gray-600 text-[11px] mb-2"># One line. Any Linux. No dependencies.</div>
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText("curl -fsSL cxlinux.com/install | sh");
-                          setCopiedInstall(true);
-                          setTimeout(() => setCopiedInstall(false), 2000);
-                        }}
-                        className="flex items-center gap-2 bg-black/50 border border-white/[0.06] hover:border-[#00FF9F]/30 rounded-lg p-3 w-full text-left transition-colors group"
-                      >
-                        <span className="text-gray-600 select-none">$</span>
-                        <code className="text-[#00FF9F] flex-1 break-all text-xs sm:text-[13px]">
-                          curl -fsSL cxlinux.com/install | sh
-                        </code>
-                        {copiedInstall ? (
-                          <Check className="w-3.5 h-3.5 text-[#00FF9F] flex-shrink-0" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5 text-gray-500 group-hover:text-gray-300 flex-shrink-0 transition-colors" />
-                        )}
-                      </button>
-                    </div>
-                    <div className="space-y-1.5 text-[11.5px]">
-                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Downloaded cx-cli (4.2 MB)</span></div>
-                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Signature verified</span></div>
-                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Installed to /usr/local/bin</span></div>
-                      <div className="flex gap-2 pt-1">
-                        <span className="text-[#00FF9F]">▶</span>
-                        <span className="text-[#00FF9F] font-semibold">Try: cx "what's eating my disk?"</span>
-                        <motion.span
-                          className="inline-block w-1.5 h-3.5 bg-[#00FF9F] align-middle"
-                          animate={{ opacity: [1, 0, 1] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Why is curl | sh safe?, addresses the biggest install anxiety */}
-                    <details className="group pt-2 -mx-1">
-                      <summary className="cursor-pointer flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#00FF9F] transition-colors select-none">
-                        <ChevronDown className="w-3 h-3 group-open:rotate-180 transition-transform" />
-                        Why is <code className="text-gray-400">curl | sh</code> safe here?
-                      </summary>
-                      <div className="mt-2 ml-4 text-[11px] text-gray-500 leading-relaxed space-y-1.5">
-                        <div>· Script is served over HTTPS from <code className="text-gray-400">cxlinux.com</code></div>
-                        <div>· Binary signature is verified before install</div>
-                        <div>· You can inspect the script before running it</div>
-                        <div>· Prefer not to pipe? <Link href="/getting-started"><a className="text-[#00FF9F] hover:underline">See manual install →</a></Link></div>
-                      </div>
-                    </details>
-                  </div>
-                </div>
-                <div className="pointer-events-none absolute -inset-4 bg-[#00FF9F]/[0.06] blur-3xl rounded-3xl -z-10" />
+              {/* Community row */}
+              <div className="mt-8 flex items-center justify-center gap-6 text-sm text-white/50">
+                <a
+                  href="https://discord.gg/q4FUyBW6z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[#5865F2] transition-colors"
+                >
+                  <FaDiscord className="w-4 h-4" />
+                  Discord
+                </a>
+                <a
+                  href="https://reddit.com/r/cxlinux"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[#FF4500] transition-colors"
+                >
+                  <FaReddit className="w-4 h-4" />
+                  r/cxlinux
+                </a>
               </div>
             </div>
-          </RotatingBorderCard>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="py-24 px-4 relative overflow-hidden">
-        {/* Background glow */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="w-[600px] h-[300px] bg-[#00FF9F]/[0.04] blur-[100px] rounded-full" />
-        </div>
-
-        <div className="max-w-4xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-full px-4 py-1.5 text-xs text-[#00FF9F] font-medium mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9F] animate-pulse" />
-            Open community
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
-            Join the CX community
-          </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-            Thousands of Linux engineers sharing configs, asking questions, building together, and making CX better every day.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-4 mb-12">
-            {/* Discord */}
-            <a
-              href="https://discord.gg/q4FUyBW6z"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-[#5865F2]/50 rounded-2xl p-6 transition-all duration-200 hover:bg-[#5865F2]/5"
-            >
-              <div className="w-12 h-12 rounded-xl bg-[#5865F2]/10 border border-[#5865F2]/20 flex items-center justify-center group-hover:bg-[#5865F2]/20 transition-colors">
-                <FaDiscord className="w-6 h-6 text-[#5865F2]" />
-              </div>
-              <div>
-                <div className="text-white font-semibold text-sm mb-0.5">Discord</div>
-                <div className="text-gray-500 text-xs leading-relaxed">Ask questions, share configs, get help from real engineers</div>
-              </div>
-              <span className="text-[#5865F2] text-xs font-medium mt-auto group-hover:underline">Join server →</span>
-            </a>
-
-            {/* Reddit */}
-            <a
-              href="https://reddit.com/r/cxlinux"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3 bg-[#111]/80 border border-white/[0.07] hover:border-[#FF4500]/40 rounded-2xl p-6 transition-all duration-200 hover:bg-[#FF4500]/[0.04]"
-            >
-              <div className="w-12 h-12 rounded-xl bg-[#FF4500]/10 border border-[#FF4500]/20 flex items-center justify-center group-hover:bg-[#FF4500]/20 transition-colors">
-                <FaReddit className="w-6 h-6 text-[#FF4500]" />
-              </div>
-              <div>
-                <div className="text-white font-semibold text-sm mb-0.5">Reddit</div>
-                <div className="text-gray-500 text-xs leading-relaxed">Longer threads, war stories, and community showcases</div>
-              </div>
-              <span className="text-[#FF4500] text-xs font-medium mt-auto group-hover:underline">Visit subreddit →</span>
-            </a>
-          </div>
-
-          <p className="text-gray-600 text-sm">
-            Already a member?{" "}
-            <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
-              Say hi on Discord
-            </a>{" "}
-            — we read every message.
-          </p>
+          </motion.div>
         </div>
       </section>
 
       <Footer />
 
-      {/* Mobile-only sticky CTA, primary action always reachable on small screens */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80 backdrop-blur-md border-t border-[#00FF9F]/20">
+      {/* Mobile-only sticky CTA */}
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] bg-[#08080a]/90 backdrop-blur-md border-t border-white/[0.08]">
         <div className="px-4 py-3">
-          <Link href="/getting-started">
-            <a className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]">
-              Install in 60s, free
-              <ArrowRight className="w-4 h-4" />
-            </a>
+          <Link href="/getting-started" className="cx-btn cx-btn-primary w-full">
+            Install in 60 seconds
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

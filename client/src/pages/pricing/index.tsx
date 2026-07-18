@@ -98,19 +98,19 @@ export default function PricingPage() {
   const referralCode = params.get("ref");
 
   return (
-    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-x-hidden">
+    <div className="relative min-h-screen text-white overflow-x-hidden">
       {/* Ambient glow, top centre */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#00FF9F]/[0.05] rounded-full blur-[160px]" />
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#2F6BFF]/[0.05] rounded-full blur-[160px]" />
 
       {/* Referral banner */}
       {referralCode && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-[#00FF9F]/10 border-b border-[#00FF9F]/20 py-3 px-4 text-center text-sm"
+          className="bg-[#2F6BFF]/10 border-b border-[#2F6BFF]/20 py-3 px-4 text-center text-sm"
         >
-          🎉 <span className="text-[#00FF9F] font-semibold">You've been referred!</span>{" "}
-          Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on Pro.
+          🎉 <span className="text-[#7AA0FF] font-semibold">You've been referred!</span>{" "}
+          Sign up now and get <span className="text-[#7AA0FF] font-bold">3 months free</span> on Pro.
         </motion.div>
       )}
 
@@ -118,12 +118,12 @@ export default function PricingPage() {
       <section className="relative pt-28 pb-12 px-4 text-center">
         <div className="max-w-2xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#00FF9F] font-bold mb-6">
+            <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#7AA0FF] font-bold mb-6">
               Pricing
             </span>
             <h1 className="text-5xl sm:text-[3.75rem] font-extrabold tracking-tight leading-[1.07] mb-5">
               Simple{" "}
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">
                 Transparent
               </span>{" "}
               Pricing
@@ -135,15 +135,15 @@ export default function PricingPage() {
             {/* Trust row */}
             <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-500 mb-10">
               <span className="flex items-center gap-1.5">
-                <RefreshCw className="w-3.5 h-3.5 text-[#00FF9F]" /> 7-day money back
+                <RefreshCw className="w-3.5 h-3.5 text-[#7AA0FF]" /> 7-day money back
               </span>
               <span className="h-3 w-px bg-white/10 hidden sm:block" />
               <span className="flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-[#00FF9F]" /> Stripe payments
+                <Lock className="w-3.5 h-3.5 text-[#7AA0FF]" /> Stripe payments
               </span>
               <span className="h-3 w-px bg-white/10 hidden sm:block" />
               <span className="flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-[#00FF9F]" /> Cancel anytime
+                <Check className="w-3.5 h-3.5 text-[#7AA0FF]" /> Cancel anytime
               </span>
             </div>
 
@@ -166,7 +166,7 @@ export default function PricingPage() {
                 Annual
                 <span
                   className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full transition-colors ${
-                    isAnnual ? "bg-[#00FF9F] text-black" : "bg-[#00FF9F]/20 text-[#00FF9F]"
+                    isAnnual ? "bg-[#2F6BFF] text-white" : "bg-[#2F6BFF]/20 text-[#7AA0FF]"
                   }`}
                 >
                   2 months free
@@ -197,8 +197,8 @@ export default function PricingPage() {
               transition={{ delay: i * 0.08 }}
               className="flex items-center gap-3"
             >
-              <div className="w-9 h-9 rounded-xl bg-[#00FF9F]/10 flex items-center justify-center flex-shrink-0">
-                <badge.icon className="w-4 h-4 text-[#00FF9F]" />
+              <div className="w-9 h-9 rounded-xl bg-[#2F6BFF]/10 flex items-center justify-center flex-shrink-0">
+                <badge.icon className="w-4 h-4 text-[#7AA0FF]" />
               </div>
               <div>
                 <p className="text-sm font-semibold text-white leading-tight">{badge.label}</p>
@@ -228,7 +228,7 @@ export default function PricingPage() {
                 <tr className="border-b border-white/[0.08]">
                   <th className="text-left py-5 px-6 text-gray-500 font-medium w-[38%]">Feature</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Core</th>
-                  <th className="text-center py-5 px-4 font-bold text-[#00FF9F] bg-[#00FF9F]/[0.05]">Pro</th>
+                  <th className="text-center py-5 px-4 font-bold text-[#7AA0FF] bg-[#2F6BFF]/[0.05]">Pro</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Team</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Enterprise</th>
                 </tr>
@@ -240,8 +240,8 @@ export default function PricingPage() {
                       <tr key={`s-${i}`} className="border-b border-white/[0.05]">
                         <td colSpan={5} className="pt-6 pb-3 px-6">
                           <div className="flex items-center gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]/50 flex-shrink-0" />
-                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#00FF9F]/60">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#2F6BFF]/50 flex-shrink-0" />
+                            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#7AA0FF]/60">
                               {row.label}
                             </span>
                           </div>
@@ -258,7 +258,7 @@ export default function PricingPage() {
                       <td className="py-3.5 px-4 text-center">
                         {typeof row.core === "boolean" ? (
                           row.core ? (
-                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                            <Check className="w-4 h-4 text-[#7AA0FF] mx-auto" />
                           ) : (
                             <X className="w-4 h-4 text-white/[0.12] mx-auto" />
                           )
@@ -266,10 +266,10 @@ export default function PricingPage() {
                           <span className="text-gray-400">{row.core}</span>
                         )}
                       </td>
-                      <td className="py-3.5 px-4 text-center bg-[#00FF9F]/[0.04]">
+                      <td className="py-3.5 px-4 text-center bg-[#2F6BFF]/[0.04]">
                         {typeof row.pro === "boolean" ? (
                           row.pro ? (
-                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                            <Check className="w-4 h-4 text-[#7AA0FF] mx-auto" />
                           ) : (
                             <X className="w-4 h-4 text-white/[0.12] mx-auto" />
                           )
@@ -280,7 +280,7 @@ export default function PricingPage() {
                       <td className="py-3.5 px-4 text-center">
                         {typeof row.team === "boolean" ? (
                           row.team ? (
-                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                            <Check className="w-4 h-4 text-[#7AA0FF] mx-auto" />
                           ) : (
                             <X className="w-4 h-4 text-white/[0.12] mx-auto" />
                           )
@@ -291,12 +291,12 @@ export default function PricingPage() {
                       <td className="py-3.5 px-4 text-center">
                         {typeof row.enterprise === "boolean" ? (
                           row.enterprise ? (
-                            <Check className="w-4 h-4 text-[#00FF9F] mx-auto" />
+                            <Check className="w-4 h-4 text-[#7AA0FF] mx-auto" />
                           ) : (
                             <X className="w-4 h-4 text-white/[0.12] mx-auto" />
                           )
                         ) : (
-                          <span className="text-[#00FF9F] font-semibold">{row.enterprise}</span>
+                          <span className="text-[#7AA0FF] font-semibold">{row.enterprise}</span>
                         )}
                       </td>
                     </tr>
@@ -320,7 +320,7 @@ export default function PricingPage() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-3">Frequently asked questions</h2>
             <p className="text-gray-500">
               Still have questions?{" "}
-              <a href="mailto:sales@cxlinux.com" className="text-[#00FF9F] underline underline-offset-2">
+              <a href="mailto:sales@cxlinux.com" className="text-[#7AA0FF] underline underline-offset-2">
                 Email us
               </a>
               .
@@ -337,7 +337,7 @@ export default function PricingPage() {
                 transition={{ delay: i * 0.04 }}
                 className={`rounded-xl border transition-all duration-150 overflow-hidden ${
                   openFaq === i
-                    ? "border-[#00FF9F]/20 bg-[#00FF9F]/[0.03]"
+                    ? "border-[#2F6BFF]/20 bg-[#2F6BFF]/[0.03]"
                     : "border-white/[0.07] bg-white/[0.01]"
                 }`}
               >
@@ -348,7 +348,7 @@ export default function PricingPage() {
                   <span className="text-sm font-semibold text-white leading-snug">{faq.q}</span>
                   <ChevronDown
                     className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${
-                      openFaq === i ? "rotate-180 text-[#00FF9F]" : "text-gray-500"
+                      openFaq === i ? "rotate-180 text-[#7AA0FF]" : "text-gray-500"
                     }`}
                   />
                 </button>
@@ -386,7 +386,7 @@ export default function PricingPage() {
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
                 Need a{" "}
-                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">
                   custom solution?
                 </span>
               </h2>
@@ -400,13 +400,13 @@ export default function PricingPage() {
                   href="https://calendly.com/ai-consultant/vip"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-[#00FF9F] text-black text-base font-bold rounded-xl hover:bg-[#00CC7F] transition-colors shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]"
+                  className="group w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 bg-[#2F6BFF] text-white text-base font-bold rounded-xl hover:bg-[#2257E0] transition-colors shadow-[0_4px_14px_-6px_rgba(47,107,255,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]"
                 >
                   <Calendar className="w-4 h-4" /> Schedule a Demo
                 </a>
                 <a
                   href="mailto:sales@cxlinux.com"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 border border-white/15 bg-white/[0.02] text-white text-base font-semibold rounded-xl hover:bg-white/[0.06] hover:border-[#00FF9F]/40 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 border border-white/15 bg-white/[0.02] text-white text-base font-semibold rounded-xl hover:bg-white/[0.06] hover:border-[#2F6BFF]/40 transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                 >
                   Contact Sales <ArrowRight className="w-4 h-4" />
                 </a>

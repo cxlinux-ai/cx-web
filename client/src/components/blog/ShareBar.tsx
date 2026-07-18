@@ -24,7 +24,7 @@ export function ShareBar({ title, url, className = "" }: ShareBarProps) {
   const mailUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
 
   const btnClass =
-    "w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 hover:border-[#00FF9F]/30 hover:bg-white/8 transition-all duration-150 text-gray-400 hover:text-white";
+    "w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 hover:border-[#2F6BFF]/30 hover:bg-white/8 transition-all duration-150 text-gray-400 hover:text-white";
 
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
@@ -34,7 +34,7 @@ export function ShareBar({ title, url, className = "" }: ShareBarProps) {
       </a>
       <button onClick={handleCopy} className={btnClass} title={copied ? "Copied!" : "Copy link"}>
         {copied ? (
-          <span className="text-[#00FF9F] text-[10px] font-bold">✓</span>
+          <span className="text-[#7AA0FF] text-[10px] font-bold">✓</span>
         ) : (
           <Link2 className="w-4 h-4" />
         )}

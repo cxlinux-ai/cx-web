@@ -35,9 +35,9 @@ export function CodeBlock({ children, filename, language, className }: CodeBlock
   };
 
   return (
-    <div className="not-prose my-6 bg-[#0D0D0D] border border-white/8 rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+    <div className="not-prose my-6 bg-[#0E0E12] border border-white/8 rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#161616] border-b border-white/8">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#0D0D10] border-b border-white/8">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]/40" />
@@ -58,7 +58,7 @@ export function CodeBlock({ children, filename, language, className }: CodeBlock
             onClick={handleCopy}
             className="text-xs text-gray-500 hover:text-white transition-colors px-2 py-0.5 rounded hover:bg-white/8"
           >
-            {copied ? <span className="text-[#00FF9F]">✓ Copied!</span> : "Copy"}
+            {copied ? <span className="text-[#7AA0FF]">✓ Copied!</span> : "Copy"}
           </button>
         </div>
       </div>

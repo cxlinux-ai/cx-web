@@ -149,7 +149,7 @@ export default function SuccessPage() {
             transition={{ delay: 0.3 }}
             className="text-4xl sm:text-5xl font-extrabold mb-4"
           >
-            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">
               Welcome to CX Linux!
             </span>
           </motion.h1>
@@ -168,7 +168,7 @@ export default function SuccessPage() {
         {/* Subscription Details Card */}
         {loading ? (
           <div id="success-loading" className="flex items-center justify-center py-12">
-            <Loader2 className="w-8 h-8 text-[#00FF9F] animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#7AA0FF] animate-spin" />
           </div>
         ) : error ? (
           <motion.div
@@ -191,7 +191,7 @@ export default function SuccessPage() {
             className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 mb-12"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Mail className="w-5 h-5 text-[#00FF9F]" />
+              <Mail className="w-5 h-5 text-[#7AA0FF]" />
               <span className="text-gray-400">Confirmation sent to:</span>
               <span className="text-white font-medium">{subscription.email}</span>
             </div>
@@ -210,21 +210,21 @@ export default function SuccessPage() {
               </div>
             </div>
             {subscription.licenseKey ? (
-              <div className="mt-6 p-4 bg-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-lg">
+              <div className="mt-6 p-4 bg-[#2F6BFF]/10 border border-[#2F6BFF]/30 rounded-lg">
                 <p className="text-sm text-gray-400 mb-2">Your License Key</p>
                 <div className="flex items-center justify-between">
-                  <code className="text-lg font-mono text-[#00FF9F] font-bold">{subscription.licenseKey}</code>
+                  <code className="text-lg font-mono text-[#7AA0FF] font-bold">{subscription.licenseKey}</code>
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(subscription.licenseKey!);
                     }}
-                    className="px-3 py-1 text-sm bg-[#00FF9F]/20 hover:bg-[#00FF9F]/30 rounded text-[#00FF9F] transition-colors"
+                    className="px-3 py-1 text-sm bg-[#2F6BFF]/20 hover:bg-[#2F6BFF]/30 rounded text-[#7AA0FF] transition-colors"
                   >
                     Copy
                   </button>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  Use this key to activate CX Terminal: <code className="text-[#00FF9F]">cx license activate {subscription.licenseKey}</code>
+                  Use this key to activate CX Terminal: <code className="text-[#7AA0FF]">cx license activate {subscription.licenseKey}</code>
                 </p>
               </div>
             ) : (
@@ -279,10 +279,10 @@ export default function SuccessPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 hover:border-[#00FF9F]/50 transition-all"
+                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 hover:border-[#2F6BFF]/50 transition-all"
               >
-                <div className="w-12 h-12 bg-[#00FF9F]/20 rounded-xl flex items-center justify-center mb-4">
-                  <step.icon className="w-6 h-6 text-[#00FF9F]" />
+                <div className="w-12 h-12 bg-[#2F6BFF]/20 rounded-xl flex items-center justify-center mb-4">
+                  <step.icon className="w-6 h-6 text-[#7AA0FF]" />
                 </div>
                 <h3 className="font-semibold mb-2">{step.title}</h3>
                 <p className="text-gray-400 text-sm mb-4">{step.description}</p>
@@ -290,14 +290,14 @@ export default function SuccessPage() {
                   <a
                     href={step.link}
                     target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#00FF9F] text-sm hover:text-[#00FF9F] transition-colors"
+                    className="inline-flex items-center gap-1 text-[#7AA0FF] text-sm hover:text-[#7AA0FF] transition-colors"
                   >
                     Get Started <ArrowRight className="w-4 h-4" />
                   </a>
                 ) : (
                   <Link
                     href={step.link}
-                    className="inline-flex items-center gap-1 text-[#00FF9F] text-sm hover:text-[#00FF9F] transition-colors"
+                    className="inline-flex items-center gap-1 text-[#7AA0FF] text-sm hover:text-[#7AA0FF] transition-colors"
                   >
                     Get Started <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -322,14 +322,14 @@ export default function SuccessPage() {
             <a
               id="success-email-support"
               href="mailto:support@cxlinux.com"
-              className="px-6 py-3 bg-[#00FF9F] text-white font-semibold rounded-lg hover:bg-[#00FF9F] hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
+              className="px-6 py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2F6BFF] hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all"
             >
               Contact Support
             </a>
             <Link
               id="success-faq-link"
               href="/pricing/faq"
-              className="px-6 py-3 border-2 border-[#00FF9F] text-[#00FF9F] font-semibold rounded-lg hover:bg-[#00FF9F]/10 transition-all"
+              className="px-6 py-3 border-2 border-[#2F6BFF] text-[#7AA0FF] font-semibold rounded-lg hover:bg-[#2F6BFF]/10 transition-all"
             >
               View FAQ
             </Link>

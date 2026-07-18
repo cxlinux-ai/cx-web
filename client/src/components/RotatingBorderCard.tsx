@@ -73,7 +73,7 @@ export function RotatingBorderCard({
             ? { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" }
             : undefined
         }
-        className="relative rounded-[28px] p-[1.5px] overflow-hidden will-change-transform shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7),0_0_80px_-20px_rgba(0,255,159,0.18)]"
+        className="relative rounded-[28px] p-[1.5px] overflow-hidden will-change-transform shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7),0_0_80px_-20px_rgba(47,107,255,0.18)]"
       >
         {/* Rotating conic-gradient border */}
         <motion.div
@@ -82,7 +82,7 @@ export function RotatingBorderCard({
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
           style={{
             background:
-              "conic-gradient(from 0deg, transparent 0deg, rgba(0,255,159,0.7) 60deg, rgba(0,255,204,0.4) 120deg, transparent 180deg, transparent 360deg)",
+              "conic-gradient(from 0deg, transparent 0deg, rgba(47,107,255,0.7) 60deg, rgba(0,255,204,0.4) 120deg, transparent 180deg, transparent 360deg)",
           }}
         />
 
@@ -92,7 +92,7 @@ export function RotatingBorderCard({
         >
           {/* Ambient radial glows */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,159,0.18)_0%,transparent_60%)] blur-3xl" />
+            <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(47,107,255,0.18)_0%,transparent_60%)] blur-3xl" />
             <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(0,255,204,0.10)_0%,transparent_70%)] blur-3xl" />
             <svg
               className="absolute inset-0 w-full h-full opacity-[0.08]"
@@ -105,7 +105,7 @@ export function RotatingBorderCard({
                   height="34"
                   patternUnits="userSpaceOnUse"
                 >
-                  <circle cx="1" cy="1" r="0.9" fill="#00FF9F" />
+                  <circle cx="1" cy="1" r="0.9" fill="#2F6BFF" />
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill={`url(#${patternId})`} />
@@ -138,8 +138,8 @@ export function IconPlate({
 
   return (
     <div className={`relative inline-flex items-center justify-center ${sizeClasses}`}>
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00FF9F]/[0.22] via-[#00FF9F]/[0.10] to-[#00FFCC]/[0.05] border border-[#00FF9F]/30 shadow-[0_12px_30px_-12px_rgba(0,255,159,0.45),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]" />
-      <div className="relative text-[#00FF9F]">{children}</div>
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#2F6BFF]/[0.22] via-[#2F6BFF]/[0.10] to-[#7AA0FF]/[0.05] border border-[#2F6BFF]/30 shadow-[0_12px_30px_-12px_rgba(47,107,255,0.45),inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]" />
+      <div className="relative text-[#7AA0FF]">{children}</div>
     </div>
   );
 }

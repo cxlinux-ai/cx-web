@@ -26,7 +26,7 @@ export function ArticleCardHero({ post }: ArticleCardHeroProps) {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Link href={`/blog/${slug}`}>
-        <article className="group relative rounded-2xl overflow-hidden border border-[#00FF9F]/20 hover:border-[#00FF9F]/60 transition-all duration-300 cursor-pointer bg-[#161616] min-h-[340px] flex flex-col justify-end">
+        <article className="group relative rounded-2xl overflow-hidden border border-[#2F6BFF]/20 hover:border-[#2F6BFF]/60 transition-all duration-300 cursor-pointer bg-[#0D0D10] min-h-[340px] flex flex-col justify-end">
           {/* Background image */}
           {imageUrl && (
             <>
@@ -38,12 +38,12 @@ export function ArticleCardHero({ post }: ArticleCardHeroProps) {
             </>
           )}
           {!imageUrl && (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] to-[#0D0D0D]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] to-[#0E0E12]" />
           )}
 
           {/* Featured badge */}
           <div className="absolute top-4 left-4">
-            <span className="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#00FF9F] text-black rounded-full">
+            <span className="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#2F6BFF] text-white rounded-full">
               Featured
             </span>
           </div>
@@ -55,7 +55,7 @@ export function ArticleCardHero({ post }: ArticleCardHeroProps) {
               {frontmatter.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] font-medium border border-[#00FF9F]/20"
+                  className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#2F6BFF]/15 text-[#7AA0FF] font-medium border border-[#2F6BFF]/20"
                 >
                   {tag}
                 </span>
@@ -63,7 +63,7 @@ export function ArticleCardHero({ post }: ArticleCardHeroProps) {
             </div>
 
             {/* Title */}
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight group-hover:text-[#00FF9F] transition-colors duration-200">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight group-hover:text-[#7AA0FF] transition-colors duration-200">
               {frontmatter.title}
             </h2>
 
@@ -84,7 +84,7 @@ export function ArticleCardHero({ post }: ArticleCardHeroProps) {
                   {readingTimeMinutes} min read
                 </span>
               </div>
-              <span className="inline-flex items-center gap-2 bg-[#00FF9F] text-black text-sm font-semibold px-4 py-2 rounded-lg group-hover:bg-[#00CC7F] transition-colors">
+              <span className="inline-flex items-center gap-2 bg-[#2F6BFF] text-white text-sm font-semibold px-4 py-2 rounded-lg group-hover:bg-[#2257E0] transition-colors">
                 Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>

@@ -34,20 +34,20 @@ export default function BlogTagArchive() {
   }, [tag]);
 
   return (
-    <div className="min-h-screen bg-[#1E1E1E] text-white">
+    <div className="min-h-screen text-white">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-white/8">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,255,159,0.04)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(47,107,255,0.04)_0%,transparent_60%)]" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#00FF9F] transition-colors mb-6">
+            <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#7AA0FF] transition-colors mb-6">
               <ArrowLeft className="w-4 h-4" />
               All Posts
             </Link>
             <div className="flex items-center gap-3">
-              <Hash className="w-8 h-8 text-[#00FF9F]" />
+              <Hash className="w-8 h-8 text-[#7AA0FF]" />
               <h1 className="text-4xl md:text-5xl font-bold">
-                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">{tag}</span>
+                <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">{tag}</span>
               </h1>
             </div>
             {!loading && (
@@ -62,7 +62,7 @@ export default function BlogTagArchive() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading ? (
           <div className="flex items-center justify-center py-24">
-            <div className="w-8 h-8 border-2 border-[#00FF9F] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-[#2F6BFF] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : posts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

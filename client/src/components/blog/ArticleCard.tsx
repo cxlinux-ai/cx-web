@@ -27,10 +27,10 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
       transition={{ delay: index * 0.06, duration: 0.4, ease: "easeOut" }}
     >
       <Link href={`/blog/${slug}`}>
-        <article className="group h-full bg-[#1A1A1A] border border-white/8 rounded-xl overflow-hidden hover:border-[#00FF9F]/30 hover:bg-[#1F1F1F] transition-all duration-200 cursor-pointer flex flex-col">
+        <article className="group h-full bg-[#1A1A1A] border border-white/8 rounded-xl overflow-hidden hover:border-[#2F6BFF]/30 hover:bg-[#1F1F1F] transition-all duration-200 cursor-pointer flex flex-col">
           {/* Thumbnail */}
           {!compact && frontmatter.ogImage && (
-            <div className="aspect-[1200/630] overflow-hidden bg-[#0D0D0D]">
+            <div className="aspect-[1200/630] overflow-hidden bg-[#0E0E12]">
               <img
                 src={frontmatter.ogImage}
                 alt={frontmatter.title}
@@ -61,7 +61,7 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
             {frontmatter.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#00FF9F]/10 text-[#00FF9F] font-medium"
+                className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#2F6BFF]/10 text-[#7AA0FF] font-medium"
               >
                 {tag}
               </span>
@@ -74,7 +74,7 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
           </div>
 
           {/* Title */}
-          <h2 className="text-base font-bold text-white group-hover:text-[#00FF9F] transition-colors leading-snug mb-2 line-clamp-2">
+          <h2 className="text-base font-bold text-white group-hover:text-[#7AA0FF] transition-colors leading-snug mb-2 line-clamp-2">
             {frontmatter.title}
           </h2>
 
@@ -88,7 +88,7 @@ export function ArticleCard({ post, index = 0, compact = false }: ArticleCardPro
           {/* Footer */}
           <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/5">
             <span className="text-xs text-gray-500">{frontmatter.author}</span>
-            <span className="text-[#00FF9F] text-xs flex items-center gap-1 group-hover:gap-2 transition-all duration-150">
+            <span className="text-[#7AA0FF] text-xs flex items-center gap-1 group-hover:gap-2 transition-all duration-150">
               Read <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </div>

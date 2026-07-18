@@ -1,12 +1,14 @@
-import { lazy, Suspense, useEffect, useState, useRef } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Switch, Route, Link, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Shield, Mail } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 import analytics from "./lib/analytics";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { Backdrop } from "./components/fx/Backdrop";
 
 // Lazy load pages
 const HomePage = lazy(() => import("./sections/HomePage"));
@@ -30,17 +32,35 @@ const AccountPage = lazy(() => import("./pages/account"));
 
 // Loading component
 const PageLoader = () => (
-  <div className="min-h-screen bg-[#1E1E1E] flex items-center justify-center">
-    <div className="w-8 h-8 border-2 border-[#00FF9F] border-t-transparent rounded-full animate-spin" />
+  <div className="min-h-screen flex items-center justify-center">
+    <span className="cx-label">
+      loading<span className="cx-caret" />
+    </span>
   </div>
 );
+
+const NAV_LINKS = [
+  { label: "Terminal", href: "/getting-started", match: (l: string) => l === "/getting-started" },
+  { label: "Pricing", href: "/pricing", match: (l: string) => l.startsWith("/pricing") },
+  { label: "Affiliates", href: "/affiliates", match: (l: string) => l === "/affiliates" },
+  { label: "Blog", href: "/blog", match: (l: string) => l.startsWith("/blog") },
+  { label: "About", href: "/about", match: (l: string) => l === "/about" },
+];
 
 function App() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Hide navigation on checkout pages
   const isCheckoutPage = location.includes("/checkout") || location.includes("/success");
+
+  // Scroll-aware header background
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Scroll to top when navigating
   useEffect(() => {
@@ -59,139 +79,139 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
-      <div className="min-h-screen bg-[#1E1E1E]">
-        {/* Navigation */}
+      <div className="min-h-screen">
+        <Backdrop />
+
+        {/* Navigation — two-tier, scroll-aware */}
         {!isCheckoutPage && (
-          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#1E1E1E]/95 border-b border-white/[0.07] h-16">
-            <nav className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-              {/* Logo */}
-              <button
-                onClick={handleHomeClick}
-                className="flex items-center gap-3 cursor-pointer group"
-              >
-                <div className="w-8 h-8 flex-shrink-0">
-                  <img src="/logo-mark.svg" alt="CX Linux" className="w-8 h-8 object-contain" />
+          <header
+            className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+              scrolled
+                ? "bg-[#08080a]/85 border-b border-white/[0.08]"
+                : "bg-[#08080a]/70 border-b border-transparent"
+            }`}
+          >
+            {/* Top bar — trust + contact, desktop only */}
+            <div className="hidden lg:block bg-[#0e0e12] border-b border-white/[0.08]">
+              <div className="mx-auto max-w-7xl px-6 py-1.5 flex items-center justify-between text-[13px] text-white/60">
+                <div className="flex items-center gap-4">
+                  <span className="flex items-center gap-1.5">
+                    <Shield className="w-3.5 h-3.5" />
+                    Sandboxed · previewed · reversible
+                  </span>
+                  <span className="text-white/25">|</span>
+                  <a
+                    href="https://discord.gg/q4FUyBW6z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 hover:text-[#7AA0FF] transition-colors"
+                  >
+                    <FaDiscord className="w-3.5 h-3.5" />
+                    2,400+ engineers in Discord
+                  </a>
                 </div>
-                <span className="text-[1.1rem] font-bold tracking-wide leading-none">
-                  <span className="text-white">CX</span>
-                  <span className="text-[#00FF9F]"> LINUX</span>
-                </span>
-              </button>
-
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-6">
-                <Link
-                  href="/getting-started"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/getting-started" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
+                <a
+                  href="mailto:sales@cxlinux.com"
+                  className="flex items-center gap-1.5 font-medium hover:text-[#7AA0FF] transition-colors"
                 >
-                  Terminal
-                </Link>
-                <Link
-                  href="/pricing"
-                  className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/pricing") ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/affiliates"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/affiliates" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Affiliates
-                </Link>
-                <Link
-                  href="/blog"
-                  className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/blog") ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/about"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/about" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  About
-                </Link>
+                  <Mail className="w-3.5 h-3.5" />
+                  sales@cxlinux.com
+                </a>
               </div>
+            </div>
 
-              {/* Desktop CTAs */}
-              <div className="hidden md:flex items-center gap-4">
-                <Link href="/account">
-                  <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg">
-                    My Account
-                  </button>
-                </Link>
+            {/* Main navigation */}
+            <nav className="mx-auto max-w-7xl px-4 sm:px-6">
+              <div className="flex h-16 items-center justify-between">
+                {/* Logo */}
+                <button onClick={handleHomeClick} className="flex items-center gap-2.5 cursor-pointer shrink-0">
+                  <img src="/logo-mark.svg" alt="" className="w-7 h-7 object-contain" />
+                  <span className="font-bold text-[17px] tracking-tight text-white leading-none">
+                    CX Linux
+                  </span>
+                </button>
+
+                {/* Desktop nav */}
+                <div className="hidden lg:flex items-center gap-1">
+                  {NAV_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`inline-flex h-9 items-center px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+                        link.match(location)
+                          ? "text-[#7AA0FF]"
+                          : "text-white/60 hover:text-[#7AA0FF] hover:bg-white/5"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Desktop CTA */}
+                <div className="hidden lg:flex items-center gap-3 shrink-0">
+                  <Link
+                    href="/account"
+                    className="inline-flex h-9 items-center px-3 text-sm font-medium rounded-lg text-white/60 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    Account
+                  </Link>
+                  <Link href="/getting-started" className="cx-btn cx-btn-primary">
+                    Install CX
+                  </Link>
+                </div>
+
+                {/* Mobile menu button */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="lg:hidden text-white p-2"
+                  aria-label="Menu"
+                >
+                  {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                </button>
               </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden text-white p-2"
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
             </nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile menu */}
             <AnimatePresence>
               {mobileMenuOpen && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="md:hidden bg-[#1E1E1E] border-b border-[#333]"
+                  className="lg:hidden bg-[#08080a] border-b border-white/[0.08] overflow-hidden"
                 >
-                  <div className="px-4 py-4 space-y-4">
-                    <Link
-                      href="/getting-started"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Terminal
-                    </Link>
-                    <Link
-                      href="/pricing"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Pricing
-                    </Link>
-                    <Link
-                      href="/affiliates"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Affiliates
-                    </Link>
-                    <Link
-                      href="/blog"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Blog
-                    </Link>
-                    <Link
-                      href="/about"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      About
-                    </Link>
+                  <div className="px-5 py-3">
+                    {NAV_LINKS.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`flex items-center px-3 py-3 rounded-lg text-[15px] font-medium transition-colors ${
+                          link.match(location)
+                            ? "text-[#7AA0FF] bg-[#2F6BFF]/10"
+                            : "text-white/70 hover:bg-white/5"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
                     <Link
                       href="/account"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block w-full text-center px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg"
+                      className="flex items-center px-3 py-3 rounded-lg text-[15px] font-medium text-white/70 hover:bg-white/5 transition-colors"
                     >
-                      My Account
+                      Account
                     </Link>
+                    <div className="pt-3 pb-3 px-1">
+                      <Link
+                        href="/getting-started"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="cx-btn cx-btn-primary w-full"
+                      >
+                        Install CX
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -200,7 +220,7 @@ function App() {
         )}
 
         {/* Main Content */}
-        <main className={!isCheckoutPage ? "pt-16" : ""}>
+        <main>
           <Suspense fallback={<PageLoader />}>
             <Switch>
               <Route path="/" component={HomePage} />
