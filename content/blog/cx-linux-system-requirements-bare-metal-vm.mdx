@@ -1,0 +1,219 @@
+---
+title: "CX Linux System Requirements: Desktop, Server, VM"
+date: "2026-07-25T23:45:48.362Z"
+description: "CX Linux system requirements broken down by workload across desktop, server, VM, and container deployments, with a benchmark methodology to verify each spec."
+slug: "cx-linux-system-requirements-bare-metal-vm"
+draft: false
+tags: ["linux", "system-requirements", "deployment", "benchmarking", "infrastructure"]
+image: "/images/cx-linux-system-requirements-bare-metal-vm.jpg"
+---
+
+**Meta description:** CX Linux system requirements broken down by workload across desktop, server, VM, and container deployments, with a comparative-baseline framework you can validate against official release docs.
+
+**URL slug:** cx-linux-system-requirements
+
+---
+
+## Introduction
+
+Most distributions publish a single line of minimum specs and leave it there: 2 GB RAM, 20 GB disk, dual-core CPU. That number tells you almost nothing. A machine that boots CX Linux and lets you run \`pkgctl update\` is a different machine from one that can host a GNOME session with a browser, an IDE, and a video call open at the same time.
+
+Treat CX Linux system requirements as a range tied to what you are running. This piece breaks specs down by workload across desktop, server, virtualized, and containerized deployments, and pairs each figure with the kind of benchmark you would run to confirm it for yourself. If you administer fleets or plan capacity for a homelab, the framework here should get you closer to a real answer than any spec sheet on a download page.
+
+## A Note on These Numbers
+
+The figures below are a comparative baseline, not official CX Linux measurements. They draw on established conventions across general-purpose distributions \(Ubuntu, Debian, Fedora, Rocky\) and on typical hypervisor and container-runtime behavior. Where a range appears, read it as a planning bracket to validate, not a published result from a specific test rig.
+
+Before you commit hardware or size a template, cross-check every figure against CX Linux's own release notes, hardware compatibility list, and package documentation. The ranges here are meant to give you the right shape of the answer and a methodology to nail it down. Treat them as illustrative until you reproduce them on your own gear.
+
+## Benchmark Methodology and Test Environment
+
+Here is the test setup you would use to reproduce every figure below, along with what each tool measures. The point is that any of these numbers can be verified with the same procedure on your own hardware.
+
+A representative baseline host would be something like an AMD Ryzen 5 5600G \(6 cores/12 threads\), 32 GB DDR4-3200, and a 1 TB NVMe SSD. Virtualization comparisons should hold that host constant across KVM/QEMU with libvirt, VMware Workstation, and Hyper-V, each configured with virtio or paravirtual drivers where supported. State your exact versions when you publish results, since overhead figures shift between hypervisor releases.
+
+The tools and what each one covers:
+
+- Phoronix Test Suite for general system throughput and cross-workload comparisons.
+
+- sysbench for CPU, memory, and threading performance under synthetic load.
+
+- fio for disk I/O, using mixed random read/write profiles that mimic database and package-manager activity.
+
+- iperf3 for network throughput between host and guest, and between containers on a bridge network.
+
+- systemd-analyze for boot time and service startup cost, which matters more than most spec sheets admit.
+
+Measure idle RAM with \`free -h\` after a clean boot, no login shell open, and no background services beyond the default install. Take CPU load figures as sustained utilization over a 10-minute run, not instantaneous spikes.
+
+Every figure below assumes a base install with no unnecessary services enabled. Additional daemons, monitoring agents, or security tooling layered on top will push these numbers up, so budget for what you actually deploy.
+
+## Desktop Requirements by CX Linux Desktop Environment
+
+The desktop environment you choose swings resource requirements more than any other single variable. Comparing CX Linux desktop requirements as one number is close to useless, so here is the breakdown by spin. The idle-RAM ranges are baselines from comparable DE builds; confirm against your own spin.
+
+### GNOME \(default spin\)
+
+- Minimum: dual-core CPU, 4 GB RAM, 20 GB disk. Boots and lets you open a file manager and terminal without swapping.
+
+- Recommended: quad-core CPU, 8 GB RAM, 40 GB disk. Comfortable with a browser \(10+ tabs\), a code editor, and a terminal multiplexer running concurrently.
+
+- Idle RAM after boot: roughly 1.0-1.2 GB on comparable builds.
+
+### KDE Plasma
+
+- Minimum: dual-core CPU, 4 GB RAM, 20 GB disk.
+
+- Recommended: quad-core CPU, 8 GB RAM, 40 GB disk.
+
+- Idle RAM after boot: roughly 0.9-1.1 GB. Plasma's compositor tends to idle lighter than GNOME's Mutter at equivalent settings, though the gap narrows once you enable desktop effects.
+
+### XFCE
+
+- Minimum: single-core CPU \(2 GHz+\), 2 GB RAM, 15 GB disk.
+
+- Recommended: dual-core CPU, 4 GB RAM, 25 GB disk.
+
+- Idle RAM after boot: roughly 400-550 MB.
+
+### LXQt
+
+- Minimum: single-core CPU \(1.6 GHz+\), 1.5 GB RAM, 12 GB disk.
+
+- Recommended: dual-core CPU, 3 GB RAM, 20 GB disk.
+
+- Idle RAM after boot: roughly 300-400 MB, the lightest of the four spins in this class.
+
+If you are provisioning laptops for a field team or reviving older hardware, XFCE or LXQt get you a usable desktop on specs that would choke GNOME within minutes of opening a browser. If your users live in a chat client, a browser, and a terminal all day, budget for the recommended tier regardless of DE. The minimum numbers describe a system that boots rather than one you would want to work on.
+
+## Server Requirements: Minimum vs. Recommended
+
+Server specs need a workload attached to mean anything. Minimum here means the system boots, authenticates, and can run \`pkgctl\` to pull security patches without thrashing. Recommended means a defined workload: a LAMP stack \(Apache, MariaDB, PHP-FPM\) serving moderate concurrent traffic, in the range of 200 requests per second sustained.
+
+Minimum, headless, boot and patch only:
+
+- CPU: single-core, 1.6 GHz
+
+- RAM: 1 GB
+
+- Disk: 10 GB
+
+- Network: any interface with driver support
+
+Recommended, LAMP stack under moderate load:
+
+- CPU: 4 cores
+
+- RAM: 8 GB
+
+- Disk: 60 GB \(SSD strongly preferred over spinning disk\)
+
+- Network: 1 Gbps
+
+The reasoning behind the 4-core recommendation: on comparable distributions, a 2-core server saturates its CPU well before RAM under PHP-FPM concurrency in the range of 30-50 workers, and p95 request latency climbs sharply once the CPU is the bottleneck. Confirm your own crossover point with sysbench and a load generator against your target workload rather than assuming these thresholds transfer exactly.
+
+Disk matters more than most server spec sheets admit. In fio tests with a mixed random read/write profile \(70/30, 4K block size\) against a database data directory, NVMe consistently delivers several times the IOPS of a 7200rpm SATA drive at the same queue depth. If your workload touches a database of any size, treat SSD as a requirement rather than a nice-to-have, whatever the minimum spec allows.
+
+## Bare-Metal vs. VM Overhead
+
+Running CX Linux under a hypervisor costs you something. How much depends on the hypervisor and on whether paravirtual drivers are active. The percentages below are typical ranges observed across comparable Linux guests; measure your own before you size a fleet.
+
+Running an identical single-threaded sysbench CPU benchmark on bare metal against three hypervisor configurations tends to land like this:
+
+- Bare metal: baseline, 0% overhead by definition.
+
+- KVM/QEMU with virtio: single-digit CPU overhead, higher on disk I/O if virtio-blk is misconfigured or falls back to emulated devices.
+
+- VMware Workstation: mid-single-digit CPU overhead, with disk I/O overhead varying by VMDK provisioning \(thick-provisioned tends to hold up better than thin under sustained write load\).
+
+- Hyper-V: slightly higher CPU overhead, with disk I/O overhead climbing when using dynamically expanding VHDX files versus fixed-size.
+
+Memory ballooning introduces a separate cost worth flagging. Under memory pressure, ballooned VMs show latency spikes during the reclaim window even when total allocated RAM looks sufficient on paper. For memory-sensitive workloads such as databases or in-memory caches, disable ballooning or over-provision RAM by at least 20% above the recommended bare-metal figure.
+
+CPU overcommit is where most VM deployments quietly fail capacity planning. Overcommitting vCPUs at 2:1 against physical cores tends to show negligible impact under light load, but push toward 4:1 and throughput drops off hard under sustained concurrent load. Plan vCPU allocation against actual physical core count, not against the number your hypervisor lets you configure.
+
+For CX Linux VMs, a reasonable starting adjustment is to add roughly 10% to recommended bare-metal RAM and 15% to recommended CPU allocation to absorb overhead under realistic load. Confirm virtio drivers are installed and active rather than assuming emulated device fallback is close enough.
+
+## Containerized Deployment Requirements
+
+Containers split the requirements question into two problems: what the host needs to run a container runtime, and what each container costs once it is running.
+
+Host minimum requirements for a container runtime:
+
+- Kernel: 5.10 or newer, with cgroups v2 enabled by default
+
+- Storage driver: overlay2 supported and configured as default
+
+- CPU: dual-core minimum for a runtime with more than a handful of containers
+
+- RAM: 2 GB minimum for the runtime and engine overhead alone, before any workload containers are scheduled
+
+- Disk: 20 GB minimum, more depending on image cache retention policy
+
+Per-container resource budgets for typical microservice images:
+
+- Lightweight API service \(Alpine-based, single process\): 50-100 MB RAM, negligible CPU at idle, bursting to 0.2-0.5 vCPU under load
+
+- Node.js application container: 150-300 MB RAM baseline, 0.3-0.7 vCPU under moderate request load
+
+- PostgreSQL container \(single instance, moderate dataset\): 512 MB to 1 GB RAM minimum, dedicated vCPU recommended rather than shared
+
+- Redis container: 100-250 MB RAM depending on dataset size and eviction policy
+
+For density planning, on a 6-core, 32 GB host, a stack of a few dozen lightweight API containers plus a shared PostgreSQL instance typically stays well within CPU and RAM headroom. Doubling that count tends to introduce CPU throttling under simultaneous load spikes long before RAM runs out. Plan container density against CPU contention first. RAM rarely becomes the limiting factor until you cross into database-heavy or in-memory-cache-heavy workloads.
+
+## CX Linux vs. Ubuntu Comparison
+
+A side-by-side against Ubuntu's published requirements gives useful context, since it is the distribution most admins are migrating from or comparing against. Verify CX Linux figures against its release notes and Ubuntu figures against Ubuntu's current LTS documentation before you rely on either column.
+
+Desktop \(GNOME, both distributions\):
+
+- Ubuntu Desktop minimum: dual-core CPU, 4 GB RAM, 25 GB disk
+
+- CX Linux GNOME minimum \(baseline estimate\): dual-core CPU, 4 GB RAM, 20 GB disk
+
+A leaner default application set would explain a smaller disk footprint, which matters when you image a fleet of machines with limited storage.
+
+Server:
+
+- Ubuntu Server minimum: single-core CPU, 1 GB RAM, 2.5 GB disk \(base install, no GUI\)
+
+- CX Linux Server minimum \(baseline estimate\): single-core CPU, 1 GB RAM, 10 GB disk
+
+A higher minimum disk figure usually reflects more conservative default log retention and package cache policy, worth knowing if you provision minimal VM templates and expect Ubuntu-level footprints.
+
+Recommended production tier: both distributions land in a similar range for equivalent workloads, around 4 cores and 8 GB RAM for a moderate LAMP or container host, which tracks with shared kernel lineage and similar baseline daemon overhead. Where they diverge is default install footprint and package manager behavior.
+
+## Disk Space and Package Manager Overhead
+
+The disk sizing above assumes typical package manager overhead, but it earns a separate mention because it catches admins off guard on minimal installs.
+
+A package manager maintains a local metadata cache and a package cache directory that grows over time unless cleaned. On a server running weekly updates for six months without cache cleanup, expect the cache directory to reach the low single-digit gigabytes on comparable distributions. That is not large in absolute terms, but it is enough to matter on a 10 GB minimum install where headroom is already tight.
+
+If you run near the minimum disk spec, enable automatic cache pruning and budget an additional 2 GB of headroom beyond the stated minimum for any server expected to receive regular updates over its lifecycle rather than a fresh image redeployed periodically. For a deeper walkthrough of cache management and update workflows, see our CX Linux package manager tutorial.
+
+## Quick-Reference Summary
+
+Shared base for all deployment types: kernel 5.10 or newer \(container hosts additionally require cgroups v2 and overlay2\). The figures below are planning baselines to validate against official CX Linux documentation.
+
+- Desktop \(GNOME\) minimum: dual-core, 4 GB RAM, 20 GB disk
+
+- Desktop \(GNOME\) recommended: quad-core, 8 GB RAM, 40 GB disk
+
+- Desktop \(XFCE/LXQt\) minimum: single-core, 1.5-2 GB RAM, 12-15 GB disk
+
+- Server minimum \(boot and patch\): single-core, 1 GB RAM, 10 GB disk
+
+- Server recommended \(LAMP, moderate load\): quad-core, 8 GB RAM, 60 GB SSD
+
+- VM overhead adjustment: add \~10% RAM, \~15% CPU over bare-metal recommended figures
+
+- Container host minimum: dual-core, 2 GB RAM, 20 GB disk, kernel 5.10+, cgroups v2, overlay2
+
+- Per-container budget: 50 MB to 1 GB RAM depending on workload type
+
+## Conclusion and Next Steps
+
+The ranges above give you a starting point for capacity planning and a methodology to confirm them, not a final answer for your environment. Reproduce the benchmarks against your own workload before committing a fleet to a given configuration, and swap every figure here for CX Linux's official specs once you have them in front of you.
+
+When you move from planning to deployment, our install guide walks through partitioning decisions and DE selection in more detail. For hardware compatibility questions not covered here, such as specific NICs, RAID controllers, or GPU passthrough, the CX Linux community support forums are the fastest path to an answer from someone running the same hardware you are.
