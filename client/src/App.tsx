@@ -1,12 +1,11 @@
-import { lazy, Suspense, useEffect, useState, useRef } from "react";
-import { Switch, Route, Link, useLocation } from "wouter";
+import { lazy, Suspense, useEffect } from "react";
+import { Switch, Route, useLocation } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
 import analytics from "./lib/analytics";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import SiteHeader from "./components/SiteHeader";
 
 // Lazy load pages
 const HomePage = lazy(() => import("./sections/HomePage"));
@@ -36,8 +35,7 @@ const PageLoader = () => (
 );
 
 function App() {
-  const [location, navigate] = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   // Hide navigation on checkout pages
   const isCheckoutPage = location.includes("/checkout") || location.includes("/success");
@@ -45,159 +43,14 @@ function App() {
   // Scroll to top when navigating
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setMobileMenuOpen(false);
   }, [location]);
-
-  const handleHomeClick = () => {
-    if (location === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      navigate("/");
-    }
-  };
 
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
       <div className="min-h-screen bg-[#1E1E1E]">
         {/* Navigation */}
-        {!isCheckoutPage && (
-          <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#1E1E1E]/95 border-b border-white/[0.07] h-16">
-            <nav className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-              {/* Logo */}
-              <button
-                onClick={handleHomeClick}
-                className="flex items-center gap-3 cursor-pointer group"
-              >
-                <div className="w-8 h-8 flex-shrink-0">
-                  <img src="/logo-mark.svg" alt="CX Linux" className="w-8 h-8 object-contain" />
-                </div>
-                <span className="text-[1.1rem] font-bold tracking-wide leading-none">
-                  <span className="text-white">CX</span>
-                  <span className="text-[#00FF9F]"> LINUX</span>
-                </span>
-              </button>
-
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-6">
-                <Link
-                  href="/getting-started"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/getting-started" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Terminal
-                </Link>
-                <Link
-                  href="/pricing"
-                  className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/pricing") ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="/affiliates"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/affiliates" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Affiliates
-                </Link>
-                <Link
-                  href="/blog"
-                  className={`text-sm font-medium transition-colors ${
-                    location.startsWith("/blog") ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/about"
-                  className={`text-sm font-medium transition-colors ${
-                    location === "/about" ? "text-[#00FF9F]" : "text-gray-400"
-                  }`}
-                >
-                  About
-                </Link>
-              </div>
-
-              {/* Desktop CTAs */}
-              <div className="hidden md:flex items-center gap-4">
-                <Link href="/account">
-                  <button className="px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg">
-                    My Account
-                  </button>
-                </Link>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden text-white p-2"
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </nav>
-
-            {/* Mobile Menu */}
-            <AnimatePresence>
-              {mobileMenuOpen && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="md:hidden bg-[#1E1E1E] border-b border-[#333]"
-                >
-                  <div className="px-4 py-4 space-y-4">
-                    <Link
-                      href="/getting-started"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Terminal
-                    </Link>
-                    <Link
-                      href="/pricing"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Pricing
-                    </Link>
-                    <Link
-                      href="/affiliates"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Affiliates
-                    </Link>
-                    <Link
-                      href="/blog"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      Blog
-                    </Link>
-                    <Link
-                      href="/about"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block text-gray-400"
-                    >
-                      About
-                    </Link>
-                    <Link
-                      href="/account"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block w-full text-center px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg"
-                    >
-                      My Account
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </header>
-        )}
+        {!isCheckoutPage && <SiteHeader />}
 
         {/* Main Content */}
         <main className={!isCheckoutPage ? "pt-16" : ""}>
