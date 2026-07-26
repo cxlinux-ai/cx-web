@@ -1,0 +1,207 @@
+---
+title: "CX Linux Boot Failures: Diagnostic Checklist"
+publishedAt: "2026-07-26"
+description: "Fix CX Linux boot failures with an ordered checklist covering GRUB errors, initramfs, systemd targets, and kernel panics, from firmware to filesystem repair."
+draft: true
+author: "cx-team"
+tags: ["linux-boot", "grub", "initramfs", "systemd", "troubleshooting"]
+ogImage: "/images/cx-linux-boot-failure-diagnostic-checklist.jpg"
+---
+
+## Read the Logs Before You Reboot
+
+When a CX Linux machine fails to boot, the first instinct is to hold down the power button and try again. That instinct destroys the one thing you need most: the record of what happened. Every boot writes a trail through firmware, GRUB, initramfs, systemd, and the kernel, and each of those stages leaves evidence behind. Power-cycle before capturing it and you are left guessing at whatever failed on the next attempt, which may not fail the same way twice.
+
+Treat a boot failure as a diagnostic tree, not a single error to fix. Work through it in order: firmware and UEFI, GRUB, initramfs, systemd, kernel, then storage. Each stage either passes control to the next or fails in a way that tells you exactly where to look. CX Linux's boot architecture follows the same handoff chain as most modern distributions, so if you have debugged a GRUB2 and systemd stack before, the sequence here will feel familiar - the difference is knowing which command to run at which stage instead of trying everything at once.
+
+This checklist assumes you have a live USB or rescue image on hand. If you don't, make one now, before you need it.
+
+## Stage 1: Firmware and UEFI Checks
+
+Start outside the operating system entirely. A surprising number of "boot failures" are firmware configuration issues that have nothing to do with the distro.
+
+Check the boot device order in your BIOS/UEFI settings first. Firmware updates, new drive installs, and even some system updates silently reset boot priority, and a machine that looks dead may just be booting from the wrong device. This is also the point to confirm your hardware meets CX Linux system requirements for the kernel and bootloader version you're running - older firmware or unsupported chipsets can produce boot behavior that looks like corruption but is actually a compatibility gap.
+
+Next, check Secure Boot state. If you've built a custom kernel, installed a third-party driver, or added an out-of-tree module, an unsigned binary will block the boot process, often without a clear error message. Disabling Secure Boot temporarily is a valid diagnostic step even if you plan to re-enable it later with proper signing.
+
+Finally, from your live environment, check for a corrupted EFI System Partition \(ESP\). The ESP holds the boot loader files your firmware reads directly, and a damaged entry here will prevent GRUB from ever loading:
+
+\`\`\`
+
+efibootmgr -v
+
+\`\`\`
+
+Look for missing or duplicate boot entries. If CX Linux's entry is absent, you can recreate it once you've confirmed the ESP itself is mounted and intact.
+
+## Stage 2: GRUB-Level Errors
+
+If firmware hands off control but the OS still doesn't load, GRUB is your next stop. The errors here tend to fall into a predictable order of likelihood.
+
+1. **\`error: no such partition\` or \`error: unknown filesystem\`** - by far the most common. This usually means a UUID referenced in \`grub.cfg\` no longer matches reality, often after resizing a partition, cloning a disk, or swapping drives.
+
+1. **\`grub rescue&gt;\` prompt** - GRUB has lost track of its own core image or can't find \`/boot\`. Recoverable manually with \`ls\`, \`set root=\`, and \`linux\`/\`initrd\` commands typed directly at the prompt, though this is a stopgap, not a fix.
+
+1. **Menu loads, chosen entry fails** - typically a missing or renamed kernel or initramfs file, usually left behind by an interrupted update.
+
+1. **Blank screen after GRUB** - often a \`GRUB\_GFXMODE\` or framebuffer misconfiguration rather than a real failure. Worth ruling out before you assume the worst.
+
+The repair path is consistent across all four: boot from live media, mount the root partition, chroot into the installed system, and regenerate GRUB.
+
+\`\`\`
+
+mount /dev/sdXn /mnt
+
+chroot /mnt
+
+grub-install /dev/sdX
+
+update-grub
+
+\`\`\`
+
+If partition changes caused the UUID mismatch, update \`/etc/fstab\` and \`grub.cfg\` to match the current disk layout before rebooting. Don't just fix the immediate error and walk away - if the UUID drifted once, check for other stale references while you're in there.
+
+## Stage 3: Initramfs and Early Userspace Failures
+
+Past GRUB, the kernel loads and hands control to the initial RAM filesystem, whose job is to find and mount the real root filesystem. When that fails, you land in an \`\(initramfs\)\` shell.
+
+The usual suspects: a missing or incorrect root filesystem reference in \`fstab\` or the kernel command line, an LVM volume group that hasn't activated, or a LUKS-encrypted volume that never got unlocked. Storage driver gaps after a hardware change - a new NVMe controller, for instance - also show up here, since the initramfs may not include the module needed to see the disk at all.
+
+Work through it with:
+
+\`\`\`
+
+lsblk
+
+blkid
+
+cryptsetup status &lt;volume-name&gt;
+
+vgchange -ay
+
+\`\`\`
+
+\`lsblk\` and \`blkid\` tell you what the kernel can actually see. If the root volume is present but inactive, \`vgchange -ay\` activates LVM groups, and \`cryptsetup status\` confirms whether an encrypted volume is open. Once you've located and mounted the correct root manually, \`exit\` from the initramfs shell to continue booting - that gets you running again, but it's a one-time fix.
+
+To make it permanent, rebuild the initramfs with the correct modules included:
+
+\`\`\`
+
+update-initramfs -u
+
+\`\`\`
+
+or, on dracut-based tooling:
+
+\`\`\`
+
+dracut --force
+
+\`\`\`
+
+Missing storage modules are worth checking explicitly here - if a hardware change is the root cause, the rebuilt initramfs needs to include the new driver, not just refresh the old one.
+
+## Stage 4: systemd Boot Stage Failures
+
+If the initramfs succeeds but the boot still hangs, the failure has moved into systemd's territory - it's waiting on a unit that never comes up.
+
+From an emergency shell, list what failed:
+
+\`\`\`
+
+systemctl --failed
+
+\`\`\`
+
+This is usually a \`.mount\` or \`.service\` unit. A stale entry in \`fstab\` - wrong UUID, a mount point that no longer exists, or a network share missing the \`nofail\` or \`\_netdev\` option - is the most frequent cause of a stalled boot at this stage. \`systemctl status &lt;unit-name&gt;\` on the offending unit will usually spell out exactly why it failed.
+
+One distinction worth getting right: **rescue target vs. emergency target**. They are not interchangeable, and picking the wrong one wastes diagnostic time.
+
+- \`systemd.unit=rescue.target\` gives you a minimal environment with most local filesystems mounted and basic services running. Use this when you need to inspect a system that's mostly working.
+
+- \`systemd.unit=emergency.target\` gives you close to nothing - root mounted read-only, almost no services. Use this when even rescue mode fails to boot, or when you suspect the failure is in core mount handling itself.
+
+Add either as a kernel parameter by pressing \`e\` at the GRUB menu and appending it to the \`linux\` line before booting.
+
+Once in a shell, \`journalctl -xb\` is your primary tool for finding exactly where the boot sequence stalled. If the machine did boot on a previous attempt and only started failing recently, \`journalctl -b -1\` pulls logs from that prior boot - which is exactly why you captured logs before reboot instead of destroying them.
+
+## Stage 5: Kernel Panics
+
+A kernel panic is a different animal from everything above it - the kernel itself has hit a state it can't recover from, and the console will show \`Kernel panic - not syncing:\` before the system halts. Distinguish this from an "oops," which is recoverable and logged but doesn't necessarily stop the system.
+
+The most common cause by a wide margin is a broken kernel module after an update - GPU drivers and out-of-tree filesystem modules are frequent offenders. Corrupted filesystem superblocks and failing RAM are the other two candidates worth ruling out.
+
+The fastest diagnostic step: boot the previous kernel version from GRUB's advanced options menu. This alone resolves the majority of panics that appear right after a kernel upgrade, and it costs you nothing to try first. If no older kernel entry is available, boot from live media and check \`/boot\` for any remaining kernel and initramfs pairs you can select manually.
+
+If the panic persists across multiple kernel versions, stop suspecting software and start suspecting hardware. Run a memory test from the GRUB menu:
+
+\`\`\`
+
+memtest86+
+
+\`\`\`
+
+and check disk health directly:
+
+\`\`\`
+
+smartctl -a /dev/sdX
+
+\`\`\`
+
+For filesystem corruption, run a check from live media - never against a mounted filesystem:
+
+\`\`\`
+
+fsck -f /dev/sdXn
+
+\`\`\`
+
+or for Btrfs:
+
+\`\`\`
+
+btrfs check /dev/sdXn
+
+\`\`\`
+
+## Stage 6: Root Filesystem and Storage Emergencies
+
+Before you reboot again, check \`journalctl\` and \`dmesg\` from the rescue shell for any read-only filesystem remounts, I/O errors, or controller errors that preceded the panic. A filesystem that goes read-only mid-operation is the kernel protecting itself from writing to a disk it no longer trusts, and that log entry usually points straight at the failing device.
+
+On multi-disk servers, a RAID array or LVM volume group that fails to assemble on boot is one of the more common causes of this class of failure. Check assembly state directly:
+
+\`\`\`
+
+cat /proc/mdstat
+
+mdadm --detail /dev/mdX
+
+vgs
+
+lvs
+
+\`\`\`
+
+If an array is degraded or a volume group isn't showing its expected logical volumes, you're looking at a storage-layer problem that boot-stage fixes won't solve - the array needs to be reassembled or repaired before anything above it will work reliably.
+
+## CX-Specific Recovery Commands
+
+CX Linux ships tooling on top of the standard GRUB2 and systemd stack, and where that tooling diverges from generic commands - its package manager's recovery syntax, any bundled rescue utility, or distro-specific initramfs hooks - is the detail that turns this checklist from generic advice into something specific to your system.
+
+This section is intentionally left as a placeholder pending confirmation from the CX Linux team on: the upstream base and package manager name, the default init system if it differs from systemd, the default bootloader if it differs from GRUB2, and any proprietary recovery utility bundled with the distribution. Once confirmed, the CX-specific equivalents replace the generic commands above at each stage - same diagnostic tree, distro-native syntax.
+
+## Scripting the Checklist for Fleet Recovery
+
+Manual troubleshooting works for one machine. It doesn't scale to a rack of them.
+
+For fleet-wide recovery, script the early stages of this checklist rather than repeating them by hand. A pre-boot kernel parameter pushed through your provisioning system can force any unresponsive server into \`rescue.target\` on the next boot attempt, giving you a consistent entry point across every machine without touching a console. Pair that with a systemd unit that captures \`journalctl -b -1\` output to a remote log target immediately after boot, and you get the evidence-before-reboot principle applied automatically, at scale, instead of relying on whoever happens to be on call.
+
+For DevOps teams managing CX Linux across many hosts, this is worth building once and keeping in your provisioning toolkit - a small investment that pays back the first time a batch of servers fails to come up after a kernel update.
+
+## Building a Repeatable Recovery Workflow
+
+Boot failures are rarely mysterious once you follow the handoff chain in order: firmware, GRUB, initramfs, systemd, kernel, storage. Each stage either passes control forward cleanly or fails with a specific, identifiable signature. The discipline that separates a fast recovery from a long one isn't cleverness - it's resisting the urge to reboot before you've read what the system already told you.
+
+Keep a live USB current, know the difference between rescue and emergency targets before you need it, and build the habit of capturing logs first. For more on getting a CX Linux system into a stable state to begin with, see our guides on installation and initial setup, and check the community support channels if you run into a failure mode this checklist doesn't cover.
