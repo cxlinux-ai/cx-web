@@ -1,0 +1,139 @@
+---
+title: "AI Command-Line Tools for Linux: 6 Worth Trying"
+date: "2026-07-26T11:30:14.138Z"
+description: "A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell."
+slug: "ai-command-line-tools-linux"
+draft: false
+tags: ["linux", "ai-tools", "cli", "security", "command-line"]
+image: "/images/ai-command-line-tools-linux.jpg"
+---
+
+## Why Switch Tabs When You Have a Shell?
+
+There's a specific annoyance that happens a dozen times a day for anyone running Linux systems: you hit an error, you don't immediately know the fix, and now you're alt-tabbing to a browser to ask a chatbot something you could have typed inline. Then you copy the answer back into your terminal, half-formatted, and lose your place in whatever you were doing.
+
+A growing set of AI command-line tools for Linux exist specifically to remove that tab switch. They let you query a language model, generate a shell command, or get an error explained without ever leaving the prompt. Some of these are thin wrappers around the OpenAI API. Others are full-on Unix-philosophy tools built to sit in a pipeline like \`grep\` or \`awk\`. This post covers the actual tools - what they do, how to install them, and where they're genuinely useful versus where they're just a novelty - not another "AI is changing everything" overview.
+
+## What These Tools Actually Do
+
+Strip away the branding and most of these tools share the same handful of tricks. They take a prompt as an argument or read it from stdin, so you can pipe a log file, a git diff, or a stack trace straight into them. Many offer a "shell mode" that turns a plain-English request into an actual command and asks if you want to run it. Several support a REPL or chat mode for back-and-forth conversations instead of one-shot queries. And nearly all of them can point at either a hosted API \(OpenAI, Anthropic, Gemini\) or a local model server like Ollama, so the same tool works whether you're paying per token or running something offline on your own hardware. Once you know that pattern, the differences between tools come down to install friction, provider flexibility, and how well they fit into scripts versus interactive use.
+
+## The Tools, One by One
+
+### shell-gpt \(sgpt\)
+
+shell-gpt is a Python CLI that's become the default answer to "what's that AI terminal tool" for a lot of people, mostly because it was early and does the obvious thing well. Install it with \`pip install shell-gpt\`, set an API key, and you're running.
+
+Its killer feature is \`sgpt -s\` \(shell mode\): you describe a task in plain English and it generates the actual command, then asks whether to run it, describe it further, or abort.
+
+\`\`\`
+
+sgpt -s "find all files over 1GB modified in the last week, sorted by size"
+
+\`\`\`
+
+That saves you the trip to \`man find\` and the inevitable flag lookup. There's also \`--code\` for output with no explanatory prose \(handy when piping into a file\), a \`--chat\` mode with persistent context, and "roles" for baking in a custom system prompt. Configuration lives in a plain \`.sgptrc\` file, and you can repoint it at an OpenAI-compatible local endpoint if you'd rather not send every query to a cloud API.
+
+### aichat
+
+aichat is a Rust binary from sigoden, and the fact that it's a single static binary rather than a Python package with dependencies is a real selling point for anyone who's tired of managing virtualenvs just to run a CLI tool. Install via cargo, your distro's package manager, or a prebuilt release binary.
+
+Where aichat pulls ahead of shell-gpt is provider flexibility and session management. One YAML config file can hold credentials and settings for OpenAI, Claude, Gemini, Mistral, and local Ollama models, and you switch between them with named roles. You can keep a "Kubernetes troubleshooting" persona and a separate "Bash one-liner" persona without juggling config files. It also has a proper REPL with syntax highlighting, and an execute mode \(\`-e\`\) that mirrors shell-gpt's command generation. If you want one tool that talks to several backends without reconfiguring each time, this is the one.
+
+### llm
+
+Simon Willison's \`llm\` is less a chat tool and more a piece of infrastructure that happens to have a chat mode. Install with \`pipx install llm\`, then add whatever backend you need via plugins - \`llm install llm-claude\`, \`llm install llm-gpt4all\`, and so on.
+
+The defining feature is that every prompt and response gets logged to a local SQLite database automatically. That sounds minor until you realize you can later run SQL queries against your own AI usage history, which is a genuinely useful thing for a sysadmin who wants an audit trail of what they asked a model to do to production systems. It's built for piping:
+
+\`\`\`
+
+cat error.log | llm "what's causing this and how do I fix it"
+
+\`\`\`
+
+It also does embeddings and basic retrieval-augmented workflows from the same CLI. If your interest is scripting AI calls into cron jobs or shell scripts rather than chatting, \`llm\` is built for that specifically, not adapted to it.
+
+### mods
+
+mods, from the Charm team behind \`glow\` and \`gum\`, is built around one job: take command output, pipe it through an LLM, get something more useful back. It's a Go binary, installable via Homebrew or \`go install\`.
+
+The canonical demo is generating a commit message from a diff:
+
+\`\`\`
+
+git diff | mods "write a concise commit message for this"
+
+\`\`\`
+
+or summarizing a noisy log file:
+
+\`\`\`
+
+cat access.log | mods "summarize the error patterns in this"
+
+\`\`\`
+
+It renders markdown output cleanly in the terminal \(borrowing from \`glow\`\) and supports continuing a previous piped conversation, so you can follow up without re-pasting context. It supports OpenAI, Azure OpenAI, and local models through any OpenAI-compatible endpoint. Think of it as the tool you reach for when the AI call is a small transformation step in an otherwise normal terminal session, not the main event.
+
+### tgpt
+
+tgpt's whole pitch is that you can use it without an API key. Historically it's routed queries through a handful of free backends rather than requiring an OpenAI account, which makes it the easiest of these tools to just try on a whim. It's a Go binary with a \`-s\` shell-generation flag similar to the others, plus a quiet mode meant for scripting.
+
+The tradeoff is durability. Those no-key backends are unofficial and can break or disappear without warning, since tgpt doesn't control them. Fine for kicking the tires or for genuinely low-stakes use; not something I'd build a production script around.
+
+### GitHub Copilot CLI
+
+If you already pay for GitHub Copilot, the official CLI extension is worth knowing about even though it's not open source and not free-standing. Install with \`gh extension install github/gh-copilot\`.
+
+It's narrower than the tools above by design - two subcommands, not a general chatbot. \`gh copilot suggest "&lt;task&gt;"\` proposes a shell, git, or \`gh\` command and lets you execute, explain, revise, or copy it interactively. \`gh copilot explain "&lt;command&gt;"\` runs the other direction: paste in some cursed one-liner from a runbook you inherited and get a plain-English breakdown of what it actually does. If you're already inside the GitHub ecosystem, this slots in with zero extra config.
+
+### Honorable mention: Fabric
+
+Fabric, from Daniel Miessler, isn't really a chat tool - it's a library of reusable prompt "patterns" \(summarize, extract key claims, analyze a paper\) that you invoke from the CLI and feed via stdin:
+
+\`\`\`
+
+pbpaste | fabric --pattern summarize
+
+\`\`\`
+
+It's a different flavor of the same trend: instead of writing a fresh prompt every time, you maintain a library of ones that already work. More of a power-user framework than a drop-in tool, but worth knowing it exists if ad hoc prompting starts to feel repetitive.
+
+## Local vs. Cloud Models: What Sysadmins Should Know
+
+Almost every tool on this list can be pointed at a local model instead of a hosted API, usually via Ollama or any server that speaks the OpenAI-compatible API format. That matters for two reasons that actually affect a sysadmin's decision, not just a hobbyist's.
+
+First, cost. If you're running these queries dozens of times a day, API costs add up in a way that's easy to ignore until the bill shows up. A local 7B or 13B model running on decent hardware handles "explain this error" or "write this find command" perfectly well, and it's free after the initial setup.
+
+Second, and more relevant for anyone touching production or regulated environments: air-gapped or privacy-sensitive systems can't send logs, configs, or stack traces to a third-party API at all. Piping a snippet of an internal log file into a cloud LLM might violate a policy you didn't even think to check. Pointing the same tool at a local Ollama instance sidesteps that entirely. If you're evaluating any of these tools for work use rather than personal tinkering, check the local-model support before you check anything else.
+
+## The Obvious Risk: Letting AI Run Commands For You
+
+The shell-generation features in shell-gpt, aichat, and tgpt are the most impressive demo and the most dangerous feature on this list. They work by generating a command from your description and then asking if you want to run it immediately, in your current shell, with your current permissions.
+
+That's fine when the request is "list files over 1GB." It's less fine when the request is more complex and the model quietly hallucinates a flag that doesn't do what you think, or generates a \`find ... -exec rm \{\} \\;\` that's scoped wider than intended. These tools aren't malicious, they're just occasionally wrong, and the failure mode for a wrong shell command is not a wrong sentence in a chat window - it's a wrong action against your filesystem.
+
+A few habits make this manageable. Always read the generated command before confirming, every time, even the tenth time that day when you're tempted to just hit enter. Test unfamiliar generated commands against a non-root user or a throwaway VM first if there's any doubt. Favor tools and flags that show you the command and require a separate confirmation step over anything that executes silently by default. And keep destructive operations - anything touching \`rm\`, \`dd\`, \`mkfs\`, iptables rules, or production databases - out of the auto-execute path entirely. Generate the command, read it, then run it yourself.
+
+## Which Tool Fits Which Job
+
+- **Scripting or cron automation**: \`llm\`. Built for piping, logs every call, and works well as a library call rather than an interactive session.
+
+- **Multi-provider interactive use**: \`aichat\`. One config, several backends, role-based context switching.
+
+- **Git workflows and log summarizing**: \`mods\`. Built specifically around piping command output through a model and getting clean markdown back.
+
+- **No-key experimentation**: \`tgpt\`. Lowest friction to try, least reliable for anything you depend on long-term.
+
+- **Already paying for Copilot**: \`gh copilot\`. No reason to add a second tool if this one is already covered by a subscription you have.
+
+- **General command generation and quick chat**: \`shell-gpt\`. The most mature, most documented option if you just want one tool that does the basics well.
+
+## Verdict: Is This Worth Adding to Your Workflow?
+
+These tools earn their place for two things specifically: turning a vague command you half-remember into a working one-liner, and explaining an error message or log excerpt faster than you'd parse it yourself. Both save real time, and both fit naturally into how terminal users already work - pipe in, get an answer, move on.
+
+Where they don't earn their place is as a replacement for actually knowing your systems. A generated \`iptables\` rule you don't understand is a liability whether a human or a model wrote it. And the auto-execute features need real discipline, not blind trust, or you're one bad suggestion away from a bad afternoon.
+
+If you're already comfortable in a terminal, picking one AI command-line tool for Linux and using it for a couple of weeks - not five tools at once - is the way to actually find out if it earns a permanent spot in your dotfiles.
