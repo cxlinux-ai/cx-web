@@ -1,0 +1,195 @@
+---
+title: "CX Linux Package Manager Tutorial: cxpkg Guide"
+publishedAt: "2026-07-26"
+description: "Learn the CX Linux package manager with real cxpkg commands for install, update, rollback, and dependency resolution in production."
+draft: false
+author: "cx-team"
+tags: ["linux", "package-manager", "tutorial", "cxpkg", "command-line"]
+ogImage: "/images/cx-linux-package-manager-tutorial.jpg"
+---
+
+## The 2 a.m. rollback
+
+A routine update lands on a production box. Ten minutes later, the service that box runs stops responding. This is the moment every sysadmin has lived through at least once, and it's the reason a package manager tutorial that only covers installs is incomplete. This CX Linux package manager tutorial walks through the four workflows that actually matter once a system is in production: installing packages cleanly, updating without surprises, rolling back when an update goes wrong, and resolving the dependency conflicts that cause most of those failures in the first place.
+
+If you're new to CX Linux, this assumes you already have a working system and basic shell access. If you haven't installed it yet, the install guide covers that ground. Here, we're focused on \`cxpkg\`, the command-line tool CX Linux uses to manage software.
+
+## How the package manager works
+
+CX Linux ships with \`cxpkg\`, a package manager that borrows the dependency-resolution logic familiar to anyone who has used DNF or apt, but adds a transaction journal that records every state change to the system. Each install, update, or removal gets a numbered entry in that journal, along with a filesystem snapshot of the affected configuration files. That combination is what makes rollback a first-class operation instead of a manual reconstruction job.
+
+Like every package manager, \`cxpkg\` works from local metadata: a cached index of what's available in each configured repository, including package names, versions, and dependency relationships. That cache doesn't refresh itself. If you skip the update step before installing something, you're working from a snapshot that could be days old, which is one of the more common ways people end up chasing a version mismatch that shouldn't exist.
+
+## Installing packages
+
+Start with a search to confirm the package name and check what's available before you commit to anything.
+
+- \`$ cxpkg search nginx\`
+
+- Output: \`nginx 1.25.3-2 \[stable\] - high performance HTTP server\`
+
+Once you know the version and repo, install it directly:
+
+- \`$ sudo cxpkg install nginx\`
+
+- \`Resolving dependencies... done\`
+
+- \`Installing: nginx \(1.25.3-2\), nginx-common \(1.25.3-2\)\`
+
+- \`Transaction #4021 recorded. Proceed? \[Y/n\]\`
+
+That transaction number matters. It's the handle you'll use later if this install needs to be undone. Confirm, and \`cxpkg\` writes the packages to disk and logs the pre-install state of \`/etc/nginx\` before making any changes there.
+
+Verify the install landed correctly:
+
+- \`$ cxpkg info nginx\`
+
+- \`Status: installed, version 1.25.3-2, transaction #4021\`
+
+For scripted or automated deployments, drop the interactive prompt with the non-interactive flag:
+
+- \`$ sudo cxpkg install -y nginx\`
+
+This is the flag you want in provisioning scripts, Ansible playbooks, or CI pipelines - anywhere a human isn't sitting at the terminal to answer a yes/no prompt. Just don't use it as a default habit on systems you're managing by hand; the confirmation step is there because dependency resolution occasionally pulls in more than you expect, and skipping the review defeats the point.
+
+## Updating packages and refreshing metadata
+
+Before you update anything, refresh the local cache so \`cxpkg\` knows what's actually available:
+
+- \`$ sudo cxpkg refresh\`
+
+- \`Fetching: stable \(1,204 packages\)\`
+
+- \`Fetching: security \(89 packages\)\`
+
+- \`Cache updated: 2 repositories\`
+
+With the cache current, check what's outdated:
+
+- \`$ cxpkg check\`
+
+- \`12 packages can be updated:\`
+
+- \`nginx 1.25.3-2 -&gt; 1.25.4-1\`
+
+- \`openssl 3.0.11-1 -&gt; 3.0.12-1\`
+
+- \`... \(10 more\)\`
+
+This is a read-only operation. Nothing changes until you run the upgrade:
+
+- \`$ sudo cxpkg upgrade\`
+
+- \`Resolving dependencies... done\`
+
+- \`Upgrading 12 packages\`
+
+- \`Transaction #4022 recorded. Proceed? \[Y/n\]\`
+
+Same pattern as install: a transaction number, a confirmation prompt, and a snapshot of anything that's about to change. If you only want to patch one package rather than everything in the queue, target it directly:
+
+- \`$ sudo cxpkg upgrade nginx\`
+
+This is the safer move on a production system where you don't want twelve unrelated packages moving at once, each one a separate variable if something breaks afterward.
+
+## Rolling back a failed update
+
+Say the upgrade from the last section did land, and now nginx won't start. First step is figuring out what changed and when:
+
+- \`$ cxpkg history\`
+
+- \`#4022 - upgrade - 12 packages - 2024-03-14 02:11\`
+
+- \`#4021 - install - nginx, nginx-common - 2024-03-12 16:40\`
+
+- \`#4020 - install - certbot - 2024-03-10 09:02\`
+
+Transaction #4022 is the obvious suspect - it's the most recent change and it touches nginx directly. Before reverting, it helps to see exactly what was in it:
+
+- \`$ cxpkg history show 4022\`
+
+- \`Packages: nginx \(1.25.3-2 -&gt; 1.25.4-1\), openssl \(3.0.11-1 -&gt; 3.0.12-1\), ... 10 more\`
+
+- \`Config snapshot: /etc/nginx, /etc/ssl \(pre-transaction state saved\)\`
+
+Everything checks out as expected, so revert the transaction:
+
+- \`$ sudo cxpkg rollback 4022\`
+
+- \`Reverting: 12 packages to pre-transaction versions\`
+
+- \`Restoring config snapshot: /etc/nginx, /etc/ssl\`
+
+- \`Rollback complete. System restored to transaction #4021 state.\`
+
+This is the part worth understanding rather than just running: \`cxpkg\` isn't reinstalling the old package versions from scratch and hoping the config files sort themselves out. It's restoring the exact filesystem state captured at the moment before the transaction ran, package binaries and configuration together. That's the difference between a rollback that actually works and one that leaves you with old binaries reading a config file written by the new version - a mismatch that causes its own separate outage.
+
+Restart the service and confirm:
+
+- \`$ sudo systemctl restart nginx\`
+
+- \`$ systemctl status nginx\`
+
+- \`Active: active \(running\)\`
+
+If the rollback fixed it, you now know the update itself introduced the regression, and you have a specific version pair to test in staging before trying that upgrade again. If the rollback doesn't fix it, the problem isn't the package update, and you've just saved yourself from chasing the wrong lead for the rest of the night.
+
+## Resolving dependency conflicts
+
+Rollback handles a bad update after the fact. Dependency resolution is what stops a bad install before it happens. Here's what a conflict looks like:
+
+- \`$ sudo cxpkg install libssl-dev\`
+
+- \`Resolving dependencies... conflict detected\`
+
+- \`libssl-dev 3.0.12-1 requires openssl \(&gt;= 3.0.12\)\`
+
+- \`Installed: openssl 3.0.11-1 is held by transaction #4021\`
+
+- \`Cannot resolve automatically.\`
+
+The "held" language is the key detail. Something in your system - a manual pin, or a package that explicitly depends on the older openssl - is preventing \`cxpkg\` from bumping the version automatically. You have a few ways to move forward:
+
+- Check what's holding the version: \`$ cxpkg why openssl\` shows which installed packages depend on the current version and why the resolver won't touch it.
+
+- Release the hold if it's no longer needed: \`$ sudo cxpkg unhold openssl\`, then retry the install.
+
+- Pin the new package to a compatible version instead, if upgrading openssl system-wide isn't something you want to do right now: \`$ sudo cxpkg install libssl-dev=3.0.11-1\` \(if a matching build exists in the repo\).
+
+- Remove the conflicting package outright if it's no longer in use: \`$ sudo cxpkg remove &lt;package-holding-the-version&gt;\`.
+
+This is also where the transaction journal pays off twice over. Any dependency resolution you force through - an unhold, a downgrade, a removal - gets logged the same way an install does. If forcing the resolution causes a problem somewhere else, you roll it back exactly the way you rolled back the failed nginx update above. Dependency conflicts and rollback aren't two unrelated features; they're two ends of the same safety mechanism.
+
+## Quick reference
+
+- Search for a package: \`cxpkg search &lt;name&gt;\`
+
+- Install a package: \`sudo cxpkg install &lt;name&gt;\`
+
+- Non-interactive install: \`sudo cxpkg install -y &lt;name&gt;\`
+
+- Refresh metadata cache: \`sudo cxpkg refresh\`
+
+- List available updates: \`cxpkg check\`
+
+- Apply all updates: \`sudo cxpkg upgrade\`
+
+- Upgrade a single package: \`sudo cxpkg upgrade &lt;name&gt;\`
+
+- View transaction history: \`cxpkg history\`
+
+- Inspect a specific transaction: \`cxpkg history show &lt;id&gt;\`
+
+- Roll back a transaction: \`sudo cxpkg rollback &lt;id&gt;\`
+
+- Check why a version is held: \`cxpkg why &lt;name&gt;\`
+
+- Release a version hold: \`sudo cxpkg unhold &lt;name&gt;\`
+
+- Remove a package: \`sudo cxpkg remove &lt;name&gt;\`
+
+Keep this list near your terminal for the first few weeks. The commands are consistent enough that most of them become muscle memory fast, but the transaction ID workflow - checking history before rolling back - is worth doing deliberately every time rather than rushing it at 2 a.m.
+
+## Where to go next
+
+This tutorial assumes CX Linux is already installed and running. If you're setting it up for the first time, the install guide walks through partitioning, base system setup, and first boot in more detail. And if you're weighing CX Linux against a Debian-based setup you already know, the CX Linux vs Ubuntu comparison covers where the package manager, init system, and release cadence diverge - useful context if \`cxpkg\`'s transaction-based approach is new territory coming from apt or dpkg.
