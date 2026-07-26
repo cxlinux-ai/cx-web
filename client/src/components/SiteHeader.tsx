@@ -96,13 +96,6 @@ export default function SiteHeader() {
         />
       </div>
 
-      {/* Ambient accent bloom behind the island */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-24 h-48 bg-[radial-gradient(50%_60%_at_50%_100%,rgba(0,255,159,0.10),transparent_70%)] transition-opacity duration-700"
-        style={{ opacity: scrolled ? 1 : 0 }}
-      />
-
       <div
         className={`px-3 sm:px-5 lg:px-8 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           scrolled ? "pt-2.5 sm:pt-3" : "pt-0"
