@@ -76,7 +76,7 @@ export function TableOfContents({ contentRef }: TableOfContentsProps) {
         <div className="absolute left-1 top-1.5 bottom-1.5 w-px bg-white/8" />
         {/* Active fill */}
         <div
-          className="absolute left-1 top-1.5 w-px bg-[#2F6BFF] transition-all duration-300"
+          className="absolute left-1 top-1.5 w-px bg-[#00FF9F] transition-all duration-300"
           style={{
             height: items.length > 0 ? `${((activeIndex + 1) / items.length) * 100}%` : "0%",
           }}
@@ -92,9 +92,9 @@ export function TableOfContents({ contentRef }: TableOfContentsProps) {
                 <span
                   className={`absolute -left-[18px] top-[7px] w-2 h-2 rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-[#2F6BFF] ring-4 ring-[#2F6BFF]/20 scale-110"
+                      ? "bg-[#00FF9F] ring-4 ring-[#00FF9F]/20 scale-110"
                       : isPassed
-                      ? "bg-[#2F6BFF]/60"
+                      ? "bg-[#00FF9F]/60"
                       : "bg-white/10"
                   }`}
                 />

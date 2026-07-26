@@ -68,7 +68,7 @@ const SERVERS: SrvRow[] = [
 ];
 
 const STATUS_COLOR: Record<Status, string> = {
-  healthy:   "bg-[#2F6BFF]",
+  healthy:   "bg-[#00FF9F]",
   warning:   "bg-amber-400",
   deploying: "bg-blue-400",
 };
@@ -283,10 +283,10 @@ function Graph({ vals, color, animate: shouldAnimate, delay = 0 }: { vals: numbe
 /* ── Log lines ─────────────────────────────────────────────────────────── */
 const LOG = [
   { col: "text-gray-500",  text: "$ cx fleet patch --stable" },
-  { col: "text-[#7AA0FF]", text: "✓ web-01.prod   upgraded   2.8s" },
-  { col: "text-[#7AA0FF]", text: "✓ api-01.prod   upgraded   3.1s" },
+  { col: "text-[#00FF9F]", text: "✓ web-01.prod   upgraded   2.8s" },
+  { col: "text-[#00FF9F]", text: "✓ api-01.prod   upgraded   3.1s" },
   { col: "text-blue-400",  text: "⟳ worker-01     deploying…" },
-  { col: "text-[#7AA0FF]", text: "● 3/4 done · 0 errors" },
+  { col: "text-[#00FF9F]", text: "● 3/4 done · 0 errors" },
 ];
 
 function LiveLog({ start }: { start: boolean }) {
@@ -314,7 +314,7 @@ function LiveLog({ start }: { start: boolean }) {
         </motion.div>
       ))}
       <motion.span
-        className="inline-block w-[6px] h-[11px] bg-[#2F6BFF]/50 rounded-sm align-middle"
+        className="inline-block w-[6px] h-[11px] bg-[#00FF9F]/50 rounded-sm align-middle"
         animate={{ opacity: [1, 0.2, 1] }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -330,7 +330,7 @@ export function FleetMetricsPanel() {
   return (
     <div ref={containerRef} className="relative w-full select-none">
       {/* very subtle glow */}
-      <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-2/3 h-20 bg-[#2F6BFF]/[0.04] blur-3xl rounded-full" />
+      <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 w-2/3 h-20 bg-[#00FF9F]/[0.04] blur-3xl rounded-full" />
 
       <motion.div
         initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
@@ -349,11 +349,11 @@ export function FleetMetricsPanel() {
             <span className="text-[11px] text-gray-600 font-mono ml-1.5">cx, fleet</span>
             <div className="ml-auto flex items-center gap-2">
               <motion.span
-                className="w-1.5 h-1.5 rounded-full bg-[#2F6BFF]"
+                className="w-1.5 h-1.5 rounded-full bg-[#00FF9F]"
                 animate={{ opacity: [1, 0.4, 1] }}
                 transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               />
-              <span className="text-[10px] text-[#7AA0FF]/80 font-mono tracking-wide">LIVE</span>
+              <span className="text-[10px] text-[#00FF9F]/80 font-mono tracking-wide">LIVE</span>
             </div>
           </div>
 
@@ -361,13 +361,13 @@ export function FleetMetricsPanel() {
           <div className="grid grid-cols-2 border-b border-white/[0.05] divide-x divide-white/[0.05]">
             <div className="px-4 py-3 text-center">
               <div className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Online</div>
-              <div className="text-lg font-bold tabular-nums font-mono text-[#7AA0FF]">
+              <div className="text-lg font-bold tabular-nums font-mono text-[#00FF9F]">
                 {inView ? <CountUp to={12} suffix="/12" /> : "0/12"}
               </div>
             </div>
             <div className="px-4 py-3 text-center">
               <div className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Avg CPU</div>
-              <div className="text-lg font-bold tabular-nums font-mono text-[#7AA0FF]">
+              <div className="text-lg font-bold tabular-nums font-mono text-[#00FF9F]">
                 {inView ? <CountUp to={50} suffix="%" /> : "0%"}
               </div>
             </div>
@@ -392,7 +392,7 @@ export function FleetMetricsPanel() {
                   <div className="flex-1 min-w-0">
                     <Graph
                       vals={srv.spark}
-                      color={srv.cpu >= 75 ? "#fbbf24" : "#2F6BFF"}
+                      color={srv.cpu >= 75 ? "#fbbf24" : "#00FF9F"}
                       animate={inView}
                       delay={rowDelay + 0.1}
                     />

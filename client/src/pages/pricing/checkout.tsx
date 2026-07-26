@@ -331,7 +331,7 @@ export default function CheckoutPage() {
 
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
                   <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Server className="w-5 h-5 text-[#7AA0FF]" />
+                    <Server className="w-5 h-5 text-[#00FF9F]" />
                     CX Core includes:
                   </h3>
                   <ul className="space-y-2">
@@ -356,7 +356,7 @@ export default function CheckoutPage() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder="John Doe"
                       required
-                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                     />
                   </div>
 
@@ -371,14 +371,14 @@ export default function CheckoutPage() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="john@example.com"
                       required
-                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-4 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
                       <>
@@ -405,7 +405,7 @@ export default function CheckoutPage() {
               >
                 <h1 className="text-3xl font-bold mb-2">Check Your Email</h1>
                 <p className="text-gray-400 mb-8">
-                  We sent a 6-digit code to <span className="text-[#7AA0FF]">{email}</span>
+                  We sent a 6-digit code to <span className="text-[#00FF9F]">{email}</span>
                 </p>
 
                 <form onSubmit={handleVerifyOTP} className="space-y-6">
@@ -420,14 +420,14 @@ export default function CheckoutPage() {
                       onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
                       placeholder="000000"
                       maxLength={6}
-                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF] text-center text-2xl tracking-widest font-mono"
+                      className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] text-center text-2xl tracking-widest font-mono"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isLoading || otp.length !== 6}
-                    className="w-full py-4 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {isLoading ? (
                       <>
@@ -460,8 +460,8 @@ export default function CheckoutPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center"
               >
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#2F6BFF]/20 flex items-center justify-center">
-                  <Check className="w-10 h-10 text-[#7AA0FF]" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#00FF9F]/20 flex items-center justify-center">
+                  <Check className="w-10 h-10 text-[#00FF9F]" />
                 </div>
 
                 <h1 className="text-3xl font-bold mb-2">Welcome to CX Linux!</h1>
@@ -472,7 +472,7 @@ export default function CheckoutPage() {
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
                   <p className="text-sm text-gray-400 mb-3">Your License Key</p>
                   <div className="flex items-center justify-center gap-3">
-                    <code className="text-xl font-mono text-[#7AA0FF] font-bold">
+                    <code className="text-xl font-mono text-[#00FF9F] font-bold">
                       {licenseKey}
                     </code>
                     <button
@@ -488,22 +488,22 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                <div className="bg-[#08080A] rounded-xl p-6 text-left mb-8">
+                <div className="bg-[#1E1E1E] rounded-xl p-6 text-left mb-8">
                   <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Key className="w-5 h-5 text-[#7AA0FF]" />
+                    <Key className="w-5 h-5 text-[#00FF9F]" />
                     Next Steps
                   </h3>
                   <ol className="space-y-3 text-sm text-gray-300">
                     <li className="flex gap-3">
-                      <span className="w-6 h-6 rounded-full bg-[#2F6BFF]/20 text-[#7AA0FF] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
-                      <span>Install CX Terminal from <a href="/getting-started" className="text-[#7AA0FF] hover:underline">Getting Started</a></span>
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                      <span>Install CX Terminal from <a href="/getting-started" className="text-[#00FF9F] hover:underline">Getting Started</a></span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="w-6 h-6 rounded-full bg-[#2F6BFF]/20 text-[#7AA0FF] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
-                      <span>Run: <code className="bg-black/50 px-2 py-1 rounded text-[#7AA0FF]">cx license activate {licenseKey}</code></span>
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                      <span>Run: <code className="bg-black/50 px-2 py-1 rounded text-[#00FF9F]">cx license activate {licenseKey}</code></span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="w-6 h-6 rounded-full bg-[#2F6BFF]/20 text-[#7AA0FF] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                      <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
                       <span>Start using AI-powered terminal commands!</span>
                     </li>
                   </ol>
@@ -511,7 +511,7 @@ export default function CheckoutPage() {
 
                 <Link
                   href="/getting-started"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all"
                 >
                   Go to Getting Started
                   <ArrowLeft className="w-4 h-4 rotate-180" />
@@ -573,7 +573,7 @@ export default function CheckoutPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
                   required
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                 />
               </div>
 
@@ -588,7 +588,7 @@ export default function CheckoutPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="john@company.com"
                   required
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                 />
               </div>
 
@@ -602,7 +602,7 @@ export default function CheckoutPage() {
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
                   placeholder="Acme Corp"
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                 />
               </div>
 
@@ -620,7 +620,7 @@ export default function CheckoutPage() {
                     if (code) localStorage.setItem("cx_referral", code);
                   }}
                   placeholder="Enter referral code"
-                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF] font-mono uppercase"
+                  className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] font-mono uppercase"
                 />
               </div>
 
@@ -631,7 +631,7 @@ export default function CheckoutPage() {
                     type="button"
                     onClick={() => setIsAnnual(false)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
-                      !isAnnual ? "bg-[#2F6BFF] text-white" : "bg-white/5 text-gray-400 hover:bg-white/10"
+                      !isAnnual ? "bg-[#00FF9F] text-black" : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
                     Monthly
@@ -641,7 +641,7 @@ export default function CheckoutPage() {
                     type="button"
                     onClick={() => setIsAnnual(true)}
                     className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all ${
-                      isAnnual ? "bg-[#2F6BFF] text-white" : "bg-white/5 text-gray-400 hover:bg-white/10"
+                      isAnnual ? "bg-[#00FF9F] text-black" : "bg-white/5 text-gray-400 hover:bg-white/10"
                     }`}
                   >
                     Annual
@@ -655,7 +655,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -685,10 +685,10 @@ export default function CheckoutPage() {
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sticky top-24">
               <h2 className="text-xl font-bold mb-6">Order Summary</h2>
 
-              <div className="bg-gradient-to-r from-[#2F6BFF]/10 to-[#2F6BFF]/10 border border-[#2F6BFF]/30 rounded-xl p-4 mb-6">
+              <div className="bg-gradient-to-r from-[#00FF9F]/10 to-[#00FF9F]/10 border border-[#00FF9F]/30 rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 bg-[#2F6BFF]/20 rounded-lg flex items-center justify-center">
-                    <plan.icon className="w-5 h-5 text-[#7AA0FF]" />
+                  <div className="w-10 h-10 bg-[#00FF9F]/20 rounded-lg flex items-center justify-center">
+                    <plan.icon className="w-5 h-5 text-[#00FF9F]" />
                   </div>
                   <div>
                     <h3 className="font-semibold">{plan.name} Plan</h3>

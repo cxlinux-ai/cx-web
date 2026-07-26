@@ -31,12 +31,12 @@ export default function GettingStarted() {
   };
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_0%,rgba(47,107,255,0.07)_0%,transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_0%,rgba(0,255,159,0.07)_0%,transparent_65%)]" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24 text-center">
@@ -44,9 +44,9 @@ export default function GettingStarted() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="inline-flex items-center gap-2 rounded-full bg-[#2F6BFF]/[0.08] border border-[#2F6BFF]/20 px-3.5 py-1.5 text-[11px] text-[#7AA0FF] font-mono tracking-wider mb-8"
+            className="inline-flex items-center gap-2 rounded-full bg-[#00FF9F]/[0.08] border border-[#00FF9F]/20 px-3.5 py-1.5 text-[11px] text-[#00FF9F] font-mono tracking-wider mb-8"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2F6BFF] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9F] animate-pulse" />
             Free to install · no account required
           </motion.div>
 
@@ -57,7 +57,7 @@ export default function GettingStarted() {
             className="text-5xl md:text-[4rem] font-bold mb-5 leading-[1.05] tracking-tight text-[#F3F5F7]"
           >
             Get Started in{" "}
-            <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
               60 Seconds
             </span>
             <br />
@@ -89,7 +89,7 @@ export default function GettingStarted() {
                     onClick={() => setTab(key)}
                     className={`flex-1 px-3 py-2.5 text-[11px] font-mono tracking-wider transition-colors ${
                       active
-                        ? "text-[#7AA0FF] bg-[#2F6BFF]/[0.04] border-b border-[#2F6BFF]"
+                        ? "text-[#00FF9F] bg-[#00FF9F]/[0.04] border-b border-[#00FF9F]"
                         : "text-gray-500 hover:text-gray-300 border-b border-transparent"
                     }`}
                   >
@@ -103,11 +103,11 @@ export default function GettingStarted() {
               className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/[0.02] transition-colors group"
             >
               <span className="text-gray-600 font-mono text-sm select-none flex-shrink-0">$</span>
-              <code className="text-[#7AA0FF] font-mono text-sm flex-1 break-all">
+              <code className="text-[#00FF9F] font-mono text-sm flex-1 break-all">
                 {INSTALL[tab].cmd}
               </code>
               {copied ? (
-                <Check className="w-4 h-4 text-[#7AA0FF] flex-shrink-0" />
+                <Check className="w-4 h-4 text-[#00FF9F] flex-shrink-0" />
               ) : (
                 <Copy className="w-4 h-4 text-gray-500 group-hover:text-gray-300 flex-shrink-0 transition-colors" />
               )}
@@ -123,7 +123,7 @@ export default function GettingStarted() {
           >
             {["Works offline", "Rollback-safe", "SSH-native"].map((t) => (
               <span key={t} className="text-[11px] text-gray-500 flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-[#2F6BFF]/50" />{t}
+                <span className="w-1 h-1 rounded-full bg-[#00FF9F]/50" />{t}
               </span>
             ))}
           </motion.div>
@@ -166,15 +166,15 @@ export default function GettingStarted() {
               </p>
               <ul className="space-y-3 text-sm text-gray-300">
                 <li className="flex items-start gap-3">
-                  <span className="w-1 h-1 rounded-full bg-[#2F6BFF] mt-2 flex-shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-[#00FF9F] mt-2 flex-shrink-0" />
                   <span>Every command previewed before execution, copy, edit, or reject</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="w-1 h-1 rounded-full bg-[#2F6BFF] mt-2 flex-shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-[#00FF9F] mt-2 flex-shrink-0" />
                   <span>Local LLM by default, cloud models when you opt in</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="w-1 h-1 rounded-full bg-[#2F6BFF] mt-2 flex-shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-[#00FF9F] mt-2 flex-shrink-0" />
                   <span>Works alongside your dotfiles, aliases, and existing tooling</span>
                 </li>
               </ul>
@@ -217,9 +217,9 @@ export default function GettingStarted() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-[#2F6BFF]/25 transition-colors p-4 flex items-start gap-3"
+                className="rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00FF9F]/25 transition-colors p-4 flex items-start gap-3"
               >
-                <span className="text-[#7AA0FF]/60 font-mono text-sm mt-0.5">❯</span>
+                <span className="text-[#00FF9F]/60 font-mono text-sm mt-0.5">❯</span>
                 <code className="text-gray-200 font-mono text-[13px] leading-relaxed">{cmd}</code>
               </motion.div>
             ))}
@@ -246,8 +246,8 @@ export default function GettingStarted() {
                   { icon: Shield, t: "Audit",    d: "Every prompt and command logged locally." },
                 ].map(({ icon: Icon, t, d }) => (
                   <div key={t} className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-[#2F6BFF]/[0.08] border border-[#2F6BFF]/20 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-4 h-4 text-[#7AA0FF]" />
+                    <div className="w-9 h-9 rounded-lg bg-[#00FF9F]/[0.08] border border-[#00FF9F]/20 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 text-[#00FF9F]" />
                     </div>
                     <div>
                       <h3 className="text-[#F3F5F7] text-sm font-semibold mb-0.5">{t}</h3>
@@ -277,7 +277,7 @@ export default function GettingStarted() {
                 {["SOC2", "ISO 27001", "GDPR", "HIPAA"].map((b) => (
                   <span
                     key={b}
-                    className="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#2F6BFF]/30 text-[#7AA0FF]"
+                    className="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#00FF9F]/30 text-[#00FF9F]"
                   >
                     {b}
                   </span>
@@ -289,7 +289,7 @@ export default function GettingStarted() {
       </section>
 
       {/* ── CTA, shared rotating-border shell (matches homepage Final CTA) ─────────────────────────── */}
-      <section className="relative py-24 px-4 overflow-hidden border-t border-white/[0.05] bg-[#08080A]">
+      <section className="relative py-24 px-4 overflow-hidden border-t border-white/[0.05] bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto">
           <RotatingBorderCard
             patternId="gsCtaGrid"
@@ -305,7 +305,7 @@ export default function GettingStarted() {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-5 leading-[1.05] tracking-tight">
                 Your terminal, smarter.
                 <br />
-                <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">
                   No subscription required.
                 </span>
               </h2>
@@ -314,7 +314,7 @@ export default function GettingStarted() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/pricing">
-                  <Button className="group w-full sm:w-auto bg-[#2F6BFF] text-white hover:bg-[#2257E0] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(47,107,255,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
+                  <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
                     See pricing <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

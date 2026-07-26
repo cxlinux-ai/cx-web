@@ -21,7 +21,7 @@ export function AuthorCard({ author }: AuthorCardProps) {
         alt={author.name}
         width={56}
         height={56}
-        className="w-14 h-14 rounded-full ring-2 ring-[#2F6BFF]/30 object-cover flex-shrink-0"
+        className="w-14 h-14 rounded-full ring-2 ring-[#00FF9F]/30 object-cover flex-shrink-0"
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-3 mb-1">
@@ -31,7 +31,7 @@ export function AuthorCard({ author }: AuthorCardProps) {
               href={`https://twitter.com/${author.twitter}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-[#7AA0FF] transition-colors"
+              className="text-gray-500 hover:text-[#00FF9F] transition-colors"
               aria-label="Twitter"
             >
               <Twitter className="w-4 h-4" />

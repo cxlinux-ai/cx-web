@@ -109,10 +109,10 @@ export default function StatusPage() {
   const anyDown = services.some((s) => s.status === "down");
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#2F6BFF]/[0.04] rounded-full blur-[110px]" />
-        <div className="absolute bottom-0 right-1/3 w-[500px] h-[350px] bg-[#2F6BFF]/[0.025] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/3 w-[500px] h-[350px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
       </div>
       {/* Hero */}
       <section className="pt-24 pb-12 px-4">
@@ -121,7 +121,7 @@ export default function StatusPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="text-[#7AA0FF] text-sm font-semibold tracking-wider uppercase mb-4 block">
+            <span className="text-[#00FF9F] text-sm font-semibold tracking-wider uppercase mb-4 block">
               SYSTEM STATUS
             </span>
             <h1 className="text-5xl font-extrabold mb-6">
@@ -140,7 +140,7 @@ export default function StatusPage() {
                 <button
                   onClick={checkServices}
                   disabled={isRefreshing}
-                  className="ml-2 text-[#7AA0FF] hover:text-[#7AA0FF]/80 transition-colors"
+                  className="ml-2 text-[#00FF9F] hover:text-[#00FF9F]/80 transition-colors"
                 >
                   <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
                 </button>
@@ -192,7 +192,7 @@ export default function StatusPage() {
               className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-center justify-between hover:border-white/20 transition-all"
             >
               <div className="flex items-center gap-4">
-                <service.icon className="w-6 h-6 text-[#7AA0FF]" />
+                <service.icon className="w-6 h-6 text-[#00FF9F]" />
                 <div>
                   <h3 className="font-semibold flex items-center gap-2">
                     {service.name}
@@ -223,7 +223,7 @@ export default function StatusPage() {
             <p className="text-gray-400 text-sm">
               Service checks run automatically every 60 seconds.
               For real-time incident updates, join our{" "}
-              <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-[#7AA0FF] hover:underline">
+              <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-[#00FF9F] hover:underline">
                 Discord community
               </a>
               .

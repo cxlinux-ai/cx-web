@@ -159,18 +159,18 @@ export default function BlogPostPage() {
 
   if (post === undefined) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#2F6BFF] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#1E1E1E] flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#00FF9F] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (post === null) {
     return (
-      <div className="min-h-screen text-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#1E1E1E] text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Post Not Found</h1>
-          <Link href="/blog" className="text-[#7AA0FF] hover:underline">← Back to Blog</Link>
+          <Link href="/blog" className="text-[#00FF9F] hover:underline">← Back to Blog</Link>
         </div>
       </div>
     );
@@ -184,10 +184,10 @@ export default function BlogPostPage() {
   const canonicalUrl = `${BASE_URL}/blog/${slug}`;
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#2F6BFF]/[0.035] rounded-full blur-[110px]" />
-        <div className="absolute bottom-1/4 right-0 w-[500px] h-[400px] bg-[#2F6BFF]/[0.02] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.035] rounded-full blur-[110px]" />
+        <div className="absolute bottom-1/4 right-0 w-[500px] h-[400px] bg-[#00FF9F]/[0.02] rounded-full blur-[100px]" />
       </div>
       {/* Hero band: image + title overlay */}
       <header className="relative">
@@ -198,12 +198,12 @@ export default function BlogPostPage() {
             aria-hidden="true"
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D10]/40 via-[#0D0D10]/80 to-[#0D0D10]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/40 via-[#0F0F0F]/80 to-[#0F0F0F]" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
           {/* Back link */}
-          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#7AA0FF] transition-colors mb-8">
+          <Link href="/blog" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#00FF9F] transition-colors mb-8">
             <ArrowLeft className="w-4 h-4" />
             All Articles
           </Link>
@@ -212,7 +212,7 @@ export default function BlogPostPage() {
           <div className="flex flex-wrap gap-2 mb-6">
             {frontmatter.tags.map((tag) => (
               <Link key={tag} href={`/blog/tag/${encodeURIComponent(tag)}`}>
-                <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#2F6BFF]/10 text-[#7AA0FF] hover:bg-[#2F6BFF]/20 transition-colors cursor-pointer font-medium border border-[#2F6BFF]/20">
+                <span className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#00FF9F]/10 text-[#00FF9F] hover:bg-[#00FF9F]/20 transition-colors cursor-pointer font-medium border border-[#00FF9F]/20">
                   {tag}
                 </span>
               </Link>
@@ -300,11 +300,11 @@ export default function BlogPostPage() {
                 prose-h2:text-[1.75rem] prose-h2:mt-14 prose-h2:mb-5 prose-h2:pb-3 prose-h2:border-b prose-h2:border-white/10
                 prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
                 prose-p:text-gray-200 prose-p:leading-[1.85] prose-p:text-[1.125rem]
-                prose-a:text-[#7AA0FF] prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:decoration-2 prose-a:underline-offset-2
+                prose-a:text-[#00FF9F] prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:decoration-2 prose-a:underline-offset-2
                 prose-strong:text-white prose-strong:font-semibold
                 prose-em:text-gray-300
-                prose-blockquote:border-l-[3px] prose-blockquote:border-[#2F6BFF]/60 prose-blockquote:pl-5 prose-blockquote:text-gray-400 prose-blockquote:not-italic prose-blockquote:font-normal
-                prose-code:text-[#7AA0FF] prose-code:bg-white/[0.08] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[0.9em] prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-code:font-normal
+                prose-blockquote:border-l-[3px] prose-blockquote:border-[#00FF9F]/60 prose-blockquote:pl-5 prose-blockquote:text-gray-400 prose-blockquote:not-italic prose-blockquote:font-normal
+                prose-code:text-[#00FF9F] prose-code:bg-white/[0.08] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[0.9em] prose-code:font-mono prose-code:before:content-none prose-code:after:content-none prose-code:font-normal
                 prose-pre:!p-0 prose-pre:!bg-transparent prose-pre:!border-0 prose-pre:!rounded-none prose-pre:!shadow-none prose-pre:!my-6
                 prose-ul:text-gray-200 prose-ul:my-5 prose-li:my-1.5 prose-li:leading-relaxed
                 prose-ol:text-gray-200
@@ -345,12 +345,12 @@ export default function BlogPostPage() {
               {related.length > 0 && (
                 <div className="mt-20">
                   {/* Gradient separator */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-[#2F6BFF]/20 to-transparent mb-14" />
+                  <div className="h-px bg-gradient-to-r from-transparent via-[#00FF9F]/20 to-transparent mb-14" />
 
                   {/* Header row */}
                   <div className="flex items-end justify-between mb-10">
                     <div>
-                      <p className="text-[11px] uppercase tracking-[0.15em] text-[#7AA0FF] font-semibold mb-2">
+                      <p className="text-[11px] uppercase tracking-[0.15em] text-[#00FF9F] font-semibold mb-2">
                         Keep reading
                       </p>
                       <h2 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
@@ -362,7 +362,7 @@ export default function BlogPostPage() {
                     </div>
                     <Link
                       href="/blog"
-                      className="hidden sm:flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#7AA0FF] transition-colors flex-shrink-0 pb-1"
+                      className="hidden sm:flex items-center gap-1.5 text-sm text-gray-400 hover:text-[#00FF9F] transition-colors flex-shrink-0 pb-1"
                     >
                       All articles <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -376,11 +376,11 @@ export default function BlogPostPage() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.08, duration: 0.45, ease: "easeOut" }}
-                          className="group relative h-full bg-[#131313] border border-white/8 rounded-2xl overflow-hidden hover:border-[#2F6BFF]/30 hover:shadow-[0_0_40px_rgba(47,107,255,0.06)] transition-all duration-300 cursor-pointer flex flex-col"
+                          className="group relative h-full bg-[#131313] border border-white/8 rounded-2xl overflow-hidden hover:border-[#00FF9F]/30 hover:shadow-[0_0_40px_rgba(0,255,159,0.06)] transition-all duration-300 cursor-pointer flex flex-col"
                         >
                           {/* Hero image */}
                           {p.frontmatter.ogImage && (
-                            <div className="aspect-[16/9] overflow-hidden bg-[#0E0E12]">
+                            <div className="aspect-[16/9] overflow-hidden bg-[#0D0D0D]">
                               <img
                                 src={p.frontmatter.ogImage}
                                 alt={p.frontmatter.title}
@@ -393,10 +393,10 @@ export default function BlogPostPage() {
 
                           {/* Content */}
                           <div className="p-5 flex flex-col flex-1">
-                            <span className="text-[10px] uppercase tracking-wider text-[#7AA0FF] font-semibold">
+                            <span className="text-[10px] uppercase tracking-wider text-[#00FF9F] font-semibold">
                               {p.frontmatter.tags[0]}
                             </span>
-                            <h3 className="mt-2 text-sm font-bold text-white leading-snug line-clamp-2 group-hover:text-[#7AA0FF] transition-colors duration-200">
+                            <h3 className="mt-2 text-sm font-bold text-white leading-snug line-clamp-2 group-hover:text-[#00FF9F] transition-colors duration-200">
                               {p.frontmatter.title}
                             </h3>
                             <p className="mt-2 text-xs text-gray-500 line-clamp-2 leading-relaxed flex-1">
@@ -407,7 +407,7 @@ export default function BlogPostPage() {
                                 <Clock className="w-3 h-3" />
                                 {p.readingTimeMinutes} min read
                               </span>
-                              <span className="text-[11px] text-[#7AA0FF] flex items-center gap-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-200">
+                              <span className="text-[11px] text-[#00FF9F] flex items-center gap-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-200">
                                 Read <ArrowRight className="w-3 h-3" />
                               </span>
                             </div>
@@ -420,7 +420,7 @@ export default function BlogPostPage() {
                   {/* Browse all CTA */}
                   <div className="flex justify-center mt-10">
                     <Link href="/blog">
-                      <button className="px-6 py-2.5 rounded-full border border-white/10 hover:border-[#2F6BFF]/30 text-sm text-gray-400 hover:text-[#7AA0FF] transition-all duration-200 flex items-center gap-2">
+                      <button className="px-6 py-2.5 rounded-full border border-white/10 hover:border-[#00FF9F]/30 text-sm text-gray-400 hover:text-[#00FF9F] transition-all duration-200 flex items-center gap-2">
                         Browse all articles <ArrowRight className="w-4 h-4" />
                       </button>
                     </Link>
@@ -447,7 +447,7 @@ export default function BlogPostPage() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 w-11 h-11 bg-[#2F6BFF] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#2257E0] transition-colors z-50"
+            className="fixed bottom-8 right-8 w-11 h-11 bg-[#00FF9F] text-black rounded-full flex items-center justify-center shadow-lg hover:bg-[#00CC7F] transition-colors z-50"
             aria-label="Scroll to top"
           >
             <ChevronUp className="w-5 h-5" />

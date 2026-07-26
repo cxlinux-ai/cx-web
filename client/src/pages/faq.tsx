@@ -202,15 +202,15 @@ export default function FAQ() {
   }, [searchTerm]);
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#1E1E1E] text-white overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#2F6BFF]/[0.04] rounded-full blur-[110px]" />
-        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-[#2F6BFF]/[0.025] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
       </div>
       <section aria-labelledby="faq-heading" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <h1 id="faq-heading" className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-6">
-            <span className="text-white">Frequently Asked</span> <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">Questions</span>
+            <span className="text-white">Frequently Asked</span> <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Questions</span>
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Everything you need to know about CX Linux
@@ -224,7 +224,7 @@ export default function FAQ() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               data-testid="search-input"
-              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-[#2F6BFF]"
+              className="pl-10 h-12 bg-white/5 border-white/10 backdrop-blur-xl text-white placeholder:text-gray-500 focus-visible:ring-[#00FF9F]"
             />
           </div>
         </div>
@@ -237,8 +237,8 @@ export default function FAQ() {
               className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-[#2F6BFF]/15 rounded-xl flex items-center justify-center">
-                  <category.icon className="h-6 w-6 text-[#7AA0FF]" />
+                <div className="w-12 h-12 bg-[#00FF9F]/15 rounded-xl flex items-center justify-center">
+                  <category.icon className="h-6 w-6 text-[#00FF9F]" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white">
                   {category.category}
@@ -258,7 +258,7 @@ export default function FAQ() {
                       data-testid={`question-${globalQuestionIndex}`}
                       className="border-white/10"
                     >
-                      <AccordionTrigger className="text-left hover:no-underline hover:text-[#7AA0FF] transition-colors">
+                      <AccordionTrigger className="text-left hover:no-underline hover:text-[#00FF9F] transition-colors">
                         <span className="text-lg font-semibold pr-4">
                           {question.q}
                         </span>
@@ -296,14 +296,14 @@ export default function FAQ() {
             <a
               href="https://discord.gg/q4FUyBW6z"
               target="_blank" rel="noopener noreferrer"
-              className="px-6 py-3 bg-[#2F6BFF] hover:bg-[#2257E0] text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-[#00FF9F] hover:bg-[#00CC7F] text-black font-semibold rounded-lg transition-colors"
               data-testid="link-discord"
             >
               Ask on Discord
             </a>
             <a
               href="mailto:hello@cxlinux.com"
-              className="px-6 py-3 border-2 border-[#2F6BFF]/60 hover:bg-[#2F6BFF]/10 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 border-2 border-[#00FF9F]/60 hover:bg-[#00FF9F]/10 text-white font-semibold rounded-lg transition-colors"
               data-testid="link-email"
             >
               Email Us

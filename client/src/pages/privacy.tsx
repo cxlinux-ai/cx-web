@@ -105,13 +105,13 @@ Data Protection Officer: Available for enterprise customers with specific compli
   ];
 
   return (
-    <div className="relative min-h-screen pt-20 pb-16 bg-[#08080A] text-white overflow-hidden">
+    <div className="relative min-h-screen pt-20 pb-16 bg-[#1E1E1E] text-white overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#2F6BFF]/[0.04] rounded-full blur-[110px]" />
-        <div className="absolute bottom-0 left-1/4 w-[600px] h-[350px] bg-[#2F6BFF]/[0.025] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[350px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
       </div>
       <div className="relative max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#7AA0FF] transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#00FF9F] transition-colors mb-8" data-testid="link-back-home">
           <ChevronLeft size={16} />
           Back to Home
         </Link>
@@ -123,7 +123,7 @@ Data Protection Officer: Available for enterprise customers with specific compli
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-white">Privacy</span>{" "}
-            <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">Policy</span>
+            <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Policy</span>
           </h1>
           <p className="text-gray-400 text-lg">
             How CX Linux collects, uses, and protects your data
@@ -141,8 +141,8 @@ Data Protection Officer: Available for enterprise customers with specific compli
               className="bg-white/5 border border-white/10 rounded-xl p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-[#2F6BFF]/10 rounded-lg">
-                  <section.icon size={20} className="text-[#7AA0FF]" />
+                <div className="p-2 bg-[#00FF9F]/10 rounded-lg">
+                  <section.icon size={20} className="text-[#00FF9F]" />
                 </div>
                 <h2 className="text-xl font-semibold text-white">{section.title}</h2>
               </div>

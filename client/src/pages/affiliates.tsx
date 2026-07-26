@@ -303,7 +303,7 @@ export default function AffiliatesPage() {
   ];
 
   return (
-    <div className="min-h-screen text-white py-16 px-4">
+    <div className="min-h-screen bg-[#1E1E1E] text-white py-16 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -313,9 +313,9 @@ export default function AffiliatesPage() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {mode === "dashboard" ? (
-              <>Your <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">Affiliate Dashboard</span></>
+              <>Your <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Affiliate Dashboard</span></>
             ) : (
-              <>Earn <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">10% Commission</span></>
+              <>Earn <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">10% Commission</span></>
             )}
           </h1>
           {mode !== "dashboard" && (
@@ -339,7 +339,7 @@ export default function AffiliatesPage() {
                 key={index}
                 className="bg-white/5 border border-white/10 rounded-xl p-6 text-center"
               >
-                <feature.icon className="w-10 h-10 text-[#7AA0FF] mx-auto mb-4" />
+                <feature.icon className="w-10 h-10 text-[#00FF9F] mx-auto mb-4" />
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
                 <p className="text-sm text-gray-400">{feature.desc}</p>
               </div>
@@ -362,10 +362,10 @@ export default function AffiliatesPage() {
             >
               <button
                 onClick={() => setMode("signup")}
-                className="border-2 border-[#2F6BFF] rounded-2xl p-8 text-center bg-[#2F6BFF]/5 hover:bg-[#2F6BFF]/15 hover:shadow-[0_0_30px_rgba(47,107,255,0.15)] transition-all duration-300 group"
+                className="border-2 border-[#00FF9F] rounded-2xl p-8 text-center bg-[#00FF9F]/5 hover:bg-[#00FF9F]/15 hover:shadow-[0_0_30px_rgba(0,255,159,0.15)] transition-all duration-300 group"
               >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#2F6BFF]/10 flex items-center justify-center group-hover:bg-[#2F6BFF]/20 transition-colors">
-                  <UserPlus className="w-7 h-7 text-[#7AA0FF]" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#00FF9F]/10 flex items-center justify-center group-hover:bg-[#00FF9F]/20 transition-colors">
+                  <UserPlus className="w-7 h-7 text-[#00FF9F]" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">Become an Affiliate</h2>
                 <p className="text-sm text-gray-400">
@@ -375,10 +375,10 @@ export default function AffiliatesPage() {
 
               <button
                 onClick={() => setMode("login")}
-                className="border-2 border-[#2F6BFF]/50 rounded-2xl p-8 text-center bg-transparent hover:border-[#2F6BFF] hover:bg-[#2F6BFF]/10 hover:shadow-[0_0_30px_rgba(47,107,255,0.1)] transition-all duration-300 group"
+                className="border-2 border-[#00FF9F]/50 rounded-2xl p-8 text-center bg-transparent hover:border-[#00FF9F] hover:bg-[#00FF9F]/10 hover:shadow-[0_0_30px_rgba(0,255,159,0.1)] transition-all duration-300 group"
               >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#2F6BFF]/10 transition-colors">
-                  <BarChart3 className="w-7 h-7 text-[#7AA0FF]" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00FF9F]/10 transition-colors">
+                  <BarChart3 className="w-7 h-7 text-[#00FF9F]" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">View Dashboard</h2>
                 <p className="text-sm text-gray-400">
@@ -415,7 +415,7 @@ export default function AffiliatesPage() {
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
                     required
-                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                   />
                 </div>
                 
@@ -430,14 +430,14 @@ export default function AffiliatesPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     required
-                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSendingOTP}
-                  className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isSendingOTP ? (
                     <>
@@ -478,7 +478,7 @@ export default function AffiliatesPage() {
                 Check Your Email
               </h2>
               <p className="text-gray-400 text-center mb-6">
-                We sent a 6-digit code to <span className="text-[#7AA0FF]">{email}</span>
+                We sent a 6-digit code to <span className="text-[#00FF9F]">{email}</span>
               </p>
               
               <form onSubmit={handleSignupVerifyOTP} className="space-y-4">
@@ -494,14 +494,14 @@ export default function AffiliatesPage() {
                     placeholder="000000"
                     required
                     maxLength={6}
-                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF] text-center text-2xl tracking-widest font-mono"
+                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] text-center text-2xl tracking-widest font-mono"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isVerifying || otp.length !== 6}
-                  className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isVerifying ? (
                     <>
@@ -536,10 +536,10 @@ export default function AffiliatesPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-gradient-to-br from-[#2F6BFF]/20 to-emerald-500/10 border border-[#2F6BFF]/30 rounded-2xl p-8 max-w-md mx-auto text-center"
+              className="bg-gradient-to-br from-[#00FF9F]/20 to-emerald-500/10 border border-[#00FF9F]/30 rounded-2xl p-8 max-w-md mx-auto text-center"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#2F6BFF]/20 flex items-center justify-center">
-                <Check className="w-8 h-8 text-[#7AA0FF]" />
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#00FF9F]/20 flex items-center justify-center">
+                <Check className="w-8 h-8 text-[#00FF9F]" />
               </div>
               
               <h2 className="text-2xl font-bold mb-2">You're In!</h2>
@@ -549,7 +549,7 @@ export default function AffiliatesPage() {
 
               <div className="bg-black/30 rounded-xl p-4 mb-4">
                 <p className="text-xs text-gray-500 mb-2">Your Referral Code</p>
-                <p className="text-3xl font-mono font-bold text-[#7AA0FF]">
+                <p className="text-3xl font-mono font-bold text-[#00FF9F]">
                   {referralCode}
                 </p>
               </div>
@@ -561,7 +561,7 @@ export default function AffiliatesPage() {
                 </p>
                 <button
                   onClick={() => copyToClipboard(referralLink)}
-                  className="w-full py-2 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all flex items-center justify-center gap-2"
+                  className="w-full py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all flex items-center justify-center gap-2"
                 >
                   {copied ? (
                     <>
@@ -577,8 +577,8 @@ export default function AffiliatesPage() {
                 </button>
               </div>
 
-              <div className="bg-[#2F6BFF]/10 border border-[#2F6BFF]/20 rounded-lg p-3 mb-4">
-                <p className="text-xs text-[#7AA0FF]">
+              <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-4">
+                <p className="text-xs text-[#00FF9F]">
                   🎁 Everyone who signs up through your link gets <strong>3 months free</strong> on the Pro plan, tell them!
                 </p>
               </div>
@@ -620,7 +620,7 @@ export default function AffiliatesPage() {
               className="bg-white/5 border border-white/10 rounded-2xl p-8 max-w-md mx-auto"
             >
               <div className="flex items-center justify-center gap-2 mb-6">
-                <Shield className="w-6 h-6 text-[#7AA0FF]" />
+                <Shield className="w-6 h-6 text-[#00FF9F]" />
                 <h2 className="text-2xl font-bold">Affiliate Dashboard</h2>
               </div>
               <p className="text-gray-400 text-center mb-6 text-sm">
@@ -639,14 +639,14 @@ export default function AffiliatesPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     required
-                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF]"
+                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F]"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSendingOTP}
-                  className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isSendingOTP ? (
                     <>
@@ -687,7 +687,7 @@ export default function AffiliatesPage() {
                 Enter Verification Code
               </h2>
               <p className="text-gray-400 text-center mb-6">
-                We sent a 6-digit code to <span className="text-[#7AA0FF]">{email}</span>
+                We sent a 6-digit code to <span className="text-[#00FF9F]">{email}</span>
               </p>
               
               <form onSubmit={handleDashboardLogin} className="space-y-4">
@@ -703,14 +703,14 @@ export default function AffiliatesPage() {
                     placeholder="000000"
                     required
                     maxLength={6}
-                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#2F6BFF] text-center text-2xl tracking-widest font-mono"
+                    className="mt-2 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF9F] text-center text-2xl tracking-widest font-mono"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isVerifying || otp.length !== 6}
-                  className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isVerifying ? (
                     <>
@@ -773,7 +773,7 @@ export default function AffiliatesPage() {
               <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-wrap gap-6 text-sm">
                 <div>
                   <span className="text-gray-500">Commission</span>
-                  <span className="ml-2 text-[#7AA0FF] font-semibold">{dashboard.commission_rate}</span>
+                  <span className="ml-2 text-[#00FF9F] font-semibold">{dashboard.commission_rate}</span>
                 </div>
                 {dashboard.second_level_rate && (
                   <div>
@@ -790,7 +790,7 @@ export default function AffiliatesPage() {
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
-                  <Users className="w-6 h-6 text-[#7AA0FF] mx-auto mb-2" />
+                  <Users className="w-6 h-6 text-[#00FF9F] mx-auto mb-2" />
                   <p className="text-3xl font-bold text-white">{dashboard.total_referrals}</p>
                   <p className="text-xs text-gray-500 mt-1">Total Referrals</p>
                 </div>
@@ -809,7 +809,7 @@ export default function AffiliatesPage() {
               {/* Referral Link Card */}
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                 <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <LinkIcon className="w-5 h-5 text-[#7AA0FF]" />
+                  <LinkIcon className="w-5 h-5 text-[#00FF9F]" />
                   Your Referral Link
                 </h3>
                 
@@ -819,20 +819,20 @@ export default function AffiliatesPage() {
                   </code>
                   <button
                     onClick={() => copyToClipboard(dashboard.referral_link)}
-                    className="shrink-0 p-3 bg-[#2F6BFF] text-white rounded-lg hover:bg-[#2257E0] transition-all"
+                    className="shrink-0 p-3 bg-[#00FF9F] text-black rounded-lg hover:bg-[#00CC7F] transition-all"
                   >
                     {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                   </button>
                 </div>
 
-                <div className="bg-[#2F6BFF]/10 border border-[#2F6BFF]/20 rounded-lg p-3 mb-3">
-                  <p className="text-xs text-[#7AA0FF]">
+                <div className="bg-[#00FF9F]/10 border border-[#00FF9F]/20 rounded-lg p-3 mb-3">
+                  <p className="text-xs text-[#00FF9F]">
                     🎁 People who use your link get <strong>3 months free</strong>, mention this when sharing!
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <code className="bg-black/30 rounded-lg px-4 py-2 text-lg font-mono font-bold text-[#7AA0FF]">
+                  <code className="bg-black/30 rounded-lg px-4 py-2 text-lg font-mono font-bold text-[#00FF9F]">
                     {dashboard.referral_code}
                   </code>
                   <button
@@ -848,7 +848,7 @@ export default function AffiliatesPage() {
               {/* Recent Referrals */}
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                 <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-[#7AA0FF]" />
+                  <TrendingUp className="w-5 h-5 text-[#00FF9F]" />
                   Recent Referrals
                 </h3>
                 
@@ -867,8 +867,8 @@ export default function AffiliatesPage() {
                         <div className="flex items-center gap-3">
                           <span className={`px-2 py-1 rounded text-xs font-semibold uppercase ${
                             ref.tier === 'enterprise' ? 'bg-purple-500/20 text-purple-400' :
-                            ref.tier === 'team' ? 'bg-[#2F6BFF]/15 text-[#7AA0FF]' :
-                            'bg-[#2F6BFF]/20 text-[#7AA0FF]'
+                            ref.tier === 'team' ? 'bg-[#00FF9F]/15 text-[#00FF9F]' :
+                            'bg-[#00FF9F]/20 text-[#00FF9F]'
                           }`}>
                             {ref.tier}
                           </span>
@@ -877,7 +877,7 @@ export default function AffiliatesPage() {
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-semibold text-[#7AA0FF]">
+                          <span className="font-semibold text-[#00FF9F]">
                             +${ref.commission}
                           </span>
                           <span className={`text-xs px-2 py-1 rounded ${
@@ -908,7 +908,7 @@ export default function AffiliatesPage() {
                   </div>
                   <div>
                     <p className="text-gray-500">Total Earned</p>
-                    <p className="text-[#7AA0FF] font-semibold">${dashboard.total_earned}</p>
+                    <p className="text-[#00FF9F] font-semibold">${dashboard.total_earned}</p>
                   </div>
                   <div>
                     <p className="text-gray-500">Member Since</p>
@@ -983,7 +983,7 @@ function LeaderboardSection() {
     >
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold">
-          <span className="text-[#7AA0FF]">🏆</span> Affiliate Leaderboard
+          <span className="text-[#00FF9F]">🏆</span> Affiliate Leaderboard
         </h2>
         <p className="text-gray-400 mt-2">Top affiliates by referrals</p>
       </div>
@@ -1007,7 +1007,7 @@ function LeaderboardSection() {
                     <tr
                       key={entry.referral_code}
                       className={`border-b border-white/5 hover:bg-white/5 transition-colors ${
-                        entry.rank <= 3 ? "bg-[#2F6BFF]/5" : ""
+                        entry.rank <= 3 ? "bg-[#00FF9F]/5" : ""
                       }`}
                     >
                       <td className="py-3 px-4 text-lg">{rankEmoji(entry.rank)}</td>
@@ -1023,7 +1023,7 @@ function LeaderboardSection() {
                       <td className="py-3 px-4 text-center text-white font-semibold">
                         {entry.total_referrals}
                       </td>
-                      <td className="py-3 px-4 text-right text-[#7AA0FF] font-semibold">
+                      <td className="py-3 px-4 text-right text-[#00FF9F] font-semibold">
                         {entry.total_earned}
                       </td>
                     </tr>

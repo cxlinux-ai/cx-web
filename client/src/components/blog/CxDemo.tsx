@@ -25,9 +25,9 @@ export function CxDemo({ command, output }: CxDemoProps) {
   }, [command]);
 
   return (
-    <div className="not-prose my-6 bg-[#0A0A0D]/90 border border-white/10 rounded-xl overflow-hidden">
+    <div className="not-prose my-6 bg-[#0A0A0A]/90 border border-white/10 rounded-xl overflow-hidden">
       {/* Title bar */}
-      <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#0D0D10] border-b border-white/8">
+      <div className="flex items-center gap-1.5 px-4 py-2.5 bg-[#161616] border-b border-white/8">
         <span className="w-3 h-3 rounded-full bg-[#FF5F57]/40" />
         <span className="w-3 h-3 rounded-full bg-[#FEBC2E]/40" />
         <span className="w-3 h-3 rounded-full bg-[#28C840]/40" />
@@ -36,7 +36,7 @@ export function CxDemo({ command, output }: CxDemoProps) {
 
       {/* Command line */}
       <div className="px-5 py-4 font-mono text-sm">
-        <span className="text-[#7AA0FF] select-none">user@cx:~$ </span>
+        <span className="text-[#00FF9F] select-none">user@cx:~$ </span>
         <span className="text-white">{displayed}</span>
         {!done && (
           <span className="inline-block w-2 h-4 bg-white/80 ml-0.5 animate-pulse align-[-3px]" />

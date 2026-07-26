@@ -129,7 +129,7 @@ const planColors: Record<string, string> = {
   free: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-  team: "bg-[#2F6BFF]/15 text-[#7AA0FF] border-[#2F6BFF]/30",
+  team: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
   enterprise: "bg-purple-500/20 text-purple-300 border-purple-500/30",
 };
 
@@ -375,8 +375,8 @@ export default function AccountPage() {
       className="max-w-md mx-auto"
     >
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-[#2F6BFF]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <Shield className="w-8 h-8 text-[#7AA0FF]" />
+        <div className="w-16 h-16 bg-[#00FF9F]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Shield className="w-8 h-8 text-[#00FF9F]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">My Account</h1>
         <p className="text-gray-400">
@@ -408,7 +408,7 @@ export default function AccountPage() {
         <button
           type="submit"
           disabled={isSendingOTP}
-          className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {isSendingOTP ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -431,8 +431,8 @@ export default function AccountPage() {
       className="max-w-md mx-auto"
     >
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-[#2F6BFF]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          <Key className="w-8 h-8 text-[#7AA0FF]" />
+        <div className="w-16 h-16 bg-[#00FF9F]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <Key className="w-8 h-8 text-[#00FF9F]" />
         </div>
         <h1 className="text-3xl font-bold text-white mb-2">Enter Code</h1>
         <p className="text-gray-400">
@@ -466,7 +466,7 @@ export default function AccountPage() {
         <button
           type="submit"
           disabled={isVerifying || isLoading}
-          className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {isVerifying || isLoading ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -599,7 +599,7 @@ export default function AccountPage() {
             className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-6"
           >
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              <Key className="w-5 h-5 text-[#7AA0FF]" />
+              <Key className="w-5 h-5 text-[#00FF9F]" />
               License & Devices
             </h2>
 
@@ -608,7 +608,7 @@ export default function AccountPage() {
               <div>
                 <p className="text-sm text-gray-400 mb-1">License Key</p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2.5 text-[#7AA0FF] font-mono text-sm break-all">
+                  <code className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2.5 text-[#00FF9F] font-mono text-sm break-all">
                     {license.key}
                   </code>
                   <button
@@ -616,7 +616,7 @@ export default function AccountPage() {
                     className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
                   >
                     {copiedField === "license" ? (
-                      <Check className="w-4 h-4 text-[#7AA0FF]" />
+                      <Check className="w-4 h-4 text-[#00FF9F]" />
                     ) : (
                       <Copy className="w-4 h-4 text-gray-400" />
                     )}
@@ -628,7 +628,7 @@ export default function AccountPage() {
                 <p className="text-sm text-gray-400 mb-1">Quick Install</p>
                 <div className="flex items-center gap-2">
                   <code className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2.5 text-gray-300 font-mono text-sm">
-                    <span className="text-[#7AA0FF]">cx</span> activate{" "}
+                    <span className="text-[#00FF9F]">cx</span> activate{" "}
                     {license.key}
                   </code>
                   <button
@@ -641,7 +641,7 @@ export default function AccountPage() {
                     className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
                   >
                     {copiedField === "activate" ? (
-                      <Check className="w-4 h-4 text-[#7AA0FF]" />
+                      <Check className="w-4 h-4 text-[#00FF9F]" />
                     ) : (
                       <Copy className="w-4 h-4 text-gray-400" />
                     )}
@@ -663,7 +663,7 @@ export default function AccountPage() {
               </div>
               <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#2F6BFF] rounded-full transition-all"
+                  className="h-full bg-[#00FF9F] rounded-full transition-all"
                   style={{
                     width: `${(license.activated_devices / license.max_devices) * 100}%`,
                   }}
@@ -725,7 +725,7 @@ export default function AccountPage() {
           className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-5"
         >
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-[#7AA0FF]" />
+            <CreditCard className="w-5 h-5 text-[#00FF9F]" />
             Subscription & Billing
           </h2>
 
@@ -738,7 +738,7 @@ export default function AccountPage() {
                 Upgrade to unlock more devices and features
               </p>
               <Link href="/pricing">
-                <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors cursor-pointer">
+                <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors cursor-pointer">
                   Upgrade Plan
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
@@ -784,7 +784,7 @@ export default function AccountPage() {
                   Manage Billing & Cancel
                 </button>
                 <Link href="/pricing">
-                  <span className="flex items-center gap-2 px-4 py-2 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors cursor-pointer">
+                  <span className="flex items-center gap-2 px-4 py-2 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors cursor-pointer">
                     Upgrade Plan
                     <ArrowUpRight className="w-4 h-4" />
                   </span>
@@ -812,7 +812,7 @@ export default function AccountPage() {
           className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-5"
         >
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <Users className="w-5 h-5 text-[#7AA0FF]" />
+            <Users className="w-5 h-5 text-[#00FF9F]" />
             Affiliate Program
           </h2>
 
@@ -823,7 +823,7 @@ export default function AccountPage() {
                 <div>
                   <p className="text-sm text-gray-400 mb-1">Referral Code</p>
                   <div className="flex items-center gap-2">
-                    <code className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2.5 text-[#7AA0FF] font-mono text-sm">
+                    <code className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2.5 text-[#00FF9F] font-mono text-sm">
                       {affiliate.referral_code}
                     </code>
                     <button
@@ -836,7 +836,7 @@ export default function AccountPage() {
                       className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
                     >
                       {copiedField === "referral-code" ? (
-                        <Check className="w-4 h-4 text-[#7AA0FF]" />
+                        <Check className="w-4 h-4 text-[#00FF9F]" />
                       ) : (
                         <Copy className="w-4 h-4 text-gray-400" />
                       )}
@@ -859,7 +859,7 @@ export default function AccountPage() {
                       className="p-2.5 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
                     >
                       {copiedField === "referral-link" ? (
-                        <Check className="w-4 h-4 text-[#7AA0FF]" />
+                        <Check className="w-4 h-4 text-[#00FF9F]" />
                       ) : (
                         <Copy className="w-4 h-4 text-gray-400" />
                       )}
@@ -896,7 +896,7 @@ export default function AccountPage() {
                 </div>
                 <div className="bg-black/20 border border-white/5 rounded-lg p-4">
                   <p className="text-sm text-gray-400">Pending Earnings</p>
-                  <p className="text-2xl font-bold text-[#7AA0FF] mt-1">
+                  <p className="text-2xl font-bold text-[#00FF9F] mt-1">
                     {affiliate.unpaid_amount}
                   </p>
                 </div>
@@ -908,7 +908,7 @@ export default function AccountPage() {
                 </div>
               </div>
 
-              <div className="bg-[#2F6BFF]/5 border border-[#2F6BFF]/20 rounded-lg p-4 text-sm text-gray-300">
+              <div className="bg-[#00FF9F]/5 border border-[#00FF9F]/20 rounded-lg p-4 text-sm text-gray-300">
                 🎁 People who use your link get 3 months free, mention this
                 when sharing!
               </div>
@@ -926,7 +926,7 @@ export default function AccountPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-black/20 border border-white/5 rounded-lg p-4 text-center">
-                  <DollarSign className="w-6 h-6 text-[#7AA0FF] mx-auto mb-2" />
+                  <DollarSign className="w-6 h-6 text-[#00FF9F] mx-auto mb-2" />
                   <p className="text-white font-medium text-sm">
                     10% Commission
                   </p>
@@ -935,7 +935,7 @@ export default function AccountPage() {
                   </p>
                 </div>
                 <div className="bg-black/20 border border-white/5 rounded-lg p-4 text-center">
-                  <TrendingUp className="w-6 h-6 text-[#7AA0FF] mx-auto mb-2" />
+                  <TrendingUp className="w-6 h-6 text-[#00FF9F] mx-auto mb-2" />
                   <p className="text-white font-medium text-sm">
                     Recurring Revenue
                   </p>
@@ -944,7 +944,7 @@ export default function AccountPage() {
                   </p>
                 </div>
                 <div className="bg-black/20 border border-white/5 rounded-lg p-4 text-center">
-                  <Gift className="w-6 h-6 text-[#7AA0FF] mx-auto mb-2" />
+                  <Gift className="w-6 h-6 text-[#00FF9F] mx-auto mb-2" />
                   <p className="text-white font-medium text-sm">
                     3 Months Free
                   </p>
@@ -958,7 +958,7 @@ export default function AccountPage() {
                 <button
                   onClick={handleJoinAffiliate}
                   disabled={isJoiningAffiliate}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors disabled:opacity-50"
                 >
                   {isJoiningAffiliate ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -987,7 +987,7 @@ export default function AccountPage() {
             rel="noopener noreferrer"
             className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors group"
           >
-            <BookOpen className="w-6 h-6 text-[#7AA0FF] mb-3" />
+            <BookOpen className="w-6 h-6 text-[#00FF9F] mb-3" />
             <h3 className="text-white font-medium mb-1">Documentation</h3>
             <p className="text-gray-500 text-sm flex items-center gap-1">
               Browse the docs{" "}
@@ -1001,7 +1001,7 @@ export default function AccountPage() {
             rel="noopener noreferrer"
             className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors group"
           >
-            <MessageCircle className="w-6 h-6 text-[#7AA0FF] mb-3" />
+            <MessageCircle className="w-6 h-6 text-[#00FF9F] mb-3" />
             <h3 className="text-white font-medium mb-1">Discord Community</h3>
             <p className="text-gray-500 text-sm flex items-center gap-1">
               Join the chat{" "}
@@ -1013,7 +1013,7 @@ export default function AccountPage() {
             href="mailto:support@cxlinux.com"
             className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors group"
           >
-            <Mail className="w-6 h-6 text-[#7AA0FF] mb-3" />
+            <Mail className="w-6 h-6 text-[#00FF9F] mb-3" />
             <h3 className="text-white font-medium mb-1">Support</h3>
             <p className="text-gray-500 text-sm flex items-center gap-1">
               Get help{" "}
@@ -1026,10 +1026,10 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen bg-[#1E1E1E] overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#2F6BFF]/[0.04] rounded-full blur-[110px]" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-[#2F6BFF]/[0.025] rounded-full blur-[100px]" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#00FF9F]/[0.04] rounded-full blur-[110px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-[#00FF9F]/[0.025] rounded-full blur-[100px]" />
       </div>
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <AnimatePresence mode="wait">

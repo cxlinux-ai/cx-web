@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <p className="text-gray-400 mb-6">Please refresh the page or try again later.</p>
             <button 
               onClick={() => window.location.reload()}
-              className="px-6 py-2 bg-[#2F6BFF] text-white rounded-lg hover:bg-[#2257E0] transition-colors"
+              className="px-6 py-2 bg-[#00FF9F] text-black rounded-lg hover:bg-[#00CC7F] transition-colors"
             >
               Refresh Page
             </button>

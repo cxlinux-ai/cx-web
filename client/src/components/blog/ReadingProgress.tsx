@@ -22,7 +22,7 @@ export function ReadingProgress() {
 
   return (
     <div
-      className="fixed top-[63px] left-0 right-0 h-[4px] z-[200] pointer-events-none bg-[#2F6BFF]/10"
+      className="fixed top-[63px] left-0 right-0 h-[4px] z-[200] pointer-events-none bg-[#00FF9F]/10"
       role="progressbar"
       aria-label="Reading progress"
       aria-valuenow={Math.round(progress)}
@@ -30,11 +30,11 @@ export function ReadingProgress() {
       aria-valuemax={100}
     >
       <div
-        className="h-full bg-[#2F6BFF] origin-left will-change-transform"
+        className="h-full bg-[#00FF9F] origin-left will-change-transform"
         style={{
           transform: `scaleX(${progress / 100})`,
           transition: "transform 80ms linear",
-          boxShadow: "0 0 8px rgba(47,107,255,0.6), 0 0 3px rgba(47,107,255,0.8)",
+          boxShadow: "0 0 8px rgba(0,255,159,0.6), 0 0 3px rgba(0,255,159,0.8)",
         }}
       />
     </div>

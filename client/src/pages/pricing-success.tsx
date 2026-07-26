@@ -120,7 +120,7 @@ export default function PricingSuccessPage() {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center bg-black">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-[#2F6BFF]/30 border-t-[#2F6BFF] rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-12 h-12 border-4 border-[#00FF9F]/30 border-t-[#00FF9F] rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-400">Retrieving your license key...</p>
         </div>
       </div>
@@ -165,9 +165,9 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
   const activateCommand = `cx activate ${sessionData?.licenseKey}`;
 
   return (
-    <div className="relative min-h-screen pt-20 pb-16 bg-[#08080A] overflow-hidden">
+    <div className="relative min-h-screen pt-20 pb-16 bg-[#1E1E1E] overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#2F6BFF]/[0.05] rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#00FF9F]/[0.05] rounded-full blur-[120px]" />
       </div>
       <div className="relative max-w-3xl mx-auto px-4">
         <motion.div
@@ -198,10 +198,10 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-[#2F6BFF]/15 to-[#2257E0]/10 border border-[#2F6BFF]/25 rounded-xl p-6 mb-6"
+          className="bg-gradient-to-br from-[#00FF9F]/15 to-[#00CC7F]/10 border border-[#00FF9F]/25 rounded-xl p-6 mb-6"
         >
           <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-            <Terminal size={20} className="text-[#7AA0FF]" />
+            <Terminal size={20} className="text-[#00FF9F]" />
             Your License Key
           </h2>
           {sessionData?.licenseKey ? (
@@ -331,15 +331,15 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <h2 className="text-lg font-semibold text-white mb-4">Quick Start</h2>
           <ol className="space-y-3 text-gray-400">
             <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#2F6BFF]/15 text-[#7AA0FF] flex items-center justify-center text-sm font-medium">1</span>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] flex items-center justify-center text-sm font-medium">1</span>
               <span>Run the 3 commands above on any Ubuntu/Debian system</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#2F6BFF]/15 text-[#7AA0FF] flex items-center justify-center text-sm font-medium">2</span>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] flex items-center justify-center text-sm font-medium">2</span>
               <span>Launch CX Terminal: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx-terminal</code></span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#2F6BFF]/15 text-[#7AA0FF] flex items-center justify-center text-sm font-medium">3</span>
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] flex items-center justify-center text-sm font-medium">3</span>
               <span>Try your first command: <code className="bg-black/50 px-2 py-0.5 rounded text-terminal-green">cx "install nginx and configure it"</code></span>
             </li>
           </ol>
@@ -380,7 +380,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#7AA0FF] transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00FF9F] transition-colors text-sm"
             data-testid="link-home"
           >
             Return to Homepage

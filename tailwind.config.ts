@@ -108,14 +108,14 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            "--tw-prose-links": "#7aa0ff",
+            "--tw-prose-links": "#00FF9F",
             a: {
-              color: "#7aa0ff",
+              color: "#00FF9F",
               textDecoration: "none",
               fontWeight: "500",
               "&:hover": {
                 textDecoration: "underline",
-                textDecorationColor: "#7aa0ff",
+                textDecorationColor: "#00FF9F",
               },
             },
             // rehype-autolink-headings wraps headings in <a> — keep them looking like headings

@@ -140,7 +140,7 @@ const tierBadge: Record<string, string> = {
   core: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   free: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   pro: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-  team: "bg-[#2F6BFF]/15 text-[#7AA0FF] border-[#2F6BFF]/30",
+  team: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
   enterprise: "bg-purple-500/20 text-purple-300 border-purple-500/30",
 };
 
@@ -487,11 +487,11 @@ export default function AdminPanel() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="min-h-screen bg-[#1E1E1E] flex items-center justify-center px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-[#2F6BFF]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-[#7AA0FF]" />
+            <div className="w-16 h-16 bg-[#00FF9F]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-8 h-8 text-[#00FF9F]" />
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Admin Panel</h1>
             <p className="text-gray-400">Enter your admin API key to continue</p>
@@ -512,14 +512,14 @@ export default function AdminPanel() {
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   placeholder="Enter your admin API key"
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors"
+                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors"
                 />
               </div>
             </div>
             <button
               type="submit"
               disabled={authLoading || !apiKey}
-              className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {authLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Shield className="w-4 h-4" />}
               {authLoading ? "Authenticating..." : "Login"}
@@ -533,7 +533,7 @@ export default function AdminPanel() {
   // ── Dashboard Shell ────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -567,7 +567,7 @@ export default function AdminPanel() {
                 onClick={() => setActiveTab(t.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === t.id
-                    ? "bg-[#2F6BFF] text-white"
+                    ? "bg-[#00FF9F] text-black"
                     : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -729,7 +729,7 @@ function OverviewTab({
   if (!stats && loading) {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#7AA0FF]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#00FF9F]" />
       </motion.div>
     );
   }
@@ -748,15 +748,15 @@ function OverviewTab({
 
       {/* Row 1: Main stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="Active Licenses" value={stats.active_licenses} icon={Key} color="text-[#7AA0FF]" delay={0.05} />
-        <StatCard label="Total Devices" value={stats.active_devices} icon={Monitor} color="text-[#7AA0FF]" delay={0.1} />
+        <StatCard label="Active Licenses" value={stats.active_licenses} icon={Key} color="text-[#00FF9F]" delay={0.05} />
+        <StatCard label="Total Devices" value={stats.active_devices} icon={Monitor} color="text-[#00FF9F]" delay={0.1} />
         <StatCard label="Active Affiliates" value={stats.active_referrers} icon={Users} color="text-purple-400" delay={0.15} />
         <StatCard label="Recent Signups" value={stats.recent_signups} icon={UserPlus} color="text-yellow-400" delay={0.2} />
       </div>
 
       {/* Row 2: Revenue */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <StatCard label="Total Commissions" value={`$${stats.total_commissions}`} icon={DollarSign} color="text-[#7AA0FF]" delay={0.25} />
+        <StatCard label="Total Commissions" value={`$${stats.total_commissions}`} icon={DollarSign} color="text-[#00FF9F]" delay={0.25} />
         <StatCard label="Unpaid Commissions" value={`$${stats.unpaid_commissions}`} icon={DollarSign} color="text-yellow-400" delay={0.3} />
       </div>
 
@@ -773,7 +773,7 @@ function OverviewTab({
             const colors: Record<string, string> = {
               core: "bg-gray-400",
               pro: "bg-emerald-400",
-              team: "bg-[#2F6BFF]",
+              team: "bg-[#00FF9F]",
               enterprise: "bg-purple-400",
             };
             return (
@@ -786,7 +786,7 @@ function OverviewTab({
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className={`h-full rounded-full ${colors[tier] || "bg-gray-400"} flex items-center justify-end pr-2`}
                   >
-                    <span className="text-xs font-semibold text-white">{count}</span>
+                    <span className="text-xs font-semibold text-black">{count}</span>
                   </motion.div>
                 </div>
               </div>
@@ -871,13 +871,13 @@ function LicensesTab({
             placeholder="Search by email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
         </div>
         <select
           value={tierFilter}
           onChange={(e) => setTierFilter(e.target.value)}
-          className="px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 focus:outline-none focus:border-[#2F6BFF] transition-colors appearance-none cursor-pointer"
+          className="px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-gray-300 focus:outline-none focus:border-[#00FF9F] transition-colors appearance-none cursor-pointer"
         >
           <option value="all">All Tiers</option>
           <option value="core">Core</option>
@@ -891,7 +891,7 @@ function LicensesTab({
               key={val}
               onClick={() => setActiveFilter(val as "1" | "0" | "")}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                activeFilter === val ? "bg-[#2F6BFF] text-white" : "text-gray-400 hover:text-white"
+                activeFilter === val ? "bg-[#00FF9F] text-black" : "text-gray-400 hover:text-white"
               }`}
             >
               {label}
@@ -936,7 +936,7 @@ function LicensesTab({
                       <td className="p-3 text-gray-300">{lic.customer_email}</td>
                       <td className="p-3">
                         <div className="flex items-center gap-1.5">
-                          <code className="text-[#7AA0FF] text-xs bg-white/5 px-2 py-0.5 rounded">{truncatedKey}</code>
+                          <code className="text-[#00FF9F] text-xs bg-white/5 px-2 py-0.5 rounded">{truncatedKey}</code>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -945,7 +945,7 @@ function LicensesTab({
                             className="text-gray-500 hover:text-white transition-colors"
                           >
                             {copiedField === `lic-${lic.id}` ? (
-                              <Check className="w-3.5 h-3.5 text-[#7AA0FF]" />
+                              <Check className="w-3.5 h-3.5 text-[#00FF9F]" />
                             ) : (
                               <Copy className="w-3.5 h-3.5" />
                             )}
@@ -1046,7 +1046,7 @@ function LicensesTab({
           {licenses.length === 0 && !loading && <EmptyState message="No licenses found" />}
           {loading && licenses.length === 0 && (
             <div className="flex justify-center py-12">
-              <Loader2 className="w-6 h-6 animate-spin text-[#7AA0FF]" />
+              <Loader2 className="w-6 h-6 animate-spin text-[#00FF9F]" />
             </div>
           )}
         </div>
@@ -1107,10 +1107,10 @@ function AffiliatesTab({
       {/* Summary Cards */}
       {data && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatCard label="Standard Referrers" value={data.summary.standard_referrers} icon={Users} color="text-[#7AA0FF]" delay={0.05} />
+          <StatCard label="Standard Referrers" value={data.summary.standard_referrers} icon={Users} color="text-[#00FF9F]" delay={0.05} />
           <StatCard label="Founding Affiliates" value={data.summary.founding_referrers} icon={Users} color="text-yellow-400" delay={0.1} />
-          <StatCard label="Active Total" value={data.summary.active_referrers} icon={Users} color="text-[#7AA0FF]" delay={0.15} />
-          <StatCard label="Total Commissions" value={`$${data.summary.total_commissions}`} icon={DollarSign} color="text-[#7AA0FF]" delay={0.2} />
+          <StatCard label="Active Total" value={data.summary.active_referrers} icon={Users} color="text-[#00FF9F]" delay={0.15} />
+          <StatCard label="Total Commissions" value={`$${data.summary.total_commissions}`} icon={DollarSign} color="text-[#00FF9F]" delay={0.2} />
           <StatCard label="Unpaid" value={`$${data.summary.total_unpaid}`} icon={DollarSign} color="text-red-400" delay={0.25} />
         </div>
       )}
@@ -1141,14 +1141,14 @@ function AffiliatesTab({
             value={addEmail}
             onChange={(e) => setAddEmail(e.target.value)}
             placeholder="Email"
-            className="flex-1 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="flex-1 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
           <input
             type="text"
             value={addName}
             onChange={(e) => setAddName(e.target.value)}
             placeholder="Name (optional)"
-            className="sm:w-48 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="sm:w-48 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
           <button
             type="submit"
@@ -1166,7 +1166,7 @@ function AffiliatesTab({
             key={f}
             onClick={() => setTierFilter(f)}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
-              tierFilter === f ? "bg-[#2F6BFF] text-white" : "text-gray-400 hover:text-white"
+              tierFilter === f ? "bg-[#00FF9F] text-black" : "text-gray-400 hover:text-white"
             }`}
           >
             {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)}
@@ -1200,13 +1200,13 @@ function AffiliatesTab({
                   </td>
                   <td className="p-3">
                     <div className="flex items-center gap-1.5">
-                      <code className="text-[#7AA0FF] text-xs bg-white/5 px-2 py-0.5 rounded">{r.referral_code}</code>
+                      <code className="text-[#00FF9F] text-xs bg-white/5 px-2 py-0.5 rounded">{r.referral_code}</code>
                       <button
                         onClick={() => onCopy(r.referral_code, `ref-${r.referral_code}`)}
                         className="text-gray-500 hover:text-white transition-colors"
                       >
                         {copiedField === `ref-${r.referral_code}` ? (
-                          <Check className="w-3.5 h-3.5 text-[#7AA0FF]" />
+                          <Check className="w-3.5 h-3.5 text-[#00FF9F]" />
                         ) : (
                           <Copy className="w-3.5 h-3.5" />
                         )}
@@ -1232,7 +1232,7 @@ function AffiliatesTab({
                   </td>
                   <td className="p-3 text-right text-gray-300">{r.l1_referrals}</td>
                   <td className="p-3 text-right text-gray-300">{r.l2_referrals ?? 0}</td>
-                  <td className="p-3 text-right text-[#7AA0FF]">${r.total_earned}</td>
+                  <td className="p-3 text-right text-[#00FF9F]">${r.total_earned}</td>
                   <td className="p-3 text-right text-yellow-400">${r.unpaid}</td>
                   <td className="p-3">
                     <div className="flex items-center gap-1.5">
@@ -1257,7 +1257,7 @@ function AffiliatesTab({
                         onClick={() =>
                           onChangeTier(r.referral_code, r.tier === "standard" ? "founding" : "standard")
                         }
-                        className="px-2 py-1 text-xs bg-[#2F6BFF]/10 text-[#7AA0FF] rounded-md hover:bg-[#2F6BFF]/20 transition-colors border border-[#2F6BFF]/20"
+                        className="px-2 py-1 text-xs bg-[#00FF9F]/10 text-[#00FF9F] rounded-md hover:bg-[#00FF9F]/20 transition-colors border border-[#00FF9F]/20"
                         title={`Switch to ${r.tier === "standard" ? "founding" : "standard"}`}
                       >
                         <ArrowUpDown className="w-3.5 h-3.5" />
@@ -1312,13 +1312,13 @@ function AffiliatesTab({
                     <tr key={t.id} className="border-b border-white/5 hover:bg-white/[0.03] transition-colors">
                       <td className="p-3 text-gray-400 text-xs">{formatDate(t.created_at)}</td>
                       <td className="p-3">
-                        <code className="text-[#7AA0FF] text-xs">{t.referral_code}</code>
+                        <code className="text-[#00FF9F] text-xs">{t.referral_code}</code>
                         <span className="text-gray-500 text-xs ml-1">({t.tier})</span>
                       </td>
                       <td className="p-3">
                         <span
                           className={`px-2 py-0.5 rounded text-xs font-medium ${
-                            t.level === 1 ? "bg-[#2F6BFF]/15 text-[#7AA0FF]" : "bg-purple-500/20 text-purple-400"
+                            t.level === 1 ? "bg-[#00FF9F]/15 text-[#00FF9F]" : "bg-purple-500/20 text-purple-400"
                           }`}
                         >
                           L{t.level}
@@ -1329,7 +1329,7 @@ function AffiliatesTab({
                         <TierBadge tier={t.license_tier} />
                       </td>
                       <td className="p-3 text-right text-gray-300">${t.amount_paid}</td>
-                      <td className="p-3 text-right text-[#7AA0FF] font-medium">${t.commission}</td>
+                      <td className="p-3 text-right text-[#00FF9F] font-medium">${t.commission}</td>
                       <td className="p-3">
                         {t.paid ? (
                           <span className="flex items-center gap-1 text-emerald-400 text-xs">
@@ -1366,7 +1366,7 @@ function ActivityTab({
 }) {
   const actionColors: Record<string, string> = {
     validate: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
-    activate: "bg-[#2F6BFF]/15 text-[#7AA0FF] border-[#2F6BFF]/30",
+    activate: "bg-[#00FF9F]/15 text-[#00FF9F] border-[#00FF9F]/30",
     deactivate: "bg-red-500/20 text-red-400 border-red-500/30",
     register: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   };
@@ -1380,7 +1380,7 @@ function ActivityTab({
 
       {loading && activity.length === 0 ? (
         <div className="flex justify-center py-20">
-          <Loader2 className="w-8 h-8 animate-spin text-[#7AA0FF]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#00FF9F]" />
         </div>
       ) : activity.length === 0 ? (
         <EmptyState message="No activity recorded" />
@@ -1418,7 +1418,7 @@ function ActivityTab({
 
               {/* Details */}
               <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                <code className="text-[#7AA0FF] text-xs truncate">{entry.license_key}</code>
+                <code className="text-[#00FF9F] text-xs truncate">{entry.license_key}</code>
                 {entry.hardware_id && (
                   <span className="text-gray-500 text-xs truncate">
                     <Cpu className="w-3 h-3 inline mr-1" />
@@ -1487,13 +1487,13 @@ function CreateLicenseTab({
           <p className={result.success ? "text-emerald-400" : "text-red-400"}>{result.message}</p>
           {result.license_key && (
             <div className="mt-3 flex items-center gap-2">
-              <code className="text-[#7AA0FF] text-sm bg-white/5 px-3 py-1.5 rounded-lg">{result.license_key}</code>
+              <code className="text-[#00FF9F] text-sm bg-white/5 px-3 py-1.5 rounded-lg">{result.license_key}</code>
               <button
                 onClick={() => onCopy(result.license_key!, "created-key")}
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 {copiedField === "created-key" ? (
-                  <Check className="w-4 h-4 text-[#7AA0FF]" />
+                  <Check className="w-4 h-4 text-[#00FF9F]" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
@@ -1515,7 +1515,7 @@ function CreateLicenseTab({
             value={form.customer_email}
             onChange={(e) => updateField("customer_email", e.target.value)}
             placeholder="customer@example.com"
-            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
         </div>
 
@@ -1533,7 +1533,7 @@ function CreateLicenseTab({
                 }}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
                   form.tier === t
-                    ? "bg-[#2F6BFF] text-white border-[#2F6BFF]"
+                    ? "bg-[#00FF9F] text-black border-[#00FF9F]"
                     : "bg-white/5 text-gray-400 border-white/10 hover:border-white/20"
                 }`}
               >
@@ -1552,7 +1552,7 @@ function CreateLicenseTab({
               min={1}
               value={form.systems_allowed}
               onChange={(e) => updateField("systems_allowed", parseInt(e.target.value) || 1)}
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
             />
           </div>
           <div>
@@ -1562,7 +1562,7 @@ function CreateLicenseTab({
               min={1}
               value={form.days_valid}
               onChange={(e) => updateField("days_valid", parseInt(e.target.value) || 365)}
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
             />
           </div>
         </div>
@@ -1575,7 +1575,7 @@ function CreateLicenseTab({
             value={form.organization}
             onChange={(e) => updateField("organization", e.target.value)}
             placeholder="Company name"
-            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
         </div>
 
@@ -1587,14 +1587,14 @@ function CreateLicenseTab({
             value={form.referral_code}
             onChange={(e) => updateField("referral_code", e.target.value)}
             placeholder="REF-ABC123"
-            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#2F6BFF] transition-colors text-sm"
+            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-[#00FF9F] transition-colors text-sm"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading || !form.customer_email}
-          className="w-full py-3 bg-[#2F6BFF] text-white font-semibold rounded-lg hover:bg-[#2257E0] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full py-3 bg-[#00FF9F] text-black font-semibold rounded-lg hover:bg-[#00CC7F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <PlusCircle className="w-4 h-4" />}
           {loading ? "Creating..." : "Create License"}

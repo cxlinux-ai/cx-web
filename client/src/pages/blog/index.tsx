@@ -68,14 +68,14 @@ export default function BlogIndex() {
   const paginated = filtered.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
 
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen bg-[#1E1E1E] text-white">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-white/8">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(47,107,255,0.06)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,255,159,0.06)_0%,transparent_60%)]" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-              CX Linux <span className="bg-gradient-to-r from-[#7AA0FF] to-[#B9CCFF] bg-clip-text text-transparent">Blog</span>
+              CX Linux <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Blog</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl">
               Tutorials, architecture deep-dives, and practical guides for AI-powered Linux engineering.
@@ -97,20 +97,20 @@ export default function BlogIndex() {
               placeholder="Search posts…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#2F6BFF]/40 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#00FF9F]/40 transition-all"
             />
           </div>
 
           {/* Tags, top 8 only to prevent overflow */}
           <div className="flex flex-wrap gap-2">
             <Link href="/blog">
-              <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${!activeTag ? "bg-[#2F6BFF] text-white border-[#2F6BFF] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#2F6BFF]/40 hover:text-white"}`}>
+              <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${!activeTag ? "bg-[#00FF9F] text-black border-[#00FF9F] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#00FF9F]/40 hover:text-white"}`}>
                 All
               </span>
             </Link>
             {tags.slice(0, 8).map(({ tag }) => (
               <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
-                <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${activeTag === tag ? "bg-[#2F6BFF] text-white border-[#2F6BFF] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#2F6BFF]/40 hover:text-white"}`}>
+                <span className={`text-xs px-3 py-1.5 rounded-full cursor-pointer border transition-all ${activeTag === tag ? "bg-[#00FF9F] text-black border-[#00FF9F] font-semibold" : "bg-white/5 border-white/10 text-gray-400 hover:border-[#00FF9F]/40 hover:text-white"}`}>
                   {tag}
                 </span>
               </Link>
@@ -120,7 +120,7 @@ export default function BlogIndex() {
 
         {loading ? (
           <div className="flex items-center justify-center py-24">
-            <div className="w-8 h-8 border-2 border-[#2F6BFF] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-[#00FF9F] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <>
@@ -154,7 +154,7 @@ export default function BlogIndex() {
                 )}
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                   <Link key={p} href={`/blog?${new URLSearchParams({ ...(activeTag ? { tag: activeTag } : {}), page: String(p) })}`}>
-                    <span className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm cursor-pointer transition-all ${p === page ? "bg-[#2F6BFF] text-white font-semibold" : "bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20"}`}>{p}</span>
+                    <span className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm cursor-pointer transition-all ${p === page ? "bg-[#00FF9F] text-black font-semibold" : "bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20"}`}>{p}</span>
                   </Link>
                 ))}
                 {page < totalPages && (
