@@ -14,11 +14,17 @@ import {
   Mail,
   Key,
   Copy,
+  AlertCircle,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
+import {
+  CheckoutSessionError,
+  createCheckoutSession,
+} from "@/lib/stripeCheckoutSession";
 
 const LICENSE_SERVER = "https://license.cxlinux.com";
 
@@ -118,6 +124,7 @@ export default function CheckoutPage() {
   const [company, setCompany] = useState("");
   const [referralCode, setReferralCode] = useState(initialReferralCode);
   const [isLoading, setIsLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [isAnnual, setIsAnnual] = useState(billingCycle === "annual");
   
   // Free tier OTP flow
@@ -243,8 +250,49 @@ export default function CheckoutPage() {
     }
   };
 
+  const runPaidCheckout = async () => {
+    const ref = referralCode || localStorage.getItem("cx_referral") || "";
+
+    const checkoutUrl = await createCheckoutSession(LICENSE_SERVER, {
+      email,
+      name,
+      planId: plan.id,
+      billingCycle: isAnnual ? "annual" : "monthly",
+      referralCode: ref,
+      successUrl: `${window.location.origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancelUrl: `${window.location.origin}/pricing/checkout?plan=${planId}&billing=${isAnnual ? "annual" : "monthly"}${ref ? `&ref=${ref}` : ""}`,
+    });
+
+    window.location.href = checkoutUrl;
+  };
+
+  const startPaidCheckout = async () => {
+    setCheckoutError(null);
+    setIsLoading(true);
+
+    try {
+      await runPaidCheckout();
+    } catch (error) {
+      const message =
+        error instanceof CheckoutSessionError
+          ? error.message
+          : error instanceof Error
+            ? error.message
+            : "Failed to start checkout.";
+
+      setCheckoutError(message);
+      toast({
+        title: "Checkout Error",
+        description: message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Handle paid tier checkout
-  const handlePaidCheckout = async (e: React.FormEvent) => {
+  const handlePaidCheckout = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !name) {
@@ -256,44 +304,7 @@ export default function CheckoutPage() {
       return;
     }
 
-    setIsLoading(true);
-
-    try {
-      const ref = referralCode || localStorage.getItem("cx_referral") || "";
-      
-      const response = await fetch(`${LICENSE_SERVER}/api/v1/stripe/checkout-session`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          name,
-          planId: plan.id,
-          billingCycle: isAnnual ? "annual" : "monthly",
-          referralCode: ref,
-          successUrl: `${window.location.origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${window.location.origin}/pricing/checkout?plan=${planId}&billing=${isAnnual ? "annual" : "monthly"}${ref ? `&ref=${ref}` : ""}`,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
-      }
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("No checkout URL returned");
-      }
-    } catch (error) {
-      toast({
-        title: "Checkout Error",
-        description: error instanceof Error ? error.message : "Failed to start checkout.",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-    }
+    void startPaidCheckout();
   };
 
   const copyLicenseKey = () => {
@@ -651,6 +662,36 @@ export default function CheckoutPage() {
                   </button>
                 </div>
               </div>
+
+              {checkoutError && (
+                <Alert
+                  variant="destructive"
+                  className="border-red-500/50 bg-red-500/10 text-red-100"
+                  data-testid="checkout-error-alert"
+                >
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Checkout failed</AlertTitle>
+                  <AlertDescription className="space-y-3 text-red-100/90">
+                    <p>{checkoutError}</p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => void startPaidCheckout()}
+                        disabled={isLoading}
+                        className="rounded-md bg-red-500/20 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-500/30 disabled:opacity-50"
+                      >
+                        Retry
+                      </button>
+                      <a
+                        href="mailto:support@cxlinux.com"
+                        className="text-sm font-medium text-[#00FF9F] underline underline-offset-2"
+                      >
+                        Contact support
+                      </a>
+                    </div>
+                  </AlertDescription>
+                </Alert>
+              )}
 
               <button
                 type="submit"

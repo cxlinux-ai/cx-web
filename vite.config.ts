@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import mdx from "@mdx-js/rollup";
@@ -51,5 +52,11 @@ export default defineConfig({
     fs: {
       strict: false,
     },
+  },
+  test: {
+    root: path.resolve(import.meta.dirname, "client"),
+    environment: "jsdom",
+    setupFiles: [path.resolve(import.meta.dirname, "client", "src", "test", "setup.ts")],
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
   },
 });
