@@ -11,6 +11,34 @@ type PagesContext = {
   env: PagesEnv;
 };
 
+async function fetchIndexHtml(
+  env: PagesEnv,
+  url: URL,
+  request: Request,
+): Promise<Response | null> {
+  const indexRequest = new Request(new URL("/index.html", url), {
+    method: "GET",
+    headers: request.headers,
+    redirect: "manual",
+  });
+  const indexResponse = await env.ASSETS.fetch(indexRequest);
+  if (indexResponse.status === 308 || indexResponse.status === 301 || indexResponse.status === 302) {
+    const location = indexResponse.headers.get("Location");
+    if (location === "/" || location === url.origin + "/") {
+      const rootResponse = await env.ASSETS.fetch(new Request(new URL("/", url), request));
+      if (rootResponse.ok) {
+        return rootResponse;
+      }
+    }
+  }
+  if (!indexResponse.ok) {
+    return null;
+  }
+  const headers = new Headers(indexResponse.headers);
+  headers.set("Content-Type", "text/html; charset=utf-8");
+  return new Response(indexResponse.body, { status: 200, headers });
+}
+
 export const onRequest = async (context: PagesContext): Promise<Response> => {
   const url = new URL(context.request.url);
   const pathname = url.pathname;
@@ -29,18 +57,27 @@ export const onRequest = async (context: PagesContext): Promise<Response> => {
     });
   }
 
-  const response = await context.next();
-  if (response.ok) {
-    return response;
+  if (pathname === "/") {
+    const root = await context.next();
+    if (root.ok) {
+      return root;
+    }
+    const index = await fetchIndexHtml(context.env, url, context.request);
+    return index ?? root;
   }
 
-  const indexRequest = new Request(new URL("/index.html", url), context.request);
-  const indexResponse = await context.env.ASSETS.fetch(indexRequest);
-  if (!indexResponse.ok) {
-    return response;
+  const index = await fetchIndexHtml(context.env, url, context.request);
+  if (index) {
+    return index;
   }
 
-  const headers = new Headers(indexResponse.headers);
-  headers.set("Content-Type", "text/html; charset=utf-8");
-  return new Response(indexResponse.body, { status: 200, headers });
+  const fallback = await context.next();
+  if (fallback.ok) {
+    return fallback;
+  }
+
+  return new Response("Not Found", {
+    status: 404,
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
 };
