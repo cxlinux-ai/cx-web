@@ -1,0 +1,30 @@
+/** Client-side routes that should return index.html with HTTP 200. */
+const EXACT_SPA_ROUTES = new Set([
+  "/getting-started",
+  "/pricing",
+  "/pricing/checkout",
+  "/pricing/success",
+  "/pricing/faq",
+  "/privacy",
+  "/terms",
+  "/faq",
+  "/about",
+  "/status",
+  "/affiliates",
+  "/account",
+  "/blog",
+  "/admin",
+  "/admin/referrals",
+]);
+
+const SPA_PREFIXES = ["/blog/"];
+
+export function isSpaRoute(pathname: string): boolean {
+  if (pathname === "/") {
+    return true;
+  }
+  if (EXACT_SPA_ROUTES.has(pathname)) {
+    return true;
+  }
+  return SPA_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+}

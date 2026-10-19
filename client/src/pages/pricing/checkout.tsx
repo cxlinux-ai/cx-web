@@ -53,7 +53,7 @@ const plans: Record<string, PlanDetails> = {
   },
   pro: {
     id: "pro",
-    name: "Pro",
+    name: "Core+",
     monthlyPrice: 20,
     annualPrice: 200,
     features: [
@@ -73,7 +73,7 @@ const plans: Record<string, PlanDetails> = {
     monthlyPrice: 99,
     annualPrice: 990,
     features: [
-      "Everything in Pro",
+      "Everything in Core+",
       "Team workspaces",
       "Role-based access control",
       "Shared command history",

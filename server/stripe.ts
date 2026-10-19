@@ -913,8 +913,8 @@ router.post("/create-checkout-session", requireStripe, async (req: Request, res:
 
 const PRICE_TO_TIER: Record<string, { name: string; prefix: string }> = {
   // Pro (Core+)
-  'price_1SqYQjJ4X1wkC4EsLDB6ZbOk': { name: 'Pro', prefix: 'CX-PRO-' },
-  'price_1SqYQjJ4X1wkC4EslIkZEJFZ': { name: 'Pro', prefix: 'CX-PRO-' },
+  'price_1SqYQjJ4X1wkC4EsLDB6ZbOk': { name: 'Core+', prefix: 'CX-PRO-' },
+  'price_1SqYQjJ4X1wkC4EslIkZEJFZ': { name: 'Core+', prefix: 'CX-PRO-' },
   // Team (Pro+)
   'price_1SqYQkJ4X1wkC4Es8OMt79pZ': { name: 'Team', prefix: 'CX-TEAM-' },
   'price_1SqYQkJ4X1wkC4EsWYwUgceu': { name: 'Team', prefix: 'CX-TEAM-' },
@@ -956,7 +956,7 @@ router.get("/session/:sessionId", requireStripe, async (req: Request, res: Respo
     const lineItems = session.line_items?.data || [];
     const priceId = lineItems[0]?.price?.id || '';
 
-    const tierInfo = PRICE_TO_TIER[priceId] || { name: 'Pro', prefix: 'CX-PRO-' };
+    const tierInfo = PRICE_TO_TIER[priceId] || { name: 'Core+', prefix: 'CX-PRO-' };
     const licenseKey = generateLicenseKey(tierInfo.prefix);
 
     res.json({

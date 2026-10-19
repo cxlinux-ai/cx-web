@@ -1,2 +1,15 @@
-# SPA fallback
-/*    /index.html   200
+# Known SPA routes — serve index.html with 200 (no catch-all; unknown paths stay 404)
+/getting-started  /index.html  200
+/pricing          /index.html  200
+/pricing/*        /index.html  200
+/privacy          /index.html  200
+/terms            /index.html  200
+/faq              /index.html  200
+/about            /index.html  200
+/status           /index.html  200
+/affiliates       /index.html  200
+/account          /index.html  200
+/blog             /index.html  200
+/blog/*           /index.html  200
+/admin            /index.html  200
+/admin/*          /index.html  200
