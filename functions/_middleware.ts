@@ -11,14 +11,23 @@ type PagesContext = {
 };
 
 export const onRequest = async (context: PagesContext): Promise<Response> => {
-  const response = await context.next();
-  const pathname = new URL(context.request.url).pathname;
+  const url = new URL(context.request.url);
+  const pathname = url.pathname;
 
-  if (response.status !== 404 || !isSpaRoute(pathname)) {
+  // Do not call next() for unknown paths — Pages dev serves index.html with 200 otherwise.
+  if (!isSpaRoute(pathname)) {
+    return new Response("Not Found", {
+      status: 404,
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
+  }
+
+  const response = await context.next();
+  if (response.ok) {
     return response;
   }
 
-  const indexRequest = new Request(new URL("/index.html", context.request.url), context.request);
+  const indexRequest = new Request(new URL("/index.html", url), context.request);
   const indexResponse = await context.env.ASSETS.fetch(indexRequest);
   if (!indexResponse.ok) {
     return response;
