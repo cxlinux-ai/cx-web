@@ -19,7 +19,13 @@ const EXACT_SPA_ROUTES = new Set([
 
 const SPA_PREFIXES = ["/blog/"];
 
+/** Static assets under SPA-looking paths (must not return index.html). */
+const NON_SPA_EXACT = new Set(["/blog/rss.xml"]);
+
 export function isSpaRoute(pathname: string): boolean {
+  if (NON_SPA_EXACT.has(pathname)) {
+    return false;
+  }
   if (pathname === "/") {
     return true;
   }

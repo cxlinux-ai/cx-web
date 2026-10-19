@@ -1,4 +1,5 @@
 import { isSpaRoute } from "./spa-routes";
+import { shouldServeAsStaticAsset } from "./static-path";
 
 interface PagesEnv {
   ASSETS: { fetch: (request: Request | string) => Promise<Response> };
@@ -14,7 +15,13 @@ export const onRequest = async (context: PagesContext): Promise<Response> => {
   const url = new URL(context.request.url);
   const pathname = url.pathname;
 
-  // Do not call next() for unknown paths — Pages dev serves index.html with 200 otherwise.
+  if (shouldServeAsStaticAsset(pathname)) {
+    const staticResponse = await context.env.ASSETS.fetch(context.request);
+    if (staticResponse.status !== 404) {
+      return staticResponse;
+    }
+  }
+
   if (!isSpaRoute(pathname)) {
     return new Response("Not Found", {
       status: 404,

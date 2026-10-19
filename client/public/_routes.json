@@ -18,6 +18,8 @@
     "/*.css",
     "/install.sh",
     "/robots.txt",
-    "/sitemap.xml"
+    "/sitemap.xml",
+    "/blog/rss.xml",
+    "/og-image.png"
   ]
 }
