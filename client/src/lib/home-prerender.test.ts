@@ -22,8 +22,10 @@ describe("homepage prerender", () => {
     expect((html.match(/<h2[\s>]/g) ?? []).length).toBeGreaterThanOrEqual(3);
   });
 
-  it("serves at least 300 words of readable copy without JavaScript", () => {
-    expect(visibleText(HOME_PRERENDER_HTML).split(" ").length).toBeGreaterThanOrEqual(300);
+  it("serves at least 300 words of section copy without JavaScript", () => {
+    // SEOAST counts body copy below the hero; keep margin above its 300-word floor.
+    const sections = HOME_PRERENDER_HTML.slice(HOME_PRERENDER_HTML.indexOf("</header>"));
+    expect(visibleText(sections).split(" ").length).toBeGreaterThanOrEqual(300);
   });
 
   it("links to at least 3 internal pages", () => {
@@ -45,6 +47,9 @@ describe("homepage prerender", () => {
       "Start free, scale as you grow. All paid plans include a 14-day free trial.",
       "Join the CX community",
       "curl -fsSL https://cxlinux.com/install.sh | bash",
+      "Binary signature is verified before install",
+      "Ask questions, share configs, get help from real engineers",
+      "Longer threads, war stories, and community showcases",
     ];
     for (const line of lines) {
       expect(homeSource).toContain(line);

@@ -62,12 +62,16 @@ export const HOME_PRERENDER_HTML = `<div class="max-w-4xl mx-auto px-4 py-20 tex
 <h2 class="text-2xl md:text-3xl font-bold mb-3 text-white">Take back your weekends.</h2>
 <p class="text-gray-400 mb-4">Stop typing the same commands at 2am. Let CX handle the toil so you can focus on the work that actually moves things forward.</p>
 <pre class="text-[#00FF9F] text-xs sm:text-[13px] mb-3"><code>${INSTALL_COMMAND}</code></pre>
+<h3 class="font-semibold text-white mb-1 text-sm">Why is curl | bash safe here?</h3>
+<p class="text-gray-500 text-sm mb-3">Script is served over HTTPS from cxlinux.com. Binary signature is verified before install. You can inspect the script before running it.</p>
 <p class="text-gray-500 text-sm">Free forever for personal use. No credit card required. Cancel anytime. Prefer not to pipe? <a href="/getting-started" class="text-[#00FF9F] hover:underline">See manual install</a>.</p>
 </section>
 <section>
 <h2 class="text-2xl md:text-3xl font-bold mb-3 text-white">Join the CX community</h2>
 <p class="text-gray-400 mb-4">Thousands of Linux engineers sharing configs, asking questions, building together, and making CX better every day.</p>
-<p class="text-sm"><a href="https://discord.gg/q4FUyBW6z" class="text-[#00FF9F] hover:underline">CX Linux on Discord</a> · <a href="https://reddit.com/r/cxlinux" class="text-[#00FF9F] hover:underline">r/cxlinux on Reddit</a> · <a href="/about" class="text-[#00FF9F] hover:underline">About CX Linux</a></p>
+<p class="text-gray-500 text-sm mb-2"><a href="https://discord.gg/q4FUyBW6z" class="text-[#00FF9F] hover:underline">CX Linux on Discord</a>: Ask questions, share configs, get help from real engineers.</p>
+<p class="text-gray-500 text-sm mb-2"><a href="https://reddit.com/r/cxlinux" class="text-[#00FF9F] hover:underline">r/cxlinux on Reddit</a>: Longer threads, war stories, and community showcases.</p>
+<p class="text-sm"><a href="/about" class="text-[#00FF9F] hover:underline">About CX Linux</a></p>
 </section>
 </div>`;
 
