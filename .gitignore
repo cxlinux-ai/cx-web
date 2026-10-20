@@ -34,4 +34,3 @@ ENV/
 # Model cache
 .cache/huggingface/.env*
 .wrangler/
-client/public/og/
