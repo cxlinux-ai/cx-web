@@ -8,6 +8,19 @@ interface Props {
   referralCode?: string | null;
 }
 
+function tierHref(tier: (typeof tiers)[number], isAnnual: boolean, referralCode?: string | null) {
+  if (!tier.ctaLink.includes("/pricing/checkout")) {
+    return tier.ctaLink;
+  }
+  const billing = isAnnual ? "annual" : "monthly";
+  const sep = tier.ctaLink.includes("?") ? "&" : "?";
+  let href = `${tier.ctaLink}${sep}billing=${billing}`;
+  if (referralCode) {
+    href += `&ref=${encodeURIComponent(referralCode)}`;
+  }
+  return href;
+}
+
 export default function PricingCards({ isAnnual, referralCode }: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 items-start">
@@ -90,7 +103,7 @@ export default function PricingCards({ isAnnual, referralCode }: Props) {
               </a>
             ) : (
               <Link
-                href={tier.ctaLink + (isAnnual ? "&billing=annual" : "&billing=monthly") + (referralCode ? `&ref=${referralCode}` : "")}
+                href={tierHref(tier, isAnnual, referralCode)}
                 className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
                   isHighlighted
                     ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"

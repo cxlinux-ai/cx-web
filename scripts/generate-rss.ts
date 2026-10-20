@@ -4,12 +4,16 @@ import { fileURLToPath } from "url";
 import { glob } from "glob";
 import matter from "gray-matter";
 import { Feed } from "feed";
+import { PostFrontmatterSchema } from "../client/src/blog/schema";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const BASE_URL = "https://cxlinux.com";
 
-mkdirSync(join(ROOT, "public", "blog"), { recursive: true });
+const RSS_OUT_DIRS = [join(ROOT, "client", "public", "blog")];
+for (const dir of RSS_OUT_DIRS) {
+  mkdirSync(dir, { recursive: true });
+}
 
 async function main() {
   const files = await glob(join(ROOT, "content", "blog", "*.mdx"));
@@ -19,7 +23,7 @@ async function main() {
   for (const file of files) {
     const src = readFileSync(file, "utf-8");
     const { data, content } = matter(src);
-    if (data.draft) continue;
+    if (data.draft || !PostFrontmatterSchema.safeParse(data).success) continue;
     const slug = file.replace(/^.*\/([^/]+)\.mdx$/, "$1");
     posts.push({ slug, data, body: content });
   }
@@ -41,7 +45,13 @@ async function main() {
 
   for (const { slug, data, body } of posts) {
     const url = `${BASE_URL}/blog/${slug}`;
-    const ogImage = data.ogImage ?? `${BASE_URL}/og/${slug}.png`;
+    const rawOg = data.ogImage as string | undefined;
+    const ogImage =
+      rawOg && /^https?:\/\//i.test(rawOg)
+        ? rawOg
+        : rawOg
+          ? `${BASE_URL}${rawOg.startsWith("/") ? rawOg : `/${rawOg}`}`
+          : `${BASE_URL}/og/${slug}.png`;
     // Strip MDX components for the feed — render as plain text
     const plainBody = body
       .replace(/<[A-Z][^>]*>[\s\S]*?<\/[A-Z][^>]*>/g, "")
@@ -62,8 +72,13 @@ async function main() {
   }
 
   const rss = feed.rss2();
-  writeFileSync(join(ROOT, "public", "blog", "rss.xml"), rss);
-  console.log(`✓ /public/blog/rss.xml (${posts.length} posts)`);
+  for (const dir of RSS_OUT_DIRS) {
+    writeFileSync(join(dir, "rss.xml"), rss);
+  }
+  console.log(`✓ client/public/blog/rss.xml (${posts.length} posts)`);
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

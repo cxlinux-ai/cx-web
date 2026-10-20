@@ -4,7 +4,7 @@
         <title>CX Linux Blog</title>
         <link>https://cxlinux.com/blog</link>
         <description>Tutorials, architecture deep-dives, and practical guides for AI-powered Linux engineering.</description>
-        <lastBuildDate>Thu, 16 Jul 2026 12:35:39 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 20 Oct 2026 06:23:36 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -14,6 +14,66 @@
             <link>https://cxlinux.com/blog</link>
         </image>
         <copyright>© 2026 AI Venture Holdings LLC</copyright>
+        <item>
+            <title><![CDATA[Linux Troubleshooting Common Errors with AI Assistants]]></title>
+            <link>https://cxlinux.com/blog/ai-assistants-linux-sysadmin-troubleshooting</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/ai-assistants-linux-sysadmin-troubleshooting</guid>
+            <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Linux troubleshooting common errors gets faster with AI assistants like Claude and Copilot - see where they help, where they fail, and how to verify commands.]]></description>
+            <content:encoded><![CDATA[<p>Linux troubleshooting common errors gets faster with AI assistants like Claude and Copilot - see where they help, where they fail, and how to verify commands.</p><p><a href="https://cxlinux.com/blog/ai-assistants-linux-sysadmin-troubleshooting">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/og/ai-assistants-linux-sysadmin-troubleshooting.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[CX Linux vs Ubuntu Comparison for AI Workloads]]></title>
+            <link>https://cxlinux.com/blog/cx-linux-vs-ubuntu-ai-workloads</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/cx-linux-vs-ubuntu-ai-workloads</guid>
+            <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A CX Linux vs Ubuntu comparison covering package ecosystems, resource overhead, and AI tooling support to help admins pick a base for ML infrastructure.]]></description>
+            <content:encoded><![CDATA[<p>A CX Linux vs Ubuntu comparison covering package ecosystems, resource overhead, and AI tooling support to help admins pick a base for ML infrastructure.</p><p><a href="https://cxlinux.com/blog/cx-linux-vs-ubuntu-ai-workloads">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/images/cx-linux-vs-ubuntu-ai-workloads.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[CX Linux System Requirements: Desktop, Server, VM]]></title>
+            <link>https://cxlinux.com/blog/cx-linux-system-requirements-bare-metal-vm</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/cx-linux-system-requirements-bare-metal-vm</guid>
+            <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[CX Linux system requirements broken down by workload across desktop, server, VM, and container deployments, with a benchmark methodology to verify each spec.]]></description>
+            <content:encoded><![CDATA[<p>CX Linux system requirements broken down by workload across desktop, server, VM, and container deployments, with a benchmark methodology to verify each spec.</p><p><a href="https://cxlinux.com/blog/cx-linux-system-requirements-bare-metal-vm">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/images/cx-linux-system-requirements-bare-metal-vm.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[CX Linux Package Manager Tutorial: cxpkg Guide]]></title>
+            <link>https://cxlinux.com/blog/cx-linux-package-manager-tutorial</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/cx-linux-package-manager-tutorial</guid>
+            <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Learn the CX Linux package manager with real cxpkg commands for install, update, rollback, and dependency resolution in production.]]></description>
+            <content:encoded><![CDATA[<p>Learn the CX Linux package manager with real cxpkg commands for install, update, rollback, and dependency resolution in production.</p><p><a href="https://cxlinux.com/blog/cx-linux-package-manager-tutorial">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/images/cx-linux-package-manager-tutorial.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[CX Linux Boot Failures: Diagnostic Checklist]]></title>
+            <link>https://cxlinux.com/blog/cx-linux-boot-failure-diagnostic-checklist</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/cx-linux-boot-failure-diagnostic-checklist</guid>
+            <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Fix CX Linux boot failures with an ordered checklist covering GRUB errors, initramfs, systemd targets, and kernel panics, from firmware to filesystem repair.]]></description>
+            <content:encoded><![CDATA[<p>Fix CX Linux boot failures with an ordered checklist covering GRUB errors, initramfs, systemd targets, and kernel panics, from firmware to filesystem repair.</p><p><a href="https://cxlinux.com/blog/cx-linux-boot-failure-diagnostic-checklist">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/images/cx-linux-boot-failure-diagnostic-checklist.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[AI Command-Line Tools for Linux: 6 Worth Trying]]></title>
+            <link>https://cxlinux.com/blog/ai-command-line-tools-linux</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/ai-command-line-tools-linux</guid>
+            <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.]]></description>
+            <content:encoded><![CDATA[<p>A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.</p><p><a href="https://cxlinux.com/blog/ai-command-line-tools-linux">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/og/ai-command-line-tools-linux.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[How We Built CX: Architecture of an AI-Native OS Layer]]></title>
             <link>https://cxlinux.com/blog/how-we-built-cx</link>

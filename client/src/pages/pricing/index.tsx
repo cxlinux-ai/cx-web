@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState } from "react";
 import { Link, useSearch } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +71,7 @@ const faqs = [
   },
   {
     q: "Do you offer a free trial on paid plans?",
-    a: "CX Core is free forever, no trial needed. For Pro and Team, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, we'll refund your first payment in full.",
+    a: "CX Core is free forever, no trial needed. For Core+ and Team, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, we'll refund your first payment in full.",
   },
   {
     q: "What happens when I exceed my cloud command limit?",
@@ -86,11 +87,12 @@ const faqs = [
   },
   {
     q: "Do you offer student discounts?",
-    a: "Yes, 50% off Pro for verified students with a valid .edu email. Email sales@cxlinux.com with your student verification.",
+    a: "Yes, 50% off Core+ for verified students with a valid .edu email. Email sales@cxlinux.com with your student verification.",
   },
 ];
 
 export default function PricingPage() {
+  usePageSEO(seoConfigs.pricing);
   const [isAnnual, setIsAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const searchString = useSearch();
@@ -110,7 +112,7 @@ export default function PricingPage() {
           className="bg-[#00FF9F]/10 border-b border-[#00FF9F]/20 py-3 px-4 text-center text-sm"
         >
           🎉 <span className="text-[#00FF9F] font-semibold">You've been referred!</span>{" "}
-          Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on Pro.
+          Sign up now and get <span className="text-[#00FF9F] font-bold">3 months free</span> on Core+.
         </motion.div>
       )}
 
@@ -228,7 +230,7 @@ export default function PricingPage() {
                 <tr className="border-b border-white/[0.08]">
                   <th className="text-left py-5 px-6 text-gray-500 font-medium w-[38%]">Feature</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Core</th>
-                  <th className="text-center py-5 px-4 font-bold text-[#00FF9F] bg-[#00FF9F]/[0.05]">Pro</th>
+                  <th className="text-center py-5 px-4 font-bold text-[#00FF9F] bg-[#00FF9F]/[0.05]">Core+</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Team</th>
                   <th className="text-center py-5 px-4 text-gray-400 font-semibold">Enterprise</th>
                 </tr>
@@ -343,6 +345,7 @@ export default function PricingPage() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  aria-expanded={openFaq === i}
                   className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
                 >
                   <span className="text-sm font-semibold text-white leading-snug">{faq.q}</span>

@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,7 +60,7 @@ const plans: Record<string, PlanDetails> = {
   },
   pro: {
     id: "pro",
-    name: "Pro",
+    name: "Core+",
     monthlyPrice: 20,
     annualPrice: 200,
     features: [
@@ -79,7 +80,7 @@ const plans: Record<string, PlanDetails> = {
     monthlyPrice: 99,
     annualPrice: 990,
     features: [
-      "Everything in Pro",
+      "Everything in Core+",
       "Team workspaces",
       "Role-based access control",
       "Shared command history",
@@ -110,6 +111,7 @@ const plans: Record<string, PlanDetails> = {
 type FreeStep = "form" | "otp" | "success";
 
 export default function CheckoutPage() {
+  usePageSEO(seoConfigs.checkout);
   const [, navigate] = useLocation();
   const { toast } = useToast();
 
