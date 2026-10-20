@@ -12,7 +12,7 @@ const columns = [
     heading: "Resources",
     links: [
       { label: "Blog", href: "/blog", internal: true },
-      { label: "FAQ", href: "/pricing", scrollTo: "faq", internal: true },
+      { label: "FAQ", href: "/faq", internal: true },
     ],
   },
   {
@@ -126,7 +126,7 @@ export default function Footer() {
             © {new Date().getFullYear()} CX Linux. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
+            <a href="https://discord.gg/q4FUyBW6z" target="_blank" rel="noopener noreferrer" aria-label="CX Linux on Discord" className="text-gray-500 hover:text-[#00FF9F] transition-colors">
               <FaDiscord className="w-4 h-4" />
             </a>
           </div>

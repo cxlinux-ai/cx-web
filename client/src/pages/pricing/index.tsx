@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState } from "react";
 import { Link, useSearch } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -91,6 +92,7 @@ const faqs = [
 ];
 
 export default function PricingPage() {
+  usePageSEO(seoConfigs.pricing);
   const [isAnnual, setIsAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const searchString = useSearch();
@@ -343,6 +345,7 @@ export default function PricingPage() {
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  aria-expanded={openFaq === i}
                   className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
                 >
                   <span className="text-sm font-semibold text-white leading-snug">{faq.q}</span>

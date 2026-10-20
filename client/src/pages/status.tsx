@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
@@ -64,6 +65,7 @@ function StatusBadge({ status }: { status: ServiceStatus["status"] }) {
 }
 
 export default function StatusPage() {
+  usePageSEO(seoConfigs.status);
   const [services, setServices] = useState<ServiceStatus[]>(initialServices);
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -140,6 +142,7 @@ export default function StatusPage() {
                 <button
                   onClick={checkServices}
                   disabled={isRefreshing}
+                  aria-label="Refresh service status"
                   className="ml-2 text-[#00FF9F] hover:text-[#00FF9F]/80 transition-colors"
                 >
                   <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
@@ -196,7 +199,7 @@ export default function StatusPage() {
                 <div>
                   <h3 className="font-semibold flex items-center gap-2">
                     {service.name}
-                    <a href={service.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300">
+                    <a href={service.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${service.name} endpoint`} className="text-gray-500 hover:text-gray-300">
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </h3>

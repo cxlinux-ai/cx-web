@@ -1,7 +1,9 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { Link } from "wouter";
 import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
+  usePageSEO(seoConfigs.notFound);
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center bg-[#1E1E1E] overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">

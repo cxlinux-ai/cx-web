@@ -67,7 +67,8 @@ export default function BlogPostPage() {
   useEffect(() => {
     if (!post) return;
     const fm = post.frontmatter;
-    const ogImage = fm.ogImage ?? `${BASE_URL}/og/${slug}.png`;
+    const rawImage = fm.ogImage ?? `/og/${slug}.png`;
+    const ogImage = rawImage.startsWith("/") ? `${BASE_URL}${rawImage}` : rawImage;
     const canonicalUrl = `${BASE_URL}/blog/${slug}`;
     const author = authorsJson.find((a) => a.id === fm.author) ?? authorsJson[0];
 

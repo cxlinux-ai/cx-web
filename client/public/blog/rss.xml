@@ -4,7 +4,7 @@
         <title>CX Linux Blog</title>
         <link>https://cxlinux.com/blog</link>
         <description>Tutorials, architecture deep-dives, and practical guides for AI-powered Linux engineering.</description>
-        <lastBuildDate>Mon, 19 Oct 2026 15:04:01 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 20 Oct 2026 06:23:36 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -63,6 +63,16 @@
             <content:encoded><![CDATA[<p>Fix CX Linux boot failures with an ordered checklist covering GRUB errors, initramfs, systemd targets, and kernel panics, from firmware to filesystem repair.</p><p><a href="https://cxlinux.com/blog/cx-linux-boot-failure-diagnostic-checklist">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
             <enclosure url="https://cxlinux.com/images/cx-linux-boot-failure-diagnostic-checklist.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[AI Command-Line Tools for Linux: 6 Worth Trying]]></title>
+            <link>https://cxlinux.com/blog/ai-command-line-tools-linux</link>
+            <guid isPermaLink="false">https://cxlinux.com/blog/ai-command-line-tools-linux</guid>
+            <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.]]></description>
+            <content:encoded><![CDATA[<p>A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.</p><p><a href="https://cxlinux.com/blog/ai-command-line-tools-linux">Read the full article →</a></p>]]></content:encoded>
+            <author>CX Linux Team</author>
+            <enclosure url="https://cxlinux.com/og/ai-command-line-tools-linux.png" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[How We Built CX: Architecture of an AI-Native OS Layer]]></title>
@@ -163,16 +173,6 @@
             <content:encoded><![CDATA[<p>Running AI-generated commands on your production system sounds risky. Here's exactly how CX Linux uses sandboxing, command preview, and instant rollback to make it safe.</p><p><a href="https://cxlinux.com/blog/sandboxed-execution-safety">Read the full article →</a></p>]]></content:encoded>
             <author>CX Linux Team</author>
             <enclosure url="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=630&q=80" length="0" type="image//photo-1563986768609-322da13575f3"/>
-        </item>
-        <item>
-            <title><![CDATA[AI Command-Line Tools for Linux: 6 Worth Trying]]></title>
-            <link>https://cxlinux.com/blog/ai-command-line-tools-linux</link>
-            <guid isPermaLink="false">https://cxlinux.com/blog/ai-command-line-tools-linux</guid>
-            <pubDate>Invalid Date</pubDate>
-            <description><![CDATA[A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.]]></description>
-            <content:encoded><![CDATA[<p>A hands-on look at shell-gpt, aichat, llm, mods, tgpt, and gh copilot - AI command-line tools for Linux that generate commands and explain errors in the shell.</p><p><a href="https://cxlinux.com/blog/ai-command-line-tools-linux">Read the full article →</a></p>]]></content:encoded>
-            <author>CX Linux Team</author>
-            <enclosure url="https://cxlinux.com/og/ai-command-line-tools-linux.png" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>

@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { motion } from "framer-motion";
 import {
   Terminal,
@@ -97,6 +98,7 @@ const stats = [
 ];
 
 export default function AboutPage() {
+  usePageSEO(seoConfigs.about);
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
       {/* Hero */}

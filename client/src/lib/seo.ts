@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface SEOConfig {
   title: string;
   description: string;
@@ -580,5 +582,45 @@ export const seoConfigs = {
     description: 'Join the CX Linux affiliate program and earn 10% recurring commission on every referral. Easy to join, transparent payouts, and dedicated support.',
     canonicalPath: '/affiliates',
     keywords: ['CX Linux affiliate', 'affiliate program', 'tech affiliate', 'Linux affiliate', 'recurring commission'],
-  }
+  },
+
+  pricingFaq: {
+    title: 'Pricing FAQ | CX Linux',
+    description: 'Answers to common questions about CX Linux plans, billing, trials, upgrades, cancellations, and licensing for Core, Pro, Team, and Enterprise.',
+    canonicalPath: '/pricing/faq',
+  },
+  about: {
+    title: 'About CX Linux | Making Linux Smarter',
+    description: 'CX Linux is the AI layer for Linux, built by AI Venture Holdings LLC. Learn who we are, what we are building, and why safe natural-language system administration matters.',
+    canonicalPath: '/about',
+  },
+  account: {
+    title: 'My Account | CX Linux',
+    description: 'Manage your CX Linux license, subscription, and billing.',
+    canonicalPath: '/account',
+    noIndex: true,
+  },
+  checkout: {
+    title: 'Checkout | CX Linux',
+    description: 'Complete your CX Linux subscription.',
+    canonicalPath: '/pricing/checkout',
+    noIndex: true,
+  },
+  admin: {
+    title: 'Admin | CX Linux',
+    description: 'CX Linux administration.',
+    canonicalPath: '/admin',
+    noIndex: true,
+  },
+  notFound: {
+    title: 'Page Not Found | CX Linux',
+    description: 'The page you are looking for does not exist.',
+    canonicalPath: '/404',
+    noIndex: true,
+  },
 };
+
+/** Apply page-level SEO (title, description, canonical, robots) for the lifetime of a component. */
+export function usePageSEO(config: SEOConfig): void {
+  useEffect(() => updateSEO(config), [config]);
+}

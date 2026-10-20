@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
@@ -152,6 +153,7 @@ const faqData: FAQCategory[] = [
 ];
 
 export default function PricingFAQ() {
+  usePageSEO(seoConfigs.pricingFaq);
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredFAQ = useMemo(() => {
