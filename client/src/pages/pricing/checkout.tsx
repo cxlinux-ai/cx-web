@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -104,6 +105,7 @@ const plans: Record<string, PlanDetails> = {
 type FreeStep = "form" | "otp" | "success";
 
 export default function CheckoutPage() {
+  usePageSEO(seoConfigs.checkout);
   const [, navigate] = useLocation();
   const { toast } = useToast();
 

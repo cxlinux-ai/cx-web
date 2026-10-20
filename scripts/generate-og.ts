@@ -3,13 +3,14 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { glob } from "glob";
 import matter from "gray-matter";
+import { PostFrontmatterSchema } from "../client/src/blog/schema";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { createElement } from "react";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const OUT_DIR = join(ROOT, "public", "og");
+const OUT_DIR = join(ROOT, "client", "public", "og");
 mkdirSync(OUT_DIR, { recursive: true });
 
 // Load Inter font for satori
@@ -145,7 +146,7 @@ async function main() {
   for (const file of files) {
     const src = readFileSync(file, "utf-8");
     const { data } = matter(src);
-    if (data.draft) continue;
+    if (data.draft || !PostFrontmatterSchema.safeParse(data).success) continue;
 
     const slug = file.replace(/^.*\/([^/]+)\.mdx$/, "$1");
     const words = src.replace(/---[\s\S]*?---/, "").trim().split(/\s+/).length;
@@ -156,4 +157,7 @@ async function main() {
   console.log("OG images generated.");
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

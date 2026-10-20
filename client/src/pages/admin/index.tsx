@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -176,6 +177,7 @@ const tabMeta: { id: Tab; label: string; icon: typeof BarChart3 }[] = [
 // ── Component ──────────────────────────────────────────────────────
 
 export default function AdminPanel() {
+  usePageSEO(seoConfigs.admin);
   const [apiKey, setApiKey] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authError, setAuthError] = useState("");

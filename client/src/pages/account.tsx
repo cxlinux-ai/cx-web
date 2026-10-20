@@ -1,3 +1,4 @@
+import { usePageSEO, seoConfigs } from "@/lib/seo";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
@@ -134,6 +135,7 @@ const planColors: Record<string, string> = {
 };
 
 export default function AccountPage() {
+  usePageSEO(seoConfigs.account);
   const { toast } = useToast();
 
   const [mode, setMode] = useState<Mode>("login");

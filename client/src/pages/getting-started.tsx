@@ -7,12 +7,14 @@ import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 
-type Tab = "curl" | "apt" | "npm";
+type Tab = "curl" | "apt";
 
 const INSTALL: Record<Tab, { label: string; cmd: string }> = {
-  curl: { label: "any linux",      cmd: "curl -fsSL cxlinux.com/install | sh" },
-  apt:  { label: "ubuntu/debian",  cmd: "sudo apt install cx-terminal" },
-  npm:  { label: "node.js",        cmd: "npm install -g cx-cli" },
+  curl: { label: "any linux",     cmd: "curl -fsSL https://cxlinux.com/install.sh | bash" },
+  apt:  {
+    label: "ubuntu/debian",
+    cmd: 'curl -fsSL https://repo.cxlinux.com/pub.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cxlinux-archive-keyring.gpg && echo "deb [signed-by=/usr/share/keyrings/cxlinux-archive-keyring.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list && sudo apt update && sudo apt install -y cx-terminal',
+  },
 };
 
 export default function GettingStarted() {

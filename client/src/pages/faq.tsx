@@ -149,7 +149,7 @@ export default function FAQ() {
       questions: [
         {
           q: "How do I install CX?",
-          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu 24.04\ncurl -s https://install.cxlinux.com | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: cxlinux.com/getting-started"
+          a: "Installation guide:\n\nSTEP 1: Install on Ubuntu or Debian\ncurl -fsSL https://cxlinux.com/install.sh | bash\n\nSTEP 2: Configure AI provider\ncx config set-api-key [your-claude-api-key]\n# Or use our managed cloud (free tier available)\n\nSTEP 3: Try your first command\ncx install --help\n\nFull documentation: cxlinux.com/getting-started"
         },
         {
           q: "Is it ready to use now?",

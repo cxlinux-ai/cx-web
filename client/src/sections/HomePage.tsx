@@ -245,24 +245,9 @@ export default function HomePage() {
   // SEO
   updateSEO(seoConfigs.home);
 
-  const [copiedApt, setCopiedApt] = useState(false);
-  const [copiedNpm, setCopiedNpm] = useState(false);
   const [copiedInstall, setCopiedInstall] = useState(false);
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
 
-  const copyToClipboard = (text: string, type: "apt" | "npm") => {
-    navigator.clipboard.writeText(text);
-    if (type === "apt") {
-      setCopiedApt(true);
-      setTimeout(() => setCopiedApt(false), 2000);
-    } else {
-      setCopiedNpm(true);
-      setTimeout(() => setCopiedNpm(false), 2000);
-    }
-  };
-
-  const aptCommand = 'sudo apt update && sudo apt install cx-terminal && cx "your command here"';
-  const npmCommand = "npm install -g cx-cli";
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
@@ -681,7 +666,7 @@ export default function HomePage() {
                       <div className="text-gray-600 text-[11px] mb-2"># One line. Any Linux. No dependencies.</div>
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText("curl -fsSL cxlinux.com/install | sh");
+                          navigator.clipboard.writeText("curl -fsSL https://cxlinux.com/install.sh | bash");
                           setCopiedInstall(true);
                           setTimeout(() => setCopiedInstall(false), 2000);
                         }}
@@ -689,7 +674,7 @@ export default function HomePage() {
                       >
                         <span className="text-gray-600 select-none">$</span>
                         <code className="text-[#00FF9F] flex-1 break-all text-xs sm:text-[13px]">
-                          curl -fsSL cxlinux.com/install | sh
+                          curl -fsSL https://cxlinux.com/install.sh | bash
                         </code>
                         {copiedInstall ? (
                           <Check className="w-3.5 h-3.5 text-[#00FF9F] flex-shrink-0" />
@@ -699,7 +684,7 @@ export default function HomePage() {
                       </button>
                     </div>
                     <div className="space-y-1.5 text-[11.5px]">
-                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Downloaded cx-cli (4.2 MB)</span></div>
+                      <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Downloaded cx-terminal</span></div>
                       <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Signature verified</span></div>
                       <div className="flex gap-2"><span className="text-[#00FF9F]">✓</span><span className="text-gray-400">Installed to /usr/local/bin</span></div>
                       <div className="flex gap-2 pt-1">
@@ -717,13 +702,13 @@ export default function HomePage() {
                     <details className="group pt-2 -mx-1">
                       <summary className="cursor-pointer flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-[#00FF9F] transition-colors select-none">
                         <ChevronDown className="w-3 h-3 group-open:rotate-180 transition-transform" />
-                        Why is <code className="text-gray-400">curl | sh</code> safe here?
+                        Why is <code className="text-gray-400">curl | bash</code> safe here?
                       </summary>
                       <div className="mt-2 ml-4 text-[11px] text-gray-500 leading-relaxed space-y-1.5">
                         <div>· Script is served over HTTPS from <code className="text-gray-400">cxlinux.com</code></div>
                         <div>· Binary signature is verified before install</div>
                         <div>· You can inspect the script before running it</div>
-                        <div>· Prefer not to pipe? <Link href="/getting-started"><a className="text-[#00FF9F] hover:underline">See manual install →</a></Link></div>
+                        <div>· Prefer not to pipe? <Link href="/getting-started" className="text-[#00FF9F] hover:underline">See manual install →</Link></div>
                       </div>
                     </details>
                   </div>
@@ -806,11 +791,12 @@ export default function HomePage() {
       {/* Mobile-only sticky CTA, primary action always reachable on small screens */}
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 pb-[env(safe-area-inset-bottom)] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/80 backdrop-blur-md border-t border-[#00FF9F]/20">
         <div className="px-4 py-3">
-          <Link href="/getting-started">
-            <a className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]">
-              Install in 60s, free
-              <ArrowRight className="w-4 h-4" />
-            </a>
+          <Link
+            href="/getting-started"
+            className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]"
+          >
+            Install in 60s, free
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
