@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 import { updateSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import {
+  APT_ADD_GPG_KEY_COMMAND,
+  APT_ADD_SOURCES_COMMAND,
+  APT_INSTALL_PACKAGES_COMMAND,
+  licenseActivateCommand,
+  LICENSE_ACTIVATE_PLACEHOLDER,
+} from "@/lib/installSnippets";
 
 interface SessionData {
   success: boolean;
@@ -158,11 +165,12 @@ export default function PricingSuccessPage() {
     );
   }
 
-  // APT installation commands
-  const setupRepoCommand = `curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg
-echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list`;
-  const installCommand = `sudo apt update && sudo apt install cx-terminal`;
-  const activateCommand = `cx activate ${sessionData?.licenseKey}`;
+  const setupRepoCommand = `${APT_ADD_GPG_KEY_COMMAND}
+${APT_ADD_SOURCES_COMMAND}`;
+  const installCommand = APT_INSTALL_PACKAGES_COMMAND;
+  const activateCommand = sessionData?.licenseKey
+    ? licenseActivateCommand(sessionData.licenseKey)
+    : LICENSE_ACTIVATE_PLACEHOLDER;
 
   return (
     <div className="relative min-h-screen pt-20 pb-16 bg-[#1E1E1E] overflow-hidden">
@@ -260,8 +268,8 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
               <pre className="bg-black/50 border border-white/10 rounded-lg p-4 overflow-x-auto">
                 <code className="text-sm text-gray-300">
                   <span className="text-gray-500">#</span> Add GPG key and repository{'\n'}
-                  <span className="text-gray-500">$</span> curl -fsSL https://repo.cxlinux.com/key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/cxlinux.gpg{'\n'}
-                  <span className="text-gray-500">$</span> echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list
+                  <span className="text-gray-500">$</span> {APT_ADD_GPG_KEY_COMMAND}{'\n'}
+                  <span className="text-gray-500">$</span> {APT_ADD_SOURCES_COMMAND}
                 </code>
               </pre>
             </div>
@@ -332,7 +340,7 @@ echo "deb [signed-by=/etc/apt/keyrings/cxlinux.gpg] https://repo.cxlinux.com/apt
           <ol className="space-y-3 text-gray-400">
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] flex items-center justify-center text-sm font-medium">1</span>
-              <span>Run the 3 commands above on any Ubuntu/Debian system</span>
+              <span>Run the 3 commands above on Ubuntu 24.04 LTS (verified; other distros untested)</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#00FF9F]/15 text-[#00FF9F] flex items-center justify-center text-sm font-medium">2</span>
