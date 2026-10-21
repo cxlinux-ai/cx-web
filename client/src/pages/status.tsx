@@ -44,7 +44,7 @@ const initialServices: ServiceStatus[] = [
     url: "https://repo.cxlinux.com/apt/dists/stable/Release",
     icon: Server,
     status: "checking",
-    description: "Package repository for Ubuntu/Debian",
+    description: "APT packages for Ubuntu 24.04 LTS (verified)",
   },
 ];
 
