@@ -34,7 +34,6 @@ detect_platform() {
                 . /etc/os-release
                 DISTRO="$ID"
                 DISTRO_VERSION="$VERSION_ID"
-                DISTRO_CODENAME="${VERSION_CODENAME:-}"
                 DISTRO_LIKE="${ID_LIKE:-}"
             else
                 fatal "Cannot detect Linux distribution. /etc/os-release not found."
@@ -58,9 +57,39 @@ detect_platform() {
 }
 
 # ============================================
+# Preflight: fail before changing anything
+# ============================================
+# The published cx-terminal package is built for amd64 and links against
+# glibc 2.39 (Ubuntu 24.04+). Stop early with a clear message instead of
+# adding the repository and then failing inside apt.
+MIN_GLIBC="2.39"
+
+glibc_version() {
+    getconf GNU_LIBC_VERSION 2>/dev/null | awk '{print $2}'
+}
+
+preflight_apt() {
+    if [ "$ARCH" != "amd64" ]; then
+        fatal "CX Terminal packages are published for amd64 only today (detected: $ARCH). Nothing was changed on this system. Build from source: https://github.com/cxlinux-ai/cx-core"
+    fi
+
+    local have
+    have="$(glibc_version)"
+    if [ -z "$have" ]; then
+        warn "Could not determine glibc version; continuing."
+        return
+    fi
+    if [ "$(printf '%s\n%s\n' "$MIN_GLIBC" "$have" | sort -V | head -n1)" != "$MIN_GLIBC" ]; then
+        fatal "CX Terminal requires glibc $MIN_GLIBC+ (Ubuntu 24.04 or newer). Detected glibc $have on $DISTRO $DISTRO_VERSION. Nothing was changed on this system."
+    fi
+}
+
+# ============================================
 # Debian/Ubuntu APT Install
 # ============================================
 install_apt() {
+    preflight_apt
+
     info "Installing CX Terminal via APT..."
 
     # Check for root or sudo
@@ -99,8 +128,19 @@ install_apt() {
     else
         error "apt install failed. Trying direct download..."
         install_deb_direct
+    fi
+    ensure_cx_command
+}
+
+# Packages up to 2026-02 ship only /usr/bin/cx-terminal, while every `cx ask`
+# suggestion runs `cx ...`. Register the same alternative later packages add in
+# postinst, so the two never conflict.
+ensure_cx_command() {
+    if [ -e /usr/bin/cx ] || ! [ -x /usr/bin/cx-terminal ]; then
         return
     fi
+    $SUDO update-alternatives --install /usr/bin/cx cx /usr/bin/cx-terminal 100 >/dev/null
+    ok "Registered 'cx' command"
 }
 
 # ============================================
@@ -128,49 +168,7 @@ install_deb_direct() {
 # macOS Install
 # ============================================
 install_macos() {
-    info "Installing CX Terminal on macOS..."
-
-    if ! command -v brew &>/dev/null; then
-        warn "Homebrew not found. Installing Homebrew first..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-
-    # Check if cask exists, otherwise use npm
-    if brew install --cask cx-terminal 2>/dev/null; then
-        ok "cx-terminal installed via Homebrew"
-    else
-        warn "Homebrew cask not available yet. Installing cx-cli via npm..."
-        install_npm
-    fi
-}
-
-# ============================================
-# npm Install (universal fallback)
-# ============================================
-install_npm() {
-    info "Installing cx-cli via npm..."
-
-    # Check for Node.js
-    if ! command -v node &>/dev/null; then
-        info "Node.js not found. Installing..."
-        if [ "$DISTRO" = "macos" ]; then
-            brew install node
-        elif is_debian_based; then
-            curl -fsSL https://deb.nodesource.com/setup_20.x | $SUDO bash -
-            $SUDO apt-get install -y nodejs
-        else
-            fatal "Please install Node.js 18+ first: https://nodejs.org"
-        fi
-    fi
-
-    # Check Node.js version
-    NODE_VERSION=$(node -v | sed 's/v//' | cut -d. -f1)
-    if [ "$NODE_VERSION" -lt 18 ]; then
-        fatal "Node.js 18+ required (found v${NODE_VERSION}). Please upgrade: https://nodejs.org"
-    fi
-
-    npm install -g cx-cli
-    ok "cx-cli installed via npm"
+    fatal "A macOS package is not published yet. Nothing was changed on this system. Build from source: https://github.com/cxlinux-ai/cx-core"
 }
 
 # ============================================
@@ -204,30 +202,37 @@ verify_install() {
     echo ""
     info "Verifying installation..."
 
+    local CX_CMD
     if command -v cx &>/dev/null; then
-        local VERSION
-        VERSION=$(cx --version 2>/dev/null || echo "unknown")
-        ok "CX Terminal installed: $VERSION"
+        CX_CMD="cx"
     elif command -v cx-terminal &>/dev/null; then
-        ok "cx-terminal binary found"
+        CX_CMD="cx-terminal"
     else
-        warn "cx binary not found in PATH. You may need to restart your shell."
+        warn "cx-terminal not found in PATH. You may need to restart your shell."
         return
     fi
+
+    local VERSION
+    VERSION=$("$CX_CMD" --version 2>/dev/null || echo "unknown")
+    ok "CX Terminal installed: $VERSION"
 
     echo ""
     echo -e "${GREEN}${BOLD}╔══════════════════════════════════════════╗${NC}"
     echo -e "${GREEN}${BOLD}║   CX Terminal installed successfully!    ║${NC}"
     echo -e "${GREEN}${BOLD}╚══════════════════════════════════════════╝${NC}"
     echo ""
-    echo -e "  ${BOLD}Quick start:${NC}"
-    echo -e "    cx ask \"how do I install docker\""
-    echo -e "    cx install nginx"
-    echo -e "    cx fix"
+    echo -e "  ${BOLD}Step 1 — enable AI (pick one):${NC}"
+    echo -e "    $CX_CMD ai download                 local model, ~5 GB, then works offline"
+    echo -e "    export ANTHROPIC_API_KEY=...        Claude API"
+    echo -e "    export OLLAMA_HOST=http://...       your Ollama server"
+    echo ""
+    echo -e "  ${BOLD}Step 2 — try it:${NC}"
+    echo -e "    $CX_CMD ask \"how do I install docker\""
+    echo -e "    $CX_CMD install nginx"
     echo ""
     echo -e "  ${BOLD}More info:${NC}"
-    echo -e "    Documentation: https://docs.cxlinux.com"
-    echo -e "    Discord:       https://discord.gg/q4FUyBW6z"
+    echo -e "    Getting started: https://cxlinux.com/getting-started"
+    echo -e "    Discord:         https://discord.gg/7K6TR7qtS"
     echo ""
 }
 
@@ -256,12 +261,8 @@ main() {
         *)
             if is_debian_based; then
                 install_apt
-            elif command -v npm &>/dev/null; then
-                warn "Unsupported distro '$DISTRO'. Trying npm install..."
-                SUDO="${SUDO:-}"
-                install_npm
             else
-                fatal "Unsupported distribution: $DISTRO. Install manually: https://docs.cxlinux.com/getting-started"
+                fatal "Unsupported distribution: $DISTRO. Nothing was changed on this system. See https://cxlinux.com/getting-started"
             fi
             ;;
     esac
