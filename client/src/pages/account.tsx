@@ -984,9 +984,7 @@ export default function AccountPage() {
           className="grid grid-cols-1 sm:grid-cols-3 gap-4"
         >
           <a
-            href="https://docs.cxlinux.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/getting-started"
             className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-colors group"
           >
             <BookOpen className="w-6 h-6 text-[#00FF9F] mb-3" />
