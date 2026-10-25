@@ -6,15 +6,13 @@ import { Copy, Check, ArrowRight, Lock, Eye, Undo2, Shield } from "lucide-react"
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { APT_FULL_INSTALL_COMMAND, CURL_INSTALL_COMMAND } from "@/lib/installSnippets";
 
 type Tab = "curl" | "apt";
 
 const INSTALL: Record<Tab, { label: string; cmd: string }> = {
-  curl: { label: "any linux",     cmd: "curl -fsSL https://cxlinux.com/install.sh | bash" },
-  apt:  {
-    label: "ubuntu/debian",
-    cmd: 'curl -fsSL https://repo.cxlinux.com/pub.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cxlinux-archive-keyring.gpg && echo "deb [signed-by=/usr/share/keyrings/cxlinux-archive-keyring.gpg] https://repo.cxlinux.com/apt stable main" | sudo tee /etc/apt/sources.list.d/cxlinux.list && sudo apt update && sudo apt install -y cx-terminal',
-  },
+  curl: { label: "ubuntu 24.04", cmd: CURL_INSTALL_COMMAND },
+  apt:  { label: "apt (verified)", cmd: APT_FULL_INSTALL_COMMAND },
 };
 
 export default function GettingStarted() {
@@ -72,7 +70,7 @@ export default function GettingStarted() {
             transition={{ duration: 0.55, delay: 0.15 }}
             className="text-[#9CA3AF] text-lg mb-10 leading-relaxed max-w-xl mx-auto"
           >
-            One command installs CX. Then you describe what you want done, patching, configs, deploys, log forensics, and it does it.
+            One command installs CX on Ubuntu 24.04 LTS (verified). Other distros are untested and coming soon. Then describe what you want done—patching, configs, deploys, log forensics—and CX does it.
           </motion.p>
 
           {/* Install widget */}

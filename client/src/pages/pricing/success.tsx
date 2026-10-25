@@ -224,7 +224,7 @@ export default function SuccessPage() {
                   </button>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  Use this key to activate CX Terminal: <code className="text-[#00FF9F]">cx license activate {subscription.licenseKey}</code>
+                  Use this key to activate CX Terminal: <code className="text-[#00FF9F]">cx activate {subscription.licenseKey}</code>
                 </p>
               </div>
             ) : (

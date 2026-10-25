@@ -2,8 +2,8 @@
 # CX Linux Terminal - Install Script
 # Usage: curl -fsSL https://cxlinux.com/install.sh | bash
 #
-# Supports: Ubuntu 20.04+, Debian 11+, Linux Mint, Pop!_OS
-# Also supports: macOS (via Homebrew)
+# Verified: Ubuntu 24.04 LTS (APT install tested)
+# Other platforms (Debian, Linux Mint, Pop!_OS, macOS, etc.): untested / coming soon
 
 set -euo pipefail
 
@@ -186,6 +186,17 @@ is_debian_based() {
     return 1
 }
 
+warn_platform_support() {
+    if [ "$DISTRO" = "macos" ]; then
+        warn "Only Ubuntu 24.04 LTS is verified today. macOS install is untested and may fail (coming soon)."
+        return
+    fi
+    if [ "$DISTRO" = "ubuntu" ] && [ "$DISTRO_VERSION" = "24.04" ]; then
+        return
+    fi
+    warn "Only Ubuntu 24.04 LTS is verified today. Detected: $DISTRO ${DISTRO_VERSION:-unknown}. Continuing is untested and may fail (other distros: coming soon)."
+}
+
 # ============================================
 # Verification
 # ============================================
@@ -233,6 +244,7 @@ main() {
     detect_platform
 
     info "Detected: $DISTRO $DISTRO_VERSION ($ARCH)"
+    warn_platform_support
 
     case "$DISTRO" in
         macos)

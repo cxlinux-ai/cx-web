@@ -513,7 +513,7 @@ export default function CheckoutPage() {
                     </li>
                     <li className="flex gap-3">
                       <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
-                      <span>Run: <code className="bg-black/50 px-2 py-1 rounded text-[#00FF9F]">cx license activate {licenseKey}</code></span>
+                      <span>Run: <code className="bg-black/50 px-2 py-1 rounded text-[#00FF9F]">cx activate {licenseKey}</code></span>
                     </li>
                     <li className="flex gap-3">
                       <span className="w-6 h-6 rounded-full bg-[#00FF9F]/20 text-[#00FF9F] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
