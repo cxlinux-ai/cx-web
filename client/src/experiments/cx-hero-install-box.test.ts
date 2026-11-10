@@ -124,9 +124,13 @@ describe("variant B copy", () => {
     const home = read("client/src/sections/HomePage.tsx");
     expect(home).toContain("CX will never run a command without your explicit approval.");
     expect(home).toContain("Atomic Rollbacks");
-    expect(home).toContain("Free forever for personal use. No credit card required.");
+    expect(home).toContain("Firejail Sandboxing");
+    expect(home).toContain("Full Audit Logs");
+    // B adds no microcopy: the control's distro/pricing line stays the only one, in both arms.
+    expect(Object.keys(HERO_B_COPY)).not.toContain("microcopy");
+    expect(home).toContain("Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.");
     expect(home).toContain("You can inspect the script before running it");
-    expect(read("client/public/install.sh")).toContain("Supports: Ubuntu 20.04+, Debian 11+");
+    expect(HERO_B_COPY.installGuideHref).toBe("/getting-started");
   });
 });
 

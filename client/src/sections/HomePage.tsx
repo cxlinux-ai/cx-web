@@ -316,6 +316,7 @@ export default function HomePage() {
                 conversionEvents.ctaClick("hero_primary", heroTag);
                 conversionEvents.installIntent("copy", "hero_box");
               }}
+              onInstallGuideClick={() => conversionEvents.installIntent("cta", "hero_install_guide")}
               onSecondaryClick={() => conversionEvents.ctaClick("hero_secondary", heroTag)}
             />
           ) : (

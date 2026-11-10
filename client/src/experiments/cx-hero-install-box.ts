@@ -53,22 +53,26 @@ export const HERO_B_COPY = {
   readScriptHref: "https://cxlinux.com/install.sh",
 
   /**
-   * Live claims: "CX will never run a command without your explicit approval." (HomePage.tsx, The CX
-   * Promise) and the "Atomic Rollbacks" feature card ("Made a mistake? Undo any change instantly
-   * with a single keystroke."). VoC: fear of a blind `rm -rf` / not being able to verify what an AI
-   * runs, https://news.ycombinator.com/item?id=38988164 and
-   * https://news.ycombinator.com/item?id=39012590 (sources cited by the approved plan).
+   * Docs-first path: same destination as A's primary CTA (/getting-started), counted as
+   * install_intent method "cta".
    */
-  approvalLine: "Nothing runs without your approval. Atomic rollbacks if it's wrong.",
+  installGuideLabel: "Install guide →",
+  installGuideHref: "/getting-started",
 
   /**
-   * Live claims: "Free forever for personal use. No credit card required." (HomePage.tsx hero and
-   * final CTA). Distros: install.sh header "Supports: Ubuntu 20.04+, Debian 11+, Linux Mint,
-   * Pop!_OS" and FAQ "STEP 1: Install on Ubuntu or Debian". (The hero also says "RHEL, and Arch";
-   * install.sh only falls back to npm there, so B names only the distros every source agrees on.)
+   * Live claims (HomePage.tsx): "CX will never run a command without your explicit approval." (The
+   * CX Promise) and the security feature cards "Firejail Sandboxing", "Full Audit Logs" and
+   * "Atomic Rollbacks" ("Made a mistake? Undo any change instantly with a single keystroke.").
+   * VoC: fear of a blind `rm -rf` / not being able to verify what an AI runs,
+   * https://news.ycombinator.com/item?id=38988164 and
+   * https://news.ycombinator.com/item?id=39012590 (sources cited by the approved plan).
    */
-  microcopy: "Free forever for personal use · no credit card · Ubuntu & Debian",
+  approvalLine: "Nothing runs until you approve it. Firejail sandbox, full audit log, atomic rollback if it's wrong.",
 } as const;
+
+// The hero's "Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit
+// card required." line sits above the CTA block and is identical in both arms: B adds no
+// microcopy of its own, so only the first action differs.
 
 // ─── Assignment (pure, unit-tested) ──────────────────────────────────────────
 
