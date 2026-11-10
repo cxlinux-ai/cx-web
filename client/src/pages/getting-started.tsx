@@ -6,6 +6,7 @@ import { Copy, Check, ArrowRight, Lock, Eye, Undo2, Shield } from "lucide-react"
 import Footer from "@/components/Footer";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { conversionEvents } from "@/lib/analytics";
 
 type Tab = "curl" | "apt";
 
@@ -30,6 +31,7 @@ export default function GettingStarted() {
     navigator.clipboard.writeText(INSTALL[tab].cmd);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    conversionEvents.installIntent("copy", `getting_started_${tab}`);
   };
 
   return (
@@ -102,6 +104,7 @@ export default function GettingStarted() {
             </div>
             <button
               onClick={copy}
+              onCopy={() => conversionEvents.installIntent("copy", `getting_started_${tab}`)}
               className="w-full flex items-center gap-3 px-5 py-4 text-left hover:bg-white/[0.02] transition-colors group"
             >
               <span className="text-gray-600 font-mono text-sm select-none flex-shrink-0">$</span>

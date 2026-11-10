@@ -29,6 +29,65 @@ export function trackEvent({ category, action, label, value }: TrackEventParams)
   }
 }
 
+// ─── Experiment + conversion events (AIVH experiment contract v1) ────────────
+// Exact event and param names are read by the AIVH analytics dashboard; do not rename.
+// No PII in params. All calls are no-ops when GA is not loaded (see lib/ga.ts host/bot gate).
+
+type EventParams = Record<string, string | number | undefined>;
+
+export function sendEvent(name: string, params: EventParams = {}) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  const clean: Record<string, string | number> = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined) clean[key] = value;
+  }
+  window.gtag("event", name, clean);
+}
+
+/** Runs `fn` at most once per browser session for `key`. Storage failures fall back to "run". */
+function oncePerSession(key: string, fn: () => void) {
+  try {
+    if (window.sessionStorage.getItem(key)) return;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    // Private mode / blocked storage: still record the event.
+  }
+  fn();
+}
+
+export type HeroCta = "hero_primary" | "hero_secondary";
+export type InstallIntentMethod = "copy" | "cta";
+
+export const conversionEvents = {
+  /** Once per session, when the experiment hero renders for a tagged visitor. */
+  experienceImpression(expId: string, tag: string) {
+    oncePerSession(`aivh_exp_impression_${expId}`, () =>
+      sendEvent("experience_impression", { exp_variant_string: tag }),
+    );
+  },
+
+  ctaClick(cta: HeroCta, tag: string | null) {
+    sendEvent("cta_click", { cta, exp_variant_string: tag ?? undefined });
+  },
+
+  /** First install signal of the session: a copy of the install command or a click on an install CTA. */
+  installIntent(method: InstallIntentMethod, location: string) {
+    oncePerSession("aivh_install_intent", () => sendEvent("install_intent", { method, location }));
+  },
+
+  /** Checkout page reached. */
+  beginCheckout(plan: string, billing: string) {
+    oncePerSession(`aivh_begin_checkout_${plan}_${billing}`, () =>
+      sendEvent("begin_checkout", { plan, billing }),
+    );
+  },
+
+  /** Success page with a Stripe `session_id`; deduped per session id, which is never sent to GA. */
+  checkoutCompleted(sessionId: string) {
+    oncePerSession(`aivh_checkout_completed_${sessionId}`, () => sendEvent("checkout_completed"));
+  },
+};
+
 // Pre-built event trackers
 export const analytics = {
   // CTA Clicks

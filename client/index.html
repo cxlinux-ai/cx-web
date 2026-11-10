@@ -60,17 +60,9 @@
     <!-- RSS feed -->
     <link rel="alternate" type="application/rss+xml" title="CX Linux Blog" href="https://cxlinux.com/blog/rss.xml" />
 
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-KW1EVSFJLM', {
-        anonymize_ip: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
-    </script>
+    <!-- Google Analytics (GA4, G-KW1EVSFJLM) is loaded by client/src/lib/ga.ts from main.tsx:
+         cxlinux.com only, never for automated browsers, and after A/B assignment so the first
+         page_view carries the experiment tag. -->
 
     <!-- Stripe Pricing Table -->
     <script async src="https://js.stripe.com/v3/pricing-table.js"></script>

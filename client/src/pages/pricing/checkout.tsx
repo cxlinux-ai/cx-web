@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
+import { conversionEvents } from "@/lib/analytics";
 import {
   CheckoutSessionError,
   createCheckoutSession,
@@ -141,6 +142,11 @@ export default function CheckoutPage() {
   const monthlyCostIfAnnual = plan.annualPrice / 12;
   const annualSavings = (plan.monthlyPrice * 12) - plan.annualPrice;
   const savingsPercent = Math.round((annualSavings / (plan.monthlyPrice * 12)) * 100);
+
+  // Checkout page reached (AIVH experiment contract: `begin_checkout`).
+  useEffect(() => {
+    conversionEvents.beginCheckout(plan.id, isAnnual ? "annual" : "monthly");
+  }, []);
 
   useEffect(() => {
     const urlRef = params.get("ref");

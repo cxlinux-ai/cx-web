@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { updateSEO } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { conversionEvents } from "@/lib/analytics";
 
 interface SessionData {
   success: boolean;
@@ -37,6 +38,8 @@ export default function PricingSuccessPage() {
     const sessionId = urlParams.get('session_id');
 
     if (sessionId) {
+      // Only a real Stripe redirect (with session_id) counts as a completed checkout.
+      conversionEvents.checkoutCompleted(sessionId);
       fetchWithRetry(sessionId);
     } else {
       setStatus('error');
