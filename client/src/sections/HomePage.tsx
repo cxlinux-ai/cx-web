@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { updateSEO, seoConfigs } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,9 @@ import Footer from "@/components/Footer";
 import PricingCards from "@/components/PricingCards";
 import { FleetMetricsPanel } from "@/components/HomeIllustrations";
 import { RotatingBorderCard } from "@/components/RotatingBorderCard";
+import { HeroInstallBox } from "@/components/HeroInstallBox";
+import { conversionEvents } from "@/lib/analytics";
+import { EXP_ID, INSTALL_COMMAND, experimentTag, getHeroAssignment } from "@/experiments/cx-hero-install-box";
 
 // ============================================
 // CX Linux - Admin-Focused Homepage
@@ -248,6 +251,13 @@ export default function HomePage() {
   const [copiedInstall, setCopiedInstall] = useState(false);
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
 
+  // A/B `cx-hero-install-box`: arm assigned in main.tsx before render; A is the unchanged hero.
+  const heroAssignment = getHeroAssignment();
+  const heroTag = experimentTag(heroAssignment);
+  useEffect(() => {
+    if (heroTag) conversionEvents.experienceImpression(EXP_ID, heroTag);
+  }, [heroTag]);
+
 
   return (
     <div className="min-h-screen bg-[#1E1E1E] text-white">
@@ -300,18 +310,35 @@ export default function HomePage() {
           </div>
 
           {/* CTAs */}
+          {heroAssignment.variant === "B" ? (
+            <HeroInstallBox
+              onCopy={() => {
+                conversionEvents.ctaClick("hero_primary", heroTag);
+                conversionEvents.installIntent("copy", "hero_box");
+              }}
+              onInstallGuideClick={() => conversionEvents.installIntent("cta", "hero_install_guide")}
+              onSecondaryClick={() => conversionEvents.ctaClick("hero_secondary", heroTag)}
+            />
+          ) : (
           <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link href="/getting-started">
+            <Link
+              href="/getting-started"
+              onClick={() => {
+                conversionEvents.ctaClick("hero_primary", heroTag);
+                conversionEvents.installIntent("cta", "hero");
+              }}
+            >
               <Button className="bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-semibold px-8 py-3 text-base">
                 Install in 60s, free <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
-            <Link href="/pricing">
+            <Link href="/pricing" onClick={() => conversionEvents.ctaClick("hero_secondary", heroTag)}>
               <Button variant="outline" className="border-[#00FF9F] text-[#00FF9F] hover:bg-[#00FF9F]/10 px-8 py-3 text-base">
                 See pricing
               </Button>
             </Link>
           </div>
+          )}
 
           {/* Trust strip, only verifiable facts */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-gray-500">
@@ -365,7 +392,7 @@ export default function HomePage() {
             <p className="text-[#9CA3AF] text-base mb-7 leading-relaxed max-w-sm">
               Works on Ubuntu, Debian, RHEL, Arch—any Linux distro you SSH into.
             </p>
-            <Link href="/getting-started">
+            <Link href="/getting-started" onClick={() => conversionEvents.installIntent("cta", "fleet_section")}>
               <Button
                 className="bg-[#00FF9F] text-black hover:bg-[#00E090] font-semibold rounded-[10px] px-5 py-2.5 text-sm h-auto"
               >
@@ -621,7 +648,7 @@ export default function HomePage() {
                   Stop typing the same commands at 2am. Let CX handle the toil so you can focus on the work that actually moves things forward.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                  <Link href="/getting-started">
+                  <Link href="/getting-started" onClick={() => conversionEvents.installIntent("cta", "final_cta")}>
                     <Button className="group w-full sm:w-auto bg-[#00FF9F] text-black hover:bg-[#00CC7F] font-bold px-8 py-3.5 text-base shadow-[0_4px_14px_-6px_rgba(0,255,159,0.30),inset_0_1px_0_rgba(255,255,255,0.20),inset_0_-1px_0_rgba(0,0,0,0.15)]">
                       <span className="flex items-center">
                         Install CX free
@@ -666,10 +693,12 @@ export default function HomePage() {
                       <div className="text-gray-600 text-[11px] mb-2"># One line. Any Linux. No dependencies.</div>
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText("curl -fsSL https://cxlinux.com/install.sh | bash");
+                          navigator.clipboard.writeText(INSTALL_COMMAND);
                           setCopiedInstall(true);
                           setTimeout(() => setCopiedInstall(false), 2000);
+                          conversionEvents.installIntent("copy", "final_cta_box");
                         }}
+                        onCopy={() => conversionEvents.installIntent("copy", "final_cta_box")}
                         className="flex items-center gap-2 bg-black/50 border border-white/[0.06] hover:border-[#00FF9F]/30 rounded-lg p-3 w-full text-left transition-colors group"
                       >
                         <span className="text-gray-600 select-none">$</span>
@@ -793,6 +822,7 @@ export default function HomePage() {
         <div className="px-4 py-3">
           <Link
             href="/getting-started"
+            onClick={() => conversionEvents.installIntent("cta", "mobile_sticky")}
             className="flex items-center justify-center gap-2 w-full bg-[#00FF9F] text-black font-bold py-3 rounded-xl text-sm shadow-[0_0_24px_rgba(0,255,159,0.25)]"
           >
             Install in 60s, free

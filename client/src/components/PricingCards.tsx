@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Check } from "lucide-react";
 import { tiers } from "@/data/pricingTiers";
+import { conversionEvents } from "@/lib/analytics";
 
 interface Props {
   isAnnual: boolean;
@@ -104,6 +105,9 @@ export default function PricingCards({ isAnnual, referralCode }: Props) {
             ) : (
               <Link
                 href={tierHref(tier, isAnnual, referralCode)}
+                onClick={() => {
+                  if (tier.ctaLink === "/getting-started") conversionEvents.installIntent("cta", "pricing_card");
+                }}
                 className={`block w-full text-center py-3 rounded-xl text-sm font-bold transition-all duration-200 mb-7 ${
                   isHighlighted
                     ? "bg-[#00FF9F] text-black shadow-[0_0_24px_rgba(0,255,159,0.25)] hover:bg-[#00E88F]"
