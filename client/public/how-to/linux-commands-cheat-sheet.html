@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Commands Cheat Sheet: The Commands You'll Use Daily</title>
+<meta name="description" content="A practical Linux commands cheat sheet for Ubuntu and Debian: files, search, permissions, processes, packages, disk, network and services, with examples.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-commands-cheat-sheet">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-commands-cheat-sheet">
+<meta property="og:title" content="Linux Commands Cheat Sheet: The Commands You'll Use Daily">
+<meta property="og:description" content="A practical Linux commands cheat sheet for Ubuntu and Debian: files, search, permissions, processes, packages, disk, network and services, with examples.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linux Commands Cheat Sheet","description":"A practical Linux commands cheat sheet for Ubuntu and Debian: files, search, permissions, processes, packages, disk, network and services, with examples.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-commands-cheat-sheet","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux commands"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"Linux Commands Cheat Sheet","item":"https://cxlinux.com/how-to/linux-commands-cheat-sheet"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the most important Linux commands to learn first?","acceptedAnswer":{"@type":"Answer","text":"ls, cd, pwd, cp, mv, rm, cat, less, grep, sudo, apt, systemctl and journalctl cover most daily work on a server."}},{"@type":"Question","name":"How do I find out what a command does?","acceptedAnswer":{"@type":"Answer","text":"Run man command for the manual, command --help for a summary, or tldr command (after sudo apt install tldr) for short examples."}},{"@type":"Question","name":"Are these commands the same on every Linux?","acceptedAnswer":{"@type":"Answer","text":"The core commands are. Package management differs: Ubuntu and Debian use apt, Fedora and RHEL use dnf, Arch uses pacman."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">Linux Commands Cheat Sheet</li></ol></nav>
+<article>
+<h1>Linux Commands Cheat Sheet</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>The Linux commands you'll use most, grouped by task. Every command works on Ubuntu and Debian; most work on any Linux. Add <code>--help</code> to any of them, or run <code>man command</code>, for every option.</p>
+<pre class="code" data-lang="bash"><code>ls -la
+cd /var/www
+sudo apt install htop</code></pre>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;show me common commands for managing files&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="files-and-directories">Files and directories</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>List files, including hidden</td><td><code>ls -la</code></td></tr><tr><td>Change directory</td><td><code>cd /path</code> (<code>cd ..</code> up, <code>cd ~</code> home)</td></tr><tr><td>Show current directory</td><td><code>pwd</code></td></tr><tr><td>Create a directory</td><td><code>mkdir -p a/b/c</code></td></tr><tr><td>Copy a file / a folder</td><td><code>cp file copy</code> / <code>cp -r dir dir2</code></td></tr><tr><td>Move or rename</td><td><code>mv old new</code></td></tr><tr><td>Delete a file</td><td><code>rm file</code></td></tr><tr><td>Delete a folder</td><td><code>rm -r dir</code> (no trash, no undo)</td></tr><tr><td>Delete an empty folder</td><td><code>rmdir dir</code></td></tr><tr><td>Create an empty file</td><td><code>touch file</code></td></tr><tr><td>Link</td><td><code>ln -s /target linkname</code></td></tr></tbody></table></div>
+<h2 id="read-and-search">Read and search</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Print a file</td><td><code>cat file</code></td></tr><tr><td>Page through a file</td><td><code>less file</code> (<code>/word</code> to search, <code>q</code> to quit)</td></tr><tr><td>First / last lines</td><td><code>head -20 file</code> / <code>tail -20 file</code></td></tr><tr><td>Follow a growing log</td><td><code>tail -f /var/log/syslog</code></td></tr><tr><td>Find text in files</td><td><code>grep -rn &quot;timeout&quot; /etc/nginx/</code></td></tr><tr><td>Find files by name</td><td><code>find / -name &quot;*.conf&quot; 2&gt;/dev/null</code></td></tr><tr><td>Files changed in 7 days</td><td><code>find /etc -mtime -7</code></td></tr><tr><td>Count lines</td><td><code>wc -l file</code></td></tr></tbody></table></div>
+<h2 id="permissions-and-users">Permissions and users</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Make a script executable</td><td><code>chmod +x script.sh</code></td></tr><tr><td>Owner-only read/write</td><td><code>chmod 600 file</code></td></tr><tr><td>Change owner</td><td><code>sudo chown user:group file</code></td></tr><tr><td>Run as root</td><td><code>sudo command</code></td></tr><tr><td>Who am I</td><td><code>whoami</code>, <code>id</code></td></tr><tr><td>Add a user</td><td><code>sudo adduser name</code></td></tr><tr><td>Add to a group</td><td><code>sudo usermod -aG group name</code></td></tr><tr><td>Change password</td><td><code>passwd</code></td></tr></tbody></table></div>
+<h2 id="packages-apt">Packages (APT)</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Refresh package lists</td><td><code>sudo apt update</code></td></tr><tr><td>Upgrade everything</td><td><code>sudo apt upgrade</code></td></tr><tr><td>Install</td><td><code>sudo apt install nginx</code></td></tr><tr><td>Remove</td><td><code>sudo apt remove nginx</code> (<code>purge</code> removes config too)</td></tr><tr><td>Search</td><td><code>apt search keyword</code></td></tr><tr><td>Is it installed?</td><td><code>apt list --installed | grep nginx</code></td></tr><tr><td>Preview without changing anything</td><td><code>apt-get -s install nginx</code></td></tr></tbody></table></div>
+<p>More on keeping systems patched: <a href="/how-to/linux-security-updates">Linux security updates</a>.</p>
+<h2 id="processes-and-services">Processes and services</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Top CPU users</td><td><code>ps aux --sort=-%cpu | head</code></td></tr><tr><td>Live view</td><td><code>top</code> or <code>htop</code></td></tr><tr><td>Stop a process</td><td><code>kill PID</code> (<code>kill -9 PID</code> to force)</td></tr><tr><td>Service status</td><td><code>systemctl status nginx</code></td></tr><tr><td>Restart a service</td><td><code>sudo systemctl restart nginx</code></td></tr><tr><td>Service logs</td><td><code>journalctl -u nginx -f</code></td></tr></tbody></table></div>
+<p>Guides: <a href="/how-to/linux-processes">processes</a>, <a href="/how-to/systemctl-manage-services">systemctl</a>, <a href="/how-to/linux-logs-journalctl">logs</a>.</p>
+<h2 id="disk-and-memory">Disk and memory</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Free disk space</td><td><code>df -h</code></td></tr><tr><td>Size of a folder</td><td><code>du -sh /var/log</code></td></tr><tr><td>Biggest folders</td><td><code>du -h --max-depth=1 / 2&gt;/dev/null | sort -h</code></td></tr><tr><td>Memory</td><td><code>free -h</code></td></tr><tr><td>Disks and partitions</td><td><code>lsblk</code></td></tr></tbody></table></div>
+<h2 id="network">Network</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>IP addresses</td><td><code>ip -brief address</code></td></tr><tr><td>Listening ports</td><td><code>sudo ss -tulpn</code></td></tr><tr><td>Test a connection</td><td><code>ping -c 4 example.com</code></td></tr><tr><td>Fetch a URL</td><td><code>curl -I https://example.com</code></td></tr><tr><td>Download a file</td><td><code>wget URL</code> or <code>curl -O URL</code></td></tr><tr><td>Log in to a server</td><td><code>ssh user@host</code></td></tr><tr><td>Copy to a server</td><td><code>scp file user@host:/path/</code></td></tr></tbody></table></div>
+<h2 id="archives">Archives</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>Create <code>.tar.gz</code></td><td><code>tar -czf backup.tar.gz dir/</code></td></tr><tr><td>Extract <code>.tar.gz</code></td><td><code>tar -xzf backup.tar.gz</code></td></tr><tr><td>List contents</td><td><code>tar -tzf backup.tar.gz</code></td></tr><tr><td>Unzip</td><td><code>unzip file.zip</code> (install with <code>sudo apt install unzip</code>)</td></tr></tbody></table></div>
+<h2 id="system-information">System information</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Command</th></tr></thead><tbody><tr><td>OS version</td><td><code>cat /etc/os-release</code></td></tr><tr><td>Kernel</td><td><code>uname -r</code></td></tr><tr><td>Uptime and load</td><td><code>uptime</code></td></tr><tr><td>CPU cores</td><td><code>nproc</code></td></tr><tr><td>Hostname</td><td><code>hostnamectl</code></td></tr></tbody></table></div>
+<h2 id="shell-shortcuts">Shell shortcuts</h2>
+<div class="table"><table><thead><tr><th scope="col">Keys / syntax</th><th scope="col">Does</th></tr></thead><tbody><tr><td><code>Tab</code></td><td>Complete a command or path</td></tr><tr><td><code>Ctrl+R</code></td><td>Search command history</td></tr><tr><td><code>Ctrl+C</code></td><td>Stop the running command</td></tr><tr><td><code>!!</code></td><td>Repeat the last command (<code>sudo !!</code>)</td></tr><tr><td><code>cmd &gt; file</code> / <code>cmd &gt;&gt; file</code></td><td>Write / append output to a file</td></tr><tr><td><code>cmd1 | cmd2</code></td><td>Send output of one command to another</td></tr><tr><td><code>cmd1 &amp;&amp; cmd2</code></td><td>Run the second only if the first succeeds</td></tr></tbody></table></div>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="what-are-the-most-important-linux-commands-to-learn-first">What are the most important Linux commands to learn first?</h3>
+<p><code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>, <code>cat</code>, <code>less</code>, <code>grep</code>, <code>sudo</code>, <code>apt</code>, <code>systemctl</code> and <code>journalctl</code> cover most daily work on a server.</p>
+<h3 id="how-do-i-find-out-what-a-command-does">How do I find out what a command does?</h3>
+<p>Run <code>man command</code> for the manual, <code>command --help</code> for a summary, or <code>tldr command</code> (after <code>sudo apt install tldr</code>) for short examples.</p>
+<h3 id="are-these-commands-the-same-on-every-linux">Are these commands the same on every Linux?</h3>
+<p>The core commands are. Package management differs: Ubuntu and Debian use <code>apt</code>, Fedora and RHEL use <code>dnf</code>, Arch uses <code>pacman</code>.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/linux-processes">How to List and Kill Processes in Linux</a></li><li><a href="/how-to/systemctl-manage-services">How to Manage Services on Linux with systemctl</a></li><li><a href="/how-to/transfer-files-scp-rsync">How to Transfer Files Between Linux Servers (scp and rsync)</a></li><li><a href="/how-to/linux-system-administration">Linux System Administration: The Checklist</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

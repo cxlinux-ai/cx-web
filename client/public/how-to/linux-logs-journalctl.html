@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Logs: How to Read journalctl, syslog and dmesg</title>
+<meta name="description" content="Find out why a Linux service failed: read logs with journalctl, filter by service, time and priority, follow live, check dmesg and manage log disk use.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-logs-journalctl">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-logs-journalctl">
+<meta property="og:title" content="Linux Logs: How to Read journalctl, syslog and dmesg">
+<meta property="og:description" content="Find out why a Linux service failed: read logs with journalctl, filter by service, time and priority, follow live, check dmesg and manage log disk use.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Read Logs on Linux (journalctl, syslog, dmesg)","description":"Find out why a Linux service failed: read logs with journalctl, filter by service, time and priority, follow live, check dmesg and manage log disk use.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-logs-journalctl","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux logs"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Read Logs on Linux (journalctl, syslog, dmesg)","item":"https://cxlinux.com/how-to/linux-logs-journalctl"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Where are Linux logs stored?","acceptedAnswer":{"@type":"Answer","text":"The systemd journal is in /var/log/journal/ (binary; read it with journalctl). Text logs from rsyslog and applications are in /var/log/."}},{"@type":"Question","name":"How do I search logs for a word?","acceptedAnswer":{"@type":"Answer","text":"Pipe the journal through grep, or use journalctl -g: sudo journalctl -u nginx -g \"upstream timed out\"."}},{"@type":"Question","name":"How long are logs kept?","acceptedAnswer":{"@type":"Answer","text":"Until the journal hits its size limit (by default up to 10% of the filesystem, capped at 4 GB) or a vacuum removes them. Text logs follow their logrotate rules, often four weekly files."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Read Logs on Linux (journalctl, syslog, dmesg)</li></ol></nav>
+<article>
+<h1>How to Read Logs on Linux (journalctl, syslog, dmesg)</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>On Ubuntu and Debian, systemd's journal holds the logs of every service. To see why one failed, read its recent entries:</p>
+<pre class="code" data-lang="bash"><code>sudo journalctl -u nginx --since &quot;1 hour ago&quot; --no-pager
+systemctl status nginx --no-pager</code></pre>
+<p><code>systemctl status</code> shows the last few lines and the exit code; <code>journalctl -u</code> shows everything for that unit.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;why did nginx fail last night&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="filter-the-journal">Filter the journal</h2>
+<div class="table"><table><thead><tr><th scope="col">You want</th><th scope="col">Command</th></tr></thead><tbody><tr><td>One service</td><td><code>journalctl -u nginx</code></td></tr><tr><td>Follow live (like <code>tail -f</code>)</td><td><code>journalctl -u nginx -f</code></td></tr><tr><td>Since a time</td><td><code>journalctl --since &quot;2026-11-18 02:00&quot; --until &quot;03:00&quot;</code></td></tr><tr><td>Since yesterday</td><td><code>journalctl --since yesterday</code></td></tr><tr><td>Errors and worse</td><td><code>journalctl -p err</code></td></tr><tr><td>This boot only</td><td><code>journalctl -b</code></td></tr><tr><td>The previous boot</td><td><code>journalctl -b -1</code></td></tr><tr><td>Kernel messages</td><td><code>journalctl -k</code></td></tr><tr><td>Newest first, last 50</td><td><code>journalctl -r -n 50</code></td></tr></tbody></table></div>
+<p>Combine them: <code>sudo journalctl -u ssh -p warning --since today</code>.</p>
+<h2 id="why-did-the-server-reboot-or-crash">Why did the server reboot or crash?</h2>
+<pre class="code" data-lang="bash"><code>journalctl --list-boots
+sudo journalctl -b -1 -p err --no-pager
+sudo journalctl -b -1 -n 100 --no-pager</code></pre>
+<p>The last lines of the previous boot show what happened just before it went down. A clean shutdown ends with systemd stopping services; a crash or power loss just stops.</p>
+<h2 id="kernel-messages-dmesg">Kernel messages: dmesg</h2>
+<p><code>dmesg</code> shows the kernel ring buffer: hardware errors, disk problems, the out-of-memory killer. Ubuntu restricts it to root.</p>
+<pre class="code" data-lang="bash"><code>sudo dmesg -T | tail -50
+sudo dmesg -T | grep -iE 'error|fail|oom'</code></pre>
+<p><code>-T</code> prints readable timestamps. &quot;Out of memory: Killed process&quot; lines explain processes that vanished.</p>
+<h2 id="syslog-and-auth-log">syslog and auth.log</h2>
+<p>Ubuntu also writes classic text logs through rsyslog. Debian 12 and newer don't install rsyslog, so use <code>journalctl</code> there.</p>
+<div class="table"><table><thead><tr><th scope="col">File (Ubuntu)</th><th scope="col">Contains</th></tr></thead><tbody><tr><td><code>/var/log/syslog</code></td><td>Most system messages</td></tr><tr><td><code>/var/log/auth.log</code></td><td>Logins, <code>sudo</code>, SSH</td></tr><tr><td><code>/var/log/kern.log</code></td><td>Kernel messages</td></tr><tr><td><code>/var/log/nginx/error.log</code></td><td>Nginx errors (most apps keep their own logs)</td></tr></tbody></table></div>
+<pre class="code" data-lang="bash"><code>sudo tail -f /var/log/syslog
+sudo grep &quot;Failed password&quot; /var/log/auth.log | tail</code></pre>
+<h2 id="control-how-much-disk-logs-use">Control how much disk logs use</h2>
+<pre class="code" data-lang="bash"><code>journalctl --disk-usage
+sudo journalctl --vacuum-time=2weeks
+sudo journalctl --vacuum-size=500M</code></pre>
+<p>To set a permanent limit, set <code>SystemMaxUse=500M</code> in <code>/etc/systemd/journald.conf</code> and run <code>sudo systemctl restart systemd-journald</code>. Text logs in <code>/var/log</code> are rotated by <code>logrotate</code>, configured in <code>/etc/logrotate.d/</code>.</p>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>&quot;No journal files were found&quot; or <code>-b -1</code> shows nothing.</strong> The journal is stored only in memory, so it's lost at reboot. Make it persistent: <code>sudo mkdir -p /var/log/journal &amp;&amp; sudo systemctl restart systemd-journald</code>.</p>
+<p><strong>&quot;Hint: You are currently not seeing messages from other users and the system.&quot;</strong> Run <code>journalctl</code> with <code>sudo</code>, or add your user to the <code>adm</code> or <code>systemd-journal</code> group.</p>
+<p><strong><code>dmesg: read kernel buffer failed: Operation not permitted</code>.</strong> Use <code>sudo dmesg</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="where-are-linux-logs-stored">Where are Linux logs stored?</h3>
+<p>The systemd journal is in <code>/var/log/journal/</code> (binary; read it with <code>journalctl</code>). Text logs from rsyslog and applications are in <code>/var/log/</code>.</p>
+<h3 id="how-do-i-search-logs-for-a-word">How do I search logs for a word?</h3>
+<p>Pipe the journal through grep, or use <code>journalctl -g</code>: <code>sudo journalctl -u nginx -g &quot;upstream timed out&quot;</code>.</p>
+<h3 id="how-long-are-logs-kept">How long are logs kept?</h3>
+<p>Until the journal hits its size limit (by default up to 10% of the filesystem, capped at 4 GB) or a vacuum removes them. Text logs follow their logrotate rules, often four weekly files.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/systemctl-manage-services">How to Manage Services on Linux with systemctl</a></li><li><a href="/how-to/linux-system-administration">Linux System Administration: The Checklist</a></li><li><a href="/how-to/linux-processes">How to List and Kill Processes in Linux</a></li><li><a href="/how-to/linux-server-security-hardening">Linux Server Security Hardening (Ubuntu &amp; Debian)</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

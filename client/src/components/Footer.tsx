@@ -12,6 +12,8 @@ const columns = [
     heading: "Resources",
     links: [
       { label: "Blog", href: "/blog", internal: true },
+      // Static pre-rendered pages, not an SPA route: full page load, so internal: false.
+      { label: "Linux How-To", href: "/how-to", internal: false },
       { label: "FAQ", href: "/faq", internal: true },
     ],
   },
@@ -80,8 +82,8 @@ function FooterLink({ link }: { link: FooterLink }) {
   return (
     <a
       href={link.href}
-      target={link.href.startsWith("mailto") ? undefined : "_blank"}
-      rel="noopener noreferrer"
+      target={link.href.startsWith("http") ? "_blank" : undefined}
+      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="text-sm text-gray-400 hover:text-[#00FF9F] transition-colors"
     >
       {link.label}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Add an APT Repository on Ubuntu and Debian | CX Linux</title>
+<meta name="description" content="Add, list and remove APT repositories and PPAs on Ubuntu and Debian the current, secure way, with signed-by keys instead of the deprecated apt-key.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/add-apt-repository">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/add-apt-repository">
+<meta property="og:title" content="How to Add an APT Repository on Ubuntu and Debian | CX Linux">
+<meta property="og:description" content="Add, list and remove APT repositories and PPAs on Ubuntu and Debian the current, secure way, with signed-by keys instead of the deprecated apt-key.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Add (and Remove) an APT Repository","description":"Add, list and remove APT repositories and PPAs on Ubuntu and Debian the current, secure way, with signed-by keys instead of the deprecated apt-key.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/add-apt-repository","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux ubuntu repository"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Add (and Remove) an APT Repository","item":"https://cxlinux.com/how-to/add-apt-repository"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to add third-party repositories?","acceptedAnswer":{"@type":"Answer","text":"Only from vendors you trust. Packages run their install scripts as root, so a repository has the same access to your server as you do. Prefer official vendor repositories and pin versions on production servers."}},{"@type":"Question","name":"What is the difference between .list and .sources files?","acceptedAnswer":{"@type":"Answer","text":".list files hold one-line deb … entries. .sources files use the newer multi-line deb822 format. APT reads both from /etc/apt/sources.list.d/."}},{"@type":"Question","name":"How do I add a repository on Debian?","acceptedAnswer":{"@type":"Answer","text":"Use the signed-by method at the top of this page. add-apt-repository and PPAs are designed for Ubuntu."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Add (and Remove) an APT Repository</li></ol></nav>
+<article>
+<h1>How to Add (and Remove) an APT Repository</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>To add a third-party APT repository safely, save the vendor's signing key in <code>/etc/apt/keyrings/</code>, add a source line that names that key with <code>signed-by</code>, then run <code>apt update</code>:</p>
+<pre class="code" data-lang="bash"><code>sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://example.com/apt/key.asc | sudo tee /etc/apt/keyrings/example.asc &gt; /dev/null
+echo &quot;deb [signed-by=/etc/apt/keyrings/example.asc] https://example.com/apt stable main&quot; | sudo tee /etc/apt/sources.list.d/example.list
+sudo apt update</code></pre>
+<p>Replace the URLs, suite (<code>stable</code>) and component (<code>main</code>) with the values from the vendor's install instructions.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;add the official Docker repository&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="why-signed-by-and-not-apt-key">Why <code>signed-by</code> and not <code>apt-key</code></h2>
+<p><code>apt-key add</code> put a vendor's key in a keyring trusted for <strong>every</strong> repository on the system, so one compromised key could sign packages that look like they come from Ubuntu. <code>apt-key</code> is deprecated and removed in current releases. With <code>signed-by</code>, each key is trusted only for the repository that names it.</p>
+<h2 id="a-real-example-docker-s-repository">A real example: Docker's repository</h2>
+<pre class="code" data-lang="bash"><code>sudo apt update
+sudo apt install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release &amp;&amp; echo &quot;${UBUNTU_CODENAME:-$VERSION_CODENAME}&quot;) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt update</code></pre>
+<p>On Debian, replace both <code>linux/ubuntu</code> paths with <code>linux/debian</code>. The <code>$(. /etc/os-release …)</code> part fills in your release codename (for example <code>noble</code>) so the line matches your system.</p>
+<h2 id="add-a-ppa-ubuntu-only">Add a PPA (Ubuntu only)</h2>
+<p>Personal Package Archives are Launchpad repositories for Ubuntu. <code>add-apt-repository</code> fetches the key and writes the source file for you:</p>
+<pre class="code" data-lang="bash"><code>sudo apt install -y software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update</code></pre>
+<p>PPAs are maintained by individuals and teams, not by Ubuntu. Add only ones you trust, because their packages install as root. PPAs are built for Ubuntu and are not meant for Debian.</p>
+<h2 id="list-the-repositories-you-have">List the repositories you have</h2>
+<pre class="code" data-lang="bash"><code>ls /etc/apt/sources.list.d/
+apt-cache policy</code></pre>
+<p>Ubuntu 24.04 and newer store the main Ubuntu sources in <code>/etc/apt/sources.list.d/ubuntu.sources</code> (the multi-line deb822 format) instead of <code>/etc/apt/sources.list</code>. <code>apt-cache policy</code> shows every repository APT is using, whatever the file format.</p>
+<p>To see which repository a package will come from:</p>
+<pre class="code" data-lang="bash"><code>apt-cache policy docker-ce</code></pre>
+<h2 id="remove-a-repository">Remove a repository</h2>
+<pre class="code" data-lang="bash"><code>sudo rm /etc/apt/sources.list.d/example.list /etc/apt/keyrings/example.asc
+sudo add-apt-repository --remove ppa:deadsnakes/ppa
+sudo apt update</code></pre>
+<p>Removing a repository doesn't uninstall packages you installed from it. They stay at their current version until you remove or replace them.</p>
+<h2 id="preview-before-installing-from-a-new-repository">Preview before installing from a new repository</h2>
+<p>A new repository can offer newer versions of packages you already have. Simulate first; nothing changes on disk:</p>
+<pre class="code" data-lang="bash"><code>apt-get -s upgrade
+apt-get -s install docker-ce</code></pre>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>&quot;NO_PUBKEY&quot; or &quot;The following signatures couldn't be verified&quot;.</strong> The key file is missing, unreadable or named differently from the <code>signed-by</code> path. Check both paths match and run <code>sudo chmod a+r</code> on the key.</p>
+<p><strong>&quot;Conflicting values set for option Signed-By&quot;.</strong> The same repository is listed twice with different keys, often once in an old <code>.list</code> file and once in a <code>.sources</code> file. Remove the duplicate.</p>
+<p><strong>&quot;does not have a Release file&quot;.</strong> The suite or codename is wrong for your release, or the vendor doesn't publish for it yet. Check <code>cat /etc/os-release</code> against the vendor's supported list.</p>
+<p><strong>&quot;add-apt-repository: command not found&quot;.</strong> Install <code>software-properties-common</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="is-it-safe-to-add-third-party-repositories">Is it safe to add third-party repositories?</h3>
+<p>Only from vendors you trust. Packages run their install scripts as root, so a repository has the same access to your server as you do. Prefer official vendor repositories and pin versions on production servers.</p>
+<h3 id="what-is-the-difference-between-list-and-sources-files">What is the difference between <code>.list</code> and <code>.sources</code> files?</h3>
+<p><code>.list</code> files hold one-line <code>deb …</code> entries. <code>.sources</code> files use the newer multi-line deb822 format. APT reads both from <code>/etc/apt/sources.list.d/</code>.</p>
+<h3 id="how-do-i-add-a-repository-on-debian">How do I add a repository on Debian?</h3>
+<p>Use the <code>signed-by</code> method at the top of this page. <code>add-apt-repository</code> and PPAs are designed for Ubuntu.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/install-docker-linux">How to Install Docker on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-security-updates">How to Install Security Updates on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-commands-cheat-sheet">Linux Commands Cheat Sheet</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>
