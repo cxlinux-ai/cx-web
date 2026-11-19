@@ -56,6 +56,8 @@ sudo ss -tulpn
 
 Review pending updates (see [security updates](/how-to/linux-security-updates)), who logged in, failed login attempts and what's listening on the network.
 
+Debian 13 no longer ships `last` and `lastb`. Install `wtmpdb` and `libpam-wtmpdb` and use `wtmpdb last` for login history, and `sudo lslogins --failed` for failed logins.
+
 ## Monthly
 
 - Restore one file from backup and check it (see [Linux backups](/how-to/linux-backups)).

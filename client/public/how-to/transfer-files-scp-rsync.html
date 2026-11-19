@@ -82,10 +82,10 @@ rsync -avz -e &quot;ssh -p 2222&quot; ./site/ user@host:/var/www/site/</code></p
 <h2 id="the-trailing-slash-matters">The trailing slash matters</h2>
 <div class="table"><table><thead><tr><th scope="col">Command</th><th scope="col">Result</th></tr></thead><tbody><tr><td><code>rsync -a site/ host:/var/www/site/</code></td><td>Copies the <strong>contents</strong> of <code>site</code> into <code>/var/www/site/</code></td></tr><tr><td><code>rsync -a site host:/var/www/site/</code></td><td>Creates <code>/var/www/site/site/</code></td></tr></tbody></table></div>
 <h2 id="sync-safely-with-delete">Sync safely with --delete</h2>
-<p><code>--delete</code> makes the destination an exact copy, which includes deleting files there. Always look first:</p>
-<pre class="code" data-lang="bash"><code>rsync -avn --delete ./site/ user@host:/var/www/site/
-rsync -av --delete ./site/ user@host:/var/www/site/</code></pre>
-<p>The first command is a dry run (<code>-n</code>). Lines starting with <code>deleting</code> show what would go.</p>
+<p><code>--delete</code> makes the destination an exact copy, which includes deleting files there. Always run a dry run (<code>-n</code>) first:</p>
+<pre class="code" data-lang="bash"><code>rsync -avn --delete ./site/ user@host:/var/www/site/</code></pre>
+<p>Check both paths and every line that starts with <code>deleting</code>. Only when that list is right, run the real sync:</p>
+<pre class="code" data-lang="bash"><code>rsync -av --delete ./site/ user@host:/var/www/site/</code></pre>
 <h2 id="large-or-unreliable-transfers">Large or unreliable transfers</h2>
 <pre class="code" data-lang="bash"><code>rsync -avP bigfile.iso user@host:/data/</code></pre>
 <p>If the connection drops, run the same command again and rsync continues where it stopped. For very long transfers, run it inside <code>tmux</code> or <code>screen</code> so closing your terminal doesn't stop it.</p>

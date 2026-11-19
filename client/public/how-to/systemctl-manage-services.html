@@ -87,8 +87,9 @@ sudo journalctl -u myapp -n 50 --no-pager</code></pre>
 <pre class="code" data-lang="bash"><code>sudo systemctl reset-failed myapp</code></pre>
 <h2 id="stop-a-service-from-ever-starting">Stop a service from ever starting</h2>
 <p><code>disable</code> only removes it from boot; another service can still start it. <code>mask</code> blocks it completely:</p>
-<pre class="code" data-lang="bash"><code>sudo systemctl mask cups
-sudo systemctl unmask cups</code></pre>
+<pre class="code" data-lang="bash"><code>sudo systemctl mask cups</code></pre>
+<p>To undo it later:</p>
+<pre class="code" data-lang="bash"><code>sudo systemctl unmask cups</code></pre>
 <h2 id="create-a-service-for-your-own-app">Create a service for your own app</h2>
 <p>Save this as <code>/etc/systemd/system/myapp.service</code>:</p>
 <pre class="code" data-lang="ini"><code>[Unit]

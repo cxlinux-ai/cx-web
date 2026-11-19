@@ -7,6 +7,11 @@ import { HOWTO_PATHS } from "./howto/manifest";
  * HTTP 200 for unknown paths, so a prefix rule would turn every mistyped guide URL into a soft 404.
  */
 export function shouldServeAsStaticAsset(pathname: string): boolean {
+  // Guides are decided by the manifest alone, including `.html` spellings (which the asset
+  // server 308-redirects to the clean URL); the extension rule below must not catch them.
+  if (pathname.startsWith("/how-to/")) {
+    return HOWTO_PATHS.has(pathname.replace(/\.html$/, ""));
+  }
   if (
     pathname.startsWith("/assets/") ||
     pathname.startsWith("/images/") ||

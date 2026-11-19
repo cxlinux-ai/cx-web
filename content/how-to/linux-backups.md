@@ -37,20 +37,27 @@ You don't need `/proc`, `/sys`, `/dev`, `/run`, `/tmp` or `/var/cache`.
 
 ## Dump databases first
 
+Write each dump to a temporary file and rename it only when the whole pipeline succeeded, so a failed dump never replaces a good one. The commands run in a root shell because `/var/backups` is writable only by root:
+
 ```bash
-sudo -u postgres pg_dumpall | gzip > /var/backups/postgres-$(date +%F).sql.gz
-sudo mysqldump --all-databases --single-transaction | gzip > /var/backups/mysql-$(date +%F).sql.gz
+sudo bash -c 'set -o pipefail; f=/var/backups/postgres-$(date +%F).sql.gz; sudo -u postgres pg_dumpall | gzip > "$f.tmp" && mv "$f.tmp" "$f"'
+sudo bash -c 'set -o pipefail; f=/var/backups/mysql-$(date +%F).sql.gz; mysqldump --all-databases --single-transaction | gzip > "$f.tmp" && mv "$f.tmp" "$f"'
 ```
 
-Then include `/var/backups` in the file backup.
+If either command exits with an error, the previous dump is untouched; read the error before the next run. Then include `/var/backups` in the file backup.
 
 ## Copy offsite with rsync
 
-`rsync` sends only what changed. Run it against a dry run (`-n`) first so you can see what `--delete` would remove:
+`rsync` sends only what changed. Run a dry run (`-n`) first and read the lines that start with `deleting`:
 
 ```bash
-rsync -aHAXn --delete /etc /home /var/www backup@backup.example.com:/backups/web-01/
-rsync -aHAX --delete /etc /home /var/www backup@backup.example.com:/backups/web-01/
+sudo rsync -aHAXn --delete /etc /home /var/www /var/backups backup@backup.example.com:/backups/web-01/
+```
+
+When the list is what you expect, run the same command without `-n`:
+
+```bash
+sudo rsync -aHAX --delete /etc /home /var/www /var/backups backup@backup.example.com:/backups/web-01/
 ```
 
 This keeps one up-to-date copy, not history. If a file is deleted or encrypted by ransomware, the next run copies that too. For history, use restic.
@@ -58,6 +65,15 @@ This keeps one up-to-date copy, not history. If a file is deleted or encrypted b
 ## Versioned, encrypted backups with restic
 
 restic encrypts, deduplicates and keeps snapshots you can restore from any point.
+
+Create the repository password first. restic reads it from the file but never creates the file:
+
+```bash
+sudo sh -c 'umask 077; openssl rand -base64 32 > /root/.restic-password'
+sudo cat /root/.restic-password
+```
+
+Copy the password into your password manager now. Without it, the backup can't be decrypted by anyone, including you.
 
 ```bash
 sudo apt install -y restic
@@ -68,7 +84,7 @@ sudo -E restic backup /etc /home /var/www /var/backups
 sudo -E restic snapshots
 ```
 
-Store the password somewhere other than the server. Without it, the backup can't be decrypted by anyone, including you. restic also writes to S3-compatible storage and Backblaze B2.
+restic also writes to S3-compatible storage and Backblaze B2.
 
 Keep a sensible history and delete the rest:
 

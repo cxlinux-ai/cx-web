@@ -9,15 +9,18 @@ related: "secure-linux-vps, linux-server-security-hardening, install-docker-linu
 updated: 2026-11-18
 ---
 
-UFW (Uncomplicated Firewall) is the simplest way to manage the Linux firewall on Ubuntu and Debian. Allow SSH before you enable it, or you will lock yourself out:
+UFW (Uncomplicated Firewall) is the simplest way to manage the Linux firewall on Ubuntu and Debian. Allow SSH before you enable it, or you will lock yourself out. The `OpenSSH` rule opens port 22; check which port your SSH server actually uses first:
 
 ```bash
+sudo ss -tlnp | grep sshd
 sudo apt install -y ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow OpenSSH
 sudo ufw enable
 ```
+
+If `ss` shows SSH on another port, such as 2222, replace `sudo ufw allow OpenSSH` with `sudo ufw allow 2222/tcp` before you run `ufw enable`.
 
 <!-- cx -->
 
@@ -35,8 +38,20 @@ Allow a port only from one address or network:
 
 ```bash
 sudo ufw allow from 203.0.113.5 to any port 5432 proto tcp
+```
+
+To restrict SSH to one network, add the narrow rule, confirm a **new** SSH session from inside that network works, and only then remove the broad rule. UFW uses the first rule that matches, so while `allow OpenSSH` exists, every address can still connect:
+
+```bash
 sudo ufw allow from 10.0.0.0/24 to any port 22 proto tcp
 ```
+
+```bash
+sudo ufw delete allow OpenSSH
+sudo ufw status numbered
+```
+
+Don't combine this with `ufw limit OpenSSH` below: `limit` also allows connections from anywhere.
 
 ## Rate-limit SSH
 

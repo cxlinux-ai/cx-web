@@ -49,6 +49,15 @@ ssh-keygen -t ed25519 -C "you@example.com"
 ssh-copy-id deploy@203.0.113.10
 ```
 
+`ssh-copy-id` needs to log in once with a password. If your provider set the server up for keys only, copy the key you already use for root or the image's admin user to the new account instead, from your current session on the server:
+
+```bash
+sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+```
+
+If you are logged in as root, use `/root/.ssh/authorized_keys` as the source.
+
 Open a **second** terminal and confirm `ssh deploy@203.0.113.10` works without a password before you continue. Keep your first session open until the end, so a mistake can't lock you out.
 
 ## 4. Turn off root login and passwords
@@ -66,7 +75,17 @@ sudo sshd -t && sudo systemctl restart ssh
 sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'
 ```
 
-`sshd -t` checks the configuration before the restart; the last line shows the values sshd is actually using. Both should read `no`.
+`sshd -t` checks the configuration before the restart; the last line shows the global values sshd is using. Both should read `no`.
+
+A `Match` block elsewhere in the configuration can switch these back on for particular users or addresses. Check the effective values for the connections that matter:
+
+```bash
+sudo sshd -T -C user=root,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo sshd -T -C user=deploy,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo grep -rn '^Match' /etc/ssh/sshd_config /etc/ssh/sshd_config.d/
+```
+
+If a `Match` block sets either option to `yes`, change or remove it, then run `sudo sshd -t && sudo systemctl restart ssh` again.
 
 ## 5. Turn on the firewall
 
@@ -93,7 +112,7 @@ sudo systemctl enable --now fail2ban
 sudo fail2ban-client status sshd
 ```
 
-Debian 12 and newer don't install rsyslog, so there is no `/var/log/auth.log`. If the status command shows no log file being watched, tell the jail to read the systemd journal:
+Debian 12 and newer don't install rsyslog, so there is no `/var/log/auth.log`. If fail2ban fails to start, the status command reports a socket or server error, or the jail watches no log file, tell the jail to read the systemd journal:
 
 ```bash
 sudo tee /etc/fail2ban/jail.local > /dev/null <<'EOF'
@@ -101,6 +120,7 @@ sudo tee /etc/fail2ban/jail.local > /dev/null <<'EOF'
 backend = systemd
 EOF
 sudo systemctl restart fail2ban
+sudo fail2ban-client status sshd
 ```
 
 ## 7. Install security updates automatically
@@ -116,7 +136,7 @@ Choose **Yes**. By default only security updates install automatically. See [Lin
 
 | Check | Command | What you want |
 |---|---|---|
-| Root login and passwords off | `sudo sshd -T \| grep -Ei 'permitrootlogin\|passwordauthentication'` | both `no` |
+| Root login and passwords off | `sudo sshd -T -C user=root,host=x,addr=198.51.100.7 \| grep -Ei 'permitroot\|passwordauth'` | both `no` |
 | Firewall on | `sudo ufw status` | `Status: active`, only your ports |
 | fail2ban running | `sudo fail2ban-client status sshd` | a jail with a log source |
 | Open ports | `sudo ss -tulpn` | only services you expect |

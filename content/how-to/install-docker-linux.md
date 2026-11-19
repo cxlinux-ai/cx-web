@@ -76,14 +76,14 @@ More in [Linux firewall with UFW](/how-to/linux-firewall-ufw).
 
 ## Docker Compose
 
-Compose is installed as a plugin and runs as `docker compose` (with a space). A minimal `compose.yaml`:
+Compose is installed as a plugin and runs as `docker compose` (with a space). A minimal `compose.yaml` (it uses host port 8081 so it doesn't clash with the `web` container above):
 
 ```yaml
 services:
   web:
     image: nginx
     ports:
-      - "127.0.0.1:8080:80"
+      - "127.0.0.1:8081:80"
     restart: unless-stopped
 ```
 

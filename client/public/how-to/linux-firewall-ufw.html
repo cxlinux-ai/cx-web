@@ -61,12 +61,14 @@ footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}f
 <article>
 <h1>How to Set Up a Firewall on Linux with UFW</h1>
 <p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
-<p>UFW (Uncomplicated Firewall) is the simplest way to manage the Linux firewall on Ubuntu and Debian. Allow SSH before you enable it, or you will lock yourself out:</p>
-<pre class="code" data-lang="bash"><code>sudo apt install -y ufw
+<p>UFW (Uncomplicated Firewall) is the simplest way to manage the Linux firewall on Ubuntu and Debian. Allow SSH before you enable it, or you will lock yourself out. The <code>OpenSSH</code> rule opens port 22; check which port your SSH server actually uses first:</p>
+<pre class="code" data-lang="bash"><code>sudo ss -tlnp | grep sshd
+sudo apt install -y ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow OpenSSH
 sudo ufw enable</code></pre>
+<p>If <code>ss</code> shows SSH on another port, such as 2222, replace <code>sudo ufw allow OpenSSH</code> with <code>sudo ufw allow 2222/tcp</code> before you run <code>ufw enable</code>.</p>
 <aside class="cx" aria-label="CX Terminal">
 <p class="cx-kicker">Prefer plain English?</p>
 <p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;only allow ssh and https&rdquo; start from a sentence instead of a man page.</p>
@@ -78,8 +80,12 @@ sudo ufw allow 443/tcp
 sudo ufw allow 'Nginx Full'</code></pre>
 <p><code>'Nginx Full'</code> is an application profile that opens 80 and 443 together. <code>sudo ufw app list</code> shows the profiles your installed packages provide.</p>
 <p>Allow a port only from one address or network:</p>
-<pre class="code" data-lang="bash"><code>sudo ufw allow from 203.0.113.5 to any port 5432 proto tcp
-sudo ufw allow from 10.0.0.0/24 to any port 22 proto tcp</code></pre>
+<pre class="code" data-lang="bash"><code>sudo ufw allow from 203.0.113.5 to any port 5432 proto tcp</code></pre>
+<p>To restrict SSH to one network, add the narrow rule, confirm a <strong>new</strong> SSH session from inside that network works, and only then remove the broad rule. UFW uses the first rule that matches, so while <code>allow OpenSSH</code> exists, every address can still connect:</p>
+<pre class="code" data-lang="bash"><code>sudo ufw allow from 10.0.0.0/24 to any port 22 proto tcp</code></pre>
+<pre class="code" data-lang="bash"><code>sudo ufw delete allow OpenSSH
+sudo ufw status numbered</code></pre>
+<p>Don't combine this with <code>ufw limit OpenSSH</code> below: <code>limit</code> also allows connections from anywhere.</p>
 <h2 id="rate-limit-ssh">Rate-limit SSH</h2>
 <p><code>limit</code> denies an address that opens six or more connections in 30 seconds, which slows password-guessing bots:</p>
 <pre class="code" data-lang="bash"><code>sudo ufw limit OpenSSH</code></pre>

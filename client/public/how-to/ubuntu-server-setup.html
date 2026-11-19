@@ -91,7 +91,10 @@ timedatectl</code></pre>
 <h2 id="4-create-your-admin-user-and-add-ssh-keys">4. Create your admin user and add SSH keys</h2>
 <pre class="code" data-lang="bash"><code>sudo adduser deploy
 sudo usermod -aG sudo deploy</code></pre>
-<p>From your own computer, copy your key with <code>ssh-copy-id deploy@your-server</code>, confirm you can log in with it, then turn off password and root logins. The exact, safe sequence is in <a href="/how-to/secure-linux-vps">How to secure a Linux VPS</a>.</p>
+<p>From your own computer, copy your key with <code>ssh-copy-id deploy@your-server</code>. That needs one password login; on a server that accepts keys only, copy your existing key from the admin account instead:</p>
+<pre class="code" data-lang="bash"><code>sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys</code></pre>
+<p>Confirm you can log in as <code>deploy</code> with the key, then turn off password and root logins. The exact, safe sequence is in <a href="/how-to/secure-linux-vps">How to secure a Linux VPS</a>.</p>
 <h2 id="5-add-swap">5. Add swap</h2>
 <p>Small servers without swap get processes killed when memory runs out. Check first, then add a 2 GB swap file if there is none:</p>
 <pre class="code" data-lang="bash"><code>swapon --show

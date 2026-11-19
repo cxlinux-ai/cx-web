@@ -88,8 +88,10 @@ sudo apt autoremove --purge</code></pre>
 <p>Linux malware exists, but on a server the usual reason to scan is <strong>files other people upload</strong> (mail attachments, shared folders, user uploads) that Windows or macOS users will open later. ClamAV is the standard open-source scanner:</p>
 <pre class="code" data-lang="bash"><code>sudo apt install -y clamav clamav-daemon
 sudo systemctl status clamav-freshclam --no-pager
-sudo clamscan -r -i /srv/uploads</code></pre>
-<p><code>clamav-freshclam</code> updates signatures automatically. <code>-i</code> prints only infected files. Schedule the scan with cron (see <a href="/how-to/cron-jobs-linux">Cron jobs</a>).</p>
+ls /var/lib/clamav/</code></pre>
+<p>Right after installation, <code>clamav-freshclam</code> downloads the signature databases, which takes a few minutes. Scan once <code>/var/lib/clamav/</code> lists <code>main</code>, <code>daily</code> and <code>bytecode</code> files (<code>.cvd</code> or <code>.cld</code>). If a scan reports &quot;No supported database files found&quot;, the download hasn't finished; wait and try again.</p>
+<pre class="code" data-lang="bash"><code>sudo clamscan -r -i /srv/uploads</code></pre>
+<p><code>clamav-freshclam</code> keeps the signatures updated from then on. <code>-i</code> prints only infected files. Schedule the scan with cron (see <a href="/how-to/cron-jobs-linux">Cron jobs</a>).</p>
 <h2 id="5-watch-logins">5. Watch logins</h2>
 <pre class="code" data-lang="bash"><code>last -n 20
 sudo lastb -n 20
@@ -105,9 +107,9 @@ sudo find /home /root -name authorized_keys -exec ls -l {} \;</code></pre>
 sudo chmod 600 /srv/app/.env</code></pre>
 <p>The first command finds <code>.env</code> files anyone on the system can read.</p>
 <h2 id="hardening-checklist">Hardening checklist</h2>
-<div class="table"><table><thead><tr><th scope="col">Area</th><th scope="col">Check</th><th scope="col">Command</th></tr></thead><tbody><tr><td>SSH</td><td>Keys only, no root</td><td><code>sudo sshd -T | grep -Ei 'permitroot|passwordauth'</code></td></tr><tr><td>Firewall</td><td>Only needed ports</td><td><code>sudo ufw status</code></td></tr><tr><td>Updates</td><td>Security updates automatic</td><td><code>systemctl status unattended-upgrades</code></td></tr><tr><td>Services</td><td>Nothing unexpected listening</td><td><code>sudo ss -tulpn</code></td></tr><tr><td>AppArmor</td><td>Profiles enforcing</td><td><code>sudo aa-status</code></td></tr><tr><td>Accounts</td><td>One UID 0</td><td><code>awk -F: '$3==0' /etc/passwd</code></td></tr><tr><td>Audit</td><td>Lynis hardening index</td><td><code>sudo lynis audit system</code></td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th scope="col">Area</th><th scope="col">Check</th><th scope="col">Command</th></tr></thead><tbody><tr><td>SSH</td><td>Keys only, no root</td><td><code>sudo sshd -T | grep -Ei 'permitroot|passwordauth'</code></td></tr><tr><td>Firewall</td><td>Only needed ports</td><td><code>sudo ufw status</code></td></tr><tr><td>Updates</td><td>Security updates automatic</td><td><code>apt-config dump APT::Periodic::Unattended-Upgrade</code> (want <code>&quot;1&quot;</code>) and <code>systemctl list-timers 'apt-daily*'</code></td></tr><tr><td>Services</td><td>Nothing unexpected listening</td><td><code>sudo ss -tulpn</code></td></tr><tr><td>AppArmor</td><td>Profiles enforcing</td><td><code>sudo aa-status</code></td></tr><tr><td>Accounts</td><td>One UID 0</td><td><code>awk -F: '$3==0' /etc/passwd</code></td></tr><tr><td>Audit</td><td>Lynis hardening index</td><td><code>sudo lynis audit system</code></td></tr></tbody></table></div>
 <h2 id="common-errors">Common errors</h2>
-<p><strong><code>clamscan</code> uses a lot of memory and CPU.</strong> It loads all signatures on each run. For frequent scans, use the daemon: <code>clamdscan -m -i /srv/uploads</code>.</p>
+<p><strong><code>clamscan</code> uses a lot of memory and CPU.</strong> It loads all signatures on each run. For frequent scans, use the daemon: <code>sudo clamdscan --fdpass -m -i /srv/uploads</code>. The daemon runs as the <code>clamav</code> user; <code>--fdpass</code> lets it scan files that only root can read, so you never need to make private uploads readable by everyone.</p>
 <p><strong>Lynis warnings you can't act on.</strong> Some checks don't apply to every server. Note them in <code>/etc/lynis/custom.prf</code> with <code>skip-test=TEST-ID</code> so the report stays readable.</p>
 <h2 id="frequently-asked-questions">Frequently asked questions</h2>
 <h3 id="do-linux-servers-need-antivirus">Do Linux servers need antivirus?</h3>

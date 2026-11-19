@@ -84,6 +84,10 @@ usermod -aG sudo deploy</code></pre>
 <p>On <strong>your own computer</strong>, create a key if you don't have one and copy it to the server:</p>
 <pre class="code" data-lang="bash"><code>ssh-keygen -t ed25519 -C &quot;you@example.com&quot;
 ssh-copy-id deploy@203.0.113.10</code></pre>
+<p><code>ssh-copy-id</code> needs to log in once with a password. If your provider set the server up for keys only, copy the key you already use for root or the image's admin user to the new account instead, from your current session on the server:</p>
+<pre class="code" data-lang="bash"><code>sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys</code></pre>
+<p>If you are logged in as root, use <code>/root/.ssh/authorized_keys</code> as the source.</p>
 <p>Open a <strong>second</strong> terminal and confirm <code>ssh deploy@203.0.113.10</code> works without a password before you continue. Keep your first session open until the end, so a mistake can't lock you out.</p>
 <h2 id="4-turn-off-root-login-and-passwords">4. Turn off root login and passwords</h2>
 <p>OpenSSH uses the <strong>first</strong> value it reads for each setting, and files in <code>/etc/ssh/sshd_config.d/</code> are read in name order. Cloud images often ship <code>50-cloud-init.conf</code> with <code>PasswordAuthentication yes</code>, so put your settings in a file that sorts first:</p>
@@ -95,7 +99,12 @@ PubkeyAuthentication yes
 EOF
 sudo sshd -t &amp;&amp; sudo systemctl restart ssh
 sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'</code></pre>
-<p><code>sshd -t</code> checks the configuration before the restart; the last line shows the values sshd is actually using. Both should read <code>no</code>.</p>
+<p><code>sshd -t</code> checks the configuration before the restart; the last line shows the global values sshd is using. Both should read <code>no</code>.</p>
+<p>A <code>Match</code> block elsewhere in the configuration can switch these back on for particular users or addresses. Check the effective values for the connections that matter:</p>
+<pre class="code" data-lang="bash"><code>sudo sshd -T -C user=root,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo sshd -T -C user=deploy,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo grep -rn '^Match' /etc/ssh/sshd_config /etc/ssh/sshd_config.d/</code></pre>
+<p>If a <code>Match</code> block sets either option to <code>yes</code>, change or remove it, then run <code>sudo sshd -t &amp;&amp; sudo systemctl restart ssh</code> again.</p>
 <h2 id="5-turn-on-the-firewall">5. Turn on the firewall</h2>
 <p>Allow SSH <strong>before</strong> enabling the firewall, then add only the ports you serve.</p>
 <pre class="code" data-lang="bash"><code>sudo ufw default deny incoming
@@ -110,18 +119,19 @@ sudo ufw status verbose</code></pre>
 <pre class="code" data-lang="bash"><code>sudo apt install -y fail2ban
 sudo systemctl enable --now fail2ban
 sudo fail2ban-client status sshd</code></pre>
-<p>Debian 12 and newer don't install rsyslog, so there is no <code>/var/log/auth.log</code>. If the status command shows no log file being watched, tell the jail to read the systemd journal:</p>
+<p>Debian 12 and newer don't install rsyslog, so there is no <code>/var/log/auth.log</code>. If fail2ban fails to start, the status command reports a socket or server error, or the jail watches no log file, tell the jail to read the systemd journal:</p>
 <pre class="code" data-lang="bash"><code>sudo tee /etc/fail2ban/jail.local &gt; /dev/null &lt;&lt;'EOF'
 [sshd]
 backend = systemd
 EOF
-sudo systemctl restart fail2ban</code></pre>
+sudo systemctl restart fail2ban
+sudo fail2ban-client status sshd</code></pre>
 <h2 id="7-install-security-updates-automatically">7. Install security updates automatically</h2>
 <pre class="code" data-lang="bash"><code>sudo apt install -y unattended-upgrades
 sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre>
 <p>Choose <strong>Yes</strong>. By default only security updates install automatically. See <a href="/how-to/linux-security-updates">Linux security updates</a> for reboots and checking what ran.</p>
 <h2 id="check-your-work">Check your work</h2>
-<div class="table"><table><thead><tr><th scope="col">Check</th><th scope="col">Command</th><th scope="col">What you want</th></tr></thead><tbody><tr><td>Root login and passwords off</td><td><code>sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'</code></td><td>both <code>no</code></td></tr><tr><td>Firewall on</td><td><code>sudo ufw status</code></td><td><code>Status: active</code>, only your ports</td></tr><tr><td>fail2ban running</td><td><code>sudo fail2ban-client status sshd</code></td><td>a jail with a log source</td></tr><tr><td>Open ports</td><td><code>sudo ss -tulpn</code></td><td>only services you expect</td></tr><tr><td>Pending updates</td><td><code>apt list --upgradable</code></td><td>empty</td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th scope="col">Check</th><th scope="col">Command</th><th scope="col">What you want</th></tr></thead><tbody><tr><td>Root login and passwords off</td><td><code>sudo sshd -T -C user=root,host=x,addr=198.51.100.7 | grep -Ei 'permitroot|passwordauth'</code></td><td>both <code>no</code></td></tr><tr><td>Firewall on</td><td><code>sudo ufw status</code></td><td><code>Status: active</code>, only your ports</td></tr><tr><td>fail2ban running</td><td><code>sudo fail2ban-client status sshd</code></td><td>a jail with a log source</td></tr><tr><td>Open ports</td><td><code>sudo ss -tulpn</code></td><td>only services you expect</td></tr><tr><td>Pending updates</td><td><code>apt list --upgradable</code></td><td>empty</td></tr></tbody></table></div>
 <h2 id="common-errors">Common errors</h2>
 <p><strong>&quot;Permission denied (publickey)&quot; after step 4.</strong> The key isn't in <code>~/.ssh/authorized_keys</code> for that user, or the file's permissions are too open. Use your still-open session to run <code>chmod 700 ~/.ssh &amp;&amp; chmod 600 ~/.ssh/authorized_keys</code>, or log in through your provider's web console.</p>
 <p><strong>Passwords still work after step 4.</strong> Another file set <code>PasswordAuthentication yes</code> first. Run <code>sudo grep -ri passwordauthentication /etc/ssh/sshd_config /etc/ssh/sshd_config.d/</code> and make sure your <code>00-</code> file sorts before it.</p>
