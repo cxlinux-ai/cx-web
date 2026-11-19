@@ -86,6 +86,7 @@ last -n 20
 sudo lastb -n 20
 sudo ss -tulpn</code></pre>
 <p>Review pending updates (see <a href="/how-to/linux-security-updates">security updates</a>), who logged in, failed login attempts and what's listening on the network.</p>
+<p>Debian 13 no longer ships <code>last</code> and <code>lastb</code>. Install <code>wtmpdb</code> and <code>libpam-wtmpdb</code> and use <code>wtmpdb last</code> for login history, and <code>sudo lslogins --failed</code> for failed logins.</p>
 <h2 id="monthly">Monthly</h2>
 <ul><li>Restore one file from backup and check it (see <a href="/how-to/linux-backups">Linux backups</a>).</li><li>Review user accounts and SSH keys: <code>getent passwd | awk -F: '$3 &gt;= 1000'</code> and every <code>authorized_keys</code> file.</li><li>Check TLS certificate expiry: <code>sudo certbot certificates</code> if you use Let's Encrypt.</li><li>Run a security audit: <code>sudo lynis audit system</code> (see <a href="/how-to/linux-server-security-hardening">server hardening</a>).</li><li>Remove what's unused: <code>sudo apt autoremove --purge</code>.</li></ul>
 <h2 id="know-your-server">Know your server</h2>

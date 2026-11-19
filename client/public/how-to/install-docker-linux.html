@@ -101,12 +101,12 @@ docker logs web</code></pre>
 <ul><li>publish on localhost only (<code>-p 127.0.0.1:8080:80</code>, as above) and expose it through a reverse proxy such as Nginx, or</li><li>add filtering rules to the <code>DOCKER-USER</code> chain, which Docker leaves for you.</li></ul>
 <p>More in <a href="/how-to/linux-firewall-ufw">Linux firewall with UFW</a>.</p>
 <h2 id="docker-compose">Docker Compose</h2>
-<p>Compose is installed as a plugin and runs as <code>docker compose</code> (with a space). A minimal <code>compose.yaml</code>:</p>
+<p>Compose is installed as a plugin and runs as <code>docker compose</code> (with a space). A minimal <code>compose.yaml</code> (it uses host port 8081 so it doesn't clash with the <code>web</code> container above):</p>
 <pre class="code" data-lang="yaml"><code>services:
   web:
     image: nginx
     ports:
-      - &quot;127.0.0.1:8080:80&quot;
+      - &quot;127.0.0.1:8081:80&quot;
     restart: unless-stopped</code></pre>
 <pre class="code" data-lang="bash"><code>docker compose up -d
 docker compose ps

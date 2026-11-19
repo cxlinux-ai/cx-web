@@ -37,7 +37,7 @@ kill 12345
 
 ```bash
 sudo ss -ltnp 'sport = :3000'
-sudo lsof -i :3000
+sudo lsof -iTCP:3000 -sTCP:LISTEN
 ```
 
 Both print the PID of the process listening on port 3000.
@@ -51,7 +51,8 @@ Both print the PID of the process listening on port 3000.
 | `pkill nginx` | Signal every process named `nginx` |
 | `pkill -f "python app.py"` | Match the full command line |
 | `killall node` | Signal every process with that exact name |
-| `sudo fuser -k 3000/tcp` | Kill whatever is using TCP port 3000 |
+| `sudo fuser -k -TERM 3000/tcp` | Ask whatever is using TCP port 3000 to exit |
+| `sudo fuser -k 3000/tcp` | Force it (fuser sends SIGKILL by default); only if the line above didn't work |
 
 Try the polite signal first and give the process a few seconds. Programs use SIGTERM to finish writes and remove lock files, and SIGKILL skips all of that.
 

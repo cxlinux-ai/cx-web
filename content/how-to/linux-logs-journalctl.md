@@ -26,7 +26,7 @@ systemctl status nginx --no-pager
 |---|---|
 | One service | `journalctl -u nginx` |
 | Follow live (like `tail -f`) | `journalctl -u nginx -f` |
-| Since a time | `journalctl --since "2026-11-18 02:00" --until "03:00"` |
+| A time window | `journalctl --since "2026-11-18 02:00" --until "2026-11-18 03:00"` |
 | Since yesterday | `journalctl --since yesterday` |
 | Errors and worse | `journalctl -p err` |
 | This boot only | `journalctl -b` |

@@ -115,6 +115,9 @@ export function slugifyHeading(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
+/** A code fence opener: three or more backticks and an optional language (`bash`, `shell-session`, `c++`). */
+const FENCE_OPEN = /^(`{3,})\s*([\w+#.-]*)\s*$/;
+
 /** Block-level Markdown subset → HTML. `cxBox` replaces the `<!-- cx -->` marker. */
 export function renderBlocks(md: string, cxBox: string): string {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
@@ -131,12 +134,16 @@ export function renderBlocks(md: string, cxBox: string): string {
       i++;
       continue;
     }
-    const fence = line.match(/^```(\w*)\s*$/);
+    const fence = line.match(FENCE_OPEN);
     if (fence) {
-      const lang = fence[1] || "text";
+      const ticks = fence[1];
+      const lang = fence[2] || "text";
+      const close = new RegExp(`^${ticks}\\s*$`);
       const code: string[] = [];
+      const start = i + 1;
       i++;
-      while (i < lines.length && !/^```\s*$/.test(lines[i])) code.push(lines[i++]);
+      while (i < lines.length && !close.test(lines[i])) code.push(lines[i++]);
+      if (i >= lines.length) throw new Error(`unclosed code fence opened on line ${start}`);
       i++;
       out.push(`<pre class="code" data-lang="${escapeHtml(lang)}"><code>${escapeHtml(code.join("\n"))}</code></pre>`);
       continue;
@@ -168,11 +175,14 @@ export function renderBlocks(md: string, cxBox: string): string {
     while (
       i < lines.length &&
       lines[i].trim() !== "" &&
-      !/^(```|#{2,3}\s|- |\|)/.test(lines[i]) &&
+      !FENCE_OPEN.test(lines[i]) &&
+      !/^(#{2,3}\s|- |\|)/.test(lines[i]) &&
       lines[i].trim() !== "<!-- cx -->"
     ) {
       para.push(lines[i++].trim());
     }
+    // Every iteration must consume at least one line; anything unrecognised is an authoring error.
+    if (para.length === 0) throw new Error(`unsupported Markdown on line ${i + 1}: ${lines[i]}`);
     out.push(`<p>${renderInline(para.join(" "))}</p>`);
   }
   return out.join("\n");
@@ -335,6 +345,14 @@ function formatDate(iso: string): string {
   return `${months[m - 1]} ${d}, ${y}`;
 }
 
+function renderBody(page: HowToPage): string {
+  try {
+    return renderBlocks(page.body, cxBox(page));
+  } catch (err) {
+    throw new Error(`content/how-to/${page.slug}.md: ${(err as Error).message}`);
+  }
+}
+
 /** Search results cut titles near 60 characters, so the brand suffix is added only when it fits. */
 export const MAX_TITLE = 60;
 export function pageTitle(title: string): string {
@@ -381,7 +399,7 @@ export function renderHowToPage(page: HowToPage, bySlug: Map<string, HowToPage>)
 <article>
 <h1>${escapeHtml(page.fm.h1)}</h1>
 <p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="${page.fm.updated}">${formatDate(page.fm.updated)}</time></p>
-${renderBlocks(page.body, cxBox(page))}
+${renderBody(page)}
 </article>
 <section class="related" aria-labelledby="related-heading">
 <h2 id="related-heading">Related guides</h2>

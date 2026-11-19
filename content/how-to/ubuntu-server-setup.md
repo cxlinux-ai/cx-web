@@ -65,7 +65,14 @@ sudo adduser deploy
 sudo usermod -aG sudo deploy
 ```
 
-From your own computer, copy your key with `ssh-copy-id deploy@your-server`, confirm you can log in with it, then turn off password and root logins. The exact, safe sequence is in [How to secure a Linux VPS](/how-to/secure-linux-vps).
+From your own computer, copy your key with `ssh-copy-id deploy@your-server`. That needs one password login; on a server that accepts keys only, copy your existing key from the admin account instead:
+
+```bash
+sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+```
+
+Confirm you can log in as `deploy` with the key, then turn off password and root logins. The exact, safe sequence is in [How to secure a Linux VPS](/how-to/secure-linux-vps).
 
 ## 5. Add swap
 

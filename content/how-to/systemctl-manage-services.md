@@ -68,6 +68,11 @@ sudo systemctl reset-failed myapp
 
 ```bash
 sudo systemctl mask cups
+```
+
+To undo it later:
+
+```bash
 sudo systemctl unmask cups
 ```
 

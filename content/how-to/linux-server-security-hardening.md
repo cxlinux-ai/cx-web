@@ -61,10 +61,16 @@ Linux malware exists, but on a server the usual reason to scan is **files other 
 ```bash
 sudo apt install -y clamav clamav-daemon
 sudo systemctl status clamav-freshclam --no-pager
+ls /var/lib/clamav/
+```
+
+Right after installation, `clamav-freshclam` downloads the signature databases, which takes a few minutes. Scan once `/var/lib/clamav/` lists `main`, `daily` and `bytecode` files (`.cvd` or `.cld`). If a scan reports "No supported database files found", the download hasn't finished; wait and try again.
+
+```bash
 sudo clamscan -r -i /srv/uploads
 ```
 
-`clamav-freshclam` updates signatures automatically. `-i` prints only infected files. Schedule the scan with cron (see [Cron jobs](/how-to/cron-jobs-linux)).
+`clamav-freshclam` keeps the signatures updated from then on. `-i` prints only infected files. Schedule the scan with cron (see [Cron jobs](/how-to/cron-jobs-linux)).
 
 ## 5. Watch logins
 
@@ -101,7 +107,7 @@ The first command finds `.env` files anyone on the system can read.
 |---|---|---|
 | SSH | Keys only, no root | `sudo sshd -T \| grep -Ei 'permitroot\|passwordauth'` |
 | Firewall | Only needed ports | `sudo ufw status` |
-| Updates | Security updates automatic | `systemctl status unattended-upgrades` |
+| Updates | Security updates automatic | `apt-config dump APT::Periodic::Unattended-Upgrade` (want `"1"`) and `systemctl list-timers 'apt-daily*'` |
 | Services | Nothing unexpected listening | `sudo ss -tulpn` |
 | AppArmor | Profiles enforcing | `sudo aa-status` |
 | Accounts | One UID 0 | `awk -F: '$3==0' /etc/passwd` |
@@ -109,7 +115,7 @@ The first command finds `.env` files anyone on the system can read.
 
 ## Common errors
 
-**`clamscan` uses a lot of memory and CPU.** It loads all signatures on each run. For frequent scans, use the daemon: `clamdscan -m -i /srv/uploads`.
+**`clamscan` uses a lot of memory and CPU.** It loads all signatures on each run. For frequent scans, use the daemon: `sudo clamdscan --fdpass -m -i /srv/uploads`. The daemon runs as the `clamav` user; `--fdpass` lets it scan files that only root can read, so you never need to make private uploads readable by everyone.
 
 **Lynis warnings you can't act on.** Some checks don't apply to every server. Note them in `/etc/lynis/custom.prf` with `skip-test=TEST-ID` so the report stays readable.
 

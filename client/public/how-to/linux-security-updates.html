@@ -51,7 +51,7 @@ footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}f
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Install Security Updates on Linux (Ubuntu & Debian)","description":"Patch Ubuntu and Debian servers safely: preview updates, install security patches, automate them with unattended-upgrades and handle reboots.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-security-updates","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"patch management linux"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Install Security Updates on Linux (Ubuntu & Debian)","item":"https://cxlinux.com/how-to/linux-security-updates"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How often should I patch Linux servers?","acceptedAnswer":{"@type":"Answer","text":"Let security updates install daily with unattended-upgrades, and review the remaining updates on a fixed weekly or monthly schedule, with reboots in a maintenance window."}},{"@type":"Question","name":"Do I have to reboot after every update?","acceptedAnswer":{"@type":"Answer","text":"No. Only when /var/run/reboot-required exists, which is usually after kernel, glibc or systemd updates."}},{"@type":"Question","name":"Can updates break my server?","acceptedAnswer":{"@type":"Answer","text":"Occasionally. Simulate first with apt-get -s upgrade, hold packages your application pins, keep backups (see Linux backups) and patch a staging server before production."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How often should I patch Linux servers?","acceptedAnswer":{"@type":"Answer","text":"Let security updates install daily with unattended-upgrades, and review the remaining updates on a fixed weekly or monthly schedule, with reboots in a maintenance window."}},{"@type":"Question","name":"Do I have to reboot after every update?","acceptedAnswer":{"@type":"Answer","text":"No. Reboot when /var/run/reboot-required exists or sudo needrestart -k reports a newer kernel than the one running; that usually follows kernel, glibc or systemd updates. Treat the file as a positive signal, not the only one."}},{"@type":"Question","name":"Can updates break my server?","acceptedAnswer":{"@type":"Answer","text":"Occasionally. Simulate first with apt-get -s --with-new-pkgs upgrade, hold packages your application pins, keep backups (see Linux backups) and patch a staging server before production."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -65,7 +65,7 @@ footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}f
 <pre class="code" data-lang="bash"><code>sudo apt update
 apt list --upgradable
 sudo apt upgrade</code></pre>
-<p>Check whether a reboot is needed afterwards with <code>[ -f /var/run/reboot-required ] &amp;&amp; cat /var/run/reboot-required</code>.</p>
+<p>Then check whether a reboot is needed: <code>[ -f /var/run/reboot-required ] &amp;&amp; cat /var/run/reboot-required</code>, and <code>sudo needrestart -k</code> for the running kernel.</p>
 <aside class="cx" aria-label="CX Terminal">
 <p class="cx-kicker">Prefer plain English?</p>
 <p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;apply security patches, show me first&rdquo; start from a sentence instead of a man page.</p>
@@ -73,11 +73,13 @@ sudo apt upgrade</code></pre>
 </aside>
 <h2 id="preview-before-you-patch">Preview before you patch</h2>
 <p><code>apt-get -s</code> simulates an upgrade and prints every package it would install, upgrade or remove, without changing the system. Run it before patching production:</p>
-<pre class="code" data-lang="bash"><code>apt-get -s upgrade
+<pre class="code" data-lang="bash"><code>apt-get -s --with-new-pkgs upgrade
 apt-get -s dist-upgrade</code></pre>
+<p>The first previews what <code>apt upgrade</code> would do; the second previews <code>apt full-upgrade</code>.</p>
 <h2 id="upgrade-vs-full-upgrade"><code>upgrade</code> vs <code>full-upgrade</code></h2>
 <div class="table"><table><thead><tr><th scope="col">Command</th><th scope="col">Installs new dependencies</th><th scope="col">Removes packages</th><th scope="col">Use it for</th></tr></thead><tbody><tr><td><code>apt upgrade</code></td><td>Yes</td><td>No</td><td>Routine patching</td></tr><tr><td><code>apt full-upgrade</code></td><td>Yes</td><td>Yes, when needed</td><td>Kernel and dependency changes</td></tr><tr><td><code>apt-get upgrade</code></td><td>No (holds those packages back)</td><td>No</td><td>Most conservative option</td></tr></tbody></table></div>
-<p>Packages shown as &quot;kept back&quot; need a new dependency. <code>sudo apt full-upgrade</code> or <code>sudo apt install &lt;package&gt;</code> installs them.</p>
+<p>Packages shown as &quot;kept back&quot; have one of three causes. Check which before you act:</p>
+<ul><li><strong>Phased update (Ubuntu):</strong> Ubuntu releases some updates to a growing share of machines over a few days. <code>apt-cache policy &lt;package&gt;</code> shows <code>phased</code> next to the candidate version. Wait; the update arrives on its own.</li><li><strong>Held:</strong> <code>apt-mark showhold</code> lists it. Unhold it only if the hold is no longer needed.</li><li><strong>New or removed dependencies:</strong> <code>sudo apt full-upgrade</code> installs them; read its list of removals first.</li></ul>
 <h2 id="automate-security-updates">Automate security updates</h2>
 <p><code>unattended-upgrades</code> installs security updates every day. Install and enable it:</p>
 <pre class="code" data-lang="bash"><code>sudo apt install -y unattended-upgrades
@@ -105,15 +107,15 @@ apt-mark showhold
 sudo apt-mark unhold nginx</code></pre>
 <h2 id="common-errors">Common errors</h2>
 <p><strong>&quot;Could not get lock /var/lib/dpkg/lock-frontend&quot;.</strong> Another apt process, usually unattended-upgrades, is running. Wait for it to finish; <code>ps aux | grep -i apt</code> shows it. Don't delete the lock file.</p>
-<p><strong>&quot;The following packages have been kept back&quot;.</strong> They need new dependencies. Use <code>sudo apt full-upgrade</code> after reviewing the list.</p>
+<p><strong>&quot;The following packages have been kept back&quot;.</strong> The update is phased, held, or needs dependency changes. See <a href="#upgrade-vs-full-upgrade"><code>upgrade</code> vs <code>full-upgrade</code></a> for how to tell which.</p>
 <p><strong>&quot;dpkg was interrupted&quot;.</strong> A previous upgrade stopped partway. Run <code>sudo dpkg --configure -a</code>, then <code>sudo apt -f install</code>.</p>
 <h2 id="frequently-asked-questions">Frequently asked questions</h2>
 <h3 id="how-often-should-i-patch-linux-servers">How often should I patch Linux servers?</h3>
 <p>Let security updates install daily with unattended-upgrades, and review the remaining updates on a fixed weekly or monthly schedule, with reboots in a maintenance window.</p>
 <h3 id="do-i-have-to-reboot-after-every-update">Do I have to reboot after every update?</h3>
-<p>No. Only when <code>/var/run/reboot-required</code> exists, which is usually after kernel, glibc or systemd updates.</p>
+<p>No. Reboot when <code>/var/run/reboot-required</code> exists or <code>sudo needrestart -k</code> reports a newer kernel than the one running; that usually follows kernel, glibc or systemd updates. Treat the file as a positive signal, not the only one.</p>
 <h3 id="can-updates-break-my-server">Can updates break my server?</h3>
-<p>Occasionally. Simulate first with <code>apt-get -s upgrade</code>, hold packages your application pins, keep backups (see <a href="/how-to/linux-backups">Linux backups</a>) and patch a staging server before production.</p>
+<p>Occasionally. Simulate first with <code>apt-get -s --with-new-pkgs upgrade</code>, hold packages your application pins, keep backups (see <a href="/how-to/linux-backups">Linux backups</a>) and patch a staging server before production.</p>
 </article>
 <section class="related" aria-labelledby="related-heading">
 <h2 id="related-heading">Related guides</h2>

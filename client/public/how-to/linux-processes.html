@@ -75,10 +75,10 @@ kill 12345</code></pre>
 <p><code>htop</code> is a friendlier live view with mouse support: <code>sudo apt install htop</code>.</p>
 <h2 id="find-what-s-using-a-port">Find what's using a port</h2>
 <pre class="code" data-lang="bash"><code>sudo ss -ltnp 'sport = :3000'
-sudo lsof -i :3000</code></pre>
+sudo lsof -iTCP:3000 -sTCP:LISTEN</code></pre>
 <p>Both print the PID of the process listening on port 3000.</p>
 <h2 id="stop-a-process">Stop a process</h2>
-<div class="table"><table><thead><tr><th scope="col">Command</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>kill 12345</code></td><td>Ask PID 12345 to exit (SIGTERM)</td></tr><tr><td><code>kill -9 12345</code></td><td>Force it to stop immediately (SIGKILL); it can't clean up</td></tr><tr><td><code>pkill nginx</code></td><td>Signal every process named <code>nginx</code></td></tr><tr><td><code>pkill -f &quot;python app.py&quot;</code></td><td>Match the full command line</td></tr><tr><td><code>killall node</code></td><td>Signal every process with that exact name</td></tr><tr><td><code>sudo fuser -k 3000/tcp</code></td><td>Kill whatever is using TCP port 3000</td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th scope="col">Command</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>kill 12345</code></td><td>Ask PID 12345 to exit (SIGTERM)</td></tr><tr><td><code>kill -9 12345</code></td><td>Force it to stop immediately (SIGKILL); it can't clean up</td></tr><tr><td><code>pkill nginx</code></td><td>Signal every process named <code>nginx</code></td></tr><tr><td><code>pkill -f &quot;python app.py&quot;</code></td><td>Match the full command line</td></tr><tr><td><code>killall node</code></td><td>Signal every process with that exact name</td></tr><tr><td><code>sudo fuser -k -TERM 3000/tcp</code></td><td>Ask whatever is using TCP port 3000 to exit</td></tr><tr><td><code>sudo fuser -k 3000/tcp</code></td><td>Force it (fuser sends SIGKILL by default); only if the line above didn't work</td></tr></tbody></table></div>
 <p>Try the polite signal first and give the process a few seconds. Programs use SIGTERM to finish writes and remove lock files, and SIGKILL skips all of that.</p>
 <p>Check what <code>pkill</code> would match before you run it:</p>
 <pre class="code" data-lang="bash"><code>pgrep -af &quot;python app.py&quot;</code></pre>

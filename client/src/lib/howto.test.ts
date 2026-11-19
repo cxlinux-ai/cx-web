@@ -45,7 +45,9 @@ describe("how-to pages: SEO contract", () => {
     expect((html.match(/<h2[\s>]/g) ?? []).length).toBeGreaterThanOrEqual(4);
     expect(text(html.slice(html.indexOf("<main"))).split(" ").length).toBeGreaterThanOrEqual(500);
     // The answer comes first: the first block after the intro is a command.
-    expect(html.indexOf('<pre class="code"')).toBeLessThan(html.indexOf("<h2"));
+    const firstCode = html.indexOf('<pre class="code"');
+    expect(firstCode).toBeGreaterThanOrEqual(0);
+    expect(firstCode).toBeLessThan(html.indexOf("<h2"));
   });
 
   it.each(pages.map((p) => [p.slug, p] as const))("%s has valid structured data with its FAQs", (slug, page) => {
@@ -84,6 +86,15 @@ describe("how-to renderer", () => {
     expect(renderInline("Use `<b>` and **bold** [x](/how-to)")).toBe('Use <code>&lt;b&gt;</code> and <strong>bold</strong> <a href="/how-to">x</a>');
   });
 
+  it("renders fences with any language tag and longer backtick runs", () => {
+    expect(renderBlocks("```shell-session\n$ ls\n```", "")).toContain('data-lang="shell-session"');
+    expect(renderBlocks("````md\n```\ninner\n```\n````", "")).toContain("```\ninner\n```");
+  });
+
+  it("fails loudly instead of hanging on Markdown it cannot render", () => {
+    expect(() => renderBlocks("```bash\nnever closed", "")).toThrow(/unclosed code fence opened on line 1/);
+  });
+
   it("splits table cells on unescaped pipes only", () => {
     const html = renderBlocks("| A | B |\n|---|---|\n| `x \\| y` | z |", "");
     expect(html).toContain("<td><code>x | y</code></td><td>z</td>");
@@ -95,6 +106,8 @@ describe("how-to routing", () => {
     expect(shouldServeAsStaticAsset("/how-to")).toBe(true);
     expect(shouldServeAsStaticAsset("/how-to/linux-firewall-ufw")).toBe(true);
     expect(shouldServeAsStaticAsset("/how-to/not-a-guide")).toBe(false);
+    expect(shouldServeAsStaticAsset("/how-to/not-a-guide.html")).toBe(false);
+    expect(shouldServeAsStaticAsset("/how-to/linux-firewall-ufw.html")).toBe(true);
     expect(shouldServeAsStaticAsset("/how-tox")).toBe(false);
   });
 

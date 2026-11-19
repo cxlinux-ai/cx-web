@@ -63,14 +63,17 @@ rsync -avz -e "ssh -p 2222" ./site/ user@host:/var/www/site/
 
 ## Sync safely with --delete
 
-`--delete` makes the destination an exact copy, which includes deleting files there. Always look first:
+`--delete` makes the destination an exact copy, which includes deleting files there. Always run a dry run (`-n`) first:
 
 ```bash
 rsync -avn --delete ./site/ user@host:/var/www/site/
-rsync -av --delete ./site/ user@host:/var/www/site/
 ```
 
-The first command is a dry run (`-n`). Lines starting with `deleting` show what would go.
+Check both paths and every line that starts with `deleting`. Only when that list is right, run the real sync:
+
+```bash
+rsync -av --delete ./site/ user@host:/var/www/site/
+```
 
 ## Large or unreliable transfers
 
