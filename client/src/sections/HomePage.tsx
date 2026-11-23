@@ -289,7 +289,7 @@ export default function HomePage() {
             CX handles the commands. You stay in control.
           </p>
           <p className="text-sm text-gray-500 mb-8">
-            Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.
+            Verified on Ubuntu 24.04 LTS; other distros are untested and coming soon. Free forever for personal use. No credit card required.
           </p>
 
           {/* Hero demo video */}
@@ -363,7 +363,7 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#00FF9F] to-[#00FFCC] bg-clip-text text-transparent">Every server.</span>
             </h2>
             <p className="text-[#9CA3AF] text-base mb-7 leading-relaxed max-w-sm">
-              Works on Ubuntu, Debian, RHEL, Arch—any Linux distro you SSH into.
+              Verified on Ubuntu 24.04 LTS today. Debian, RHEL, Arch, and other distros are untested and coming soon.
             </p>
             <Link href="/getting-started">
               <Button
