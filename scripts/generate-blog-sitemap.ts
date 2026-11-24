@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { glob } from "glob";
 import matter from "gray-matter";
 import { PostFrontmatterSchema } from "../client/src/blog/schema";
+import { loadHowToPages } from "../shared/howto/load";
 
 /**
  * Single source of truth for /sitemap.xml.
@@ -65,10 +66,15 @@ async function main() {
   const url = (loc: string, lastmod: string, changefreq: string, priority: string) =>
     `  <url>\n    <loc>${escapeXml(loc)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 
+  const howTo = loadHowToPages(ROOT);
+  const howToNewest = howTo.map((p) => p.fm.updated).sort().at(-1) ?? today;
+
   const entries = [
     ...STATIC_ROUTES.map((r) => url(`${BASE_URL}${r.path}`, r.path === "/blog" ? newest : today, r.changefreq, r.priority)),
     ...posts.map((p) => url(`${BASE_URL}/blog/${p.slug}`, p.lastmod, "monthly", p.featured ? "0.9" : "0.7")),
     ...tags.map((t) => url(`${BASE_URL}/blog/tag/${encodeURIComponent(t)}`, newest, "weekly", "0.5")),
+    url(`${BASE_URL}/how-to`, howToNewest, "weekly", "0.8"),
+    ...howTo.map((p) => url(`${BASE_URL}/how-to/${p.slug}`, p.fm.updated, "monthly", "0.7")),
   ];
 
   writeFileSync(
@@ -76,7 +82,7 @@ async function main() {
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join("\n")}\n</urlset>\n`,
   );
 
-  console.log(`✓ client/public/sitemap.xml (${STATIC_ROUTES.length} pages, ${posts.length} posts, ${tags.length} tags)`);
+  console.log(`✓ client/public/sitemap.xml (${STATIC_ROUTES.length} pages, ${posts.length} posts, ${tags.length} tags, ${howTo.length + 1} how-to)`);
   if (skipped.length) console.warn(`  skipped: ${skipped.join(", ")}`);
 }
 

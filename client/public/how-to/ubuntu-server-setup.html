@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ubuntu Server Setup: The Baseline Every Server Needs</title>
+<meta name="description" content="Set up a fresh Ubuntu or Debian server step by step: hostname, time, users, SSH keys, swap, firewall, updates and the checks that confirm it all works.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/ubuntu-server-setup">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/ubuntu-server-setup">
+<meta property="og:title" content="Ubuntu Server Setup: The Baseline Every Server Needs">
+<meta property="og:description" content="Set up a fresh Ubuntu or Debian server step by step: hostname, time, users, SSH keys, swap, firewall, updates and the checks that confirm it all works.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Set Up an Ubuntu or Debian Server","description":"Set up a fresh Ubuntu or Debian server step by step: hostname, time, users, SSH keys, swap, firewall, updates and the checks that confirm it all works.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/ubuntu-server-setup","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux ubuntu server"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Set Up an Ubuntu or Debian Server","item":"https://cxlinux.com/how-to/ubuntu-server-setup"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ubuntu Server or Debian for a server?","acceptedAnswer":{"@type":"Answer","text":"Both use apt and the same commands on this page. Ubuntu LTS has a fixed five-year support window and more cloud images; Debian changes less between releases. Pick the one your team already runs."}},{"@type":"Question","name":"Do I need a GUI on Ubuntu Server?","acceptedAnswer":{"@type":"Answer","text":"No. Servers are managed over SSH. A desktop adds packages to patch and memory to spend without adding anything a server needs."}},{"@type":"Question","name":"How much swap should a server have?","acceptedAnswer":{"@type":"Answer","text":"For most servers, 1 to 2 GB is enough to absorb short memory spikes. If a server relies on swap continuously, it needs more RAM."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Set Up an Ubuntu or Debian Server</li></ol></nav>
+<article>
+<h1>How to Set Up an Ubuntu or Debian Server</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>A fresh Ubuntu or Debian server needs the same baseline every time: current packages, a correct name and clock, a sudo user with SSH keys, swap, a firewall and automatic security updates. These are the commands, in order.</p>
+<pre class="code" data-lang="bash"><code>sudo apt update &amp;&amp; sudo apt full-upgrade -y
+sudo hostnamectl set-hostname web-01
+sudo timedatectl set-timezone UTC</code></pre>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;set up a fresh Ubuntu server for a web app&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="pick-a-release">Pick a release</h2>
+<p>Use a long-term support release for servers: Ubuntu LTS (24.04 or newer) or Debian stable. Both get security updates for years without forcing feature upgrades. Check what you're on with:</p>
+<pre class="code" data-lang="bash"><code>cat /etc/os-release
+uname -r</code></pre>
+<h2 id="1-update-packages">1. Update packages</h2>
+<pre class="code" data-lang="bash"><code>sudo apt update
+sudo apt full-upgrade -y
+sudo apt autoremove -y</code></pre>
+<p><code>full-upgrade</code> can add or remove packages when dependencies change; plain <code>upgrade</code> never removes anything. On a new server, <code>full-upgrade</code> is what you want.</p>
+<h2 id="2-set-the-hostname">2. Set the hostname</h2>
+<pre class="code" data-lang="bash"><code>sudo hostnamectl set-hostname web-01
+hostnamectl</code></pre>
+<p>Add the name to <code>/etc/hosts</code> on the <code>127.0.1.1</code> line so <code>sudo</code> doesn't warn that it can't resolve the host.</p>
+<h2 id="3-set-the-time-zone-and-check-the-clock">3. Set the time zone and check the clock</h2>
+<p>Servers are easier to reason about in UTC. Ubuntu and Debian keep the clock correct with <code>systemd-timesyncd</code>.</p>
+<pre class="code" data-lang="bash"><code>sudo timedatectl set-timezone UTC
+timedatectl</code></pre>
+<p>Look for <code>System clock synchronized: yes</code>.</p>
+<h2 id="4-create-your-admin-user-and-add-ssh-keys">4. Create your admin user and add SSH keys</h2>
+<pre class="code" data-lang="bash"><code>sudo adduser deploy
+sudo usermod -aG sudo deploy</code></pre>
+<p>From your own computer, copy your key with <code>ssh-copy-id deploy@your-server</code>. That needs one password login; on a server that accepts keys only, copy your existing key from the admin account instead:</p>
+<pre class="code" data-lang="bash"><code>sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys</code></pre>
+<p>Confirm you can log in as <code>deploy</code> with the key, then turn off password and root logins. The exact, safe sequence is in <a href="/how-to/secure-linux-vps">How to secure a Linux VPS</a>.</p>
+<h2 id="5-add-swap">5. Add swap</h2>
+<p>Small servers without swap get processes killed when memory runs out. Check first, then add a 2 GB swap file if there is none:</p>
+<pre class="code" data-lang="bash"><code>swapon --show
+free -h
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab</code></pre>
+<h2 id="6-turn-on-the-firewall">6. Turn on the firewall</h2>
+<pre class="code" data-lang="bash"><code>sudo apt install -y ufw
+sudo ufw allow OpenSSH
+sudo ufw enable</code></pre>
+<p>Open web ports only when a web server is running: <code>sudo ufw allow 80,443/tcp</code>. Details in <a href="/how-to/linux-firewall-ufw">Linux firewall with UFW</a>.</p>
+<h2 id="7-automatic-security-updates">7. Automatic security updates</h2>
+<pre class="code" data-lang="bash"><code>sudo apt install -y unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre>
+<h2 id="8-install-what-the-server-is-for">8. Install what the server is for</h2>
+<p>Install only what you need. Common starting points:</p>
+<div class="table"><table><thead><tr><th scope="col">Role</th><th scope="col">Packages</th></tr></thead><tbody><tr><td>Web server</td><td><code>nginx</code> or <code>apache2</code></td></tr><tr><td>Database</td><td><code>postgresql</code> or <code>mariadb-server</code></td></tr><tr><td>Containers</td><td>Docker Engine (see <a href="/how-to/install-docker-linux">Install Docker on Linux</a>)</td></tr><tr><td>Basics</td><td><code>curl git htop unzip</code></td></tr></tbody></table></div>
+<pre class="code" data-lang="bash"><code>sudo apt install -y nginx curl git htop unzip
+systemctl status nginx --no-pager</code></pre>
+<h2 id="verify-the-baseline">Verify the baseline</h2>
+<pre class="code" data-lang="bash"><code>hostnamectl
+timedatectl | grep synchronized
+swapon --show
+sudo ufw status
+sudo ss -tulpn
+systemctl --failed</code></pre>
+<p>Every command should show what you set: the new hostname, a synchronized clock, swap in use, the firewall active, only expected ports listening and no failed services.</p>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>&quot;sudo: unable to resolve host web-01&quot;.</strong> The new hostname isn't in <code>/etc/hosts</code>. Add <code>127.0.1.1 web-01</code> to it.</p>
+<p><strong><code>fallocate</code> fails with &quot;Operation not supported&quot;.</strong> Some filesystems don't support it. Use <code>sudo dd if=/dev/zero of=/swapfile bs=1M count=2048</code> instead, then continue with <code>chmod</code>.</p>
+<p><strong><code>ufw: command not found</code> on Debian.</strong> Debian doesn't install it by default. Run <code>sudo apt install ufw</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="ubuntu-server-or-debian-for-a-server">Ubuntu Server or Debian for a server?</h3>
+<p>Both use <code>apt</code> and the same commands on this page. Ubuntu LTS has a fixed five-year support window and more cloud images; Debian changes less between releases. Pick the one your team already runs.</p>
+<h3 id="do-i-need-a-gui-on-ubuntu-server">Do I need a GUI on Ubuntu Server?</h3>
+<p>No. Servers are managed over SSH. A desktop adds packages to patch and memory to spend without adding anything a server needs.</p>
+<h3 id="how-much-swap-should-a-server-have">How much swap should a server have?</h3>
+<p>For most servers, 1 to 2 GB is enough to absorb short memory spikes. If a server relies on swap continuously, it needs more RAM.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/secure-linux-vps">How to Secure a Linux VPS (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-firewall-ufw">How to Set Up a Firewall on Linux with UFW</a></li><li><a href="/how-to/systemctl-manage-services">How to Manage Services on Linux with systemctl</a></li><li><a href="/how-to/linux-system-administration">Linux System Administration: The Checklist</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

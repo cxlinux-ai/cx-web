@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Server Security: Hardening, Antivirus and Audits</title>
+<meta name="description" content="Harden a Linux server beyond the basics: audit it with Lynis, scan uploads with ClamAV, check AppArmor, close unused ports and remove what you don't need.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-server-security-hardening">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-server-security-hardening">
+<meta property="og:title" content="Linux Server Security: Hardening, Antivirus and Audits">
+<meta property="og:description" content="Harden a Linux server beyond the basics: audit it with Lynis, scan uploads with ClamAV, check AppArmor, close unused ports and remove what you don't need.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linux Server Security Hardening (Ubuntu & Debian)","description":"Harden a Linux server beyond the basics: audit it with Lynis, scan uploads with ClamAV, check AppArmor, close unused ports and remove what you don't need.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-server-security-hardening","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux security"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"Linux Server Security Hardening (Ubuntu & Debian)","item":"https://cxlinux.com/how-to/linux-server-security-hardening"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do Linux servers need antivirus?","acceptedAnswer":{"@type":"Answer","text":"Not to protect Linux itself in most cases. Scan where the server stores or forwards files that other systems will open."}},{"@type":"Question","name":"What is a good Lynis hardening index?","acceptedAnswer":{"@type":"Answer","text":"There is no pass mark. Track the number over time, and treat every warning as a task to fix or consciously accept."}},{"@type":"Question","name":"Is SELinux better than AppArmor?","acceptedAnswer":{"@type":"Answer","text":"Both are mandatory access control systems. Ubuntu and Debian are built around AppArmor; Red Hat-family systems use SELinux. Use the one your distribution supports."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">Linux Server Security Hardening (Ubuntu &amp; Debian)</li></ol></nav>
+<article>
+<h1>Linux Server Security Hardening (Ubuntu &amp; Debian)</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>Start with an audit so you fix real gaps instead of guessing. Lynis checks hundreds of settings and lists concrete suggestions:</p>
+<pre class="code" data-lang="bash"><code>sudo apt install -y lynis
+sudo lynis audit system</code></pre>
+<p>Read the <strong>Warnings</strong> and <strong>Suggestions</strong> at the end of the report, then work through the sections below. If you haven't done the first-hour basics (SSH keys, firewall, automatic updates), start with <a href="/how-to/secure-linux-vps">How to secure a Linux VPS</a>.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;audit this server's security settings&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="1-close-ports-you-don-t-use">1. Close ports you don't use</h2>
+<p>Every listening service is attack surface. List them:</p>
+<pre class="code" data-lang="bash"><code>sudo ss -tulpn</code></pre>
+<p>For each service you don't need, stop and disable it:</p>
+<pre class="code" data-lang="bash"><code>sudo systemctl disable --now cups</code></pre>
+<p>Services that only your server uses, such as a database, should listen on <code>127.0.0.1</code>, not <code>0.0.0.0</code>.</p>
+<h2 id="2-remove-packages-you-don-t-need">2. Remove packages you don't need</h2>
+<pre class="code" data-lang="bash"><code>apt list --installed | wc -l
+sudo apt purge telnet rsh-client
+sudo apt autoremove --purge</code></pre>
+<h2 id="3-check-apparmor">3. Check AppArmor</h2>
+<p>Ubuntu and Debian ship AppArmor, which confines programs to the files and actions in their profile:</p>
+<pre class="code" data-lang="bash"><code>sudo aa-status</code></pre>
+<p>Profiles in <strong>enforce</strong> mode block violations; <strong>complain</strong> mode only logs them. Don't disable AppArmor to fix a permission error. Check the denial in <code>sudo journalctl -k | grep -i apparmor</code> and adjust the profile instead.</p>
+<h2 id="4-antivirus-when-it-matters">4. Antivirus: when it matters</h2>
+<p>Linux malware exists, but on a server the usual reason to scan is <strong>files other people upload</strong> (mail attachments, shared folders, user uploads) that Windows or macOS users will open later. ClamAV is the standard open-source scanner:</p>
+<pre class="code" data-lang="bash"><code>sudo apt install -y clamav clamav-daemon
+sudo systemctl status clamav-freshclam --no-pager
+ls /var/lib/clamav/</code></pre>
+<p>Right after installation, <code>clamav-freshclam</code> downloads the signature databases, which takes a few minutes. Scan once <code>/var/lib/clamav/</code> lists <code>main</code>, <code>daily</code> and <code>bytecode</code> files (<code>.cvd</code> or <code>.cld</code>). If a scan reports &quot;No supported database files found&quot;, the download hasn't finished; wait and try again.</p>
+<pre class="code" data-lang="bash"><code>sudo clamscan -r -i /srv/uploads</code></pre>
+<p><code>clamav-freshclam</code> keeps the signatures updated from then on. <code>-i</code> prints only infected files. Schedule the scan with cron (see <a href="/how-to/cron-jobs-linux">Cron jobs</a>).</p>
+<h2 id="5-watch-logins">5. Watch logins</h2>
+<pre class="code" data-lang="bash"><code>last -n 20
+sudo lastb -n 20
+sudo journalctl -u ssh --since today | grep -E 'Accepted|Failed'</code></pre>
+<p><code>last</code> lists successful logins and <code>lastb</code> failed ones. On Ubuntu, failed SSH attempts also appear in <code>/var/log/auth.log</code>.</p>
+<h2 id="6-check-for-unexpected-admin-accounts-and-keys">6. Check for unexpected admin accounts and keys</h2>
+<pre class="code" data-lang="bash"><code>getent group sudo
+awk -F: '$3 == 0 {print $1}' /etc/passwd
+sudo find /home /root -name authorized_keys -exec ls -l {} \;</code></pre>
+<p>Only <code>root</code> should have UID 0. Review every key in each <code>authorized_keys</code> file.</p>
+<h2 id="7-protect-files-with-secrets">7. Protect files with secrets</h2>
+<pre class="code" data-lang="bash"><code>sudo find /etc /srv /var/www -name &quot;*.env&quot; -perm /o+r
+sudo chmod 600 /srv/app/.env</code></pre>
+<p>The first command finds <code>.env</code> files anyone on the system can read.</p>
+<h2 id="hardening-checklist">Hardening checklist</h2>
+<div class="table"><table><thead><tr><th scope="col">Area</th><th scope="col">Check</th><th scope="col">Command</th></tr></thead><tbody><tr><td>SSH</td><td>Keys only, no root</td><td><code>sudo sshd -T | grep -Ei 'permitroot|passwordauth'</code></td></tr><tr><td>Firewall</td><td>Only needed ports</td><td><code>sudo ufw status</code></td></tr><tr><td>Updates</td><td>Security updates automatic</td><td><code>apt-config dump APT::Periodic::Unattended-Upgrade</code> (want <code>&quot;1&quot;</code>) and <code>systemctl list-timers 'apt-daily*'</code></td></tr><tr><td>Services</td><td>Nothing unexpected listening</td><td><code>sudo ss -tulpn</code></td></tr><tr><td>AppArmor</td><td>Profiles enforcing</td><td><code>sudo aa-status</code></td></tr><tr><td>Accounts</td><td>One UID 0</td><td><code>awk -F: '$3==0' /etc/passwd</code></td></tr><tr><td>Audit</td><td>Lynis hardening index</td><td><code>sudo lynis audit system</code></td></tr></tbody></table></div>
+<h2 id="common-errors">Common errors</h2>
+<p><strong><code>clamscan</code> uses a lot of memory and CPU.</strong> It loads all signatures on each run. For frequent scans, use the daemon: <code>sudo clamdscan --fdpass -m -i /srv/uploads</code>. The daemon runs as the <code>clamav</code> user; <code>--fdpass</code> lets it scan files that only root can read, so you never need to make private uploads readable by everyone.</p>
+<p><strong>Lynis warnings you can't act on.</strong> Some checks don't apply to every server. Note them in <code>/etc/lynis/custom.prf</code> with <code>skip-test=TEST-ID</code> so the report stays readable.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="do-linux-servers-need-antivirus">Do Linux servers need antivirus?</h3>
+<p>Not to protect Linux itself in most cases. Scan where the server stores or forwards files that other systems will open.</p>
+<h3 id="what-is-a-good-lynis-hardening-index">What is a good Lynis hardening index?</h3>
+<p>There is no pass mark. Track the number over time, and treat every warning as a task to fix or consciously accept.</p>
+<h3 id="is-selinux-better-than-apparmor">Is SELinux better than AppArmor?</h3>
+<p>Both are mandatory access control systems. Ubuntu and Debian are built around AppArmor; Red Hat-family systems use SELinux. Use the one your distribution supports.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/secure-linux-vps">How to Secure a Linux VPS (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-firewall-ufw">How to Set Up a Firewall on Linux with UFW</a></li><li><a href="/how-to/linux-security-updates">How to Install Security Updates on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-logs-journalctl">How to Read Logs on Linux (journalctl, syslog, dmesg)</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

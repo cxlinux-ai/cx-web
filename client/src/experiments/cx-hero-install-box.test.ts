@@ -116,7 +116,8 @@ describe("variant B copy", () => {
   it("uses the canonical install command the site already ships", () => {
     expect(INSTALL_COMMAND).toBe("curl -fsSL https://cxlinux.com/install.sh | bash");
     expect(read("client/src/sections/HomePage.tsx")).toContain(INSTALL_COMMAND);
-    expect(read("client/src/pages/getting-started.tsx")).toContain(INSTALL_COMMAND);
+    expect(read("client/src/lib/installSnippets.ts")).toContain(INSTALL_COMMAND);
+    expect(read("client/src/pages/getting-started.tsx")).toContain("CURL_INSTALL_COMMAND");
     expect(HERO_B_COPY.readScriptHref).toBe("https://cxlinux.com/install.sh");
   });
 
@@ -128,7 +129,7 @@ describe("variant B copy", () => {
     expect(home).toContain("Full Audit Logs");
     // B adds no microcopy: the control's distro/pricing line stays the only one, in both arms.
     expect(Object.keys(HERO_B_COPY)).not.toContain("microcopy");
-    expect(home).toContain("Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit card required.");
+    expect(home).toContain("Verified on Ubuntu 24.04 LTS; other distros are untested and coming soon. Free forever for personal use. No credit card required.");
     expect(home).toContain("You can inspect the script before running it");
     expect(HERO_B_COPY.installGuideHref).toBe("/getting-started");
   });

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Secure a Linux VPS: First-Hour Checklist | CX Linux</title>
+<meta name="description" content="Lock down a new Ubuntu or Debian VPS in under an hour: updates, a sudo user, SSH keys, no root or password logins, a firewall and fail2ban.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/secure-linux-vps">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/secure-linux-vps">
+<meta property="og:title" content="How to Secure a Linux VPS: First-Hour Checklist | CX Linux">
+<meta property="og:description" content="Lock down a new Ubuntu or Debian VPS in under an hour: updates, a sudo user, SSH keys, no root or password logins, a firewall and fail2ban.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Secure a Linux VPS (Ubuntu & Debian)","description":"Lock down a new Ubuntu or Debian VPS in under an hour: updates, a sudo user, SSH keys, no root or password logins, a firewall and fail2ban.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/secure-linux-vps","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux vps"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Secure a Linux VPS (Ubuntu & Debian)","item":"https://cxlinux.com/how-to/secure-linux-vps"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should I change the SSH port?","acceptedAnswer":{"@type":"Answer","text":"It cuts log noise from scanners but isn't real protection. Keys with passwords off, plus fail2ban, matter far more. If you do change it, open the new port in the firewall first. Ubuntu 22.10 and newer start SSH through ssh.socket, so the port is also set there; follow Ubuntu's OpenSSH documentation for your release."}},{"@type":"Question","name":"Is a VPS secure out of the box?","acceptedAnswer":{"@type":"Answer","text":"Not fully. Most providers' images allow root or password logins and ship with the firewall off. The steps above close the common gaps."}},{"@type":"Question","name":"Do I need antivirus on a Linux server?","acceptedAnswer":{"@type":"Answer","text":"Usually not for the server itself, but it matters if the server stores files uploaded by users. See Linux server security."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Secure a Linux VPS (Ubuntu &amp; Debian)</li></ol></nav>
+<article>
+<h1>How to Secure a Linux VPS (Ubuntu &amp; Debian)</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>A new VPS is reachable from the whole internet the moment it boots, and automated scanners will start trying passwords on port 22 within minutes. Run these steps in order, the first time you log in.</p>
+<pre class="code" data-lang="bash"><code>sudo apt update &amp;&amp; sudo apt full-upgrade -y
+sudo adduser deploy &amp;&amp; sudo usermod -aG sudo deploy
+sudo apt install -y ufw fail2ban unattended-upgrades</code></pre>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;harden this new VPS&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="1-update-everything-first">1. Update everything first</h2>
+<p>Provider images are often weeks old. Bring every package current before you change anything else, and reboot if the kernel was updated.</p>
+<pre class="code" data-lang="bash"><code>sudo apt update
+sudo apt full-upgrade -y
+[ -f /var/run/reboot-required ] &amp;&amp; sudo reboot</code></pre>
+<h2 id="2-create-a-non-root-user-with-sudo">2. Create a non-root user with sudo</h2>
+<p>Work as a normal user and use <code>sudo</code> when you need root. Replace <code>deploy</code> with the name you want.</p>
+<pre class="code" data-lang="bash"><code>adduser deploy
+usermod -aG sudo deploy</code></pre>
+<p>Run those as root (on some providers you log in as root first). On images that log you in as a regular user (<code>ubuntu</code>, <code>debian</code>, <code>admin</code>), prefix them with <code>sudo</code>.</p>
+<h2 id="3-switch-to-ssh-keys">3. Switch to SSH keys</h2>
+<p>On <strong>your own computer</strong>, create a key if you don't have one and copy it to the server:</p>
+<pre class="code" data-lang="bash"><code>ssh-keygen -t ed25519 -C &quot;you@example.com&quot;
+ssh-copy-id deploy@203.0.113.10</code></pre>
+<p><code>ssh-copy-id</code> needs to log in once with a password. If your provider set the server up for keys only, copy the key you already use for root or the image's admin user to the new account instead, from your current session on the server:</p>
+<pre class="code" data-lang="bash"><code>sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo install -m 600 -o deploy -g deploy ~/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys</code></pre>
+<p>If you are logged in as root, use <code>/root/.ssh/authorized_keys</code> as the source.</p>
+<p>Open a <strong>second</strong> terminal and confirm <code>ssh deploy@203.0.113.10</code> works without a password before you continue. Keep your first session open until the end, so a mistake can't lock you out.</p>
+<h2 id="4-turn-off-root-login-and-passwords">4. Turn off root login and passwords</h2>
+<p>OpenSSH uses the <strong>first</strong> value it reads for each setting, and files in <code>/etc/ssh/sshd_config.d/</code> are read in name order. Cloud images often ship <code>50-cloud-init.conf</code> with <code>PasswordAuthentication yes</code>, so put your settings in a file that sorts first:</p>
+<pre class="code" data-lang="bash"><code>sudo tee /etc/ssh/sshd_config.d/00-hardening.conf &gt; /dev/null &lt;&lt;'EOF'
+PermitRootLogin no
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+EOF
+sudo sshd -t &amp;&amp; sudo systemctl restart ssh
+sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'</code></pre>
+<p><code>sshd -t</code> checks the configuration before the restart; the last line shows the global values sshd is using. Both should read <code>no</code>.</p>
+<p>A <code>Match</code> block elsewhere in the configuration can switch these back on for particular users or addresses. Check the effective values for the connections that matter:</p>
+<pre class="code" data-lang="bash"><code>sudo sshd -T -C user=root,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo sshd -T -C user=deploy,host=example.com,addr=198.51.100.7 | grep -Ei 'permitrootlogin|passwordauthentication'
+sudo grep -rn '^Match' /etc/ssh/sshd_config /etc/ssh/sshd_config.d/</code></pre>
+<p>If a <code>Match</code> block sets either option to <code>yes</code>, change or remove it, then run <code>sudo sshd -t &amp;&amp; sudo systemctl restart ssh</code> again.</p>
+<h2 id="5-turn-on-the-firewall">5. Turn on the firewall</h2>
+<p>Allow SSH <strong>before</strong> enabling the firewall, then add only the ports you serve.</p>
+<pre class="code" data-lang="bash"><code>sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow OpenSSH
+sudo ufw allow 80,443/tcp
+sudo ufw enable
+sudo ufw status verbose</code></pre>
+<p>The full walkthrough, including rate limiting and removing rules, is in <a href="/how-to/linux-firewall-ufw">Linux firewall with UFW</a>.</p>
+<h2 id="6-ban-repeated-failed-logins">6. Ban repeated failed logins</h2>
+<p>fail2ban watches login failures and blocks the source address. On Ubuntu and Debian the <code>sshd</code> jail is enabled as soon as the package is installed.</p>
+<pre class="code" data-lang="bash"><code>sudo apt install -y fail2ban
+sudo systemctl enable --now fail2ban
+sudo fail2ban-client status sshd</code></pre>
+<p>Debian 12 and newer don't install rsyslog, so there is no <code>/var/log/auth.log</code>. If fail2ban fails to start, the status command reports a socket or server error, or the jail watches no log file, tell the jail to read the systemd journal:</p>
+<pre class="code" data-lang="bash"><code>sudo tee /etc/fail2ban/jail.local &gt; /dev/null &lt;&lt;'EOF'
+[sshd]
+backend = systemd
+EOF
+sudo systemctl restart fail2ban
+sudo fail2ban-client status sshd</code></pre>
+<h2 id="7-install-security-updates-automatically">7. Install security updates automatically</h2>
+<pre class="code" data-lang="bash"><code>sudo apt install -y unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre>
+<p>Choose <strong>Yes</strong>. By default only security updates install automatically. See <a href="/how-to/linux-security-updates">Linux security updates</a> for reboots and checking what ran.</p>
+<h2 id="check-your-work">Check your work</h2>
+<div class="table"><table><thead><tr><th scope="col">Check</th><th scope="col">Command</th><th scope="col">What you want</th></tr></thead><tbody><tr><td>Root login and passwords off</td><td><code>sudo sshd -T -C user=root,host=x,addr=198.51.100.7 | grep -Ei 'permitroot|passwordauth'</code></td><td>both <code>no</code></td></tr><tr><td>Firewall on</td><td><code>sudo ufw status</code></td><td><code>Status: active</code>, only your ports</td></tr><tr><td>fail2ban running</td><td><code>sudo fail2ban-client status sshd</code></td><td>a jail with a log source</td></tr><tr><td>Open ports</td><td><code>sudo ss -tulpn</code></td><td>only services you expect</td></tr><tr><td>Pending updates</td><td><code>apt list --upgradable</code></td><td>empty</td></tr></tbody></table></div>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>&quot;Permission denied (publickey)&quot; after step 4.</strong> The key isn't in <code>~/.ssh/authorized_keys</code> for that user, or the file's permissions are too open. Use your still-open session to run <code>chmod 700 ~/.ssh &amp;&amp; chmod 600 ~/.ssh/authorized_keys</code>, or log in through your provider's web console.</p>
+<p><strong>Passwords still work after step 4.</strong> Another file set <code>PasswordAuthentication yes</code> first. Run <code>sudo grep -ri passwordauthentication /etc/ssh/sshd_config /etc/ssh/sshd_config.d/</code> and make sure your <code>00-</code> file sorts before it.</p>
+<p><strong>Locked out after <code>ufw enable</code>.</strong> SSH wasn't allowed. Use your provider's console, run <code>sudo ufw allow OpenSSH</code>, and reconnect.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="should-i-change-the-ssh-port">Should I change the SSH port?</h3>
+<p>It cuts log noise from scanners but isn't real protection. Keys with passwords off, plus fail2ban, matter far more. If you do change it, open the new port in the firewall first. Ubuntu 22.10 and newer start SSH through <code>ssh.socket</code>, so the port is also set there; follow Ubuntu's OpenSSH documentation for your release.</p>
+<h3 id="is-a-vps-secure-out-of-the-box">Is a VPS secure out of the box?</h3>
+<p>Not fully. Most providers' images allow root or password logins and ship with the firewall off. The steps above close the common gaps.</p>
+<h3 id="do-i-need-antivirus-on-a-linux-server">Do I need antivirus on a Linux server?</h3>
+<p>Usually not for the server itself, but it matters if the server stores files uploaded by users. See <a href="/how-to/linux-server-security-hardening">Linux server security</a>.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/linux-firewall-ufw">How to Set Up a Firewall on Linux with UFW</a></li><li><a href="/how-to/linux-security-updates">How to Install Security Updates on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-server-security-hardening">Linux Server Security Hardening (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/ubuntu-server-setup">How to Set Up an Ubuntu or Debian Server</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

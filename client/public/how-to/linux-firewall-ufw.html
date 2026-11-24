@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Firewall with UFW: Setup, Rules and Fixes | CX Linux</title>
+<meta name="description" content="Set up a Linux firewall with UFW on Ubuntu or Debian: allow SSH first, open only the ports you serve, rate-limit logins and remove rules safely.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-firewall-ufw">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-firewall-ufw">
+<meta property="og:title" content="Linux Firewall with UFW: Setup, Rules and Fixes | CX Linux">
+<meta property="og:description" content="Set up a Linux firewall with UFW on Ubuntu or Debian: allow SSH first, open only the ports you serve, rate-limit logins and remove rules safely.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Set Up a Firewall on Linux with UFW","description":"Set up a Linux firewall with UFW on Ubuntu or Debian: allow SSH first, open only the ports you serve, rate-limit logins and remove rules safely.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-firewall-ufw","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux firewall"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Set Up a Firewall on Linux with UFW","item":"https://cxlinux.com/how-to/linux-firewall-ufw"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Ubuntu have a firewall enabled by default?","acceptedAnswer":{"@type":"Answer","text":"UFW is installed on Ubuntu but inactive until you run sudo ufw enable. Debian doesn't install UFW at all."}},{"@type":"Question","name":"Should I also use my cloud provider's firewall?","acceptedAnswer":{"@type":"Answer","text":"Yes. A provider firewall blocks traffic before it reaches the server, and UFW protects the server if the provider rules are ever loosened. Use both."}},{"@type":"Question","name":"How do I allow a port range?","acceptedAnswer":{"@type":"Answer","text":"Give the range and protocol: sudo ufw allow 60000:61000/udp."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Set Up a Firewall on Linux with UFW</li></ol></nav>
+<article>
+<h1>How to Set Up a Firewall on Linux with UFW</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>UFW (Uncomplicated Firewall) is the simplest way to manage the Linux firewall on Ubuntu and Debian. Allow SSH before you enable it, or you will lock yourself out. The <code>OpenSSH</code> rule opens port 22; check which port your SSH server actually uses first:</p>
+<pre class="code" data-lang="bash"><code>sudo ss -tlnp | grep sshd
+sudo apt install -y ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow OpenSSH
+sudo ufw enable</code></pre>
+<p>If <code>ss</code> shows SSH on another port, such as 2222, replace <code>sudo ufw allow OpenSSH</code> with <code>sudo ufw allow 2222/tcp</code> before you run <code>ufw enable</code>.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;only allow ssh and https&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="open-the-ports-you-serve">Open the ports you serve</h2>
+<pre class="code" data-lang="bash"><code>sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 'Nginx Full'</code></pre>
+<p><code>'Nginx Full'</code> is an application profile that opens 80 and 443 together. <code>sudo ufw app list</code> shows the profiles your installed packages provide.</p>
+<p>Allow a port only from one address or network:</p>
+<pre class="code" data-lang="bash"><code>sudo ufw allow from 203.0.113.5 to any port 5432 proto tcp</code></pre>
+<p>To restrict SSH to one network, add the narrow rule, confirm a <strong>new</strong> SSH session from inside that network works, and only then remove the broad rule. UFW uses the first rule that matches, so while <code>allow OpenSSH</code> exists, every address can still connect:</p>
+<pre class="code" data-lang="bash"><code>sudo ufw allow from 10.0.0.0/24 to any port 22 proto tcp</code></pre>
+<pre class="code" data-lang="bash"><code>sudo ufw delete allow OpenSSH
+sudo ufw status numbered</code></pre>
+<p>Don't combine this with <code>ufw limit OpenSSH</code> below: <code>limit</code> also allows connections from anywhere.</p>
+<h2 id="rate-limit-ssh">Rate-limit SSH</h2>
+<p><code>limit</code> denies an address that opens six or more connections in 30 seconds, which slows password-guessing bots:</p>
+<pre class="code" data-lang="bash"><code>sudo ufw limit OpenSSH</code></pre>
+<h2 id="check-the-rules">Check the rules</h2>
+<pre class="code" data-lang="bash"><code>sudo ufw status verbose
+sudo ufw status numbered</code></pre>
+<h2 id="remove-a-rule">Remove a rule</h2>
+<p>Delete by number (numbers change after each deletion, so list again before the next one) or by repeating the rule:</p>
+<pre class="code" data-lang="bash"><code>sudo ufw status numbered
+sudo ufw delete 3
+sudo ufw delete allow 80/tcp</code></pre>
+<h2 id="turn-it-off-reset-or-log">Turn it off, reset or log</h2>
+<pre class="code" data-lang="bash"><code>sudo ufw disable
+sudo ufw reset
+sudo ufw logging on</code></pre>
+<p><code>reset</code> deletes every rule and disables the firewall. Blocked connections are logged to the kernel log (<code>/var/log/ufw.log</code> on Ubuntu, <code>journalctl -k | grep UFW</code> everywhere).</p>
+<h2 id="docker-bypasses-ufw">Docker bypasses UFW</h2>
+<p>Docker writes its own iptables rules, and ports you publish with <code>-p 8080:80</code> are reachable from outside <strong>even if UFW denies them</strong>. Either bind published ports to localhost (<code>-p 127.0.0.1:8080:80</code>) and put a reverse proxy in front, or filter in the <code>DOCKER-USER</code> chain. See <a href="/how-to/install-docker-linux">Install Docker on Linux</a>.</p>
+<h2 id="ufw-iptables-and-nftables">UFW, iptables and nftables</h2>
+<p>UFW is a front end. On current Ubuntu and Debian it writes rules through the iptables commands, which are backed by nftables. Use one tool to manage the firewall; mixing hand-written nftables rules with UFW makes both hard to reason about.</p>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>Locked out of SSH after enabling.</strong> Use your provider's web console, run <code>sudo ufw allow OpenSSH</code> (or your custom SSH port with <code>sudo ufw allow 2222/tcp</code>), then reconnect.</p>
+<p><strong>&quot;ERROR: Could not find a profile matching 'OpenSSH'&quot;.</strong> The SSH server isn't installed, or the profile has another name. Run <code>sudo ufw app list</code>, or allow the port directly: <code>sudo ufw allow 22/tcp</code>.</p>
+<p><strong>A port is still reachable after <code>ufw deny</code>.</strong> An earlier <code>allow</code> rule matches first, or the port is published by Docker. Check <code>sudo ufw status numbered</code> and <code>sudo docker ps</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="does-ubuntu-have-a-firewall-enabled-by-default">Does Ubuntu have a firewall enabled by default?</h3>
+<p>UFW is installed on Ubuntu but inactive until you run <code>sudo ufw enable</code>. Debian doesn't install UFW at all.</p>
+<h3 id="should-i-also-use-my-cloud-provider-s-firewall">Should I also use my cloud provider's firewall?</h3>
+<p>Yes. A provider firewall blocks traffic before it reaches the server, and UFW protects the server if the provider rules are ever loosened. Use both.</p>
+<h3 id="how-do-i-allow-a-port-range">How do I allow a port range?</h3>
+<p>Give the range and protocol: <code>sudo ufw allow 60000:61000/udp</code>.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/secure-linux-vps">How to Secure a Linux VPS (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-server-security-hardening">Linux Server Security Hardening (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/install-docker-linux">How to Install Docker on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/ubuntu-server-setup">How to Set Up an Ubuntu or Debian Server</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

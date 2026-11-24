@@ -15,6 +15,8 @@
  * source) it rests on. Claims whitelist: only what cxlinux.com already states.
  */
 
+import { CURL_INSTALL_COMMAND } from "@/lib/installSnippets";
+
 export const EXP_ID = "cx-hero-install-box" as const;
 
 /**
@@ -33,10 +35,10 @@ export const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90; // 90 days
 
 /**
  * Canonical install command. Same string the site already ships in the homepage "Take back your
- * weekends" block (HomePage.tsx), /getting-started (`INSTALL.curl`), the FAQ install answer and the
+ * weekends" block (HomePage.tsx), /getting-started (`CURL_INSTALL_COMMAND`), the FAQ install answer and the
  * server-rendered homepage (shared/home-prerender.ts).
  */
-export const INSTALL_COMMAND = "curl -fsSL https://cxlinux.com/install.sh | bash";
+export const INSTALL_COMMAND = CURL_INSTALL_COMMAND;
 
 export const HERO_B_COPY = {
   copyLabel: "Copy",
@@ -70,8 +72,8 @@ export const HERO_B_COPY = {
   approvalLine: "Nothing runs until you approve it. Firejail sandbox, full audit log, atomic rollback if it's wrong.",
 } as const;
 
-// The hero's "Works on Ubuntu, Debian, RHEL, and Arch. Free forever for personal use. No credit
-// card required." line sits above the CTA block and is identical in both arms: B adds no
+// The hero's "Verified on Ubuntu 24.04 LTS; other distros are untested and coming soon. Free forever
+// for personal use. No credit card required." line sits above the CTA block and is identical in both arms: B adds no
 // microcopy of its own, so only the first action differs.
 
 // ─── Assignment (pure, unit-tested) ──────────────────────────────────────────

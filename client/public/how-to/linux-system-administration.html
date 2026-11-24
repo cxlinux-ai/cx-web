@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux System Administration: Daily, Weekly, Monthly Checks</title>
+<meta name="description" content="A practical Linux system administration checklist for Ubuntu and Debian servers, with the exact commands for health, disk, updates, security and backups.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-system-administration">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-system-administration">
+<meta property="og:title" content="Linux System Administration: Daily, Weekly, Monthly Checks">
+<meta property="og:description" content="A practical Linux system administration checklist for Ubuntu and Debian servers, with the exact commands for health, disk, updates, security and backups.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Linux System Administration: The Checklist","description":"A practical Linux system administration checklist for Ubuntu and Debian servers, with the exact commands for health, disk, updates, security and backups.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-system-administration","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"linux administration system"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"Linux System Administration: The Checklist","item":"https://cxlinux.com/how-to/linux-system-administration"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does a Linux system administrator do day to day?","acceptedAnswer":{"@type":"Answer","text":"Keeps servers patched, monitored, backed up and secure; manages users and access; troubleshoots services; and automates the repetitive parts."}},{"@type":"Question","name":"Which Linux should I learn system administration on?","acceptedAnswer":{"@type":"Answer","text":"Ubuntu Server LTS or Debian. They run a large share of cloud servers, and everything on these pages works on both."}},{"@type":"Question","name":"How do I know a server is healthy?","acceptedAnswer":{"@type":"Answer","text":"Load below the CPU count, disk and inodes below about 85%, memory available, no failed units, no new errors in the journal and a recent backup that restores."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">Linux System Administration: The Checklist</li></ol></nav>
+<article>
+<h1>Linux System Administration: The Checklist</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>Most Linux system administration is the same short list of checks, run on a schedule. The quick health check:</p>
+<pre class="code" data-lang="bash"><code>uptime
+df -h
+free -h
+systemctl --failed
+sudo journalctl -p err -b --no-pager | tail -20</code></pre>
+<p>That covers load, disk, memory, failed services and recent errors. The rest of this page is the full routine and what to do when a check fails.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;what should I check on this server every week&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="daily">Daily</h2>
+<div class="table"><table><thead><tr><th scope="col">Check</th><th scope="col">Command</th><th scope="col">Act when</th></tr></thead><tbody><tr><td>Load</td><td><code>uptime</code></td><td>Load average stays above the CPU count (<code>nproc</code>)</td></tr><tr><td>Disk space</td><td><code>df -h</code></td><td>Any filesystem is above 85%</td></tr><tr><td>Inodes</td><td><code>df -i</code></td><td>Above 85% (many small files)</td></tr><tr><td>Memory</td><td><code>free -h</code></td><td><code>available</code> is near zero or swap keeps growing</td></tr><tr><td>Failed services</td><td><code>systemctl --failed</code></td><td>Anything is listed</td></tr><tr><td>Errors</td><td><code>sudo journalctl -p err --since yesterday</code></td><td>New or repeating errors</td></tr><tr><td>Backups</td><td>your backup log</td><td>The last run failed or is missing</td></tr></tbody></table></div>
+<p>When disk is full, find what grew:</p>
+<pre class="code" data-lang="bash"><code>sudo du -xh / --max-depth=1 2&gt;/dev/null | sort -h | tail
+sudo du -xh /var --max-depth=2 2&gt;/dev/null | sort -h | tail</code></pre>
+<p>Logs, Docker images and old kernels are the usual causes. See <a href="/how-to/linux-logs-journalctl">Linux logs</a> and <a href="/how-to/install-docker-linux">Install Docker</a>.</p>
+<h2 id="weekly">Weekly</h2>
+<pre class="code" data-lang="bash"><code>apt list --upgradable
+[ -f /var/run/reboot-required ] &amp;&amp; echo &quot;reboot needed&quot;
+last -n 20
+sudo lastb -n 20
+sudo ss -tulpn</code></pre>
+<p>Review pending updates (see <a href="/how-to/linux-security-updates">security updates</a>), who logged in, failed login attempts and what's listening on the network.</p>
+<p>Debian 13 no longer ships <code>last</code> and <code>lastb</code>. Install <code>wtmpdb</code> and <code>libpam-wtmpdb</code> and use <code>wtmpdb last</code> for login history, and <code>sudo lslogins --failed</code> for failed logins.</p>
+<h2 id="monthly">Monthly</h2>
+<ul><li>Restore one file from backup and check it (see <a href="/how-to/linux-backups">Linux backups</a>).</li><li>Review user accounts and SSH keys: <code>getent passwd | awk -F: '$3 &gt;= 1000'</code> and every <code>authorized_keys</code> file.</li><li>Check TLS certificate expiry: <code>sudo certbot certificates</code> if you use Let's Encrypt.</li><li>Run a security audit: <code>sudo lynis audit system</code> (see <a href="/how-to/linux-server-security-hardening">server hardening</a>).</li><li>Remove what's unused: <code>sudo apt autoremove --purge</code>.</li></ul>
+<h2 id="know-your-server">Know your server</h2>
+<p>Information to have before something breaks:</p>
+<pre class="code" data-lang="bash"><code>hostnamectl
+cat /etc/os-release
+nproc &amp;&amp; free -h
+lsblk
+ip -brief address
+systemctl list-units --type=service --state=running</code></pre>
+<h2 id="automate-the-checks">Automate the checks</h2>
+<p>Run the daily checks from cron and get the output by email or in a log you read (see <a href="/how-to/cron-jobs-linux">Cron jobs</a>), or install a monitoring agent such as Netdata or Prometheus node_exporter when you manage more than a handful of servers.</p>
+<h2 id="core-skills-by-page">Core skills, by page</h2>
+<div class="table"><table><thead><tr><th scope="col">Task</th><th scope="col">Guide</th></tr></thead><tbody><tr><td>Start, stop and debug services</td><td><a href="/how-to/systemctl-manage-services">systemctl</a></td></tr><tr><td>Find and stop runaway processes</td><td><a href="/how-to/linux-processes">Linux processes</a></td></tr><tr><td>Schedule jobs</td><td><a href="/how-to/cron-jobs-linux">Cron jobs</a></td></tr><tr><td>Move files between servers</td><td><a href="/how-to/transfer-files-scp-rsync">scp and rsync</a></td></tr><tr><td>Firewall</td><td><a href="/how-to/linux-firewall-ufw">UFW</a></td></tr><tr><td>New server baseline</td><td><a href="/how-to/ubuntu-server-setup">Server setup</a></td></tr><tr><td>Everyday commands</td><td><a href="/how-to/linux-commands-cheat-sheet">Linux commands cheat sheet</a></td></tr></tbody></table></div>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="what-does-a-linux-system-administrator-do-day-to-day">What does a Linux system administrator do day to day?</h3>
+<p>Keeps servers patched, monitored, backed up and secure; manages users and access; troubleshoots services; and automates the repetitive parts.</p>
+<h3 id="which-linux-should-i-learn-system-administration-on">Which Linux should I learn system administration on?</h3>
+<p>Ubuntu Server LTS or Debian. They run a large share of cloud servers, and everything on these pages works on both.</p>
+<h3 id="how-do-i-know-a-server-is-healthy">How do I know a server is healthy?</h3>
+<p>Load below the CPU count, disk and inodes below about 85%, memory available, no failed units, no new errors in the journal and a recent backup that restores.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/linux-logs-journalctl">How to Read Logs on Linux (journalctl, syslog, dmesg)</a></li><li><a href="/how-to/linux-security-updates">How to Install Security Updates on Linux (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/linux-backups">How to Back Up a Linux Server</a></li><li><a href="/how-to/linux-commands-cheat-sheet">Linux Commands Cheat Sheet</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>

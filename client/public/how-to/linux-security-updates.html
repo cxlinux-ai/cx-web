@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linux Security Updates and Patching on Ubuntu &amp; Debian</title>
+<meta name="description" content="Patch Ubuntu and Debian servers safely: preview updates, install security patches, automate them with unattended-upgrades and handle reboots.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cxlinux.com/how-to/linux-security-updates">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cxlinux.com/how-to/linux-security-updates">
+<meta property="og:title" content="Linux Security Updates and Patching on Ubuntu &amp; Debian">
+<meta property="og:description" content="Patch Ubuntu and Debian servers safely: preview updates, install security patches, automate them with unattended-upgrades and handle reboots.">
+<meta property="og:image" content="https://cxlinux.com/og-image.png?v=2">
+<meta property="og:site_name" content="CX Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@cxlinux">
+<meta name="theme-color" content="#00FF9F">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--bg:#0a0a0a;--card:#111;--line:#262626;--text:#f5f5f5;--muted:#a3a3a3;--accent:#00ff9f;--mono:'Fira Code','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans)}
+a{color:var(--accent);text-underline-offset:3px}a:hover{color:#00cc7f}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--accent);color:#000;padding:6px 10px;z-index:10}
+header.site{border-bottom:1px solid var(--line)}.bar{max-width:1080px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:18px;letter-spacing:.02em}.brand span{color:var(--accent)}
+nav.main ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}nav.main a{color:var(--muted);text-decoration:none;font-size:14px}nav.main a:hover,nav.main a[aria-current]{color:var(--text)}
+main{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+.crumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.crumbs a{color:var(--muted)}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap}.crumbs li+li:before{content:"/";margin-right:8px;color:#525252}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--muted);font-size:14px;margin:0 0 28px}
+h2{font-size:24px;line-height:1.3;margin:44px 0 12px}h3{font-size:18px;margin:28px 0 8px}
+p,ul{margin:0 0 16px}li{margin:4px 0}
+code{font-family:var(--mono);font-size:.88em;background:#1a1a1a;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code{background:#0d0d0d;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:0 0 20px}
+pre.code code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:#e5e5e5;white-space:pre}
+.table{overflow-x:auto;margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.cx{background:linear-gradient(180deg,rgba(0,255,159,.07),rgba(0,255,159,.02));border:1px solid rgba(0,255,159,.35);border-radius:12px;padding:18px 20px;margin:8px 0 28px}
+.cx-kicker{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.cx p:last-child{margin:0}.cx-link{font-weight:600}
+.related{border-top:1px solid var(--line);margin-top:48px;padding-top:24px}.related ul{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.related a,.card a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--text);background:var(--card)}.related a:hover,.card a:hover{border-color:var(--accent)}
+.card small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.cluster{margin-top:36px}.cluster ul{list-style:none;padding:0;display:grid;gap:10px}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:14px}footer.site .bar{justify-content:space-between}footer.site ul{list-style:none;display:flex;gap:16px;flex-wrap:wrap;margin:0;padding:0}footer.site a{color:var(--muted);text-decoration:none}footer.site a:hover{color:var(--text)}
+@media (max-width:600px){main{padding:24px 16px 48px}.bar{padding:12px 16px;gap:12px}h2{font-size:21px}}</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KW1EVSFJLM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KW1EVSFJLM',{anonymize_ip:true,cookie_flags:'SameSite=None;Secure'});</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Install Security Updates on Linux (Ubuntu & Debian)","description":"Patch Ubuntu and Debian servers safely: preview updates, install security patches, automate them with unattended-upgrades and handle reboots.","dateModified":"2026-11-18","inLanguage":"en","mainEntityOfPage":"https://cxlinux.com/how-to/linux-security-updates","author":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com"},"publisher":{"@type":"Organization","name":"CX Linux","url":"https://cxlinux.com","logo":"https://cxlinux.com/logo.png"},"about":"patch management linux"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://cxlinux.com/"},{"@type":"ListItem","position":2,"name":"How-to","item":"https://cxlinux.com/how-to"},{"@type":"ListItem","position":3,"name":"How to Install Security Updates on Linux (Ubuntu & Debian)","item":"https://cxlinux.com/how-to/linux-security-updates"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How often should I patch Linux servers?","acceptedAnswer":{"@type":"Answer","text":"Let security updates install daily with unattended-upgrades, and review the remaining updates on a fixed weekly or monthly schedule, with reboots in a maintenance window."}},{"@type":"Question","name":"Do I have to reboot after every update?","acceptedAnswer":{"@type":"Answer","text":"No. Reboot when /var/run/reboot-required exists or sudo needrestart -k reports a newer kernel than the one running; that usually follows kernel, glibc or systemd updates. Treat the file as a positive signal, not the only one."}},{"@type":"Question","name":"Can updates break my server?","acceptedAnswer":{"@type":"Answer","text":"Occasionally. Simulate first with apt-get -s --with-new-pkgs upgrade, hold packages your application pins, keep backups (see Linux backups) and patch a staging server before production."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site"><div class="bar"><a class="brand" href="/">CX<span>.</span> Linux</a><nav class="main" aria-label="Primary"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to" aria-current="page">How-to</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/blog">Blog</a></li><li><a href="/about">About</a></li></ul></nav></div></header>
+<main id="content">
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/how-to">How-to</a></li><li aria-current="page">How to Install Security Updates on Linux (Ubuntu &amp; Debian)</li></ol></nav>
+<article>
+<h1>How to Install Security Updates on Linux (Ubuntu &amp; Debian)</h1>
+<p class="meta">Ubuntu &amp; Debian &middot; Updated <time datetime="2026-11-18">November 18, 2026</time></p>
+<p>Refresh the package lists, preview what would change, then upgrade:</p>
+<pre class="code" data-lang="bash"><code>sudo apt update
+apt list --upgradable
+sudo apt upgrade</code></pre>
+<p>Then check whether a reboot is needed: <code>[ -f /var/run/reboot-required ] &amp;&amp; cat /var/run/reboot-required</code>, and <code>sudo needrestart -k</code> for the running kernel.</p>
+<aside class="cx" aria-label="CX Terminal">
+<p class="cx-kicker">Prefer plain English?</p>
+<p>CX Terminal is building plain-English system administration for Ubuntu and Debian, so tasks like &ldquo;apply security patches, show me first&rdquo; start from a sentence instead of a man page.</p>
+<p><a class="cx-link" href="/getting-started">See CX Terminal &rarr;</a></p>
+</aside>
+<h2 id="preview-before-you-patch">Preview before you patch</h2>
+<p><code>apt-get -s</code> simulates an upgrade and prints every package it would install, upgrade or remove, without changing the system. Run it before patching production:</p>
+<pre class="code" data-lang="bash"><code>apt-get -s --with-new-pkgs upgrade
+apt-get -s dist-upgrade</code></pre>
+<p>The first previews what <code>apt upgrade</code> would do; the second previews <code>apt full-upgrade</code>.</p>
+<h2 id="upgrade-vs-full-upgrade"><code>upgrade</code> vs <code>full-upgrade</code></h2>
+<div class="table"><table><thead><tr><th scope="col">Command</th><th scope="col">Installs new dependencies</th><th scope="col">Removes packages</th><th scope="col">Use it for</th></tr></thead><tbody><tr><td><code>apt upgrade</code></td><td>Yes</td><td>No</td><td>Routine patching</td></tr><tr><td><code>apt full-upgrade</code></td><td>Yes</td><td>Yes, when needed</td><td>Kernel and dependency changes</td></tr><tr><td><code>apt-get upgrade</code></td><td>No (holds those packages back)</td><td>No</td><td>Most conservative option</td></tr></tbody></table></div>
+<p>Packages shown as &quot;kept back&quot; have one of three causes. Check which before you act:</p>
+<ul><li><strong>Phased update (Ubuntu):</strong> Ubuntu releases some updates to a growing share of machines over a few days. <code>apt-cache policy &lt;package&gt;</code> shows <code>phased</code> next to the candidate version. Wait; the update arrives on its own.</li><li><strong>Held:</strong> <code>apt-mark showhold</code> lists it. Unhold it only if the hold is no longer needed.</li><li><strong>New or removed dependencies:</strong> <code>sudo apt full-upgrade</code> installs them; read its list of removals first.</li></ul>
+<h2 id="automate-security-updates">Automate security updates</h2>
+<p><code>unattended-upgrades</code> installs security updates every day. Install and enable it:</p>
+<pre class="code" data-lang="bash"><code>sudo apt install -y unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre>
+<p>The defaults install only security updates. To check what it would do and what it did:</p>
+<pre class="code" data-lang="bash"><code>sudo unattended-upgrade --dry-run --debug
+less /var/log/unattended-upgrades/unattended-upgrades.log</code></pre>
+<p>To reboot automatically when an update needs it, at a time of your choosing, set these in <code>/etc/apt/apt.conf.d/50unattended-upgrades</code>:</p>
+<pre class="code" data-lang="text"><code>Unattended-Upgrade::Automatic-Reboot &quot;true&quot;;
+Unattended-Upgrade::Automatic-Reboot-Time &quot;03:30&quot;;</code></pre>
+<h2 id="reboots-and-service-restarts">Reboots and service restarts</h2>
+<p>Kernel and core library updates need a reboot. Other updates need the affected services restarted.</p>
+<pre class="code" data-lang="bash"><code>cat /var/run/reboot-required.pkgs
+sudo needrestart</code></pre>
+<p><code>needrestart</code> (installed by default on Ubuntu Server) lists services still running old library code and can restart them. On Debian, install it with <code>sudo apt install needrestart</code>.</p>
+<p>On Ubuntu, Livepatch applies critical kernel fixes without a reboot. It is part of Ubuntu Pro, which is free for personal use on up to five machines: <code>sudo pro attach</code> then <code>sudo pro enable livepatch</code>.</p>
+<h2 id="see-which-updates-are-security-fixes">See which updates are security fixes</h2>
+<pre class="code" data-lang="bash"><code>apt list --upgradable 2&gt;/dev/null | grep -i security
+pro security-status</code></pre>
+<p><code>pro security-status</code> (Ubuntu) summarizes how many installed packages get security coverage and from which archive.</p>
+<h2 id="hold-a-package-at-its-current-version">Hold a package at its current version</h2>
+<p>When an update would break something, hold that one package while you test:</p>
+<pre class="code" data-lang="bash"><code>sudo apt-mark hold nginx
+apt-mark showhold
+sudo apt-mark unhold nginx</code></pre>
+<h2 id="common-errors">Common errors</h2>
+<p><strong>&quot;Could not get lock /var/lib/dpkg/lock-frontend&quot;.</strong> Another apt process, usually unattended-upgrades, is running. Wait for it to finish; <code>ps aux | grep -i apt</code> shows it. Don't delete the lock file.</p>
+<p><strong>&quot;The following packages have been kept back&quot;.</strong> The update is phased, held, or needs dependency changes. See <a href="#upgrade-vs-full-upgrade"><code>upgrade</code> vs <code>full-upgrade</code></a> for how to tell which.</p>
+<p><strong>&quot;dpkg was interrupted&quot;.</strong> A previous upgrade stopped partway. Run <code>sudo dpkg --configure -a</code>, then <code>sudo apt -f install</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="how-often-should-i-patch-linux-servers">How often should I patch Linux servers?</h3>
+<p>Let security updates install daily with unattended-upgrades, and review the remaining updates on a fixed weekly or monthly schedule, with reboots in a maintenance window.</p>
+<h3 id="do-i-have-to-reboot-after-every-update">Do I have to reboot after every update?</h3>
+<p>No. Reboot when <code>/var/run/reboot-required</code> exists or <code>sudo needrestart -k</code> reports a newer kernel than the one running; that usually follows kernel, glibc or systemd updates. Treat the file as a positive signal, not the only one.</p>
+<h3 id="can-updates-break-my-server">Can updates break my server?</h3>
+<p>Occasionally. Simulate first with <code>apt-get -s --with-new-pkgs upgrade</code>, hold packages your application pins, keep backups (see <a href="/how-to/linux-backups">Linux backups</a>) and patch a staging server before production.</p>
+</article>
+<section class="related" aria-labelledby="related-heading">
+<h2 id="related-heading">Related guides</h2>
+<ul><li><a href="/how-to/secure-linux-vps">How to Secure a Linux VPS (Ubuntu &amp; Debian)</a></li><li><a href="/how-to/add-apt-repository">How to Add (and Remove) an APT Repository</a></li><li><a href="/how-to/linux-system-administration">Linux System Administration: The Checklist</a></li><li><a href="/how-to/systemctl-manage-services">How to Manage Services on Linux with systemctl</a></li></ul>
+</section>
+</main>
+<footer class="site"><div class="bar"><span>&copy; CX Linux &middot; AI Venture Holdings LLC</span><nav aria-label="Footer"><ul><li><a href="/getting-started">Terminal</a></li><li><a href="/how-to">Linux how-to guides</a></li><li><a href="/blog">Blog</a></li><li><a href="/faq">FAQ</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about">About</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></nav></div></footer>
+</body>
+</html>
